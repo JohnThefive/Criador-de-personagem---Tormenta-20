@@ -11,11 +11,13 @@ class PersonagemState {
   final Personagem personagem;
   final int etapaAtual; // 0: Atributos, 1: Raça, 2: Classe...
   final MetodoAtributos metodoAtributos; // Controla a UI da etapa 0
+
   
   // Mantemos os dados específicos de rolagem aqui também
   final List<int> valoresRolados;
   final Map<String, int> alocacaoIndices;
   final int pontosRestantesCompra;
+  final List<String> atributosVariaveisRaca; // atributos escolhidos em raças complexas 
 
   PersonagemState({
     required this.personagem,
@@ -24,6 +26,7 @@ class PersonagemState {
     this.valoresRolados = const [],
     this.alocacaoIndices = const {},
     this.pontosRestantesCompra = 10,
+    this.atributosVariaveisRaca = const [],
   });
 
   // CopyWith para facilitar atualizações
@@ -34,6 +37,7 @@ class PersonagemState {
     List<int>? valoresRolados,
     Map<String, int>? alocacaoIndices,
     int? pontosRestantesCompra,
+    List<String>? atributosVariaveisRaca,
   }) {
     return PersonagemState(
       personagem: personagem ?? this.personagem,
@@ -42,6 +46,7 @@ class PersonagemState {
       valoresRolados: valoresRolados ?? this.valoresRolados,
       alocacaoIndices: alocacaoIndices ?? this.alocacaoIndices,
       pontosRestantesCompra: pontosRestantesCompra ?? this.pontosRestantesCompra,
+      atributosVariaveisRaca: atributosVariaveisRaca ?? this.atributosVariaveisRaca,
     );
   }
 }
@@ -156,6 +161,37 @@ class PersonagemCubit extends Cubit<PersonagemState> {
   void selecionarRaca(Raca raca) {
   // Atualiza o personagem com a nova raça
   final novoPersonagem = state.personagem.copyWith(raca: raca);
-  emit(state.copyWith(personagem: novoPersonagem));
+  emit(state.copyWith(
+    personagem: novoPersonagem,
+    atributosVariaveisRaca: [],
+    ));
 }
+
+  void toggleAtributoRacial(String sigla) {
+    final raca = state.personagem.raca;
+    if (raca == null || !raca.ehFlexivel) {
+      return;
+
+    }
+
+    // Verifica a penalidade de raca 
+    if (raca.atributosBloqueados.contains(sigla)) {
+      return; 
+    }
+
+    final listaAtual = List<String>.from(state.atributosVariaveisRaca);
+
+
+    // se já tem, remove. se não tem, adicione.
+    if (listaAtual.contains(sigla)){
+      listaAtual.remove(sigla);
+    } else{
+      if (listaAtual.length <= 3){
+        listaAtual.add(sigla);
+      }
+    }
+
+    emit(state.copyWith(atributosVariaveisRaca: listaAtual));
+    
+    }
 }

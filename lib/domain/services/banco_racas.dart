@@ -85,28 +85,32 @@ class BancoDeRacas {
       nome: "Humano",
       modificadores: {}, 
       habilidades: ["Graça da Ambição", "Versátil"], // graça da ambição: +1 em 3 que escolher
-      ehFlexivel: true, // Flag para a UI saber que precisa abrir um seletor
+      ehFlexivel: true,
+      atributosBloqueados: [] // Flag para a UI saber que precisa abrir um seletor
     ),
 
     Raca(
       nome: "Lefou",
-      modificadores: {}, 
+      modificadores: {'CAR': -1}, 
       habilidades: ["Graça da brutalidade", "Cria Da Tormenta", "Deformidade"], //graça da brutalidade: +1 em 3 que escolher - carisma
-      ehFlexivel: true, // Flag para a UI saber que precisa abrir um seletor - carisma
+      ehFlexivel: true,
+      atributosBloqueados: ['CAR'] // Flag para a UI saber que precisa abrir um seletor - carisma
     ),
 
     Raca(
       nome: "Osteon",
       modificadores: {'COS': -1}, 
       habilidades: ["Armadura Óssea", "Memória Póstuma", "Natureza Esquelética", "Preço da Não Vida"],
-      ehFlexivel: true // +1 em 3 atributos diferentes (menos constituição)
+      ehFlexivel: true,// +1 em 3 atributos diferentes (menos constituição)
+      atributosBloqueados: ["COS"]
     ),
 
     Raca(
       nome: "Sereia/Tritão",
       modificadores: {}, 
       habilidades: ["Canção dos Mares", "Mestre do Tridente", "Transformação Anfíbia"],
-      ehFlexivel: true // +1 em 3 atributos diferentes 
+      ehFlexivel: true, // +1 em 3 atributos diferentes 
+      atributosBloqueados: [],
     ),
 
   ];

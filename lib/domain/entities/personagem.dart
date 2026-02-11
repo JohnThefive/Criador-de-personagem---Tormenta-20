@@ -40,12 +40,15 @@ class Personagem {
   }
 
   // Este método calcula o valor final para exibir na tela
-  int getValorFinal(String sigla) {
+  int getValorFinal(String sigla, {List<String> bonusVariaveis = const []}) {
     int base = atributos[sigla]?.valor ?? 0;
+
+    // Bônus Fixo da Raça (Ex: Anão +2 CON)
+    int bonusFixo = raca?.modificadores[sigla] ?? 0;
+
+    // Bônus Variável (Se a sigla estiver na lista de escolhidos, ganha +1)
+    int bonusVariavel = bonusVariaveis.contains(sigla) ? 1 : 0;
     
-    // Se tiver raça e ela tiver modificador para esse atributo, soma.
-    int bonusRaca = raca?.modificadores[sigla] ?? 0;
-    
-    return base + bonusRaca;
+    return base + bonusFixo + bonusVariavel;
   }
 }

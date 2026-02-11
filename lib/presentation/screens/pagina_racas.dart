@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:t20_creator/domain/entities/raca.dart';
 import 'package:t20_creator/presentation/controllers/personagem_cubit.dart';
 
 import '../../domain/services/banco_racas.dart'; // Importe o banco
@@ -20,9 +21,22 @@ class PaginaSelecaoRaca extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: state.personagem.atributos.keys.map((sigla) {
-              // Usa o getValorFinal para mostrar a soma (Base + Raça)
-              int valorFinal = state.personagem.getValorFinal(sigla);
+
+
+              // Usa o getValorFinal para mostrar a soma (Base + Raça + seletor)
+              int valorFinal = state.personagem.getValorFinal(
+                sigla,
+                bonusVariaveis: state.atributosVariaveisRaca
+                );
+
+              int valorBase = state.personagem.atributos[sigla]?.valor ?? 0;
               bool foiAlterado = (state.personagem.raca?.modificadores[sigla] ?? 0) != 0;
+
+              Color corTexto = Colors.black;
+              if (foiAlterado){
+                corTexto = valorFinal > valorBase ? Colors.green[800]!: Colors.red[800]!;
+              }
+
 
               return Column(
                 children: [
@@ -33,9 +47,7 @@ class PaginaSelecaoRaca extends StatelessWidget {
                       fontSize: 16, 
                       fontWeight: FontWeight.bold,
                       // Fica Verde/Vermelho se a raça alterou este atributo
-                      color: foiAlterado 
-                          ? (valorFinal > (state.personagem.atributos[sigla]?.valor ?? 0) ? Colors.green : Colors.red)
-                          : Colors.black,
+                      color: corTexto,
                     ),
                   ),
                 ],
@@ -63,10 +75,14 @@ class PaginaSelecaoRaca extends StatelessWidget {
 
               return GestureDetector(
                 onTap: () {
+
+                  // selecionar raca 
+                  context.read<PersonagemCubit>().selecionarRaca(raca);
+
+                  //se flexivel 
                   if (raca.ehFlexivel) {
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Lógica de Humano/Flexível em breve!")));
-                    // Mesmo sendo flexível, selecionamos para testar
-                    context.read<PersonagemCubit>().selecionarRaca(raca);
+                    // delecionar os atributos de raca 
+                    _mostrarSeletorDeAtributos(context, raca);
                   } else {
                     context.read<PersonagemCubit>().selecionarRaca(raca);
                   }
@@ -153,4 +169,95 @@ class PaginaSelecaoRaca extends StatelessWidget {
       ],
     );
   }
+}
+
+// Cole isso no final do arquivo _pagina_racas.dart (fora da classe PaginaSelecaoRaca)
+
+void _mostrarSeletorDeAtributos(BuildContext parentContext, Raca raca) {
+  showModalBottomSheet(
+    context: parentContext,
+    isDismissible: false, // O usuário é obrigado a terminar ou cancelar
+    enableDrag: false,    // Não deixa fechar arrastando para baixo
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(20))
+    ),
+    builder: (context) {
+      // Usamos StatefulBuilder ou BlocBuilder para atualizar SÓ o modal
+      return BlocBuilder<PersonagemCubit, PersonagemState>(
+        bloc: parentContext.read<PersonagemCubit>(), // Usa o Cubit da tela de trás
+        builder: (context, state) {
+          
+          final selecoes = state.atributosVariaveisRaca;
+          final faltam = 3 - selecoes.length;
+
+          return Container(
+            padding: const EdgeInsets.all(24),
+            height: 450, // Altura do painel
+            child: Column(
+              children: [
+                Text("Bônus de ${raca.nome}", 
+                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                
+                const SizedBox(height: 8),
+                
+                Text(
+                  faltam > 0 ? "Escolha mais $faltam atributos (+1)" : "Seleção Completa!",
+                  style: TextStyle(
+                    color: faltam > 0 ? Colors.red[700] : Colors.green[700], 
+                    fontWeight: FontWeight.bold
+                  ),
+                ),
+                
+                const SizedBox(height: 20),
+                
+                // GRID DE BOTÕES (CHIPS)
+                Wrap(
+                  spacing: 10,
+                  runSpacing: 10,
+                  alignment: WrapAlignment.center,
+                  children: state.personagem.atributos.keys.map((sigla) {
+                    
+                    final estaSelecionado = selecoes.contains(sigla);
+                    // Verifica se a raça proíbe este atributo (Ex: Lefou proíbe Carisma)
+                    final estaBloqueado = raca.atributosBloqueados.contains(sigla);
+                    
+                    return FilterChip(
+                      label: Text(sigla),
+                      selected: estaSelecionado,
+                      // Se bloqueado, onSelected é null (desabilita o botão)
+                      onSelected: estaBloqueado ? null : (bool selected) {
+                        parentContext.read<PersonagemCubit>().toggleAtributoRacial(sigla);
+                      },
+                      selectedColor: Colors.green[200],
+                      checkmarkColor: Colors.green[900],
+                      // Visual de "Bloqueado/Proibido"
+                      labelStyle: TextStyle(
+                        color: estaBloqueado ? Colors.grey : Colors.black,
+                        decoration: estaBloqueado ? TextDecoration.lineThrough : null,
+                      ),
+                      backgroundColor: estaBloqueado ? Colors.grey[200] : null,
+                    );
+                  }).toList(),
+                ),
+
+                const Spacer(),
+                
+                // BOTÃO CONFIRMAR
+                ElevatedButton(
+                  onPressed: faltam == 0 
+                    ? () => Navigator.pop(context) // Fecha o modal se acabou
+                    : null, // Botão cinza se ainda faltam escolhas
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(double.infinity, 50),
+                    backgroundColor: Colors.red[900],
+                  ),
+                  child: const Text("CONFIRMAR BÔNUS", style: TextStyle(color: Colors.white)),
+                )
+              ],
+            ),
+          );
+        },
+      );
+    },
+  );
 }

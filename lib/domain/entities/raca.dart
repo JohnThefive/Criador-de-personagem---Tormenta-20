@@ -11,10 +11,15 @@ class Raca {
   // Flags para raças que midufucam muitos atributos e habilidades compleas 
   final bool ehFlexivel; 
 
+  // raças que possuem penalidades complexas 
+  final List<String> atributosBloqueados;
+
+
   const Raca({
     required this.nome,
     required this.modificadores,
     required this.habilidades,
     this.ehFlexivel = false,
+    this.atributosBloqueados = const [],
   });
 }
