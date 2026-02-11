@@ -56,6 +56,14 @@ class PersonagemCubit extends Cubit<PersonagemState> {
 
   // --- CONTROLE DE FLUXO (WIZARD) ---
 
+  //  reset de criação de personagem
+  void resetarCriacao() {
+  emit(
+    PersonagemState(
+      personagem: Personagem.inicial()
+      )); // Zera tudo para o estado original
+}
+
   void escolherMetodoAtributos(MetodoAtributos metodo) {
     // Ao escolher, resetamos os valores para garantir limpeza
     emit(state.copyWith(

@@ -99,10 +99,10 @@ class BancoDeRacas {
 
     Raca(
       nome: "Osteon",
-      modificadores: {'COS': -1}, 
+      modificadores: {'CON': -1}, 
       habilidades: ["Armadura Óssea", "Memória Póstuma", "Natureza Esquelética", "Preço da Não Vida"],
       ehFlexivel: true,// +1 em 3 atributos diferentes (menos constituição)
-      atributosBloqueados: ["COS"]
+      atributosBloqueados: ["CON"]
     ),
 
     Raca(

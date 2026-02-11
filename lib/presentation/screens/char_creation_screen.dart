@@ -24,7 +24,28 @@ class CharacterCreatorScreen extends StatelessWidget {
         );
       },
       builder: (context, state) {
-        return Scaffold(
+        return PopScope(
+          canPop: false,
+          onPopInvokedWithResult: (didPop, result){
+            if (didPop){
+              return;
+            }
+            final cubit = context.read<PersonagemCubit>();
+
+            // 1. Se estiver avançado no Wizard (Raça, etc), volta uma etapa
+            if (state.etapaAtual > 0) {
+              cubit.voltarEtapa();
+            } 
+            // 2. Se estiver na etapa 0 mas já escolheu um método (Rolagem/Compra), reseta pro inicio
+            else if (state.metodoAtributos != MetodoAtributos.nenhum) {
+               cubit.escolherMetodoAtributos(MetodoAtributos.nenhum);
+            }
+            // 3. Se estiver no começo de tudo, limpa a memória e fecha a tela
+            else {
+              cubit.resetarCriacao(); // <--- O SEGREDO ESTÁ AQUI (Limpa o estado sujo)
+              Navigator.pop(context); // Agora sim fecha manualmente
+            }
+          },child:Scaffold(
           appBar: AppBar(
             title: Text(_getTituloEtapa(state.etapaAtual)),
             leading: IconButton(
@@ -45,8 +66,8 @@ class CharacterCreatorScreen extends StatelessWidget {
             controller: _pageController,
             physics: const NeverScrollableScrollPhysics(), // Bloqueia swipe manual
             children: [
-              _PaginaAtributos(state: state), // Etapa 0
-              PaginaSelecaoRaca(state: state),
+              _PaginaAtributos(state: state), // pagina de atributos 
+              PaginaSelecaoRaca(state: state), // pagina de seleção de egua
               const Center(child: Text("Etapa 2: Escolha da Classe (Em Breve)")),
               const Center(child: Text("Etapa 3: Origem (Em Breve)")),
               // ... adicione as outras etapas aqui (mesngaem pro joão do futuro) ...
@@ -63,7 +84,11 @@ class CharacterCreatorScreen extends StatelessWidget {
                 backgroundColor: Colors.red[900],
               )
             : null,
+        ),
         );
+
+
+        
       },
     );
   }
@@ -78,29 +103,29 @@ class CharacterCreatorScreen extends StatelessWidget {
   }
 
   bool _deveMostrarBotaoAvancar(PersonagemState state) {
-    if (state.etapaAtual == 0){
-
-      // só avança se todos os pontos forem comprado
-      if (state.metodoAtributos == MetodoAtributos.compra){
+    // 1. LÓGICA DA ETAPA 0 (ATRIBUTOS)
+    if (state.etapaAtual == 0) {
+      // Compra de Pontos: Só avança se zerou
+      if (state.metodoAtributos == MetodoAtributos.compra) {
         return state.pontosRestantesCompra == 0;
       }
-
-      if (state.etapaAtual == 1){
-
-      return state.personagem.raca != null;}
-
-      // só avanca se colocou todos os atributos 
-      if(state.metodoAtributos == MetodoAtributos.rolagem){
+      // Rolagem: Só avança se alocou os 6 dados
+      if (state.metodoAtributos == MetodoAtributos.rolagem) {
         return state.alocacaoIndices.length == 6; 
       }
-
-      // se não escolher nada 
+      // Se não escolheu método, esconde o botão
       return false; 
+    }
 
+    // 2. LÓGICA DA ETAPA 1 (RAÇA) - (Isso estava dentro do if anterior por engano)
+    if (state.etapaAtual == 1) {
+   
+      return state.personagem.raca != null;
     }
-    // passa pra ir pros mocks 
+
+    // 3. OUTRAS ETAPAS (Mocks)
     return true;
-    }
+  }
   }
 
 
