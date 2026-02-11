@@ -1,12 +1,17 @@
 import 'atributos.dart';
+import 'raca.dart'; // Importe a raça
 
 class Personagem {
   final String nome;
-  final Map<String, Atributo> atributos;
+  final Map<String, Atributo> atributos; // Estes são os atributos BASE (Rolados/Comprados)
+  final Raca? raca; // Agora ele pode ter uma raça (ou null no começo)
 
-  Personagem({required this.nome, required this.atributos});
+  Personagem({
+    required this.nome, 
+    required this.atributos, 
+    this.raca
+  });
 
-  // Factory para criar um personagem "zerado" ou padrão
   factory Personagem.inicial() {
     return Personagem(
       nome: 'Novo Aventureiro',
@@ -18,18 +23,29 @@ class Personagem {
         'SAB': const Atributo(nome: 'Sabedoria', valor: 0),
         'CAR': const Atributo(nome: 'Carisma', valor: 0),
       },
+      raca: null,
     );
   }
 
   Personagem copyWith({
     String? nome,
     Map<String, Atributo>? atributos,
+    Raca? raca,
   }) {
     return Personagem(
       nome: nome ?? this.nome,
       atributos: atributos ?? this.atributos,
+      raca: raca ?? this.raca,
     );
+  }
 
-  // Métodos auxiliares
-  
-}}
+  // Este método calcula o valor final para exibir na tela
+  int getValorFinal(String sigla) {
+    int base = atributos[sigla]?.valor ?? 0;
+    
+    // Se tiver raça e ela tiver modificador para esse atributo, soma.
+    int bonusRaca = raca?.modificadores[sigla] ?? 0;
+    
+    return base + bonusRaca;
+  }
+}

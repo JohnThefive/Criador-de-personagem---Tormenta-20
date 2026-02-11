@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:t20_creator/presentation/screens/pagina_racas.dart';
 import '../controllers/personagem_cubit.dart';
 import '../widgets/atributo_card_compra.dart'; 
 // Importe seus widgets de AtributoCard e a lógica de Rolagem aqui
@@ -45,15 +46,15 @@ class CharacterCreatorScreen extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(), // Bloqueia swipe manual
             children: [
               _PaginaAtributos(state: state), // Etapa 0
-              const Center(child: Text("Etapa 1: Escolha da Raça (Em Breve)")),
+              PaginaSelecaoRaca(state: state),
               const Center(child: Text("Etapa 2: Escolha da Classe (Em Breve)")),
               const Center(child: Text("Etapa 3: Origem (Em Breve)")),
-              // ... adicione as outras etapas aqui ...
+              // ... adicione as outras etapas aqui (mesngaem pro joão do futuro) ...
               _PaginaFinalizacao(), // Última Etapa
             ],
           ),
 
-          // BOTÃO DE AVANÇAR (Só aparece se a etapa estiver concluída/válida)
+          // Botão de avançar só aparece quando uma atividade é concluida (modificar visual no futuro)
           floatingActionButton: _deveMostrarBotaoAvancar(state) 
             ? FloatingActionButton.extended(
                 onPressed: () => context.read<PersonagemCubit>().avancarEtapa(),
@@ -84,6 +85,10 @@ class CharacterCreatorScreen extends StatelessWidget {
         return state.pontosRestantesCompra == 0;
       }
 
+      if (state.etapaAtual == 1){
+
+      return state.personagem.raca != null;}
+
       // só avanca se colocou todos os atributos 
       if(state.metodoAtributos == MetodoAtributos.rolagem){
         return state.alocacaoIndices.length == 6; 
@@ -107,7 +112,7 @@ class _PaginaAtributos extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // 1. SE NÃO ESCOLHEU MÉTODO AINDA: Mostra os Botões Grandes
+    // Escolha dos metodos de compra de pontos (2 botões grandes)
     if (state.metodoAtributos == MetodoAtributos.nenhum) {
       return Center(
         child: Column(
@@ -134,7 +139,7 @@ class _PaginaAtributos extends StatelessWidget {
       );
     }
 
-    // 2. SE ESCOLHEU COMPRA DE PONTOS
+    // escolheu comprar pontos 
     if (state.metodoAtributos == MetodoAtributos.compra) {
       return Column(
         children: [
@@ -166,7 +171,7 @@ class _PaginaAtributos extends StatelessWidget {
       );
     }
 
-    // 3. SE ESCOLHEU ROLAGEM (Use seu widget atualizado aqui)
+    // usuario escolheu rodar os dados
     if (state.metodoAtributos == MetodoAtributos.rolagem) {
       return _TelaRolagemAtributos(state: state);
   
@@ -219,6 +224,7 @@ class _BotaoSelecaoMetodo extends StatelessWidget {
   }
 }
 
+// modificar pagina no futuro.
 class _PaginaFinalizacao extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -227,7 +233,7 @@ class _PaginaFinalizacao extends StatelessWidget {
         style: ElevatedButton.styleFrom(backgroundColor: Colors.green, padding: const EdgeInsets.all(20)),
         onPressed: () {
           // Aqui sim salvamos!
-          // context.read<PersonagemCubit>().salvarPersonagemFinal(context);
+          //context.read<PersonagemCubit>().salvarPersonagemFinal(context);
         },
         child: const Text("SALVAR PERSONAGEM FINAL", style: TextStyle(color: Colors.white)),
       ),
@@ -376,3 +382,4 @@ class _TelaRolagemAtributos extends StatelessWidget {
     );
   }
 }
+

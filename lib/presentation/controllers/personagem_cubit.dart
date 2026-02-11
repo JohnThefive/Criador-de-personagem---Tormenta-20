@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../domain/entities/personagem.dart';
 import '../../domain/services/regras_atributos.dart';
+import '../../domain/entities/raca.dart';
 
 // Enum para saber qual método o usuário escolheu nesta etapa
 enum MetodoAtributos { nenhum, compra, rolagem }
@@ -150,4 +151,11 @@ class PersonagemCubit extends Cubit<PersonagemState> {
     // retorna o personagem atualizado
     return state.personagem.copyWith(atributos: novosAtributos.cast()); 
   }
+
+  // logica de selecionar raca 
+  void selecionarRaca(Raca raca) {
+  // Atualiza o personagem com a nova raça
+  final novoPersonagem = state.personagem.copyWith(raca: raca);
+  emit(state.copyWith(personagem: novoPersonagem));
+}
 }
