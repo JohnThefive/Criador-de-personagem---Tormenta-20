@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t20_creator/presentation/screens/pagina_racas.dart';
+import 'package:t20_creator/presentation/screens/pagina_selecao_classe.dart';
 import '../controllers/personagem_cubit.dart';
 import '../widgets/atributo_card_compra.dart'; 
 // Importe seus widgets de AtributoCard e a lógica de Rolagem aqui
@@ -67,8 +68,8 @@ class CharacterCreatorScreen extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(), // Bloqueia swipe manual
             children: [
               _PaginaAtributos(state: state), // pagina de atributos 
-              PaginaSelecaoRaca(state: state), // pagina de seleção de egua
-              const Center(child: Text("Etapa 2: Escolha da Classe (Em Breve)")),
+              PaginaSelecaoRaca(state: state), // pagina de seleção de raça
+              PaginaSelecaoClasse(state: state), // pagina de seleçao de classe 
               const Center(child: Text("Etapa 3: Origem (Em Breve)")),
               // ... adicione as outras etapas aqui (mesngaem pro joão do futuro) ...
               _PaginaFinalizacao(), // Última Etapa
@@ -123,7 +124,24 @@ class CharacterCreatorScreen extends StatelessWidget {
       return state.personagem.raca != null;
     }
 
-    // 3. OUTRAS ETAPAS (Mocks)
+    if (state.etapaAtual == 2){
+      if (state.personagem.classes.isEmpty){
+        return false;
+      }
+
+      final classeSelecionada = state.personagem.classes[0];
+
+      // se a classe tem caminhos 
+      if (classeSelecionada.classeDefinicao.caminhosDisponiveis.isNotEmpty){
+        return classeSelecionada.caminhoEscolhido != null;
+      }
+
+      return true;
+
+
+    }
+
+    
     return true;
   }
   }

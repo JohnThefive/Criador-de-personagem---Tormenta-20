@@ -1,15 +1,18 @@
 import 'atributos.dart';
-import 'raca.dart'; // Importe a raça
+import 'raca.dart'; 
+import 'classe_do_personagem.dart';
 
 class Personagem {
   final String nome;
   final Map<String, Atributo> atributos; // Estes são os atributos BASE (Rolados/Comprados)
-  final Raca? raca; // Agora ele pode ter uma raça (ou null no começo)
+  final Raca? raca; // Agora ele pode ter uma raça (
+  final List<ClasseDoPersonagem> classes; // o item no índice [0] é a classe inicial.
 
   Personagem({
     required this.nome, 
     required this.atributos, 
-    this.raca
+    this.raca,
+    this.classes = const [],
   });
 
   factory Personagem.inicial() {
@@ -31,15 +34,18 @@ class Personagem {
     String? nome,
     Map<String, Atributo>? atributos,
     Raca? raca,
+    // ignore: non_constant_identifier_names
+    List<ClasseDoPersonagem>? classe_do_personagem
   }) {
     return Personagem(
       nome: nome ?? this.nome,
       atributos: atributos ?? this.atributos,
       raca: raca ?? this.raca,
+      classes: classe_do_personagem ?? classes
     );
   }
 
-  // Este método calcula o valor final para exibir na tela
+  // Este método calcula o valor final para exibir na tela (Base + Raça Fixa + Raça Variável)
   int getValorFinal(String sigla, {List<String> bonusVariaveis = const []}) {
     int base = atributos[sigla]?.valor ?? 0;
 
@@ -50,5 +56,101 @@ class Personagem {
     int bonusVariavel = bonusVariaveis.contains(sigla) ? 1 : 0;
     
     return base + bonusFixo + bonusVariavel;
+  }
+
+  //Funções que Afetam a CLASSE e o nivel do personagem. 
+
+  // Nível de Personagem (Soma dos níveis de todas as classes)
+  int get nivelPersonagem {
+    if (classes.isEmpty) return 0; // Ainda não escolheu classe
+    return classes.fold(0, (soma, c) => soma + c.nivel);
+  }
+
+  // Pontos de Vida Totais (PV)
+  int get pvTotal {
+    if (classes.isEmpty) return 0;
+
+    // Pega o valor FINAL da Constituição 
+    int con = getValorFinal('CON'); 
+    
+    int totalPV = 0;
+
+    for (int i = 0; i < classes.length; i++) {
+      final item = classes[i];
+      final regras = item.classeDefinicao;
+      final bool ehClasseInicial = (i == 0); // O índice 0 define a regra inicial
+
+      if (ehClasseInicial) {
+        // Nível 1 da PRIMEIRA classe: PV Cheio + CON
+        totalPV += regras.pvInicial + con;
+        
+        // Níveis subsequentes da MESMA classe inicial
+        if (item.nivel > 1) {
+           // Regra: Ganha PV por nível + CON (mínimo 1)
+           int ganhoPorNivel = regras.pvPorNivel + con;
+           if (ganhoPorNivel < 1) ganhoPorNivel = 1;
+           
+           totalPV += ganhoPorNivel * (item.nivel - 1);
+        }
+      } else {
+        // MULTICLASSE (Classes adicionadas depois)
+        // ganha os PV de um nível subsequente, não do primeiro
+        int ganhoPorNivel = regras.pvPorNivel + con;
+        if (ganhoPorNivel < 1) ganhoPorNivel = 1;
+
+        totalPV += ganhoPorNivel * item.nivel;
+      }
+    }
+    return totalPV;
+  }
+
+  // Pontos de Mana Totais (PM)
+  int get pmTotal {
+    if (classes.isEmpty) return 0;
+    
+    int totalPM = 0;
+
+    for (int i = 0; i < classes.length; i++) {
+      final item = classes[i];
+      final regras = item.classeDefinicao;
+      
+      // 1. PM da Classe (Ex: Arcanista ganha 6 no Nível 1, e +6 a cada nível extra)
+      if (i == 0) {
+         totalPM += regras.pmInicial; // Nível 1 da classe principal
+         if (item.nivel > 1) {
+           totalPM += regras.pmPorNivel * (item.nivel - 1);
+         }
+      } else {
+         // Multiclasse ganha apenas o PM por nível, não o inicial (geralmente é o mesmo, mas garante a regra)
+         totalPM += regras.pmPorNivel * item.nivel; 
+      }
+
+      // 2. Bônus do Atributo-Chave (Específico para Arcanistas ou Caminhos)
+      if (item.caminhoEscolhido != null) {
+        // Ex: Pega 'INT' (Mago/Bruxo) ou 'CAR' (Feiticeiro)
+        String siglaChave = item.caminhoEscolhido!.atributoChave;
+        
+        // Pega o valor total do atributo com os bônus
+        int valorAtributoChave = getValorFinal(siglaChave);
+        
+        // Soma os PMs extras fornecidos pelo atributo-chave
+        totalPM += valorAtributoChave;
+      }
+    }
+    return totalPM;
+  }
+
+  // --- REGRAS ESPECÍFICAS DE CLASSE/CAMINHO ---
+  
+  // PV do Foco Mágico (Regra Específica do Arcanista Bruxo)
+  int get pvDoFocoMagico {
+    // Procura na lista de classes se o personagem tem o caminho "Bruxo"
+    for (var item in classes) {
+      if (item.caminhoEscolhido?.temFocoMagico == true) {
+        // PV do Foco é a metade do PV total do personagem (arredondado para baixo)
+        return (pvTotal / 2).floor();
+      }
+    }
+    return 0; // Não possui foco mágico
   }
 }

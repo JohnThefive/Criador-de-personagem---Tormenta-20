@@ -1,4 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:t20_creator/domain/entities/classe.dart';
+import 'package:t20_creator/domain/entities/classe_do_personagem.dart';
 import '../../domain/entities/personagem.dart';
 import '../../domain/services/regras_atributos.dart';
 import '../../domain/entities/raca.dart';
@@ -202,4 +204,27 @@ class PersonagemCubit extends Cubit<PersonagemState> {
     emit(state.copyWith(atributosVariaveisRaca: listaAtual));
     
     }
+
+  // Vamos começar a logica de seleção de classe 
+  void selecionarClasse(Classe classeDefinicao) {
+    // Cria a instância da classe no Nível 1
+    final novaClasse = ClasseDoPersonagem(classeDefinicao: classeDefinicao, nivel: 1);
+    
+    // Como estamos na criação do personagem, esta será a classe principal (índice 0)
+    final novoPersonagem = state.personagem.copyWith(classe_do_personagem: [novaClasse]);
+    emit(state.copyWith(personagem: novoPersonagem));
+  }
+
+  // para classes com subclasses/caminhos
+  void selecionarCaminhoDaClasse(CaminhoDeClasse caminho) {
+    if (state.personagem.classes.isEmpty) return;
+    
+    // Pega a classe atual e atualiza com o caminho escolhido
+    final classeAtual = state.personagem.classes[0];
+    final classeAtualizada = classeAtual.copyWith(caminhoEscolhido: caminho);
+    
+    final novoPersonagem = state.personagem.copyWith(classe_do_personagem: [classeAtualizada]);
+    emit(state.copyWith(personagem: novoPersonagem));
+  }
+
 }
