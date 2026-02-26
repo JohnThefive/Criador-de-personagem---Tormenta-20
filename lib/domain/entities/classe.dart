@@ -7,10 +7,14 @@ class CaminhoDeClasse {
   final String descricao;
   
   
-  // Flags para a UI saber o que renderizar depois
+  // Flags para a UI saber o que renderizar depois (Arcanista)
   final bool temFocoMagico;
   final bool temLinhagem;
   final bool temGrimorio;
+
+
+  
+  
 
   const CaminhoDeClasse({
     required this.nome,
@@ -28,11 +32,17 @@ class Classe {
   final int pvPorNivel;  
   final int pmInicial; // Adicionado para a regra do Nível 1
   final int pmPorNivel;  
+
+  final String descricaoclasse;
+  
   
   final List<TipoProficiencia> proficiencias;
   final List<String> periciasFixas; 
   final List<String> periciasOpcoes; 
   final int qtdPericiasEscolha; 
+
+  // flags para descrição e imagem 
+  final String caminhoImagem;
 
   // Tabela de progressão (toda classe tem)
   final Map<int, List<String>> tabelaDeProgressao;
@@ -51,7 +61,10 @@ class Classe {
     required this.periciasOpcoes,
     required this.qtdPericiasEscolha,
     this.caminhosDisponiveis = const [],
-    this.tabelaDeProgressao = const {}
+    this.tabelaDeProgressao = const {},
+    required this.caminhoImagem, 
+    required this.descricaoclasse, // <--- AQUI
+    
 
   });
 }

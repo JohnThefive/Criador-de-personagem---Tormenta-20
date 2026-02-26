@@ -89,16 +89,38 @@ class PaginaSelecaoClasse extends StatelessWidget {
                       ),
                       const SizedBox(height: 16),
 
-                      // Placeholder para Imagem (Como na sua arte)
-                      Container(
-                        height: 150,
-                        decoration: BoxDecoration(
-                          color: Colors.grey[300],
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: const Center(child: Icon(Icons.image, size: 50, color: Colors.grey)),
-                      ),
-                      const SizedBox(height: 16),
+                      // 1. A Imagem da Classe
+      ClipRRect(
+        borderRadius: BorderRadius.circular(12), // Arredonda as pontas da imagem
+        child: Image.asset(
+          classeSelecionada.caminhoImagem,
+          width: double.infinity, // Faz a imagem preencher a largura toda
+          fit: BoxFit.cover, // Preenche o espaço sem achatar a imagem
+          // Caso a imagem não seja encontrada, mostra um ícone de erro para o app não "quebrar"
+          errorBuilder: (context, error, stackTrace) => Container(
+            height: 150,
+            color: Colors.grey[300],
+            child: const Icon(Icons.broken_image, size: 50, color: Colors.grey),
+          ),
+        ),
+      ),
+      
+      const SizedBox(height: 16),
+
+      // 2. A Descrição da Classe
+      Text(
+        classeSelecionada.descricaoclasse, // Certifique-se de que a variável chama descricaoclasse no seu banco
+        style: const TextStyle(
+          fontSize: 14, 
+          color: Colors.black87,
+          height: 1.3, // Dá um pequeno respiro entre as linhas do texto
+        ),
+        textAlign: TextAlign.justify, // Deixa o texto alinhado retinho nas bordas (como num livro)
+      ),
+      
+      const SizedBox(height: 16),
+
+                      
 
                       // Botão de Equipamento Inicial
                       ElevatedButton(

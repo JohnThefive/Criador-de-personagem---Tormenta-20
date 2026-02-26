@@ -4,6 +4,15 @@ class BancoDeClasses {
   static const List<Classe> todas = [
     Classe(
       nome: "Arcanista",
+      descricaoclasse: """
+      Arte feita por Odmir Fortes 
+
+      A magia é a força mais poderosa e misteriosa de Arton, presente em maravilhas, criaturas e artefatos lendários.
+      O arcanista é seu maior estudioso, capaz de dobrar a realidade por meio de dedicação e conhecimento.
+      Esse poder pode gerar arrogância, humildade ou até loucura diante dos segredos do universo.
+      Frágeis no início, tornam-se líderes formidáveis à medida que dominam rituais, objetos místicos ou poderes inatos.
+      """,
+      caminhoImagem: "assets/images/classes/arcanista_image.png",
       pvInicial: 8,
       pvPorNivel: 2,
       pmInicial: 6,
@@ -11,7 +20,7 @@ class BancoDeClasses {
       proficiencias: [], // Nenhuma proficiência concedida
       periciasFixas: ["MISTICISMO", "VONTADE"],
       qtdPericiasEscolha: 2,
-      periciasOpcoes: ["NOBREZA", "ACROBACIA"],
+      periciasOpcoes: ["CONHECIMENTO","DIPLOMACIA", "ENGANACAO", "GUERRA", "INICIATIVA", "INTIMIDACAO", "INTUICAO", "INVESTIGACAO", "NOBREZA", "OFICIO","PERCEPCAO"],
 
       tabelaDeProgressao: {
         1: ["Escolha do Caminho", "Magias de 1º Círculo"],
