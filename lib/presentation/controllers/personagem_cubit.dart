@@ -14,12 +14,17 @@ class PersonagemState {
   final int etapaAtual; // 0: Atributos, 1: Raça, 2: Classe...
   final MetodoAtributos metodoAtributos; // Controla a UI da etapa 0
 
+
   
   // Mantemos os dados específicos de rolagem aqui também
   final List<int> valoresRolados;
   final Map<String, int> alocacaoIndices;
   final int pontosRestantesCompra;
   final List<String> atributosVariaveisRaca; // atributos escolhidos em raças complexas 
+
+  // Atributos de pericias 
+  final List<String> selecoesPericiaClasse; // As escolhas restritas (2)
+  final List<String> selecoesPericiaInteligencia; // As escolhas livres (Mod. INT)
 
   PersonagemState({
     required this.personagem,
@@ -29,6 +34,8 @@ class PersonagemState {
     this.alocacaoIndices = const {},
     this.pontosRestantesCompra = 10,
     this.atributosVariaveisRaca = const [],
+    this.selecoesPericiaClasse = const [],
+    this.selecoesPericiaInteligencia = const [],
   });
 
   // CopyWith para facilitar atualizações
@@ -40,6 +47,9 @@ class PersonagemState {
     Map<String, int>? alocacaoIndices,
     int? pontosRestantesCompra,
     List<String>? atributosVariaveisRaca,
+    List<String>? selecoesPericiaClasse,       // <--- ADICIONE AQUI
+    List<String>? selecoesPericiaInteligencia,
+    
   }) {
     return PersonagemState(
       personagem: personagem ?? this.personagem,
@@ -49,6 +59,8 @@ class PersonagemState {
       alocacaoIndices: alocacaoIndices ?? this.alocacaoIndices,
       pontosRestantesCompra: pontosRestantesCompra ?? this.pontosRestantesCompra,
       atributosVariaveisRaca: atributosVariaveisRaca ?? this.atributosVariaveisRaca,
+      selecoesPericiaClasse: selecoesPericiaClasse ?? this.selecoesPericiaClasse,
+      selecoesPericiaInteligencia: selecoesPericiaInteligencia ?? this.selecoesPericiaInteligencia,
     );
   }
 }
@@ -226,5 +238,81 @@ class PersonagemCubit extends Cubit<PersonagemState> {
     final novoPersonagem = state.personagem.copyWith(classe_do_personagem: [classeAtualizada]);
     emit(state.copyWith(personagem: novoPersonagem));
   }
+
+
+
+  // estapas de pericias 
+  void togglePericiaClasse(String siglaPericia) {
+    if (state.personagem.classes.isEmpty) return;
+    
+    final classe = state.personagem.classes[0].classeDefinicao;
+
+    // 1. Bloqueia se a perícia já for fixa da classe
+    if (classe.periciasFixas.contains(siglaPericia)) return;
+
+    // 2. Bloqueia se já escolheu essa perícia na lista de Inteligência
+    if (state.selecoesPericiaInteligencia.contains(siglaPericia)) return;
+
+    final listaAtual = List<String>.from(state.selecoesPericiaClasse);
+
+    // 3. Marca/Desmarca com limite
+    if (listaAtual.contains(siglaPericia)) {
+      listaAtual.remove(siglaPericia);
+    } else {
+      if (listaAtual.length < classe.qtdPericiasEscolha) {
+        listaAtual.add(siglaPericia);
+      }
+    }
+
+    emit(state.copyWith(selecoesPericiaClasse: listaAtual));
+  }
+
+  void togglePericiaInteligencia(String siglaPericia) {
+    if (state.personagem.classes.isEmpty) return;
+    
+    final classe = state.personagem.classes[0].classeDefinicao;
+
+    // 1. Bloqueia se a perícia já for fixa da classe
+    if (classe.periciasFixas.contains(siglaPericia)) return;
+
+    // 2. Bloqueia se já escolheu essa perícia na lista da Classe
+    if (state.selecoesPericiaClasse.contains(siglaPericia)) return;
+
+    // 3. Calcula o limite de INT (Mínimo de 0, caso o jogador tenha INT negativa)
+    final modificadorInt = state.personagem.getValorFinal('INT');
+    final limiteInteligencia = modificadorInt > 0 ? modificadorInt : 0;
+
+    final listaAtual = List<String>.from(state.selecoesPericiaInteligencia);
+
+    // 4. Marca/Desmarca com limite
+    if (listaAtual.contains(siglaPericia)) {
+      listaAtual.remove(siglaPericia);
+    } else {
+      if (listaAtual.length < limiteInteligencia) {
+        listaAtual.add(siglaPericia);
+      }
+    }
+
+    emit(state.copyWith(selecoesPericiaInteligencia: listaAtual));
+  }
+
+  // Quando o jogador clicar em "Próximo" na tela de perícias, chamamos isso
+  // para injetar todas as escolhas dentro da ficha definitiva do personagem.
+  void consolidarPericias() {
+    if (state.personagem.classes.isEmpty) return;
+
+    final classe = state.personagem.classes[0].classeDefinicao;
+    
+    // Junta tudo: Fixas + Escolhas da Classe + Escolhas de INT
+    final todasPericias = <String>[
+      ...classe.periciasFixas,
+      ...state.selecoesPericiaClasse,
+      ...state.selecoesPericiaInteligencia,
+    ];
+
+    final novoPersonagem = state.personagem.copyWith(periciasTreinadas: todasPericias);
+    emit(state.copyWith(personagem: novoPersonagem));
+  }
+  
 
 }

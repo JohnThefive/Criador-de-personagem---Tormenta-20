@@ -9,13 +9,9 @@ class BancoDeClasses {
       pmInicial: 6,
       pmPorNivel: 6,
       proficiencias: [], // Nenhuma proficiência concedida
-      periciasFixas: ["Misticismo", "Vontade"],
+      periciasFixas: ["MISTICISMO", "VONTADE"],
       qtdPericiasEscolha: 2,
-      periciasOpcoes: [
-        "Conhecimento", "Diplomacia", "Enganação", "Iniciativa", 
-        "Intimidação", "Intuição", "Investigação", "Ofício", 
-        "Percepção", "Religião", "Cura" // DEPois colocar Baseado no livro
-      ],
+      periciasOpcoes: ["NOBREZA", "ACROBACIA"],
 
       tabelaDeProgressao: {
         1: ["Escolha do Caminho", "Magias de 1º Círculo"],

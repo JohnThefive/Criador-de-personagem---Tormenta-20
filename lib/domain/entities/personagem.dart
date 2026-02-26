@@ -2,17 +2,24 @@ import 'atributos.dart';
 import 'raca.dart'; 
 import 'classe_do_personagem.dart';
 
+// imports pras pericias 
+import '../services/banco_pericias.dart';
+
+
 class Personagem {
   final String nome;
   final Map<String, Atributo> atributos; // Estes são os atributos BASE (Rolados/Comprados)
   final Raca? raca; // Agora ele pode ter uma raça (
   final List<ClasseDoPersonagem> classes; // o item no índice [0] é a classe inicial.
+  final List<String> periciasTreinadas;   // lista string de pericias treinadas do personagem 
+
 
   Personagem({
     required this.nome, 
     required this.atributos, 
     this.raca,
     this.classes = const [],
+    this.periciasTreinadas = const [],
   });
 
   factory Personagem.inicial() {
@@ -35,13 +42,15 @@ class Personagem {
     Map<String, Atributo>? atributos,
     Raca? raca,
     // ignore: non_constant_identifier_names
-    List<ClasseDoPersonagem>? classe_do_personagem
+    List<ClasseDoPersonagem>? classe_do_personagem,
+    List<String>? periciasTreinadas
   }) {
     return Personagem(
       nome: nome ?? this.nome,
       atributos: atributos ?? this.atributos,
       raca: raca ?? this.raca,
-      classes: classe_do_personagem ?? classes
+      classes: classe_do_personagem ?? classes,
+      periciasTreinadas: periciasTreinadas ?? this.periciasTreinadas,
     );
   }
 
@@ -152,5 +161,37 @@ class Personagem {
       }
     }
     return 0; // Não possui foco mágico
+  }
+
+
+  // REgras de pericia 
+
+  // bonus baseado no nivel do personagem (quando o personagem subir de nivel (futuro))
+  int get bonusTreinamento {
+  if (nivelPersonagem >= 15) return 6;
+  if (nivelPersonagem >= 7) return 4;
+  return 2;
+ }
+
+  //calculo final da pericia 
+  int getValorPericia(String periciaKey, {int penalidadeArmaduraAtual = 0}) {
+    final pericia = BancoDePericias.getByKey(periciaKey);
+
+    // a. Metade do nível (arredondado para baixo)
+    int metadeNivel = (nivelPersonagem / 2).floor();
+
+    int modAtributo = getValorFinal(pericia.atributoChave);
+
+    // Bônus de Treinamento
+    bool ehTreinada = periciasTreinadas.contains(periciaKey);
+    int bonusTreino = ehTreinada ? bonusTreinamento : 0;
+
+    // d. Penalidade de Armadura (se a perícia sofrer e se o personagem usar armadura)
+    int penalidade = 0;
+    if (pericia.penalidadeArmadura) {
+      penalidade = penalidadeArmaduraAtual; // Valor que virá do equipamento no futuro
+    }
+
+    return metadeNivel + modAtributo + bonusTreino - penalidade;
   }
 }

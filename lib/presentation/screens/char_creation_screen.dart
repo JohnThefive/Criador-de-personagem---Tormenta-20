@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:t20_creator/presentation/screens/pagina_pericias.dart';
 import 'package:t20_creator/presentation/screens/pagina_racas.dart';
 import 'package:t20_creator/presentation/screens/pagina_selecao_classe.dart';
 import '../controllers/personagem_cubit.dart';
@@ -70,6 +71,7 @@ class CharacterCreatorScreen extends StatelessWidget {
               _PaginaAtributos(state: state), // pagina de atributos 
               PaginaSelecaoRaca(state: state), // pagina de seleção de raça
               PaginaSelecaoClasse(state: state), // pagina de seleçao de classe 
+              PaginaSelecaoPericias(state: state) ,// Pagina de seleção de pericias 
               const Center(child: Text("Etapa 3: Origem (Em Breve)")),
               // ... adicione as outras etapas aqui (mesngaem pro joão do futuro) ...
               _PaginaFinalizacao(), // Última Etapa
@@ -136,12 +138,30 @@ class CharacterCreatorScreen extends StatelessWidget {
         return classeSelecionada.caminhoEscolhido != null;
       }
 
+
+
+      // Logica de pericias 
+      if (state.etapaAtual == 3) {
+        if (state.personagem.classes.isEmpty) return false;
+
+        final  classeDef = state.personagem.classes[0].classeDefinicao;
+
+        // 1. Verificou se escolheu as 2 (ou X) da classe?
+        bool completouClasse = state.selecoesPericiaClasse.length == classeDef.qtdPericiasEscolha;
+
+        // 2. Verificou se gastou as extras de INT?
+        final modInt = state.personagem.getValorFinal('INT');
+        final limiteInteligencia = modInt > 0 ? modInt : 0;
+        bool completouInt = state.selecoesPericiaInteligencia.length == limiteInteligencia;
+
+        // Só avança se completou as duas exigências
+        return completouClasse && completouInt;
+
+        }
+
       return true;
 
-
     }
-
-    
     return true;
   }
   }
