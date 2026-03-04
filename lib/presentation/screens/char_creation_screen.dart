@@ -34,18 +34,18 @@ class CharacterCreatorScreen extends StatelessWidget {
             }
             final cubit = context.read<PersonagemCubit>();
 
-            // 1. Se estiver avançado no Wizard (Raça, etc), volta uma etapa
+            // Se estiver avançado no Wizard (Raça, etc), volta uma etapa
             if (state.etapaAtual > 0) {
               cubit.voltarEtapa();
             } 
-            // 2. Se estiver na etapa 0 mas já escolheu um método (Rolagem/Compra), reseta pro inicio
+            // Se estiver na etapa 0 mas já escolheu um método (Rolagem/Compra), reseta pro inicio
             else if (state.metodoAtributos != MetodoAtributos.nenhum) {
                cubit.escolherMetodoAtributos(MetodoAtributos.nenhum);
             }
             // 3. Se estiver no começo de tudo, limpa a memória e fecha a tela
             else {
-              cubit.resetarCriacao(); // <--- O SEGREDO ESTÁ AQUI (Limpa o estado sujo)
-              Navigator.pop(context); // Agora sim fecha manualmente
+              cubit.resetarCriacao(); // (Limpa o estado sujo)
+              Navigator.pop(context); 
             }
           },child:Scaffold(
           appBar: AppBar(
@@ -61,9 +61,27 @@ class CharacterCreatorScreen extends StatelessWidget {
                 }
               },
             ),
+            // Botão de avançar só aparece quando uma atividade é concluida (modificar visual no futuro)
+            actions: [
+                if (_deveMostrarBotaoAvancar(state))
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: TextButton(
+                      onPressed: () => context.read<PersonagemCubit>().avancarEtapa(),
+                      style: TextButton.styleFrom(
+                        foregroundColor: Colors.red[900], // Cor do texto e ícone
+                      ),
+                      child: const Row(
+                        children: [
+                          Text("Próximo", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                          SizedBox(width: 4),
+                          Icon(Icons.arrow_forward),
+                        ],
+                      ),
+                    ),
+                  ),
+              ],
           ),
-          
-          // O CORPO É UM WIZARD QUE NÃO DESLIZA COM O DEDO (Physics)
           body: PageView(
             controller: _pageController,
             physics: const NeverScrollableScrollPhysics(), // Bloqueia swipe manual
@@ -71,22 +89,15 @@ class CharacterCreatorScreen extends StatelessWidget {
               _PaginaAtributos(state: state), // pagina de atributos 
               PaginaSelecaoRaca(state: state), // pagina de seleção de raça
               PaginaSelecaoClasse(state: state), // pagina de seleçao de classe 
+              // fazer uma pagina de origens 
+              // fazer uma pagina de deuses
               PaginaSelecaoPericias(state: state) ,// Pagina de seleção de pericias 
               const Center(child: Text("Etapa 3: Origem (Em Breve)")),
               // ... adicione as outras etapas aqui (mesngaem pro joão do futuro) ...
               _PaginaFinalizacao(), // Última Etapa
             ],
           ),
-
-          // Botão de avançar só aparece quando uma atividade é concluida (modificar visual no futuro)
-          floatingActionButton: _deveMostrarBotaoAvancar(state) 
-            ? FloatingActionButton.extended(
-                onPressed: () => context.read<PersonagemCubit>().avancarEtapa(),
-                label: const Text("Próximo"),
-                icon: const Icon(Icons.arrow_forward),
-                backgroundColor: Colors.red[900],
-              )
-            : null,
+        
         ),
         );
 

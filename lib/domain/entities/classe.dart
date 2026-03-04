@@ -50,6 +50,9 @@ class Classe {
   // A classe pode ter caminhos para escolher no Nível 1 (Ex: Arcanista)
   final List<CaminhoDeClasse> caminhosDisponiveis;
 
+  final Map<String, String> habilidadesFixas; // Ex: Fúria, Instinto Selvagem
+  final Map<String, String> poderesDaClasse;  // Ex: Alma de Bronze, Frenesi
+
   const Classe({
     required this.nome,
     required this.pvInicial,
@@ -63,7 +66,9 @@ class Classe {
     this.caminhosDisponiveis = const [],
     this.tabelaDeProgressao = const {},
     required this.caminhoImagem, 
-    required this.descricaoclasse, // <--- AQUI
+    required this.descricaoclasse, 
+    this.habilidadesFixas = const {}, 
+    this.poderesDaClasse = const {},
     
 
   });

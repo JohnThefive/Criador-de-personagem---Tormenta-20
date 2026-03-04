@@ -25,7 +25,7 @@ class Poder {
     // 1. Checa Nível
     if (classeAtual.nivel < nivelMinimo) return false;
 
-    // 2. Checa Caminho (Se a lista não for vazia, o caminho atual DEVE estar nela)
+    // 2. Checa Caminho (
     if (caminhosExigidos.isNotEmpty) {
       final caminhoAtual = classeAtual.caminhoEscolhido?.nome;
       if (caminhoAtual == null || !caminhosExigidos.contains(caminhoAtual)) {
@@ -39,7 +39,7 @@ class Poder {
       if (!nomesDosPoderesQueTenho.contains(exigido)) return false;
     }
 
-    // 4. Checa Perícias (Assumindo que teremos uma lista de perícias treinadas no personagem no futuro)
+    // 4. Checa Perícias (deixarei isso para apliicações futuras)
     // for (var pericia in periciasExigidas) {
     //   if (!personagem.periciasTreinadas.contains(pericia)) return false;
     // }

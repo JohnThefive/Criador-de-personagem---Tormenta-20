@@ -141,6 +141,56 @@ class PaginaSelecaoClasse extends StatelessWidget {
                       const SizedBox(height: 16),
                       const Divider(),
 
+                      //SEssão de de Habilidades fixas de classe 
+                      if (classeSelecionada.habilidadesFixas.isNotEmpty)
+                        ExpansionTile(
+                          title: const Text("Habilidades de Classe", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                          subtitle: const Text("Ganha automaticamente ao subir de nível"),
+                          iconColor: Colors.red[900],
+                          collapsedIconColor: Colors.grey,
+                          children: classeSelecionada.habilidadesFixas.entries.map((entry) {
+                            return ListTile(
+                              title: Text(entry.key, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+                              subtitle: Text(entry.value, style: const TextStyle(fontSize: 12)),
+                              contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                            );
+                          }).toList(),
+                        ),
+
+                      //SEssão de poderes gerais de classe 
+                      if (classeSelecionada.poderesDaClasse.isNotEmpty)
+                        ExpansionTile(
+                          title: const Text("Poderes da Classe", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                          subtitle: const Text("Pode escolher 1 a cada nível a partir do nível 2"),
+                          iconColor: Colors.red[900],
+                          collapsedIconColor: Colors.grey,
+                          children: classeSelecionada.poderesDaClasse.entries.map((entry) {
+                            return Container(
+                              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                              padding: const EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                color: Colors.grey[100],
+                                border: Border.all(color: Colors.grey[300]!),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Icon(Icons.bolt, size: 16, color: Colors.orange[700]),
+                                      const SizedBox(width: 4),
+                                      Text(entry.key, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Text(entry.value, style: const TextStyle(fontSize: 12, color: Colors.black87)),
+                                ],
+                              ),
+                            );
+                          }).toList(),
+                        ),
+
                       // --- SEÇÃO DE CAMINHOS/SUBCLASSES ---
                       if (classeSelecionada.caminhosDisponiveis.isNotEmpty) ...[
                         Row(
