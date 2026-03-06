@@ -1,169 +1,203 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:t20_creator/domain/entities/raca.dart';
-import 'package:t20_creator/presentation/controllers/personagem_cubit.dart';
+import '../../domain/entities/raca.dart';
+import '../controllers/personagem_cubit.dart';
+import '../../domain/services/banco_racas.dart';
 
-import '../../domain/services/banco_racas.dart'; // Importe o banco
-
-class PaginaSelecaoRaca extends StatelessWidget {
+class PaginaSelecaoRaca extends StatefulWidget {
   final PersonagemState state;
 
   const PaginaSelecaoRaca({super.key, required this.state});
 
   @override
+  State<PaginaSelecaoRaca> createState() => _PaginaSelecaoRacaState();
+}
+
+class _PaginaSelecaoRacaState extends State<PaginaSelecaoRaca> {
+  bool _menuAberto = true;
+
+  @override
   Widget build(BuildContext context) {
+    final racaSelecionada = widget.state.personagem.raca;
+
     return Column(
       children: [
-        // 1. Resumo dos Atributos Atuais (Como uma "Hud" no topo)
+        // Hud de atributos (no topo)
         Container(
           padding: const EdgeInsets.symmetric(vertical: 10),
           color: Colors.grey[200],
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: state.personagem.atributos.keys.map((sigla) {
-
-
-              // Usa o getValorFinal para mostrar a soma (Base + Raça + seletor)
-              int valorFinal = state.personagem.getValorFinal(
+            children: widget.state.personagem.atributos.keys.map((sigla) {
+              int valorFinal = widget.state.personagem.getValorFinal(
                 sigla,
-                bonusVariaveis: state.atributosVariaveisRaca
-                );
-
-              int valorBase = state.personagem.atributos[sigla]?.valor ?? 0;
-              bool foiAlterado = (state.personagem.raca?.modificadores[sigla] ?? 0) != 0;
+                bonusVariaveis: widget.state.atributosVariaveisRaca
+              );
+              int valorBase = widget.state.personagem.atributos[sigla]?.valor ?? 0;
+              bool foiAlterado = (widget.state.personagem.raca?.modificadores[sigla] ?? 0) != 0 || widget.state.atributosVariaveisRaca.contains(sigla);
 
               Color corTexto = Colors.black;
-              if (foiAlterado){
-                corTexto = valorFinal > valorBase ? Colors.green[800]!: Colors.red[800]!;
+              if (foiAlterado) {
+                corTexto = valorFinal > valorBase ? Colors.green[800]! : Colors.red[800]!;
               }
-
 
               return Column(
                 children: [
                   Text(sigla, style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
                   Text(
                     valorFinal >= 0 ? "+$valorFinal" : "$valorFinal",
-                    style: TextStyle(
-                      fontSize: 16, 
-                      fontWeight: FontWeight.bold,
-                      // Fica Verde/Vermelho se a raça alterou este atributo
-                      color: corTexto,
-                    ),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: corTexto),
                   ),
                 ],
               );
             }).toList(),
           ),
         ),
-
         const Divider(height: 1),
 
-        // 2. Grid de Raças
+        //  (Menu de escolha + Detalhes) ---
         Expanded(
-          child: GridView.builder(
-            padding: const EdgeInsets.all(8),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2, // 2 colunas
-              childAspectRatio: 0.8, // Altura do card
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-            ),
-            itemCount: BancoDeRacas.todas.length,
-            itemBuilder: (context, index) {
-              final raca = BancoDeRacas.todas[index];
-              final selecionada = state.personagem.raca?.nome == raca.nome;
-
-              return GestureDetector(
-                onTap: () {
-
-                  // selecionar raca 
-                  context.read<PersonagemCubit>().selecionarRaca(raca);
-
-                  //se flexivel 
-                  if (raca.ehFlexivel) {
-                    // delecionar os atributos de raca 
-                    _mostrarSeletorDeAtributos(context, raca);
-                  } else {
-                    context.read<PersonagemCubit>().selecionarRaca(raca);
-                  }
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: selecionada ? Colors.red[50] : Colors.white,
-                    border: Border.all(
-                      color: selecionada ? Colors.red : Colors.grey[300]!,
-                      width: selecionada ? 2 : 1
-                    ),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
+          child: Row(
+            children: [
+              // MENU LATERAL ANIMADO (Mesmo que o de classes)
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeInOut,
+                width: _menuAberto ? 130 : 0,
+                color: Colors.red[600],
+                child: ClipRect(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Nome da Raça
-                      Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          color: selecionada ? Colors.red : Colors.grey[100],
-                          borderRadius: const BorderRadius.vertical(top: Radius.circular(11)),
-                        ),
-                        child: Text(
-                          raca.nome,
-                          style: TextStyle(
-                            color: selecionada ? Colors.white : Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text("Escolha Uma Raça", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12), textAlign: TextAlign.center),
                       ),
-                      
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // Modificadores (Ex: CON +2)
-                            if (raca.modificadores.isNotEmpty)
-                              Wrap(
-                                spacing: 4,
-                                children: raca.modificadores.entries.map((e) {
-                                  return Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                                    decoration: BoxDecoration(
-                                      color: e.value > 0 ? Colors.green[100] : Colors.red[100],
-                                      borderRadius: BorderRadius.circular(4),
-                                    ),
-                                    child: Text(
-                                      "${e.key} ${e.value > 0 ? '+' : ''}${e.value}",
-                                      style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
-                                    ),
-                                  );
-                                }).toList(),
-                              )
-                            else 
-                              const Text("Modificadores Variáveis", style: TextStyle(fontSize: 10, fontStyle: FontStyle.italic)),
+                      const Divider(color: Colors.white54),
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: BancoDeRacas.todas.length,
+                          itemBuilder: (context, index) {
+                            final raca = BancoDeRacas.todas[index];
+                            final isSelected = racaSelecionada?.nome == raca.nome;
 
-                            const SizedBox(height: 8),
-                            
-                            // Lista de Habilidades (Bullet Points)
-                            ...raca.habilidades.map((habilidade) => Padding(
-                              padding: const EdgeInsets.only(bottom: 2),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text("• ", style: TextStyle(fontSize: 10)),
-                                  Expanded(child: Text(habilidade, style: const TextStyle(fontSize: 10))),
-                                ],
+                            return GestureDetector(
+                              onTap: () {
+                                context.read<PersonagemCubit>().selecionarRaca(raca);
+                                if (raca.ehFlexivel) {
+                                  // Chama a função Atualizando atributos
+                                  _mostrarSeletorDeAtributos(context, raca);
+                                }
+                              },
+                              child: Container(
+                                margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                padding: const EdgeInsets.symmetric(vertical: 12),
+                                decoration: BoxDecoration(
+                                  color: isSelected ? Colors.grey[400] : Colors.transparent,
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Text(
+                                  raca.nome,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(color: isSelected ? Colors.black : Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               ),
-                            )),
-                          ],
+                            );
+                          },
                         ),
                       ),
                     ],
                   ),
                 ),
-              );
-            },
+              ),
+
+              // Aba para fechar e abrie seletor de reças
+              GestureDetector(
+                onTap: () => setState(() => _menuAberto = !_menuAberto),
+                child: Container(
+                  width: 24,
+                  height: double.infinity,
+                  color: Colors.red[800],
+                  child: Icon(_menuAberto ? Icons.chevron_left : Icons.chevron_right, color: Colors.white),
+                ),
+              ),
+
+              // LOcal de detalhes
+              Expanded(
+                child: Container(
+                  color: Colors.white,
+                  child: racaSelecionada == null
+                      ? const Center(child: Text("Selecione uma raça ao lado."))
+                      : ListView(
+                          padding: const EdgeInsets.all(16),
+                          children: [
+                            // Imagem da Raça
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: Image.asset(
+                                racaSelecionada.imagemRaca,
+                                width: double.infinity,
+                                fit: BoxFit.contain,
+                                errorBuilder: (context, error, stackTrace) => Container(
+                                  height: 150, color: Colors.grey[300], child: const Icon(Icons.broken_image, size: 50, color: Colors.grey),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+
+                            // História / Lore
+                            Text(
+                              racaSelecionada.descricaoRaca,
+                              style: const TextStyle(fontSize: 14, color: Colors.black87, height: 1.3),
+                              textAlign: TextAlign.justify,
+                            ),
+                            const SizedBox(height: 16),
+                            const Divider(),
+
+                            // Modificadores de Atributo da Raça
+                            const Text("Modificadores de Atributo", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                            const SizedBox(height: 8),
+                            if (racaSelecionada.modificadores.isNotEmpty)
+                              Wrap(
+                                spacing: 8,
+                                children: racaSelecionada.modificadores.entries.map((e) {
+                                  return Chip(
+                                    label: Text("${e.key} ${e.value > 0 ? '+' : ''}${e.value}", style: const TextStyle(fontWeight: FontWeight.bold)),
+                                    backgroundColor: e.value > 0 ? Colors.green[100] : Colors.red[100],
+                                  );
+                                }).toList(),
+                              )
+                            else if (racaSelecionada.ehFlexivel)
+                              Chip(
+                                label: const Text("Escolha +1 em 3 atributos", style: TextStyle(fontWeight: FontWeight.bold)),
+                                backgroundColor: Colors.blue[100],
+                                avatar: const Icon(Icons.touch_app, size: 16),
+                              ),
+                            
+                            const SizedBox(height: 16),
+
+                            // Sanfona (ExpansionTile) das Habilidades da Raça
+                            if (racaSelecionada.habilidadesRaca.isNotEmpty)
+                              ExpansionTile(
+                                title: const Text("Habilidades da Raça", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                                subtitle: const Text("Características únicas da sua espécie"),
+                                iconColor: Colors.red[900],
+                                collapsedIconColor: Colors.grey,
+                                initiallyExpanded: true, // Já começa aberto para o usuário ver
+                                children: racaSelecionada.habilidadesRaca.entries.map((entry) {
+                                  return ListTile(
+                                    title: Text(entry.key, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+                                    subtitle: Text(entry.value, style: const TextStyle(fontSize: 12)),
+                                    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                                  );
+                                }).toList(),
+                              ),
+                          ],
+                        ),
+                ),
+              ),
+            ],
           ),
         ),
       ],
@@ -171,8 +205,7 @@ class PaginaSelecaoRaca extends StatelessWidget {
   }
 }
 
-// Cole isso no final do arquivo _pagina_racas.dart (fora da classe PaginaSelecaoRaca)
-
+// Funções RElacionadas a atributos
 void _mostrarSeletorDeAtributos(BuildContext parentContext, Raca raca) {
   showModalBottomSheet(
     context: parentContext,
@@ -190,6 +223,7 @@ void _mostrarSeletorDeAtributos(BuildContext parentContext, Raca raca) {
           final selecoes = state.atributosVariaveisRaca;
           final faltam = 3 - selecoes.length;
 
+          //Tela de seleção de atributos
           return Container(
             padding: const EdgeInsets.all(24),
             height: 450, // Altura do painel
@@ -242,7 +276,7 @@ void _mostrarSeletorDeAtributos(BuildContext parentContext, Raca raca) {
 
                 const Spacer(),
                 
-                // BOTÃO CONFIRMAR
+                // Botão de confirmar escolha
                 ElevatedButton(
                   onPressed: faltam == 0 
                     ? () => Navigator.pop(context) // Fecha o modal se acabou

@@ -144,10 +144,17 @@ class CharacterCreatorScreen extends StatelessWidget {
 
       final classeSelecionada = state.personagem.classes[0];
 
-      // se a classe tem caminhos 
-      if (classeSelecionada.classeDefinicao.caminhosDisponiveis.isNotEmpty){
-        return classeSelecionada.caminhoEscolhido != null;
+     // Se tem caminhos, precisa escolher um
+      if (classeSelecionada.classeDefinicao.caminhosDisponiveis.isNotEmpty) {
+        if (classeSelecionada.caminhoEscolhido == null) return false;
+        
+        // Se o caminho escolhido for Feiticeiro, OBRIGA a escolher a Linhagem
+        if (classeSelecionada.caminhoEscolhido!.nome == "Feiticeiro") {
+          if (classeSelecionada.linhagemEscolhida == null) return false;
+        }
       }
+      return true;
+    }
 
 
 
@@ -157,10 +164,10 @@ class CharacterCreatorScreen extends StatelessWidget {
 
         final  classeDef = state.personagem.classes[0].classeDefinicao;
 
-        // 1. Verificou se escolheu as 2 (ou X) da classe?
+        // Verificou se escolheu as pericias de classe
         bool completouClasse = state.selecoesPericiaClasse.length == classeDef.qtdPericiasEscolha;
 
-        // 2. Verificou se gastou as extras de INT?
+        // Verificou se gastou as extras de INT?
         final modInt = state.personagem.getValorFinal('INT');
         final limiteInteligencia = modInt > 0 ? modInt : 0;
         bool completouInt = state.selecoesPericiaInteligencia.length == limiteInteligencia;
@@ -171,14 +178,12 @@ class CharacterCreatorScreen extends StatelessWidget {
         }
 
       return true;
-
     }
-    return true;
   }
-  }
+  
 
 
-// --- SUB-WIDGET DA ETAPA 0: ATRIBUTOS ---
+// Widget de Atributos
 class _PaginaAtributos extends StatelessWidget {
   final PersonagemState state;
 
