@@ -1,0 +1,1170 @@
+{
+    "ARCANISTA": [
+        {
+            "key": "ARCANISTA_ARCANO_DE_BATALHA",
+            "nome": "Arcano de Batalha",
+            "descricao": "Você soma o bônus de seu atributo-chave nas rolagens de dano para magias e para seu Raio Arcano.",
+            "preRequisitoTexto": "",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ARCANISTA_AUMENTO_DE_ATRIBUTO",
+            "nome": "Aumento de Atributo",
+            "descricao": "Você recebe +2 em um atributo à sua escolha. Escolhas posteriores no mesmo atributo concedem +1.",
+            "preRequisitoTexto": "",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ARCANISTA_RAIO_ARCANO",
+            "nome": "Raio Arcano",
+            "descricao": "Dispara um raio em alcance curto causando 1d6 de dano de essência. Escala com círculos superiores.",
+            "preRequisitoTexto": "",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ARCANISTA_RAIO_ELEMENTAL",
+            "nome": "Raio Elemental",
+            "descricao": "Pode converter o Raio Arcano em dano elemental e aplicar condição ao alvo.",
+            "preRequisitoTexto": "Pré-requisito: Raio Arcano.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "ARCANISTA_RAIO_ARCANO"
+            ],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ARCANISTA_RAIO_PODEROSO",
+            "nome": "Raio Poderoso",
+            "descricao": "Seu Raio Arcano usa d8 e passa a alcance médio.",
+            "preRequisitoTexto": "Pré-requisito: Raio Arcano.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "ARCANISTA_RAIO_ARCANO"
+            ],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ARCANISTA_TINTA_DO_MAGO",
+            "nome": "Tinta do Mago",
+            "descricao": "Você pode criar pergaminhos como se tivesse Escrever Pergaminho.",
+            "preRequisitoTexto": "Pré-requisitos: Mago.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [
+                "Mago"
+            ],
+            "poderesExigidos": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ARCANISTA_CALDEIRAO_DO_BRUXO",
+            "nome": "Caldeirão do Bruxo",
+            "descricao": "Você pode criar poções como se tivesse Preparar Poção.",
+            "preRequisitoTexto": "Pré-requisitos: Bruxo.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [
+                "Bruxo"
+            ],
+            "poderesExigidos": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ARCANISTA_CONHECIMENTO_MAGICO",
+            "nome": "Conhecimento Mágico",
+            "descricao": "Aprende duas magias adicionais de qualquer círculo que possa lançar.",
+            "preRequisitoTexto": "",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ARCANISTA_CONTRAMAGICA_APRIMORADA",
+            "nome": "Contramágica Aprimorada",
+            "descricao": "Uma vez por rodada, pode realizar contramágica como reação.",
+            "preRequisitoTexto": "Pré-requisito: Dissipar Magia.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "DISSIPAR_MAGIA"
+            ],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ARCANISTA_ENVOLTO_EM_MISTERIO",
+            "nome": "Envolto em Mistério",
+            "descricao": "Recebe +5 em Enganação e Intimidação contra ignorantes e supersticiosos.",
+            "preRequisitoTexto": "",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ARCANISTA_ESCRIBA_ARCANO",
+            "nome": "Escriba Arcano",
+            "descricao": "Você pode aprender magias copiando pergaminhos e grimórios.",
+            "preRequisitoTexto": "Pré-requisitos: Mago.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [
+                "Mago"
+            ],
+            "poderesExigidos": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ARCANISTA_ESPECIALISTA_EM_ESCOLA",
+            "nome": "Especialista em Escola",
+            "descricao": "Escolha uma escola; a CD para resistir a suas magias dela aumenta em +2.",
+            "preRequisitoTexto": "Pré-requisitos: Bruxo ou Mago.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [
+                "Bruxo",
+                "Mago"
+            ],
+            "poderesExigidos": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ARCANISTA_FAMILIAR",
+            "nome": "Familiar",
+            "descricao": "Você possui um animal de estimação mágico.",
+            "preRequisitoTexto": "",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ARCANISTA_FLUXO_DE_MANA",
+            "nome": "Fluxo de Mana",
+            "descricao": "Pode manter dois efeitos sustentados ativos simultaneamente.",
+            "preRequisitoTexto": "Pré-requisito: 10º nível de Arcanista.",
+            "nivelMinimo": 10,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ARCANISTA_FOCO_VITAL",
+            "nome": "Foco Vital",
+            "descricao": "Seu foco absorve dano que o levaria a 0 PV ou menos.",
+            "preRequisitoTexto": "Pré-requisito: Bruxo.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [
+                "Bruxo"
+            ],
+            "poderesExigidos": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ARCANISTA_FORTALECIMENTO_ARCANO",
+            "nome": "Fortalecimento Arcano",
+            "descricao": "A CD para resistir a suas magias aumenta em +1, ou +2 com 4º círculo.",
+            "preRequisitoTexto": "Pré-requisito: 5º nível.",
+            "nivelMinimo": 5,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ARCANISTA_HERANCA_APRIMORADA",
+            "nome": "Herança Aprimorada",
+            "descricao": "Recebe a herança aprimorada da linhagem sobrenatural.",
+            "preRequisitoTexto": "Pré-requisitos: Feiticeiro, 6º nível.",
+            "nivelMinimo": 6,
+            "caminhosExigidos": [
+                "Feiticeiro"
+            ],
+            "poderesExigidos": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ARCANISTA_HERANCA_SUPERIOR",
+            "nome": "Herança Superior",
+            "descricao": "Recebe a herança superior da linhagem sobrenatural.",
+            "preRequisitoTexto": "Pré-requisitos: Herança Aprimorada, 11º nível.",
+            "nivelMinimo": 11,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "ARCANISTA_HERANCA_APRIMORADA"
+            ],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ARCANISTA_MAGIA_PUNGENTE",
+            "nome": "Magia Pungente",
+            "descricao": "Ao lançar magia, pode pagar 1 PM para aumentar a CD em +2.",
+            "preRequisitoTexto": "",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ARCANISTA_MESTRE_EM_ESCOLA",
+            "nome": "Mestre em Escola",
+            "descricao": "O custo para lançar magias da escola escolhida diminui em -1 PM.",
+            "preRequisitoTexto": "Pré-requisitos: Especialista em Escola, 8º nível.",
+            "nivelMinimo": 8,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "ARCANISTA_ESPECIALISTA_EM_ESCOLA"
+            ],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ARCANISTA_PODER_MAGICO",
+            "nome": "Poder Mágico",
+            "descricao": "Recebe +1 PM por nível de Arcanista.",
+            "preRequisitoTexto": "",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "atributosExigidos": {}
+        }
+    ],
+    "BARBARO": [
+        {
+            "key": "ALMA_DE_BRONZE",
+            "nome": "Alma de Bronze",
+            "descricao": "Ao entrar em Fúria, recebe PV temporários iguais à metade do nível + mod. Força.",
+            "preRequisitoTexto": "",
+            "nivelMinimo": 1,
+            "atributosExigidos": {},
+            "periciasExigidas": [],
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "podeRepetir": false
+        },
+        {
+            "key": "AUMENTO_DE_ATRIBUTO",
+            "nome": "Aumento de Atributo",
+            "descricao": "Recebe +2 em um atributo. Escolhas posteriores no mesmo atributo concedem +1.",
+            "preRequisitoTexto": "",
+            "nivelMinimo": 1,
+            "atributosExigidos": {},
+            "periciasExigidas": [],
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "podeRepetir": true
+        },
+        {
+            "key": "BRADO_ASSUSTADOR",
+            "nome": "Brado Assustador",
+            "descricao": "Pode assustar inimigos em alcance curto com um berro feroz.",
+            "preRequisitoTexto": "Pré-requisito: treinado em Intimidação.",
+            "nivelMinimo": 1,
+            "atributosExigidos": {},
+            "periciasExigidas": [
+                "INTIMIDACAO"
+            ],
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "podeRepetir": false
+        },
+        {
+            "key": "CRITICO_BRUTAL",
+            "nome": "Crítico Brutal",
+            "descricao": "Seu multiplicador de crítico com armas corpo a corpo aumenta em +1.",
+            "preRequisitoTexto": "Pré-requisito: 6º nível de Bárbaro.",
+            "nivelMinimo": 6,
+            "atributosExigidos": {},
+            "periciasExigidas": [],
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "podeRepetir": false
+        },
+        {
+            "key": "DESTRUIDOR",
+            "nome": "Destruidor",
+            "descricao": "Pode rerrolar resultados 1 ou 2 no dano de armas de duas mãos.",
+            "preRequisitoTexto": "Pré-requisito: For 13.",
+            "nivelMinimo": 1,
+            "atributosExigidos": {
+                "FOR": 13
+            },
+            "periciasExigidas": [],
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "podeRepetir": false
+        },
+        {
+            "key": "ESPIRITO_INQUEBRAVEL",
+            "nome": "Espírito Inquebrável",
+            "descricao": "Durante Fúria, não fica inconsciente com 0 ou menos PV.",
+            "preRequisitoTexto": "Pré-requisito: Alma de Bronze.",
+            "nivelMinimo": 1,
+            "atributosExigidos": {},
+            "periciasExigidas": [],
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "ALMA_DE_BRONZE"
+            ],
+            "podeRepetir": false
+        },
+        {
+            "key": "ESQUIVA_SOBRENATURAL",
+            "nome": "Esquiva Sobrenatural",
+            "descricao": "Você nunca fica surpreendido.",
+            "preRequisitoTexto": "",
+            "nivelMinimo": 1,
+            "atributosExigidos": {},
+            "periciasExigidas": [],
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "podeRepetir": false
+        },
+        {
+            "key": "FORCA_INDOMAVEL",
+            "nome": "Força Indomável",
+            "descricao": "Pode gastar 1 PM para somar o nível em testes de Força ou Atletismo.",
+            "preRequisitoTexto": "",
+            "nivelMinimo": 1,
+            "atributosExigidos": {},
+            "periciasExigidas": [],
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "podeRepetir": false
+        },
+        {
+            "key": "FRENESI",
+            "nome": "Frenesi",
+            "descricao": "Durante Fúria, pode gastar 2 PM para fazer um ataque adicional.",
+            "preRequisitoTexto": "",
+            "nivelMinimo": 1,
+            "atributosExigidos": {},
+            "periciasExigidas": [],
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "podeRepetir": false
+        },
+        {
+            "key": "FURIA_DA_SAVANA",
+            "nome": "Fúria da Savana",
+            "descricao": "Recebe +3m de deslocamento e aplica bônus da Fúria a armas de arremesso.",
+            "preRequisitoTexto": "",
+            "nivelMinimo": 1,
+            "atributosExigidos": {},
+            "periciasExigidas": [],
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "podeRepetir": false
+        },
+        {
+            "key": "FURIA_RAIVOSA",
+            "nome": "Fúria Raivosa",
+            "descricao": "Pode gastar 1 PM para manter a Fúria ativa sem atacar.",
+            "preRequisitoTexto": "",
+            "nivelMinimo": 1,
+            "atributosExigidos": {},
+            "periciasExigidas": [],
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "podeRepetir": false
+        },
+        {
+            "key": "GOLPE_PODEROSO",
+            "nome": "Golpe Poderoso",
+            "descricao": "Ao acertar um ataque corpo a corpo, pode gastar 1 PM para causar um dado extra de dano.",
+            "preRequisitoTexto": "",
+            "nivelMinimo": 1,
+            "atributosExigidos": {},
+            "periciasExigidas": [],
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "podeRepetir": false
+        },
+        {
+            "key": "IMPETO",
+            "nome": "Ímpeto",
+            "descricao": "Pode gastar 1 PM para aumentar deslocamento em +6m por uma rodada.",
+            "preRequisitoTexto": "",
+            "nivelMinimo": 1,
+            "atributosExigidos": {},
+            "periciasExigidas": [],
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "podeRepetir": false
+        },
+        {
+            "key": "INVESTIDA_IMPRUDENTE",
+            "nome": "Investida Imprudente",
+            "descricao": "Pode aumentar penalidade da investida para ganhar +1d8 de dano.",
+            "preRequisitoTexto": "",
+            "nivelMinimo": 1,
+            "atributosExigidos": {},
+            "periciasExigidas": [],
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "podeRepetir": false
+        },
+        {
+            "key": "PELE_DE_FERRO",
+            "nome": "Pele de Ferro",
+            "descricao": "Recebe +2 na Defesa sem armadura pesada.",
+            "preRequisitoTexto": "",
+            "nivelMinimo": 1,
+            "atributosExigidos": {},
+            "periciasExigidas": [],
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "podeRepetir": false
+        },
+        {
+            "key": "PELE_DE_ACO",
+            "nome": "Pele de Aço",
+            "descricao": "Aumenta o bônus de Pele de Ferro para +5.",
+            "preRequisitoTexto": "Pré-requisitos: Pele de Ferro, 8º nível de Bárbaro.",
+            "nivelMinimo": 8,
+            "atributosExigidos": {},
+            "periciasExigidas": [],
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "PELE_DE_FERRO"
+            ],
+            "podeRepetir": false
+        },
+        {
+            "key": "SANGUE_DOS_INIMIGOS",
+            "nome": "Sangue dos Inimigos",
+            "descricao": "Acertos críticos ou derrotar inimigos concedem bônus cumulativo em ataque e dano.",
+            "preRequisitoTexto": "",
+            "nivelMinimo": 1,
+            "atributosExigidos": {},
+            "periciasExigidas": [],
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "podeRepetir": false
+        },
+        {
+            "key": "SUPERSTICAO",
+            "nome": "Superstição",
+            "descricao": "Recebe resistência a magia +2.",
+            "preRequisitoTexto": "",
+            "nivelMinimo": 1,
+            "atributosExigidos": {},
+            "periciasExigidas": [],
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "podeRepetir": false
+        },
+        {
+            "key": "TOTEM_ESPIRITUAL",
+            "nome": "Totem Espiritual",
+            "descricao": "Recebe PM adicionais e magia ligada a um animal totêmico.",
+            "preRequisitoTexto": "Pré-requisitos: Sab 13, 4º nível de Bárbaro.",
+            "nivelMinimo": 4,
+            "atributosExigidos": {
+                "SAB": 13
+            },
+            "periciasExigidas": [],
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "podeRepetir": false
+        },
+        {
+            "key": "VIGOR_PRIMAL",
+            "nome": "Vigor Primal",
+            "descricao": "Pode gastar PM para recuperar pontos de vida.",
+            "preRequisitoTexto": "",
+            "nivelMinimo": 1,
+            "atributosExigidos": {},
+            "periciasExigidas": [],
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "podeRepetir": false
+        }
+    ],
+    "BARDO": [
+        {
+            "key": "ARTE_MAGICA",
+            "nome": "Arte Mágica",
+            "descricao": "Enquanto estiver sob efeito de Inspiração, a CD para resistir às suas magias aumenta em +2.",
+            "preRequisitoTexto": "",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "AUMENTAR_REPERTORIO",
+            "nome": "Aumentar Repertório",
+            "descricao": "Aprende duas magias adicionais de qualquer círculo que possa lançar.",
+            "preRequisitoTexto": "",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "AUMENTO_DE_ATRIBUTO",
+            "nome": "Aumento de Atributo",
+            "descricao": "Recebe +2 em um atributo; escolhas posteriores no mesmo atributo concedem +1.",
+            "preRequisitoTexto": "",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "CANCAO_ASSUSTADORA",
+            "nome": "Canção Assustadora",
+            "descricao": "Pode gastar 1 PM para abalar criaturas em alcance curto.",
+            "preRequisitoTexto": "",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ESGRIMA_MAGICA",
+            "nome": "Esgrima Mágica",
+            "descricao": "Enquanto sob Inspiração, pode usar Atuação no lugar de Luta com armas leves ou de uma mão.",
+            "preRequisitoTexto": "",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "DANCA_DAS_LAMINAS",
+            "nome": "Dança das Lâminas",
+            "descricao": "Ao lançar magia com ação padrão, pode gastar 1 PM para realizar um ataque corpo a corpo como ação livre.",
+            "preRequisitoTexto": "Pré-requisitos: Esgrima Mágica, 10º nível.",
+            "nivelMinimo": 10,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "ESGRIMA_MAGICA"
+            ],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ESTRELATO",
+            "nome": "Estrelato",
+            "descricao": "Suas apresentações garantem reconhecimento e bônus sociais ampliados.",
+            "preRequisitoTexto": "Pré-requisito: 6º nível.",
+            "nivelMinimo": 6,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "FASCINAR",
+            "nome": "Fascinar",
+            "descricao": "Pode fascinar uma criatura com teste oposto de Atuação.",
+            "preRequisitoTexto": "",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "FASCINAR_EM_MASSA",
+            "nome": "Fascinar em Massa",
+            "descricao": "Ao usar Fascinar, pode afetar múltiplas criaturas.",
+            "preRequisitoTexto": "Pré-requisito: Fascinar.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "FASCINAR"
+            ],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "GOLPE_MAGICO",
+            "nome": "Golpe Mágico",
+            "descricao": "Acertos corpo a corpo sob Inspiração concedem PM temporários.",
+            "preRequisitoTexto": "Pré-requisito: Esgrima Mágica.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "ESGRIMA_MAGICA"
+            ],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "GOLPE_ELEMENTAL",
+            "nome": "Golpe Elemental",
+            "descricao": "Pode gastar PM para causar dano elemental adicional em ataques corpo a corpo.",
+            "preRequisitoTexto": "Pré-requisito: Golpe Mágico.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "GOLPE_MAGICO"
+            ],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "INSPIRACAO_MARCIAL",
+            "nome": "Inspiração Marcial",
+            "descricao": "O bônus de Inspiração também se aplica em rolagens de dano.",
+            "preRequisitoTexto": "",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "LENDAS_E_HISTORIAS",
+            "nome": "Lendas e Histórias",
+            "descricao": "Pode rerrolar testes ligados a conhecimento e identificação.",
+            "preRequisitoTexto": "Pré-requisito: Int 13.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "atributosExigidos": {
+                "INT": 13
+            }
+        },
+        {
+            "key": "MANIPULAR",
+            "nome": "Manipular",
+            "descricao": "Pode transformar Fascinar em efeito similar a Enfeitiçar.",
+            "preRequisitoTexto": "Pré-requisito: Fascinar.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "FASCINAR"
+            ],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "MANIPULAR_EM_MASSA",
+            "nome": "Manipular em Massa",
+            "descricao": "Manipular pode afetar múltiplas criaturas.",
+            "preRequisitoTexto": "Pré-requisitos: Fascinar em Massa, Manipular, 10º nível.",
+            "nivelMinimo": 10,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "FASCINAR_EM_MASSA",
+                "MANIPULAR"
+            ],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "MELODIA_CURATIVA",
+            "nome": "Melodia Curativa",
+            "descricao": "Cura você e aliados em alcance curto.",
+            "preRequisitoTexto": "",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "MELODIA_RESTAURADORA",
+            "nome": "Melodia Restauradora",
+            "descricao": "Melodia Curativa também remove condições.",
+            "preRequisitoTexto": "Pré-requisito: Melodia Curativa.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "MELODIA_CURATIVA"
+            ],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "MESTRE_DOS_SUSSURROS",
+            "nome": "Mestre dos Sussurros",
+            "descricao": "Rola dois dados em Investigação e Enganação para intrigas e rumores.",
+            "preRequisitoTexto": "Pré-requisito: Car 13. Treinamento em Enganação e Investigação.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [
+                "Enganação",
+                "Investigação"
+            ],
+            "atributosExigidos": {
+                "CAR": 13
+            }
+        },
+        {
+            "key": "PARODIA",
+            "nome": "Paródia",
+            "descricao": "Pode copiar temporariamente uma magia observada.",
+            "preRequisitoTexto": "",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "PRESTIDIGITACAO",
+            "nome": "Prestidigitação",
+            "descricao": "Pode lançar magia de ilusão como ação livre ao realizar outra ação padrão.",
+            "preRequisitoTexto": "",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "atributosExigidos": {}
+        }
+    ],
+    "BUCANEIRO": [
+        {
+            "key": "ABUSAR_DOS_FRACOS",
+            "nome": "Abusar dos Fracos",
+            "descricao": "Quando ataca uma criatura sob efeito de medo, seu dano aumenta em um passo.",
+            "preRequisitoTexto": "Pré-requisito: Flagelo dos Mares.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "FLAGELO_DOS_MARES"
+            ],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "AMIGOS_NO_PORTO",
+            "nome": "Amigos no Porto",
+            "descricao": "Pode encontrar contatos e aliados em comunidades portuárias.",
+            "preRequisitoTexto": "Pré-requisitos: Car 13, 6º nível de Bucaneiro.",
+            "nivelMinimo": 6,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "atributosExigidos": {
+                "CAR": 13
+            }
+        },
+        {
+            "key": "APARAR",
+            "nome": "Aparar",
+            "descricao": "Pode evitar um ataque corpo a corpo com teste oposto.",
+            "preRequisitoTexto": "Pré-requisito: Esgrimista.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "ESGRIMISTA"
+            ],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "APOSTADOR",
+            "nome": "Apostador",
+            "descricao": "Pode usar Jogatina para ganhar dinheiro ou favores.",
+            "preRequisitoTexto": "Pré-requisito: treinado em Jogatina.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [
+                "JOGATINA"
+            ],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "BRAVATA_AUDAZ",
+            "nome": "Bravata Audaz",
+            "descricao": "Ao cumprir uma façanha jurada, recebe bônus temporário de PM.",
+            "preRequisitoTexto": "",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "BRAVATA_IMPRUDENTE",
+            "nome": "Bravata Imprudente",
+            "descricao": "Aceita uma limitação em combate para receber bônus se vencer.",
+            "preRequisitoTexto": "",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "EN_GARDE",
+            "nome": "En Garde",
+            "descricao": "Assume postura defensiva recebendo bônus em Defesa e margem de ameaça.",
+            "preRequisitoTexto": "Pré-requisito: Esgrimista.",
+            "nivelMinimo": 1,
+            "poderesExigidos": [
+                "ESGRIMISTA"
+            ],
+            "caminhosExigidos": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ESGRIMISTA",
+            "nome": "Esgrimista",
+            "descricao": "Soma Inteligência no dano com armas leves ou ágeis.",
+            "preRequisitoTexto": "Pré-requisito: Int 13.",
+            "nivelMinimo": 1,
+            "poderesExigidos": [],
+            "caminhosExigidos": [],
+            "atributosExigidos": {
+                "INT": 13
+            }
+        },
+        {
+            "key": "FLAGELO_DOS_MARES",
+            "nome": "Flagelo dos Mares",
+            "descricao": "Aprende e pode lançar Amedrontar.",
+            "preRequisitoTexto": "Pré-requisito: treinado em Intimidação.",
+            "nivelMinimo": 1,
+            "poderesExigidos": [],
+            "periciasExigidas": [
+                "INTIMIDACAO"
+            ],
+            "caminhosExigidos": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "FOLIAO",
+            "nome": "Folião",
+            "descricao": "Melhora automaticamente atitudes sociais em festas.",
+            "preRequisitoTexto": "Pré-requisito: Car 13.",
+            "nivelMinimo": 1,
+            "poderesExigidos": [],
+            "caminhosExigidos": [],
+            "atributosExigidos": {
+                "CAR": 13
+            }
+        },
+        {
+            "key": "GRUDAR_O_CANO",
+            "nome": "Grudar o Cano",
+            "descricao": "Melhora ataques com arma de fogo em combate adjacente.",
+            "preRequisitoTexto": "Pré-requisitos: treinado em Luta, Pistoleiro.",
+            "nivelMinimo": 1,
+            "poderesExigidos": [
+                "PISTOLEIRO"
+            ],
+            "periciasExigidas": [
+                "LUTA"
+            ],
+            "caminhosExigidos": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "PERNAS_DO_MAR",
+            "nome": "Pernas do Mar",
+            "descricao": "Recebe bônus em equilíbrio e escalada.",
+            "preRequisitoTexto": "",
+            "nivelMinimo": 1,
+            "poderesExigidos": [],
+            "caminhosExigidos": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "PISTOLEIRO",
+            "nome": "Pistoleiro",
+            "descricao": "Ganha proficiência e bônus com armas de fogo.",
+            "preRequisitoTexto": "",
+            "nivelMinimo": 1,
+            "poderesExigidos": [],
+            "caminhosExigidos": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "PRESENCA_PARALISANTE",
+            "nome": "Presença Paralisante",
+            "descricao": "Soma Carisma em Iniciativa.",
+            "preRequisitoTexto": "Pré-requisito: Car 13.",
+            "nivelMinimo": 1,
+            "poderesExigidos": [],
+            "caminhosExigidos": [],
+            "atributosExigidos": {
+                "CAR": 13
+            }
+        },
+        {
+            "key": "RIPOSTAR",
+            "nome": "Ripostar",
+            "descricao": "Após Aparar, pode contra-atacar.",
+            "preRequisitoTexto": "Pré-requisitos: Aparar, 12º nível.",
+            "nivelMinimo": 12,
+            "poderesExigidos": [
+                "APARAR"
+            ],
+            "caminhosExigidos": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "TOUCHE",
+            "nome": "Touché",
+            "descricao": "Ao avançar e atacar, recebe bônus de dano e margem de ameaça.",
+            "preRequisitoTexto": "Pré-requisitos: Esgrimista, 10º nível.",
+            "nivelMinimo": 10,
+            "poderesExigidos": [
+                "ESGRIMISTA"
+            ],
+            "caminhosExigidos": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ATAQUE_ACROBATICO",
+            "nome": "Ataque Acrobático",
+            "descricao": "Recebe bônus ao atacar após manobra acrobática.",
+            "preRequisitoTexto": "",
+            "nivelMinimo": 1,
+            "poderesExigidos": [],
+            "caminhosExigidos": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "AUMENTO_DE_ATRIBUTO",
+            "nome": "Aumento de Atributo",
+            "descricao": "Recebe +2 em um atributo. Escolhas posteriores no mesmo atributo concedem +1.",
+            "preRequisitoTexto": "",
+            "nivelMinimo": 1,
+            "poderesExigidos": [],
+            "caminhosExigidos": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "AVENTUREIRO_AVIDO",
+            "nome": "Aventureiro Ávido",
+            "descricao": "Pode gastar PM para ação adicional.",
+            "preRequisitoTexto": "",
+            "nivelMinimo": 1,
+            "poderesExigidos": [],
+            "caminhosExigidos": [],
+            "atributosExigidos": {}
+        }
+    ],
+    "CACADOR": [
+        {
+            "key": "AMBIDESTRIA",
+            "nome": "Ambidestria",
+            "descricao": "Se estiver usando duas armas, pode fazer dois ataques.",
+            "preRequisitoTexto": "Pré-requisito: Des 15.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {
+                "DES": 15
+            }
+        },
+        {
+            "key": "ARMADILHA_ARATACA",
+            "nome": "Armadilha: Arataca",
+            "descricao": "Causa 2d6 de dano e agarra o alvo.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ARMADILHA_ESPINHOS",
+            "nome": "Armadilha: Espinhos",
+            "descricao": "Causa 6d6 de dano perfurante.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ARMADILHA_LACO",
+            "nome": "Armadilha: Laço",
+            "descricao": "Pode derrubar ou agarrar a vítima.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ARMADILHA_REDE",
+            "nome": "Armadilha: Rede",
+            "descricao": "Enreda criaturas e cria terreno difícil.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ARQUEIRO",
+            "nome": "Arqueiro",
+            "descricao": "Soma Sabedoria no dano com armas à distância.",
+            "preRequisitoTexto": "Pré-requisito: Sab 13.",
+            "nivelMinimo": 1,
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {
+                "SAB": 13
+            }
+        },
+        {
+            "key": "AUMENTO_DE_ATRIBUTO",
+            "nome": "Aumento de Atributo",
+            "descricao": "Recebe +2 em um atributo.",
+            "nivelMinimo": 1,
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "BOTE",
+            "nome": "Bote",
+            "descricao": "Faz um ataque adicional em investida com arma secundária.",
+            "preRequisitoTexto": "Pré-requisitos: Ambidestria, 6º nível.",
+            "nivelMinimo": 6,
+            "poderesExigidos": [
+                "AMBIDESTRIA"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "CAMUFLAGEM",
+            "nome": "Camuflagem",
+            "descricao": "Pode se esconder sem cobertura.",
+            "preRequisitoTexto": "Pré-requisito: 6º nível.",
+            "nivelMinimo": 6,
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "CHUVA_DE_LAMINAS",
+            "nome": "Chuva de Lâminas",
+            "descricao": "Ganha ataque adicional ao usar Ambidestria.",
+            "preRequisitoTexto": "Pré-requisitos: Des 19, Ambidestria, 12º nível.",
+            "nivelMinimo": 12,
+            "poderesExigidos": [
+                "AMBIDESTRIA"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {
+                "DES": 19
+            }
+        },
+        {
+            "key": "COMPANHEIRO_ANIMAL",
+            "nome": "Companheiro Animal",
+            "descricao": "Recebe um companheiro animal.",
+            "preRequisitoTexto": "Pré-requisito: treinado em Adestramento.",
+            "nivelMinimo": 1,
+            "poderesExigidos": [],
+            "periciasExigidas": [
+                "ADESTRAMENTO"
+            ],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ELO_COM_A_NATUREZA",
+            "nome": "Elo com a Natureza",
+            "descricao": "Recebe PM extras e pode lançar Caminhos da Natureza.",
+            "preRequisitoTexto": "Pré-requisitos: Sab 13, 3º nível.",
+            "nivelMinimo": 3,
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {
+                "SAB": 13
+            }
+        },
+        {
+            "key": "EMBOSCAR",
+            "nome": "Emboscar",
+            "descricao": "Pode fazer ação padrão adicional na primeira rodada.",
+            "preRequisitoTexto": "Pré-requisito: treinado em Furtividade.",
+            "nivelMinimo": 1,
+            "poderesExigidos": [],
+            "periciasExigidas": [
+                "FURTIVIDADE"
+            ],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "EMPATIA_SELVAGEM",
+            "nome": "Empatia Selvagem",
+            "descricao": "Pode se comunicar e negociar com animais.",
+            "nivelMinimo": 1,
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ESCARAMUCA",
+            "nome": "Escaramuça",
+            "descricao": "Recebe bônus defensivos e dano após se mover.",
+            "preRequisitoTexto": "Pré-requisitos: Des 15, 6º nível.",
+            "nivelMinimo": 6,
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {
+                "DES": 15
+            }
+        },
+        {
+            "key": "ESCARAMUCA_SUPERIOR",
+            "nome": "Escaramuça Superior",
+            "descricao": "Melhora Escaramuça.",
+            "preRequisitoTexto": "Pré-requisito: Escaramuça, 12º nível.",
+            "nivelMinimo": 12,
+            "poderesExigidos": [
+                "ESCARAMUCA"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ESPREITAR",
+            "nome": "Espreitar",
+            "descricao": "Recebe bônus em perícias contra a presa marcada.",
+            "nivelMinimo": 1,
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ERVAS_CURATIVAS",
+            "nome": "Ervas Curativas",
+            "descricao": "Pode curar PV ou remover veneno.",
+            "nivelMinimo": 1,
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "IMPETO",
+            "nome": "Ímpeto",
+            "descricao": "Aumenta deslocamento em +6m.",
+            "nivelMinimo": 1,
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "INIMIGO_DE_CRIATURA",
+            "nome": "Inimigo de (Criatura)",
+            "descricao": "Dobra os dados de Marca da Presa contra tipo escolhido.",
+            "nivelMinimo": 1,
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "OLHO_DO_FALCAO",
+            "nome": "Olho do Falcão",
+            "descricao": "Marca da Presa pode ser usada em alcance longo.",
+            "nivelMinimo": 1,
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "PONTO_FRACO",
+            "nome": "Ponto Fraco",
+            "descricao": "Ataques contra presa marcada recebem +2 na margem de ameaça.",
+            "nivelMinimo": 1,
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        }
+    ]
+}

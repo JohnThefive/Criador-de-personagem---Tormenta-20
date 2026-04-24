@@ -1,49 +1,37 @@
-import 'personagem.dart';
-import 'classe_do_personagem.dart';
-
 class Poder {
+  final String key;
   final String nome;
-  final String descricao; // O efeito mecânico
-
-  // --- PRÉ-REQUISITOS ---
+  final String descricao;
+  final String preRequisitoTexto;
   final int nivelMinimo;
-  final List<String> caminhosExigidos; // Ex: ['Bruxo', 'Mago']
-  final List<String> poderesExigidos;  // Ex: ['Raio Arcano']
-  final List<String> periciasExigidas; // Ex: ['Ofício (Escriba)']
+  final List<String> caminhosExigidos;
+  final List<String> poderesExigidos;
+  final Map<String, int> atributosExigidos;
+  final List<String> periciasExigidas;
 
   const Poder({
+    required this.key,
     required this.nome,
     required this.descricao,
+    this.preRequisitoTexto = '',
     this.nivelMinimo = 1,
     this.caminhosExigidos = const [],
     this.poderesExigidos = const [],
+    this.atributosExigidos = const {},
     this.periciasExigidas = const [],
   });
 
-  // O motor de validação: O App chama isso para saber se o botão fica cinza ou clicável
-  bool isElegivel(Personagem personagem, ClasseDoPersonagem classeAtual) {
-    // 1. Checa Nível
-    if (classeAtual.nivel < nivelMinimo) return false;
-
-    // 2. Checa Caminho (
-    if (caminhosExigidos.isNotEmpty) {
-      final caminhoAtual = classeAtual.caminhoEscolhido?.nome;
-      if (caminhoAtual == null || !caminhosExigidos.contains(caminhoAtual)) {
-        return false;
-      }
-    }
-
-    // 3. Checa Poderes Anteriores
-    final nomesDosPoderesQueTenho = classeAtual.poderesEscolhidos.map((p) => p.nome).toList();
-    for (var exigido in poderesExigidos) {
-      if (!nomesDosPoderesQueTenho.contains(exigido)) return false;
-    }
-
-    // 4. Checa Perícias (deixarei isso para apliicações futuras)
-    // for (var pericia in periciasExigidas) {
-    //   if (!personagem.periciasTreinadas.contains(pericia)) return false;
-    // }
-
-    return true; // Passou em tudo!
+  factory Poder.fromJson(Map<String, dynamic> json) {
+    return Poder(
+      key: json['key'],
+      nome: json['nome'],
+      descricao: json['descricao'],
+      preRequisitoTexto: json['preRequisitoTexto'] ?? '',
+      nivelMinimo: json['nivelMinimo'] ?? 1,
+      caminhosExigidos: List<String>.from(json['caminhosExigidos'] ?? []),
+      poderesExigidos: List<String>.from(json['poderesExigidos'] ?? []),
+      atributosExigidos: Map<String, int>.from(json['atributosExigidos'] ?? {}),
+      periciasExigidas: List<String>.from(json['periciasExigidas'] ?? []),
+    );
   }
 }
