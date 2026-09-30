@@ -8,8 +8,11 @@ import 'banco_racas.dart';
 import 'banco_classes.dart';
 import 'banco_origens.dart';
 import 'banco_divindades.dart';
+import 'banco_poderes.dart';
+import 'banco_armas.dart';
 import '../entities/classe_do_personagem.dart';
 import '../entities/poder.dart';
+import '../entities/arma.dart';
 
 class PersonagemStorageService {
   // Retorna a pasta interna onde o app tem permissão de escrita no Android
@@ -73,11 +76,18 @@ class PersonagemStorageService {
       'descricaoAparencia': p.descricaoAparencia,
       'caminhoFoto': p.caminhoFoto,
       'tamanho': p.tamanho,
+      'peso': p.peso,
+      'altura': p.altura,
+      'pvAtual': p.pvAtual,
+      'pmAtual': p.pmAtual,
+      'experienciaAtual': p.experienciaAtual,
       'racaNome': p.raca?.nome,
       'origemId': p.origem?.id,
       'divindadeId': p.divindade?.id,
       'poderConcedidoKey': p.poderConcedido?.key,
       'itensInventario': p.itensInventario,
+      'armasKeys': p.armas.map((a) => a.key).toList(),
+      'tibares': p.tibares,
       'periciasTreinadas': p.periciasTreinadas,
       'atributos': p.atributos.map((k, v) => MapEntry(k, v.valor)),
       'classes': p.classes
@@ -86,6 +96,8 @@ class PersonagemStorageService {
               'idClasse': c.classeDefinicao.idClasse,
               'nivel': c.nivel,
               'caminho': c.caminhoEscolhido?.nome,
+              'poderesEscolhidosKeys':
+                  c.poderesEscolhidos.map((pod) => pod.key).toList(),
             },
           )
           .toList(),
@@ -128,7 +140,7 @@ class PersonagemStorageService {
           .firstOrNull;
     }
 
-    // Reconstrói classes com caminho
+    // Reconstrói classes com caminho e poderes escolhidos
     List<ClasseDoPersonagem> classesList = [];
     if (map['classes'] != null) {
       for (var c in map['classes']) {
@@ -141,13 +153,33 @@ class PersonagemStorageService {
                 .firstOrNull
             : null;
 
+        final List<dynamic> poderesKeysRaw = c['poderesEscolhidosKeys'] ?? [];
+        final List<Poder> poderesCarregados = [];
+        for (var k in poderesKeysRaw) {
+          final pod = BancoDePoderes.getByKey(k.toString());
+          if (pod != null) {
+            poderesCarregados.add(pod);
+          }
+        }
+
         classesList.add(
           ClasseDoPersonagem(
             classeDefinicao: def,
             nivel: (c['nivel'] as num?)?.toInt() ?? 1,
             caminhoEscolhido: caminho,
+            poderesEscolhidos: poderesCarregados,
           ),
         );
+      }
+    }
+
+    // Reconstrói armas a partir das chaves
+    final List<dynamic> armasKeysRaw = map['armasKeys'] ?? [];
+    final List<Arma> armasList = [];
+    for (var k in armasKeysRaw) {
+      final arma = BancoDeArmas.getByKey(k.toString());
+      if (arma != null) {
+        armasList.add(arma);
       }
     }
 
@@ -159,6 +191,11 @@ class PersonagemStorageService {
       descricaoAparencia: map['descricaoAparencia'] ?? '',
       caminhoFoto: map['caminhoFoto'],
       tamanho: map['tamanho'] ?? 'Médio',
+      peso: map['peso']?.toString() ?? '70 kg',
+      altura: map['altura']?.toString() ?? '1.70 m',
+      pvAtual: (map['pvAtual'] as num?)?.toInt(),
+      pmAtual: (map['pmAtual'] as num?)?.toInt(),
+      experienciaAtual: (map['experienciaAtual'] as num?)?.toInt() ?? 0,
       atributos: atribs,
       raca: raca,
       classes: classesList,
@@ -168,6 +205,8 @@ class PersonagemStorageService {
       itensInventario: List<String>.from(
         map['itensInventario'] ?? (origem?.itensIniciais ?? const []),
       ),
+      armas: armasList,
+      tibares: (map['tibares'] as num?)?.toInt() ?? 0,
       periciasTreinadas: List<String>.from(map['periciasTreinadas'] ?? []),
     );
   }

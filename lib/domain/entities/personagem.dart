@@ -1,4 +1,7 @@
 import 'package:t20_creator/domain/entities/poder.dart';
+import 'arma.dart';
+import 'proficiencias.dart';
+import '../services/regras_carga_service.dart';
 
 import 'atributos.dart';
 import 'raca.dart';
@@ -16,10 +19,12 @@ class Personagem {
   final List<ClasseDoPersonagem> classes; // Índice [0] é a classe inicial
   final List<String> periciasTreinadas;
 
-  // Campos referentes a origem
+  // Campos referentes a origem e equipamento
   final Origem? origem;
   final List<Poder> poderesGerais; // Armazena poderes de origem / gerais
   final List<String> itensInventario; // Recebe os itens gratuitos da origem
+  final List<Arma> armas; // Armas equipadas/carregadas
+  final int tibares; // Dinheiro em T$ (Tibar)
 
   // Campos referentes a divindade
   final Divindade? divindade;
@@ -33,6 +38,16 @@ class Personagem {
   descricaoAparencia; // Breve biografia/descrição escrita pelo jogador
   final String? caminhoFoto; // Caminho local da imagem escolhida no celular
   final String tamanho; // Padrão: "Médio"
+  final String peso; // Ex: "70 kg"
+  final String altura; // Ex: "1.70 m"
+
+  // Estado dinâmico de jogo / sessão
+  final int? _pvAtual;
+  final int? _pmAtual;
+  final int experienciaAtual;
+
+  int get pvAtual => _pvAtual ?? pvTotal;
+  int get pmAtual => _pmAtual ?? pmTotal;
 
   Personagem({
     required this.nome,
@@ -40,10 +55,12 @@ class Personagem {
     this.raca,
     this.classes = const [],
     this.periciasTreinadas = const [],
-    // Campos referentes a origem
+    // Campos referentes a origem e equipamento
     this.origem,
     this.poderesGerais = const [],
     this.itensInventario = const [],
+    this.armas = const [],
+    this.tibares = 0,
     // Campos referentes a divindade
     this.divindade,
     this.poderConcedido,
@@ -54,7 +71,15 @@ class Personagem {
     this.descricaoAparencia = '',
     this.caminhoFoto,
     this.tamanho = 'Médio',
-  }) : id = id ?? DateTime.now().millisecondsSinceEpoch.toString();
+    this.peso = '70 kg',
+    this.altura = '1.70 m',
+    // Recursos em jogo
+    int? pvAtual,
+    int? pmAtual,
+    this.experienciaAtual = 0,
+  })  : id = id ?? DateTime.now().millisecondsSinceEpoch.toString(),
+        _pvAtual = pvAtual,
+        _pmAtual = pmAtual;
 
   bool get ehDevoto => divindade != null;
 
@@ -85,6 +110,8 @@ class Personagem {
       origem: null,
       poderesGerais: const [],
       itensInventario: const [],
+      armas: const [],
+      tibares: 0,
       divindade: null,
       poderConcedido: null,
       idade: 20,
@@ -92,6 +119,11 @@ class Personagem {
       descricaoAparencia: '',
       caminhoFoto: null,
       tamanho: 'Médio',
+      peso: '70 kg',
+      altura: '1.70 m',
+      pvAtual: null,
+      pmAtual: null,
+      experienciaAtual: 0,
     );
   }
 
@@ -103,10 +135,12 @@ class Personagem {
     // ignore: non_constant_identifier_names
     List<ClasseDoPersonagem>? classe_do_personagem,
     List<String>? periciasTreinadas,
-    // Campos referentes a origem
+    // Campos referentes a origem e equipamento
     Origem? origem,
     List<Poder>? poderesGerais,
     List<String>? itensInventario,
+    List<Arma>? armas,
+    int? tibares,
     // Campos referentes a divindade
     Divindade? divindade,
     Poder? poderConcedido,
@@ -118,6 +152,12 @@ class Personagem {
     String? caminhoFoto,
     bool anularFoto = false,
     String? tamanho,
+    String? peso,
+    String? altura,
+    // Recursos dinâmicos em jogo
+    int? pvAtual,
+    int? pmAtual,
+    int? experienciaAtual,
   }) {
     return Personagem(
       id: id ?? this.id,
@@ -129,6 +169,8 @@ class Personagem {
       origem: origem ?? this.origem,
       poderesGerais: poderesGerais ?? this.poderesGerais,
       itensInventario: itensInventario ?? this.itensInventario,
+      armas: armas ?? this.armas,
+      tibares: tibares ?? this.tibares,
       divindade: anularDivindade ? null : (divindade ?? this.divindade),
       poderConcedido: anularDivindade
           ? null
@@ -138,7 +180,47 @@ class Personagem {
       descricaoAparencia: descricaoAparencia ?? this.descricaoAparencia,
       caminhoFoto: anularFoto ? null : (caminhoFoto ?? this.caminhoFoto),
       tamanho: tamanho ?? this.tamanho,
+      peso: peso ?? this.peso,
+      altura: altura ?? this.altura,
+      pvAtual: pvAtual ?? _pvAtual,
+      pmAtual: pmAtual ?? _pmAtual,
+      experienciaAtual: experienciaAtual ?? this.experienciaAtual,
     );
+  }
+
+  // --- MÉTODOS DE MANIPULAÇÃO DE RECURSOS EM JOGO ---
+
+  Personagem aplicarDano(int dano) {
+    if (dano <= 0) return this;
+    final novoPV = pvAtual - dano;
+    return copyWith(pvAtual: novoPV);
+  }
+
+  Personagem curarPV(int cura) {
+    if (cura <= 0) return this;
+    final novoPV = (pvAtual + cura).clamp(0, pvTotal);
+    return copyWith(pvAtual: novoPV);
+  }
+
+  Personagem gastarPM(int gasto) {
+    if (gasto <= 0) return this;
+    final novoPM = (pmAtual - gasto).clamp(0, pmTotal);
+    return copyWith(pmAtual: novoPM);
+  }
+
+  Personagem recuperarPM(int recuperacao) {
+    if (recuperacao <= 0) return this;
+    final novoPM = (pmAtual + recuperacao).clamp(0, pmTotal);
+    return copyWith(pmAtual: novoPM);
+  }
+
+  Personagem adicionarXP(int xp) {
+    if (xp <= 0) return this;
+    return copyWith(experienciaAtual: experienciaAtual + xp);
+  }
+
+  Personagem restaurarRecursos() {
+    return copyWith(pvAtual: pvTotal, pmAtual: pmTotal);
   }
 
   // Este método calcula o valor final para exibir na tela (Base + Raça Fixa + Raça Variável)
@@ -251,4 +333,36 @@ class Personagem {
 
     return metadeNivel + modAtributo + bonusTreino - penalidade;
   }
+
+  // --- REGRAS DE PROFICIÊNCIAS ---
+  bool get temProficienciaMarcial => classes.any(
+        (c) => c.classeDefinicao.proficiencias.contains(TipoProficiencia.armasMarciais),
+      );
+
+  bool get temProficienciaSimples => classes.any(
+        (c) => c.classeDefinicao.proficiencias.contains(TipoProficiencia.armasSimples),
+      );
+
+  bool get temProficienciaArmadurasPesadas => classes.any(
+        (c) => c.classeDefinicao.proficiencias.contains(TipoProficiencia.armadurasPesadas),
+      );
+
+  bool get temProficienciaEscudos => classes.any(
+        (c) => c.classeDefinicao.proficiencias.contains(TipoProficiencia.escudos),
+      );
+
+  bool get ehArcanista => classes.any(
+        (c) => c.classeDefinicao.idClasse.toLowerCase() == 'arcanista',
+      );
+
+  // --- CAPACIDADE DE CARGA (TORMENTA 20) ---
+  int get limiteCarga =>
+      RegrasCargaService.calcularLimiteCarga(getValorFinal('FOR'));
+
+  int get cargaAtual => RegrasCargaService.calcularEspacosOcupados(
+        armas: armas,
+        itensInventario: itensInventario,
+      );
+
+  bool get estaSobrecarregado => cargaAtual > limiteCarga;
 }

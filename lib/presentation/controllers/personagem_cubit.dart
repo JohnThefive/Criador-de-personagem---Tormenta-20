@@ -1,7 +1,11 @@
+import 'dart:math';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t20_creator/domain/entities/classe.dart';
 import 'package:t20_creator/domain/entities/classe_do_personagem.dart';
 import 'package:t20_creator/domain/entities/linhagem_arcanista.dart';
+import 'package:t20_creator/domain/entities/arma.dart';
+import 'package:t20_creator/domain/services/regras_carga_service.dart';
 import 'package:t20_creator/domain/services/personagem_storage_service.dart';
 import '../../domain/entities/personagem.dart';
 import '../../domain/services/regras_atributos.dart';
@@ -40,6 +44,11 @@ class PersonagemState {
   final List<String>
   selecoesPericiaInteligencia; // As escolhas livres (Mod. INT)
 
+  // Equipamento inicial (Nível 1)
+  final Arma? armaSimplesInicial;
+  final Arma? armaMarcialInicial;
+  final int? tibaresIniciais;
+
   PersonagemState({
     required this.personagem,
     this.etapaAtual = 0,
@@ -55,6 +64,9 @@ class PersonagemState {
     this.atributosVariaveisRaca = const [],
     this.selecoesPericiaClasse = const [],
     this.selecoesPericiaInteligencia = const [],
+    this.armaSimplesInicial,
+    this.armaMarcialInicial,
+    this.tibaresIniciais,
   });
 
   int get totalBeneficiosOrigem =>
@@ -69,6 +81,52 @@ class PersonagemState {
     }
     if (divindadeSelecionada == null) return true;
     return poderConcedidoSelecionado != null;
+  }
+
+  // Getters para Equipamento Inicial e Carga
+  OpcoesArmasIniciais get opcoesArmasIniciais =>
+      RegrasCargaService.obterArmasIniciaisDisponiveis(personagem);
+
+  StatusCarga get statusCarga {
+    final armasAtuais = <Arma>[...personagem.armas];
+    if (armaSimplesInicial != null &&
+        !armasAtuais.any((a) => a.key == armaSimplesInicial!.key)) {
+      armasAtuais.add(armaSimplesInicial!);
+    }
+    if (armaMarcialInicial != null &&
+        !armasAtuais.any((a) => a.key == armaMarcialInicial!.key)) {
+      armasAtuais.add(armaMarcialInicial!);
+    }
+
+    final itensAtuais = List<String>.from(personagem.itensInventario);
+    const kitPadrao = ['Mochila', 'Saco de Dormir', 'Traje de Viajante'];
+    for (final item in kitPadrao) {
+      if (!itensAtuais.contains(item)) {
+        itensAtuais.add(item);
+      }
+    }
+
+    final modForca = personagem.getValorFinal('FOR');
+    final limite = RegrasCargaService.calcularLimiteCarga(modForca);
+    final atual = RegrasCargaService.calcularEspacosOcupados(
+      armas: armasAtuais,
+      itensInventario: itensAtuais,
+    );
+
+    return StatusCarga(
+      cargaAtual: atual,
+      limiteCarga: limite,
+      sobrecarregado: atual > limite,
+      espacosRestantes: limite - atual,
+    );
+  }
+
+  bool get concluiuEquipamentoInicial {
+    if (armaSimplesInicial == null) return false;
+    if (personagem.temProficienciaMarcial && armaMarcialInicial == null) {
+      return false;
+    }
+    return true;
   }
 
   // CopyWith para facilitar atualizações
@@ -86,8 +144,13 @@ class PersonagemState {
     Map<String, int>? alocacaoIndices,
     int? pontosRestantesCompra,
     List<String>? atributosVariaveisRaca,
-    List<String>? selecoesPericiaClasse, // <--- ADICIONE AQUI
+    List<String>? selecoesPericiaClasse,
     List<String>? selecoesPericiaInteligencia,
+    Arma? armaSimplesInicial,
+    bool anularArmaSimples = false,
+    Arma? armaMarcialInicial,
+    bool anularArmaMarcial = false,
+    int? tibaresIniciais,
   }) {
     return PersonagemState(
       personagem: personagem ?? this.personagem,
@@ -114,6 +177,13 @@ class PersonagemState {
           selecoesPericiaClasse ?? this.selecoesPericiaClasse,
       selecoesPericiaInteligencia:
           selecoesPericiaInteligencia ?? this.selecoesPericiaInteligencia,
+      armaSimplesInicial: anularArmaSimples
+          ? null
+          : (armaSimplesInicial ?? this.armaSimplesInicial),
+      armaMarcialInicial: anularArmaMarcial
+          ? null
+          : (armaMarcialInicial ?? this.armaMarcialInicial),
+      tibaresIniciais: tibaresIniciais ?? this.tibaresIniciais,
     );
   }
 }
@@ -150,6 +220,8 @@ class PersonagemCubit extends Cubit<PersonagemState> {
       consolidarOrigem();
     } else if (state.etapaAtual == 5) {
       consolidarDivindade();
+    } else if (state.etapaAtual == 6) {
+      consolidarEquipamentoInicial();
     }
     emit(state.copyWith(etapaAtual: state.etapaAtual + 1));
   }
@@ -519,6 +591,22 @@ class PersonagemCubit extends Cubit<PersonagemState> {
     );
   }
 
+  void atualizarPeso(String novoPeso) {
+    emit(
+      state.copyWith(
+        personagem: state.personagem.copyWith(peso: novoPeso),
+      ),
+    );
+  }
+
+  void atualizarAltura(String novaAltura) {
+    emit(
+      state.copyWith(
+        personagem: state.personagem.copyWith(altura: novaAltura),
+      ),
+    );
+  }
+
   void atualizarFoto(String caminhoFoto) {
     emit(
       state.copyWith(
@@ -535,8 +623,87 @@ class PersonagemCubit extends Cubit<PersonagemState> {
     );
   }
 
+  // --- MÉTODOS DE EQUIPAMENTO INICIAL E CARGA (TORMENTA 20) ---
+
+  /// Filtra quais armas são elegíveis como escolha gratuita no Nível 1
+  List<Arma> obterArmasIniciaisDisponiveis(Personagem p) {
+    final opcoes = RegrasCargaService.obterArmasIniciaisDisponiveis(p);
+    final List<Arma> lista = [...opcoes.armasSimples];
+    if (opcoes.podeEscolherMarcial) {
+      lista.addAll(opcoes.armasMarciais);
+    }
+    return lista;
+  }
+
+  /// Verifica se o personagem está sobrecarregado com base na Força e carga
+  bool verificarSobrecarga(Personagem p) {
+    return p.estaSobrecarregado;
+  }
+
+  void selecionarArmaSimplesInicial(Arma arma) {
+    emit(state.copyWith(armaSimplesInicial: arma));
+  }
+
+  void selecionarArmaMarcialInicial(Arma arma) {
+    emit(state.copyWith(armaMarcialInicial: arma));
+  }
+
+  void removerArmaInicial({required bool ehMarcial}) {
+    if (ehMarcial) {
+      emit(state.copyWith(anularArmaMarcial: true));
+    } else {
+      emit(state.copyWith(anularArmaSimples: true));
+    }
+  }
+
+  int rolarDinheiroInicial() {
+    final rand = Random();
+    int total = 0;
+    for (int i = 0; i < 4; i++) {
+      total += rand.nextInt(6) + 1;
+    }
+    emit(state.copyWith(tibaresIniciais: total));
+    return total;
+  }
+
+  void consolidarEquipamentoInicial() {
+    final armasIniciais = <Arma>[];
+    if (state.armaSimplesInicial != null) {
+      armasIniciais.add(state.armaSimplesInicial!);
+    }
+    if (state.armaMarcialInicial != null) {
+      armasIniciais.add(state.armaMarcialInicial!);
+    }
+
+    // Kit de Aventureiro Inicial padrão de T20:
+    // Uma mochila, um saco de dormir e um traje de viajante.
+    final itensBase = List<String>.from(state.personagem.itensInventario);
+    const kitPadrao = ['Mochila', 'Saco de Dormir', 'Traje de Viajante'];
+    for (final item in kitPadrao) {
+      if (!itensBase.contains(item)) {
+        itensBase.add(item);
+      }
+    }
+
+    // Se ainda não rolou tibares (4d6), rola agora
+    final tibares = state.tibaresIniciais ?? rolarDinheiroInicial();
+
+    final novoPersonagem = state.personagem.copyWith(
+      armas: armasIniciais,
+      itensInventario: itensBase,
+      tibares: tibares,
+    );
+
+    emit(state.copyWith(personagem: novoPersonagem));
+  }
+
   // MÉTODO PARA SALVAR A FICHA NO DISCO DO ANDROID
   Future<void> salvarPersonagemNoAparelho() async {
     await PersonagemStorageService.salvarPersonagem(state.personagem);
+  }
+
+  @visibleForTesting
+  void emitirEstadoParaTeste(PersonagemState novoEstado) {
+    emit(novoEstado);
   }
 }

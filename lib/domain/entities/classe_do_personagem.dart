@@ -14,22 +14,21 @@ class ClasseDoPersonagem {
 
   ClasseDoPersonagem({
     required this.classeDefinicao,
-    required this.nivel,
+    required int nivel,
     this.caminhoEscolhido,
     this.poderesEscolhidos = const [],
     this.linhagemEscolhida,
-  });
+  }) : nivel = nivel.clamp(1, 20);
 
   ClasseDoPersonagem copyWith({
     int? nivel, 
     CaminhoDeClasse? caminhoEscolhido,
     List<Poder>? poderesEscolhidos,
     Linhagem? linhagemEscolhida,
-    
-    }) {
+  }) {
     return ClasseDoPersonagem(
       classeDefinicao: classeDefinicao,
-      nivel: nivel ?? this.nivel,
+      nivel: (nivel ?? this.nivel).clamp(1, 20),
       caminhoEscolhido: caminhoEscolhido ?? this.caminhoEscolhido,
       poderesEscolhidos: poderesEscolhidos ?? this.poderesEscolhidos,
       linhagemEscolhida: linhagemEscolhida ?? this.linhagemEscolhida,
@@ -40,6 +39,25 @@ class ClasseDoPersonagem {
   bool get possuiHerancaAprimorada => poderesEscolhidos.any((p) => p.nome == "Herança Aprimorada");
   bool get possuiHerancaSuperior => poderesEscolhidos.any((p) => p.nome == "Herança Superior");
 
+  /// No Tormenta 20, a cada nível a partir do 2º o personagem ganha um poder de classe.
+  int get poderesPermitidos => (nivel - 1).clamp(0, 20);
 
+  /// Quantidade de poderes que ainda podem ser escolhidos para o nível atual.
+  int get poderesPendentes =>
+      (poderesPermitidos - poderesEscolhidos.length).clamp(0, 20);
 
+  /// Indica se há poderes a serem escolhidos pelo jogador.
+  bool get temPoderPendente => poderesPendentes > 0;
+
+  ClasseDoPersonagem adicionarPoder(Poder poder) {
+    if (poderesEscolhidos.any((p) => p.key == poder.key)) return this;
+    return copyWith(poderesEscolhidos: [...poderesEscolhidos, poder]);
+  }
+
+  ClasseDoPersonagem removerPoder(String poderKey) {
+    return copyWith(
+      poderesEscolhidos:
+          poderesEscolhidos.where((p) => p.key != poderKey).toList(),
+    );
+  }
 }

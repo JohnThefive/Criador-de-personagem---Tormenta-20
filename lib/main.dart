@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t20_creator/domain/services/banco_poderes.dart';
+import 'package:t20_creator/domain/services/banco_armas.dart';
 
 // Importe seus arquivos
 import 'presentation/controllers/home_cubit.dart';
 import 'presentation/controllers/personagem_cubit.dart';
-import 'presentation/screens/home_screen.dart'; // <--- A tela vermelha está aqui
+import 'presentation/screens/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await BancoDePoderes.carregar();
+  await BancoDeArmas.carregar();
   runApp(const T20App());
 }
 
@@ -19,7 +21,6 @@ class T20App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      // Aqui nós "injetamos" os cérebros no app inteiro
       providers: [
         // O HomeCubit fica vivo o tempo todo para segurar a lista
         BlocProvider(create: (context) => HomeCubit()),
@@ -37,7 +38,6 @@ class T20App extends StatelessWidget {
           scaffoldBackgroundColor: const Color(0xFFD32F2F),
         ),
 
-        // AQUI É O PULO DO GATO:
         // home: define qual é a PRIMEIRA tela que o usuário vê.
         home: const HomeScreen(),
       ),

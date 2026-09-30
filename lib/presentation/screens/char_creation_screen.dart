@@ -9,6 +9,7 @@ import 'package:t20_creator/presentation/screens/pagina_racas.dart';
 import 'package:t20_creator/presentation/screens/pagina_selecao_classe.dart';
 import 'package:t20_creator/presentation/screens/pagina_origens.dart';
 import 'package:t20_creator/presentation/screens/pagina_divindades.dart';
+import 'package:t20_creator/presentation/screens/pagina_selecao_equipamento.dart';
 import '../controllers/personagem_cubit.dart';
 import '../widgets/atributo_card_compra.dart';
 // Importe seus widgets de AtributoCard e a lógica de Rolagem aqui
@@ -115,23 +116,24 @@ class CharacterCreatorScreen extends StatelessWidget {
               physics:
                   const NeverScrollableScrollPhysics(), // Bloqueia swipe manual
               children: [
-                _PaginaAtributos(state: state), // pagina de atributos
-                PaginaSelecaoRaca(state: state), // pagina de seleção de raça
+                _PaginaAtributos(state: state), // 0: pagina de atributos
+                PaginaSelecaoRaca(state: state), // 1: pagina de seleção de raça
                 PaginaSelecaoClasse(
                   state: state,
-                ), // pagina de seleçao de classe
-                // fazer uma pagina de origens
-                // fazer uma pagina de deuses
+                ), // 2: pagina de seleçao de classe
                 PaginaSelecaoPericias(
                   state: state,
-                ), // Pagina de seleção de pericias
+                ), // 3: Pagina de seleção de pericias
                 PaginaSelecaoOrigem(
                   state: state,
-                ), // Pagina de seleção de origem
+                ), // 4: Pagina de seleção de origem
                 PaginaSelecaoDivindade(
                   state: state,
-                ), // Pagina de seleção de divindade
-                _PaginaFinalizacao(), // Última Etapa
+                ), // 5: Pagina de seleção de divindade
+                PaginaSelecaoEquipamento(
+                  state: state,
+                ), // 6: Pagina de equipamento e armas iniciais
+                _PaginaFinalizacao(), // 7: Última Etapa
               ],
             ),
           ),
@@ -155,6 +157,8 @@ class CharacterCreatorScreen extends StatelessWidget {
       case 5:
         return "Escolher Divindade";
       case 6:
+        return "Equipamento Inicial";
+      case 7:
         return "Finalização";
       default:
         return "Criação de Personagem";
@@ -230,8 +234,13 @@ class CharacterCreatorScreen extends StatelessWidget {
       return state.etapaDivindadeConcluida;
     }
 
+    // 6. LÓGICA DA ETAPA 6 (EQUIPAMENTO INICIAL)
+    if (state.etapaAtual == 6) {
+      return state.concluiuEquipamentoInicial;
+    }
+
     // Na última etapa (Finalização), não exibe botão "Próximo"
-    if (state.etapaAtual >= 6) {
+    if (state.etapaAtual >= 7) {
       return false;
     }
 
@@ -748,6 +757,100 @@ class _PaginaFinalizacaoState extends State<_PaginaFinalizacao> {
                 ),
                 const SizedBox(height: 14),
 
+                // Linha com Peso e Altura
+                Row(
+                  children: [
+                    // Peso
+                    Expanded(
+                      child: TextFormField(
+                        initialValue: p.peso,
+                        style: const TextStyle(
+                          color: Color(0xFF1F2937),
+                          fontWeight: FontWeight.w500,
+                        ),
+                        decoration: InputDecoration(
+                          labelText: 'Peso',
+                          labelStyle:
+                              const TextStyle(color: Color(0xFF4B5563)),
+                          hintText: 'Ex: 75 kg',
+                          filled: true,
+                          fillColor: const Color(0xFFF9FAFB),
+                          prefixIcon: const Icon(
+                            Icons.fitness_center_outlined,
+                            color: Color(0xFF6B7280),
+                            size: 20,
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide:
+                                const BorderSide(color: Color(0xFFD1D5DB)),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide:
+                                const BorderSide(color: Color(0xFFD1D5DB)),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: const BorderSide(
+                              color: Color(0xFFB71C1C),
+                              width: 2,
+                            ),
+                          ),
+                        ),
+                        onChanged: (val) => cubit.atualizarPeso(
+                          val.trim().isEmpty ? '70 kg' : val.trim(),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    // Altura
+                    Expanded(
+                      child: TextFormField(
+                        initialValue: p.altura,
+                        style: const TextStyle(
+                          color: Color(0xFF1F2937),
+                          fontWeight: FontWeight.w500,
+                        ),
+                        decoration: InputDecoration(
+                          labelText: 'Altura',
+                          labelStyle:
+                              const TextStyle(color: Color(0xFF4B5563)),
+                          hintText: 'Ex: 1,75 m',
+                          filled: true,
+                          fillColor: const Color(0xFFF9FAFB),
+                          prefixIcon: const Icon(
+                            Icons.straighten_outlined,
+                            color: Color(0xFF6B7280),
+                            size: 20,
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide:
+                                const BorderSide(color: Color(0xFFD1D5DB)),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide:
+                                const BorderSide(color: Color(0xFFD1D5DB)),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: const BorderSide(
+                              color: Color(0xFFB71C1C),
+                              width: 2,
+                            ),
+                          ),
+                        ),
+                        onChanged: (val) => cubit.atualizarAltura(
+                          val.trim().isEmpty ? '1.70 m' : val.trim(),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 14),
+
                 // Descrição Física e Personalidade
                 TextFormField(
                   maxLines: 3,
@@ -917,6 +1020,233 @@ class _PaginaFinalizacaoState extends State<_PaginaFinalizacao> {
                     ),
                   ],
                 ),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(height: 16),
+        Card(
+          color: Colors.white,
+          elevation: 1.5,
+          shadowColor: Colors.black.withValues(alpha: 0.08),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+            side: const BorderSide(color: Color(0xFFE5E7EB)),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(18),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Cabeçalho do Card 3
+                Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFFEF3C7),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: const Icon(
+                        Icons.colorize_rounded,
+                        color: Color(0xFFD97706),
+                        size: 22,
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    const Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Equipamento & Riqueza",
+                            style: TextStyle(
+                              color: Color(0xFF111827),
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 2),
+                          Text(
+                            "Armas, itens iniciais e tibares do aventureiro",
+                            style: TextStyle(
+                              color: Color(0xFF4B5563),
+                              fontSize: 12.5,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+
+                // Resumo de Dinheiro e Carga
+                Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFFFFBEB),
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: const Color(0xFFFDE68A)),
+                        ),
+                        child: Row(
+                          children: [
+                            const Icon(
+                              Icons.monetization_on_rounded,
+                              color: Color(0xFFD97706),
+                              size: 20,
+                            ),
+                            const SizedBox(width: 8),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  "TIBARES",
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xFF92400E),
+                                  ),
+                                ),
+                                Text(
+                                  "T\$ ${p.tibares}",
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xFFB45309),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFF0FDF4),
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: const Color(0xFFBBF7D0)),
+                        ),
+                        child: Row(
+                          children: [
+                            const Icon(
+                              Icons.inventory_2_outlined,
+                              color: Color(0xFF16A34A),
+                              size: 20,
+                            ),
+                            const SizedBox(width: 8),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  "CARGA",
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xFF166534),
+                                  ),
+                                ),
+                                Text(
+                                  "${p.cargaAtual}/${p.limiteCarga} esp.",
+                                  style: const TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xFF15803D),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 14),
+
+                // Lista de Armas Escolhidas
+                const Text(
+                  "Armas Equipadas:",
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF374151),
+                  ),
+                ),
+                const SizedBox(height: 6),
+                if (p.armas.isEmpty)
+                  const Text(
+                    "Nenhuma arma cadastrada.",
+                    style: TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
+                  )
+                else
+                  ...p.armas.map((arma) {
+                    return Container(
+                      margin: const EdgeInsets.only(bottom: 6),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 8,
+                      ),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFF9FAFB),
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: const Color(0xFFE5E7EB)),
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.colorize_rounded,
+                            size: 16,
+                            color: Color(0xFFB71C1C),
+                          ),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Text(
+                              arma.nome,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 13.5,
+                                color: Color(0xFF111827),
+                              ),
+                            ),
+                          ),
+                          Text(
+                            "${arma.dano} (${arma.criticoFormatado})",
+                            style: const TextStyle(
+                              fontSize: 12.5,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFFB71C1C),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 6,
+                              vertical: 2,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.grey[200],
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Text(
+                              arma.tipoDano.label,
+                              style: const TextStyle(
+                                fontSize: 10.5,
+                                color: Color(0xFF4B5563),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }),
               ],
             ),
           ),

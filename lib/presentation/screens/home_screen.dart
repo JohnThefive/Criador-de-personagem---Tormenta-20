@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 // Imports necessários (ajuste os caminhos se suas pastas forem diferentes)
 import '../controllers/home_cubit.dart';
 import 'char_creation_screen.dart'; // Importe a tela de criação aqui
+import 'painel_jogador_screen.dart';
 import '../../domain/entities/personagem.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -230,7 +231,16 @@ class _CharacterCard extends StatelessWidget {
         child: InkWell(
           borderRadius: BorderRadius.circular(16),
           onTap: () {
-            // Futuramente: abrir detalhes da ficha completa
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => PainelJogadorScreen(personagemInicial: personagem),
+              ),
+            ).then((_) {
+              if (context.mounted) {
+                context.read<HomeCubit>().carregarPersonagensReais();
+              }
+            });
           },
           onLongPress: () => _confirmarExclusao(context),
           child: Padding(
