@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -88,12 +89,16 @@ class HomeScreen extends StatelessWidget {
                     if (index == 0) {
                       return GestureDetector(
                         onTap: () {
-                          // NAVEGAÇÃO: Vai para a tela de Atributos
-                          // da tela de atributos pra outras telas 
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => CharacterCreatorScreen()),
-                          );
+                            MaterialPageRoute(
+                              builder: (context) => CharacterCreatorScreen(),
+                            ),
+                          ).then((_) {
+                            if (context.mounted) {
+                              context.read<HomeCubit>().carregarPersonagensReais();
+                            }
+                          });
                         },
                         child: Container(
                           height: 100,
@@ -107,7 +112,13 @@ class HomeScreen extends StatelessWidget {
                             children: const [
                               Icon(Icons.add, size: 40, color: Colors.black),
                               SizedBox(width: 10),
-                              Text("Criar Personagem", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                              Text(
+                                "Criar Personagem",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -134,44 +145,191 @@ class _CharacterCard extends StatelessWidget {
 
   const _CharacterCard({required this.personagem});
 
+  void _confirmarExclusao(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        title: Row(
+          children: const [
+            Icon(Icons.warning_amber_rounded, color: Color(0xFFB71C1C), size: 28),
+            SizedBox(width: 8),
+            Text(
+              "Excluir Personagem",
+              style: TextStyle(
+                color: Color(0xFF1F2937),
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
+            ),
+          ],
+        ),
+        content: Text(
+          'Tem certeza de que deseja excluir "${personagem.nome}"?\nEsta ação apagará a ficha permanentemente e não pode ser desfeita.',
+          style: const TextStyle(color: Color(0xFF374151), fontSize: 14, height: 1.4),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(),
+            child: const Text("CANCELAR", style: TextStyle(color: Colors.black54, fontWeight: FontWeight.w600)),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFFB71C1C),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+            ),
+            onPressed: () {
+              Navigator.of(ctx).pop();
+              context.read<HomeCubit>().excluirPersonagem(personagem.id);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Personagem "${personagem.nome}" excluído.'),
+                  backgroundColor: Colors.black87,
+                ),
+              );
+            },
+            child: const Text(
+              "EXCLUIR",
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final temFoto = personagem.caminhoFoto != null &&
+        personagem.caminhoFoto!.isNotEmpty &&
+        File(personagem.caminhoFoto!).existsSync();
+
+    final classeNome = personagem.classes.isNotEmpty
+        ? personagem.classes[0].classeDefinicao.nome
+        : "Sem Classe";
+    final racaNome = personagem.raca?.nome ?? "Sem Raça";
+    final nivel = personagem.nivelPersonagem > 0 ? personagem.nivelPersonagem : 1;
+
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
-        color: const Color(0xFFB71C1C), // Vermelho escuro para o card
-        borderRadius: BorderRadius.circular(15),
-        border: Border.all(color: Colors.white24)
-      ),
-      child: ListTile(
-        contentPadding: const EdgeInsets.all(8),
-        // Avatar
-        leading: Container(
-          width: 60, 
-          height: 60,
-          decoration: BoxDecoration(
-            color: Colors.grey[400],
-            borderRadius: BorderRadius.circular(10),
+        color: const Color(0xFF8B0000), // Carmesim profundo para contraste e elegância
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.15)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.18),
+            blurRadius: 6,
+            offset: const Offset(0, 3),
           ),
-          child: const Icon(Icons.person, color: Colors.white70, size: 40),
-        ),
-        // Textos
-        title: Text(personagem.nome, 
-          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18)),
-        subtitle: const Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text("Classe: Indefinida", style: TextStyle(color: Colors.white70)),
-            Text("Nível: 1", style: TextStyle(color: Colors.white70, fontSize: 12)),
-          ],
-        ),
-        trailing: IconButton(
-          icon: const Icon(Icons.star_border, color: Colors.amber),
-          onPressed: () {},
+        ],
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(16),
+          onTap: () {
+            // Futuramente: abrir detalhes da ficha completa
+          },
+          onLongPress: () => _confirmarExclusao(context),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+            child: Row(
+              children: [
+                // Avatar / Foto
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: Container(
+                    width: 62,
+                    height: 62,
+                    color: Colors.black38,
+                    child: temFoto
+                        ? Image.file(
+                            File(personagem.caminhoFoto!),
+                            width: 62,
+                            height: 62,
+                            fit: BoxFit.cover,
+                          )
+                        : const Icon(
+                            Icons.person,
+                            color: Colors.white70,
+                            size: 38,
+                          ),
+                  ),
+                ),
+                const SizedBox(width: 14),
+
+                // Textos descritivos
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        personagem.nome,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: 3),
+                      Text(
+                        "$classeNome • $racaNome",
+                        style: TextStyle(
+                          color: Colors.white.withValues(alpha: 0.9),
+                          fontSize: 13,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const SizedBox(height: 2),
+                      Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 6,
+                              vertical: 1.5,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.black26,
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Text(
+                              "Nvl $nivel",
+                              style: const TextStyle(
+                                color: Colors.white70,
+                                fontSize: 11,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            "PV: ${personagem.pvTotal}  •  PM: ${personagem.pmTotal}",
+                            style: TextStyle(
+                              color: Colors.white.withValues(alpha: 0.75),
+                              fontSize: 11,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+
+                // Ícone de opções / menu de deleção rápida
+                IconButton(
+                  tooltip: "Opções (segure para excluir)",
+                  icon: const Icon(Icons.delete_outline, color: Colors.white70),
+                  onPressed: () => _confirmarExclusao(context),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
   }
 }
-
-// fazer um card de personagem onde tenha nome/ foto, atributos, nivel e configuraões (deletar, colocar em pdf, etc)
