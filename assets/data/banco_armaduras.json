@@ -1,0 +1,98 @@
+[
+  {
+    "key": "ARMADURA_COURO",
+    "nome": "Armadura de Couro",
+    "descricao": "O peitoral desta armadura é feito de couro curtido em óleo fervente para endurecer, enquanto as outras partes são de couro flexível.",
+    "tipo": "armaduraLeve",
+    "bonusDefesa": 2,
+    "penalidadeArmadura": 0,
+    "espacos": 2,
+    "precoEmTibares": 20
+  },
+  {
+    "key": "COURO_BATIDO",
+    "nome": "Couro Batido",
+    "descricao": "Versão mais pesada da armadura de couro, reforçada com rebites de metal que oferecem maior proteção com leve perda de flexibilidade.",
+    "tipo": "armaduraLeve",
+    "bonusDefesa": 3,
+    "penalidadeArmadura": 1,
+    "espacos": 2,
+    "precoEmTibares": 35
+  },
+  {
+    "key": "GIBAO_DE_PELES",
+    "nome": "Gibão de Peles",
+    "descricao": "Armadura favorita de bárbaros e povos do ermo, confeccionada com camadas grossas de pele e couro rústico.",
+    "tipo": "armaduraLeve",
+    "bonusDefesa": 4,
+    "penalidadeArmadura": 3,
+    "espacos": 2,
+    "precoEmTibares": 25
+  },
+  {
+    "key": "BRUNEA",
+    "nome": "Brunea",
+    "descricao": "Um colete de couro coberto com pequenas placas de metal sobrepostas, como escamas. A armadura pesada inicial padrão de guerreiros e paladinos.",
+    "tipo": "armaduraPesada",
+    "bonusDefesa": 5,
+    "penalidadeArmadura": 2,
+    "espacos": 5,
+    "precoEmTibares": 50
+  },
+  {
+    "key": "COTA_DE_MALHA",
+    "nome": "Cota de Malha",
+    "descricao": "Feita de anéis de aço entrelaçados sobre uma túnica de pano acolchoado. Muito durável contra cortes.",
+    "tipo": "armaduraPesada",
+    "bonusDefesa": 6,
+    "penalidadeArmadura": 2,
+    "espacos": 5,
+    "precoEmTibares": 150
+  },
+  {
+    "key": "LORIGA_SEGMENTADA",
+    "nome": "Loriga Segmentada",
+    "descricao": "Composta por tiras horizontais de metal sobrepostas, rebitadas a tiras de couro. Excelente cobertura e proteção.",
+    "tipo": "armaduraPesada",
+    "bonusDefesa": 7,
+    "penalidadeArmadura": 3,
+    "espacos": 5,
+    "precoEmTibares": 250
+  },
+  {
+    "key": "ARMADURA_COMPLETA",
+    "nome": "Armadura Completa",
+    "descricao": "O ápice da forja medieval: placas de aço moldadas que cobrem o corpo inteiro sobre uma cota de malha, com elmo fechado e guanteletes articulados.",
+    "tipo": "armaduraPesada",
+    "bonusDefesa": 10,
+    "penalidadeArmadura": 5,
+    "espacos": 5,
+    "precoEmTibares": 1000
+  },
+  {
+    "key": "ESCUDO_LEVE",
+    "nome": "Escudo Leve",
+    "descricao": "Um escudo menor de madeira ou couro reforçado, preso ao antebraço. Deixa a mão livre para segurar tochas ou rédeas (mas não para empunhar armas ou fazer magias).",
+    "tipo": "escudoLeve",
+    "bonusDefesa": 1,
+    "penalidadeArmadura": 1,
+    "espacos": 1,
+    "precoEmTibares": 5,
+    "danoAtaque": "1d4",
+    "criticoAtaque": "x2",
+    "multiplicadorCriticoAtaque": 2
+  },
+  {
+    "key": "ESCUDO_PESADO",
+    "nome": "Escudo Pesado",
+    "descricao": "Grande escudo de aço ou madeira reforçada com ferro. Ocupa a mão inteira do personagem e concede excelente cobertura defensiva.",
+    "tipo": "escudoPesado",
+    "bonusDefesa": 2,
+    "penalidadeArmadura": 2,
+    "espacos": 2,
+    "precoEmTibares": 15,
+    "danoAtaque": "1d6",
+    "criticoAtaque": "x2",
+    "multiplicadorCriticoAtaque": 2
+  }
+]

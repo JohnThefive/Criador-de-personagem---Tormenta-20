@@ -10,9 +10,11 @@ import 'banco_origens.dart';
 import 'banco_divindades.dart';
 import 'banco_poderes.dart';
 import 'banco_armas.dart';
+import 'banco_armaduras.dart';
 import '../entities/classe_do_personagem.dart';
 import '../entities/poder.dart';
 import '../entities/arma.dart';
+import '../entities/protecao.dart';
 
 class PersonagemStorageService {
   // Retorna a pasta interna onde o app tem permissão de escrita no Android
@@ -87,6 +89,8 @@ class PersonagemStorageService {
       'poderConcedidoKey': p.poderConcedido?.key,
       'itensInventario': p.itensInventario,
       'armasKeys': p.armas.map((a) => a.key).toList(),
+      'armaduraKey': p.armaduraEquipada?.key,
+      'escudoKey': p.escudoEquipado?.key,
       'tibares': p.tibares,
       'periciasTreinadas': p.periciasTreinadas,
       'atributos': p.atributos.map((k, v) => MapEntry(k, v.valor)),
@@ -183,6 +187,15 @@ class PersonagemStorageService {
       }
     }
 
+    // Reconstrói armadura e escudo
+    final String? armaduraKey = map['armaduraKey'];
+    final Protecao? armadura =
+        armaduraKey != null ? BancoDeArmaduras.getByKey(armaduraKey) : null;
+
+    final String? escudoKey = map['escudoKey'];
+    final Protecao? escudo =
+        escudoKey != null ? BancoDeArmaduras.getByKey(escudoKey) : null;
+
     return Personagem(
       id: map['id']?.toString(),
       nome: map['nome'] ?? 'Aventureiro',
@@ -206,6 +219,8 @@ class PersonagemStorageService {
         map['itensInventario'] ?? (origem?.itensIniciais ?? const []),
       ),
       armas: armasList,
+      armaduraEquipada: armadura,
+      escudoEquipado: escudo,
       tibares: (map['tibares'] as num?)?.toInt() ?? 0,
       periciasTreinadas: List<String>.from(map['periciasTreinadas'] ?? []),
     );

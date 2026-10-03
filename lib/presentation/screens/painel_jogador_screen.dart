@@ -6,6 +6,7 @@ import 'package:t20_creator/domain/entities/classe_do_personagem.dart';
 import '../../domain/entities/personagem.dart';
 import '../../domain/services/personagem_storage_service.dart';
 import 'selecao_poderes_screen.dart';
+import 'aba_combate_view.dart';
 
 class PainelJogadorScreen extends StatefulWidget {
   final Personagem personagemInicial;
@@ -23,6 +24,7 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
 
   final List<Tab> _abas = const [
     Tab(icon: Icon(Icons.dashboard_outlined, size: 20), text: 'Geral'),
+    Tab(icon: Icon(Icons.sports_kabaddi_rounded, size: 20), text: 'Combate'),
     Tab(icon: Icon(Icons.auto_awesome_outlined, size: 20), text: 'Habilidades'),
     Tab(icon: Icon(Icons.menu_book_outlined, size: 20), text: 'Magias'),
     Tab(icon: Icon(Icons.backpack_outlined, size: 20), text: 'Inventário'),
@@ -1198,6 +1200,10 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
                         controller: _tabController,
                         children: [
                           _buildTabGeral(),
+                          AbaCombateView(
+                            personagem: _personagem,
+                            onPersonagemAtualizado: _atualizarPersonagem,
+                          ),
                           _buildTabHabilidades(),
                           _buildTabMagia(),
                           _buildTabEquipamento(),
@@ -1238,14 +1244,14 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
               icon: const Icon(Icons.history_edu, color: Colors.white),
               tooltip: 'História / Notas',
               onPressed: () {
-                _tabController.animateTo(4);
+                _tabController.animateTo(5);
               },
             ),
             IconButton(
               icon: const Icon(Icons.backpack, color: Colors.white),
               tooltip: 'Inventário',
               onPressed: () {
-                _tabController.animateTo(3);
+                _tabController.animateTo(4);
               },
             ),
           ],

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t20_creator/domain/services/banco_poderes.dart';
 import 'package:t20_creator/domain/services/banco_armas.dart';
+import 'package:t20_creator/domain/services/banco_armaduras.dart';
 
 // Importe seus arquivos
 import 'presentation/controllers/home_cubit.dart';
@@ -12,6 +13,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await BancoDePoderes.carregar();
   await BancoDeArmas.carregar();
+  await BancoDeArmaduras.carregar();
   runApp(const T20App());
 }
 

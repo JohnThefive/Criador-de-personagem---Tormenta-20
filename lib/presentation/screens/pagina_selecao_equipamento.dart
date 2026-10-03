@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../domain/entities/arma.dart';
+import '../../domain/entities/protecao.dart';
 import '../../domain/services/banco_armas.dart';
 import '../controllers/personagem_cubit.dart';
 
@@ -21,12 +22,42 @@ class _PaginaSelecaoEquipamentoState extends State<PaginaSelecaoEquipamento> {
     final cubit = context.read<PersonagemCubit>();
     final p = state.personagem;
     final statusCarga = state.statusCarga;
-    final temProfMarcial = p.temProficienciaMarcial;
 
-    final totalArmasNecessarias = temProfMarcial ? 2 : 1;
-    int armasEscolhidas = 0;
-    if (state.armaSimplesInicial != null) armasEscolhidas++;
-    if (temProfMarcial && state.armaMarcialInicial != null) armasEscolhidas++;
+    // Regras de Proficiência e Opções de Equipamento
+    final temProfMarcial = p.temProficienciaMarcial;
+    final opcoesProtecoes = state.opcoesProtecoesIniciais;
+    final bool arcanista = p.ehArcanista;
+
+    // Cálculos prévios de Defesa e Penalidade em tempo real para o HUD
+    final armaduraAtual = state.armaduraInicial ?? p.armaduraEquipada;
+    final escudoAtual = state.escudoInicial ?? p.escudoEquipado;
+    final bool usaArmaduraPesada = armaduraAtual?.ehArmaduraPesada ?? false;
+    final int modDes = p.getValorFinal('DES');
+    final int modDesAplicado = usaArmaduraPesada ? 0 : modDes;
+    final int bonusDefesaArmadura = armaduraAtual?.bonusDefesa ?? 0;
+    final int bonusDefesaEscudo = escudoAtual?.bonusDefesa ?? 0;
+    final int defesaEstimada =
+        10 + modDesAplicado + bonusDefesaArmadura + bonusDefesaEscudo;
+
+    final int penalidadeBase =
+        (armaduraAtual?.penalidadeArmadura ?? 0) +
+        (escudoAtual?.penalidadeArmadura ?? 0);
+    final int penalidadeTotal =
+        penalidadeBase + (statusCarga.sobrecarregado ? 2 : 0);
+
+    // Progresso dos slots obrigatórios
+    int slotsNecessarios = 1; // Arma Simples
+    int slotsPreenchidos = 0;
+
+    if (state.armaSimplesInicial != null) slotsPreenchidos++;
+    if (temProfMarcial) {
+      slotsNecessarios++;
+      if (state.armaMarcialInicial != null) slotsPreenchidos++;
+    }
+    if (!arcanista) {
+      slotsNecessarios++;
+      if (state.armaduraInicial != null) slotsPreenchidos++;
+    }
 
     final bool selecaoCompleta = state.concluiuEquipamentoInicial;
 
@@ -36,16 +67,20 @@ class _PaginaSelecaoEquipamentoState extends State<PaginaSelecaoEquipamento> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           // ----------------------------------------------------
-          // 1. HUD SUPERIOR INFORMATIVO (STATUS, CARGA, TIBARES)
+          // 1. HUD SUPERIOR INFORMATIVO (DEFESA, CARGA, STATUS)
           // ----------------------------------------------------
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             color: Colors.grey[200],
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            child: Wrap(
+              alignment: WrapAlignment.spaceBetween,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              spacing: 8,
+              runSpacing: 8,
               children: [
-                // Progresso de Escolha de Armas
+                // Progresso de Escolha
                 Row(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Icon(
                       selecaoCompleta
@@ -58,15 +93,80 @@ class _PaginaSelecaoEquipamentoState extends State<PaginaSelecaoEquipamento> {
                     ),
                     const SizedBox(width: 8),
                     Text(
-                      "Armas: $armasEscolhidas / $totalArmasNecessarias",
+                      "Slots: $slotsPreenchidos / $slotsNecessarios",
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 13.5,
+                        fontSize: 13,
                         color: Color(0xFF1F2937),
                       ),
                     ),
                   ],
                 ),
+
+                // Prévia de Defesa
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 4,
+                  ),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFEFF6FF),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: const Color(0xFFBFDBFE)),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(
+                        Icons.shield_rounded,
+                        size: 15,
+                        color: Color(0xFF2563EB),
+                      ),
+                      const SizedBox(width: 5),
+                      Text(
+                        "Defesa: $defesaEstimada",
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF1D4ED8),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                // Indicador de Penalidade de Armadura (se houver)
+                if (penalidadeTotal > 0)
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFFFF7ED),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: const Color(0xFFFED7AA)),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Icon(
+                          Icons.accessibility_new_rounded,
+                          size: 14,
+                          color: Color(0xFFC2410C),
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          "Penalidade: -$penalidadeTotal",
+                          style: const TextStyle(
+                            fontSize: 11.5,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF9A3412),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
 
                 // Indicador de Carga
                 Container(
@@ -116,7 +216,7 @@ class _PaginaSelecaoEquipamentoState extends State<PaginaSelecaoEquipamento> {
           ),
           const Divider(height: 1),
 
-          // Alerta visual de sobrecarga se ultrapassou o limite
+          // Alerta visual de sobrecarga
           if (statusCarga.sobrecarregado)
             Container(
               margin: const EdgeInsets.fromLTRB(16, 12, 16, 0),
@@ -132,7 +232,7 @@ class _PaginaSelecaoEquipamentoState extends State<PaginaSelecaoEquipamento> {
                   SizedBox(width: 10),
                   Expanded(
                     child: Text(
-                      "Atenção: O peso dos itens excede seu limite de carga! Quando sobrecarregado, você sofre -2 de penalidade de armadura e tem o deslocamento reduzido.",
+                      "Atenção: O peso dos itens excede seu limite de carga! Quando sobrecarregado, você sofre -2 adicional de penalidade de armadura e tem o deslocamento reduzido.",
                       style: TextStyle(
                         fontSize: 11.5,
                         color: Color(0xFF991B1B),
@@ -175,7 +275,7 @@ class _PaginaSelecaoEquipamentoState extends State<PaginaSelecaoEquipamento> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const Text(
-                                "Equipamento Inicial de 1º Nível",
+                                "Equipamento Inicial de 1º Nível (T20)",
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 15,
@@ -184,9 +284,11 @@ class _PaginaSelecaoEquipamentoState extends State<PaginaSelecaoEquipamento> {
                               ),
                               const SizedBox(height: 4),
                               Text(
-                                temProfMarcial
-                                    ? "Sua classe concede treino em Armas Marciais! Escolha 1 Arma Simples e 1 Arma Marcial gratuitas para iniciar suas aventuras."
-                                    : "Personagens de 1º nível começam com 1 Arma Simples gratuita a sua escolha, além do kit básico de aventureiro.",
+                                arcanista
+                                    ? "Como Arcanista, você não começa com armaduras por padrão. Você recebe 1 Arma Simples gratuita e seu kit de aventureiro."
+                                    : temProfMarcial
+                                    ? "Sua classe concede treino em Armas Marciais e Proteções! Escolha 1 Arma Simples, 1 Arma Marcial e sua Armadura inicial gratuitas."
+                                    : "Você recebe 1 Arma Simples e 1 Armadura Leve gratuitas a sua escolha, além do kit básico de aventureiro.",
                                 style: const TextStyle(
                                   fontSize: 12.5,
                                   color: Color(0xFF7C2D12),
@@ -200,7 +302,7 @@ class _PaginaSelecaoEquipamentoState extends State<PaginaSelecaoEquipamento> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 22),
 
                 // ----------------------------------------------------
                 // 3. SLOT: ARMA SIMPLES GRATUITA (OBRIGATÓRIO)
@@ -256,7 +358,8 @@ class _PaginaSelecaoEquipamentoState extends State<PaginaSelecaoEquipamento> {
                       ? "Concedida pelo treino marcial da classe"
                       : "Sua classe não possui treino marcial",
                   obrigatoria: temProfMarcial,
-                  concluida: !temProfMarcial || state.armaMarcialInicial != null,
+                  concluida:
+                      !temProfMarcial || state.armaMarcialInicial != null,
                 ),
                 const SizedBox(height: 8),
 
@@ -294,71 +397,142 @@ class _PaginaSelecaoEquipamentoState extends State<PaginaSelecaoEquipamento> {
                           cubit.removerArmaInicial(ehMarcial: true),
                     ),
                 ] else ...[
-                  // Card explicativo elegante para não marciais
-                  Container(
-                    padding: const EdgeInsets.all(14),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFF3F4F6),
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: const Color(0xFFE5E7EB)),
+                  _buildCardBloqueado(
+                    titulo:
+                        "Slot Bloqueado (${p.classes.isNotEmpty ? p.classes[0].classeDefinicao.nome : 'Classe'})",
+                    mensagem:
+                        "Esta classe não confere proficiência com armas marciais. Você não precisa escolher este slot.",
+                  ),
+                ],
+
+                const SizedBox(height: 24),
+
+                // ----------------------------------------------------
+                // 5. SLOT: ARMADURA INICIAL (REGRAS T20)
+                // ----------------------------------------------------
+                _buildSecaoTitulo(
+                  titulo: "3. Armadura Inicial",
+                  subtitulo: arcanista
+                      ? "Arcanistas não iniciam com armaduras por regra"
+                      : p.temProficienciaArmadurasPesadas
+                      ? "Armaduras Leves ou Brúnea (Pesada)"
+                      : "Escolha uma armadura leve inicial gratuita",
+                  obrigatoria: !arcanista,
+                  concluida: arcanista || state.armaduraInicial != null,
+                ),
+                const SizedBox(height: 8),
+
+                if (arcanista) ...[
+                  _buildCardBloqueado(
+                    titulo: "Sem Armadura Inicial (Arcanista)",
+                    mensagem:
+                        "Arcanistas não recebem armadura de 1º nível. Armaduras impõem penalidades severas ao lançamento de magias arcanas caso não seja treinado.",
+                  ),
+                ] else if (state.armaduraInicial == null) ...[
+                  _buildSlotVazioCard(
+                    icone: Icons.security_rounded,
+                    titulo: "Selecionar Armadura Inicial",
+                    descricao: p.temProficienciaArmadurasPesadas
+                        ? "Escolha entre Armadura de Couro, Couro Batido, Gibão de Peles ou Brúnea..."
+                        : "Escolha entre Armadura de Couro, Couro Batido ou Gibão de Peles...",
+                    corDestaque: const Color(0xFF1D4ED8),
+                    onTap: () => _abrirSeletorProtecoes(
+                      context: context,
+                      titulo: "Escolha sua Armadura Inicial",
+                      protecoes: opcoesProtecoes.armadurasIniciais,
+                      protecaoAtual: state.armaduraInicial,
+                      onSelecionar: (armadura) {
+                        cubit.selecionarArmaduraInicial(armadura);
+                      },
                     ),
-                    child: Row(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            color: Colors.grey[300],
-                            shape: BoxShape.circle,
-                          ),
-                          child: const Icon(
-                            Icons.block_rounded,
-                            size: 20,
-                            color: Color(0xFF6B7280),
-                          ),
-                        ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Slot Bloqueado (${p.classes.isNotEmpty ? p.classes[0].classeDefinicao.nome : 'Classe'})",
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 13.5,
-                                  color: Color(0xFF374151),
-                                ),
-                              ),
-                              const SizedBox(height: 2),
-                              const Text(
-                                "Esta classe não confere proficiência com armas marciais. Você não precisa escolher este slot.",
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: Color(0xFF6B7280),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+                  ),
+                ] else ...[
+                  _buildCardProtecaoSelecionada(
+                    protecao: state.armaduraInicial!,
+                    tipoSlot: state.armaduraInicial!.ehArmaduraPesada
+                        ? "Armadura Pesada Gratuita"
+                        : "Armadura Leve Gratuita",
+                    onTrocar: () => _abrirSeletorProtecoes(
+                      context: context,
+                      titulo: "Trocar Armadura Inicial",
+                      protecoes: opcoesProtecoes.armadurasIniciais,
+                      protecaoAtual: state.armaduraInicial,
+                      onSelecionar: (armadura) {
+                        cubit.selecionarArmaduraInicial(armadura);
+                      },
                     ),
+                    onRemover: () => cubit.removerArmaduraInicial(),
+                  ),
+                ],
+
+                const SizedBox(height: 24),
+
+                // ----------------------------------------------------
+                // 6. SLOT: ESCUDO (CONDICIONAL À PROFICIÊNCIA)
+                // ----------------------------------------------------
+                _buildSecaoTitulo(
+                  titulo: "4. Escudo",
+                  subtitulo: opcoesProtecoes.podeEscolherEscudo
+                      ? "Concedido pelo treino com escudos da sua classe"
+                      : "Sua classe não confere treino com escudos",
+                  obrigatoria: false,
+                  concluida: state.escudoInicial != null,
+                ),
+                const SizedBox(height: 8),
+
+                if (opcoesProtecoes.podeEscolherEscudo) ...[
+                  if (state.escudoInicial == null)
+                    _buildSlotVazioCard(
+                      icone: Icons.shield_outlined,
+                      titulo: "Equipar Escudo Leve (Opcional)",
+                      descricao:
+                          "Toque para adicionar o Escudo Leve gratuito (+1 na Defesa, -1 Penalidade).",
+                      corDestaque: const Color(0xFF047857),
+                      onTap: () => _abrirSeletorProtecoes(
+                        context: context,
+                        titulo: "Escolha seu Escudo",
+                        protecoes: opcoesProtecoes.escudosIniciais,
+                        protecaoAtual: state.escudoInicial,
+                        onSelecionar: (escudo) {
+                          cubit.selecionarEscudoInicial(escudo);
+                        },
+                      ),
+                    )
+                  else
+                    _buildCardProtecaoSelecionada(
+                      protecao: state.escudoInicial!,
+                      tipoSlot: "Escudo Inicial Gratuito",
+                      onTrocar: () => _abrirSeletorProtecoes(
+                        context: context,
+                        titulo: "Trocar Escudo",
+                        protecoes: opcoesProtecoes.escudosIniciais,
+                        protecaoAtual: state.escudoInicial,
+                        onSelecionar: (escudo) {
+                          cubit.selecionarEscudoInicial(escudo);
+                        },
+                      ),
+                      onRemover: () => cubit.removerEscudoInicial(),
+                    ),
+                ] else ...[
+                  _buildCardBloqueado(
+                    titulo:
+                        "Slot Bloqueado (${p.classes.isNotEmpty ? p.classes[0].classeDefinicao.nome : 'Classe'})",
+                    mensagem:
+                        "Sua classe não possui proficiência com escudos. Utilizar escudos sem treino impõe sua penalidade a testes de Força e Destreza.",
                   ),
                 ],
 
                 const SizedBox(height: 28),
 
                 // ----------------------------------------------------
-                // 5. SEÇÃO: DINHEIRO INICIAL (TIBARES - 4d6 T$)
+                // 7. SEÇÃO: DINHEIRO INICIAL (TIBARES - 4d6 T$)
                 // ----------------------------------------------------
-                _buildCardDinheiroInicial(
-                  state: state,
-                  cubit: cubit,
-                ),
+                _buildCardDinheiroInicial(state: state, cubit: cubit),
 
                 const SizedBox(height: 20),
 
                 // ----------------------------------------------------
-                // 6. SEÇÃO: KIT BÁSICO DE AVENTUREIRO & ITENS
+                // 8. SEÇÃO: KIT BÁSICO DE AVENTUREIRO & ITENS
                 // ----------------------------------------------------
                 _buildCardKitAventureiro(state: state),
               ],
@@ -370,7 +544,7 @@ class _PaginaSelecaoEquipamentoState extends State<PaginaSelecaoEquipamento> {
   }
 
   // ----------------------------------------------------
-  // WIDGETS AUXILIARES
+  // WIDGETS AUXILIARES E COMPONENTES DE UI
   // ----------------------------------------------------
 
   Widget _buildSecaoTitulo({
@@ -396,10 +570,7 @@ class _PaginaSelecaoEquipamentoState extends State<PaginaSelecaoEquipamento> {
               const SizedBox(height: 2),
               Text(
                 subtitulo,
-                style: const TextStyle(
-                  fontSize: 12,
-                  color: Color(0xFF6B7280),
-                ),
+                style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
               ),
             ],
           ),
@@ -440,6 +611,25 @@ class _PaginaSelecaoEquipamentoState extends State<PaginaSelecaoEquipamento> {
                   ),
                 ),
               ],
+            ),
+          )
+        else
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+            decoration: BoxDecoration(
+              color: const Color(0xFFF3F4F6),
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: const Color(0xFFE5E7EB)),
+            ),
+            child: Text(
+              concluida ? "Equipado" : "Opcional",
+              style: TextStyle(
+                fontSize: 11,
+                fontWeight: FontWeight.w600,
+                color: concluida
+                    ? const Color(0xFF15803D)
+                    : const Color(0xFF6B7280),
+              ),
             ),
           ),
       ],
@@ -505,9 +695,68 @@ class _PaginaSelecaoEquipamentoState extends State<PaginaSelecaoEquipamento> {
                 ],
               ),
             ),
-            const Icon(Icons.arrow_forward_ios, size: 16, color: Color(0xFF9CA3AF)),
+            const Icon(
+              Icons.arrow_forward_ios,
+              size: 16,
+              color: Color(0xFF9CA3AF),
+            ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildCardBloqueado({
+    required String titulo,
+    required String mensagem,
+  }) {
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: const Color(0xFFF3F4F6),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: const Color(0xFFE5E7EB)),
+      ),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: Colors.grey[300],
+              shape: BoxShape.circle,
+            ),
+            child: const Icon(
+              Icons.block_rounded,
+              size: 20,
+              color: Color(0xFF6B7280),
+            ),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  titulo,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 13.5,
+                    color: Color(0xFF374151),
+                  ),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  mensagem,
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: Color(0xFF6B7280),
+                    height: 1.3,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -531,7 +780,6 @@ class _PaginaSelecaoEquipamentoState extends State<PaginaSelecaoEquipamento> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Cabeçalho da Arma
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -572,7 +820,6 @@ class _PaginaSelecaoEquipamentoState extends State<PaginaSelecaoEquipamento> {
                     ],
                   ),
                 ),
-                // Botão de Trocar
                 OutlinedButton.icon(
                   onPressed: onTrocar,
                   icon: const Icon(Icons.swap_horiz, size: 16),
@@ -581,8 +828,10 @@ class _PaginaSelecaoEquipamentoState extends State<PaginaSelecaoEquipamento> {
                     foregroundColor: const Color(0xFF4B5563),
                     side: const BorderSide(color: Color(0xFFD1D5DB)),
                     visualDensity: VisualDensity.compact,
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 4,
+                    ),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -592,7 +841,6 @@ class _PaginaSelecaoEquipamentoState extends State<PaginaSelecaoEquipamento> {
             ),
             const SizedBox(height: 12),
 
-            // Chips com Estatísticas da Arma
             Wrap(
               spacing: 6,
               runSpacing: 6,
@@ -603,10 +851,7 @@ class _PaginaSelecaoEquipamentoState extends State<PaginaSelecaoEquipamento> {
                   const Color(0xFFB45309),
                 ),
                 _buildChipInfo(arma.tipoDano.label, const Color(0xFF4B5563)),
-                _buildChipInfo(
-                  arma.empunhadura.label,
-                  const Color(0xFF2563EB),
-                ),
+                _buildChipInfo(arma.empunhadura.label, const Color(0xFF2563EB)),
                 _buildChipInfo(arma.alcance, const Color(0xFF059669)),
                 _buildChipInfo(
                   "${arma.espacos} ${arma.espacos == 1 ? 'espaço' : 'espaços'}",
@@ -615,7 +860,6 @@ class _PaginaSelecaoEquipamentoState extends State<PaginaSelecaoEquipamento> {
               ],
             ),
 
-            // Propriedades Especiais (se houver)
             if (arma.propriedades.isNotEmpty) ...[
               const SizedBox(height: 8),
               Wrap(
@@ -623,8 +867,10 @@ class _PaginaSelecaoEquipamentoState extends State<PaginaSelecaoEquipamento> {
                 runSpacing: 4,
                 children: arma.propriedades.map((prop) {
                   return Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 2,
+                    ),
                     decoration: BoxDecoration(
                       color: const Color(0xFFF3E8FF),
                       borderRadius: BorderRadius.circular(6),
@@ -658,6 +904,157 @@ class _PaginaSelecaoEquipamentoState extends State<PaginaSelecaoEquipamento> {
     );
   }
 
+  Widget _buildCardProtecaoSelecionada({
+    required Protecao protecao,
+    required String tipoSlot,
+    required VoidCallback onTrocar,
+    required VoidCallback onRemover,
+  }) {
+    final bool ehEscudo = protecao.ehEscudo;
+    final Color corTema = ehEscudo
+        ? const Color(0xFF059669)
+        : const Color(0xFF2563EB);
+
+    return Card(
+      elevation: 2,
+      shadowColor: Colors.black.withValues(alpha: 0.08),
+      color: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(14),
+        side: const BorderSide(color: Color(0xFFE5E7EB)),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: corTema.withValues(alpha: 0.12),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Icon(
+                    ehEscudo ? Icons.shield_rounded : Icons.security_rounded,
+                    color: corTema,
+                    size: 22,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        protecao.nome,
+                        style: const TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF111827),
+                        ),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        tipoSlot,
+                        style: TextStyle(
+                          fontSize: 11.5,
+                          fontWeight: FontWeight.w600,
+                          color: corTema,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                OutlinedButton.icon(
+                  onPressed: onTrocar,
+                  icon: const Icon(Icons.swap_horiz, size: 16),
+                  label: const Text("Trocar"),
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: const Color(0xFF4B5563),
+                    side: const BorderSide(color: Color(0xFFD1D5DB)),
+                    visualDensity: VisualDensity.compact,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 4,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                ),
+                if (ehEscudo) ...[
+                  const SizedBox(width: 6),
+                  IconButton(
+                    icon: const Icon(
+                      Icons.delete_outline,
+                      size: 18,
+                      color: Color(0xFFEF4444),
+                    ),
+                    tooltip: "Remover Escudo",
+                    visualDensity: VisualDensity.compact,
+                    onPressed: onRemover,
+                  ),
+                ],
+              ],
+            ),
+            const SizedBox(height: 12),
+
+            Wrap(
+              spacing: 6,
+              runSpacing: 6,
+              children: [
+                _buildChipInfo(
+                  "Defesa +${protecao.bonusDefesa}",
+                  const Color(0xFF16A34A),
+                ),
+                _buildChipInfo(
+                  protecao.penalidadeArmadura > 0
+                      ? "Penalidade: -${protecao.penalidadeArmadura}"
+                      : "Sem Penalidade",
+                  protecao.penalidadeArmadura > 0
+                      ? const Color(0xFFD97706)
+                      : const Color(0xFF4B5563),
+                ),
+                _buildChipInfo(
+                  "${protecao.espacos} ${protecao.espacos == 1 ? 'espaço' : 'espaços'}",
+                  const Color(0xFF7C3AED),
+                ),
+                _buildChipInfo(
+                  protecao.permiteDestrezaNaDefesa
+                      ? "Aplica DES"
+                      : "Anula DES na Defesa",
+                  protecao.permiteDestrezaNaDefesa
+                      ? const Color(0xFF2563EB)
+                      : const Color(0xFFDC2626),
+                ),
+                if (protecao.reduzDeslocamento)
+                  _buildChipInfo("Deslocamento -3m", const Color(0xFFB91C1C)),
+                if (protecao.danoAtaque != null)
+                  _buildChipInfo(
+                    "Golpe: ${protecao.danoAtaque}",
+                    const Color(0xFFC026D3),
+                  ),
+              ],
+            ),
+
+            const SizedBox(height: 10),
+            Text(
+              protecao.descricao,
+              style: const TextStyle(
+                fontSize: 12.5,
+                color: Color(0xFF4B5563),
+                height: 1.35,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _buildChipInfo(String texto, Color cor) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
@@ -668,11 +1065,7 @@ class _PaginaSelecaoEquipamentoState extends State<PaginaSelecaoEquipamento> {
       ),
       child: Text(
         texto,
-        style: TextStyle(
-          fontSize: 11,
-          fontWeight: FontWeight.w600,
-          color: cor,
-        ),
+        style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: cor),
       ),
     );
   }
@@ -725,8 +1118,8 @@ class _PaginaSelecaoEquipamentoState extends State<PaginaSelecaoEquipamento> {
                   const SizedBox(height: 3),
                   Text(
                     tibares == null
-                      ? "Rolar 4 dados de 6 faces para determinar suas moedas iniciais."
-                      : "Total rolado: T\$ $tibares (Tibares guardados para a aventura)",
+                        ? "Rolar 4 dados de 6 faces para determinar suas moedas iniciais."
+                        : "Total rolado: T\$ $tibares (Tibares guardados para a aventura)",
                     style: const TextStyle(
                       fontSize: 12,
                       color: Color(0xFF6B7280),
@@ -759,7 +1152,10 @@ class _PaginaSelecaoEquipamentoState extends State<PaginaSelecaoEquipamento> {
                 backgroundColor: const Color(0xFFD97706),
                 foregroundColor: Colors.white,
                 visualDensity: VisualDensity.compact,
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 8,
+                ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
@@ -933,8 +1329,39 @@ class _PaginaSelecaoEquipamentoState extends State<PaginaSelecaoEquipamento> {
       },
     );
   }
+
+  // ----------------------------------------------------
+  // MODAL / BOTTOM SHEET DE SELEÇÃO DE PROTEÇÕES
+  // ----------------------------------------------------
+  void _abrirSeletorProtecoes({
+    required BuildContext context,
+    required String titulo,
+    required List<Protecao> protecoes,
+    Protecao? protecaoAtual,
+    required ValueChanged<Protecao> onSelecionar,
+  }) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (modalContext) {
+        return _ModalSeletorProtecoes(
+          titulo: titulo,
+          protecoes: protecoes,
+          protecaoAtual: protecaoAtual,
+          onSelecionar: (protecao) {
+            onSelecionar(protecao);
+            Navigator.pop(modalContext);
+          },
+        );
+      },
+    );
+  }
 }
 
+// ====================================================
+// MODAL: SELETOR DE ARMAS COM FILTRO E BUSCA
+// ====================================================
 class _ModalSeletorArmas extends StatefulWidget {
   final String titulo;
   final List<Arma> armas;
@@ -960,10 +1387,12 @@ class _ModalSeletorArmasState extends State<_ModalSeletorArmas> {
   Widget build(BuildContext context) {
     final armasFiltradas = widget.armas.where((a) {
       if (_busca.isNotEmpty) {
-        final matchNome =
-            a.nome.toLowerCase().contains(_busca.toLowerCase().trim());
-        final matchDesc =
-            a.descricao.toLowerCase().contains(_busca.toLowerCase().trim());
+        final matchNome = a.nome.toLowerCase().contains(
+          _busca.toLowerCase().trim(),
+        );
+        final matchDesc = a.descricao.toLowerCase().contains(
+          _busca.toLowerCase().trim(),
+        );
         if (!matchNome && !matchDesc) return false;
       }
       if (_filtroProposito != null && a.proposito != _filtroProposito) {
@@ -980,7 +1409,6 @@ class _ModalSeletorArmasState extends State<_ModalSeletorArmas> {
       ),
       child: Column(
         children: [
-          // Puxador Superior
           const SizedBox(height: 10),
           Container(
             width: 40,
@@ -992,7 +1420,6 @@ class _ModalSeletorArmasState extends State<_ModalSeletorArmas> {
           ),
           const SizedBox(height: 12),
 
-          // Título do Modal
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Row(
@@ -1017,7 +1444,6 @@ class _ModalSeletorArmasState extends State<_ModalSeletorArmas> {
           ),
           const Divider(height: 1),
 
-          // Barra de Pesquisa
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
             child: TextField(
@@ -1042,7 +1468,6 @@ class _ModalSeletorArmasState extends State<_ModalSeletorArmas> {
             ),
           ),
 
-          // Filtros Rápidos (Todos, Corpo a Corpo, Disparo, Arremesso)
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
@@ -1050,10 +1475,7 @@ class _ModalSeletorArmasState extends State<_ModalSeletorArmas> {
               children: [
                 _buildFiltroChip("Todas", null),
                 const SizedBox(width: 6),
-                _buildFiltroChip(
-                  "Corpo a Corpo",
-                  PropositoArma.corpoACorpo,
-                ),
+                _buildFiltroChip("Corpo a Corpo", PropositoArma.corpoACorpo),
                 const SizedBox(width: 6),
                 _buildFiltroChip("Disparo", PropositoArma.disparo),
                 const SizedBox(width: 6),
@@ -1064,7 +1486,6 @@ class _ModalSeletorArmasState extends State<_ModalSeletorArmas> {
           const SizedBox(height: 6),
           const Divider(height: 1),
 
-          // Lista de Armas Disponíveis
           Expanded(
             child: armasFiltradas.isEmpty
                 ? const Center(
@@ -1123,7 +1544,9 @@ class _ModalSeletorArmasState extends State<_ModalSeletorArmas> {
         color: selecionada ? const Color(0xFFFEF2F2) : Colors.white,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: selecionada ? const Color(0xFFB71C1C) : const Color(0xFFE5E7EB),
+          color: selecionada
+              ? const Color(0xFFB71C1C)
+              : const Color(0xFFE5E7EB),
           width: selecionada ? 1.5 : 1,
         ),
       ),
@@ -1187,13 +1610,15 @@ class _ModalSeletorArmasState extends State<_ModalSeletorArmas> {
                 ),
                 const SizedBox(height: 8),
 
-                // Tags de atributos
                 Wrap(
                   spacing: 6,
                   runSpacing: 4,
                   children: [
                     _buildPill("Dano: ${arma.dano}", const Color(0xFFDC2626)),
-                    _buildPill("Crítico: ${arma.criticoFormatado}", const Color(0xFFD97706)),
+                    _buildPill(
+                      "Crítico: ${arma.criticoFormatado}",
+                      const Color(0xFFD97706),
+                    ),
                     _buildPill(arma.tipoDano.label, const Color(0xFF4B5563)),
                     _buildPill(arma.empunhadura.label, const Color(0xFF2563EB)),
                     _buildPill(arma.alcance, const Color(0xFF059669)),
@@ -1201,7 +1626,6 @@ class _ModalSeletorArmasState extends State<_ModalSeletorArmas> {
                   ],
                 ),
 
-                // Propriedades
                 if (arma.propriedades.isNotEmpty) ...[
                   const SizedBox(height: 6),
                   Wrap(
@@ -1233,6 +1657,353 @@ class _ModalSeletorArmasState extends State<_ModalSeletorArmas> {
                 const SizedBox(height: 8),
                 Text(
                   arma.descricao,
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: Color(0xFF4B5563),
+                    height: 1.3,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPill(String texto, Color cor) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+      decoration: BoxDecoration(
+        color: cor.withValues(alpha: 0.08),
+        borderRadius: BorderRadius.circular(4),
+        border: Border.all(color: cor.withValues(alpha: 0.2)),
+      ),
+      child: Text(
+        texto,
+        style: TextStyle(
+          fontSize: 10.5,
+          fontWeight: FontWeight.w600,
+          color: cor,
+        ),
+      ),
+    );
+  }
+}
+
+// ====================================================
+// MODAL: SELETOR DE PROTEÇÕES (ARMADURAS E ESCUDOS)
+// ====================================================
+class _ModalSeletorProtecoes extends StatefulWidget {
+  final String titulo;
+  final List<Protecao> protecoes;
+  final Protecao? protecaoAtual;
+  final ValueChanged<Protecao> onSelecionar;
+
+  const _ModalSeletorProtecoes({
+    required this.titulo,
+    required this.protecoes,
+    this.protecaoAtual,
+    required this.onSelecionar,
+  });
+
+  @override
+  State<_ModalSeletorProtecoes> createState() => _ModalSeletorProtecoesState();
+}
+
+class _ModalSeletorProtecoesState extends State<_ModalSeletorProtecoes> {
+  String _busca = '';
+  TipoProtecao? _filtroTipo;
+
+  @override
+  Widget build(BuildContext context) {
+    final protecoesFiltradas = widget.protecoes.where((p) {
+      if (_busca.isNotEmpty) {
+        final matchNome = p.nome.toLowerCase().contains(
+          _busca.toLowerCase().trim(),
+        );
+        final matchDesc = p.descricao.toLowerCase().contains(
+          _busca.toLowerCase().trim(),
+        );
+        if (!matchNome && !matchDesc) return false;
+      }
+      if (_filtroTipo != null && p.tipo != _filtroTipo) {
+        return false;
+      }
+      return true;
+    }).toList();
+
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.82,
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      child: Column(
+        children: [
+          const SizedBox(height: 10),
+          Container(
+            width: 40,
+            height: 4,
+            decoration: BoxDecoration(
+              color: Colors.grey[300],
+              borderRadius: BorderRadius.circular(2),
+            ),
+          ),
+          const SizedBox(height: 12),
+
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Text(
+                    widget.titulo,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF111827),
+                    ),
+                  ),
+                ),
+                IconButton(
+                  icon: const Icon(Icons.close),
+                  onPressed: () => Navigator.pop(context),
+                ),
+              ],
+            ),
+          ),
+          const Divider(height: 1),
+
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
+            child: TextField(
+              decoration: InputDecoration(
+                hintText: "Buscar armadura ou escudo...",
+                prefixIcon: const Icon(Icons.search, size: 20),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 14),
+                filled: true,
+                fillColor: const Color(0xFFF9FAFB),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(color: Color(0xFFD1D5DB)),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(color: Color(0xFFE5E7EB)),
+                ),
+              ),
+              onChanged: (val) {
+                setState(() => _busca = val);
+              },
+            ),
+          ),
+
+          // Filtro por tipo de proteção
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+            child: Row(
+              children: [
+                _buildFiltroChip("Todas", null),
+                const SizedBox(width: 6),
+                _buildFiltroChip("Armadura Leve", TipoProtecao.armaduraLeve),
+                const SizedBox(width: 6),
+                _buildFiltroChip(
+                  "Armadura Pesada",
+                  TipoProtecao.armaduraPesada,
+                ),
+                const SizedBox(width: 6),
+                _buildFiltroChip("Escudo Leve", TipoProtecao.escudoLeve),
+              ],
+            ),
+          ),
+          const SizedBox(height: 6),
+          const Divider(height: 1),
+
+          Expanded(
+            child: protecoesFiltradas.isEmpty
+                ? const Center(
+                    child: Text(
+                      "Nenhuma proteção encontrada.",
+                      style: TextStyle(color: Color(0xFF6B7280)),
+                    ),
+                  )
+                : ListView.separated(
+                    padding: const EdgeInsets.all(16),
+                    itemCount: protecoesFiltradas.length,
+                    separatorBuilder: (_, _) => const SizedBox(height: 12),
+                    itemBuilder: (context, index) {
+                      final protecao = protecoesFiltradas[index];
+                      final selecionada =
+                          widget.protecaoAtual?.key == protecao.key;
+
+                      return _buildItemModalProtecao(
+                        protecao: protecao,
+                        selecionada: selecionada,
+                        onTap: () => widget.onSelecionar(protecao),
+                      );
+                    },
+                  ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildFiltroChip(String label, TipoProtecao? tipo) {
+    final ativo = _filtroTipo == tipo;
+    return ChoiceChip(
+      label: Text(label),
+      selected: ativo,
+      onSelected: (_) {
+        setState(() => _filtroTipo = tipo);
+      },
+      selectedColor: const Color(0xFF1D4ED8),
+      labelStyle: TextStyle(
+        color: ativo ? Colors.white : const Color(0xFF4B5563),
+        fontWeight: ativo ? FontWeight.bold : FontWeight.normal,
+        fontSize: 12,
+      ),
+      backgroundColor: const Color(0xFFF3F4F6),
+      visualDensity: VisualDensity.compact,
+    );
+  }
+
+  Widget _buildItemModalProtecao({
+    required Protecao protecao,
+    required bool selecionada,
+    required VoidCallback onTap,
+  }) {
+    final bool ehEscudo = protecao.ehEscudo;
+    final Color corDestaque = ehEscudo
+        ? const Color(0xFF059669)
+        : const Color(0xFF2563EB);
+
+    return Container(
+      decoration: BoxDecoration(
+        color: selecionada ? corDestaque.withValues(alpha: 0.06) : Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: selecionada ? corDestaque : const Color(0xFFE5E7EB),
+          width: selecionada ? 1.5 : 1,
+        ),
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(12),
+          child: Padding(
+            padding: const EdgeInsets.all(14),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            protecao.nome,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: selecionada
+                                  ? corDestaque
+                                  : const Color(0xFF111827),
+                            ),
+                          ),
+                          const SizedBox(height: 2),
+                          Text(
+                            protecao.tipo.label,
+                            style: TextStyle(
+                              fontSize: 11.5,
+                              fontWeight: FontWeight.w600,
+                              color: corDestaque,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    if (protecao.precoEmTibares > 0)
+                      Text(
+                        "Valor: T\$ ${protecao.precoEmTibares}",
+                        style: const TextStyle(
+                          fontSize: 11.5,
+                          color: Color(0xFF6B7280),
+                          decoration: TextDecoration.lineThrough,
+                        ),
+                      ),
+                    const SizedBox(width: 8),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 3,
+                      ),
+                      decoration: BoxDecoration(
+                        color: selecionada
+                            ? corDestaque
+                            : corDestaque.withValues(alpha: 0.12),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Text(
+                        selecionada ? "Selecionada" : "Grátis",
+                        style: TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.bold,
+                          color: selecionada ? Colors.white : corDestaque,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+
+                // Tags com dados mecânicos do T20
+                Wrap(
+                  spacing: 6,
+                  runSpacing: 4,
+                  children: [
+                    _buildPill(
+                      "Defesa +${protecao.bonusDefesa}",
+                      const Color(0xFF16A34A),
+                    ),
+                    _buildPill(
+                      protecao.penalidadeArmadura > 0
+                          ? "Penalidade: -${protecao.penalidadeArmadura}"
+                          : "Sem Penalidade",
+                      protecao.penalidadeArmadura > 0
+                          ? const Color(0xFFD97706)
+                          : const Color(0xFF4B5563),
+                    ),
+                    _buildPill(
+                      "${protecao.espacos} esp.",
+                      const Color(0xFF7C3AED),
+                    ),
+                    _buildPill(
+                      protecao.permiteDestrezaNaDefesa
+                          ? "+ Mod. DES"
+                          : "Sem Mod. DES",
+                      protecao.permiteDestrezaNaDefesa
+                          ? const Color(0xFF2563EB)
+                          : const Color(0xFFDC2626),
+                    ),
+                    if (protecao.reduzDeslocamento)
+                      _buildPill("Deslocamento -3m", const Color(0xFFB91C1C)),
+                    if (protecao.danoAtaque != null)
+                      _buildPill(
+                        "Golpe: ${protecao.danoAtaque}",
+                        const Color(0xFFC026D3),
+                      ),
+                  ],
+                ),
+
+                const SizedBox(height: 8),
+                Text(
+                  protecao.descricao,
                   style: const TextStyle(
                     fontSize: 12,
                     color: Color(0xFF4B5563),

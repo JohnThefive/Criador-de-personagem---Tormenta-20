@@ -5,6 +5,7 @@ import 'package:t20_creator/domain/entities/classe.dart';
 import 'package:t20_creator/domain/entities/classe_do_personagem.dart';
 import 'package:t20_creator/domain/entities/linhagem_arcanista.dart';
 import 'package:t20_creator/domain/entities/arma.dart';
+import 'package:t20_creator/domain/entities/protecao.dart';
 import 'package:t20_creator/domain/services/regras_carga_service.dart';
 import 'package:t20_creator/domain/services/personagem_storage_service.dart';
 import '../../domain/entities/personagem.dart';
@@ -47,6 +48,8 @@ class PersonagemState {
   // Equipamento inicial (Nível 1)
   final Arma? armaSimplesInicial;
   final Arma? armaMarcialInicial;
+  final Protecao? armaduraInicial;
+  final Protecao? escudoInicial;
   final int? tibaresIniciais;
 
   PersonagemState({
@@ -66,6 +69,8 @@ class PersonagemState {
     this.selecoesPericiaInteligencia = const [],
     this.armaSimplesInicial,
     this.armaMarcialInicial,
+    this.armaduraInicial,
+    this.escudoInicial,
     this.tibaresIniciais,
   });
 
@@ -87,6 +92,9 @@ class PersonagemState {
   OpcoesArmasIniciais get opcoesArmasIniciais =>
       RegrasCargaService.obterArmasIniciaisDisponiveis(personagem);
 
+  OpcoesProtecoesIniciais get opcoesProtecoesIniciais =>
+      RegrasCargaService.obterProtecoesIniciaisDisponiveis(personagem);
+
   StatusCarga get statusCarga {
     final armasAtuais = <Arma>[...personagem.armas];
     if (armaSimplesInicial != null &&
@@ -106,11 +114,16 @@ class PersonagemState {
       }
     }
 
+    final armaduraAtual = armaduraInicial ?? personagem.armaduraEquipada;
+    final escudoAtual = escudoInicial ?? personagem.escudoEquipado;
+
     final modForca = personagem.getValorFinal('FOR');
     final limite = RegrasCargaService.calcularLimiteCarga(modForca);
     final atual = RegrasCargaService.calcularEspacosOcupados(
       armas: armasAtuais,
       itensInventario: itensAtuais,
+      armadura: armaduraAtual,
+      escudo: escudoAtual,
     );
 
     return StatusCarga(
@@ -124,6 +137,10 @@ class PersonagemState {
   bool get concluiuEquipamentoInicial {
     if (armaSimplesInicial == null) return false;
     if (personagem.temProficienciaMarcial && armaMarcialInicial == null) {
+      return false;
+    }
+    // Arcanistas começam sem armadura por regra. Outras classes devem escolher 1 armadura.
+    if (!personagem.ehArcanista && armaduraInicial == null) {
       return false;
     }
     return true;
@@ -150,6 +167,10 @@ class PersonagemState {
     bool anularArmaSimples = false,
     Arma? armaMarcialInicial,
     bool anularArmaMarcial = false,
+    Protecao? armaduraInicial,
+    bool anularArmadura = false,
+    Protecao? escudoInicial,
+    bool anularEscudo = false,
     int? tibaresIniciais,
   }) {
     return PersonagemState(
@@ -183,6 +204,12 @@ class PersonagemState {
       armaMarcialInicial: anularArmaMarcial
           ? null
           : (armaMarcialInicial ?? this.armaMarcialInicial),
+      armaduraInicial: anularArmadura
+          ? null
+          : (armaduraInicial ?? this.armaduraInicial),
+      escudoInicial: anularEscudo
+          ? null
+          : (escudoInicial ?? this.escudoInicial),
       tibaresIniciais: tibaresIniciais ?? this.tibaresIniciais,
     );
   }
@@ -656,6 +683,27 @@ class PersonagemCubit extends Cubit<PersonagemState> {
     }
   }
 
+  /// Retorna as opções de armaduras e escudos iniciais disponíveis para a classe do personagem
+  OpcoesProtecoesIniciais obterProtecoesIniciaisDisponiveis(Personagem p) {
+    return RegrasCargaService.obterProtecoesIniciaisDisponiveis(p);
+  }
+
+  void selecionarArmaduraInicial(Protecao armadura) {
+    emit(state.copyWith(armaduraInicial: armadura));
+  }
+
+  void removerArmaduraInicial() {
+    emit(state.copyWith(anularArmadura: true));
+  }
+
+  void selecionarEscudoInicial(Protecao escudo) {
+    emit(state.copyWith(escudoInicial: escudo));
+  }
+
+  void removerEscudoInicial() {
+    emit(state.copyWith(anularEscudo: true));
+  }
+
   int rolarDinheiroInicial() {
     final rand = Random();
     int total = 0;
@@ -692,6 +740,8 @@ class PersonagemCubit extends Cubit<PersonagemState> {
       armas: armasIniciais,
       itensInventario: itensBase,
       tibares: tibares,
+      armaduraEquipada: state.armaduraInicial,
+      escudoEquipado: state.escudoInicial,
     );
 
     emit(state.copyWith(personagem: novoPersonagem));

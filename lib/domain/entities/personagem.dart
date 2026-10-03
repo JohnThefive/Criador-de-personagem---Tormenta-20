@@ -1,5 +1,6 @@
 import 'package:t20_creator/domain/entities/poder.dart';
 import 'arma.dart';
+import 'protecao.dart';
 import 'proficiencias.dart';
 import '../services/regras_carga_service.dart';
 
@@ -24,6 +25,8 @@ class Personagem {
   final List<Poder> poderesGerais; // Armazena poderes de origem / gerais
   final List<String> itensInventario; // Recebe os itens gratuitos da origem
   final List<Arma> armas; // Armas equipadas/carregadas
+  final Protecao? armaduraEquipada; // Armadura equipada
+  final Protecao? escudoEquipado; // Escudo equipado
   final int tibares; // Dinheiro em T$ (Tibar)
 
   // Campos referentes a divindade
@@ -60,6 +63,8 @@ class Personagem {
     this.poderesGerais = const [],
     this.itensInventario = const [],
     this.armas = const [],
+    this.armaduraEquipada,
+    this.escudoEquipado,
     this.tibares = 0,
     // Campos referentes a divindade
     this.divindade,
@@ -111,6 +116,8 @@ class Personagem {
       poderesGerais: const [],
       itensInventario: const [],
       armas: const [],
+      armaduraEquipada: null,
+      escudoEquipado: null,
       tibares: 0,
       divindade: null,
       poderConcedido: null,
@@ -140,6 +147,10 @@ class Personagem {
     List<Poder>? poderesGerais,
     List<String>? itensInventario,
     List<Arma>? armas,
+    Protecao? armaduraEquipada,
+    bool anularArmadura = false,
+    Protecao? escudoEquipado,
+    bool anularEscudo = false,
     int? tibares,
     // Campos referentes a divindade
     Divindade? divindade,
@@ -170,6 +181,10 @@ class Personagem {
       poderesGerais: poderesGerais ?? this.poderesGerais,
       itensInventario: itensInventario ?? this.itensInventario,
       armas: armas ?? this.armas,
+      armaduraEquipada:
+          anularArmadura ? null : (armaduraEquipada ?? this.armaduraEquipada),
+      escudoEquipado:
+          anularEscudo ? null : (escudoEquipado ?? this.escudoEquipado),
       tibares: tibares ?? this.tibares,
       divindade: anularDivindade ? null : (divindade ?? this.divindade),
       poderConcedido: anularDivindade
@@ -293,10 +308,50 @@ class Personagem {
     return totalPM;
   }
 
-  // --- CÁLCULO DE DEFESA BÁSICA ---
+  // --- CÁLCULO DE DEFESA E PROTEÇÕES (TORMENTA 20) ---
+  int get bonusArmadura => armaduraEquipada?.bonusDefesa ?? 0;
+  int get bonusEscudo => escudoEquipado?.bonusDefesa ?? 0;
+  bool get usaArmaduraPesada => armaduraEquipada?.ehArmaduraPesada ?? false;
+
+  /// Defesa final calculada reativamente:
+  /// Defesa = 10 + (usaArmaduraPesada ? 0 : modDES) + bonusArmadura + bonusEscudo
+  int get defesaFinal {
+    final modDes = getValorFinal('DES');
+    final modDesAplicado = usaArmaduraPesada ? 0 : modDes;
+    return 10 + modDesAplicado + bonusArmadura + bonusEscudo;
+  }
+
+  /// Defesa básica sem armaduras (10 + DES)
   int get defesaBase {
     final modDes = getValorFinal('DES');
     return 10 + modDes;
+  }
+
+  /// Penalidade total cumulativa de armadura (armadura + escudo + 2 se sobrecarregado)
+  int get penalidadeArmaduraTotal {
+    int total = (armaduraEquipada?.penalidadeArmadura ?? 0) +
+        (escudoEquipado?.penalidadeArmadura ?? 0);
+    if (estaSobrecarregado) {
+      total += 2; // T20: sobrecarga adiciona -2 de penalidade de armadura
+    }
+    return total;
+  }
+
+  /// Verifica se o personagem está usando armadura ou escudo sem a proficiência necessária
+  bool get usaProtecaoSemProficiencia {
+    if (armaduraEquipada != null) {
+      if (armaduraEquipada!.ehArmaduraPesada &&
+          !temProficienciaArmadurasPesadas) {
+        return true;
+      }
+      if (armaduraEquipada!.ehArmaduraLeve && !temProficienciaArmadurasLeves) {
+        return true;
+      }
+    }
+    if (escudoEquipado != null && !temProficienciaEscudos) {
+      return true;
+    }
+    return false;
   }
 
   // PV do Foco Mágico (Regra Específica do Arcanista Bruxo)
@@ -317,7 +372,7 @@ class Personagem {
   }
 
   // Cálculo final da perícia
-  int getValorPericia(String periciaKey, {int penalidadeArmaduraAtual = 0}) {
+  int getValorPericia(String periciaKey, {int? penalidadeArmaduraCustom}) {
     final pericia = BancoDePericias.getByKey(periciaKey);
 
     int metadeNivel = (nivelPersonagem / 2).floor();
@@ -326,12 +381,18 @@ class Personagem {
     bool ehTreinada = periciasTreinadas.contains(periciaKey);
     int bonusTreino = ehTreinada ? bonusTreinamento : 0;
 
-    int penalidade = 0;
+    final penalidade = penalidadeArmaduraCustom ?? penalidadeArmaduraTotal;
+
+    int penalidadeAplicada = 0;
     if (pericia.penalidadeArmadura) {
-      penalidade = penalidadeArmaduraAtual;
+      penalidadeAplicada = penalidade;
+    } else if (usaProtecaoSemProficiencia &&
+        (pericia.atributoChave == 'FOR' || pericia.atributoChave == 'DES')) {
+      // Regra T20: se não tiver proficiência, a penalidade afeta TODAS as perícias de FOR e DES
+      penalidadeAplicada = penalidade;
     }
 
-    return metadeNivel + modAtributo + bonusTreino - penalidade;
+    return metadeNivel + modAtributo + bonusTreino - penalidadeAplicada;
   }
 
   // --- REGRAS DE PROFICIÊNCIAS ---
@@ -341,6 +402,10 @@ class Personagem {
 
   bool get temProficienciaSimples => classes.any(
         (c) => c.classeDefinicao.proficiencias.contains(TipoProficiencia.armasSimples),
+      );
+
+  bool get temProficienciaArmadurasLeves => classes.any(
+        (c) => c.classeDefinicao.proficiencias.contains(TipoProficiencia.armadurasLeves),
       );
 
   bool get temProficienciaArmadurasPesadas => classes.any(
@@ -362,6 +427,8 @@ class Personagem {
   int get cargaAtual => RegrasCargaService.calcularEspacosOcupados(
         armas: armas,
         itensInventario: itensInventario,
+        armadura: armaduraEquipada,
+        escudo: escudoEquipado,
       );
 
   bool get estaSobrecarregado => cargaAtual > limiteCarga;

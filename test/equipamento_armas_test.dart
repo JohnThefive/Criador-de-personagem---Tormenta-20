@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:t20_creator/domain/entities/arma.dart';
+import 'package:t20_creator/domain/entities/protecao.dart';
 import 'package:t20_creator/domain/entities/atributos.dart';
 import 'package:t20_creator/domain/entities/classe_do_personagem.dart';
 import 'package:t20_creator/domain/entities/personagem.dart';
@@ -226,12 +227,26 @@ void main() {
       // Escolhe arma marcial
       cubit.selecionarArmaMarcialInicial(espadaLonga);
       expect(cubit.state.armaMarcialInicial?.nome, 'Espada Longa');
+      // Bárbaro ainda precisa escolher armadura inicial
+      expect(cubit.state.concluiuEquipamentoInicial, false);
+
+      const armaduraCouro = Protecao(
+        key: 'ARMADURA_DE_COURO',
+        nome: 'Armadura de Couro',
+        descricao: 'Feita de couro fervido em óleo.',
+        tipo: TipoProtecao.armaduraLeve,
+        bonusDefesa: 2,
+        penalidadeArmadura: 0,
+        espacos: 1,
+        precoEmTibares: 20,
+      );
+      cubit.selecionarArmaduraInicial(armaduraCouro);
       expect(cubit.state.concluiuEquipamentoInicial, true);
 
       // Verifica carga em tempo real no State
       // 10 (base) + 0 (modForca) = 10 espacos
-      // Adaga (1) + Espada Longa (1) + Saco de dormir (1) + Mochila (0) + Traje (0) = 3 espacos
-      expect(cubit.state.statusCarga.cargaAtual, 3);
+      // Adaga (1) + Espada Longa (1) + Armadura de Couro (1) + Saco de dormir (1) + Mochila (0) + Traje (0) = 4 espacos
+      expect(cubit.state.statusCarga.cargaAtual, 4);
       expect(cubit.state.statusCarga.limiteCarga, 10);
       expect(cubit.state.statusCarga.sobrecarregado, false);
 
@@ -243,6 +258,7 @@ void main() {
       expect(cubit.state.etapaAtual, 7);
       expect(cubit.state.personagem.armas.length, 2);
       expect(cubit.state.personagem.armas.map((a) => a.nome), containsAll(['Adaga', 'Espada Longa']));
+      expect(cubit.state.personagem.armaduraEquipada?.nome, 'Armadura de Couro');
       expect(cubit.state.personagem.itensInventario, containsAll(['Mochila', 'Saco de Dormir', 'Traje de Viajante']));
       expect(cubit.state.personagem.tibares, greaterThanOrEqualTo(4));
     });
