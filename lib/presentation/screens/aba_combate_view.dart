@@ -60,7 +60,8 @@ class _AbaCombateViewState extends State<AbaCombateView> {
           final meuHeroi = state.filaIniciativa
               .where((c) => c.nome == widget.personagem.nome)
               .firstOrNull;
-          if (meuHeroi != null && meuHeroi.pvAtual != widget.personagem.pvAtual) {
+          if (meuHeroi != null &&
+              meuHeroi.pvAtual != widget.personagem.pvAtual) {
             widget.onPersonagemAtualizado?.call(
               widget.personagem.copyWith(pvAtual: meuHeroi.pvAtual),
             );
@@ -125,7 +126,10 @@ class _AbaCombateViewState extends State<AbaCombateView> {
                       SizedBox(height: 4),
                       Text(
                         "Combate tático com Grid 2D (1,5m), regras reais de sangramento, morte e dano não letal.",
-                        style: TextStyle(fontSize: 12.5, color: Color(0xFF7C2D12)),
+                        style: TextStyle(
+                          fontSize: 12.5,
+                          color: Color(0xFF7C2D12),
+                        ),
                       ),
                     ],
                   ),
@@ -167,8 +171,9 @@ class _AbaCombateViewState extends State<AbaCombateView> {
                       backgroundColor: selecionado
                           ? const Color(0xFFB71C1C)
                           : const Color(0xFFE5E7EB),
-                      foregroundColor:
-                          selecionado ? Colors.white : Colors.black87,
+                      foregroundColor: selecionado
+                          ? Colors.white
+                          : Colors.black87,
                       child: Text(inimigo.nome[0]),
                     ),
                     const SizedBox(width: 14),
@@ -247,7 +252,12 @@ class _AbaCombateViewState extends State<AbaCombateView> {
         final bool modoLandscape = constraints.maxWidth >= 600;
 
         if (modoLandscape) {
-          return _buildArenaCombateLandscape(context, state, cubit, constraints);
+          return _buildArenaCombateLandscape(
+            context,
+            state,
+            cubit,
+            constraints,
+          );
         } else {
           return _buildArenaCombatePortrait(context, state, cubit, constraints);
         }
@@ -265,18 +275,20 @@ class _AbaCombateViewState extends State<AbaCombateView> {
     BoxConstraints constraints,
   ) {
     final combatenteAtual = state.combatenteAtual;
-    final bool ehVezDoJogador = combatenteAtual != null &&
+    final bool ehVezDoJogador =
+        combatenteAtual != null &&
         combatenteAtual.nome == widget.personagem.nome;
 
-    final heroi = state.filaIniciativa
-        .firstWhere((c) => c.nome == widget.personagem.nome);
-    final inimigo = state.filaIniciativa
-        .firstWhere((c) => c.nome != widget.personagem.nome);
+    final heroi = state.filaIniciativa.firstWhere(
+      (c) => c.nome == widget.personagem.nome,
+    );
+    final inimigo = state.filaIniciativa.firstWhere(
+      (c) => c.nome != widget.personagem.nome,
+    );
 
     return Column(
       children: [
-        if (state.combateTerminado)
-          _buildBannerTermino(state),
+        if (state.combateTerminado) _buildBannerTermino(state),
 
         Expanded(
           child: Row(
@@ -308,10 +320,15 @@ class _AbaCombateViewState extends State<AbaCombateView> {
                       padding: const EdgeInsets.fromLTRB(10, 0, 5, 6),
                       child: ehVezDoJogador && !state.combateTerminado
                           ? _buildPainelAcoesJogador(
-                              context, state, cubit, heroi, inimigo)
+                              context,
+                              state,
+                              cubit,
+                              heroi,
+                              inimigo,
+                            )
                           : !state.combateTerminado
-                              ? _buildPainelAcoesBot(context, cubit, inimigo)
-                              : _buildPainelCombateTerminado(context, state, cubit),
+                          ? _buildPainelAcoesBot(context, cubit, inimigo)
+                          : _buildPainelCombateTerminado(context, state, cubit),
                     ),
                   ],
                 ),
@@ -335,7 +352,9 @@ class _AbaCombateViewState extends State<AbaCombateView> {
                     // Cards dos Combatentes (Herói VS Inimigo)
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 8, vertical: 4),
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
                       child: Row(
                         children: [
                           Expanded(
@@ -402,22 +421,26 @@ class _AbaCombateViewState extends State<AbaCombateView> {
     BoxConstraints constraints,
   ) {
     final combatenteAtual = state.combatenteAtual;
-    final bool ehVezDoJogador = combatenteAtual != null &&
+    final bool ehVezDoJogador =
+        combatenteAtual != null &&
         combatenteAtual.nome == widget.personagem.nome;
 
-    final heroi = state.filaIniciativa
-        .firstWhere((c) => c.nome == widget.personagem.nome);
-    final inimigo = state.filaIniciativa
-        .firstWhere((c) => c.nome != widget.personagem.nome);
+    final heroi = state.filaIniciativa.firstWhere(
+      (c) => c.nome == widget.personagem.nome,
+    );
+    final inimigo = state.filaIniciativa.firstWhere(
+      (c) => c.nome != widget.personagem.nome,
+    );
 
     // Altura calculada dinamicamente para o grid de acordo com o espaço disponível
-    final double gridHeight =
-        (constraints.maxHeight * 0.30).clamp(120.0, 155.0);
+    final double gridHeight = (constraints.maxHeight * 0.30).clamp(
+      120.0,
+      155.0,
+    );
 
     return Column(
       children: [
-        if (state.combateTerminado)
-          _buildBannerTermino(state),
+        if (state.combateTerminado) _buildBannerTermino(state),
 
         _buildHudSuperior(state, cubit, ehVezDoJogador),
 
@@ -478,9 +501,7 @@ class _AbaCombateViewState extends State<AbaCombateView> {
           _buildPainelCombateTerminado(context, state, cubit),
 
         // Log de combate
-        Expanded(
-          child: _buildLogCombate(state),
-        ),
+        Expanded(child: _buildLogCombate(state)),
       ],
     );
   }
@@ -542,8 +563,10 @@ class _AbaCombateViewState extends State<AbaCombateView> {
           Row(
             children: [
               Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 2.5),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 8,
+                  vertical: 2.5,
+                ),
                 decoration: BoxDecoration(
                   color: ehVezDoJogador
                       ? const Color(0xFF16A34A)
@@ -595,7 +618,11 @@ class _AbaCombateViewState extends State<AbaCombateView> {
               children: [
                 const Row(
                   children: [
-                    Icon(Icons.history_edu_rounded, size: 13, color: Color(0xFF4B5563)),
+                    Icon(
+                      Icons.history_edu_rounded,
+                      size: 13,
+                      color: Color(0xFF4B5563),
+                    ),
                     SizedBox(width: 4),
                     Text(
                       "Registro de Batalha (Tempo Real)",
@@ -626,7 +653,8 @@ class _AbaCombateViewState extends State<AbaCombateView> {
                     linha.contains('💥') || linha.contains('acertou');
                 final bool ehErro = linha.contains('errou');
                 final bool ehCritico = linha.contains('CRÍTICO');
-                final bool ehMorte = linha.contains('💀') || linha.contains('VITÓRIA');
+                final bool ehMorte =
+                    linha.contains('💀') || linha.contains('VITÓRIA');
                 final bool ehAviso = linha.contains('⚠️');
 
                 return Padding(
@@ -641,14 +669,14 @@ class _AbaCombateViewState extends State<AbaCombateView> {
                       color: ehCritico
                           ? const Color(0xFFB45309)
                           : ehMorte
-                              ? const Color(0xFFDC2626)
-                              : ehAviso
-                                  ? const Color(0xFFC2410C)
-                                  : ehDano
-                                      ? const Color(0xFF15803D)
-                                      : ehErro
-                                          ? const Color(0xFFB91C1C)
-                                          : const Color(0xFF374151),
+                          ? const Color(0xFFDC2626)
+                          : ehAviso
+                          ? const Color(0xFFC2410C)
+                          : ehDano
+                          ? const Color(0xFF15803D)
+                          : ehErro
+                          ? const Color(0xFFB91C1C)
+                          : const Color(0xFF374151),
                     ),
                   ),
                 );
@@ -737,7 +765,9 @@ class _AbaCombateViewState extends State<AbaCombateView> {
     }
 
     if (ehAlcancavel) {
-      corFundo = const Color(0xFF047857).withValues(alpha: 0.65); // Verde tático
+      corFundo = const Color(
+        0xFF047857,
+      ).withValues(alpha: 0.65); // Verde tático
     }
 
     return Positioned(
@@ -775,10 +805,10 @@ class _AbaCombateViewState extends State<AbaCombateView> {
                     ),
                   )
                 : terreno == TipoTerreno.obstaculo
-                    ? const Icon(Icons.block, size: 12, color: Colors.grey)
-                    : terreno == TipoTerreno.dificil
-                        ? const Icon(Icons.terrain, size: 11, color: Colors.amber)
-                        : null,
+                ? const Icon(Icons.block, size: 12, color: Colors.grey)
+                : terreno == TipoTerreno.dificil
+                ? const Icon(Icons.terrain, size: 11, color: Colors.amber)
+                : null,
           ),
         ),
       ),
@@ -792,8 +822,10 @@ class _AbaCombateViewState extends State<AbaCombateView> {
     required double cellHeight,
     required CombateState state,
   }) {
-    final combatente = state.filaIniciativa
-        .firstWhere((c) => c.id == combatenteId, orElse: () => state.filaIniciativa.first);
+    final combatente = state.filaIniciativa.firstWhere(
+      (c) => c.id == combatenteId,
+      orElse: () => state.filaIniciativa.first,
+    );
     final bool ehHeroi = combatente.time == TimeCombatente.heroi;
     final bool ehAtivo = state.combatenteAtual?.id == combatenteId;
 
@@ -812,7 +844,9 @@ class _AbaCombateViewState extends State<AbaCombateView> {
           ),
           boxShadow: [
             BoxShadow(
-              color: (ehHeroi ? Colors.blue : Colors.red).withValues(alpha: 0.5),
+              color: (ehHeroi ? Colors.blue : Colors.red).withValues(
+                alpha: 0.5,
+              ),
               blurRadius: 4,
             ),
           ],
@@ -887,10 +921,10 @@ class _AbaCombateViewState extends State<AbaCombateView> {
                 combatente.pvAtual <= combatente.limiteMorte
                     ? Colors.black
                     : combatente.pvAtual <= 0
-                        ? Colors.purple
-                        : pctPv > 0.5
-                            ? const Color(0xFF16A34A)
-                            : const Color(0xFFDC2626),
+                    ? Colors.purple
+                    : pctPv > 0.5
+                    ? const Color(0xFF16A34A)
+                    : const Color(0xFFDC2626),
               ),
             ),
           ),
@@ -962,7 +996,8 @@ class _AbaCombateViewState extends State<AbaCombateView> {
     final armasHeroi = widget.personagem.armas;
     final posHeroi = state.posicoesCombatentes[heroi.id];
     final posInimigo = state.posicoesCombatentes[inimigo.id];
-    final bool adjacente = posHeroi != null &&
+    final bool adjacente =
+        posHeroi != null &&
         posInimigo != null &&
         posHeroi.ehAdjacente(posInimigo);
     final double distMetros = (posHeroi != null && posInimigo != null)
@@ -1019,8 +1054,10 @@ class _AbaCombateViewState extends State<AbaCombateView> {
                 ),
                 style: OutlinedButton.styleFrom(
                   visualDensity: VisualDensity.compact,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 7, vertical: 0),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 7,
+                    vertical: 0,
+                  ),
                   foregroundColor: state.modoMovimentoAtivo
                       ? Colors.red
                       : const Color(0xFF047857),
@@ -1055,8 +1092,10 @@ class _AbaCombateViewState extends State<AbaCombateView> {
                   ),
                   style: OutlinedButton.styleFrom(
                     visualDensity: VisualDensity.compact,
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 6, vertical: 0),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 6,
+                      vertical: 0,
+                    ),
                     foregroundColor: const Color(0xFF2563EB),
                   ),
                 ),
@@ -1082,7 +1121,8 @@ class _AbaCombateViewState extends State<AbaCombateView> {
 
                 return ElevatedButton.icon(
                   onPressed: state.acoesPadraoRestantes > 0 && heroi.podeAgir
-                      ? () => cubit.executarAtaque(defensor: inimigo, arma: arma)
+                      ? () =>
+                            cubit.executarAtaque(defensor: inimigo, arma: arma)
                       : null,
                   icon: Icon(
                     foraDeAlcance
@@ -1106,7 +1146,9 @@ class _AbaCombateViewState extends State<AbaCombateView> {
                     foregroundColor: Colors.white,
                     visualDensity: VisualDensity.compact,
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 8, vertical: 4),
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(6),
                     ),
@@ -1138,7 +1180,11 @@ class _AbaCombateViewState extends State<AbaCombateView> {
               else
                 Row(
                   children: [
-                    const Icon(Icons.radar_rounded, size: 13, color: Colors.orange),
+                    const Icon(
+                      Icons.radar_rounded,
+                      size: 13,
+                      color: Colors.orange,
+                    ),
                     const SizedBox(width: 4),
                     Text(
                       "Distância: ${distMetros.toStringAsFixed(1)}m",
@@ -1160,7 +1206,10 @@ class _AbaCombateViewState extends State<AbaCombateView> {
                 style: TextButton.styleFrom(
                   foregroundColor: const Color(0xFF4B5563),
                   visualDensity: VisualDensity.compact,
-                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 0),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 6,
+                    vertical: 0,
+                  ),
                 ),
               ),
             ],
@@ -1193,7 +1242,9 @@ class _AbaCombateViewState extends State<AbaCombateView> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  vitoria ? "Batalha Encerrada: Vitória!" : "Batalha Encerrada: Derrota!",
+                  vitoria
+                      ? "Batalha Encerrada: Vitória!"
+                      : "Batalha Encerrada: Derrota!",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 11.5,
@@ -1242,7 +1293,11 @@ class _AbaCombateViewState extends State<AbaCombateView> {
       color: const Color(0xFFFEF2F2),
       child: Row(
         children: [
-          const Icon(Icons.smart_toy_outlined, color: Color(0xFFDC2626), size: 22),
+          const Icon(
+            Icons.smart_toy_outlined,
+            color: Color(0xFFDC2626),
+            size: 22,
+          ),
           const SizedBox(width: 10),
           Expanded(
             child: Text(
@@ -1278,9 +1333,7 @@ class _AbaCombateViewState extends State<AbaCombateView> {
       decoration: BoxDecoration(
         color: disponivel ? cor.withValues(alpha: 0.1) : Colors.grey[200],
         borderRadius: BorderRadius.circular(6),
-        border: Border.all(
-          color: disponivel ? cor : Colors.grey[400]!,
-        ),
+        border: Border.all(color: disponivel ? cor : Colors.grey[400]!),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,

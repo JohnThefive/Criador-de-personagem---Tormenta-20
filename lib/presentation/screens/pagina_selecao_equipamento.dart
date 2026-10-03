@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../domain/entities/arma.dart';
 import '../../domain/entities/protecao.dart';
-import '../../domain/services/banco_armas.dart';
+import '../../domain/services/data_services/call_armas.dart';
 import '../controllers/personagem_cubit.dart';
 
 class PaginaSelecaoEquipamento extends StatefulWidget {

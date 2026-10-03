@@ -43,8 +43,8 @@ class CombateState extends Equatable {
 
   Combatente? get combatenteAtual =>
       filaIniciativa.isNotEmpty && indiceTurnoAtual < filaIniciativa.length
-          ? filaIniciativa[indiceTurnoAtual]
-          : null;
+      ? filaIniciativa[indiceTurnoAtual]
+      : null;
 
   Posicao2D? get posicaoCombatenteAtual =>
       combatenteAtual != null ? posicoesCombatentes[combatenteAtual!.id] : null;
@@ -100,21 +100,21 @@ class CombateState extends Equatable {
 
   @override
   List<Object?> get props => [
-        filaIniciativa,
-        rodadaAtual,
-        indiceTurnoAtual,
-        acoesPadraoRestantes,
-        acoesMovimentoRestantes,
-        deslocamentoRestanteMetros,
-        mirouNesteTurno,
-        ataqueNaoLetalAtivo,
-        modoMovimentoAtivo,
-        mapaGrid,
-        posicoesCombatentes,
-        celulasAlcancaveis,
-        custosMovimento,
-        statusCombate,
-        logCombate,
-        ultimoResultadoAtaque,
-      ];
+    filaIniciativa,
+    rodadaAtual,
+    indiceTurnoAtual,
+    acoesPadraoRestantes,
+    acoesMovimentoRestantes,
+    deslocamentoRestanteMetros,
+    mirouNesteTurno,
+    ataqueNaoLetalAtivo,
+    modoMovimentoAtivo,
+    mapaGrid,
+    posicoesCombatentes,
+    celulasAlcancaveis,
+    custosMovimento,
+    statusCombate,
+    logCombate,
+    ultimoResultadoAtaque,
+  ];
 }

@@ -38,7 +38,8 @@ class MovimentoEngine {
     required String combatenteAtivoId,
   }) {
     final combatenteAtivo = combatentesPorId[combatenteAtivoId];
-    final TimeCombatente timeAtivo = combatenteAtivo?.time ?? TimeCombatente.heroi;
+    final TimeCombatente timeAtivo =
+        combatenteAtivo?.time ?? TimeCombatente.heroi;
 
     // Mapeamento de ocupantes por posição
     final ocupantesPorPosicao = <Posicao2D, Combatente>{};
@@ -52,7 +53,9 @@ class MovimentoEngine {
 
     final custos = <Posicao2D, double>{inicio: 0.0};
     final antecessores = <Posicao2D, Posicao2D?>{inicio: null};
-    final fila = PriorityQueue<_NodoMovimento>((a, b) => a.custo.compareTo(b.custo));
+    final fila = PriorityQueue<_NodoMovimento>(
+      (a, b) => a.custo.compareTo(b.custo),
+    );
 
     fila.add(_NodoMovimento(inicio, 0.0));
 
@@ -94,7 +97,8 @@ class MovimentoEngine {
 
           final bool ehDiag = (dx.abs() == 1 && dy.abs() == 1);
           final bool ehTerrenoDificil =
-              (terreno == TipoTerreno.dificil) || ocupanteContaComoTerrenoDificil;
+              (terreno == TipoTerreno.dificil) ||
+              ocupanteContaComoTerrenoDificil;
 
           // Regras de custo em metros:
           // Ortogonal normal: 1.5m

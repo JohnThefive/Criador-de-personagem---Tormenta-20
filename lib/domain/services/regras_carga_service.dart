@@ -1,8 +1,8 @@
 import '../entities/personagem.dart';
 import '../entities/arma.dart';
 import '../entities/protecao.dart';
-import 'banco_armas.dart';
-import 'banco_armaduras.dart';
+import 'data_services/call_armas.dart';
+import 'data_services/call_armaduras.dart';
 
 class OpcoesArmasIniciais {
   final bool podeEscolherSimples;
@@ -125,7 +125,8 @@ class RegrasCargaService {
   /// - 1 arma Simples para qualquer classe.
   /// - Se tiver proficiência em armas marciais, também escolhe 1 arma Marcial.
   static OpcoesArmasIniciais obterArmasIniciaisDisponiveis(
-      Personagem personagem) {
+    Personagem personagem,
+  ) {
     final bool temMarcial = personagem.temProficienciaMarcial;
 
     return OpcoesArmasIniciais(
@@ -142,7 +143,8 @@ class RegrasCargaService {
   /// - Se tiver proficiência com armaduras pesadas: pode substituir por uma Brunea sem custo.
   /// - Se tiver proficiência com escudos: recebe adicionalmente um Escudo Leve sem custo.
   static OpcoesProtecoesIniciais obterProtecoesIniciaisDisponiveis(
-      Personagem personagem) {
+    Personagem personagem,
+  ) {
     final bool arcanista = personagem.ehArcanista;
 
     final List<Protecao> armaduras = [];

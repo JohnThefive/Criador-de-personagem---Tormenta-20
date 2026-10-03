@@ -4,13 +4,13 @@ import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 import '../entities/personagem.dart';
 import '../entities/atributos.dart';
-import 'banco_racas.dart';
-import 'banco_classes.dart';
+import 'data_services/call_racas.dart';
+import '../services/data_services/call_classes.dart';
 import 'banco_origens.dart';
 import 'banco_divindades.dart';
-import 'banco_poderes.dart';
-import 'banco_armas.dart';
-import 'banco_armaduras.dart';
+import 'data_services/call_poderes.dart';
+import 'data_services/call_armas.dart';
+import 'data_services/call_armaduras.dart';
 import '../entities/classe_do_personagem.dart';
 import '../entities/poder.dart';
 import '../entities/arma.dart';
@@ -84,6 +84,7 @@ class PersonagemStorageService {
       'pmAtual': p.pmAtual,
       'experienciaAtual': p.experienciaAtual,
       'racaNome': p.raca?.nome,
+      'racaId': p.raca?.id,
       'origemId': p.origem?.id,
       'divindadeId': p.divindade?.id,
       'poderConcedidoKey': p.poderConcedido?.key,
@@ -100,8 +101,9 @@ class PersonagemStorageService {
               'idClasse': c.classeDefinicao.idClasse,
               'nivel': c.nivel,
               'caminho': c.caminhoEscolhido?.nome,
-              'poderesEscolhidosKeys':
-                  c.poderesEscolhidos.map((pod) => pod.key).toList(),
+              'poderesEscolhidosKeys': c.poderesEscolhidos
+                  .map((pod) => pod.key)
+                  .toList(),
             },
           )
           .toList(),
@@ -122,12 +124,11 @@ class PersonagemStorageService {
     };
 
     // Reconstrói raça, origem e divindade pelos catálogos existentes
-    final raca = map['racaNome'] != null
-        ? BancoDeRacas.todas.firstWhere(
-            (r) => r.nome == map['racaNome'],
-            orElse: () => BancoDeRacas.todas.first,
-          )
-        : null;
+    final raca = map['racaId'] != null
+        ? BancoDeRacas.getById(map['racaId'])
+        : (map['racaNome'] != null
+              ? BancoDeRacas.getByNome(map['racaNome'])
+              : null);
 
     final origem = map['origemId'] != null
         ? BancoDeOrigens.getById(map['origemId'])
@@ -148,13 +149,17 @@ class PersonagemStorageService {
     List<ClasseDoPersonagem> classesList = [];
     if (map['classes'] != null) {
       for (var c in map['classes']) {
-        final def = BancoDeClasses.todas.firstWhere(
-          (cl) => cl.idClasse == c['idClasse'],
-        );
+        final idClasse = c['idClasse'] ?? c['id'];
+        final def = idClasse != null
+            ? (BancoDeClasses.getById(idClasse.toString()) ??
+                  BancoDeClasses.getByNome(idClasse.toString()))
+            : null;
+        if (def == null) continue;
+
         final caminho = c['caminho'] != null
             ? def.caminhosDisponiveis
-                .where((cam) => cam.nome == c['caminho'])
-                .firstOrNull
+                  .where((cam) => cam.nome == c['caminho'])
+                  .firstOrNull
             : null;
 
         final List<dynamic> poderesKeysRaw = c['poderesEscolhidosKeys'] ?? [];
@@ -189,12 +194,14 @@ class PersonagemStorageService {
 
     // Reconstrói armadura e escudo
     final String? armaduraKey = map['armaduraKey'];
-    final Protecao? armadura =
-        armaduraKey != null ? BancoDeArmaduras.getByKey(armaduraKey) : null;
+    final Protecao? armadura = armaduraKey != null
+        ? BancoDeArmaduras.getByKey(armaduraKey)
+        : null;
 
     final String? escudoKey = map['escudoKey'];
-    final Protecao? escudo =
-        escudoKey != null ? BancoDeArmaduras.getByKey(escudoKey) : null;
+    final Protecao? escudo = escudoKey != null
+        ? BancoDeArmaduras.getByKey(escudoKey)
+        : null;
 
     return Personagem(
       id: map['id']?.toString(),

@@ -42,7 +42,10 @@ class _PaginaSelecaoOrigemState extends State<PaginaSelecaoOrigem> {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 4,
+                ),
                 decoration: BoxDecoration(
                   color: widget.state.totalBeneficiosOrigem == 2
                       ? Colors.green[700]
@@ -94,7 +97,8 @@ class _PaginaSelecaoOrigemState extends State<PaginaSelecaoOrigem> {
                           itemCount: BancoDeOrigens.todas.length,
                           itemBuilder: (context, index) {
                             final origem = BancoDeOrigens.todas[index];
-                            final isSelected = origemSelecionada?.id == origem.id;
+                            final isSelected =
+                                origemSelecionada?.id == origem.id;
 
                             return GestureDetector(
                               onTap: () {
@@ -105,7 +109,9 @@ class _PaginaSelecaoOrigemState extends State<PaginaSelecaoOrigem> {
                                   horizontal: 8,
                                   vertical: 4,
                                 ),
-                                padding: const EdgeInsets.symmetric(vertical: 12),
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 12,
+                                ),
                                 decoration: BoxDecoration(
                                   color: isSelected
                                       ? Colors.grey[400]
@@ -116,7 +122,9 @@ class _PaginaSelecaoOrigemState extends State<PaginaSelecaoOrigem> {
                                   origem.nome,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                    color: isSelected ? Colors.black : Colors.white,
+                                    color: isSelected
+                                        ? Colors.black
+                                        : Colors.white,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 15,
                                   ),
@@ -188,7 +196,11 @@ class _PaginaSelecaoOrigemState extends State<PaginaSelecaoOrigem> {
                             // 1. Itens Iniciais (Grátis)
                             Row(
                               children: [
-                                Icon(Icons.inventory_2_outlined, color: Colors.red[800], size: 20),
+                                Icon(
+                                  Icons.inventory_2_outlined,
+                                  color: Colors.red[800],
+                                  size: 20,
+                                ),
                                 const SizedBox(width: 8),
                                 const Text(
                                   "Itens Iniciais (Recebidos Gratuitamente)",
@@ -203,11 +215,17 @@ class _PaginaSelecaoOrigemState extends State<PaginaSelecaoOrigem> {
                             Wrap(
                               spacing: 8,
                               runSpacing: 6,
-                              children: origemSelecionada.itensIniciais.map((item) {
+                              children: origemSelecionada.itensIniciais.map((
+                                item,
+                              ) {
                                 return Chip(
                                   backgroundColor: Colors.grey[100],
                                   side: BorderSide(color: Colors.grey[350]!),
-                                  avatar: const Icon(Icons.check, size: 16, color: Colors.green),
+                                  avatar: const Icon(
+                                    Icons.check,
+                                    size: 16,
+                                    color: Colors.green,
+                                  ),
                                   label: Text(
                                     item,
                                     style: const TextStyle(fontSize: 12),
@@ -242,7 +260,10 @@ class _PaginaSelecaoOrigemState extends State<PaginaSelecaoOrigem> {
                             const SizedBox(height: 4),
                             Text(
                               "Você pode escolher 2 perícias, 2 poderes ou 1 perícia e 1 poder.",
-                              style: TextStyle(fontSize: 12, color: Colors.grey[600]),
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.grey[600],
+                              ),
                             ),
                             const SizedBox(height: 12),
 
@@ -267,11 +288,20 @@ class _PaginaSelecaoOrigemState extends State<PaginaSelecaoOrigem> {
                             Wrap(
                               spacing: 8,
                               runSpacing: 8,
-                              children: origemSelecionada.periciasOpcoes.map((sigla) {
-                                final isSelected = widget.state.periciasEscolhidasOrigem.contains(sigla);
+                              children: origemSelecionada.periciasOpcoes.map((
+                                sigla,
+                              ) {
+                                final isSelected = widget
+                                    .state
+                                    .periciasEscolhidasOrigem
+                                    .contains(sigla);
                                 final pericia = BancoDePericias.getByKey(sigla);
-                                final jaTreinadaNaClasse = widget.state.personagem.periciasTreinadas.contains(sigla) ||
-                                    widget.state.selecoesPericiaClasse.contains(sigla);
+                                final jaTreinadaNaClasse =
+                                    widget.state.personagem.periciasTreinadas
+                                        .contains(sigla) ||
+                                    widget.state.selecoesPericiaClasse.contains(
+                                      sigla,
+                                    );
 
                                 return ChoiceChip(
                                   label: Row(
@@ -281,7 +311,10 @@ class _PaginaSelecaoOrigemState extends State<PaginaSelecaoOrigem> {
                                       if (jaTreinadaNaClasse)
                                         const Text(
                                           " (Já treinada)",
-                                          style: TextStyle(fontSize: 10, fontStyle: FontStyle.italic),
+                                          style: TextStyle(
+                                            fontSize: 10,
+                                            fontStyle: FontStyle.italic,
+                                          ),
                                         ),
                                     ],
                                   ),
@@ -291,7 +324,9 @@ class _PaginaSelecaoOrigemState extends State<PaginaSelecaoOrigem> {
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(16),
                                     side: BorderSide(
-                                      color: isSelected ? Colors.red[800]! : Colors.grey[350]!,
+                                      color: isSelected
+                                          ? Colors.red[800]!
+                                          : Colors.grey[350]!,
                                       width: isSelected ? 1.8 : 1,
                                     ),
                                   ),
@@ -304,7 +339,9 @@ class _PaginaSelecaoOrigemState extends State<PaginaSelecaoOrigem> {
                             const SizedBox(height: 16),
 
                             // C. Poderes Gerais Disponíveis
-                            if (origemSelecionada.poderesGeraisOpcoes.isNotEmpty) ...[
+                            if (origemSelecionada
+                                .poderesGeraisOpcoes
+                                .isNotEmpty) ...[
                               const Text(
                                 "Poderes Gerais Disponíveis:",
                                 style: TextStyle(
@@ -314,7 +351,9 @@ class _PaginaSelecaoOrigemState extends State<PaginaSelecaoOrigem> {
                                 ),
                               ),
                               const SizedBox(height: 8),
-                              ...origemSelecionada.poderesGeraisOpcoes.map((poder) {
+                              ...origemSelecionada.poderesGeraisOpcoes.map((
+                                poder,
+                              ) {
                                 return _buildCardPoderGeral(
                                   context,
                                   poder,
@@ -339,7 +378,9 @@ class _PaginaSelecaoOrigemState extends State<PaginaSelecaoOrigem> {
     Poder poder,
     PersonagemCubit cubit,
   ) {
-    final isSelected = widget.state.poderesEscolhidosOrigem.any((p) => p.key == poder.key);
+    final isSelected = widget.state.poderesEscolhidosOrigem.any(
+      (p) => p.key == poder.key,
+    );
 
     return InkWell(
       onTap: () => cubit.togglePoderOrigem(poder),
@@ -362,7 +403,10 @@ class _PaginaSelecaoOrigemState extends State<PaginaSelecaoOrigem> {
                 Icon(Icons.star, color: Colors.amber[800], size: 20),
                 const SizedBox(width: 6),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 6,
+                    vertical: 2,
+                  ),
                   decoration: BoxDecoration(
                     color: Colors.amber[800],
                     borderRadius: BorderRadius.circular(8),
@@ -405,7 +449,9 @@ class _PaginaSelecaoOrigemState extends State<PaginaSelecaoOrigem> {
     Poder poder,
     PersonagemCubit cubit,
   ) {
-    final isSelected = widget.state.poderesEscolhidosOrigem.any((p) => p.key == poder.key);
+    final isSelected = widget.state.poderesEscolhidosOrigem.any(
+      (p) => p.key == poder.key,
+    );
 
     return Container(
       margin: const EdgeInsets.only(bottom: 8),

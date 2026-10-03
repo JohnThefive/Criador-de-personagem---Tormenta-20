@@ -4,5 +4,5 @@ enum TipoProficiencia {
   armadurasLeves,
   armadurasPesadas,
   escudos,
-  // Adicionar mais depois, por enquanto vamos colocar a classe 
+  // Adicionar mais depois, por enquanto vamos colocar a classe
 }

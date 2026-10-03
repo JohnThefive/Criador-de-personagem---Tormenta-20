@@ -1,14 +1,13 @@
 import 'classe.dart';
-import 'poder.dart'; 
+import 'poder.dart';
 import 'linhagem_arcanista.dart';
 
 class ClasseDoPersonagem {
   final Classe classeDefinicao; // Referência à regra (Bárbaro)
-  final int nivel;               // Nível atual nesta classe (ex: 5)
+  final int nivel; // Nível atual nesta classe (ex: 5)
   final List<Poder> poderesEscolhidos;
   final CaminhoDeClasse? caminhoEscolhido;
   final Linhagem? linhagemEscolhida;
-
 
   //
 
@@ -21,7 +20,7 @@ class ClasseDoPersonagem {
   }) : nivel = nivel.clamp(1, 20);
 
   ClasseDoPersonagem copyWith({
-    int? nivel, 
+    int? nivel,
     CaminhoDeClasse? caminhoEscolhido,
     List<Poder>? poderesEscolhidos,
     Linhagem? linhagemEscolhida,
@@ -36,8 +35,10 @@ class ClasseDoPersonagem {
   }
 
   bool get possuiHerancaBasica => linhagemEscolhida != null;
-  bool get possuiHerancaAprimorada => poderesEscolhidos.any((p) => p.nome == "Herança Aprimorada");
-  bool get possuiHerancaSuperior => poderesEscolhidos.any((p) => p.nome == "Herança Superior");
+  bool get possuiHerancaAprimorada =>
+      poderesEscolhidos.any((p) => p.nome == "Herança Aprimorada");
+  bool get possuiHerancaSuperior =>
+      poderesEscolhidos.any((p) => p.nome == "Herança Superior");
 
   /// No Tormenta 20, a cada nível a partir do 2º o personagem ganha um poder de classe.
   int get poderesPermitidos => (nivel - 1).clamp(0, 20);
@@ -56,8 +57,9 @@ class ClasseDoPersonagem {
 
   ClasseDoPersonagem removerPoder(String poderKey) {
     return copyWith(
-      poderesEscolhidos:
-          poderesEscolhidos.where((p) => p.key != poderKey).toList(),
+      poderesEscolhidos: poderesEscolhidos
+          .where((p) => p.key != poderKey)
+          .toList(),
     );
   }
 }

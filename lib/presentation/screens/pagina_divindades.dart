@@ -36,8 +36,8 @@ class _PaginaSelecaoDivindadeState extends State<PaginaSelecaoDivindade> {
                   divindadeSelecionada != null
                       ? "Devoto de ${divindadeSelecionada.nome}"
                       : (exigeDevocao
-                          ? "Devoção Obrigatória (Escolha um Deus)"
-                          : "Sem Divindade (Não Devoto)"),
+                            ? "Devoção Obrigatória (Escolha um Deus)"
+                            : "Sem Divindade (Não Devoto)"),
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 14,
@@ -109,21 +109,16 @@ class _PaginaSelecaoDivindadeState extends State<PaginaSelecaoDivindade> {
                             color: divindadeSelecionada == null
                                 ? Colors.grey[400]
                                 : (exigeDevocao
-                                    ? Colors.black26
-                                    : Colors.transparent),
+                                      ? Colors.black26
+                                      : Colors.transparent),
                             borderRadius: BorderRadius.circular(16),
-                            border: Border.all(
-                              color: Colors.white38,
-                              width: 1,
-                            ),
+                            border: Border.all(color: Colors.white38, width: 1),
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Icon(
-                                exigeDevocao
-                                    ? Icons.lock
-                                    : Icons.block,
+                                exigeDevocao ? Icons.lock : Icons.block,
                                 size: 14,
                                 color: Colors.white,
                               ),
@@ -135,8 +130,8 @@ class _PaginaSelecaoDivindadeState extends State<PaginaSelecaoDivindade> {
                                     color: divindadeSelecionada == null
                                         ? Colors.black
                                         : (exigeDevocao
-                                            ? Colors.white38
-                                            : Colors.white),
+                                              ? Colors.white38
+                                              : Colors.white),
                                     fontWeight: FontWeight.bold,
                                     fontSize: 13,
                                   ),
@@ -297,7 +292,9 @@ class _PaginaSelecaoDivindadeState extends State<PaginaSelecaoDivindade> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
-              exigeDevocao ? Icons.warning_amber_rounded : Icons.shield_outlined,
+              exigeDevocao
+                  ? Icons.warning_amber_rounded
+                  : Icons.shield_outlined,
               size: 64,
               color: exigeDevocao ? Colors.red[700] : Colors.grey[500],
             ),
@@ -330,10 +327,18 @@ class _PaginaSelecaoDivindadeState extends State<PaginaSelecaoDivindade> {
               Chip(
                 backgroundColor: Colors.green[50],
                 side: BorderSide(color: Colors.green[400]!),
-                avatar: const Icon(Icons.check_circle, size: 18, color: Colors.green),
+                avatar: const Icon(
+                  Icons.check_circle,
+                  size: 18,
+                  color: Colors.green,
+                ),
                 label: const Text(
                   "Você pode avançar sem escolher um deus",
-                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.green),
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.green,
+                  ),
                 ),
               ),
           ],
@@ -373,14 +378,24 @@ class _PaginaSelecaoDivindadeState extends State<PaginaSelecaoDivindade> {
             Chip(
               backgroundColor: Colors.grey[100],
               side: BorderSide(color: Colors.grey[300]!),
-              avatar: const Icon(Icons.auto_awesome, size: 16, color: Colors.indigo),
-              label: Text("Símbolo: ${divindade.simboloSagrado}", style: const TextStyle(fontSize: 12)),
+              avatar: const Icon(
+                Icons.auto_awesome,
+                size: 16,
+                color: Colors.indigo,
+              ),
+              label: Text(
+                "Símbolo: ${divindade.simboloSagrado}",
+                style: const TextStyle(fontSize: 12),
+              ),
             ),
             Chip(
               backgroundColor: Colors.grey[100],
               side: BorderSide(color: Colors.grey[300]!),
               avatar: const Icon(Icons.colorize, size: 16, color: Colors.brown),
-              label: Text("Arma: ${divindade.armaPreferida}", style: const TextStyle(fontSize: 12)),
+              label: Text(
+                "Arma: ${divindade.armaPreferida}",
+                style: const TextStyle(fontSize: 12),
+              ),
             ),
             Chip(
               backgroundColor: Colors.grey[100],
@@ -399,7 +414,11 @@ class _PaginaSelecaoDivindadeState extends State<PaginaSelecaoDivindade> {
         // Lore / Descrição
         Text(
           divindade.descricao,
-          style: const TextStyle(fontSize: 14, color: Colors.black87, height: 1.3),
+          style: const TextStyle(
+            fontSize: 14,
+            color: Colors.black87,
+            height: 1.3,
+          ),
           textAlign: TextAlign.justify,
         ),
         const SizedBox(height: 16),
@@ -451,10 +470,7 @@ class _PaginaSelecaoDivindadeState extends State<PaginaSelecaoDivindade> {
           children: [
             const Text(
               "Poderes Concedidos",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-              ),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
             ),
             Text(
               "Escolha 1 poder",

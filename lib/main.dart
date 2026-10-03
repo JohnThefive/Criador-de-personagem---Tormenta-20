@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:t20_creator/domain/services/banco_poderes.dart';
-import 'package:t20_creator/domain/services/banco_armas.dart';
-import 'package:t20_creator/domain/services/banco_armaduras.dart';
+import 'package:t20_creator/domain/services/data_services/call_poderes.dart';
+import 'package:t20_creator/domain/services/data_services/call_armas.dart';
+import 'package:t20_creator/domain/services/data_services/call_armaduras.dart';
+import 'package:t20_creator/domain/services/data_services/call_racas.dart';
+import 'package:t20_creator/domain/services/data_services/call_classes.dart';
 
 // Importe seus arquivos
 import 'presentation/controllers/home_cubit.dart';
@@ -11,6 +13,8 @@ import 'presentation/screens/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await BancoDeRacas.carregar();
+  await BancoDeClasses.carregar();
   await BancoDePoderes.carregar();
   await BancoDeArmas.carregar();
   await BancoDeArmaduras.carregar();

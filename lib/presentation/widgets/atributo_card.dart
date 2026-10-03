@@ -16,7 +16,9 @@ class AtributoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Cor condicional: Modificador positivo verde, negativo vermelho
-    final modColor = atributo.modificador >= 0 ? Colors.green[700] : Colors.red[700];
+    final modColor = atributo.modificador >= 0
+        ? Colors.green[700]
+        : Colors.red[700];
 
     return Card(
       elevation: 2,
@@ -31,12 +33,21 @@ class AtributoCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(sigla, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                  Text(atributo.nome, style: const TextStyle(fontSize: 12, color: Colors.grey)),
+                  Text(
+                    sigla,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
+                  Text(
+                    atributo.nome,
+                    style: const TextStyle(fontSize: 12, color: Colors.grey),
+                  ),
                 ],
               ),
             ),
-            
+
             // Controle de Valor ( - Valor + )
             Expanded(
               flex: 3,
@@ -49,7 +60,10 @@ class AtributoCard extends StatelessWidget {
                   ),
                   Text(
                     '${atributo.valor}',
-                    style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   IconButton(
                     icon: const Icon(Icons.add_circle_outline),
@@ -70,8 +84,14 @@ class AtributoCard extends StatelessWidget {
               ),
               child: Center(
                 child: Text(
-                  atributo.modificador >= 0 ? '+${atributo.modificador}' : '${atributo.modificador}',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: modColor),
+                  atributo.modificador >= 0
+                      ? '+${atributo.modificador}'
+                      : '${atributo.modificador}',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: modColor,
+                  ),
                 ),
               ),
             ),

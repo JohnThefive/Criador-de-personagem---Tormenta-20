@@ -4,7 +4,7 @@ import 'package:t20_creator/domain/entities/protecao.dart';
 import 'package:t20_creator/domain/entities/atributos.dart';
 import 'package:t20_creator/domain/entities/classe_do_personagem.dart';
 import 'package:t20_creator/domain/entities/personagem.dart';
-import 'package:t20_creator/domain/services/banco_classes.dart';
+import 'package:t20_creator/domain/services/data_services/call_classes.dart';
 import 'package:t20_creator/domain/services/regras_carga_service.dart';
 import 'package:t20_creator/presentation/controllers/personagem_cubit.dart';
 
@@ -124,10 +124,10 @@ void main() {
         armas: [arcoCurto, espadaLonga], // 2 + 1 = 3 espaços
         itensInventario: [
           'Saco de Dormir', // 1 espaço
-          'Corda de 15m',   // 1 espaço
-          'Tocha',          // 1 espaço
-          'Rações (x3)',    // 1 espaço
-          'Mochila',        // 0 espaço
+          'Corda de 15m', // 1 espaço
+          'Tocha', // 1 espaço
+          'Rações (x3)', // 1 espaço
+          'Mochila', // 0 espaço
           'Traje de Viajante', // 0 espaço
         ],
       );
@@ -150,117 +150,135 @@ void main() {
       expect(personagemSobrecarregado.estaSobrecarregado, true);
     });
 
-    test('3. Regras de Equipamento Inicial e Armas Disponíveis por Proficiência', () {
-      final classeBarbaro = BancoDeClasses.todas.firstWhere(
-        (c) => c.idClasse.toUpperCase() == 'BARBARO',
-        orElse: () => BancoDeClasses.todas.first,
-      );
+    test(
+      '3. Regras de Equipamento Inicial e Armas Disponíveis por Proficiência',
+      () {
+        final classeBarbaro = BancoDeClasses.todas.firstWhere(
+          (c) => c.idClasse.toUpperCase() == 'BARBARO',
+          orElse: () => BancoDeClasses.todas.first,
+        );
 
-      final classeArcanista = BancoDeClasses.todas.firstWhere(
-        (c) => c.idClasse.toUpperCase() == 'ARCANISTA',
-        orElse: () => BancoDeClasses.todas.first,
-      );
+        final classeArcanista = BancoDeClasses.todas.firstWhere(
+          (c) => c.idClasse.toUpperCase() == 'ARCANISTA',
+          orElse: () => BancoDeClasses.todas.first,
+        );
 
-      final barbaro = Personagem(
-        nome: 'Bárbaro Marcial',
-        atributos: {
-          'FOR': const Atributo(nome: 'Força', valor: 3),
-          'DES': const Atributo(nome: 'Destreza', valor: 1),
-          'CON': const Atributo(nome: 'Constituição', valor: 2),
-          'INT': const Atributo(nome: 'Inteligência', valor: 0),
-          'SAB': const Atributo(nome: 'Sabedoria', valor: 0),
-          'CAR': const Atributo(nome: 'Carisma', valor: 0),
-        },
-        classes: [
-          ClasseDoPersonagem(classeDefinicao: classeBarbaro, nivel: 1),
-        ],
-      );
+        final barbaro = Personagem(
+          nome: 'Bárbaro Marcial',
+          atributos: {
+            'FOR': const Atributo(nome: 'Força', valor: 3),
+            'DES': const Atributo(nome: 'Destreza', valor: 1),
+            'CON': const Atributo(nome: 'Constituição', valor: 2),
+            'INT': const Atributo(nome: 'Inteligência', valor: 0),
+            'SAB': const Atributo(nome: 'Sabedoria', valor: 0),
+            'CAR': const Atributo(nome: 'Carisma', valor: 0),
+          },
+          classes: [
+            ClasseDoPersonagem(classeDefinicao: classeBarbaro, nivel: 1),
+          ],
+        );
 
-      final arcanista = Personagem(
-        nome: 'Arcanista Simples',
-        atributos: {
-          'FOR': const Atributo(nome: 'Força', valor: 0),
-          'DES': const Atributo(nome: 'Destreza', valor: 1),
-          'CON': const Atributo(nome: 'Constituição', valor: 0),
-          'INT': const Atributo(nome: 'Inteligência', valor: 3),
-          'SAB': const Atributo(nome: 'Sabedoria', valor: 0),
-          'CAR': const Atributo(nome: 'Carisma', valor: 0),
-        },
-        classes: [
-          ClasseDoPersonagem(classeDefinicao: classeArcanista, nivel: 1),
-        ],
-      );
+        final arcanista = Personagem(
+          nome: 'Arcanista Simples',
+          atributos: {
+            'FOR': const Atributo(nome: 'Força', valor: 0),
+            'DES': const Atributo(nome: 'Destreza', valor: 1),
+            'CON': const Atributo(nome: 'Constituição', valor: 0),
+            'INT': const Atributo(nome: 'Inteligência', valor: 3),
+            'SAB': const Atributo(nome: 'Sabedoria', valor: 0),
+            'CAR': const Atributo(nome: 'Carisma', valor: 0),
+          },
+          classes: [
+            ClasseDoPersonagem(classeDefinicao: classeArcanista, nivel: 1),
+          ],
+        );
 
-      // Bárbaro tem proficiência marcial -> pode escolher Simples E Marcial!
-      expect(barbaro.temProficienciaMarcial, true);
-      final opcoesBarbaro = RegrasCargaService.obterArmasIniciaisDisponiveis(barbaro);
-      expect(opcoesBarbaro.podeEscolherSimples, true);
-      expect(opcoesBarbaro.podeEscolherMarcial, true);
-      expect(opcoesBarbaro.totalArmasPermitidas, 2);
+        // Bárbaro tem proficiência marcial -> pode escolher Simples E Marcial!
+        expect(barbaro.temProficienciaMarcial, true);
+        final opcoesBarbaro = RegrasCargaService.obterArmasIniciaisDisponiveis(
+          barbaro,
+        );
+        expect(opcoesBarbaro.podeEscolherSimples, true);
+        expect(opcoesBarbaro.podeEscolherMarcial, true);
+        expect(opcoesBarbaro.totalArmasPermitidas, 2);
 
-      // Arcanista NÃO tem proficiência marcial -> pode escolher apenas 1 Simples!
-      expect(arcanista.temProficienciaMarcial, false);
-      final opcoesArcanista = RegrasCargaService.obterArmasIniciaisDisponiveis(arcanista);
-      expect(opcoesArcanista.podeEscolherSimples, true);
-      expect(opcoesArcanista.podeEscolherMarcial, false);
-      expect(opcoesArcanista.totalArmasPermitidas, 1);
-    });
+        // Arcanista NÃO tem proficiência marcial -> pode escolher apenas 1 Simples!
+        expect(arcanista.temProficienciaMarcial, false);
+        final opcoesArcanista =
+            RegrasCargaService.obterArmasIniciaisDisponiveis(arcanista);
+        expect(opcoesArcanista.podeEscolherSimples, true);
+        expect(opcoesArcanista.podeEscolherMarcial, false);
+        expect(opcoesArcanista.totalArmasPermitidas, 1);
+      },
+    );
 
-    test('4. Fluxo no Cubit: seleção de armas e consolidação de equipamento inicial', () {
-      final cubit = PersonagemCubit();
+    test(
+      '4. Fluxo no Cubit: seleção de armas e consolidação de equipamento inicial',
+      () {
+        final cubit = PersonagemCubit();
 
-      // Configura classe Barbaro (marcial)
-      final classeBarbaro = BancoDeClasses.todas.firstWhere(
-        (c) => c.nome.toLowerCase() == 'bárbaro',
-      );
-      cubit.selecionarClasse(classeBarbaro);
+        // Configura classe Barbaro (marcial)
+        final classeBarbaro = BancoDeClasses.todas.firstWhere(
+          (c) => c.nome.toLowerCase() == 'bárbaro',
+        );
+        cubit.selecionarClasse(classeBarbaro);
 
-      expect(cubit.state.personagem.temProficienciaMarcial, true);
-      expect(cubit.state.concluiuEquipamentoInicial, false);
+        expect(cubit.state.personagem.temProficienciaMarcial, true);
+        expect(cubit.state.concluiuEquipamentoInicial, false);
 
-      // Escolhe arma simples
-      cubit.selecionarArmaSimplesInicial(adaga);
-      expect(cubit.state.armaSimplesInicial?.nome, 'Adaga');
-      // Ainda falta a marcial para bárbaro
-      expect(cubit.state.concluiuEquipamentoInicial, false);
+        // Escolhe arma simples
+        cubit.selecionarArmaSimplesInicial(adaga);
+        expect(cubit.state.armaSimplesInicial?.nome, 'Adaga');
+        // Ainda falta a marcial para bárbaro
+        expect(cubit.state.concluiuEquipamentoInicial, false);
 
-      // Escolhe arma marcial
-      cubit.selecionarArmaMarcialInicial(espadaLonga);
-      expect(cubit.state.armaMarcialInicial?.nome, 'Espada Longa');
-      // Bárbaro ainda precisa escolher armadura inicial
-      expect(cubit.state.concluiuEquipamentoInicial, false);
+        // Escolhe arma marcial
+        cubit.selecionarArmaMarcialInicial(espadaLonga);
+        expect(cubit.state.armaMarcialInicial?.nome, 'Espada Longa');
+        // Bárbaro ainda precisa escolher armadura inicial
+        expect(cubit.state.concluiuEquipamentoInicial, false);
 
-      const armaduraCouro = Protecao(
-        key: 'ARMADURA_DE_COURO',
-        nome: 'Armadura de Couro',
-        descricao: 'Feita de couro fervido em óleo.',
-        tipo: TipoProtecao.armaduraLeve,
-        bonusDefesa: 2,
-        penalidadeArmadura: 0,
-        espacos: 1,
-        precoEmTibares: 20,
-      );
-      cubit.selecionarArmaduraInicial(armaduraCouro);
-      expect(cubit.state.concluiuEquipamentoInicial, true);
+        const armaduraCouro = Protecao(
+          key: 'ARMADURA_DE_COURO',
+          nome: 'Armadura de Couro',
+          descricao: 'Feita de couro fervido em óleo.',
+          tipo: TipoProtecao.armaduraLeve,
+          bonusDefesa: 2,
+          penalidadeArmadura: 0,
+          espacos: 1,
+          precoEmTibares: 20,
+        );
+        cubit.selecionarArmaduraInicial(armaduraCouro);
+        expect(cubit.state.concluiuEquipamentoInicial, true);
 
-      // Verifica carga em tempo real no State
-      // 10 (base) + 0 (modForca) = 10 espacos
-      // Adaga (1) + Espada Longa (1) + Armadura de Couro (1) + Saco de dormir (1) + Mochila (0) + Traje (0) = 4 espacos
-      expect(cubit.state.statusCarga.cargaAtual, 4);
-      expect(cubit.state.statusCarga.limiteCarga, 10);
-      expect(cubit.state.statusCarga.sobrecarregado, false);
+        // Verifica carga em tempo real no State
+        // 10 (base) + 0 (modForca) = 10 espacos
+        // Adaga (1) + Espada Longa (1) + Armadura de Couro (1) + Saco de dormir (1) + Mochila (0) + Traje (0) = 4 espacos
+        expect(cubit.state.statusCarga.cargaAtual, 4);
+        expect(cubit.state.statusCarga.limiteCarga, 10);
+        expect(cubit.state.statusCarga.sobrecarregado, false);
 
-      // Avança da etapa 6 -> consolida o equipamento
-      // Simula estar na etapa 6
-      cubit.emitirEstadoParaTeste(cubit.state.copyWith(etapaAtual: 6));
-      cubit.avancarEtapa();
+        // Avança da etapa 6 -> consolida o equipamento
+        // Simula estar na etapa 6
+        cubit.emitirEstadoParaTeste(cubit.state.copyWith(etapaAtual: 6));
+        cubit.avancarEtapa();
 
-      expect(cubit.state.etapaAtual, 7);
-      expect(cubit.state.personagem.armas.length, 2);
-      expect(cubit.state.personagem.armas.map((a) => a.nome), containsAll(['Adaga', 'Espada Longa']));
-      expect(cubit.state.personagem.armaduraEquipada?.nome, 'Armadura de Couro');
-      expect(cubit.state.personagem.itensInventario, containsAll(['Mochila', 'Saco de Dormir', 'Traje de Viajante']));
-      expect(cubit.state.personagem.tibares, greaterThanOrEqualTo(4));
-    });
+        expect(cubit.state.etapaAtual, 7);
+        expect(cubit.state.personagem.armas.length, 2);
+        expect(
+          cubit.state.personagem.armas.map((a) => a.nome),
+          containsAll(['Adaga', 'Espada Longa']),
+        );
+        expect(
+          cubit.state.personagem.armaduraEquipada?.nome,
+          'Armadura de Couro',
+        );
+        expect(
+          cubit.state.personagem.itensInventario,
+          containsAll(['Mochila', 'Saco de Dormir', 'Traje de Viajante']),
+        );
+        expect(cubit.state.personagem.tibares, greaterThanOrEqualTo(4));
+      },
+    );
   });
 }

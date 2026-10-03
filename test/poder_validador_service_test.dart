@@ -4,7 +4,7 @@ import 'package:t20_creator/domain/entities/classe.dart';
 import 'package:t20_creator/domain/entities/classe_do_personagem.dart';
 import 'package:t20_creator/domain/entities/personagem.dart';
 import 'package:t20_creator/domain/entities/poder.dart';
-import 'package:t20_creator/domain/services/banco_classes.dart';
+import 'package:t20_creator/domain/services/data_services/call_classes.dart';
 import 'package:t20_creator/domain/services/poder_validador_service.dart';
 
 void main() {
@@ -32,7 +32,11 @@ void main() {
       expect(nivel2.temPoderPendente, true);
 
       // Adicionando 1 poder no nível 2
-      final poder1 = const Poder(key: 'GOLPE_PODEROSO', nome: 'Golpe Poderoso', descricao: 'Mais dano');
+      final poder1 = const Poder(
+        key: 'GOLPE_PODEROSO',
+        nome: 'Golpe Poderoso',
+        descricao: 'Mais dano',
+      );
       final nivel2ComPoder = nivel2.adicionarPoder(poder1);
       expect(nivel2ComPoder.poderesEscolhidos.length, 1);
       expect(nivel2ComPoder.poderesPendentes, 0);
@@ -49,7 +53,10 @@ void main() {
       final personagem = Personagem(
         nome: 'Kallian',
         atributos: {
-          'FOR': const Atributo(nome: 'Força', valor: 2), // Mod +2 (equivalente a 14/15)
+          'FOR': const Atributo(
+            nome: 'Força',
+            valor: 2,
+          ), // Mod +2 (equivalente a 14/15)
           'DES': const Atributo(nome: 'Destreza', valor: 0),
           'CON': const Atributo(nome: 'Constituição', valor: 1),
           'INT': const Atributo(nome: 'Inteligência', valor: 0),
@@ -57,10 +64,7 @@ void main() {
           'CAR': const Atributo(nome: 'Carisma', valor: 0),
         },
         classes: [
-          ClasseDoPersonagem(
-            classeDefinicao: classeGuerreiro,
-            nivel: 2,
-          ),
+          ClasseDoPersonagem(classeDefinicao: classeGuerreiro, nivel: 2),
         ],
       );
 
@@ -78,7 +82,10 @@ void main() {
       );
 
       expect(resNivel.ehElegivel, false);
-      expect(resNivel.pendencias.any((r) => r.descricao.contains('6º nível')), true);
+      expect(
+        resNivel.pendencias.any((r) => r.descricao.contains('6º nível')),
+        true,
+      );
 
       final poderFor13 = const Poder(
         key: 'DESTRUIDOR',
@@ -138,7 +145,10 @@ void main() {
       );
 
       expect(res.ehElegivel, false);
-      expect(res.pendencias.any((r) => r.descricao.contains('Caminho: Mago')), true);
+      expect(
+        res.pendencias.any((r) => r.descricao.contains('Caminho: Mago')),
+        true,
+      );
     });
   });
 }

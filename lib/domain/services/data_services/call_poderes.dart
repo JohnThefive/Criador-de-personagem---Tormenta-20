@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
-import '../entities/poder.dart';
+import '../../entities/poder.dart';
 
 class BancoDePoderes {
   // O mapa guarda as listas usando o idClasse (ex: "arcanista") como chave

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t20_creator/domain/entities/linhagem_arcanista.dart';
-import '../../domain/services/banco_classes.dart';
-import '../../domain/services/banco_poderes.dart';
+import '../../domain/services/data_services/call_classes.dart';
+import '../../domain/services/data_services/call_poderes.dart';
 import '../controllers/personagem_cubit.dart';
 
 class PaginaSelecaoClasse extends StatefulWidget {
@@ -144,23 +144,23 @@ class _PaginaSelecaoClasseState extends State<PaginaSelecaoClasse> {
                       ),
                       const SizedBox(height: 16),
 
-                      // Imagem da Classe
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(12),
-                        child: Image.asset(
-                          classeSelecionada.caminhoImagem,
-                          width: double.infinity,
-                          fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) =>
-                              Container(
-                                height: 150,
-                                color: Colors.grey[300],
-                                child: const Icon(
-                                  Icons.broken_image,
-                                  size: 50,
-                                  color: Colors.grey,
-                                ),
-                              ),
+                      // Ícone da Classe
+                      Center(
+                        child: Container(
+                          padding: const EdgeInsets.all(20),
+                          decoration: BoxDecoration(
+                            color: Colors.red[50],
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: Colors.red.shade200,
+                              width: 2,
+                            ),
+                          ),
+                          child: Icon(
+                            classeSelecionada.iconeClasse,
+                            size: 64,
+                            color: Colors.red[800],
+                          ),
                         ),
                       ),
                       const SizedBox(height: 16),

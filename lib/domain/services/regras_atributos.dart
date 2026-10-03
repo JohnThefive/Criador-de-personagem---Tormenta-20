@@ -41,7 +41,7 @@ class RegrasAtributos {
   // Gera o array completo de 6 atributos garantindo a regra "Soma >= 6"
   static List<int> gerarKitRolagem() {
     List<int> modificadores = [];
-    
+
     // Loop de segurança até o kit ser válido
     do {
       modificadores = List.generate(6, (_) {
@@ -55,8 +55,7 @@ class RegrasAtributos {
         int novaRolagem = rolar4d6DropMenor();
         modificadores[0] = converterRolagemParaModificador(novaRolagem);
       }
-      
-    } while (modificadores.reduce((a, b) => a + b) < 6); 
+    } while (modificadores.reduce((a, b) => a + b) < 6);
 
     return modificadores;
   }

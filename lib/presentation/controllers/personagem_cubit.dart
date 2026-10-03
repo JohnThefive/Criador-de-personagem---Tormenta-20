@@ -619,18 +619,12 @@ class PersonagemCubit extends Cubit<PersonagemState> {
   }
 
   void atualizarPeso(String novoPeso) {
-    emit(
-      state.copyWith(
-        personagem: state.personagem.copyWith(peso: novoPeso),
-      ),
-    );
+    emit(state.copyWith(personagem: state.personagem.copyWith(peso: novoPeso)));
   }
 
   void atualizarAltura(String novaAltura) {
     emit(
-      state.copyWith(
-        personagem: state.personagem.copyWith(altura: novaAltura),
-      ),
+      state.copyWith(personagem: state.personagem.copyWith(altura: novaAltura)),
     );
   }
 
@@ -644,9 +638,7 @@ class PersonagemCubit extends Cubit<PersonagemState> {
 
   void removerFoto() {
     emit(
-      state.copyWith(
-        personagem: state.personagem.copyWith(anularFoto: true),
-      ),
+      state.copyWith(personagem: state.personagem.copyWith(anularFoto: true)),
     );
   }
 

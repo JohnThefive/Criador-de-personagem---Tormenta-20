@@ -51,85 +51,97 @@ void main() {
       expect(combatenteForte.limiteMorte, -20);
     });
 
-    test('Dano Letal: Fica inconsciente e sangrando ao chegar a 0 PV ou menos', () {
-      const heroi = Combatente(
-        id: 'heroi',
-        nome: 'Ladino',
-        pvMax: 20,
-        pvAtual: 5,
-        pmMax: 0,
-        pmAtual: 0,
-        defesa: 14,
-        deslocamentoMetros: 9.0,
-        modIniciativa: 3,
-        modLuta: 2,
-        modPontaria: 4,
-        modPercepcao: 2,
-        modForca: 0,
-        modDestreza: 3,
-        modConstituicao: 1,
-      );
+    test(
+      'Dano Letal: Fica inconsciente e sangrando ao chegar a 0 PV ou menos',
+      () {
+        const heroi = Combatente(
+          id: 'heroi',
+          nome: 'Ladino',
+          pvMax: 20,
+          pvAtual: 5,
+          pmMax: 0,
+          pmAtual: 0,
+          defesa: 14,
+          deslocamentoMetros: 9.0,
+          modIniciativa: 3,
+          modLuta: 2,
+          modPontaria: 4,
+          modPercepcao: 2,
+          modForca: 0,
+          modDestreza: 3,
+          modConstituicao: 1,
+        );
 
-      final ferido = heroi.aplicarDano(8, naoLetal: false);
-      expect(ferido.pvAtual, -3);
-      expect(ferido.estadoVida, EstadoVidaCombatente.inconscienteSangrando);
-      expect(ferido.estaInconsciente, isTrue);
-      expect(ferido.estaIncapacitado, isTrue);
-    });
+        final ferido = heroi.aplicarDano(8, naoLetal: false);
+        expect(ferido.pvAtual, -3);
+        expect(ferido.estadoVida, EstadoVidaCombatente.inconscienteSangrando);
+        expect(ferido.estaInconsciente, isTrue);
+        expect(ferido.estaIncapacitado, isTrue);
+      },
+    );
 
-    test('Morte Instantânea quando PV atinge ou ultrapassa o Limite de Morte', () {
-      const heroi = Combatente(
-        id: 'heroi',
-        nome: 'Mago',
-        pvMax: 16, // Limite de morte = min(-10, -8) = -10
-        pvAtual: 2,
-        pmMax: 0,
-        pmAtual: 0,
-        defesa: 11,
-        deslocamentoMetros: 9.0,
-        modIniciativa: 1,
-        modLuta: 0,
-        modPontaria: 1,
-        modPercepcao: 2,
-        modForca: -1,
-        modDestreza: 1,
-        modConstituicao: 0,
-      );
+    test(
+      'Morte Instantânea quando PV atinge ou ultrapassa o Limite de Morte',
+      () {
+        const heroi = Combatente(
+          id: 'heroi',
+          nome: 'Mago',
+          pvMax: 16, // Limite de morte = min(-10, -8) = -10
+          pvAtual: 2,
+          pmMax: 0,
+          pmAtual: 0,
+          defesa: 11,
+          deslocamentoMetros: 9.0,
+          modIniciativa: 1,
+          modLuta: 0,
+          modPontaria: 1,
+          modPercepcao: 2,
+          modForca: -1,
+          modDestreza: 1,
+          modConstituicao: 0,
+        );
 
-      // Dano de 15 leva PV a -13, que é menor que -10 -> MORTE
-      final morto = heroi.aplicarDano(15, naoLetal: false);
-      expect(morto.pvAtual, -13);
-      expect(morto.estadoVida, EstadoVidaCombatente.morto);
-      expect(morto.estaMorto, isTrue);
-      expect(morto.estaIncapacitado, isTrue);
-    });
+        // Dano de 15 leva PV a -13, que é menor que -10 -> MORTE
+        final morto = heroi.aplicarDano(15, naoLetal: false);
+        expect(morto.pvAtual, -13);
+        expect(morto.estadoVida, EstadoVidaCombatente.morto);
+        expect(morto.estaMorto, isTrue);
+        expect(morto.estaIncapacitado, isTrue);
+      },
+    );
 
-    test('Dano Não Letal: Inconsciente estabilizado sem sangrar quando danoNaoLetal >= PV', () {
-      const heroi = Combatente(
-        id: 'heroi',
-        nome: 'Monge',
-        pvMax: 20,
-        pvAtual: 10,
-        pmMax: 0,
-        pmAtual: 0,
-        defesa: 15,
-        deslocamentoMetros: 9.0,
-        modIniciativa: 2,
-        modLuta: 4,
-        modPontaria: 2,
-        modPercepcao: 1,
-        modForca: 2,
-        modDestreza: 2,
-        modConstituicao: 2,
-      );
+    test(
+      'Dano Não Letal: Inconsciente estabilizado sem sangrar quando danoNaoLetal >= PV',
+      () {
+        const heroi = Combatente(
+          id: 'heroi',
+          nome: 'Monge',
+          pvMax: 20,
+          pvAtual: 10,
+          pmMax: 0,
+          pmAtual: 0,
+          defesa: 15,
+          deslocamentoMetros: 9.0,
+          modIniciativa: 2,
+          modLuta: 4,
+          modPontaria: 2,
+          modPercepcao: 1,
+          modForca: 2,
+          modDestreza: 2,
+          modConstituicao: 2,
+        );
 
-      final nocauteado = heroi.aplicarDano(12, naoLetal: true);
-      expect(nocauteado.pvAtual, 10); // PV não cai abaixo de 0 por dano não letal
-      expect(nocauteado.danoNaoLetal, 12);
-      expect(nocauteado.estadoVida, EstadoVidaCombatente.estabilizado);
-      expect(nocauteado.estaIncapacitado, isTrue);
-      expect(nocauteado.estaInconsciente, isTrue);
-    });
+        final nocauteado = heroi.aplicarDano(12, naoLetal: true);
+        expect(
+          nocauteado.pvAtual,
+          10,
+        ); // PV não cai abaixo de 0 por dano não letal
+        expect(nocauteado.danoNaoLetal, 12);
+        expect(nocauteado.estadoVida, EstadoVidaCombatente.estabilizado);
+        expect(nocauteado.estaIncapacitado, isTrue);
+        expect(nocauteado.estaInconsciente, isTrue);
+      },
+    );
 
     test('Teste de Constituição CD 15 para estabilização de sangramento', () {
       const sangrando = Combatente(
@@ -159,7 +171,10 @@ void main() {
       // Simula resultado 10 no d20: 10 + 2 = 12 < 15 -> Falha, perde 3 PV (dado d6)
       final resFalha = sangrando.testeEstabilizacaoCon(10, 3);
       expect(resFalha.$1.pvAtual, -5);
-      expect(resFalha.$1.estadoVida, EstadoVidaCombatente.inconscienteSangrando);
+      expect(
+        resFalha.$1.estadoVida,
+        EstadoVidaCombatente.inconscienteSangrando,
+      );
     });
 
     test('Penalidade de -5 no Ataque para Dano Não Letal com Arma Letal', () {
@@ -336,14 +351,17 @@ void main() {
           'h1': const Posicao2D(0, 0),
           'aliado': const Posicao2D(0, 1),
         },
-        combatentesPorId: {
-          'h1': heroi,
-          'aliado': aliado,
-        },
+        combatentesPorId: {'h1': heroi, 'aliado': aliado},
         combatenteAtivoId: 'h1',
       );
-      expect(resComAliado.destinosValidos.contains(const Posicao2D(0, 1)), isFalse); // Ocupado
-      expect(resComAliado.destinosValidos.contains(const Posicao2D(0, 2)), isTrue); // Pode passar por ele!
+      expect(
+        resComAliado.destinosValidos.contains(const Posicao2D(0, 1)),
+        isFalse,
+      ); // Ocupado
+      expect(
+        resComAliado.destinosValidos.contains(const Posicao2D(0, 2)),
+        isTrue,
+      ); // Pode passar por ele!
 
       // Inimigo ativo em (0, 1): herói NÃO pode atravessar para (0, 2)
       final resComInimigo = MovimentoEngine.calcularAlcancaveis(
@@ -354,57 +372,60 @@ void main() {
           'h1': const Posicao2D(0, 0),
           'inimigo': const Posicao2D(0, 1),
         },
-        combatentesPorId: {
-          'h1': heroi,
-          'inimigo': inimigo,
-        },
+        combatentesPorId: {'h1': heroi, 'inimigo': inimigo},
         combatenteAtivoId: 'h1',
       );
       // Inimigo bloqueia passagem
-      expect(resComInimigo.destinosValidos.contains(const Posicao2D(0, 1)), isFalse);
-      expect(resComInimigo.custosMetros.containsKey(const Posicao2D(0, 2)), isFalse);
+      expect(
+        resComInimigo.destinosValidos.contains(const Posicao2D(0, 1)),
+        isFalse,
+      );
+      expect(
+        resComInimigo.custosMetros.containsKey(const Posicao2D(0, 2)),
+        isFalse,
+      );
     });
 
-    test('Travessia sobre Inimigo Caído/Inconsciente custa como Terreno Difícil', () {
-      const inimigoCaido = Combatente(
-        id: 'inimigo_caido',
-        nome: 'Orc Caído',
-        time: TimeCombatente.inimigo,
-        pvMax: 20,
-        pvAtual: -2,
-        estadoVida: EstadoVidaCombatente.inconscienteSangrando,
-        pmMax: 0,
-        pmAtual: 0,
-        defesa: 10,
-        deslocamentoMetros: 9.0,
-        modIniciativa: 0,
-        modLuta: 0,
-        modPontaria: 0,
-        modPercepcao: 0,
-        modForca: 0,
-        modDestreza: 0,
-        modConstituicao: 0,
-      );
+    test(
+      'Travessia sobre Inimigo Caído/Inconsciente custa como Terreno Difícil',
+      () {
+        const inimigoCaido = Combatente(
+          id: 'inimigo_caido',
+          nome: 'Orc Caído',
+          time: TimeCombatente.inimigo,
+          pvMax: 20,
+          pvAtual: -2,
+          estadoVida: EstadoVidaCombatente.inconscienteSangrando,
+          pmMax: 0,
+          pmAtual: 0,
+          defesa: 10,
+          deslocamentoMetros: 9.0,
+          modIniciativa: 0,
+          modLuta: 0,
+          modPontaria: 0,
+          modPercepcao: 0,
+          modForca: 0,
+          modDestreza: 0,
+          modConstituicao: 0,
+        );
 
-      final res = MovimentoEngine.calcularAlcancaveis(
-        mapa: const GridMapa(largura: 5, altura: 5),
-        inicio: const Posicao2D(0, 0),
-        deslocamentoMaximoMetros: 9.0,
-        posicoesCombatentes: {
-          'h1': const Posicao2D(0, 0),
-          'inimigo_caido': const Posicao2D(0, 1),
-        },
-        combatentesPorId: {
-          'h1': heroi,
-          'inimigo_caido': inimigoCaido,
-        },
-        combatenteAtivoId: 'h1',
-      );
+        final res = MovimentoEngine.calcularAlcancaveis(
+          mapa: const GridMapa(largura: 5, altura: 5),
+          inicio: const Posicao2D(0, 0),
+          deslocamentoMaximoMetros: 9.0,
+          posicoesCombatentes: {
+            'h1': const Posicao2D(0, 0),
+            'inimigo_caido': const Posicao2D(0, 1),
+          },
+          combatentesPorId: {'h1': heroi, 'inimigo_caido': inimigoCaido},
+          combatenteAtivoId: 'h1',
+        );
 
-      // Pode atravessar o caído até (0, 2). Custo de passar por ele = 3.0m (terreno difícil) + 1.5m = 4.5m
-      expect(res.destinosValidos.contains(const Posicao2D(0, 2)), isTrue);
-      expect(res.custosMetros[const Posicao2D(0, 2)], 4.5);
-    });
+        // Pode atravessar o caído até (0, 2). Custo de passar por ele = 3.0m (terreno difícil) + 1.5m = 4.5m
+        expect(res.destinosValidos.contains(const Posicao2D(0, 2)), isTrue);
+        expect(res.custosMetros[const Posicao2D(0, 2)], 4.5);
+      },
+    );
   });
 
   group('3. Fim de Combate (Vitória e Derrota)', () {
@@ -511,74 +532,89 @@ void main() {
       armas: [espada],
     );
 
-    test('Ataque corpo a corpo é bloqueado quando o inimigo está longe (> 1.5m)', () {
-      final cubit = CombateCubit();
-      // Heroi em (1, 1) e Inimigo em (5, 5) -> Distância Chebyshev = 4 quadrados = 6.0m
-      cubit.iniciarCombate(
-        [heroi, inimigo],
-        posicoesIniciais: {
-          'heroi': const Posicao2D(1, 1),
-          'inimigo': const Posicao2D(5, 5),
-        },
-      );
+    test(
+      'Ataque corpo a corpo é bloqueado quando o inimigo está longe (> 1.5m)',
+      () {
+        final cubit = CombateCubit();
+        // Heroi em (1, 1) e Inimigo em (5, 5) -> Distância Chebyshev = 4 quadrados = 6.0m
+        cubit.iniciarCombate(
+          [heroi, inimigo],
+          posicoesIniciais: {
+            'heroi': const Posicao2D(1, 1),
+            'inimigo': const Posicao2D(5, 5),
+          },
+        );
 
-      cubit.executarAtaque(defensor: inimigo, arma: espada);
+        cubit.executarAtaque(defensor: inimigo, arma: espada);
 
-      // Ação padrão não deve ser gasta e deve avisar sobre o alcance no log
-      expect(cubit.state.acoesPadraoRestantes, 1);
-      expect(cubit.state.logCombate.last, contains('fora de alcance'));
-    });
+        // Ação padrão não deve ser gasta e deve avisar sobre o alcance no log
+        expect(cubit.state.acoesPadraoRestantes, 1);
+        expect(cubit.state.logCombate.last, contains('fora de alcance'));
+      },
+    );
 
-    test('Ataque corpo a corpo funciona quando os combatentes estão adjacentes (1.5m)', () {
-      final cubit = CombateCubit();
-      // Heroi em (1, 1) e Inimigo em (1, 2) -> Adjacente (1.5m)
-      cubit.iniciarCombate(
-        [heroi, inimigo],
-        posicoesIniciais: {
-          'heroi': const Posicao2D(1, 1),
-          'inimigo': const Posicao2D(1, 2),
-        },
-      );
+    test(
+      'Ataque corpo a corpo funciona quando os combatentes estão adjacentes (1.5m)',
+      () {
+        final cubit = CombateCubit();
+        // Heroi em (1, 1) e Inimigo em (1, 2) -> Adjacente (1.5m)
+        cubit.iniciarCombate(
+          [heroi, inimigo],
+          posicoesIniciais: {
+            'heroi': const Posicao2D(1, 1),
+            'inimigo': const Posicao2D(1, 2),
+          },
+        );
 
-      final atacante = cubit.state.combatenteAtual!;
-      final defensor =
-          cubit.state.filaIniciativa.firstWhere((c) => c.id != atacante.id);
+        final atacante = cubit.state.combatenteAtual!;
+        final defensor = cubit.state.filaIniciativa.firstWhere(
+          (c) => c.id != atacante.id,
+        );
 
-      cubit.executarAtaque(defensor: defensor, arma: espada);
+        cubit.executarAtaque(defensor: defensor, arma: espada);
 
-      // Deve consumir a ação padrão e registrar o ataque
-      expect(cubit.state.acoesPadraoRestantes, 0);
-      expect(
-        cubit.state.logCombate.any((l) => l.contains('atacou') || l.contains('acertou') || l.contains('errou')),
-        isTrue,
-      );
-    });
+        // Deve consumir a ação padrão e registrar o ataque
+        expect(cubit.state.acoesPadraoRestantes, 0);
+        expect(
+          cubit.state.logCombate.any(
+            (l) =>
+                l.contains('atacou') ||
+                l.contains('acertou') ||
+                l.contains('errou'),
+          ),
+          isTrue,
+        );
+      },
+    );
 
-    test('IA do bot move-se taticamente no grid para se aproximar do herói', () {
-      final cubit = CombateCubit();
-      // Heroi em (1, 1) e Bot em (1, 4) -> 3 quadrados de distância (4.5m)
-      cubit.iniciarCombate(
-        [heroi, inimigo],
-        posicoesIniciais: {
-          'inimigo': const Posicao2D(1, 4),
-          'heroi': const Posicao2D(1, 1),
-        },
-      );
+    test(
+      'IA do bot move-se taticamente no grid para se aproximar do herói',
+      () {
+        final cubit = CombateCubit();
+        // Heroi em (1, 1) e Bot em (1, 4) -> 3 quadrados de distância (4.5m)
+        cubit.iniciarCombate(
+          [heroi, inimigo],
+          posicoesIniciais: {
+            'inimigo': const Posicao2D(1, 4),
+            'heroi': const Posicao2D(1, 1),
+          },
+        );
 
-      // Avança o turno até ser a vez do bot (Time inimigo)
-      while (cubit.state.combatenteAtual?.time != TimeCombatente.inimigo) {
-        cubit.proximoTurno();
-      }
+        // Avança o turno até ser a vez do bot (Time inimigo)
+        while (cubit.state.combatenteAtual?.time != TimeCombatente.inimigo) {
+          cubit.proximoTurno();
+        }
 
-      final posInicialBot = cubit.state.posicoesCombatentes['inimigo']!;
-      cubit.executarTurnoBot();
+        final posInicialBot = cubit.state.posicoesCombatentes['inimigo']!;
+        cubit.executarTurnoBot();
 
-      final posFinalBot = cubit.state.posicoesCombatentes['inimigo']!;
-      // O bot deve ter se movido em direção ao herói (diminuindo a distância)
-      expect(
-        posFinalBot.distanciaEmQuadrados(const Posicao2D(1, 1)),
-        lessThan(posInicialBot.distanciaEmQuadrados(const Posicao2D(1, 1))),
-      );
-    });
+        final posFinalBot = cubit.state.posicoesCombatentes['inimigo']!;
+        // O bot deve ter se movido em direção ao herói (diminuindo a distância)
+        expect(
+          posFinalBot.distanciaEmQuadrados(const Posicao2D(1, 1)),
+          lessThan(posInicialBot.distanciaEmQuadrados(const Posicao2D(1, 1))),
+        );
+      },
+    );
   });
 }

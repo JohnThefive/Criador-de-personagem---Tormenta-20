@@ -102,7 +102,8 @@ const List<Divindade> bancoDivindades = [
       Poder(
         key: 'bencao_do_mana',
         nome: 'Bênção do Mana',
-        descricao: 'Você recebe +1 Ponto de Mana adicional para cada patamar de nível.',
+        descricao:
+            'Você recebe +1 Ponto de Mana adicional para cada patamar de nível.',
       ),
       Poder(
         key: 'centelha_magica',

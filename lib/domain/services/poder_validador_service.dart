@@ -1,17 +1,14 @@
 import '../entities/personagem.dart';
 import '../entities/classe_do_personagem.dart';
 import '../entities/poder.dart';
-import 'banco_poderes.dart';
+import 'data_services/call_poderes.dart';
 import 'banco_pericias.dart';
 
 class ItemRequisito {
   final String descricao;
   final bool atendido;
 
-  const ItemRequisito({
-    required this.descricao,
-    required this.atendido,
-  });
+  const ItemRequisito({required this.descricao, required this.atendido});
 }
 
 class ResultadoElegibilidade {
@@ -59,7 +56,8 @@ class PoderValidadorService {
     // 3. Validação de Caminho / Especialização (ex: Mago, Bruxo, Feiticeiro)
     if (poder.caminhosExigidos.isNotEmpty) {
       final caminhoAtual = classeDoPersonagem.caminhoEscolhido?.nome;
-      final bool atendeCaminho = caminhoAtual != null &&
+      final bool atendeCaminho =
+          caminhoAtual != null &&
           poder.caminhosExigidos.any(
             (c) => c.trim().toLowerCase() == caminhoAtual.trim().toLowerCase(),
           );
@@ -84,7 +82,8 @@ class PoderValidadorService {
 
       requisitos.add(
         ItemRequisito(
-          descricao: '$sigla $modNecessario (${sigla.toUpperCase()} $valorExigido)',
+          descricao:
+              '$sigla $modNecessario (${sigla.toUpperCase()} $valorExigido)',
           atendido: atendeAtributo,
         ),
       );

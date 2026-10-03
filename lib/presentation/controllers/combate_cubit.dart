@@ -11,8 +11,8 @@ class CombateCubit extends Cubit<CombateState> {
   final CombateEngine _engine;
 
   CombateCubit({CombateEngine? engine})
-      : _engine = engine ?? CombateEngine(),
-        super(const CombateState());
+    : _engine = engine ?? CombateEngine(),
+      super(const CombateState());
 
   /// 1. Inicia o combate, define posições no grid 2D e rola a iniciativa
   void iniciarCombate(
@@ -23,7 +23,8 @@ class CombateCubit extends Cubit<CombateState> {
     if (participantes.isEmpty) return;
 
     // Mapa tático padrão com alguns terrenos difíceis e obstáculos
-    final gridPadrao = mapa ??
+    final gridPadrao =
+        mapa ??
         GridMapa(
           largura: 10,
           altura: 8,
@@ -190,20 +191,31 @@ class CombateCubit extends Cubit<CombateState> {
   }
 
   /// 4. Move o combatente para uma célula de destino válida no Grid
-  void moverCombatente(String combatenteId, Posicao2D destino, {double? custo}) {
+  void moverCombatente(
+    String combatenteId,
+    Posicao2D destino, {
+    double? custo,
+  }) {
     if (custo == null && !state.celulasAlcancaveis.contains(destino)) return;
 
     final custoGasto = custo ?? state.custosMovimento[destino] ?? 0.0;
-    final combatente = state.filaIniciativa.firstWhere((c) => c.id == combatenteId);
+    final combatente = state.filaIniciativa.firstWhere(
+      (c) => c.id == combatenteId,
+    );
 
     // Desconta Ação de Movimento se ainda não foi consumida
     if (state.acoesMovimentoRestantes > 0) {
       gastarAcao(TipoAcao.movimento);
     }
 
-    final novoRestante = (state.deslocamentoRestanteMetros - custoGasto).clamp(0.0, 99.0);
+    final novoRestante = (state.deslocamentoRestanteMetros - custoGasto).clamp(
+      0.0,
+      99.0,
+    );
 
-    final novasPosicoes = Map<String, Posicao2D>.from(state.posicoesCombatentes);
+    final novasPosicoes = Map<String, Posicao2D>.from(
+      state.posicoesCombatentes,
+    );
     novasPosicoes[combatenteId] = destino;
 
     emit(
@@ -403,8 +415,9 @@ class CombateCubit extends Cubit<CombateState> {
 
     // Processa início do turno (ex: Teste de Sangramento / Estabilização)
     List<Combatente> filaAtualizada = List.from(state.filaIniciativa);
-    final (combatenteAposInicio, logInicio) =
-        _engine.processarInicioTurno(novoCombatente);
+    final (combatenteAposInicio, logInicio) = _engine.processarInicioTurno(
+      novoCombatente,
+    );
 
     if (logInicio.isNotEmpty) {
       novosLogs.add(logInicio);
@@ -497,8 +510,11 @@ class CombateCubit extends Cubit<CombateState> {
     // 2. Se tiver ação padrão, verifica se tem alcance e agride
     final posBotFinal = state.posicoesCombatentes[bot.id];
     if (arma != null && state.acoesPadraoRestantes > 0) {
-      final bool podeAtacar = !arma.ehCorpoACorpo ||
-          (posBotFinal != null && posHeroi != null && posBotFinal.ehAdjacente(posHeroi));
+      final bool podeAtacar =
+          !arma.ehCorpoACorpo ||
+          (posBotFinal != null &&
+              posHeroi != null &&
+              posBotFinal.ehAdjacente(posHeroi));
 
       if (podeAtacar) {
         executarAtaque(defensor: heroiAlvo, arma: arma);

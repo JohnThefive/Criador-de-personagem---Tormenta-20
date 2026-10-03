@@ -4,7 +4,8 @@ import '../../domain/entities/atributos.dart';
 class AtributoCardCompra extends StatelessWidget {
   final String sigla;
   final Atributo atributo;
-  final VoidCallback onIncrement; // Função sem parâmetros (apenas avisa que clicou)
+  final VoidCallback
+  onIncrement; // Função sem parâmetros (apenas avisa que clicou)
   final VoidCallback onDecrement; // Função sem parâmetros
 
   const AtributoCardCompra({
@@ -17,11 +18,13 @@ class AtributoCardCompra extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Regra visual: Se o valor for menor que -1 ou maior que 4 (limites T20 compra), 
+    // Regra visual: Se o valor for menor que -1 ou maior que 4 (limites T20 compra),
     // podemos desabilitar visualmente os botões futuramente.
-    
+
     // Cor do modificador
-    final modColor = atributo.modificador >= 0 ? Colors.green[700] : Colors.red[700];
+    final modColor = atributo.modificador >= 0
+        ? Colors.green[700]
+        : Colors.red[700];
 
     return Card(
       margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
@@ -35,8 +38,17 @@ class AtributoCardCompra extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(sigla, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-                  Text(atributo.nome, style: const TextStyle(fontSize: 12, color: Colors.grey)),
+                  Text(
+                    sigla,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                  Text(
+                    atributo.nome,
+                    style: const TextStyle(fontSize: 12, color: Colors.grey),
+                  ),
                 ],
               ),
             ),
@@ -54,7 +66,10 @@ class AtributoCardCompra extends StatelessWidget {
                   ),
                   Text(
                     '${atributo.valor}', // Valor bruto (ex: 18)
-                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   IconButton(
                     icon: const Icon(Icons.add_circle_outline),
@@ -77,7 +92,9 @@ class AtributoCardCompra extends StatelessWidget {
                 border: Border.all(color: modColor!.withOpacity(0.5)),
               ),
               child: Text(
-                atributo.modificador >= 0 ? '+${atributo.modificador}' : '${atributo.modificador}',
+                atributo.modificador >= 0
+                    ? '+${atributo.modificador}'
+                    : '${atributo.modificador}',
                 style: TextStyle(fontWeight: FontWeight.bold, color: modColor),
               ),
             ),

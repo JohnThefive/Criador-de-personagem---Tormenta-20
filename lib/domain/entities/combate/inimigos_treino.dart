@@ -101,8 +101,8 @@ class InimigosTreino {
   );
 
   static List<Combatente> get todos => [
-        bonecoDeTreino,
-        goblinSaqueador,
-        orcGuerreiro,
-      ];
+    bonecoDeTreino,
+    goblinSaqueador,
+    orcGuerreiro,
+  ];
 }

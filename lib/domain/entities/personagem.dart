@@ -82,9 +82,9 @@ class Personagem {
     int? pvAtual,
     int? pmAtual,
     this.experienciaAtual = 0,
-  })  : id = id ?? DateTime.now().millisecondsSinceEpoch.toString(),
-        _pvAtual = pvAtual,
-        _pmAtual = pmAtual;
+  }) : id = id ?? DateTime.now().millisecondsSinceEpoch.toString(),
+       _pvAtual = pvAtual,
+       _pmAtual = pmAtual;
 
   bool get ehDevoto => divindade != null;
 
@@ -181,10 +181,12 @@ class Personagem {
       poderesGerais: poderesGerais ?? this.poderesGerais,
       itensInventario: itensInventario ?? this.itensInventario,
       armas: armas ?? this.armas,
-      armaduraEquipada:
-          anularArmadura ? null : (armaduraEquipada ?? this.armaduraEquipada),
-      escudoEquipado:
-          anularEscudo ? null : (escudoEquipado ?? this.escudoEquipado),
+      armaduraEquipada: anularArmadura
+          ? null
+          : (armaduraEquipada ?? this.armaduraEquipada),
+      escudoEquipado: anularEscudo
+          ? null
+          : (escudoEquipado ?? this.escudoEquipado),
       tibares: tibares ?? this.tibares,
       divindade: anularDivindade ? null : (divindade ?? this.divindade),
       poderConcedido: anularDivindade
@@ -329,7 +331,8 @@ class Personagem {
 
   /// Penalidade total cumulativa de armadura (armadura + escudo + 2 se sobrecarregado)
   int get penalidadeArmaduraTotal {
-    int total = (armaduraEquipada?.penalidadeArmadura ?? 0) +
+    int total =
+        (armaduraEquipada?.penalidadeArmadura ?? 0) +
         (escudoEquipado?.penalidadeArmadura ?? 0);
     if (estaSobrecarregado) {
       total += 2; // T20: sobrecarga adiciona -2 de penalidade de armadura
@@ -397,39 +400,46 @@ class Personagem {
 
   // --- REGRAS DE PROFICIÊNCIAS ---
   bool get temProficienciaMarcial => classes.any(
-        (c) => c.classeDefinicao.proficiencias.contains(TipoProficiencia.armasMarciais),
-      );
+    (c) => c.classeDefinicao.proficiencias.contains(
+      TipoProficiencia.armasMarciais,
+    ),
+  );
 
   bool get temProficienciaSimples => classes.any(
-        (c) => c.classeDefinicao.proficiencias.contains(TipoProficiencia.armasSimples),
-      );
+    (c) =>
+        c.classeDefinicao.proficiencias.contains(TipoProficiencia.armasSimples),
+  );
 
   bool get temProficienciaArmadurasLeves => classes.any(
-        (c) => c.classeDefinicao.proficiencias.contains(TipoProficiencia.armadurasLeves),
-      );
+    (c) => c.classeDefinicao.proficiencias.contains(
+      TipoProficiencia.armadurasLeves,
+    ),
+  );
 
   bool get temProficienciaArmadurasPesadas => classes.any(
-        (c) => c.classeDefinicao.proficiencias.contains(TipoProficiencia.armadurasPesadas),
-      );
+    (c) => c.classeDefinicao.proficiencias.contains(
+      TipoProficiencia.armadurasPesadas,
+    ),
+  );
 
   bool get temProficienciaEscudos => classes.any(
-        (c) => c.classeDefinicao.proficiencias.contains(TipoProficiencia.escudos),
-      );
+    (c) => c.classeDefinicao.proficiencias.contains(TipoProficiencia.escudos),
+  );
 
   bool get ehArcanista => classes.any(
-        (c) => c.classeDefinicao.idClasse.toLowerCase() == 'arcanista',
-      );
+    (c) => c.classeDefinicao.idClasse.toLowerCase() == 'arcanista',
+  );
 
   // --- CAPACIDADE DE CARGA (TORMENTA 20) ---
   int get limiteCarga =>
       RegrasCargaService.calcularLimiteCarga(getValorFinal('FOR'));
 
   int get cargaAtual => RegrasCargaService.calcularEspacosOcupados(
-        armas: armas,
-        itensInventario: itensInventario,
-        armadura: armaduraEquipada,
-        escudo: escudoEquipado,
-      );
+    armas: armas,
+    itensInventario: itensInventario,
+    armadura: armaduraEquipada,
+    escudo: escudoEquipado,
+  );
 
   bool get estaSobrecarregado => cargaAtual > limiteCarga;
 }

@@ -117,7 +117,8 @@ class CombateEngine {
 
     // Rolagem do teste de ataque
     final d20 = d20Teste ?? _rolarDado(20);
-    final totalAtaque = d20 + bonusPericia + penalidadeDistancia + penalidadeNaoLetal;
+    final totalAtaque =
+        d20 + bonusPericia + penalidadeDistancia + penalidadeNaoLetal;
 
     // Regras de Acerto:
     // - 20 Natural: Acerto automático

@@ -527,12 +527,14 @@ class _PaginaFinalizacaoState extends State<_PaginaFinalizacao> {
                             child: CircleAvatar(
                               radius: 50,
                               backgroundColor: const Color(0xFFF3F4F6),
-                              backgroundImage: (p.caminhoFoto != null &&
+                              backgroundImage:
+                                  (p.caminhoFoto != null &&
                                       p.caminhoFoto!.isNotEmpty &&
                                       File(p.caminhoFoto!).existsSync())
                                   ? FileImage(File(p.caminhoFoto!))
                                   : null,
-                              child: (p.caminhoFoto == null ||
+                              child:
+                                  (p.caminhoFoto == null ||
                                       p.caminhoFoto!.isEmpty ||
                                       !File(p.caminhoFoto!).existsSync())
                                   ? const Icon(
@@ -560,7 +562,9 @@ class _PaginaFinalizacaoState extends State<_PaginaFinalizacao> {
                                   ),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Colors.black.withValues(alpha: 0.2),
+                                      color: Colors.black.withValues(
+                                        alpha: 0.2,
+                                      ),
                                       blurRadius: 4,
                                     ),
                                   ],
@@ -670,8 +674,7 @@ class _PaginaFinalizacaoState extends State<_PaginaFinalizacao> {
                         ),
                         decoration: InputDecoration(
                           labelText: 'Idade',
-                          labelStyle:
-                              const TextStyle(color: Color(0xFF4B5563)),
+                          labelStyle: const TextStyle(color: Color(0xFF4B5563)),
                           filled: true,
                           fillColor: const Color(0xFFF9FAFB),
                           prefixIcon: const Icon(
@@ -681,13 +684,15 @@ class _PaginaFinalizacaoState extends State<_PaginaFinalizacao> {
                           ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
-                            borderSide:
-                                const BorderSide(color: Color(0xFFD1D5DB)),
+                            borderSide: const BorderSide(
+                              color: Color(0xFFD1D5DB),
+                            ),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
-                            borderSide:
-                                const BorderSide(color: Color(0xFFD1D5DB)),
+                            borderSide: const BorderSide(
+                              color: Color(0xFFD1D5DB),
+                            ),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -715,8 +720,7 @@ class _PaginaFinalizacaoState extends State<_PaginaFinalizacao> {
                         dropdownColor: Colors.white,
                         decoration: InputDecoration(
                           labelText: 'Alinhamento',
-                          labelStyle:
-                              const TextStyle(color: Color(0xFF4B5563)),
+                          labelStyle: const TextStyle(color: Color(0xFF4B5563)),
                           filled: true,
                           fillColor: const Color(0xFFF9FAFB),
                           prefixIcon: const Icon(
@@ -726,13 +730,15 @@ class _PaginaFinalizacaoState extends State<_PaginaFinalizacao> {
                           ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
-                            borderSide:
-                                const BorderSide(color: Color(0xFFD1D5DB)),
+                            borderSide: const BorderSide(
+                              color: Color(0xFFD1D5DB),
+                            ),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
-                            borderSide:
-                                const BorderSide(color: Color(0xFFD1D5DB)),
+                            borderSide: const BorderSide(
+                              color: Color(0xFFD1D5DB),
+                            ),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -770,8 +776,7 @@ class _PaginaFinalizacaoState extends State<_PaginaFinalizacao> {
                         ),
                         decoration: InputDecoration(
                           labelText: 'Peso',
-                          labelStyle:
-                              const TextStyle(color: Color(0xFF4B5563)),
+                          labelStyle: const TextStyle(color: Color(0xFF4B5563)),
                           hintText: 'Ex: 75 kg',
                           filled: true,
                           fillColor: const Color(0xFFF9FAFB),
@@ -782,13 +787,15 @@ class _PaginaFinalizacaoState extends State<_PaginaFinalizacao> {
                           ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
-                            borderSide:
-                                const BorderSide(color: Color(0xFFD1D5DB)),
+                            borderSide: const BorderSide(
+                              color: Color(0xFFD1D5DB),
+                            ),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
-                            borderSide:
-                                const BorderSide(color: Color(0xFFD1D5DB)),
+                            borderSide: const BorderSide(
+                              color: Color(0xFFD1D5DB),
+                            ),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -814,8 +821,7 @@ class _PaginaFinalizacaoState extends State<_PaginaFinalizacao> {
                         ),
                         decoration: InputDecoration(
                           labelText: 'Altura',
-                          labelStyle:
-                              const TextStyle(color: Color(0xFF4B5563)),
+                          labelStyle: const TextStyle(color: Color(0xFF4B5563)),
                           hintText: 'Ex: 1,75 m',
                           filled: true,
                           fillColor: const Color(0xFFF9FAFB),
@@ -826,13 +832,15 @@ class _PaginaFinalizacaoState extends State<_PaginaFinalizacao> {
                           ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
-                            borderSide:
-                                const BorderSide(color: Color(0xFFD1D5DB)),
+                            borderSide: const BorderSide(
+                              color: Color(0xFFD1D5DB),
+                            ),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
-                            borderSide:
-                                const BorderSide(color: Color(0xFFD1D5DB)),
+                            borderSide: const BorderSide(
+                              color: Color(0xFFD1D5DB),
+                            ),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),

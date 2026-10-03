@@ -9,7 +9,8 @@ class BancoDePericias {
       somenteTreinada: false,
       penalidadeArmadura: true,
       descricao: 'Você consegue fazer proezas acrobáticas.',
-      acoesExecutadas: 'Amortecer queda, equilíbrio, escapar, levantar-se rapidamente, passar por inimigo.',
+      acoesExecutadas:
+          'Amortecer queda, equilíbrio, escapar, levantar-se rapidamente, passar por inimigo.',
     ),
     Pericia(
       key: 'ADESTRAMENTO',
@@ -35,7 +36,8 @@ class BancoDePericias {
       atributoChave: 'CAR',
       somenteTreinada: true,
       penalidadeArmadura: false,
-      descricao: 'Você sabe fazer apresentações artísticas, incluindo música, dança e dramaturgia.',
+      descricao:
+          'Você sabe fazer apresentações artísticas, incluindo música, dança e dramaturgia.',
       acoesExecutadas: 'Impressionar, Apresentar-se.',
     ),
     Pericia(
@@ -44,7 +46,8 @@ class BancoDePericias {
       atributoChave: 'DES',
       somenteTreinada: false,
       penalidadeArmadura: false,
-      descricao: 'Você sabe conduzir animais de montaria, como cavalos, trobos e grifos.',
+      descricao:
+          'Você sabe conduzir animais de montaria, como cavalos, trobos e grifos.',
       acoesExecutadas: 'Conduzirm, Galopar, Montar Rapidamente',
     ),
     Pericia(
@@ -53,7 +56,8 @@ class BancoDePericias {
       atributoChave: 'INT',
       somenteTreinada: true,
       penalidadeArmadura: false,
-      descricao: 'Você é um estudioso de assuntos gerais, como história e geografia.',
+      descricao:
+          'Você é um estudioso de assuntos gerais, como história e geografia.',
       acoesExecutadas: 'Lembrar informação, Saber de Idiomas.',
     ),
     Pericia(
@@ -63,7 +67,8 @@ class BancoDePericias {
       somenteTreinada: false,
       penalidadeArmadura: false,
       descricao: 'Você sabe tratar ferimentos, doenças e venenos.',
-      acoesExecutadas: 'Cuidados Prolongados, Necropsia, Primeiros socorros, Tratemento(precisa de Treinamento)',
+      acoesExecutadas:
+          'Cuidados Prolongados, Necropsia, Primeiros socorros, Tratemento(precisa de Treinamento)',
     ),
     Pericia(
       key: 'DIPLOMACIA',
@@ -81,7 +86,8 @@ class BancoDePericias {
       somenteTreinada: false,
       penalidadeArmadura: false,
       descricao: 'Você engana pessoas com mentiras, falsificações e disfarces.',
-      acoesExecutadas: 'Disfarce, Falsificação, Fintar, Insinuação, Intriga, Mentir',
+      acoesExecutadas:
+          'Disfarce, Falsificação, Fintar, Insinuação, Intriga, Mentir',
     ),
     Pericia(
       key: 'FORTITUDE',
@@ -99,7 +105,8 @@ class BancoDePericias {
       somenteTreinada: false,
       penalidadeArmadura: true,
       descricao: 'Você pode se esconder nas sombras e andar sem fazer barulho.',
-      acoesExecutadas: 'Esconder-se, mover-se furtivamente, seguir alvo sem ser percebido',
+      acoesExecutadas:
+          'Esconder-se, mover-se furtivamente, seguir alvo sem ser percebido',
     ),
     Pericia(
       key: 'GUERRA',
@@ -116,7 +123,8 @@ class BancoDePericias {
       atributoChave: 'DES',
       somenteTreinada: false,
       penalidadeArmadura: false,
-      descricao: 'Esta perícia determina sua velocidade de reação em situações de perigo.',
+      descricao:
+          'Esta perícia determina sua velocidade de reação em situações de perigo.',
       acoesExecutadas: 'Agir primeiro no combate.',
     ),
     Pericia(
@@ -135,7 +143,8 @@ class BancoDePericias {
       somenteTreinada: false,
       penalidadeArmadura: false,
       descricao: 'Esta perícia mede seu “sexto sentido”.',
-      acoesExecutadas: 'Perceber blefe, pressentimento, ler a pessoa, perceber ilusões.',
+      acoesExecutadas:
+          'Perceber blefe, pressentimento, ler a pessoa, perceber ilusões.',
     ),
     Pericia(
       key: 'INVESTIGACAO',
@@ -161,7 +170,8 @@ class BancoDePericias {
       atributoChave: 'DES',
       somenteTreinada: true,
       penalidadeArmadura: true,
-      descricao: 'Com mãos leves e mente suja, você sabe exercer as tarefas de um ladrão.',
+      descricao:
+          'Com mãos leves e mente suja, você sabe exercer as tarefas de um ladrão.',
       acoesExecutadas: 'Abrir fechaduras,Ocultar, Bater Carteira, Sabotagem',
     ),
     Pericia(
@@ -170,8 +180,10 @@ class BancoDePericias {
       atributoChave: 'FOR',
       somenteTreinada: false,
       penalidadeArmadura: false,
-      descricao: 'Mede sua capacidade de luta corpo a corpo, com armas brancas ou desarmado.',
-      acoesExecutadas: 'Atacar corpo a corpo, agarrar, derrubar, desarmar, empurrar, quebrar.',
+      descricao:
+          'Mede sua capacidade de luta corpo a corpo, com armas brancas ou desarmado.',
+      acoesExecutadas:
+          'Atacar corpo a corpo, agarrar, derrubar, desarmar, empurrar, quebrar.',
     ),
     Pericia(
       key: 'MISTICISMO',
@@ -179,9 +191,10 @@ class BancoDePericias {
       atributoChave: 'INT',
       somenteTreinada: true,
       penalidadeArmadura: false,
-      descricao: 'Esta perícia envolve o conhecimento de magias, itens mágicos e fenômenos sobrenaturais',
-      acoesExecutadas: 'Detectar magias, identificar criatura (fadas, mortos-vivos), identificar item mágico, informação, lançar magia armadurado.',
-      
+      descricao:
+          'Esta perícia envolve o conhecimento de magias, itens mágicos e fenômenos sobrenaturais',
+      acoesExecutadas:
+          'Detectar magias, identificar criatura (fadas, mortos-vivos), identificar item mágico, informação, lançar magia armadurado.',
     ),
     Pericia(
       key: 'NOBREZA',
@@ -189,17 +202,22 @@ class BancoDePericias {
       atributoChave: 'INT',
       somenteTreinada: true,
       penalidadeArmadura: false,
-      descricao: 'Você recebeu a educação de um nobre. Sabe desde supervisionar uma colheita a se portar em um baile.',
-      acoesExecutadas: 'Etiqueta, conhecer brasões, Informação de casas nobres ',
+      descricao:
+          'Você recebeu a educação de um nobre. Sabe desde supervisionar uma colheita a se portar em um baile.',
+      acoesExecutadas:
+          'Etiqueta, conhecer brasões, Informação de casas nobres ',
     ),
     Pericia(
       key: 'OFICIO',
       label: 'Ofício',
       atributoChave: 'INT',
-      somenteTreinada: false, // Obs: no T20 base depende do ofício, mas geralmente pode ser destreinado pra coisas fáceis
+      somenteTreinada:
+          false, // Obs: no T20 base depende do ofício, mas geralmente pode ser destreinado pra coisas fáceis
       penalidadeArmadura: false,
-      descricao: 'Permite fabricar itens de uma categoria específica (ex: Armeiro, Alquimista).',
-      acoesExecutadas: 'Fabricar item, ganhar sustento, reparar item. (converse com seu mestre para outros tipos de oficio)',
+      descricao:
+          'Permite fabricar itens de uma categoria específica (ex: Armeiro, Alquimista).',
+      acoesExecutadas:
+          'Fabricar item, ganhar sustento, reparar item. (converse com seu mestre para outros tipos de oficio)',
     ),
     Pericia(
       key: 'PERCEPCAO',
@@ -208,7 +226,8 @@ class BancoDePericias {
       somenteTreinada: false,
       penalidadeArmadura: false,
       descricao: 'Você nota coisas usando os sentidos.',
-      acoesExecutadas: 'Observar, ouvir, perceber coisas escondidas, contrapor Furtividade.',
+      acoesExecutadas:
+          'Observar, ouvir, perceber coisas escondidas, contrapor Furtividade.',
     ),
     Pericia(
       key: 'PILOTAGEM',
@@ -217,7 +236,8 @@ class BancoDePericias {
       somenteTreinada: true,
       penalidadeArmadura: false,
       descricao: 'Você sabe operar veículos como carroças, barcos e balões.',
-      acoesExecutadas: 'Conduzir veículo, manobras perigosas, combater embarcado.',
+      acoesExecutadas:
+          'Conduzir veículo, manobras perigosas, combater embarcado.',
     ),
     Pericia(
       key: 'PONTARIA',
@@ -225,7 +245,8 @@ class BancoDePericias {
       atributoChave: 'DES',
       somenteTreinada: false,
       penalidadeArmadura: false,
-      descricao: 'Mede sua capacidade de mira, seja com armas de arremesso, seja com armas de disparo.',
+      descricao:
+          'Mede sua capacidade de mira, seja com armas de arremesso, seja com armas de disparo.',
       acoesExecutadas: 'Atacar à distância.',
     ),
     Pericia(
@@ -234,8 +255,10 @@ class BancoDePericias {
       atributoChave: 'DES',
       somenteTreinada: false,
       penalidadeArmadura: false,
-      descricao: 'Mede sua capacidade de evitar armadilhas, explosões e ameaças rápidas.',
-      acoesExecutadas: 'Teste de resistência contra ataques em área, magias de Evocação e armadilhas.',
+      descricao:
+          'Mede sua capacidade de evitar armadilhas, explosões e ameaças rápidas.',
+      acoesExecutadas:
+          'Teste de resistência contra ataques em área, magias de Evocação e armadilhas.',
     ),
     Pericia(
       key: 'RELIGIAO',
@@ -243,8 +266,10 @@ class BancoDePericias {
       atributoChave: 'SAB',
       somenteTreinada: true,
       penalidadeArmadura: false,
-      descricao: 'Você possui conhecimento sobre os deuses e as religiões de Arton.',
-      acoesExecutadas: 'Conhecimento divino, identificar criatura/item (celestiais, demônios, mortos-vivos), Rito.',
+      descricao:
+          'Você possui conhecimento sobre os deuses e as religiões de Arton.',
+      acoesExecutadas:
+          'Conhecimento divino, identificar criatura/item (celestiais, demônios, mortos-vivos), Rito.',
     ),
     Pericia(
       key: 'SOBREVIVENCIA',
@@ -252,8 +277,10 @@ class BancoDePericias {
       atributoChave: 'SAB',
       somenteTreinada: false,
       penalidadeArmadura: false,
-      descricao: 'Você pode se guiar nos ermos e reconhecer e evitar perigos da natureza.',
-      acoesExecutadas: 'Acampamento, Identificar criaturas da floresta, Orientar-se, Rastrear (se for treinado).',
+      descricao:
+          'Você pode se guiar nos ermos e reconhecer e evitar perigos da natureza.',
+      acoesExecutadas:
+          'Acampamento, Identificar criaturas da floresta, Orientar-se, Rastrear (se for treinado).',
     ),
     Pericia(
       key: 'VONTADE',
@@ -262,7 +289,8 @@ class BancoDePericias {
       somenteTreinada: false,
       penalidadeArmadura: false,
       descricao: 'Esta perícia envolve sua concentração e força de vontade.',
-      acoesExecutadas: 'Teste de resistência contra intimidação, ilusões, encantamentos e medo.',
+      acoesExecutadas:
+          'Teste de resistência contra intimidação, ilusões, encantamentos e medo.',
     ),
   ];
 

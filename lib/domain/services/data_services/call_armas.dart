@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
-import '../entities/arma.dart';
+import '../../entities/arma.dart';
 
 class BancoDeArmas {
   static List<Arma> _dados = [];

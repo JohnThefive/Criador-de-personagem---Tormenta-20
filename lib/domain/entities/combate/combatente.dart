@@ -72,14 +72,13 @@ class Combatente {
     if (naoLetal) {
       final novoDanoNaoLetal = danoNaoLetal + valor;
       // Dano não-letal faz desmaiar quando soma >= PV atual, mas não sangra
-      final novoEstado = (novoDanoNaoLetal >= pvAtual && estadoVida == EstadoVidaCombatente.ativo)
+      final novoEstado =
+          (novoDanoNaoLetal >= pvAtual &&
+              estadoVida == EstadoVidaCombatente.ativo)
           ? EstadoVidaCombatente.estabilizado
           : estadoVida;
 
-      return copyWith(
-        danoNaoLetal: novoDanoNaoLetal,
-        estadoVida: novoEstado,
-      );
+      return copyWith(danoNaoLetal: novoDanoNaoLetal, estadoVida: novoEstado);
     }
 
     // Dano Letal
@@ -93,10 +92,7 @@ class Combatente {
       novoEstado = EstadoVidaCombatente.inconscienteSangrando;
     }
 
-    return copyWith(
-      pvAtual: novoPv,
-      estadoVida: novoEstado,
-    );
+    return copyWith(pvAtual: novoPv, estadoVida: novoEstado);
   }
 
   /// Aplica cura: se PV voltar a ser > 0, acorda e volta a ficar ativo
@@ -114,15 +110,15 @@ class Combatente {
       novoEstado = EstadoVidaCombatente.estabilizado;
     }
 
-    return copyWith(
-      pvAtual: novoPv,
-      estadoVida: novoEstado,
-    );
+    return copyWith(pvAtual: novoPv, estadoVida: novoEstado);
   }
 
   /// Realiza o teste de Constituição (CD 15) no início do turno se estiver sangrando
   /// Retorna o novo Combatente e o resultado textual
-  (Combatente, String) testeEstabilizacaoCon(int dadoD20, int danoSangramentoD6) {
+  (Combatente, String) testeEstabilizacaoCon(
+    int dadoD20,
+    int danoSangramentoD6,
+  ) {
     if (estadoVida != EstadoVidaCombatente.inconscienteSangrando) {
       return (this, "");
     }

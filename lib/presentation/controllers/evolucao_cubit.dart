@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../domain/entities/personagem.dart';
 import '../../domain/entities/classe_do_personagem.dart';
 import '../../domain/entities/poder.dart';
-import '../../domain/services/banco_poderes.dart';
+import '../../domain/services/data_services/call_poderes.dart';
 import '../../domain/services/poder_validador_service.dart';
 import '../../domain/services/personagem_storage_service.dart';
 
@@ -12,10 +12,7 @@ class ItemPoderEvolucao {
   final Poder poder;
   final ResultadoElegibilidade elegibilidade;
 
-  const ItemPoderEvolucao({
-    required this.poder,
-    required this.elegibilidade,
-  });
+  const ItemPoderEvolucao({required this.poder, required this.elegibilidade});
 
   bool get podeAprender => elegibilidade.ehElegivel;
   bool get jaAdquirido => elegibilidade.jaPossui;
@@ -45,11 +42,11 @@ class EvolucaoState {
 
   ClasseDoPersonagem get classeAtual =>
       personagem.classes.isNotEmpty && indiceClasse < personagem.classes.length
-          ? personagem.classes[indiceClasse]
-          : ClasseDoPersonagem(
-              classeDefinicao: personagem.classes.first.classeDefinicao,
-              nivel: 1,
-            );
+      ? personagem.classes[indiceClasse]
+      : ClasseDoPersonagem(
+          classeDefinicao: personagem.classes.first.classeDefinicao,
+          nivel: 1,
+        );
 
   int get poderesPendentes => classeAtual.poderesPendentes;
   int get poderesPermitidos => classeAtual.poderesPermitidos;
@@ -105,22 +102,16 @@ class EvolucaoState {
       todosItens: todosItens ?? this.todosItens,
       salvando: salvando ?? this.salvando,
       mensagemErro: anularErro ? null : (mensagemErro ?? this.mensagemErro),
-      mensagemSucesso:
-          anularSucesso ? null : (mensagemSucesso ?? this.mensagemSucesso),
+      mensagemSucesso: anularSucesso
+          ? null
+          : (mensagemSucesso ?? this.mensagemSucesso),
     );
   }
 }
 
 class EvolucaoCubit extends Cubit<EvolucaoState> {
-  EvolucaoCubit({
-    required Personagem personagem,
-    int indiceClasse = 0,
-  }) : super(
-          EvolucaoState(
-            personagem: personagem,
-            indiceClasse: indiceClasse,
-          ),
-        ) {
+  EvolucaoCubit({required Personagem personagem, int indiceClasse = 0})
+    : super(EvolucaoState(personagem: personagem, indiceClasse: indiceClasse)) {
     _recalcularItens();
   }
 
@@ -177,12 +168,7 @@ class EvolucaoCubit extends Cubit<EvolucaoState> {
       return a.poder.nome.compareTo(b.poder.nome);
     });
 
-    emit(
-      state.copyWith(
-        personagem: p,
-        todosItens: listaItens,
-      ),
-    );
+    emit(state.copyWith(personagem: p, todosItens: listaItens));
   }
 
   /// Aprende o poder selecionado
@@ -217,8 +203,9 @@ class EvolucaoCubit extends Cubit<EvolucaoState> {
     }
 
     if (!validacao.ehElegivel) {
-      final pendenciasTexto =
-          validacao.pendencias.map((req) => req.descricao).join(', ');
+      final pendenciasTexto = validacao.pendencias
+          .map((req) => req.descricao)
+          .join(', ');
       emit(
         state.copyWith(
           mensagemErro:
@@ -233,7 +220,9 @@ class EvolucaoCubit extends Cubit<EvolucaoState> {
 
     try {
       final novaClasse = classe.adicionarPoder(poder);
-      final novasClasses = List<ClasseDoPersonagem>.from(state.personagem.classes);
+      final novasClasses = List<ClasseDoPersonagem>.from(
+        state.personagem.classes,
+      );
       novasClasses[state.indiceClasse] = novaClasse;
 
       final novoPersonagem = state.personagem.copyWith(
@@ -275,7 +264,9 @@ class EvolucaoCubit extends Cubit<EvolucaoState> {
 
     try {
       final novaClasse = classe.removerPoder(poderKey);
-      final novasClasses = List<ClasseDoPersonagem>.from(state.personagem.classes);
+      final novasClasses = List<ClasseDoPersonagem>.from(
+        state.personagem.classes,
+      );
       novasClasses[state.indiceClasse] = novaClasse;
 
       final novoPersonagem = state.personagem.copyWith(

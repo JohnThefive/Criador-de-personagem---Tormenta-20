@@ -107,8 +107,9 @@ void main() {
 
       // Identifica o combatente ativo e o adversário na fila
       final ativo = cubit.state.combatenteAtual!;
-      final adversario =
-          cubit.state.filaIniciativa.firstWhere((c) => c.id != ativo.id);
+      final adversario = cubit.state.filaIniciativa.firstWhere(
+        (c) => c.id != ativo.id,
+      );
 
       // Executa ataque (gasta Ação Padrão)
       cubit.executarAtaque(defensor: adversario, arma: espadaLonga);

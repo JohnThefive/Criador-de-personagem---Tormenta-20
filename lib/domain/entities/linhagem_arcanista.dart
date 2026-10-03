@@ -20,22 +20,25 @@ abstract class Linhagem {
 class LinhagemDraconica extends Linhagem {
   final TipoDanoDraconico tipoDanoEscolhido;
 
-  LinhagemDraconica({required this.tipoDanoEscolhido}) 
+  LinhagemDraconica({required this.tipoDanoEscolhido})
     : super(
         nome: "Dracônica",
-        descricaoBasica: "Redução de dano e bônus de dano do tipo ${tipoDanoEscolhido.name}.",
+        descricaoBasica:
+            "Redução de dano e bônus de dano do tipo ${tipoDanoEscolhido.name}.",
         descricaoAprimorada: "Aumento de PV e imunidade.",
         descricaoSuperior: "Transformação em meio-dragão.",
       );
 }
 
 class LinhagemFeerica extends Linhagem {
-  final String magiaBonusEncantamentoOuIlusao; // Guardaremos o nome ou ID da magia
+  final String
+  magiaBonusEncantamentoOuIlusao; // Guardaremos o nome ou ID da magia
 
   LinhagemFeerica({required this.magiaBonusEncantamentoOuIlusao})
     : super(
         nome: "Feérica",
-        descricaoBasica: "Aprende $magiaBonusEncantamentoOuIlusao (+1 magia bônus).",
+        descricaoBasica:
+            "Aprende $magiaBonusEncantamentoOuIlusao (+1 magia bônus).",
         descricaoAprimorada: "Aumento de Carisma.",
         descricaoSuperior: "Magias viram ações livres.",
       );
@@ -43,7 +46,7 @@ class LinhagemFeerica extends Linhagem {
 
 class LinhagemRubra extends Linhagem {
   // Flag para a UI saber que precisa abrir a lista de Poderes da Tormenta
-  final bool interageComTormenta = true; 
+  final bool interageComTormenta = true;
 
   LinhagemRubra()
     : super(

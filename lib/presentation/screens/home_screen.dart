@@ -14,18 +14,21 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Cor Principal baseada no seu design (Vermelho T20)
-    final t20Red = const Color.fromARGB(255, 255, 0, 0); 
+    final t20Red = const Color.fromARGB(255, 255, 0, 0);
 
     return Scaffold(
       backgroundColor: t20Red, // Fundo Vermelho
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const Text("T20 - Criador de herois", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+        title: const Text(
+          "T20 - Criador de herois",
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
         centerTitle: true,
       ),
-      
-      // O MENU DE BAIXO 
+
+      // O MENU DE BAIXO
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(), // Recorte para o dado
         color: Colors.black,
@@ -34,21 +37,33 @@ class HomeScreen extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              IconButton(icon: const Icon(Icons.settings, color: Colors.white), onPressed: () {}),
-              IconButton(icon: const Icon(Icons.person, color: Colors.white), onPressed: () {}),
+              IconButton(
+                icon: const Icon(Icons.settings, color: Colors.white),
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: const Icon(Icons.person, color: Colors.white),
+                onPressed: () {},
+              ),
               const SizedBox(width: 40), // Espaço para o botão do meio
-              IconButton(icon: const Icon(Icons.description, color: Colors.white), onPressed: () {}), 
-              IconButton(icon: const Icon(Icons.language, color: Colors.white), onPressed: () {}), 
+              IconButton(
+                icon: const Icon(Icons.description, color: Colors.white),
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: const Icon(Icons.language, color: Colors.white),
+                onPressed: () {},
+              ),
             ],
           ),
         ),
       ),
-      
+
       // O DADO D20 NO MEIO (Floating Action Button) // colocar d20 futuramente
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-            // Ação rápida (rolar dado avulso futuramente)
+          // Ação rápida (rolar dado avulso futuramente)
         },
         backgroundColor: Colors.white,
         child: const Icon(Icons.casino, color: Colors.red, size: 30),
@@ -69,11 +84,20 @@ class HomeScreen extends StatelessWidget {
                 ),
                 child: Column(
                   children: const [
-                    Text("Bem Vindo ao criador de herois !!", 
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18), textAlign: TextAlign.center),
+                    Text(
+                      "Bem Vindo ao criador de herois !!",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
                     SizedBox(height: 8),
-                    Text("Crie Personagens complexos e suba de nível com eles.", 
-                      style: TextStyle(fontSize: 12), textAlign: TextAlign.center),
+                    Text(
+                      "Crie Personagens complexos e suba de nível com eles.",
+                      style: TextStyle(fontSize: 12),
+                      textAlign: TextAlign.center,
+                    ),
                   ],
                 ),
               ),
@@ -83,9 +107,8 @@ class HomeScreen extends StatelessWidget {
                 child: ListView.builder(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   // Soma +1 ao tamanho da lista para incluir o botão de criar
-                  itemCount: state.personagens.length + 1, 
+                  itemCount: state.personagens.length + 1,
                   itemBuilder: (context, index) {
-                    
                     // O PRIMEIRO ITEM É O BOTÃO DE CRIAR
                     if (index == 0) {
                       return GestureDetector(
@@ -97,7 +120,9 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ).then((_) {
                             if (context.mounted) {
-                              context.read<HomeCubit>().carregarPersonagensReais();
+                              context
+                                  .read<HomeCubit>()
+                                  .carregarPersonagensReais();
                             }
                           });
                         },
@@ -154,7 +179,11 @@ class _CharacterCard extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         title: Row(
           children: const [
-            Icon(Icons.warning_amber_rounded, color: Color(0xFFB71C1C), size: 28),
+            Icon(
+              Icons.warning_amber_rounded,
+              color: Color(0xFFB71C1C),
+              size: 28,
+            ),
             SizedBox(width: 8),
             Text(
               "Excluir Personagem",
@@ -168,17 +197,29 @@ class _CharacterCard extends StatelessWidget {
         ),
         content: Text(
           'Tem certeza de que deseja excluir "${personagem.nome}"?\nEsta ação apagará a ficha permanentemente e não pode ser desfeita.',
-          style: const TextStyle(color: Color(0xFF374151), fontSize: 14, height: 1.4),
+          style: const TextStyle(
+            color: Color(0xFF374151),
+            fontSize: 14,
+            height: 1.4,
+          ),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(ctx).pop(),
-            child: const Text("CANCELAR", style: TextStyle(color: Colors.black54, fontWeight: FontWeight.w600)),
+            child: const Text(
+              "CANCELAR",
+              style: TextStyle(
+                color: Colors.black54,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFFB71C1C),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
             ),
             onPressed: () {
               Navigator.of(ctx).pop();
@@ -192,7 +233,10 @@ class _CharacterCard extends StatelessWidget {
             },
             child: const Text(
               "EXCLUIR",
-              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ],
@@ -202,7 +246,8 @@ class _CharacterCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final temFoto = personagem.caminhoFoto != null &&
+    final temFoto =
+        personagem.caminhoFoto != null &&
         personagem.caminhoFoto!.isNotEmpty &&
         File(personagem.caminhoFoto!).existsSync();
 
@@ -210,12 +255,16 @@ class _CharacterCard extends StatelessWidget {
         ? personagem.classes[0].classeDefinicao.nome
         : "Sem Classe";
     final racaNome = personagem.raca?.nome ?? "Sem Raça";
-    final nivel = personagem.nivelPersonagem > 0 ? personagem.nivelPersonagem : 1;
+    final nivel = personagem.nivelPersonagem > 0
+        ? personagem.nivelPersonagem
+        : 1;
 
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
-        color: const Color(0xFF8B0000), // Carmesim profundo para contraste e elegância
+        color: const Color(
+          0xFF8B0000,
+        ), // Carmesim profundo para contraste e elegância
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: Colors.white.withValues(alpha: 0.15)),
         boxShadow: [
@@ -234,7 +283,8 @@ class _CharacterCard extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => PainelJogadorScreen(personagemInicial: personagem),
+                builder: (context) =>
+                    PainelJogadorScreen(personagemInicial: personagem),
               ),
             ).then((_) {
               if (context.mounted) {
@@ -261,10 +311,10 @@ class _CharacterCard extends StatelessWidget {
                             height: 62,
                             fit: BoxFit.cover,
                           )
-                        : const Icon(
-                            Icons.person,
-                            color: Colors.white70,
-                            size: 38,
+                        : Icon(
+                            personagem.raca?.iconeRaca ?? Icons.person,
+                            color: Colors.white.withValues(alpha: 0.85),
+                            size: personagem.raca != null ? 32 : 38,
                           ),
                   ),
                 ),

@@ -195,7 +195,9 @@ class Arma {
       key: json['key'] ?? '',
       nome: json['nome'] ?? '',
       descricao: json['descricao'] ?? '',
-      proficiencia: ProficienciaArma.fromString(json['proficiencia'] ?? 'simples'),
+      proficiencia: ProficienciaArma.fromString(
+        json['proficiencia'] ?? 'simples',
+      ),
       proposito: PropositoArma.fromString(json['proposito'] ?? 'corpoACorpo'),
       empunhadura: EmpunhaduraArma.fromString(json['empunhadura'] ?? 'umaMao'),
       dano: json['dano'] ?? '1d6',

@@ -163,8 +163,10 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
                   ),
                 ),
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 6,
+                  ),
                   decoration: BoxDecoration(
                     color: Colors.amber,
                     borderRadius: BorderRadius.circular(8),
@@ -365,10 +367,11 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
         hint: campo == 'Idade'
             ? 'Ex: 25'
             : campo == 'Peso'
-                ? 'Ex: 75 kg'
-                : 'Ex: 1.80 m',
-        keyboardType:
-            campo == 'Idade' ? TextInputType.number : TextInputType.text,
+            ? 'Ex: 75 kg'
+            : 'Ex: 1.80 m',
+        keyboardType: campo == 'Idade'
+            ? TextInputType.number
+            : TextInputType.text,
       ),
     );
 
@@ -660,8 +663,9 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
   }
 
   void _mostrarModalClasse() {
-    final classeDoPersonagem =
-        _personagem.classes.isNotEmpty ? _personagem.classes[0] : null;
+    final classeDoPersonagem = _personagem.classes.isNotEmpty
+        ? _personagem.classes[0]
+        : null;
     final classe = classeDoPersonagem?.classeDefinicao;
     final nivel = classeDoPersonagem?.nivel ?? 1;
 
@@ -792,10 +796,7 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
                           const SizedBox(height: 4),
                           Text(
                             e.value,
-                            style: const TextStyle(
-                              fontSize: 13,
-                              height: 1.35,
-                            ),
+                            style: const TextStyle(fontSize: 13, height: 1.35),
                           ),
                         ],
                       ),
@@ -838,10 +839,7 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
                           const SizedBox(height: 4),
                           Text(
                             p.descricao,
-                            style: const TextStyle(
-                              fontSize: 13,
-                              height: 1.35,
-                            ),
+                            style: const TextStyle(fontSize: 13, height: 1.35),
                           ),
                         ],
                       ),
@@ -972,14 +970,14 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
                 color: resultadoDado == 20
                     ? Colors.amber.shade100
                     : resultadoDado == 1
-                        ? Colors.red.shade100
-                        : Colors.grey.shade100,
+                    ? Colors.red.shade100
+                    : Colors.grey.shade100,
                 border: Border.all(
                   color: resultadoDado == 20
                       ? Colors.amber
                       : resultadoDado == 1
-                          ? Colors.red
-                          : Colors.grey.shade300,
+                      ? Colors.red
+                      : Colors.grey.shade300,
                   width: 3,
                 ),
               ),
@@ -991,8 +989,8 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
                   color: resultadoDado == 20
                       ? Colors.amber.shade900
                       : resultadoDado == 1
-                          ? Colors.red.shade900
-                          : Colors.black87,
+                      ? Colors.red.shade900
+                      : Colors.black87,
                 ),
               ),
             ),
@@ -1973,9 +1971,7 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
               color: const Color(0xFF80DEEA),
               borderRadius: BorderRadius.circular(16),
             ),
-            child: Center(
-              child: Icon(icone, size: 30, color: Colors.black87),
-            ),
+            child: Center(child: Icon(icone, size: 30, color: Colors.black87)),
           ),
           const SizedBox(height: 6),
           Text(
@@ -2032,8 +2028,9 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
 
   // --- DEMAIS ABAS ---
   Widget _buildTabHabilidades() {
-    final classeDoPersonagem =
-        _personagem.classes.isNotEmpty ? _personagem.classes[0] : null;
+    final classeDoPersonagem = _personagem.classes.isNotEmpty
+        ? _personagem.classes[0]
+        : null;
     final classe = classeDoPersonagem?.classeDefinicao;
     final nivel = classeDoPersonagem?.nivel ?? 1;
 
@@ -2167,7 +2164,10 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
                         )
                       : null,
                   trailing: classeDoPersonagem.temPoderPendente
-                      ? const Icon(Icons.chevron_right, color: Color(0xFFD32F2F))
+                      ? const Icon(
+                          Icons.chevron_right,
+                          color: Color(0xFFD32F2F),
+                        )
                       : null,
                   onTap: () => _abrirSelecaoPoderes(),
                 ),
@@ -2184,7 +2184,11 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
                     ),
                     subtitle: Text(p.descricao),
                     trailing: IconButton(
-                      icon: const Icon(Icons.settings, color: Colors.grey, size: 20),
+                      icon: const Icon(
+                        Icons.settings,
+                        color: Colors.grey,
+                        size: 20,
+                      ),
                       tooltip: 'Gerenciar poderes',
                       onPressed: () => _abrirSelecaoPoderes(),
                     ),
