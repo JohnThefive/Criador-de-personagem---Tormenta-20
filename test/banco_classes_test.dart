@@ -167,7 +167,24 @@ void main() {
     );
 
     test(
-      'Arquivo assets/data/banco_classe.json é válido e carrega as 5 classes do catálogo',
+      'Classe.fromJson lida com caminhosDisponiveis em formato String sem lancar _TypeError',
+      () {
+        final jsonComStrings = {
+          'id': 'cavaleiro',
+          'nome': 'Cavaleiro',
+          'descricaoClasse': 'Guerreiro nobre.',
+          'caminhosDisponiveis': ['Bastião', 'Montaria'],
+        };
+
+        final classe = Classe.fromJson(jsonComStrings);
+        expect(classe.caminhosDisponiveis.length, equals(2));
+        expect(classe.caminhosDisponiveis[0].nome, equals('Bastião'));
+        expect(classe.caminhosDisponiveis[1].nome, equals('Montaria'));
+      },
+    );
+
+    test(
+      'Arquivo assets/data/banco_classe.json é válido e carrega as 6 classes do catálogo',
       () {
         final file = File('assets/data/banco_classe.json');
         expect(
@@ -179,12 +196,12 @@ void main() {
         final content = file.readAsStringSync();
         final List<dynamic> jsonList = jsonDecode(content);
 
-        expect(jsonList.length, equals(5));
+        expect(jsonList.length, equals(8));
 
         final classes = jsonList
             .map((e) => Classe.fromJson(e as Map<String, dynamic>))
             .toList();
-        expect(classes.length, equals(5));
+        expect(classes.length, equals(8));
 
         final idsEsperados = {
           'arcanista',
@@ -192,6 +209,9 @@ void main() {
           'bardo',
           'bucaneiro',
           'cacador',
+          'cavaleiro',
+          'clerigo',
+          'druida',
         };
         final idsEncontrados = classes.map((c) => c.idClasse).toSet();
         expect(idsEncontrados, equals(idsEsperados));
@@ -226,6 +246,36 @@ void main() {
         final bucaneiro = classes.firstWhere((c) => c.idClasse == 'bucaneiro');
         expect(bucaneiro.nome, equals('Bucaneiro'));
         expect(bucaneiro.icone, equals('saber-and-pistol'));
+
+        // Verificações do Cavaleiro
+        final cavaleiro = classes.firstWhere((c) => c.idClasse == 'cavaleiro');
+        expect(cavaleiro.nome, equals('Cavaleiro'));
+        expect(cavaleiro.pvInicial, equals(20));
+        expect(cavaleiro.pvPorNivel, equals(5));
+        expect(cavaleiro.pmInicial, equals(3));
+        expect(
+          cavaleiro.proficiencias,
+          contains(TipoProficiencia.armadurasPesadas),
+        );
+        expect(cavaleiro.proficiencias, contains(TipoProficiencia.escudos));
+        expect(
+          cavaleiro.proficiencias,
+          contains(TipoProficiencia.armasMarciais),
+        );
+
+        // Verificações dos caminhos do Cavaleiro (regra de nível 5)
+        expect(cavaleiro.caminhosNivel1, isEmpty);
+        expect(cavaleiro.caminhosParaNivel(5).length, equals(2));
+        expect(
+          cavaleiro.caminhosParaNivel(5).map((c) => c.nome),
+          containsAll(['Bastião', 'Montaria']),
+        );
+
+        // Verificações do Druida (sem caminhos de classe no nível 1)
+        final druida = classes.firstWhere((c) => c.idClasse == 'druida');
+        expect(druida.nome, equals('Druida'));
+        expect(druida.caminhosDisponiveis, isEmpty);
+        expect(druida.caminhosNivel1, isEmpty);
       },
     );
   });

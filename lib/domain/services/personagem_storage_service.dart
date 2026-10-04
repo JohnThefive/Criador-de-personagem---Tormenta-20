@@ -15,6 +15,7 @@ import '../entities/classe_do_personagem.dart';
 import '../entities/poder.dart';
 import '../entities/arma.dart';
 import '../entities/protecao.dart';
+import '../entities/forma_selvagem.dart';
 
 class PersonagemStorageService {
   // Retorna a pasta interna onde o app tem permissão de escrita no Android
@@ -68,6 +69,14 @@ class PersonagemStorageService {
     }
   }
 
+  // MÉTODOS PÚBLICOS DE SERIALIZAÇÃO / DESSERIALIZAÇÃO
+  static Map<String, dynamic> personagemToMap(Personagem p) => _personagemToMap(p);
+  static String personagemToJson(Personagem p) => jsonEncode(_personagemToMap(p));
+
+  static Personagem mapToPersonagem(Map<String, dynamic> map) => _mapToPersonagem(map);
+  static Personagem personagemFromJson(String jsonStr) =>
+      _mapToPersonagem(jsonDecode(jsonStr) as Map<String, dynamic>);
+
   // SERIALIZAÇÃO (Personagem -> Map)
   static Map<String, dynamic> _personagemToMap(Personagem p) {
     return {
@@ -93,6 +102,8 @@ class PersonagemStorageService {
       'armaduraKey': p.armaduraEquipada?.key,
       'escudoKey': p.escudoEquipado?.key,
       'tibares': p.tibares,
+      'formaSelvagemAtiva': p.formaSelvagemAtiva?.toJson(),
+      'tipoCompanheiroAnimal': p.tipoCompanheiroAnimal,
       'periciasTreinadas': p.periciasTreinadas,
       'atributos': p.atributos.map((k, v) => MapEntry(k, v.valor)),
       'classes': p.classes
@@ -203,6 +214,10 @@ class PersonagemStorageService {
         ? BancoDeArmaduras.getByKey(escudoKey)
         : null;
 
+    final formaSelvagem = map['formaSelvagemAtiva'] != null
+        ? FormaSelvagemAtiva.fromJson(Map<String, dynamic>.from(map['formaSelvagemAtiva']))
+        : null;
+
     return Personagem(
       id: map['id']?.toString(),
       nome: map['nome'] ?? 'Aventureiro',
@@ -229,6 +244,8 @@ class PersonagemStorageService {
       armaduraEquipada: armadura,
       escudoEquipado: escudo,
       tibares: (map['tibares'] as num?)?.toInt() ?? 0,
+      formaSelvagemAtiva: formaSelvagem,
+      tipoCompanheiroAnimal: map['tipoCompanheiroAnimal']?.toString(),
       periciasTreinadas: List<String>.from(map['periciasTreinadas'] ?? []),
     );
   }

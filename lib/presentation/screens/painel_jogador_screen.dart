@@ -3,7 +3,11 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:t20_creator/domain/entities/classe_do_personagem.dart';
+import '../../domain/entities/classe.dart';
 import '../../domain/entities/personagem.dart';
+import '../../domain/entities/companheiro_animal.dart';
+import '../../domain/services/data_services/call_formas_selvagens.dart';
+import '../../domain/services/data_services/call_companheiros.dart';
 import '../../domain/services/personagem_storage_service.dart';
 import 'selecao_poderes_screen.dart';
 import 'aba_combate_view.dart';
@@ -97,6 +101,20 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
           ),
         ),
       );
+    }
+
+    // Se liberou caminhos no nível atual (ex: Cavaleiro no nível 5) e ainda não escolheu
+    final clAtual = atualizado.classes[0];
+    final caminhosNivel = clAtual.classeDefinicao.caminhosParaNivel(novoNivel);
+    if (delta > 0 &&
+        clAtual.caminhoEscolhido == null &&
+        caminhosNivel.isNotEmpty &&
+        mounted) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          _mostrarModalEscolhaCaminho(clAtual, caminhosNivel);
+        }
+      });
     }
   }
 
@@ -911,6 +929,125 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
                   ),
                 ),
               ],
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _mostrarModalEscolhaCaminho(
+    ClasseDoPersonagem classeDoPersonagem,
+    List<CaminhoDeClasse> caminhos,
+  ) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.white,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (ctx) => SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Container(
+                  width: 40,
+                  height: 4,
+                  margin: const EdgeInsets.only(bottom: 12),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+              ),
+              Text(
+                classeDoPersonagem.classeDefinicao.idClasse == 'cavaleiro'
+                    ? 'Caminho do Cavaleiro (5º Nível)'
+                    : 'Escolha de Caminho / Especialização',
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  color: Color(0xFFD32F2F),
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                classeDoPersonagem.classeDefinicao.idClasse == 'cavaleiro'
+                    ? 'No 5º nível, o cavaleiro deve escolher entre Bastião ou Montaria:'
+                    : 'Selecione o caminho para a sua classe:',
+                style: const TextStyle(fontSize: 13, color: Colors.black54),
+              ),
+              const SizedBox(height: 12),
+              ...caminhos.map((cam) {
+                final selecionado =
+                    classeDoPersonagem.caminhoEscolhido?.nome == cam.nome;
+                return Card(
+                  margin: const EdgeInsets.only(bottom: 8),
+                  color: selecionado ? Colors.red.shade50 : Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    side: BorderSide(
+                      color: selecionado
+                          ? const Color(0xFFD32F2F)
+                          : Colors.grey.shade300,
+                      width: selecionado ? 2 : 1,
+                    ),
+                  ),
+                  child: ListTile(
+                    leading: Icon(
+                      selecionado
+                          ? Icons.check_circle
+                          : Icons.radio_button_unchecked,
+                      color: selecionado
+                          ? const Color(0xFFD32F2F)
+                          : Colors.grey,
+                    ),
+                    title: Text(
+                      cam.nome,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(cam.descricao),
+                    onTap: () async {
+                      Navigator.pop(ctx);
+                      final clAtualizada = classeDoPersonagem.copyWith(
+                        caminhoEscolhido: cam,
+                      );
+                      final novasClasses = List<ClasseDoPersonagem>.from(
+                        _personagem.classes,
+                      );
+                      final idx = _personagem.classes.indexOf(
+                        classeDoPersonagem,
+                      );
+                      if (idx >= 0) {
+                        novasClasses[idx] = clAtualizada;
+                      } else {
+                        novasClasses[0] = clAtualizada;
+                      }
+                      final novoP = _personagem.copyWith(
+                        classe_do_personagem: novasClasses,
+                      );
+                      await PersonagemStorageService.salvarPersonagem(novoP);
+                      setState(() {
+                        _personagem = novoP;
+                      });
+                      if (mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'Caminho "${cam.nome}" escolhido com sucesso!',
+                            ),
+                            backgroundColor: const Color(0xFFD32F2F),
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                );
+              }),
             ],
           ),
         ),
@@ -1769,6 +1906,12 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
           ),
         ),
 
+        // BANNER DA FORMA SELVAGEM SE TRANSFORMADO
+        if (_personagem.estaEmFormaSelvagem) ...[
+          const SizedBox(height: 12),
+          _buildBannerFormaSelvagemAtiva(),
+        ],
+
         const SizedBox(height: 18),
 
         // 4 CARDS RÁPIDOS 100% RESPONSIVOS (Atributos, Raça, Classe, PDF)
@@ -2079,6 +2222,51 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 subtitle: Text(classeDoPersonagem.caminhoEscolhido!.descricao),
+                trailing: classe.caminhosParaNivel(nivel).length > 1
+                    ? IconButton(
+                        icon: const Icon(
+                          Icons.edit,
+                          size: 18,
+                          color: Colors.brown,
+                        ),
+                        tooltip: 'Alterar caminho',
+                        onPressed: () => _mostrarModalEscolhaCaminho(
+                          classeDoPersonagem,
+                          classe.caminhosParaNivel(nivel),
+                        ),
+                      )
+                    : null,
+              ),
+            ),
+          ] else if (classeDoPersonagem != null &&
+              classe.caminhosParaNivel(nivel).isNotEmpty) ...[
+            Card(
+              color: Colors.red.shade50,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+                side: BorderSide(color: Colors.red.shade300),
+              ),
+              margin: const EdgeInsets.only(bottom: 8),
+              child: ListTile(
+                leading: const Icon(Icons.stars, color: Color(0xFFD32F2F)),
+                title: Text(
+                  classe.idClasse == 'cavaleiro'
+                      ? 'Caminho do Cavaleiro (5º Nível)'
+                      : 'Especialização / Caminho Disponível',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFFD32F2F),
+                  ),
+                ),
+                subtitle: const Text('Toque para escolher seu caminho!'),
+                trailing: const Icon(
+                  Icons.chevron_right,
+                  color: Color(0xFFD32F2F),
+                ),
+                onTap: () => _mostrarModalEscolhaCaminho(
+                  classeDoPersonagem,
+                  classe.caminhosParaNivel(nivel),
+                ),
               ),
             ),
           ],
@@ -2104,6 +2292,13 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
               ),
             ),
           ),
+          // SEÇÃO DE PODERES ESPECIAIS DE DRUIDA (Forma Selvagem e Companheiro Animal)
+          if (_personagem.temPoderFormaSelvagem) ...[
+            _buildCardFormaSelvagem(),
+          ],
+          if (_personagem.temPoderCompanheiroAnimal) ...[
+            _buildCardCompanheiroAnimal(),
+          ],
           if (classeDoPersonagem != null) ...[
             const SizedBox(height: 10),
             Row(
@@ -2287,6 +2482,582 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
             ),
         ],
       ],
+    );
+  }
+
+  // --- SEÇÃO DE FORMA SELVAGEM E COMPANHEIRO ANIMAL DO DRUIDA ---
+
+  Widget _buildBannerFormaSelvagemAtiva() {
+    final forma = _personagem.formaSelvagemAtiva!;
+    final modsTexto = forma.modificadores.entries
+        .map((e) => '+${e.value} ${e.key}')
+        .join(', ');
+
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: const Color(0xFF1B4332),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: const Color(0xFF52B788), width: 1.5),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.15),
+            blurRadius: 6,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Icon(Icons.pets, color: Color(0xFF95D5B2), size: 22),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  'Transfigurado: ${forma.nome}',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                  ),
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF2D6A4F),
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                child: Text(
+                  forma.tier.toUpperCase(),
+                  style: const TextStyle(
+                    color: Color(0xFFD8F3DC),
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 6),
+          Text(
+            'Bônus ativos: $modsTexto'
+            '${forma.rd > 0 ? " | RD ${forma.rd}" : ""}'
+            '${forma.tamanho != null ? " | Tamanho ${forma.tamanho}" : ""}',
+            style: const TextStyle(color: Color(0xFFD8F3DC), fontSize: 12),
+          ),
+          const SizedBox(height: 8),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton.icon(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFFD32F2F),
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              onPressed: () {
+                _atualizarPersonagem(_personagem.reverterFormaSelvagem());
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Você reverteu à sua forma normal.'),
+                  ),
+                );
+              },
+              icon: const Icon(Icons.undo, size: 16),
+              label: const Text(
+                'Reverter Forma (Ação Livre)',
+                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCardFormaSelvagem() {
+    final estaTransformado = _personagem.estaEmFormaSelvagem;
+
+    if (estaTransformado) {
+      return Padding(
+        padding: const EdgeInsets.only(bottom: 8),
+        child: _buildBannerFormaSelvagemAtiva(),
+      );
+    }
+
+    return Card(
+      color: const Color(0xFFF1F8E9),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+        side: const BorderSide(color: Color(0xFFAED581)),
+      ),
+      margin: const EdgeInsets.only(bottom: 8),
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                const Icon(Icons.pets, color: Color(0xFF33691E), size: 22),
+                const SizedBox(width: 8),
+                const Expanded(
+                  child: Text(
+                    'Poder: Forma Selvagem',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                      color: Color(0xFF33691E),
+                    ),
+                  ),
+                ),
+                Text(
+                  'Druida Nv. ${_personagem.nivelDruida}',
+                  style: const TextStyle(
+                    fontSize: 11,
+                    color: Color(0xFF558B2F),
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 6),
+            const Text(
+              'Gaste uma ação completa e PM para transformar-se em uma fera que você conhece, alterando estatísticas e ganhando armas naturais.',
+              style: TextStyle(fontSize: 12, color: Colors.black87),
+            ),
+            const SizedBox(height: 10),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF33691E),
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                onPressed: _mostrarModalAssumirFormaSelvagem,
+                icon: const Icon(Icons.flash_on, size: 16),
+                label: const Text(
+                  'Assumir Forma Selvagem',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _mostrarModalAssumirFormaSelvagem() {
+    final nivelDruida = _personagem.nivelDruida;
+    final formas = BancoDeFormasSelvagens.todas;
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.white,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (ctx) => DraggableScrollableSheet(
+        initialChildSize: 0.8,
+        minChildSize: 0.4,
+        maxChildSize: 0.95,
+        expand: false,
+        builder: (_, scrollController) {
+          return Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: Container(
+                    width: 40,
+                    height: 4,
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade400,
+                      borderRadius: BorderRadius.circular(2),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Assumir Forma Selvagem',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF33691E),
+                      ),
+                    ),
+                    Text(
+                      'Seu PM: ${_personagem.pmAtual}/${_personagem.pmTotal}',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 13,
+                        color: Colors.blueGrey,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 4),
+                const Text(
+                  'Escolha a forma que deseja assumir nesta cena:',
+                  style: TextStyle(fontSize: 12, color: Colors.black54),
+                ),
+                const SizedBox(height: 12),
+                Expanded(
+                  child: ListView.builder(
+                    controller: scrollController,
+                    itemCount: formas.length,
+                    itemBuilder: (_, index) {
+                      final forma = formas[index];
+                      final tier = forma.tierParaNivel(nivelDruida);
+                      final nivelForma = forma.getNivelParaDruida(nivelDruida);
+                      final temPm = _personagem.pmAtual >= nivelForma.custoPm;
+
+                      final modsTexto = nivelForma.modificadores.entries
+                          .map((e) => '+${e.value} ${e.key}')
+                          .join(', ');
+
+                      return Card(
+                        margin: const EdgeInsets.only(bottom: 12),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          side: BorderSide(
+                            color: Colors.grey.shade300,
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(12),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  const Icon(
+                                    Icons.pets,
+                                    color: Color(0xFF33691E),
+                                    size: 20,
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Expanded(
+                                    child: Text(
+                                      forma.nome,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 6,
+                                      vertical: 2,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFFE8F5E9),
+                                      borderRadius: BorderRadius.circular(6),
+                                    ),
+                                    child: Text(
+                                      tier.toUpperCase(),
+                                      style: const TextStyle(
+                                        color: Color(0xFF2E7D32),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 11,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                forma.descricaoGeral,
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.black87,
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              Container(
+                                padding: const EdgeInsets.all(8),
+                                decoration: BoxDecoration(
+                                  color: Colors.grey.shade50,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    if (modsTexto.isNotEmpty)
+                                      Text(
+                                        'Bônus: $modsTexto',
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 12,
+                                          color: Color(0xFF1B5E20),
+                                        ),
+                                      ),
+                                    if (nivelForma.armasNaturais.isNotEmpty)
+                                      Text(
+                                        'Armas Naturais: ${nivelForma.armasNaturais.map((a) => '${a.tipo == 'duas_armas' ? '2x ' : ''}${a.dano} (${a.critico})').join(', ')}',
+                                        style: const TextStyle(
+                                          fontSize: 11,
+                                          color: Colors.black87,
+                                        ),
+                                      ),
+                                    if (nivelForma.tamanho != null)
+                                      Text(
+                                        'Tamanho: ${nivelForma.tamanho}'
+                                        '${nivelForma.deslocamento != null ? ' | Deslocamento: ${nivelForma.deslocamento}' : ''}',
+                                        style: const TextStyle(
+                                          fontSize: 11,
+                                          color: Colors.black54,
+                                        ),
+                                      ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              SizedBox(
+                                width: double.infinity,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: temPm
+                                        ? const Color(0xFF2E7D32)
+                                        : Colors.grey.shade400,
+                                    foregroundColor: Colors.white,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                  ),
+                                  onPressed: temPm
+                                      ? () {
+                                          Navigator.pop(ctx);
+                                          _atualizarPersonagem(
+                                            _personagem.assumirFormaSelvagem(forma),
+                                          );
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                'Você assumiu a ${forma.nome}!',
+                                              ),
+                                              backgroundColor: const Color(0xFF2E7D32),
+                                            ),
+                                          );
+                                        }
+                                      : null,
+                                  child: Text(
+                                    temPm
+                                        ? 'Assumir esta Forma (${nivelForma.custoPm} PM)'
+                                        : 'PM Insuficiente (${nivelForma.custoPm} PM)',
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 13,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildCardCompanheiroAnimal() {
+    final tipoKey = _personagem.tipoCompanheiroAnimal;
+    final comp = tipoKey != null ? BancoDeCompanheiros.getByKey(tipoKey) : null;
+    final nivelDruida = _personagem.nivelDruida;
+
+    return Card(
+      color: Colors.amber.shade50,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+        side: BorderSide(color: Colors.amber.shade300),
+      ),
+      margin: const EdgeInsets.only(bottom: 8),
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                const Icon(Icons.pets, color: Colors.brown, size: 20),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    comp != null
+                        ? 'Companheiro Animal: ${comp.nome}'
+                        : 'Companheiro Animal',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                      color: Colors.brown,
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  decoration: BoxDecoration(
+                    color: Colors.amber.shade200,
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: Text(
+                    TipoCompanheiroAnimal.tierParaNivel(nivelDruida).toUpperCase(),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 10,
+                      color: Colors.brown,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 6),
+            if (comp != null) ...[
+              Text(
+                comp.descricao,
+                style: const TextStyle(fontSize: 12, color: Colors.black87),
+              ),
+              const SizedBox(height: 6),
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: Colors.amber.shade200),
+                ),
+                child: Text(
+                  'Benefício: ${comp.getBeneficioParaNivel(nivelDruida)}',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 12,
+                    color: Colors.brown.shade800,
+                  ),
+                ),
+              ),
+            ] else ...[
+              const Text(
+                'Você possui o poder Companheiro Animal, mas ainda não selecionou o tipo de animal parceiro.',
+                style: TextStyle(fontSize: 12, color: Colors.black87),
+              ),
+              const SizedBox(height: 8),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.brown,
+                    foregroundColor: Colors.white,
+                  ),
+                  onPressed: _mostrarModalEscolhaCompanheiroPainel,
+                  child: const Text('Escolher Tipo de Companheiro'),
+                ),
+              ),
+            ],
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _mostrarModalEscolhaCompanheiroPainel() {
+    final nivelDruida = _personagem.nivelDruida;
+    final companheiros = BancoDeCompanheiros.todos;
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.white,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (ctx) => DraggableScrollableSheet(
+        initialChildSize: 0.75,
+        minChildSize: 0.4,
+        maxChildSize: 0.95,
+        expand: false,
+        builder: (_, scrollController) {
+          return Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: Container(
+                    width: 40,
+                    height: 4,
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade400,
+                      borderRadius: BorderRadius.circular(2),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                const Text(
+                  'Escolha o Tipo de Companheiro Animal',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 12),
+                Expanded(
+                  child: ListView.builder(
+                    controller: scrollController,
+                    itemCount: companheiros.length,
+                    itemBuilder: (_, index) {
+                      final comp = companheiros[index];
+                      final beneficio = comp.getBeneficioParaNivel(nivelDruida);
+
+                      return Card(
+                        margin: const EdgeInsets.only(bottom: 10),
+                        child: ListTile(
+                          leading: const Icon(Icons.pets, color: Colors.amber),
+                          title: Text(
+                            comp.nome,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          subtitle: Text(
+                            '${comp.descricao}\nBenefício: $beneficio',
+                            style: const TextStyle(fontSize: 12),
+                          ),
+                          onTap: () {
+                            Navigator.pop(ctx);
+                            _atualizarPersonagem(
+                              _personagem.copyWith(tipoCompanheiroAnimal: comp.key),
+                            );
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('Companheiro "${comp.nome}" selecionado!'),
+                              ),
+                            );
+                          },
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 

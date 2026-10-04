@@ -104,6 +104,14 @@ void main() {
           expect(raca.descricaoRaca, isNotEmpty);
           expect(raca.icone, isNotEmpty);
           expect(raca.iconeRaca, isNotNull);
+
+          final svgFile = File('assets/icons/${raca.icone}.svg');
+          expect(
+            svgFile.existsSync(),
+            isTrue,
+            reason:
+                'O arquivo SVG para ${raca.nome} (${svgFile.path}) deve existir',
+          );
         }
 
         final ids = racas.map((r) => r.id).toSet();

@@ -1,0 +1,141 @@
+{
+    "progressaoNivelClasse": {
+        "iniciante": {
+            "nivelMinimo": 1
+        },
+        "veterano": {
+            "nivelMinimo": 6
+        },
+        "mestre": {
+            "nivelMinimo": 12
+        }
+    },
+    "tipos": [
+        {
+            "key": "AJUDANTE",
+            "nome": "Ajudante",
+            "descricao": "Animal ágil e esperto que auxilia em perícias.",
+            "exemplos": [
+                "Raposa",
+                "Corvo",
+                "Macaco",
+                "Serpente",
+                "Gato"
+            ],
+            "beneficiosPorTier": {
+                "iniciante": "+1 em três perícias (exceto ataque)",
+                "veterano": "+2 em três perícias (exceto ataque)",
+                "mestre": "+3 em três perícias (exceto ataque) e pode prestar ajuda como ação livre"
+            }
+        },
+        {
+            "key": "ASSASSINO",
+            "nome": "Assassino",
+            "descricao": "Predador treinado para abater alvos vulneráveis.",
+            "exemplos": [
+                "Onça",
+                "Lince"
+            ],
+            "beneficiosPorTier": {
+                "iniciante": "+1d6 no dano contra alvos desprevenidos ou flanqueados",
+                "veterano": "+2d6 no dano contra alvos desprevenidos ou flanqueados",
+                "mestre": "+3d6 no dano e aumenta margem de ameaça em +1 contra alvos nessas condições"
+            }
+        },
+        {
+            "key": "ATIRADOR",
+            "nome": "Atirador",
+            "descricao": "Ave ou criatura veloz que ataca alvos à distância.",
+            "exemplos": [
+                "Falcão",
+                "Águia"
+            ],
+            "beneficiosPorTier": {
+                "iniciante": "+1 em testes de ataque e rolagens de dano à distância",
+                "veterano": "+2 em testes de ataque e rolagens de dano à distância",
+                "mestre": "+2 em testes de ataque e dano à distância e alvos atingidos sofrem –2 na Defesa por uma rodada"
+            }
+        },
+        {
+            "key": "FORTAO",
+            "nome": "Fortão",
+            "descricao": "Fera encorpada que combate diretamente na linha de frente.",
+            "exemplos": [
+                "Lobo",
+                "Javali",
+                "Crocodilo"
+            ],
+            "beneficiosPorTier": {
+                "iniciante": "+1d8 no dano corpo a corpo",
+                "veterano": "+2d8 no dano corpo a corpo",
+                "mestre": "+3d8 no dano corpo a corpo e derruba alvos em acertos críticos"
+            }
+        },
+        {
+            "key": "GUARDIAO",
+            "nome": "Guardião",
+            "descricao": "Animal corpulento ou alerta que protege contra investidas.",
+            "exemplos": [
+                "Alce",
+                "Coruja",
+                "Urso",
+                "Tartaruga Gigante",
+                "Cão"
+            ],
+            "beneficiosPorTier": {
+                "iniciante": "+1 na Defesa",
+                "veterano": "+2 na Defesa e +2 em testes de resistência",
+                "mestre": "+3 na Defesa e concede camuflagem leve contra ataques à distância"
+            }
+        },
+        {
+            "key": "MONTARIA",
+            "nome": "Montaria",
+            "descricao": "Animal preparado para conduzir o druida velozmente no terreno.",
+            "exemplos": [
+                "Cavalo",
+                "Bisão",
+                "Cavalo-marinho gigante"
+            ],
+            "beneficiosPorTier": {
+                "iniciante": "Deslocamento torna-se 15m (ou +3m se já superior)",
+                "veterano": "Deslocamento torna-se 18m e pode realizar uma investida sem linha reta obrigatória",
+                "mestre": "Deslocamento torna-se 21m e concede uma ação de movimento extra por rodada"
+            }
+        },
+        {
+            "key": "PERSEGUIDOR",
+            "nome": "Perseguidor",
+            "descricao": "Animal farejador com sentidos apurados para caçadas.",
+            "exemplos": [
+                "Gambá",
+                "Sabujo"
+            ],
+            "beneficiosPorTier": {
+                "iniciante": "+2 em Percepção e Sobrevivência para rastrear; ignora camuflagem leve",
+                "veterano": "+4 em testes de rastreio e ignora totalmente camuflagem",
+                "mestre": "+5 em testes de rastreio e o druida não fica desprevenido contra emboscadas"
+            }
+        },
+        {
+            "key": "DESTRUIDOR",
+            "nome": "Destruidor",
+            "origem": "Companheiro Animal Mágico",
+            "descricao": "Canalizador de dano e destruição mágica.",
+            "beneficiosPorTier": {
+                "veterano": "+1d8 no dano de magias ofensivas",
+                "mestre": "+2d8 no dano de magias ofensivas e ignora 5 pontos de resistência elemental"
+            }
+        },
+        {
+            "key": "MEDICO",
+            "nome": "Médico",
+            "origem": "Companheiro Animal Mágico",
+            "descricao": "Canalizador de cura e restauração biológica.",
+            "beneficiosPorTier": {
+                "veterano": "+1 PV curado por dado de cura de magias",
+                "mestre": "+2 PV curados por dado de cura e pode remover uma condição com um toque"
+            }
+        }
+    ]
+}

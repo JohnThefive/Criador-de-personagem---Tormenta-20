@@ -213,8 +213,8 @@ class _PaginaSelecaoClasseState extends State<PaginaSelecaoClasse> {
                       const SizedBox(height: 16),
                       const Divider(),
 
-                      // 1. CAMINHOS DE CLASSE
-                      if (classeSelecionada.caminhosDisponiveis.isNotEmpty) ...[
+                      // 1. CAMINHOS DE CLASSE (NÍVEL 1)
+                      if (classeSelecionada.caminhosNivel1.isNotEmpty) ...[
                         Row(
                           children: [
                             const Text(
@@ -238,7 +238,7 @@ class _PaginaSelecaoClasseState extends State<PaginaSelecaoClasse> {
                           style: TextStyle(fontSize: 12),
                         ),
                         const SizedBox(height: 12),
-                        ...classeSelecionada.caminhosDisponiveis.map((caminho) {
+                        ...classeSelecionada.caminhosNivel1.map((caminho) {
                           final isCaminhoSelecionado =
                               caminhoSelecionado?.nome == caminho.nome;
                           return GestureDetector(

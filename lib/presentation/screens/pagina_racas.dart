@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../domain/entities/raca.dart';
 import '../controllers/personagem_cubit.dart';
 import '../../domain/services/data_services/call_racas.dart';
+import '../widgets/rpg_icon.dart';
 
 class PaginaSelecaoRaca extends StatefulWidget {
   final PersonagemState state;
@@ -117,30 +118,50 @@ class _PaginaSelecaoRacaState extends State<PaginaSelecaoRaca> {
                               },
                               child: Container(
                                 margin: const EdgeInsets.symmetric(
-                                  horizontal: 8,
+                                  horizontal: 6,
                                   vertical: 4,
                                 ),
                                 padding: const EdgeInsets.symmetric(
-                                  vertical: 12,
+                                  vertical: 8,
+                                  horizontal: 6,
                                 ),
                                 decoration: BoxDecoration(
                                   color: isSelected
                                       ? Colors.grey[400]
                                       : Colors.transparent,
-                                  borderRadius: BorderRadius.circular(20),
+                                  borderRadius: BorderRadius.circular(16),
                                 ),
-                                child: Text(
-                                  raca.nome,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: isSelected
-                                        ? Colors.black
-                                        : Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                  ),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
+                                child: Row(
+                                  children: [
+                                    CircleAvatar(
+                                      radius: 12,
+                                      backgroundColor: isSelected
+                                          ? Colors.brown.shade900
+                                          : Colors.red.shade900,
+                                      child: RpgIcon(
+                                        iconName: raca.icone,
+                                        size: 14,
+                                        color: isSelected
+                                            ? Colors.amber
+                                            : Colors.white,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 6),
+                                    Expanded(
+                                      child: Text(
+                                        raca.nome,
+                                        style: TextStyle(
+                                          color: isSelected
+                                              ? Colors.black
+                                              : Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 13,
+                                        ),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             );
@@ -187,8 +208,8 @@ class _PaginaSelecaoRacaState extends State<PaginaSelecaoRaca> {
                                     width: 2,
                                   ),
                                 ),
-                                child: Icon(
-                                  racaSelecionada.iconeRaca,
+                                child: RpgIcon(
+                                  iconName: racaSelecionada.icone,
                                   size: 64,
                                   color: Colors.red[800],
                                 ),

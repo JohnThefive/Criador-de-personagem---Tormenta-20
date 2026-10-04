@@ -1166,5 +1166,672 @@
             "periciasExigidas": [],
             "atributosExigidos": {}
         }
+    ],
+    "CAVALEIRO": [
+        {
+            "key": "ARMADURA_DA_HONRA",
+            "nome": "Armadura da Honra",
+            "descricao": "No início da cena, recebe PV temporários iguais ao seu nível + Carisma.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "AUMENTO_DE_ATRIBUTO",
+            "nome": "Aumento de Atributo",
+            "descricao": "Recebe +1 em um atributo.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "AUTORIDADE_FEUDAL",
+            "nome": "Autoridade Feudal",
+            "descricao": "Gasta uma hora e 2 PM para receber ajuda de parceiro iniciante até o fim da aventura.",
+            "preRequisitoTexto": "Pré-requisito: 6º nível de cavaleiro.",
+            "nivelMinimo": 6,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "DESPREZAR_OS_COVARDES",
+            "nome": "Desprezar os Covardes",
+            "descricao": "Recebe redução de dano 5 se estiver caído, desprevenido ou flanqueado.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ESCUDEIRO",
+            "nome": "Escudeiro",
+            "descricao": "Recebe parceiro que concede +1 no dano, +1 na Defesa e ação de movimento por 1 PM.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ESPECIALIZACAO_EM_ARMADURA",
+            "nome": "Especialização em Armadura",
+            "descricao": "Recebe redução de dano 5 se estiver usando armadura pesada.",
+            "preRequisitoTexto": "Pré-requisito: 12º nível de cavaleiro.",
+            "nivelMinimo": 12,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ESTANDARTE",
+            "nome": "Estandarte",
+            "descricao": "No início da cena, você e aliados que veem o estandarte recebem PM temporários iguais ao Carisma.",
+            "preRequisitoTexto": "Pré-requisitos: Título, 14º nível de cavaleiro.",
+            "nivelMinimo": 14,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "TITULO"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ETIQUETA",
+            "nome": "Etiqueta",
+            "descricao": "Recebe +2 em Diplomacia ou Nobreza e pode gastar 1 PM para rerrolar um teste dessas perícias.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "INVESTIDA_DESTRUIDORA",
+            "nome": "Investida Destruidora",
+            "descricao": "Pode gastar 2 PM ao fazer uma investida para causar +2d8 de dano.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "MONTARIA_CORAJOSA",
+            "nome": "Montaria Corajosa",
+            "descricao": "Montaria concede +1d6 em rolagens de dano corpo a corpo.",
+            "preRequisitoTexto": "Pré-requisito: Montaria.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [
+                "Montaria"
+            ],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "PAJEM",
+            "nome": "Pajem",
+            "descricao": "Recebe parceiro que concede +2 em Diplomacia e melhora condição de descanso em uma categoria.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "POSTURA_DE_COMBATE_ARIETE_IMPLACAVEL",
+            "nome": "Postura de Combate: Aríete Implacável",
+            "descricao": "Postura. Aumenta bônus de ataque em investidas em +2 (+1 por +2 PM) e causa +2d8 contra construtos e objetos.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "POSTURA_DE_COMBATE_CASTIGO_DE_FERRO",
+            "nome": "Postura de Combate: Castigo de Ferro",
+            "descricao": "Postura. Quando aliado adjacente sofre ataque corpo a corpo, gasta 1 PM para contra-atacar o agressor.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "POSTURA_DE_COMBATE_FOCO_DE_BATALHA",
+            "nome": "Postura de Combate: Foco de Batalha",
+            "descricao": "Postura. Recebe 1 PM temporário cumulativo ao ser atacado (máximo por cena igual ao nível).",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "POSTURA_DE_COMBATE_MURALHA_INTRANSPONIVEL",
+            "nome": "Postura de Combate: Muralha Intransponível",
+            "descricao": "Postura. Exige escudo. Recebe +1 na Defesa e Reflexos (+1 por +2 PM), anula dano em testes de Reflexos bem-sucedidos e reduz deslocamento para 3m.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "POSTURA_DE_COMBATE_PROVOCACAO_PETULANTE",
+            "nome": "Postura de Combate: Provocação Petulante",
+            "descricao": "Postura. Inimigos a alcance curto que falharem em teste de Vontade (CD Car) só podem realizar ações hostis contra você.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "POSTURA_DE_COMBATE_TORRE_INABALAVEL",
+            "nome": "Postura de Combate: Torre Inabalável",
+            "descricao": "Postura. Imune a deslocamento forçado, não pode se mover, soma Constituição na Defesa e substitui Reflexos e Vontade por Fortitude.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "SOLIDEZ",
+            "nome": "Solidez",
+            "descricao": "Ao usar escudo, soma o bônus de Defesa do escudo em testes de resistência.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "TITULO",
+            "nome": "Título",
+            "descricao": "Recebe título nobre com 20 TO por nível no início de cada aventura ou auxílio de parceiro veterano.",
+            "preRequisitoTexto": "Pré-requisitos: Autoridade Feudal, 10º nível de cavaleiro.",
+            "nivelMinimo": 10,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "AUTORIDADE_FEUDAL"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "TORRE_ARMADA",
+            "nome": "Torre Armada",
+            "descricao": "Quando um inimigo erra um ataque contra você, pode gastar 1 PM para receber +5 no dano contra ele até o fim do próximo turno.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        }
+    ],
+    "CLERIGO": [
+        {
+            "key": "ABENCOAR_ARMA",
+            "nome": "Abençoar Arma",
+            "descricao": "Torna-se proficiente na arma da divindade; gasta ação de movimento e 3 PM para torná-la mágica até o fim da cena, aumentar seu dano em um passo e usar Sabedoria no ataque e dano.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "AUMENTO_DE_ATRIBUTO",
+            "nome": "Aumento de Atributo",
+            "descricao": "Recebe +1 em um atributo.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "AUTORIDADE_ECLESIASTICA",
+            "nome": "Autoridade Eclesiástica",
+            "descricao": "Recebe +5 em Diplomacia ou Intimidação com devotos de sua fé e paga metade do preço de itens e serviços em seus templos.",
+            "preRequisitoTexto": "Pré-requisitos: 5º nível de clérigo, devoto de um deus maior.",
+            "nivelMinimo": 5,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "CANALIZAR_ENERGIA",
+            "nome": "Canalizar Energia Positiva/Negativa",
+            "descricao": "Gasta ação padrão e PM para liberar onda em alcance curto curando ou causando 1d6 de dano de luz/trevas por PM gasto em criaturas vivas e mortos-vivos.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "CANALIZAR_AMPLO",
+            "nome": "Canalizar Amplo",
+            "descricao": "Gasta +2 PM ao usar Canalizar Energia para aumentar o alcance para médio.",
+            "preRequisitoTexto": "Pré-requisito: Canalizar Energia Positiva ou Negativa.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "CANALIZAR_ENERGIA"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "COMUNHAO_VITAL",
+            "nome": "Comunhão Vital",
+            "descricao": "Ao lançar magia que cure uma criatura, pode pagar +2 PM para curar metade do valor em outra criatura a alcance curto.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "CONHECIMENTO_MAGICO",
+            "nome": "Conhecimento Mágico",
+            "descricao": "Aprende duas magias divinas de qualquer círculo que possa lançar.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "EXPULSAR_COMANDAR_MORTOS_VIVOS",
+            "nome": "Expulsar/Comandar Mortos-Vivos",
+            "descricao": "Gasta ação padrão e 3 PM para apavorar mortos-vivos (energia positiva) ou comandá-los/fasciná-los (energia negativa) em alcance curto (Vontade CD Sab anula).",
+            "preRequisitoTexto": "Pré-requisito: Canalizar Energia Positiva ou Negativa.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "CANALIZAR_ENERGIA"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "LITURGIA_MAGICA",
+            "nome": "Liturgia Mágica",
+            "descricao": "Gasta uma ação de movimento para aumentar em +2 a CD para resistir à sua próxima habilidade de clérigo até o final do próximo turno.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "MAGIA_SAGRADA_PROFANA",
+            "nome": "Magia Sagrada/Profana",
+            "descricao": "Gasta +1 PM ao lançar magia que causa dano para mudar seu tipo para luz (positiva) ou trevas (negativa).",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "MESTRE_CELEBRANTE",
+            "nome": "Mestre Celebrante",
+            "descricao": "Multiplica por dez o número de pessoas afetadas por uma missa e dobra os benefícios concedidos.",
+            "preRequisitoTexto": "Pré-requisitos: qualquer poder de Missa, 12º nível de clérigo.",
+            "nivelMinimo": 12,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "MISSA_BENCAO_DA_VIDA",
+            "nome": "Missa: Bênção da Vida",
+            "descricao": "Os participantes da missa recebem PV temporários iguais ao seu nível + Sabedoria.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "MISSA_CHAMADO_AS_ARMAS",
+            "nome": "Missa: Chamado às Armas",
+            "descricao": "Os participantes da missa recebem +1 em testes de ataque e rolagens de dano.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "MISSA_ELEVACAO_DO_ESPIRITO",
+            "nome": "Missa: Elevação do Espírito",
+            "descricao": "Os participantes da missa recebem PM temporários iguais à sua Sabedoria.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "MISSA_ESCUDO_DIVINO",
+            "nome": "Missa: Escudo Divino",
+            "descricao": "Os participantes da missa recebem +1 na Defesa e testes de resistência.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "MISSA_SUPERAR_AS_LIMITACOES",
+            "nome": "Missa: Superar as Limitações",
+            "descricao": "Cada participante recebe +1d6 para somar em um único teste a sua escolha (pode ser usado após rolar).",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "PRECE_DE_COMBATE",
+            "nome": "Prece de Combate",
+            "descricao": "Gasta +2 PM para lançar uma magia divina pessoal de ação padrão como ação de movimento.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "SIMBOLO_SAGRADO_ENERGIZADO",
+            "nome": "Símbolo Sagrado Energizado",
+            "descricao": "Gasta ação de movimento e 1 PM para energizar o símbolo sagrado até o fim da cena, diminuindo em 1 o custo em PM de magias divinas empunhadas.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        }
+    ],
+    "DRUIDA": [
+        {
+            "key": "ASPECTO_DO_INVERNO",
+            "nome": "Aspecto do Inverno",
+            "descricao": "Recebe resistência a frio 5 e magias de frio causam +1 de dano por dado. No inverno, magias de druida custam −1 PM.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ASPECTO_DO_OUTONO",
+            "nome": "Aspecto do Outono",
+            "descricao": "Aprende uma magia de necromancia (arcana ou divina). Gasta 1 PM para impor penalidade de –2 nos testes de resistência de inimigos em alcance médio até o próximo turno. No outono, magias de druida custam −1 PM.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ASPECTO_DA_PRIMAVERA",
+            "nome": "Aspecto da Primavera",
+            "descricao": "Recebe +1 em Carisma e magias de cura recuperam +1 PV por dado. Na primavera, magias de druida custam −1 PM.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ASPECTO_DO_VERAO",
+            "nome": "Aspecto do Verão",
+            "descricao": "Recebe +2 em Iniciativa e pode gastar 1 PM para armas causarem +1d6 de dano de fogo até o fim da cena. No verão, magias de druida custam −1 PM.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "AUMENTO_DE_ATRIBUTO",
+            "nome": "Aumento de Atributo",
+            "descricao": "Recebe +2 em um atributo a sua escolha (+1 a partir da segunda vez no mesmo atributo).",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "COMPANHEIRO_ANIMAL",
+            "nome": "Companheiro Animal",
+            "descricao": "Recebe um animal valoroso que atua como aliado (Iniciante no 1º nível, Veterano no 6º e Mestre no 12º).",
+            "preRequisitoTexto": "Pré-requisito: Treinado em Adestramento.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [
+                "ADESTRAMENTO"
+            ],
+            "atributosExigidos": {},
+            "referenciaTabela": "tiposCompanheiroAnimal",
+            "opcoesChave": [
+                "AJUDANTE",
+                "ASSASSINO",
+                "ATIRADOR",
+                "FORTAO",
+                "GUARDIAO",
+                "MONTARIA",
+                "PERSEGUIDOR"
+            ]
+        },
+        {
+            "key": "COMPANHEIRO_ANIMAL_ADICIONAL",
+            "nome": "Companheiro Animal Adicional",
+            "descricao": "Recebe um companheiro animal adicional de tipo diferente dos que já possui.",
+            "preRequisitoTexto": "Pré-requisitos: Carisma 15, Companheiro Animal, 7° nível de druida.",
+            "nivelMinimo": 7,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "COMPANHEIRO_ANIMAL"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {
+                "CAR": 15
+            }
+        },
+        {
+            "key": "COMPANHEIRO_ANIMAL_APRIMORADO",
+            "nome": "Companheiro Animal Aprimorado",
+            "descricao": "Um companheiro animal recebe um segundo tipo diferente, acumulando os bônus concedidos.",
+            "preRequisitoTexto": "Pré-requisitos: Companheiro Animal, 8° nível de druida.",
+            "nivelMinimo": 8,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "COMPANHEIRO_ANIMAL"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "COMPANHEIRO_ANIMAL_LENDARIO",
+            "nome": "Companheiro Animal Lendário",
+            "descricao": "Um de seus companheiros dobra os bônus concedidos (ou aumenta em +1 dado de bônus).",
+            "preRequisitoTexto": "Pré-requisitos: Companheiro Animal, 18° nível de druida.",
+            "nivelMinimo": 18,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "COMPANHEIRO_ANIMAL"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "COMPANHEIRO_ANIMAL_MAGICO",
+            "nome": "Companheiro Animal Mágico",
+            "descricao": "Um companheiro animal recebe um segundo tipo diferente entre destruidor ou médico.",
+            "preRequisitoTexto": "Pré-requisitos: Companheiro Animal, 8° nível de druida.",
+            "nivelMinimo": 8,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "COMPANHEIRO_ANIMAL"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "CORACAO_DA_SELVA",
+            "nome": "Coração da Selva",
+            "descricao": "Recebe +2 em Fortitude e imunidade a venenos.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ESPIRITO_DOS_EQUINOCIOS",
+            "nome": "Espírito dos Equinócios",
+            "descricao": "Pode gastar 1 PM para escolher 10 em um teste de resistência.",
+            "preRequisitoTexto": "Pré-requisitos: Aspecto da Primavera, Aspecto do Outono, 10° nível de druida.",
+            "nivelMinimo": 10,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "ASPECTO_DA_PRIMAVERA",
+                "ASPECTO_DO_OUTONO"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ESPIRITO_DOS_SOLSTICIOS",
+            "nome": "Espírito dos Solstícios",
+            "descricao": "Pode gastar +4 PM ao lançar uma magia para maximizar todos os seus efeitos numéricos variáveis.",
+            "preRequisitoTexto": "Pré-requisitos: Aspecto do Inverno, Aspecto do Verão, 10° nível de druida.",
+            "nivelMinimo": 10,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "ASPECTO_DO_INVERNO",
+                "ASPECTO_DO_VERAO"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "FORCA_DOS_PENHASCOS",
+            "nome": "Força dos Penhascos",
+            "descricao": "Recebe +2 em Fortitude. Em rocha sólida, gasta 1 PM e uma reação para receber RD 10 contra um ataque.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "FORMA_PRIMAL",
+            "nome": "Forma Primal",
+            "descricao": "Ao usar Forma Selvagem, recebe os benefícios combinados de dois tipos de animais.",
+            "preRequisitoTexto": "Pré-requisitos: Forma Selvagem duas vezes, 18° nível de druida.",
+            "nivelMinimo": 18,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "FORMA_SELVAGEM"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "FORMA_SELVAGEM",
+            "nome": "Forma Selvagem",
+            "descricao": "Permite gastar uma ação completa e PM para transformar-se em uma fera que você conhece, alterando estatísticas e ganhando armas naturais.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {},
+            "referenciaTabela": "formasSelvagens",
+            "opcoesChave": [
+                "FORMA_AGIL",
+                "FORMA_FEROZ",
+                "FORMA_RESISTENTE",
+                "FORMA_SORRATEIRA",
+                "FORMA_VELOZ"
+            ]
+        },
+        {
+            "key": "LIBERDADE_DA_PRADARIA",
+            "nome": "Liberdade da Pradaria",
+            "descricao": "Recebe +2 em Reflexos. Ao ar livre, pode gastar 1 PM ao lançar magia para aumentar o alcance em um passo.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "MAGIA_NATURAL",
+            "nome": "Magia Natural",
+            "descricao": "Pode lançar magias em forma selvagem.",
+            "preRequisitoTexto": "Pré-requisitos: Forma Selvagem, 8° nível de druida.",
+            "nivelMinimo": 8,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "FORMA_SELVAGEM"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "PRESAS_AFIADAS",
+            "nome": "Presas Afiadas",
+            "descricao": "A margem de ameaça de suas armas naturais em forma selvagem aumenta em +2.",
+            "preRequisitoTexto": "Pré-requisito: Forma Selvagem.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "FORMA_SELVAGEM"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "SEGREDOS_DA_NATUREZA",
+            "nome": "Segredos da Natureza",
+            "descricao": "Aprende duas magias de qualquer círculo que possa lançar de suas escolas conhecidas (podem ser arcanas ou divinas).",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "TRANQUILIDADE_DOS_LAGOS",
+            "nome": "Tranquilidade dos Lagos",
+            "descricao": "Recebe +2 em Vontade. A alcance médio de lagos/rios, gasta 1 PM para repetir um teste de resistência recém realizado (1/rodada).",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        }
     ]
 }

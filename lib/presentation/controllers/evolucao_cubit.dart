@@ -172,7 +172,7 @@ class EvolucaoCubit extends Cubit<EvolucaoState> {
   }
 
   /// Aprende o poder selecionado
-  Future<void> aprenderPoder(Poder poder) async {
+  Future<void> aprenderPoder(Poder poder, {String? tipoCompanheiro}) async {
     final classe = state.classeAtual;
 
     if (!classe.temPoderPendente) {
@@ -227,6 +227,7 @@ class EvolucaoCubit extends Cubit<EvolucaoState> {
 
       final novoPersonagem = state.personagem.copyWith(
         classe_do_personagem: novasClasses,
+        tipoCompanheiroAnimal: tipoCompanheiro ?? state.personagem.tipoCompanheiroAnimal,
       );
 
       // Salva no disco
@@ -271,6 +272,8 @@ class EvolucaoCubit extends Cubit<EvolucaoState> {
 
       final novoPersonagem = state.personagem.copyWith(
         classe_do_personagem: novasClasses,
+        anularCompanheiro: poderKey == 'COMPANHEIRO_ANIMAL',
+        anularFormaSelvagem: poderKey == 'FORMA_SELVAGEM',
       );
 
       await PersonagemStorageService.salvarPersonagem(novoPersonagem);

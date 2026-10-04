@@ -588,5 +588,352 @@
             "Caminho do Explorador": "Ignora terreno difícil e recebe +10 na CD para ser rastreado em terrenos onde possui Explorador.",
             "Mestre Caçador": "Pode usar Marca da Presa como ação livre. Pode gastar 5 PM para +2 na margem de ameaça. Ao derrotar a presa marcada, recupera 5 PM."
         }
+    },
+    {
+        "id": "cavaleiro",
+        "nome": "Cavaleiro",
+        "descricaoClasse": "Cavaleiros são guerreiros treinados para proteger os inocentes e defender seus senhores, reinos ou ordens. Reconhecidos por suas armaduras, armas e brasões, seguem os ideais de lealdade, coragem e dever, embora nem todos sejam fiéis a esses princípios. Entre os cavaleiros famosos estão Alenn Toren Greenfeld, Bernard Branalon, Brigandine, Orion Drake e Pelvas.",
+        "icone": "shield",
+        "pvInicial": 20,
+        "pvPorNivel": 5,
+        "pmInicial": 3,
+        "pmPorNivel": 3,
+        "proficiencias": [
+            "armasMarciais",
+            "armadurasPesadas",
+            "escudos"
+        ],
+        "periciasFixas": [
+            "FORTITUDE",
+            "LUTA"
+        ],
+        "qtdPericiasEscolha": 2,
+        "periciasOpcoes": [
+            "ADESTRAMENTO",
+            "ATLETISMO",
+            "CAVALGAR",
+            "DIPLOMACIA",
+            "GUERRA",
+            "INICIATIVA",
+            "INTIMIDACAO",
+            "NOBREZA",
+            "PERCEPCAO",
+            "VONTADE"
+        ],
+        "caminhosDisponiveis": [
+            {
+                "nome": "Bastião",
+                "atributoChave": "FOR",
+                "descricao": "Você recebe resistência a dano 5 quando usa armadura pesada.",
+                "nivelLiberado": 5
+            },
+            {
+                "nome": "Montaria",
+                "atributoChave": "FOR",
+                "descricao": "Você recebe um cavalo de guerra como parceiro veterano (+5 em Adestramento e Cavalgar, evoluindo para mestre no 11º nível).",
+                "nivelLiberado": 5
+            }
+        ],
+        "tabelaDeProgressao": {
+            "1": [
+                "Baluarte +2",
+                "Código de Honra"
+            ],
+            "2": [
+                "Duelo +2",
+                "Poder de Cavaleiro"
+            ],
+            "3": [
+                "Poder de Cavaleiro"
+            ],
+            "4": [
+                "Poder de Cavaleiro"
+            ],
+            "5": [
+                "Baluarte +4",
+                "Caminho do Cavaleiro",
+                "Poder de Cavaleiro"
+            ],
+            "6": [
+                "Poder de Cavaleiro"
+            ],
+            "7": [
+                "Baluarte (aliados adjacentes)",
+                "Duelo +3",
+                "Poder de Cavaleiro"
+            ],
+            "8": [
+                "Poder de Cavaleiro"
+            ],
+            "9": [
+                "Baluarte +6",
+                "Poder de Cavaleiro"
+            ],
+            "10": [
+                "Poder de Cavaleiro"
+            ],
+            "11": [
+                "Poder de Cavaleiro",
+                "Resoluto"
+            ],
+            "12": [
+                "Duelo +4",
+                "Poder de Cavaleiro"
+            ],
+            "13": [
+                "Baluarte +8",
+                "Poder de Cavaleiro"
+            ],
+            "14": [
+                "Poder de Cavaleiro"
+            ],
+            "15": [
+                "Baluarte (aliados em alcance curto)",
+                "Poder de Cavaleiro"
+            ],
+            "16": [
+                "Poder de Cavaleiro"
+            ],
+            "17": [
+                "Baluarte +10",
+                "Duelo +5",
+                "Poder de Cavaleiro"
+            ],
+            "18": [
+                "Poder de Cavaleiro"
+            ],
+            "19": [
+                "Poder de Cavaleiro"
+            ],
+            "20": [
+                "Bravura Final",
+                "Poder de Cavaleiro"
+            ]
+        },
+        "habilidadesFixas": {
+            "Código de Honra": "Não pode atacar um oponente pelas costas (sem benefício de flanquear), caído, desprevenido ou incapaz de lutar. Se violar o código, perde todos os PM e só pode recuperá-los a partir do próximo dia.",
+            "Baluarte": "Ao sofrer um ataque ou fazer um teste de resistência, gasta 1 PM para receber +2 na Defesa e nos testes de resistência até o início do próximo turno. A cada 4 níveis, pode gastar +1 PM para aumentar o bônus em +2. No 7º nível, pode gastar +2 PM para estender o bônus a aliados adjacentes. No 15º nível, pode gastar +5 PM para estender a aliados em alcance curto.",
+            "Duelo": "Gasta 2 PM para escolher um oponente em alcance curto e recebe +2 em testes de ataque e dano contra ele até o fim da cena (termina se atacar outro oponente). A cada 5 níveis, pode gastar +1 PM para aumentar o bônus em +1.",
+            "Caminho do Cavaleiro": "No 5º nível, escolhe entre Bastião (RD 5 com armadura pesada) ou Montaria (cavalo de guerra que atua como parceiro veterano, com +5 em Adestramento e Cavalgar, evoluindo para mestre no 11º nível).",
+            "Resoluto": "Gasta 1 PM para refazer um teste de resistência contra uma condição que o esteja afetando, com +5 de bônus. Se passar, cancela o efeito (uma vez por efeito).",
+            "Bravura Final": "Se for reduzido a 0 ou menos PV, pode gastar 3 PM para continuar consciente e de pé. Efeito sustentado; ao encerrar, sofre os efeitos dos PV atuais."
+        }
+    },
+    {
+        "id": "clerigo",
+        "nome": "Clérigo",
+        "descricaoClasse": "Clérigos são sacerdotes escolhidos pelos deuses, capazes de canalizar seu poder para realizar milagres, curar aliados e enfrentar inimigos da fé. Guiados por sua devoção, podem atuar em templos ou viajar em missões sagradas, protegendo fiéis e cumprindo os desígnios de suas divindades. Entre os clérigos famosos estão Artorius, Aurora, Gwen, Khorr’benn An-ug’atz, Mestre Arsenal, Nichaela e Vanessa Drake.",
+        "icone": "ankh",
+        "pvInicial": 16,
+        "pvPorNivel": 4,
+        "pmInicial": 5,
+        "pmPorNivel": 5,
+        "proficiencias": [
+            "armadurasPesadas",
+            "escudos"
+        ],
+        "periciasFixas": [
+            "RELIGIAO",
+            "VONTADE"
+        ],
+        "qtdPericiasEscolha": 2,
+        "periciasOpcoes": [
+            "CONHECIMENTO",
+            "CURA",
+            "DIPLOMACIA",
+            "FORTITUDE",
+            "INICIATIVA",
+            "INTUICAO",
+            "LUTA",
+            "MISTICISMO",
+            "NOBREZA",
+            "OFICIO",
+            "PERCEPCAO"
+        ],
+        "caminhosDisponiveis": [],
+        "tabelaDeProgressao": {
+            "1": [
+                "Devoto Fiel",
+                "Magias (1º Círculo)"
+            ],
+            "2": [
+                "Poder de Clérigo"
+            ],
+            "3": [
+                "Poder de Clérigo"
+            ],
+            "4": [
+                "Poder de Clérigo"
+            ],
+            "5": [
+                "Magias (2º Círculo)",
+                "Poder de Clérigo"
+            ],
+            "6": [
+                "Poder de Clérigo"
+            ],
+            "7": [
+                "Poder de Clérigo"
+            ],
+            "8": [
+                "Poder de Clérigo"
+            ],
+            "9": [
+                "Magias (3º Círculo)",
+                "Poder de Clérigo"
+            ],
+            "10": [
+                "Poder de Clérigo"
+            ],
+            "11": [
+                "Poder de Clérigo"
+            ],
+            "12": [
+                "Poder de Clérigo"
+            ],
+            "13": [
+                "Magias (4º Círculo)",
+                "Poder de Clérigo"
+            ],
+            "14": [
+                "Poder de Clérigo"
+            ],
+            "15": [
+                "Poder de Clérigo"
+            ],
+            "16": [
+                "Poder de Clérigo"
+            ],
+            "17": [
+                "Magias (5º Círculo)",
+                "Poder de Clérigo"
+            ],
+            "18": [
+                "Poder de Clérigo"
+            ],
+            "19": [
+                "Poder de Clérigo"
+            ],
+            "20": [
+                "Mão da Divindade",
+                "Poder de Clérigo"
+            ]
+        },
+        "habilidadesFixas": {
+            "Devoto Fiel": "Torna-se devoto de um deus maior e recebe dois poderes concedidos em vez de um (ou cultua o Panteão sem poderes concedidos, com restrição de não usar armas cortantes/perfurantes e maça como arma preferida).",
+            "Magias": "Pode lançar magias divinas baseadas em Sabedoria (soma Sabedoria no total de PM). Inicia com três magias de 1º círculo e aprende uma nova a cada nível. Desbloqueia círculos superiores a cada 4 níveis.",
+            "Mão da Divindade": "No 20º nível, gasta uma ação completa e 15 PM para canalizar energia divina e lançar três magias divinas quaisquer como ação livre sem custo de PM (mas paga aprimoramentos). Fica atordoado por 1d4 rodadas em seguida."
+        }
+    },
+    {
+        "id": "druida",
+        "nome": "Druida",
+        "descricaoClasse": "Druidas são sacerdotes ligados às forças da natureza, atuando como guardiões dos animais, plantas e regiões selvagens. Vivem em harmonia com o mundo natural, rejeitando muitos aspectos da civilização e utilizando seus poderes para proteger ou, em alguns casos, restaurar a natureza. Entre seus maiores poderes está a capacidade de transformar o próprio corpo em diferentes formas. Entre os druidas famosos estão Lisandra, Oihana, Shantall e Trebane.",
+        "icone": "paw",
+        "pvInicial": 16,
+        "pvPorNivel": 4,
+        "pmInicial": 4,
+        "pmPorNivel": 4,
+        "proficiencias": [
+            "escudos"
+        ],
+        "periciasFixas": [
+            "SOBREVIVENCIA",
+            "VONTADE"
+        ],
+        "qtdPericiasEscolha": 4,
+        "periciasOpcoes": [
+            "ADESTRAMENTO",
+            "ATLETISMO",
+            "CAVALGAR",
+            "CONHECIMENTO",
+            "CURA",
+            "FORTITUDE",
+            "INICIATIVA",
+            "INTUICAO",
+            "LUTA",
+            "MISTICISMO",
+            "OFICIO",
+            "PERCEPCAO",
+            "RELIGIAO"
+        ],
+        "caminhosDisponiveis": [],
+        "tabelaDeProgressao": {
+            "1": [
+                "Devoto Fiel",
+                "Empatia Selvagem",
+                "Magias (1º Círculo)"
+            ],
+            "2": [
+                "Caminho dos Ermos",
+                "Poder de Druida"
+            ],
+            "3": [
+                "Poder de Druida"
+            ],
+            "4": [
+                "Poder de Druida"
+            ],
+            "5": [
+                "Poder de Druida"
+            ],
+            "6": [
+                "Magias (2º Círculo)",
+                "Poder de Druida"
+            ],
+            "7": [
+                "Poder de Druida"
+            ],
+            "8": [
+                "Poder de Druida"
+            ],
+            "9": [
+                "Poder de Druida"
+            ],
+            "10": [
+                "Magias (3º Círculo)",
+                "Poder de Druida"
+            ],
+            "11": [
+                "Poder de Druida"
+            ],
+            "12": [
+                "Poder de Druida"
+            ],
+            "13": [
+                "Poder de Druida"
+            ],
+            "14": [
+                "Magias (4º Círculo)",
+                "Poder de Druida"
+            ],
+            "15": [
+                "Poder de Druida"
+            ],
+            "16": [
+                "Poder de Druida"
+            ],
+            "17": [
+                "Poder de Druida"
+            ],
+            "18": [
+                "Poder de Druida"
+            ],
+            "19": [
+                "Poder de Druida"
+            ],
+            "20": [
+                "Força da Natureza",
+                "Poder de Druida"
+            ]
+        },
+        "habilidadesFixas": {
+            "Devoto Fiel": "Torna-se devoto de um deus disponível para druidas (Allihanna, Megalokk ou Oceano) e recebe dois poderes concedidos em vez de apenas um.",
+            "Empatia Selvagem": "Pode se comunicar com animais por linguagem corporal e vocalizações, permitindo usar Adestramento com animais para mudar atitude e persuasão.",
+            "Magias": "Escolhe 3 escolas de magia. Pode lançar magias divinas baseadas em Sabedoria (soma Sabedoria no total de PM). Inicia com duas magias de 1º círculo e aprende uma nova a cada nível par. Desbloqueia círculos superiores nos níveis 6, 10 e 14.",
+            "Caminho dos Ermos": "No 2º nível, atravessa terrenos difíceis sem redução de deslocamento e a CD para ser rastreado aumenta em +10 em terrenos naturais.",
+            "Força da Natureza": "No 20º nível, reduz o custo de todas as magias em –2 PM e aumenta a CD em +2 (bônus dobram para –4 PM e +4 na CD se estiver em terrenos naturais).",
+            "Forma Selvagem": "Gasta uma ação completa e 3 PM para assumir uma forma selvagem (Ágil, Feroz, Resistente, Sorrateira ou Veloz). Não pode falar, empunhar itens ou lançar magias; itens equipados somem, mas mantêm benefícios vestidos. Dura até escolher reverter, ficar inconsciente ou morrer."
+        }
     }
 ]

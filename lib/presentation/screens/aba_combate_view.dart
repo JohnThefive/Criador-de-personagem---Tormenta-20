@@ -62,8 +62,13 @@ class _AbaCombateViewState extends State<AbaCombateView> {
               .firstOrNull;
           if (meuHeroi != null &&
               meuHeroi.pvAtual != widget.personagem.pvAtual) {
+            final bool perdeuForma =
+                meuHeroi.pvAtual <= 0 && widget.personagem.estaEmFormaSelvagem;
             widget.onPersonagemAtualizado?.call(
-              widget.personagem.copyWith(pvAtual: meuHeroi.pvAtual),
+              widget.personagem.copyWith(
+                pvAtual: meuHeroi.pvAtual,
+                anularFormaSelvagem: perdeuForma,
+              ),
             );
           }
         },

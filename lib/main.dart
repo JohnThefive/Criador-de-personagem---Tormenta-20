@@ -5,6 +5,8 @@ import 'package:t20_creator/domain/services/data_services/call_armas.dart';
 import 'package:t20_creator/domain/services/data_services/call_armaduras.dart';
 import 'package:t20_creator/domain/services/data_services/call_racas.dart';
 import 'package:t20_creator/domain/services/data_services/call_classes.dart';
+import 'package:t20_creator/domain/services/data_services/call_formas_selvagens.dart';
+import 'package:t20_creator/domain/services/data_services/call_companheiros.dart';
 
 // Importe seus arquivos
 import 'presentation/controllers/home_cubit.dart';
@@ -18,6 +20,8 @@ void main() async {
   await BancoDePoderes.carregar();
   await BancoDeArmas.carregar();
   await BancoDeArmaduras.carregar();
+  await BancoDeFormasSelvagens.carregar();
+  await BancoDeCompanheiros.carregar();
   runApp(const T20App());
 }
 

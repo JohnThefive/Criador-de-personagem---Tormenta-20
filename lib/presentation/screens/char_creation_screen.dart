@@ -192,8 +192,8 @@ class CharacterCreatorScreen extends StatelessWidget {
 
       final classeSelecionada = state.personagem.classes[0];
 
-      // Se tem caminhos, precisa escolher um
-      if (classeSelecionada.classeDefinicao.caminhosDisponiveis.isNotEmpty) {
+      // Se tem caminhos no 1º nível (ex: Arcanista), precisa escolher um
+      if (classeSelecionada.classeDefinicao.caminhosNivel1.isNotEmpty) {
         if (classeSelecionada.caminhoEscolhido == null) return false;
 
         // Se o caminho escolhido for Feiticeiro, OBRIGA a escolher a Linhagem

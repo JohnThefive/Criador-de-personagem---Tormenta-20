@@ -13,6 +13,8 @@ class CaminhoDeClasse {
   final bool temLinhagem;
   final bool temGrimorio;
 
+  final int nivelLiberado;
+
   const CaminhoDeClasse({
     required this.nome,
     required this.atributoChave,
@@ -20,6 +22,7 @@ class CaminhoDeClasse {
     this.temFocoMagico = false,
     this.temLinhagem = false,
     this.temGrimorio = false,
+    this.nivelLiberado = 1,
   });
 
   factory CaminhoDeClasse.fromJson(Map<String, dynamic> json) {
@@ -30,6 +33,7 @@ class CaminhoDeClasse {
       temFocoMagico: json['temFocoMagico'] as bool? ?? false,
       temLinhagem: json['temLinhagem'] as bool? ?? false,
       temGrimorio: json['temGrimorio'] as bool? ?? false,
+      nivelLiberado: (json['nivelLiberado'] as num?)?.toInt() ?? 1,
     );
   }
 
@@ -40,6 +44,7 @@ class CaminhoDeClasse {
     'temFocoMagico': temFocoMagico,
     'temLinhagem': temLinhagem,
     'temGrimorio': temGrimorio,
+    'nivelLiberado': nivelLiberado,
   };
 }
 
@@ -97,6 +102,14 @@ class Classe {
   /// Getter para compatibilidade de nomenclatura descricaoClasse
   String get descricaoClasse => descricaoclasse;
 
+  /// Retorna apenas os caminhos que devem ser escolhidos no 1º nível (ex: Arcanista)
+  List<CaminhoDeClasse> get caminhosNivel1 =>
+      caminhosDisponiveis.where((c) => c.nivelLiberado == 1).toList();
+
+  /// Retorna os caminhos elegíveis até o nível informado
+  List<CaminhoDeClasse> caminhosParaNivel(int nivel) =>
+      caminhosDisponiveis.where((c) => c.nivelLiberado <= nivel).toList();
+
   factory Classe.fromJson(Map<String, dynamic> json) {
     // Parser seguro de proficiências
     final rawProf = json['proficiencias'] as List<dynamic>? ?? [];
@@ -126,16 +139,25 @@ class Classe {
       }
     });
 
-    // Parser seguro de caminhos
+    // Parser seguro de caminhos (aceita Map completo ou String de fallback)
     final rawCaminhos = json['caminhosDisponiveis'] as List<dynamic>? ?? [];
-    final caminhos = rawCaminhos
-        .map((c) => CaminhoDeClasse.fromJson(c as Map<String, dynamic>))
-        .toList();
+    final List<CaminhoDeClasse> caminhos = [];
+    for (var c in rawCaminhos) {
+      if (c is Map<String, dynamic>) {
+        caminhos.add(CaminhoDeClasse.fromJson(c));
+      } else if (c is Map) {
+        caminhos.add(CaminhoDeClasse.fromJson(Map<String, dynamic>.from(c)));
+      } else if (c is String) {
+        caminhos.add(
+          CaminhoDeClasse(nome: c, atributoChave: 'FOR', descricao: ''),
+        );
+      }
+    }
 
     // Parser seguro de habilidades fixas
-    final rawHab = json['habilidadesFixas'] as Map<String, dynamic>? ?? {};
+    final rawHab = (json['habilidadesFixas'] as Map?) ?? {};
     final Map<String, String> habs = rawHab.map(
-      (k, v) => MapEntry(k, v.toString()),
+      (k, v) => MapEntry(k.toString(), v.toString()),
     );
 
     return Classe(

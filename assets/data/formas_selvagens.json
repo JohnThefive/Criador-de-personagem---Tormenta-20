@@ -1,0 +1,348 @@
+[
+    {
+        "key": "FORMA_AGIL",
+        "nome": "Forma Ágil",
+        "descricaoGeral": "Foco em velocidade, margem de ameaça e múltiplos ataques.",
+        "niveis": {
+            "padrao": {
+                "custoPm": 3,
+                "nivelMinimo": 1,
+                "modificadores": {
+                    "DES": 6
+                },
+                "deslocamento": "+0m",
+                "tamanho": "Médio",
+                "armasNaturais": [
+                    {
+                        "tipo": "duas_armas",
+                        "dano": "1d6",
+                        "critico": "19/x2"
+                    }
+                ],
+                "penalidades": "–2 em todos os testes de ataque até a próxima rodada se atacar com ambas."
+            },
+            "aprimorada": {
+                "custoPm": 6,
+                "nivelMinimo": 6,
+                "modificadores": {
+                    "DES": 10
+                },
+                "deslocamento": "+3m",
+                "tamanho": "Grande",
+                "modificadoresGerais": {
+                    "FURTIVIDADE": -2,
+                    "MANOBRA": 2
+                },
+                "armasNaturais": [
+                    {
+                        "tipo": "duas_armas",
+                        "dano": "1d8",
+                        "critico": "19/x2"
+                    }
+                ],
+                "penalidades": "–2 em todos os testes de ataque até a próxima rodada se atacar com ambas."
+            },
+            "superior": {
+                "custoPm": 10,
+                "nivelMinimo": 12,
+                "modificadores": {
+                    "DES": 20
+                },
+                "deslocamento": "+6m",
+                "tamanho": "Grande",
+                "modificadoresGerais": {
+                    "FURTIVIDADE": -2,
+                    "MANOBRA": 2
+                },
+                "armasNaturais": [
+                    {
+                        "tipo": "duas_armas",
+                        "dano": "1d10",
+                        "critico": "19/x2"
+                    }
+                ],
+                "penalidades": "–2 em todos os testes de ataque até a próxima rodada se atacar com ambas."
+            }
+        }
+    },
+    {
+        "key": "FORMA_FEROZ",
+        "nome": "Forma Feroz",
+        "descricaoGeral": "Foco em dano bruto e poder de combate corpo a corpo.",
+        "niveis": {
+            "padrao": {
+                "custoPm": 3,
+                "nivelMinimo": 1,
+                "modificadores": {
+                    "FOR": 6,
+                    "DEFESA": 2
+                },
+                "tamanho": "Médio",
+                "armasNaturais": [
+                    {
+                        "tipo": "arma_natural",
+                        "dano": "1d8",
+                        "critico": "20/x2"
+                    }
+                ]
+            },
+            "aprimorada": {
+                "custoPm": 6,
+                "nivelMinimo": 6,
+                "modificadores": {
+                    "FOR": 10,
+                    "DEFESA": 5
+                },
+                "tamanho": "Grande",
+                "modificadoresGerais": {
+                    "FURTIVIDADE": -2,
+                    "MANOBRA": 2
+                },
+                "armasNaturais": [
+                    {
+                        "tipo": "arma_natural",
+                        "dano": "2d6",
+                        "critico": "20/x2"
+                    }
+                ]
+            },
+            "superior": {
+                "custoPm": 10,
+                "nivelMinimo": 12,
+                "modificadores": {
+                    "FOR": 20,
+                    "DEFESA": 10
+                },
+                "tamanho": "Enorme",
+                "modificadoresGerais": {
+                    "FURTIVIDADE": -5,
+                    "MANOBRA": 5
+                },
+                "armasNaturais": [
+                    {
+                        "tipo": "arma_natural",
+                        "dano": "4d6",
+                        "critico": "20/x2"
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "key": "FORMA_RESISTENTE",
+        "nome": "Forma Resistente",
+        "descricaoGeral": "Foco em sobrevida, armadura e Redução de Dano.",
+        "niveis": {
+            "padrao": {
+                "custoPm": 3,
+                "nivelMinimo": 1,
+                "modificadores": {
+                    "DEFESA": 5,
+                    "RD": 5
+                },
+                "tamanho": "Médio",
+                "armasNaturais": [
+                    {
+                        "tipo": "arma_natural",
+                        "dano": "1d6",
+                        "critico": "20/x2"
+                    }
+                ]
+            },
+            "aprimorada": {
+                "custoPm": 6,
+                "nivelMinimo": 6,
+                "modificadores": {
+                    "FOR": 6,
+                    "DEFESA": 10,
+                    "RD": 10
+                },
+                "tamanho": "Grande",
+                "modificadoresGerais": {
+                    "FURTIVIDADE": -2,
+                    "MANOBRA": 2
+                },
+                "armasNaturais": [
+                    {
+                        "tipo": "arma_natural",
+                        "dano": "1d8",
+                        "critico": "20/x2"
+                    }
+                ]
+            },
+            "superior": {
+                "custoPm": 10,
+                "nivelMinimo": 12,
+                "modificadores": {
+                    "FOR": 10,
+                    "DEFESA": 15,
+                    "RD": 15
+                },
+                "tamanho": "Enorme",
+                "modificadoresGerais": {
+                    "FURTIVIDADE": -5,
+                    "MANOBRA": 5
+                },
+                "armasNaturais": [
+                    {
+                        "tipo": "arma_natural",
+                        "dano": "2d6",
+                        "critico": "20/x2"
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "key": "FORMA_SORRATEIRA",
+        "nome": "Forma Sorrateira",
+        "descricaoGeral": "Foco em infiltração, furtividade e tamanhos reduzidos.",
+        "niveis": {
+            "padrao": {
+                "custoPm": 3,
+                "nivelMinimo": 1,
+                "modificadores": {
+                    "DES": 6
+                },
+                "tamanho": "Pequeno",
+                "modificadoresGerais": {
+                    "FURTIVIDADE": 2,
+                    "MANOBRA": -2
+                },
+                "armasNaturais": [
+                    {
+                        "tipo": "arma_natural",
+                        "dano": "1d4",
+                        "critico": "20/x2"
+                    }
+                ]
+            },
+            "aprimorada": {
+                "custoPm": 6,
+                "nivelMinimo": 6,
+                "modificadores": {
+                    "DES": 10
+                },
+                "tamanho": "Minúsculo",
+                "modificadoresGerais": {
+                    "FURTIVIDADE": 5,
+                    "MANOBRA": -5
+                },
+                "armasNaturais": [
+                    {
+                        "tipo": "arma_natural",
+                        "dano": "1d4",
+                        "critico": "20/x2"
+                    }
+                ]
+            },
+            "superior": {
+                "custoPm": 10,
+                "nivelMinimo": 12,
+                "modificadores": {
+                    "DES": 20
+                },
+                "deslocamentoVoo": "18m",
+                "tamanho": "Minúsculo",
+                "modificadoresGerais": {
+                    "FURTIVIDADE": 5,
+                    "MANOBRA": -5
+                },
+                "armasNaturais": [
+                    {
+                        "tipo": "arma_natural",
+                        "dano": "1d4",
+                        "critico": "20/x2"
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "key": "FORMA_VELOZ",
+        "nome": "Forma Veloz",
+        "descricaoGeral": "Foco em mobilidade extrema em terra, água ou ar.",
+        "niveis": {
+            "padrao": {
+                "custoPm": 3,
+                "nivelMinimo": 1,
+                "modificadores": {
+                    "DES": 6
+                },
+                "opcoesDeslocamento": [
+                    {
+                        "tipo": "terrestre",
+                        "valor": "15m"
+                    },
+                    {
+                        "tipo": "escalada",
+                        "valor": "9m"
+                    },
+                    {
+                        "tipo": "natacao",
+                        "valor": "9m"
+                    }
+                ],
+                "armasNaturais": [
+                    {
+                        "tipo": "arma_natural",
+                        "dano": "1d6",
+                        "critico": "20/x2"
+                    }
+                ]
+            },
+            "aprimorada": {
+                "custoPm": 6,
+                "nivelMinimo": 6,
+                "modificadores": {
+                    "DES": 10
+                },
+                "opcoesDeslocamento": [
+                    {
+                        "tipo": "terrestre",
+                        "valor": "18m"
+                    },
+                    {
+                        "tipo": "escalada",
+                        "valor": "12m"
+                    },
+                    {
+                        "tipo": "natacao",
+                        "valor": "12m"
+                    }
+                ],
+                "armasNaturais": [
+                    {
+                        "tipo": "arma_natural",
+                        "dano": "1d6",
+                        "critico": "20/x2"
+                    }
+                ]
+            },
+            "superior": {
+                "custoPm": 10,
+                "nivelMinimo": 12,
+                "modificadores": {
+                    "DES": 20
+                },
+                "opcoesDeslocamento": [
+                    {
+                        "tipo": "natacao",
+                        "valor": "18m"
+                    },
+                    {
+                        "tipo": "voo",
+                        "valor": "24m"
+                    }
+                ],
+                "armasNaturais": [
+                    {
+                        "tipo": "arma_natural",
+                        "dano": "1d6",
+                        "critico": "20/x2"
+                    }
+                ]
+            }
+        }
+    }
+]

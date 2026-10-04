@@ -2,6 +2,7 @@ import 'package:t20_creator/domain/entities/poder.dart';
 import 'arma.dart';
 import 'protecao.dart';
 import 'proficiencias.dart';
+import 'forma_selvagem.dart';
 import '../services/regras_carga_service.dart';
 
 import 'atributos.dart';
@@ -28,6 +29,10 @@ class Personagem {
   final Protecao? armaduraEquipada; // Armadura equipada
   final Protecao? escudoEquipado; // Escudo equipado
   final int tibares; // Dinheiro em T$ (Tibar)
+
+  // Campos específicos de poderes de Druida
+  final FormaSelvagemAtiva? formaSelvagemAtiva;
+  final String? tipoCompanheiroAnimal; // Ex: "GUARDIAO", "FORTAO", "AJUDANTE"
 
   // Campos referentes a divindade
   final Divindade? divindade;
@@ -66,6 +71,9 @@ class Personagem {
     this.armaduraEquipada,
     this.escudoEquipado,
     this.tibares = 0,
+    // Campos específicos de poderes de Druida
+    this.formaSelvagemAtiva,
+    this.tipoCompanheiroAnimal,
     // Campos referentes a divindade
     this.divindade,
     this.poderConcedido,
@@ -119,6 +127,8 @@ class Personagem {
       armaduraEquipada: null,
       escudoEquipado: null,
       tibares: 0,
+      formaSelvagemAtiva: null,
+      tipoCompanheiroAnimal: null,
       divindade: null,
       poderConcedido: null,
       idade: 20,
@@ -152,6 +162,11 @@ class Personagem {
     Protecao? escudoEquipado,
     bool anularEscudo = false,
     int? tibares,
+    // Campos de poderes de Druida
+    FormaSelvagemAtiva? formaSelvagemAtiva,
+    bool anularFormaSelvagem = false,
+    String? tipoCompanheiroAnimal,
+    bool anularCompanheiro = false,
     // Campos referentes a divindade
     Divindade? divindade,
     Poder? poderConcedido,
@@ -188,6 +203,12 @@ class Personagem {
           ? null
           : (escudoEquipado ?? this.escudoEquipado),
       tibares: tibares ?? this.tibares,
+      formaSelvagemAtiva: anularFormaSelvagem
+          ? null
+          : (formaSelvagemAtiva ?? this.formaSelvagemAtiva),
+      tipoCompanheiroAnimal: anularCompanheiro
+          ? null
+          : (tipoCompanheiroAnimal ?? this.tipoCompanheiroAnimal),
       divindade: anularDivindade ? null : (divindade ?? this.divindade),
       poderConcedido: anularDivindade
           ? null
@@ -210,7 +231,29 @@ class Personagem {
   Personagem aplicarDano(int dano) {
     if (dano <= 0) return this;
     final novoPV = pvAtual - dano;
-    return copyWith(pvAtual: novoPV);
+    // Se ficar inconsciente (<= 0) ou morrer, a Forma Selvagem é desfeita imediatamente!
+    final bool reverteuForma = novoPV <= 0 && estaEmFormaSelvagem;
+    return copyWith(
+      pvAtual: novoPV,
+      formaSelvagemAtiva: reverteuForma ? null : formaSelvagemAtiva,
+      anularFormaSelvagem: reverteuForma,
+    );
+  }
+
+  Personagem assumirFormaSelvagem(FormaSelvagem forma) {
+    final ativa = FormaSelvagemAtiva.fromFormaENivel(
+      forma: forma,
+      nivelDruida: nivelDruida,
+    );
+    final novoPM = (pmAtual - ativa.custoPm).clamp(0, pmTotal);
+    return copyWith(
+      formaSelvagemAtiva: ativa,
+      pmAtual: novoPM,
+    );
+  }
+
+  Personagem reverterFormaSelvagem() {
+    return copyWith(anularFormaSelvagem: true);
   }
 
   Personagem curarPV(int cura) {
@@ -240,12 +283,54 @@ class Personagem {
     return copyWith(pvAtual: pvTotal, pmAtual: pmTotal);
   }
 
-  // Este método calcula o valor final para exibir na tela (Base + Raça Fixa + Raça Variável)
+  // Getters específicos de Druida
+  bool get estaEmFormaSelvagem => formaSelvagemAtiva != null;
+
+  bool get temPoderFormaSelvagem => classes.any(
+    (c) => c.poderesEscolhidos.any((p) => p.key == 'FORMA_SELVAGEM'),
+  );
+
+  bool get temPoderCompanheiroAnimal => classes.any(
+    (c) => c.poderesEscolhidos.any((p) => p.key == 'COMPANHEIRO_ANIMAL'),
+  );
+
+  int get nivelDruida {
+    for (final c in classes) {
+      if (c.classeDefinicao.idClasse.toLowerCase() == 'druida') {
+        return c.nivel;
+      }
+    }
+    return 0;
+  }
+
+  /// Retorna as armas efetivas do personagem (se transformado, retorna as armas naturais da forma selvagem)
+  List<Arma> get armasEfetivas {
+    if (estaEmFormaSelvagem) {
+      return formaSelvagemAtiva!.gerarArmas();
+    }
+    return armas;
+  }
+
+  /// Redução de dano total ativa
+  int get rdTotal {
+    int total = 0;
+    if (estaEmFormaSelvagem) {
+      total += formaSelvagemAtiva!.rd;
+    }
+    return total;
+  }
+
+  // Este método calcula o valor final para exibir na tela (Base + Raça Fixa + Raça Variável + Forma Selvagem)
   int getValorFinal(String sigla, {List<String> bonusVariaveis = const []}) {
     int base = atributos[sigla]?.valor ?? 0;
     int bonusFixo = raca?.modificadores[sigla] ?? 0;
     int bonusVariavel = bonusVariaveis.contains(sigla) ? 1 : 0;
-    return base + bonusFixo + bonusVariavel;
+    int bonusForma = 0;
+    if (estaEmFormaSelvagem &&
+        formaSelvagemAtiva!.modificadores.containsKey(sigla)) {
+      bonusForma = formaSelvagemAtiva!.modificadores[sigla]!;
+    }
+    return base + bonusFixo + bonusVariavel + bonusForma;
   }
 
   // Nível de Personagem (Soma dos níveis de todas as classes)
@@ -316,11 +401,31 @@ class Personagem {
   bool get usaArmaduraPesada => armaduraEquipada?.ehArmaduraPesada ?? false;
 
   /// Defesa final calculada reativamente:
-  /// Defesa = 10 + (usaArmaduraPesada ? 0 : modDES) + bonusArmadura + bonusEscudo
+  /// Defesa = 10 + (usaArmaduraPesada ? 0 : modDES) + bonusArmadura + bonusEscudo + bonusForma + bonusCompanheiro
   int get defesaFinal {
     final modDes = getValorFinal('DES');
     final modDesAplicado = usaArmaduraPesada ? 0 : modDes;
-    return 10 + modDesAplicado + bonusArmadura + bonusEscudo;
+    int bonusForma = 0;
+    if (estaEmFormaSelvagem &&
+        formaSelvagemAtiva!.modificadores.containsKey('DEFESA')) {
+      bonusForma = formaSelvagemAtiva!.modificadores['DEFESA']!;
+    }
+    int bonusCompanheiro = 0;
+    if (temPoderCompanheiroAnimal && tipoCompanheiroAnimal == 'GUARDIAO') {
+      if (nivelDruida >= 12) {
+        bonusCompanheiro = 3;
+      } else if (nivelDruida >= 6) {
+        bonusCompanheiro = 2;
+      } else {
+        bonusCompanheiro = 1;
+      }
+    }
+    return 10 +
+        modDesAplicado +
+        bonusArmadura +
+        bonusEscudo +
+        bonusForma +
+        bonusCompanheiro;
   }
 
   /// Defesa básica sem armaduras (10 + DES)
