@@ -6,12 +6,16 @@ import '../../entities/forma_selvagem.dart';
 class BancoDeFormasSelvagens {
   static List<FormaSelvagem> _dados = [];
 
-  static Future<void> carregar() async {
-    final raw = await rootBundle.loadString('assets/data/formas_selvagens.json');
+  static List<FormaSelvagem> _parse(String raw) {
     final List<dynamic> jsonList = jsonDecode(raw);
-    _dados = jsonList
+    return jsonList
         .map((item) => FormaSelvagem.fromJson(Map<String, dynamic>.from(item as Map)))
         .toList();
+  }
+
+  static Future<void> carregar() async {
+    final raw = await rootBundle.loadString('assets/data/formas_selvagens.json');
+    _dados = _parse(raw);
   }
 
   static List<FormaSelvagem> get todas {
@@ -19,11 +23,7 @@ class BancoDeFormasSelvagens {
       try {
         final file = File('assets/data/formas_selvagens.json');
         if (file.existsSync()) {
-          final raw = file.readAsStringSync();
-          final List<dynamic> jsonList = jsonDecode(raw);
-          _dados = jsonList
-              .map((item) => FormaSelvagem.fromJson(Map<String, dynamic>.from(item as Map)))
-              .toList();
+          _dados = _parse(file.readAsStringSync());
         }
       } catch (_) {}
     }

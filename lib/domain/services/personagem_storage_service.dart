@@ -16,6 +16,9 @@ import '../entities/poder.dart';
 import '../entities/arma.dart';
 import '../entities/protecao.dart';
 import '../entities/forma_selvagem.dart';
+import '../entities/golpe_pessoal.dart';
+import '../entities/engenhoca.dart';
+import '../entities/montaria_sagrada.dart';
 
 class PersonagemStorageService {
   // Retorna a pasta interna onde o app tem permissão de escrita no Android
@@ -34,7 +37,7 @@ class PersonagemStorageService {
     final arquivo = File('${pasta.path}/personagem_${p.id}.json');
 
     // Converte o Personagem em Map e depois em String JSON
-    final jsonString = jsonEncode(_personagemToMap(p));
+    final jsonString = jsonEncode(personagemToMap(p));
     await arquivo.writeAsString(jsonString);
   }
 
@@ -50,7 +53,7 @@ class PersonagemStorageService {
       try {
         final conteudo = await arq.readAsString();
         final map = jsonDecode(conteudo);
-        lista.add(_mapToPersonagem(map));
+        lista.add(mapToPersonagem(map));
       } catch (e) {
         if (kDebugMode) {
           print("Erro ao carregar personagem do arquivo ${arq.path}: $e");
@@ -70,15 +73,12 @@ class PersonagemStorageService {
   }
 
   // MÉTODOS PÚBLICOS DE SERIALIZAÇÃO / DESSERIALIZAÇÃO
-  static Map<String, dynamic> personagemToMap(Personagem p) => _personagemToMap(p);
-  static String personagemToJson(Personagem p) => jsonEncode(_personagemToMap(p));
-
-  static Personagem mapToPersonagem(Map<String, dynamic> map) => _mapToPersonagem(map);
+  static String personagemToJson(Personagem p) => jsonEncode(personagemToMap(p));
   static Personagem personagemFromJson(String jsonStr) =>
-      _mapToPersonagem(jsonDecode(jsonStr) as Map<String, dynamic>);
+      mapToPersonagem(jsonDecode(jsonStr) as Map<String, dynamic>);
 
   // SERIALIZAÇÃO (Personagem -> Map)
-  static Map<String, dynamic> _personagemToMap(Personagem p) {
+  static Map<String, dynamic> personagemToMap(Personagem p) {
     return {
       'id': p.id,
       'nome': p.nome,
@@ -102,8 +102,11 @@ class PersonagemStorageService {
       'armaduraKey': p.armaduraEquipada?.key,
       'escudoKey': p.escudoEquipado?.key,
       'tibares': p.tibares,
+      'golpesPessoais': p.golpesPessoais.map((g) => g.toJson()).toList(),
+      'engenhocas': p.engenhocas.map((e) => e.toJson()).toList(),
       'formaSelvagemAtiva': p.formaSelvagemAtiva?.toJson(),
       'tipoCompanheiroAnimal': p.tipoCompanheiroAnimal,
+      'montariaSagrada': p.montariaSagrada?.toJson(),
       'periciasTreinadas': p.periciasTreinadas,
       'atributos': p.atributos.map((k, v) => MapEntry(k, v.valor)),
       'classes': p.classes
@@ -122,7 +125,7 @@ class PersonagemStorageService {
   }
 
   // DESSERIALIZAÇÃO (Map -> Personagem)
-  static Personagem _mapToPersonagem(Map<String, dynamic> map) {
+  static Personagem mapToPersonagem(Map<String, dynamic> map) {
     // Reconstrói atributos
     final Map<String, dynamic> rawAtrib = map['atributos'] ?? {};
     final Map<String, Atributo> atribs = {
@@ -218,6 +221,28 @@ class PersonagemStorageService {
         ? FormaSelvagemAtiva.fromJson(Map<String, dynamic>.from(map['formaSelvagemAtiva']))
         : null;
 
+    final List<GolpePessoal> golpes = [];
+    if (map['golpesPessoais'] != null) {
+      for (var g in map['golpesPessoais']) {
+        if (g is Map) {
+          golpes.add(GolpePessoal.fromJson(Map<String, dynamic>.from(g)));
+        }
+      }
+    }
+
+    final List<Engenhoca> engenhocasList = [];
+    if (map['engenhocas'] != null) {
+      for (var e in map['engenhocas']) {
+        if (e is Map) {
+          engenhocasList.add(Engenhoca.fromJson(Map<String, dynamic>.from(e)));
+        }
+      }
+    }
+
+    final montariaSagrada = map['montariaSagrada'] != null
+        ? MontariaSagrada.fromJson(Map<String, dynamic>.from(map['montariaSagrada']))
+        : null;
+
     return Personagem(
       id: map['id']?.toString(),
       nome: map['nome'] ?? 'Aventureiro',
@@ -244,8 +269,11 @@ class PersonagemStorageService {
       armaduraEquipada: armadura,
       escudoEquipado: escudo,
       tibares: (map['tibares'] as num?)?.toInt() ?? 0,
+      golpesPessoais: golpes,
+      engenhocas: engenhocasList,
       formaSelvagemAtiva: formaSelvagem,
       tipoCompanheiroAnimal: map['tipoCompanheiroAnimal']?.toString(),
+      montariaSagrada: montariaSagrada,
       periciasTreinadas: List<String>.from(map['periciasTreinadas'] ?? []),
     );
   }

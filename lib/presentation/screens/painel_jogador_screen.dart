@@ -6,11 +6,14 @@ import 'package:t20_creator/domain/entities/classe_do_personagem.dart';
 import '../../domain/entities/classe.dart';
 import '../../domain/entities/personagem.dart';
 import '../../domain/entities/companheiro_animal.dart';
+import '../../domain/entities/montaria_sagrada.dart';
 import '../../domain/services/data_services/call_formas_selvagens.dart';
 import '../../domain/services/data_services/call_companheiros.dart';
+import '../../domain/services/data_services/call_montaria_sagrada.dart';
 import '../../domain/services/personagem_storage_service.dart';
 import 'selecao_poderes_screen.dart';
 import 'aba_combate_view.dart';
+import '../widgets/modal_escolha_companheiro.dart';
 
 class PainelJogadorScreen extends StatefulWidget {
   final Personagem personagemInicial;
@@ -1055,33 +1058,6 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
     );
   }
 
-  void _mostrarModalPDF() {
-    showDialog(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        title: Row(
-          children: const [
-            Icon(Icons.picture_as_pdf, color: Colors.red),
-            SizedBox(width: 8),
-            Text('Exportar Ficha'),
-          ],
-        ),
-        content: Text(
-          'A ficha de "${_personagem.nome}" está pronta para ser exportada como PDF completo no padrão Tormenta 20.\n\nRecurso de geração de PDF em desenvolvimento.',
-        ),
-        actions: [
-          ElevatedButton(
-            onPressed: () => Navigator.pop(ctx),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFFD32F2F),
-            ),
-            child: const Text('OK', style: TextStyle(color: Colors.white)),
-          ),
-        ],
-      ),
-    );
-  }
-
   // --- ROLADOR DE DADOS ---
   void _rolarDadoComModificador(int lados, int mod, String rotulo) {
     final rand = Random();
@@ -1912,9 +1888,15 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
           _buildBannerFormaSelvagemAtiva(),
         ],
 
+        // BANNER DA MONTARIA SAGRADA SE ATIVA
+        if (_personagem.montariaSagradaAtiva) ...[
+          const SizedBox(height: 12),
+          _buildBannerMontariaSagradaAtiva(),
+        ],
+
         const SizedBox(height: 18),
 
-        // 4 CARDS RÁPIDOS 100% RESPONSIVOS (Atributos, Raça, Classe, PDF)
+        // 3 CARDS RÁPIDOS 100% RESPONSIVOS (Atributos, Raça, Classe)
         Row(
           children: [
             Expanded(
@@ -1938,14 +1920,6 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
                 icone: Icons.shield_outlined,
                 titulo: 'Classe\n',
                 onTap: _mostrarModalClasse,
-              ),
-            ),
-            const SizedBox(width: 8),
-            Expanded(
-              child: _buildCardAcaoRapida(
-                icone: Icons.picture_as_pdf_outlined,
-                titulo: 'Gerar\nPDF',
-                onTap: _mostrarModalPDF,
               ),
             ),
           ],
@@ -2298,6 +2272,10 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
           ],
           if (_personagem.temPoderCompanheiroAnimal) ...[
             _buildCardCompanheiroAnimal(),
+          ],
+          // SEÇÃO DE MONTARIA SAGRADA (PALADINO)
+          if (_personagem.temMontariaSagrada) ...[
+            _buildCardMontariaSagrada(),
           ],
           if (classeDoPersonagem != null) ...[
             const SizedBox(height: 10),
@@ -2980,83 +2958,401 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
   }
 
   void _mostrarModalEscolhaCompanheiroPainel() {
-    final nivelDruida = _personagem.nivelDruida;
-    final companheiros = BancoDeCompanheiros.todos;
-
-    showModalBottomSheet(
+    mostrarModalEscolhaCompanheiro(
       context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.white,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      nivelDruida: _personagem.nivelDruida,
+      onSelecionado: (comp) {
+        _atualizarPersonagem(
+          _personagem.copyWith(tipoCompanheiroAnimal: comp.key),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Companheiro "${comp.nome}" selecionado!'),
+          ),
+        );
+      },
+    );
+  }
+
+  // --- SEÇÃO DE MONTARIA SAGRADA DO PALADINO ---
+
+  Widget _buildBannerMontariaSagradaAtiva() {
+    final montaria = _personagem.montariaSagrada ??
+        MontariaSagrada(
+          nomeCustomizado: BancoDeRegrasMontariaSagrada.animalPadraoParaTamanho(_personagem.tamanho),
+          especie: BancoDeRegrasMontariaSagrada.animalPadraoParaTamanho(_personagem.tamanho),
+        );
+    final tier = _personagem.tierMontariaSagrada;
+    final deslocamento = _personagem.deslocamentoMontadoMetros;
+
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: const Color(0xFF4E342E),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: const Color(0xFFFFB300), width: 1.5),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.15),
+            blurRadius: 6,
+            offset: const Offset(0, 3),
+          ),
+        ],
       ),
-      builder: (ctx) => DraggableScrollableSheet(
-        initialChildSize: 0.75,
-        minChildSize: 0.4,
-        maxChildSize: 0.95,
-        expand: false,
-        builder: (_, scrollController) {
-          return Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Icon(Icons.pets, color: Color(0xFFFFD54F), size: 22),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  'Montaria Sagrada Ativa: ${montaria.nomeCustomizado}',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                  ),
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFFFB300),
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                child: Text(
+                  tier.toUpperCase(),
+                  style: const TextStyle(
+                    color: Colors.brown,
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 6),
+          Text(
+            'Deslocamento: ${deslocamento}m | ${montaria.especie} (${montaria.isVarianteMundana ? "Variante Mundana" : "Invocada"})',
+            style: const TextStyle(color: Color(0xFFFFF8E1), fontSize: 12),
+          ),
+          if (!montaria.isVarianteMundana) ...[
+            const SizedBox(height: 8),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFFD32F2F),
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                onPressed: () {
+                  _atualizarPersonagem(_personagem.dispensarMontariaSagrada());
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Montaria sagrada dispensada.')),
+                  );
+                },
+                icon: const Icon(Icons.close, size: 16),
+                label: const Text('Dispensar Montaria', style: TextStyle(fontSize: 12)),
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCardMontariaSagrada() {
+    final montaria = _personagem.montariaSagrada ??
+        MontariaSagrada(
+          nomeCustomizado: BancoDeRegrasMontariaSagrada.animalPadraoParaTamanho(_personagem.tamanho),
+          especie: BancoDeRegrasMontariaSagrada.animalPadraoParaTamanho(_personagem.tamanho),
+        );
+    final tier = _personagem.tierMontariaSagrada;
+    final deslocamento = _personagem.deslocamentoMontadoMetros;
+    final beneficios = BancoDeRegrasMontariaSagrada.beneficiosParaTier(tier);
+
+    return Card(
+      color: Colors.amber.shade50,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+        side: BorderSide(color: Colors.amber.shade400),
+      ),
+      margin: const EdgeInsets.only(bottom: 8),
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
               children: [
-                Center(
-                  child: Container(
-                    width: 40,
-                    height: 4,
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade400,
-                      borderRadius: BorderRadius.circular(2),
+                const Icon(Icons.pets, color: Colors.brown, size: 20),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    'Montaria Sagrada: ${montaria.nomeCustomizado}',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                      color: Colors.brown,
                     ),
                   ),
                 ),
-                const SizedBox(height: 12),
-                const Text(
-                  'Escolha o Tipo de Companheiro Animal',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                IconButton(
+                  icon: const Icon(Icons.edit, size: 18, color: Colors.brown),
+                  tooltip: 'Personalizar Montaria',
+                  onPressed: () => _mostrarDialogoEditarMontaria(montaria),
                 ),
-                const SizedBox(height: 12),
-                Expanded(
-                  child: ListView.builder(
-                    controller: scrollController,
-                    itemCount: companheiros.length,
-                    itemBuilder: (_, index) {
-                      final comp = companheiros[index];
-                      final beneficio = comp.getBeneficioParaNivel(nivelDruida);
-
-                      return Card(
-                        margin: const EdgeInsets.only(bottom: 10),
-                        child: ListTile(
-                          leading: const Icon(Icons.pets, color: Colors.amber),
-                          title: Text(
-                            comp.nome,
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          subtitle: Text(
-                            '${comp.descricao}\nBenefício: $beneficio',
-                            style: const TextStyle(fontSize: 12),
-                          ),
-                          onTap: () {
-                            Navigator.pop(ctx);
-                            _atualizarPersonagem(
-                              _personagem.copyWith(tipoCompanheiroAnimal: comp.key),
-                            );
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text('Companheiro "${comp.nome}" selecionado!'),
-                              ),
-                            );
-                          },
-                        ),
-                      );
-                    },
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  decoration: BoxDecoration(
+                    color: Colors.amber.shade200,
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: Text(
+                    tier.toUpperCase(),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 10,
+                      color: Colors.brown,
+                    ),
                   ),
                 ),
               ],
             ),
-          );
-        },
+            const SizedBox(height: 6),
+            Text(
+              'Espécie: ${montaria.especie} • Deslocamento: ${deslocamento}m',
+              style: const TextStyle(fontSize: 12, color: Colors.black87),
+            ),
+            const SizedBox(height: 8),
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.amber.shade200),
+              ),
+              child: Text(
+                'Benefício ($tier): $beneficios',
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 12,
+                  color: Colors.brown.shade800,
+                ),
+              ),
+            ),
+            const SizedBox(height: 10),
+
+            // Invocação e estado
+            if (montaria.isVarianteMundana) ...[
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: Colors.green.shade50,
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: Colors.green.shade300),
+                ),
+                child: Row(
+                  children: [
+                    const Icon(Icons.check_circle, color: Colors.green, size: 18),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        'Variante Mundana Ativa: Animal físico permanente (sem custo de PM).',
+                        style: TextStyle(fontSize: 11, color: Colors.green.shade900),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ] else ...[
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      montaria.invocada
+                          ? 'Status: Invocada na Cena (Ativa)'
+                          : 'Status: Em Repouso / Dispensada',
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: montaria.invocada
+                            ? Colors.green.shade800
+                            : Colors.grey.shade700,
+                      ),
+                    ),
+                  ),
+                  if (montaria.invocada)
+                    ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFFD32F2F),
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                      ),
+                      onPressed: () {
+                        _atualizarPersonagem(_personagem.dispensarMontariaSagrada());
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Montaria sagrada dispensada.')),
+                        );
+                      },
+                      icon: const Icon(Icons.close, size: 14),
+                      label: const Text('Dispensar', style: TextStyle(fontSize: 11)),
+                    )
+                  else
+                    ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.brown,
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                      ),
+                      onPressed: () {
+                        const custo = 2;
+                        if (_personagem.pmAtual < custo) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('PM insuficiente para invocar a montaria sagrada (custa 2 PM).'),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
+                          return;
+                        }
+                        _atualizarPersonagem(_personagem.invocarMontariaSagrada());
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('${montaria.nomeCustomizado} invocada! (-2 PM)'),
+                            backgroundColor: Colors.green.shade700,
+                          ),
+                        );
+                      },
+                      icon: const Icon(Icons.auto_awesome, size: 14),
+                      label: const Text('Invocar (2 PM)', style: TextStyle(fontSize: 11)),
+                    ),
+                ],
+              ),
+            ],
+
+            const SizedBox(height: 8),
+
+            // Switch Variante Mundana
+            SwitchListTile(
+              contentPadding: EdgeInsets.zero,
+              dense: true,
+              title: const Text(
+                'Variante Mundana (animal físico)',
+                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+              ),
+              subtitle: Text(
+                montaria.isVarianteMundana
+                    ? 'Animal permanente físico (sujeito a terreno e passagens).'
+                    : 'Animal sagrado/espiritual invocado por 2 PM até o fim da cena.',
+                style: const TextStyle(fontSize: 11, color: Colors.black54),
+              ),
+              value: montaria.isVarianteMundana,
+              onChanged: (val) {
+                _atualizarPersonagem(
+                  _personagem.alternarVarianteMundanaMontaria(val),
+                );
+              },
+            ),
+
+            // Propriedades e Regras
+            Theme(
+              data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+              child: ExpansionTile(
+                tilePadding: EdgeInsets.zero,
+                childrenPadding: EdgeInsets.zero,
+                title: const Text(
+                  'Propriedades Sagradas',
+                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.brown),
+                ),
+                children: BancoDeRegrasMontariaSagrada.propriedades.map((prop) {
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 4),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text('• ', style: TextStyle(color: Colors.brown, fontWeight: FontWeight.bold)),
+                        Expanded(
+                          child: Text(
+                            prop,
+                            style: const TextStyle(fontSize: 11, color: Colors.black87),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _mostrarDialogoEditarMontaria(MontariaSagrada montariaAtual) {
+    final nomeController = TextEditingController(text: montariaAtual.nomeCustomizado);
+    final especieController = TextEditingController(text: montariaAtual.especie);
+
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Personalizar Montaria Sagrada'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              controller: nomeController,
+              decoration: const InputDecoration(
+                labelText: 'Nome da Montaria',
+                hintText: 'Ex: Brioso, Relâmpago',
+              ),
+            ),
+            const SizedBox(height: 12),
+            TextField(
+              controller: especieController,
+              decoration: const InputDecoration(
+                labelText: 'Espécie / Tipo de Animal',
+                hintText: 'Ex: Cavalo de Guerra, Pônei, Grifo',
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text('Cancelar'),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.brown,
+              foregroundColor: Colors.white,
+            ),
+            onPressed: () {
+              final novoNome = nomeController.text.trim().isEmpty ? 'Cavalo de Guerra' : nomeController.text.trim();
+              final novaEspecie = especieController.text.trim().isEmpty ? 'Cavalo de Guerra' : especieController.text.trim();
+              _atualizarPersonagem(
+                _personagem.atualizarMontariaSagrada(
+                  montariaAtual.copyWith(
+                    nomeCustomizado: novoNome,
+                    especie: novaEspecie,
+                  ),
+                ),
+              );
+              Navigator.pop(ctx);
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Montaria sagrada atualizada!')),
+              );
+            },
+            child: const Text('Salvar'),
+          ),
+        ],
       ),
     );
   }

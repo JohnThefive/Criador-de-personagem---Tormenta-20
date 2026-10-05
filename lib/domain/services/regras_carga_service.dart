@@ -1,6 +1,7 @@
 import '../entities/personagem.dart';
 import '../entities/arma.dart';
 import '../entities/protecao.dart';
+import '../entities/engenhoca.dart';
 import 'data_services/call_armas.dart';
 import 'data_services/call_armaduras.dart';
 
@@ -63,6 +64,7 @@ class RegrasCargaService {
     required List<String> itensInventario,
     Protecao? armadura,
     Protecao? escudo,
+    List<Engenhoca> engenhocas = const [],
   }) {
     // Espaço ocupado pelas armas
     int espacosArmas = armas.fold(0, (soma, a) => soma + a.espacos);
@@ -76,7 +78,12 @@ class RegrasCargaService {
       espacosItens += _obterEspacoItem(item);
     }
 
-    return espacosArmas + espacosProtecoes + espacosItens;
+    // Espaço ocupado pelas engenhocas (fracionários arredondados para cima no total)
+    final num somaEngenhocas =
+        engenhocas.fold<num>(0, (soma, e) => soma + e.espacosOcupados);
+    final int espacosEngenhocas = somaEngenhocas.ceil();
+
+    return espacosArmas + espacosProtecoes + espacosItens + espacosEngenhocas;
   }
 
   /// Determina o espaço ocupado por itens gerais (padrão T20)
@@ -111,6 +118,7 @@ class RegrasCargaService {
       itensInventario: personagem.itensInventario,
       armadura: personagem.armaduraEquipada,
       escudo: personagem.escudoEquipado,
+      engenhocas: personagem.engenhocas,
     );
 
     return StatusCarga(

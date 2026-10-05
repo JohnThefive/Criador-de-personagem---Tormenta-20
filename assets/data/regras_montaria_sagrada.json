@@ -1,0 +1,29 @@
+{
+    "id": "montaria_sagrada",
+    "nome": "Montaria Sagrada",
+    "classeOrigem": "paladino",
+    "nivelDisponivel": 5,
+    "tipoParceiro": "MONTARIA",
+    "custoInvocacao": {
+        "acao": "MOVIMENTO",
+        "pm": 2,
+        "duracao": "FIM_DA_CENA"
+    },
+    "animaisPadrao": {
+        "MEDIO": "Cavalo de Guerra",
+        "PEQUENO": "Pônei"
+    },
+    "escalaParceiro": {
+        "5": "VETERANO",
+        "11": "MESTRE"
+    },
+    "propriedades": [
+        "Vinculo mental com o cavaleiro (dispensa testes de Adestramento).",
+        "Cumpre qualquer ordem incondicionalmente, mesmo arriscando a vida.",
+        "Se a montaria morrer, o paladino fica atordoado por 1 rodada.",
+        "Uma nova montaria pode ser invocada após um dia inteiro de prece e meditação."
+    ],
+    "varianteMundana": {
+        "descricao": "O animal e mundano em vez de invocado (sem custo de PM ou acao para invocar, mas restrito a terrenos e passagens acessiveis para o porte do animal)."
+    }
+}

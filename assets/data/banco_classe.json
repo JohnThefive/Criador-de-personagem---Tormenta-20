@@ -935,5 +935,724 @@
             "Força da Natureza": "No 20º nível, reduz o custo de todas as magias em –2 PM e aumenta a CD em +2 (bônus dobram para –4 PM e +4 na CD se estiver em terrenos naturais).",
             "Forma Selvagem": "Gasta uma ação completa e 3 PM para assumir uma forma selvagem (Ágil, Feroz, Resistente, Sorrateira ou Veloz). Não pode falar, empunhar itens ou lançar magias; itens equipados somem, mas mantêm benefícios vestidos. Dura até escolher reverter, ficar inconsciente ou morrer."
         }
+    },
+    {
+        "id": "guerreiro",
+        "nome": "Guerreiro",
+        "descricaoClasse": "Guerreiros são combatentes treinados no uso de diferentes armas e armaduras, dedicando-se ao domínio das técnicas de batalha. Versáteis e disciplinados, podem atuar como soldados, mercenários, guardas ou aventureiros, adaptando seu estilo de combate às situações que enfrentam. Entre os guerreiros famosos estão Christian Pryde, Katabrok, Ledd, Loriane, Vallen Allond, Sandro Galtran, Val e Verônica.",
+        "icone": "sword",
+        "pvInicial": 20,
+        "pvPorNivel": 5,
+        "pmInicial": 3,
+        "pmPorNivel": 3,
+        "proficiencias": [
+            "armasMarciais",
+            "armadurasPesadas",
+            "escudos"
+        ],
+        "periciasFixas": [
+            "LUTA_OU_PONTARIA",
+            "FORTITUDE"
+        ],
+        "qtdPericiasEscolha": 2,
+        "periciasOpcoes": [
+            "ADESTRAMENTO",
+            "ATLETISMO",
+            "CAVALGAR",
+            "GUERRA",
+            "INICIATIVA",
+            "INTIMIDACAO",
+            "LUTA",
+            "OFICIO",
+            "PERCEPCAO",
+            "PONTARIA",
+            "REFLEXOS"
+        ],
+        "caminhosDisponiveis": [],
+        "tabelaDeProgressao": {
+            "1": [
+                "Ataque Especial +4"
+            ],
+            "2": [
+                "Poder de Guerreiro"
+            ],
+            "3": [
+                "Durão",
+                "Poder de Guerreiro"
+            ],
+            "4": [
+                "Poder de Guerreiro"
+            ],
+            "5": [
+                "Ataque Especial +8",
+                "Poder de Guerreiro"
+            ],
+            "6": [
+                "Ataque Extra",
+                "Poder de Guerreiro"
+            ],
+            "7": [
+                "Poder de Guerreiro"
+            ],
+            "8": [
+                "Poder de Guerreiro"
+            ],
+            "9": [
+                "Ataque Especial +12",
+                "Poder de Guerreiro"
+            ],
+            "10": [
+                "Poder de Guerreiro"
+            ],
+            "11": [
+                "Poder de Guerreiro"
+            ],
+            "12": [
+                "Poder de Guerreiro"
+            ],
+            "13": [
+                "Ataque Especial +16",
+                "Poder de Guerreiro"
+            ],
+            "14": [
+                "Poder de Guerreiro"
+            ],
+            "15": [
+                "Poder de Guerreiro"
+            ],
+            "16": [
+                "Poder de Guerreiro"
+            ],
+            "17": [
+                "Ataque Especial +20",
+                "Poder de Guerreiro"
+            ],
+            "18": [
+                "Poder de Guerreiro"
+            ],
+            "19": [
+                "Poder de Guerreiro"
+            ],
+            "20": [
+                "Campeão",
+                "Poder de Guerreiro"
+            ]
+        },
+        "habilidadesFixas": {
+            "Ataque Especial": "Ao atacar, pode gastar 1 PM para receber +4 no ataque ou no dano. A cada quatro níveis, pode gastar +1 PM para aumentar o bônus em +4, podendo dividir os bônus livremente entre ataque e dano.",
+            "Durão": "A partir do 3º nível, sempre que sofre dano, pode gastar 3 PM para reduzir esse dano à metade.",
+            "Ataque Extra": "A partir do 6º nível, ao usar a ação agredir, pode gastar 2 PM para realizar um ataque adicional uma vez por rodada.",
+            "Campeão": "No 20º nível, o dano de todos os ataques aumenta em um passo. Ao acertar um ataque usando Ataque Especial ou Golpe Pessoal, recupera metade dos PM gastos na habilidade."
+        }
+    },
+    {
+        "id": "inventor",
+        "nome": "Inventor",
+        "descricaoClasse": "Inventores são aventureiros que utilizam ciência, criatividade e conhecimento para criar engenhocas e desenvolver novas soluções. Em vez de depender apenas de força, magia ou fé, confiam no próprio intelecto para aprimorar equipamentos, superar obstáculos e transformar o mundo ao seu redor. Entre os inventores famosos estão Dok, Ingram Brassbones, Marlin e Lorde Niebling.",
+        "icone": "wrench",
+        "pvInicial": 12,
+        "pvPorNivel": 3,
+        "pmInicial": 4,
+        "pmPorNivel": 4,
+        "proficiencias": [],
+        "periciasFixas": [
+            "OFICIO_ENGENHOQUEIRO",
+            "VONTADE"
+        ],
+        "qtdPericiasEscolha": 4,
+        "periciasOpcoes": [
+            "CONHECIMENTO",
+            "CURA",
+            "DIPLOMACIA",
+            "FORTITUDE",
+            "INICIATIVA",
+            "INVESTIGACAO",
+            "LUTA",
+            "MISTICISMO",
+            "OFICIO_ALQUIMISTA",
+            "OFICIO_ARMEIRO",
+            "OFICIO_COZINHEIRO",
+            "OFICIO_ARTESANATO",
+            "PILOTAGEM",
+            "PERCEPCAO",
+            "PONTARIA"
+        ],
+        "caminhosDisponiveis": [],
+        "tabelaDeProgressao": {
+            "1": [
+                "Engenhosidade",
+                "Protótipo"
+            ],
+            "2": [
+                "Fabricar Item Superior (1 melhoria)",
+                "Poder de Inventor"
+            ],
+            "3": [
+                "Comerciante",
+                "Poder de Inventor"
+            ],
+            "4": [
+                "Poder de Inventor"
+            ],
+            "5": [
+                "Fabricar Item Superior (2 melhorias)",
+                "Poder de Inventor"
+            ],
+            "6": [
+                "Poder de Inventor"
+            ],
+            "7": [
+                "Encontrar Fraqueza",
+                "Poder de Inventor"
+            ],
+            "8": [
+                "Fabricar Item Superior (3 melhorias)",
+                "Poder de Inventor"
+            ],
+            "9": [
+                "Fabricar Item Mágico (menor)",
+                "Poder de Inventor"
+            ],
+            "10": [
+                "Olho do Dragão",
+                "Poder de Inventor"
+            ],
+            "11": [
+                "Fabricar Item Superior (4 melhorias)",
+                "Poder de Inventor"
+            ],
+            "12": [
+                "Poder de Inventor"
+            ],
+            "13": [
+                "Fabricar Item Mágico (médio)",
+                "Poder de Inventor"
+            ],
+            "14": [
+                "Poder de Inventor"
+            ],
+            "15": [
+                "Poder de Inventor"
+            ],
+            "16": [
+                "Poder de Inventor"
+            ],
+            "17": [
+                "Fabricar Item Mágico (maior)",
+                "Poder de Inventor"
+            ],
+            "18": [
+                "Poder de Inventor"
+            ],
+            "19": [
+                "Poder de Inventor"
+            ],
+            "20": [
+                "Obra-Prima",
+                "Poder de Inventor"
+            ]
+        },
+        "habilidadesFixas": {
+            "Engenhosidade": "Quando faz um teste de perícia (exceto testes de ataque), pode gastar 2 PM para somar sua Inteligência no resultado.",
+            "Protótipo": "Começa com um item superior ou com 10 itens alquímicos, com preço total somado de até T$ 500.",
+            "Fabricar Item Superior": "No 2º nível, recebe um item superior de até T$ 2.000 e passa a fabricar itens superiores com uma melhoria. Nos níveis 5, 8 e 11, pode substituir o item e passa a fabricar itens com duas, três e quatro melhorias, respectivamente.",
+            "Comerciante": "A partir do 3º nível, pode vender itens por um valor 10% mais caro (não cumulativo com barganha).",
+            "Encontrar Fraqueza": "A partir do 7º nível, gasta uma ação de movimento e 2 PM para analisar um objeto a alcance curto e ignorar sua RD até o fim da cena. Pode analisar um inimigo de armadura ou construto para receber +2 em testes de ataque contra ele até o fim da cena.",
+            "Fabricar Item Mágico": "No 9º nível, recebe um item mágico menor e passa a fabricar itens menores. Nos níveis 13 e 17, pode substituir o item recebido e passa a fabricar itens mágicos médios e maiores, respectivamente.",
+            "Olho do Dragão": "A partir do 10º nível, gasta uma ação completa para analisar um item e descobrir automaticamente se é mágico, suas propriedades e como utilizá-las.",
+            "Obra-Prima": "No 20º nível, fabrica sem custos um item lendário definitivo aprovado pelo mestre (equivalente a 5 melhorias e 4 encantos)."
+        }
+    },
+    {
+        "id": "ladino",
+        "nome": "Ladino",
+        "descricaoClasse": "Ladinos são aventureiros furtivos, astutos e versáteis, especializados em infiltração, armadilhas, arrombamentos e obtenção de informações. Preferem a estratégia e a precisão ao confronto direto, utilizando sua esperteza para superar obstáculos e auxiliar seus aliados. Entre os ladinos famosos estão Andrus o Aranha, Ashlen Ironsmith, o Camaleão, Drikka e Leon Galtran.",
+        "icone": "dagger",
+        "pvInicial": 12,
+        "pvPorNivel": 3,
+        "pmInicial": 4,
+        "pmPorNivel": 4,
+        "proficiencias": [],
+        "periciasFixas": [
+            "LADINAGEM",
+            "REFLEXOS"
+        ],
+        "qtdPericiasEscolha": 8,
+        "periciasOpcoes": [
+            "ACROBACIA",
+            "ATLETISMO",
+            "ATUACAO",
+            "CAVALGAR",
+            "CONHECIMENTO",
+            "DIPLOMACIA",
+            "ENGANACAO",
+            "FURTIVIDADE",
+            "INICIATIVA",
+            "INTIMIDACAO",
+            "INTUICAO",
+            "INVESTIGACAO",
+            "JOGATINA",
+            "LUTA",
+            "OFICIO",
+            "PERCEPCAO",
+            "PILOTAGEM",
+            "PONTARIA"
+        ],
+        "caminhosDisponiveis": [],
+        "tabelaDeProgressao": {
+            "1": [
+                "Ataque Furtivo +1d6",
+                "Especialista"
+            ],
+            "2": [
+                "Evasão",
+                "Poder de Ladino"
+            ],
+            "3": [
+                "Ataque Furtivo +2d6",
+                "Poder de Ladino"
+            ],
+            "4": [
+                "Esquiva Sobrenatural",
+                "Poder de Ladino"
+            ],
+            "5": [
+                "Ataque Furtivo +3d6",
+                "Poder de Ladino"
+            ],
+            "6": [
+                "Poder de Ladino"
+            ],
+            "7": [
+                "Ataque Furtivo +4d6",
+                "Poder de Ladino"
+            ],
+            "8": [
+                "Olhos nas Costas",
+                "Poder de Ladino"
+            ],
+            "9": [
+                "Ataque Furtivo +5d6",
+                "Poder de Ladino"
+            ],
+            "10": [
+                "Evasão Aprimorada",
+                "Poder de Ladino"
+            ],
+            "11": [
+                "Ataque Furtivo +6d6",
+                "Poder de Ladino"
+            ],
+            "12": [
+                "Poder de Ladino"
+            ],
+            "13": [
+                "Ataque Furtivo +7d6",
+                "Poder de Ladino"
+            ],
+            "14": [
+                "Poder de Ladino"
+            ],
+            "15": [
+                "Ataque Furtivo +8d6",
+                "Poder de Ladino"
+            ],
+            "16": [
+                "Poder de Ladino"
+            ],
+            "17": [
+                "Ataque Furtivo +9d6",
+                "Poder de Ladino"
+            ],
+            "18": [
+                "Poder de Ladino"
+            ],
+            "19": [
+                "Ataque Furtivo +10d6",
+                "Poder de Ladino"
+            ],
+            "20": [
+                "A Pessoa Certa para o Trabalho",
+                "Poder de Ladino"
+            ]
+        },
+        "habilidadesFixas": {
+            "Ataque Furtivo": "Uma vez por rodada, ao atingir criatura desprevenida (corpo a corpo ou alcance curto) ou flanqueada, causa +1d6 de dano extra. Aumenta em +1d6 a cada dois níveis. Criaturas imunes a críticos são imunes.",
+            "Especialista": "Escolha perícias treinadas igual à sua Inteligência (mínimo 1). Ao fazer um teste dessas perícias, pode gastar 1 PM para dobrar o bônus de treinamento (não pode ser usado em testes de ataque).",
+            "Evasão": "A partir do 2º nível, se passar num teste de Reflexos para reduzir dano à metade, não sofre dano algum. Exige liberdade de movimentos (inutilizável com armadura pesada ou imóvel).",
+            "Esquiva Sobrenatural": "A partir do 4º nível, seus instintos impedem que você fique surpreendido.",
+            "Olhos nas Costas": "A partir do 8º nível, você não pode ser flanqueado.",
+            "Evasão Aprimorada": "A partir do 10º nível, se passar num teste de Reflexos para reduzir dano à metade não sofre dano, e se falhar sofre apenas metade do dano. Exige liberdade de movimentos.",
+            "A Pessoa Certa para o Trabalho": "No 20º nível, ao fazer um ataque furtivo ou teste de perícia da lista de ladino, pode gastar 5 PM para receber +10 no teste."
+        }
+    },
+    {
+        "id": "lutador",
+        "nome": "Lutador",
+        "descricaoClasse": "Lutadores são especialistas em combate desarmado, usando disciplina, resistência e habilidade para superar seus adversários sem depender de armas ou armaduras. Muitos encontram nas arenas e na vida de aventureiro uma oportunidade de conquistar fama, riqueza e uma vida melhor. Entre os lutadores famosos estão Maquius, Rexthor e Syrion.",
+        "icone": "fist",
+        "pvInicial": 20,
+        "pvPorNivel": 5,
+        "pmInicial": 3,
+        "pmPorNivel": 3,
+        "proficiencias": [],
+        "periciasFixas": [
+            "FORTITUDE",
+            "LUTA"
+        ],
+        "qtdPericiasEscolha": 4,
+        "periciasOpcoes": [
+            "ACROBACIA",
+            "ADESTRAMENTO",
+            "ATLETISMO",
+            "ENGANACAO",
+            "FURTIVIDADE",
+            "INICIATIVA",
+            "INTIMIDACAO",
+            "OFICIO",
+            "PERCEPCAO",
+            "PONTARIA",
+            "REFLEXOS"
+        ],
+        "caminhosDisponiveis": [],
+        "tabelaDeProgressao": {
+            "1": [
+                "Briga (1d6)",
+                "Golpe Relâmpago"
+            ],
+            "2": [
+                "Poder de Lutador"
+            ],
+            "3": [
+                "Casca Grossa (Con)",
+                "Poder de Lutador"
+            ],
+            "4": [
+                "Poder de Lutador"
+            ],
+            "5": [
+                "Briga (1d8)",
+                "Golpe Cruel",
+                "Poder de Lutador"
+            ],
+            "6": [
+                "Poder de Lutador"
+            ],
+            "7": [
+                "Casca Grossa (Con+1)",
+                "Poder de Lutador"
+            ],
+            "8": [
+                "Poder de Lutador"
+            ],
+            "9": [
+                "Briga (1d10)",
+                "Golpe Violento",
+                "Poder de Lutador"
+            ],
+            "10": [
+                "Poder de Lutador"
+            ],
+            "11": [
+                "Casca Grossa (Con+2)",
+                "Poder de Lutador"
+            ],
+            "12": [
+                "Poder de Lutador"
+            ],
+            "13": [
+                "Briga (2d6)",
+                "Poder de Lutador"
+            ],
+            "14": [
+                "Poder de Lutador"
+            ],
+            "15": [
+                "Casca Grossa (Con+3)",
+                "Poder de Lutador"
+            ],
+            "16": [
+                "Poder de Lutador"
+            ],
+            "17": [
+                "Briga (2d8)",
+                "Poder de Lutador"
+            ],
+            "18": [
+                "Poder de Lutador"
+            ],
+            "19": [
+                "Casca Grossa (Con+4)",
+                "Poder de Lutador"
+            ],
+            "20": [
+                "Dono da Rua (2d10)",
+                "Poder de Lutador"
+            ]
+        },
+        "habilidadesFixas": {
+            "Briga": "Seus ataques desarmados causam 1d6 de dano letal ou não letal (sem penalidades). O dano aumenta a cada quatro níveis (para criaturas Pequenas e Médias).",
+            "Golpe Relâmpago": "Quando usa a ação agredir para fazer um ataque desarmado, pode gastar 1 PM para realizar um ataque desarmado adicional.",
+            "Casca Grossa": "No 3º nível, soma a Constituição na Defesa (limitado pelo nível e sem armadura pesada). No 7º nível e a cada quatro níveis, recebe +1 cumulativo na Defesa.",
+            "Golpe Cruel": "No 5º nível, a sua margem de ameaça com ataques desarmados aumenta em +1.",
+            "Golpe Violento": "No 9º nível, o seu multiplicador de crítico com ataques desarmados aumenta em +1.",
+            "Dono da Rua": "No 20º nível, o dano desarmado base sobe para 2d10 e a ação agredir desarmada permite fazer dois ataques em vez de um (podendo somar o Golpe Relâmpago para um terceiro)."
+        }
+    },
+    {
+        "id": "nobre",
+        "nome": "Nobre",
+        "descricaoClasse": "Nobres são líderes capazes de organizar, inspirar e comandar outras pessoas, utilizando sua influência, recursos e contatos para superar desafios. Embora tenham privilégios e responsabilidades herdados ou conquistados, muitos se aventuram para proteger seu povo, defender seus interesses ou escapar das obrigações de sua posição. Entre os nobres famosos estão Arius Gorgonius Dubitatius, General Supremo Hermann Von Krauser, Lady Ayleth Karst e Rainha-Imperatriz Shivara.",
+        "icone": "crown",
+        "pvInicial": 16,
+        "pvPorNivel": 4,
+        "pmInicial": 4,
+        "pmPorNivel": 4,
+        "proficiencias": [
+            "ARMAS_MARCIAIS",
+            "ARMADURAS_PESADAS",
+            "ESCUDOS"
+        ],
+        "periciasFixas": [
+            "VONTADE"
+        ],
+        "qtdPericiasEscolha": 5,
+        "periciasOpcoes": [
+            "ADESTRAMENTO",
+            "ATUACAO",
+            "CAVALGAR",
+            "CONHECIMENTO",
+            "DIPLOMACIA",
+            "ENGANACAO",
+            "FORTITUDE",
+            "GUERRA",
+            "INICIATIVA",
+            "INTIMIDACAO",
+            "INTUICAO",
+            "INVESTIGACAO",
+            "JOGATINA",
+            "LUTA",
+            "NOBREZA",
+            "OFICIO",
+            "PERCEPCAO",
+            "PONTARIA"
+        ],
+        "caminhosDisponiveis": [],
+        "tabelaDeProgressao": {
+            "1": [
+                "Autoconfiança",
+                "Espólio",
+                "Orgulho"
+            ],
+            "2": [
+                "Palavras Afiadas (2d6)",
+                "Poder de Nobre"
+            ],
+            "3": [
+                "Poder de Nobre",
+                "Riqueza"
+            ],
+            "4": [
+                "Gritar Ordens",
+                "Poder de Nobre"
+            ],
+            "5": [
+                "Poder de Nobre",
+                "Presença Aristocrática"
+            ],
+            "6": [
+                "Palavras Afiadas (4d6)",
+                "Poder de Nobre"
+            ],
+            "7": [
+                "Poder de Nobre"
+            ],
+            "8": [
+                "Poder de Nobre"
+            ],
+            "9": [
+                "Poder de Nobre"
+            ],
+            "10": [
+                "Palavras Afiadas (6d6)",
+                "Poder de Nobre"
+            ],
+            "11": [
+                "Poder de Nobre"
+            ],
+            "12": [
+                "Poder de Nobre"
+            ],
+            "13": [
+                "Poder de Nobre"
+            ],
+            "14": [
+                "Palavras Afiadas (8d6)",
+                "Poder de Nobre"
+            ],
+            "15": [
+                "Poder de Nobre"
+            ],
+            "16": [
+                "Poder de Nobre"
+            ],
+            "17": [
+                "Poder de Nobre"
+            ],
+            "18": [
+                "Palavras Afiadas (10d6)",
+                "Poder de Nobre"
+            ],
+            "19": [
+                "Poder de Nobre"
+            ],
+            "20": [
+                "Realeza",
+                "Poder de Nobre"
+            ]
+        },
+        "habilidadesFixas": {
+            "Autoconfiança": "Pode usar Carisma em vez de Destreza na Defesa (não acumulável com armadura pesada).",
+            "Espólio": "Recebe um item à sua escolha com valor de até T$ 2.000.",
+            "Orgulho": "Ao fazer teste de perícia, pode gastar até seu Carisma em PM para receber +2 por PM gasto no resultado.",
+            "Palavras Afiadas": "Ação padrão e 1 PM para teste oposto de Diplomacia ou Intimidação contra Vontade de criatura inteligente em alcance curto; causa 2d6 de dano psíquico não letal (metade se falhar). Se reduzida a 0 PV, ela se rende ou foge apavorada. Aumenta o dano com mais PM a cada 4 níveis.",
+            "Riqueza": "A partir do 3º nível, uma vez por aventura pode rolar Carisma + nível para receber essa quantidade em Tibares de Ouro (TO).",
+            "Gritar Ordens": "A partir do 4º nível, gasta até seu Carisma em PM para dar bônus igual ao gasto em todos os testes de perícia dos aliados em alcance curto até seu próximo turno.",
+            "Presença Aristocrática": "A partir do 5º nível, quando uma criatura inteligente tentar causar dano a você, gasta 2 PM para exigir teste de Vontade (CD Car); se falhar, ela perde a ação (1 vez por cena por criatura).",
+            "Realeza": "No 20º nível, a CD de Presença Aristocrática recebe +5 e falhas por 10 ou mais fazem a criatura lutar ao seu lado na cena. Alvos reduzidos a 0 PV por Palavras Afiadas passam a lutar ao seu lado em vez de caírem."
+        }
+    },
+    {
+        "id": "paladino",
+        "nome": "Paladino",
+        "descricaoClasse": "Paladinos são guerreiros sagrados dedicados ao bem, à justiça e à proteção dos inocentes. Abençoados por divindades bondosas, enfrentam o mal com coragem, disciplina e fé, buscando sempre agir de acordo com seus ideais, mesmo diante de difíceis dilemas. Entre os paladinos famosos estão Gregor Vahn, Ignis Crae, Lothar Alghe-rulff, o Paladino de Jallar e Titus Lomatu-barius.",
+        "icone": "shield-cross",
+        "pvInicial": 20,
+        "pvPorNivel": 5,
+        "pmInicial": 3,
+        "pmPorNivel": 3,
+        "proficiencias": [
+            "ARMAS_MARCIAIS",
+            "ARMADURAS_PESADAS",
+            "ESCUDOS"
+        ],
+        "periciasFixas": [
+            "LUTA",
+            "VONTADE"
+        ],
+        "qtdPericiasEscolha": 2,
+        "periciasOpcoes": [
+            "ADESTRAMENTO",
+            "ATLETISMO",
+            "CAVALGAR",
+            "CURA",
+            "DIPLOMACIA",
+            "FORTITUDE",
+            "GUERRA",
+            "INICIATIVA",
+            "INTUICAO",
+            "NOBREZA",
+            "PERCEPCAO",
+            "RELIGIAO"
+        ],
+        "caminhosDisponiveis": [
+            {
+                "nome": "Égide Sagrada",
+                "atributoChave": "CAR",
+                "descricao": "Você soma seu Carisma na sua Defesa e na Defesa de aliados adjacentes. No 11º nível, pode gastar uma reação e 2 PM para refletir uma magia contra o conjurador.",
+                "nivelLiberado": 5
+            },
+            {
+                "nome": "Montaria Sagrada",
+                "atributoChave": "CAR",
+                "descricao": "Você pode gastar uma ação de movimento e 2 PM para invocar uma montaria mágica leal (Veterana no 5º nível, Mestre no 11º nível).",
+                "nivelLiberado": 5
+            }
+        ],
+        "tabelaDeProgressao": {
+            "1": [
+                "Abençoado",
+                "Código do Herói",
+                "Golpe Divino (+1d8)"
+            ],
+            "2": [
+                "Cura pelas Mãos (1d8+1 PV)",
+                "Poder de Paladino"
+            ],
+            "3": [
+                "Aura Sagrada",
+                "Poder de Paladino"
+            ],
+            "4": [
+                "Poder de Paladino"
+            ],
+            "5": [
+                "Bênção da Justiça",
+                "Golpe Divino (+2d8)",
+                "Poder de Paladino"
+            ],
+            "6": [
+                "Cura pelas Mãos (2d8+2 PV)",
+                "Poder de Paladino"
+            ],
+            "7": [
+                "Poder de Paladino"
+            ],
+            "8": [
+                "Poder de Paladino"
+            ],
+            "9": [
+                "Golpe Divino (+3d8)",
+                "Poder de Paladino"
+            ],
+            "10": [
+                "Cura pelas Mãos (3d8+3 PV)",
+                "Poder de Paladino"
+            ],
+            "11": [
+                "Poder de Paladino"
+            ],
+            "12": [
+                "Poder de Paladino"
+            ],
+            "13": [
+                "Golpe Divino (+4d8)",
+                "Poder de Paladino"
+            ],
+            "14": [
+                "Cura pelas Mãos (4d8+4 PV)",
+                "Poder de Paladino"
+            ],
+            "15": [
+                "Poder de Paladino"
+            ],
+            "16": [
+                "Poder de Paladino"
+            ],
+            "17": [
+                "Golpe Divino (+5d8)",
+                "Poder de Paladino"
+            ],
+            "18": [
+                "Cura pelas Mãos (5d8+5 PV)",
+                "Poder de Paladino"
+            ],
+            "19": [
+                "Poder de Paladino"
+            ],
+            "20": [
+                "Vingador Sagrado",
+                "Poder de Paladino"
+            ]
+        },
+        "habilidadesFixas": {
+            "Abençoado": "Soma o Carisma no total inicial de PM. Torna-se devoto de um deus disponível para paladinos (recebendo dois poderes concedidos em vez de um) ou devoto do Bem (sem poderes concedidos, mas livre de Obrigações & Restrições além do Código do Herói).",
+            "Código do Herói": "Deve manter sua palavra, nunca recusar ajuda a inocentes e jamais mentir, trapacear ou roubar. Violar o código anula todos os PM até o próximo dia.",
+            "Golpe Divino": "Ao fazer um ataque corpo a corpo, gasta 2 PM para somar o Carisma no teste de ataque e causar +1d8 de dano. A cada quatro níveis, pode gastar +1 PM para aumentar o dano em +1d8.",
+            "Cura pelas Mãos": "Ação de movimento e 1 PM para curar 1d8+1 PV em alcance corpo a corpo (ou causar dano de luz em mortos-vivos com ataque desarmado). A cada quatro níveis, gasta +1 PM para aumentar a cura em +1d8+1. A partir do 6º nível, pode gastar +1 PM para remover uma condição prejudicial.",
+            "Aura Sagrada": "A partir do 3º nível, gasta 1 PM para manter aura de 9m sustentada que emite luz e soma seu Carisma nos testes de resistência seus e dos aliados dentro dela.",
+            "Bênção da Justiça": "No 5º nível, escolhe entre Égide Sagrada (bônus de Carisma na Defesa para si e aliados adjacentes e reflete magias no nível 11) ou Montaria Sagrada (invoca uma montaria mágica leal).",
+            "Vingador Sagrado": "No 20º nível, gasta ação completa e 10 PM para receber voo 18m, RD 20, reduzir o custo do Golpe Divino pela metade e adicionar dois dados extras de dano ao golpe até o fim da cena."
+        }
     }
 ]

@@ -10,8 +10,6 @@ class CaminhoDeClasse {
 
   // Flags para a UI saber o que renderizar depois (Arcanista)
   final bool temFocoMagico;
-  final bool temLinhagem;
-  final bool temGrimorio;
 
   final int nivelLiberado;
 
@@ -20,8 +18,6 @@ class CaminhoDeClasse {
     required this.atributoChave,
     required this.descricao,
     this.temFocoMagico = false,
-    this.temLinhagem = false,
-    this.temGrimorio = false,
     this.nivelLiberado = 1,
   });
 
@@ -31,8 +27,6 @@ class CaminhoDeClasse {
       atributoChave: json['atributoChave'] as String? ?? 'INT',
       descricao: json['descricao'] as String? ?? '',
       temFocoMagico: json['temFocoMagico'] as bool? ?? false,
-      temLinhagem: json['temLinhagem'] as bool? ?? false,
-      temGrimorio: json['temGrimorio'] as bool? ?? false,
       nivelLiberado: (json['nivelLiberado'] as num?)?.toInt() ?? 1,
     );
   }
@@ -42,8 +36,6 @@ class CaminhoDeClasse {
     'atributoChave': atributoChave,
     'descricao': descricao,
     'temFocoMagico': temFocoMagico,
-    'temLinhagem': temLinhagem,
-    'temGrimorio': temGrimorio,
     'nivelLiberado': nivelLiberado,
   };
 }
@@ -96,6 +88,9 @@ class Classe {
   /// Getter conveniente para obter o IconData do RpgAwesome
   IconData get iconeClasse => IconeRpgHelper.obterIcone(icone);
 
+  /// Retorna o identificador do ícone SVG da classe (ex: 'classes/arcanista')
+  String get iconeSvg => 'classes/$idClasse';
+
   /// Getter para compatibilidade de nomenclatura id
   String get id => idClasse;
 
@@ -139,20 +134,10 @@ class Classe {
       }
     });
 
-    // Parser seguro de caminhos (aceita Map completo ou String de fallback)
-    final rawCaminhos = json['caminhosDisponiveis'] as List<dynamic>? ?? [];
-    final List<CaminhoDeClasse> caminhos = [];
-    for (var c in rawCaminhos) {
-      if (c is Map<String, dynamic>) {
-        caminhos.add(CaminhoDeClasse.fromJson(c));
-      } else if (c is Map) {
-        caminhos.add(CaminhoDeClasse.fromJson(Map<String, dynamic>.from(c)));
-      } else if (c is String) {
-        caminhos.add(
-          CaminhoDeClasse(nome: c, atributoChave: 'FOR', descricao: ''),
-        );
-      }
-    }
+    final caminhos = (json['caminhosDisponiveis'] as List? ?? [])
+        .whereType<Map>()
+        .map((c) => CaminhoDeClasse.fromJson(Map<String, dynamic>.from(c)))
+        .toList();
 
     // Parser seguro de habilidades fixas
     final rawHab = (json['habilidadesFixas'] as Map?) ?? {};

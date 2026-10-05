@@ -4,7 +4,6 @@ class TipoCompanheiroAnimal {
   final String descricao;
   final List<String> exemplos;
   final Map<String, String> beneficiosPorTier;
-  final String? origem;
 
   const TipoCompanheiroAnimal({
     required this.key,
@@ -12,7 +11,6 @@ class TipoCompanheiroAnimal {
     required this.descricao,
     this.exemplos = const [],
     this.beneficiosPorTier = const {},
-    this.origem,
   });
 
   factory TipoCompanheiroAnimal.fromJson(Map<String, dynamic> json) {
@@ -25,7 +23,6 @@ class TipoCompanheiroAnimal {
       descricao: json['descricao']?.toString() ?? '',
       exemplos: rawExemplos.map((e) => e.toString()).toList(),
       beneficiosPorTier: rawBen.map((k, v) => MapEntry(k.toString(), v.toString())),
-      origem: json['origem']?.toString(),
     );
   }
 
@@ -35,7 +32,6 @@ class TipoCompanheiroAnimal {
     'descricao': descricao,
     'exemplos': exemplos,
     'beneficiosPorTier': beneficiosPorTier,
-    if (origem != null) 'origem': origem,
   };
 
   /// Retorna o tier do companheiro conforme o nível de Druida:

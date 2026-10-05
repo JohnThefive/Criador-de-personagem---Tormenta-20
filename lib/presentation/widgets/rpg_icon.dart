@@ -13,25 +13,58 @@ class RpgIcon extends StatelessWidget {
     this.color,
   });
 
-  String _resolverCaminhoAsset() {
-    if (iconName.startsWith('assets/')) {
-      return iconName.endsWith('.svg') ? iconName : '$iconName.svg';
+  static const Set<String> _classesConhecidas = {
+    'arcanista',
+    'barbaro',
+    'bardo',
+    'bucaneiro',
+    'cacador',
+    'cavaleiro',
+    'clerigo',
+    'druida',
+    'guerreiro',
+    'inventor',
+    'ladino',
+    'lutador',
+    'nobre',
+    'paladino',
+  };
+
+  static String resolverCaminhoAsset(String iconName) {
+    String clean = iconName.trim();
+    if (clean.endsWith('.svg')) {
+      clean = clean.substring(0, clean.length - 4);
+    }
+    // Padroniza em minúsculas para garantir consistência e evitar duplicatas
+    clean = clean.toLowerCase();
+
+    // Aliases para manter compatibilidade com nomes antigos/alternativos
+    if (clean == 'sereia' || clean == 'racas/sereia') {
+      clean = 'racas/sereia_tritao';
+    } else if (clean == 'suraggel(luz)' ||
+        clean == 'suraggel_luz' ||
+        clean == 'racas/suraggel(luz)' ||
+        clean == 'racas/suraggel_luz') {
+      clean = 'racas/suraggel_aggelus';
+    } else if (clean == 'suraggel(escuro)' ||
+        clean == 'suraggel_escuro' ||
+        clean == 'racas/suraggel(escuro)' ||
+        clean == 'racas/suraggel_escuro') {
+      clean = 'racas/suraggel_sulfure';
     }
 
-    // Se já contém subpasta (ex: "racas/anao")
-    if (iconName.contains('/')) {
-      final semExt = iconName.endsWith('.svg')
-          ? iconName.substring(0, iconName.length - 4)
-          : iconName;
-      return 'assets/icons/$semExt.svg';
+    // Se for um identificador direto de classe sem barra, redireciona para a pasta de classes
+    if (!clean.contains('/') && _classesConhecidas.contains(clean)) {
+      clean = 'classes/$clean';
     }
 
-    // Fallback padrão se passado apenas o nome direto da raça (ex: "anao")
-    final semExt = iconName.endsWith('.svg')
-        ? iconName.substring(0, iconName.length - 4)
-        : iconName;
-    return 'assets/icons/racas/$semExt.svg';
+    final prefix = clean.startsWith('assets/')
+        ? ''
+        : (clean.contains('/') ? 'assets/icons/' : 'assets/icons/racas/');
+    return '$prefix$clean.svg';
   }
+
+  String _resolverCaminhoAsset() => resolverCaminhoAsset(iconName);
 
   @override
   Widget build(BuildContext context) {

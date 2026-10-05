@@ -7,6 +7,9 @@ import 'package:t20_creator/domain/services/data_services/call_racas.dart';
 import 'package:t20_creator/domain/services/data_services/call_classes.dart';
 import 'package:t20_creator/domain/services/data_services/call_formas_selvagens.dart';
 import 'package:t20_creator/domain/services/data_services/call_companheiros.dart';
+import 'package:t20_creator/domain/services/data_services/call_efeitos_golpe_pessoal.dart';
+import 'package:t20_creator/domain/services/data_services/call_regras_engenhocas.dart';
+import 'package:t20_creator/domain/services/data_services/call_montaria_sagrada.dart';
 
 // Importe seus arquivos
 import 'presentation/controllers/home_cubit.dart';
@@ -22,6 +25,9 @@ void main() async {
   await BancoDeArmaduras.carregar();
   await BancoDeFormasSelvagens.carregar();
   await BancoDeCompanheiros.carregar();
+  await BancoDeEfeitosGolpePessoal.carregar();
+  await BancoDeRegrasEngenhocas.carregar();
+  await BancoDeRegrasMontariaSagrada.carregar();
   runApp(const T20App());
 }
 

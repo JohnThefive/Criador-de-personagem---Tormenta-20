@@ -146,8 +146,6 @@ class Combatente {
   }
 
   /// Constrói um Combatente a partir da ficha do Personagem
-  factory Combatente.fromPersonagem(Personagem p) => Combatente.doPersonagem(p);
-
   factory Combatente.doPersonagem(Personagem p) {
     // Se estiver sobrecarregado, deslocamento reduz em 3m
     final double deslocamento = p.estaSobrecarregado ? 6.0 : 9.0;

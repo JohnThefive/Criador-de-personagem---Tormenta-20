@@ -32,8 +32,6 @@ void main() {
         'atributoChave': 'INT',
         'descricao': 'Usa um foco mágico.',
         'temFocoMagico': true,
-        'temLinhagem': false,
-        'temGrimorio': false,
       };
 
       final caminho = CaminhoDeClasse.fromJson(jsonCaminho);
@@ -41,7 +39,6 @@ void main() {
       expect(caminho.atributoChave, equals('INT'));
       expect(caminho.descricao, equals('Usa um foco mágico.'));
       expect(caminho.temFocoMagico, isTrue);
-      expect(caminho.temLinhagem, isFalse);
 
       final map = caminho.toJson();
       expect(map['nome'], equals('Bruxo'));
@@ -75,8 +72,6 @@ void main() {
               'atributoChave': 'INT',
               'descricao': 'Foco',
               'temFocoMagico': true,
-              'temLinhagem': false,
-              'temGrimorio': false,
             },
           ],
           'habilidadesFixasNivel': {
@@ -177,9 +172,7 @@ void main() {
         };
 
         final classe = Classe.fromJson(jsonComStrings);
-        expect(classe.caminhosDisponiveis.length, equals(2));
-        expect(classe.caminhosDisponiveis[0].nome, equals('Bastião'));
-        expect(classe.caminhosDisponiveis[1].nome, equals('Montaria'));
+        expect(classe.caminhosDisponiveis, isEmpty);
       },
     );
 
@@ -196,12 +189,12 @@ void main() {
         final content = file.readAsStringSync();
         final List<dynamic> jsonList = jsonDecode(content);
 
-        expect(jsonList.length, equals(8));
+        expect(jsonList.length, equals(14));
 
         final classes = jsonList
             .map((e) => Classe.fromJson(e as Map<String, dynamic>))
             .toList();
-        expect(classes.length, equals(8));
+        expect(classes.length, equals(14));
 
         final idsEsperados = {
           'arcanista',
@@ -212,6 +205,12 @@ void main() {
           'cavaleiro',
           'clerigo',
           'druida',
+          'guerreiro',
+          'inventor',
+          'ladino',
+          'lutador',
+          'nobre',
+          'paladino',
         };
         final idsEncontrados = classes.map((c) => c.idClasse).toSet();
         expect(idsEncontrados, equals(idsEsperados));
@@ -276,6 +275,41 @@ void main() {
         expect(druida.nome, equals('Druida'));
         expect(druida.caminhosDisponiveis, isEmpty);
         expect(druida.caminhosNivel1, isEmpty);
+
+        // Validação da existência e integridade dos ícones SVG de todas as 14 classes
+        final dirClasses = Directory('assets/icons/classes');
+        expect(dirClasses.existsSync(), isTrue);
+
+        final svgFiles = dirClasses
+            .listSync()
+            .whereType<File>()
+            .where((f) => f.path.endsWith('.svg'))
+            .toList();
+        expect(
+          svgFiles.length,
+          equals(14),
+          reason: 'Deve haver exatamente 14 arquivos SVG em assets/icons/classes (1 para cada classe)',
+        );
+
+        for (final classe in classes) {
+          expect(classe.iconeSvg, equals('classes/${classe.idClasse}'));
+          final svgFile = File('assets/icons/${classe.iconeSvg}.svg');
+          expect(
+            svgFile.existsSync(),
+            isTrue,
+            reason:
+                'O arquivo SVG para a classe ${classe.nome} (${svgFile.path}) deve existir',
+          );
+        }
+
+        for (final file in svgFiles) {
+          final fileName = file.uri.pathSegments.last;
+          expect(
+            fileName,
+            equals(fileName.toLowerCase()),
+            reason: 'O arquivo $fileName deve estar em minúsculas (padronizado)',
+          );
+        }
       },
     );
   });

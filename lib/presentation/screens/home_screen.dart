@@ -166,71 +166,26 @@ class HomeScreen extends StatelessWidget {
   }
 
   void _abrirConfiguracoes(BuildContext context) {
-    showModalBottomSheet(
+    showAboutDialog(
       context: context,
-      backgroundColor: Colors.white,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      applicationName: 'T20 Creator',
+      applicationVersion: '1.0.0',
+      applicationIcon: const Icon(
+        Icons.shield,
+        size: 40,
+        color: Colors.red,
       ),
-      builder: (ctx) => SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                width: 40,
-                height: 4,
-                margin: const EdgeInsets.only(bottom: 12),
-                decoration: BoxDecoration(
-                  color: Colors.grey[300],
-                  borderRadius: BorderRadius.circular(2),
-                ),
-              ),
-              const Text(
-                "Configurações",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
-                ),
-              ),
-              const SizedBox(height: 8),
-              const Divider(height: 1),
-              ListTile(
-                leading: const Icon(Icons.info_outline, color: Colors.black87),
-                title: const Text("Créditos e Licenças"),
-                subtitle: const Text("Ícones fornecidos por Game-Icons.net"),
-                trailing: const Icon(Icons.chevron_right),
-                onTap: () {
-                  Navigator.pop(ctx);
-                  showAboutDialog(
-                    context: context,
-                    applicationName: 'T20 Creator',
-                    applicationVersion: '1.0.0',
-                    applicationIcon: const Icon(
-                      Icons.shield,
-                      size: 40,
-                      color: Colors.red,
-                    ),
-                    children: const [
-                      SizedBox(height: 12),
-                      Text(
-                        'Ícones fornecidos por Game-Icons.net sob licença CC BY 3.0.',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(height: 6),
-                      Text('Autores: Delapouite, Lorc e colaboradores.'),
-                      SizedBox(height: 6),
-                      Text('Disponível em: https://game-icons.net'),
-                    ],
-                  );
-                },
-              ),
-            ],
-          ),
+      children: const [
+        SizedBox(height: 12),
+        Text(
+          'Ícones fornecidos por Game-Icons.net sob licença CC BY 3.0.',
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
-      ),
+        SizedBox(height: 6),
+        Text('Autores: Delapouite, Lorc e colaboradores.'),
+        SizedBox(height: 6),
+        Text('Disponível em: https://game-icons.net'),
+      ],
     );
   }
 }

@@ -67,24 +67,16 @@ class NivelFormaSelvagem {
   final int nivelMinimo;
   final Map<String, int> modificadores;
   final String? deslocamento;
-  final String? deslocamentoVoo;
   final String? tamanho;
-  final Map<String, int> modificadoresGerais;
   final List<ArmaNaturalForma> armasNaturais;
-  final String? penalidades;
-  final List<Map<String, String>> opcoesDeslocamento;
 
   const NivelFormaSelvagem({
     required this.custoPm,
     required this.nivelMinimo,
     this.modificadores = const {},
     this.deslocamento,
-    this.deslocamentoVoo,
     this.tamanho,
-    this.modificadoresGerais = const {},
     this.armasNaturais = const [],
-    this.penalidades,
-    this.opcoesDeslocamento = const [],
   });
 
   factory NivelFormaSelvagem.fromJson(Map<String, dynamic> json) {
@@ -93,19 +85,9 @@ class NivelFormaSelvagem {
       (k, v) => MapEntry(k.toString(), (v as num?)?.toInt() ?? 0),
     );
 
-    final rawModGerais = (json['modificadoresGerais'] as Map?) ?? {};
-    final modsGerais = rawModGerais.map(
-      (k, v) => MapEntry(k.toString(), (v as num?)?.toInt() ?? 0),
-    );
-
     final rawArmas = (json['armasNaturais'] as List?) ?? [];
     final armas = rawArmas
         .map((a) => ArmaNaturalForma.fromJson(Map<String, dynamic>.from(a as Map)))
-        .toList();
-
-    final rawOpcoesDesl = (json['opcoesDeslocamento'] as List?) ?? [];
-    final opcoes = rawOpcoesDesl
-        .map((o) => (o as Map).map((k, v) => MapEntry(k.toString(), v.toString())))
         .toList();
 
     return NivelFormaSelvagem(
@@ -113,12 +95,8 @@ class NivelFormaSelvagem {
       nivelMinimo: (json['nivelMinimo'] as num?)?.toInt() ?? 1,
       modificadores: mods,
       deslocamento: json['deslocamento']?.toString(),
-      deslocamentoVoo: json['deslocamentoVoo']?.toString(),
       tamanho: json['tamanho']?.toString(),
-      modificadoresGerais: modsGerais,
       armasNaturais: armas,
-      penalidades: json['penalidades']?.toString(),
-      opcoesDeslocamento: opcoes,
     );
   }
 
@@ -127,12 +105,8 @@ class NivelFormaSelvagem {
     'nivelMinimo': nivelMinimo,
     'modificadores': modificadores,
     'deslocamento': deslocamento,
-    'deslocamentoVoo': deslocamentoVoo,
     'tamanho': tamanho,
-    'modificadoresGerais': modificadoresGerais,
     'armasNaturais': armasNaturais.map((a) => a.toJson()).toList(),
-    'penalidades': penalidades,
-    'opcoesDeslocamento': opcoesDeslocamento,
   };
 }
 

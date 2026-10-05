@@ -1,0 +1,65 @@
+{
+    "limiteEngenhocas": {
+        "atributoBase": "INT",
+        "modificadorPadrao": 0
+    },
+    "estatisticasItem": {
+        "tamanho": "Minúsculo",
+        "espacos": 1,
+        "defesa": 15,
+        "pv": "METADE_PV_FABRICANTE",
+        "rd": 5,
+        "modosUso": [
+            "empunhada",
+            "vestida"
+        ]
+    },
+    "progressaoCirculos": {
+        "1": {
+            "circuloMaximo": 1,
+            "custoPmBase": 1
+        },
+        "6": {
+            "circuloMaximo": 2,
+            "custoPmBase": 3
+        },
+        "10": {
+            "circuloMaximo": 3,
+            "custoPmBase": 6
+        },
+        "14": {
+            "circuloMaximo": 4,
+            "custoPmBase": 10
+        },
+        "18": {
+            "circuloMaximo": 5,
+            "custoPmBase": 15
+        }
+    },
+    "fabricacao": {
+        "pericia": "OFICIO_ENGENHOQUEIRO",
+        "tempo": "1 semana",
+        "formulaCustoT$": "100 * CUSTO_PM_MAGIA",
+        "formulaCd": "20 + CUSTO_PM_MAGIA"
+    },
+    "ativacao": {
+        "acao": "padrao_ou_execucao_magia",
+        "pericia": "OFICIO_ENGENHOQUEIRO",
+        "aplicaPenalidadeArmadura": true,
+        "atributoChave": "INT",
+        "formulaCdBase": "15 + CUSTO_PM_MAGIA",
+        "incrementoCdPorUsoNoDia": 5,
+        "aprimoramentos": {
+            "limitePm": "INT",
+            "incrementoCdPorPm": 1
+        },
+        "emCasoDeFalha": "enguica_ate_conserto_1_hora"
+    },
+    "propriedadesEspeciais": {
+        "eletromagneticoMundano": true,
+        "imuneADissipacao": true,
+        "funcionaEmAntimagia": true,
+        "ignoraTesteMisticismoArmadura": true,
+        "bloqueadoPorEfeitosAnticonjuracao": true
+    }
+}

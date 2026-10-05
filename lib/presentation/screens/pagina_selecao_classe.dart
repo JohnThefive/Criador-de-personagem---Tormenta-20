@@ -4,6 +4,7 @@ import 'package:t20_creator/domain/entities/linhagem_arcanista.dart';
 import '../../domain/services/data_services/call_classes.dart';
 import '../../domain/services/data_services/call_poderes.dart';
 import '../controllers/personagem_cubit.dart';
+import '../widgets/rpg_icon.dart';
 
 class PaginaSelecaoClasse extends StatefulWidget {
   final PersonagemState state;
@@ -73,23 +74,47 @@ class _PaginaSelecaoClasseState extends State<PaginaSelecaoClasse> {
                             horizontal: 8,
                             vertical: 4,
                           ),
-                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 8,
+                            horizontal: 6,
+                          ),
                           decoration: BoxDecoration(
                             color: isSelected
                                 ? Colors.grey[400]
                                 : Colors.transparent,
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(16),
                           ),
-                          child: Text(
-                            classe.nome,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: isSelected ? Colors.black : Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            ),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
+                          child: Row(
+                            children: [
+                              CircleAvatar(
+                                radius: 12,
+                                backgroundColor: isSelected
+                                    ? Colors.brown.shade900
+                                    : Colors.red.shade900,
+                                child: RpgIcon(
+                                  iconName: classe.iconeSvg,
+                                  size: 14,
+                                  color: isSelected
+                                      ? Colors.amber
+                                      : Colors.white,
+                                ),
+                              ),
+                              const SizedBox(width: 6),
+                              Expanded(
+                                child: Text(
+                                  classe.nome,
+                                  style: TextStyle(
+                                    color: isSelected
+                                        ? Colors.black
+                                        : Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 13,
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       );
@@ -156,8 +181,8 @@ class _PaginaSelecaoClasseState extends State<PaginaSelecaoClasse> {
                               width: 2,
                             ),
                           ),
-                          child: Icon(
-                            classeSelecionada.iconeClasse,
+                          child: RpgIcon(
+                            iconName: classeSelecionada.iconeSvg,
                             size: 64,
                             color: Colors.red[800],
                           ),

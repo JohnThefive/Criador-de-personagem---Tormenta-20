@@ -3,6 +3,10 @@ import 'arma.dart';
 import 'protecao.dart';
 import 'proficiencias.dart';
 import 'forma_selvagem.dart';
+import 'golpe_pessoal.dart';
+import 'engenhoca.dart';
+import 'montaria_sagrada.dart';
+import '../services/data_services/call_montaria_sagrada.dart';
 import '../services/regras_carga_service.dart';
 
 import 'atributos.dart';
@@ -30,9 +34,18 @@ class Personagem {
   final Protecao? escudoEquipado; // Escudo equipado
   final int tibares; // Dinheiro em T$ (Tibar)
 
+  // Golpes Pessoais (customizados para Guerreiro)
+  final List<GolpePessoal> golpesPessoais;
+
+  // Engenhocas (customizadas para Inventor)
+  final List<Engenhoca> engenhocas;
+
   // Campos específicos de poderes de Druida
   final FormaSelvagemAtiva? formaSelvagemAtiva;
   final String? tipoCompanheiroAnimal; // Ex: "GUARDIAO", "FORTAO", "AJUDANTE"
+
+  // Montaria Sagrada (Paladino)
+  final MontariaSagrada? montariaSagrada;
 
   // Campos referentes a divindade
   final Divindade? divindade;
@@ -71,9 +84,15 @@ class Personagem {
     this.armaduraEquipada,
     this.escudoEquipado,
     this.tibares = 0,
+    // Golpes Pessoais (customizados para Guerreiro)
+    this.golpesPessoais = const [],
+    // Engenhocas (customizadas para Inventor)
+    this.engenhocas = const [],
     // Campos específicos de poderes de Druida
     this.formaSelvagemAtiva,
     this.tipoCompanheiroAnimal,
+    // Montaria Sagrada (Paladino)
+    this.montariaSagrada,
     // Campos referentes a divindade
     this.divindade,
     this.poderConcedido,
@@ -127,8 +146,11 @@ class Personagem {
       armaduraEquipada: null,
       escudoEquipado: null,
       tibares: 0,
+      golpesPessoais: const [],
+      engenhocas: const [],
       formaSelvagemAtiva: null,
       tipoCompanheiroAnimal: null,
+      montariaSagrada: null,
       divindade: null,
       poderConcedido: null,
       idade: 20,
@@ -162,11 +184,16 @@ class Personagem {
     Protecao? escudoEquipado,
     bool anularEscudo = false,
     int? tibares,
+    List<GolpePessoal>? golpesPessoais,
+    List<Engenhoca>? engenhocas,
     // Campos de poderes de Druida
     FormaSelvagemAtiva? formaSelvagemAtiva,
     bool anularFormaSelvagem = false,
     String? tipoCompanheiroAnimal,
     bool anularCompanheiro = false,
+    // Montaria Sagrada (Paladino)
+    MontariaSagrada? montariaSagrada,
+    bool anularMontaria = false,
     // Campos referentes a divindade
     Divindade? divindade,
     Poder? poderConcedido,
@@ -203,12 +230,17 @@ class Personagem {
           ? null
           : (escudoEquipado ?? this.escudoEquipado),
       tibares: tibares ?? this.tibares,
+      golpesPessoais: golpesPessoais ?? this.golpesPessoais,
+      engenhocas: engenhocas ?? this.engenhocas,
       formaSelvagemAtiva: anularFormaSelvagem
           ? null
           : (formaSelvagemAtiva ?? this.formaSelvagemAtiva),
       tipoCompanheiroAnimal: anularCompanheiro
           ? null
           : (tipoCompanheiroAnimal ?? this.tipoCompanheiroAnimal),
+      montariaSagrada: anularMontaria
+          ? null
+          : (montariaSagrada ?? this.montariaSagrada),
       divindade: anularDivindade ? null : (divindade ?? this.divindade),
       poderConcedido: anularDivindade
           ? null
@@ -294,13 +326,162 @@ class Personagem {
     (c) => c.poderesEscolhidos.any((p) => p.key == 'COMPANHEIRO_ANIMAL'),
   );
 
-  int get nivelDruida {
-    for (final c in classes) {
-      if (c.classeDefinicao.idClasse.toLowerCase() == 'druida') {
-        return c.nivel;
-      }
-    }
-    return 0;
+  int get nivelDruida =>
+      classes
+          .where((c) => c.classeDefinicao.idClasse.toLowerCase() == 'druida')
+          .firstOrNull
+          ?.nivel ??
+      0;
+
+  // Getters e métodos específicos de Inventor e Engenhocas
+  int get nivelInventor =>
+      classes
+          .where((c) => c.classeDefinicao.idClasse.toLowerCase() == 'inventor')
+          .firstOrNull
+          ?.nivel ??
+      0;
+
+  bool get temPoderEngenhoqueiro => classes.any(
+    (c) => c.poderesEscolhidos.any((p) => p.key.toUpperCase() == 'ENGENHOQUEIRO'),
+  ) || poderesGerais.any((p) => p.key.toUpperCase() == 'ENGENHOQUEIRO');
+
+  bool get temPoderManutencaoEficiente => classes.any(
+    (c) => c.poderesEscolhidos.any((p) => p.key.toUpperCase() == 'MANUTENCAO_EFICIENTE'),
+  ) || poderesGerais.any((p) => p.key.toUpperCase() == 'MANUTENCAO_EFICIENTE');
+
+  /// Limite de engenhocas ativas sustentadas pelo personagem:
+  /// Baseado em Inteligência (+3 se possuir Manutenção Eficiente). Mínimo 0.
+  int get limiteEngenhocas {
+    final int baseInt = getValorFinal('INT');
+    final int extra = temPoderManutencaoEficiente ? 3 : 0;
+    final int total = baseInt + extra;
+    return total < 0 ? 0 : total;
+  }
+
+  /// Espaços totais de inventário ocupados pelas engenhocas
+  num get espacosTotaisEngenhocas =>
+      engenhocas.fold<num>(0, (soma, e) => soma + e.espacosOcupados);
+
+  Personagem adicionarEngenhoca(Engenhoca engenhoca) {
+    return copyWith(engenhocas: [...engenhocas, engenhoca]);
+  }
+
+  Personagem removerEngenhoca(String idEngenhoca) {
+    return copyWith(
+      engenhocas: engenhocas.where((e) => e.id != idEngenhoca).toList(),
+    );
+  }
+
+  Personagem atualizarEngenhoca(Engenhoca engenhocaAtualizada) {
+    return copyWith(
+      engenhocas: engenhocas
+          .map((e) => e.id == engenhocaAtualizada.id ? engenhocaAtualizada : e)
+          .toList(),
+    );
+  }
+
+  Personagem ativarEngenhoca(String idEngenhoca) {
+    return copyWith(
+      engenhocas: engenhocas.map((e) {
+        if (e.id == idEngenhoca) {
+          return e.copyWith(usosHoje: e.usosHoje + 1);
+        }
+        return e;
+      }).toList(),
+    );
+  }
+
+  Personagem enguicarEngenhoca(String idEngenhoca) {
+    return copyWith(
+      engenhocas: engenhocas.map((e) {
+        if (e.id == idEngenhoca) {
+          return e.copyWith(enguicado: true);
+        }
+        return e;
+      }).toList(),
+    );
+  }
+
+  Personagem consertarEngenhoca(String idEngenhoca) {
+    return copyWith(
+      engenhocas: engenhocas.map((e) {
+        if (e.id == idEngenhoca) {
+          return e.copyWith(enguicado: false);
+        }
+        return e;
+      }).toList(),
+    );
+  }
+
+  Personagem descansarEngenhocas() {
+    return copyWith(
+      engenhocas: engenhocas.map((e) => e.copyWith(usosHoje: 0)).toList(),
+    );
+  }
+
+  // Getters e métodos específicos de Paladino e Montaria Sagrada
+  int get nivelPaladino =>
+      classes
+          .where((c) => c.classeDefinicao.idClasse.toLowerCase() == 'paladino')
+          .firstOrNull
+          ?.nivel ??
+      0;
+
+  bool get temCaminhoMontariaSagrada {
+    final clPaladino = classes
+        .where((c) => c.classeDefinicao.idClasse.toLowerCase() == 'paladino')
+        .firstOrNull;
+    if (clPaladino == null) return false;
+    final nomeCaminho = clPaladino.caminhoEscolhido?.nome.toLowerCase() ?? '';
+    return nomeCaminho.contains('montaria');
+  }
+
+  bool get temMontariaSagrada =>
+      (nivelPaladino >= 5 && temCaminhoMontariaSagrada) || montariaSagrada != null;
+
+  bool get montariaSagradaAtiva =>
+      temMontariaSagrada && (montariaSagrada?.ativa ?? false);
+
+  String get tierMontariaSagrada =>
+      BancoDeRegrasMontariaSagrada.tierParaNivel(nivelPaladino);
+
+  int get deslocamentoMontadoMetros =>
+      BancoDeRegrasMontariaSagrada.deslocamentoParaNivel(nivelPaladino);
+
+  Personagem atualizarMontariaSagrada(MontariaSagrada montaria) {
+    return copyWith(montariaSagrada: montaria);
+  }
+
+  Personagem invocarMontariaSagrada() {
+    final custo = BancoDeRegrasMontariaSagrada.custoPmInvocacao;
+    if (pmAtual < custo) return this;
+    final montariaAtual = montariaSagrada ??
+        MontariaSagrada(
+          nomeCustomizado: BancoDeRegrasMontariaSagrada.animalPadraoParaTamanho(tamanho),
+          especie: BancoDeRegrasMontariaSagrada.animalPadraoParaTamanho(tamanho),
+        );
+    return copyWith(
+      pmAtual: (pmAtual - custo).clamp(0, pmTotal),
+      montariaSagrada: montariaAtual.copyWith(invocada: true),
+    );
+  }
+
+  Personagem dispensarMontariaSagrada() {
+    if (montariaSagrada == null) return this;
+    return copyWith(
+      montariaSagrada: montariaSagrada!.copyWith(invocada: false),
+    );
+  }
+
+  Personagem alternarVarianteMundanaMontaria(bool mundana) {
+    final montariaAtual = montariaSagrada ??
+        MontariaSagrada(
+          nomeCustomizado: BancoDeRegrasMontariaSagrada.animalPadraoParaTamanho(tamanho),
+          especie: BancoDeRegrasMontariaSagrada.animalPadraoParaTamanho(tamanho),
+        );
+    return copyWith(
+      montariaSagrada: montariaAtual.copyWith(isVarianteMundana: mundana),
+    );
   }
 
   /// Retorna as armas efetivas do personagem (se transformado, retorna as armas naturais da forma selvagem)
@@ -312,13 +493,7 @@ class Personagem {
   }
 
   /// Redução de dano total ativa
-  int get rdTotal {
-    int total = 0;
-    if (estaEmFormaSelvagem) {
-      total += formaSelvagemAtiva!.rd;
-    }
-    return total;
-  }
+  int get rdTotal => estaEmFormaSelvagem ? formaSelvagemAtiva!.rd : 0;
 
   // Este método calcula o valor final para exibir na tela (Base + Raça Fixa + Raça Variável + Forma Selvagem)
   int getValorFinal(String sigla, {List<String> bonusVariaveis = const []}) {
@@ -410,16 +585,9 @@ class Personagem {
         formaSelvagemAtiva!.modificadores.containsKey('DEFESA')) {
       bonusForma = formaSelvagemAtiva!.modificadores['DEFESA']!;
     }
-    int bonusCompanheiro = 0;
-    if (temPoderCompanheiroAnimal && tipoCompanheiroAnimal == 'GUARDIAO') {
-      if (nivelDruida >= 12) {
-        bonusCompanheiro = 3;
-      } else if (nivelDruida >= 6) {
-        bonusCompanheiro = 2;
-      } else {
-        bonusCompanheiro = 1;
-      }
-    }
+    final bonusCompanheiro = (temPoderCompanheiroAnimal && tipoCompanheiroAnimal == 'GUARDIAO')
+        ? (nivelDruida >= 12 ? 3 : (nivelDruida >= 6 ? 2 : 1))
+        : 0;
     return 10 +
         modDesAplicado +
         bonusArmadura +

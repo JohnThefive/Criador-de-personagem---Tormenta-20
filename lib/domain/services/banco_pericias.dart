@@ -209,15 +209,69 @@ class BancoDePericias {
     ),
     Pericia(
       key: 'OFICIO',
-      label: 'Ofício',
+      label: 'Ofício (Geral)',
       atributoChave: 'INT',
-      somenteTreinada:
-          false, // Obs: no T20 base depende do ofício, mas geralmente pode ser destreinado pra coisas fáceis
+      somenteTreinada: false,
       penalidadeArmadura: false,
       descricao:
-          'Permite fabricar itens de uma categoria específica (ex: Armeiro, Alquimista).',
+          'Permite fabricar itens de uma categoria específica (ex: Armeiro, Alquimista, Engenhoqueiro).',
       acoesExecutadas:
-          'Fabricar item, ganhar sustento, reparar item. (converse com seu mestre para outros tipos de oficio)',
+          'Fabricar item, ganhar sustento, reparar item.',
+    ),
+    Pericia(
+      key: 'OFICIO_ENGENHOQUEIRO',
+      label: 'Ofício (Engenhoqueiro)',
+      atributoChave: 'INT',
+      somenteTreinada: true,
+      penalidadeArmadura: false,
+      descricao:
+          'Permite projetar, fabricar, ativar e consertar engenhocas e dispositivos tecnológicos.',
+      acoesExecutadas:
+          'Fabricar engenhoca, ativar engenhoca, consertar engenhoca enguiçada.',
+    ),
+    Pericia(
+      key: 'OFICIO_ALQUIMISTA',
+      label: 'Ofício (Alquimista)',
+      atributoChave: 'INT',
+      somenteTreinada: true,
+      penalidadeArmadura: false,
+      descricao:
+          'Permite preparar itens alquímicos, poções, ácidos, venenos e bombas.',
+      acoesExecutadas:
+          'Fabricar itens alquímicos e poções, identificar substâncias químicas.',
+    ),
+    Pericia(
+      key: 'OFICIO_ARMEIRO',
+      label: 'Ofício (Armeiro)',
+      atributoChave: 'INT',
+      somenteTreinada: true,
+      penalidadeArmadura: false,
+      descricao:
+          'Permite forjar, modificar e reparar armas, escudos e armaduras.',
+      acoesExecutadas:
+          'Fabricar armas e proteções, aplicar melhorias de equipamento, reparar itens danificados.',
+    ),
+    Pericia(
+      key: 'OFICIO_COZINHEIRO',
+      label: 'Ofício (Culinária)',
+      atributoChave: 'INT',
+      somenteTreinada: false,
+      penalidadeArmadura: false,
+      descricao:
+          'Permite cozinhar pratos especiais, rações de viagem e refeições nutritivas com bônus temporários.',
+      acoesExecutadas:
+          'Cozinhar pratos especiais, identificar alimentos envenenados ou estragados.',
+    ),
+    Pericia(
+      key: 'OFICIO_ARTESANATO',
+      label: 'Ofício (Artesanato / Geral)',
+      atributoChave: 'INT',
+      somenteTreinada: false,
+      penalidadeArmadura: false,
+      descricao:
+          'Permite confeccionar itens de vestuário, couro, madeira, alvenaria e artigos gerais.',
+      acoesExecutadas:
+          'Fabricar itens comuns de artesanato, reparos em artigos do dia a dia.',
     ),
     Pericia(
       key: 'PERCEPCAO',

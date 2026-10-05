@@ -120,6 +120,29 @@ void main() {
           equals(18),
           reason: 'Todos os IDs de raças devem ser únicos',
         );
+
+        // Valida que o diretório possui exatamente 18 SVGs únicos, sem duplicatas ou maiúsculas
+        final dirRacas = Directory('assets/icons/racas');
+        expect(dirRacas.existsSync(), isTrue);
+        final svgFiles = dirRacas
+            .listSync()
+            .whereType<File>()
+            .where((f) => f.path.endsWith('.svg'))
+            .toList();
+        expect(
+          svgFiles.length,
+          equals(18),
+          reason: 'Deve haver exatamente 18 arquivos SVG em assets/icons/racas (1 para cada raça)',
+        );
+
+        for (final file in svgFiles) {
+          final fileName = file.uri.pathSegments.last;
+          expect(
+            fileName,
+            equals(fileName.toLowerCase()),
+            reason: 'O arquivo $fileName deve estar em minúsculas (padronizado)',
+          );
+        }
       },
     );
   });

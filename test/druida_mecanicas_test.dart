@@ -71,7 +71,7 @@ void main() {
       classes: [classePersonagem],
       periciasTreinadas: ['Sobrevivência', 'Vontade', 'Percepção'],
       pvAtual: 24,
-      pmAtual: 12,
+      pmAtual: 8,
       formaSelvagemAtiva: formaAtiva,
       tipoCompanheiroAnimal: companheiro,
     );
@@ -149,7 +149,7 @@ void main() {
       expect(armaNatural.dano, '1d8');
 
       // Combatente gerado tem arma natural equipada
-      final combatente = Combatente.fromPersonagem(transformado);
+      final combatente = Combatente.doPersonagem(transformado);
       expect(combatente.armas.any((a) => a.dano == '1d8'), isTrue);
     });
 

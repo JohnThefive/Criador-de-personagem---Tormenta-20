@@ -1833,5 +1833,1581 @@
             "periciasExigidas": [],
             "atributosExigidos": {}
         }
+    ],
+    "GUERREIRO": [
+        {
+            "key": "AMBIDESTRIA",
+            "nome": "Ambidestria",
+            "descricao": "Usando duas armas (ao menos uma leve), faz dois ataques ao atacar, sofrendo –2 nos testes de ataque até o próximo turno.",
+            "preRequisitoTexto": "Pré-requisito: Des 15.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {
+                "DES": 15
+            }
+        },
+        {
+            "key": "AUMENTO_DE_ATRIBUTO",
+            "nome": "Aumento de Atributo",
+            "descricao": "Recebe +2 em um atributo a sua escolha (+1 a partir da segunda vez no mesmo atributo).",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ARQUEIRO",
+            "nome": "Arqueiro",
+            "descricao": "Com armas de ataque à distância, soma Sabedoria nas rolagens de dano (limitado pelo nível).",
+            "preRequisitoTexto": "Pré-requisito: Sab 13.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {
+                "SAB": 13
+            }
+        },
+        {
+            "key": "ATAQUE_REFLEXO",
+            "nome": "Ataque Reflexo",
+            "descricao": "Se um alvo adjacente ficar desprevenido ou sair do seu alcance, gasta 1 PM para atacá-lo corpo a corpo como reação.",
+            "preRequisitoTexto": "Pré-requisito: Des 13.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {
+                "DES": 13
+            }
+        },
+        {
+            "key": "BATER_E_CORRER",
+            "nome": "Bater e Correr",
+            "descricao": "Pode continuar se movendo após uma investida até o limite de deslocamento. Gasta 2 PM para investir sobre terreno difícil sem penalidade na Defesa.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "DESTRUIDOR",
+            "nome": "Destruidor",
+            "descricao": "Com arma corpo a corpo de duas mãos, pode rerrolar qualquer resultado 1 ou 2 no dano.",
+            "preRequisitoTexto": "Pré-requisito: For 13.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {
+                "FOR": 13
+            }
+        },
+        {
+            "key": "ESGRIMISTA",
+            "nome": "Esgrimista",
+            "descricao": "Com armas leves ou ágeis, soma Inteligência nas rolagens de dano (limitado pelo nível).",
+            "preRequisitoTexto": "Pré-requisito: Int 13.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {
+                "INT": 13
+            }
+        },
+        {
+            "key": "ESPECIALIZACAO_EM_ARMA",
+            "nome": "Especialização em Arma",
+            "descricao": "Recebe +2 em rolagens de dano com a arma escolhida.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ESPECIALIZACAO_EM_ARMADURA",
+            "nome": "Especialização em Armadura",
+            "descricao": "Recebe resistência a dano 5 se estiver usando armadura pesada.",
+            "preRequisitoTexto": "Pré-requisito: 12º nível de guerreiro.",
+            "nivelMinimo": 12,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "GOLPE_DE_RASPAO",
+            "nome": "Golpe de Raspão",
+            "descricao": "Quando erra um ataque, pode gastar 1 PM para causar 1d8 pontos de dano do tipo da arma no alvo.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "GOLPE_DEMOLIDOR",
+            "nome": "Golpe Demolidor",
+            "descricao": "Ao quebrar ou atacar objetos, gasta 1 PM para ignorar a RD do alvo.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "GOLPE_PESSOAL",
+            "nome": "Golpe Pessoal",
+            "descricao": "Cria um ataque customizado para uma arma específica combinando efeitos da lista (custo mínimo 1 PM, máximo igual ao nível). Pode ser alterado a cada nível.",
+            "preRequisitoTexto": "Pré-requisito: 5º nível de guerreiro.",
+            "nivelMinimo": 5,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {},
+            "referenciaTabela": "efeitos_golpe_pessoal",
+            "regrasCustomizacao": {
+                "custoPmMínimo": 1,
+                "custoPmMaximo": "nivel_do_personagem",
+                "permiteMultiplasInstancias": true
+            }
+        },
+        {
+            "key": "IMPETO",
+            "nome": "Ímpeto",
+            "descricao": "Gasta 1 PM para aumentar o deslocamento em +6m por uma rodada.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "MESTRE_EM_ARMA",
+            "nome": "Mestre em Arma",
+            "descricao": "O dano da arma escolhida aumenta em um passo e pode gastar 2 PM para rerrolar um ataque recém realizado com ela.",
+            "preRequisitoTexto": "Pré-requisitos: Especialização em Arma com a arma escolhida, 12º nível de guerreiro.",
+            "nivelMinimo": 12,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "ESPECIALIZACAO_EM_ARMA"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "PLANEJAMENTO_MARCIAL",
+            "nome": "Planejamento Marcial",
+            "descricao": "Uma vez por dia, gasta uma hora e 3 PM para receber os benefícios de um poder de guerreiro ou combate cujos pré-requisitos cumpra até o dia seguinte.",
+            "preRequisitoTexto": "Pré-requisitos: treinado em Guerra, 10º nível de guerreiro.",
+            "nivelMinimo": 10,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [
+                "GUERRA"
+            ],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ROMPER_RESISTENCIAS",
+            "nome": "Romper Resistências",
+            "descricao": "Ao usar Ataque Especial, gasta +1 PM para ignorar 10 pontos de redução de dano do alvo.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "TORNADO_DE_DOR",
+            "nome": "Tornado de Dor",
+            "descricao": "Gasta ação padrão e 2 PM para desferir um ataque contra todos os inimigos adjacentes, ganhando +2 no dano para cada acerto.",
+            "preRequisitoTexto": "Pré-requisito: 6º nível de guerreiro.",
+            "nivelMinimo": 6,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "VALENTAO",
+            "nome": "Valentão",
+            "descricao": "Recebe +2 em testes de ataque e rolagens de dano contra oponentes caídos, desprevenidos, flanqueados ou indefesos.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        }
+    ],
+    "INVENTOR": [
+        {
+            "key": "AGITE_ANTES_DE_USAR",
+            "nome": "Agite Antes de Usar",
+            "descricao": "Ao usar preparado alquímico de dano, pode gastar PM (limitado por Inteligência) para causar um dado extra de dano por PM gasto.",
+            "preRequisitoTexto": "Pré-requisito: treinado em Ofício (alquimista).",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [
+                "OFICIO_ALQUIMISTA"
+            ],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "AJUSTE_DE_MIRA",
+            "nome": "Ajuste de Mira",
+            "descricao": "Gasta ação padrão e PM (limitado por Inteligência) para aprimorar uma arma de disparo, recebendo +1 no dano por PM até o fim da cena.",
+            "preRequisitoTexto": "Pré-requisito: Balística.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "BALISTICA"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ALQUIMISTA_DE_BATALHA",
+            "nome": "Alquimista de Batalha",
+            "descricao": "Soma Inteligência na rolagem de dano ao usar preparados alquímicos ou poções que causem dano.",
+            "preRequisitoTexto": "Pré-requisito: Alquimista Iniciado.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "ALQUIMISTA_INICIADO"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ALQUIMISTA_INICIADO",
+            "nome": "Alquimista Iniciado",
+            "descricao": "Recebe livro de fórmulas e pode fabricar poções com fórmulas conhecidas de 1º e 2º círculos.",
+            "preRequisitoTexto": "Pré-requisitos: Int 1, Sab 1, treinado em Ofício (alquimista).",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [
+                "OFICIO_ALQUIMISTA"
+            ],
+            "atributosExigidos": {
+                "INT": 1,
+                "SAB": 1
+            }
+        },
+        {
+            "key": "ARMEIRO",
+            "nome": "Armeiro",
+            "descricao": "Proficiência com armas marciais corpo a corpo; permite usar Inteligência no ataque e dano com armas corpo a corpo.",
+            "preRequisitoTexto": "Pré-requisitos: treinado em Luta e Ofício (armeiro).",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [
+                "LUTA",
+                "OFICIO_ARMEIRO"
+            ],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ATIVACAO_RAPIDA",
+            "nome": "Ativação Rápida",
+            "descricao": "Paga 2 PM para ativar com ação de movimento uma engenhoca que exigiria ação padrão.",
+            "preRequisitoTexto": "Pré-requisitos: Engenhoqueiro, 7º nível de inventor.",
+            "nivelMinimo": 7,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "ENGENHOQUEIRO"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "AUMENTO_DE_ATRIBUTO",
+            "nome": "Aumento de Atributo",
+            "descricao": "Recebe +1 em um atributo.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "AUTOMATO",
+            "nome": "Autômato",
+            "descricao": "Fabrica um autômato que atua como parceiro (iniciante; vira veterano no nível 7 e mestre no nível 15).",
+            "preRequisitoTexto": "Pré-requisito: Engenhoqueiro.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "ENGENHOQUEIRO"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "AUTOMATO_PROTOTIPADO",
+            "nome": "Autômato Prototipado",
+            "descricao": "Gasta ação padrão e 2 PM para rolar 1d6: em 2 a 6 melhora o nível do autômato ou concede habilidade de outro tipo de parceiro até o fim da cena; em 1, ele enguiça.",
+            "preRequisitoTexto": "Pré-requisito: Autômato.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "AUTOMATO"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "BALISTICA",
+            "nome": "Balística",
+            "descricao": "Proficiência com armas de fogo ou marciais de disparo; usa Inteligência em vez de Destreza no ataque à distância (e no dano se possuir Estilo de Disparo).",
+            "preRequisitoTexto": "Pré-requisitos: treinado em Pontaria e Ofício (armeiro).",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [
+                "PONTARIA",
+                "OFICIO_ARMEIRO"
+            ],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "BLINDAGEM",
+            "nome": "Blindagem",
+            "descricao": "Pode somar Inteligência na Defesa ao usar armadura pesada (substituindo Destreza).",
+            "preRequisitoTexto": "Pré-requisitos: Couraceiro, 8º nível de inventor.",
+            "nivelMinimo": 8,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "COURACEIRO"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "CANO_RAIADO",
+            "nome": "Cano Raiado",
+            "descricao": "Armas de disparo fabricadas por você recebem +1 na margem de ameaça.",
+            "preRequisitoTexto": "Pré-requisitos: Balística, 5º nível de inventor.",
+            "nivelMinimo": 5,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "BALISTICA"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "CATALISADOR_INSTAVEL",
+            "nome": "Catalisador Instável",
+            "descricao": "Gasta ação completa e 3 PM para criar instantaneamente item alquímico ou poção pela metade do custo sem teste, durando até o fim da cena.",
+            "preRequisitoTexto": "Pré-requisito: Alquimista Iniciado.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "ALQUIMISTA_INICIADO"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "CHUTES_E_PALAVROES",
+            "nome": "Chutes e Palavrões",
+            "descricao": "Paga 1 PM para repetir teste de Ofício (engenhoqueiro) recém realizado para ativar engenhoca (1/rodada).",
+            "preRequisitoTexto": "Pré-requisito: Engenhoqueiro.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "ENGENHOQUEIRO"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "CONHECIMENTO_DE_FORMULAS",
+            "nome": "Conhecimento de Fórmulas",
+            "descricao": "Aprende três fórmulas de quaisquer círculos que possa fabricar.",
+            "preRequisitoTexto": "Pré-requisito: Alquimista Iniciado.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "ALQUIMISTA_INICIADO"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "COURACEIRO",
+            "nome": "Couraceiro",
+            "descricao": "Proficiência com armaduras pesadas e escudos; usa Inteligência em vez de Destreza na Defesa ao usar armaduras.",
+            "preRequisitoTexto": "Pré-requisito: treinado em Ofício (armeiro).",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [
+                "OFICIO_ARMEIRO"
+            ],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ENGENHOQUEIRO",
+            "nome": "Engenhoqueiro",
+            "descricao": "Permite fabricar e ativar engenhocas que simulam magias arcanas ou divinas como itens mundanos.",
+            "preRequisitoTexto": "Pré-requisitos: Int 3, treinado em Ofício (engenhoqueiro).",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [
+                "OFICIO_ENGENHOQUEIRO"
+            ],
+            "atributosExigidos": {
+                "INT": 3
+            },
+            "referenciaTabela": "regras_engenhocas"
+        },
+        {
+            "key": "FARMACEUTICO",
+            "nome": "Farmacêutico",
+            "descricao": "Ao usar item alquímico que cure PV, gasta PM (limitado por Inteligência) para curar um dado extra por PM.",
+            "preRequisitoTexto": "Pré-requisitos: Sab 1, treinado em Ofício (alquimista).",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [
+                "OFICIO_ALQUIMISTA"
+            ],
+            "atributosExigidos": {
+                "SAB": 1
+            }
+        },
+        {
+            "key": "FERREIRO",
+            "nome": "Ferreiro",
+            "descricao": "Armas corpo a corpo fabricadas por você causam dano aumentado em um passo.",
+            "preRequisitoTexto": "Pré-requisitos: Armeiro, 5º nível de inventor.",
+            "nivelMinimo": 5,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "ARMEIRO"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "GRANADEIRO",
+            "nome": "Granadeiro",
+            "descricao": "Arremessa itens alquímicos e poções em alcance médio e usa Inteligência no cálculo da CD de resistência desses itens.",
+            "preRequisitoTexto": "Pré-requisito: Alquimista de Batalha.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "ALQUIMISTA_DE_BATALHA"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "HOMUNCULO",
+            "nome": "Homúnculo",
+            "descricao": "Recebe parceiro ajudante iniciante telepático; pode perder 1d6 PV para torná-lo parceiro guardião iniciante até o fim da cena.",
+            "preRequisitoTexto": "Pré-requisito: Alquimista Iniciado.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "ALQUIMISTA_INICIADO"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "INVENCAO_POTENTE",
+            "nome": "Invenção Potente",
+            "descricao": "Paga 1 PM para aumentar em +2 a CD de resistência de um item ou engenhoca fabricado por você.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "MAESTRIA_EM_PERICIA",
+            "nome": "Maestria em Perícia",
+            "descricao": "Escolhe perícias treinadas iguais à Inteligência; gasta 1 PM para escolher 10 em qualquer situação (exceto ataques).",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "MANUTENCAO_EFICIENTE",
+            "nome": "Manutenção Eficiente",
+            "descricao": "Aumenta o limite de engenhocas mantidas em +3 e cada uma passa a ocupar meio espaço.",
+            "preRequisitoTexto": "Pré-requisitos: Engenhoqueiro, 5º nível de inventor.",
+            "nivelMinimo": 5,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "ENGENHOQUEIRO"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "MESTRE_ALQUIMISTA",
+            "nome": "Mestre Alquimista",
+            "descricao": "Permite fabricar poções com fórmulas conhecidas de qualquer círculo.",
+            "preRequisitoTexto": "Pré-requisitos: Int 3, Sab 3, Alquimista Iniciado, 10º nível de inventor.",
+            "nivelMinimo": 10,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "ALQUIMISTA_INICIADO"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {
+                "INT": 3,
+                "SAB": 3
+            }
+        },
+        {
+            "key": "MESTRE_CUCA",
+            "nome": "Mestre Cuca",
+            "descricao": "Todas as comidas preparadas por você recebem +1 em seu bônus numérico.",
+            "preRequisitoTexto": "Pré-requisito: treinado em Ofício (cozinheiro).",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [
+                "OFICIO_COZINHEIRO"
+            ],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "MISTURA_FERVILHANTE",
+            "nome": "Mistura Fervilhante",
+            "descricao": "Gasta 2 PM ao usar item alquímico ou poção para dobrar sua área de efeito.",
+            "preRequisitoTexto": "Pré-requisitos: Alquimista Iniciado, 5º nível de inventor.",
+            "nivelMinimo": 5,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "ALQUIMISTA_INICIADO"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "MANUTENCAO_DE_EQUIPAMENTO",
+            "nome": "Oficina: Manutenção de Equipamento",
+            "descricao": "Gasta descanso e PM para manter equipamentos do grupo por um dia (+1 no ataque de armas ou +1 na Defesa de armaduras/escudos).",
+            "preRequisitoTexto": "Pré-requisito: treinado em Ofício (armeiro).",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [
+                "OFICIO_ARMEIRO"
+            ],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "PEDRA_DE_AMOLAR",
+            "nome": "Pedra de Amolar",
+            "descricao": "Gasta ação de movimento e PM (limitado por Inteligência) para conceder +1 no dano de arma corpo a corpo por PM gasto até o fim da cena.",
+            "preRequisitoTexto": "Pré-requisito: Armeiro.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "ARMEIRO"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "SINTESE_RAPIDA",
+            "nome": "Síntese Rápida",
+            "descricao": "Fabrica o dobro de doses no mesmo período de tempo ao produzir poções ou itens alquímicos (pagando custo de cada uma).",
+            "preRequisitoTexto": "Pré-requisito: Alquimista Iniciado.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "ALQUIMISTA_INICIADO"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        }
+    ],
+    "LADINO": [
+        {
+            "key": "ASSASSINAR",
+            "nome": "Assassinar",
+            "descricao": "Gasta uma ação de movimento e 3 PM para analisar uma criatura em alcance curto; até o fim do próximo turno, o primeiro Ataque Furtivo que causar dano a ela tem os dados de dano extras dobrados.",
+            "preRequisitoTexto": "Pré-requisito: 5º nível de ladino.",
+            "nivelMinimo": 5,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "AUMENTO_DE_ATRIBUTO",
+            "nome": "Aumento de Atributo",
+            "descricao": "Recebe +1 em um atributo.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "CONTATOS_NO_SUBMUNDO",
+            "nome": "Contatos no Submundo",
+            "descricao": "Em comunidade do tamanho de vila ou maior, gasta 2 PM para fazer teste de Carisma (CD 10); se passar, recebe +5 em Investigação para interrogar, 20% de desconto em itens mundanos, poções e pergaminhos, além de acesso a itens e serviços proibidos a critério do mestre.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "EMBOSCAR",
+            "nome": "Emboscar",
+            "descricao": "Na primeira rodada de combate, gasta 2 PM para realizar uma ação padrão adicional no turno.",
+            "preRequisitoTexto": "Pré-requisito: treinado em Furtividade.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [
+                "FURTIVIDADE"
+            ],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ESCAPISTA",
+            "nome": "Escapista",
+            "descricao": "Recebe +5 em testes de Acrobacia para escapar, passar por espaço apertado ou passar por inimigo, e em testes para resistir a efeitos de movimento.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "FUGA_FORMIDAVEL",
+            "nome": "Fuga Formidável",
+            "descricao": "Gasta ação completa e 1 PM para analisar o local; até o fim da cena recebe +3m no deslocamento, +5 em Acrobacia e Atletismo e ignora penalidades de terreno difícil ao fugir (benefício perdido se realizar ações não voltadas à fuga).",
+            "preRequisitoTexto": "Pré-requisito: Int 1.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {
+                "INT": 1
+            }
+        },
+        {
+            "key": "GATUNO",
+            "nome": "Gatuno",
+            "descricao": "Recebe +2 em Atletismo. Ao escalar, não fica desprevenido e desloca-se na velocidade normal em vez de metade.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "LADRAO_ARCANO",
+            "nome": "Ladrão Arcano",
+            "descricao": "Ao causar dano com Ataque Furtivo em criatura conjuradora, paga 1 PM por círculo para roubar uma magia vista de até 4º círculo e lançá-la até o fim da cena usando Inteligência.",
+            "preRequisitoTexto": "Pré-requisitos: Roubo de Mana, 13º nível de ladino.",
+            "nivelMinimo": 13,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "ROUBO_DE_MANA"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "MAO_NA_BOCA",
+            "nome": "Mão na Boca",
+            "descricao": "Recebe +2 em testes de agarrar. Ao acertar um Ataque Furtivo em criatura desprevenida, faz um teste de agarrar como ação livre; se tiver sucesso, o alvo não pode falar enquanto agarrado.",
+            "preRequisitoTexto": "Pré-requisito: treinado em Luta.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [
+                "LUTA"
+            ],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "MAOS_RAPIDAS",
+            "nome": "Mãos Rápidas",
+            "descricao": "Uma vez por rodada, paga 1 PM para fazer testes de Ladinagem para abrir fechaduras, ocultar item, punga ou sabotar como ação livre.",
+            "preRequisitoTexto": "Pré-requisitos: Des 2, treinado em Ladinagem.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [
+                "LADINAGEM"
+            ],
+            "atributosExigidos": {
+                "DES": 2
+            }
+        },
+        {
+            "key": "MENTE_CRIMINOSA",
+            "nome": "Mente Criminosa",
+            "descricao": "Soma o bônus de Inteligência nos testes de Ladinagem e Furtividade.",
+            "preRequisitoTexto": "Pré-requisito: Int 1.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {
+                "INT": 1
+            }
+        },
+        {
+            "key": "OPORTUNISMO",
+            "nome": "Oportunismo",
+            "descricao": "Uma vez por rodada, gasta 2 PM para realizar um ataque corpo a corpo contra um inimigo adjacente que acabou de sofrer dano de um aliado.",
+            "preRequisitoTexto": "Pré-requisito: 6º nível de ladino.",
+            "nivelMinimo": 6,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ROLAMENTO_DEFENSIVO",
+            "nome": "Rolamento Defensivo",
+            "descricao": "Sempre que sofrer dano, gasta 2 PM para reduzi-lo à metade e fica caído.",
+            "preRequisitoTexto": "Pré-requisito: treinado em Reflexos.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [
+                "REFLEXOS"
+            ],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ROUBO_DE_MANA",
+            "nome": "Roubo de Mana",
+            "descricao": "Ao causar dano com Ataque Furtivo, recebe 1 PM temporário e o alvo perde 1 PM por dado de 1d6 de dano furtivo (1 vez por cena por criatura).",
+            "preRequisitoTexto": "Pré-requisitos: Truque Mágico, 7º nível de ladino.",
+            "nivelMinimo": 7,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "TRUQUE_MAGICO"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "SAQUEADOR_DE_TUMBAS",
+            "nome": "Saqueador de Tumbas",
+            "descricao": "Recebe +5 em Investigação contra armadilhas e em resistências contra elas; desabilita mecanismos com uma ação padrão em vez de 1d4 rodadas.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "SOMBRA",
+            "nome": "Sombra",
+            "descricao": "Recebe +2 em Furtividade, anula a penalidade por se mover no deslocamento normal e diminui para -10 a penalidade ao atacar ou agir de forma chamativa.",
+            "preRequisitoTexto": "Pré-requisito: treinado em Furtividade.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [
+                "FURTIVIDADE"
+            ],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "TRUQUE_MAGICO",
+            "nome": "Truque Mágico",
+            "descricao": "Aprende e lança uma magia arcana de 1º círculo usando Inteligência como atributo-chave.",
+            "preRequisitoTexto": "Pré-requisito: Int 1.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {
+                "INT": 1
+            }
+        },
+        {
+            "key": "VELOCIDADE_LADINA",
+            "nome": "Velocidade Ladina",
+            "descricao": "Uma vez por rodada, gasta 2 PM para realizar uma ação de movimento adicional no seu turno.",
+            "preRequisitoTexto": "Pré-requisitos: Des 2, treinado em Iniciativa.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [
+                "INICIATIVA"
+            ],
+            "atributosExigidos": {
+                "DES": 2
+            }
+        },
+        {
+            "key": "VENENO_PERSISTENTE",
+            "nome": "Veneno Persistente",
+            "descricao": "A aplicação de veneno em uma arma dura três ataques em vez de apenas um.",
+            "preRequisitoTexto": "Pré-requisitos: Veneno Potente, 8º nível de ladino.",
+            "nivelMinimo": 8,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "VENENO_POTENTE"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "VENENO_POTENTE",
+            "nome": "Veneno Potente",
+            "descricao": "Aumenta em +5 a CD para resistir aos venenos aplicados por você.",
+            "preRequisitoTexto": "Pré-requisito: treinado em Ofício (alquimista).",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [
+                "OFICIO_ALQUIMISTA"
+            ],
+            "atributosExigidos": {}
+        }
+    ],
+    "LUTADOR": [
+        {
+            "key": "ARMA_IMPROVISADA",
+            "nome": "Arma Improvisada",
+            "descricao": "Atacar com armas improvisadas conta como ataque desarmado com dano aumentado em um passo. Pode gastar ação de movimento e passar em Percepção (CD 20) para encontrar uma; se errar um ataque e o resultado do d20 for ímpar, a arma quebra.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ATE_ACERTAR",
+            "nome": "Até Acertar",
+            "descricao": "Ao errar um ataque desarmado, recebe +2 cumulativo em testes de ataque e rolagens de dano desarmado contra o mesmo oponente até acertar ou até o fim da cena.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "AUMENTO_DE_ATRIBUTO",
+            "nome": "Aumento de Atributo",
+            "descricao": "Recebe +1 em um atributo.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "BRACOS_CALEJADOS",
+            "nome": "Braços Calejados",
+            "descricao": "Se não estiver usando armadura, soma sua Força na Defesa (limitado pelo seu nível).",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "CABECADA",
+            "nome": "Cabeçada",
+            "descricao": "Ao fazer um ataque desarmado, pode gastar 2 PM para deixar o oponente desprevenido contra o ataque (1 vez por cena por alvo).",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "CHAVE",
+            "nome": "Chave",
+            "descricao": "Ao agarrar uma criatura e realizar teste de manobra para causar dano, o dano desarmado aumenta em um passo.",
+            "preRequisitoTexto": "Pré-requisitos: Int 1, Lutador de Chão, 4º nível de lutador.",
+            "nivelMinimo": 4,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "LUTADOR_DE_CHAO"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {
+                "INT": 1
+            }
+        },
+        {
+            "key": "CONFIANCA_DOS_RINGUES",
+            "nome": "Confiança dos Ringues",
+            "descricao": "Quando um inimigo erra um ataque corpo a corpo contra você, recebe 2 PM temporários cumulativos até o fim da cena (máximo de PM temporários por cena igual ao nível).",
+            "preRequisitoTexto": "Pré-requisito: 8º nível de lutador.",
+            "nivelMinimo": 8,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "CONVENCIDO",
+            "nome": "Convencido",
+            "descricao": "Recebe resistência a medo e mental +5.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "GOLPE_BAIXO",
+            "nome": "Golpe Baixo",
+            "descricao": "Ao fazer um ataque desarmado, pode gastar 2 PM para forçar o alvo acertado a fazer um teste de Fortitude (CD For) ou ficar atordoado por 1 rodada (1 vez por cena).",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "GOLPE_IMPRUDENTE",
+            "nome": "Golpe Imprudente",
+            "descricao": "Ao usar Golpe Relâmpago, pode atacar impulsivamente para adicionar um dado de dano extra do mesmo tipo aos ataques desarmados, sofrendo –5 na Defesa até o início do próximo turno.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "IMOBILIZACAO",
+            "nome": "Imobilização",
+            "descricao": "Ao agarrar uma criatura, pode gastar uma ação completa e passar em manobra para deixá-la indefesa e incapaz de agir exceto para tentar se soltar (você sofre penalidades normais de agarrar).",
+            "preRequisitoTexto": "Pré-requisitos: Chave, 8º nível de lutador.",
+            "nivelMinimo": 8,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "CHAVE"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "LINGUA_DOS_BECOS",
+            "nome": "Língua dos Becos",
+            "descricao": "Pode gastar 1 PM para usar Força no lugar de Carisma em um teste de perícia baseada em Carisma.",
+            "preRequisitoTexto": "Pré-requisitos: For 1, treinado em Intimidação.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [
+                "INTIMIDACAO"
+            ],
+            "atributosExigidos": {
+                "FOR": 1
+            }
+        },
+        {
+            "key": "LUTADOR_DE_CHAO",
+            "nome": "Lutador de Chão",
+            "descricao": "Recebe +2 em testes de manobra para agarrar e derrubar. Ao agarrar uma criatura, pode gastar 1 PM para tentar derrubá-la como ação livre.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "NOME_NA_ARENA",
+            "nome": "Nome na Arena",
+            "descricao": "Uma vez por cena, gasta ação completa e passa em teste de Luta (CD 10) para receber +2 (+2 a cada 10 pontos acima da CD) em testes de perícias baseadas em Carisma até o fim da cena e melhorar a atitude de fãs de luta em uma categoria.",
+            "preRequisitoTexto": "Pré-requisito: 11º nível de lutador.",
+            "nivelMinimo": 11,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "PUNHOS_DE_ADAMANTE",
+            "nome": "Punhos de Adamante",
+            "descricao": "Seus ataques desarmados ignoram 10 pontos de redução de dano (RD) do alvo.",
+            "preRequisitoTexto": "Pré-requisito: 8º nível de lutador.",
+            "nivelMinimo": 8,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "RASTEIRA",
+            "nome": "Rasteira",
+            "descricao": "Ao realizar ataque desarmado contra alvo até uma categoria de tamanho maior, gasta 2 PM para derrubá-lo se acertar.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "SARADO",
+            "nome": "Sarado",
+            "descricao": "Soma a Força nos pontos de vida totais e em Fortitude. Pode usar Força no lugar de Carisma em Diplomacia com quem se atrai por físicos definidos.",
+            "preRequisitoTexto": "Pré-requisito: For 3.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {
+                "FOR": 3
+            }
+        },
+        {
+            "key": "SEQUENCIA_DESTRUIDORA",
+            "nome": "Sequência Destruidora",
+            "descricao": "No início do turno, gasta 2 PM e anuncia um número (mínimo 2); se acertar exatamente essa quantidade de ataques, o último recebe +4 de dano por ataque realizado.",
+            "preRequisitoTexto": "Pré-requisitos: Trocação, 12º nível de lutador.",
+            "nivelMinimo": 12,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "TROCACAO"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "TRINCADO",
+            "nome": "Trincado",
+            "descricao": "Soma a sua Constituição nas rolagens de dano desarmado.",
+            "preRequisitoTexto": "Pré-requisitos: Con 3, Sarado, 10º nível de lutador.",
+            "nivelMinimo": 10,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "SARADO"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {
+                "CON": 3
+            }
+        },
+        {
+            "key": "TROCACAO",
+            "nome": "Trocação",
+            "descricao": "Ao acertar um ataque desarmado, pode desferir outro contra o mesmo alvo pagando PM igual ao número de ataques já feitos no turno (1 PM no primeiro extra, 2 PM no segundo, etc.) até errar ou zerar a mana.",
+            "preRequisitoTexto": "Pré-requisito: 6º nível de lutador.",
+            "nivelMinimo": 6,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "TROCACAO_TUMULTUOSA",
+            "nome": "Trocação Tumultuosa",
+            "descricao": "Ao usar a ação agredir desarmado, pode gastar 2 PM antes do teste para comparar o mesmo ataque contra a Defesa de todas as criaturas adjacentes (incluindo aliados).",
+            "preRequisitoTexto": "Pré-requisitos: Trocação, 8º nível de lutador.",
+            "nivelMinimo": 8,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "TROCACAO"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "VALENTAO",
+            "nome": "Valentão",
+            "descricao": "Recebe +2 em testes de ataque e rolagens de dano contra oponentes caídos, desprevenidos, flanqueados ou indefesos.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "VOADORA",
+            "nome": "Voadora",
+            "descricao": "Em investida desarmada, pode gastar 2 PM para receber +1d6 no dano para cada 3m deslocados até o alvo (limitado pelo nível).",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        }
+    ],
+    "NOBRE": [
+        {
+            "key": "ARMADURA_BRILHANTE",
+            "nome": "Armadura Brilhante",
+            "descricao": "Pode usar Carisma na Defesa ao vestir armadura pesada (não soma Destreza, mesmo com outros efeitos).",
+            "preRequisitoTexto": "Pré-requisito: 8º nível de nobre.",
+            "nivelMinimo": 8,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "AUMENTO_DE_ATRIBUTO",
+            "nome": "Aumento de Atributo",
+            "descricao": "Recebe +1 em um atributo.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "AUTORIDADE_FEUDAL",
+            "nome": "Autoridade Feudal",
+            "descricao": "Gasta uma hora e 2 PM em locais com sua influência para obter ajuda do povo comum, funcionando como um parceiro iniciante até o fim da aventura.",
+            "preRequisitoTexto": "Pré-requisito: 6º nível de nobre.",
+            "nivelMinimo": 6,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "EDUCACAO_PRIVILEGIADA",
+            "nome": "Educação Privilegiada",
+            "descricao": "Torna-se treinado em duas perícias da lista de nobre à sua escolha.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ESTRATEGISTA",
+            "nome": "Estrategista",
+            "descricao": "Ação padrão e 1 PM por aliado em alcance curto (limitado por Carisma); concede a cada um uma ação de movimento adicional no próximo turno dele.",
+            "preRequisitoTexto": "Pré-requisitos: Int 1, treinado em Guerra, 6º nível de nobre.",
+            "nivelMinimo": 6,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [
+                "GUERRA"
+            ],
+            "atributosExigidos": {
+                "INT": 1
+            }
+        },
+        {
+            "key": "FAVOR",
+            "nome": "Favor",
+            "descricao": "Gasta 5 PM e 1 hora de conversa para pedir favores difíceis, caros ou de alto risco usando as regras de Diplomacia (persuasão); falhas impedem repetir o pedido por uma semana.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "GENERAL",
+            "nome": "General",
+            "descricao": "Aliados direcionados pelo poder Estrategista recebem 1d4 PM temporários válidos até o final do turno deles.",
+            "preRequisitoTexto": "Pré-requisitos: Estrategista, 12º nível de nobre.",
+            "nivelMinimo": 12,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "ESTRATEGISTA"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "GRITO_TIRANICO",
+            "nome": "Grito Tirânico",
+            "descricao": "Permite usar Palavras Afiadas como ação completa, aumentando o dano para d8 e atingindo todos os inimigos em alcance curto.",
+            "preRequisitoTexto": "Pré-requisito: 8º nível de nobre.",
+            "nivelMinimo": 8,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "INSPIRAR_CONFIANCA",
+            "nome": "Inspirar Confiança",
+            "descricao": "Gasta 2 PM como reação para permitir que um aliado em alcance curto rerrole um teste recém realizado.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "INSPIRAR_GLORIA",
+            "nome": "Inspirar Glória",
+            "descricao": "Uma vez por rodada, gasta 5 PM para conceder uma ação padrão adicional no próximo turno de um aliado em alcance curto (1 vez por cena por aliado).",
+            "preRequisitoTexto": "Pré-requisitos: Inspirar Confiança, 8º nível de nobre.",
+            "nivelMinimo": 8,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "INSPIRAR_CONFIANCA"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "JOGO_DA_CORTE",
+            "nome": "Jogo da Corte",
+            "descricao": "Gasta 1 PM para rolar novamente um teste recém realizado de Diplomacia, Intuição ou Nobreza.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "LIDERAR_PELO_EXEMPLO",
+            "nome": "Liderar pelo Exemplo",
+            "descricao": "Gasta 2 PM; até seu próximo turno, se passar num teste de perícia, aliados em alcance curto fazendo o mesmo teste podem usar o seu resultado.",
+            "preRequisitoTexto": "Pré-requisito: 6º nível de nobre.",
+            "nivelMinimo": 6,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "LINGUA_DE_OURO",
+            "nome": "Língua de Ouro",
+            "descricao": "Ação padrão e 4 PM para gerar o efeito não mágico da magia Enfeitiçar (sugerir ação e afetar todas as criaturas dentro do alcance, CD Car).",
+            "preRequisitoTexto": "Pré-requisitos: Língua de Prata, 8º nível de nobre.",
+            "nivelMinimo": 8,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "LINGUA_DE_PRATA"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "LINGUA_DE_PRATA",
+            "nome": "Língua de Prata",
+            "descricao": "Ao realizar teste de perícia baseada em Carisma, gasta 2 PM para receber bônus igual a metade do seu nível.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "LINGUA_RAPIDA",
+            "nome": "Língua Rápida",
+            "descricao": "Reduz a penalidade para mudar atitude com Diplomacia em ação completa de -10 para -5.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "PRESENCA_MAJESTOSA",
+            "nome": "Presença Majestosa",
+            "descricao": "Presença Aristocrática passa a afetar qualquer criatura com valor de Inteligência (incluindo animais) e pode ser usada mais de uma vez contra o mesmo alvo na mesma cena.",
+            "preRequisitoTexto": "Pré-requisito: 16º nível de nobre.",
+            "nivelMinimo": 16,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "TITULO",
+            "nome": "Título",
+            "descricao": "Concede título de nobreza. Conforme aprovação do mestre, no início de cada aventura rende 20 TO por nível de nobre ou o auxílio de um parceiro veterano da sua corte.",
+            "preRequisitoTexto": "Pré-requisitos: Autoridade Feudal, 10º nível de nobre, terras conquistadas ou serviço prestado a um suserano.",
+            "nivelMinimo": 10,
+            "caminhosExigidos": [],
+            "poderesExigidos": [
+                "AUTORIDADE_FEUDAL"
+            ],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "VOZ_PODEROSA",
+            "nome": "Voz Poderosa",
+            "descricao": "Recebe +2 em Diplomacia e Intimidação; habilidades de classe de nobre de alcance curto passam para alcance médio.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        }
+    ],
+    "PALADINO": [
+        {
+            "key": "ARMA_SAGRADA",
+            "nome": "Arma Sagrada",
+            "categoria": "GERAL",
+            "descricao": "Ao usar Golpe Divino com a arma preferida de sua divindade, o dado de dano do golpe aumenta para d12.",
+            "preRequisitoTexto": "Pré-requisito: devoto de uma divindade (exceto Lena e Marah).",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "AUMENTO_DE_ATRIBUTO",
+            "nome": "Aumento de Atributo",
+            "categoria": "GERAL",
+            "descricao": "Recebe +1 em um atributo.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "AURA_ANTIMAGIA",
+            "nome": "Aura Antimagia",
+            "categoria": "GERAL",
+            "descricao": "Enquanto a aura estiver ativa, você e aliados dentro dela podem rolar novamente qualquer teste de resistência contra magia recém realizado.",
+            "preRequisitoTexto": "Pré-requisito: 14º nível de paladino.",
+            "nivelMinimo": 14,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "AURA_ARDENTE",
+            "nome": "Aura Ardente",
+            "categoria": "GERAL",
+            "descricao": "Enquanto a aura estiver ativa, no início de seus turnos, espíritos e mortos-vivos à sua escolha dentro dela sofrem 5 + Carisma em dano de luz.",
+            "preRequisitoTexto": "Pré-requisito: 10º nível de paladino.",
+            "nivelMinimo": 10,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "AURA_DE_CURA",
+            "nome": "Aura de Cura",
+            "categoria": "GERAL",
+            "descricao": "Enquanto a aura estiver ativa, no início de seus turnos, você e aliados à sua escolha dentro dela curam 5 + Carisma PV.",
+            "preRequisitoTexto": "Pré-requisito: 6º nível de paladino.",
+            "nivelMinimo": 6,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "AURA_DE_INVENCIBILIDADE",
+            "nome": "Aura de Invencibilidade",
+            "categoria": "GERAL",
+            "descricao": "Enquanto a aura estiver ativa, você e aliados dentro dela ignoram a primeira instância de dano que sofrerem na cena.",
+            "preRequisitoTexto": "Pré-requisito: 18º nível de paladino.",
+            "nivelMinimo": 18,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "AURA_PODEROSA",
+            "nome": "Aura Poderosa",
+            "categoria": "GERAL",
+            "descricao": "O raio de sua Aura Sagrada aumenta de 9m para 30m.",
+            "preRequisitoTexto": "Pré-requisito: 6º nível de paladino.",
+            "nivelMinimo": 6,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "FULGOR_DIVINO",
+            "nome": "Fulgor Divino",
+            "categoria": "GERAL",
+            "descricao": "Ao usar Golpe Divino, todos os inimigos em alcance curto ficam ofuscados até o início do seu próximo turno.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "JULGAMENTO_DIVINO_ARREPENDIMENTO",
+            "nome": "Julgamento Divino: Arrependimento",
+            "categoria": "JULGAMENTO_DIVINO",
+            "descricao": "Gasta 2 PM para marcar inimigo em alcance curto; na próxima vez que ele acertar ataque em você ou aliado, deve passar em Vontade (CD Car) ou fica atordoado no turno dele (1 vez por cena).",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "JULGAMENTO_DIVINO_AUTORIDADE",
+            "nome": "Julgamento Divino: Autoridade",
+            "categoria": "JULGAMENTO_DIVINO",
+            "descricao": "Gasta 1 PM para dar ordem a alvo em alcance curto via Diplomacia oposta a Vontade; se vencer, ele obedece a comando simples (1 vez por cena).",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "JULGAMENTO_DIVINO_CORAGEM",
+            "nome": "Julgamento Divino: Coragem",
+            "categoria": "JULGAMENTO_DIVINO",
+            "descricao": "Gasta 2 PM para conceder imunidade a medo e +2 no ataque contra o inimigo de maior ND da cena a uma criatura em alcance curto (ou a si mesmo).",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "JULGAMENTO_DIVINO_ILUMINACAO",
+            "nome": "Julgamento Divino: Iluminação",
+            "categoria": "JULGAMENTO_DIVINO",
+            "descricao": "Marca inimigo em alcance curto (1 vez por cena); ao acertá-lo com ataque corpo a corpo, você recebe 2 PM temporários.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "JULGAMENTO_DIVINO_JUSTICA",
+            "nome": "Julgamento Divino: Justiça",
+            "categoria": "JULGAMENTO_DIVINO",
+            "descricao": "Gasta 2 PM para marcar inimigo em alcance curto; na próxima vez que causar dano a você ou aliados, deve passar em Vontade (CD Car) ou sofre dano de luz igual a metade do que causou.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "JULGAMENTO_DIVINO_LIBERTACAO",
+            "nome": "Julgamento Divino: Libertação",
+            "categoria": "JULGAMENTO_DIVINO",
+            "descricao": "Gasta 5 PM para cancelar qualquer condição negativa afetando uma criatura em alcance curto.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "JULGAMENTO_DIVINO_SALVACAO",
+            "nome": "Julgamento Divino: Salvação",
+            "categoria": "JULGAMENTO_DIVINO",
+            "descricao": "Gasta 2 PM para marcar inimigo em alcance curto; até o fim da cena, recupera 5 PV sempre que acertá-lo com ataque corpo a corpo.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "JULGAMENTO_DIVINO_VINDICACAO",
+            "nome": "Julgamento Divino: Vindicação",
+            "categoria": "JULGAMENTO_DIVINO",
+            "descricao": "Gasta 2 PM para marcar alvo que causou dano na cena; recebe +1 no ataque e +1d8 no dano contra ele (–5 contra outros alvos). A cada 5 níveis, gasta +1 PM para +1 no ataque e +1d8 no dano.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "JULGAMENTO_DIVINO_ZELO",
+            "nome": "Julgamento Divino: Zelo",
+            "categoria": "JULGAMENTO_DIVINO",
+            "descricao": "Gasta 1 PM para marcar criatura em alcance longo; dobra o deslocamento sempre que se mover em direção a ela até o fim da cena.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "ORAR",
+            "nome": "Orar",
+            "categoria": "GERAL",
+            "descricao": "Aprende e lança uma magia divina de 1º círculo à sua escolha usando Sabedoria como atributo-chave (pode ser escolhido várias vezes).",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "VIRTUDE_PALADINESCA_CARIDADE",
+            "nome": "Virtude Paladinesca: Caridade",
+            "categoria": "VIRTUDE_PALADINESCA",
+            "descricao": "O custo de habilidades de paladino que tenham um aliado como alvo é reduzido em –1 PM.",
+            "restricaoComportamento": "Deve sempre ajudar os necessitados e ser generoso. Recusar caridade quebra o Código do Herói.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "VIRTUDE_PALADINESCA_CASTIDADE",
+            "nome": "Virtude Paladinesca: Castidade",
+            "categoria": "VIRTUDE_PALADINESCA",
+            "descricao": "Imunidade a efeitos de encantamento e +5 em testes de Intuição para perceber blefes.",
+            "restricaoComportamento": "Nunca ceder a tentações carnais, lascívia ou luxúria. Ceder à tentação quebra o Código do Herói.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "VIRTUDE_PALADINESCA_COMPAIXAO",
+            "nome": "Virtude Paladinesca: Compaixão",
+            "categoria": "VIRTUDE_PALADINESCA",
+            "descricao": "Cura pelas Mãos pode ser usada em alcance curto e passa a curar 2d6+1 PV por PM investido (em vez de 1d8+1).",
+            "restricaoComportamento": "Poupar inimigos rendidos, demonstrar clemência e aliviar sofrimento alheio. Crueldade quebra o Código do Herói.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        },
+        {
+            "key": "VIRTUDE_PALADINESCA_HUMILDADE",
+            "nome": "Virtude Paladinesca: Humildade",
+            "categoria": "VIRTUDE_PALADINESCA",
+            "descricao": "Na primeira rodada de combate, gasta ação completa para rezar e ganha PM temporários iguais ao Carisma até o fim da cena.",
+            "restricaoComportamento": "Jamais se vangloriar, ser arrogante ou colocar seu orgulho à frente dos outros. Arrogância quebra o Código do Herói.",
+            "nivelMinimo": 1,
+            "caminhosExigidos": [],
+            "poderesExigidos": [],
+            "periciasExigidas": [],
+            "atributosExigidos": {}
+        }
     ]
 }
