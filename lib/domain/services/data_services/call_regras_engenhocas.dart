@@ -10,14 +10,14 @@ class BancoDeRegrasEngenhocas {
   }
 
   static Future<void> carregar() async {
-    final raw = await rootBundle.loadString('assets/data/regras_engenhocas.json');
+    final raw = await rootBundle.loadString('assets/data/classes_data/especifico_classe/inventor/regras_engenhocas.json');
     _dados = _parse(raw);
   }
 
   static Map<String, dynamic> get regras {
     if (_dados == null) {
       try {
-        final file = File('assets/data/regras_engenhocas.json');
+        final file = File('assets/data/classes_data/especifico_classe/inventor/regras_engenhocas.json');
         if (file.existsSync()) {
           _dados = _parse(file.readAsStringSync());
         }

@@ -6,7 +6,7 @@ import '../entities/personagem.dart';
 import '../entities/atributos.dart';
 import 'data_services/call_racas.dart';
 import '../services/data_services/call_classes.dart';
-import 'banco_origens.dart';
+import 'data_services/call_origens.dart';
 import 'banco_divindades.dart';
 import 'data_services/call_poderes.dart';
 import 'data_services/call_armas.dart';

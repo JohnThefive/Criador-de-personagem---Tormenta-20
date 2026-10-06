@@ -17,7 +17,7 @@ import 'package:t20_creator/domain/services/personagem_storage_service.dart';
 void main() {
   setUpAll(() async {
     // Carrega dados de teste se em ambiente VM
-    final arquivoClasses = File('assets/data/banco_classe.json');
+    final arquivoClasses = File('assets/data/classes_data/banco_classe.json');
     if (arquivoClasses.existsSync()) {
       final jsonList = jsonDecode(arquivoClasses.readAsStringSync()) as List;
       BancoDeClasses.carregarParaTestes(
@@ -25,7 +25,7 @@ void main() {
       );
     }
 
-    final arquivoFormas = File('assets/data/formas_selvagens.json');
+    final arquivoFormas = File('assets/data/classes_data/especifico_classe/druida/formas_selvagens.json');
     if (arquivoFormas.existsSync()) {
       final jsonList = jsonDecode(arquivoFormas.readAsStringSync()) as List;
       BancoDeFormasSelvagens.carregarParaTestes(
@@ -33,7 +33,7 @@ void main() {
       );
     }
 
-    final arquivoCompanheiros = File('assets/data/tipos_companheiro_animal.json');
+    final arquivoCompanheiros = File('assets/data/classes_data/especifico_classe/druida/tipos_companheiro_animal.json');
     if (arquivoCompanheiros.existsSync()) {
       final jsonMap = jsonDecode(arquivoCompanheiros.readAsStringSync()) as Map<String, dynamic>;
       final jsonList = jsonMap['tipos'] as List;

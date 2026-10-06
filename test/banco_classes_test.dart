@@ -177,13 +177,13 @@ void main() {
     );
 
     test(
-      'Arquivo assets/data/banco_classe.json é válido e carrega as 6 classes do catálogo',
+      'Arquivo assets/data/classes_data/banco_classe.json é válido e carrega as 6 classes do catálogo',
       () {
-        final file = File('assets/data/banco_classe.json');
+        final file = File('assets/data/classes_data/banco_classe.json');
         expect(
           file.existsSync(),
           isTrue,
-          reason: 'O arquivo banco_classe.json deve existir em assets/data/',
+          reason: 'O arquivo banco_classe.json deve existir em assets/data/classes_data/',
         );
 
         final content = file.readAsStringSync();

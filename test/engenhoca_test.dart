@@ -16,7 +16,7 @@ import 'package:t20_creator/domain/services/regras_carga_service.dart';
 
 void main() {
   setUpAll(() {
-    final arquivoClasses = File('assets/data/banco_classe.json');
+    final arquivoClasses = File('assets/data/classes_data/banco_classe.json');
     if (arquivoClasses.existsSync()) {
       final jsonList = jsonDecode(arquivoClasses.readAsStringSync()) as List;
       BancoDeClasses.carregarParaTestes(
@@ -24,7 +24,7 @@ void main() {
       );
     }
 
-    final arquivoRegras = File('assets/data/regras_engenhocas.json');
+    final arquivoRegras = File('assets/data/classes_data/especifico_classe/inventor/regras_engenhocas.json');
     if (arquivoRegras.existsSync()) {
       final jsonMap = jsonDecode(arquivoRegras.readAsStringSync()) as Map<String, dynamic>;
       BancoDeRegrasEngenhocas.carregarParaTestes(jsonMap);

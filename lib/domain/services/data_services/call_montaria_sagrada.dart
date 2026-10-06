@@ -10,14 +10,14 @@ class BancoDeRegrasMontariaSagrada {
   }
 
   static Future<void> carregar() async {
-    final raw = await rootBundle.loadString('assets/data/regras_montaria_sagrada.json');
+    final raw = await rootBundle.loadString('assets/data/classes_data/especifico_classe/cavaleiro/regras_montaria_sagrada.json');
     _dados = _parse(raw);
   }
 
   static Map<String, dynamic> get regras {
     if (_dados == null) {
       try {
-        final file = File('assets/data/regras_montaria_sagrada.json');
+        final file = File('assets/data/classes_data/especifico_classe/cavaleiro/regras_montaria_sagrada.json');
         if (file.existsSync()) {
           _dados = _parse(file.readAsStringSync());
         }

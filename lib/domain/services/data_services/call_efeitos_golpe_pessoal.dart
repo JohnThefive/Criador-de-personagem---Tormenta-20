@@ -14,14 +14,14 @@ class BancoDeEfeitosGolpePessoal {
   }
 
   static Future<void> carregar() async {
-    final raw = await rootBundle.loadString('assets/data/efeitos_golpe_pessoal.json');
+    final raw = await rootBundle.loadString('assets/data/classes_data/especifico_classe/guerreiro/efeitos_golpe_pessoal.json');
     _dados = _parse(raw);
   }
 
   static List<EfeitoGolpePessoal> get todos {
     if (_dados.isEmpty) {
       try {
-        final file = File('assets/data/efeitos_golpe_pessoal.json');
+        final file = File('assets/data/classes_data/especifico_classe/guerreiro/efeitos_golpe_pessoal.json');
         if (file.existsSync()) {
           _dados = _parse(file.readAsStringSync());
         }

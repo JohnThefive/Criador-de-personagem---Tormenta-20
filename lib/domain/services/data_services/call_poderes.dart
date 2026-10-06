@@ -8,7 +8,7 @@ class BancoDePoderes {
 
   static Future<void> carregar() async {
     final raw = await rootBundle.loadString(
-      'assets/data/banco_poderes_classe.json',
+      'assets/data/classes_data/banco_poderes_classe.json',
     );
 
     final Map<String, dynamic> jsonMap = jsonDecode(raw);

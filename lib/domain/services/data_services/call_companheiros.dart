@@ -20,7 +20,7 @@ class BancoDeCompanheiros {
 
   static Future<void> carregar() async {
     final raw = await rootBundle.loadString(
-      'assets/data/tipos_companheiro_animal.json',
+      'assets/data/classes_data/especifico_classe/druida/tipos_companheiro_animal.json',
     );
     _dados = _parse(raw);
   }
@@ -28,7 +28,7 @@ class BancoDeCompanheiros {
   static List<TipoCompanheiroAnimal> get todos {
     if (_dados.isEmpty) {
       try {
-        final file = File('assets/data/tipos_companheiro_animal.json');
+        final file = File('assets/data/classes_data/especifico_classe/druida/tipos_companheiro_animal.json');
         if (file.existsSync()) {
           _dados = _parse(file.readAsStringSync());
         }

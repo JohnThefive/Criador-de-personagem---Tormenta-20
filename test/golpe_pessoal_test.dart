@@ -12,7 +12,7 @@ import 'package:t20_creator/domain/services/personagem_storage_service.dart';
 void main() {
   setUpAll(() {
     // Carrega dados de teste se em ambiente VM
-    final arquivoEfeitos = File('assets/data/efeitos_golpe_pessoal.json');
+    final arquivoEfeitos = File('assets/data/classes_data/especifico_classe/guerreiro/efeitos_golpe_pessoal.json');
     if (arquivoEfeitos.existsSync()) {
       final jsonList = jsonDecode(arquivoEfeitos.readAsStringSync()) as List;
       BancoDeEfeitosGolpePessoal.carregarParaTestes(
@@ -20,7 +20,7 @@ void main() {
       );
     }
 
-    final arquivoClasses = File('assets/data/banco_classe.json');
+    final arquivoClasses = File('assets/data/classes_data/banco_classe.json');
     if (arquivoClasses.existsSync()) {
       final jsonList = jsonDecode(arquivoClasses.readAsStringSync()) as List;
       BancoDeClasses.carregarParaTestes(

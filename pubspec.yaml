@@ -67,6 +67,12 @@ flutter:
   # assets:
   assets:
     - assets/data/
+    - assets/data/classes_data/
+    - assets/data/classes_data/especifico_classe/guerreiro/
+    - assets/data/classes_data/especifico_classe/inventor/
+    - assets/data/classes_data/especifico_classe/cavaleiro/
+    - assets/data/classes_data/especifico_classe/druida/
+    - assets/data/equipment/
     - assets/icons/
     - assets/icons/racas/
     - assets/icons/classes/

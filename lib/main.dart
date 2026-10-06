@@ -5,6 +5,7 @@ import 'package:t20_creator/domain/services/data_services/call_armas.dart';
 import 'package:t20_creator/domain/services/data_services/call_armaduras.dart';
 import 'package:t20_creator/domain/services/data_services/call_racas.dart';
 import 'package:t20_creator/domain/services/data_services/call_classes.dart';
+import 'package:t20_creator/domain/services/data_services/call_origens.dart';
 import 'package:t20_creator/domain/services/data_services/call_formas_selvagens.dart';
 import 'package:t20_creator/domain/services/data_services/call_companheiros.dart';
 import 'package:t20_creator/domain/services/data_services/call_efeitos_golpe_pessoal.dart';
@@ -20,6 +21,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await BancoDeRacas.carregar();
   await BancoDeClasses.carregar();
+  await BancoDeOrigens.carregar();
   await BancoDePoderes.carregar();
   await BancoDeArmas.carregar();
   await BancoDeArmaduras.carregar();

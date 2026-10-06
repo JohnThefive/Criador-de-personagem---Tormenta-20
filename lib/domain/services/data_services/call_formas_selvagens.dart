@@ -14,14 +14,14 @@ class BancoDeFormasSelvagens {
   }
 
   static Future<void> carregar() async {
-    final raw = await rootBundle.loadString('assets/data/formas_selvagens.json');
+    final raw = await rootBundle.loadString('assets/data/classes_data/especifico_classe/druida/formas_selvagens.json');
     _dados = _parse(raw);
   }
 
   static List<FormaSelvagem> get todas {
     if (_dados.isEmpty) {
       try {
-        final file = File('assets/data/formas_selvagens.json');
+        final file = File('assets/data/classes_data/especifico_classe/druida/formas_selvagens.json');
         if (file.existsSync()) {
           _dados = _parse(file.readAsStringSync());
         }

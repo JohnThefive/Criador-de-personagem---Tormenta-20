@@ -1,0 +1,1051 @@
+[
+    {
+        "id": "acolito",
+        "nome": "Acólito",
+        "descricao": "Você cresceu cercado por orações, evangelhos e ensinamentos religiosos, seja por tradição familiar, vocação ou criação em um templo ou mosteiro.",
+        "itensIniciais": [
+            "Símbolo sagrado",
+            "Traje de sacerdote"
+        ],
+        "periciasOpcoes": [
+            "CURA",
+            "RELIGIAO",
+            "VONTADE"
+        ],
+        "poderesGeraisOpcoes": [
+            {
+                "key": "medicina",
+                "nome": "Medicina",
+                "descricao": "Poder geral Medicina."
+            },
+            {
+                "key": "vontade_de_ferro",
+                "nome": "Vontade de Ferro",
+                "descricao": "Poder geral Vontade de Ferro."
+            }
+        ],
+        "poderUnico": {
+            "key": "membro_da_igreja",
+            "nome": "Membro da Igreja",
+            "descricao": "Você consegue hospedagem confortável e informação em qualquer templo de sua divindade, para você e seus aliados."
+        }
+    },
+    {
+        "id": "amigo_animais",
+        "nome": "Amigo dos Animais",
+        "descricao": "Você possui facilidade em lidar com animais, seja por ter trabalhado com eles ou por possuir uma afinidade natural. Desde a infância, consegue compreendê-los e estabelecer uma relação especial com eles.",
+        "itensIniciais": [
+            "Cão de caça, cavalo, pônei ou trobo (escolha um)"
+        ],
+        "periciasOpcoes": [
+            "ADESTRAMENTO",
+            "CAVALGAR"
+        ],
+        "poderesGeraisOpcoes": [],
+        "poderUnico": {
+            "key": "amigo_especial",
+            "nome": "Amigo Especial",
+            "descricao": "Você recebe +5 em testes de Adestramento com animais. Além disso, possui um animal de estimação que o auxilia e o acompanha em suas aventuras. Em termos de jogo, é um parceiro que fornece +2 em uma perícia a sua escolha (exceto Luta ou Pontaria e aprovada pelo mestre) e não conta em seu limite de parceiros."
+        }
+    },
+    {
+        "id": "aristocrata",
+        "nome": "Aristocrata",
+        "descricao": "Você nasceu na nobreza e recebeu uma educação sofisticada, podendo ter sido instruído em assuntos acadêmicos, política, torneios de cavalaria ou conjuração arcana, conforme as tradições de sua linhagem.",
+        "itensIniciais": [
+            "Joia de família no valor de T$ 300",
+            "Traje da corte"
+        ],
+        "periciasOpcoes": [
+            "DIPLOMACIA",
+            "ENGANACAO",
+            "NOBREZA"
+        ],
+        "poderesGeraisOpcoes": [
+            {
+                "key": "comandar",
+                "nome": "Comandar",
+                "descricao": "Poder geral Comandar."
+            }
+        ],
+        "poderUnico": {
+            "key": "sangue_azul",
+            "nome": "Sangue Azul",
+            "descricao": "Você tem alguma influência política, suficiente para ser tratado com mais leniência pela guarda, conseguir uma audiência com o nobre local etc."
+        }
+    },
+    {
+        "id": "capanga",
+        "nome": "Capanga",
+        "descricao": "Você trabalhou como força bruta para algum criminoso, integrando um bando, quadrilha ou guilda de ladrões. Sua força e intimidação eram suas principais ferramentas no mundo do crime.",
+        "itensIniciais": [
+            "Tatuagem ou outro adereço de sua gangue (+1 em Intimidação)",
+            "Uma arma simples corpo a corpo"
+        ],
+        "periciasOpcoes": [
+            "LUTA",
+            "INTIMIDACAO"
+        ],
+        "poderesGeraisOpcoes": [
+            {
+                "key": "poder_combate_escolha",
+                "nome": "Poder de combate à escolha",
+                "descricao": "Você pode escolher um poder de combate que cumpra todos os seus pré-requisitos."
+            }
+        ],
+        "poderUnico": {
+            "key": "confissao",
+            "nome": "Confissão",
+            "descricao": "Você pode usar Intimidação para interrogar sem custo e em uma hora (veja Investigação)."
+        }
+    },
+    {
+        "id": "soldado",
+        "nome": "Soldado",
+        "descricao": "Você se alistou ou foi convocado para servir em um grande exército, recebendo treinamento em combate e equipamento militar. Depois de deixar a vida militar, tornou-se aventureiro.",
+        "itensIniciais": [
+            "Uma arma marcial",
+            "Um uniforme militar",
+            "Uma insígnia de seu exército"
+        ],
+        "periciasOpcoes": [
+            "FORTITUDE",
+            "GUERRA",
+            "LUTA",
+            "PONTARIA"
+        ],
+        "poderesGeraisOpcoes": [
+            {
+                "key": "poder_combate_escolha",
+                "nome": "Poder de combate à escolha",
+                "descricao": "Você pode escolher um poder de combate que cumpra todos os seus pré-requisitos."
+            }
+        ],
+        "poderUnico": {
+            "key": "influencia_militar",
+            "nome": "Influência Militar",
+            "descricao": "Você fez amigos nas forças armadas. Onde houver acampamentos ou bases militares, você pode conseguir hospedagem e informações para você e seus aliados."
+        }
+    },
+    {
+        "id": "amnesico",
+        "nome": "Amnésico",
+        "descricao": "Você perdeu a maior parte da memória. Sabe apenas o próprio nome ou nem isso. Talvez tenha alguns itens pessoais, mas nenhuma ideia de como os conseguiu — podem ser relíquias de família, presentes de um ente querido ou apenas coisas que pegou de viajantes mortos lá atrás. Você não sabe como recebeu seu treinamento; apenas tem uma intuição sobre aquilo que consegue fazer. Seus atuais companheiros são a única família que conhece. Talvez viajando com eles você descubra algo sobre seu passado.",
+        "itensIniciais": [
+            "Um ou mais itens (somando até T$ 500), aprovados pelo mestre, que podem ser uma pista misteriosa do seu passado"
+        ],
+        "qtdBeneficiosEscolha": 0,
+        "beneficiosEspeciais": "Em vez de dois benefícios de uma lista, você recebe uma perícia e um poder geral escolhidos pelo mestre, além do poder único Lembranças Graduais.",
+        "periciasOpcoes": [],
+        "poderesGeraisOpcoes": [],
+        "poderUnico": {
+            "key": "lembrancas_graduais",
+            "nome": "Lembranças Graduais",
+            "descricao": "Durante suas aventuras, em determinados momentos a critério do mestre, você pode fazer um teste de Sabedoria (CD 10) para reconhecer pessoas, criaturas ou lugares que tenha encontrado antes de perder a memória."
+        }
+    },
+    {
+        "id": "artesao",
+        "nome": "Artesão",
+        "descricao": "Do alfaiate habilidoso em costurar as vestes da nobreza ao armeiro que forja armas letais, você foi treinado por um parente, mestre ou guilda para fabricar itens importantes no mundo civilizado. Suas habilidades podem ter sido aprendidas para o trabalho, mas se mostraram úteis durante as aventuras.",
+        "itensIniciais": [
+            "Instrumentos de ofício (qualquer)",
+            "Um item que você possa fabricar de até T$ 50"
+        ],
+        "qtdBeneficiosEscolha": 2,
+        "periciasOpcoes": [
+            "OFICIO",
+            "VONTADE"
+        ],
+        "poderesGeraisOpcoes": [
+            {
+                "key": "sortudo",
+                "nome": "Sortudo",
+                "descricao": "Você pode gastar 3 PM para rolar novamente um teste recém realizado (apenas uma vez por teste)."
+            }
+        ],
+        "poderUnico": {
+            "key": "frutos_do_trabalho",
+            "nome": "Frutos do Trabalho",
+            "descricao": "No início de cada aventura, você recebe até 5 itens gerais que possa fabricar num valor total de até T$ 50. Esse valor aumenta para T$ 100 no patamar veterano, T$ 300 no heroico e T$ 500 no lenda."
+        }
+    },
+    {
+        "id": "artista",
+        "nome": "Artista",
+        "descricao": "Você possui talento, nasceu com um dom — pelo menos é o que outras pessoas gostam de pensar. Será verdade? Ou será que você apenas sentiu atração por certa forma de arte e treinou muito, muito mesmo? Enquanto o artesão fabrica itens mundanos, o artista produz entretenimento, alimento para o coração e a alma. Talvez você apenas saiba entoar belas canções, aprendidas na infância com pais amorosos, ou ouvindo fadas na floresta. Ou talvez seja um ator ou dançarino formado em alguma escola de artes prestigiada.",
+        "itensIniciais": [
+            "Um instrumento musical ou outro instrumento de trabalho artístico"
+        ],
+        "qtdBeneficiosEscolha": 2,
+        "periciasOpcoes": [
+            "ATUACAO",
+            "ENGANACAO"
+        ],
+        "poderesGeraisOpcoes": [
+            {
+                "key": "atraente",
+                "nome": "Atraente",
+                "descricao": "Você recebe +2 em testes de perícias baseadas em Carisma contra criaturas que possam se sentir atraídas por você."
+            },
+            {
+                "key": "torcida",
+                "nome": "Torcida",
+                "descricao": "Você recebe +2 em testes de perícia e Defesa quando houver pelo menos uma criatura torcendo por você em alcance curto."
+            }
+        ],
+        "poderUnico": {
+            "key": "dom_artistico",
+            "nome": "Dom Artístico",
+            "descricao": "Você pode usar Atuação para impressionar uma plateia e obter benefícios como sustento, pequenos favores ou gorjetas (veja a perícia Atuação)."
+        }
+    },
+    {
+        "id": "assistente_de_alquimista",
+        "nome": "Assistente de Alquimista",
+        "descricao": "Você trabalhou como aprendiz ou ajudante de um alquimista. Não era o trabalho mais fácil, limpo ou seguro do mundo. Exposição prolongada a substâncias e experimentos perigosos talvez tenham prejudicado sua saúde (ou despertado suas habilidades de classe...).",
+        "itensIniciais": [
+            "Instrumentos de ofício (alquimista)"
+        ],
+        "qtdBeneficiosEscolha": 2,
+        "periciasOpcoes": [
+            "OFICIO_ALQUIMISTA",
+            "MISTICISMO"
+        ],
+        "poderesGeraisOpcoes": [
+            {
+                "key": "veneficio",
+                "nome": "Venefício",
+                "descricao": "Você é treinado no uso de venenos, não corre risco de se envenenar acidentalmente ao manipulá-los e a CD para resistir aos venenos que usa aumenta em +2."
+            },
+            {
+                "key": "poder_da_tormenta_escolha",
+                "nome": "Poder da Tormenta à escolha",
+                "descricao": "Você pode escolher um poder da Tormenta cujos pré-requisitos cumpra."
+            }
+        ],
+        "poderUnico": {
+            "key": "esse_cheiro",
+            "nome": "Esse Cheiro...",
+            "descricao": "Você recebe +2 em Fortitude e detecta automaticamente a presença (mas não a localização ou natureza) de itens alquímicos em alcance curto."
+        }
+    },
+    {
+        "id": "batedor",
+        "nome": "Batedor",
+        "descricao": "Seja conduzindo caravanas através dos reinos, rastreando inimigos nos campos de batalha ou guiando exploradores nas vastidões selvagens, você aprendeu a achar caminhos e dirigir outros com segurança. Batedores podem surgir nas tribos mais primitivas, acompanhando grupos de caça, como profissionais sofisticados nas grandes cidades e forças militares ou ainda na perigosa atividade de caça-recompensas. Pouco importando a carreira que adotou mais tarde, como aventureiro, seu antigo treino acaba se revelando útil em numerosas ocasiões.",
+        "itensIniciais": [
+            "Barraca",
+            "Equipamento de viagem",
+            "Uma arma simples ou marcial de ataque à distância"
+        ],
+        "qtdBeneficiosEscolha": 2,
+        "periciasOpcoes": [
+            "FURTIVIDADE",
+            "PERCEPCAO",
+            "SOBREVIVENCIA"
+        ],
+        "poderesGeraisOpcoes": [
+            {
+                "key": "estilo_de_disparo",
+                "nome": "Estilo de Disparo",
+                "descricao": "Se estiver usando uma arma de disparo, você soma sua Destreza nas rolagens de dano."
+            },
+            {
+                "key": "sentidos_agucados",
+                "nome": "Sentidos Aguçados",
+                "descricao": "Você recebe +2 em Percepção e ignora camuflagem leve ao atacar alvos à distância."
+            }
+        ],
+        "poderUnico": {
+            "key": "a_prova_de_tudo",
+            "nome": "À Prova de Tudo",
+            "descricao": "Você não sofre penalidade em deslocamento e Sobrevivência por clima ruim e por terreno difícil natural."
+        }
+    },
+    {
+        "id": "capanga",
+        "nome": "Capanga",
+        "descricao": "Agilidade e esperteza são importantes no mundo do crime, mas não são tudo; às vezes é preciso esmurrar alguém. Por ser grande, forte ou mal-encarado, você acabou trabalhando como músculos para algum bandido, ou integrando um bando, quadrilha ou guilda de ladrões. Talvez você não fosse muito bom em bater carteiras nas ruas de Ahlen, mas sabia erguer alguém pelo tornozelo e sacudir até as moedas caírem. Hoje, como aventureiro, você provavelmente deixou essa época para trás — pelo menos até que alguém precise ser “convencido” a colaborar.",
+        "itensIniciais": [
+            "Tatuagem ou outro adereço de sua gangue (+1 em Intimidação)",
+            "Uma arma simples corpo a corpo"
+        ],
+        "qtdBeneficiosEscolha": 2,
+        "periciasOpcoes": [
+            "INTIMIDACAO",
+            "LUTA"
+        ],
+        "poderesGeraisOpcoes": [
+            {
+                "key": "poder_combate_escolha",
+                "nome": "Poder de combate à escolha",
+                "descricao": "Você pode escolher um poder de combate que cumpra todos os seus pré-requisitos."
+            }
+        ],
+        "poderUnico": {
+            "key": "confissao",
+            "nome": "Confissão",
+            "descricao": "Você pode usar Intimidação para interrogar sem custo e em uma hora (veja Investigação)."
+        }
+    },
+    {
+        "id": "charlatao",
+        "nome": "Charlatão",
+        "descricao": "Você sempre teve talento para resolver problemas com conversa, sincera ou nem tanto. Talvez tenha aprendido andando com más companhias. Por ser pequeno e fraco em meio a guerreiros truculentos, talvez fosse pura questão de sobrevivência. Ou foi tocado por Hyninn, Sszzaas ou outra entidade traiçoeira. Seja como for, após um pouco de diálogo, você percebe o que as pessoas mais querem ou temem, usando palavras para vencer obstáculos tão facilmente quanto espadas e magias. Ou melhor.",
+        "itensIniciais": [
+            "Estojo de disfarces",
+            "Joia falsificada (valor aparente de T$ 100, sem valor real)"
+        ],
+        "qtdBeneficiosEscolha": 2,
+        "periciasOpcoes": [
+            "ENGANACAO",
+            "JOGATINA"
+        ],
+        "poderesGeraisOpcoes": [
+            {
+                "key": "aparencia_inofensiva",
+                "nome": "Aparência Inofensiva",
+                "descricao": ""
+            },
+            {
+                "key": "sortudo",
+                "nome": "Sortudo",
+                "descricao": ""
+            }
+        ],
+        "poderUnico": {
+            "key": "alpinista_social",
+            "nome": "Alpinista Social",
+            "descricao": "Você pode substituir testes de Diplomacia por testes de Enganação."
+        }
+    },
+    {
+        "id": "circense",
+        "nome": "Circense",
+        "descricao": "Você treinou acrobacia, malabarismo, mágica ou outra forma de arte circense. Talvez tenha aprendido sozinho, durante as brincadeiras de infância. Talvez tenha sido ensinado por um ente querido, tornando essa arte uma forte ligação com seu passado. Ou ainda, é possível que tenha sido forçado a aprender seus truques para sobreviver nas ruas. De qualquer forma, são aptidões que podem ser úteis em suas aventuras.",
+        "itensIniciais": [
+            "Três bolas coloridas para malabarismo (+1 em Atuação)"
+        ],
+        "qtdBeneficiosEscolha": 3,
+        "periciasOpcoes": [
+            "ACROBACIA",
+            "ATUACAO",
+            "REFLEXOS"
+        ],
+        "poderesGeraisOpcoes": [
+            {
+                "key": "acrobatico",
+                "nome": "Acrobático",
+                "descricao": ""
+            },
+            {
+                "key": "torcida",
+                "nome": "Torcida",
+                "descricao": ""
+            }
+        ],
+        "poderUnico": {
+            "key": "truque_de_magica",
+            "nome": "Truque de Mágica",
+            "descricao": "Você pode lançar Explosão de Chamas, Hipnotismo e Queda Suave, mas apenas com o aprimoramento Truque. Esta não é uma habilidade mágica — os efeitos provêm de prestidigitação."
+        }
+    },
+    {
+        "id": "criminoso",
+        "nome": "Criminoso",
+        "descricao": "Fazer o bem é bonito, mas não enche barriga — pelo menos, assim você foi ensinado. Por necessidade, ambição ou apenas sem conhecer outra vida, você foi um bandido durante boa parte da juventude. Furtava bolsas, trapaceava em jogos de taverna, emboscava viajantes nas estradas ou até aceitava contratos para matar. Agia sozinho, com seu próprio bando, pertencia a uma guilda de ladrões. Tornar-se aventureiro talvez seja uma forma de expiar por seus crimes, ou apenas o passo seguinte; em vez de mercadores, roubar tesouros de dragões!",
+        "itensIniciais": [
+            "Estojo de disfarces ou gazua"
+        ],
+        "qtdBeneficiosEscolha": 2,
+        "periciasOpcoes": [
+            "ENGANACAO",
+            "FURTIVIDADE",
+            "LADINAGEM"
+        ],
+        "poderesGeraisOpcoes": [
+            {
+                "key": "veneficio",
+                "nome": "Venefício",
+                "descricao": ""
+            }
+        ],
+        "poderUnico": {
+            "key": "punguista",
+            "nome": "Punguista",
+            "descricao": "Você pode fazer testes de Ladinagem para sustento (como a perícia Ofício), mas em apenas um dia. Se passar, recebe o dobro do dinheiro, mas, se falhar, pode ter problemas com a lei (a critério do mestre)."
+        }
+    },
+    {
+        "id": "curandeiro",
+        "nome": "Curandeiro",
+        "descricao": "Que bom seria se a cura milagrosa dos clérigos estivesse ao alcance de todos! Talvez você tenha sido ajudante do curandeiro da vila, testemunhando quando ele tratava doenças e lesões sem conjurar qualquer magia. Ou teve um estudo formal e sofisticado de medicina no Colégio Real de Médicos em Salistick. De qualquer modo, você é treinado em curar com remédios e tratamentos naturais — algo sempre útil, mesmo quando há um clérigo por perto.",
+        "itensIniciais": [
+            "Bálsamo restaurador x2",
+            "Maleta de medicamentos"
+        ],
+        "qtdBeneficiosEscolha": 3,
+        "periciasOpcoes": [
+            "CURA",
+            "VONTADE"
+        ],
+        "poderesGeraisOpcoes": [
+            {
+                "key": "medicina",
+                "nome": "Medicina",
+                "descricao": ""
+            },
+            {
+                "key": "veneficio",
+                "nome": "Venefício",
+                "descricao": ""
+            }
+        ],
+        "poderUnico": {
+            "key": "medico_de_campo",
+            "nome": "Médico de Campo",
+            "descricao": "Você soma sua Sabedoria aos PV restaurados por suas habilidades e itens mundanos de cura."
+        }
+    },
+    {
+        "id": "eremita",
+        "nome": "Eremita",
+        "descricao": "Você passou parte da vida isolado, afastado da sociedade. Foi banido ainda criança, por nascer lefou ou com alguma deformidade da Tormenta. Ouviu um chamado dos deuses, buscando o isolamento para meditar sobre seu significado. Viveu enclausurado em um mosteiro, mantendo contato apenas com monges silenciosos. Ou foi praticante de artes arcanas proibidas, mantendo-se longe de olhares curiosos. A vida simples o tornou forte de corpo e espírito. Mas, em algum momento, você decidiu que bastava — ou teve sua tranquilidade interrompida.",
+        "itensIniciais": [
+            "Barraca",
+            "Equipamento de viagem"
+        ],
+        "qtdBeneficiosEscolha": 3,
+        "periciasOpcoes": [
+            "MISTICISMO",
+            "RELIGIAO",
+            "SOBREVIVENCIA"
+        ],
+        "poderesGeraisOpcoes": [
+            {
+                "key": "lobo_solitario",
+                "nome": "Lobo Solitário",
+                "descricao": ""
+            }
+        ],
+        "poderUnico": {
+            "key": "busca_interior",
+            "nome": "Busca Interior",
+            "descricao": "Quando você e seus companheiros estão diante de um mistério, incapazes de prosseguir, você pode gastar 1 PM para meditar sozinho durante algum tempo e receber uma dica do mestre."
+        }
+    },
+    {
+        "id": "escravo",
+        "nome": "Escravo",
+        "descricao": "De minotauros odiosos no Império de Tauron aos cruéis mestres subterrâneos de Trollkyrka, várias culturas praticam a escravidão. Você já nasceu escravo, fez parte de um povo derrotado na guerra ou foi capturado em alguma rua escura para depois despertar na jaula, em algum mercado clandestino? Encontrou uma chance de escapar, tornando-se agora um escravo foragido? Recebeu a liberdade como recompensa por realizar um grande favor a seu algoz? Foi resgatado por aventureiros que agora se tornaram sua nova família?",
+        "itensIniciais": [
+            "Algemas",
+            "Uma ferramenta pesada (mesmas estatísticas de uma maça)"
+        ],
+        "qtdBeneficiosEscolha": 3,
+        "periciasOpcoes": [
+            "ATLETISMO",
+            "FORTITUDE",
+            "FURTIVIDADE"
+        ],
+        "poderesGeraisOpcoes": [
+            {
+                "key": "vitalidade",
+                "nome": "Vitalidade",
+                "descricao": ""
+            }
+        ],
+        "poderUnico": {
+            "key": "desejo_de_liberdade",
+            "nome": "Desejo de Liberdade",
+            "descricao": "Ninguém voltará a torná-lo um escravo! Você recebe +5 em testes contra a manobra agarrar e efeitos de movimento."
+        }
+    },
+    {
+        "id": "estudioso",
+        "nome": "Estudioso",
+        "descricao": "Não importa se você já nasceu apaixonado por certo assunto, testemunhou um evento incrível que atiçou sua curiosidade ou se viu forçado a estudar por imposição familiar. Longos anos de sua vida foram gastos em meio a livros e pergaminhos. Da engenharia dos anões à geopolítica do Reinado, das táticas militares puristas aos sistemas de conjuração da Academia Arcana, da anatomia dos dragões aos enigmas cósmicos da Tormenta... em Arton não faltam campos a conquistar, segredos a desvendar. Agora, como aventureiro, você tem a chance de vivenciar aquilo que aprendeu e também auxiliar o grupo com o fruto de seus estudos.",
+        "itensIniciais": [
+            "Coleção de livros (+1 em Conhecimento, Guerra, Misticismo ou Nobreza, a sua escolha)"
+        ],
+        "qtdBeneficiosEscolha": 3,
+        "periciasOpcoes": [
+            "CONHECIMENTO",
+            "GUERRA",
+            "MISTICISMO"
+        ],
+        "poderesGeraisOpcoes": [
+            {
+                "key": "aparencia_inofensiva",
+                "nome": "Aparência Inofensiva",
+                "descricao": ""
+            },
+            {
+                "key": "presente_de_wynlla",
+                "nome": "Presente de Wynlla",
+                "descricao": ""
+            }
+        ],
+        "poderUnico": {
+            "key": "palpite_fundamentado",
+            "nome": "Palpite Fundamentado",
+            "descricao": "Você pode gastar 2 PM para substituir um teste de qualquer perícia originalmente baseada em Inteligência ou Sabedoria por um teste de Conhecimento."
+        }
+    },
+    {
+        "id": "fazendeiro",
+        "nome": "Fazendeiro",
+        "descricao": "Boa parte da população de Arton jamais conheceu outro modo de viver. Em algum lugar na perigosa transição entre os ermos e as cidades, você trabalhou duro em campos e fazendas. Cultivando a terra ou criando animais, viveu longos anos em contato com a natureza, orando e trabalhando por boas colheitas ou gado saudável, só ocasionalmente visitando povoados para negociar sua produção. Por que essa vida tranquila acabou? Sua família foi assassinada por goblins? Sua fazenda foi devastada por um dragão? Ou você apenas foi atraído pelo chamado da aventura?",
+        "itensIniciais": [
+            "Carroça",
+            "Ferramenta agrícola (mesmas estatísticas de uma lança)",
+            "Ração de Viagem",
+            "Animal não combativo (como uma galinha, porco ou ovelha)"
+        ],
+        "qtdBeneficiosEscolha": 2,
+        "periciasOpcoes": [
+            "ADESTRAMENTO",
+            "CAVALGAR",
+            "OFICIO",
+            "SOBREVIVENCIA"
+        ],
+        "poderesGeraisOpcoes": [
+            {
+                "key": "ginete",
+                "nome": "Ginete",
+                "descricao": ""
+            }
+        ],
+        "poderUnico": {
+            "key": "agua_no_feijao",
+            "nome": "Água no Feijão",
+            "descricao": "Você não sofre a penalidade de –5 e não gasta matéria prima adicional para fabricar pratos para cinco pessoas."
+        }
+    },
+    {
+        "id": "forasteiro",
+        "nome": "Forasteiro",
+        "descricao": "Você veio de longe. Sua cultura nativa é quase ou totalmente desconhecida no Reinado, tornando-o uma figura exótica, de hábitos estranhos. Você pertence a uma tribo perdida nas Montanhas Sanguinárias? Nasceu em uma bela cidade de cúpulas douradas no Deserto da Perdição? Navegou em navios audazes desde os Reinos de Moreania? Talvez você até tenha chegado de outro mundo, através de algum portal mágico. Será que conseguiu ajustar-se a este Reinado, agora chamando-o de lar? Ou procura até hoje o caminho de volta para casa?",
+        "itensIniciais": [
+            "Equipamento de viagem",
+            "Traje de Viagem Estrangeiro",
+            "Instrumento musical exótico (+1 em uma perícia de Carisma aprovada pelo mestre)"
+        ],
+        "qtdBeneficiosEscolha": 2,
+        "periciasOpcoes": [
+            "CAVALGAR",
+            "PILOTAGEM",
+            "SOBREVIVENCIA"
+        ],
+        "poderesGeraisOpcoes": [
+            {
+                "key": "lobo_solitario",
+                "nome": "Lobo Solitário",
+                "descricao": ""
+            }
+        ],
+        "poderUnico": {
+            "key": "cultura_exotica",
+            "nome": "Cultura Exótica",
+            "descricao": "Por sua diferente visão de mundo, você encontra soluções inesperadas. Você pode gastar 1 PM para fazer um teste de perícia somente treinada, mesmo sem ser treinado na perícia."
+        }
+    },
+    {
+        "id": "gladiador",
+        "nome": "Gladiador",
+        "descricao": "Combates de arena são um entretenimento popular em Arton — a ponto de atrair muitos jovens praticantes. Podem ser combates até a morte ou apenas encenações elaboradas ou ainda corridas de cavalo, arquearia e outros esportes menos sangrentos. Você se envolveu nesse mundo glamoroso por ser tradição em sua família, por admirar algum gladiador renomado ou apenas por sede de fama e fortuna. Um evento traumático, uma desilusão ou o puro tédio levou você a abandonar as arenas e aplausos, usando sua experiência em torneios para viver aventuras.",
+        "itensIniciais": [
+            "Uma arma marcial ou exótica",
+            "Item sem valor recebido de um admirador"
+        ],
+        "qtdBeneficiosEscolha": 3,
+        "periciasOpcoes": [
+            "ATUACAO",
+            "LUTA"
+        ],
+        "poderesGeraisOpcoes": [
+            {
+                "key": "atraente",
+                "nome": "Atraente",
+                "descricao": ""
+            },
+            {
+                "key": "torcida",
+                "nome": "Torcida",
+                "descricao": ""
+            }
+        ],
+        "poderUnico": {
+            "key": "pao_e_circo",
+            "nome": "Pão e Circo",
+            "descricao": "Por seu treino em combates de exibição, você sabe “bater sem machucar”. Pode escolher causar dano não letal sem sofrer a penalidade de –5."
+        }
+    },
+    {
+        "id": "guarda",
+        "nome": "Guarda",
+        "descricao": "Você atuou como agente da lei em uma vila ou cidade. Nem de longe uma profissão tão glamorosa ou emocionante quanto parece; boa parte de seu trabalho resumia-se a guardar um portão, fazer rondas tediosas ou recolher bêbados em tavernas. Pelo menos você recebeu algum treino em investigação e combate. Também tem consigo alguma boa arma, que “esqueceu” de devolver quando abandonou a milícia para se tornar aventureiro.",
+        "itensIniciais": [
+            "Apito",
+            "Insígnia da milícia",
+            "Uma arma marcial"
+        ],
+        "qtdBeneficiosEscolha": 3,
+        "periciasOpcoes": [
+            "INVESTIGACAO",
+            "LUTA",
+            "PERCEPCAO"
+        ],
+        "poderesGeraisOpcoes": [
+            {
+                "key": "investigador",
+                "nome": "Investigador",
+                "descricao": ""
+            },
+            {
+                "key": "poder_combate_escolha",
+                "nome": "Poder de combate à escolha",
+                "descricao": "Você pode escolher um poder de combate que cumpra todos os seus pré-requisitos."
+            }
+        ],
+        "poderUnico": {
+            "key": "detetive",
+            "nome": "Detetive",
+            "descricao": "Você pode gastar 1 PM para substituir testes de Percepção e Intuição por testes de Investigação até o fim da cena."
+        }
+    },
+    {
+        "id": "herdeiro",
+        "nome": "Herdeiro",
+        "descricao": "Você pertence a uma linhagem de nobres, mercadores, conjuradores, acadêmicos, assassinos, ou outra atividade tradicional em sua família — tão tradicional que, de você, não se espera outra coisa. Pode ser uma longa e antiquíssima ascendência, traçada até antes da Grande Batalha, ou você apenas é filho de uma importante personalidade. Talvez tenha nascido em alguma ordem de cavalaria em Bielefeld, ou uma influente estirpe da nobreza de Deheon, ou como filho de um célebre arquimago com planos de enviá-lo à Academia Arcana, ou até cresceu em um culto familiar secreto a um deus maligno. Graças a essa herança, recebeu treino e equipamento adequados. Mas você pretende mesmo seguir esse caminho?",
+        "itensIniciais": [
+            "Um símbolo de sua herança, como um anel de sinete ou manto cerimonial. Enquanto estiver com esse item, você pode ser reconhecido por sua descendência, o que pode ser bom... ou não!"
+        ],
+        "qtdBeneficiosEscolha": 2,
+        "periciasOpcoes": [
+            "MISTICISMO",
+            "NOBREZA",
+            "OFICIO"
+        ],
+        "poderesGeraisOpcoes": [
+            {
+                "key": "comandar",
+                "nome": "Comandar",
+                "descricao": ""
+            }
+        ],
+        "poderUnico": {
+            "key": "heranca",
+            "nome": "Herança",
+            "descricao": "Você herdou um item de preço de até T$ 1.000. Você pode escolher este poder duas vezes, para um item de até T$ 2.000."
+        }
+    },
+    {
+        "id": "heroi_campones",
+        "nome": "Herói Camponês",
+        "descricao": "Quando o povoado foi atacado por goblins, você empunhou o forcado para expulsá-los. Quando o estábulo pegou fogo, você se arriscou para salvar todos os animais. Quando todos temiam a mansão assombrada na colina, você encontrou a carta de amor perdida que trouxe descanso à alma torturada. Você era o campeão local, amado pelo povo, mas também destinado a feitos maiores. Houve comoção quando você partiu para uma vida de aventuras, mas ninguém deixou de orar por seu sucesso. Talvez você até tenha sido presenteado com alguma arma ou item há tempos guardado no povoado.",
+        "itensIniciais": [
+            "Instrumentos de ofício ou uma arma simples",
+            "Traje de plebeu"
+        ],
+        "qtdBeneficiosEscolha": 4,
+        "periciasOpcoes": [
+            "ADESTRAMENTO",
+            "OFICIO"
+        ],
+        "poderesGeraisOpcoes": [
+            {
+                "key": "sortudo",
+                "nome": "Sortudo",
+                "descricao": ""
+            },
+            {
+                "key": "surto_heroico",
+                "nome": "Surto Heroico",
+                "descricao": ""
+            },
+            {
+                "key": "torcida",
+                "nome": "Torcida",
+                "descricao": ""
+            }
+        ],
+        "poderUnico": {
+            "key": "coracao_heroico",
+            "nome": "Coração Heroico",
+            "descricao": "Você recebe +3 pontos de mana. Quando atinge um novo patamar (no 5º, 11º e 17º níveis), recebe +3 PM."
+        }
+    },
+    {
+        "id": "marujo",
+        "nome": "Marujo",
+        "descricao": "Você foi tripulante em uma embarcação — um barco pesqueiro, galé pirata, caravela exploradora, trirreme dos minotauros... — no Mar Negro, no Mar do Dragão-Rei ou mesmo ao longo do imenso Rio dos Deuses. Você também pode ter trabalhado em um veículo exótico, como um dirigível goblin, ou mesmo em uma embarcação mágica, como as naves vivas gog’magogue que viajam entre mundos!",
+        "itensIniciais": [
+            "T$ 2d6 (seu último salário)",
+            "Corda"
+        ],
+        "qtdBeneficiosEscolha": 2,
+        "periciasOpcoes": [
+            "ATLETISMO",
+            "JOGATINA",
+            "PILOTAGEM"
+        ],
+        "poderesGeraisOpcoes": [
+            {
+                "key": "acrobatico",
+                "nome": "Acrobático",
+                "descricao": ""
+            }
+        ],
+        "poderUnico": {
+            "key": "passagem_de_navio",
+            "nome": "Passagem de Navio",
+            "descricao": "Você consegue transporte marítimo para você e seus aliados, sem custos, desde que todos paguem com trabalho (passar em pelo menos um teste de perícia adequado durante a viagem)."
+        }
+    },
+    {
+        "id": "mateiro",
+        "nome": "Mateiro",
+        "descricao": "Nem todos em Arton vivem em cidades confortavelmente abastecidas por fazendeiros, mineiros ou pescadores — muitas comunidades ainda obtêm sustento através da caça. Você aprendeu cedo a abater animais selvagens para colocar comida na mesa, ou como esporte de gosto duvidoso. Se você caça com reverência a Allihanna ou apenas coleciona troféus com orgulho, a escolha é sua. De qualquer forma, para alguém habituado a flechar cervos e colocar armadilhas para coelhos, combater ogros, demônios e dragões seria apenas o passo seguinte.",
+        "itensIniciais": [
+            "Arco curto",
+            "Barraca",
+            "Equipamento de viagem",
+            "20 flechas"
+        ],
+        "qtdBeneficiosEscolha": 3,
+        "periciasOpcoes": [
+            "ATLETISMO",
+            "FURTIVIDADE",
+            "SOBREVIVENCIA"
+        ],
+        "poderesGeraisOpcoes": [
+            {
+                "key": "lobo_solitario",
+                "nome": "Lobo Solitário",
+                "descricao": ""
+            },
+            {
+                "key": "sentidos_aguçados",
+                "nome": "Sentidos Aguçados",
+                "descricao": ""
+            }
+        ],
+        "poderUnico": {
+            "key": "vendedor_de_carcaças",
+            "nome": "Vendedor de Carcaças",
+            "descricao": "Você pode extrair recursos de criaturas em um minuto, em vez de uma hora, e recebe +5 no teste."
+        }
+    },
+    {
+        "id": "membro_de_guilda",
+        "nome": "Membro de Guilda",
+        "descricao": "Você foi, ou ainda é, membro atuante em uma grande guilda — uma associação de artesãos, mercadores, magos, criminosos ou mesmo aventureiros. A guilda forneceu o treinamento e equipamento necessários para suas atividades, esperando que você seja útil em troca. Você se manteve fiel a seus patronos, cumprindo missões e colhendo os benefícios de pertencer a uma vasta organização? Ou deixou essa vida para trás, sendo agora desprezado ou até caçado por seus antigos mestres?",
+        "itensIniciais": [
+            "Gazua ou instrumentos de ofício"
+        ],
+        "qtdBeneficiosEscolha": 2,
+        "periciasOpcoes": [
+            "DIPLOMACIA",
+            "ENGANACAO",
+            "MISTICISMO",
+            "OFICIO"
+        ],
+        "poderesGeraisOpcoes": [
+            {
+                "key": "foco_em_pericia",
+                "nome": "Foco em Perícia",
+                "descricao": ""
+            }
+        ],
+        "poderUnico": {
+            "key": "rede_de_contatos",
+            "nome": "Rede de Contatos",
+            "descricao": "Graças à influência de sua guilda, você pode usar Diplomacia para interrogar sem custo e em uma hora (veja Investigação)."
+        }
+    },
+    {
+        "id": "mercador",
+        "nome": "Mercador",
+        "descricao": "Seguindo uma tradição de família, após herdar um estabelecimento ou apenas como um jovem empregado, você atuou como comerciante — pelo menos por algum tempo. Uma tenda modesta em algum grande mercado urbano? Uma caravana mercante cruzando o Reinado? Um belo bazar na prestigiada cidade voadora de Vectora? Após alguns anos de negociações e jornadas (nem tão tranquilas quanto outros imaginam), você talvez não tenha ficado rico, mas reuniu algum equipamento e dinheiro suficientes para começar carreira como aventureiro.",
+        "itensIniciais": [
+            "Carroça",
+            "Trobo",
+            "Mercadorias para vender no valor de T$ 100"
+        ],
+        "qtdBeneficiosEscolha": 3,
+        "periciasOpcoes": [
+            "DIPLOMACIA",
+            "INTUICAO",
+            "OFICIO"
+        ],
+        "poderesGeraisOpcoes": [
+            {
+                "key": "proficiencia",
+                "nome": "Proficiência",
+                "descricao": ""
+            },
+            {
+                "key": "sortudo",
+                "nome": "Sortudo",
+                "descricao": ""
+            }
+        ],
+        "poderUnico": {
+            "key": "negociacao",
+            "nome": "Negociação",
+            "descricao": "Você pode vender itens 10% mais caro (não cumulativo com barganha)."
+        }
+    },
+    {
+        "id": "minerador",
+        "nome": "Minerador",
+        "descricao": "Ser aventureiro é a profissão mais perigosa de todas; ser mineiro, talvez a segunda mais perigosa. Você mergulhou nas profundezas da terra atrás de metais necessários à civilização ou riquezas em gemas preciosas. Enquanto humanos e outras raças consideram essa vida um pesadelo, quase todos os anões acreditam ser a mais feliz das carreiras. A escuridão e o sufocamento dos subterrâneos talvez tenham sido assustadores, mas trouxeram a você bens materiais valiosos, bem como informação profunda (sem trocadilhos) sobre túneis e masmorras.",
+        "itensIniciais": [
+            "Gemas preciosas no valor de T$ 100",
+            "Picareta"
+        ],
+        "qtdBeneficiosEscolha": 3,
+        "periciasOpcoes": [
+            "ATLETISMO",
+            "FORTITUDE",
+            "OFICIO"
+        ],
+        "poderesGeraisOpcoes": [
+            {
+                "key": "ataque_poderoso",
+                "nome": "Ataque Poderoso",
+                "descricao": ""
+            },
+            {
+                "key": "sentidos_aguçados",
+                "nome": "Sentidos Aguçados",
+                "descricao": ""
+            }
+        ],
+        "poderUnico": {
+            "key": "escavador",
+            "nome": "Escavador",
+            "descricao": "Você se torna proficiente em picaretas, causa +1 de dano com elas e não é afetado por terreno difícil em masmorras e subterrâneos."
+        }
+    },
+    {
+        "id": "nomade",
+        "nome": "Nômade",
+        "descricao": "Até onde se lembra, você nunca pertenceu a um só lugar. Sua família viajava constantemente, como parte de alguma grande caravana comercial, peregrinação religiosa ou algum povo primitivo que nunca praticou agricultura. Ou talvez suas razões para viajar sejam bastante diferentes e pessoais — após a quase extinção de seu povo, muitos elfos temem criar raízes, enquanto a deusa Valkaria exige que seus devotos se mantenham sempre em viagem. Para você, habituado às estradas e sem laços com nenhuma terra, bastou um pequeno passo para se tornar aventureiro.",
+        "itensIniciais": [
+            "Bordão",
+            "Equipamento de viagem"
+        ],
+        "qtdBeneficiosEscolha": 3,
+        "periciasOpcoes": [
+            "CAVALGAR",
+            "PILOTAGEM",
+            "SOBREVIVENCIA"
+        ],
+        "poderesGeraisOpcoes": [
+            {
+                "key": "lobo_solitario",
+                "nome": "Lobo Solitário",
+                "descricao": ""
+            },
+            {
+                "key": "sentidos_aguçados",
+                "nome": "Sentidos Aguçados",
+                "descricao": ""
+            }
+        ],
+        "poderUnico": {
+            "key": "mochileiro",
+            "nome": "Mochileiro",
+            "descricao": "Seu limite de carga aumenta em 5 espaços."
+        }
+    },
+    {
+        "id": "pivete",
+        "nome": "Pivete",
+        "descricao": "Você era uma criança de rua. Não conheceu seus pais, foi abandonado por eles ou fugiu para evitar maus tratos. Sem muitas escolhas na vida, aprendeu cedo a sobreviver em grandes cidades, pedindo esmolas, roubando bolsas ou cumprindo pequenas tarefas para bandidos. Tornar-se aventureiro não parecia apenas um jeito de ficar rico e famoso, mas também a única chance de uma vida melhor. Talvez você não tenha as armaduras e mantos chiques de seus companheiros, mas sabe se virar nas ruas melhor que ninguém.",
+        "itensIniciais": [
+            "Gazua",
+            "Traje de plebeu",
+            "Um animal urbano (como um cão, gato, rato ou pombo)"
+        ],
+        "qtdBeneficiosEscolha": 3,
+        "periciasOpcoes": [
+            "FURTIVIDADE",
+            "INICIATIVA",
+            "LADINAGEM"
+        ],
+        "poderesGeraisOpcoes": [
+            {
+                "key": "acrobatico",
+                "nome": "Acrobático",
+                "descricao": ""
+            },
+            {
+                "key": "aparencia_inofensiva",
+                "nome": "Aparência Inofensiva",
+                "descricao": ""
+            }
+        ],
+        "poderUnico": {
+            "key": "quebra_galho",
+            "nome": "Quebra-Galho",
+            "descricao": "Em cidades ou metrópoles, você pode comprar qualquer item mundano não superior por metade do preço normal. Esses itens não podem ser matérias-primas e não podem ser revendidos (são velhos, sujos, furtados...)."
+        }
+    },
+    {
+        "id": "refugiado",
+        "nome": "Refugiado",
+        "descricao": "Neste mundo assolado por tantas guerras e tragédias, você acabou sobrevivendo a alguma delas. Sendo elfo, estava presente durante a sofrida queda de Lenórienn. Escapou à destruição de Tamu-ra. Teve sorte em sair do caminho de Mestre Arsenal, conseguiu esconder-se das forças puristas ou testemunhou a chegada da Flecha de Fogo e viveu para contar a história. Trauma e privações talvez tenham tornado você amargo, sombrio, embrutecido... mas também um sobrevivente tenaz, acostumado a uma vida perigosa.",
+        "itensIniciais": [
+            "Um item estrangeiro de até T$ 100"
+        ],
+        "qtdBeneficiosEscolha": 3,
+        "periciasOpcoes": [
+            "FORTITUDE",
+            "REFLEXOS",
+            "VONTADE"
+        ],
+        "poderesGeraisOpcoes": [
+            {
+                "key": "vontade_de_ferro",
+                "nome": "Vontade de Ferro",
+                "descricao": ""
+            }
+        ],
+        "poderUnico": {
+            "key": "estoico",
+            "nome": "Estoico",
+            "descricao": "Sua condição de descanso é uma categoria acima do padrão pela situação (normal em condições ruins, confortável em condições normais e luxuosa em condições confortáveis ou melhores). Veja as regras de recuperação na página 106."
+        }
+    },
+    {
+        "id": "seguidor",
+        "nome": "Seguidor",
+        "descricao": "Você não nasceu herói, mas viveu algum tempo na companhia de um. Pode ter sido escudeiro de um cavaleiro de Khalmyr, garoto de recados para um ladino, criado de um nobre... enfim, um ajudante para um aventureiro de verdade. Durante esse tempo adquiriu aprendizado valioso, testemunhou eventos incríveis, mas você não seria um seguidor para sempre. Como ocorreu a separação? Você apenas disse adeus e trilhou seu próprio caminho? Seu mestre desapareceu de forma misteriosa ou foi assassinado diante de seus olhos? Você ficou com parte de seus itens, como presente ou lembrança?",
+        "itensIniciais": [
+            "Um item recebido de seu mestre de até T$ 100"
+        ],
+        "qtdBeneficiosEscolha": 2,
+        "periciasOpcoes": [
+            "ADESTRAMENTO",
+            "OFICIO"
+        ],
+        "poderesGeraisOpcoes": [
+            {
+                "key": "proficiencia",
+                "nome": "Proficiência",
+                "descricao": "Você recebe proficiência com uma categoria de armadura (leves, pesadas ou escudos) ou de armas (marciais, exóticas ou de fogo)."
+            },
+            {
+                "key": "surto_heroico",
+                "nome": "Surto Heroico",
+                "descricao": "Uma vez por rodada, você pode gastar 5 PM para realizar uma ação padrão ou de movimento adicional no seu turno."
+            }
+        ],
+        "poderUnico": {
+            "key": "antigo_mestre",
+            "nome": "Antigo Mestre",
+            "descricao": "Você ainda mantém contato com o herói que costumava servir. Uma vez por aventura, ele surge para ajudá-lo por uma cena. Ele é um parceiro mestre de um tipo a sua escolha (definido ao obter este poder) que não conta em seu limite de aliados."
+        }
+    },
+    {
+        "id": "selvagem",
+        "nome": "Selvagem",
+        "descricao": "Você nasceu em uma tribo de bárbaros incultos ou tem uma origem bem mais exótica. Perdeu-se dos pais verdadeiros em alguma região remota, sobrevivendo graças aos cuidados de um eremita, ou criado por animais, ou por pura bondade dos deuses. Você pode nem mesmo ter nascido de pais humanoides — talvez seja cria de dragões, demônios ou deuses, com poderes a serem revelados no momento certo. Será que você ainda teme a civilização, assustando-se com uma simples fogueira? Ou já aprendeu algumas coisas, graças a seus novos companheiros?",
+        "itensIniciais": [
+            "Uma arma simples",
+            "Um pequeno animal de estimação como um pássaro ou esquilo"
+        ],
+        "qtdBeneficiosEscolha": 2,
+        "periciasOpcoes": [
+            "PERCEPCAO",
+            "REFLEXOS",
+            "SOBREVIVENCIA"
+        ],
+        "poderesGeraisOpcoes": [
+            {
+                "key": "lobo_solitario",
+                "nome": "Lobo Solitário",
+                "descricao": "Você recebe +1 em testes de perícia e Defesa se não houver nenhum aliado em alcance curto."
+            },
+            {
+                "key": "vitalidade",
+                "nome": "Vitalidade",
+                "descricao": "Você recebe +1 PV por nível de personagem e +2 em testes de Fortitude."
+            }
+        ],
+        "poderUnico": {
+            "key": "vida_rustica",
+            "nome": "Vida Rústica",
+            "descricao": "Você come coisas que fariam um avestruz vomitar (sendo imune a efeitos prejudiciais de itens ingeríveis) e também consegue descansar nos lugares mais desconfortáveis (mesmo dormindo ao relento, sua recuperação de PV e PM nunca é inferior a seu próprio nível)."
+        }
+    },
+    {
+        "id": "taverneiro",
+        "nome": "Taverneiro",
+        "descricao": "Não é incomum que heróis aposentados se tornem donos de tavernas ou estalagens, mas o contrário também pode ocorrer. Você foi dono, filho do dono ou empregado em algum lugar frequentado por aventureiros — esses tipos sempre cheios de ouro e bravatas, atiçando sua ambição. Claro, eles nem sempre mencionam os horrores, amputações e mortes! Ainda assim, parece bem melhor que a vida atrás do balcão, limpando canecas sujas. Você ouviu todas as grandes histórias, trocou socos em algumas brigas e até ganhou uma lembrança ou outra de algum herói bêbado.",
+        "itensIniciais": [
+            "Rolo de macarrão ou martelo de carne (mesmas estatísticas de uma clava)",
+            "Uma panela",
+            "Um avental",
+            "Uma caneca",
+            "Um pano sujo"
+        ],
+        "qtdBeneficiosEscolha": 2,
+        "periciasOpcoes": [
+            "DIPLOMACIA",
+            "JOGATINA",
+            "OFICIO_COZINHEIRO"
+        ],
+        "poderesGeraisOpcoes": [
+            {
+                "key": "proficiencia",
+                "nome": "Proficiência",
+                "descricao": "Você recebe proficiência com uma categoria de armadura (leves, pesadas ou escudos) ou de armas (marciais, exóticas ou de fogo)."
+            },
+            {
+                "key": "vitalidade",
+                "nome": "Vitalidade",
+                "descricao": "Você recebe +1 PV por nível de personagem e +2 em testes de Fortitude."
+            }
+        ],
+        "poderUnico": {
+            "key": "gororoba",
+            "nome": "Gororoba",
+            "descricao": "Você não sofre a penalidade de –5 para fabricar um prato especial adicional."
+        }
+    },
+    {
+        "id": "trabalhador",
+        "nome": "Trabalhador",
+        "descricao": "Nenhum glamour aqui, apenas trabalho braçal pesado. De origem humilde, sem grandes chances na vida, você trabalhou duro desde muito jovem. Transportou pedras na construção de templos e castelos, carregou sacas de grãos em fazendas, empilhou cargas em portos, puxou arado feito um animal de tração. Talvez sua vida tenha sido um pouco melhor, como servo em um palácio. Ou muito pior, arrastando ou queimando corpos em campos de batalha. Não é surpresa que a carreira como aventureiro, mesmo perigosa, tenha parecido muito mais atraente.",
+        "itensIniciais": [
+            "Uma ferramenta pesada (mesmas estatísticas de uma maça ou lança, a sua escolha)"
+        ],
+        "qtdBeneficiosEscolha": 2,
+        "periciasOpcoes": [
+            "ATLETISMO",
+            "FORTITUDE"
+        ],
+        "poderesGeraisOpcoes": [
+            {
+                "key": "atletico",
+                "nome": "Atlético",
+                "descricao": "Você recebe +2 em Atletismo e +3m no seu deslocamento."
+            },
+            {
+                "key": "vitalidade",
+                "nome": "Vitalidade",
+                "descricao": "Você recebe +1 PV por nível de personagem e +2 em testes de Fortitude."
+            }
+        ],
+        "poderUnico": {
+            "key": "esforcado",
+            "nome": "Esforçado",
+            "descricao": "Você não teme trabalho duro, nem prazos apertados. Você recebe um bônus de +2 em todos os testes de perícias estendidos (incluindo perigos complexos)."
+        }
+    }
+]

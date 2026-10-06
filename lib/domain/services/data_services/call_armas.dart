@@ -6,7 +6,7 @@ class BancoDeArmas {
   static List<Arma> _dados = [];
 
   static Future<void> carregar() async {
-    final raw = await rootBundle.loadString('assets/data/banco_armas.json');
+    final raw = await rootBundle.loadString('assets/data/equipment/banco_armas.json');
     final List<dynamic> jsonList = jsonDecode(raw);
 
     _dados = jsonList

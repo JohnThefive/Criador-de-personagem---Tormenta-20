@@ -9,7 +9,7 @@ class BancoDeClasses {
 
   /// Carrega as classes a partir do arquivo JSON nos assets
   static Future<void> carregar() async {
-    final raw = await rootBundle.loadString('assets/data/banco_classe.json');
+    final raw = await rootBundle.loadString('assets/data/classes_data/banco_classe.json');
     final List<dynamic> jsonList = jsonDecode(raw);
 
     _dados = jsonList
@@ -28,7 +28,7 @@ class BancoDeClasses {
   static List<Classe> get todas {
     if (_dados.isEmpty) {
       try {
-        final file = File('assets/data/banco_classe.json');
+        final file = File('assets/data/classes_data/banco_classe.json');
         if (file.existsSync()) {
           final raw = file.readAsStringSync();
           final List<dynamic> jsonList = jsonDecode(raw);
