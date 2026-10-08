@@ -7,7 +7,8 @@ import '../entities/atributos.dart';
 import 'data_services/call_racas.dart';
 import '../services/data_services/call_classes.dart';
 import 'data_services/call_origens.dart';
-import 'banco_divindades.dart';
+import 'data_services/call_divindades.dart';
+import '../entities/divindade.dart';
 import 'data_services/call_poderes.dart';
 import 'data_services/call_armas.dart';
 import 'data_services/call_armaduras.dart';
@@ -96,7 +97,11 @@ class PersonagemStorageService {
       'racaId': p.raca?.id,
       'origemId': p.origem?.id,
       'divindadeId': p.divindade?.id,
+      'poderesConcedidosKeys':
+          p.poderesConcedidos.map((pod) => pod.key).toList(),
       'poderConcedidoKey': p.poderConcedido?.key,
+      'canalizacaoEnergia': p.canalizacaoEnergia?.name,
+      'punicaoDivinaAtiva': p.punicaoDivinaAtiva,
       'itensInventario': p.itensInventario,
       'armasKeys': p.armas.map((a) => a.key).toList(),
       'armaduraKey': p.armaduraEquipada?.key,
@@ -152,12 +157,39 @@ class PersonagemStorageService {
         ? BancoDeDivindades.getById(map['divindadeId'])
         : null;
 
-    Poder? poderConcedido;
-    if (divindade != null && map['poderConcedidoKey'] != null) {
-      poderConcedido = divindade.poderesConcedidos
-          .where((p) => p.key == map['poderConcedidoKey'])
-          .firstOrNull;
+    final List<Poder> poderesConcedidosList = [];
+    if (divindade != null) {
+      if (map['poderesConcedidosKeys'] != null) {
+        final List<dynamic> keysRaw = map['poderesConcedidosKeys'];
+        for (var k in keysRaw) {
+          final pod = divindade.poderesConcedidos
+              .where((p) => p.key == k)
+              .firstOrNull;
+          if (pod != null &&
+              !poderesConcedidosList.any((p) => p.key == pod.key)) {
+            poderesConcedidosList.add(pod);
+          }
+        }
+      } else if (map['poderConcedidoKey'] != null) {
+        final pod = divindade.poderesConcedidos
+            .where((p) => p.key == map['poderConcedidoKey'])
+            .firstOrNull;
+        if (pod != null) {
+          poderesConcedidosList.add(pod);
+        }
+      }
     }
+
+    TipoEnergia? canalizacao;
+    if (map['canalizacaoEnergia'] != null) {
+      canalizacao = TipoEnergia.values
+          .where((e) => e.name == map['canalizacaoEnergia'])
+          .firstOrNull;
+    } else if (divindade != null) {
+      canalizacao = divindade.energiaCanalizada;
+    }
+
+    final bool punicaoDivina = map['punicaoDivinaAtiva'] as bool? ?? false;
 
     // Reconstrói classes com caminho e poderes escolhidos
     List<ClasseDoPersonagem> classesList = [];
@@ -261,7 +293,9 @@ class PersonagemStorageService {
       classes: classesList,
       origem: origem,
       divindade: divindade,
-      poderConcedido: poderConcedido,
+      poderesConcedidos: poderesConcedidosList,
+      canalizacaoEnergia: canalizacao,
+      punicaoDivinaAtiva: punicaoDivina,
       itensInventario: List<String>.from(
         map['itensInventario'] ?? (origem?.itensIniciais ?? const []),
       ),

@@ -11,6 +11,7 @@ import 'package:t20_creator/domain/services/data_services/call_companheiros.dart
 import 'package:t20_creator/domain/services/data_services/call_efeitos_golpe_pessoal.dart';
 import 'package:t20_creator/domain/services/data_services/call_regras_engenhocas.dart';
 import 'package:t20_creator/domain/services/data_services/call_montaria_sagrada.dart';
+import 'package:t20_creator/domain/services/data_services/call_divindades.dart';
 
 // Importe seus arquivos
 import 'presentation/controllers/home_cubit.dart';
@@ -30,6 +31,7 @@ void main() async {
   await BancoDeEfeitosGolpePessoal.carregar();
   await BancoDeRegrasEngenhocas.carregar();
   await BancoDeRegrasMontariaSagrada.carregar();
+  await BancoDeDivindades.carregar();
   runApp(const T20App());
 }
 

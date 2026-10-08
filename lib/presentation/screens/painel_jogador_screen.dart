@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:t20_creator/domain/entities/classe_do_personagem.dart';
 import '../../domain/entities/classe.dart';
 import '../../domain/entities/personagem.dart';
+import '../../domain/entities/divindade.dart';
 import '../../domain/entities/companheiro_animal.dart';
 import '../../domain/entities/montaria_sagrada.dart';
 import '../../domain/services/data_services/call_formas_selvagens.dart';
@@ -345,10 +346,87 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
     );
 
     if (ajuste != null && mounted) {
+      if (_personagem.punicaoDivinaAtiva && ajuste > 0) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              'O personagem está sob Punição Divina e não pode recuperar Pontos de Mana!',
+            ),
+            backgroundColor: Color(0xFFB71C1C),
+          ),
+        );
+        return;
+      }
       if (ajuste < 0) {
         _atualizarPersonagem(_personagem.gastarPM(-ajuste));
       } else if (ajuste > 0) {
         _atualizarPersonagem(_personagem.recuperarPM(ajuste));
+      }
+    }
+  }
+
+  Future<void> _mostrarDialogoPunicaoDivina() async {
+    final sobPunicao = _personagem.punicaoDivinaAtiva;
+    final confirmar = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Row(
+          children: [
+            Icon(
+              sobPunicao ? Icons.verified : Icons.warning_amber_rounded,
+              color: sobPunicao ? Colors.green[700] : const Color(0xFFD32F2F),
+            ),
+            const SizedBox(width: 8),
+            Text(sobPunicao ? 'Remover Punição Divina' : 'Aplicar Punição Divina'),
+          ],
+        ),
+        content: Text(
+          sobPunicao
+              ? 'O personagem cumpriu a penitência exigida pela divindade ${_personagem.divindade?.nome ?? ""}?\n\n'
+                  'Ao confirmar, a punição será revogada, permitindo que o herói volte a recuperar Pontos de Mana normalmente e reative seus poderes concedidos.'
+              : 'ATENÇÃO (Ação do Mestre):\n\n'
+                  'O personagem cometeu uma violação grave de suas Obrigações e Restrições perante ${_personagem.divindade?.nome ?? "sua divindade"}.\n\n'
+                  'Efeitos mecânicos oficiais (T20 JDA):\n'
+                  '• Todos os Pontos de Mana (PM) atuais são reduzidos a 0 imediatamente.\n'
+                  '• A recuperação de PM fica bloqueada (descanso ou itens não recuperam PM).\n'
+                  '• Todos os poderes concedidos são desativados até que a penitência seja cumprida.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: const Text('CANCELAR'),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: sobPunicao ? Colors.green[700] : const Color(0xFFD32F2F),
+              foregroundColor: Colors.white,
+            ),
+            onPressed: () => Navigator.pop(ctx, true),
+            child: Text(sobPunicao ? 'REVOGAR PUNIÇÃO' : 'APLICAR PUNIÇÃO'),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmar == true && mounted) {
+      if (sobPunicao) {
+        _atualizarPersonagem(_personagem.removerPunicaoDivina());
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Penitência aceita! Punição divina revogada.'),
+            backgroundColor: Colors.green,
+          ),
+        );
+      } else {
+        _atualizarPersonagem(_personagem.aplicarPunicaoDivina());
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              'Punição divina aplicada! PM zerado e poderes concedidos inativos.',
+            ),
+            backgroundColor: Color(0xFFD32F2F),
+          ),
+        );
       }
     }
   }
@@ -1837,6 +1915,55 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
     return ListView(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       children: [
+        // ALERTA DE PUNIÇÃO DIVINA ATIVA
+        if (_personagem.punicaoDivinaAtiva)
+          Container(
+            margin: const EdgeInsets.only(bottom: 12),
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: Colors.red.shade50,
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: Colors.red.shade400, width: 1.5),
+            ),
+            child: Row(
+              children: [
+                Icon(Icons.warning_rounded, color: Colors.red.shade900, size: 24),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Sob Punição Divina (${_personagem.divindade?.nome ?? "Divindade"})',
+                        style: TextStyle(
+                          color: Colors.red.shade900,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 13,
+                        ),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        'PM zerado e bloqueado. Poderes concedidos inativos até penitência.',
+                        style: TextStyle(
+                          color: const Color(0xFFB71C1C),
+                          fontSize: 11,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                TextButton(
+                  onPressed: _mostrarDialogoPunicaoDivina,
+                  style: TextButton.styleFrom(
+                    foregroundColor: Colors.red.shade900,
+                    padding: const EdgeInsets.symmetric(horizontal: 6),
+                  ),
+                  child: const Text('DETALHES', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold)),
+                ),
+              ],
+            ),
+          ),
+
         // BARRA DE EXPERIÊNCIA ATUAL
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -2405,25 +2532,312 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
           const Divider(height: 24),
         ],
 
-        // Divindade
+        // Divindade e Devoção
         if (_personagem.divindade != null) ...[
-          Text(
-            'Divindade: ${_personagem.divindade!.nome}',
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-              color: Color(0xFFD32F2F),
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: _personagem.punicaoDivinaAtiva
+                    ? Colors.red.shade700
+                    : Colors.red.shade200,
+                width: _personagem.punicaoDivinaAtiva ? 2 : 1,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.05),
+                  blurRadius: 4,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            _personagem.divindade!.nome,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              color: Color(0xFFD32F2F),
+                            ),
+                          ),
+                          Text(
+                            _personagem.divindade!.titulo,
+                            style: TextStyle(
+                              fontSize: 13,
+                              color: Colors.grey.shade700,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    if (_personagem.ehDevotoFiel)
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: Colors.amber.shade100,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: Colors.amber.shade700),
+                        ),
+                        child: Text(
+                          'Devoto Fiel',
+                          style: TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.amber.shade900,
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                Wrap(
+                  spacing: 6,
+                  runSpacing: 6,
+                  children: [
+                    Chip(
+                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      padding: EdgeInsets.zero,
+                      labelPadding: const EdgeInsets.symmetric(horizontal: 8),
+                      backgroundColor: Colors.grey.shade100,
+                      avatar: const Icon(Icons.colorize, size: 14, color: Colors.brown),
+                      label: Text(
+                        'Arma: ${_personagem.divindade!.armaPreferida}',
+                        style: const TextStyle(fontSize: 11),
+                      ),
+                    ),
+                    if (_personagem.canalizacaoEnergia != null)
+                      Chip(
+                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        padding: EdgeInsets.zero,
+                        labelPadding: const EdgeInsets.symmetric(horizontal: 8),
+                        backgroundColor: _personagem.canalizacaoEnergia == TipoEnergia.positiva
+                            ? Colors.green.shade50
+                            : Colors.purple.shade50,
+                        avatar: Icon(
+                          _personagem.canalizacaoEnergia == TipoEnergia.positiva
+                              ? Icons.favorite
+                              : Icons.dark_mode,
+                          size: 14,
+                          color: _personagem.canalizacaoEnergia == TipoEnergia.positiva
+                              ? Colors.green.shade700
+                              : Colors.purple.shade700,
+                        ),
+                        label: Text(
+                          'Energia ${_personagem.canalizacaoEnergia == TipoEnergia.positiva ? "Positiva" : "Negativa"}',
+                          style: TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.bold,
+                            color: _personagem.canalizacaoEnergia == TipoEnergia.positiva
+                                ? Colors.green.shade900
+                                : Colors.purple.shade900,
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+
+                // Alerta de Punição Divina Ativa
+                if (_personagem.punicaoDivinaAtiva) ...[
+                  const SizedBox(height: 12),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.red.shade50,
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: Colors.red.shade400, width: 1.5),
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Icon(Icons.warning_rounded, color: Colors.red.shade900, size: 24),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'SOB PUNIÇÃO DIVINA DO MESTRE',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.red.shade900,
+                                  fontSize: 13,
+                                ),
+                              ),
+                              const SizedBox(height: 2),
+                              Text(
+                                'O herói violou as obrigações sagradas. Seus PM atuais foram reduzidos a 0, '
+                                'a recuperação de PM está bloqueada e todos os poderes concedidos estão desativados '
+                                'até que uma penitência seja cumprida.',
+                                style: TextStyle(
+                                  fontSize: 11,
+                                  color: const Color(0xFFB71C1C),
+                                  height: 1.3,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+
+                const SizedBox(height: 12),
+                // Botão de Gestão da Punição Divina (Mestre)
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: OutlinedButton.icon(
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: _personagem.punicaoDivinaAtiva
+                          ? Colors.green.shade700
+                          : Colors.red.shade800,
+                      side: BorderSide(
+                        color: _personagem.punicaoDivinaAtiva
+                            ? Colors.green.shade700
+                            : Colors.red.shade300,
+                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                      textStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                    ),
+                    onPressed: _mostrarDialogoPunicaoDivina,
+                    icon: Icon(
+                      _personagem.punicaoDivinaAtiva
+                          ? Icons.verified
+                          : Icons.gavel,
+                      size: 16,
+                    ),
+                    label: Text(
+                      _personagem.punicaoDivinaAtiva
+                          ? 'Penitência Cumprida (Revogar)'
+                          : 'Aplicar Punição Divina',
+                    ),
+                  ),
+                ),
+
+                const Divider(height: 20),
+                const Text(
+                  'Obrigações & Restrições:',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                ),
+                const SizedBox(height: 4),
+                ..._personagem.divindade!.obrigacoesERestricoes.map(
+                  (regra) => Padding(
+                    padding: const EdgeInsets.only(bottom: 4),
+                    child: Text(
+                      '• $regra',
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.grey.shade800,
+                        height: 1.25,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
-          if (_personagem.poderConcedido != null)
-            Card(
-              margin: const EdgeInsets.only(top: 8, bottom: 16),
-              child: ListTile(
-                title: Text(
-                  _personagem.poderConcedido!.nome,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
+
+          const SizedBox(height: 14),
+          const Text(
+            'Poderes Concedidos:',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 15,
+              color: Colors.black87,
+            ),
+          ),
+          const SizedBox(height: 6),
+
+          if (_personagem.poderesConcedidos.isEmpty)
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 4),
+              child: Text(
+                'Nenhum poder concedido associado.',
+                style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
+              ),
+            )
+          else
+            ..._personagem.poderesConcedidos.map(
+              (p) => Card(
+                margin: const EdgeInsets.only(bottom: 8),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  side: BorderSide(
+                    color: _personagem.punicaoDivinaAtiva
+                        ? Colors.red.shade300
+                        : Colors.grey.shade300,
+                  ),
                 ),
-                subtitle: Text(_personagem.poderConcedido!.descricao),
+                color: _personagem.punicaoDivinaAtiva
+                    ? Colors.red.shade50.withValues(alpha: 0.5)
+                    : Colors.white,
+                child: ListTile(
+                  dense: true,
+                  leading: Icon(
+                    _personagem.punicaoDivinaAtiva
+                        ? Icons.block
+                        : Icons.auto_awesome,
+                    color: _personagem.punicaoDivinaAtiva
+                        ? Colors.red.shade800
+                        : Colors.amber.shade800,
+                    size: 22,
+                  ),
+                  title: Row(
+                    children: [
+                      Text(
+                        p.nome,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: _personagem.punicaoDivinaAtiva
+                              ? Colors.red.shade900
+                              : Colors.black87,
+                          decoration: _personagem.punicaoDivinaAtiva
+                              ? TextDecoration.lineThrough
+                              : null,
+                        ),
+                      ),
+                      if (_personagem.punicaoDivinaAtiva) ...[
+                        const SizedBox(width: 6),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                          decoration: BoxDecoration(
+                            color: Colors.red.shade100,
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: Text(
+                            'INATIVO',
+                            style: TextStyle(
+                              fontSize: 9,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.red.shade900,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ],
+                  ),
+                  subtitle: Text(
+                    p.descricao,
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: _personagem.punicaoDivinaAtiva
+                          ? Colors.grey.shade600
+                          : Colors.grey.shade800,
+                    ),
+                  ),
+                ),
               ),
             ),
           const Divider(height: 24),

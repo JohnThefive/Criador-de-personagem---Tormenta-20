@@ -1,0 +1,902 @@
+{
+    "divindades": [
+        {
+            "id": "khalmyr",
+            "nome": "Khalmyr",
+            "titulo": "O Deus da Justiça e da Ordem",
+            "simboloSagrado": "Uma espada sobre uma balança de dois pratos",
+            "canalizacaoPermitida": "apenasPositiva",
+            "armaPreferidaId": "Espada Longa",
+            "crencasObjetivos": "Líder tradicional do Panteão, Khalmyr personifica a justiça, a ordem, a honra e as leis. Seus seguidores são paladinos, juízes, nobres e guerreiros honrados que buscam trazer estabilidade e paz a Arton.",
+            "obrigacoesERestricoes": [
+                "Você é proibido de mentir, trapacear, roubar ou desobedecer uma lei justa.",
+                "Nunca pode atacar um oponente indefeso, desarmado ou pelas costas.",
+                "Penalidade: Se quebrar estas regras, você perde todos os seus Pontos de Mana e seus poderes concedidos ficam inativos até realizar uma penitência aceita pelo mestre."
+            ],
+            "classesPermitidas": [],
+            "poderesConcedidosIds": [
+                "coragem_total",
+                "dom_da_verdade",
+                "espada_justiceira"
+            ],
+            "poderesConcedidos": [
+                {
+                    "key": "coragem_total",
+                    "nome": "Coragem Total",
+                    "descricao": "Você é imune a efeitos de medo, mágicos ou não."
+                },
+                {
+                    "key": "dom_da_verdade",
+                    "nome": "Dom da Verdade",
+                    "descricao": "Você pode gastar 1 PM para receber +5 em testes de Intuição para perceber mentiras até o fim da cena."
+                },
+                {
+                    "key": "espada_justiceira",
+                    "nome": "Espada Justiceira",
+                    "descricao": "Você pode gastar 1 PM para fazer sua arma corpo a corpo causar +1d6 de dano de essência até o fim do combate."
+                }
+            ]
+        },
+        {
+            "id": "valkaria",
+            "nome": "Valkaria",
+            "titulo": "A Deusa da Ambição e dos Aventureiros",
+            "simboloSagrado": "Uma estátua de mulher com mãos acorrentadas erguidas",
+            "canalizacaoPermitida": "apenasPositiva",
+            "armaPreferidaId": "Chicote",
+            "crencasObjetivos": "Criadora da humanidade, Valkaria incentiva a superação de limites, a exploração do desconhecido e a busca incessante pela glória. É a deusa suprema dos aventureiros e de quem não aceita o destino imposto.",
+            "obrigacoesERestricoes": [
+                "Você não pode recusar um convite para uma aventura ou uma missão heroica legítima.",
+                "Nunca pode permanecer no mesmo vilarejo ou cidade por mais de um mês consecutivo.",
+                "Penalidade: Se violar estas obrigações, perde todos os seus Pontos de Mana e poderes concedidos até realizar uma penitência em nome de Valkaria."
+            ],
+            "classesPermitidas": [],
+            "poderesConcedidosIds": [
+                "alpinista_social",
+                "armas_da_ambicao",
+                "liberdade_divina"
+            ],
+            "poderesConcedidos": [
+                {
+                    "key": "alpinista_social",
+                    "nome": "Alpinista Social",
+                    "descricao": "Você pode usar seu Carisma no lugar de Sabedoria em testes de perícia e recebe +2 em testes de Diplomacia com figuras de autoridade."
+                },
+                {
+                    "key": "armas_da_ambicao",
+                    "nome": "Armas da Ambição",
+                    "descricao": "Você recebe +1 em testes de ataque e na margem de ameaça de acerto crítico com a arma preferida da deusa ou com qualquer arma corpo a corpo."
+                },
+                {
+                    "key": "liberdade_divina",
+                    "nome": "Liberdade Divina",
+                    "descricao": "Você pode gastar 1 PM para se libertar instantaneamente de efeitos de paralisia, imobilização ou condição agarrado."
+                }
+            ]
+        },
+        {
+            "id": "wynna",
+            "nome": "Wynna",
+            "titulo": "A Deusa da Magia",
+            "simboloSagrado": "Um anel metálico de três aros entrelaçados",
+            "canalizacaoPermitida": "qualquer",
+            "armaPreferidaId": "Adaga",
+            "crencasObjetivos": "Wynna ama a magia acima de todas as coisas e a concede generosamente a todos os mortais. Ela não faz distinção entre o bem e o mal, ensinando que a magia é a maior dádiva concedida aos povos de Arton.",
+            "obrigacoesERestricoes": [
+                "Você é proibido de matar qualquer criatura capaz de lançar magias arcanas ou divinas.",
+                "Não pode destruir ou se desfazer de itens mágicos permanentemente de forma intencional.",
+                "Penalidade: Ao violar esta obrigação, seus Pontos de Mana são reduzidos a 0 e seus poderes concedidos ficam desativados até realizar uma penitência sagrada."
+            ],
+            "classesPermitidas": [],
+            "poderesConcedidosIds": [
+                "bencao_do_mana",
+                "centelha_magica",
+                "teurgista_mistico"
+            ],
+            "poderesConcedidos": [
+                {
+                    "key": "bencao_do_mana",
+                    "nome": "Bênção do Mana",
+                    "descricao": "Você recebe +1 Ponto de Mana adicional para cada patamar de nível de personagem."
+                },
+                {
+                    "key": "centelha_magica",
+                    "nome": "Centelha Mágica",
+                    "descricao": "Você aprende uma magia de 1º círculo adicional, arcana ou divina, à sua escolha."
+                },
+                {
+                    "key": "teurgista_mistico",
+                    "nome": "Teurgista Místico",
+                    "descricao": "Suas magias arcanas podem ser lançadas como divinas, e suas magias divinas podem ser lançadas como arcanas."
+                }
+            ]
+        },
+        {
+            "id": "allihanna",
+            "nome": "Allihanna",
+            "titulo": "A Deusa da Natureza e dos Animais",
+            "simboloSagrado": "Uma flor de quatro pétalas ou a pegada de um animal",
+            "canalizacaoPermitida": "apenasPositiva",
+            "armaPreferidaId": "Bordão",
+            "crencasObjetivos": "Gentil e protetora, Allihanna cuida das florestas, dos animais e dos ermos. Ela prega a harmonia com o mundo natural e o respeito aos seres vivos, sendo venerada por caçadores, druidas, bárbaros e povos tribais.",
+            "obrigacoesERestricoes": [
+                "Você não pode usar armaduras ou escudos feitos de metal.",
+                "Nunca pode matar animais selvagens, exceto em legítima defesa direta de sua vida.",
+                "Penalidade: Se violar as obrigações, perde todos os seus Pontos de Mana e poderes concedidos até purificar-se em um santuário ou floresta sagrada."
+            ],
+            "classesPermitidas": [],
+            "poderesConcedidosIds": [
+                "dedo_verde",
+                "descanso_natural",
+                "voz_dos_monstros"
+            ],
+            "poderesConcedidos": [
+                {
+                    "key": "dedo_verde",
+                    "nome": "Dedo Verde",
+                    "descricao": "Você aprende e pode lançar a magia Controlar Plantas. Se já a conhece, seu custo diminui em -1 PM."
+                },
+                {
+                    "key": "descanso_natural",
+                    "nome": "Descanso Natural",
+                    "descricao": "Para você, dormir sob o céu aberto em ambiente natural conta como condições de descanso confortáveis para recuperação de PV e PM."
+                },
+                {
+                    "key": "voz_dos_monstros",
+                    "nome": "Voz dos Monstros",
+                    "descricao": "Você consegue se comunicar livremente com animais e criaturas do tipo monstro."
+                }
+            ]
+        },
+        {
+            "id": "nimb",
+            "nome": "Nimb",
+            "titulo": "O Deus da Sorte, do Acaso e do Caos",
+            "simboloSagrado": "Um dado de seis faces com pontos multicoloridos",
+            "canalizacaoPermitida": "qualquer",
+            "armaPreferidaId": "Adaga ou Maça",
+            "crencasObjetivos": "Inconstante e imprevisível, Nimb governa os golpes de sorte e as marés de azar. Seus devotos abraçam a incerteza e acreditam que tentar controlar o destino é uma grande tolice.",
+            "obrigacoesERestricoes": [
+                "Você nunca pode recusar uma aposta ou um jogo de azar em que haja risco real.",
+                "Sempre que se deparar com uma encruzilhada ou dúvida crítica, deve lançar uma moeda ou dado para decidir sua ação.",
+                "Penalidade: A quebra da regra zera seus Pontos de Mana e desativa poderes concedidos até o mestre decretar um ato caótico de penitência."
+            ],
+            "classesPermitidas": [],
+            "poderesConcedidosIds": [
+                "poder_oculto",
+                "sorte_dos_loucos",
+                "transmissao_da_loucura"
+            ],
+            "poderesConcedidos": [
+                {
+                    "key": "poder_oculto",
+                    "nome": "Poder Oculto",
+                    "descricao": "Você pode gastar 2 PM para rolar 1d6. Em 1, nada acontece; de 2 a 5 você recebe +2 em um atributo; em 6 você recebe +4 em todos os atributos até o fim da cena."
+                },
+                {
+                    "key": "sorte_dos_loucos",
+                    "nome": "Sorte dos Loucos",
+                    "descricao": "Você pode gastar 1 PM para rerrolar qualquer teste recém-realizado, ficando obrigatoriamente com o novo resultado."
+                },
+                {
+                    "key": "transmissao_da_loucura",
+                    "nome": "Transmissão da Loucura",
+                    "descricao": "Você pode gastar 2 PM para forçar um alvo em alcance curto a ficar confuso por 1 rodada (Vontade anula)."
+                }
+            ]
+        },
+        {
+            "id": "arsenal",
+            "nome": "Arsenal",
+            "titulo": "O Deus da Guerra e da Conquista",
+            "simboloSagrado": "Um martelo de guerra sobre uma espada larga cruzada",
+            "canalizacaoPermitida": "apenasNegativa",
+            "armaPreferidaId": "Martelo de Guerra",
+            "crencasObjetivos": "Anteriormente o sumo-sacerdote de Keenn, Arsenal conquistou a divindade através da força pura e estratégia bélica. Ele ensina que a vitória pertence aos mais fortes, mais preparados e que nunca recuam no campo de batalha.",
+            "obrigacoesERestricoes": [
+                "Você nunca pode fugir de um combate militar nem recusar um duelo honroso contra um líder ou campeão inimigo.",
+                "Penalidade: Se fugir de uma luta ou recusar combate, você perde todos os seus Pontos de Mana e poderes concedidos até derrotar um inimigo em combate individual solo."
+            ],
+            "classesPermitidas": [],
+            "poderesConcedidosIds": [
+                "conjurar_arma",
+                "foco_em_arma_arsenal",
+                "sangue_de_ferro"
+            ],
+            "poderesConcedidos": [
+                {
+                    "key": "conjurar_arma",
+                    "nome": "Conjurar Arma",
+                    "descricao": "Você pode gastar 1 PM para materializar qualquer arma corpo a corpo ou de arremesso em suas mãos por uma cena."
+                },
+                {
+                    "key": "foco_em_arma_arsenal",
+                    "nome": "Foco em Arma (Arsenal)",
+                    "descricao": "Você recebe o poder geral Foco em Arma com sua arma favorita, ganhando +2 em testes de ataque com ela."
+                },
+                {
+                    "key": "sangue_de_ferro",
+                    "nome": "Sangue de Ferro",
+                    "descricao": "Você pode gastar 2 PM para ganhar Redução de Dano (RD) 3 até o fim do combate."
+                }
+            ]
+        },
+        {
+            "id": "azgher",
+            "nome": "Azgher",
+            "titulo": "O Deus-Sol",
+            "simboloSagrado": "Um sol dourado",
+            "canalizacaoPermitida": "apenasPositiva",
+            "armaPreferidaId": "Cimitarra",
+            "crencasObjetivos": "Venerado pelos povos do Deserto da Perdição, o Deus-Sol é também cultuado por viajantes, mercadores honestos e todos aqueles que combatem as trevas. Azgher é um deus generoso; sua jornada diária derrama calor e conforto sobre Arton. Azgher é como um pai severo: responsável, provedor, mas que também exige respeito de seus filhos. Como um olho sempre vigilante nos céus, nada acontece à luz do dia sem que Azgher perceba. Praticar a gratidão pela proteção e generosidade do sol. Promover a honestidade, expor embustes e mentiras. Praticar a caridade e o altruísmo. Proteger os necessitados. Oferecer clemência, perdão e redenção. Combater o mal.",
+            "obrigacoesERestricoes": [
+                "O devoto de Azgher deve manter o rosto sempre coberto (com uma máscara, capuz ou trapos). Sua face pode ser revelada apenas ao sumo-sacerdote ou em seu funeral.",
+                "Devotos do Sol também devem doar para a igreja de Azgher 20% de qualquer tesouro obtido. Essa doação deve ser feita em ouro, seja na forma de moedas ou itens."
+            ],
+            "classesPermitidas": [],
+            "poderesConcedidosIds": [
+                "espada_solar",
+                "fulgor_solar",
+                "habitante_do_deserto",
+                "inimigo_de_tenebra"
+            ],
+            "poderesConcedidos": [
+                {
+                    "key": "espada_solar",
+                    "nome": "Espada Solar",
+                    "descricao": ""
+                },
+                {
+                    "key": "fulgor_solar",
+                    "nome": "Fulgor Solar",
+                    "descricao": ""
+                },
+                {
+                    "key": "habitante_do_deserto",
+                    "nome": "Habitante do Deserto",
+                    "descricao": ""
+                },
+                {
+                    "key": "inimigo_de_tenebra",
+                    "nome": "Inimigo de Tenebra",
+                    "descricao": ""
+                }
+            ]
+        },
+        {
+            "id": "hyninn",
+            "nome": "Hyninn",
+            "titulo": "O Deus da Trapaça",
+            "simboloSagrado": "Uma adaga atravessando uma máscara, ou uma raposa",
+            "canalizacaoPermitida": "qualquer",
+            "armaPreferidaId": "Adaga",
+            "crencasObjetivos": "Capaz de enganar até mesmo outros deuses, o ardiloso Deus da Trapaça é uma divindade favorita de foras da lei — seus clérigos atuam como conselheiros, ou até mesmo líderes, em guildas criminosas ou navios piratas. Também é louvado por regentes e mercadores não muito honestos, orando por vantagens ilícitas. No entanto, mesmo pessoas honradas eventualmente simpatizam com Hyninn por sua esperteza, despreocupação e ousadia. Praticar a astúcia e a esperteza. Demonstrar que honestidade e sinceridade levam ao fracasso. Desafiar a lei e a ordem. Ser vitorioso sem seguir regras. Fazer aos outros antes que façam a você. Levar vantagem em tudo.",
+            "obrigacoesERestricoes": [
+                "Um devoto de Hyninn não recusa participação em um golpe, trapaça ou artimanha (o que muitas vezes inclui missões para roubar... hã, resgatar tesouros), exceto quando prejudica seus próprios aliados.",
+                "O devoto também deve fazer um ato furtivo, ousado ou proibido por dia (ou por sessão de jogo, o que demorar mais), como oferenda a Hyninn. Roubar uma bolsa, enganar um miliciano, invadir o quarto de um nobre... Em termos de jogo, uma ação exigindo um teste de Enganação ou Ladinagem com CD mínima 15 + metade do seu nível."
+            ],
+            "classesPermitidas": [
+                "hynne",
+                "goblins",
+                "silfides",
+                "bardos",
+                "bucaneiros",
+                "ladinos",
+                "inventores",
+                "nobres"
+            ],
+            "poderesConcedidosIds": [
+                "apostar_com_o_trapaceiro",
+                "farsa_do_fingidor",
+                "forma_de_macaco",
+                "golpista_divino"
+            ],
+            "poderesConcedidos": [
+                {
+                    "key": "apostar_com_o_trapaceiro",
+                    "nome": "Apostar com o Trapaceiro",
+                    "descricao": ""
+                },
+                {
+                    "key": "farsa_do_fingidor",
+                    "nome": "Farsa do Fingidor",
+                    "descricao": ""
+                },
+                {
+                    "key": "forma_de_macaco",
+                    "nome": "Forma de Macaco",
+                    "descricao": ""
+                },
+                {
+                    "key": "golpista_divino",
+                    "nome": "Golpista Divino",
+                    "descricao": ""
+                }
+            ]
+        },
+        {
+            "id": "kallyadranoch",
+            "nome": "Kallyadranoch",
+            "titulo": "O Deus dos Dragões",
+            "simboloSagrado": "Escamas de cinco cores diferentes",
+            "canalizacaoPermitida": "apenasNegativa",
+            "armaPreferidaId": "Lança",
+            "crencasObjetivos": "Como punição imposta por Khalmyr pelo crime de criar a Tormenta, o Deus dos Dragões estava esquecido até poucos anos atrás, conhecido apenas como “o Terceiro”. Restaurado em tempos recentes durante um combate épico contra os invasores aberrantes, Kallyadranoch agora governa não apenas os dragões, mas todos que cultuam o poder elemental das grandes feras. Além disso, enquanto Wynna representa o lado bondoso e generoso da magia arcana, Kally é cultuado por arcanistas malignos. Praticar a soberania. Demonstrar orgulho, superioridade, majestade. Praticar o acúmulo de riquezas. Proteger suas posses e sua dignidade. Ser implacável com seus inimigos. Reverenciar os dragões e suas crias.",
+            "obrigacoesERestricoes": [
+                "Para subir de nível, além de acumular XP suficiente, o devoto de Kally deve realizar uma oferenda em tesouro. O valor é igual à 20% da diferença do dinheiro inicial do nível que vai alcançar para o nível atual (por exemplo, T$ 80 para subir para o 4° nível). Sabe-se, também, de devotos malignos que sacrificam vítimas a Kally (não permitido para personagens jogadores)."
+            ],
+            "classesPermitidas": [
+                "elfos",
+                "medusas",
+                "sulfure",
+                "arcanistas",
+                "cavaleiros",
+                "guerreiros",
+                "lutadores",
+                "nobres"
+            ],
+            "poderesConcedidosIds": [
+                "aura_de_medo",
+                "escamas_draconicas",
+                "presas_primordiais",
+                "servos_do_dragao"
+            ],
+            "poderesConcedidos": [
+                {
+                    "key": "aura_de_medo",
+                    "nome": "Aura de Medo",
+                    "descricao": ""
+                },
+                {
+                    "key": "escamas_draconicas",
+                    "nome": "Escamas Dracônicas",
+                    "descricao": ""
+                },
+                {
+                    "key": "presas_primordiais",
+                    "nome": "Presas Primordiais",
+                    "descricao": ""
+                },
+                {
+                    "key": "servos_do_dragao",
+                    "nome": "Servos do Dragão",
+                    "descricao": ""
+                }
+            ]
+        },
+        {
+            "id": "khalmyr",
+            "nome": "Khalmyr",
+            "titulo": "O Deus da Justiça",
+            "simboloSagrado": "Espada sobreposta a uma balança",
+            "canalizacaoPermitida": "apenasPositiva",
+            "armaPreferidaId": "Espada longa",
+            "crencasObjetivos": "Antigo líder do Panteão, o Deus da Justiça já foi considerado a divindade mais popular no Reinado. Isso mudaria com a vitória dos minotauros nas Guerras Táuricas, bem como a recente ascensão de Valkaria como nova líder dos deuses. Mesmo assim, Khalmyr ainda é louvado por aqueles que lutam pela ordem e justiça. As duas maiores ordens de cavaleiros em Arton foram criadas em sua honra: a Ordem da Luz e a Ordem de Khalmyr. Esta é também uma das divindades principais dos anões, junto de Tenebra — conforme a crença, ambos teriam gerado juntos a raça anã. Praticar a caridade e o altruísmo. Defender a lei, a ordem e os necessitados. Combater a mentira, o crime e o mal. Oferecer clemência, perdão e redenção. Lutar o bom combate.",
+            "obrigacoesERestricoes": [
+                "Devotos de Khalmyr não podem recusar pedidos de ajuda de pessoas inocentes.",
+                "Também devem cumprir as ordens de superiores na hierarquia da igreja (devotos do Deus da Justiça de nível maior) e só podem usar itens mágicos permanentes criados por devotos do mesmo deus."
+            ],
+            "classesPermitidas": [
+                "aggelus",
+                "anoes",
+                "cavaleiros",
+                "guerreiros",
+                "nobres",
+                "paladinos"
+            ],
+            "poderesConcedidosIds": [
+                "coragem_total",
+                "dom_da_verdade",
+                "espada_justiceira",
+                "reparar_injustica"
+            ],
+            "poderesConcedidos": [
+                {
+                    "key": "coragem_total",
+                    "nome": "Coragem Total",
+                    "descricao": ""
+                },
+                {
+                    "key": "dom_da_verdade",
+                    "nome": "Dom da Verdade",
+                    "descricao": ""
+                },
+                {
+                    "key": "espada_justiceira",
+                    "nome": "Espada Justiceira",
+                    "descricao": ""
+                },
+                {
+                    "key": "reparar_injustica",
+                    "nome": "Reparar Injustiça",
+                    "descricao": ""
+                }
+            ]
+        },
+        {
+            "id": "lena",
+            "nome": "Lena",
+            "titulo": "A Deusa Criança",
+            "simboloSagrado": "Lua crescente prateada",
+            "canalizacaoPermitida": "apenasPositiva",
+            "armaPreferidaId": "Nenhuma",
+            "crencasObjetivos": "Mesmo os deuses mais violentos e cruéis são respeitosos com a Deusa Criança, provedora da fertilidade, do sustento, da própria vida. Lena não é venerada apenas por aventureiros necessitados de curas mágicas, mas também por fazendeiros que imploram por colheitas fartas, criadores desejosos de saúde para seus animais e cada grávida prestes a dar à luz. Servida quase exclusivamente por mulheres, a Deusa da Vida oferece os mais poderosos milagres de cura presenciados em Arton. Reverenciar e proteger a vida em todas as suas formas. Reverenciar a fertilidade, a fecundidade, a maternidade e a infância. Praticar a caridade e o altruísmo. Oferecer clemência, perdão e redenção. Aliviar a dor e o sofrimento físico, mental ou espiritual.",
+            "obrigacoesERestricoes": [
+                "Devotos de Lena não podem causar dano letal ou perda de PV a criaturas vivas (fornecer bônus em dano letal também é proibido). Podem causar dano não letal e prejudicar seus inimigos (em termos de jogo, impondo condições), desde que não causem dano letal ou perda de PV. Para um devoto de Lena, é preferível perder a própria vida a tirá-la de outros.",
+                "Apenas mulheres podem ser devotas de Lena. Uma clériga precisa dar à luz pelo menos uma vez antes de receber seus poderes divinos. A fecundação é um mistério bem guardado pelas sacerdotisas; conta-se que a própria deusa vem semear suas discípulas. Paladinos de Lena podem ser homens (são os únicos devotos masculinos permitidos) ou mulheres."
+            ],
+            "classesPermitidas": [
+                "dahllan",
+                "qareen",
+                "nobres",
+                "paladinos"
+            ],
+            "poderesConcedidosIds": [
+                "ataque_piedoso",
+                "aura_restauradora",
+                "cura_gentil",
+                "curandeira_perfeita"
+            ],
+            "poderesConcedidos": [
+                {
+                    "key": "ataque_piedoso",
+                    "nome": "Ataque Piedoso",
+                    "descricao": ""
+                },
+                {
+                    "key": "aura_restauradora",
+                    "nome": "Aura Restauradora",
+                    "descricao": ""
+                },
+                {
+                    "key": "cura_gentil",
+                    "nome": "Cura Gentil",
+                    "descricao": ""
+                },
+                {
+                    "key": "curandeira_perfeita",
+                    "nome": "Curandeira Perfeita",
+                    "descricao": ""
+                }
+            ]
+        },
+        {
+            "id": "lin-wu",
+            "nome": "Lin-Wu",
+            "titulo": "O Deus Samurai",
+            "simboloSagrado": "Placa de metal com a silhueta de um dragão-serpente celestial",
+            "canalizacaoPermitida": "qualquer",
+            "armaPreferidaId": "Katana",
+            "crencasObjetivos": "Mesmo com a quase extinção de seu povo pela Tormenta, o honrado Deus Samurai nunca fraquejou, nunca perdeu sua dignidade. Hoje, o Império de Jade está livre da tempestade, seus habitantes retornam para a grande reconstrução. Lin-Wu e seu povo sempre serão gratos aos campeões gaijin, por sua amizade e suporte durante os anos de pesadelo. Talvez por esse motivo, conforme especulam seus servos shugenja, devotos de Lin-Wu atuando longe de Tamu-ra recebem poderes diferentes, mais convenientes para suas missões. Promover a honra acima de tudo. Proteger Tamu-ra e o Reinado de Arton. Praticar honestidade, coragem, cortesia e compaixão. Demonstrar integridade e dignidade. Ser leal a seus companheiros. Buscar redenção após cometer desonra.",
+            "obrigacoesERestricoes": [
+                "Antigas proibições quanto a devotos estrangeiros ou do gênero feminino não mais se aplicam. No entanto, devotos de Lin-Wu ainda devem demonstrar comportamento honrado, jamais recorrendo a mentiras e subterfúgios. Em termos de jogo, são proibidos de tentar qualquer ação que exigiria um teste de Enganação, Furtividade ou Ladinagem."
+            ],
+            "classesPermitidas": [
+                "anoes",
+                "cavaleiros",
+                "guerreiros",
+                "nobres",
+                "paladinos"
+            ],
+            "poderesConcedidosIds": [
+                "coragem_total",
+                "kiai_divino",
+                "mente_vazia",
+                "tradicao_de_lin-wu"
+            ],
+            "poderesConcedidos": [
+                {
+                    "key": "coragem_total",
+                    "nome": "Coragem Total",
+                    "descricao": ""
+                },
+                {
+                    "key": "kiai_divino",
+                    "nome": "Kiai Divino",
+                    "descricao": ""
+                },
+                {
+                    "key": "mente_vazia",
+                    "nome": "Mente Vazia",
+                    "descricao": ""
+                },
+                {
+                    "key": "tradicao_de_lin-wu",
+                    "nome": "Tradição de Lin-Wu",
+                    "descricao": ""
+                }
+            ]
+        },
+        {
+            "id": "marah",
+            "nome": "Marah",
+            "titulo": "A Deusa da Paz",
+            "simboloSagrado": "Um coração vermelho",
+            "canalizacaoPermitida": "apenasPositiva",
+            "armaPreferidaId": "Nenhuma",
+            "crencasObjetivos": "Neste mundo sempre em guerra, devotos da Deusa da Paz talvez sejam os mais corajosos e perseverantes, buscando inspiração em sua padroeira para proteger Arton sem usar de violência. Marah ensina a suportar qualquer provação, demonstrar que brutalidade nunca é a única resposta. Ainda assim, esta não é apenas uma divindade de placidez e indolência; devotos de Marah costumam ser plenos de bom humor e atitude positiva, sempre prontos para uma nova celebração ou romance... Praticar o amor e a gratidão pela vida e pela bondade. Promover a paz, harmonia e felicidade. Aliviar a dor e o sofrimento, trazer conforto aos aflitos. Praticar a caridade e o altruísmo. Oferecer clemência, perdão e redenção.",
+            "obrigacoesERestricoes": [
+                "Devotos de Marah não podem causar dano, perda de PV e condições a criaturas, exceto enfeitiçado, fascinado e pasmo (fornecer bônus em dano também é proibido). Em combate, só podem recorrer a ações como proteger ou curar — ou fugir, render-se ou aceitar a morte. Um devoto de Marah jamais vai causar violência, nem mesmo para se salvar."
+            ],
+            "classesPermitidas": [
+                "aggelus",
+                "elfos",
+                "hynne",
+                "qareen",
+                "bardos",
+                "nobres",
+                "paladinos"
+            ],
+            "poderesConcedidosIds": [
+                "aura_de_paz",
+                "dom_da_esperanca",
+                "palavras_de_bondade",
+                "talento_artistico"
+            ],
+            "poderesConcedidos": [
+                {
+                    "key": "aura_de_paz",
+                    "nome": "Aura de Paz",
+                    "descricao": ""
+                },
+                {
+                    "key": "dom_da_esperanca",
+                    "nome": "Dom da Esperança",
+                    "descricao": ""
+                },
+                {
+                    "key": "palavras_de_bondade",
+                    "nome": "Palavras de Bondade",
+                    "descricao": ""
+                },
+                {
+                    "key": "talento_artistico",
+                    "nome": "Talento Artístico",
+                    "descricao": ""
+                }
+            ]
+        },
+        {
+            "id": "megalokk",
+            "nome": "Megalokk",
+            "titulo": "O Deus dos Monstros",
+            "simboloSagrado": "A garra de um monstro",
+            "canalizacaoPermitida": "apenasNegativa",
+            "armaPreferidaId": "Maça",
+            "crencasObjetivos": "O Deus dos Monstros é uma divindade de selvageria e descontrole — quando bárbaros entram em fúria, diz-se que estão apenas canalizando seu rancor primordial. Enquanto servos de Allihanna promovem harmonia entre a natureza e os povos civilizados, devotos de seu irmão sanguinário buscam apenas o extermínio de seus inimigos. E, para um servo do Deus dos Monstros, quase tudo que se move é um inimigo... Praticar a violência, a soberania do mais forte. Jamais reprimir os próprios instintos e desejos. Jamais ser domado, desafiar qualquer forma de controle. Jamais oferecer perdão ou rendição. Eliminar os fracos. Destruir seus inimigos.",
+            "obrigacoesERestricoes": [
+                "Devotos de Megalokk devem rejeitar os modos civilizados e se entregar à ferocidade, descontrole e impaciência. Você é proibido de usar perícias baseadas em Inteligência ou Carisma (exceto Adestramento e Intimidação) e não pode preparar uma ação, escolher 10 ou 20 em testes e lançar magias sustentadas (pois são ações que exigem foco e paciência)."
+            ],
+            "classesPermitidas": [
+                "goblins",
+                "medusas",
+                "minotauros",
+                "sulfure",
+                "trogs",
+                "barbaros",
+                "cacadores",
+                "druidas",
+                "lutadores"
+            ],
+            "poderesConcedidosIds": [
+                "olhar_amedrontador",
+                "presas_primordiais",
+                "urro_divino",
+                "voz_dos_monstros"
+            ],
+            "poderesConcedidos": [
+                {
+                    "key": "olhar_amedrontador",
+                    "nome": "Olhar Amedrontador",
+                    "descricao": ""
+                },
+                {
+                    "key": "presas_primordiais",
+                    "nome": "Presas Primordiais",
+                    "descricao": ""
+                },
+                {
+                    "key": "urro_divino",
+                    "nome": "Urro Divino",
+                    "descricao": ""
+                },
+                {
+                    "key": "voz_dos_monstros",
+                    "nome": "Voz dos Monstros",
+                    "descricao": ""
+                }
+            ]
+        },
+        {
+            "id": "oceano",
+            "nome": "Oceano",
+            "titulo": "O Deus dos Mares",
+            "simboloSagrado": "Uma concha",
+            "canalizacaoPermitida": "qualquer",
+            "armaPreferidaId": "Tridente",
+            "crencasObjetivos": "Nestes tempos de grande tumulto no plano divino, em meio a deuses caindo e ascendendo, o Deus dos Mares está entre os poucos ainda imutáveis. Sua época de fúria, quando arrasava civilizações inteiras, foi quase esquecida. Hoje o Oceano é sereno, pleno em si mesmo, alienado dos conflitos no Panteão — acha os outros deuses mesquinhos, disputando ninharias, frente à vastidão de seus domínios. Ainda assim, recebe preces de marinheiros, piratas e povos marinhos, orando por sua tranquilidade, rogando que suas tempestades sejam breves. Reverenciar os mares, o oceano e os seres que ali habitam. Promover harmonia entre o oceano e o mundo seco. Proteger os seres marinhos, mas também os seres do mundo seco que se aventuram sobre as ondas. Demandar devido respeito ao mar e seu poder.",
+            "obrigacoesERestricoes": [
+                "As únicas armas permitidas para devotos do Oceano são a azagaia, a lança, o tridente e a rede. Podem usar apenas armaduras leves.",
+                "O devoto também não pode se manter afastado do oceano por mais de um mês."
+            ],
+            "classesPermitidas": [
+                "dahllan",
+                "hynne",
+                "minotauros",
+                "sereias/tritoes",
+                "barbaros",
+                "bucaneiros",
+                "cacadores",
+                "druidas"
+            ],
+            "poderesConcedidosIds": [
+                "anfibio",
+                "arsenal_das_profundezas",
+                "mestre_dos_mares",
+                "sopro_do_mar"
+            ],
+            "poderesConcedidos": [
+                {
+                    "key": "anfibio",
+                    "nome": "Anfíbio",
+                    "descricao": ""
+                },
+                {
+                    "key": "arsenal_das_profundezas",
+                    "nome": "Arsenal das Profundezas",
+                    "descricao": ""
+                },
+                {
+                    "key": "mestre_dos_mares",
+                    "nome": "Mestre dos Mares",
+                    "descricao": ""
+                },
+                {
+                    "key": "sopro_do_mar",
+                    "nome": "Sopro do Mar",
+                    "descricao": ""
+                }
+            ]
+        },
+        {
+            "id": "sszzaas",
+            "nome": "Sszzaas",
+            "titulo": "O Deus da Traição",
+            "simboloSagrado": "Uma naja vertendo veneno pelas presas",
+            "canalizacaoPermitida": "apenasNegativa",
+            "armaPreferidaId": "Adaga",
+            "crencasObjetivos": "O sibilante Deus da Traição não é apenas o mais inteligente entre os deuses, mas também o mais perigoso. Tão perigoso que, certa vez, tentou reunir os Rubis da Virtude — vinte gemas de poder contendo a essência de todos os deuses. Chegou a ser expulso do Panteão por esse crime, mas sua astúcia não conhecia limites; Sszzaas conseguiu tramar um novo plano para ser aceito de volta. Hoje, mesmo após a quase extinção de seu culto, os sszzaazitas voltam a se espalhar sobre Arton, agindo em nome do Grande Corruptor. Mas será prudente devotar-se a um Deus da Traição? Apenas os mais ousados e astutos acreditam que sim. Praticar a mentira e a trapaça. Buscar sempre a solução mais inteligente. Demonstrar que lealdade e confiança são fraquezas, devem ser eliminadas. Promover competição, rivalidade, desconfiança. Usar os recursos do inimigo para alcançar seus objetivos. Levar outros a se sacrificarem em seu lugar.",
+            "obrigacoesERestricoes": [
+                "O devoto deve fazer um ato de traição, intriga ou corrupção por dia (ou por sessão de jogo, o que demorar mais) como oferenda a Sszzaas. Pouco importa se o alvo é aliado ou inimigo — uns poucos sszzaazitas usam seus métodos torpes para ajudar colegas aventureiros em suas missões, às vezes sem que eles próprios saibam. Sugerir a alguém que foi traído pelo cônjuge, influenciar um guarda a aceitar suborno, instruir um mercador a roubar nos preços, incriminar alguém por um crime que não cometeu, enganar um guerreiro para que mate um oponente rendido e inofensivo... Em termos de jogo, uma ação exigindo um teste de Enganação com CD mínima 15 + metade do seu nível."
+            ],
+            "classesPermitidas": [
+                "medusas",
+                "arcanistas",
+                "bardos",
+                "bucaneiros",
+                "inventores",
+                "ladinos",
+                "nobres"
+            ],
+            "poderesConcedidosIds": [
+                "astucia_da_serpente",
+                "familiar_ofidico",
+                "presas_venenosas",
+                "sangue_ofidico"
+            ],
+            "poderesConcedidos": [
+                {
+                    "key": "astucia_da_serpente",
+                    "nome": "Astúcia da Serpente",
+                    "descricao": ""
+                },
+                {
+                    "key": "familiar_ofidico",
+                    "nome": "Familiar Ofídico",
+                    "descricao": ""
+                },
+                {
+                    "key": "presas_venenosas",
+                    "nome": "Presas Venenosas",
+                    "descricao": ""
+                },
+                {
+                    "key": "sangue_ofidico",
+                    "nome": "Sangue Ofídico",
+                    "descricao": ""
+                }
+            ]
+        },
+        {
+            "id": "tanna-toh",
+            "nome": "Tanna-Toh",
+            "titulo": "A Deusa do Conhecimento",
+            "simboloSagrado": "Pergaminho e pena",
+            "canalizacaoPermitida": "qualquer",
+            "armaPreferidaId": "Bordão",
+            "crencasObjetivos": "Em uma sociedade medieval típica, apenas membros do clero ou da nobreza teriam acesso a boa educação — camponeses jamais saberiam ler e escrever. Não é assim no Reinado de Arton, graças ao empenho da igreja de Tanna-Toh. Devotos da Deusa do Conhecimento atuam como professores, catequistas e pesquisadores, tomando a missão sagrada de levar educação e cultura para todos. Tanna-Toh é amplamente venerada pelos povos civilizados, amada por aqueles que se devotam aos estudos ou artes. Ainda assim, esta deusa é inimiga de povos bárbaros que escolhem permanecer ignorantes e selvagens. Reverenciar a mente racional, o conhecimento, a civilização, a verdade. Proteger o progresso, o avanço dos povos civilizados. Promover o ensino e a prática das artes e das ciências. Solucionar todos os mistérios, revelar todas as mentiras. Buscar novo conhecimento. Não tolerar a ignorância.",
+            "obrigacoesERestricoes": [
+                "Devotos de Tanna-Toh jamais podem recusar uma missão que envolva a busca por um novo conhecimento ou informação; investigar rumores sobre um livro perdido, procurar uma aldeia lendária, pesquisar os hábitos de uma criatura desconhecida...",
+                "Além disso, o devoto sempre deve dizer a verdade e nunca pode se recusar a responder uma pergunta direta, pouco importando as consequências. É proibido para ele esconder qualquer conhecimento."
+            ],
+            "classesPermitidas": [
+                "golens",
+                "kliren",
+                "arcanistas",
+                "bardos",
+                "inventores",
+                "nobres",
+                "paladinos"
+            ],
+            "poderesConcedidosIds": [
+                "conhecimento_enciclopedico",
+                "mente_analitica",
+                "pesquisa_abencoada",
+                "voz_da_civilizacao"
+            ],
+            "poderesConcedidos": [
+                {
+                    "key": "conhecimento_enciclopedico",
+                    "nome": "Conhecimento Enciclopédico",
+                    "descricao": ""
+                },
+                {
+                    "key": "mente_analitica",
+                    "nome": "Mente Analítica",
+                    "descricao": ""
+                },
+                {
+                    "key": "pesquisa_abencoada",
+                    "nome": "Pesquisa Abençoada",
+                    "descricao": ""
+                },
+                {
+                    "key": "voz_da_civilizacao",
+                    "nome": "Voz da Civilização",
+                    "descricao": ""
+                }
+            ]
+        },
+        {
+            "id": "tenebra",
+            "nome": "Tenebra",
+            "titulo": "A Deusa das Trevas",
+            "simboloSagrado": "Estrela negra de cinco pontas",
+            "canalizacaoPermitida": "apenasNegativa",
+            "armaPreferidaId": "Adaga",
+            "crencasObjetivos": "Assim como seu inimigo Azgher vigia e protege Arton durante o dia, Tenebra é atenta sob as estrelas; nada acontece na noite sem seu conhecimento. A sedutora e misteriosa Deusa das Trevas é mãe de tudo que anda e rasteja no escuro, dos nobres anões aos sinistros mortos-vivos e trogloditas. Ainda que muitas vezes temida, Tenebra sempre protegeu as criaturas noturnas e subterrâneas, bondosas ou malignas. No entanto, com a recente destruição de Ragnar, antigo Deus da Morte, cada vez mais cultos necromantes começam a oferecer sacrifícios à Mãe Noite. Reverenciar a noite, a escuridão, a lua e as estrelas. Proteger segredos e mistérios, proteger tudo que é oculto e invisível. Reverenciar a não vida e os mortos-vivos, propagar a prática da necromancia. Rejeitar o sol e a luz.",
+            "obrigacoesERestricoes": [
+                "Tenebra proíbe que seus devotos sejam tocados por Azgher, o odiado rival. O devoto deve se cobrir inteiramente durante o dia, sem expor ao sol nenhum pedaço de pele."
+            ],
+            "classesPermitidas": [
+                "anoes",
+                "medusas",
+                "qareen",
+                "osteon",
+                "sulfure",
+                "trogs",
+                "arcanistas",
+                "bardos",
+                "ladinos"
+            ],
+            "poderesConcedidosIds": [
+                "caricia_sombria",
+                "manto_da_penumbra",
+                "visao_nas_trevas",
+                "zumbificar"
+            ],
+            "poderesConcedidos": [
+                {
+                    "key": "caricia_sombria",
+                    "nome": "Carícia Sombria",
+                    "descricao": ""
+                },
+                {
+                    "key": "manto_da_penumbra",
+                    "nome": "Manto da Penumbra",
+                    "descricao": ""
+                },
+                {
+                    "key": "visao_nas_trevas",
+                    "nome": "Visão nas Trevas",
+                    "descricao": ""
+                },
+                {
+                    "key": "zumbificar",
+                    "nome": "Zumbificar",
+                    "descricao": ""
+                }
+            ]
+        },
+        {
+            "id": "thwor",
+            "nome": "Thwor",
+            "titulo": "O Deus dos Goblinoides",
+            "simboloSagrado": "Um grande punho fechado",
+            "canalizacaoPermitida": "qualquer",
+            "armaPreferidaId": "Machado de guerra",
+            "crencasObjetivos": "A Flecha de Fogo foi disparada, rompendo o coração das trevas. A antiga profecia foi cumprida. No entanto, o que muitos pensavam significar o fim da Aliança Negra dos goblinoides resultou em algo totalmente diferente, totalmente novo. Ao enfrentar e derrotar o próprio Ragnar, antigo Deus da Morte, o imperador bugbear Thwor Khoshkothruk ascendeu ao Panteão como o Deus dos Goblinoides. Agora protegidos e governados por uma poderosa divindade, os povos duyshidakk erguem sua própria civilização no continente de Lamnor, e o Reinado de Arton deverá lidar com o futuro que surgir disso. Reverenciar a lealdade, a força e a coragem. Promover a união entre goblins, hobgoblins, bugbears, orcs, ogros e outros povos humanoides. Reverenciar o caos, a mutação, a vida sempre em movimento. Proteger a cultura e o modo de vida goblinoide. Destruir os elfos.",
+            "obrigacoesERestricoes": [
+                "Não importando sua raça, o devoto de Thwor deve ser duyshidakk — ou seja, aceito como membro do povo goblinoide.",
+                "Também deve se esforçar para que o “Mundo Como Deve Ser” tome o continente (veja a página 386).",
+                "Deve sempre procurar fazer alianças com goblinoides e só lutar contra eles em último caso."
+            ],
+            "classesPermitidas": [],
+            "poderesConcedidosIds": [
+                "almejar_o_impossivel",
+                "furia_divina",
+                "olhar_amedrontador",
+                "tropas_duyshidakk"
+            ],
+            "poderesConcedidos": [
+                {
+                    "key": "almejar_o_impossivel",
+                    "nome": "Almejar o Impossível",
+                    "descricao": ""
+                },
+                {
+                    "key": "furia_divina",
+                    "nome": "Fúria Divina",
+                    "descricao": ""
+                },
+                {
+                    "key": "olhar_amedrontador",
+                    "nome": "Olhar Amedrontador",
+                    "descricao": ""
+                },
+                {
+                    "key": "tropas_duyshidakk",
+                    "nome": "Tropas Duyshidakk",
+                    "descricao": ""
+                }
+            ]
+        },
+        {
+            "id": "thyatis",
+            "nome": "Thyatis",
+            "titulo": "O Deus da Ressurreição e Profecia",
+            "simboloSagrado": "Uma ave fênix",
+            "canalizacaoPermitida": "apenasPositiva",
+            "armaPreferidaId": "Espada longa",
+            "crencasObjetivos": "O generoso Deus da Ressurreição e Profecia representa o perdão, a tolerância, as segundas chances. Seu dom maior é a prevenção ou correção dos erros — através de predições que evitam esses erros ou reversão das mortes que tenham causado. Para Thyatis, ninguém deve ser castigado por errar e todos merecem a chance de aprender com suas falhas, em vez de morrer por elas. Dizem que seus clérigos são contemplados com poderosos dons de profecia e ressurreição, e seus paladinos nunca morrem! Proteger a vida e aqueles necessitados de novas chances. Renegar a morte e a mentira. Ajudar os perdidos a encontrar seus caminhos e alcançar seus destinos. Oferecer clemência, perdão e redenção.",
+            "obrigacoesERestricoes": [
+                "Devotos de Thyatis são proibidos de matar criaturas inteligentes (Int –3 ou maior). Podem atacar e causar dano, mas jamais levar à morte. Por esse motivo, devotos de Thyatis preferem armas e ataques que apenas incapacitam seus oponentes ou causam dano não letal."
+            ],
+            "classesPermitidas": [
+                "aggelus",
+                "cavaleiros",
+                "inventores",
+                "lutadores",
+                "paladinos"
+            ],
+            "poderesConcedidosIds": [
+                "ataque_piedoso",
+                "dom_da_imortalidade",
+                "dom_da_profecia",
+                "dom_da_ressurreicao"
+            ],
+            "poderesConcedidos": [
+                {
+                    "key": "ataque_piedoso",
+                    "nome": "Ataque Piedoso",
+                    "descricao": ""
+                },
+                {
+                    "key": "dom_da_imortalidade",
+                    "nome": "Dom da Imortalidade",
+                    "descricao": ""
+                },
+                {
+                    "key": "dom_da_profecia",
+                    "nome": "Dom da Profecia",
+                    "descricao": ""
+                },
+                {
+                    "key": "dom_da_ressurreicao",
+                    "nome": "Dom da Ressurreição",
+                    "descricao": ""
+                }
+            ]
+        }
+    ]
+}

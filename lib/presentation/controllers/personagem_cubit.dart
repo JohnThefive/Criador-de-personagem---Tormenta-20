@@ -14,6 +14,7 @@ import '../../domain/entities/raca.dart';
 import '../../domain/entities/origem.dart';
 import '../../domain/entities/poder.dart';
 import '../../domain/entities/divindade.dart';
+import '../../domain/validators/validador_divindade.dart';
 
 // Enum para saber qual método o usuário escolheu nesta etapa
 enum MetodoAtributos { nenhum, compra, rolagem }
@@ -29,9 +30,16 @@ class PersonagemState {
   final List<String> periciasEscolhidasOrigem; // Siglas de perícia selecionadas
   final List<Poder> poderesEscolhidosOrigem; // Poderes selecionados
 
-  // metodos relacionados a divindade
+  // metodos relacionados a divindade e devocao
   final Divindade? divindadeSelecionada;
-  final Poder? poderConcedidoSelecionado;
+  final List<Poder> poderesConcedidosSelecionados;
+  final TipoEnergia? canalizacaoSelecionada;
+  final bool modoEstritoDevocao;
+
+  Poder? get poderConcedidoSelecionado =>
+      poderesConcedidosSelecionados.isNotEmpty
+          ? poderesConcedidosSelecionados.first
+          : null;
 
   // Mantemos os dados específicos de rolagem aqui também
   final List<int> valoresRolados;
@@ -60,7 +68,10 @@ class PersonagemState {
     this.periciasEscolhidasOrigem = const [],
     this.poderesEscolhidosOrigem = const [],
     this.divindadeSelecionada,
-    this.poderConcedidoSelecionado,
+    List<Poder>? poderesConcedidosSelecionados,
+    Poder? poderConcedidoSelecionado,
+    this.canalizacaoSelecionada,
+    this.modoEstritoDevocao = true,
     this.valoresRolados = const [],
     this.alocacaoIndices = const {},
     this.pontosRestantesCompra = 10,
@@ -72,7 +83,10 @@ class PersonagemState {
     this.armaduraInicial,
     this.escudoInicial,
     this.tibaresIniciais,
-  });
+  }) : poderesConcedidosSelecionados = poderesConcedidosSelecionados ??
+           (poderConcedidoSelecionado != null
+               ? [poderConcedidoSelecionado]
+               : const []);
 
   int get totalBeneficiosOrigem =>
       periciasEscolhidasOrigem.length + poderesEscolhidosOrigem.length;
@@ -80,12 +94,35 @@ class PersonagemState {
   bool get concluiuOrigem =>
       origemSelecionada != null && totalBeneficiosOrigem == 2;
 
+  int get cotaPoderesConcedidos =>
+      ValidadorDivindade.ehDevotoFiel(personagem) ? 2 : 1;
+
   bool get etapaDivindadeConcluida {
-    if (personagem.exigeDevocao) {
-      return divindadeSelecionada != null && poderConcedidoSelecionado != null;
+    final precisaDevocao = ValidadorDivindade.exigeDevocao(
+      personagem,
+      modoEstrito: modoEstritoDevocao,
+    );
+
+    // Se não escolheu divindade (Não Devoto)
+    if (divindadeSelecionada == null) {
+      return !precisaDevocao;
     }
-    if (divindadeSelecionada == null) return true;
-    return poderConcedidoSelecionado != null;
+
+    // Valida elegibilidade com base na classe/regras
+    final elegibilidade = ValidadorDivindade.validarElegibilidade(
+      personagem: personagem,
+      divindade: divindadeSelecionada,
+      modoEstrito: modoEstritoDevocao,
+    );
+    if (!elegibilidade.ehElegivel) return false;
+
+    // Se a divindade permite qualquer canalização, exige escolha expressa
+    if (divindadeSelecionada!.canalizacaoPermitida == CanalizacaoOpcao.qualquer) {
+      if (canalizacaoSelecionada == null) return false;
+    }
+
+    // Devoto Fiel (Clérigo, Druida, Paladino) escolhe 2 poderes; Devoto Comum escolhe 1
+    return poderesConcedidosSelecionados.length == cotaPoderesConcedidos;
   }
 
   // Getters para Equipamento Inicial e Carga
@@ -155,7 +192,11 @@ class PersonagemState {
     List<String>? periciasEscolhidasOrigem,
     List<Poder>? poderesEscolhidosOrigem,
     Divindade? divindadeSelecionada,
+    List<Poder>? poderesConcedidosSelecionados,
     Poder? poderConcedidoSelecionado,
+    TipoEnergia? canalizacaoSelecionada,
+    bool anularCanalizacao = false,
+    bool? modoEstritoDevocao,
     bool anularDivindade = false,
     List<int>? valoresRolados,
     Map<String, int>? alocacaoIndices,
@@ -185,9 +226,16 @@ class PersonagemState {
       divindadeSelecionada: anularDivindade
           ? null
           : (divindadeSelecionada ?? this.divindadeSelecionada),
-      poderConcedidoSelecionado: anularDivindade
+      poderesConcedidosSelecionados: anularDivindade
+          ? const []
+          : (poderesConcedidosSelecionados ??
+              (poderConcedidoSelecionado != null
+                  ? [poderConcedidoSelecionado]
+                  : this.poderesConcedidosSelecionados)),
+      canalizacaoSelecionada: (anularDivindade || anularCanalizacao)
           ? null
-          : (poderConcedidoSelecionado ?? this.poderConcedidoSelecionado),
+          : (canalizacaoSelecionada ?? this.canalizacaoSelecionada),
+      modoEstritoDevocao: modoEstritoDevocao ?? this.modoEstritoDevocao,
       valoresRolados: valoresRolados ?? this.valoresRolados,
       alocacaoIndices: alocacaoIndices ?? this.alocacaoIndices,
       pontosRestantesCompra:
@@ -554,35 +602,90 @@ class PersonagemCubit extends Cubit<PersonagemState> {
 
   // --- MÉTODOS DE DIVINDADE / DEVOÇÃO ---
 
+  void alternarModoEstritoDevocao(bool estrito) {
+    emit(state.copyWith(modoEstritoDevocao: estrito));
+  }
+
   void selecionarDivindade(Divindade? divindade) {
     if (divindade == null) {
       // Optou por não ser devoto / desmarcou
-      emit(state.copyWith(anularDivindade: true));
-    } else {
       emit(
         state.copyWith(
-          divindadeSelecionada: divindade,
-          poderConcedidoSelecionado:
-              null, // Reseta poder concedido ao trocar de divindade
+          anularDivindade: true,
+          poderesConcedidosSelecionados: const [],
+          anularCanalizacao: true,
         ),
       );
+      return;
     }
+
+    // Define canalização inicial se a divindade for de canalização exclusiva
+    TipoEnergia? canalizacao;
+    if (divindade.canalizacaoPermitida == CanalizacaoOpcao.apenasPositiva) {
+      canalizacao = TipoEnergia.positiva;
+    } else if (divindade.canalizacaoPermitida == CanalizacaoOpcao.apenasNegativa) {
+      canalizacao = TipoEnergia.negativa;
+    }
+
+    emit(
+      state.copyWith(
+        divindadeSelecionada: divindade,
+        poderesConcedidosSelecionados: const [],
+        canalizacaoSelecionada: canalizacao,
+        anularCanalizacao: canalizacao == null,
+      ),
+    );
+  }
+
+  void selecionarCanalizacao(TipoEnergia energia) {
+    emit(state.copyWith(canalizacaoSelecionada: energia));
   }
 
   void selecionarPoderConcedido(Poder poder) {
-    emit(state.copyWith(poderConcedidoSelecionado: poder));
+    final cota = state.cotaPoderesConcedidos;
+    final atuais = List<Poder>.from(state.poderesConcedidosSelecionados);
+    final index = atuais.indexWhere((p) => p.key == poder.key);
+
+    if (index >= 0) {
+      // Desmarca o poder caso já esteja selecionado
+      atuais.removeAt(index);
+    } else {
+      if (cota == 1) {
+        // Devoto comum: seleciona 1
+        atuais.clear();
+        atuais.add(poder);
+      } else {
+        // Devoto fiel: escolhe até 2 poderes
+        if (atuais.length < cota) {
+          atuais.add(poder);
+        } else {
+          // Já tem 2 poderes: substitui o mais antigo
+          atuais.removeAt(0);
+          atuais.add(poder);
+        }
+      }
+    }
+
+    emit(state.copyWith(poderesConcedidosSelecionados: atuais));
   }
 
   void consolidarDivindade() {
     if (!state.etapaDivindadeConcluida) return;
 
     if (state.divindadeSelecionada == null) {
-      final novoPersonagem = state.personagem.copyWith(anularDivindade: true);
+      final novoPersonagem = state.personagem.copyWith(
+        anularDivindade: true,
+        anularCanalizacao: true,
+      );
       emit(state.copyWith(personagem: novoPersonagem));
     } else {
+      final energiaFinal = state.canalizacaoSelecionada ??
+          state.divindadeSelecionada!.energiaCanalizada;
+
       final novoPersonagem = state.personagem.copyWith(
         divindade: state.divindadeSelecionada,
-        poderConcedido: state.poderConcedidoSelecionado,
+        poderesConcedidos: state.poderesConcedidosSelecionados,
+        canalizacaoEnergia: energiaFinal,
       );
       emit(state.copyWith(personagem: novoPersonagem));
     }

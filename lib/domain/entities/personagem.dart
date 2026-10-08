@@ -47,9 +47,17 @@ class Personagem {
   // Montaria Sagrada (Paladino)
   final MontariaSagrada? montariaSagrada;
 
-  // Campos referentes a divindade
+  // Campos referentes a divindade e devoção
   final Divindade? divindade;
-  final Poder? poderConcedido;
+  final List<Poder> poderesConcedidos;
+  final TipoEnergia? canalizacaoEnergia;
+  final bool punicaoDivinaAtiva;
+
+  Poder? get poderConcedido =>
+      poderesConcedidos.isNotEmpty ? poderesConcedidos.first : null;
+
+  List<Poder> get poderesConcedidosAtivos =>
+      punicaoDivinaAtiva ? const [] : poderesConcedidos;
 
   // Finalização e personalização do personagem
   final String id; // Identificador único
@@ -68,7 +76,7 @@ class Personagem {
   final int experienciaAtual;
 
   int get pvAtual => _pvAtual ?? pvTotal;
-  int get pmAtual => _pmAtual ?? pmTotal;
+  int get pmAtual => punicaoDivinaAtiva ? 0 : (_pmAtual ?? pmTotal);
 
   Personagem({
     required this.nome,
@@ -93,9 +101,12 @@ class Personagem {
     this.tipoCompanheiroAnimal,
     // Montaria Sagrada (Paladino)
     this.montariaSagrada,
-    // Campos referentes a divindade
+    // Campos referentes a divindade e devoção
     this.divindade,
-    this.poderConcedido,
+    List<Poder>? poderesConcedidos,
+    Poder? poderConcedido,
+    this.canalizacaoEnergia,
+    this.punicaoDivinaAtiva = false,
     // Campos de personalização (com fallback para id se vier nulo)
     String? id,
     this.idade = 20,
@@ -110,6 +121,8 @@ class Personagem {
     int? pmAtual,
     this.experienciaAtual = 0,
   }) : id = id ?? DateTime.now().millisecondsSinceEpoch.toString(),
+       poderesConcedidos = poderesConcedidos ??
+           (poderConcedido != null ? [poderConcedido] : const []),
        _pvAtual = pvAtual,
        _pmAtual = pmAtual;
 
@@ -123,6 +136,8 @@ class Personagem {
         idClasse == 'druida' ||
         idClasse == 'paladino';
   }
+
+  bool get ehDevotoFiel => exigeDevocao;
 
   factory Personagem.inicial() {
     return Personagem(
@@ -194,9 +209,13 @@ class Personagem {
     // Montaria Sagrada (Paladino)
     MontariaSagrada? montariaSagrada,
     bool anularMontaria = false,
-    // Campos referentes a divindade
+    // Campos referentes a divindade e devoção
     Divindade? divindade,
+    List<Poder>? poderesConcedidos,
     Poder? poderConcedido,
+    TipoEnergia? canalizacaoEnergia,
+    bool anularCanalizacao = false,
+    bool? punicaoDivinaAtiva,
     bool anularDivindade = false,
     // Campos de personalização
     int? idade,
@@ -242,9 +261,18 @@ class Personagem {
           ? null
           : (montariaSagrada ?? this.montariaSagrada),
       divindade: anularDivindade ? null : (divindade ?? this.divindade),
-      poderConcedido: anularDivindade
+      poderesConcedidos: anularDivindade
+          ? const []
+          : (poderesConcedidos ??
+              (poderConcedido != null
+                  ? [poderConcedido]
+                  : this.poderesConcedidos)),
+      canalizacaoEnergia: (anularDivindade || anularCanalizacao)
           ? null
-          : (poderConcedido ?? this.poderConcedido),
+          : (canalizacaoEnergia ?? this.canalizacaoEnergia),
+      punicaoDivinaAtiva: anularDivindade
+          ? false
+          : (punicaoDivinaAtiva ?? this.punicaoDivinaAtiva),
       idade: idade ?? this.idade,
       alinhamento: alinhamento ?? this.alinhamento,
       descricaoAparencia: descricaoAparencia ?? this.descricaoAparencia,
@@ -295,13 +323,13 @@ class Personagem {
   }
 
   Personagem gastarPM(int gasto) {
-    if (gasto <= 0) return this;
+    if (punicaoDivinaAtiva || gasto <= 0) return this;
     final novoPM = (pmAtual - gasto).clamp(0, pmTotal);
     return copyWith(pmAtual: novoPM);
   }
 
   Personagem recuperarPM(int recuperacao) {
-    if (recuperacao <= 0) return this;
+    if (punicaoDivinaAtiva || recuperacao <= 0) return this;
     final novoPM = (pmAtual + recuperacao).clamp(0, pmTotal);
     return copyWith(pmAtual: novoPM);
   }
@@ -312,7 +340,25 @@ class Personagem {
   }
 
   Personagem restaurarRecursos() {
-    return copyWith(pvAtual: pvTotal, pmAtual: pmTotal);
+    return copyWith(
+      pvAtual: pvTotal,
+      pmAtual: punicaoDivinaAtiva ? 0 : pmTotal,
+    );
+  }
+
+  /// Aplica a penalidade mecânica de Punição Divina (decretada pelo Mestre)
+  Personagem aplicarPunicaoDivina() {
+    return copyWith(
+      punicaoDivinaAtiva: true,
+      pmAtual: 0,
+    );
+  }
+
+  /// Remove a Punição Divina após o cumprimento de penitência
+  Personagem removerPunicaoDivina() {
+    return copyWith(
+      punicaoDivinaAtiva: false,
+    );
   }
 
   // Getters específicos de Druida
