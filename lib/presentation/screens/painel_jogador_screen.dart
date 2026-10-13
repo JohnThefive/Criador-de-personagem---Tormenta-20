@@ -2,15 +2,16 @@ import 'dart:io';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:t20_creator/domain/entities/classe_do_personagem.dart';
-import '../../domain/entities/classe.dart';
-import '../../domain/entities/personagem.dart';
-import '../../domain/entities/divindade.dart';
-import '../../domain/entities/companheiro_animal.dart';
-import '../../domain/entities/montaria_sagrada.dart';
+import 'package:t20_creator/domain/entities/personagem/classe_do_personagem.dart';
+import '../../domain/entities/personagem/classe.dart';
+import '../../domain/entities/personagem/personagem.dart';
+import '../../domain/entities/personagem/divindade.dart';
+import '../../domain/entities/habilidades_complexas/companheiro_animal.dart';
+import '../../domain/entities/habilidades_complexas/montaria_sagrada.dart';
 import '../../domain/services/data_services/call_formas_selvagens.dart';
 import '../../domain/services/data_services/call_companheiros.dart';
 import '../../domain/services/data_services/call_montaria_sagrada.dart';
+import '../../domain/services/data_services/call_magias.dart';
 import '../../domain/services/personagem_storage_service.dart';
 import 'selecao_poderes_screen.dart';
 import 'aba_combate_view.dart';
@@ -377,19 +378,21 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
               color: sobPunicao ? Colors.green[700] : const Color(0xFFD32F2F),
             ),
             const SizedBox(width: 8),
-            Text(sobPunicao ? 'Remover Punição Divina' : 'Aplicar Punição Divina'),
+            Text(
+              sobPunicao ? 'Remover Punição Divina' : 'Aplicar Punição Divina',
+            ),
           ],
         ),
         content: Text(
           sobPunicao
               ? 'O personagem cumpriu a penitência exigida pela divindade ${_personagem.divindade?.nome ?? ""}?\n\n'
-                  'Ao confirmar, a punição será revogada, permitindo que o herói volte a recuperar Pontos de Mana normalmente e reative seus poderes concedidos.'
+                    'Ao confirmar, a punição será revogada, permitindo que o herói volte a recuperar Pontos de Mana normalmente e reative seus poderes concedidos.'
               : 'ATENÇÃO (Ação do Mestre):\n\n'
-                  'O personagem cometeu uma violação grave de suas Obrigações e Restrições perante ${_personagem.divindade?.nome ?? "sua divindade"}.\n\n'
-                  'Efeitos mecânicos oficiais (T20 JDA):\n'
-                  '• Todos os Pontos de Mana (PM) atuais são reduzidos a 0 imediatamente.\n'
-                  '• A recuperação de PM fica bloqueada (descanso ou itens não recuperam PM).\n'
-                  '• Todos os poderes concedidos são desativados até que a penitência seja cumprida.',
+                    'O personagem cometeu uma violação grave de suas Obrigações e Restrições perante ${_personagem.divindade?.nome ?? "sua divindade"}.\n\n'
+                    'Efeitos mecânicos oficiais (T20 JDA):\n'
+                    '• Todos os Pontos de Mana (PM) atuais são reduzidos a 0 imediatamente.\n'
+                    '• A recuperação de PM fica bloqueada (descanso ou itens não recuperam PM).\n'
+                    '• Todos os poderes concedidos são desativados até que a penitência seja cumprida.',
         ),
         actions: [
           TextButton(
@@ -398,7 +401,9 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: sobPunicao ? Colors.green[700] : const Color(0xFFD32F2F),
+              backgroundColor: sobPunicao
+                  ? Colors.green[700]
+                  : const Color(0xFFD32F2F),
               foregroundColor: Colors.white,
             ),
             onPressed: () => Navigator.pop(ctx, true),
@@ -1927,7 +1932,11 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
             ),
             child: Row(
               children: [
-                Icon(Icons.warning_rounded, color: Colors.red.shade900, size: 24),
+                Icon(
+                  Icons.warning_rounded,
+                  color: Colors.red.shade900,
+                  size: 24,
+                ),
                 const SizedBox(width: 8),
                 Expanded(
                   child: Column(
@@ -1958,7 +1967,10 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
                     foregroundColor: Colors.red.shade900,
                     padding: const EdgeInsets.symmetric(horizontal: 6),
                   ),
-                  child: const Text('DETALHES', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold)),
+                  child: const Text(
+                    'DETALHES',
+                    style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
+                  ),
                 ),
               ],
             ),
@@ -2394,16 +2406,12 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
             ),
           ),
           // SEÇÃO DE PODERES ESPECIAIS DE DRUIDA (Forma Selvagem e Companheiro Animal)
-          if (_personagem.temPoderFormaSelvagem) ...[
-            _buildCardFormaSelvagem(),
-          ],
+          if (_personagem.temPoderFormaSelvagem) ...[_buildCardFormaSelvagem()],
           if (_personagem.temPoderCompanheiroAnimal) ...[
             _buildCardCompanheiroAnimal(),
           ],
           // SEÇÃO DE MONTARIA SAGRADA (PALADINO)
-          if (_personagem.temMontariaSagrada) ...[
-            _buildCardMontariaSagrada(),
-          ],
+          if (_personagem.temMontariaSagrada) ...[_buildCardMontariaSagrada()],
           if (classeDoPersonagem != null) ...[
             const SizedBox(height: 10),
             Row(
@@ -2584,7 +2592,10 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
                     ),
                     if (_personagem.ehDevotoFiel)
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 4,
+                        ),
                         decoration: BoxDecoration(
                           color: Colors.amber.shade100,
                           borderRadius: BorderRadius.circular(12),
@@ -2611,7 +2622,11 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
                       padding: EdgeInsets.zero,
                       labelPadding: const EdgeInsets.symmetric(horizontal: 8),
                       backgroundColor: Colors.grey.shade100,
-                      avatar: const Icon(Icons.colorize, size: 14, color: Colors.brown),
+                      avatar: const Icon(
+                        Icons.colorize,
+                        size: 14,
+                        color: Colors.brown,
+                      ),
                       label: Text(
                         'Arma: ${_personagem.divindade!.armaPreferida}',
                         style: const TextStyle(fontSize: 11),
@@ -2622,7 +2637,9 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
                         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         padding: EdgeInsets.zero,
                         labelPadding: const EdgeInsets.symmetric(horizontal: 8),
-                        backgroundColor: _personagem.canalizacaoEnergia == TipoEnergia.positiva
+                        backgroundColor:
+                            _personagem.canalizacaoEnergia ==
+                                TipoEnergia.positiva
                             ? Colors.green.shade50
                             : Colors.purple.shade50,
                         avatar: Icon(
@@ -2630,7 +2647,9 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
                               ? Icons.favorite
                               : Icons.dark_mode,
                           size: 14,
-                          color: _personagem.canalizacaoEnergia == TipoEnergia.positiva
+                          color:
+                              _personagem.canalizacaoEnergia ==
+                                  TipoEnergia.positiva
                               ? Colors.green.shade700
                               : Colors.purple.shade700,
                         ),
@@ -2639,7 +2658,9 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
                           style: TextStyle(
                             fontSize: 11,
                             fontWeight: FontWeight.bold,
-                            color: _personagem.canalizacaoEnergia == TipoEnergia.positiva
+                            color:
+                                _personagem.canalizacaoEnergia ==
+                                    TipoEnergia.positiva
                                 ? Colors.green.shade900
                                 : Colors.purple.shade900,
                           ),
@@ -2656,12 +2677,19 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
                     decoration: BoxDecoration(
                       color: Colors.red.shade50,
                       borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: Colors.red.shade400, width: 1.5),
+                      border: Border.all(
+                        color: Colors.red.shade400,
+                        width: 1.5,
+                      ),
                     ),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Icon(Icons.warning_rounded, color: Colors.red.shade900, size: 24),
+                        Icon(
+                          Icons.warning_rounded,
+                          color: Colors.red.shade900,
+                          size: 24,
+                        ),
                         const SizedBox(width: 8),
                         Expanded(
                           child: Column(
@@ -2708,8 +2736,14 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
                             ? Colors.green.shade700
                             : Colors.red.shade300,
                       ),
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                      textStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 6,
+                      ),
+                      textStyle: const TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     onPressed: _mostrarDialogoPunicaoDivina,
                     icon: Icon(
@@ -2811,7 +2845,10 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
                       if (_personagem.punicaoDivinaAtiva) ...[
                         const SizedBox(width: 6),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 6,
+                            vertical: 2,
+                          ),
                           decoration: BoxDecoration(
                             color: Colors.red.shade100,
                             borderRadius: BorderRadius.circular(6),
@@ -3126,9 +3163,7 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
                         margin: const EdgeInsets.only(bottom: 12),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
-                          side: BorderSide(
-                            color: Colors.grey.shade300,
-                          ),
+                          side: BorderSide(color: Colors.grey.shade300),
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(12),
@@ -3236,14 +3271,20 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
                                       ? () {
                                           Navigator.pop(ctx);
                                           _atualizarPersonagem(
-                                            _personagem.assumirFormaSelvagem(forma),
+                                            _personagem.assumirFormaSelvagem(
+                                              forma,
+                                            ),
                                           );
-                                          ScaffoldMessenger.of(context).showSnackBar(
+                                          ScaffoldMessenger.of(
+                                            context,
+                                          ).showSnackBar(
                                             SnackBar(
                                               content: Text(
                                                 'Você assumiu a ${forma.nome}!',
                                               ),
-                                              backgroundColor: const Color(0xFF2E7D32),
+                                              backgroundColor: const Color(
+                                                0xFF2E7D32,
+                                              ),
                                             ),
                                           );
                                         }
@@ -3308,13 +3349,18 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
                   ),
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 6,
+                    vertical: 2,
+                  ),
                   decoration: BoxDecoration(
                     color: Colors.amber.shade200,
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: Text(
-                    TipoCompanheiroAnimal.tierParaNivel(nivelDruida).toUpperCase(),
+                    TipoCompanheiroAnimal.tierParaNivel(
+                      nivelDruida,
+                    ).toUpperCase(),
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 10,
@@ -3380,9 +3426,7 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
           _personagem.copyWith(tipoCompanheiroAnimal: comp.key),
         );
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Companheiro "${comp.nome}" selecionado!'),
-          ),
+          SnackBar(content: Text('Companheiro "${comp.nome}" selecionado!')),
         );
       },
     );
@@ -3391,10 +3435,15 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
   // --- SEÇÃO DE MONTARIA SAGRADA DO PALADINO ---
 
   Widget _buildBannerMontariaSagradaAtiva() {
-    final montaria = _personagem.montariaSagrada ??
+    final montaria =
+        _personagem.montariaSagrada ??
         MontariaSagrada(
-          nomeCustomizado: BancoDeRegrasMontariaSagrada.animalPadraoParaTamanho(_personagem.tamanho),
-          especie: BancoDeRegrasMontariaSagrada.animalPadraoParaTamanho(_personagem.tamanho),
+          nomeCustomizado: BancoDeRegrasMontariaSagrada.animalPadraoParaTamanho(
+            _personagem.tamanho,
+          ),
+          especie: BancoDeRegrasMontariaSagrada.animalPadraoParaTamanho(
+            _personagem.tamanho,
+          ),
         );
     final tier = _personagem.tierMontariaSagrada;
     final deslocamento = _personagem.deslocamentoMontadoMetros;
@@ -3468,11 +3517,16 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
                 onPressed: () {
                   _atualizarPersonagem(_personagem.dispensarMontariaSagrada());
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Montaria sagrada dispensada.')),
+                    const SnackBar(
+                      content: Text('Montaria sagrada dispensada.'),
+                    ),
                   );
                 },
                 icon: const Icon(Icons.close, size: 16),
-                label: const Text('Dispensar Montaria', style: TextStyle(fontSize: 12)),
+                label: const Text(
+                  'Dispensar Montaria',
+                  style: TextStyle(fontSize: 12),
+                ),
               ),
             ),
           ],
@@ -3482,10 +3536,15 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
   }
 
   Widget _buildCardMontariaSagrada() {
-    final montaria = _personagem.montariaSagrada ??
+    final montaria =
+        _personagem.montariaSagrada ??
         MontariaSagrada(
-          nomeCustomizado: BancoDeRegrasMontariaSagrada.animalPadraoParaTamanho(_personagem.tamanho),
-          especie: BancoDeRegrasMontariaSagrada.animalPadraoParaTamanho(_personagem.tamanho),
+          nomeCustomizado: BancoDeRegrasMontariaSagrada.animalPadraoParaTamanho(
+            _personagem.tamanho,
+          ),
+          especie: BancoDeRegrasMontariaSagrada.animalPadraoParaTamanho(
+            _personagem.tamanho,
+          ),
         );
     final tier = _personagem.tierMontariaSagrada;
     final deslocamento = _personagem.deslocamentoMontadoMetros;
@@ -3523,7 +3582,10 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
                   onPressed: () => _mostrarDialogoEditarMontaria(montaria),
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 6,
+                    vertical: 2,
+                  ),
                   decoration: BoxDecoration(
                     color: Colors.amber.shade200,
                     borderRadius: BorderRadius.circular(6),
@@ -3574,12 +3636,19 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
                 ),
                 child: Row(
                   children: [
-                    const Icon(Icons.check_circle, color: Colors.green, size: 18),
+                    const Icon(
+                      Icons.check_circle,
+                      color: Colors.green,
+                      size: 18,
+                    ),
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
                         'Variante Mundana Ativa: Animal físico permanente (sem custo de PM).',
-                        style: TextStyle(fontSize: 11, color: Colors.green.shade900),
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: Colors.green.shade900,
+                        ),
                       ),
                     ),
                   ],
@@ -3607,45 +3676,67 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFFD32F2F),
                         foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 6,
+                        ),
                       ),
                       onPressed: () {
-                        _atualizarPersonagem(_personagem.dispensarMontariaSagrada());
+                        _atualizarPersonagem(
+                          _personagem.dispensarMontariaSagrada(),
+                        );
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Montaria sagrada dispensada.')),
+                          const SnackBar(
+                            content: Text('Montaria sagrada dispensada.'),
+                          ),
                         );
                       },
                       icon: const Icon(Icons.close, size: 14),
-                      label: const Text('Dispensar', style: TextStyle(fontSize: 11)),
+                      label: const Text(
+                        'Dispensar',
+                        style: TextStyle(fontSize: 11),
+                      ),
                     )
                   else
                     ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.brown,
                         foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 6,
+                        ),
                       ),
                       onPressed: () {
                         const custo = 2;
                         if (_personagem.pmAtual < custo) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
-                              content: Text('PM insuficiente para invocar a montaria sagrada (custa 2 PM).'),
+                              content: Text(
+                                'PM insuficiente para invocar a montaria sagrada (custa 2 PM).',
+                              ),
                               backgroundColor: Colors.red,
                             ),
                           );
                           return;
                         }
-                        _atualizarPersonagem(_personagem.invocarMontariaSagrada());
+                        _atualizarPersonagem(
+                          _personagem.invocarMontariaSagrada(),
+                        );
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text('${montaria.nomeCustomizado} invocada! (-2 PM)'),
+                            content: Text(
+                              '${montaria.nomeCustomizado} invocada! (-2 PM)',
+                            ),
                             backgroundColor: Colors.green.shade700,
                           ),
                         );
                       },
                       icon: const Icon(Icons.auto_awesome, size: 14),
-                      label: const Text('Invocar (2 PM)', style: TextStyle(fontSize: 11)),
+                      label: const Text(
+                        'Invocar (2 PM)',
+                        style: TextStyle(fontSize: 11),
+                      ),
                     ),
                 ],
               ),
@@ -3677,13 +3768,19 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
 
             // Propriedades e Regras
             Theme(
-              data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+              data: Theme.of(
+                context,
+              ).copyWith(dividerColor: Colors.transparent),
               child: ExpansionTile(
                 tilePadding: EdgeInsets.zero,
                 childrenPadding: EdgeInsets.zero,
                 title: const Text(
                   'Propriedades Sagradas',
-                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.brown),
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.brown,
+                  ),
                 ),
                 children: BancoDeRegrasMontariaSagrada.propriedades.map((prop) {
                   return Padding(
@@ -3691,11 +3788,20 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('• ', style: TextStyle(color: Colors.brown, fontWeight: FontWeight.bold)),
+                        const Text(
+                          '• ',
+                          style: TextStyle(
+                            color: Colors.brown,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                         Expanded(
                           child: Text(
                             prop,
-                            style: const TextStyle(fontSize: 11, color: Colors.black87),
+                            style: const TextStyle(
+                              fontSize: 11,
+                              color: Colors.black87,
+                            ),
                           ),
                         ),
                       ],
@@ -3711,8 +3817,12 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
   }
 
   void _mostrarDialogoEditarMontaria(MontariaSagrada montariaAtual) {
-    final nomeController = TextEditingController(text: montariaAtual.nomeCustomizado);
-    final especieController = TextEditingController(text: montariaAtual.especie);
+    final nomeController = TextEditingController(
+      text: montariaAtual.nomeCustomizado,
+    );
+    final especieController = TextEditingController(
+      text: montariaAtual.especie,
+    );
 
     showDialog(
       context: context,
@@ -3749,8 +3859,12 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
               foregroundColor: Colors.white,
             ),
             onPressed: () {
-              final novoNome = nomeController.text.trim().isEmpty ? 'Cavalo de Guerra' : nomeController.text.trim();
-              final novaEspecie = especieController.text.trim().isEmpty ? 'Cavalo de Guerra' : especieController.text.trim();
+              final novoNome = nomeController.text.trim().isEmpty
+                  ? 'Cavalo de Guerra'
+                  : nomeController.text.trim();
+              final novaEspecie = especieController.text.trim().isEmpty
+                  ? 'Cavalo de Guerra'
+                  : especieController.text.trim();
               _atualizarPersonagem(
                 _personagem.atualizarMontariaSagrada(
                   montariaAtual.copyWith(
@@ -3772,6 +3886,9 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
   }
 
   Widget _buildTabMagia() {
+    final magiasIds = _personagem.magiasConhecidas;
+    final magias = magiasIds.map((id) => BancoDeMagias.getById(id)).toList();
+
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
@@ -3807,13 +3924,106 @@ class _PainelJogadorScreenState extends State<PainelJogadorScreen>
             style: TextStyle(fontSize: 13, height: 1.4),
           ),
         ),
-        const SizedBox(height: 24),
-        const Center(
-          child: Text(
-            'Nenhuma magia personalizada vinculada.',
-            style: TextStyle(color: Colors.grey),
-          ),
-        ),
+        const SizedBox(height: 16),
+        if (magias.isEmpty)
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 32),
+            child: Center(
+              child: Text(
+                'Nenhuma magia conhecida.',
+                style: TextStyle(color: Colors.grey),
+              ),
+            ),
+          )
+        else
+          ...magias.map((magia) {
+            return Card(
+              margin: const EdgeInsets.only(bottom: 10),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+                side: BorderSide(color: Colors.grey.shade300),
+              ),
+              child: ExpansionTile(
+                leading: Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFEFF6FF),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: const Icon(Icons.auto_awesome, color: Color(0xFF2563EB), size: 20),
+                ),
+                title: Text(
+                  magia.nome,
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                ),
+                subtitle: Text(
+                  '${magia.escola.toUpperCase()} • ${magia.circulo}º Círculo • ${magia.tipo.toUpperCase()}',
+                  style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
+                ),
+                childrenPadding: const EdgeInsets.all(16),
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          'Execução: ${magia.execucao.detalhes ?? magia.execucao.tipo}',
+                          style: const TextStyle(fontSize: 12.5),
+                        ),
+                      ),
+                      Expanded(
+                        child: Text(
+                          'Alcance: ${magia.alcance.detalhes ?? magia.alcance.tipo}',
+                          style: const TextStyle(fontSize: 12.5),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 6),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          'Duração: ${magia.duracao.detalhes ?? magia.duracao.tipo}',
+                          style: const TextStyle(fontSize: 12.5),
+                        ),
+                      ),
+                      if (magia.resistencia != null)
+                        Expanded(
+                          child: Text(
+                            'Resistência: ${magia.resistencia!.tipoTeste ?? ""} (${magia.resistencia!.resultadoSucesso})',
+                            style: const TextStyle(fontSize: 12.5),
+                          ),
+                        ),
+                    ],
+                  ),
+                  const Divider(height: 18),
+                  Text(
+                    magia.descricao,
+                    style: const TextStyle(fontSize: 13, height: 1.4),
+                  ),
+                  if (magia.aprimoramentos.isNotEmpty) ...[
+                    const SizedBox(height: 12),
+                    const Text(
+                      'Aprimoramentos:',
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                    ),
+                    const SizedBox(height: 6),
+                    ...magia.aprimoramentos.map((ap) {
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 4),
+                        child: Text(
+                          ap.custoAdicionalPM > 0
+                              ? '• +${ap.custoAdicionalPM} PM: ${ap.descricao}'
+                              : '• Truque: ${ap.descricao}',
+                          style: const TextStyle(fontSize: 12),
+                        ),
+                      );
+                    }),
+                  ],
+                ],
+              ),
+            );
+          }),
       ],
     );
   }

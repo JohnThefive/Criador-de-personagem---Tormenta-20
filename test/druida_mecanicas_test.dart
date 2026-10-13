@@ -1,13 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:t20_creator/domain/entities/atributos.dart';
-import 'package:t20_creator/domain/entities/classe.dart';
-import 'package:t20_creator/domain/entities/classe_do_personagem.dart';
-import 'package:t20_creator/domain/entities/companheiro_animal.dart';
-import 'package:t20_creator/domain/entities/forma_selvagem.dart';
-import 'package:t20_creator/domain/entities/personagem.dart';
-import 'package:t20_creator/domain/entities/poder.dart';
+import 'package:t20_creator/domain/entities/personagem/atributos.dart';
+import 'package:t20_creator/domain/entities/personagem/classe.dart';
+import 'package:t20_creator/domain/entities/personagem/classe_do_personagem.dart';
+import 'package:t20_creator/domain/entities/habilidades_complexas/companheiro_animal.dart';
+import 'package:t20_creator/domain/entities/habilidades_complexas/forma_selvagem.dart';
+import 'package:t20_creator/domain/entities/personagem/personagem.dart';
+import 'package:t20_creator/domain/entities/personagem/poder.dart';
 import 'package:t20_creator/domain/entities/combate/combatente.dart';
 import 'package:t20_creator/domain/services/data_services/call_classes.dart';
 import 'package:t20_creator/domain/services/data_services/call_companheiros.dart';
@@ -25,7 +25,9 @@ void main() {
       );
     }
 
-    final arquivoFormas = File('assets/data/classes_data/especifico_classe/druida/formas_selvagens.json');
+    final arquivoFormas = File(
+      'assets/data/classes_data/especifico_classe/druida/formas_selvagens.json',
+    );
     if (arquivoFormas.existsSync()) {
       final jsonList = jsonDecode(arquivoFormas.readAsStringSync()) as List;
       BancoDeFormasSelvagens.carregarParaTestes(
@@ -33,9 +35,13 @@ void main() {
       );
     }
 
-    final arquivoCompanheiros = File('assets/data/classes_data/especifico_classe/druida/tipos_companheiro_animal.json');
+    final arquivoCompanheiros = File(
+      'assets/data/classes_data/especifico_classe/druida/tipos_companheiro_animal.json',
+    );
     if (arquivoCompanheiros.existsSync()) {
-      final jsonMap = jsonDecode(arquivoCompanheiros.readAsStringSync()) as Map<String, dynamic>;
+      final jsonMap =
+          jsonDecode(arquivoCompanheiros.readAsStringSync())
+              as Map<String, dynamic>;
       final jsonList = jsonMap['tipos'] as List;
       BancoDeCompanheiros.carregarParaTestes(
         jsonList.map((e) => TipoCompanheiroAnimal.fromJson(e)).toList(),
@@ -81,8 +87,11 @@ void main() {
     test('Druida não possui caminhos arcanos/especializações de 1º nível', () {
       final druida = BancoDeClasses.getById('druida');
       expect(druida, isNotNull);
-      expect(druida!.caminhosDisponiveis, isEmpty,
-          reason: 'Formas Selvagens não devem ser caminhos arcanos de nível 1');
+      expect(
+        druida!.caminhosDisponiveis,
+        isEmpty,
+        reason: 'Formas Selvagens não devem ser caminhos arcanos de nível 1',
+      );
     });
 
     test('Banco de Formas Selvagens possui as 5 formas oficiais', () {
@@ -96,7 +105,7 @@ void main() {
           'Forma Feroz',
           'Forma Resistente',
           'Forma Sorrateira',
-          'Forma Veloz'
+          'Forma Veloz',
         ]),
       );
     });
@@ -114,44 +123,51 @@ void main() {
           'Fortão',
           'Guardião',
           'Montaria',
-          'Perseguidor'
+          'Perseguidor',
         ]),
       );
     });
   });
 
   group('Druida - Mecânica de Forma Selvagem', () {
-    test('Assumir Forma Feroz consome PM e aplica bônus de FOR e Armas Naturais', () {
-      const poderForma = Poder(
-        key: 'FORMA_SELVAGEM',
-        nome: 'Forma Selvagem',
-        descricao: 'Transformação em animal.',
-        nivelMinimo: 2,
-      );
+    test(
+      'Assumir Forma Feroz consome PM e aplica bônus de FOR e Armas Naturais',
+      () {
+        const poderForma = Poder(
+          key: 'FORMA_SELVAGEM',
+          nome: 'Forma Selvagem',
+          descricao: 'Transformação em animal.',
+          nivelMinimo: 2,
+        );
 
-      final druida = criarDruidaBase(nivel: 2, poderes: [poderForma]);
-      expect(druida.temPoderFormaSelvagem, isTrue);
-      expect(druida.estaEmFormaSelvagem, isFalse);
-      expect(druida.getValorFinal('FOR'), 2);
+        final druida = criarDruidaBase(nivel: 2, poderes: [poderForma]);
+        expect(druida.temPoderFormaSelvagem, isTrue);
+        expect(druida.estaEmFormaSelvagem, isFalse);
+        expect(druida.getValorFinal('FOR'), 2);
 
-      final formaFeroz = BancoDeFormasSelvagens.getPorNome('Feroz');
-      expect(formaFeroz, isNotNull);
+        final formaFeroz = BancoDeFormasSelvagens.getPorNome('Feroz');
+        expect(formaFeroz, isNotNull);
 
-      // Assumir Forma Feroz (nível 2 = tier padrão, custo 3 PM, FOR +6)
-      final transformado = druida.assumirFormaSelvagem(formaFeroz!);
-      expect(transformado.estaEmFormaSelvagem, isTrue);
-      expect(transformado.pmAtual, 5, reason: '8 PM máximo - 3 PM = 5 PM');
-      expect(transformado.getValorFinal('FOR'), 8, reason: '2 base + 6 da Forma Feroz = 8');
+        // Assumir Forma Feroz (nível 2 = tier padrão, custo 3 PM, FOR +6)
+        final transformado = druida.assumirFormaSelvagem(formaFeroz!);
+        expect(transformado.estaEmFormaSelvagem, isTrue);
+        expect(transformado.pmAtual, 5, reason: '8 PM máximo - 3 PM = 5 PM');
+        expect(
+          transformado.getValorFinal('FOR'),
+          8,
+          reason: '2 base + 6 da Forma Feroz = 8',
+        );
 
-      // Verifica armas naturais
-      expect(transformado.armasEfetivas.length, 1);
-      final armaNatural = transformado.armasEfetivas.first;
-      expect(armaNatural.dano, '1d8');
+        // Verifica armas naturais
+        expect(transformado.armasEfetivas.length, 1);
+        final armaNatural = transformado.armasEfetivas.first;
+        expect(armaNatural.dano, '1d8');
 
-      // Combatente gerado tem arma natural equipada
-      final combatente = Combatente.doPersonagem(transformado);
-      expect(combatente.armas.any((a) => a.dano == '1d8'), isTrue);
-    });
+        // Combatente gerado tem arma natural equipada
+        final combatente = Combatente.doPersonagem(transformado);
+        expect(combatente.armas.any((a) => a.dano == '1d8'), isTrue);
+      },
+    );
 
     test('Assumir Forma Resistente aumenta Defesa e concede RD', () {
       final druida = criarDruidaBase(nivel: 2);
@@ -165,50 +181,66 @@ void main() {
       expect(transformado.rdTotal, 5);
     });
 
-    test('Forma Selvagem escala de nível (Padrão 2-5, Aprimorada 6-11, Superior 12+)', () {
-      final formaFeroz = BancoDeFormasSelvagens.getPorNome('Feroz')!;
+    test(
+      'Forma Selvagem escala de nível (Padrão 2-5, Aprimorada 6-11, Superior 12+)',
+      () {
+        final formaFeroz = BancoDeFormasSelvagens.getPorNome('Feroz')!;
 
-      // Nível 2 = Padrão (3 PM)
-      final d2 = criarDruidaBase(nivel: 2).assumirFormaSelvagem(formaFeroz);
-      expect(d2.formaSelvagemAtiva?.custoPm, 3);
-      expect(d2.formaSelvagemAtiva?.tier, 'padrao');
+        // Nível 2 = Padrão (3 PM)
+        final d2 = criarDruidaBase(nivel: 2).assumirFormaSelvagem(formaFeroz);
+        expect(d2.formaSelvagemAtiva?.custoPm, 3);
+        expect(d2.formaSelvagemAtiva?.tier, 'padrao');
 
-      // Nível 6 = Aprimorada (6 PM)
-      final d6 = criarDruidaBase(nivel: 6).assumirFormaSelvagem(formaFeroz);
-      expect(d6.formaSelvagemAtiva?.custoPm, 6);
-      expect(d6.formaSelvagemAtiva?.tier, 'aprimorada');
+        // Nível 6 = Aprimorada (6 PM)
+        final d6 = criarDruidaBase(nivel: 6).assumirFormaSelvagem(formaFeroz);
+        expect(d6.formaSelvagemAtiva?.custoPm, 6);
+        expect(d6.formaSelvagemAtiva?.tier, 'aprimorada');
 
-      // Nível 12 = Superior (10 PM)
-      final d12 = criarDruidaBase(nivel: 12).assumirFormaSelvagem(formaFeroz);
-      expect(d12.formaSelvagemAtiva?.custoPm, 10);
-      expect(d12.formaSelvagemAtiva?.tier, 'superior');
-    });
+        // Nível 12 = Superior (10 PM)
+        final d12 = criarDruidaBase(nivel: 12).assumirFormaSelvagem(formaFeroz);
+        expect(d12.formaSelvagemAtiva?.custoPm, 10);
+        expect(d12.formaSelvagemAtiva?.tier, 'superior');
+      },
+    );
 
-    test('Forma Selvagem é desfeita imediatamente ao cair inconsciente (PV <= 0) ou morrer', () {
-      final formaFeroz = BancoDeFormasSelvagens.getPorNome('Feroz')!;
-      final transformado = criarDruidaBase(nivel: 2).assumirFormaSelvagem(formaFeroz);
+    test(
+      'Forma Selvagem é desfeita imediatamente ao cair inconsciente (PV <= 0) ou morrer',
+      () {
+        final formaFeroz = BancoDeFormasSelvagens.getPorNome('Feroz')!;
+        final transformado = criarDruidaBase(
+          nivel: 2,
+        ).assumirFormaSelvagem(formaFeroz);
 
-      expect(transformado.estaEmFormaSelvagem, isTrue);
-      expect(transformado.getValorFinal('FOR'), 8);
+        expect(transformado.estaEmFormaSelvagem, isTrue);
+        expect(transformado.getValorFinal('FOR'), 8);
 
-      // Dano parcial (mantém forma)
-      final ferido = transformado.aplicarDano(10);
-      expect(ferido.pvAtual, 14);
-      expect(ferido.estaEmFormaSelvagem, isTrue);
+        // Dano parcial (mantém forma)
+        final ferido = transformado.aplicarDano(10);
+        expect(ferido.pvAtual, 14);
+        expect(ferido.estaEmFormaSelvagem, isTrue);
 
-      // Dano fatal / inconsciente (PV vai a 0 ou menos)
-      final inconsciente = ferido.aplicarDano(15); // 14 - 15 = -1 PV
-      expect(inconsciente.pvAtual, -1);
-      expect(inconsciente.estaEmFormaSelvagem, isFalse,
-          reason: 'A Forma Selvagem deve ser desfeita ao atingir PV <= 0');
-      expect(inconsciente.formaSelvagemAtiva, isNull);
-      expect(inconsciente.getValorFinal('FOR'), 2,
-          reason: 'Modificadores da forma voltam ao normal');
-    });
+        // Dano fatal / inconsciente (PV vai a 0 ou menos)
+        final inconsciente = ferido.aplicarDano(15); // 14 - 15 = -1 PV
+        expect(inconsciente.pvAtual, -1);
+        expect(
+          inconsciente.estaEmFormaSelvagem,
+          isFalse,
+          reason: 'A Forma Selvagem deve ser desfeita ao atingir PV <= 0',
+        );
+        expect(inconsciente.formaSelvagemAtiva, isNull);
+        expect(
+          inconsciente.getValorFinal('FOR'),
+          2,
+          reason: 'Modificadores da forma voltam ao normal',
+        );
+      },
+    );
 
     test('Reverter forma manualmente restaura atributos mantendo PV', () {
       final formaFeroz = BancoDeFormasSelvagens.getPorNome('Feroz')!;
-      final transformado = criarDruidaBase(nivel: 2).assumirFormaSelvagem(formaFeroz);
+      final transformado = criarDruidaBase(
+        nivel: 2,
+      ).assumirFormaSelvagem(formaFeroz);
 
       final revertido = transformado.reverterFormaSelvagem();
       expect(revertido.estaEmFormaSelvagem, isFalse);
@@ -257,22 +289,28 @@ void main() {
   });
 
   group('Druida - Persistência JSON de Forma Selvagem e Companheiro', () {
-    test('Salva e restaura personagem com Forma Selvagem e Companheiro Animal', () {
-      final formaVeloz = BancoDeFormasSelvagens.getPorNome('Veloz')!;
+    test(
+      'Salva e restaura personagem com Forma Selvagem e Companheiro Animal',
+      () {
+        final formaVeloz = BancoDeFormasSelvagens.getPorNome('Veloz')!;
 
-      final druidaOriginal = criarDruidaBase(
-        nivel: 3,
-        companheiro: 'GUARDIAO',
-      ).assumirFormaSelvagem(formaVeloz);
+        final druidaOriginal = criarDruidaBase(
+          nivel: 3,
+          companheiro: 'GUARDIAO',
+        ).assumirFormaSelvagem(formaVeloz);
 
-      final json = PersonagemStorageService.personagemToJson(druidaOriginal);
-      final restaurado = PersonagemStorageService.personagemFromJson(json);
+        final json = PersonagemStorageService.personagemToJson(druidaOriginal);
+        final restaurado = PersonagemStorageService.personagemFromJson(json);
 
-      expect(restaurado.estaEmFormaSelvagem, isTrue);
-      expect(restaurado.formaSelvagemAtiva?.nome, 'Forma Veloz');
-      expect(restaurado.tipoCompanheiroAnimal, 'GUARDIAO');
-      expect(restaurado.defesaFinal, druidaOriginal.defesaFinal);
-      expect(restaurado.getValorFinal('DES'), druidaOriginal.getValorFinal('DES'));
-    });
+        expect(restaurado.estaEmFormaSelvagem, isTrue);
+        expect(restaurado.formaSelvagemAtiva?.nome, 'Forma Veloz');
+        expect(restaurado.tipoCompanheiroAnimal, 'GUARDIAO');
+        expect(restaurado.defesaFinal, druidaOriginal.defesaFinal);
+        expect(
+          restaurado.getValorFinal('DES'),
+          druidaOriginal.getValorFinal('DES'),
+        );
+      },
+    );
   });
 }

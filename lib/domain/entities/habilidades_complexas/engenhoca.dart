@@ -1,4 +1,4 @@
-import '../services/data_services/call_regras_engenhocas.dart';
+import '../../services/data_services/call_regras_engenhocas.dart';
 
 class Engenhoca {
   final String id;
@@ -141,7 +141,8 @@ class ValidadorEngenhoca {
     }
 
     if (nivelInventor != null) {
-      final circuloMaximoPermitido = BancoDeRegrasEngenhocas.circuloMaximoParaNivel(nivelInventor);
+      final circuloMaximoPermitido =
+          BancoDeRegrasEngenhocas.circuloMaximoParaNivel(nivelInventor);
       if (circulo > circuloMaximoPermitido) {
         erros.add(
           'Um inventor de nível $nivelInventor pode criar engenhocas de até $circuloMaximoPermitidoº círculo (tentou $circuloº círculo).',
@@ -158,9 +159,12 @@ class ValidadorEngenhoca {
     }
 
     final custoPm = BancoDeRegrasEngenhocas.custoPmBaseParaCirculo(circulo);
-    final cdAtivacaoBase = BancoDeRegrasEngenhocas.calcularCdAtivacaoBase(custoPm);
+    final cdAtivacaoBase = BancoDeRegrasEngenhocas.calcularCdAtivacaoBase(
+      custoPm,
+    );
     final cdFabricacao = BancoDeRegrasEngenhocas.calcularCdFabricacao(custoPm);
-    final custoFabricacao = BancoDeRegrasEngenhocas.calcularCustoFabricacaoTibares(custoPm);
+    final custoFabricacao =
+        BancoDeRegrasEngenhocas.calcularCustoFabricacaoTibares(custoPm);
 
     return ResultadoValidacaoEngenhoca(
       valido: erros.isEmpty,

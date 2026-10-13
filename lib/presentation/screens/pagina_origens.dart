@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../domain/entities/poder.dart';
+import '../../domain/entities/personagem/poder.dart';
 import '../../domain/services/data_services/call_origens.dart';
-import '../../domain/services/banco_pericias.dart';
+import '../../domain/services/data_services/call_pericias.dart';
 import '../controllers/personagem_cubit.dart';
 
 class PaginaSelecaoOrigem extends StatefulWidget {

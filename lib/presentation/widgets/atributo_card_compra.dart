@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../domain/entities/atributos.dart';
+import '../../domain/entities/personagem/atributos.dart';
 
 class AtributoCardCompra extends StatelessWidget {
   final String sigla;

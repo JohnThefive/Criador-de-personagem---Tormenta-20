@@ -1,6 +1,6 @@
 import 'classe.dart';
 import 'poder.dart';
-import 'linhagem_arcanista.dart';
+import '../habilidades_complexas/linhagem_arcanista.dart';
 
 class ClasseDoPersonagem {
   final Classe classeDefinicao; // Referência à regra (Bárbaro)

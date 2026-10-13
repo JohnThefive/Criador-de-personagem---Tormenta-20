@@ -1,11 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:t20_creator/domain/entities/atributos.dart';
-import 'package:t20_creator/domain/entities/classe.dart';
-import 'package:t20_creator/domain/entities/classe_do_personagem.dart';
-import 'package:t20_creator/domain/entities/personagem.dart';
-import 'package:t20_creator/domain/entities/poder.dart';
+import 'package:t20_creator/domain/entities/personagem/atributos.dart';
+import 'package:t20_creator/domain/entities/personagem/classe.dart';
+import 'package:t20_creator/domain/entities/personagem/classe_do_personagem.dart';
+import 'package:t20_creator/domain/entities/personagem/personagem.dart';
+import 'package:t20_creator/domain/entities/personagem/poder.dart';
 import 'package:t20_creator/domain/services/data_services/call_classes.dart';
-import 'package:t20_creator/domain/services/poder_validador_service.dart';
+import 'package:t20_creator/domain/services/poderes_e_magias/poder_validador_service.dart';
 
 void main() {
   group('Evolução e PoderValidadorService - Tormenta 20', () {

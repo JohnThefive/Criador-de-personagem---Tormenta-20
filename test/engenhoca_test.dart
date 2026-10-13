@@ -1,17 +1,17 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:t20_creator/domain/entities/atributos.dart';
-import 'package:t20_creator/domain/entities/classe.dart';
-import 'package:t20_creator/domain/entities/classe_do_personagem.dart';
-import 'package:t20_creator/domain/entities/engenhoca.dart';
-import 'package:t20_creator/domain/entities/personagem.dart';
-import 'package:t20_creator/domain/entities/poder.dart';
-import 'package:t20_creator/domain/services/banco_pericias.dart';
+import 'package:t20_creator/domain/entities/personagem/atributos.dart';
+import 'package:t20_creator/domain/entities/personagem/classe.dart';
+import 'package:t20_creator/domain/entities/personagem/classe_do_personagem.dart';
+import 'package:t20_creator/domain/entities/habilidades_complexas/engenhoca.dart';
+import 'package:t20_creator/domain/entities/personagem/personagem.dart';
+import 'package:t20_creator/domain/entities/personagem/poder.dart';
+import 'package:t20_creator/domain/services/data_services/call_pericias.dart';
 import 'package:t20_creator/domain/services/data_services/call_classes.dart';
 import 'package:t20_creator/domain/services/data_services/call_regras_engenhocas.dart';
 import 'package:t20_creator/domain/services/personagem_storage_service.dart';
-import 'package:t20_creator/domain/services/poder_validador_service.dart';
+import 'package:t20_creator/domain/services/poderes_e_magias/poder_validador_service.dart';
 import 'package:t20_creator/domain/services/regras_carga_service.dart';
 
 void main() {
@@ -24,77 +24,85 @@ void main() {
       );
     }
 
-    final arquivoRegras = File('assets/data/classes_data/especifico_classe/inventor/regras_engenhocas.json');
+    final arquivoRegras = File(
+      'assets/data/classes_data/especifico_classe/inventor/regras_engenhocas.json',
+    );
     if (arquivoRegras.existsSync()) {
-      final jsonMap = jsonDecode(arquivoRegras.readAsStringSync()) as Map<String, dynamic>;
+      final jsonMap =
+          jsonDecode(arquivoRegras.readAsStringSync()) as Map<String, dynamic>;
       BancoDeRegrasEngenhocas.carregarParaTestes(jsonMap);
     }
   });
 
   group('Engenhoca - Payload e Serialização', () {
-    test('deve desserializar e serializar exatamente o payload solicitado pelo usuário', () {
-      final rawPayload = [
-        {
-          "id": "engenhoca_01",
-          "nomeCustomizado": "Canhão Portátil a Vapor",
-          "magiaSimuladaKey": "BOLA_DE_FOGO",
-          "circulo": 2,
-          "custoPmBase": 3,
-          "modoUso": "empunhada",
-          "cdAtivacaoBase": 18,
-          "usosHoje": 0,
-          "enguicado": false,
-          "espacosOcupados": 1
-        },
-        {
-          "id": "engenhoca_02",
-          "nomeCustomizado": "Gabinete de Choque Cardíaco",
-          "magiaSimuladaKey": "CURAR_FERIMENTOS",
-          "circulo": 1,
-          "custoPmBase": 1,
-          "modoUso": "vestida",
-          "cdAtivacaoBase": 16,
-          "usosHoje": 1,
-          "enguicado": false,
-          "espacosOcupados": 1
-        }
-      ];
+    test(
+      'deve desserializar e serializar exatamente o payload solicitado pelo usuário',
+      () {
+        final rawPayload = [
+          {
+            "id": "engenhoca_01",
+            "nomeCustomizado": "Canhão Portátil a Vapor",
+            "magiaSimuladaKey": "BOLA_DE_FOGO",
+            "circulo": 2,
+            "custoPmBase": 3,
+            "modoUso": "empunhada",
+            "cdAtivacaoBase": 18,
+            "usosHoje": 0,
+            "enguicado": false,
+            "espacosOcupados": 1,
+          },
+          {
+            "id": "engenhoca_02",
+            "nomeCustomizado": "Gabinete de Choque Cardíaco",
+            "magiaSimuladaKey": "CURAR_FERIMENTOS",
+            "circulo": 1,
+            "custoPmBase": 1,
+            "modoUso": "vestida",
+            "cdAtivacaoBase": 16,
+            "usosHoje": 1,
+            "enguicado": false,
+            "espacosOcupados": 1,
+          },
+        ];
 
-      final engenhocas = rawPayload.map((map) => Engenhoca.fromJson(map)).toList();
+        final engenhocas = rawPayload
+            .map((map) => Engenhoca.fromJson(map))
+            .toList();
 
-      expect(engenhocas.length, equals(2));
+        expect(engenhocas.length, equals(2));
 
-      final e1 = engenhocas[0];
-      expect(e1.id, equals('engenhoca_01'));
-      expect(e1.nomeCustomizado, equals('Canhão Portátil a Vapor'));
-      expect(e1.magiaSimuladaKey, equals('BOLA_DE_FOGO'));
-      expect(e1.circulo, equals(2));
-      expect(e1.custoPmBase, equals(3));
-      expect(e1.modoUso, equals('empunhada'));
-      expect(e1.cdAtivacaoBase, equals(18));
-      expect(e1.usosHoje, equals(0));
-      expect(e1.enguicado, isFalse);
-      expect(e1.espacosOcupados, equals(1));
-      expect(e1.cdAtivacaoAtual, equals(18)); // 18 + 0*5
-      expect(e1.podeSerUsada, isTrue);
+        final e1 = engenhocas[0];
+        expect(e1.id, equals('engenhoca_01'));
+        expect(e1.nomeCustomizado, equals('Canhão Portátil a Vapor'));
+        expect(e1.magiaSimuladaKey, equals('BOLA_DE_FOGO'));
+        expect(e1.circulo, equals(2));
+        expect(e1.custoPmBase, equals(3));
+        expect(e1.modoUso, equals('empunhada'));
+        expect(e1.cdAtivacaoBase, equals(18));
+        expect(e1.usosHoje, equals(0));
+        expect(e1.enguicado, isFalse);
+        expect(e1.espacosOcupados, equals(1));
+        expect(e1.cdAtivacaoAtual, equals(18)); // 18 + 0*5
+        expect(e1.podeSerUsada, isTrue);
 
-      final e2 = engenhocas[1];
-      expect(e2.id, equals('engenhoca_02'));
-      expect(e2.nomeCustomizado, equals('Gabinete de Choque Cardíaco'));
-      expect(e2.magiaSimuladaKey, equals('CURAR_FERIMENTOS'));
-      expect(e2.circulo, equals(1));
-      expect(e2.custoPmBase, equals(1));
-      expect(e2.modoUso, equals('vestida'));
-      expect(e2.cdAtivacaoBase, equals(16));
-      expect(e2.usosHoje, equals(1));
-      expect(e2.enguicado, isFalse);
-      expect(e2.espacosOcupados, equals(1));
-      expect(e2.cdAtivacaoAtual, equals(21)); // 16 + 1*5 = 21
+        final e2 = engenhocas[1];
+        expect(e2.id, equals('engenhoca_02'));
+        expect(e2.nomeCustomizado, equals('Gabinete de Choque Cardíaco'));
+        expect(e2.magiaSimuladaKey, equals('CURAR_FERIMENTOS'));
+        expect(e2.circulo, equals(1));
+        expect(e2.custoPmBase, equals(1));
+        expect(e2.modoUso, equals('vestida'));
+        expect(e2.cdAtivacaoBase, equals(16));
+        expect(e2.usosHoje, equals(1));
+        expect(e2.enguicado, isFalse);
+        expect(e2.espacosOcupados, equals(1));
+        expect(e2.cdAtivacaoAtual, equals(21)); // 16 + 1*5 = 21
 
-      // Reserialização idêntica
-      final serialized = engenhocas.map((e) => e.toJson()).toList();
-      expect(serialized, equals(rawPayload));
-    });
+        // Reserialização idêntica
+        final serialized = engenhocas.map((e) => e.toJson()).toList();
+        expect(serialized, equals(rawPayload));
+      },
+    );
   });
 
   group('Regras de Engenhocas e Progressão de Inventor', () {
@@ -114,34 +122,66 @@ void main() {
     test('deve calcular custos e CDs de fabricação e ativação base', () {
       // 1º Círculo: 1 PM
       expect(BancoDeRegrasEngenhocas.custoPmBaseParaCirculo(1), equals(1));
-      expect(BancoDeRegrasEngenhocas.calcularCdAtivacaoBase(1), equals(16)); // 15 + 1
-      expect(BancoDeRegrasEngenhocas.calcularCdFabricacao(1), equals(21)); // 20 + 1
-      expect(BancoDeRegrasEngenhocas.calcularCustoFabricacaoTibares(1), equals(100)); // 100 * 1
+      expect(
+        BancoDeRegrasEngenhocas.calcularCdAtivacaoBase(1),
+        equals(16),
+      ); // 15 + 1
+      expect(
+        BancoDeRegrasEngenhocas.calcularCdFabricacao(1),
+        equals(21),
+      ); // 20 + 1
+      expect(
+        BancoDeRegrasEngenhocas.calcularCustoFabricacaoTibares(1),
+        equals(100),
+      ); // 100 * 1
 
       // 2º Círculo: 3 PM
       expect(BancoDeRegrasEngenhocas.custoPmBaseParaCirculo(2), equals(3));
-      expect(BancoDeRegrasEngenhocas.calcularCdAtivacaoBase(3), equals(18)); // 15 + 3
-      expect(BancoDeRegrasEngenhocas.calcularCdFabricacao(3), equals(23)); // 20 + 3
-      expect(BancoDeRegrasEngenhocas.calcularCustoFabricacaoTibares(3), equals(300)); // 100 * 3
-    });
-
-    test('deve calcular limite de engenhocas e bônus de Manutenção Eficiente', () {
-      // INT 3, sem poder -> limite 3
-      expect(BancoDeRegrasEngenhocas.calcularLimiteEngenhocas(inteligencia: 3), equals(3));
-
-      // INT 4 com Manutenção Eficiente -> limite 7 (4 + 3)
       expect(
-        BancoDeRegrasEngenhocas.calcularLimiteEngenhocas(
-          inteligencia: 4,
-          temManutencaoEficiente: true,
-        ),
-        equals(7),
-      );
-
-      // Espaço: 1 normal, 0.5 com Manutenção Eficiente
-      expect(BancoDeRegrasEngenhocas.espacoOcupadoPorEngenhoca(), equals(1.0));
-      expect(BancoDeRegrasEngenhocas.espacoOcupadoPorEngenhoca(temManutencaoEficiente: true), equals(0.5));
+        BancoDeRegrasEngenhocas.calcularCdAtivacaoBase(3),
+        equals(18),
+      ); // 15 + 3
+      expect(
+        BancoDeRegrasEngenhocas.calcularCdFabricacao(3),
+        equals(23),
+      ); // 20 + 3
+      expect(
+        BancoDeRegrasEngenhocas.calcularCustoFabricacaoTibares(3),
+        equals(300),
+      ); // 100 * 3
     });
+
+    test(
+      'deve calcular limite de engenhocas e bônus de Manutenção Eficiente',
+      () {
+        // INT 3, sem poder -> limite 3
+        expect(
+          BancoDeRegrasEngenhocas.calcularLimiteEngenhocas(inteligencia: 3),
+          equals(3),
+        );
+
+        // INT 4 com Manutenção Eficiente -> limite 7 (4 + 3)
+        expect(
+          BancoDeRegrasEngenhocas.calcularLimiteEngenhocas(
+            inteligencia: 4,
+            temManutencaoEficiente: true,
+          ),
+          equals(7),
+        );
+
+        // Espaço: 1 normal, 0.5 com Manutenção Eficiente
+        expect(
+          BancoDeRegrasEngenhocas.espacoOcupadoPorEngenhoca(),
+          equals(1.0),
+        );
+        expect(
+          BancoDeRegrasEngenhocas.espacoOcupadoPorEngenhoca(
+            temManutencaoEficiente: true,
+          ),
+          equals(0.5),
+        );
+      },
+    );
   });
 
   group('ValidadorEngenhoca', () {
@@ -162,34 +202,50 @@ void main() {
       expect(resultado.cdAtivacaoBaseCalculada, equals(16));
     });
 
-    test('deve rejeitar engenhoca de círculo superior ao nível do inventor', () {
-      // Nível 3 só pode 1º círculo; tentando 2º círculo
-      final resultado = ValidadorEngenhoca.validar(
-        nomeCustomizado: 'Raio Congelante',
-        magiaSimuladaKey: 'BOLA_DE_FOGO',
-        circulo: 2,
-        modoUso: 'empunhada',
-        nivelInventor: 3,
-      );
+    test(
+      'deve rejeitar engenhoca de círculo superior ao nível do inventor',
+      () {
+        // Nível 3 só pode 1º círculo; tentando 2º círculo
+        final resultado = ValidadorEngenhoca.validar(
+          nomeCustomizado: 'Raio Congelante',
+          magiaSimuladaKey: 'BOLA_DE_FOGO',
+          circulo: 2,
+          modoUso: 'empunhada',
+          nivelInventor: 3,
+        );
 
-      expect(resultado.valido, isFalse);
-      expect(resultado.erros.any((e) => e.contains('pode criar engenhocas de até 1º círculo')), isTrue);
-    });
+        expect(resultado.valido, isFalse);
+        expect(
+          resultado.erros.any(
+            (e) => e.contains('pode criar engenhocas de até 1º círculo'),
+          ),
+          isTrue,
+        );
+      },
+    );
 
-    test('deve rejeitar criação quando atinge o limite máximo de engenhocas', () {
-      final resultado = ValidadorEngenhoca.validar(
-        nomeCustomizado: 'Escudo Cinético',
-        magiaSimuladaKey: 'ARMADURA_ARCANA',
-        circulo: 1,
-        modoUso: 'vestida',
-        nivelInventor: 2,
-        quantidadeEngenhocasExistentes: 3,
-        limiteEngenhocas: 3,
-      );
+    test(
+      'deve rejeitar criação quando atinge o limite máximo de engenhocas',
+      () {
+        final resultado = ValidadorEngenhoca.validar(
+          nomeCustomizado: 'Escudo Cinético',
+          magiaSimuladaKey: 'ARMADURA_ARCANA',
+          circulo: 1,
+          modoUso: 'vestida',
+          nivelInventor: 2,
+          quantidadeEngenhocasExistentes: 3,
+          limiteEngenhocas: 3,
+        );
 
-      expect(resultado.valido, isFalse);
-      expect(resultado.erros.any((e) => e.contains('Limite de engenhocas atingido')), isTrue);
-    });
+        expect(resultado.valido, isFalse);
+        expect(
+          resultado.erros.any(
+            (e) => e.contains('Limite de engenhocas atingido'),
+          ),
+          isTrue,
+        );
+      },
+    );
   });
 
   group('Integração de Engenhocas na Ficha do Personagem', () {
@@ -242,142 +298,154 @@ void main() {
       expect(p.nivelInventor, equals(5));
       expect(p.temPoderEngenhoqueiro, isTrue);
       expect(p.temPoderManutencaoEficiente, isTrue);
-      expect(p.limiteEngenhocas, equals(7)); // 4 base + 3 de Manutenção Eficiente
+      expect(
+        p.limiteEngenhocas,
+        equals(7),
+      ); // 4 base + 3 de Manutenção Eficiente
     });
 
-    test('deve manipular ciclo de vida de engenhoca (ativação, enguiço, conserto e descanso)', () {
-      const e = Engenhoca(
-        id: 'eng_01',
-        nomeCustomizado: 'Raiador Elétrico',
-        magiaSimuladaKey: 'TOQUE_CHOCANTE',
-        circulo: 1,
-        custoPmBase: 1,
-        modoUso: 'empunhada',
-        cdAtivacaoBase: 16,
-      );
+    test(
+      'deve manipular ciclo de vida de engenhoca (ativação, enguiço, conserto e descanso)',
+      () {
+        const e = Engenhoca(
+          id: 'eng_01',
+          nomeCustomizado: 'Raiador Elétrico',
+          magiaSimuladaKey: 'TOQUE_CHOCANTE',
+          circulo: 1,
+          custoPmBase: 1,
+          modoUso: 'empunhada',
+          cdAtivacaoBase: 16,
+        );
 
-      var p = criarInventor(engenhocas: [e]);
-      expect(p.engenhocas.length, equals(1));
-      expect(p.engenhocas.first.usosHoje, equals(0));
-      expect(p.engenhocas.first.cdAtivacaoAtual, equals(16));
+        var p = criarInventor(engenhocas: [e]);
+        expect(p.engenhocas.length, equals(1));
+        expect(p.engenhocas.first.usosHoje, equals(0));
+        expect(p.engenhocas.first.cdAtivacaoAtual, equals(16));
 
-      // Ativar engenhoca primeira vez (+5 na CD)
-      p = p.ativarEngenhoca('eng_01');
-      expect(p.engenhocas.first.usosHoje, equals(1));
-      expect(p.engenhocas.first.cdAtivacaoAtual, equals(21));
+        // Ativar engenhoca primeira vez (+5 na CD)
+        p = p.ativarEngenhoca('eng_01');
+        expect(p.engenhocas.first.usosHoje, equals(1));
+        expect(p.engenhocas.first.cdAtivacaoAtual, equals(21));
 
-      // Ativar engenhoca segunda vez
-      p = p.ativarEngenhoca('eng_01');
-      expect(p.engenhocas.first.usosHoje, equals(2));
-      expect(p.engenhocas.first.cdAtivacaoAtual, equals(26));
+        // Ativar engenhoca segunda vez
+        p = p.ativarEngenhoca('eng_01');
+        expect(p.engenhocas.first.usosHoje, equals(2));
+        expect(p.engenhocas.first.cdAtivacaoAtual, equals(26));
 
-      // Enguiçar
-      p = p.enguicarEngenhoca('eng_01');
-      expect(p.engenhocas.first.enguicado, isTrue);
-      expect(p.engenhocas.first.podeSerUsada, isFalse);
+        // Enguiçar
+        p = p.enguicarEngenhoca('eng_01');
+        expect(p.engenhocas.first.enguicado, isTrue);
+        expect(p.engenhocas.first.podeSerUsada, isFalse);
 
-      // Consertar
-      p = p.consertarEngenhoca('eng_01');
-      expect(p.engenhocas.first.enguicado, isFalse);
-      expect(p.engenhocas.first.podeSerUsada, isTrue);
+        // Consertar
+        p = p.consertarEngenhoca('eng_01');
+        expect(p.engenhocas.first.enguicado, isFalse);
+        expect(p.engenhocas.first.podeSerUsada, isTrue);
 
-      // Descanso diário zera usosHoje
-      p = p.descansarEngenhocas();
-      expect(p.engenhocas.first.usosHoje, equals(0));
-      expect(p.engenhocas.first.cdAtivacaoAtual, equals(16));
-    });
+        // Descanso diário zera usosHoje
+        p = p.descansarEngenhocas();
+        expect(p.engenhocas.first.usosHoje, equals(0));
+        expect(p.engenhocas.first.cdAtivacaoAtual, equals(16));
+      },
+    );
 
-    test('deve contabilizar espaços de engenhocas no cálculo de carga do inventário', () {
-      const e1 = Engenhoca(
-        id: 'eng_01',
-        nomeCustomizado: 'Item A',
-        magiaSimuladaKey: 'M1',
-        circulo: 1,
-        custoPmBase: 1,
-        modoUso: 'empunhada',
-        cdAtivacaoBase: 16,
-        espacosOcupados: 1,
-      );
-      const e2 = Engenhoca(
-        id: 'eng_02',
-        nomeCustomizado: 'Item B',
-        magiaSimuladaKey: 'M2',
-        circulo: 1,
-        custoPmBase: 1,
-        modoUso: 'vestida',
-        cdAtivacaoBase: 16,
-        espacosOcupados: 1,
-      );
+    test(
+      'deve contabilizar espaços de engenhocas no cálculo de carga do inventário',
+      () {
+        const e1 = Engenhoca(
+          id: 'eng_01',
+          nomeCustomizado: 'Item A',
+          magiaSimuladaKey: 'M1',
+          circulo: 1,
+          custoPmBase: 1,
+          modoUso: 'empunhada',
+          cdAtivacaoBase: 16,
+          espacosOcupados: 1,
+        );
+        const e2 = Engenhoca(
+          id: 'eng_02',
+          nomeCustomizado: 'Item B',
+          magiaSimuladaKey: 'M2',
+          circulo: 1,
+          custoPmBase: 1,
+          modoUso: 'vestida',
+          cdAtivacaoBase: 16,
+          espacosOcupados: 1,
+        );
 
-      final p = criarInventor(engenhocas: [e1, e2]);
-      expect(p.espacosTotaisEngenhocas, equals(2));
+        final p = criarInventor(engenhocas: [e1, e2]);
+        expect(p.espacosTotaisEngenhocas, equals(2));
 
-      final statusCarga = RegrasCargaService.avaliarCarga(p);
-      // Limite = 10 + 2*FOR(0) = 10; Carga = 2 (duas engenhocas de 1 espaço)
-      expect(statusCarga.cargaAtual, equals(2));
-      expect(statusCarga.limiteCarga, equals(10));
-      expect(statusCarga.sobrecarregado, isFalse);
-    });
+        final statusCarga = RegrasCargaService.avaliarCarga(p);
+        // Limite = 10 + 2*FOR(0) = 10; Carga = 2 (duas engenhocas de 1 espaço)
+        expect(statusCarga.cargaAtual, equals(2));
+        expect(statusCarga.limiteCarga, equals(10));
+        expect(statusCarga.sobrecarregado, isFalse);
+      },
+    );
 
-    test('deve salvar e recarregar personagem com engenhocas no PersonagemStorageService', () {
-      final pOriginal = criarInventor(
-        engenhocas: [
-          const Engenhoca(
-            id: 'engenhoca_01',
-            nomeCustomizado: 'Canhão Portátil a Vapor',
-            magiaSimuladaKey: 'BOLA_DE_FOGO',
-            circulo: 2,
-            custoPmBase: 3,
-            modoUso: 'empunhada',
-            cdAtivacaoBase: 18,
-            usosHoje: 0,
-            enguicado: false,
-            espacosOcupados: 1,
-          ),
-          const Engenhoca(
-            id: 'engenhoca_02',
-            nomeCustomizado: 'Gabinete de Choque Cardíaco',
-            magiaSimuladaKey: 'CURAR_FERIMENTOS',
-            circulo: 1,
-            custoPmBase: 1,
-            modoUso: 'vestida',
-            cdAtivacaoBase: 16,
-            usosHoje: 1,
-            enguicado: false,
-            espacosOcupados: 1,
-          ),
-        ],
-      );
+    test(
+      'deve salvar e recarregar personagem com engenhocas no PersonagemStorageService',
+      () {
+        final pOriginal = criarInventor(
+          engenhocas: [
+            const Engenhoca(
+              id: 'engenhoca_01',
+              nomeCustomizado: 'Canhão Portátil a Vapor',
+              magiaSimuladaKey: 'BOLA_DE_FOGO',
+              circulo: 2,
+              custoPmBase: 3,
+              modoUso: 'empunhada',
+              cdAtivacaoBase: 18,
+              usosHoje: 0,
+              enguicado: false,
+              espacosOcupados: 1,
+            ),
+            const Engenhoca(
+              id: 'engenhoca_02',
+              nomeCustomizado: 'Gabinete de Choque Cardíaco',
+              magiaSimuladaKey: 'CURAR_FERIMENTOS',
+              circulo: 1,
+              custoPmBase: 1,
+              modoUso: 'vestida',
+              cdAtivacaoBase: 16,
+              usosHoje: 1,
+              enguicado: false,
+              espacosOcupados: 1,
+            ),
+          ],
+        );
 
-      final jsonStr = PersonagemStorageService.personagemToJson(pOriginal);
-      final pCarregado = PersonagemStorageService.personagemFromJson(jsonStr);
+        final jsonStr = PersonagemStorageService.personagemToJson(pOriginal);
+        final pCarregado = PersonagemStorageService.personagemFromJson(jsonStr);
 
-      expect(pCarregado.engenhocas.length, equals(2));
+        expect(pCarregado.engenhocas.length, equals(2));
 
-      final e1 = pCarregado.engenhocas[0];
-      expect(e1.id, equals('engenhoca_01'));
-      expect(e1.nomeCustomizado, equals('Canhão Portátil a Vapor'));
-      expect(e1.magiaSimuladaKey, equals('BOLA_DE_FOGO'));
-      expect(e1.circulo, equals(2));
-      expect(e1.custoPmBase, equals(3));
-      expect(e1.modoUso, equals('empunhada'));
-      expect(e1.cdAtivacaoBase, equals(18));
-      expect(e1.usosHoje, equals(0));
-      expect(e1.enguicado, isFalse);
-      expect(e1.espacosOcupados, equals(1));
+        final e1 = pCarregado.engenhocas[0];
+        expect(e1.id, equals('engenhoca_01'));
+        expect(e1.nomeCustomizado, equals('Canhão Portátil a Vapor'));
+        expect(e1.magiaSimuladaKey, equals('BOLA_DE_FOGO'));
+        expect(e1.circulo, equals(2));
+        expect(e1.custoPmBase, equals(3));
+        expect(e1.modoUso, equals('empunhada'));
+        expect(e1.cdAtivacaoBase, equals(18));
+        expect(e1.usosHoje, equals(0));
+        expect(e1.enguicado, isFalse);
+        expect(e1.espacosOcupados, equals(1));
 
-      final e2 = pCarregado.engenhocas[1];
-      expect(e2.id, equals('engenhoca_02'));
-      expect(e2.nomeCustomizado, equals('Gabinete de Choque Cardíaco'));
-      expect(e2.magiaSimuladaKey, equals('CURAR_FERIMENTOS'));
-      expect(e2.circulo, equals(1));
-      expect(e2.custoPmBase, equals(1));
-      expect(e2.modoUso, equals('vestida'));
-      expect(e2.cdAtivacaoBase, equals(16));
-      expect(e2.usosHoje, equals(1));
-      expect(e2.enguicado, isFalse);
-      expect(e2.espacosOcupados, equals(1));
-    });
+        final e2 = pCarregado.engenhocas[1];
+        expect(e2.id, equals('engenhoca_02'));
+        expect(e2.nomeCustomizado, equals('Gabinete de Choque Cardíaco'));
+        expect(e2.magiaSimuladaKey, equals('CURAR_FERIMENTOS'));
+        expect(e2.circulo, equals(1));
+        expect(e2.custoPmBase, equals(1));
+        expect(e2.modoUso, equals('vestida'));
+        expect(e2.cdAtivacaoBase, equals(16));
+        expect(e2.usosHoje, equals(1));
+        expect(e2.enguicado, isFalse);
+        expect(e2.espacosOcupados, equals(1));
+      },
+    );
   });
 
   group('Ofícios e Elegibilidade de Poder Engenhoqueiro', () {
@@ -447,7 +515,9 @@ void main() {
       );
       expect(resultadoSemOficio.ehElegivel, isFalse);
       expect(
-        resultadoSemOficio.requisitos.any((r) => r.descricao.contains('Engenhoqueiro') && !r.atendido),
+        resultadoSemOficio.requisitos.any(
+          (r) => r.descricao.contains('Engenhoqueiro') && !r.atendido,
+        ),
         isTrue,
       );
     });

@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import '../../entities/raca.dart';
+import '../../entities/personagem/raca.dart';
 
 class BancoDeRacas {
   static List<Raca> _dados = [];

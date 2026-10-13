@@ -1,7 +1,7 @@
-import '../entities/personagem.dart';
-import '../entities/arma.dart';
-import '../entities/protecao.dart';
-import '../entities/engenhoca.dart';
+import '../entities/personagem/personagem.dart';
+import '../entities/equipamento/arma.dart';
+import '../entities/equipamento/protecao.dart';
+import '../entities/habilidades_complexas/engenhoca.dart';
 import 'data_services/call_armas.dart';
 import 'data_services/call_armaduras.dart';
 
@@ -79,8 +79,10 @@ class RegrasCargaService {
     }
 
     // Espaço ocupado pelas engenhocas (fracionários arredondados para cima no total)
-    final num somaEngenhocas =
-        engenhocas.fold<num>(0, (soma, e) => soma + e.espacosOcupados);
+    final num somaEngenhocas = engenhocas.fold<num>(
+      0,
+      (soma, e) => soma + e.espacosOcupados,
+    );
     final int espacosEngenhocas = somaEngenhocas.ceil();
 
     return espacosArmas + espacosProtecoes + espacosItens + espacosEngenhocas;

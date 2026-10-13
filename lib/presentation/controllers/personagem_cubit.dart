@@ -1,20 +1,21 @@
 import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:t20_creator/domain/entities/classe.dart';
-import 'package:t20_creator/domain/entities/classe_do_personagem.dart';
-import 'package:t20_creator/domain/entities/linhagem_arcanista.dart';
-import 'package:t20_creator/domain/entities/arma.dart';
-import 'package:t20_creator/domain/entities/protecao.dart';
+import 'package:t20_creator/domain/entities/personagem/classe.dart';
+import 'package:t20_creator/domain/entities/personagem/classe_do_personagem.dart';
+import 'package:t20_creator/domain/entities/habilidades_complexas/linhagem_arcanista.dart';
+import 'package:t20_creator/domain/entities/equipamento/arma.dart';
+import 'package:t20_creator/domain/entities/equipamento/protecao.dart';
 import 'package:t20_creator/domain/services/regras_carga_service.dart';
 import 'package:t20_creator/domain/services/personagem_storage_service.dart';
-import '../../domain/entities/personagem.dart';
+import '../../domain/entities/personagem/personagem.dart';
 import '../../domain/services/regras_atributos.dart';
-import '../../domain/entities/raca.dart';
-import '../../domain/entities/origem.dart';
-import '../../domain/entities/poder.dart';
-import '../../domain/entities/divindade.dart';
+import '../../domain/entities/personagem/raca.dart';
+import '../../domain/entities/personagem/origem.dart';
+import '../../domain/entities/personagem/poder.dart';
+import '../../domain/entities/personagem/divindade.dart';
 import '../../domain/validators/validador_divindade.dart';
+import '../../domain/services/poderes_e_magias/aprendizado_magia_service.dart';
 
 // Enum para saber qual método o usuário escolheu nesta etapa
 enum MetodoAtributos { nenhum, compra, rolagem }
@@ -38,8 +39,8 @@ class PersonagemState {
 
   Poder? get poderConcedidoSelecionado =>
       poderesConcedidosSelecionados.isNotEmpty
-          ? poderesConcedidosSelecionados.first
-          : null;
+      ? poderesConcedidosSelecionados.first
+      : null;
 
   // Mantemos os dados específicos de rolagem aqui também
   final List<int> valoresRolados;
@@ -52,6 +53,9 @@ class PersonagemState {
   final List<String> selecoesPericiaClasse; // As escolhas restritas (2)
   final List<String>
   selecoesPericiaInteligencia; // As escolhas livres (Mod. INT)
+
+  // Magias aprendidas na etapa de magias
+  final List<String> magiasSelecionadas;
 
   // Equipamento inicial (Nível 1)
   final Arma? armaSimplesInicial;
@@ -78,12 +82,14 @@ class PersonagemState {
     this.atributosVariaveisRaca = const [],
     this.selecoesPericiaClasse = const [],
     this.selecoesPericiaInteligencia = const [],
+    this.magiasSelecionadas = const [],
     this.armaSimplesInicial,
     this.armaMarcialInicial,
     this.armaduraInicial,
     this.escudoInicial,
     this.tibaresIniciais,
-  }) : poderesConcedidosSelecionados = poderesConcedidosSelecionados ??
+  }) : poderesConcedidosSelecionados =
+           poderesConcedidosSelecionados ??
            (poderConcedidoSelecionado != null
                ? [poderConcedidoSelecionado]
                : const []);
@@ -117,12 +123,29 @@ class PersonagemState {
     if (!elegibilidade.ehElegivel) return false;
 
     // Se a divindade permite qualquer canalização, exige escolha expressa
-    if (divindadeSelecionada!.canalizacaoPermitida == CanalizacaoOpcao.qualquer) {
+    if (divindadeSelecionada!.canalizacaoPermitida ==
+        CanalizacaoOpcao.qualquer) {
       if (canalizacaoSelecionada == null) return false;
     }
 
     // Devoto Fiel (Clérigo, Druida, Paladino) escolhe 2 poderes; Devoto Comum escolhe 1
     return poderesConcedidosSelecionados.length == cotaPoderesConcedidos;
+  }
+
+  // --- REGRAS E CONCLUSÃO DE MAGIAS INICIAIS ---
+  RegrasConjuracaoClasse get regrasConjuracao {
+    if (personagem.classes.isEmpty) {
+      return const RegrasConjuracaoClasse(isConjurador: false);
+    }
+    return AprendizadoMagiaService.obterRegrasIniciais(
+      personagem.classes[0].classeDefinicao.idClasse,
+    );
+  }
+
+  bool get concluiuMagias {
+    final regras = regrasConjuracao;
+    if (!regras.isConjurador) return true;
+    return magiasSelecionadas.length == regras.qtdMagiasIniciais;
   }
 
   // Getters para Equipamento Inicial e Carga
@@ -204,6 +227,7 @@ class PersonagemState {
     List<String>? atributosVariaveisRaca,
     List<String>? selecoesPericiaClasse,
     List<String>? selecoesPericiaInteligencia,
+    List<String>? magiasSelecionadas,
     Arma? armaSimplesInicial,
     bool anularArmaSimples = false,
     Arma? armaMarcialInicial,
@@ -229,9 +253,9 @@ class PersonagemState {
       poderesConcedidosSelecionados: anularDivindade
           ? const []
           : (poderesConcedidosSelecionados ??
-              (poderConcedidoSelecionado != null
-                  ? [poderConcedidoSelecionado]
-                  : this.poderesConcedidosSelecionados)),
+                (poderConcedidoSelecionado != null
+                    ? [poderConcedidoSelecionado]
+                    : this.poderesConcedidosSelecionados)),
       canalizacaoSelecionada: (anularDivindade || anularCanalizacao)
           ? null
           : (canalizacaoSelecionada ?? this.canalizacaoSelecionada),
@@ -246,6 +270,7 @@ class PersonagemState {
           selecoesPericiaClasse ?? this.selecoesPericiaClasse,
       selecoesPericiaInteligencia:
           selecoesPericiaInteligencia ?? this.selecoesPericiaInteligencia,
+      magiasSelecionadas: magiasSelecionadas ?? this.magiasSelecionadas,
       armaSimplesInicial: anularArmaSimples
           ? null
           : (armaSimplesInicial ?? this.armaSimplesInicial),
@@ -297,6 +322,8 @@ class PersonagemCubit extends Cubit<PersonagemState> {
       consolidarDivindade();
     } else if (state.etapaAtual == 6) {
       consolidarEquipamentoInicial();
+    } else if (state.etapaAtual == 7) {
+      consolidarMagias();
     }
     emit(state.copyWith(etapaAtual: state.etapaAtual + 1));
   }
@@ -623,7 +650,8 @@ class PersonagemCubit extends Cubit<PersonagemState> {
     TipoEnergia? canalizacao;
     if (divindade.canalizacaoPermitida == CanalizacaoOpcao.apenasPositiva) {
       canalizacao = TipoEnergia.positiva;
-    } else if (divindade.canalizacaoPermitida == CanalizacaoOpcao.apenasNegativa) {
+    } else if (divindade.canalizacaoPermitida ==
+        CanalizacaoOpcao.apenasNegativa) {
       canalizacao = TipoEnergia.negativa;
     }
 
@@ -679,7 +707,8 @@ class PersonagemCubit extends Cubit<PersonagemState> {
       );
       emit(state.copyWith(personagem: novoPersonagem));
     } else {
-      final energiaFinal = state.canalizacaoSelecionada ??
+      final energiaFinal =
+          state.canalizacaoSelecionada ??
           state.divindadeSelecionada!.energiaCanalizada;
 
       final novoPersonagem = state.personagem.copyWith(
@@ -689,6 +718,37 @@ class PersonagemCubit extends Cubit<PersonagemState> {
       );
       emit(state.copyWith(personagem: novoPersonagem));
     }
+  }
+
+  // --- MÉTODOS DE MAGIAS INICIAIS ---
+
+  void alternarMagia(String magiaId) {
+    final regras = state.regrasConjuracao;
+    if (!regras.isConjurador) return;
+
+    final selecionadas = List<String>.from(state.magiasSelecionadas);
+    if (selecionadas.contains(magiaId)) {
+      selecionadas.remove(magiaId);
+    } else {
+      if (selecionadas.length < regras.qtdMagiasIniciais) {
+        selecionadas.add(magiaId);
+      }
+    }
+    emit(state.copyWith(magiasSelecionadas: selecionadas));
+  }
+
+  void definirMagias(List<String> magias) {
+    emit(state.copyWith(magiasSelecionadas: List<String>.from(magias)));
+  }
+
+  void consolidarMagias() {
+    emit(
+      state.copyWith(
+        personagem: state.personagem.copyWith(
+          magiasConhecidas: List<String>.from(state.magiasSelecionadas),
+        ),
+      ),
+    );
   }
 
   // metodos de atualização e personalização de personagem

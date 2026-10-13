@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import '../../entities/divindade.dart';
+import '../../entities/personagem/divindade.dart';
 
 /// Serviço responsável pelo carregamento e acesso ao catálogo de divindades do Panteão (JSON).
 class BancoDeDivindades {
@@ -10,7 +10,9 @@ class BancoDeDivindades {
 
   /// Carrega as divindades a partir do arquivo JSON nos assets
   static Future<void> carregar() async {
-    final raw = await rootBundle.loadString('assets/data/deuses/banco_deuses.json');
+    final raw = await rootBundle.loadString(
+      'assets/data/deuses/banco_deuses.json',
+    );
     _dados = _parsearJson(raw);
   }
 
@@ -34,7 +36,8 @@ class BancoDeDivindades {
         final idNorm = div.id.trim().toLowerCase();
         // Se já existir entrada com o mesmo ID, mantém a mais completa (com mais poderes)
         if (!mapa.containsKey(idNorm) ||
-            div.poderesConcedidos.length > mapa[idNorm]!.poderesConcedidos.length) {
+            div.poderesConcedidos.length >
+                mapa[idNorm]!.poderesConcedidos.length) {
           mapa[idNorm] = div;
         }
       }
@@ -71,6 +74,8 @@ class BancoDeDivindades {
   /// Busca uma divindade pelo seu nome (ex: "Khalmyr", "Valkaria")
   static Divindade? getByNome(String nome) {
     final nomeNorm = nome.trim().toLowerCase();
-    return todas.where((d) => d.nome.trim().toLowerCase() == nomeNorm).firstOrNull;
+    return todas
+        .where((d) => d.nome.trim().toLowerCase() == nomeNorm)
+        .firstOrNull;
   }
 }

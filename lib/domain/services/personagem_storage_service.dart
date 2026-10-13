@@ -2,24 +2,24 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
-import '../entities/personagem.dart';
-import '../entities/atributos.dart';
+import '../entities/personagem/personagem.dart';
+import '../entities/personagem/atributos.dart';
 import 'data_services/call_racas.dart';
 import '../services/data_services/call_classes.dart';
 import 'data_services/call_origens.dart';
 import 'data_services/call_divindades.dart';
-import '../entities/divindade.dart';
+import '../entities/personagem/divindade.dart';
 import 'data_services/call_poderes.dart';
 import 'data_services/call_armas.dart';
 import 'data_services/call_armaduras.dart';
-import '../entities/classe_do_personagem.dart';
-import '../entities/poder.dart';
-import '../entities/arma.dart';
-import '../entities/protecao.dart';
-import '../entities/forma_selvagem.dart';
-import '../entities/golpe_pessoal.dart';
-import '../entities/engenhoca.dart';
-import '../entities/montaria_sagrada.dart';
+import '../entities/personagem/classe_do_personagem.dart';
+import '../entities/personagem/poder.dart';
+import '../entities/equipamento/arma.dart';
+import '../entities/equipamento/protecao.dart';
+import '../entities/habilidades_complexas/forma_selvagem.dart';
+import '../entities/habilidades_complexas/golpe_pessoal.dart';
+import '../entities/habilidades_complexas/engenhoca.dart';
+import '../entities/habilidades_complexas/montaria_sagrada.dart';
 
 class PersonagemStorageService {
   // Retorna a pasta interna onde o app tem permissão de escrita no Android
@@ -74,7 +74,8 @@ class PersonagemStorageService {
   }
 
   // MÉTODOS PÚBLICOS DE SERIALIZAÇÃO / DESSERIALIZAÇÃO
-  static String personagemToJson(Personagem p) => jsonEncode(personagemToMap(p));
+  static String personagemToJson(Personagem p) =>
+      jsonEncode(personagemToMap(p));
   static Personagem personagemFromJson(String jsonStr) =>
       mapToPersonagem(jsonDecode(jsonStr) as Map<String, dynamic>);
 
@@ -97,11 +98,13 @@ class PersonagemStorageService {
       'racaId': p.raca?.id,
       'origemId': p.origem?.id,
       'divindadeId': p.divindade?.id,
-      'poderesConcedidosKeys':
-          p.poderesConcedidos.map((pod) => pod.key).toList(),
+      'poderesConcedidosKeys': p.poderesConcedidos
+          .map((pod) => pod.key)
+          .toList(),
       'poderConcedidoKey': p.poderConcedido?.key,
       'canalizacaoEnergia': p.canalizacaoEnergia?.name,
       'punicaoDivinaAtiva': p.punicaoDivinaAtiva,
+      'magiasConhecidas': p.magiasConhecidas,
       'itensInventario': p.itensInventario,
       'armasKeys': p.armas.map((a) => a.key).toList(),
       'armaduraKey': p.armaduraEquipada?.key,
@@ -250,7 +253,9 @@ class PersonagemStorageService {
         : null;
 
     final formaSelvagem = map['formaSelvagemAtiva'] != null
-        ? FormaSelvagemAtiva.fromJson(Map<String, dynamic>.from(map['formaSelvagemAtiva']))
+        ? FormaSelvagemAtiva.fromJson(
+            Map<String, dynamic>.from(map['formaSelvagemAtiva']),
+          )
         : null;
 
     final List<GolpePessoal> golpes = [];
@@ -272,7 +277,9 @@ class PersonagemStorageService {
     }
 
     final montariaSagrada = map['montariaSagrada'] != null
-        ? MontariaSagrada.fromJson(Map<String, dynamic>.from(map['montariaSagrada']))
+        ? MontariaSagrada.fromJson(
+            Map<String, dynamic>.from(map['montariaSagrada']),
+          )
         : null;
 
     return Personagem(
@@ -296,6 +303,7 @@ class PersonagemStorageService {
       poderesConcedidos: poderesConcedidosList,
       canalizacaoEnergia: canalizacao,
       punicaoDivinaAtiva: punicaoDivina,
+      magiasConhecidas: List<String>.from(map['magiasConhecidas'] ?? []),
       itensInventario: List<String>.from(
         map['itensInventario'] ?? (origem?.itensIniciais ?? const []),
       ),

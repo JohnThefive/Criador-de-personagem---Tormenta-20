@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import '../../entities/origem.dart';
+import '../../entities/personagem/origem.dart';
 
 class BancoDeOrigens {
   static List<Origem> _dados = [];

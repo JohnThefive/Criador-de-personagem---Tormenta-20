@@ -9,6 +9,7 @@ import 'package:t20_creator/presentation/screens/pagina_racas.dart';
 import 'package:t20_creator/presentation/screens/pagina_selecao_classe.dart';
 import 'package:t20_creator/presentation/screens/pagina_origens.dart';
 import 'package:t20_creator/presentation/screens/pagina_divindades.dart';
+import 'package:t20_creator/presentation/screens/pagina_selecao_magias.dart';
 import 'package:t20_creator/presentation/screens/pagina_selecao_equipamento.dart';
 import '../controllers/personagem_cubit.dart';
 import '../widgets/atributo_card_compra.dart';
@@ -133,7 +134,10 @@ class CharacterCreatorScreen extends StatelessWidget {
                 PaginaSelecaoEquipamento(
                   state: state,
                 ), // 6: Pagina de equipamento e armas iniciais
-                _PaginaFinalizacao(), // 7: Última Etapa
+                PaginaSelecaoMagias(
+                  state: state,
+                ), // 7: Pagina de seleção de magias
+                _PaginaFinalizacao(), // 8: Última Etapa
               ],
             ),
           ),
@@ -159,6 +163,8 @@ class CharacterCreatorScreen extends StatelessWidget {
       case 6:
         return "Equipamento Inicial";
       case 7:
+        return "Escolher Magias";
+      case 8:
         return "Finalização";
       default:
         return "Criação de Personagem";
@@ -239,8 +245,13 @@ class CharacterCreatorScreen extends StatelessWidget {
       return state.concluiuEquipamentoInicial;
     }
 
+    // 7. LÓGICA DA ETAPA 7 (MAGIAS INICIAIS)
+    if (state.etapaAtual == 7) {
+      return state.concluiuMagias;
+    }
+
     // Na última etapa (Finalização), não exibe botão "Próximo"
-    if (state.etapaAtual >= 7) {
+    if (state.etapaAtual >= 8) {
       return false;
     }
 

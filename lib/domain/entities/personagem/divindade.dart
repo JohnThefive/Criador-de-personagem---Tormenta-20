@@ -1,18 +1,10 @@
 import 'poder.dart';
 
 /// Opções de canalização de energia permitidas pela divindade.
-enum CanalizacaoOpcao {
-  apenasPositiva,
-  apenasNegativa,
-  qualquer,
-}
+enum CanalizacaoOpcao { apenasPositiva, apenasNegativa, qualquer }
 
 /// Tipo de energia que pode ser canalizada pelo devoto.
-enum TipoEnergia {
-  positiva,
-  negativa,
-  qualquer,
-}
+enum TipoEnergia { positiva, negativa, qualquer }
 
 /// Entidade imutável que representa uma divindade do Panteão de Tormenta 20.
 class Divindade {
@@ -24,7 +16,8 @@ class Divindade {
   final CanalizacaoOpcao canalizacaoPermitida;
   final String armaPreferidaId;
   final List<String> obrigacoesERestricoes;
-  final List<String> classesPermitidas; // Vazio = todas; ou IDs de classes com restrição específica
+  final List<String>
+  classesPermitidas; // Vazio = todas; ou IDs de classes com restrição específica
   final List<String> poderesConcedidosIds;
   final List<Poder> poderesConcedidos;
 
@@ -74,7 +67,9 @@ class Divindade {
         .map((p) => Poder.fromJson(Map<String, dynamic>.from(p as Map)))
         .toList();
 
-    final List<String> poderesIds = List<String>.from(json['poderesConcedidosIds'] ?? const []);
+    final List<String> poderesIds = List<String>.from(
+      json['poderesConcedidosIds'] ?? const [],
+    );
     if (poderesIds.isEmpty && poderesList.isNotEmpty) {
       poderesIds.addAll(poderesList.map((p) => p.key));
     }
@@ -83,12 +78,18 @@ class Divindade {
       id: json['id']?.toString() ?? '',
       nome: json['nome']?.toString() ?? '',
       titulo: json['titulo']?.toString() ?? '',
-      crencasObjetivos: (json['crencasObjetivos'] ?? json['descricao'])?.toString() ?? '',
+      crencasObjetivos:
+          (json['crencasObjetivos'] ?? json['descricao'])?.toString() ?? '',
       simboloSagrado: json['simboloSagrado']?.toString() ?? '',
       canalizacaoPermitida: parseCanalizacao(json['canalizacaoPermitida']),
-      armaPreferidaId: (json['armaPreferidaId'] ?? json['armaPreferida'])?.toString() ?? '',
-      obrigacoesERestricoes: List<String>.from(json['obrigacoesERestricoes'] ?? const []),
-      classesPermitidas: List<String>.from(json['classesPermitidas'] ?? const []),
+      armaPreferidaId:
+          (json['armaPreferidaId'] ?? json['armaPreferida'])?.toString() ?? '',
+      obrigacoesERestricoes: List<String>.from(
+        json['obrigacoesERestricoes'] ?? const [],
+      ),
+      classesPermitidas: List<String>.from(
+        json['classesPermitidas'] ?? const [],
+      ),
       poderesConcedidosIds: poderesIds,
       poderesConcedidos: poderesList,
     );
@@ -117,11 +118,9 @@ class Divindade {
       'obrigacoesERestricoes': obrigacoesERestricoes,
       'classesPermitidas': classesPermitidas,
       'poderesConcedidosIds': poderesConcedidosIds,
-      'poderesConcedidos': poderesConcedidos.map((p) => {
-        'key': p.key,
-        'nome': p.nome,
-        'descricao': p.descricao,
-      }).toList(),
+      'poderesConcedidos': poderesConcedidos
+          .map((p) => {'key': p.key, 'nome': p.nome, 'descricao': p.descricao})
+          .toList(),
     };
   }
 
@@ -146,7 +145,8 @@ class Divindade {
       simboloSagrado: simboloSagrado ?? this.simboloSagrado,
       canalizacaoPermitida: canalizacaoPermitida ?? this.canalizacaoPermitida,
       armaPreferidaId: armaPreferidaId ?? this.armaPreferidaId,
-      obrigacoesERestricoes: obrigacoesERestricoes ?? this.obrigacoesERestricoes,
+      obrigacoesERestricoes:
+          obrigacoesERestricoes ?? this.obrigacoesERestricoes,
       classesPermitidas: classesPermitidas ?? this.classesPermitidas,
       poderesConcedidosIds: poderesConcedidosIds ?? this.poderesConcedidosIds,
       poderesConcedidos: poderesConcedidos ?? this.poderesConcedidos,

@@ -1,8 +1,8 @@
-import '../entities/personagem.dart';
-import '../entities/classe_do_personagem.dart';
-import '../entities/poder.dart';
-import 'data_services/call_poderes.dart';
-import 'banco_pericias.dart';
+import '../../entities/personagem/personagem.dart';
+import '../../entities/personagem/classe_do_personagem.dart';
+import '../../entities/personagem/poder.dart';
+import '../data_services/call_poderes.dart';
+import '../data_services/call_pericias.dart';
 
 class ItemRequisito {
   final String descricao;

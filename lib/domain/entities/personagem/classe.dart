@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import '../../helpers/icone_rpg_helper.dart';
+import '../../../helpers/icone_rpg_helper.dart';
 import 'proficiencias.dart';
 
 // Representa escolhas e caminhos no nível 1 (ex: Bruxo, Feiticeiro, Mago para Arcanista)

@@ -2,14 +2,16 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import '../../entities/classe.dart';
+import '../../entities/personagem/classe.dart';
 
 class BancoDeClasses {
   static List<Classe> _dados = [];
 
   /// Carrega as classes a partir do arquivo JSON nos assets
   static Future<void> carregar() async {
-    final raw = await rootBundle.loadString('assets/data/classes_data/banco_classe.json');
+    final raw = await rootBundle.loadString(
+      'assets/data/classes_data/banco_classe.json',
+    );
     final List<dynamic> jsonList = jsonDecode(raw);
 
     _dados = jsonList

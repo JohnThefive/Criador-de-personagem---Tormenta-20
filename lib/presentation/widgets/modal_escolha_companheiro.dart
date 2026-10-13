@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../domain/entities/companheiro_animal.dart';
+import '../../domain/entities/habilidades_complexas/companheiro_animal.dart';
 import '../../domain/services/data_services/call_companheiros.dart';
 
 void mostrarModalEscolhaCompanheiro({

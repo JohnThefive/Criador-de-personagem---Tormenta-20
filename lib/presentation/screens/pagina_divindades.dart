@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../domain/entities/divindade.dart';
+import '../../domain/entities/personagem/divindade.dart';
 import '../../domain/services/data_services/call_divindades.dart';
 import '../../domain/validators/validador_divindade.dart';
 import '../controllers/personagem_cubit.dart';
@@ -527,10 +527,7 @@ class _PaginaSelecaoDivindadeState extends State<PaginaSelecaoDivindade> {
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SimboloDivindade(
-              idDivindade: divindade.id,
-              tamanho: 64,
-            ),
+            SimboloDivindade(idDivindade: divindade.id, tamanho: 64),
             const SizedBox(width: 14),
             Expanded(
               child: Column(

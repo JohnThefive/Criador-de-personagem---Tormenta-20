@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../domain/entities/arma.dart';
+import '../../domain/entities/equipamento/arma.dart';
 import '../../domain/entities/combate/combatente.dart';
 import '../../domain/entities/combate/grid_tatico.dart';
 import '../../domain/entities/combate/tipo_acao.dart';

@@ -1,4 +1,4 @@
-import 'arma.dart';
+import '../equipamento/arma.dart';
 
 class ArmaNaturalForma {
   final String tipo;
@@ -44,7 +44,8 @@ class ArmaNaturalForma {
         : 'Arma Natural ($nomeForma)';
 
     return Arma(
-      key: 'arma_natural_${nomeForma.toLowerCase().replaceAll(' ', '_')}_$indice',
+      key:
+          'arma_natural_${nomeForma.toLowerCase().replaceAll(' ', '_')}_$indice',
       nome: nomeArma,
       descricao: 'Arma natural concedida pela $nomeForma.',
       proficiencia: ProficienciaArma.simples,
@@ -87,7 +88,9 @@ class NivelFormaSelvagem {
 
     final rawArmas = (json['armasNaturais'] as List?) ?? [];
     final armas = rawArmas
-        .map((a) => ArmaNaturalForma.fromJson(Map<String, dynamic>.from(a as Map)))
+        .map(
+          (a) => ArmaNaturalForma.fromJson(Map<String, dynamic>.from(a as Map)),
+        )
         .toList();
 
     return NivelFormaSelvagem(
@@ -166,7 +169,9 @@ class FormaSelvagem {
 
   NivelFormaSelvagem getNivelParaDruida(int nivelDruida) {
     final tier = tierParaNivel(nivelDruida);
-    return niveis[tier] ?? niveis['padrao'] ?? const NivelFormaSelvagem(custoPm: 3, nivelMinimo: 1);
+    return niveis[tier] ??
+        niveis['padrao'] ??
+        const NivelFormaSelvagem(custoPm: 3, nivelMinimo: 1);
   }
 }
 
@@ -223,7 +228,9 @@ class FormaSelvagemAtiva {
 
     final rawArmas = (json['armasNaturais'] as List?) ?? [];
     final armas = rawArmas
-        .map((a) => ArmaNaturalForma.fromJson(Map<String, dynamic>.from(a as Map)))
+        .map(
+          (a) => ArmaNaturalForma.fromJson(Map<String, dynamic>.from(a as Map)),
+        )
         .toList();
 
     return FormaSelvagemAtiva(

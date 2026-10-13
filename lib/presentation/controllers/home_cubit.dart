@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../domain/entities/personagem.dart';
+import '../../domain/entities/personagem/personagem.dart';
 import '../../domain/services/personagem_storage_service.dart';
 
 // Estado da Home (apenas o necessário)

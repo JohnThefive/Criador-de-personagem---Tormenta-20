@@ -1,0 +1,95 @@
+[
+    {
+        "id": "armadura_arcana",
+        "nome": "Armadura Arcana",
+        "tipo": "arcana",
+        "circulo": 1,
+        "escola": "abjuracao",
+        "execucao": {
+            "tipo": "padrao",
+            "detalhes": "Ação padrão"
+        },
+        "alcance": {
+            "tipo": "pessoal",
+            "detalhes": "Você"
+        },
+        "efeito": {
+            "tipo": "alvo",
+            "descricao": "Você"
+        },
+        "duracao": {
+            "tipo": "cena",
+            "detalhes": "Cena"
+        },
+        "resistencia": null,
+        "descricao": "Esta magia cria uma película protetora invisível, mas tangível, fornecendo +5 na Defesa. Esse bônus é cumulativo com outras magias, mas não com bônus fornecido por armaduras.",
+        "aprimoramentos": [
+            {
+                "id": "armadura_arcana_reacao",
+                "descricao": "Muda a execução para reação. Em vez do normal, quando sofre um ataque, você cria um escudo mágico que fornece +5 na Defesa contra esse ataque.",
+                "custoAdicionalPM": 1
+            },
+            {
+                "id": "armadura_arcana_bonus",
+                "descricao": "Aumenta o bônus na Defesa em +1.",
+                "custoAdicionalPM": 2
+            },
+            {
+                "id": "armadura_arcana_duracao",
+                "descricao": "Muda a duração para um dia.",
+                "custoAdicionalPM": 2
+            }
+        ]
+    },
+    {
+        "id": "curar_ferimentos",
+        "nome": "Curar Ferimentos",
+        "tipo": "divina",
+        "circulo": 1,
+        "escola": "evocacao",
+        "execucao": {
+            "tipo": "padrao",
+            "detalhes": "Ação padrão"
+        },
+        "alcance": {
+            "tipo": "toque",
+            "detalhes": "Toque"
+        },
+        "efeito": {
+            "tipo": "alvo",
+            "descricao": "1 criatura"
+        },
+        "duracao": {
+            "tipo": "instantanea",
+            "detalhes": "Instantânea"
+        },
+        "resistencia": {
+            "tipoTeste": "Vontade",
+            "resultadoSucesso": "reduz_metade"
+        },
+        "descricao": "Você canaliza luz que recupera 2d8+2 pontos de vida na criatura tocada.",
+        "aprimoramentos": [
+            {
+                "id": "curar_ferimentos_truque",
+                "descricao": "Muda o alvo para 1 morto-vivo. Em vez do normal, causa 1d8 pontos de dano de luz.",
+                "custoAdicionalPM": 0,
+                "isTruque": true
+            },
+            {
+                "id": "curar_ferimentos_aumento",
+                "descricao": "Aumenta a cura em +1d8+1.",
+                "custoAdicionalPM": 1
+            },
+            {
+                "id": "curar_ferimentos_fadiga",
+                "descricao": "Também remove uma condição de fadiga do alvo.",
+                "custoAdicionalPM": 2
+            },
+            {
+                "id": "curar_ferimentos_alcance",
+                "descricao": "Muda o alcance para curto.",
+                "custoAdicionalPM": 2
+            }
+        ]
+    }
+]

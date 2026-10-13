@@ -18,4 +18,16 @@ class Pericia {
     required this.descricao,
     required this.acoesExecutadas,
   });
+
+  factory Pericia.fromJson(Map<String, dynamic> json) {
+    return Pericia(
+      key: json['key'] as String,
+      label: json['label'] as String,
+      atributoChave: json['atributoChave'] as String,
+      somenteTreinada: json['somenteTreinada'] as bool,
+      penalidadeArmadura: json['penalidadeArmadura'] as bool,
+      descricao: json['descricao'] as String,
+      acoesExecutadas: json['acoesExecutadas'] as String,
+    );
+  }
 }

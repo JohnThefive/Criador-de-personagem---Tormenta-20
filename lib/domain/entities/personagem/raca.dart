@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import '../../helpers/icone_rpg_helper.dart';
+import '../../../helpers/icone_rpg_helper.dart';
 
 class Raca {
   final String id;

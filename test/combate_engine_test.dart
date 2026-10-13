@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:t20_creator/domain/entities/arma.dart';
+import 'package:t20_creator/domain/entities/equipamento/arma.dart';
 import 'package:t20_creator/domain/entities/combate/combatente.dart';
 import 'package:t20_creator/domain/entities/combate/grid_tatico.dart';
 import 'package:t20_creator/domain/services/combate_engine.dart';

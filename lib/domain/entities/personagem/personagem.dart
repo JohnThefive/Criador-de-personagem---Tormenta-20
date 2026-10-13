@@ -1,13 +1,13 @@
-import 'package:t20_creator/domain/entities/poder.dart';
-import 'arma.dart';
-import 'protecao.dart';
+import 'package:t20_creator/domain/entities/personagem/poder.dart';
+import '../equipamento/arma.dart';
+import '../equipamento/protecao.dart';
 import 'proficiencias.dart';
-import 'forma_selvagem.dart';
-import 'golpe_pessoal.dart';
-import 'engenhoca.dart';
-import 'montaria_sagrada.dart';
-import '../services/data_services/call_montaria_sagrada.dart';
-import '../services/regras_carga_service.dart';
+import '../habilidades_complexas/forma_selvagem.dart';
+import '../habilidades_complexas/golpe_pessoal.dart';
+import '../habilidades_complexas/engenhoca.dart';
+import '../habilidades_complexas/montaria_sagrada.dart';
+import '../../services/data_services/call_montaria_sagrada.dart';
+import '../../services/regras_carga_service.dart';
 
 import 'atributos.dart';
 import 'raca.dart';
@@ -16,7 +16,7 @@ import 'origem.dart';
 import 'divindade.dart';
 
 // imports pras pericias
-import '../services/banco_pericias.dart';
+import '../../services/data_services/call_pericias.dart';
 
 class Personagem {
   final String nome;
@@ -52,6 +52,9 @@ class Personagem {
   final List<Poder> poderesConcedidos;
   final TipoEnergia? canalizacaoEnergia;
   final bool punicaoDivinaAtiva;
+
+  // Magias aprendidas / conhecidas pelo personagem
+  final List<String> magiasConhecidas;
 
   Poder? get poderConcedido =>
       poderesConcedidos.isNotEmpty ? poderesConcedidos.first : null;
@@ -107,6 +110,7 @@ class Personagem {
     Poder? poderConcedido,
     this.canalizacaoEnergia,
     this.punicaoDivinaAtiva = false,
+    this.magiasConhecidas = const [],
     // Campos de personalização (com fallback para id se vier nulo)
     String? id,
     this.idade = 20,
@@ -121,7 +125,8 @@ class Personagem {
     int? pmAtual,
     this.experienciaAtual = 0,
   }) : id = id ?? DateTime.now().millisecondsSinceEpoch.toString(),
-       poderesConcedidos = poderesConcedidos ??
+       poderesConcedidos =
+           poderesConcedidos ??
            (poderConcedido != null ? [poderConcedido] : const []),
        _pvAtual = pvAtual,
        _pmAtual = pmAtual;
@@ -168,6 +173,7 @@ class Personagem {
       montariaSagrada: null,
       divindade: null,
       poderConcedido: null,
+      magiasConhecidas: const [],
       idade: 20,
       alinhamento: 'Neutro',
       descricaoAparencia: '',
@@ -217,6 +223,7 @@ class Personagem {
     bool anularCanalizacao = false,
     bool? punicaoDivinaAtiva,
     bool anularDivindade = false,
+    List<String>? magiasConhecidas,
     // Campos de personalização
     int? idade,
     String? alinhamento,
@@ -264,15 +271,16 @@ class Personagem {
       poderesConcedidos: anularDivindade
           ? const []
           : (poderesConcedidos ??
-              (poderConcedido != null
-                  ? [poderConcedido]
-                  : this.poderesConcedidos)),
+                (poderConcedido != null
+                    ? [poderConcedido]
+                    : this.poderesConcedidos)),
       canalizacaoEnergia: (anularDivindade || anularCanalizacao)
           ? null
           : (canalizacaoEnergia ?? this.canalizacaoEnergia),
       punicaoDivinaAtiva: anularDivindade
           ? false
           : (punicaoDivinaAtiva ?? this.punicaoDivinaAtiva),
+      magiasConhecidas: magiasConhecidas ?? this.magiasConhecidas,
       idade: idade ?? this.idade,
       alinhamento: alinhamento ?? this.alinhamento,
       descricaoAparencia: descricaoAparencia ?? this.descricaoAparencia,
@@ -306,10 +314,7 @@ class Personagem {
       nivelDruida: nivelDruida,
     );
     final novoPM = (pmAtual - ativa.custoPm).clamp(0, pmTotal);
-    return copyWith(
-      formaSelvagemAtiva: ativa,
-      pmAtual: novoPM,
-    );
+    return copyWith(formaSelvagemAtiva: ativa, pmAtual: novoPM);
   }
 
   Personagem reverterFormaSelvagem() {
@@ -348,17 +353,12 @@ class Personagem {
 
   /// Aplica a penalidade mecânica de Punição Divina (decretada pelo Mestre)
   Personagem aplicarPunicaoDivina() {
-    return copyWith(
-      punicaoDivinaAtiva: true,
-      pmAtual: 0,
-    );
+    return copyWith(punicaoDivinaAtiva: true, pmAtual: 0);
   }
 
   /// Remove a Punição Divina após o cumprimento de penitência
   Personagem removerPunicaoDivina() {
-    return copyWith(
-      punicaoDivinaAtiva: false,
-    );
+    return copyWith(punicaoDivinaAtiva: false);
   }
 
   // Getters específicos de Druida
@@ -387,13 +387,21 @@ class Personagem {
           ?.nivel ??
       0;
 
-  bool get temPoderEngenhoqueiro => classes.any(
-    (c) => c.poderesEscolhidos.any((p) => p.key.toUpperCase() == 'ENGENHOQUEIRO'),
-  ) || poderesGerais.any((p) => p.key.toUpperCase() == 'ENGENHOQUEIRO');
+  bool get temPoderEngenhoqueiro =>
+      classes.any(
+        (c) => c.poderesEscolhidos.any(
+          (p) => p.key.toUpperCase() == 'ENGENHOQUEIRO',
+        ),
+      ) ||
+      poderesGerais.any((p) => p.key.toUpperCase() == 'ENGENHOQUEIRO');
 
-  bool get temPoderManutencaoEficiente => classes.any(
-    (c) => c.poderesEscolhidos.any((p) => p.key.toUpperCase() == 'MANUTENCAO_EFICIENTE'),
-  ) || poderesGerais.any((p) => p.key.toUpperCase() == 'MANUTENCAO_EFICIENTE');
+  bool get temPoderManutencaoEficiente =>
+      classes.any(
+        (c) => c.poderesEscolhidos.any(
+          (p) => p.key.toUpperCase() == 'MANUTENCAO_EFICIENTE',
+        ),
+      ) ||
+      poderesGerais.any((p) => p.key.toUpperCase() == 'MANUTENCAO_EFICIENTE');
 
   /// Limite de engenhocas ativas sustentadas pelo personagem:
   /// Baseado em Inteligência (+3 se possuir Manutenção Eficiente). Mínimo 0.
@@ -483,7 +491,8 @@ class Personagem {
   }
 
   bool get temMontariaSagrada =>
-      (nivelPaladino >= 5 && temCaminhoMontariaSagrada) || montariaSagrada != null;
+      (nivelPaladino >= 5 && temCaminhoMontariaSagrada) ||
+      montariaSagrada != null;
 
   bool get montariaSagradaAtiva =>
       temMontariaSagrada && (montariaSagrada?.ativa ?? false);
@@ -501,10 +510,15 @@ class Personagem {
   Personagem invocarMontariaSagrada() {
     final custo = BancoDeRegrasMontariaSagrada.custoPmInvocacao;
     if (pmAtual < custo) return this;
-    final montariaAtual = montariaSagrada ??
+    final montariaAtual =
+        montariaSagrada ??
         MontariaSagrada(
-          nomeCustomizado: BancoDeRegrasMontariaSagrada.animalPadraoParaTamanho(tamanho),
-          especie: BancoDeRegrasMontariaSagrada.animalPadraoParaTamanho(tamanho),
+          nomeCustomizado: BancoDeRegrasMontariaSagrada.animalPadraoParaTamanho(
+            tamanho,
+          ),
+          especie: BancoDeRegrasMontariaSagrada.animalPadraoParaTamanho(
+            tamanho,
+          ),
         );
     return copyWith(
       pmAtual: (pmAtual - custo).clamp(0, pmTotal),
@@ -520,10 +534,15 @@ class Personagem {
   }
 
   Personagem alternarVarianteMundanaMontaria(bool mundana) {
-    final montariaAtual = montariaSagrada ??
+    final montariaAtual =
+        montariaSagrada ??
         MontariaSagrada(
-          nomeCustomizado: BancoDeRegrasMontariaSagrada.animalPadraoParaTamanho(tamanho),
-          especie: BancoDeRegrasMontariaSagrada.animalPadraoParaTamanho(tamanho),
+          nomeCustomizado: BancoDeRegrasMontariaSagrada.animalPadraoParaTamanho(
+            tamanho,
+          ),
+          especie: BancoDeRegrasMontariaSagrada.animalPadraoParaTamanho(
+            tamanho,
+          ),
         );
     return copyWith(
       montariaSagrada: montariaAtual.copyWith(isVarianteMundana: mundana),
@@ -631,7 +650,8 @@ class Personagem {
         formaSelvagemAtiva!.modificadores.containsKey('DEFESA')) {
       bonusForma = formaSelvagemAtiva!.modificadores['DEFESA']!;
     }
-    final bonusCompanheiro = (temPoderCompanheiroAnimal && tipoCompanheiroAnimal == 'GUARDIAO')
+    final bonusCompanheiro =
+        (temPoderCompanheiroAnimal && tipoCompanheiroAnimal == 'GUARDIAO')
         ? (nivelDruida >= 12 ? 3 : (nivelDruida >= 6 ? 2 : 1))
         : 0;
     return 10 +

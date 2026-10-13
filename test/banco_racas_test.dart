@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fluttericon/rpg_awesome_icons.dart';
 import 'package:t20_creator/helpers/icone_rpg_helper.dart';
-import 'package:t20_creator/domain/entities/raca.dart';
+import 'package:t20_creator/domain/entities/personagem/raca.dart';
 import 'package:t20_creator/domain/services/data_services/call_racas.dart';
 
 void main() {
@@ -78,72 +78,70 @@ void main() {
       expect(BancoDeRacas.getById('inexistente'), isNull);
     });
 
-    test(
-      'Arquivo assets/data/banco_racas.json é válido e contém as 18 raças',
-      () {
-        final file = File('assets/data/banco_racas.json');
+    test('Arquivo assets/data/banco_racas.json é válido e contém as 18 raças', () {
+      final file = File('assets/data/banco_racas.json');
+      expect(
+        file.existsSync(),
+        isTrue,
+        reason: 'O arquivo banco_racas.json deve existir',
+      );
+
+      final content = file.readAsStringSync();
+      final List<dynamic> jsonList = jsonDecode(content);
+
+      expect(jsonList.length, equals(18));
+
+      final racas = jsonList
+          .map((e) => Raca.fromJson(e as Map<String, dynamic>))
+          .toList();
+      expect(racas.length, equals(18));
+
+      for (final raca in racas) {
+        expect(raca.id, isNotEmpty);
+        expect(raca.nome, isNotEmpty);
+        expect(raca.descricaoRaca, isNotEmpty);
+        expect(raca.icone, isNotEmpty);
+        expect(raca.iconeRaca, isNotNull);
+
+        final svgFile = File('assets/icons/${raca.icone}.svg');
         expect(
-          file.existsSync(),
+          svgFile.existsSync(),
           isTrue,
-          reason: 'O arquivo banco_racas.json deve existir',
+          reason:
+              'O arquivo SVG para ${raca.nome} (${svgFile.path}) deve existir',
         );
+      }
 
-        final content = file.readAsStringSync();
-        final List<dynamic> jsonList = jsonDecode(content);
+      final ids = racas.map((r) => r.id).toSet();
+      expect(
+        ids.length,
+        equals(18),
+        reason: 'Todos os IDs de raças devem ser únicos',
+      );
 
-        expect(jsonList.length, equals(18));
+      // Valida que o diretório possui exatamente 18 SVGs únicos, sem duplicatas ou maiúsculas
+      final dirRacas = Directory('assets/icons/racas');
+      expect(dirRacas.existsSync(), isTrue);
+      final svgFiles = dirRacas
+          .listSync()
+          .whereType<File>()
+          .where((f) => f.path.endsWith('.svg'))
+          .toList();
+      expect(
+        svgFiles.length,
+        equals(18),
+        reason:
+            'Deve haver exatamente 18 arquivos SVG em assets/icons/racas (1 para cada raça)',
+      );
 
-        final racas = jsonList
-            .map((e) => Raca.fromJson(e as Map<String, dynamic>))
-            .toList();
-        expect(racas.length, equals(18));
-
-        for (final raca in racas) {
-          expect(raca.id, isNotEmpty);
-          expect(raca.nome, isNotEmpty);
-          expect(raca.descricaoRaca, isNotEmpty);
-          expect(raca.icone, isNotEmpty);
-          expect(raca.iconeRaca, isNotNull);
-
-          final svgFile = File('assets/icons/${raca.icone}.svg');
-          expect(
-            svgFile.existsSync(),
-            isTrue,
-            reason:
-                'O arquivo SVG para ${raca.nome} (${svgFile.path}) deve existir',
-          );
-        }
-
-        final ids = racas.map((r) => r.id).toSet();
+      for (final file in svgFiles) {
+        final fileName = file.uri.pathSegments.last;
         expect(
-          ids.length,
-          equals(18),
-          reason: 'Todos os IDs de raças devem ser únicos',
+          fileName,
+          equals(fileName.toLowerCase()),
+          reason: 'O arquivo $fileName deve estar em minúsculas (padronizado)',
         );
-
-        // Valida que o diretório possui exatamente 18 SVGs únicos, sem duplicatas ou maiúsculas
-        final dirRacas = Directory('assets/icons/racas');
-        expect(dirRacas.existsSync(), isTrue);
-        final svgFiles = dirRacas
-            .listSync()
-            .whereType<File>()
-            .where((f) => f.path.endsWith('.svg'))
-            .toList();
-        expect(
-          svgFiles.length,
-          equals(18),
-          reason: 'Deve haver exatamente 18 arquivos SVG em assets/icons/racas (1 para cada raça)',
-        );
-
-        for (final file in svgFiles) {
-          final fileName = file.uri.pathSegments.last;
-          expect(
-            fileName,
-            equals(fileName.toLowerCase()),
-            reason: 'O arquivo $fileName deve estar em minúsculas (padronizado)',
-          );
-        }
-      },
-    );
+      }
+    });
   });
 }

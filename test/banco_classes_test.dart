@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fluttericon/rpg_awesome_icons.dart';
-import 'package:t20_creator/domain/entities/classe.dart';
-import 'package:t20_creator/domain/entities/proficiencias.dart';
+import 'package:t20_creator/domain/entities/personagem/classe.dart';
+import 'package:t20_creator/domain/entities/personagem/proficiencias.dart';
 import 'package:t20_creator/domain/services/data_services/call_classes.dart';
 import 'package:t20_creator/helpers/icone_rpg_helper.dart';
 
@@ -183,7 +183,8 @@ void main() {
         expect(
           file.existsSync(),
           isTrue,
-          reason: 'O arquivo banco_classe.json deve existir em assets/data/classes_data/',
+          reason:
+              'O arquivo banco_classe.json deve existir em assets/data/classes_data/',
         );
 
         final content = file.readAsStringSync();
@@ -288,7 +289,8 @@ void main() {
         expect(
           svgFiles.length,
           equals(14),
-          reason: 'Deve haver exatamente 14 arquivos SVG em assets/icons/classes (1 para cada classe)',
+          reason:
+              'Deve haver exatamente 14 arquivos SVG em assets/icons/classes (1 para cada classe)',
         );
 
         for (final classe in classes) {
@@ -307,7 +309,8 @@ void main() {
           expect(
             fileName,
             equals(fileName.toLowerCase()),
-            reason: 'O arquivo $fileName deve estar em minúsculas (padronizado)',
+            reason:
+                'O arquivo $fileName deve estar em minúsculas (padronizado)',
           );
         }
       },

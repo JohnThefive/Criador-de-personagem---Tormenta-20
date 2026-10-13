@@ -1,12 +1,14 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
-import '../../entities/arma.dart';
+import '../../entities/equipamento/arma.dart';
 
 class BancoDeArmas {
   static List<Arma> _dados = [];
 
   static Future<void> carregar() async {
-    final raw = await rootBundle.loadString('assets/data/equipment/banco_armas.json');
+    final raw = await rootBundle.loadString(
+      'assets/data/equipment/banco_armas.json',
+    );
     final List<dynamic> jsonList = jsonDecode(raw);
 
     _dados = jsonList

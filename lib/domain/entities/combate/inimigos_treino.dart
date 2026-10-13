@@ -1,4 +1,4 @@
-import '../arma.dart';
+import '../equipamento/arma.dart';
 import 'combatente.dart';
 import 'estado_vida_combatente.dart';
 

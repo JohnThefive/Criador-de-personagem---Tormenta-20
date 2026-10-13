@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../controllers/home_cubit.dart';
 import 'char_creation_screen.dart'; // Importe a tela de criação aqui
 import 'painel_jogador_screen.dart';
-import '../../domain/entities/personagem.dart';
+import '../../domain/entities/personagem/personagem.dart';
 import '../widgets/rpg_icon.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -170,11 +170,7 @@ class HomeScreen extends StatelessWidget {
       context: context,
       applicationName: 'T20 Creator',
       applicationVersion: '1.0.0',
-      applicationIcon: const Icon(
-        Icons.shield,
-        size: 40,
-        color: Colors.red,
-      ),
+      applicationIcon: const Icon(Icons.shield, size: 40, color: Colors.red),
       children: const [
         SizedBox(height: 12),
         Text(

@@ -1,9 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:t20_creator/domain/entities/arma.dart';
-import 'package:t20_creator/domain/entities/protecao.dart';
-import 'package:t20_creator/domain/entities/atributos.dart';
-import 'package:t20_creator/domain/entities/classe_do_personagem.dart';
-import 'package:t20_creator/domain/entities/personagem.dart';
+import 'package:t20_creator/domain/entities/equipamento/arma.dart';
+import 'package:t20_creator/domain/entities/equipamento/protecao.dart';
+import 'package:t20_creator/domain/entities/personagem/atributos.dart';
+import 'package:t20_creator/domain/entities/personagem/classe_do_personagem.dart';
+import 'package:t20_creator/domain/entities/personagem/personagem.dart';
 import 'package:t20_creator/domain/services/data_services/call_classes.dart';
 import 'package:t20_creator/domain/services/regras_carga_service.dart';
 import 'package:t20_creator/presentation/controllers/personagem_cubit.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:t20_creator/domain/entities/linhagem_arcanista.dart';
+import 'package:t20_creator/domain/entities/habilidades_complexas/linhagem_arcanista.dart';
 import '../../domain/services/data_services/call_classes.dart';
 import '../../domain/services/data_services/call_poderes.dart';
 import '../controllers/personagem_cubit.dart';

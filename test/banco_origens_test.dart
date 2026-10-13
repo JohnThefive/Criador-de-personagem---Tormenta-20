@@ -1,24 +1,27 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:t20_creator/domain/entities/origem.dart';
+import 'package:t20_creator/domain/entities/personagem/origem.dart';
 import 'package:t20_creator/domain/services/data_services/call_origens.dart';
 
 void main() {
   group('BancoDeOrigens e Entidade Origem', () {
-    test('carrega catalogo a partir do JSON de assets e busca por ID e Nome', () {
-      final todas = BancoDeOrigens.todas;
-      expect(todas, isNotEmpty);
+    test(
+      'carrega catalogo a partir do JSON de assets e busca por ID e Nome',
+      () {
+        final todas = BancoDeOrigens.todas;
+        expect(todas, isNotEmpty);
 
-      final acolito = BancoDeOrigens.getById('acolito');
-      expect(acolito, isNotNull);
-      expect(acolito!.nome, equals('Acólito'));
-      expect(acolito.itensIniciais, contains('Símbolo sagrado'));
-      expect(acolito.periciasOpcoes, contains('CURA'));
-      expect(acolito.poderUnico.key, equals('membro_da_igreja'));
+        final acolito = BancoDeOrigens.getById('acolito');
+        expect(acolito, isNotNull);
+        expect(acolito!.nome, equals('Acólito'));
+        expect(acolito.itensIniciais, contains('Símbolo sagrado'));
+        expect(acolito.periciasOpcoes, contains('CURA'));
+        expect(acolito.poderUnico.key, equals('membro_da_igreja'));
 
-      final porNome = BancoDeOrigens.getByNome('Soldado');
-      expect(porNome, isNotNull);
-      expect(porNome!.id, equals('soldado'));
-    });
+        final porNome = BancoDeOrigens.getByNome('Soldado');
+        expect(porNome, isNotNull);
+        expect(porNome!.id, equals('soldado'));
+      },
+    );
 
     test('Origem.fromJson lida com campos ausentes sem falhar', () {
       final jsonMinimo = {

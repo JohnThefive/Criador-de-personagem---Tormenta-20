@@ -1,4 +1,4 @@
-import '../services/data_services/call_efeitos_golpe_pessoal.dart';
+import '../../services/data_services/call_efeitos_golpe_pessoal.dart';
 
 class EfeitoGolpePessoal {
   final String key;
@@ -179,8 +179,11 @@ class ValidadorGolpePessoal {
       if (efeito == null) continue;
 
       if (!efeito.cumulativo && entry.value > 1) {
-        erros.add('O efeito "${efeito.nome}" não pode ser escolhido mais de uma vez.');
-      } else if (efeito.limiteEscolhas != null && entry.value > efeito.limiteEscolhas!) {
+        erros.add(
+          'O efeito "${efeito.nome}" não pode ser escolhido mais de uma vez.',
+        );
+      } else if (efeito.limiteEscolhas != null &&
+          entry.value > efeito.limiteEscolhas!) {
         erros.add(
           'O efeito "${efeito.nome}" permite no máximo ${efeito.limiteEscolhas} escolhas (você escolheu ${entry.value}).',
         );
@@ -193,14 +196,18 @@ class ValidadorGolpePessoal {
       final efeito = mapaCatalogo[key];
       if (efeito?.restricao == 'arma_arremesso') {
         if (!temQualquerArma && !armaEhArremesso) {
-          erros.add('O efeito "${efeito!.nome}" exige uma arma de arremesso (ou o efeito Qualquer Arma).');
+          erros.add(
+            'O efeito "${efeito!.nome}" exige uma arma de arremesso (ou o efeito Qualquer Arma).',
+          );
         }
       }
     }
 
     // Regra de custo mínimo: 1 PM
     if (custoTotal < 1) {
-      erros.add('O custo mínimo de um Golpe Pessoal é 1 PM (atualmente totaliza $custoTotal PM).');
+      erros.add(
+        'O custo mínimo de um Golpe Pessoal é 1 PM (atualmente totaliza $custoTotal PM).',
+      );
     }
 
     // Regra de custo máximo: nível de guerreiro

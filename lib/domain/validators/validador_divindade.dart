@@ -1,7 +1,7 @@
-import '../entities/personagem.dart';
-import '../entities/divindade.dart';
-import '../entities/poder.dart';
-import '../services/poder_validador_service.dart';
+import '../entities/personagem/personagem.dart';
+import '../entities/personagem/divindade.dart';
+import '../entities/personagem/poder.dart';
+import '../services/poderes_e_magias/poder_validador_service.dart';
 
 /// Resultado detalhado da validação de elegibilidade de devoção
 class ResultadoElegibilidadeDevocao {
@@ -44,7 +44,9 @@ class ValidadorDivindade {
   /// (Clérigo, Druida ou Paladino), que pode escolher 2 poderes concedidos ao invés de 1.
   static bool ehDevotoFiel(Personagem personagem) {
     if (personagem.classes.isEmpty) return false;
-    final idClasse = _normalizarId(personagem.classes[0].classeDefinicao.idClasse);
+    final idClasse = _normalizarId(
+      personagem.classes[0].classeDefinicao.idClasse,
+    );
     return idClasse == 'clerigo' ||
         idClasse == 'clerigo' ||
         idClasse == 'druida' ||
@@ -97,7 +99,9 @@ class ValidadorDivindade {
     }
 
     if (personagem.classes.isNotEmpty) {
-      final idClasse = _normalizarId(personagem.classes[0].classeDefinicao.idClasse);
+      final idClasse = _normalizarId(
+        personagem.classes[0].classeDefinicao.idClasse,
+      );
       final idDivindade = _normalizarId(divindade.id);
 
       // Restrição de Paladino

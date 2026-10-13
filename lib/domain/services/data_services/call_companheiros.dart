@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/services.dart';
-import '../../entities/companheiro_animal.dart';
+import '../../entities/habilidades_complexas/companheiro_animal.dart';
 
 class BancoDeCompanheiros {
   static List<TipoCompanheiroAnimal> _dados = [];
@@ -28,7 +28,9 @@ class BancoDeCompanheiros {
   static List<TipoCompanheiroAnimal> get todos {
     if (_dados.isEmpty) {
       try {
-        final file = File('assets/data/classes_data/especifico_classe/druida/tipos_companheiro_animal.json');
+        final file = File(
+          'assets/data/classes_data/especifico_classe/druida/tipos_companheiro_animal.json',
+        );
         if (file.existsSync()) {
           _dados = _parse(file.readAsStringSync());
         }
@@ -43,6 +45,8 @@ class BancoDeCompanheiros {
 
   static TipoCompanheiroAnimal? getByKey(String key) {
     final keyNorm = key.trim().toUpperCase();
-    return todos.where((c) => c.key.trim().toUpperCase() == keyNorm).firstOrNull;
+    return todos
+        .where((c) => c.key.trim().toUpperCase() == keyNorm)
+        .firstOrNull;
   }
 }

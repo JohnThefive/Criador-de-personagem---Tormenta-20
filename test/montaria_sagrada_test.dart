@@ -1,9 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:t20_creator/domain/entities/atributos.dart';
-import 'package:t20_creator/domain/entities/classe.dart';
-import 'package:t20_creator/domain/entities/classe_do_personagem.dart';
-import 'package:t20_creator/domain/entities/montaria_sagrada.dart';
-import 'package:t20_creator/domain/entities/personagem.dart';
+import 'package:t20_creator/domain/entities/personagem/atributos.dart';
+import 'package:t20_creator/domain/entities/personagem/classe.dart';
+import 'package:t20_creator/domain/entities/personagem/classe_do_personagem.dart';
+import 'package:t20_creator/domain/entities/habilidades_complexas/montaria_sagrada.dart';
+import 'package:t20_creator/domain/entities/personagem/personagem.dart';
 import 'package:t20_creator/domain/services/data_services/call_montaria_sagrada.dart';
 import 'package:t20_creator/domain/services/personagem_storage_service.dart';
 
@@ -23,32 +23,61 @@ void main() {
 
     test('calcula tier e deslocamento corretamente por nível de Paladino', () {
       // Nível < 5
-      expect(BancoDeRegrasMontariaSagrada.tierParaNivel(4), equals('INICIANTE'));
+      expect(
+        BancoDeRegrasMontariaSagrada.tierParaNivel(4),
+        equals('INICIANTE'),
+      );
       expect(BancoDeRegrasMontariaSagrada.deslocamentoParaNivel(4), equals(15));
 
       // Nível 5 a 10 (Veterano)
       expect(BancoDeRegrasMontariaSagrada.tierParaNivel(5), equals('VETERANO'));
       expect(BancoDeRegrasMontariaSagrada.deslocamentoParaNivel(5), equals(18));
-      expect(BancoDeRegrasMontariaSagrada.tierParaNivel(10), equals('VETERANO'));
-      expect(BancoDeRegrasMontariaSagrada.deslocamentoParaNivel(10), equals(18));
+      expect(
+        BancoDeRegrasMontariaSagrada.tierParaNivel(10),
+        equals('VETERANO'),
+      );
+      expect(
+        BancoDeRegrasMontariaSagrada.deslocamentoParaNivel(10),
+        equals(18),
+      );
 
       // Nível 11+ (Mestre)
       expect(BancoDeRegrasMontariaSagrada.tierParaNivel(11), equals('MESTRE'));
-      expect(BancoDeRegrasMontariaSagrada.deslocamentoParaNivel(11), equals(21));
+      expect(
+        BancoDeRegrasMontariaSagrada.deslocamentoParaNivel(11),
+        equals(21),
+      );
       expect(BancoDeRegrasMontariaSagrada.tierParaNivel(20), equals('MESTRE'));
-      expect(BancoDeRegrasMontariaSagrada.deslocamentoParaNivel(20), equals(21));
+      expect(
+        BancoDeRegrasMontariaSagrada.deslocamentoParaNivel(20),
+        equals(21),
+      );
     });
 
     test('retorna espécie padrão por tamanho do personagem', () {
-      expect(BancoDeRegrasMontariaSagrada.animalPadraoParaTamanho('Pequeno'), equals('Pônei'));
-      expect(BancoDeRegrasMontariaSagrada.animalPadraoParaTamanho('Médio'), equals('Cavalo de Guerra'));
-      expect(BancoDeRegrasMontariaSagrada.animalPadraoParaTamanho(null), equals('Cavalo de Guerra'));
+      expect(
+        BancoDeRegrasMontariaSagrada.animalPadraoParaTamanho('Pequeno'),
+        equals('Pônei'),
+      );
+      expect(
+        BancoDeRegrasMontariaSagrada.animalPadraoParaTamanho('Médio'),
+        equals('Cavalo de Guerra'),
+      );
+      expect(
+        BancoDeRegrasMontariaSagrada.animalPadraoParaTamanho(null),
+        equals('Cavalo de Guerra'),
+      );
     });
 
     test('retorna propriedades e regras textuais', () {
       final props = BancoDeRegrasMontariaSagrada.propriedades;
       expect(props, isNotEmpty);
-      expect(props.any((p) => p.contains('Vinculo mental') || p.contains('Vínculo mental')), isTrue);
+      expect(
+        props.any(
+          (p) => p.contains('Vinculo mental') || p.contains('Vínculo mental'),
+        ),
+        isTrue,
+      );
     });
   });
 
@@ -193,23 +222,32 @@ void main() {
       expect(comMundana.pmAtual, equals(5));
     });
 
-    test('persistência salva e carrega montaria sagrada no PersonagemStorageService', () {
-      final pOriginal = criarPaladino(nivel: 5, pmAtual: 10).invocarMontariaSagrada();
-      final pAtualizado = pOriginal.atualizarMontariaSagrada(
-        pOriginal.montariaSagrada!.copyWith(
-          nomeCustomizado: 'Sleipnir',
-          especie: 'Cavalo de Guerra Divino',
-        ),
-      );
+    test(
+      'persistência salva e carrega montaria sagrada no PersonagemStorageService',
+      () {
+        final pOriginal = criarPaladino(
+          nivel: 5,
+          pmAtual: 10,
+        ).invocarMontariaSagrada();
+        final pAtualizado = pOriginal.atualizarMontariaSagrada(
+          pOriginal.montariaSagrada!.copyWith(
+            nomeCustomizado: 'Sleipnir',
+            especie: 'Cavalo de Guerra Divino',
+          ),
+        );
 
-      final jsonStr = PersonagemStorageService.personagemToJson(pAtualizado);
-      final pCarregado = PersonagemStorageService.personagemFromJson(jsonStr);
+        final jsonStr = PersonagemStorageService.personagemToJson(pAtualizado);
+        final pCarregado = PersonagemStorageService.personagemFromJson(jsonStr);
 
-      expect(pCarregado.montariaSagrada, isNotNull);
-      expect(pCarregado.montariaSagrada?.nomeCustomizado, equals('Sleipnir'));
-      expect(pCarregado.montariaSagrada?.especie, equals('Cavalo de Guerra Divino'));
-      expect(pCarregado.montariaSagrada?.invocada, isTrue);
-      expect(pCarregado.montariaSagradaAtiva, isTrue);
-    });
+        expect(pCarregado.montariaSagrada, isNotNull);
+        expect(pCarregado.montariaSagrada?.nomeCustomizado, equals('Sleipnir'));
+        expect(
+          pCarregado.montariaSagrada?.especie,
+          equals('Cavalo de Guerra Divino'),
+        );
+        expect(pCarregado.montariaSagrada?.invocada, isTrue);
+        expect(pCarregado.montariaSagradaAtiva, isTrue);
+      },
+    );
   });
 }

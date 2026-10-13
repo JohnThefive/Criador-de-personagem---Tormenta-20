@@ -1,5 +1,5 @@
 import 'dart:math';
-import '../entities/arma.dart';
+import '../entities/equipamento/arma.dart';
 import '../entities/combate/combatente.dart';
 import '../entities/combate/estado_vida_combatente.dart';
 import '../entities/combate/resultado_ataque.dart';

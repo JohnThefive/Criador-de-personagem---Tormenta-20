@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../domain/entities/personagem.dart';
-import '../../domain/entities/poder.dart';
+import '../../domain/entities/personagem/personagem.dart';
+import '../../domain/entities/personagem/poder.dart';
 import '../controllers/evolucao_cubit.dart';
 import '../widgets/modal_escolha_companheiro.dart';
 

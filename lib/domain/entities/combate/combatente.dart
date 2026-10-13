@@ -1,6 +1,6 @@
 import 'dart:math';
-import '../arma.dart';
-import '../personagem.dart';
+import '../equipamento/arma.dart';
+import '../personagem/personagem.dart';
 import 'estado_vida_combatente.dart';
 
 enum CondicaoCombatente { surpreendido, caido, indefeso }
