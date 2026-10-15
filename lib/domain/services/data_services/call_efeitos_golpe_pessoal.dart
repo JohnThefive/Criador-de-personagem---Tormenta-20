@@ -5,6 +5,14 @@ import '../../entities/habilidades_complexas/golpe_pessoal.dart';
 
 class BancoDeEfeitosGolpePessoal {
   static List<EfeitoGolpePessoal> _dados = [];
+  static final Map<String, EfeitoGolpePessoal> _indexPorChave = {};
+
+  static void _reconstruirIndex() {
+    _indexPorChave.clear();
+    for (final e in _dados) {
+      _indexPorChave[e.key.trim().toUpperCase()] = e;
+    }
+  }
 
   static List<EfeitoGolpePessoal> _parse(String raw) {
     final List<dynamic> jsonList = jsonDecode(raw);
@@ -22,6 +30,7 @@ class BancoDeEfeitosGolpePessoal {
       'assets/data/classes_data/especifico_classe/guerreiro/efeitos_golpe_pessoal.json',
     );
     _dados = _parse(raw);
+    _reconstruirIndex();
   }
 
   static List<EfeitoGolpePessoal> get todos {
@@ -32,6 +41,7 @@ class BancoDeEfeitosGolpePessoal {
         );
         if (file.existsSync()) {
           _dados = _parse(file.readAsStringSync());
+          _reconstruirIndex();
         }
       } catch (_) {}
     }
@@ -40,13 +50,14 @@ class BancoDeEfeitosGolpePessoal {
 
   static void carregarParaTestes(List<EfeitoGolpePessoal> efeitos) {
     _dados = List.from(efeitos);
+    _reconstruirIndex();
   }
 
   static EfeitoGolpePessoal? getByKey(String key) {
-    final keyNorm = key.trim().toUpperCase();
-    return todos
-        .where((e) => e.key.trim().toUpperCase() == keyNorm)
-        .firstOrNull;
+    if (_dados.isEmpty) {
+      final _ = todos;
+    }
+    return _indexPorChave[key.trim().toUpperCase()];
   }
 
   static List<EfeitoGolpePessoal> get vantagens =>

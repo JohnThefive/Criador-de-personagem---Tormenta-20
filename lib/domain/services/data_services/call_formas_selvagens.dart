@@ -5,6 +5,20 @@ import '../../entities/habilidades_complexas/forma_selvagem.dart';
 
 class BancoDeFormasSelvagens {
   static List<FormaSelvagem> _dados = [];
+  static final Map<String, FormaSelvagem> _indexPorChave = {};
+  static final Map<String, FormaSelvagem> _indexPorNome = {};
+
+  static void _reconstruirIndex() {
+    _indexPorChave.clear();
+    _indexPorNome.clear();
+    for (final f in _dados) {
+      _indexPorChave[f.key.trim().toUpperCase()] = f;
+      final fn = f.nome.trim().toLowerCase();
+      _indexPorNome[fn] = f;
+      _indexPorNome['forma $fn'] = f;
+      _indexPorNome[fn.replaceFirst('forma ', '')] = f;
+    }
+  }
 
   static List<FormaSelvagem> _parse(String raw) {
     final List<dynamic> jsonList = jsonDecode(raw);
@@ -21,6 +35,7 @@ class BancoDeFormasSelvagens {
       'assets/data/classes_data/especifico_classe/druida/formas_selvagens.json',
     );
     _dados = _parse(raw);
+    _reconstruirIndex();
   }
 
   static List<FormaSelvagem> get todas {
@@ -31,6 +46,7 @@ class BancoDeFormasSelvagens {
         );
         if (file.existsSync()) {
           _dados = _parse(file.readAsStringSync());
+          _reconstruirIndex();
         }
       } catch (_) {}
     }
@@ -39,20 +55,20 @@ class BancoDeFormasSelvagens {
 
   static void carregarParaTestes(List<FormaSelvagem> formas) {
     _dados = List.from(formas);
+    _reconstruirIndex();
   }
 
   static FormaSelvagem? getByKey(String key) {
-    final keyNorm = key.trim().toUpperCase();
-    return todas
-        .where((f) => f.key.trim().toUpperCase() == keyNorm)
-        .firstOrNull;
+    if (_dados.isEmpty) {
+      final _ = todas;
+    }
+    return _indexPorChave[key.trim().toUpperCase()];
   }
 
   static FormaSelvagem? getPorNome(String nome) {
-    final n = nome.trim().toLowerCase();
-    return todas.where((f) {
-      final fn = f.nome.trim().toLowerCase();
-      return fn == n || fn == 'forma $n' || fn.replaceFirst('forma ', '') == n;
-    }).firstOrNull;
+    if (_dados.isEmpty) {
+      final _ = todas;
+    }
+    return _indexPorNome[nome.trim().toLowerCase()];
   }
 }

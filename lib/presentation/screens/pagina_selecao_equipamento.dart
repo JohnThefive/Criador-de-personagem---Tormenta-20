@@ -1402,7 +1402,7 @@ class _ModalSeletorArmasState extends State<_ModalSeletorArmas> {
     }).toList();
 
     return Container(
-      height: MediaQuery.of(context).size.height * 0.82,
+      height: MediaQuery.sizeOf(context).height * 0.82,
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
@@ -1662,6 +1662,8 @@ class _ModalSeletorArmasState extends State<_ModalSeletorArmas> {
                     color: Color(0xFF4B5563),
                     height: 1.3,
                   ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ],
             ),
@@ -1734,7 +1736,7 @@ class _ModalSeletorProtecoesState extends State<_ModalSeletorProtecoes> {
     }).toList();
 
     return Container(
-      height: MediaQuery.of(context).size.height * 0.82,
+      height: MediaQuery.sizeOf(context).height * 0.82,
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
@@ -2009,6 +2011,8 @@ class _ModalSeletorProtecoesState extends State<_ModalSeletorProtecoes> {
                     color: Color(0xFF4B5563),
                     height: 1.3,
                   ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ],
             ),

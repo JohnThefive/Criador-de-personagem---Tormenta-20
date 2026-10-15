@@ -5,32 +5,42 @@ import '../habilidades_complexas/linhagem_arcanista.dart';
 class ClasseDoPersonagem {
   final Classe classeDefinicao; // Referência à regra (Bárbaro)
   final int nivel; // Nível atual nesta classe (ex: 5)
+  final Map<String, String> periciasExclusivasEscolhidas;
   final List<Poder> poderesEscolhidos;
   final CaminhoDeClasse? caminhoEscolhido;
   final Linhagem? linhagemEscolhida;
 
-  //
-
   ClasseDoPersonagem({
     required this.classeDefinicao,
     required int nivel,
+    this.periciasExclusivasEscolhidas = const {},
     this.caminhoEscolhido,
     this.poderesEscolhidos = const [],
     this.linhagemEscolhida,
   }) : nivel = nivel.clamp(1, 20);
 
   ClasseDoPersonagem copyWith({
+    Classe? classeDefinicao,
     int? nivel,
+    Map<String, String>? periciasExclusivasEscolhidas,
     CaminhoDeClasse? caminhoEscolhido,
+    bool anularCaminho = false,
     List<Poder>? poderesEscolhidos,
     Linhagem? linhagemEscolhida,
+    bool anularLinhagem = false,
   }) {
     return ClasseDoPersonagem(
-      classeDefinicao: classeDefinicao,
+      classeDefinicao: classeDefinicao ?? this.classeDefinicao,
       nivel: (nivel ?? this.nivel).clamp(1, 20),
-      caminhoEscolhido: caminhoEscolhido ?? this.caminhoEscolhido,
+      periciasExclusivasEscolhidas:
+          periciasExclusivasEscolhidas ?? this.periciasExclusivasEscolhidas,
+      caminhoEscolhido: anularCaminho
+          ? null
+          : (caminhoEscolhido ?? this.caminhoEscolhido),
       poderesEscolhidos: poderesEscolhidos ?? this.poderesEscolhidos,
-      linhagemEscolhida: linhagemEscolhida ?? this.linhagemEscolhida,
+      linhagemEscolhida: anularLinhagem
+          ? null
+          : (linhagemEscolhida ?? this.linhagemEscolhida),
     );
   }
 

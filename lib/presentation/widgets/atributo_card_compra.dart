@@ -88,8 +88,7 @@ class AtributoCardCompra extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.grey[100],
                 borderRadius: BorderRadius.circular(8),
-                // ignore: deprecated_member_use
-                border: Border.all(color: modColor!.withOpacity(0.5)),
+                border: Border.all(color: modColor!.withValues(alpha: 0.5)),
               ),
               child: Text(
                 atributo.modificador >= 0

@@ -21,143 +21,203 @@ class PaginaSelecaoPericias extends StatelessWidget {
     final modInt = state.personagem.getValorFinal('INT');
     final limiteInteligencia = modInt > 0 ? modInt : 0;
 
-    return ListView(
-      padding: const EdgeInsets.all(16),
-      children: [
+    final periciasFixas = classeDef.periciasFixas
+        .map(_safeGetPericia)
+        .whereType<Pericia>()
+        .toList();
+
+    final periciasOpcoes = classeDef.periciasOpcoes
+        .map(_safeGetPericia)
+        .whereType<Pericia>()
+        .toList();
+
+    final periciasExtrasDisponiveis = BancoDePericias.todas
+        .where((p) => !classeDef.periciasFixas.contains(p.key))
+        .toList();
+
+    const gridDelegate = SliverGridDelegateWithMaxCrossAxisExtent(
+      maxCrossAxisExtent: 190,
+      mainAxisExtent: 132,
+      crossAxisSpacing: 12,
+      mainAxisSpacing: 12,
+    );
+
+    return CustomScrollView(
+      slivers: [
         // --- 1. PERÍCIAS FIXAS DA CLASSE ---
-        const Text(
-          "Perícias Fixas da Classe",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+        const SliverToBoxAdapter(
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(16, 16, 16, 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Perícias Fixas da Classe",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                ),
+                Text(
+                  "Você já recebe treinamento nestas perícias automaticamente:",
+                  style: TextStyle(fontSize: 12, color: Colors.grey),
+                ),
+              ],
+            ),
+          ),
         ),
-        const Text(
-          "Você já recebe treinamento nestas perícias automaticamente:",
-          style: TextStyle(fontSize: 12, color: Colors.grey),
+        SliverPadding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          sliver: SliverGrid(
+            gridDelegate: gridDelegate,
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                final pericia = periciasFixas[index];
+                return _PericiaCard(
+                  pericia: pericia,
+                  isFixed: true,
+                  isSelected: true,
+                  activeColor: const Color.fromARGB(255, 238, 255, 1),
+                );
+              },
+              childCount: periciasFixas.length,
+            ),
+          ),
         ),
-        const SizedBox(height: 12),
-        Wrap(
-          spacing: 12,
-          runSpacing: 12, // Espaço vertical entre as linhas do Wrap
-          children: classeDef.periciasFixas.map((key) {
-            final pericia = _safeGetPericia(key);
-            if (pericia == null) return const SizedBox.shrink();
-
-            return _PericiaCard(
-              pericia: pericia,
-              isFixed: true,
-              isSelected: true,
-              activeColor: const Color.fromARGB(255, 238, 255, 1),
-            );
-          }).toList(),
-        ),
-
-        const Divider(height: 40),
 
         // --- 2. ESCOLHAS DA CLASSE ---
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Text(
-              "Escolhas da Classe",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-            ),
-            Text(
-              "${state.selecoesPericiaClasse.length} / ${classeDef.qtdPericiasEscolha}",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color:
-                    state.selecoesPericiaClasse.length ==
-                        classeDef.qtdPericiasEscolha
-                    ? Colors.green
-                    : const Color.fromARGB(255, 255, 230, 0),
-              ),
-            ),
-          ],
-        ),
-        const Text(
-          "Escolha entre as opções fornecidas pela sua classe:",
-          style: TextStyle(fontSize: 12, color: Colors.grey),
-        ),
-        const SizedBox(height: 12),
-        Wrap(
-          spacing: 12,
-          runSpacing: 12,
-          children: classeDef.periciasOpcoes.map((key) {
-            final pericia = _safeGetPericia(key);
-            if (pericia == null) return const SizedBox.shrink();
-
-            final isSelected = state.selecoesPericiaClasse.contains(key);
-            final isBlocked = state.selecoesPericiaInteligencia.contains(key);
-
-            return _PericiaCard(
-              pericia: pericia,
-              isSelected: isSelected,
-              isBlocked: isBlocked,
-              activeColor: const Color.fromARGB(255, 255, 251, 0),
-              onTap: isBlocked
-                  ? null
-                  : () => context.read<PersonagemCubit>().togglePericiaClasse(
-                      key,
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(16, 24, 16, 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Divider(height: 24),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "Escolhas da Classe",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
                     ),
-            );
-          }).toList(),
+                    Text(
+                      "${state.selecoesPericiaClasse.length} / ${classeDef.qtdPericiasEscolha}",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: state.selecoesPericiaClasse.length ==
+                                classeDef.qtdPericiasEscolha
+                            ? Colors.green
+                            : const Color.fromARGB(255, 255, 230, 0),
+                      ),
+                    ),
+                  ],
+                ),
+                const Text(
+                  "Escolha entre as opções fornecidas pela sua classe:",
+                  style: TextStyle(fontSize: 12, color: Colors.grey),
+                ),
+              ],
+            ),
+          ),
+        ),
+        SliverPadding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          sliver: SliverGrid(
+            gridDelegate: gridDelegate,
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                final pericia = periciasOpcoes[index];
+                final key = pericia.key;
+                final isSelected = state.selecoesPericiaClasse.contains(key);
+                final isBlocked =
+                    state.selecoesPericiaInteligencia.contains(key);
+
+                return _PericiaCard(
+                  pericia: pericia,
+                  isSelected: isSelected,
+                  isBlocked: isBlocked,
+                  activeColor: const Color.fromARGB(255, 255, 251, 0),
+                  onTap: isBlocked
+                      ? null
+                      : () => context
+                          .read<PersonagemCubit>()
+                          .togglePericiaClasse(key),
+                );
+              },
+              childCount: periciasOpcoes.length,
+            ),
+          ),
         ),
 
         // --- 3. ESCOLHAS DE INTELIGÊNCIA ---
         if (limiteInteligencia > 0) ...[
-          const Divider(height: 40),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                "Perícias Extras (Inteligência)",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(16, 24, 16, 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Divider(height: 24),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        "Perícias Extras (Inteligência)",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      ),
+                      Text(
+                        "${state.selecoesPericiaInteligencia.length} / $limiteInteligencia",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: state.selecoesPericiaInteligencia.length ==
+                                  limiteInteligencia
+                              ? Colors.green
+                              : const Color.fromARGB(255, 255, 230, 0),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Text(
+                    "Graças a sua Inteligência, escolha perícias adicionais livres:",
+                    style: TextStyle(fontSize: 12, color: Colors.grey),
+                  ),
+                ],
               ),
-              Text(
-                "${state.selecoesPericiaInteligencia.length} / $limiteInteligencia",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color:
-                      state.selecoesPericiaInteligencia.length ==
-                          limiteInteligencia
-                      ? Colors.green
-                      : const Color.fromARGB(255, 255, 230, 0),
-                ),
+            ),
+          ),
+          SliverPadding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 32),
+            sliver: SliverGrid(
+              gridDelegate: gridDelegate,
+              delegate: SliverChildBuilderDelegate(
+                (context, index) {
+                  final pericia = periciasExtrasDisponiveis[index];
+                  final key = pericia.key;
+                  final isSelected =
+                      state.selecoesPericiaInteligencia.contains(key);
+                  final isBlocked = state.selecoesPericiaClasse.contains(key);
+
+                  return _PericiaCard(
+                    pericia: pericia,
+                    isSelected: isSelected,
+                    isBlocked: isBlocked,
+                    activeColor: const Color.fromARGB(255, 255, 255, 0),
+                    onTap: isBlocked
+                        ? null
+                        : () => context
+                            .read<PersonagemCubit>()
+                            .togglePericiaInteligencia(key),
+                  );
+                },
+                childCount: periciasExtrasDisponiveis.length,
               ),
-            ],
+            ),
           ),
-          const Text(
-            "Graças a sua Inteligência, escolha perícias adicionais livres:",
-            style: TextStyle(fontSize: 12, color: Colors.grey),
-          ),
-          const SizedBox(height: 12),
-          Wrap(
-            spacing: 12,
-            runSpacing: 12,
-            children: BancoDePericias.todas.map((pericia) {
-              final key = pericia.key;
-
-              if (classeDef.periciasFixas.contains(key)) {
-                return const SizedBox.shrink();
-              }
-
-              final isSelected = state.selecoesPericiaInteligencia.contains(
-                key,
-              );
-              final isBlocked = state.selecoesPericiaClasse.contains(key);
-
-              return _PericiaCard(
-                pericia: pericia,
-                isSelected: isSelected,
-                isBlocked: isBlocked,
-                activeColor: const Color.fromARGB(255, 255, 255, 0),
-                onTap: isBlocked
-                    ? null
-                    : () => context
-                          .read<PersonagemCubit>()
-                          .togglePericiaInteligencia(key),
-              );
-            }).toList(),
-          ),
+        ] else ...[
+          const SliverToBoxAdapter(child: SizedBox(height: 32)),
         ],
       ],
     );
@@ -208,8 +268,6 @@ class _PericiaCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width:
-            160, // Largura fixa cria um visual de "Grid" organizado dentro do Wrap
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: bgColor,
@@ -221,7 +279,7 @@ class _PericiaCard extends StatelessWidget {
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min, // Ocupa apenas o espaço necessário
+          mainAxisSize: MainAxisSize.min,
           children: [
             // Linha do Título e Ícone
             Row(
@@ -236,7 +294,7 @@ class _PericiaCard extends StatelessWidget {
                       color: isBlocked ? Colors.grey : Colors.black,
                       decoration: isBlocked
                           ? TextDecoration.lineThrough
-                          : null, // Risca se bloqueado
+                          : null,
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -271,15 +329,17 @@ class _PericiaCard extends StatelessWidget {
             const SizedBox(height: 8),
 
             // Descrição (Limitada a 3 linhas para o card não esticar muito)
-            Text(
-              pericia.descricao,
-              style: TextStyle(
-                fontSize: 11,
-                color: isBlocked ? Colors.grey : Colors.black87,
-                height: 1.2,
+            Expanded(
+              child: Text(
+                pericia.descricao,
+                style: TextStyle(
+                  fontSize: 11,
+                  color: isBlocked ? Colors.grey : Colors.black87,
+                  height: 1.2,
+                ),
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
               ),
-              maxLines: 3,
-              overflow: TextOverflow.ellipsis,
             ),
           ],
         ),

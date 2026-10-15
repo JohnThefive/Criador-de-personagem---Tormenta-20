@@ -47,10 +47,10 @@ class ValidadorDivindade {
     final idClasse = _normalizarId(
       personagem.classes[0].classeDefinicao.idClasse,
     );
-    return idClasse == 'clerigo' ||
-        idClasse == 'clerigo' ||
-        idClasse == 'druida' ||
-        idClasse == 'paladino';
+    return switch (idClasse) {
+      'clerigo' || 'clérigo' || 'druida' || 'paladino' => true,
+      _ => false,
+    };
   }
 
   /// Verifica se a classe do personagem exige devoção obrigatória
@@ -104,32 +104,23 @@ class ValidadorDivindade {
       );
       final idDivindade = _normalizarId(divindade.id);
 
-      // Restrição de Paladino
-      if (idClasse == 'paladino') {
-        if (!deusesPermitidosPaladino.contains(idDivindade)) {
-          return ResultadoElegibilidadeDevocao(
-            ehElegivel: false,
-            motivoIneligibilidade:
-                'Paladinos só podem cultuar deuses com tendência compatível: '
-                'Arsenal, Khalmyr, Lena, Lin-Wu, Marah, Tanna-Toh, Thyatis ou Valkaria.',
-            ehDevotoFiel: devotoFiel,
-            exigeDevocao: precisaDevocao,
-          );
-        }
-      }
+      final motivoIncompativel = switch ((idClasse, idDivindade)) {
+        ('paladino', _) when !deusesPermitidosPaladino.contains(idDivindade) =>
+          'Paladinos só podem cultuar deuses com tendência compatível: '
+          'Arsenal, Khalmyr, Lena, Lin-Wu, Marah, Tanna-Toh, Thyatis ou Valkaria.',
+        ('druida', _) when !deusesPermitidosDruida.contains(idDivindade) =>
+          'Druidas só podem cultuar deuses da natureza ou do caos natural: '
+          'Aharadak, Allihanna, Megalokk ou Oceano.',
+        _ => null,
+      };
 
-      // Restrição de Druida
-      if (idClasse == 'druida') {
-        if (!deusesPermitidosDruida.contains(idDivindade)) {
-          return ResultadoElegibilidadeDevocao(
-            ehElegivel: false,
-            motivoIneligibilidade:
-                'Druidas só podem cultuar deuses da natureza ou do caos natural: '
-                'Aharadak, Allihanna, Megalokk ou Oceano.',
-            ehDevotoFiel: devotoFiel,
-            exigeDevocao: precisaDevocao,
-          );
-        }
+      if (motivoIncompativel != null) {
+        return ResultadoElegibilidadeDevocao(
+          ehElegivel: false,
+          motivoIneligibilidade: motivoIncompativel,
+          ehDevotoFiel: devotoFiel,
+          exigeDevocao: precisaDevocao,
+        );
       }
 
       // Restrição específica cadastrada na própria Divindade (Devotos Permitidos)

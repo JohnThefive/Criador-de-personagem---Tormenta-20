@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../domain/entities/personagem/personagem.dart';
+import '../../domain/repositories/i_personagem_repository.dart';
 import '../../domain/services/personagem_storage_service.dart';
 
 // Estado da Home (apenas o necessário)
@@ -17,16 +18,20 @@ class HomeState {
   }
 }
 
-// Cubit da Home
+// Cubit da Home com injeção de IPersonagemRepository
 class HomeCubit extends Cubit<HomeState> {
-  HomeCubit() : super(const HomeState(personagens: [], carregando: true)) {
+  final IPersonagemRepository _repository;
+
+  HomeCubit({IPersonagemRepository? repository})
+      : _repository = repository ?? const PersonagemStorageService(),
+        super(const HomeState(personagens: [], carregando: true)) {
     carregarPersonagensReais();
   }
 
   Future<void> carregarPersonagensReais() async {
     emit(state.copyWith(carregando: true));
     try {
-      final fichas = await PersonagemStorageService.carregarTodos();
+      final fichas = await _repository.obterTodos();
       emit(state.copyWith(personagens: fichas, carregando: false));
     } catch (_) {
       emit(state.copyWith(personagens: [], carregando: false));
@@ -45,7 +50,7 @@ class HomeCubit extends Cubit<HomeState> {
 
   Future<void> excluirPersonagem(String id) async {
     try {
-      await PersonagemStorageService.excluirPersonagem(id);
+      await _repository.excluir(id);
       final novaLista = state.personagens.where((p) => p.id != id).toList();
       emit(state.copyWith(personagens: novaLista));
     } catch (e) {

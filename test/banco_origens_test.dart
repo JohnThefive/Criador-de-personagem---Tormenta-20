@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:t20_creator/domain/entities/personagem/origem.dart';
 import 'package:t20_creator/domain/services/data_services/call_origens.dart';
+import 'package:t20_creator/presentation/controllers/personagem_cubit.dart';
 
 void main() {
   group('BancoDeOrigens e Entidade Origem', () {
@@ -36,6 +37,36 @@ void main() {
       expect(origem.periciasOpcoes, isEmpty);
       expect(origem.poderesGeraisOpcoes, isEmpty);
       expect(origem.poderUnico.key, isEmpty);
+    });
+
+    test('PersonagemCubit bloqueia seleção de perícia de origem já treinada na classe', () {
+      final cubit = PersonagemCubit();
+      final soldado = BancoDeOrigens.getById('soldado')!;
+
+      // Simula classe com LUTA e FORTITUDE treinadas
+      cubit.emit(
+        cubit.state.copyWith(
+          selecoesPericiaClasse: ['LUTA', 'FORTITUDE'],
+        ),
+      );
+
+      cubit.selecionarOrigem(soldado);
+
+      // Soldado oferece LUTA e PONTARIA
+      expect(soldado.periciasOpcoes, contains('LUTA'));
+      expect(soldado.periciasOpcoes, contains('PONTARIA'));
+
+      // LUTA já está treinada na classe, então periciaJaTreinada deve ser true
+      expect(cubit.state.periciaJaTreinada('LUTA'), isTrue);
+      expect(cubit.state.periciaJaTreinada('PONTARIA'), isFalse);
+
+      // Tenta selecionar LUTA pela origem -> não deve ser selecionada
+      cubit.togglePericiaOrigem('LUTA');
+      expect(cubit.state.periciasEscolhidasOrigem, isNot(contains('LUTA')));
+
+      // Seleciona PONTARIA -> deve ser selecionada normalmente
+      cubit.togglePericiaOrigem('PONTARIA');
+      expect(cubit.state.periciasEscolhidasOrigem, contains('PONTARIA'));
     });
   });
 }

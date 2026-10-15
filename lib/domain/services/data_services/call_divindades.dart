@@ -7,6 +7,17 @@ import '../../entities/personagem/divindade.dart';
 /// Serviço responsável pelo carregamento e acesso ao catálogo de divindades do Panteão (JSON).
 class BancoDeDivindades {
   static List<Divindade> _dados = [];
+  static final Map<String, Divindade> _indexPorId = {};
+  static final Map<String, Divindade> _indexPorNome = {};
+
+  static void _reconstruirIndex() {
+    _indexPorId.clear();
+    _indexPorNome.clear();
+    for (final d in _dados) {
+      _indexPorId[d.id.trim().toLowerCase()] = d;
+      _indexPorNome[d.nome.trim().toLowerCase()] = d;
+    }
+  }
 
   /// Carrega as divindades a partir do arquivo JSON nos assets
   static Future<void> carregar() async {
@@ -14,12 +25,14 @@ class BancoDeDivindades {
       'assets/data/deuses/banco_deuses.json',
     );
     _dados = _parsearJson(raw);
+    _reconstruirIndex();
   }
 
   /// Método para injetar divindades diretamente durante testes automatizados
   @visibleForTesting
   static void carregarParaTestes(List<Divindade> divindades) {
     _dados = List.from(divindades);
+    _reconstruirIndex();
   }
 
   /// Converte a string bruta em lista de divindades, desduplicando IDs se necessário
@@ -52,6 +65,7 @@ class BancoDeDivindades {
         if (file.existsSync()) {
           final raw = file.readAsStringSync();
           _dados = _parsearJson(raw);
+          _reconstruirIndex();
         }
       } catch (_) {}
     }
@@ -65,17 +79,15 @@ class BancoDeDivindades {
   /// Indica se os dados já foram carregados
   static bool get estaCarregado => _obterDados().isNotEmpty;
 
-  /// Busca uma divindade pelo seu ID único (ex: "khalmyr", "valkaria")
+  /// Busca uma divindade pelo seu ID único em O(1) (ex: "khalmyr", "valkaria")
   static Divindade? getById(String id) {
-    final idNorm = id.trim().toLowerCase();
-    return todas.where((d) => d.id.trim().toLowerCase() == idNorm).firstOrNull;
+    _obterDados();
+    return _indexPorId[id.trim().toLowerCase()];
   }
 
-  /// Busca uma divindade pelo seu nome (ex: "Khalmyr", "Valkaria")
+  /// Busca uma divindade pelo seu nome em O(1) (ex: "Khalmyr", "Valkaria")
   static Divindade? getByNome(String nome) {
-    final nomeNorm = nome.trim().toLowerCase();
-    return todas
-        .where((d) => d.nome.trim().toLowerCase() == nomeNorm)
-        .firstOrNull;
+    _obterDados();
+    return _indexPorNome[nome.trim().toLowerCase()];
   }
 }

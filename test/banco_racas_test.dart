@@ -5,6 +5,10 @@ import 'package:fluttericon/rpg_awesome_icons.dart';
 import 'package:t20_creator/helpers/icone_rpg_helper.dart';
 import 'package:t20_creator/domain/entities/personagem/raca.dart';
 import 'package:t20_creator/domain/services/data_services/call_racas.dart';
+import 'package:t20_creator/domain/entities/personagem/personagem.dart';
+import 'package:t20_creator/domain/entities/personagem/classe.dart';
+import 'package:t20_creator/domain/entities/personagem/classe_do_personagem.dart';
+import 'package:t20_creator/domain/entities/personagem/atributos.dart';
 
 void main() {
   group('Entidade Raca, IconeRpgHelper e BancoDeRacas', () {
@@ -142,6 +146,131 @@ void main() {
           reason: 'O arquivo $fileName deve estar em minúsculas (padronizado)',
         );
       }
+    });
+
+    test('Bônus Raciais de PV e PM para Anão e Elfo', () {
+      final guerreiroClasse = Classe(
+        idClasse: 'guerreiro',
+        nome: 'Guerreiro',
+        pvInicial: 20,
+        pvPorNivel: 5,
+        pmInicial: 3,
+        pmPorNivel: 3,
+        descricaoclasse: '',
+        proficiencias: const [],
+        periciasFixas: const [],
+        periciasOpcoes: const [],
+        qtdPericiasEscolha: 2,
+        caminhoImagem: '',
+      );
+
+      final anaoRaca = const Raca(
+        id: 'anao',
+        nome: 'Anão',
+        descricaoRaca: 'Duro como Pedra',
+        icone: 'axe',
+        modificadores: {'CON': 2},
+      );
+
+      final elfoRaca = const Raca(
+        id: 'elfo',
+        nome: 'Elfo',
+        descricaoRaca: 'Sangue Mágico',
+        icone: 'clover',
+        modificadores: {'INT': 2},
+      );
+
+      // Anão Nível 1:
+      // CON: Base 2 + Raça 2 = 4.
+      // Guerreiro pvInicial = 20 + CON (4) = 24.
+      // Anão: +3 PV no 1º nível -> Total 27.
+      final pAnaoNivel1 = Personagem(
+        nome: 'Thorin',
+        atributos: {
+          'FOR': const Atributo(nome: 'Força', valor: 0),
+          'DES': const Atributo(nome: 'Destreza', valor: 0),
+          'CON': const Atributo(nome: 'Constituição', valor: 2),
+          'INT': const Atributo(nome: 'Inteligência', valor: 0),
+          'SAB': const Atributo(nome: 'Sabedoria', valor: 0),
+          'CAR': const Atributo(nome: 'Carisma', valor: 0),
+        },
+        raca: anaoRaca,
+        classes: [
+          ClasseDoPersonagem(classeDefinicao: guerreiroClasse, nivel: 1),
+        ],
+      );
+
+      expect(pAnaoNivel1.bonusRacialPV, equals(3));
+      expect(pAnaoNivel1.pvTotal, equals(27));
+
+      // Anão Nível 3:
+      // CON: Base 2 + Raça 2 = 4.
+      // Nível 1: 20 + 4 = 24
+      // Nível 2: 5 + 4 = 9
+      // Nível 3: 5 + 4 = 9
+      // Base classe = 42. Anão (3 + 2 = 5): Total = 47.
+      final pAnaoNivel3 = Personagem(
+        nome: 'Thorin',
+        atributos: {
+          'FOR': const Atributo(nome: 'Força', valor: 0),
+          'DES': const Atributo(nome: 'Destreza', valor: 0),
+          'CON': const Atributo(nome: 'Constituição', valor: 2),
+          'INT': const Atributo(nome: 'Inteligência', valor: 0),
+          'SAB': const Atributo(nome: 'Sabedoria', valor: 0),
+          'CAR': const Atributo(nome: 'Carisma', valor: 0),
+        },
+        raca: anaoRaca,
+        classes: [
+          ClasseDoPersonagem(classeDefinicao: guerreiroClasse, nivel: 3),
+        ],
+      );
+
+      expect(pAnaoNivel3.bonusRacialPV, equals(5));
+      expect(pAnaoNivel3.pvTotal, equals(47));
+
+      // Elfo Nível 1:
+      // Guerreiro pmInicial = 3.
+      // Elfo: +1 PM por nível -> Total 4 PM.
+      final pElfoNivel1 = Personagem(
+        nome: 'Legolas',
+        atributos: {
+          'FOR': const Atributo(nome: 'Força', valor: 0),
+          'DES': const Atributo(nome: 'Destreza', valor: 0),
+          'CON': const Atributo(nome: 'Constituição', valor: 0),
+          'INT': const Atributo(nome: 'Inteligência', valor: 0),
+          'SAB': const Atributo(nome: 'Sabedoria', valor: 0),
+          'CAR': const Atributo(nome: 'Carisma', valor: 0),
+        },
+        raca: elfoRaca,
+        classes: [
+          ClasseDoPersonagem(classeDefinicao: guerreiroClasse, nivel: 1),
+        ],
+      );
+
+      expect(pElfoNivel1.bonusRacialPM, equals(1));
+      expect(pElfoNivel1.pmTotal, equals(4));
+
+      // Elfo Nível 5:
+      // pmInicial 3 + (3 * 4 = 12) = 15.
+      // Elfo (+5 PM) -> Total 20 PM.
+      final pElfoNivel5 = Personagem(
+        nome: 'Legolas',
+        atributos: {
+          'FOR': const Atributo(nome: 'Força', valor: 0),
+          'DES': const Atributo(nome: 'Destreza', valor: 0),
+          'CON': const Atributo(nome: 'Constituição', valor: 0),
+          'INT': const Atributo(nome: 'Inteligência', valor: 0),
+          'SAB': const Atributo(nome: 'Sabedoria', valor: 0),
+          'CAR': const Atributo(nome: 'Carisma', valor: 0),
+        },
+        raca: elfoRaca,
+        classes: [
+          ClasseDoPersonagem(classeDefinicao: guerreiroClasse, nivel: 5),
+        ],
+      );
+
+      expect(pElfoNivel5.bonusRacialPM, equals(5));
+      expect(pElfoNivel5.pmTotal, equals(20));
     });
   });
 }

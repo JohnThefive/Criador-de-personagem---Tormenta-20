@@ -50,6 +50,12 @@ class _AbaCombateViewState extends State<AbaCombateView> {
   }
 
   @override
+  void dispose() {
+    _logScrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => CombateCubit(),

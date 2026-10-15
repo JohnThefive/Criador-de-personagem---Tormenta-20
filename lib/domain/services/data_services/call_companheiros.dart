@@ -5,6 +5,14 @@ import '../../entities/habilidades_complexas/companheiro_animal.dart';
 
 class BancoDeCompanheiros {
   static List<TipoCompanheiroAnimal> _dados = [];
+  static final Map<String, TipoCompanheiroAnimal> _indexPorChave = {};
+
+  static void _reconstruirIndex() {
+    _indexPorChave.clear();
+    for (final c in _dados) {
+      _indexPorChave[c.key.trim().toUpperCase()] = c;
+    }
+  }
 
   static List<TipoCompanheiroAnimal> _parse(String raw) {
     final Map<String, dynamic> jsonMap = jsonDecode(raw);
@@ -23,6 +31,7 @@ class BancoDeCompanheiros {
       'assets/data/classes_data/especifico_classe/druida/tipos_companheiro_animal.json',
     );
     _dados = _parse(raw);
+    _reconstruirIndex();
   }
 
   static List<TipoCompanheiroAnimal> get todos {
@@ -33,6 +42,7 @@ class BancoDeCompanheiros {
         );
         if (file.existsSync()) {
           _dados = _parse(file.readAsStringSync());
+          _reconstruirIndex();
         }
       } catch (_) {}
     }
@@ -41,12 +51,13 @@ class BancoDeCompanheiros {
 
   static void carregarParaTestes(List<TipoCompanheiroAnimal> tipos) {
     _dados = List.from(tipos);
+    _reconstruirIndex();
   }
 
   static TipoCompanheiroAnimal? getByKey(String key) {
-    final keyNorm = key.trim().toUpperCase();
-    return todos
-        .where((c) => c.key.trim().toUpperCase() == keyNorm)
-        .firstOrNull;
+    if (_dados.isEmpty) {
+      final _ = todos;
+    }
+    return _indexPorChave[key.trim().toUpperCase()];
   }
 }

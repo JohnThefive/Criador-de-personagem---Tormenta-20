@@ -297,42 +297,58 @@ class _PaginaSelecaoOrigemState extends State<PaginaSelecaoOrigem> {
                                     .contains(sigla);
                                 final pericia = BancoDePericias.getByKey(sigla);
                                 final jaTreinadaNaClasse =
-                                    widget.state.personagem.periciasTreinadas
-                                        .contains(sigla) ||
-                                    widget.state.selecoesPericiaClasse.contains(
-                                      sigla,
-                                    );
+                                    widget.state.periciaJaTreinada(sigla);
 
                                 return ChoiceChip(
                                   label: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      Text(pericia.label),
+                                      Text(
+                                        pericia.label,
+                                        style: TextStyle(
+                                          color: jaTreinadaNaClasse
+                                              ? Colors.grey[500]
+                                              : (isSelected
+                                                    ? Colors.red[900]
+                                                    : Colors.black87),
+                                        ),
+                                      ),
                                       if (jaTreinadaNaClasse)
-                                        const Text(
-                                          " (Já treinada)",
-                                          style: TextStyle(
-                                            fontSize: 10,
-                                            fontStyle: FontStyle.italic,
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 4),
+                                          child: Text(
+                                            "(Já treinada)",
+                                            style: TextStyle(
+                                              fontSize: 10,
+                                              fontStyle: FontStyle.italic,
+                                              color: Colors.grey[500],
+                                            ),
                                           ),
                                         ),
                                     ],
                                   ),
                                   selected: isSelected,
                                   selectedColor: Colors.red[100],
-                                  backgroundColor: Colors.white,
+                                  backgroundColor: jaTreinadaNaClasse
+                                      ? Colors.grey[200]
+                                      : Colors.white,
+                                  disabledColor: Colors.grey[200],
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(16),
                                     side: BorderSide(
-                                      color: isSelected
-                                          ? Colors.red[800]!
-                                          : Colors.grey[350]!,
+                                      color: jaTreinadaNaClasse
+                                          ? Colors.grey[300]!
+                                          : (isSelected
+                                                ? Colors.red[800]!
+                                                : Colors.grey[350]!),
                                       width: isSelected ? 1.8 : 1,
                                     ),
                                   ),
-                                  onSelected: (_) {
-                                    cubit.togglePericiaOrigem(sigla);
-                                  },
+                                  onSelected: jaTreinadaNaClasse
+                                      ? null
+                                      : (_) {
+                                          cubit.togglePericiaOrigem(sigla);
+                                        },
                                 );
                               }).toList(),
                             ),

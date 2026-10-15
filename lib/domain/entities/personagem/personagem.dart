@@ -78,6 +78,8 @@ class Personagem {
   final int? _pmAtual;
   final int experienciaAtual;
 
+  final List<String> atributosVariaveisRaca;
+
   int get pvAtual => _pvAtual ?? pvTotal;
   int get pmAtual => punicaoDivinaAtiva ? 0 : (_pmAtual ?? pmTotal);
 
@@ -120,6 +122,7 @@ class Personagem {
     this.tamanho = 'Médio',
     this.peso = '70 kg',
     this.altura = '1.70 m',
+    this.atributosVariaveisRaca = const [],
     // Recursos em jogo
     int? pvAtual,
     int? pmAtual,
@@ -174,6 +177,7 @@ class Personagem {
       divindade: null,
       poderConcedido: null,
       magiasConhecidas: const [],
+      atributosVariaveisRaca: const [],
       idade: 20,
       alinhamento: 'Neutro',
       descricaoAparencia: '',
@@ -192,6 +196,7 @@ class Personagem {
     String? nome,
     Map<String, Atributo>? atributos,
     Raca? raca,
+    List<String>? atributosVariaveisRaca,
     // ignore: non_constant_identifier_names
     List<ClasseDoPersonagem>? classe_do_personagem,
     List<String>? periciasTreinadas,
@@ -243,6 +248,8 @@ class Personagem {
       nome: nome ?? this.nome,
       atributos: atributos ?? this.atributos,
       raca: raca ?? this.raca,
+      atributosVariaveisRaca:
+          atributosVariaveisRaca ?? this.atributosVariaveisRaca,
       classes: classe_do_personagem ?? classes,
       periciasTreinadas: periciasTreinadas ?? this.periciasTreinadas,
       origem: origem ?? this.origem,
@@ -561,10 +568,13 @@ class Personagem {
   int get rdTotal => estaEmFormaSelvagem ? formaSelvagemAtiva!.rd : 0;
 
   // Este método calcula o valor final para exibir na tela (Base + Raça Fixa + Raça Variável + Forma Selvagem)
-  int getValorFinal(String sigla, {List<String> bonusVariaveis = const []}) {
+  // Este método calcula o valor final para exibir na tela (Base + Raça Fixa + Raça Variável + Forma Selvagem)
+  int getValorFinal(String sigla, {List<String>? bonusVariaveis}) {
+    final variaveisEfetivos = bonusVariaveis ?? atributosVariaveisRaca;
+
     int base = atributos[sigla]?.valor ?? 0;
     int bonusFixo = raca?.modificadores[sigla] ?? 0;
-    int bonusVariavel = bonusVariaveis.contains(sigla) ? 1 : 0;
+    int bonusVariavel = variaveisEfetivos.contains(sigla) ? 1 : 0;
     int bonusForma = 0;
     if (estaEmFormaSelvagem &&
         formaSelvagemAtiva!.modificadores.containsKey(sigla)) {
@@ -604,35 +614,56 @@ class Personagem {
         totalPV += ganhoPorNivel * item.nivel;
       }
     }
-    return totalPV;
+    return totalPV + bonusRacialPV;
+  }
+
+  /// Bônus racial de Pontos de Vida (ex: Anão - Duro como Pedra: +3 PV no 1º nível, +1 por nível seguinte)
+  int get bonusRacialPV {
+    if (classes.isEmpty) return 0;
+    final rId = raca?.id.toLowerCase();
+    if (rId == 'anao' || rId == 'anão') {
+      return 3 + (nivelPersonagem - 1);
+    }
+    return 0;
+  }
+
+  /// Bônus racial de Pontos de Mana (ex: Elfo - Sangue Mágico: +1 PM por nível)
+  int get bonusRacialPM {
+    if (classes.isEmpty) return 0;
+    final rId = raca?.id.toLowerCase();
+    if (rId == 'elfo') {
+      return nivelPersonagem;
+    }
+    return 0;
   }
 
   // Pontos de Mana Totais (PM)
   int get pmTotal {
     if (classes.isEmpty) return 0;
-
     int totalPM = 0;
-
     for (int i = 0; i < classes.length; i++) {
       final item = classes[i];
-      final regras = item.classeDefinicao;
-
-      if (i == 0) {
-        totalPM += regras.pmInicial;
-        if (item.nivel > 1) {
-          totalPM += regras.pmPorNivel * (item.nivel - 1);
-        }
-      } else {
-        totalPM += regras.pmPorNivel * item.nivel;
+      final def = item.classeDefinicao;
+      totalPM += (i == 0) ? def.pmInicial : (def.pmPorNivel * item.nivel);
+      if (i == 0 && item.nivel > 1) {
+        totalPM += def.pmPorNivel * (item.nivel - 1);
       }
-
-      if (item.caminhoEscolhido != null) {
-        String siglaChave = item.caminhoEscolhido!.atributoChave;
-        int valorAtributoChave = getValorFinal(siglaChave);
-        totalPM += valorAtributoChave;
+      // Soma o atributo-chave da classe (independente de ter subclasse)
+      final siglaAtributo = _obterAtributoChaveConjuracao(item);
+      if (siglaAtributo != null) {
+        totalPM += getValorFinal(siglaAtributo);
       }
     }
-    return totalPM;
+    return totalPM + bonusRacialPM;
+  }
+
+  String? _obterAtributoChaveConjuracao(ClasseDoPersonagem c) {
+    return switch (c.classeDefinicao.idClasse.toLowerCase()) {
+      'clerigo' || 'clérigo' || 'druida' => 'SAB',
+      'bardo' || 'paladino' => 'CAR',
+      'arcanista' => c.caminhoEscolhido?.nome == 'Feiticeiro' ? 'CAR' : 'INT',
+      _ => null,
+    };
   }
 
   // --- CÁLCULO DE DEFESA E PROTEÇÕES (TORMENTA 20) ---
@@ -720,7 +751,15 @@ class Personagem {
     int metadeNivel = (nivelPersonagem / 2).floor();
     int modAtributo = getValorFinal(pericia.atributoChave);
 
-    bool ehTreinada = periciasTreinadas.contains(periciaKey);
+    // Verifica se é treinada manualmente, por perícia fixa limpa, ou via escolha exclusiva da classe
+    bool ehTreinadaManuais = periciasTreinadas.contains(periciaKey);
+    bool ehTreinadaPorClasse = classes.any(
+      (c) =>
+          c.classeDefinicao.periciasFixas.contains(periciaKey) ||
+          c.periciasExclusivasEscolhidas.values.contains(periciaKey),
+    );
+
+    bool ehTreinada = ehTreinadaManuais || ehTreinadaPorClasse;
     int bonusTreino = ehTreinada ? bonusTreinamento : 0;
 
     final penalidade = penalidadeArmaduraCustom ?? penalidadeArmaduraTotal;

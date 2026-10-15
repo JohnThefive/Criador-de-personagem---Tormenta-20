@@ -68,23 +68,28 @@ class _PaginaSelecaoMagiasState extends State<PaginaSelecaoMagias> {
       );
     }
 
-    final classeId = state.personagem.classes[0].classeDefinicao.idClasse;
-    final todasDisponiveis = AprendizadoMagiaService.obterMagiasDisponiveis(classeId);
+    final classeAtual = state.personagem.classes[0];
+    final todasDisponiveis = AprendizadoMagiaService.obterMagiasDisponiveis(
+      classeAtual.classeDefinicao.idClasse,
+      caminhoId: classeAtual.caminhoEscolhido?.nome ?? regras.caminho,
+    );
     final selecionadasIds = state.magiasSelecionadas;
 
     // Filtra as magias pela busca e pela escola
     final magiasFiltradas = todasDisponiveis.where((magia) {
-      final matchesTexto = _filtroTexto.isEmpty ||
+      final matchesTexto =
+          _filtroTexto.isEmpty ||
           magia.nome.toLowerCase().contains(_filtroTexto.toLowerCase()) ||
           magia.descricao.toLowerCase().contains(_filtroTexto.toLowerCase());
-      final matchesEscola = _filtroEscola == 'TODAS' ||
+      final matchesEscola =
+          _filtroEscola == 'TODAS' ||
           magia.escola.toLowerCase() == _filtroEscola.toLowerCase();
       return matchesTexto && matchesEscola;
     }).toList();
 
     final escolas = [
       'TODAS',
-      ...{...todasDisponiveis.map((m) => m.escola.toUpperCase())}
+      ...{...todasDisponiveis.map((m) => m.escola.toUpperCase())},
     ];
 
     return LayoutBuilder(
@@ -121,16 +126,17 @@ class _PaginaSelecaoMagiasState extends State<PaginaSelecaoMagias> {
     );
   }
 
-  Widget _buildHeaderStatus(RegrasConjuracaoClasse regras, int totalSelecionadas) {
+  Widget _buildHeaderStatus(
+    RegrasConjuracaoClasse regras,
+    int totalSelecionadas,
+  ) {
     final bool completo = totalSelecionadas == regras.qtdMagiasIniciais;
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: BoxDecoration(
         color: Colors.white,
-        border: Border(
-          bottom: BorderSide(color: Colors.grey.shade300),
-        ),
+        border: Border(bottom: BorderSide(color: Colors.grey.shade300)),
       ),
       child: Row(
         children: [
@@ -161,10 +167,7 @@ class _PaginaSelecaoMagiasState extends State<PaginaSelecaoMagias> {
                 ),
                 Text(
                   'Atributo-Chave: ${regras.atributoChave ?? "INT"} • Escolha suas magias iniciais',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey.shade600,
-                  ),
+                  style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
                 ),
               ],
             ),
@@ -217,7 +220,10 @@ class _PaginaSelecaoMagiasState extends State<PaginaSelecaoMagias> {
                   : null,
               filled: true,
               fillColor: Colors.white,
-              contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 12),
+              contentPadding: const EdgeInsets.symmetric(
+                vertical: 0,
+                horizontal: 12,
+              ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
                 borderSide: BorderSide(color: Colors.grey.shade300),
@@ -296,18 +302,24 @@ class _PaginaSelecaoMagiasState extends State<PaginaSelecaoMagias> {
           ),
           color: isMarcada ? const Color(0xFFFEF2F2) : Colors.white,
           child: ListTile(
-            contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 14,
+              vertical: 4,
+            ),
             leading: Checkbox(
               value: isMarcada,
               activeColor: const Color(0xFFB71C1C),
-              onChanged: (_) => _alternarSelecao(magia.id, selecionadasIds, regras, cubit),
+              onChanged: (_) =>
+                  _alternarSelecao(magia.id, selecionadasIds, regras, cubit),
             ),
             title: Text(
               magia.nome,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 15,
-                color: isMarcada ? const Color(0xFF991B1B) : const Color(0xFF111827),
+                color: isMarcada
+                    ? const Color(0xFF991B1B)
+                    : const Color(0xFF111827),
               ),
             ),
             subtitle: Text(
@@ -315,10 +327,14 @@ class _PaginaSelecaoMagiasState extends State<PaginaSelecaoMagias> {
               style: TextStyle(fontSize: 12, color: Colors.grey.shade700),
             ),
             trailing: IconButton(
-              icon: const Icon(Icons.info_outline_rounded, color: Color(0xFF2563EB)),
+              icon: const Icon(
+                Icons.info_outline_rounded,
+                color: Color(0xFF2563EB),
+              ),
               onPressed: () => _exibirDetalhesModal(magia),
             ),
-            onTap: () => _alternarSelecao(magia.id, selecionadasIds, regras, cubit),
+            onTap: () =>
+                _alternarSelecao(magia.id, selecionadasIds, regras, cubit),
           ),
         );
       },
@@ -331,7 +347,9 @@ class _PaginaSelecaoMagiasState extends State<PaginaSelecaoMagias> {
     required RegrasConjuracaoClasse regras,
     required PersonagemCubit cubit,
   }) {
-    final magiaExibida = _magiaSelecionadaParaDetalhe ?? (magias.isNotEmpty ? magias.first : null);
+    final magiaExibida =
+        _magiaSelecionadaParaDetalhe ??
+        (magias.isNotEmpty ? magias.first : null);
 
     return Row(
       children: [
@@ -361,7 +379,9 @@ class _PaginaSelecaoMagiasState extends State<PaginaSelecaoMagias> {
                         side: BorderSide(
                           color: isFocada
                               ? const Color(0xFF2563EB)
-                              : (isMarcada ? const Color(0xFFB71C1C) : Colors.grey.shade300),
+                              : (isMarcada
+                                    ? const Color(0xFFB71C1C)
+                                    : Colors.grey.shade300),
                           width: isFocada ? 2 : (isMarcada ? 1.5 : 1),
                         ),
                       ),
@@ -370,8 +390,12 @@ class _PaginaSelecaoMagiasState extends State<PaginaSelecaoMagias> {
                         leading: Checkbox(
                           value: isMarcada,
                           activeColor: const Color(0xFFB71C1C),
-                          onChanged: (_) =>
-                              _alternarSelecao(magia.id, selecionadasIds, regras, cubit),
+                          onChanged: (_) => _alternarSelecao(
+                            magia.id,
+                            selecionadasIds,
+                            regras,
+                            cubit,
+                          ),
                         ),
                         title: Text(
                           magia.nome,
@@ -385,18 +409,30 @@ class _PaginaSelecaoMagiasState extends State<PaginaSelecaoMagias> {
                         ),
                         subtitle: Text(
                           '${magia.escola.toUpperCase()} • ${magia.execucao.detalhes ?? magia.execucao.tipo}',
-                          style: TextStyle(fontSize: 12, color: Colors.grey.shade700),
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.grey.shade700,
+                          ),
                         ),
                         trailing: IconButton(
                           icon: Icon(
-                            isFocada ? Icons.visibility : Icons.visibility_outlined,
+                            isFocada
+                                ? Icons.visibility
+                                : Icons.visibility_outlined,
                             color: const Color(0xFF2563EB),
                           ),
-                          onPressed: () => setState(() => _magiaSelecionadaParaDetalhe = magia),
+                          onPressed: () => setState(
+                            () => _magiaSelecionadaParaDetalhe = magia,
+                          ),
                         ),
                         onTap: () {
                           setState(() => _magiaSelecionadaParaDetalhe = magia);
-                          _alternarSelecao(magia.id, selecionadasIds, regras, cubit);
+                          _alternarSelecao(
+                            magia.id,
+                            selecionadasIds,
+                            regras,
+                            cubit,
+                          );
                         },
                       ),
                     );
@@ -412,7 +448,9 @@ class _PaginaSelecaoMagiasState extends State<PaginaSelecaoMagias> {
           flex: 2,
           child: magiaExibida == null
               ? const Center(
-                  child: Text('Selecione uma magia para visualizar seus detalhes.'),
+                  child: Text(
+                    'Selecione uma magia para visualizar seus detalhes.',
+                  ),
                 )
               : SingleChildScrollView(
                   padding: const EdgeInsets.all(20),
@@ -532,10 +570,26 @@ class _PaginaSelecaoMagiasState extends State<PaginaSelecaoMagias> {
           ),
         ),
         const Divider(height: 24),
-        _buildInfoRow(Icons.timer_outlined, 'Execução', magia.execucao.detalhes ?? magia.execucao.tipo),
-        _buildInfoRow(Icons.radar_outlined, 'Alcance', magia.alcance.detalhes ?? magia.alcance.tipo),
-        _buildInfoRow(Icons.filter_center_focus_outlined, 'Alvo/Área', magia.efeito.descricao ?? magia.efeito.tipo),
-        _buildInfoRow(Icons.hourglass_bottom_outlined, 'Duração', magia.duracao.detalhes ?? magia.duracao.tipo),
+        _buildInfoRow(
+          Icons.timer_outlined,
+          'Execução',
+          magia.execucao.detalhes ?? magia.execucao.tipo,
+        ),
+        _buildInfoRow(
+          Icons.radar_outlined,
+          'Alcance',
+          magia.alcance.detalhes ?? magia.alcance.tipo,
+        ),
+        _buildInfoRow(
+          Icons.filter_center_focus_outlined,
+          'Alvo/Área',
+          magia.efeito.descricao ?? magia.efeito.tipo,
+        ),
+        _buildInfoRow(
+          Icons.hourglass_bottom_outlined,
+          'Duração',
+          magia.duracao.detalhes ?? magia.duracao.tipo,
+        ),
         if (magia.resistencia != null)
           _buildInfoRow(
             Icons.shield_outlined,
@@ -550,7 +604,11 @@ class _PaginaSelecaoMagiasState extends State<PaginaSelecaoMagias> {
         const SizedBox(height: 6),
         Text(
           magia.descricao,
-          style: const TextStyle(fontSize: 14, height: 1.45, color: Color(0xFF374151)),
+          style: const TextStyle(
+            fontSize: 14,
+            height: 1.45,
+            color: Color(0xFF374151),
+          ),
         ),
         if (magia.aprimoramentos.isNotEmpty) ...[
           const SizedBox(height: 20),

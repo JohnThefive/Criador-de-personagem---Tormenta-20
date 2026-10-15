@@ -55,6 +55,7 @@ class Classe {
 
   final List<TipoProficiencia> proficiencias;
   final List<String> periciasFixas;
+  final List<List<String>> periciasEscolhaExclusiva;
   final List<String> periciasOpcoes;
   final int qtdPericiasEscolha;
 
@@ -75,6 +76,7 @@ class Classe {
     required this.pmPorNivel,
     required this.proficiencias,
     required this.periciasFixas,
+    this.periciasEscolhaExclusiva = const [],
     required this.periciasOpcoes,
     required this.qtdPericiasEscolha,
     this.icone = 'player',
@@ -145,6 +147,20 @@ class Classe {
       (k, v) => MapEntry(k.toString(), v.toString()),
     );
 
+    // Tratamento seguro de perícias fixas e exclusivas
+    final rawPericiasFixas = json['periciasFixas'] as List<dynamic>? ?? [];
+    final List<String> fixas = [];
+    final List<List<String>> exclusivas = [];
+
+    for (var p in rawPericiasFixas) {
+      final str = p.toString();
+      if (str == 'LUTA_OU_PONTARIA') {
+        exclusivas.add(['LUTA', 'PONTARIA']);
+      } else {
+        fixas.add(str);
+      }
+    }
+
     return Classe(
       idClasse: (json['id'] ?? json['idClasse'] ?? '').toString(),
       nome: (json['nome'] ?? '').toString(),
@@ -157,11 +173,8 @@ class Classe {
       pmInicial: (json['pmInicial'] as num?)?.toInt() ?? 0,
       pmPorNivel: (json['pmPorNivel'] as num?)?.toInt() ?? 0,
       proficiencias: profs,
-      periciasFixas:
-          (json['periciasFixas'] as List<dynamic>?)
-              ?.map((e) => e.toString())
-              .toList() ??
-          [],
+      periciasFixas: fixas,
+      periciasEscolhaExclusiva: exclusivas,
       qtdPericiasEscolha: (json['qtdPericiasEscolha'] as num?)?.toInt() ?? 0,
       periciasOpcoes:
           (json['periciasOpcoes'] as List<dynamic>?)
@@ -186,8 +199,8 @@ class Classe {
     'pmPorNivel': pmPorNivel,
     'proficiencias': proficiencias.map((p) => p.name).toList(),
     'periciasFixas': periciasFixas,
-    'qtdPericiasEscolha': qtdPericiasEscolha,
     'periciasOpcoes': periciasOpcoes,
+    'qtdPericiasEscolha': qtdPericiasEscolha,
     'tabelaDeProgressao': tabelaDeProgressao.map(
       (k, v) => MapEntry(k.toString(), v),
     ),

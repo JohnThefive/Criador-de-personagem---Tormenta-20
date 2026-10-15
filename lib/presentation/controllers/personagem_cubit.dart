@@ -3,11 +3,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t20_creator/domain/entities/personagem/classe.dart';
 import 'package:t20_creator/domain/entities/personagem/classe_do_personagem.dart';
+import 'package:t20_creator/domain/entities/personagem/proficiencias.dart';
 import 'package:t20_creator/domain/entities/habilidades_complexas/linhagem_arcanista.dart';
 import 'package:t20_creator/domain/entities/equipamento/arma.dart';
 import 'package:t20_creator/domain/entities/equipamento/protecao.dart';
 import 'package:t20_creator/domain/services/regras_carga_service.dart';
 import 'package:t20_creator/domain/services/personagem_storage_service.dart';
+import '../../domain/repositories/i_personagem_repository.dart';
 import '../../domain/entities/personagem/personagem.dart';
 import '../../domain/services/regras_atributos.dart';
 import '../../domain/entities/personagem/raca.dart';
@@ -100,6 +102,25 @@ class PersonagemState {
   bool get concluiuOrigem =>
       origemSelecionada != null && totalBeneficiosOrigem == 2;
 
+  Set<String> get todasPericiasTreinadasAteOrigem {
+    final fixas = personagem.classes.isNotEmpty
+        ? personagem.classes[0].classeDefinicao.periciasFixas
+        : const <String>[];
+    final exclusivas = personagem.classes.isNotEmpty
+        ? personagem.classes[0].periciasExclusivasEscolhidas.values
+        : const <String>[];
+    return {
+      ...personagem.periciasTreinadas,
+      ...selecoesPericiaClasse,
+      ...selecoesPericiaInteligencia,
+      ...fixas,
+      ...exclusivas,
+    };
+  }
+
+  bool periciaJaTreinada(String sigla) =>
+      todasPericiasTreinadasAteOrigem.contains(sigla);
+
   int get cotaPoderesConcedidos =>
       ValidadorDivindade.ehDevotoFiel(personagem) ? 2 : 1;
 
@@ -137,8 +158,10 @@ class PersonagemState {
     if (personagem.classes.isEmpty) {
       return const RegrasConjuracaoClasse(isConjurador: false);
     }
+    final classeAtual = personagem.classes[0];
     return AprendizadoMagiaService.obterRegrasIniciais(
-      personagem.classes[0].classeDefinicao.idClasse,
+      classeAtual.classeDefinicao.idClasse,
+      caminhoId: classeAtual.caminhoEscolhido?.nome,
     );
   }
 
@@ -289,7 +312,11 @@ class PersonagemState {
 }
 
 class PersonagemCubit extends Cubit<PersonagemState> {
-  PersonagemCubit() : super(PersonagemState(personagem: Personagem.inicial()));
+  final IPersonagemRepository _repository;
+
+  PersonagemCubit({IPersonagemRepository? repository})
+      : _repository = repository ?? const PersonagemStorageService(),
+        super(PersonagemState(personagem: Personagem.inicial()));
 
   // --- CONTROLE DE FLUXO (WIZARD) ---
 
@@ -329,26 +356,11 @@ class PersonagemCubit extends Cubit<PersonagemState> {
   }
 
   void voltarEtapa() {
-    // Cenário 0 : Estou na Raça (1) e volto para Atributos (0)
-    if (state.etapaAtual == 1) {
-      emit(
-        state.copyWith(
-          etapaAtual: 0,
-          // HARD RESET: O usuário pediu para perder o progresso ao voltar
-          personagem: Personagem.inicial(),
-          pontosRestantesCompra: 10,
-          valoresRolados: [], // Limpa os dados rolados
-          alocacaoIndices: {}, // Limpa as alocações
-          metodoAtributos:
-              MetodoAtributos.nenhum, // Volta para a escolha dos botões grandes
-        ),
-      );
-    }
-    // situação generica
-    else if (state.etapaAtual > 1) {
+    // Se estiver na Raça (1) ou qualquer etapa posterior, volta uma etapa preservando o progresso
+    if (state.etapaAtual >= 1) {
       emit(state.copyWith(etapaAtual: state.etapaAtual - 1));
     }
-    // sitação 1: Estou nos Atributos (0) e quero sair da seleção de método
+    // Se estiver nos Atributos (0) e quiser sair da seleção de método
     else if (state.metodoAtributos != MetodoAtributos.nenhum) {
       escolherMetodoAtributos(MetodoAtributos.nenhum);
     }
@@ -422,11 +434,36 @@ class PersonagemCubit extends Cubit<PersonagemState> {
   }
 
   // logica de selecionar raca
-  void selecionarRaca(Raca raca) {
-    // Atualiza o personagem com a nova raça
-    final novoPersonagem = state.personagem.copyWith(raca: raca);
+  // Quando o usuário seleciona a raça e confirma os atributos flexíveis no modal:
+  void selecionarRaca(
+    Raca novaRaca, {
+    List<String> atributosVariaveis = const [],
+  }) {
+    final personagemAtualizado = state.personagem.copyWith(
+      raca: novaRaca,
+      atributosVariaveisRaca: atributosVariaveis,
+    );
+
     emit(
-      state.copyWith(personagem: novoPersonagem, atributosVariaveisRaca: []),
+      state.copyWith(
+        personagem: personagemAtualizado,
+        atributosVariaveisRaca:
+            atributosVariaveis, // se ainda mantiver no state da UI
+      ),
+    );
+  }
+
+  // Ou caso exista um método separado apenas para atualizar os bônus variáveis:
+  void atualizarAtributosVariaveisRaca(List<String> selecionados) {
+    final personagemAtualizado = state.personagem.copyWith(
+      atributosVariaveisRaca: selecionados,
+    );
+
+    emit(
+      state.copyWith(
+        personagem: personagemAtualizado,
+        atributosVariaveisRaca: selecionados,
+      ),
     );
   }
 
@@ -458,17 +495,65 @@ class PersonagemCubit extends Cubit<PersonagemState> {
   // Vamos começar a logica de seleção de classe
 
   void selecionarClasse(Classe classeDefinicao) {
+    final classeAnterior = state.personagem.classes.isNotEmpty
+        ? state.personagem.classes[0].classeDefinicao
+        : null;
+    final mudouDeClasse =
+        classeAnterior != null && classeAnterior.idClasse != classeDefinicao.idClasse;
+
     // Cria a instância da classe no Nível 1
     final novaClasse = ClasseDoPersonagem(
       classeDefinicao: classeDefinicao,
       nivel: 1,
     );
 
-    // Como estamos na criação do personagem, esta será a classe principal (índice 0)
-    final novoPersonagem = state.personagem.copyWith(
-      classe_do_personagem: [novaClasse],
-    );
-    emit(state.copyWith(personagem: novoPersonagem));
+    if (mudouDeClasse) {
+      final temProfMarcial = classeDefinicao.proficiencias.contains(
+        TipoProficiencia.armasMarciais,
+      );
+      final ehArcanista =
+          classeDefinicao.idClasse.toLowerCase() == 'arcanista';
+      final temProfEscudo = classeDefinicao.proficiencias.contains(
+        TipoProficiencia.escudos,
+      );
+
+      final novasArmas = List<Arma>.from(state.personagem.armas);
+      if (!temProfMarcial) {
+        novasArmas.removeWhere(
+          (a) => a.proficiencia == ProficienciaArma.marcial,
+        );
+      }
+
+      final periciasPreservadas =
+          List<String>.from(state.periciasEscolhidasOrigem);
+
+      final novoPersonagem = state.personagem.copyWith(
+        classe_do_personagem: [novaClasse],
+        periciasTreinadas: periciasPreservadas,
+        magiasConhecidas: const [],
+        armas: novasArmas,
+        anularArmadura: ehArcanista,
+        anularEscudo: !temProfEscudo,
+      );
+
+      emit(
+        state.copyWith(
+          personagem: novoPersonagem,
+          selecoesPericiaClasse: const [],
+          selecoesPericiaInteligencia: const [],
+          magiasSelecionadas: const [],
+          anularArmaMarcial: !temProfMarcial,
+          anularArmadura: ehArcanista,
+          anularEscudo: !temProfEscudo,
+        ),
+      );
+    } else {
+      // Como estamos na criação do personagem, esta será a classe principal (índice 0)
+      final novoPersonagem = state.personagem.copyWith(
+        classe_do_personagem: [novaClasse],
+      );
+      emit(state.copyWith(personagem: novoPersonagem));
+    }
   }
 
   // para classes com subclasses/caminhos
@@ -477,12 +562,24 @@ class PersonagemCubit extends Cubit<PersonagemState> {
 
     // Pega a classe atual e atualiza com o caminho escolhido
     final classeAtual = state.personagem.classes[0];
-    final classeAtualizada = classeAtual.copyWith(caminhoEscolhido: caminho);
+    final mudouCaminho = classeAtual.caminhoEscolhido?.nome != caminho.nome;
+    final classeAtualizada = classeAtual.copyWith(
+      caminhoEscolhido: caminho,
+      anularLinhagem: mudouCaminho,
+    );
 
     final novoPersonagem = state.personagem.copyWith(
       classe_do_personagem: [classeAtualizada],
+      magiasConhecidas:
+          mudouCaminho ? const [] : state.personagem.magiasConhecidas,
     );
-    emit(state.copyWith(personagem: novoPersonagem));
+    emit(
+      state.copyWith(
+        personagem: novoPersonagem,
+        magiasSelecionadas:
+            mudouCaminho ? const [] : state.magiasSelecionadas,
+      ),
+    );
   }
 
   // Seleção de linhagem de feiticeiro - classe mais complexa
@@ -587,6 +684,10 @@ class PersonagemCubit extends Cubit<PersonagemState> {
   }
 
   void togglePericiaOrigem(String siglaPericia) {
+    if (state.periciaJaTreinada(siglaPericia) &&
+        !state.periciasEscolhidasOrigem.contains(siglaPericia)) {
+      return;
+    }
     final pericias = List<String>.from(state.periciasEscolhidasOrigem);
     if (pericias.contains(siglaPericia)) {
       pericias.remove(siglaPericia);
@@ -904,7 +1005,7 @@ class PersonagemCubit extends Cubit<PersonagemState> {
 
   // MÉTODO PARA SALVAR A FICHA NO DISCO DO ANDROID
   Future<void> salvarPersonagemNoAparelho() async {
-    await PersonagemStorageService.salvarPersonagem(state.personagem);
+    await _repository.salvar(state.personagem);
   }
 
   @visibleForTesting

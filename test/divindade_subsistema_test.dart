@@ -320,7 +320,7 @@ void main() {
         );
 
         // Agora recuperação funciona (limitado a pmTotal)
-        p = p.recuperarPM(5);
+        p = p.recuperarPM(10);
         expect(p.pmAtual, equals(p.pmTotal));
       },
     );

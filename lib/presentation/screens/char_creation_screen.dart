@@ -15,11 +15,28 @@ import '../controllers/personagem_cubit.dart';
 import '../widgets/atributo_card_compra.dart';
 // Importe seus widgets de AtributoCard e a lógica de Rolagem aqui
 
-class CharacterCreatorScreen extends StatelessWidget {
-  // Controlador para deslizar as páginas programaticamente
-  final PageController _pageController = PageController();
+class CharacterCreatorScreen extends StatefulWidget {
+  const CharacterCreatorScreen({super.key});
 
-  CharacterCreatorScreen({super.key});
+  @override
+  State<CharacterCreatorScreen> createState() => _CharacterCreatorScreenState();
+}
+
+class _CharacterCreatorScreenState extends State<CharacterCreatorScreen> {
+  // Controlador para deslizar as páginas programaticamente
+  late final PageController _pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController();
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -432,17 +449,40 @@ class _PaginaFinalizacaoState extends State<_PaginaFinalizacao> {
   ];
 
   bool _salvando = false;
+  bool _selecionandoFoto = false;
+  final ImagePicker _picker = ImagePicker();
+  DateTime? _ultimoCliqueFoto;
 
   Future<void> _escolherFoto(BuildContext context) async {
-    final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(
-      source: ImageSource.gallery,
-      maxWidth: 600,
-      imageQuality: 85,
-    );
-    if (pickedFile != null) {
-      if (context.mounted) {
+    final agora = DateTime.now();
+    // Bloqueia qualquer nova tentativa se já houver uma seleção pendente ou clique repetido
+    if (_selecionandoFoto ||
+        (_ultimoCliqueFoto != null &&
+            agora.difference(_ultimoCliqueFoto!) <
+                const Duration(milliseconds: 1000))) {
+      return;
+    }
+
+    _ultimoCliqueFoto = agora;
+    setState(() {
+      _selecionandoFoto = true;
+    });
+
+    try {
+      final pickedFile = await _picker.pickImage(
+        source: ImageSource.gallery,
+        maxWidth: 600,
+        imageQuality: 85,
+      );
+      if (pickedFile != null && context.mounted) {
         context.read<PersonagemCubit>().atualizarFoto(pickedFile.path);
+      }
+    } catch (e) {
+      debugPrint('Erro ao selecionar foto da galeria: $e');
+    } finally {
+      _selecionandoFoto = false;
+      if (mounted) {
+        setState(() {});
       }
     }
   }
@@ -538,52 +578,76 @@ class _PaginaFinalizacaoState extends State<_PaginaFinalizacao> {
                             child: CircleAvatar(
                               radius: 50,
                               backgroundColor: const Color(0xFFF3F4F6),
-                              backgroundImage:
-                                  (p.caminhoFoto != null &&
-                                      p.caminhoFoto!.isNotEmpty &&
-                                      File(p.caminhoFoto!).existsSync())
-                                  ? FileImage(File(p.caminhoFoto!))
-                                  : null,
-                              child:
-                                  (p.caminhoFoto == null ||
-                                      p.caminhoFoto!.isEmpty ||
-                                      !File(p.caminhoFoto!).existsSync())
-                                  ? const Icon(
+                              child: (p.caminhoFoto != null &&
+                                      p.caminhoFoto!.isNotEmpty)
+                                  ? ClipOval(
+                                      child: Image.file(
+                                        File(p.caminhoFoto!),
+                                        width: 100,
+                                        height: 100,
+                                        fit: BoxFit.cover,
+                                        errorBuilder: (_, _, _) =>
+                                            const Icon(
+                                          Icons.person_outline_rounded,
+                                          size: 52,
+                                          color: Color(0xFF9CA3AF),
+                                        ),
+                                      ),
+                                    )
+                                  : const Icon(
                                       Icons.person_outline_rounded,
                                       size: 52,
                                       color: Color(0xFF9CA3AF),
-                                    )
-                                  : null,
+                                    ),
                             ),
                           ),
                           Positioned(
                             bottom: 0,
                             right: 0,
-                            child: InkWell(
-                              borderRadius: BorderRadius.circular(20),
-                              onTap: () => _escolherFoto(context),
-                              child: Container(
-                                padding: const EdgeInsets.all(8),
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFFB71C1C),
-                                  shape: BoxShape.circle,
-                                  border: Border.all(
-                                    color: Colors.white,
-                                    width: 2.5,
-                                  ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withValues(
-                                        alpha: 0.2,
-                                      ),
-                                      blurRadius: 4,
+                            child: Material(
+                              color: Colors.transparent,
+                              child: InkWell(
+                                borderRadius: BorderRadius.circular(20),
+                                onTap: _selecionandoFoto
+                                    ? null
+                                    : () => _escolherFoto(context),
+                                child: Container(
+                                  padding: const EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                    color: _selecionandoFoto
+                                        ? const Color(0xFF9E9E9E)
+                                        : const Color(0xFFB71C1C),
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                      color: Colors.white,
+                                      width: 2.5,
                                     ),
-                                  ],
-                                ),
-                                child: const Icon(
-                                  Icons.camera_alt_rounded,
-                                  size: 18,
-                                  color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withValues(
+                                          alpha: 0.2,
+                                        ),
+                                        blurRadius: 4,
+                                      ),
+                                    ],
+                                  ),
+                                  child: _selecionandoFoto
+                                      ? const SizedBox(
+                                          width: 18,
+                                          height: 18,
+                                          child: CircularProgressIndicator(
+                                            strokeWidth: 2,
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                              Colors.white,
+                                            ),
+                                          ),
+                                        )
+                                      : const Icon(
+                                          Icons.camera_alt_rounded,
+                                          size: 18,
+                                          color: Colors.white,
+                                        ),
                                 ),
                               ),
                             ),
@@ -592,10 +656,11 @@ class _PaginaFinalizacaoState extends State<_PaginaFinalizacao> {
                       ),
                       const SizedBox(height: 8),
                       if (p.caminhoFoto != null &&
-                          p.caminhoFoto!.isNotEmpty &&
-                          File(p.caminhoFoto!).existsSync())
+                          p.caminhoFoto!.isNotEmpty)
                         TextButton.icon(
-                          onPressed: () => cubit.removerFoto(),
+                          onPressed: _selecionandoFoto
+                              ? null
+                              : () => cubit.removerFoto(),
                           icon: const Icon(
                             Icons.delete_outline,
                             size: 16,

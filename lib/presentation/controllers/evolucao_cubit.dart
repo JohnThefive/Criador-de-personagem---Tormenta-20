@@ -4,6 +4,7 @@ import '../../domain/entities/personagem/classe_do_personagem.dart';
 import '../../domain/entities/personagem/poder.dart';
 import '../../domain/services/data_services/call_poderes.dart';
 import '../../domain/services/poderes_e_magias/poder_validador_service.dart';
+import '../../domain/repositories/i_personagem_repository.dart';
 import '../../domain/services/personagem_storage_service.dart';
 
 enum FiltroPoderes { todos, disponiveis, adquiridos, bloqueados }
@@ -110,8 +111,14 @@ class EvolucaoState {
 }
 
 class EvolucaoCubit extends Cubit<EvolucaoState> {
-  EvolucaoCubit({required Personagem personagem, int indiceClasse = 0})
-    : super(EvolucaoState(personagem: personagem, indiceClasse: indiceClasse)) {
+  final IPersonagemRepository _repository;
+
+  EvolucaoCubit({
+    required Personagem personagem,
+    int indiceClasse = 0,
+    IPersonagemRepository? repository,
+  }) : _repository = repository ?? const PersonagemStorageService(),
+       super(EvolucaoState(personagem: personagem, indiceClasse: indiceClasse)) {
     _recalcularItens();
   }
 
@@ -231,8 +238,8 @@ class EvolucaoCubit extends Cubit<EvolucaoState> {
             tipoCompanheiro ?? state.personagem.tipoCompanheiroAnimal,
       );
 
-      // Salva no disco
-      await PersonagemStorageService.salvarPersonagem(novoPersonagem);
+      // Salva no repositório
+      await _repository.salvar(novoPersonagem);
 
       emit(
         state.copyWith(
@@ -277,7 +284,7 @@ class EvolucaoCubit extends Cubit<EvolucaoState> {
         anularFormaSelvagem: poderKey == 'FORMA_SELVAGEM',
       );
 
-      await PersonagemStorageService.salvarPersonagem(novoPersonagem);
+      await _repository.salvar(novoPersonagem);
 
       emit(
         state.copyWith(

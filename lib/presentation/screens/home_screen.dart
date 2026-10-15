@@ -269,8 +269,7 @@ class _CharacterCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final temFoto =
         personagem.caminhoFoto != null &&
-        personagem.caminhoFoto!.isNotEmpty &&
-        File(personagem.caminhoFoto!).existsSync();
+        personagem.caminhoFoto!.isNotEmpty;
 
     final classeNome = personagem.classes.isNotEmpty
         ? personagem.classes[0].classeDefinicao.nome
@@ -279,6 +278,23 @@ class _CharacterCard extends StatelessWidget {
     final nivel = personagem.nivelPersonagem > 0
         ? personagem.nivelPersonagem
         : 1;
+
+    Widget buildIconeFallback() {
+      if (personagem.raca != null) {
+        return Center(
+          child: RpgIcon(
+            iconName: personagem.raca!.icone,
+            size: 34,
+            color: Colors.white.withValues(alpha: 0.85),
+          ),
+        );
+      }
+      return Icon(
+        Icons.person,
+        color: Colors.white.withValues(alpha: 0.85),
+        size: 38,
+      );
+    }
 
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
@@ -331,20 +347,10 @@ class _CharacterCard extends StatelessWidget {
                             width: 62,
                             height: 62,
                             fit: BoxFit.cover,
+                            errorBuilder: (ctx, err, stack) =>
+                                buildIconeFallback(),
                           )
-                        : (personagem.raca != null
-                              ? Center(
-                                  child: RpgIcon(
-                                    iconName: personagem.raca!.icone,
-                                    size: 34,
-                                    color: Colors.white.withValues(alpha: 0.85),
-                                  ),
-                                )
-                              : Icon(
-                                  Icons.person,
-                                  color: Colors.white.withValues(alpha: 0.85),
-                                  size: 38,
-                                )),
+                        : buildIconeFallback(),
                   ),
                 ),
                 const SizedBox(width: 14),

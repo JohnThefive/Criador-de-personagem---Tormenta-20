@@ -6,6 +6,17 @@ import '../../entities/personagem/classe.dart';
 
 class BancoDeClasses {
   static List<Classe> _dados = [];
+  static final Map<String, Classe> _indexPorId = {};
+  static final Map<String, Classe> _indexPorNome = {};
+
+  static void _reconstruirIndex() {
+    _indexPorId.clear();
+    _indexPorNome.clear();
+    for (final c in _dados) {
+      _indexPorId[c.idClasse.trim().toLowerCase()] = c;
+      _indexPorNome[c.nome.trim().toLowerCase()] = c;
+    }
+  }
 
   /// Carrega as classes a partir do arquivo JSON nos assets
   static Future<void> carregar() async {
@@ -17,12 +28,14 @@ class BancoDeClasses {
     _dados = jsonList
         .map((item) => Classe.fromJson(item as Map<String, dynamic>))
         .toList();
+    _reconstruirIndex();
   }
 
   /// Método para injetar classes diretamente durante testes automatizados
   @visibleForTesting
   static void carregarParaTestes(List<Classe> classes) {
     _dados = List.from(classes);
+    _reconstruirIndex();
   }
 
   /// Retorna a lista de todas as classes registradas.
@@ -37,6 +50,7 @@ class BancoDeClasses {
           _dados = jsonList
               .map((item) => Classe.fromJson(item as Map<String, dynamic>))
               .toList();
+          _reconstruirIndex();
         }
       } catch (_) {}
     }
@@ -46,19 +60,19 @@ class BancoDeClasses {
   /// Indica se os dados já foram carregados
   static bool get estaCarregado => _dados.isNotEmpty;
 
-  /// Busca uma classe pelo seu identificador único (ex: "arcanista", "barbaro")
+  /// Busca uma classe pelo seu identificador único em O(1) (ex: "arcanista", "barbaro")
   static Classe? getById(String idClasse) {
-    final idNorm = idClasse.trim().toLowerCase();
-    return todas
-        .where((c) => c.idClasse.trim().toLowerCase() == idNorm)
-        .firstOrNull;
+    if (_dados.isEmpty) {
+      final _ = todas;
+    }
+    return _indexPorId[idClasse.trim().toLowerCase()];
   }
 
-  /// Busca uma classe pelo seu nome de exibição (ex: "Arcanista", "Bárbaro")
+  /// Busca uma classe pelo seu nome de exibição em O(1) (ex: "Arcanista", "Bárbaro")
   static Classe? getByNome(String nome) {
-    final nomeNorm = nome.trim().toLowerCase();
-    return todas
-        .where((c) => c.nome.trim().toLowerCase() == nomeNorm)
-        .firstOrNull;
+    if (_dados.isEmpty) {
+      final _ = todas;
+    }
+    return _indexPorNome[nome.trim().toLowerCase()];
   }
 }

@@ -20,8 +20,30 @@ import '../entities/habilidades_complexas/forma_selvagem.dart';
 import '../entities/habilidades_complexas/golpe_pessoal.dart';
 import '../entities/habilidades_complexas/engenhoca.dart';
 import '../entities/habilidades_complexas/montaria_sagrada.dart';
+import '../repositories/i_personagem_repository.dart';
 
-class PersonagemStorageService {
+class PersonagemStorageService implements IPersonagemRepository {
+  const PersonagemStorageService();
+
+  @override
+  Future<void> salvar(Personagem p) => salvarPersonagem(p);
+
+  @override
+  Future<List<Personagem>> obterTodos() => carregarTodos();
+
+  @override
+  Future<Personagem?> obterPorId(String id) async {
+    final todos = await carregarTodos();
+    try {
+      return todos.firstWhere((p) => p.id == id);
+    } catch (_) {
+      return null;
+    }
+  }
+
+  @override
+  Future<void> excluir(String id) => excluirPersonagem(id);
+
   // Retorna a pasta interna onde o app tem permissão de escrita no Android
   static Future<Directory> _getDiretorioPersonagens() async {
     final appDir = await getApplicationDocumentsDirectory();
@@ -45,7 +67,8 @@ class PersonagemStorageService {
   // 2. CARREGAR TODOS OS PERSONAGENS SALVOS
   static Future<List<Personagem>> carregarTodos() async {
     final pasta = await _getDiretorioPersonagens();
-    final arquivos = pasta.listSync().whereType<File>().where(
+    final entidades = await pasta.list().toList();
+    final arquivos = entidades.whereType<File>().where(
       (f) => f.path.endsWith('.json'),
     );
 
@@ -96,6 +119,7 @@ class PersonagemStorageService {
       'experienciaAtual': p.experienciaAtual,
       'racaNome': p.raca?.nome,
       'racaId': p.raca?.id,
+      'atributosVariaveisRaca': p.atributosVariaveisRaca,
       'origemId': p.origem?.id,
       'divindadeId': p.divindade?.id,
       'poderesConcedidosKeys': p.poderesConcedidos
@@ -123,6 +147,7 @@ class PersonagemStorageService {
               'idClasse': c.classeDefinicao.idClasse,
               'nivel': c.nivel,
               'caminho': c.caminhoEscolhido?.nome,
+              'periciasExclusivasEscolhidas': c.periciasExclusivasEscolhidas,
               'poderesEscolhidosKeys': c.poderesEscolhidos
                   .map((pod) => pod.key)
                   .toList(),
@@ -220,11 +245,20 @@ class PersonagemStorageService {
           }
         }
 
+        final Map<String, String> periciasExclusivas = {};
+        if (c['periciasExclusivasEscolhidas'] != null &&
+            c['periciasExclusivasEscolhidas'] is Map) {
+          (c['periciasExclusivasEscolhidas'] as Map).forEach((k, v) {
+            periciasExclusivas[k.toString()] = v.toString();
+          });
+        }
+
         classesList.add(
           ClasseDoPersonagem(
             classeDefinicao: def,
             nivel: (c['nivel'] as num?)?.toInt() ?? 1,
             caminhoEscolhido: caminho,
+            periciasExclusivasEscolhidas: periciasExclusivas,
             poderesEscolhidos: poderesCarregados,
           ),
         );
@@ -317,6 +351,9 @@ class PersonagemStorageService {
       tipoCompanheiroAnimal: map['tipoCompanheiroAnimal']?.toString(),
       montariaSagrada: montariaSagrada,
       periciasTreinadas: List<String>.from(map['periciasTreinadas'] ?? []),
+      atributosVariaveisRaca: List<String>.from(
+        map['atributosVariaveisRaca'] ?? [],
+      ),
     );
   }
 }

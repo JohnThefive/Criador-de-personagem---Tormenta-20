@@ -6,6 +6,17 @@ import '../../entities/personagem/origem.dart';
 
 class BancoDeOrigens {
   static List<Origem> _dados = [];
+  static final Map<String, Origem> _indexPorId = {};
+  static final Map<String, Origem> _indexPorNome = {};
+
+  static void _reconstruirIndex() {
+    _indexPorId.clear();
+    _indexPorNome.clear();
+    for (final o in _dados) {
+      _indexPorId[o.id.trim().toLowerCase()] = o;
+      _indexPorNome[o.nome.trim().toLowerCase()] = o;
+    }
+  }
 
   /// Carrega o catálogo de origens a partir do arquivo JSON nos assets
   static Future<void> carregar() async {
@@ -15,12 +26,14 @@ class BancoDeOrigens {
     _dados = jsonList
         .map((item) => Origem.fromJson(item as Map<String, dynamic>))
         .toList();
+    _reconstruirIndex();
   }
 
   /// Método para injetar dados durante a execução de testes automatizados
   @visibleForTesting
   static void carregarParaTestes(List<Origem> origens) {
     _dados = List.from(origens);
+    _reconstruirIndex();
   }
 
   /// Retorna todas as origens disponíveis (imutável)
@@ -35,6 +48,7 @@ class BancoDeOrigens {
           _dados = jsonList
               .map((item) => Origem.fromJson(item as Map<String, dynamic>))
               .toList();
+          _reconstruirIndex();
         }
       } catch (_) {}
     }
@@ -44,17 +58,19 @@ class BancoDeOrigens {
   /// Retorna se os dados já foram carregados
   static bool get estaCarregado => _dados.isNotEmpty;
 
-  /// Busca uma origem pelo ID único (ex: "acolito", "soldado")
+  /// Busca uma origem pelo ID único em O(1) (ex: "acolito", "soldado")
   static Origem? getById(String id) {
-    final idNorm = id.trim().toLowerCase();
-    return todas.where((o) => o.id.trim().toLowerCase() == idNorm).firstOrNull;
+    if (_dados.isEmpty) {
+      final _ = todas;
+    }
+    return _indexPorId[id.trim().toLowerCase()];
   }
 
-  /// Busca uma origem pelo nome (ex: "Acólito", "Soldado")
+  /// Busca uma origem pelo nome em O(1) (ex: "Acólito", "Soldado")
   static Origem? getByNome(String nome) {
-    final nomeNorm = nome.trim().toLowerCase();
-    return todas
-        .where((o) => o.nome.trim().toLowerCase() == nomeNorm)
-        .firstOrNull;
+    if (_dados.isEmpty) {
+      final _ = todas;
+    }
+    return _indexPorNome[nome.trim().toLowerCase()];
   }
 }
