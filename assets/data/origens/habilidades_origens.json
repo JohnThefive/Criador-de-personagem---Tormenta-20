@@ -1,0 +1,659 @@
+{
+  "agua_no_feijao": {
+    "key": "agua_no_feijao",
+    "nome": "Água no Feijão",
+    "descricao": "Você não sofre a penalidade de –5 e não gasta matéria-prima adicional para fabricar pratos para cinco pessoas.",
+    "origem_arquivo": "agua_no_feijao.json",
+    "dados_brutos": {
+      "id": "agua_no_feijao",
+      "name": "Água no Feijão",
+      "origin": "fazendeiro",
+      "description": "Você não sofre a penalidade de –5 e não gasta matéria-prima adicional para fabricar pratos para cinco pessoas.",
+      "effects": {
+        "crafting_bonus": {
+          "activity": "fabricar pratos",
+          "serves": 5,
+          "ignore_penalty": -5,
+          "extra_material_cost": false
+        }
+      }
+    }
+  },
+  "amigo_especial": {
+    "key": "amigo_especial",
+    "nome": "Amigo Especial",
+    "descricao": "Você recebe +5 em testes de Adestramento com animais. Além disso, possui um animal de estimação que o auxilia e o acompanha em suas aventuras. Em termos de jogo, é um parceiro que fornece +2 em uma perícia a sua escolha (exceto Luta ou Pontaria e aprovada pelo mestre) e não conta em seu limite de parceiros.",
+    "origem_arquivo": "amigo_especial.json",
+    "dados_brutos": {
+      "id": "amigo_especial",
+      "name": "Amigo Especial",
+      "origin": "amigo_dos_animais",
+      "description": "Você recebe +5 em testes de Adestramento com animais. Além disso, possui um animal de estimação que o auxilia e o acompanha em suas aventuras. Em termos de jogo, é um parceiro que fornece +2 em uma perícia a sua escolha (exceto Luta ou Pontaria e aprovada pelo mestre) e não conta em seu limite de parceiros.",
+      "effects": {
+        "skill_bonuses": [
+          {
+            "skill": "Adestramento",
+            "value": 5,
+            "condition": "com animais"
+          }
+        ],
+        "partner": {
+          "type": "animal de estimação",
+          "skill_bonus": 2,
+          "skill_choice": true,
+          "excluded_skills": [
+            "Luta",
+            "Pontaria"
+          ],
+          "counts_limit": false
+        }
+      }
+    }
+  },
+  "busca_interior": {
+    "key": "busca_interior",
+    "nome": "Busca Interior",
+    "descricao": "Quando você e seus companheiros estão diante de um mistério, incapazes de prosseguir, você pode gastar 1 PM para meditar sozinho durante algum tempo e receber uma dica do mestre.",
+    "origem_arquivo": "busca_interior.json",
+    "dados_brutos": {
+      "id": "busca_interior",
+      "name": "Busca Interior",
+      "origin": "eremita",
+      "description": "Quando você e seus companheiros estão diante de um mistério, incapazes de prosseguir, você pode gastar 1 PM para meditar sozinho durante algum tempo e receber uma dica do mestre.",
+      "effects": {
+        "active_ability": {
+          "cost": {
+            "pm": 1
+          },
+          "trigger": "diante de um mistério",
+          "effect": "receber uma dica do mestre"
+        }
+      }
+    }
+  },
+  "confissao": {
+    "key": "confissao",
+    "nome": "Confissão",
+    "descricao": "Você pode usar Intimidação para interrogar sem custo e em um minuto (veja Investigação).",
+    "origem_arquivo": "confissao.json",
+    "dados_brutos": {
+      "id": "confissao",
+      "name": "Confissão",
+      "origin": "capanga",
+      "description": "Você pode usar Intimidação para interrogar sem custo e em um minuto (veja Investigação).",
+      "effects": {
+        "skill_alternate_use": {
+          "skill": "Intimidação",
+          "use": "interrogar",
+          "cost": 0,
+          "time": "1 minuto"
+        }
+      }
+    }
+  },
+  "coracao_heroico": {
+    "key": "coracao_heroico",
+    "nome": "Coração Heroico",
+    "descricao": "Você recebe +3 pontos de mana. Quando atinge um novo patamar (no 5º, 11º e 17º níveis), recebe +3 PM.",
+    "origem_arquivo": "coracao_heroico.json",
+    "dados_brutos": {
+      "id": "coracao_heroico",
+      "name": "Coração Heroico",
+      "origin": "heroi_campones",
+      "description": "Você recebe +3 pontos de mana. Quando atinge um novo patamar (no 5º, 11º e 17º níveis), recebe +3 PM.",
+      "effects": {
+        "mana_bonus": {
+          "base": 3,
+          "per_tier": 3,
+          "tier_levels": [
+            5,
+            11,
+            17
+          ]
+        }
+      }
+    }
+  },
+  "cultura_exotica": {
+    "key": "cultura_exotica",
+    "nome": "Cultura Exótica",
+    "descricao": "Por sua diferente visão de mundo, você encontra soluções inesperadas. Quando vai fazer um teste de perícia que requer treinamento, você pode gastar 1 PM para ignorar esse requerimento para esse teste.",
+    "origem_arquivo": "cultura_exotica.json",
+    "dados_brutos": {
+      "id": "cultura_exotica",
+      "name": "Cultura Exótica",
+      "origin": "forasteiro",
+      "description": "Por sua diferente visão de mundo, você encontra soluções inesperadas. Quando vai fazer um teste de perícia que requer treinamento, você pode gastar 1 PM para ignorar esse requerimento para esse teste.",
+      "effects": {
+        "active_ability": {
+          "cost": {
+            "pm": 1
+          },
+          "effect": "ignorar requerimento de treinamento em perícia",
+          "duration": "um teste"
+        }
+      }
+    }
+  },
+  "desejo_de_liberdade": {
+    "key": "desejo_de_liberdade",
+    "nome": "Desejo de Liberdade",
+    "descricao": "Ninguém voltará a torná-lo um escravo! Você recebe +5 em testes contra a manobra agarrar e efeitos de movimento.",
+    "origem_arquivo": "desejo_de_liberdade.json",
+    "dados_brutos": {
+      "id": "desejo_de_liberdade",
+      "name": "Desejo de Liberdade",
+      "origin": "escravo",
+      "description": "Ninguém voltará a torná-lo um escravo! Você recebe +5 em testes contra a manobra agarrar e efeitos de movimento.",
+      "effects": {
+        "resistance_bonuses": [
+          {
+            "against": "manobra agarrar",
+            "value": 5
+          },
+          {
+            "against": "efeitos de movimento",
+            "value": 5
+          }
+        ]
+      }
+    }
+  },
+  "detetive": {
+    "key": "detetive",
+    "nome": "Detetive",
+    "descricao": "Você pode gastar 1 PM para substituir testes de Percepção e Intuição por testes de Investigação até o fim da cena.",
+    "origem_arquivo": "detetive.json",
+    "dados_brutos": {
+      "id": "detetive",
+      "name": "Detetive",
+      "origin": "guarda",
+      "description": "Você pode gastar 1 PM para substituir testes de Percepção e Intuição por testes de Investigação até o fim da cena.",
+      "effects": {
+        "skill_substitutions": [
+          {
+            "original": [
+              "Percepção",
+              "Intuição"
+            ],
+            "substitute": "Investigação",
+            "cost": {
+              "pm": 1
+            },
+            "duration": "até o fim da cena"
+          }
+        ]
+      }
+    }
+  },
+  "dom_artistico": {
+    "key": "dom_artistico",
+    "nome": "Dom Artístico",
+    "descricao": "Você recebe +2 em testes de Atuação, e recebe o dobro de tibares em apresentações.",
+    "origem_arquivo": "dom_artistico.json",
+    "dados_brutos": {
+      "id": "dom_artistico",
+      "name": "Dom Artístico",
+      "origin": "artista",
+      "description": "Você recebe +2 em testes de Atuação, e recebe o dobro de tibares em apresentações.",
+      "effects": {
+        "skill_bonuses": [
+          {
+            "skill": "Atuação",
+            "value": 2
+          }
+        ],
+        "income_multiplier": {
+          "activity": "apresentações",
+          "multiplier": 2
+        }
+      }
+    }
+  },
+  "esse_cheiro": {
+    "key": "esse_cheiro",
+    "nome": "Esse Cheiro...",
+    "descricao": "Você recebe +2 em Fortitude e detecta automaticamente a presença (mas não a localização ou natureza) de itens alquímicos em alcance curto.",
+    "origem_arquivo": "esse_cheiro.json",
+    "dados_brutos": {
+      "id": "esse_cheiro",
+      "name": "Esse Cheiro...",
+      "origin": "assistente_de_laboratorio",
+      "description": "Você recebe +2 em Fortitude e detecta automaticamente a presença (mas não a localização ou natureza) de itens alquímicos em alcance curto.",
+      "effects": {
+        "skill_bonuses": [
+          {
+            "skill": "Fortitude",
+            "value": 2
+          }
+        ],
+        "detection": {
+          "type": "itens alquímicos",
+          "range": "curto",
+          "details": "apenas presença, não localização ou natureza"
+        }
+      }
+    }
+  },
+  "frutos_do_trabalho": {
+    "key": "frutos_do_trabalho",
+    "nome": "Frutos do Trabalho",
+    "descricao": "No início de cada aventura, você recebe até 5 itens gerais que possa fabricar num valor total de até T$ 50. Esse valor aumenta para T$ 100 no patamar veterano, T$ 300 no campeão e T$ 500 no lenda.",
+    "origem_arquivo": "frutos_do_trabalho.json",
+    "dados_brutos": {
+      "id": "frutos_do_trabalho",
+      "name": "Frutos do Trabalho",
+      "origin": "artesao",
+      "description": "No início de cada aventura, você recebe até 5 itens gerais que possa fabricar num valor total de até T$ 50. Esse valor aumenta para T$ 100 no patamar veterano, T$ 300 no campeão e T$ 500 no lenda.",
+      "effects": {
+        "free_items": {
+          "trigger": "início de aventura",
+          "max_items": 5,
+          "type": "itens gerais fabricáveis",
+          "max_value_by_tier": {
+            "iniciante": 50,
+            "veterano": 100,
+            "campeão": 300,
+            "lenda": 500
+          }
+        }
+      }
+    }
+  },
+  "gororoba": {
+    "key": "gororoba",
+    "nome": "Gororoba",
+    "descricao": "Você não sofre a penalidade de –5 para fabricar um prato especial adicional.",
+    "origem_arquivo": "gororoba.json",
+    "dados_brutos": {
+      "id": "gororoba",
+      "name": "Gororoba",
+      "origin": "taverneiro",
+      "description": "Você não sofre a penalidade de –5 para fabricar um prato especial adicional.",
+      "effects": {
+        "crafting_bonus": {
+          "activity": "fabricar prato especial adicional",
+          "ignore_penalty": -5
+        }
+      }
+    }
+  },
+  "heranca": {
+    "key": "heranca",
+    "nome": "Herança",
+    "descricao": "Você herdou um item de preço de até T$ 1.000. Você pode escolher este poder duas vezes, para um item de até T$ 2.000.",
+    "origem_arquivo": "heranca.json",
+    "dados_brutos": {
+      "id": "heranca",
+      "name": "Herança",
+      "origin": "herdeiro",
+      "description": "Você herdou um item de preço de até T$ 1.000. Você pode escolher este poder duas vezes, para um item de até T$ 2.000.",
+      "effects": {
+        "free_item": {
+          "max_value": 1000,
+          "stackable": true,
+          "stacked_max_value": 2000
+        }
+      }
+    }
+  },
+  "influencia_militar": {
+    "key": "influencia_militar",
+    "nome": "Influência Militar",
+    "descricao": "Você fez amigos nas forças armadas. Onde houver acampamentos ou bases militares, você pode conseguir hospedagem e informações para você e seus aliados.",
+    "origem_arquivo": "influencia_militar.json",
+    "dados_brutos": {
+      "id": "influencia_militar",
+      "name": "Influência Militar",
+      "origin": "soldado",
+      "description": "Você fez amigos nas forças armadas. Onde houver acampamentos ou bases militares, você pode conseguir hospedagem e informações para você e seus aliados.",
+      "effects": {
+        "social_benefits": {
+          "lodging": true,
+          "information": true,
+          "location": "acampamentos ou bases militares",
+          "includes_allies": true
+        }
+      }
+    }
+  },
+  "lembrancas_graduais": {
+    "key": "lembrancas_graduais",
+    "nome": "Lembranças Graduais",
+    "descricao": "Durante suas aventuras, em determinados momentos a critério do mestre, você pode fazer um teste de Sabedoria (CD 10) para reconhecer pessoas, criaturas ou lugares que tenha encontrado antes de perder a memória.",
+    "origem_arquivo": "lembrancas_graduais.json",
+    "dados_brutos": {
+      "id": "lembrancas_graduais",
+      "name": "Lembranças Graduais",
+      "origin": "amnesico",
+      "description": "Durante suas aventuras, em determinados momentos a critério do mestre, você pode fazer um teste de Sabedoria (CD 10) para reconhecer pessoas, criaturas ou lugares que tenha encontrado antes de perder a memória.",
+      "effects": {
+        "special_test": {
+          "attribute": "Sabedoria",
+          "dc": 10,
+          "purpose": "reconhecer pessoas, criaturas ou lugares do passado",
+          "trigger": "a critério do mestre"
+        }
+      }
+    }
+  },
+  "membro_da_igreja": {
+    "key": "membro_da_igreja",
+    "nome": "Membro da Igreja",
+    "descricao": "Você consegue hospedagem confortável e informação em qualquer templo de sua divindade, para você e seus aliados.",
+    "origem_arquivo": "membro_da_igreja.json",
+    "dados_brutos": {
+      "id": "membro_da_igreja",
+      "name": "Membro da Igreja",
+      "origin": "acolito",
+      "description": "Você consegue hospedagem confortável e informação em qualquer templo de sua divindade, para você e seus aliados.",
+      "effects": {
+        "social_benefits": {
+          "lodging": "confortável",
+          "information": true,
+          "location": "templos da divindade",
+          "includes_allies": true
+        }
+      }
+    }
+  },
+  "mochileiro": {
+    "key": "mochileiro",
+    "nome": "Mochileiro",
+    "descricao": "Seu limite de carga aumenta em 5 espaços.",
+    "origem_arquivo": "mochileiro.json",
+    "dados_brutos": {
+      "id": "mochileiro",
+      "name": "Mochileiro",
+      "origin": "nomade",
+      "description": "Seu limite de carga aumenta em 5 espaços.",
+      "effects": {
+        "carry_capacity_bonus": 5
+      }
+    }
+  },
+  "negociacao": {
+    "key": "negociacao",
+    "nome": "Negociação",
+    "descricao": "Você pode vender itens 10% mais caro (não cumulativo com barganha).",
+    "origem_arquivo": "negociacao.json",
+    "dados_brutos": {
+      "id": "negociacao",
+      "name": "Negociação",
+      "origin": "mercador",
+      "description": "Você pode vender itens 10% mais caro (não cumulativo com barganha).",
+      "effects": {
+        "economy": {
+          "sell_bonus_percent": 10,
+          "stacks_with_bargain": false
+        }
+      }
+    }
+  },
+  "pao_e_circo": {
+    "key": "pao_e_circo",
+    "nome": "Pão e Circo",
+    "descricao": "Por seu treino em combates de exibição, você sabe \"bater sem machucar\". Pode escolher causar dano não letal sem sofrer a penalidade de –5.",
+    "origem_arquivo": "pao_e_circo.json",
+    "dados_brutos": {
+      "id": "pao_e_circo",
+      "name": "Pão e Circo",
+      "origin": "gladiador",
+      "description": "Por seu treino em combates de exibição, você sabe \"bater sem machucar\". Pode escolher causar dano não letal sem sofrer a penalidade de –5.",
+      "effects": {
+        "immunity_penalties": [
+          {
+            "type": "ataque",
+            "condition": "causar dano não letal"
+          }
+        ]
+      }
+    }
+  },
+  "passagem_de_navio": {
+    "key": "passagem_de_navio",
+    "nome": "Passagem de Navio",
+    "descricao": "Você consegue transporte marítimo para você e seus aliados, sem custos, desde que todos paguem com trabalho (passar em pelo menos um teste de perícia adequado durante a viagem).",
+    "origem_arquivo": "passagem_de_navio.json",
+    "dados_brutos": {
+      "id": "passagem_de_navio",
+      "name": "Passagem de Navio",
+      "origin": "marujo",
+      "description": "Você consegue transporte marítimo para você e seus aliados, sem custos, desde que todos paguem com trabalho (passar em pelo menos um teste de perícia adequado durante a viagem).",
+      "effects": {
+        "social_benefits": {
+          "free_transport": "marítimo",
+          "includes_allies": true,
+          "condition": "passar em pelo menos um teste de perícia adequado durante a viagem"
+        }
+      }
+    }
+  },
+  "punguista": {
+    "key": "punguista",
+    "nome": "Punguista",
+    "descricao": "Você pode fazer testes de Ladinagem para sustento (como a perícia Ofício), mas em apenas um dia. Se passar, recebe o dobro do dinheiro, mas, se falhar, pode ter problemas com a lei (a critério do mestre).",
+    "origem_arquivo": "punguista.json",
+    "dados_brutos": {
+      "id": "punguista",
+      "name": "Punguista",
+      "origin": "criminoso",
+      "description": "Você pode fazer testes de Ladinagem para sustento (como a perícia Ofício), mas em apenas um dia. Se passar, recebe o dobro do dinheiro, mas, se falhar, pode ter problemas com a lei (a critério do mestre).",
+      "effects": {
+        "skill_alternate_use": {
+          "skill": "Ladinagem",
+          "use": "sustento",
+          "time": "1 dia",
+          "success_multiplier": 2,
+          "failure_consequence": "problemas com a lei"
+        }
+      }
+    }
+  },
+  "rede_de_contatos": {
+    "key": "rede_de_contatos",
+    "nome": "Rede de Contatos",
+    "descricao": "Graças à influência de sua guilda, você pode usar Diplomacia para interrogar sem custo e em um minuto (veja Investigação).",
+    "origem_arquivo": "rede_de_contatos.json",
+    "dados_brutos": {
+      "id": "rede_de_contatos",
+      "name": "Rede de Contatos",
+      "origin": "membro_de_guilda",
+      "description": "Graças à influência de sua guilda, você pode usar Diplomacia para interrogar sem custo e em um minuto (veja Investigação).",
+      "effects": {
+        "skill_alternate_use": {
+          "skill": "Diplomacia",
+          "use": "interrogar",
+          "cost": 0,
+          "time": "1 minuto"
+        }
+      }
+    }
+  },
+  "sangue_azul": {
+    "key": "sangue_azul",
+    "nome": "Sangue Azul",
+    "descricao": "Você tem alguma influência política, suficiente para ser tratado com mais leniência pela guarda, conseguir uma audiência com o nobre local etc.",
+    "origem_arquivo": "sangue_azul.json",
+    "dados_brutos": {
+      "id": "sangue_azul",
+      "name": "Sangue Azul",
+      "origin": "aristocrata",
+      "description": "Você tem alguma influência política, suficiente para ser tratado com mais leniência pela guarda, conseguir uma audiência com o nobre local etc.",
+      "effects": {
+        "social_benefits": {
+          "political_influence": true,
+          "benefits": [
+            "leniência pela guarda",
+            "audiência com nobres locais"
+          ]
+        }
+      }
+    }
+  },
+  "truque_de_magica": {
+    "key": "truque_de_magica",
+    "nome": "Truque de Mágica",
+    "descricao": "Você pode lançar Explosão de Chamas, Hipnotismo e Queda Suave, mas apenas com o aprimoramento Truque. Esta não é uma habilidade mágica — os efeitos provêm de prestidigitação.",
+    "origem_arquivo": "truque_de_magica.json",
+    "dados_brutos": {
+      "id": "truque_de_magica",
+      "name": "Truque de Mágica",
+      "origin": "circense",
+      "description": "Você pode lançar Explosão de Chamas, Hipnotismo e Queda Suave, mas apenas com o aprimoramento Truque. Esta não é uma habilidade mágica — os efeitos provêm de prestidigitação.",
+      "effects": {
+        "spells": {
+          "available": [
+            "Explosão de Chamas",
+            "Hipnotismo",
+            "Queda Suave"
+          ],
+          "restriction": "apenas com aprimoramento Truque",
+          "is_magical": false,
+          "source": "prestidigitação"
+        }
+      }
+    }
+  },
+  "vida_rustica": {
+    "key": "vida_rustica",
+    "nome": "Vida Rústica",
+    "descricao": "Você come coisas que fariam um avestruz vomitar (sendo imune a efeitos prejudiciais de itens ingeríveis) e também consegue descansar nos lugares mais desconfortáveis (mesmo dormindo ao relento, sua recuperação de PV e PM nunca é inferior a seu próprio nível).",
+    "origem_arquivo": "vida_rustica.json",
+    "dados_brutos": {
+      "id": "vida_rustica",
+      "name": "Vida Rústica",
+      "origin": "selvagem",
+      "description": "Você come coisas que fariam um avestruz vomitar (sendo imune a efeitos prejudiciais de itens ingeríveis) e também consegue descansar nos lugares mais desconfortáveis (mesmo dormindo ao relento, sua recuperação de PV e PM nunca é inferior a seu próprio nível).",
+      "effects": {
+        "immunities": [
+          "efeitos prejudiciais de itens ingeríveis"
+        ],
+        "recovery_minimum": {
+          "pv": "nível",
+          "pm": "nível"
+        }
+      }
+    }
+  },
+  "a_prova_de_tudo": {
+    "key": "a_prova_de_tudo",
+    "nome": "À Prova de Tudo",
+    "descricao": "Você não sofre penalidade em deslocamento e Sobrevivência por clima ruim e por terreno difícil natural.",
+    "origem_arquivo": "a_prova_de_tudo.json",
+    "dados_brutos": {
+      "id": "a_prova_de_tudo",
+      "name": "À Prova de Tudo",
+      "origin": "batedor",
+      "description": "Você não sofre penalidade em deslocamento e Sobrevivência por clima ruim e por terreno difícil natural."
+    }
+  },
+  "alpinista_social": {
+    "key": "alpinista_social",
+    "nome": "Alpinista Social",
+    "descricao": "Você pode substituir testes de Diplomacia por testes de Enganação.",
+    "origem_arquivo": "alpinista_social.json",
+    "dados_brutos": {
+      "id": "alpinista_social",
+      "name": "Alpinista Social",
+      "origin": "charlatao",
+      "description": "Você pode substituir testes de Diplomacia por testes de Enganação."
+    }
+  },
+  "medico_de_campo": {
+    "key": "medico_de_campo",
+    "nome": "Médico de Campo",
+    "descricao": "Você soma sua Sabedoria aos PV restaurados por suas habilidades e itens mundanos de cura.",
+    "origem_arquivo": "medico_de_campo.json",
+    "dados_brutos": {
+      "id": "medico_de_campo",
+      "name": "Médico de Campo",
+      "origin": "curandeiro",
+      "description": "Você soma sua Sabedoria aos PV restaurados por suas habilidades e itens mundanos de cura."
+    }
+  },
+  "palpite_fundamentado": {
+    "key": "palpite_fundamentado",
+    "nome": "Palpite Fundamentado",
+    "descricao": "Você pode gastar 2 PM para substituir um teste de qualquer perícia originalmente baseada em Inteligência ou Sabedoria por um teste de Conhecimento.",
+    "origem_arquivo": "palpite_fundamentado.json",
+    "dados_brutos": {
+      "id": "palpite_fundamentado",
+      "name": "Palpite Fundamentado",
+      "origin": "estudioso",
+      "description": "Você pode gastar 2 PM para substituir um teste de qualquer perícia originalmente baseada em Inteligência ou Sabedoria por um teste de Conhecimento."
+    }
+  },
+  "vendedor_de_carcaças": {
+    "key": "vendedor_de_carcaças",
+    "nome": "Vendedor de Carcaças",
+    "descricao": "Você pode extrair recursos de criaturas em um minuto, em vez de uma hora, e recebe +5 no teste.",
+    "origem_arquivo": "vendedor_de_carcacas.json",
+    "dados_brutos": {
+      "id": "vendedor_de_carcaças",
+      "name": "Vendedor de Carcaças",
+      "origin": "mateiro",
+      "description": "Você pode extrair recursos de criaturas em um minuto, em vez de uma hora, e recebe +5 no teste."
+    }
+  },
+  "escavador": {
+    "key": "escavador",
+    "nome": "Escavador",
+    "descricao": "Você se torna proficiente em picaretas, causa +1 de dano com elas e não é afetado por terreno difícil em masmorras e subterrâneos.",
+    "origem_arquivo": "escavador.json",
+    "dados_brutos": {
+      "id": "escavador",
+      "name": "Escavador",
+      "origin": "minerador",
+      "description": "Você se torna proficiente em picaretas, causa +1 de dano com elas e não é afetado por terreno difícil em masmorras e subterrâneos."
+    }
+  },
+  "quebra_galho": {
+    "key": "quebra_galho",
+    "nome": "Quebra-Galho",
+    "descricao": "Em cidades ou metrópoles, você pode comprar qualquer item mundano não superior por metade do preço normal. Esses itens não podem ser matérias-primas e não podem ser revendidos (são velhos, sujos, furtados...).",
+    "origem_arquivo": "quebra_galho.json",
+    "dados_brutos": {
+      "id": "quebra_galho",
+      "name": "Quebra-Galho",
+      "origin": "pivete",
+      "description": "Em cidades ou metrópoles, você pode comprar qualquer item mundano não superior por metade do preço normal. Esses itens não podem ser matérias-primas e não podem ser revendidos (são velhos, sujos, furtados...)."
+    }
+  },
+  "estoico": {
+    "key": "estoico",
+    "nome": "Estoico",
+    "descricao": "Sua condição de descanso é uma categoria acima do padrão pela situação (normal em condições ruins, confortável em condições normais e luxuosa em condições confortáveis ou melhores). Veja as regras de recuperação na página 106.",
+    "origem_arquivo": "estoico.json",
+    "dados_brutos": {
+      "id": "estoico",
+      "name": "Estoico",
+      "origin": "refugiado",
+      "description": "Sua condição de descanso é uma categoria acima do padrão pela situação (normal em condições ruins, confortável em condições normais e luxuosa em condições confortáveis ou melhores). Veja as regras de recuperação na página 106."
+    }
+  },
+  "antigo_mestre": {
+    "key": "antigo_mestre",
+    "nome": "Antigo Mestre",
+    "descricao": "Você ainda mantém contato com o herói que costumava servir. Uma vez por aventura, ele surge para ajudá-lo por uma cena. Ele é um parceiro mestre de um tipo a sua escolha (definido ao obter este poder) que não conta em seu limite de aliados.",
+    "origem_arquivo": "antigo_mestre.json",
+    "dados_brutos": {
+      "id": "antigo_mestre",
+      "name": "Antigo Mestre",
+      "origin": "seguidor",
+      "description": "Você ainda mantém contato com o herói que costumava servir. Uma vez por aventura, ele surge para ajudá-lo por uma cena. Ele é um parceiro mestre de um tipo a sua escolha (definido ao obter este poder) que não conta em seu limite de aliados."
+    }
+  },
+  "esforcado": {
+    "key": "esforcado",
+    "nome": "Esforçado",
+    "descricao": "Você não teme trabalho duro, nem prazos apertados. Você recebe um bônus de +2 em todos os testes de perícias estendidos (incluindo perigos complexos).",
+    "origem_arquivo": "esforcado.json",
+    "dados_brutos": {
+      "id": "esforcado",
+      "name": "Esforçado",
+      "origin": "trabalhador",
+      "description": "Você não teme trabalho duro, nem prazos apertados. Você recebe um bônus de +2 em todos os testes de perícias estendidos (incluindo perigos complexos)."
+    }
+  }
+}

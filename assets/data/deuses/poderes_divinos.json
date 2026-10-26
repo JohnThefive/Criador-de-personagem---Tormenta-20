@@ -1,0 +1,3628 @@
+{
+  "a_ferramenta_certa": {
+    "key": "a_ferramenta_certa",
+    "nome": "A Ferramenta Certa",
+    "descricao": "Você pode gastar 1 PM para fazer uma ferramenta ou um equipamento de aventura de até T$ 400 aparecer na sua mão ou em um espaço adjacente. O item dura até o fim da cena, ou até deixar sua posse.",
+    "origem_arquivo": "a_ferramenta_certa.json",
+    "dados_brutos": {
+      "id": "a_ferramenta_certa",
+      "name": "A Ferramenta Certa",
+      "deities": [
+        "hyninn"
+      ],
+      "description": "Você pode gastar 1 PM para fazer uma ferramenta ou um equipamento de aventura de até T$ 400 aparecer na sua mão ou em um espaço adjacente. O item dura até o fim da cena, ou até deixar sua posse.",
+      "effects": {
+        "type": "ativado",
+        "custo_pm": 1,
+        "efeito": "faz surgir uma ferramenta ou equipamento de aventura de até T$ 400 na mão ou espaço adjacente, até o fim da cena ou até deixar sua posse"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "abraco_da_fenix": {
+    "key": "abraco_da_fenix",
+    "nome": "Abraço da Fênix",
+    "descricao": "Você se torna imune a fogo. Se fosse sofrer dano mágico de fogo, em vez disso cura PV em quantidade igual à metade desse dano (se já faz isso por outro efeito, cura a quantidade completa).",
+    "origem_arquivo": "abraco_da_fenix.json",
+    "dados_brutos": {
+      "id": "abraco_da_fenix",
+      "name": "Abraço da Fênix",
+      "deities": [
+        "thyatis"
+      ],
+      "description": "Você se torna imune a fogo. Se fosse sofrer dano mágico de fogo, em vez disso cura PV em quantidade igual à metade desse dano (se já faz isso por outro efeito, cura a quantidade completa).",
+      "effects": {
+        "type": "passivo",
+        "efeito": "imunidade a fogo; dano mágico de fogo que sofreria se converte em cura de metade do valor (cura total se já tiver efeito semelhante)"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "adaga_noturna": {
+    "key": "adaga_noturna",
+    "nome": "Adaga Noturna",
+    "descricao": "Você pode gastar 1 PM para fazer uma arma de perfuração que esteja usando causar +1d6 pontos de dano de frio até o fim da cena.",
+    "origem_arquivo": "adaga_noturna.json",
+    "dados_brutos": {
+      "id": "adaga_noturna",
+      "name": "Adaga Noturna",
+      "deities": [
+        "tenebra"
+      ],
+      "description": "Você pode gastar 1 PM para fazer uma arma de perfuração que esteja usando causar +1d6 pontos de dano de frio até o fim da cena.",
+      "effects": {
+        "type": "ativado",
+        "custo_pm": 1,
+        "efeito": "arma de perfuração empunhada causa +1d6 de dano de frio até o fim da cena"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "afinidade_com_a_tormenta": {
+    "key": "afinidade_com_a_tormenta",
+    "nome": "Afinidade com a Tormenta",
+    "descricao": "Você recebe +10 em testes de resistência contra efeitos da Tormenta, de suas criaturas e de devotos de Aharadak. Além disso, seu primeiro poder da Tormenta não conta para perda de Carisma.",
+    "origem_arquivo": "afinidade_com_a_tormenta.json",
+    "dados_brutos": {
+      "id": "afinidade_com_a_tormenta",
+      "name": "Afinidade com a Tormenta",
+      "deities": [
+        "aharadak"
+      ],
+      "description": "Você recebe +10 em testes de resistência contra efeitos da Tormenta, de suas criaturas e de devotos de Aharadak. Além disso, seu primeiro poder da Tormenta não conta para perda de Carisma.",
+      "effects": {
+        "type": "passive",
+        "resistance_bonus": {
+          "value": 10,
+          "against": [
+            "efeitos da Tormenta",
+            "criaturas da Tormenta",
+            "devotos de Aharadak"
+          ]
+        },
+        "special": "primeiro poder da Tormenta não conta para perda de Carisma"
+      }
+    }
+  },
+  "alimentar_se_do_pavor": {
+    "key": "alimentar_se_do_pavor",
+    "nome": "Alimentar-se do Pavor",
+    "descricao": "Quando uma criatura em alcance curto sob efeito de uma condição de medo morre, você recebe pontos de vida temporários iguais ao dobro do seu ND, que duram até o fim da cena.",
+    "origem_arquivo": "alimentar_se_do_pavor.json",
+    "dados_brutos": {
+      "id": "alimentar_se_do_pavor",
+      "name": "Alimentar-se do Pavor",
+      "deities": [
+        "kallyadranoch",
+        "megalokk"
+      ],
+      "description": "Quando uma criatura em alcance curto sob efeito de uma condição de medo morre, você recebe pontos de vida temporários iguais ao dobro do seu ND, que duram até o fim da cena.",
+      "effects": {
+        "type": "passivo",
+        "gatilho": "criatura sob condição de medo em alcance curto morre",
+        "efeito": "PV temporários = 2x seu ND, até o fim da cena"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "alma_de_mudanca": {
+    "key": "alma_de_mudanca",
+    "nome": "Alma de Mudança",
+    "descricao": "No início de cada aventura, você pode trocar uma quantidade de poderes (limitada por sua Sabedoria) por poderes diferentes cujos pré-requisitos cumpra. Você não pode trocar este poder.",
+    "origem_arquivo": "alma_de_mudanca.json",
+    "dados_brutos": {
+      "id": "alma_de_mudanca",
+      "name": "Alma de Mudança",
+      "deities": [
+        "thwor",
+        "valkaria"
+      ],
+      "description": "No início de cada aventura, você pode trocar uma quantidade de poderes (limitada por sua Sabedoria) por poderes diferentes cujos pré-requisitos cumpra. Você não pode trocar este poder.",
+      "effects": {
+        "type": "passivo",
+        "gatilho": "início de cada aventura",
+        "efeito": "troca poderes (limitado pela Sabedoria) por outros cujos pré-requisitos cumpra; este poder não pode ser trocado"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "almejar_o_impossivel": {
+    "key": "almejar_o_impossivel",
+    "nome": "Almejar o Impossível",
+    "descricao": "Quando faz um teste de perícia, um resultado de 19 ou mais no dado sempre é um sucesso, não importando o valor a ser alcançado.",
+    "origem_arquivo": "almejar_o_impossivel.json",
+    "dados_brutos": {
+      "id": "almejar_o_impossivel",
+      "name": "Almejar o Impossível",
+      "deities": [
+        "thwor",
+        "valkaria"
+      ],
+      "description": "Quando faz um teste de perícia, um resultado de 19 ou mais no dado sempre é um sucesso, não importando o valor a ser alcançado.",
+      "effects": {
+        "type": "passive",
+        "auto_success": {
+          "trigger": "teste de perícia",
+          "die_result": "19+"
+        }
+      }
+    }
+  },
+  "andarilho_carregado": {
+    "key": "andarilho_carregado",
+    "nome": "Andarilho Carregado",
+    "descricao": "Sua mochila de aventureiro não conta no seu limite de itens vestidos e, se estiver vestindo uma dessas mochilas, você pode usar Sabedoria para estabelecer seu limite de carga (em vez de Força). A critério do mestre, este poder pode ser aplicado a outro item equivalente (como uma mochila de carga).",
+    "origem_arquivo": "andarilho_carregado.json",
+    "dados_brutos": {
+      "id": "andarilho_carregado",
+      "name": "Andarilho Carregado",
+      "deities": [
+        "valkaria"
+      ],
+      "description": "Sua mochila de aventureiro não conta no seu limite de itens vestidos e, se estiver vestindo uma dessas mochilas, você pode usar Sabedoria para estabelecer seu limite de carga (em vez de Força). A critério do mestre, este poder pode ser aplicado a outro item equivalente (como uma mochila de carga).",
+      "effects": {
+        "type": "passivo",
+        "efeito": "mochila de aventureiro não conta no limite de itens vestidos; usa Sabedoria (em vez de Força) para o limite de carga enquanto a estiver vestindo"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "anfibio": {
+    "key": "anfibio",
+    "nome": "Anfíbio",
+    "descricao": "Você pode respirar embaixo d'água e adquire deslocamento de natação igual a seu deslocamento terrestre.",
+    "origem_arquivo": "anfibio.json",
+    "dados_brutos": {
+      "id": "anfibio",
+      "name": "Anfíbio",
+      "deities": [
+        "oceano"
+      ],
+      "description": "Você pode respirar embaixo d'água e adquire deslocamento de natação igual a seu deslocamento terrestre.",
+      "effects": {
+        "type": "passive",
+        "special_abilities": [
+          "respirar embaixo d'água"
+        ],
+        "movement": {
+          "swim": "igual ao deslocamento terrestre"
+        }
+      }
+    }
+  },
+  "apostar_com_o_trapaceiro": {
+    "key": "apostar_com_o_trapaceiro",
+    "nome": "Apostar com o Trapaceiro",
+    "descricao": "Quando faz um teste de perícia, você pode gastar 1 PM para apostar com Hyninn. Você e o mestre rolam 1d20, mas o mestre mantém o resultado dele em segredo. Você então escolhe entre usar seu próprio resultado ou o resultado oculto do mestre (neste caso, ele revela o resultado).",
+    "origem_arquivo": "apostar_com_o_trapaceiro.json",
+    "dados_brutos": {
+      "id": "apostar_com_o_trapaceiro",
+      "name": "Apostar com o Trapaceiro",
+      "deities": [
+        "hyninn"
+      ],
+      "description": "Quando faz um teste de perícia, você pode gastar 1 PM para apostar com Hyninn. Você e o mestre rolam 1d20, mas o mestre mantém o resultado dele em segredo. Você então escolhe entre usar seu próprio resultado ou o resultado oculto do mestre (neste caso, ele revela o resultado).",
+      "effects": {
+        "type": "active",
+        "cost": "1 PM",
+        "trigger": "ao fazer um teste de perícia",
+        "benefit": "escolher entre seu resultado ou um resultado secreto do mestre"
+      }
+    }
+  },
+  "armadilha_divina": {
+    "key": "armadilha_divina",
+    "nome": "Armadilha Divina",
+    "descricao": "Você recebe um poder de Armadilha do caçador a sua escolha. Por ser criada a partir de energia divina, essa armadilha pode ser preparada em locais sem os materiais propícios.",
+    "origem_arquivo": "armadilha_divina.json",
+    "dados_brutos": {
+      "id": "armadilha_divina",
+      "name": "Armadilha Divina",
+      "deities": [
+        "hyninn"
+      ],
+      "description": "Você recebe um poder de Armadilha do caçador a sua escolha. Por ser criada a partir de energia divina, essa armadilha pode ser preparada em locais sem os materiais propícios.",
+      "effects": {
+        "type": "passivo",
+        "efeito": "concede um poder de Armadilha do caçador à escolha; a armadilha pode ser preparada sem os materiais normalmente exigidos"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "armadura_de_ossos": {
+    "key": "armadura_de_ossos",
+    "nome": "Armadura de Ossos",
+    "descricao": "Você pode gastar uma ação de movimento e 2 PM para receber +2 na Defesa e em Intimidação, e redução de corte, frio e trevas 5 até o fim da cena.",
+    "origem_arquivo": "armadura_de_ossos.json",
+    "dados_brutos": {
+      "id": "armadura_de_ossos",
+      "name": "Armadura de Ossos",
+      "deities": [
+        "tenebra"
+      ],
+      "description": "Você pode gastar uma ação de movimento e 2 PM para receber +2 na Defesa e em Intimidação, e redução de corte, frio e trevas 5 até o fim da cena.",
+      "effects": {
+        "type": "ativado",
+        "acao": "movimento",
+        "custo_pm": 2,
+        "duracao": "até o fim da cena",
+        "efeito": "+2 na Defesa e Intimidação; redução de corte, frio e trevas 5"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "armas_da_ambicao": {
+    "key": "armas_da_ambicao",
+    "nome": "Armas da Ambição",
+    "descricao": "Você recebe +1 em testes de ataque e na margem de ameaça com armas nas quais é proficiente.",
+    "origem_arquivo": "armas_da_ambicao.json",
+    "dados_brutos": {
+      "id": "armas_da_ambicao",
+      "name": "Armas da Ambição",
+      "deities": [
+        "valkaria"
+      ],
+      "description": "Você recebe +1 em testes de ataque e na margem de ameaça com armas nas quais é proficiente.",
+      "effects": {
+        "type": "passive",
+        "attack_bonus": 1,
+        "critical_threat_bonus": 1,
+        "condition": "armas nas quais é proficiente"
+      }
+    }
+  },
+  "armas_da_destruicao": {
+    "key": "armas_da_destruicao",
+    "nome": "Armas da Destruição",
+    "descricao": "Você recebe +1 nas rolagens de dano e no multiplicador de crítico com armas nas quais é proficiente.",
+    "origem_arquivo": "armas_da_destruicao.json",
+    "dados_brutos": {
+      "id": "armas_da_destruicao",
+      "name": "Armas da Destruição",
+      "deities": [
+        "arsenal"
+      ],
+      "description": "Você recebe +1 nas rolagens de dano e no multiplicador de crítico com armas nas quais é proficiente.",
+      "effects": {
+        "type": "passivo",
+        "efeito": "+1 em rolagens de dano e no multiplicador de crítico com armas nas quais é proficiente"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "armas_da_selvageria": {
+    "key": "armas_da_selvageria",
+    "nome": "Armas da Selvageria",
+    "descricao": "Para você, armas naturais são armas favoritas de Megalokk. Você recebe +2 em rolagens de dano com elas, pode usar Abençoar Arma nelas e, quando usa esse poder ou a magia Armamento da Natureza, pode aplicar seus benefícios a todas as suas armas naturais (sem custo adicional).",
+    "origem_arquivo": "armas_da_selvageria.json",
+    "dados_brutos": {
+      "id": "armas_da_selvageria",
+      "name": "Armas da Selvageria",
+      "deities": [
+        "megalokk"
+      ],
+      "description": "Para você, armas naturais são armas favoritas de Megalokk. Você recebe +2 em rolagens de dano com elas, pode usar Abençoar Arma nelas e, quando usa esse poder ou a magia Armamento da Natureza, pode aplicar seus benefícios a todas as suas armas naturais (sem custo adicional).",
+      "effects": {
+        "type": "passivo",
+        "efeito": "armas naturais contam como arma favorita; +2 em rolagens de dano com elas; Abençoar Arma e Armamento da Natureza se aplicam a todas as armas naturais ao mesmo tempo sem custo extra"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "arsenal_das_profundezas": {
+    "key": "arsenal_das_profundezas",
+    "nome": "Arsenal das Profundezas",
+    "descricao": "Você recebe +2 nas rolagens de dano com azagaias, lanças e tridentes e seu multiplicador de crítico com essas armas aumenta em +1.",
+    "origem_arquivo": "arsenal_das_profundezas.json",
+    "dados_brutos": {
+      "id": "arsenal_das_profundezas",
+      "name": "Arsenal das Profundezas",
+      "deities": [
+        "oceano"
+      ],
+      "description": "Você recebe +2 nas rolagens de dano com azagaias, lanças e tridentes e seu multiplicador de crítico com essas armas aumenta em +1.",
+      "effects": {
+        "type": "passive",
+        "weapon_bonuses": {
+          "weapons": [
+            "azagaia",
+            "lança",
+            "tridente"
+          ],
+          "damage_bonus": 2,
+          "critical_multiplier_bonus": 1
+        }
+      }
+    }
+  },
+  "astucia_da_serpente": {
+    "key": "astucia_da_serpente",
+    "nome": "Astúcia da Serpente",
+    "descricao": "Você recebe +2 em Enganação, Furtividade e Intuição.",
+    "origem_arquivo": "astucia_da_serpente.json",
+    "dados_brutos": {
+      "id": "astucia_da_serpente",
+      "name": "Astúcia da Serpente",
+      "deities": [
+        "sszzaas"
+      ],
+      "description": "Você recebe +2 em Enganação, Furtividade e Intuição.",
+      "effects": {
+        "type": "passive",
+        "skill_bonuses": [
+          {
+            "skill": "Enganação",
+            "bonus": 2
+          },
+          {
+            "skill": "Furtividade",
+            "bonus": 2
+          },
+          {
+            "skill": "Intuição",
+            "bonus": 2
+          }
+        ]
+      }
+    }
+  },
+  "ataque_piedoso": {
+    "key": "ataque_piedoso",
+    "nome": "Ataque Piedoso",
+    "descricao": "Você pode usar armas corpo a corpo para causar dano não letal sem sofrer a penalidade de –5 no teste de ataque.",
+    "origem_arquivo": "ataque_piedoso.json",
+    "dados_brutos": {
+      "id": "ataque_piedoso",
+      "name": "Ataque Piedoso",
+      "deities": [
+        "lena",
+        "thyatis"
+      ],
+      "description": "Você pode usar armas corpo a corpo para causar dano não letal sem sofrer a penalidade de –5 no teste de ataque.",
+      "effects": {
+        "type": "passive",
+        "removes_penalty": {
+          "action": "causar dano não letal com armas corpo a corpo",
+          "penalty_removed": "-5 no teste de ataque"
+        }
+      }
+    }
+  },
+  "aura_de_medo": {
+    "key": "aura_de_medo",
+    "nome": "Aura de Medo",
+    "descricao": "Você pode gastar 2 PM para gerar uma aura de medo de 9m de raio e duração até o fim da cena. Todos os inimigos que entrem na aura devem fazer um teste de Vontade (CD Car) ou ficam abalados até o fim da cena. Uma criatura que passe no teste de Vontade fica imune a esta habilidade por um dia.",
+    "origem_arquivo": "aura_de_medo.json",
+    "dados_brutos": {
+      "id": "aura_de_medo",
+      "name": "Aura de Medo",
+      "deities": [
+        "kallyadranoch"
+      ],
+      "description": "Você pode gastar 2 PM para gerar uma aura de medo de 9m de raio e duração até o fim da cena. Todos os inimigos que entrem na aura devem fazer um teste de Vontade (CD Car) ou ficam abalados até o fim da cena. Uma criatura que passe no teste de Vontade fica imune a esta habilidade por um dia.",
+      "effects": {
+        "type": "active",
+        "cost": "2 PM",
+        "aura": {
+          "radius": "9m",
+          "duration": "cena",
+          "save": "Vontade (CD Car)",
+          "effect_on_fail": "abalado até o fim da cena",
+          "immunity_on_success": "1 dia"
+        }
+      }
+    }
+  },
+  "aura_de_paz": {
+    "key": "aura_de_paz",
+    "nome": "Aura de Paz",
+    "descricao": "Você pode gastar 2 PM para gerar uma aura de paz com 9m de raio e duração de uma cena. Qualquer inimigo dentro da aura que tente fazer uma ação hostil contra você deve fazer um teste de Vontade (CD Car). Se falhar, perderá sua ação. Se passar, fica imune a esta habilidade por um dia.",
+    "origem_arquivo": "aura_de_paz.json",
+    "dados_brutos": {
+      "id": "aura_de_paz",
+      "name": "Aura de Paz",
+      "deities": [
+        "marah"
+      ],
+      "description": "Você pode gastar 2 PM para gerar uma aura de paz com 9m de raio e duração de uma cena. Qualquer inimigo dentro da aura que tente fazer uma ação hostil contra você deve fazer um teste de Vontade (CD Car). Se falhar, perderá sua ação. Se passar, fica imune a esta habilidade por um dia.",
+      "effects": {
+        "type": "active",
+        "cost": "2 PM",
+        "aura": {
+          "radius": "9m",
+          "duration": "cena",
+          "trigger": "inimigo tenta ação hostil",
+          "save": "Vontade (CD Car)",
+          "effect_on_fail": "perde a ação",
+          "immunity_on_success": "1 dia"
+        }
+      }
+    }
+  },
+  "aura_restauradora": {
+    "key": "aura_restauradora",
+    "nome": "Aura Restauradora",
+    "descricao": "Efeitos de cura usados por você e seus aliados em um raio de 9m recuperam +1 PV por dado.",
+    "origem_arquivo": "aura_restauradora.json",
+    "dados_brutos": {
+      "id": "aura_restauradora",
+      "name": "Aura Restauradora",
+      "deities": [
+        "lena"
+      ],
+      "description": "Efeitos de cura usados por você e seus aliados em um raio de 9m recuperam +1 PV por dado.",
+      "effects": {
+        "type": "passive",
+        "aura": {
+          "radius": "9m",
+          "benefit": "+1 PV por dado de cura"
+        }
+      }
+    }
+  },
+  "aventureiro_inquieto": {
+    "key": "aventureiro_inquieto",
+    "nome": "Aventureiro Inquieto",
+    "descricao": "Uma vez por busca, você pode rolar novamente um teste recém-realizado (mas deve aceitar o novo resultado) e, quando recebe uma recompensa ou um castigo aleatório por uma busca (incluindo rolagens na Tabela 8-1), rola dois dados e escolhe entre os dois resultados.",
+    "origem_arquivo": "aventureiro_inquieto.json",
+    "dados_brutos": {
+      "id": "aventureiro_inquieto",
+      "name": "Aventureiro Inquieto",
+      "deities": [
+        "valkaria"
+      ],
+      "description": "Uma vez por busca, você pode rolar novamente um teste recém-realizado (mas deve aceitar o novo resultado) e, quando recebe uma recompensa ou um castigo aleatório por uma busca (incluindo rolagens na Tabela 8-1), rola dois dados e escolhe entre os dois resultados.",
+      "effects": {
+        "type": "ativado",
+        "frequencia": "1x_por_busca",
+        "efeito": "rola novamente um teste recém-feito (aceitando o novo resultado); recompensas/castigos aleatórios de busca rolam 2 dados e escolhe o resultado"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "baforada_draconica": {
+    "key": "baforada_draconica",
+    "nome": "Baforada Dracônica",
+    "descricao": "Escolha um elemento entre ácido, eletricidade, fogo, frio, luz ou trevas (uma vez feita, essa escolha não pode ser mudada). Uma vez por rodada, você pode gastar PM (limitados por sua Constituição) para desferir um sopro elemental em uma criatura em alcance curto. Para cada PM que você gastar, o alvo sofre 1d10 pontos de dano do tipo escolhido (Reflexos CD Con reduz à metade). Recarga (movimento).",
+    "origem_arquivo": "baforada_draconica.json",
+    "dados_brutos": {
+      "id": "baforada_draconica",
+      "name": "Baforada Dracônica",
+      "deities": [
+        "kallyadranoch"
+      ],
+      "description": "Escolha um elemento entre ácido, eletricidade, fogo, frio, luz ou trevas (uma vez feita, essa escolha não pode ser mudada). Uma vez por rodada, você pode gastar PM (limitados por sua Constituição) para desferir um sopro elemental em uma criatura em alcance curto. Para cada PM que você gastar, o alvo sofre 1d10 pontos de dano do tipo escolhido (Reflexos CD Con reduz à metade). Recarga (movimento).",
+      "effects": {
+        "type": "ativado",
+        "frequencia": "1x_por_rodada",
+        "custo_pm_maximo": "sua Constituição",
+        "efeito": "1d10 de dano do elemento escolhido por PM gasto, em criatura em alcance curto (Reflexos CD Con reduz à metade)",
+        "recarga": "ação de movimento"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "barreira_de_coral": {
+    "key": "barreira_de_coral",
+    "nome": "Barreira de Coral",
+    "descricao": "Você pode gastar uma ação de movimento e 3 PM para cobrir seu corpo de coral. Até o fim da cena, você recebe +5 na Defesa e, sempre que sofrer um ataque corpo a corpo, o atacante sofre dano de perfuração igual a 1d6 + sua Constituição. Para cada patamar acima de iniciante, esse dano aumenta em +1d6.",
+    "origem_arquivo": "barreira_de_coral.json",
+    "dados_brutos": {
+      "id": "barreira_de_coral",
+      "name": "Barreira de Coral",
+      "deities": [
+        "oceano"
+      ],
+      "description": "Você pode gastar uma ação de movimento e 3 PM para cobrir seu corpo de coral. Até o fim da cena, você recebe +5 na Defesa e, sempre que sofrer um ataque corpo a corpo, o atacante sofre dano de perfuração igual a 1d6 + sua Constituição. Para cada patamar acima de iniciante, esse dano aumenta em +1d6.",
+      "effects": {
+        "type": "ativado",
+        "acao": "movimento",
+        "custo_pm": 3,
+        "duracao": "até o fim da cena",
+        "efeito": "+5 na Defesa; atacantes corpo a corpo sofrem 1d6 + Constituição de dano de perfuração",
+        "escalavel": "+1d6 por patamar acima de iniciante"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "belo_presente": {
+    "key": "belo_presente",
+    "nome": "Belo Presente",
+    "descricao": "Uma vez por cena, você pode pedir a Wynna o conhecimento de uma magia que tenha visto sendo lançada nessa aventura e que seja de um círculo a que você tenha acesso. Gaste uma ação padrão e faça um teste de Religião (CD 15 + custo em PM da magia). Se passar, você pode lançar essa magia até o fim do seu próximo turno (pagando seus custos normais).",
+    "origem_arquivo": "belo_presente.json",
+    "dados_brutos": {
+      "id": "belo_presente",
+      "name": "Belo Presente",
+      "deities": [
+        "wynna"
+      ],
+      "description": "Uma vez por cena, você pode pedir a Wynna o conhecimento de uma magia que tenha visto sendo lançada nessa aventura e que seja de um círculo a que você tenha acesso. Gaste uma ação padrão e faça um teste de Religião (CD 15 + custo em PM da magia). Se passar, você pode lançar essa magia até o fim do seu próximo turno (pagando seus custos normais).",
+      "effects": {
+        "type": "ativado",
+        "frequencia": "1x_por_cena",
+        "acao": "padrão",
+        "teste": "Religião, CD 15 + custo em PM da magia",
+        "efeito": "se passar, pode lançar uma magia vista na aventura (de círculo acessível) até o fim do próximo turno, pagando o custo normal"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "bencao_do_mana": {
+    "key": "bencao_do_mana",
+    "nome": "Bênção do Mana",
+    "descricao": "Você recebe +1 PM a cada nível ímpar.",
+    "origem_arquivo": "bencao_do_mana.json",
+    "dados_brutos": {
+      "id": "bencao_do_mana",
+      "name": "Bênção do Mana",
+      "deities": [
+        "wynna"
+      ],
+      "description": "Você recebe +1 PM a cada nível ímpar.",
+      "effects": {
+        "type": "passive",
+        "pm_bonus": "+1 PM a cada nível ímpar"
+      }
+    }
+  },
+  "biblioteca_divina": {
+    "key": "biblioteca_divina",
+    "nome": "Biblioteca Divina",
+    "descricao": "Você recebe uma perícia treinada. A cada patamar de jogo acima de iniciante, recebe mais uma perícia treinada.",
+    "origem_arquivo": "biblioteca_divina.json",
+    "dados_brutos": {
+      "id": "biblioteca_divina",
+      "name": "Biblioteca Divina",
+      "deities": [
+        "tanna_toh"
+      ],
+      "description": "Você recebe uma perícia treinada. A cada patamar de jogo acima de iniciante, recebe mais uma perícia treinada.",
+      "effects": {
+        "type": "passivo",
+        "efeito": "1 perícia treinada; +1 perícia treinada por patamar acima de iniciante"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "cancioneiro_da_esperanca": {
+    "key": "cancioneiro_da_esperanca",
+    "nome": "Cancioneiro da Esperança",
+    "descricao": "Você pode gastar uma ação padrão e 2 PM para entoar uma canção de superação e paz. Criaturas escolhidas (limitadas por seu Carisma) em alcance curto recebem +2 em testes (exceto testes de ataque) e +3m de deslocamento até o fim da cena. Se uma criatura afetada for executar uma ação hostil, perde esses bônus.",
+    "origem_arquivo": "cancioneiro_da_esperanca.json",
+    "dados_brutos": {
+      "id": "cancioneiro_da_esperanca",
+      "name": "Cancioneiro da Esperança",
+      "deities": [
+        "marah"
+      ],
+      "description": "Você pode gastar uma ação padrão e 2 PM para entoar uma canção de superação e paz. Criaturas escolhidas (limitadas por seu Carisma) em alcance curto recebem +2 em testes (exceto testes de ataque) e +3m de deslocamento até o fim da cena. Se uma criatura afetada for executar uma ação hostil, perde esses bônus.",
+      "effects": {
+        "type": "ativado",
+        "acao": "padrão",
+        "custo_pm": 2,
+        "limite_alvos": "sua Carisma",
+        "efeito": "+2 em testes (exceto ataque) e +3m de deslocamento até o fim da cena; perde o bônus ao agir de forma hostil"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "caricia_sombria": {
+    "key": "caricia_sombria",
+    "nome": "Carícia Sombria",
+    "descricao": "Você pode gastar 1 PM e uma ação padrão para cobrir sua mão com energia negativa e tocar uma criatura em alcance corpo a corpo. A criatura sofre 2d6 pontos de dano de trevas (Fortitude CD Sab reduz à metade) e você recupera PV iguais à metade do dano causado. Você pode aprender Toque Vampírico como uma magia divina. Se fizer isso, o custo dela diminui em –1 PM.",
+    "origem_arquivo": "caricia_sombria.json",
+    "dados_brutos": {
+      "id": "caricia_sombria",
+      "name": "Carícia Sombria",
+      "deities": [
+        "tenebra"
+      ],
+      "description": "Você pode gastar 1 PM e uma ação padrão para cobrir sua mão com energia negativa e tocar uma criatura em alcance corpo a corpo. A criatura sofre 2d6 pontos de dano de trevas (Fortitude CD Sab reduz à metade) e você recupera PV iguais à metade do dano causado. Você pode aprender Toque Vampírico como uma magia divina. Se fizer isso, o custo dela diminui em –1 PM.",
+      "effects": {
+        "type": "active",
+        "cost": "1 PM",
+        "action": "ação padrão",
+        "range": "toque",
+        "damage": {
+          "dice": "2d6",
+          "type": "trevas",
+          "save": "Fortitude (CD Sab) para metade"
+        },
+        "healing": "PV iguais à metade do dano causado",
+        "grants_spell": {
+          "spell": "Toque Vampírico",
+          "as": "magia divina"
+        },
+        "spell_cost_reduction": {
+          "spell": "Toque Vampírico",
+          "reduction": 1
+        }
+      }
+    }
+  },
+  "centelha_magica": {
+    "key": "centelha_magica",
+    "nome": "Centelha Mágica",
+    "descricao": "Escolha uma magia arcana ou divina de 1º círculo. Você aprende e pode lançar essa magia.",
+    "origem_arquivo": "centelha_magica.json",
+    "dados_brutos": {
+      "id": "centelha_magica",
+      "name": "Centelha Mágica",
+      "deities": [
+        "wynna"
+      ],
+      "description": "Escolha uma magia arcana ou divina de 1º círculo. Você aprende e pode lançar essa magia.",
+      "effects": {
+        "type": "passive",
+        "grants_spell": {
+          "choice": "uma magia arcana ou divina",
+          "circle": 1
+        }
+      }
+    }
+  },
+  "cerimonialista_divino": {
+    "key": "cerimonialista_divino",
+    "nome": "Cerimonialista Divino",
+    "descricao": "Uma vez por dia, você pode gastar 1 hora para executar uma cerimônia tradicional que afeta até 1 + seu Carisma criaturas por 1 dia. Faça um teste de Religião com um bônus igual ao seu Carisma. Para cada 10 pontos do resultado, cada criatura afetada recebe um dado de auxílio. Quando faz um teste de atributo ou perícia (exceto Enganação, Furtividade e Ladinagem), a criatura pode gastar um deles para receber +1d6 de bônus no teste. Para criaturas que gastarem T$ 25 em oferendas no ritual, esse bônus muda para +1d8.",
+    "origem_arquivo": "cerimonialista_divino.json",
+    "dados_brutos": {
+      "id": "cerimonialista_divino",
+      "name": "Cerimonialista Divino",
+      "deities": [
+        "lin_wu"
+      ],
+      "description": "Uma vez por dia, você pode gastar 1 hora para executar uma cerimônia tradicional que afeta até 1 + seu Carisma criaturas por 1 dia. Faça um teste de Religião com um bônus igual ao seu Carisma. Para cada 10 pontos do resultado, cada criatura afetada recebe um dado de auxílio. Quando faz um teste de atributo ou perícia (exceto Enganação, Furtividade e Ladinagem), a criatura pode gastar um deles para receber +1d6 de bônus no teste. Para criaturas que gastarem T$ 25 em oferendas no ritual, esse bônus muda para +1d8.",
+      "effects": {
+        "type": "ativado",
+        "frequencia": "1x_por_dia",
+        "tempo": "1 hora",
+        "alvos_maximos": "1 + Carisma",
+        "teste": "Religião + Carisma",
+        "efeito": "cada 10 pontos do resultado concede 1 dado de auxílio (+1d6, ou +1d8 se a criatura gastou T$ 25 em oferendas) usável em testes de atributo/perícia (exceto Enganação/Furtividade/Ladinagem), por 1 dia"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "chamado_monstruoso": {
+    "key": "chamado_monstruoso",
+    "nome": "Chamado Monstruoso",
+    "descricao": "Você aprende e pode lançar Conjurar Monstro e pode lançar e sustentar essa magia sem violar suas Obrigações & Restrições. Caso aprenda novamente essa magia, seu custo diminui em –1 PM.",
+    "origem_arquivo": "chamado_monstruoso.json",
+    "dados_brutos": {
+      "id": "chamado_monstruoso",
+      "name": "Chamado Monstruoso",
+      "deities": [
+        "megalokk"
+      ],
+      "description": "Você aprende e pode lançar Conjurar Monstro e pode lançar e sustentar essa magia sem violar suas Obrigações & Restrições. Caso aprenda novamente essa magia, seu custo diminui em –1 PM.",
+      "effects": {
+        "type": "passivo",
+        "efeito": "aprende Conjurar Monstro, podendo lançá-la e sustentá-la sem violar Obrigações & Restrições; se já a conhece, custo -1 PM"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "companheiro_celeste": {
+    "key": "companheiro_celeste",
+    "nome": "Companheiro Celeste",
+    "descricao": "Você possui um luminar que o acompanha como um parceiro iniciante. Se perder esse luminar, você pode receber outro com uma cerimônia que exige 1 dia e T$ 100 em oferendas.",
+    "origem_arquivo": "companheiro_celeste.json",
+    "dados_brutos": {
+      "id": "companheiro_celeste",
+      "name": "Companheiro Celeste",
+      "deities": [
+        "lena",
+        "marah"
+      ],
+      "description": "Você possui um luminar que o acompanha como um parceiro iniciante. Se perder esse luminar, você pode receber outro com uma cerimônia que exige 1 dia e T$ 100 em oferendas.",
+      "effects": {
+        "type": "passivo",
+        "efeito": "concede um luminar como parceiro iniciante",
+        "reposicao": "cerimônia de 1 dia + T$ 100 em oferendas"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "companheiro_silvestre": {
+    "key": "companheiro_silvestre",
+    "nome": "Companheiro Silvestre",
+    "descricao": "Você possui um espírito da natureza que o acompanha como um parceiro perseguidor iniciante. Alternativamente, se você tiver o suplemento Ameaças de Arton, pode receber um bogum iniciante. Se perder esse parceiro, você pode receber outro com uma cerimônia que exige 1 dia e T$ 100 em oferendas.",
+    "origem_arquivo": "companheiro_silvestre.json",
+    "dados_brutos": {
+      "id": "companheiro_silvestre",
+      "name": "Companheiro Silvestre",
+      "deities": [
+        "allihanna"
+      ],
+      "description": "Você possui um espírito da natureza que o acompanha como um parceiro perseguidor iniciante. Alternativamente, se você tiver o suplemento Ameaças de Arton, pode receber um bogum iniciante. Se perder esse parceiro, você pode receber outro com uma cerimônia que exige 1 dia e T$ 100 em oferendas.",
+      "effects": {
+        "type": "passivo",
+        "efeito": "concede um espírito da natureza (parceiro perseguidor iniciante) ou, com Ameaças de Arton, um bogum iniciante",
+        "reposicao": "cerimônia de 1 dia + T$ 100 em oferendas"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "compreender_os_ermos": {
+    "key": "compreender_os_ermos",
+    "nome": "Compreender os Ermos",
+    "descricao": "Você recebe +2 em Sobrevivência e pode usar Sabedoria para Adestramento (em vez de Carisma).",
+    "origem_arquivo": "compreender_os_ermos.json",
+    "dados_brutos": {
+      "id": "compreender_os_ermos",
+      "name": "Compreender os Ermos",
+      "deities": [
+        "allihanna"
+      ],
+      "description": "Você recebe +2 em Sobrevivência e pode usar Sabedoria para Adestramento (em vez de Carisma).",
+      "effects": {
+        "type": "passive",
+        "skill_bonuses": [
+          {
+            "skill": "Sobrevivência",
+            "bonus": 2
+          }
+        ],
+        "skill_attribute_substitution": {
+          "skill": "Adestramento",
+          "original_attribute": "Carisma",
+          "new_attribute": "Sabedoria"
+        }
+      }
+    }
+  },
+  "conhecimento_enciclopedico": {
+    "key": "conhecimento_enciclopedico",
+    "nome": "Conhecimento Enciclopédico",
+    "descricao": "Você se torna treinado em duas perícias baseadas em Inteligência a sua escolha.",
+    "origem_arquivo": "conhecimento_enciclopedico.json",
+    "dados_brutos": {
+      "id": "conhecimento_enciclopedico",
+      "name": "Conhecimento Enciclopédico",
+      "deities": [
+        "tanna_toh"
+      ],
+      "description": "Você se torna treinado em duas perícias baseadas em Inteligência a sua escolha.",
+      "effects": {
+        "type": "passive",
+        "skill_training": {
+          "quantity": 2,
+          "restriction": "baseadas em Inteligência"
+        }
+      }
+    }
+  },
+  "conjurar_arma": {
+    "key": "conjurar_arma",
+    "nome": "Conjurar Arma",
+    "descricao": "Você pode gastar 1 PM para invocar uma arma corpo a corpo ou de arremesso com a qual seja proficiente. A arma surge em sua mão, fornece +1 em testes de ataque e rolagens de dano, é considerada mágica e dura pela cena. Você não pode criar armas de disparo, mas pode criar 20 munições.",
+    "origem_arquivo": "conjurar_arma.json",
+    "dados_brutos": {
+      "id": "conjurar_arma",
+      "name": "Conjurar Arma",
+      "deities": [
+        "arsenal"
+      ],
+      "description": "Você pode gastar 1 PM para invocar uma arma corpo a corpo ou de arremesso com a qual seja proficiente. A arma surge em sua mão, fornece +1 em testes de ataque e rolagens de dano, é considerada mágica e dura pela cena. Você não pode criar armas de disparo, mas pode criar 20 munições.",
+      "effects": {
+        "type": "active",
+        "cost": "1 PM",
+        "summon": {
+          "type": "arma corpo a corpo ou de arremesso",
+          "condition": "proficiente",
+          "attack_bonus": 1,
+          "damage_bonus": 1,
+          "properties": [
+            "mágica"
+          ],
+          "duration": "cena"
+        },
+        "alternative": "pode criar 20 munições"
+      }
+    }
+  },
+  "conviccao_ambiciosa": {
+    "key": "conviccao_ambiciosa",
+    "nome": "Convicção Ambiciosa",
+    "descricao": "Quando luta em desvantagem (um encontro contra o dobro de inimigos que seu grupo, ou com ND maior que o do grupo), você recebe +2 em testes de perícia até o fim da cena. Além disso, se houver um ou mais inimigos de ND igual ou maior que seu nível, você recebe uma ação padrão extra em seu primeiro turno de combate.",
+    "origem_arquivo": "conviccao_ambiciosa.json",
+    "dados_brutos": {
+      "id": "conviccao_ambiciosa",
+      "name": "Convicção Ambiciosa",
+      "deities": [
+        "valkaria"
+      ],
+      "description": "Quando luta em desvantagem (um encontro contra o dobro de inimigos que seu grupo, ou com ND maior que o do grupo), você recebe +2 em testes de perícia até o fim da cena. Além disso, se houver um ou mais inimigos de ND igual ou maior que seu nível, você recebe uma ação padrão extra em seu primeiro turno de combate.",
+      "effects": {
+        "type": "passivo",
+        "gatilho": "lutar em desvantagem numérica ou de ND",
+        "efeito": "+2 em testes de perícia até o fim da cena; ação padrão extra no primeiro turno se houver inimigo de ND >= seu nível"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "coragem_total": {
+    "key": "coragem_total",
+    "nome": "Coragem Total",
+    "descricao": "Você é imune a efeitos de medo, mágicos ou não. Este poder não elimina fobias raciais (como o medo de altura dos minotauros).",
+    "origem_arquivo": "coragem_total.json",
+    "dados_brutos": {
+      "id": "coragem_total",
+      "name": "Coragem Total",
+      "deities": [
+        "arsenal",
+        "khalmyr",
+        "lin_wu",
+        "valkaria"
+      ],
+      "description": "Você é imune a efeitos de medo, mágicos ou não. Este poder não elimina fobias raciais (como o medo de altura dos minotauros).",
+      "effects": {
+        "type": "passive",
+        "immunities": [
+          "medo"
+        ],
+        "exception": "não elimina fobias raciais"
+      }
+    }
+  },
+  "corromper_equipamento": {
+    "key": "corromper_equipamento",
+    "nome": "Corromper Equipamento",
+    "descricao": "Você pode gastar 2 PM para cobrir uma arma, um escudo ou um esotérico que esteja empunhando com carapaça quitinosa. Até o fim da cena, o item recebe os benefícios de matéria vermelha, cumulativo com outros materiais especiais. Se usar este poder em uma arma produzida com Armamento Aberrante, seu custo é reduzido em –1 PM.",
+    "origem_arquivo": "corromper_equipamento.json",
+    "dados_brutos": {
+      "id": "corromper_equipamento",
+      "name": "Corromper Equipamento",
+      "deities": [
+        "aharadak"
+      ],
+      "description": "Você pode gastar 2 PM para cobrir uma arma, um escudo ou um esotérico que esteja empunhando com carapaça quitinosa. Até o fim da cena, o item recebe os benefícios de matéria vermelha, cumulativo com outros materiais especiais. Se usar este poder em uma arma produzida com Armamento Aberrante, seu custo é reduzido em –1 PM.",
+      "effects": {
+        "type": "ativado",
+        "custo_pm": 2,
+        "duracao": "até o fim da cena",
+        "efeito": "item empunhado ganha os benefícios de matéria vermelha, cumulativo com outros materiais especiais",
+        "desconto": "-1 PM se usado em arma de Armamento Aberrante"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "cura_gentil": {
+    "key": "cura_gentil",
+    "nome": "Cura Gentil",
+    "descricao": "Você soma seu Carisma aos PV restaurados por seus efeitos mágicos de cura.",
+    "origem_arquivo": "cura_gentil.json",
+    "dados_brutos": {
+      "id": "cura_gentil",
+      "name": "Cura Gentil",
+      "deities": [
+        "lena"
+      ],
+      "description": "Você soma seu Carisma aos PV restaurados por seus efeitos mágicos de cura.",
+      "effects": {
+        "type": "passive",
+        "healing_bonus": "Carisma"
+      }
+    }
+  },
+  "curandeira_perfeita": {
+    "key": "curandeira_perfeita",
+    "nome": "Curandeira Perfeita",
+    "descricao": "Você sempre pode escolher 10 em testes de Cura. Além disso, não sofre penalidade por usar essa perícia sem uma maleta de medicamentos. Se possuir o item, recebe +2 no teste de Cura (ou +5, se ele for aprimorado).",
+    "origem_arquivo": "curandeira_perfeita.json",
+    "dados_brutos": {
+      "id": "curandeira_perfeita",
+      "name": "Curandeira Perfeita",
+      "deities": [
+        "lena"
+      ],
+      "description": "Você sempre pode escolher 10 em testes de Cura. Além disso, não sofre penalidade por usar essa perícia sem uma maleta de medicamentos. Se possuir o item, recebe +2 no teste de Cura (ou +5, se ele for aprimorado).",
+      "effects": {
+        "type": "passive",
+        "take_10": "Cura",
+        "removes_penalty": "usar Cura sem maleta de medicamentos",
+        "conditional_bonus": [
+          {
+            "condition": "possui maleta de medicamentos",
+            "skill": "Cura",
+            "bonus": 2
+          },
+          {
+            "condition": "possui maleta de medicamentos aprimorada",
+            "skill": "Cura",
+            "bonus": 5
+          }
+        ]
+      }
+    }
+  },
+  "curar_o_espirito": {
+    "key": "curar_o_espirito",
+    "nome": "Curar o Espírito",
+    "descricao": "Você pode gastar uma ação completa para inspirar esperança em uma criatura que possa tocar. Faça um teste de Carisma (CD 10). Se você passar, a criatura recupera 1d4+1 PM. Você só pode usar este poder uma vez por dia numa mesma criatura.",
+    "origem_arquivo": "curar_o_espirito.json",
+    "dados_brutos": {
+      "id": "curar_o_espirito",
+      "name": "Curar o Espírito",
+      "deities": [
+        "lena"
+      ],
+      "description": "Você pode gastar uma ação completa para inspirar esperança em uma criatura que possa tocar. Faça um teste de Carisma (CD 10). Se você passar, a criatura recupera 1d4+1 PM. Você só pode usar este poder uma vez por dia numa mesma criatura.",
+      "effects": {
+        "type": "ativado",
+        "acao": "completa",
+        "teste": "Carisma CD 10",
+        "efeito": "criatura tocada recupera 1d4+1 PM",
+        "limite": "1x por dia por criatura"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "dedo_verde": {
+    "key": "dedo_verde",
+    "nome": "Dedo Verde",
+    "descricao": "Você aprende e pode lançar Controlar Plantas. Caso aprenda novamente essa magia, seu custo diminui em –1 PM.",
+    "origem_arquivo": "dedo_verde.json",
+    "dados_brutos": {
+      "id": "dedo_verde",
+      "name": "Dedo Verde",
+      "deities": [
+        "allihanna"
+      ],
+      "description": "Você aprende e pode lançar Controlar Plantas. Caso aprenda novamente essa magia, seu custo diminui em –1 PM.",
+      "effects": {
+        "type": "passive",
+        "grants_spell": "Controlar Plantas",
+        "spell_cost_reduction": {
+          "spell": "Controlar Plantas",
+          "reduction": 1
+        }
+      }
+    }
+  },
+  "descanso_natural": {
+    "key": "descanso_natural",
+    "nome": "Descanso Natural",
+    "descricao": "Para você, dormir ao relento conta como condição de descanso confortável.",
+    "origem_arquivo": "descanso_natural.json",
+    "dados_brutos": {
+      "id": "descanso_natural",
+      "name": "Descanso Natural",
+      "deities": [
+        "allihanna"
+      ],
+      "description": "Para você, dormir ao relento conta como condição de descanso confortável.",
+      "effects": {
+        "type": "passive",
+        "rest_benefit": "dormir ao relento conta como descanso confortável"
+      }
+    }
+  },
+  "discurso_conciliador": {
+    "key": "discurso_conciliador",
+    "nome": "Discurso Conciliador",
+    "descricao": "Quando faz um teste de Diplomacia para mudar atitude, você pode rolar dois dados e usar o melhor resultado ou ambos (como se tivesse usado mudar atitude duas vezes). Se passar em ambos, as mudanças de atitude são cumulativas.",
+    "origem_arquivo": "discurso_conciliador.json",
+    "dados_brutos": {
+      "id": "discurso_conciliador",
+      "name": "Discurso Conciliador",
+      "deities": [
+        "marah"
+      ],
+      "description": "Quando faz um teste de Diplomacia para mudar atitude, você pode rolar dois dados e usar o melhor resultado ou ambos (como se tivesse usado mudar atitude duas vezes). Se passar em ambos, as mudanças de atitude são cumulativas.",
+      "effects": {
+        "type": "passivo",
+        "gatilho": "teste de Diplomacia para mudar atitude",
+        "efeito": "rola 2 dados e usa o melhor, ou usa ambos como 2 tentativas de mudar atitude (cumulativas se ambas passarem)"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "dom_da_esperanca": {
+    "key": "dom_da_esperanca",
+    "nome": "Dom da Esperança",
+    "descricao": "Você soma sua Sabedoria em seus PV em vez de Constituição, e se torna imune às condições alquebrado, esmorecido e frustrado.",
+    "origem_arquivo": "dom_da_esperanca.json",
+    "dados_brutos": {
+      "id": "dom_da_esperanca",
+      "name": "Dom da Esperança",
+      "deities": [
+        "marah"
+      ],
+      "description": "Você soma sua Sabedoria em seus PV em vez de Constituição, e se torna imune às condições alquebrado, esmorecido e frustrado.",
+      "effects": {
+        "type": "passive",
+        "attribute_substitution": {
+          "for": "PV",
+          "original": "Constituição",
+          "new": "Sabedoria"
+        },
+        "immunities": [
+          "alquebrado",
+          "esmorecido",
+          "frustrado"
+        ]
+      }
+    }
+  },
+  "dom_da_furtividade": {
+    "key": "dom_da_furtividade",
+    "nome": "Dom da Furtividade",
+    "descricao": "Você soma sua Sabedoria em Furtividade e, para você, lançar magias é um ato pouco chamativo, o que reduz a penalidade para se esconder após conjurar para –10 (mas você ainda precisa de gestos e palavras).",
+    "origem_arquivo": "dom_da_furtividade.json",
+    "dados_brutos": {
+      "id": "dom_da_furtividade",
+      "name": "Dom da Furtividade",
+      "deities": [
+        "hyninn"
+      ],
+      "description": "Você soma sua Sabedoria em Furtividade e, para você, lançar magias é um ato pouco chamativo, o que reduz a penalidade para se esconder após conjurar para –10 (mas você ainda precisa de gestos e palavras).",
+      "effects": {
+        "type": "passivo",
+        "efeito": "soma Sabedoria em Furtividade; penalidade para se esconder após lançar magia reduzida para -10"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "dom_da_imortalidade": {
+    "key": "dom_da_imortalidade",
+    "nome": "Dom da Imortalidade",
+    "descricao": "Você é imortal. Sempre que morre, não importando o motivo, volta à vida após 3d6 dias. Apenas paladinos podem escolher este poder. Um personagem pode ter Dom da Imortalidade ou Dom da Ressurreição, mas não ambos.",
+    "origem_arquivo": "dom_da_imortalidade.json",
+    "dados_brutos": {
+      "id": "dom_da_imortalidade",
+      "name": "Dom da Imortalidade",
+      "deities": [
+        "thyatis"
+      ],
+      "description": "Você é imortal. Sempre que morre, não importando o motivo, volta à vida após 3d6 dias. Apenas paladinos podem escolher este poder. Um personagem pode ter Dom da Imortalidade ou Dom da Ressurreição, mas não ambos.",
+      "prerequisites": [
+        "classe paladino"
+      ],
+      "exclusive_with": [
+        "dom_da_ressurreicao"
+      ]
+    }
+  },
+  "dom_da_profecia": {
+    "key": "dom_da_profecia",
+    "nome": "Dom da Profecia",
+    "descricao": "Você pode lançar Augúrio. Caso aprenda novamente essa magia, seu custo diminui em –1 PM. Você também pode gastar 2 PM para receber +2 em um teste.",
+    "origem_arquivo": "dom_da_profecia.json",
+    "dados_brutos": {
+      "id": "dom_da_profecia",
+      "name": "Dom da Profecia",
+      "deities": [
+        "thyatis"
+      ],
+      "description": "Você pode lançar Augúrio. Caso aprenda novamente essa magia, seu custo diminui em –1 PM. Você também pode gastar 2 PM para receber +2 em um teste."
+    }
+  },
+  "dom_da_ressurreicao": {
+    "key": "dom_da_ressurreicao",
+    "nome": "Dom da Ressurreição",
+    "descricao": "Você pode gastar uma ação completa e todos os PM que possui (mínimo 1 PM) para tocar o corpo de uma criatura morta há menos de um ano e ressuscitá-la. A criatura volta à vida com 1 PV e 0 PM, e perde 1 ponto de Constituição permanentemente. Este poder só pode ser usado uma vez em cada criatura. Apenas clérigos podem escolher este poder (Deuses de Arton, p.42: frades de Thyatis também podem escolhê-lo). Um personagem pode ter Dom da Imortalidade ou Dom da Ressurreição, mas não ambos.",
+    "origem_arquivo": "dom_da_ressurreicao.json",
+    "dados_brutos": {
+      "id": "dom_da_ressurreicao",
+      "name": "Dom da Ressurreição",
+      "deities": [
+        "thyatis"
+      ],
+      "description": "Você pode gastar uma ação completa e todos os PM que possui (mínimo 1 PM) para tocar o corpo de uma criatura morta há menos de um ano e ressuscitá-la. A criatura volta à vida com 1 PV e 0 PM, e perde 1 ponto de Constituição permanentemente. Este poder só pode ser usado uma vez em cada criatura. Apenas clérigos podem escolher este poder (Deuses de Arton, p.42: frades de Thyatis também podem escolhê-lo). Um personagem pode ter Dom da Imortalidade ou Dom da Ressurreição, mas não ambos.",
+      "prerequisites": [
+        "classe clérigo (ou classe frade, se devoto de Thyatis)"
+      ],
+      "exclusive_with": [
+        "dom_da_imortalidade"
+      ]
+    }
+  },
+  "dom_da_verdade": {
+    "key": "dom_da_verdade",
+    "nome": "Dom da Verdade",
+    "descricao": "Você pode pagar 2 PM para receber +5 em testes de Intuição, e em testes de Percepção contra Enganação e Furtividade, até o fim da cena.",
+    "origem_arquivo": "dom_da_verdade.json",
+    "dados_brutos": {
+      "id": "dom_da_verdade",
+      "name": "Dom da Verdade",
+      "deities": [
+        "khalmyr"
+      ],
+      "description": "Você pode pagar 2 PM para receber +5 em testes de Intuição, e em testes de Percepção contra Enganação e Furtividade, até o fim da cena.",
+      "effects": {
+        "type": "active",
+        "cost": "2 PM",
+        "duration": "cena",
+        "skill_bonuses": [
+          {
+            "skill": "Intuição",
+            "bonus": 5
+          },
+          {
+            "skill": "Percepção",
+            "bonus": 5,
+            "against": [
+              "Enganação",
+              "Furtividade"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "dom_da_vontade": {
+    "key": "dom_da_vontade",
+    "nome": "Dom da Vontade",
+    "descricao": "Você recebe +2 em Vontade e, uma vez por cena, quando passa em um teste de Vontade contra um efeito de um inimigo ou de um perigo apresentado pelo mestre, recebe 1d4 PM temporários.",
+    "origem_arquivo": "dom_da_vontade.json",
+    "dados_brutos": {
+      "id": "dom_da_vontade",
+      "name": "Dom da Vontade",
+      "deities": [
+        "khalmyr"
+      ],
+      "description": "Você recebe +2 em Vontade e, uma vez por cena, quando passa em um teste de Vontade contra um efeito de um inimigo ou de um perigo apresentado pelo mestre, recebe 1d4 PM temporários.",
+      "effects": [
+        {
+          "type": "passivo",
+          "efeito": "+2 em Vontade"
+        },
+        {
+          "type": "passivo",
+          "frequencia": "1x_por_cena",
+          "gatilho": "passar em teste de Vontade contra efeito de inimigo ou perigo",
+          "efeito": "1d4 PM temporários"
+        }
+      ],
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "dom_dos_segredos": {
+    "key": "dom_dos_segredos",
+    "nome": "Dom dos Segredos",
+    "descricao": "Você pode gastar uma ação padrão e 2 PM para suplicar a Sszzaas por um segredo místico. Faça um teste de Carisma (CD 10, +2 para cada vez que usou este poder no mesmo dia). Se passar, você aprende e pode lançar uma magia de 1º círculo até o fim da cena (atributo-chave Car ou o seu atributo de conjuração, se houver).",
+    "origem_arquivo": "dom_dos_segredos.json",
+    "dados_brutos": {
+      "id": "dom_dos_segredos",
+      "name": "Dom dos Segredos",
+      "deities": [
+        "sszzaas"
+      ],
+      "description": "Você pode gastar uma ação padrão e 2 PM para suplicar a Sszzaas por um segredo místico. Faça um teste de Carisma (CD 10, +2 para cada vez que usou este poder no mesmo dia). Se passar, você aprende e pode lançar uma magia de 1º círculo até o fim da cena (atributo-chave Car ou o seu atributo de conjuração, se houver).",
+      "effects": {
+        "type": "ativado",
+        "acao": "padrão",
+        "custo_pm": 2,
+        "teste": "Carisma, CD 10 +2 por uso no mesmo dia",
+        "efeito": "se passar, aprende e lança uma magia de 1º círculo até o fim da cena (atributo-chave Carisma ou o de conjuração, se houver)"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "egide_dos_mares": {
+    "key": "egide_dos_mares",
+    "nome": "Égide dos Mares",
+    "descricao": "Você possui um espírito das águas que o acompanha como um parceiro guardião iniciante. Alternativamente, se você tiver o suplemento Ameaças de Arton, pode receber um escudeiro iniciante. Em ambos os casos, se perder esse parceiro, você pode receber outro com uma cerimônia que exige 1 dia e T$ 100 em oferendas.",
+    "origem_arquivo": "egide_dos_mares.json",
+    "dados_brutos": {
+      "id": "egide_dos_mares",
+      "name": "Égide dos Mares",
+      "deities": [
+        "oceano"
+      ],
+      "description": "Você possui um espírito das águas que o acompanha como um parceiro guardião iniciante. Alternativamente, se você tiver o suplemento Ameaças de Arton, pode receber um escudeiro iniciante. Em ambos os casos, se perder esse parceiro, você pode receber outro com uma cerimônia que exige 1 dia e T$ 100 em oferendas.",
+      "effects": {
+        "type": "passivo",
+        "efeito": "concede um espírito das águas (parceiro guardião iniciante) ou, com Ameaças de Arton, um escudeiro iniciante",
+        "reposicao": "cerimônia de 1 dia + T$ 100 em oferendas"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "escamas_draconicas": {
+    "key": "escamas_draconicas",
+    "nome": "Escamas Dracônicas",
+    "descricao": "Você recebe +2 na Defesa e em Fortitude.",
+    "origem_arquivo": "escamas_draconicas.json",
+    "dados_brutos": {
+      "id": "escamas_draconicas",
+      "name": "Escamas Dracônicas",
+      "deities": [
+        "kallyadranoch"
+      ],
+      "description": "Você recebe +2 na Defesa e em Fortitude.",
+      "effects": {
+        "type": "passive",
+        "defense_bonus": 2,
+        "save_bonuses": [
+          {
+            "save": "Fortitude",
+            "bonus": 2
+          }
+        ]
+      }
+    }
+  },
+  "escudo_magico": {
+    "key": "escudo_magico",
+    "nome": "Escudo Mágico",
+    "descricao": "Quando lança uma magia, você recebe um bônus na Defesa igual ao círculo da magia lançada até o início do seu próximo turno.",
+    "origem_arquivo": "escudo_magico.json",
+    "dados_brutos": {
+      "id": "escudo_magico",
+      "name": "Escudo Mágico",
+      "deities": [
+        "wynna"
+      ],
+      "description": "Quando lança uma magia, você recebe um bônus na Defesa igual ao círculo da magia lançada até o início do seu próximo turno.",
+      "effects": {
+        "type": "passive",
+        "trigger": "ao lançar uma magia",
+        "defense_bonus": "igual ao círculo da magia",
+        "duration": "até o início do próximo turno"
+      }
+    }
+  },
+  "espada_justiceira": {
+    "key": "espada_justiceira",
+    "nome": "Espada Justiceira",
+    "descricao": "Você pode gastar 1 PM para encantar sua espada (ou outra arma corpo a corpo de corte que esteja empunhando). Ela tem seu dano aumentado em um passo até o fim da cena.",
+    "origem_arquivo": "espada_justiceira.json",
+    "dados_brutos": {
+      "id": "espada_justiceira",
+      "name": "Espada Justiceira",
+      "deities": [
+        "khalmyr"
+      ],
+      "description": "Você pode gastar 1 PM para encantar sua espada (ou outra arma corpo a corpo de corte que esteja empunhando). Ela tem seu dano aumentado em um passo até o fim da cena.",
+      "effects": {
+        "type": "active",
+        "cost": "1 PM",
+        "target": "espada ou arma corpo a corpo de corte empunhada",
+        "damage_step_increase": 1,
+        "duration": "cena"
+      }
+    }
+  },
+  "espada_solar": {
+    "key": "espada_solar",
+    "nome": "Espada Solar",
+    "descricao": "Você pode gastar 1 PM para fazer uma arma corpo a corpo de corte que esteja empunhando causar +1d6 de dano por fogo até o fim da cena.",
+    "origem_arquivo": "espada_solar.json",
+    "dados_brutos": {
+      "id": "espada_solar",
+      "name": "Espada Solar",
+      "deities": [
+        "azgher"
+      ],
+      "description": "Você pode gastar 1 PM para fazer uma arma corpo a corpo de corte que esteja empunhando causar +1d6 de dano por fogo até o fim da cena.",
+      "effects": {
+        "type": "active",
+        "cost": "1 PM",
+        "target": "arma corpo a corpo de corte empunhada",
+        "extra_damage": {
+          "dice": "1d6",
+          "type": "fogo"
+        },
+        "duration": "cena"
+      }
+    }
+  },
+  "espalhar_a_corrupcao": {
+    "key": "espalhar_a_corrupcao",
+    "nome": "Espalhar a Corrupção",
+    "descricao": "Quando chega em uma comunidade, você pode gastar um dia e fazer um teste de Religião (CD 20). Se passar, você planta a semente da corrupção no coração das pessoas em uma área equivalente a uma aldeia, um castelo ou um bairro de uma cidade grande. Por uma semana, ou até você partir do lugar, a categoria de atitude dessas pessoas em relação umas às outras piora em um passo.",
+    "origem_arquivo": "espalhar_a_corrupcao.json",
+    "dados_brutos": {
+      "id": "espalhar_a_corrupcao",
+      "name": "Espalhar a Corrupção",
+      "deities": [
+        "aharadak"
+      ],
+      "description": "Quando chega em uma comunidade, você pode gastar um dia e fazer um teste de Religião (CD 20). Se passar, você planta a semente da corrupção no coração das pessoas em uma área equivalente a uma aldeia, um castelo ou um bairro de uma cidade grande. Por uma semana, ou até você partir do lugar, a categoria de atitude dessas pessoas em relação umas às outras piora em um passo.",
+      "effects": {
+        "type": "ativado",
+        "tempo": "1 dia",
+        "teste": "Religião CD 20",
+        "efeito": "a atitude das pessoas de uma área (aldeia/castelo/bairro) entre si piora um passo, por 1 semana ou até você partir"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "espirito_animal": {
+    "key": "espirito_animal",
+    "nome": "Espírito Animal",
+    "descricao": "Você pode gastar uma ação de movimento e 2 PM para conjurar um espírito animal que o envolve e luta com você. Até o fim da cena, você não pode ser flanqueado e recebe 10 PV temporários e uma arma natural (dano 1d6, crítico x2, tipo a sua escolha entre corte, impacto ou perfuração). Uma vez por rodada, quando usa a ação agredir para atacar com outra arma, pode gastar 1 PM para fazer um ataque corpo a corpo extra com essa arma. Quando usa este poder, você pode gastar PM adicionais (custo total limitado por sua Sabedoria); para cada PM adicional, os PV temporários aumentam em +5.",
+    "origem_arquivo": "espirito_animal.json",
+    "dados_brutos": {
+      "id": "espirito_animal",
+      "name": "Espírito Animal",
+      "deities": [
+        "allihanna"
+      ],
+      "description": "Você pode gastar uma ação de movimento e 2 PM para conjurar um espírito animal que o envolve e luta com você. Até o fim da cena, você não pode ser flanqueado e recebe 10 PV temporários e uma arma natural (dano 1d6, crítico x2, tipo a sua escolha entre corte, impacto ou perfuração). Uma vez por rodada, quando usa a ação agredir para atacar com outra arma, pode gastar 1 PM para fazer um ataque corpo a corpo extra com essa arma. Quando usa este poder, você pode gastar PM adicionais (custo total limitado por sua Sabedoria); para cada PM adicional, os PV temporários aumentam em +5.",
+      "effects": {
+        "type": "ativado",
+        "acao": "movimento",
+        "custo_pm": 2,
+        "duracao": "até o fim da cena",
+        "efeito": "não pode ser flanqueado; +10 PV temporários; arma natural 1d6 x2 (tipo à escolha); 1 PM por rodada para ataque extra com a arma natural",
+        "escalavel": "+5 PV temporários por PM adicional (limitado pela Sabedoria)"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "espirito_do_conhecimento": {
+    "key": "espirito_do_conhecimento",
+    "nome": "Espírito do Conhecimento",
+    "descricao": "Você pode gastar uma ação padrão e 2 PM para invocar uma manifestação do saber em um espaço desocupado em alcance curto. Ela é um espírito Minúsculo que tem deslocamento de voo 6m, Força nula, Defesa 15, 1 PV, visão no escuro e falha em qualquer teste oposto. No início de seus turnos, ela pode usar a ação movimentar-se uma vez. Você pode perceber tudo que a manifestação for capaz de perceber e pode lançar magias a partir dela (exceto magias de alcance pessoal com alvo você). A manifestação desaparece quando morre ou no fim da cena.",
+    "origem_arquivo": "espirito_do_conhecimento.json",
+    "dados_brutos": {
+      "id": "espirito_do_conhecimento",
+      "name": "Espírito do Conhecimento",
+      "deities": [
+        "tanna_toh"
+      ],
+      "description": "Você pode gastar uma ação padrão e 2 PM para invocar uma manifestação do saber em um espaço desocupado em alcance curto. Ela é um espírito Minúsculo que tem deslocamento de voo 6m, Força nula, Defesa 15, 1 PV, visão no escuro e falha em qualquer teste oposto. No início de seus turnos, ela pode usar a ação movimentar-se uma vez. Você pode perceber tudo que a manifestação for capaz de perceber e pode lançar magias a partir dela (exceto magias de alcance pessoal com alvo você). A manifestação desaparece quando morre ou no fim da cena.",
+      "effects": {
+        "type": "ativado",
+        "acao": "padrão",
+        "custo_pm": 2,
+        "efeito": "invoca um espírito Minúsculo (voo 6m, Defesa 15, 1 PV, visão no escuro, falha testes opostos automaticamente) pelo qual pode perceber e lançar magias (exceto as de alcance pessoal com alvo você); some até morrer ou fim da cena"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "estouro_da_trobada": {
+    "key": "estouro_da_trobada",
+    "nome": "Estouro da Trobada",
+    "descricao": "Você pode gastar uma ação completa e 2 PM para convocar uma manada de trobos (ou outro animal da região) em um ponto desocupado a sua escolha em alcance curto com duração sustentada. A manada é Enorme e pode passar pelo espaço de outras criaturas. Você pode gastar uma ação de movimento para mover a manada 12m em linha reta. Criaturas pelas quais ela passar sofrem 3d6 pontos de dano de impacto e ficam caídas (Fort CD Sab reduz à metade e evita a condição).",
+    "origem_arquivo": "estouro_da_trobada.json",
+    "dados_brutos": {
+      "id": "estouro_da_trobada",
+      "name": "Estouro da Trobada",
+      "deities": [
+        "allihanna"
+      ],
+      "description": "Você pode gastar uma ação completa e 2 PM para convocar uma manada de trobos (ou outro animal da região) em um ponto desocupado a sua escolha em alcance curto com duração sustentada. A manada é Enorme e pode passar pelo espaço de outras criaturas. Você pode gastar uma ação de movimento para mover a manada 12m em linha reta. Criaturas pelas quais ela passar sofrem 3d6 pontos de dano de impacto e ficam caídas (Fort CD Sab reduz à metade e evita a condição).",
+      "effects": {
+        "type": "ativado",
+        "acao": "completa",
+        "custo_pm": 2,
+        "duracao": "sustentada",
+        "efeito": "convoca uma manada Enorme que atravessa espaços de outras criaturas; ação de movimento para mover 12m em linha reta, causando 3d6 de dano de impacto e caído a quem atravessar (Fort CD Sab reduz à metade e evita a condição)"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "exaltar_honra": {
+    "key": "exaltar_honra",
+    "nome": "Exaltar Honra",
+    "descricao": "Você pode gastar 2 PM para gerar uma aura de honradez de 9m de raio que dura até o fim da cena. Dentro dessa área, devotos de Lin-Wu e personagens que sigam algum código de conduta (como Código de Honra ou Código do Herói) recebem +5 em Diplomacia e Nobreza, e todas as criaturas na área sofrem –5 em perícias desonradas (Enganação, Furtividade e Ladinagem). Apenas personagens com a habilidade Abençoado ou Devoto Fiel podem escolher este poder.",
+    "origem_arquivo": "exaltar_honra.json",
+    "dados_brutos": {
+      "id": "exaltar_honra",
+      "name": "Exaltar Honra",
+      "deities": [
+        "lin_wu"
+      ],
+      "description": "Você pode gastar 2 PM para gerar uma aura de honradez de 9m de raio que dura até o fim da cena. Dentro dessa área, devotos de Lin-Wu e personagens que sigam algum código de conduta (como Código de Honra ou Código do Herói) recebem +5 em Diplomacia e Nobreza, e todas as criaturas na área sofrem –5 em perícias desonradas (Enganação, Furtividade e Ladinagem). Apenas personagens com a habilidade Abençoado ou Devoto Fiel podem escolher este poder.",
+      "effects": {
+        "type": "ativado",
+        "custo_pm": 2,
+        "duracao": "até o fim da cena",
+        "alcance": "9m de raio",
+        "efeito": "devotos de Lin-Wu e personagens com código de conduta recebem +5 em Diplomacia e Nobreza; todas as criaturas na área sofrem -5 em Enganação/Furtividade/Ladinagem"
+      },
+      "prerequisites": [
+        "habilidade Abençoado ou Devoto Fiel"
+      ],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "expurgar_a_derrota": {
+    "key": "expurgar_a_derrota",
+    "nome": "Expurgar a Derrota",
+    "descricao": "Se estiver com 0 PM, você pode gastar seus pontos de vida (exceto PV temporários) no lugar de mana, à taxa de 3 PV por 1 PM. Você não pode reduzir seus PV a 0 ou menos dessa forma e não pode usar este poder se estiver sob efeito de ter descumprido suas Obrigações & Restrições. Pontos de vida gastos dessa forma só podem ser recuperados com descanso.",
+    "origem_arquivo": "expurgar_a_derrota.json",
+    "dados_brutos": {
+      "id": "expurgar_a_derrota",
+      "name": "Expurgar a Derrota",
+      "deities": [
+        "arsenal"
+      ],
+      "description": "Se estiver com 0 PM, você pode gastar seus pontos de vida (exceto PV temporários) no lugar de mana, à taxa de 3 PV por 1 PM. Você não pode reduzir seus PV a 0 ou menos dessa forma e não pode usar este poder se estiver sob efeito de ter descumprido suas Obrigações & Restrições. Pontos de vida gastos dessa forma só podem ser recuperados com descanso.",
+      "effects": {
+        "type": "ativado",
+        "condicao": "0 PM",
+        "taxa": "3 PV por 1 PM",
+        "restricao": "não pode reduzir PV a 0 ou menos; não funciona se estiver sob penalidade por violar Obrigações & Restrições",
+        "recuperacao": "apenas com descanso"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "extase_da_loucura": {
+    "key": "extase_da_loucura",
+    "nome": "Êxtase da Loucura",
+    "descricao": "Toda vez que uma ou mais criaturas falham em um teste de Vontade contra uma de suas habilidades mágicas, você recebe 1 PM temporário cumulativo. Você pode ganhar um máximo de PM temporários por cena desta forma igual a sua Sabedoria.",
+    "origem_arquivo": "extase_da_loucura.json",
+    "dados_brutos": {
+      "id": "extase_da_loucura",
+      "name": "Êxtase da Loucura",
+      "deities": [
+        "aharadak",
+        "nimb"
+      ],
+      "description": "Toda vez que uma ou mais criaturas falham em um teste de Vontade contra uma de suas habilidades mágicas, você recebe 1 PM temporário cumulativo. Você pode ganhar um máximo de PM temporários por cena desta forma igual a sua Sabedoria.",
+      "effects": {
+        "type": "passive",
+        "trigger": "criaturas falham em Vontade contra suas habilidades mágicas",
+        "benefit": "1 PM temporário cumulativo",
+        "limit": "Sabedoria PM temporários por cena"
+      }
+    }
+  },
+  "familiar_elemental": {
+    "key": "familiar_elemental",
+    "nome": "Familiar Elemental",
+    "descricao": "Você possui um espírito arcano que o acompanha como um familiar com as habilidades de um adepto iniciante. Alternativamente, se você tiver o suplemento Ameaças de Arton, pode receber um familiar elemental iniciante, escolhido entre aquin'ne, t'peel, pakk ou terrier. Em ambos os casos, se perder esse parceiro, você pode receber outro com uma cerimônia que exige 1 dia e T$ 100 em oferendas.",
+    "origem_arquivo": "familiar_elemental.json",
+    "dados_brutos": {
+      "id": "familiar_elemental",
+      "name": "Familiar Elemental",
+      "deities": [
+        "wynna"
+      ],
+      "description": "Você possui um espírito arcano que o acompanha como um familiar com as habilidades de um adepto iniciante. Alternativamente, se você tiver o suplemento Ameaças de Arton, pode receber um familiar elemental iniciante, escolhido entre aquin'ne, t'peel, pakk ou terrier. Em ambos os casos, se perder esse parceiro, você pode receber outro com uma cerimônia que exige 1 dia e T$ 100 em oferendas.",
+      "effects": {
+        "type": "passivo",
+        "efeito": "concede um familiar (adepto iniciante) ou, com Ameaças de Arton, um familiar elemental iniciante (aquin'ne, t'peel, pakk ou terrier)",
+        "reposicao": "cerimônia de 1 dia + T$ 100 em oferendas"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "familiar_ofidico": {
+    "key": "familiar_ofidico",
+    "nome": "Familiar Ofídico",
+    "descricao": "Você recebe um familiar cobra que não conta em seu limite de parceiros.",
+    "origem_arquivo": "familiar_ofidico.json",
+    "dados_brutos": {
+      "id": "familiar_ofidico",
+      "name": "Familiar Ofídico",
+      "deities": [
+        "sszzaas"
+      ],
+      "description": "Você recebe um familiar cobra que não conta em seu limite de parceiros.",
+      "effects": {
+        "type": "passive",
+        "grants_familiar": {
+          "type": "cobra",
+          "counts_toward_partner_limit": false
+        }
+      }
+    }
+  },
+  "farsa_do_fingidor": {
+    "key": "farsa_do_fingidor",
+    "nome": "Farsa do Fingidor",
+    "descricao": "Você aprende e pode lançar Criar Ilusão. Caso aprenda novamente essa magia, seu custo diminui em –1 PM.",
+    "origem_arquivo": "farsa_do_fingidor.json",
+    "dados_brutos": {
+      "id": "farsa_do_fingidor",
+      "name": "Farsa do Fingidor",
+      "deities": [
+        "hyninn"
+      ],
+      "description": "Você aprende e pode lançar Criar Ilusão. Caso aprenda novamente essa magia, seu custo diminui em –1 PM.",
+      "effects": {
+        "type": "passive",
+        "grants_spell": "Criar Ilusão",
+        "spell_cost_reduction": {
+          "spell": "Criar Ilusão",
+          "reduction": 1
+        }
+      }
+    }
+  },
+  "fe_guerreira": {
+    "key": "fe_guerreira",
+    "nome": "Fé Guerreira",
+    "descricao": "Você pode usar Sabedoria para Guerra (em vez de Inteligência). Além disso, em combate, quando vai fazer um teste de perícia, você pode gastar 2 PM para substituí-lo por um teste de Guerra (exceto para testes de ataque).",
+    "origem_arquivo": "fe_guerreira.json",
+    "dados_brutos": {
+      "id": "fe_guerreira",
+      "name": "Fé Guerreira",
+      "deities": [
+        "arsenal"
+      ],
+      "description": "Você pode usar Sabedoria para Guerra (em vez de Inteligência). Além disso, em combate, quando vai fazer um teste de perícia, você pode gastar 2 PM para substituí-lo por um teste de Guerra (exceto para testes de ataque).",
+      "effects": {
+        "type": "passive",
+        "skill_attribute_substitution": {
+          "skill": "Guerra",
+          "original_attribute": "Inteligência",
+          "new_attribute": "Sabedoria"
+        },
+        "active_ability": {
+          "cost": "2 PM",
+          "trigger": "em combate, ao fazer teste de perícia",
+          "benefit": "substitui por teste de Guerra",
+          "exception": "exceto testes de ataque"
+        }
+      }
+    }
+  },
+  "ferramentas_da_guerra": {
+    "key": "ferramentas_da_guerra",
+    "nome": "Ferramentas da Guerra",
+    "descricao": "Uma vez por dia, você pode gastar 1 hora e T$ 10 por item para abençoar uma quantidade de itens limitada por sua Sabedoria. Armas abençoadas dessa forma fornecem +2 em rolagens de dano, e armaduras e escudos fornecem RD 2. Se o usuário de um item abençoado for derrotado em combate, o item é destruído. Os efeitos da bênção duram 1 dia.",
+    "origem_arquivo": "ferramentas_da_guerra.json",
+    "dados_brutos": {
+      "id": "ferramentas_da_guerra",
+      "name": "Ferramentas da Guerra",
+      "deities": [
+        "arsenal"
+      ],
+      "description": "Uma vez por dia, você pode gastar 1 hora e T$ 10 por item para abençoar uma quantidade de itens limitada por sua Sabedoria. Armas abençoadas dessa forma fornecem +2 em rolagens de dano, e armaduras e escudos fornecem RD 2. Se o usuário de um item abençoado for derrotado em combate, o item é destruído. Os efeitos da bênção duram 1 dia.",
+      "effects": {
+        "type": "ativado",
+        "frequencia": "1x_por_dia",
+        "tempo": "1 hora",
+        "custo": "T$ 10 por item, até um número de itens igual à Sabedoria",
+        "duracao": "1 dia",
+        "efeito": "armas abençoadas: +2 em dano; armaduras/escudos abençoados: RD 2",
+        "risco": "o item é destruído se o usuário for derrotado em combate"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "forma_de_macaco": {
+    "key": "forma_de_macaco",
+    "nome": "Forma de Macaco",
+    "descricao": "Você pode gastar uma ação completa e 2 PM para se transformar em um macaco. Você adquire tamanho Minúsculo (o que fornece +5 em Furtividade e –5 em testes de manobra) e recebe deslocamento de escalar 9m. Seu equipamento desaparece (e você perde seus benefícios) até você voltar ao normal, mas suas outras estatísticas não são alteradas. A transformação dura indefinidamente, mas termina caso você faça um ataque, lance uma magia ou sofra dano.",
+    "origem_arquivo": "forma_de_macaco.json",
+    "dados_brutos": {
+      "id": "forma_de_macaco",
+      "name": "Forma de Macaco",
+      "deities": [
+        "hyninn"
+      ],
+      "description": "Você pode gastar uma ação completa e 2 PM para se transformar em um macaco. Você adquire tamanho Minúsculo (o que fornece +5 em Furtividade e –5 em testes de manobra) e recebe deslocamento de escalar 9m. Seu equipamento desaparece (e você perde seus benefícios) até você voltar ao normal, mas suas outras estatísticas não são alteradas. A transformação dura indefinidamente, mas termina caso você faça um ataque, lance uma magia ou sofra dano.",
+      "effects": {
+        "type": "active",
+        "cost": "2 PM",
+        "action": "ação completa",
+        "transformation": {
+          "size": "Minúsculo",
+          "skill_bonus": {
+            "skill": "Furtividade",
+            "bonus": 5
+          },
+          "skill_penalty": {
+            "skill": "manobras",
+            "penalty": -5
+          },
+          "movement": {
+            "climb": "9m"
+          },
+          "equipment": "desaparece",
+          "duration": "indefinida",
+          "ends_when": [
+            "ataque",
+            "lançar magia",
+            "sofrer dano"
+          ]
+        }
+      }
+    }
+  },
+  "fulgor_solar": {
+    "key": "fulgor_solar",
+    "nome": "Fulgor Solar",
+    "descricao": "Você recebe redução de frio e trevas 5. Além disso, quando é alvo de um ataque você pode gastar 1 PM para emitir um clarão solar que deixa o atacante ofuscado por uma rodada.",
+    "origem_arquivo": "fulgor_solar.json",
+    "dados_brutos": {
+      "id": "fulgor_solar",
+      "name": "Fulgor Solar",
+      "deities": [
+        "azgher"
+      ],
+      "description": "Você recebe redução de frio e trevas 5. Além disso, quando é alvo de um ataque você pode gastar 1 PM para emitir um clarão solar que deixa o atacante ofuscado por uma rodada.",
+      "effects": {
+        "type": "passive",
+        "damage_reduction": [
+          {
+            "type": "frio",
+            "value": 5
+          },
+          {
+            "type": "trevas",
+            "value": 5
+          }
+        ],
+        "reactive_ability": {
+          "trigger": "ser alvo de um ataque",
+          "cost": "1 PM",
+          "effect": "atacante fica ofuscado por uma rodada"
+        }
+      }
+    }
+  },
+  "furia_divina": {
+    "key": "furia_divina",
+    "nome": "Fúria Divina",
+    "descricao": "Você pode gastar 2 PM para invocar uma fúria selvagem, tornando-se temível em combate. Até o fim da cena, você recebe +2 em testes de ataque e rolagens de dano corpo a corpo, mas não pode executar nenhuma ação que exija paciência ou concentração (como usar a perícia Furtividade ou lançar magias). Se usar este poder em conjunto com a habilidade Fúria, ela também dura uma cena (e não termina se você não atacar ou for alvo de uma ação hostil).",
+    "origem_arquivo": "furia_divina.json",
+    "dados_brutos": {
+      "id": "furia_divina",
+      "name": "Fúria Divina",
+      "deities": [
+        "thwor"
+      ],
+      "description": "Você pode gastar 2 PM para invocar uma fúria selvagem, tornando-se temível em combate. Até o fim da cena, você recebe +2 em testes de ataque e rolagens de dano corpo a corpo, mas não pode executar nenhuma ação que exija paciência ou concentração (como usar a perícia Furtividade ou lançar magias). Se usar este poder em conjunto com a habilidade Fúria, ela também dura uma cena (e não termina se você não atacar ou for alvo de uma ação hostil).",
+      "effects": {
+        "type": "active",
+        "cost": "2 PM",
+        "duration": "cena",
+        "bonuses": {
+          "attack": 2,
+          "melee_damage": 2
+        },
+        "restrictions": [
+          "ações que exigem paciência ou concentração",
+          "Furtividade",
+          "lançar magias"
+        ],
+        "synergy": {
+          "with": "habilidade Fúria",
+          "benefit": "Fúria também dura uma cena"
+        }
+      }
+    }
+  },
+  "golpe_semantico": {
+    "key": "golpe_semantico",
+    "nome": "Golpe Semântico",
+    "descricao": "Você pode substituir testes de Diplomacia e Intimidação por Conhecimento.",
+    "origem_arquivo": "golpe_semantico.json",
+    "dados_brutos": {
+      "id": "golpe_semantico",
+      "name": "Golpe Semântico",
+      "deities": [
+        "tanna_toh"
+      ],
+      "description": "Você pode substituir testes de Diplomacia e Intimidação por Conhecimento.",
+      "effects": {
+        "type": "passivo",
+        "efeito": "pode usar Conhecimento no lugar de Diplomacia e Intimidação"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "golpe_tempestuoso": {
+    "key": "golpe_tempestuoso",
+    "nome": "Golpe Tempestuoso",
+    "descricao": "Quando acerta um ataque corpo a corpo, você pode gastar 2 PM. Se fizer isso, a criatura é empurrada 3m em uma direção a sua escolha e fica desprevenida por 1 rodada.",
+    "origem_arquivo": "golpe_tempestuoso.json",
+    "dados_brutos": {
+      "id": "golpe_tempestuoso",
+      "name": "Golpe Tempestuoso",
+      "deities": [
+        "oceano"
+      ],
+      "description": "Quando acerta um ataque corpo a corpo, você pode gastar 2 PM. Se fizer isso, a criatura é empurrada 3m em uma direção a sua escolha e fica desprevenida por 1 rodada.",
+      "effects": {
+        "type": "ativado",
+        "gatilho": "acertar ataque corpo a corpo",
+        "custo_pm": 2,
+        "efeito": "empurra o alvo 3m em direção escolhida e ele fica desprevenido por 1 rodada"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "golpista_divino": {
+    "key": "golpista_divino",
+    "nome": "Golpista Divino",
+    "descricao": "Você recebe +2 em Enganação, Jogatina e Ladinagem.",
+    "origem_arquivo": "golpista_divino.json",
+    "dados_brutos": {
+      "id": "golpista_divino",
+      "name": "Golpista Divino",
+      "deities": [
+        "hyninn"
+      ],
+      "description": "Você recebe +2 em Enganação, Jogatina e Ladinagem.",
+      "effects": {
+        "type": "passive",
+        "skill_bonuses": [
+          {
+            "skill": "Enganação",
+            "bonus": 2
+          },
+          {
+            "skill": "Jogatina",
+            "bonus": 2
+          },
+          {
+            "skill": "Ladinagem",
+            "bonus": 2
+          }
+        ]
+      }
+    }
+  },
+  "guardei_para_voce": {
+    "key": "guardei_para_voce",
+    "nome": "Guardei para Você",
+    "descricao": "Você pode gastar uma ação de movimento e 1 PM para produzir uma lembrança, na forma de uma memória ou de um objeto, para um aliado em alcance curto. Uma memória fornece +1d4 em um teste de perícia feito até o fim da cena, enquanto um objeto é uma versão mundana e não superior de um item não consumível a sua escolha, que dura até o fim da cena ou até ser largado pelo aliado. Você só pode produzir uma lembrança para cada aliado na mesma cena.",
+    "origem_arquivo": "guardei_para_voce.json",
+    "dados_brutos": {
+      "id": "guardei_para_voce",
+      "name": "Guardei para Você",
+      "deities": [
+        "mauziell"
+      ],
+      "description": "Você pode gastar uma ação de movimento e 1 PM para produzir uma lembrança, na forma de uma memória ou de um objeto, para um aliado em alcance curto. Uma memória fornece +1d4 em um teste de perícia feito até o fim da cena, enquanto um objeto é uma versão mundana e não superior de um item não consumível a sua escolha, que dura até o fim da cena ou até ser largado pelo aliado. Você só pode produzir uma lembrança para cada aliado na mesma cena.",
+      "effects": {
+        "type": "ativado",
+        "acao": "movimento",
+        "custo_pm": 1,
+        "alcance": "curto",
+        "efeito": "produz uma memória (+1d4 em um teste de perícia até o fim da cena) ou um objeto (versão mundana não superior de um item não consumível à escolha, até o fim da cena ou até ser largado)",
+        "limite": "1 lembrança por aliado por cena"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "habitante_do_deserto": {
+    "key": "habitante_do_deserto",
+    "nome": "Habitante do Deserto",
+    "descricao": "Você recebe redução de fogo 10 e pode pagar 1 PM para criar água pura e potável suficiente para um odre (ou outro recipiente pequeno).",
+    "origem_arquivo": "habitante_do_deserto.json",
+    "dados_brutos": {
+      "id": "habitante_do_deserto",
+      "name": "Habitante do Deserto",
+      "deities": [
+        "azgher"
+      ],
+      "description": "Você recebe redução de fogo 10 e pode pagar 1 PM para criar água pura e potável suficiente para um odre (ou outro recipiente pequeno).",
+      "effects": {
+        "type": "passive",
+        "damage_reduction": {
+          "type": "fogo",
+          "value": 10
+        },
+        "active_ability": {
+          "cost": "1 PM",
+          "effect": "criar água pura e potável (1 odre)"
+        }
+      }
+    }
+  },
+  "imolacao_sagrada": {
+    "key": "imolacao_sagrada",
+    "nome": "Imolação Sagrada",
+    "descricao": "Você pode gastar uma ação padrão e 1 PM para cobrir seus braços com chamas com duração sustentada. Nesse estado, seus ataques corpo a corpo causam +1d6 pontos de dano de fogo.",
+    "origem_arquivo": "imolacao_sagrada.json",
+    "dados_brutos": {
+      "id": "imolacao_sagrada",
+      "name": "Imolação Sagrada",
+      "deities": [
+        "azgher",
+        "thyatis"
+      ],
+      "description": "Você pode gastar uma ação padrão e 1 PM para cobrir seus braços com chamas com duração sustentada. Nesse estado, seus ataques corpo a corpo causam +1d6 pontos de dano de fogo.",
+      "effects": {
+        "type": "ativado",
+        "acao": "padrão",
+        "custo_pm": 1,
+        "duracao": "sustentada",
+        "efeito": "ataques corpo a corpo causam +1d6 de dano de fogo"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "incentivador_da_economia": {
+    "key": "incentivador_da_economia",
+    "nome": "Incentivador da Economia",
+    "descricao": "A cada T$ 50 x seu nível que gastar em uma aventura, você recebe +1 PM cumulativo até o fim da aventura.",
+    "origem_arquivo": "incentivador_da_economia.json",
+    "dados_brutos": {
+      "id": "incentivador_da_economia",
+      "name": "Incentivador da Economia",
+      "deities": [
+        "tibar"
+      ],
+      "description": "A cada T$ 50 x seu nível que gastar em uma aventura, você recebe +1 PM cumulativo até o fim da aventura.",
+      "effects": {
+        "type": "passivo",
+        "gatilho": "gastar T$ 50 x nível em uma aventura",
+        "efeito": "+1 PM cumulativo até o fim da aventura"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "inimigo_de_tenebra": {
+    "key": "inimigo_de_tenebra",
+    "nome": "Inimigo de Tenebra",
+    "descricao": "Seus ataques e habilidades causam +1d6 pontos de dano contra mortos-vivos. Quando você usa um efeito que gera luz, o alcance da iluminação dobra.",
+    "origem_arquivo": "inimigo_de_tenebra.json",
+    "dados_brutos": {
+      "id": "inimigo_de_tenebra",
+      "name": "Inimigo de Tenebra",
+      "deities": [
+        "azgher"
+      ],
+      "description": "Seus ataques e habilidades causam +1d6 pontos de dano contra mortos-vivos. Quando você usa um efeito que gera luz, o alcance da iluminação dobra.",
+      "effects": {
+        "type": "passive",
+        "extra_damage": {
+          "dice": "1d6",
+          "against": "mortos-vivos"
+        },
+        "light_bonus": "alcance de iluminação dobrado"
+      }
+    }
+  },
+  "jubilo_na_dor": {
+    "key": "jubilo_na_dor",
+    "nome": "Júbilo na Dor",
+    "descricao": "Quando causa ou sofre dano, você recebe redução de dano 1. Esse efeito é cumulativo e limitado por sua Sabedoria e termina se você passar 1 rodada sem causar ou sofrer dano.",
+    "origem_arquivo": "jubilo_na_dor.json",
+    "dados_brutos": {
+      "id": "jubilo_na_dor",
+      "name": "Júbilo na Dor",
+      "deities": [
+        "aharadak"
+      ],
+      "description": "Quando causa ou sofre dano, você recebe redução de dano 1. Esse efeito é cumulativo e limitado por sua Sabedoria e termina se você passar 1 rodada sem causar ou sofrer dano.",
+      "effects": {
+        "type": "passivo",
+        "gatilho": "causar ou sofrer dano",
+        "efeito": "ganha RD 1, cumulativo e limitado pela Sabedoria",
+        "termino": "termina após 1 rodada sem causar ou sofrer dano"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "jurista_divino": {
+    "key": "jurista_divino",
+    "nome": "Jurista Divino",
+    "descricao": "Você pode usar Sabedoria para Nobreza (em vez de Inteligência) e pode usar essa perícia no lugar de Diplomacia e Intimidação.",
+    "origem_arquivo": "jurista_divino.json",
+    "dados_brutos": {
+      "id": "jurista_divino",
+      "name": "Jurista Divino",
+      "deities": [
+        "lin_wu",
+        "khalmyr"
+      ],
+      "description": "Você pode usar Sabedoria para Nobreza (em vez de Inteligência) e pode usar essa perícia no lugar de Diplomacia e Intimidação.",
+      "effects": {
+        "type": "passivo",
+        "efeito": "usa Sabedoria para Nobreza (em vez de Inteligência) e pode usar Nobreza no lugar de Diplomacia e Intimidação"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "kiai_divino": {
+    "key": "kiai_divino",
+    "nome": "Kiai Divino",
+    "descricao": "Uma vez por rodada, quando faz um ataque corpo a corpo, você pode pagar 3 PM. Se acertar o ataque, causa dano máximo, sem necessidade de rolar dados.",
+    "origem_arquivo": "kiai_divino.json",
+    "dados_brutos": {
+      "id": "kiai_divino",
+      "name": "Kiai Divino",
+      "deities": [
+        "lin_wu"
+      ],
+      "description": "Uma vez por rodada, quando faz um ataque corpo a corpo, você pode pagar 3 PM. Se acertar o ataque, causa dano máximo, sem necessidade de rolar dados.",
+      "effects": {
+        "type": "active",
+        "cost": "3 PM",
+        "frequency": "1/rodada",
+        "trigger": "ao fazer ataque corpo a corpo",
+        "benefit": "se acertar, causa dano máximo"
+      }
+    }
+  },
+  "liberdade_divina": {
+    "key": "liberdade_divina",
+    "nome": "Liberdade Divina",
+    "descricao": "Você pode gastar 2 PM para receber imunidade a efeitos de movimento por uma rodada.",
+    "origem_arquivo": "liberdade_divina.json",
+    "dados_brutos": {
+      "id": "liberdade_divina",
+      "name": "Liberdade Divina",
+      "deities": [
+        "valkaria"
+      ],
+      "description": "Você pode gastar 2 PM para receber imunidade a efeitos de movimento por uma rodada.",
+      "effects": {
+        "type": "active",
+        "cost": "2 PM",
+        "duration": "1 rodada",
+        "immunities": [
+          "efeitos de movimento"
+        ]
+      }
+    }
+  },
+  "liberdade_irrestrita": {
+    "key": "liberdade_irrestrita",
+    "nome": "Liberdade Irrestrita",
+    "descricao": "Você recebe +2 em testes de manobra para evitar ser agarrado e de resistência contra efeitos mentais, de medo, de metamorfose e de movimento. Além disso, se falhar num desses testes, pode rolá-lo novamente. Se ainda assim falhar, no início de cada um de seus turnos pode rolar esse teste novamente, como uma ação livre e com um bônus cumulativo de +2, até se libertar.",
+    "origem_arquivo": "liberdade_irrestrita.json",
+    "dados_brutos": {
+      "id": "liberdade_irrestrita",
+      "name": "Liberdade Irrestrita",
+      "deities": [
+        "gwendolynn"
+      ],
+      "description": "Você recebe +2 em testes de manobra para evitar ser agarrado e de resistência contra efeitos mentais, de medo, de metamorfose e de movimento. Além disso, se falhar num desses testes, pode rolá-lo novamente. Se ainda assim falhar, no início de cada um de seus turnos pode rolar esse teste novamente, como uma ação livre e com um bônus cumulativo de +2, até se libertar.",
+      "effects": [
+        {
+          "type": "bônus",
+          "attribute": "manobra_evitar_agarrar,resistencia_mental_medo_metamorfose_movimento",
+          "amount": "+2"
+        },
+        {
+          "type": "passivo",
+          "gatilho": "falhar em um desses testes",
+          "efeito": "pode rolar novamente; se falhar de novo, pode continuar rolando no início de cada turno (ação livre) com +2 cumulativo até se libertar"
+        }
+      ],
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "magia_caotica": {
+    "key": "magia_caotica",
+    "nome": "Magia Caótica",
+    "descricao": "Quando lança uma magia, você pode gastar +2 PM. Se fizer isso, a CD para resistir a essa magia é calculada com 1d20 + seus modificadores, em vez de 10 + seus modificadores.",
+    "origem_arquivo": "magia_caotica.json",
+    "dados_brutos": {
+      "id": "magia_caotica",
+      "name": "Magia Caótica",
+      "deities": [
+        "nimb"
+      ],
+      "description": "Quando lança uma magia, você pode gastar +2 PM. Se fizer isso, a CD para resistir a essa magia é calculada com 1d20 + seus modificadores, em vez de 10 + seus modificadores.",
+      "effects": {
+        "type": "ativado",
+        "gatilho": "lançar uma magia",
+        "custo_pm": 2,
+        "efeito": "CD da magia passa a ser 1d20 + modificadores, em vez de 10 + modificadores"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "magia_piedosa": {
+    "key": "magia_piedosa",
+    "nome": "Magia Piedosa",
+    "descricao": "Quando lança uma magia que causa dano, você pode fazer com que ela cause dano não letal.",
+    "origem_arquivo": "magia_piedosa.json",
+    "dados_brutos": {
+      "id": "magia_piedosa",
+      "name": "Magia Piedosa",
+      "deities": [
+        "lena",
+        "thyatis"
+      ],
+      "description": "Quando lança uma magia que causa dano, você pode fazer com que ela cause dano não letal.",
+      "effects": {
+        "type": "ativado",
+        "gatilho": "lançar magia que causa dano",
+        "efeito": "a magia passa a causar dano não letal"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "magia_venenosa": {
+    "key": "magia_venenosa",
+    "nome": "Magia Venenosa",
+    "descricao": "Suas magias com resistência Fortitude recebem o seguinte aprimoramento. +1 PM: além do normal, criaturas que falharem perdem 1d12 PV por veneno, ou 1d6 se passarem na resistência.",
+    "origem_arquivo": "magia_venenosa.json",
+    "dados_brutos": {
+      "id": "magia_venenosa",
+      "name": "Magia Venenosa",
+      "deities": [
+        "sszzaas"
+      ],
+      "description": "Suas magias com resistência Fortitude recebem o seguinte aprimoramento. +1 PM: além do normal, criaturas que falharem perdem 1d12 PV por veneno, ou 1d6 se passarem na resistência.",
+      "effects": {
+        "type": "aprimoramento_de_magia",
+        "escopo": "magias com resistência Fortitude",
+        "custo_pm": 1,
+        "efeito": "criaturas que falharem na resistência perdem 1d12 PV por veneno, ou 1d6 PV se passarem"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "manto_ardiloso": {
+    "key": "manto_ardiloso",
+    "nome": "Manto Ardiloso",
+    "descricao": "Você aprende a magia Disfarce Ilusório (CD Car). Na primeira vez que interage com alguém enquanto está sob efeito dessa magia, você recebe +10 no teste de Diplomacia para mudar a atitude dela. Caso aprenda novamente essa magia, seu custo diminui em –1 PM.",
+    "origem_arquivo": "manto_ardiloso.json",
+    "dados_brutos": {
+      "id": "manto_ardiloso",
+      "name": "Manto Ardiloso",
+      "deities": [
+        "sszzaas"
+      ],
+      "description": "Você aprende a magia Disfarce Ilusório (CD Car). Na primeira vez que interage com alguém enquanto está sob efeito dessa magia, você recebe +10 no teste de Diplomacia para mudar a atitude dela. Caso aprenda novamente essa magia, seu custo diminui em –1 PM.",
+      "effects": {
+        "type": "passivo",
+        "efeito": "aprende Disfarce Ilusório (CD Car); +10 em Diplomacia na primeira interação sob o efeito; aprender de novo reduz custo em -1 PM"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "manto_da_penumbra": {
+    "key": "manto_da_penumbra",
+    "nome": "Manto da Penumbra",
+    "descricao": "Você aprende e pode lançar Escuridão. Caso aprenda novamente essa magia, seu custo diminui em –1 PM.",
+    "origem_arquivo": "manto_da_penumbra.json",
+    "dados_brutos": {
+      "id": "manto_da_penumbra",
+      "name": "Manto da Penumbra",
+      "deities": [
+        "tenebra"
+      ],
+      "description": "Você aprende e pode lançar Escuridão. Caso aprenda novamente essa magia, seu custo diminui em –1 PM.",
+      "effects": {
+        "type": "passive",
+        "grants_spell": "Escuridão",
+        "spell_cost_reduction": {
+          "spell": "Escuridão",
+          "reduction": 1
+        }
+      }
+    }
+  },
+  "mar_revolto": {
+    "key": "mar_revolto",
+    "nome": "Mar Revolto",
+    "descricao": "Você pode gastar 1 PM para gerar uma aura de 6m de raio com duração sustentada. No início de seus turnos, criaturas a sua escolha na área devem passar em um teste de Acrobacia (CD Sab, +5 se a criatura estiver dentro da água) para não cair.",
+    "origem_arquivo": "mar_revolto.json",
+    "dados_brutos": {
+      "id": "mar_revolto",
+      "name": "Mar Revolto",
+      "deities": [
+        "oceano"
+      ],
+      "description": "Você pode gastar 1 PM para gerar uma aura de 6m de raio com duração sustentada. No início de seus turnos, criaturas a sua escolha na área devem passar em um teste de Acrobacia (CD Sab, +5 se a criatura estiver dentro da água) para não cair.",
+      "effects": {
+        "type": "ativado",
+        "custo_pm": 1,
+        "duracao": "sustentada",
+        "alcance": "6m de raio",
+        "efeito": "no início dos turnos, criaturas escolhidas na área devem passar em Acrobacia (CD Sab, +5 se estiver na água) ou ficam caídas"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "mediador_da_tempestade": {
+    "key": "mediador_da_tempestade",
+    "nome": "Mediador da Tempestade",
+    "descricao": "Você pode se comunicar com lefeu inteligentes (Int –3 ou maior) livremente e recebe +5 em testes de Diplomacia e Intuição com criaturas da Tormenta e devotos de Aharadak.",
+    "origem_arquivo": "mediador_da_tempestade.json",
+    "dados_brutos": {
+      "id": "mediador_da_tempestade",
+      "name": "Mediador da Tempestade",
+      "deities": [
+        "aharadak"
+      ],
+      "description": "Você pode se comunicar com lefeu inteligentes (Int –3 ou maior) livremente e recebe +5 em testes de Diplomacia e Intuição com criaturas da Tormenta e devotos de Aharadak.",
+      "effects": {
+        "type": "passivo",
+        "efeito": "comunicação livre com lefeu inteligentes (Int -3 ou maior); +5 em Diplomacia e Intuição com criaturas da Tormenta e devotos de Aharadak"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "mente_analitica": {
+    "key": "mente_analitica",
+    "nome": "Mente Analítica",
+    "descricao": "Você recebe +2 em Intuição, Investigação e Vontade.",
+    "origem_arquivo": "mente_analitica.json",
+    "dados_brutos": {
+      "id": "mente_analitica",
+      "name": "Mente Analítica",
+      "deities": [
+        "tanna_toh"
+      ],
+      "description": "Você recebe +2 em Intuição, Investigação e Vontade.",
+      "effects": {
+        "type": "passive",
+        "skill_bonuses": [
+          {
+            "skill": "Intuição",
+            "bonus": 2
+          },
+          {
+            "skill": "Investigação",
+            "bonus": 2
+          }
+        ],
+        "save_bonuses": [
+          {
+            "save": "Vontade",
+            "bonus": 2
+          }
+        ]
+      }
+    }
+  },
+  "mente_vazia": {
+    "key": "mente_vazia",
+    "nome": "Mente Vazia",
+    "descricao": "Você recebe +2 em Iniciativa, Percepção e Vontade.",
+    "origem_arquivo": "mente_vazia.json",
+    "dados_brutos": {
+      "id": "mente_vazia",
+      "name": "Mente Vazia",
+      "deities": [
+        "lin_wu"
+      ],
+      "description": "Você recebe +2 em Iniciativa, Percepção e Vontade.",
+      "effects": {
+        "type": "passive",
+        "initiative_bonus": 2,
+        "skill_bonuses": [
+          {
+            "skill": "Percepção",
+            "bonus": 2
+          }
+        ],
+        "save_bonuses": [
+          {
+            "save": "Vontade",
+            "bonus": 2
+          }
+        ]
+      }
+    }
+  },
+  "mestre_de_si": {
+    "key": "mestre_de_si",
+    "nome": "Mestre de Si",
+    "descricao": "Você passa automaticamente no primeiro teste de Vontade contra um efeito de um inimigo que fizer a cada cena.",
+    "origem_arquivo": "mestre_de_si.json",
+    "dados_brutos": {
+      "id": "mestre_de_si",
+      "name": "Mestre de Si",
+      "deities": [
+        "lin_wu"
+      ],
+      "description": "Você passa automaticamente no primeiro teste de Vontade contra um efeito de um inimigo que fizer a cada cena.",
+      "effects": {
+        "type": "passivo",
+        "frequencia": "1x_por_cena",
+        "efeito": "sucesso automático no primeiro teste de Vontade contra efeito de inimigo na cena"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "mestre_dos_mares": {
+    "key": "mestre_dos_mares",
+    "nome": "Mestre dos Mares",
+    "descricao": "Você pode falar com animais aquáticos (como o efeito da magia Voz Divina) e aprende e pode lançar Acalmar Animal, mas só contra criaturas aquáticas. Caso aprenda novamente essa magia, seu custo diminui em –1 PM.",
+    "origem_arquivo": "mestre_dos_mares.json",
+    "dados_brutos": {
+      "id": "mestre_dos_mares",
+      "name": "Mestre dos Mares",
+      "deities": [
+        "oceano"
+      ],
+      "description": "Você pode falar com animais aquáticos (como o efeito da magia Voz Divina) e aprende e pode lançar Acalmar Animal, mas só contra criaturas aquáticas. Caso aprenda novamente essa magia, seu custo diminui em –1 PM.",
+      "effects": {
+        "type": "passive",
+        "communication": "animais aquáticos",
+        "grants_spell": {
+          "spell": "Acalmar Animal",
+          "restriction": "apenas criaturas aquáticas"
+        },
+        "spell_cost_reduction": {
+          "spell": "Acalmar Animal",
+          "reduction": 1
+        }
+      }
+    }
+  },
+  "mordida_de_vibora": {
+    "key": "mordida_de_vibora",
+    "nome": "Mordida de Víbora",
+    "descricao": "Você recebe uma arma natural de mordida (dano 1d6, crítico x2, perfuração). Suas presas são retráteis e podem armazenar até 2 doses de veneno de contato. Uma vez por rodada, quando usa a ação agredir para atacar com outra arma, você pode gastar 1 PM para fazer um ataque corpo a corpo extra com a mordida. Se acertar, pode inocular uma das doses de veneno no alvo.",
+    "origem_arquivo": "mordida_de_vibora.json",
+    "dados_brutos": {
+      "id": "mordida_de_vibora",
+      "name": "Mordida de Víbora",
+      "deities": [
+        "sszzaas"
+      ],
+      "description": "Você recebe uma arma natural de mordida (dano 1d6, crítico x2, perfuração). Suas presas são retráteis e podem armazenar até 2 doses de veneno de contato. Uma vez por rodada, quando usa a ação agredir para atacar com outra arma, você pode gastar 1 PM para fazer um ataque corpo a corpo extra com a mordida. Se acertar, pode inocular uma das doses de veneno no alvo.",
+      "effects": {
+        "type": "passivo",
+        "efeito": "arma natural de mordida (1d6, crítico x2, perfuração) que armazena até 2 doses de veneno de contato",
+        "extra": {
+          "type": "ativado",
+          "frequencia": "1x_por_rodada",
+          "gatilho": "usar a ação agredir com outra arma",
+          "custo_pm": 1,
+          "efeito": "ataque corpo a corpo extra com a mordida; se acertar, pode inocular uma dose de veneno armazenada"
+        }
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "navegador_sagrado": {
+    "key": "navegador_sagrado",
+    "nome": "Navegador Sagrado",
+    "descricao": "Você pode usar Sabedoria para Pilotagem (em vez de Destreza) e, enquanto estiver em uma embarcação aquática, suas magias divinas custam –2 PM.",
+    "origem_arquivo": "navegador_sagrado.json",
+    "dados_brutos": {
+      "id": "navegador_sagrado",
+      "name": "Navegador Sagrado",
+      "deities": [
+        "oceano"
+      ],
+      "description": "Você pode usar Sabedoria para Pilotagem (em vez de Destreza) e, enquanto estiver em uma embarcação aquática, suas magias divinas custam –2 PM.",
+      "effects": {
+        "type": "passivo",
+        "efeito": "usa Sabedoria para Pilotagem (em vez de Destreza); magias divinas custam -2 PM enquanto estiver em embarcação aquática"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "o_dobro_ou_nada": {
+    "key": "o_dobro_ou_nada",
+    "nome": "O Dobro ou Nada",
+    "descricao": "Quando usa uma habilidade com custo em PM, você pode pagar o dobro desse custo (após aplicar efeitos que alterem o custo) para aumentar a CD da habilidade em +5. Se pelo menos um alvo passar no teste de resistência, você fica alquebrado. Este poder não pode ser usado em magias, incluindo simuladas.",
+    "origem_arquivo": "o_dobro_ou_nada.json",
+    "dados_brutos": {
+      "id": "o_dobro_ou_nada",
+      "name": "O Dobro ou Nada",
+      "deities": [
+        "hyninn",
+        "nimb"
+      ],
+      "description": "Quando usa uma habilidade com custo em PM, você pode pagar o dobro desse custo (após aplicar efeitos que alterem o custo) para aumentar a CD da habilidade em +5. Se pelo menos um alvo passar no teste de resistência, você fica alquebrado. Este poder não pode ser usado em magias, incluindo simuladas.",
+      "effects": {
+        "type": "ativado",
+        "gatilho": "usar habilidade com custo em PM (exceto magias ou habilidades que as simulem)",
+        "custo_pm": "dobro do custo normal (após outros modificadores)",
+        "efeito": "CD da habilidade aumenta em +5",
+        "risco": "se ao menos um alvo passar na resistência, fica alquebrado"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "o_futuro_que_vier_disso": {
+    "key": "o_futuro_que_vier_disso",
+    "nome": "O Futuro que Vier Disso",
+    "descricao": "Quando faz um teste, você pode rolar um dado a sua escolha (d4 a d20) e somar o resultado a esse teste. Quando você faz isso, o mestre recebe um dado do mesmo tipo, que pode gastar para aplicar como penalidade em um de seus testes até o fim da próxima sessão. Você não pode usar este poder novamente na mesma sessão até que o mestre use o dado que recebeu.",
+    "origem_arquivo": "o_futuro_que_vier_disso.json",
+    "dados_brutos": {
+      "id": "o_futuro_que_vier_disso",
+      "name": "O Futuro que Vier Disso",
+      "deities": [
+        "thwor"
+      ],
+      "description": "Quando faz um teste, você pode rolar um dado a sua escolha (d4 a d20) e somar o resultado a esse teste. Quando você faz isso, o mestre recebe um dado do mesmo tipo, que pode gastar para aplicar como penalidade em um de seus testes até o fim da próxima sessão. Você não pode usar este poder novamente na mesma sessão até que o mestre use o dado que recebeu.",
+      "effects": {
+        "type": "ativado",
+        "gatilho": "fazer um teste",
+        "efeito": "rola um dado à escolha (d4 a d20) e soma ao teste",
+        "custo": "o mestre recebe um dado do mesmo tipo para aplicar como penalidade em um teste seu até o fim da próxima sessão",
+        "restricao": "não pode usar de novo na mesma sessão até o mestre gastar o dado recebido"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "o_sol_que_nos_aquece": {
+    "key": "o_sol_que_nos_aquece",
+    "nome": "O Sol que nos Aquece",
+    "descricao": "Você pode gastar uma ação padrão e 2 PM para projetar uma aura de luz solar em um raio de 6m. Nessa área, habilidades mágicas de fogo ou luz e relacionadas a plantas (como Controlar Plantas) custam –1 PM (cumulativo com outras reduções) e criaturas com sensibilidade a luz e mortos-vivos ficam vulneráveis.",
+    "origem_arquivo": "o_sol_que_nos_aquece.json",
+    "dados_brutos": {
+      "id": "o_sol_que_nos_aquece",
+      "name": "O Sol que nos Aquece",
+      "deities": [
+        "allihanna",
+        "azgher"
+      ],
+      "description": "Você pode gastar uma ação padrão e 2 PM para projetar uma aura de luz solar em um raio de 6m. Nessa área, habilidades mágicas de fogo ou luz e relacionadas a plantas (como Controlar Plantas) custam –1 PM (cumulativo com outras reduções) e criaturas com sensibilidade a luz e mortos-vivos ficam vulneráveis.",
+      "effects": {
+        "type": "ativado",
+        "acao": "padrão",
+        "custo_pm": 2,
+        "alcance": "6m de raio",
+        "efeito": "habilidades mágicas de fogo, luz ou relacionadas a plantas custam -1 PM (cumulativo); criaturas com sensibilidade a luz e mortos-vivos ficam vulneráveis na área"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "olhar_amedrontador": {
+    "key": "olhar_amedrontador",
+    "nome": "Olhar Amedrontador",
+    "descricao": "Você aprende e pode lançar Amedrontar. Caso aprenda novamente essa magia, seu custo diminui em –1 PM.",
+    "origem_arquivo": "olhar_amedrontador.json",
+    "dados_brutos": {
+      "id": "olhar_amedrontador",
+      "name": "Olhar Amedrontador",
+      "deities": [
+        "megalokk",
+        "thwor"
+      ],
+      "description": "Você aprende e pode lançar Amedrontar. Caso aprenda novamente essa magia, seu custo diminui em –1 PM.",
+      "effects": {
+        "type": "passive",
+        "grants_spell": "Amedrontar",
+        "spell_cost_reduction": {
+          "spell": "Amedrontar",
+          "reduction": 1
+        }
+      }
+    }
+  },
+  "palavra_de_poder": {
+    "key": "palavra_de_poder",
+    "nome": "Palavra de Poder",
+    "descricao": "Você aprende e pode lançar Comando. Caso aprenda novamente essa magia, seu custo diminui em –1 PM.",
+    "origem_arquivo": "palavra_de_poder.json",
+    "dados_brutos": {
+      "id": "palavra_de_poder",
+      "name": "Palavra de Poder",
+      "deities": [
+        "tanna_toh"
+      ],
+      "description": "Você aprende e pode lançar Comando. Caso aprenda novamente essa magia, seu custo diminui em –1 PM.",
+      "effects": {
+        "type": "passivo",
+        "efeito": "aprende e pode lançar Comando; aprender de novo reduz o custo em -1 PM"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "palavras_de_bondade": {
+    "key": "palavras_de_bondade",
+    "nome": "Palavras de Bondade",
+    "descricao": "Você aprende e pode lançar Enfeitiçar. Caso aprenda novamente essa magia, seu custo diminui em –1 PM.",
+    "origem_arquivo": "palavras_de_bondade.json",
+    "dados_brutos": {
+      "id": "palavras_de_bondade",
+      "name": "Palavras de Bondade",
+      "deities": [
+        "marah"
+      ],
+      "description": "Você aprende e pode lançar Enfeitiçar. Caso aprenda novamente essa magia, seu custo diminui em –1 PM.",
+      "effects": {
+        "type": "passive",
+        "grants_spell": "Enfeitiçar",
+        "spell_cost_reduction": {
+          "spell": "Enfeitiçar",
+          "reduction": 1
+        }
+      }
+    }
+  },
+  "passo_sombrio": {
+    "key": "passo_sombrio",
+    "nome": "Passo Sombrio",
+    "descricao": "Uma vez por rodada, você pode gastar 2 PM para se teleportar para um espaço desocupado em alcance curto. Se tanto você quanto esse espaço estiverem sob escuridão, o custo deste poder diminui em –1 PM. Você não pode usar este poder se estiver imóvel.",
+    "origem_arquivo": "passo_sombrio.json",
+    "dados_brutos": {
+      "id": "passo_sombrio",
+      "name": "Passo Sombrio",
+      "deities": [
+        "tenebra"
+      ],
+      "description": "Uma vez por rodada, você pode gastar 2 PM para se teleportar para um espaço desocupado em alcance curto. Se tanto você quanto esse espaço estiverem sob escuridão, o custo deste poder diminui em –1 PM. Você não pode usar este poder se estiver imóvel.",
+      "effects": {
+        "type": "ativado",
+        "frequencia": "1x_por_rodada",
+        "custo_pm": 2,
+        "alcance": "curto",
+        "efeito": "teleporta para espaço desocupado em alcance curto",
+        "reducao": "-1 PM se você e o destino estiverem sob escuridão",
+        "restricao": "não pode ser usado se estiver imóvel"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "perceber_farsas": {
+    "key": "perceber_farsas",
+    "nome": "Perceber Farsas",
+    "descricao": "Você recebe +5 em Intuição e se torna imune a efeitos de ilusão.",
+    "origem_arquivo": "perceber_farsas.json",
+    "dados_brutos": {
+      "id": "perceber_farsas",
+      "name": "Perceber Farsas",
+      "deities": [
+        "tanna_toh"
+      ],
+      "description": "Você recebe +5 em Intuição e se torna imune a efeitos de ilusão.",
+      "effects": {
+        "type": "passivo",
+        "efeito": "+5 em Intuição; imunidade a efeitos de ilusão"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "percepcao_temporal": {
+    "key": "percepcao_temporal",
+    "nome": "Percepção Temporal",
+    "descricao": "Você pode gastar 3 PM para somar sua Sabedoria (limitado por seu nível e não cumulativo com efeitos que somam este atributo) a seus ataques, Defesa e testes de Reflexos até o fim da cena.",
+    "origem_arquivo": "percepcao_temporal.json",
+    "dados_brutos": {
+      "id": "percepcao_temporal",
+      "name": "Percepção Temporal",
+      "deities": [
+        "aharadak"
+      ],
+      "description": "Você pode gastar 3 PM para somar sua Sabedoria (limitado por seu nível e não cumulativo com efeitos que somam este atributo) a seus ataques, Defesa e testes de Reflexos até o fim da cena.",
+      "effects": {
+        "type": "active",
+        "cost": "3 PM",
+        "duration": "cena",
+        "attribute_bonus": {
+          "attribute": "Sabedoria",
+          "applies_to": [
+            "ataques",
+            "Defesa",
+            "Reflexos"
+          ],
+          "limit": "nível",
+          "stacking": "não cumulativo"
+        }
+      }
+    }
+  },
+  "pesquisa_abencoada": {
+    "key": "pesquisa_abencoada",
+    "nome": "Pesquisa Abençoada",
+    "descricao": "Se passar uma hora pesquisando seus livros e anotações, você pode rolar novamente um teste de perícia baseada em Inteligência ou Sabedoria que tenha feito desde a última cena. Se tiver acesso a mais livros, você recebe um bônus no teste: +2 para uma coleção particular ou biblioteca pequena e +5 para a biblioteca de um templo ou universidade.",
+    "origem_arquivo": "pesquisa_abencoada.json",
+    "dados_brutos": {
+      "id": "pesquisa_abencoada",
+      "name": "Pesquisa Abençoada",
+      "deities": [
+        "tanna_toh"
+      ],
+      "description": "Se passar uma hora pesquisando seus livros e anotações, você pode rolar novamente um teste de perícia baseada em Inteligência ou Sabedoria que tenha feito desde a última cena. Se tiver acesso a mais livros, você recebe um bônus no teste: +2 para uma coleção particular ou biblioteca pequena e +5 para a biblioteca de um templo ou universidade.",
+      "effects": {
+        "type": "active",
+        "time_required": "1 hora",
+        "benefit": "rolar novamente teste de perícia baseada em Int ou Sab desde a última cena",
+        "conditional_bonus": [
+          {
+            "condition": "coleção particular ou biblioteca pequena",
+            "bonus": 2
+          },
+          {
+            "condition": "biblioteca de templo ou universidade",
+            "bonus": 5
+          }
+        ]
+      }
+    }
+  },
+  "pilar_de_heredrimm": {
+    "key": "pilar_de_heredrimm",
+    "nome": "Pilar de Heredrimm",
+    "descricao": "Você pode gastar 2 PM para receber +2 na Defesa e redução de dano 5 até o fim da cena ou até encerrar este poder (uma ação livre). Enquanto esse efeito estiver ativo, seu deslocamento é reduzido à metade.",
+    "origem_arquivo": "pilar_de_heredrimm.json",
+    "dados_brutos": {
+      "id": "pilar_de_heredrimm",
+      "name": "Pilar de Heredrimm",
+      "deities": [
+        "khalmyr"
+      ],
+      "description": "Você pode gastar 2 PM para receber +2 na Defesa e redução de dano 5 até o fim da cena ou até encerrar este poder (uma ação livre). Enquanto esse efeito estiver ativo, seu deslocamento é reduzido à metade.",
+      "effects": {
+        "type": "ativado",
+        "custo_pm": 2,
+        "duracao": "até o fim da cena ou até encerrar (ação livre)",
+        "efeito": "+2 na Defesa e RD 5",
+        "penalidade": "deslocamento reduzido à metade enquanto ativo"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "poder_do_vinculo": {
+    "key": "poder_do_vinculo",
+    "nome": "Poder do Vínculo",
+    "descricao": "Você pode gastar uma ação de movimento e uma quantidade de PM (limitada ao círculo de magias a que tem acesso) para tocar em uma criatura capaz de lançar magias. O custo em PM da próxima magia que ela lançar diminui em um valor igual aos PM que você gastou.",
+    "origem_arquivo": "poder_do_vinculo.json",
+    "dados_brutos": {
+      "id": "poder_do_vinculo",
+      "name": "Poder do Vínculo",
+      "deities": [
+        "wynna"
+      ],
+      "description": "Você pode gastar uma ação de movimento e uma quantidade de PM (limitada ao círculo de magias a que tem acesso) para tocar em uma criatura capaz de lançar magias. O custo em PM da próxima magia que ela lançar diminui em um valor igual aos PM que você gastou.",
+      "effects": {
+        "type": "ativado",
+        "acao": "movimento",
+        "custo_pm": "variável, limitado ao círculo de magias a que tem acesso",
+        "efeito": "a próxima magia lançada pelo alvo tocado custa -X PM, onde X é a quantidade de PM gasta"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "poder_oculto": {
+    "key": "poder_oculto",
+    "nome": "Poder Oculto",
+    "descricao": "Você pode gastar uma ação de movimento e 2 PM para invocar a força, a rapidez ou o vigor dos loucos. Role 1d6 para receber +2 em Força (1 ou 2), Destreza (3 ou 4) ou Constituição (5 ou 6) até o fim da cena. Você pode usar este poder várias vezes, mas bônus no mesmo atributo não são cumulativos.",
+    "origem_arquivo": "poder_oculto.json",
+    "dados_brutos": {
+      "id": "poder_oculto",
+      "name": "Poder Oculto",
+      "deities": [
+        "nimb"
+      ],
+      "description": "Você pode gastar uma ação de movimento e 2 PM para invocar a força, a rapidez ou o vigor dos loucos. Role 1d6 para receber +2 em Força (1 ou 2), Destreza (3 ou 4) ou Constituição (5 ou 6) até o fim da cena. Você pode usar este poder várias vezes, mas bônus no mesmo atributo não são cumulativos.",
+      "effects": {
+        "type": "active",
+        "cost": "2 PM",
+        "action": "ação de movimento",
+        "duration": "cena",
+        "random_bonus": {
+          "dice": "1d6",
+          "results": [
+            {
+              "roll": "1-2",
+              "attribute": "Força",
+              "bonus": 2
+            },
+            {
+              "roll": "3-4",
+              "attribute": "Destreza",
+              "bonus": 2
+            },
+            {
+              "roll": "5-6",
+              "attribute": "Constituição",
+              "bonus": 2
+            }
+          ],
+          "stacking": "não cumulativo no mesmo atributo"
+        }
+      }
+    }
+  },
+  "poder_sem_limites": {
+    "key": "poder_sem_limites",
+    "nome": "Poder Sem Limites",
+    "descricao": "A CD e os limites de PM de suas habilidades (exceto magias e habilidades que as simulem) aumentam em um valor igual ao seu patamar.",
+    "origem_arquivo": "poder_sem_limites.json",
+    "dados_brutos": {
+      "id": "poder_sem_limites",
+      "name": "Poder Sem Limites",
+      "deities": [
+        "kallyadranoch"
+      ],
+      "description": "A CD e os limites de PM de suas habilidades (exceto magias e habilidades que as simulem) aumentam em um valor igual ao seu patamar.",
+      "effects": {
+        "type": "passivo",
+        "escopo": "habilidades que não sejam magias ou simulem magias",
+        "efeito": "CD e limites de PM aumentam em valor igual ao patamar"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "presas_primordiais": {
+    "key": "presas_primordiais",
+    "nome": "Presas Primordiais",
+    "descricao": "Você pode gastar 1 PM para transformar seus dentes em presas afiadas até o fim da cena. Você recebe uma arma natural de mordida (dano 1d6, crítico x2, perfuração). Uma vez por rodada, quando usa a ação agredir com outra arma, você pode gastar 1 PM para fazer um ataque corpo a corpo extra com a mordida. Se já possuir outro ataque natural de mordida, em vez disso, o dano desse ataque aumenta em dois passos.",
+    "origem_arquivo": "presas_primordiais.json",
+    "dados_brutos": {
+      "id": "presas_primordiais",
+      "name": "Presas Primordiais",
+      "deities": [
+        "kallyadranoch",
+        "megalokk"
+      ],
+      "description": "Você pode gastar 1 PM para transformar seus dentes em presas afiadas até o fim da cena. Você recebe uma arma natural de mordida (dano 1d6, crítico x2, perfuração). Uma vez por rodada, quando usa a ação agredir com outra arma, você pode gastar 1 PM para fazer um ataque corpo a corpo extra com a mordida. Se já possuir outro ataque natural de mordida, em vez disso, o dano desse ataque aumenta em dois passos.",
+      "effects": {
+        "type": "active",
+        "cost": "1 PM",
+        "duration": "cena",
+        "grants_natural_weapon": {
+          "type": "mordida",
+          "damage": "1d6",
+          "critical": "x2",
+          "damage_type": "perfuração"
+        },
+        "extra_attack": {
+          "cost": "1 PM",
+          "frequency": "1/rodada",
+          "trigger": "ao usar ação agredir com outra arma"
+        },
+        "alternative": "se já possuir mordida, dano aumenta em dois passos"
+      }
+    }
+  },
+  "presas_venenosas": {
+    "key": "presas_venenosas",
+    "nome": "Presas Venenosas",
+    "descricao": "Você pode gastar uma ação de movimento e 1 PM para envenenar uma arma corpo a corpo que esteja empunhando. Em caso de acerto, a arma causa perda de 1d12 pontos de vida. A arma permanece envenenada até atingir uma criatura ou até o fim da cena, o que acontecer primeiro.",
+    "origem_arquivo": "presas_venenosas.json",
+    "dados_brutos": {
+      "id": "presas_venenosas",
+      "name": "Presas Venenosas",
+      "deities": [
+        "sszzaas"
+      ],
+      "description": "Você pode gastar uma ação de movimento e 1 PM para envenenar uma arma corpo a corpo que esteja empunhando. Em caso de acerto, a arma causa perda de 1d12 pontos de vida. A arma permanece envenenada até atingir uma criatura ou até o fim da cena, o que acontecer primeiro.",
+      "effects": {
+        "type": "active",
+        "cost": "1 PM",
+        "action": "ação de movimento",
+        "target": "arma corpo a corpo empunhada",
+        "poison": {
+          "damage": "1d12 PV",
+          "duration": "até acertar uma criatura ou fim da cena"
+        }
+      }
+    }
+  },
+  "proeminencia_solar": {
+    "key": "proeminencia_solar",
+    "nome": "Proeminência Solar",
+    "descricao": "Suas magias que causam dano de fogo e que têm um teste de resistência recebem o seguinte aprimoramento: +1 PM: criaturas que falhem na resistência ficam em chamas e lentas até apagarem as chamas.",
+    "origem_arquivo": "proeminencia_solar.json",
+    "dados_brutos": {
+      "id": "proeminencia_solar",
+      "name": "Proeminência Solar",
+      "deities": [
+        "azgher"
+      ],
+      "description": "Suas magias que causam dano de fogo e que têm um teste de resistência recebem o seguinte aprimoramento: +1 PM: criaturas que falhem na resistência ficam em chamas e lentas até apagarem as chamas.",
+      "effects": {
+        "type": "aprimoramento_de_magia",
+        "escopo": "magias de dano de fogo com teste de resistência",
+        "custo_pm": 1,
+        "efeito": "criaturas que falharem na resistência ficam em chamas e lentas até apagarem o fogo"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "quebrar_encanto": {
+    "key": "quebrar_encanto",
+    "nome": "Quebrar Encanto",
+    "descricao": "Você recebe +2 em testes de ataque para quebrar. Quando usa essa manobra, você pode gastar 2 PM. Se você acertar o ataque, o item e seu portador sofrem o efeito de Dissipar Magia, usando o resultado do teste de quebrar como teste de Misticismo e CD para resistir.",
+    "origem_arquivo": "quebrar_encanto.json",
+    "dados_brutos": {
+      "id": "quebrar_encanto",
+      "name": "Quebrar Encanto",
+      "deities": [
+        "khalmyr"
+      ],
+      "description": "Você recebe +2 em testes de ataque para quebrar. Quando usa essa manobra, você pode gastar 2 PM. Se você acertar o ataque, o item e seu portador sofrem o efeito de Dissipar Magia, usando o resultado do teste de quebrar como teste de Misticismo e CD para resistir.",
+      "effects": {
+        "type": "passivo",
+        "efeito": "+2 em testes de ataque para quebrar",
+        "extra": {
+          "type": "ativado",
+          "gatilho": "usar a manobra quebrar",
+          "custo_pm": 2,
+          "efeito": "se acertar, item e portador sofrem Dissipar Magia, usando o resultado do teste de quebrar como teste de Misticismo e CD"
+        }
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "redirecionar_destino": {
+    "key": "redirecionar_destino",
+    "nome": "Redirecionar Destino",
+    "descricao": "No início de cada dia, role um d20 e anote seu valor. Uma vez por rodada, quando uma criatura em alcance curto faz um teste, você pode gastar 3 PM para substituir o resultado do d20 desse teste pelo último valor anotado para este poder. O resultado do d20 substituído se torna seu novo valor anotado.",
+    "origem_arquivo": "redirecionar_destino.json",
+    "dados_brutos": {
+      "id": "redirecionar_destino",
+      "name": "Redirecionar Destino",
+      "deities": [
+        "thyatis"
+      ],
+      "description": "No início de cada dia, role um d20 e anote seu valor. Uma vez por rodada, quando uma criatura em alcance curto faz um teste, você pode gastar 3 PM para substituir o resultado do d20 desse teste pelo último valor anotado para este poder. O resultado do d20 substituído se torna seu novo valor anotado.",
+      "effects": {
+        "type": "ativado",
+        "preparo": "role 1d20 no início de cada dia e anote o valor",
+        "frequencia": "1x_por_rodada",
+        "custo_pm": 3,
+        "gatilho": "criatura em alcance curto faz um teste",
+        "efeito": "substitui o d20 do teste pelo valor anotado; o resultado substituído se torna o novo valor anotado"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "rejeicao_divina": {
+    "key": "rejeicao_divina",
+    "nome": "Rejeição Divina",
+    "descricao": "Você recebe resistência a magia divina +5.",
+    "origem_arquivo": "rejeicao_divina.json",
+    "dados_brutos": {
+      "id": "rejeicao_divina",
+      "name": "Rejeição Divina",
+      "deities": [
+        "aharadak"
+      ],
+      "description": "Você recebe resistência a magia divina +5.",
+      "effects": {
+        "type": "passive",
+        "spell_resistance": {
+          "type": "magia divina",
+          "value": 5
+        }
+      }
+    }
+  },
+  "remorso_do_belicista": {
+    "key": "remorso_do_belicista",
+    "nome": "Remorso do Belicista",
+    "descricao": "Uma vez por rodada, quando sofre dano de um inimigo, você pode gastar 1 PM. Se fizer isso, ele sofre uma penalidade cumulativa de –2 em testes de ataque e rolagens de dano até o fim da cena. Mental.",
+    "origem_arquivo": "remorso_do_belicista.json",
+    "dados_brutos": {
+      "id": "remorso_do_belicista",
+      "name": "Remorso do Belicista",
+      "deities": [
+        "marah"
+      ],
+      "description": "Uma vez por rodada, quando sofre dano de um inimigo, você pode gastar 1 PM. Se fizer isso, ele sofre uma penalidade cumulativa de –2 em testes de ataque e rolagens de dano até o fim da cena. Mental.",
+      "effects": {
+        "type": "ativado",
+        "frequencia": "1x_por_rodada",
+        "gatilho": "sofrer dano de um inimigo",
+        "custo_pm": 1,
+        "efeito": "o inimigo sofre -2 cumulativo em testes de ataque e rolagens de dano até o fim da cena",
+        "tag": "mental"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "reparar_injustica": {
+    "key": "reparar_injustica",
+    "nome": "Reparar Injustiça",
+    "descricao": "Uma vez por rodada, quando um oponente em alcance curto acerta um ataque em você ou em um de seus aliados, você pode gastar 2 PM para fazer este oponente repetir o ataque, escolhendo o pior entre os dois resultados.",
+    "origem_arquivo": "reparar_injustica.json",
+    "dados_brutos": {
+      "id": "reparar_injustica",
+      "name": "Reparar Injustiça",
+      "deities": [
+        "khalmyr"
+      ],
+      "description": "Uma vez por rodada, quando um oponente em alcance curto acerta um ataque em você ou em um de seus aliados, você pode gastar 2 PM para fazer este oponente repetir o ataque, escolhendo o pior entre os dois resultados.",
+      "effects": {
+        "type": "active",
+        "cost": "2 PM",
+        "frequency": "1/rodada",
+        "trigger": "oponente em alcance curto acerta ataque em você ou aliado",
+        "effect": "oponente repete o ataque, escolhendo o pior resultado"
+      }
+    }
+  },
+  "resplendor_divino": {
+    "key": "resplendor_divino",
+    "nome": "Resplendor Divino",
+    "descricao": "Você pode gastar 2 PM para gerar uma aura de luz solar com 9m de raio que dura até o fim da cena. Além de sofrer os efeitos de exposição à luz, criaturas dentro da aura perdem toda camuflagem por escuridão e efeitos semelhantes (como da cobertura de sombras do aprimoramento da magia Escuridão).",
+    "origem_arquivo": "resplendor_divino.json",
+    "dados_brutos": {
+      "id": "resplendor_divino",
+      "name": "Resplendor Divino",
+      "deities": [
+        "azgher"
+      ],
+      "description": "Você pode gastar 2 PM para gerar uma aura de luz solar com 9m de raio que dura até o fim da cena. Além de sofrer os efeitos de exposição à luz, criaturas dentro da aura perdem toda camuflagem por escuridão e efeitos semelhantes (como da cobertura de sombras do aprimoramento da magia Escuridão).",
+      "effects": {
+        "type": "ativado",
+        "custo_pm": 2,
+        "alcance": "9m de raio",
+        "duracao": "até o fim da cena",
+        "efeito": "criaturas na área sofrem exposição à luz e perdem camuflagem por escuridão e efeitos semelhantes"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "sangue_de_ferro": {
+    "key": "sangue_de_ferro",
+    "nome": "Sangue de Ferro",
+    "descricao": "Você pode pagar 3 PM para receber +2 em rolagens de dano e redução de dano 5 até o fim da cena.",
+    "origem_arquivo": "sangue_de_ferro.json",
+    "dados_brutos": {
+      "id": "sangue_de_ferro",
+      "name": "Sangue de Ferro",
+      "deities": [
+        "arsenal"
+      ],
+      "description": "Você pode pagar 3 PM para receber +2 em rolagens de dano e redução de dano 5 até o fim da cena.",
+      "effects": {
+        "type": "active",
+        "cost": "3 PM",
+        "duration": "cena",
+        "damage_bonus": 2,
+        "damage_reduction": 5
+      }
+    }
+  },
+  "sangue_ofidico": {
+    "key": "sangue_ofidico",
+    "nome": "Sangue Ofídico",
+    "descricao": "Você recebe resistência a veneno +5 e a CD para resistir aos seus venenos aumenta em +2.",
+    "origem_arquivo": "sangue_ofidico.json",
+    "dados_brutos": {
+      "id": "sangue_ofidico",
+      "name": "Sangue Ofídico",
+      "deities": [
+        "sszzaas"
+      ],
+      "description": "Você recebe resistência a veneno +5 e a CD para resistir aos seus venenos aumenta em +2.",
+      "effects": {
+        "type": "passive",
+        "resistance": {
+          "type": "veneno",
+          "value": 5
+        },
+        "poison_dc_bonus": 2
+      }
+    }
+  },
+  "saque_celestial": {
+    "key": "saque_celestial",
+    "nome": "Saque Celestial",
+    "descricao": "Você pode gastar 1 PM para sacar ou guardar uma arma como uma ação livre. Se sacar sua arma e fizer um ataque corpo a corpo no mesmo turno, você recebe +2 nesse teste de ataque e seu dano aumenta em dois passos (apenas uma vez contra cada criatura por cena).",
+    "origem_arquivo": "saque_celestial.json",
+    "dados_brutos": {
+      "id": "saque_celestial",
+      "name": "Saque Celestial",
+      "deities": [
+        "lin_wu"
+      ],
+      "description": "Você pode gastar 1 PM para sacar ou guardar uma arma como uma ação livre. Se sacar sua arma e fizer um ataque corpo a corpo no mesmo turno, você recebe +2 nesse teste de ataque e seu dano aumenta em dois passos (apenas uma vez contra cada criatura por cena).",
+      "effects": {
+        "type": "ativado",
+        "custo_pm": 1,
+        "acao": "livre",
+        "efeito": "saca ou guarda uma arma; se sacar e atacar corpo a corpo no mesmo turno, +2 no teste de ataque e dano aumenta 2 passos (uma vez por criatura por cena)"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "ser_nimb": {
+    "key": "ser_nimb",
+    "nome": "Nimb",
+    "descricao": "Você é Nimb. Ou um filho ou filha dele. Ou uma casca de banana na qual ele escorregou certa vez. Você pode gastar uma ação padrão e 2 PM para gerar uma habilidade única. Para isso, role 1d6 em cada coluna abaixo.",
+    "origem_arquivo": "ser_nimb.json",
+    "dados_brutos": {
+      "id": "ser_nimb",
+      "name": "Nimb",
+      "deities": [
+        "nimb"
+      ],
+      "description": "Você é Nimb. Ou um filho ou filha dele. Ou uma casca de banana na qual ele escorregou certa vez. Você pode gastar uma ação padrão e 2 PM para gerar uma habilidade única. Para isso, role 1d6 em cada coluna abaixo.",
+      "effects": {
+        "type": "ativado",
+        "acao": "padrão",
+        "custo_pm": 2,
+        "rolagem": "1d6 em cada coluna (Área/Alvo x Efeito)",
+        "tabela": [
+          {
+            "resultado": 1,
+            "area_alvo": "criaturas em um cone de 6m",
+            "efeito": "ficam verdes por 1 dia e recebem -2 em testes baseados em Carisma"
+          },
+          {
+            "resultado": 2,
+            "area_alvo": "até 1d3 criaturas em alcance médio",
+            "efeito": "curam 3d6 PV"
+          },
+          {
+            "resultado": 3,
+            "area_alvo": "criaturas em um raio de 9m",
+            "efeito": "no próximo teste, rolam 2 dados e escolhem o resultado"
+          },
+          {
+            "resultado": 4,
+            "area_alvo": "criaturas em uma esfera de 6m de raio em alcance curto",
+            "efeito": "perdem 3d6+3 PV"
+          },
+          {
+            "resultado": 5,
+            "area_alvo": "criaturas em 1d3 linhas de 15m",
+            "efeito": "recebem 1d4 PM temporários por 1 rodada"
+          },
+          {
+            "resultado": 6,
+            "area_alvo": "criaturas escolhidas em alcance curto",
+            "efeito": "podem usar Poder Oculto até o fim da cena"
+          }
+        ]
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "servos_do_dragao": {
+    "key": "servos_do_dragao",
+    "nome": "Servos do Dragão",
+    "descricao": "Você pode gastar uma ação completa e 2 PM para invocar 2d4+1 kobolds capangas em espaços desocupados em alcance curto. Você pode gastar uma ação de movimento para fazer os kobolds andarem (eles têm deslocamento 9m) ou uma ação padrão para fazê-los causar dano a criaturas adjacentes (1d6–1 pontos de dano de perfuração cada). Os kobolds têm For –1, Des 1, Defesa 12, 1 PV e falham automaticamente em qualquer teste de resistência ou oposto. Eles desaparecem quando morrem ou no fim da cena. Os kobolds não agem sem receber uma ordem. Usos criativos para capangas fora de combate ficam a critério do mestre.",
+    "origem_arquivo": "servos_do_dragao.json",
+    "dados_brutos": {
+      "id": "servos_do_dragao",
+      "name": "Servos do Dragão",
+      "deities": [
+        "kallyadranoch"
+      ],
+      "description": "Você pode gastar uma ação completa e 2 PM para invocar 2d4+1 kobolds capangas em espaços desocupados em alcance curto. Você pode gastar uma ação de movimento para fazer os kobolds andarem (eles têm deslocamento 9m) ou uma ação padrão para fazê-los causar dano a criaturas adjacentes (1d6–1 pontos de dano de perfuração cada). Os kobolds têm For –1, Des 1, Defesa 12, 1 PV e falham automaticamente em qualquer teste de resistência ou oposto. Eles desaparecem quando morrem ou no fim da cena. Os kobolds não agem sem receber uma ordem. Usos criativos para capangas fora de combate ficam a critério do mestre.",
+      "effects": {
+        "type": "active",
+        "cost": "2 PM",
+        "action": "ação completa",
+        "summon": {
+          "quantity": "2d4+1",
+          "creature": "kobolds capangas",
+          "stats": {
+            "forca": -1,
+            "destreza": 1,
+            "defesa": 12,
+            "pv": 1
+          },
+          "movement": "9m",
+          "damage": "1d6-1 perfuração",
+          "duration": "cena"
+        }
+      }
+    }
+  },
+  "so_os_loucos_sabem": {
+    "key": "so_os_loucos_sabem",
+    "nome": "Só os Loucos Sabem",
+    "descricao": "Role duas perícias na Tabela 6-6 (Tormenta20, p. 279). Você se torna treinado nelas (se já for, recebe +3 nessa perícia). No começo de cada dia, você pode gastar 3 PM para rolar novas perícias.",
+    "origem_arquivo": "so_os_loucos_sabem.json",
+    "dados_brutos": {
+      "id": "so_os_loucos_sabem",
+      "name": "Só os Loucos Sabem",
+      "deities": [
+        "nimb"
+      ],
+      "description": "Role duas perícias na Tabela 6-6 (Tormenta20, p. 279). Você se torna treinado nelas (se já for, recebe +3 nessa perícia). No começo de cada dia, você pode gastar 3 PM para rolar novas perícias.",
+      "effects": {
+        "type": "ativado",
+        "rolagem": "2 perícias na tabela de Desafios de Buscas",
+        "efeito": "treinado nas perícias roladas (se já for treinado, +3 nessa perícia)",
+        "custo_pm": 3,
+        "frequencia": "pode rerrolar no começo de cada dia por 3 PM"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "sopro_do_mar": {
+    "key": "sopro_do_mar",
+    "nome": "Sopro do Mar",
+    "descricao": "Você pode gastar uma ação padrão e 1 PM para soprar vento marinho em um cone de 6m. Criaturas na área sofrem 2d6 pontos de dano de frio (Reflexos CD Sab reduz à metade). Você pode aprender Sopro das Uivantes como uma magia divina. Se fizer isso, o custo dela diminui em –1 PM.",
+    "origem_arquivo": "sopro_do_mar.json",
+    "dados_brutos": {
+      "id": "sopro_do_mar",
+      "name": "Sopro do Mar",
+      "deities": [
+        "oceano"
+      ],
+      "description": "Você pode gastar uma ação padrão e 1 PM para soprar vento marinho em um cone de 6m. Criaturas na área sofrem 2d6 pontos de dano de frio (Reflexos CD Sab reduz à metade). Você pode aprender Sopro das Uivantes como uma magia divina. Se fizer isso, o custo dela diminui em –1 PM.",
+      "effects": {
+        "type": "active",
+        "cost": "1 PM",
+        "action": "ação padrão",
+        "area": "cone 6m",
+        "damage": {
+          "dice": "2d6",
+          "type": "frio",
+          "save": "Reflexos (CD Sab) para metade"
+        },
+        "grants_spell": {
+          "spell": "Sopro das Uivantes",
+          "as": "magia divina"
+        },
+        "spell_cost_reduction": {
+          "spell": "Sopro das Uivantes",
+          "reduction": 1
+        }
+      }
+    }
+  },
+  "sorte_dos_loucos": {
+    "key": "sorte_dos_loucos",
+    "nome": "Sorte dos Loucos",
+    "descricao": "Quando faz um teste, você pode pagar 1 PM para rolá-lo novamente (você pode fazer isso mais de uma vez por teste). Se ainda assim falhar, perde 1d6 PM para cada vez que utilizou este poder neste teste.",
+    "origem_arquivo": "sorte_dos_loucos.json",
+    "dados_brutos": {
+      "id": "sorte_dos_loucos",
+      "name": "Sorte dos Loucos",
+      "deities": [
+        "nimb"
+      ],
+      "description": "Quando faz um teste, você pode pagar 1 PM para rolá-lo novamente (você pode fazer isso mais de uma vez por teste). Se ainda assim falhar, perde 1d6 PM para cada vez que utilizou este poder neste teste.",
+      "effects": {
+        "type": "active",
+        "cost": "1 PM por reroll",
+        "action": "livre",
+        "benefit": "rolar novamente um teste",
+        "penalty_on_failure": "perde 1d6 PM por uso se falhar no teste"
+      }
+    }
+  },
+  "sorvo_de_mana": {
+    "key": "sorvo_de_mana",
+    "nome": "Sorvo de Mana",
+    "descricao": "Sempre que falhar no teste de resistência contra uma magia de um inimigo, você recupera uma quantidade de PM igual ao círculo dela.",
+    "origem_arquivo": "sorvo_de_mana.json",
+    "dados_brutos": {
+      "id": "sorvo_de_mana",
+      "name": "Sorvo de Mana",
+      "deities": [
+        "wynna"
+      ],
+      "description": "Sempre que falhar no teste de resistência contra uma magia de um inimigo, você recupera uma quantidade de PM igual ao círculo dela.",
+      "effects": {
+        "type": "passivo",
+        "gatilho": "falhar em teste de resistência contra magia de um inimigo",
+        "efeito": "recupera PM igual ao círculo da magia"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "talento_artistico": {
+    "key": "talento_artistico",
+    "nome": "Talento Artístico",
+    "descricao": "Você recebe +2 em Acrobacia, Atuação e Diplomacia.",
+    "origem_arquivo": "talento_artistico.json",
+    "dados_brutos": {
+      "id": "talento_artistico",
+      "name": "Talento Artístico",
+      "deities": [
+        "marah"
+      ],
+      "description": "Você recebe +2 em Acrobacia, Atuação e Diplomacia.",
+      "effects": {
+        "type": "passive",
+        "skill_bonuses": [
+          {
+            "skill": "Acrobacia",
+            "bonus": 2
+          },
+          {
+            "skill": "Atuação",
+            "bonus": 2
+          },
+          {
+            "skill": "Diplomacia",
+            "bonus": 2
+          }
+        ]
+      }
+    }
+  },
+  "temor_arcano": {
+    "key": "temor_arcano",
+    "nome": "Temor Arcano",
+    "descricao": "Quando um inimigo em alcance médio sob efeito de uma condição de medo falha em um teste de resistência contra uma de suas magias, você recebe 1 PM temporário cumulativo. Você pode ganhar um máximo de PM temporários por cena igual ao seu nível, e eles desaparecem no fim da cena.",
+    "origem_arquivo": "temor_arcano.json",
+    "dados_brutos": {
+      "id": "temor_arcano",
+      "name": "Temor Arcano",
+      "deities": [
+        "kallyadranoch"
+      ],
+      "description": "Quando um inimigo em alcance médio sob efeito de uma condição de medo falha em um teste de resistência contra uma de suas magias, você recebe 1 PM temporário cumulativo. Você pode ganhar um máximo de PM temporários por cena igual ao seu nível, e eles desaparecem no fim da cena.",
+      "effects": {
+        "type": "passivo",
+        "gatilho": "inimigo em alcance médio sob condição de medo falha na resistência contra sua magia",
+        "efeito": "ganha 1 PM temporário cumulativo",
+        "limite": "máximo de PM temporários por cena igual ao nível",
+        "duracao": "PM temporários desaparecem no fim da cena"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "terror_profundo": {
+    "key": "terror_profundo",
+    "nome": "Terror Profundo",
+    "descricao": "Você recebe +2 em Intimidação e na CD de seus efeitos de medo.",
+    "origem_arquivo": "terror_profundo.json",
+    "dados_brutos": {
+      "id": "terror_profundo",
+      "name": "Terror Profundo",
+      "deities": [
+        "kallyadranoch",
+        "megalokk",
+        "thwor"
+      ],
+      "description": "Você recebe +2 em Intimidação e na CD de seus efeitos de medo.",
+      "effects": {
+        "type": "passivo",
+        "efeito": "+2 em Intimidação e na CD de efeitos de medo"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "teurgista_mistico": {
+    "key": "teurgista_mistico",
+    "nome": "Teurgista Místico",
+    "descricao": "Até uma magia de cada círculo que você aprender poderá ser escolhida entre magias divinas (se você for um conjurador arcano) ou entre magias arcanas (se for um conjurador divino).",
+    "origem_arquivo": "teurgista_mistico.json",
+    "dados_brutos": {
+      "id": "teurgista_mistico",
+      "name": "Teurgista Místico",
+      "deities": [
+        "wynna"
+      ],
+      "description": "Até uma magia de cada círculo que você aprender poderá ser escolhida entre magias divinas (se você for um conjurador arcano) ou entre magias arcanas (se for um conjurador divino).",
+      "prerequisites": [
+        "habilidade de classe Magias"
+      ],
+      "effects": {
+        "type": "passive",
+        "benefit": "pode escolher uma magia de cada círculo da lista oposta (arcana se for divino, divina se for arcano)"
+      }
+    }
+  },
+  "toque_de_nao_vida": {
+    "key": "toque_de_nao_vida",
+    "nome": "Toque de Não Vida",
+    "descricao": "Você pode gastar uma ação de movimento e 2 PM para fornecer a si mesmo ou a uma criatura adjacente 2d12 PV temporários (que são sempre os primeiros a serem perdidos) e, enquanto os PV temporários durarem, camuflagem leve.",
+    "origem_arquivo": "toque_de_nao_vida.json",
+    "dados_brutos": {
+      "id": "toque_de_nao_vida",
+      "name": "Toque de Não Vida",
+      "deities": [
+        "tenebra"
+      ],
+      "description": "Você pode gastar uma ação de movimento e 2 PM para fornecer a si mesmo ou a uma criatura adjacente 2d12 PV temporários (que são sempre os primeiros a serem perdidos) e, enquanto os PV temporários durarem, camuflagem leve.",
+      "effects": {
+        "type": "ativado",
+        "acao": "movimento",
+        "custo_pm": 2,
+        "alcance": "você mesmo ou criatura adjacente",
+        "efeito": "concede 2d12 PV temporários (perdidos primeiro) e camuflagem leve enquanto durarem"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "tradicao_de_lin_wu": {
+    "key": "tradicao_de_lin_wu",
+    "nome": "Tradição de Lin-Wu",
+    "descricao": "Você considera a katana uma arma simples e, se for proficiente em armas marciais, recebe +1 na margem de ameaça com ela.",
+    "origem_arquivo": "tradicao_de_lin_wu.json",
+    "dados_brutos": {
+      "id": "tradicao_de_lin_wu",
+      "name": "Tradição de Lin-Wu",
+      "deities": [
+        "lin_wu"
+      ],
+      "description": "Você considera a katana uma arma simples e, se for proficiente em armas marciais, recebe +1 na margem de ameaça com ela.",
+      "effects": {
+        "type": "passive",
+        "weapon_proficiency": {
+          "weapon": "katana",
+          "type": "simples"
+        },
+        "conditional_bonus": {
+          "condition": "proficiente em armas marciais",
+          "benefit": "+1 na margem de ameaça com katana"
+        }
+      }
+    }
+  },
+  "transbordar_cura": {
+    "key": "transbordar_cura",
+    "nome": "Transbordar Cura",
+    "descricao": "Quando você usa um efeito de cura, quaisquer pontos de vida excedentes desse efeito se tornam pontos de vida temporários, até um valor máximo igual ao dobro do nível do alvo.",
+    "origem_arquivo": "transbordar_cura.json",
+    "dados_brutos": {
+      "id": "transbordar_cura",
+      "name": "Transbordar Cura",
+      "deities": [
+        "lena"
+      ],
+      "description": "Quando você usa um efeito de cura, quaisquer pontos de vida excedentes desse efeito se tornam pontos de vida temporários, até um valor máximo igual ao dobro do nível do alvo.",
+      "effects": {
+        "type": "passivo",
+        "gatilho": "usar um efeito de cura",
+        "efeito": "PV excedentes tornam-se PV temporários, até o máximo do dobro do nível do alvo"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "transmissao_da_loucura": {
+    "key": "transmissao_da_loucura",
+    "nome": "Transmissão da Loucura",
+    "descricao": "Você pode lançar Sussurros Insanos (CD Car). Caso aprenda novamente essa magia, seu custo diminui em –1 PM.",
+    "origem_arquivo": "transmissao_da_loucura.json",
+    "dados_brutos": {
+      "id": "transmissao_da_loucura",
+      "name": "Transmissão da Loucura",
+      "deities": [
+        "nimb"
+      ],
+      "description": "Você pode lançar Sussurros Insanos (CD Car). Caso aprenda novamente essa magia, seu custo diminui em –1 PM.",
+      "effects": {
+        "type": "passive",
+        "grants_spell": {
+          "spell": "Sussurros Insanos",
+          "save_dc": "Carisma"
+        },
+        "spell_cost_reduction": {
+          "spell": "Sussurros Insanos",
+          "reduction": 1
+        }
+      }
+    }
+  },
+  "trilha_desimpedida": {
+    "key": "trilha_desimpedida",
+    "nome": "Trilha Desimpedida",
+    "descricao": "Você aprende e pode lançar a magia Caminhos da Natureza. Se aprender essa magia, o custo dela diminui em –1 PM.",
+    "origem_arquivo": "trilha_desimpedida.json",
+    "dados_brutos": {
+      "id": "trilha_desimpedida",
+      "name": "Trilha Desimpedida",
+      "deities": [
+        "allihanna"
+      ],
+      "description": "Você aprende e pode lançar a magia Caminhos da Natureza. Se aprender essa magia, o custo dela diminui em –1 PM.",
+      "effects": {
+        "type": "passivo",
+        "efeito": "aprende e pode lançar Caminhos da Natureza; aprender de novo reduz o custo em -1 PM"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "tropas_duyshidakk": {
+    "key": "tropas_duyshidakk",
+    "nome": "Tropas Duyshidakk",
+    "descricao": "Você pode gastar uma ação completa e 2 PM para invocar 1d4+1 goblinoides capangas em espaços desocupados em alcance curto. Você pode gastar uma ação de movimento para fazer os goblinoides andarem (eles têm deslocamento 9m) ou uma ação padrão para fazê-los causar dano a criaturas adjacentes (1d6+1 pontos de dano de corte cada). Os goblinoides têm For 1, Des 1, Defesa 15, 1 PV e falham automaticamente em qualquer teste de resistência ou oposto. Eles desaparecem quando morrem ou no fim da cena. Os goblinoides não agem sem receber uma ordem. Usos criativos para capangas fora de combate ficam a critério do mestre.",
+    "origem_arquivo": "tropas_duyshidakk.json",
+    "dados_brutos": {
+      "id": "tropas_duyshidakk",
+      "name": "Tropas Duyshidakk",
+      "deities": [
+        "thwor"
+      ],
+      "description": "Você pode gastar uma ação completa e 2 PM para invocar 1d4+1 goblinoides capangas em espaços desocupados em alcance curto. Você pode gastar uma ação de movimento para fazer os goblinoides andarem (eles têm deslocamento 9m) ou uma ação padrão para fazê-los causar dano a criaturas adjacentes (1d6+1 pontos de dano de corte cada). Os goblinoides têm For 1, Des 1, Defesa 15, 1 PV e falham automaticamente em qualquer teste de resistência ou oposto. Eles desaparecem quando morrem ou no fim da cena. Os goblinoides não agem sem receber uma ordem. Usos criativos para capangas fora de combate ficam a critério do mestre.",
+      "effects": {
+        "type": "active",
+        "cost": "2 PM",
+        "action": "ação completa",
+        "summon": {
+          "quantity": "1d4+1",
+          "creature": "goblinoides capangas",
+          "stats": {
+            "forca": 1,
+            "destreza": 1,
+            "defesa": 15,
+            "pv": 1
+          },
+          "movement": "9m",
+          "damage": "1d6+1 corte",
+          "duration": "cena"
+        }
+      }
+    }
+  },
+  "urro_divino": {
+    "key": "urro_divino",
+    "nome": "Urro Divino",
+    "descricao": "Quando faz um ataque ou lança uma magia, você pode pagar 1 PM para somar sua Constituição (mínimo +1) à rolagem de dano desse ataque ou magia.",
+    "origem_arquivo": "urro_divino.json",
+    "dados_brutos": {
+      "id": "urro_divino",
+      "name": "Urro Divino",
+      "deities": [
+        "megalokk"
+      ],
+      "description": "Quando faz um ataque ou lança uma magia, você pode pagar 1 PM para somar sua Constituição (mínimo +1) à rolagem de dano desse ataque ou magia.",
+      "effects": {
+        "type": "active",
+        "cost": "1 PM",
+        "action": "livre",
+        "trigger": "ao fazer um ataque ou lançar uma magia",
+        "benefit": "soma Constituição (mínimo +1) à rolagem de dano"
+      }
+    }
+  },
+  "ushultt": {
+    "key": "ushultt",
+    "nome": "Ushultt",
+    "descricao": "Escolha um de seus aliados como seu ushultt. Enquanto estiverem em alcance curto um do outro, vocês recebem +2 em testes de ataque e rolagens de dano (esse bônus aumenta para +3 se o ushultt também for duyshidakk). Você pode trocar seu ushultt uma vez por aventura.",
+    "origem_arquivo": "ushultt.json",
+    "dados_brutos": {
+      "id": "ushultt",
+      "name": "Ushultt",
+      "deities": [
+        "thwor"
+      ],
+      "description": "Escolha um de seus aliados como seu ushultt. Enquanto estiverem em alcance curto um do outro, vocês recebem +2 em testes de ataque e rolagens de dano (esse bônus aumenta para +3 se o ushultt também for duyshidakk). Você pode trocar seu ushultt uma vez por aventura.",
+      "effects": {
+        "type": "passivo",
+        "efeito": "escolhe um aliado como ushultt; enquanto em alcance curto, ambos recebem +2 em testes de ataque e rolagens de dano (+3 se o ushultt for duyshidakk)",
+        "troca": "pode trocar de ushultt uma vez por aventura"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "visao_nas_trevas": {
+    "key": "visao_nas_trevas",
+    "nome": "Visão nas Trevas",
+    "descricao": "Você enxerga perfeitamente no escuro, incluindo em magias de escuridão.",
+    "origem_arquivo": "visao_nas_trevas.json",
+    "dados_brutos": {
+      "id": "visao_nas_trevas",
+      "name": "Visão nas Trevas",
+      "deities": [
+        "tenebra"
+      ],
+      "description": "Você enxerga perfeitamente no escuro, incluindo em magias de escuridão.",
+      "effects": {
+        "type": "passive",
+        "senses": [
+          "visão no escuro perfeita",
+          "ignora magias de escuridão"
+        ]
+      }
+    }
+  },
+  "vitoria_a_qualquer_custo": {
+    "key": "vitoria_a_qualquer_custo",
+    "nome": "Vitória a Qualquer Custo",
+    "descricao": "Quando faz um teste de ataque, de resistência ou de Guerra, você pode gastar 2 PM para rolar novamente esse teste. Você pode fazer isso várias vezes no mesmo teste, mas cada novo uso aumenta o custo em +1 PM.",
+    "origem_arquivo": "vitoria_a_qualquer_custo.json",
+    "dados_brutos": {
+      "id": "vitoria_a_qualquer_custo",
+      "name": "Vitória a Qualquer Custo",
+      "deities": [
+        "arsenal"
+      ],
+      "description": "Quando faz um teste de ataque, de resistência ou de Guerra, você pode gastar 2 PM para rolar novamente esse teste. Você pode fazer isso várias vezes no mesmo teste, mas cada novo uso aumenta o custo em +1 PM.",
+      "effects": {
+        "type": "ativado",
+        "gatilho": "teste de ataque, resistência ou Guerra",
+        "custo_pm": 2,
+        "efeito": "rola novamente o teste",
+        "repeticao": "pode repetir no mesmo teste, cada uso adicional custa +1 PM"
+      },
+      "prerequisites": [],
+      "livro": "deuses_de_arton"
+    }
+  },
+  "voz_da_civilizacao": {
+    "key": "voz_da_civilizacao",
+    "nome": "Voz da Civilização",
+    "descricao": "Você está sempre sob efeito de Compreensão.",
+    "origem_arquivo": "voz_da_civilizacao.json",
+    "dados_brutos": {
+      "id": "voz_da_civilizacao",
+      "name": "Voz da Civilização",
+      "deities": [
+        "tanna_toh"
+      ],
+      "description": "Você está sempre sob efeito de Compreensão.",
+      "effects": {
+        "type": "passive",
+        "permanent_spell_effect": "Compreensão"
+      }
+    }
+  },
+  "voz_da_natureza": {
+    "key": "voz_da_natureza",
+    "nome": "Voz da Natureza",
+    "descricao": "Você pode falar com animais (como o efeito da magia Voz Divina) e aprende e pode lançar Acalmar Animal, mas só contra animais. Caso aprenda novamente essa magia, seu custo diminui em –1 PM.",
+    "origem_arquivo": "voz_da_natureza.json",
+    "dados_brutos": {
+      "id": "voz_da_natureza",
+      "name": "Voz da Natureza",
+      "deities": [
+        "allihanna"
+      ],
+      "description": "Você pode falar com animais (como o efeito da magia Voz Divina) e aprende e pode lançar Acalmar Animal, mas só contra animais. Caso aprenda novamente essa magia, seu custo diminui em –1 PM.",
+      "effects": {
+        "type": "passive",
+        "communication": "falar com animais",
+        "grants_spell": {
+          "spell": "Acalmar Animal",
+          "restriction": "apenas contra animais"
+        },
+        "spell_cost_reduction": {
+          "spell": "Acalmar Animal",
+          "reduction": 1
+        }
+      }
+    }
+  },
+  "voz_dos_monstros": {
+    "key": "voz_dos_monstros",
+    "nome": "Voz dos Monstros",
+    "descricao": "Você conhece os idiomas de todos os monstros inteligentes e pode se comunicar livremente com monstros não inteligentes (Int –4 ou menor), como se estivesse sob efeito da magia Voz Divina.",
+    "origem_arquivo": "voz_dos_monstros.json",
+    "dados_brutos": {
+      "id": "voz_dos_monstros",
+      "name": "Voz dos Monstros",
+      "deities": [
+        "megalokk"
+      ],
+      "description": "Você conhece os idiomas de todos os monstros inteligentes e pode se comunicar livremente com monstros não inteligentes (Int –4 ou menor), como se estivesse sob efeito da magia Voz Divina.",
+      "effects": {
+        "type": "passive",
+        "languages": "todos os idiomas de monstros inteligentes",
+        "communication": "monstros não inteligentes (Int –4 ou menor)"
+      }
+    }
+  },
+  "zumbificar": {
+    "key": "zumbificar",
+    "nome": "Zumbificar",
+    "descricao": "Você pode gastar uma ação completa e 3 PM para reanimar o cadáver de uma criatura Pequena ou Média adjacente por um dia. O cadáver funciona como um parceiro iniciante de um tipo a sua escolha entre combatente, fortão ou guardião. Além disso, quando sofre dano, você pode sacrificar esse parceiro; se fizer isso, você sofre apenas metade do dano, mas o cadáver é destruído.",
+    "origem_arquivo": "zumbificar.json",
+    "dados_brutos": {
+      "id": "zumbificar",
+      "name": "Zumbificar",
+      "deities": [
+        "tenebra"
+      ],
+      "description": "Você pode gastar uma ação completa e 3 PM para reanimar o cadáver de uma criatura Pequena ou Média adjacente por um dia. O cadáver funciona como um parceiro iniciante de um tipo a sua escolha entre combatente, fortão ou guardião. Além disso, quando sofre dano, você pode sacrificar esse parceiro; se fizer isso, você sofre apenas metade do dano, mas o cadáver é destruído.",
+      "effects": {
+        "type": "active",
+        "cost": "3 PM",
+        "action": "ação completa",
+        "summon": {
+          "target": "cadáver de criatura Pequena ou Média adjacente",
+          "duration": "1 dia",
+          "partner_type": [
+            "combatente",
+            "fortão",
+            "guardião"
+          ],
+          "partner_level": "iniciante"
+        },
+        "special": "pode sacrificar o parceiro para sofrer metade do dano"
+      }
+    }
+  },
+  "alpinista_social": {
+    "key": "alpinista_social",
+    "nome": "Alpinista Social",
+    "descricao": "Você pode usar seu Carisma no lugar de Sabedoria em testes de perícia e recebe +2 em testes de Diplomacia com figuras de autoridade.",
+    "origem_arquivo": "alpinista_social.json",
+    "dados_brutos": {
+      "id": "alpinista_social",
+      "name": "Alpinista Social",
+      "deities": [
+        "valkaria"
+      ],
+      "description": "Você pode usar seu Carisma no lugar de Sabedoria em testes de perícia e recebe +2 em testes de Diplomacia com figuras de autoridade.",
+      "effects": {
+        "type": "passivo",
+        "efeito": "usa Carisma no lugar de Sabedoria em perícias; +2 em Diplomacia com autoridade"
+      },
+      "prerequisites": [],
+      "livro": "tormenta20_basico"
+    }
+  },
+  "foco_em_arma_arsenal": {
+    "key": "foco_em_arma_arsenal",
+    "nome": "Foco em Arma (Arsenal)",
+    "descricao": "Você recebe o poder geral Foco em Arma com sua arma favorita, ganhando +2 em testes de ataque com ela.",
+    "origem_arquivo": "foco_em_arma_arsenal.json",
+    "dados_brutos": {
+      "id": "foco_em_arma_arsenal",
+      "name": "Foco em Arma (Arsenal)",
+      "deities": [
+        "arsenal"
+      ],
+      "description": "Você recebe o poder geral Foco em Arma com sua arma favorita, ganhando +2 em testes de ataque com ela.",
+      "effects": {
+        "type": "passivo",
+        "efeito": "+2 em testes de ataque com arma favorita"
+      },
+      "prerequisites": [],
+      "livro": "tormenta20_basico"
+    }
+  },
+  "tradicao_de_lin-wu": {
+    "key": "tradicao_de_lin-wu",
+    "nome": "Tradição de Lin-Wu",
+    "descricao": "Você considera a katana uma arma marcial de uma mão em vez de exótica. Além disso, se empunhar a katana com as duas mãos, aumenta o passo de dano dela em um nível.",
+    "origem_arquivo": "tradicao_de_lin_wu.json",
+    "dados_brutos": {
+      "id": "tradicao_de_lin-wu",
+      "name": "Tradição de Lin-Wu",
+      "deities": [
+        "lin-wu",
+        "lin_wu"
+      ],
+      "description": "Você considera a katana uma arma marcial de uma mão em vez de exótica. Além disso, se empunhar a katana com as duas mãos, aumenta o passo de dano dela em um nível.",
+      "effects": {
+        "type": "passivo",
+        "efeito": "katana considerada marcial de uma mão; empunhadura com as duas mãos aumenta o passo de dano em um nível"
+      },
+      "prerequisites": [],
+      "livro": "tormenta20_basico"
+    }
+  }
+}

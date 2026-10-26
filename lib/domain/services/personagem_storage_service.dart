@@ -121,6 +121,7 @@ class PersonagemStorageService implements IPersonagemRepository {
       'racaId': p.raca?.id,
       'atributosVariaveisRaca': p.atributosVariaveisRaca,
       'origemId': p.origem?.id,
+      'poderesGeraisKeys': p.poderesGerais.map((pod) => pod.key).toList(),
       'divindadeId': p.divindade?.id,
       'poderesConcedidosKeys': p.poderesConcedidos
           .map((pod) => pod.key)
@@ -180,6 +181,27 @@ class PersonagemStorageService implements IPersonagemRepository {
     final origem = map['origemId'] != null
         ? BancoDeOrigens.getById(map['origemId'])
         : null;
+
+    final List<Poder> poderesGeraisList = [];
+    if (map['poderesGeraisKeys'] != null && map['poderesGeraisKeys'] is List) {
+      for (final k in map['poderesGeraisKeys']) {
+        final keyStr = k.toString();
+        Poder? pod;
+        if (origem != null && origem.poderUnico.key == keyStr) {
+          pod = origem.poderUnico;
+        } else if (origem != null) {
+          pod = origem.poderesGeraisOpcoes
+              .where((p) => p.key == keyStr)
+              .firstOrNull;
+        }
+        pod ??=
+            BancoDeOrigens.getHabilidadeUnica(keyStr) ??
+            BancoDePoderes.getByKey(keyStr);
+        if (pod != null && !poderesGeraisList.any((p) => p.key == pod!.key)) {
+          poderesGeraisList.add(pod);
+        }
+      }
+    }
 
     final divindade = map['divindadeId'] != null
         ? BancoDeDivindades.getById(map['divindadeId'])
@@ -333,6 +355,7 @@ class PersonagemStorageService implements IPersonagemRepository {
       raca: raca,
       classes: classesList,
       origem: origem,
+      poderesGerais: poderesGeraisList,
       divindade: divindade,
       poderesConcedidos: poderesConcedidosList,
       canalizacaoEnergia: canalizacao,

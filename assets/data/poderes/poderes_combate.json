@@ -1,0 +1,1242 @@
+{
+  "acuidade_com_arma": {
+    "id": "acuidade_com_arma",
+    "name": "Acuidade com Arma",
+    "type": "poder_geral",
+    "sub_type": "poder_de_combate",
+    "description": "Quando usa uma arma leve de corpo a corpo ou uma arma de arremesso, você pode usar seu modificador de Destreza em vez de Força nos testes de ataque e rolagens de dano.",
+    "requirements": [
+      {
+        "type": "attr_value",
+        "sub_type": "hard",
+        "attr": "des",
+        "value": 13
+      },
+      {
+        "type": "weapon_type",
+        "sub_type": "soft",
+        "weapons": [
+          "arma_leve_de_corpo_a_corpo",
+          "arma_de_arremesso"
+        ]
+      }
+    ],
+    "effects": [
+      {
+        "type": "switch_skill_attr",
+        "skill": "luta",
+        "attr": "des"
+      },
+      {
+        "type": "use_damage_attr",
+        "attr": "des"
+      }
+    ]
+  },
+  "arma_secundaria_grande": {
+    "id": "arma_secundaria_grande",
+    "name": "Arma Secundária Grande",
+    "type": "poder_geral",
+    "sub_type": "poder_de_combate",
+    "description": "Você pode usar duas armas de uma mão com o poder Estilo de Duas Armas.",
+    "requirements": [
+      {
+        "type": "feature",
+        "sub_type": "hard",
+        "id": "estilo_de_duas_armas"
+      }
+    ],
+    "effects": [
+      {
+        "type": "feature_improvement",
+        "improvement": "two_one_handed_weapons"
+      }
+    ]
+  },
+  "arremesso_multiplo": {
+    "id": "arremesso_multiplo",
+    "name": "Arremesso Múltiplo",
+    "type": "poder_geral",
+    "sub_type": "poder_de_combate",
+    "description": "Uma vez por rodada, quando faz um ataque com uma arma de arremesso, você pode gastar 1 PM para fazer um ataque adicional contra o mesmo alvo, arremessando outra arma de arremesso.",
+    "requirements": [
+      {
+        "type": "attr_value",
+        "sub_type": "hard",
+        "attr": "des",
+        "value": 13
+      },
+      {
+        "type": "power",
+        "sub_type": "hard",
+        "power": "estilo_de_arremeso"
+      }
+    ],
+    "effects": [
+      {
+        "type": "active",
+        "cost": "1 PM",
+        "trigger": "ataque_arremesso"
+      }
+    ]
+  },
+  "arremeso_potente": {
+    "id": "arremeso_potente",
+    "name": "Arremesso Potente",
+    "type": "poder_geral",
+    "sub_type": "poder_de_combate",
+    "description": "Quando usa uma arma de arremesso, você pode usar seu modificador de Força em vez de Destreza nos testes de ataque. Se você possuir o poder Ataque Poderoso, poderá usá-lo com armas de arremesso.",
+    "requirements": [
+      {
+        "type": "attr_value",
+        "sub_type": "hard",
+        "attr": "for",
+        "value": 13
+      },
+      {
+        "type": "weapon_type",
+        "sub_type": "soft",
+        "weapons": [
+          "arma_leve_de_arremesso"
+        ]
+      },
+      {
+        "type": "feature",
+        "sub_type": "hard",
+        "id": "estilo_de_arremesso"
+      }
+    ],
+    "effects": [
+      {
+        "type": "switch_skill_attr",
+        "skill": "luta",
+        "attr": "for"
+      },
+      {
+        "type": "use_damage_attr",
+        "attr": "for"
+      },
+      {
+        "type": "switch_weapon_type",
+        "requirements": [
+          {
+            "type": "feature",
+            "id": "ataque_poderoso",
+            "weapons": "armas_de_arremesso"
+          }
+        ]
+      }
+    ]
+  },
+  "ataque_com_escudo": {
+    "id": "ataque_com_escudo",
+    "name": "Ataque com Escudo",
+    "type": "poder_geral",
+    "sub_type": "poder_de_combate",
+    "description": "Uma vez por rodada, se estiver empunhando um escudo e fizer a ação agredir, você pode gastar 1 PM para fazer um ataque corpo a corpo extra com o escudo. Este ataque não faz você perder o bônus do escudo na Defesa.",
+    "requirements": [
+      {
+        "type": "power",
+        "sub_type": "hard",
+        "power": "estilo_de_arma_e_escudo"
+      }
+    ],
+    "effects": [
+      {
+        "type": "active",
+        "cost": "1 PM",
+        "trigger": "acao_agredir"
+      }
+    ]
+  },
+  "ataque_pesado": {
+    "id": "ataque_pesado",
+    "name": "Ataque Pesado",
+    "type": "poder_geral",
+    "sub_type": "poder_de_combate",
+    "description": "Quando faz um ataque corpo a corpo com uma arma de duas mãos, você pode pagar 1 PM. Se fizer isso e acertar o ataque, além do dano você faz uma manobra derrubar ou empurrar contra o alvo como uma ação livre (use o resultado do ataque como o teste de manobra).",
+    "requirements": [
+      {
+        "type": "attack_type",
+        "sub_type": "soft",
+        "weapons": "corpo_a_corpo"
+      },
+      {
+        "type": "weapon_type",
+        "sub_type": "soft",
+        "weapons": "arma_de_duas_maos"
+      },
+      {
+        "type": "feature",
+        "sub_type": "hard",
+        "id": "estilo_de_duas_maos"
+      }
+    ],
+    "effects": [
+      {
+        "type": "manouver_improvement",
+        "manouver": [
+          "derrubar",
+          "empurrar"
+        ],
+        "action": "livre"
+      }
+    ],
+    "costs": [
+      {
+        "value": 1,
+        "type": "PM"
+      }
+    ]
+  },
+  "ataque_poderoso": {
+    "id": "ataque_poderoso",
+    "name": "Ataque Poderoso",
+    "type": "poder_geral",
+    "sub_type": "poder_de_combate",
+    "description": "Declare que está usando este poder antes de fazer um ataque corpo a corpo. Você sofre –2 no teste de ataque, mas recebe +5 na rolagem de dano.",
+    "requirements": [
+      {
+        "type": "attr_value",
+        "sub_type": "hard",
+        "attr": "for",
+        "value": 13
+      },
+      {
+        "type": "attack_type",
+        "sub_type": "soft",
+        "weapons": "corpo_a_corpo"
+      }
+    ],
+    "effects": [
+      {
+        "type": "attack_penalty",
+        "value": -2,
+        "duration": "instantanea"
+      },
+      {
+        "type": "damage_improvement",
+        "value": 5,
+        "duration": "instantanea"
+      }
+    ]
+  },
+  "ataque_preciso": {
+    "id": "ataque_preciso",
+    "name": "Ataque Preciso",
+    "type": "poder_geral",
+    "sub_type": "poder_de_combate",
+    "description": "Se estiver usando uma arma corpo a corpo em uma das mãos e nada na outra, você recebe +2 na margem de ameaça e +1 no multiplicador de crítico.",
+    "requirements": [
+      {
+        "type": "weapon_type",
+        "sub_type": "hard",
+        "weapons": [
+          "arma_corpo_a_corpo_de_uma_mao",
+          "desarmado"
+        ]
+      },
+      {
+        "type": "feature",
+        "sub_type": "hard",
+        "id": "estilo_de_uma_arma"
+      }
+    ],
+    "effects": [
+      {
+        "type": "threat_improvement",
+        "value": 2
+      },
+      {
+        "type": "critic_improvement",
+        "value": 1
+      }
+    ]
+  },
+  "bloqueio_com_escudo": {
+    "id": "bloqueio_com_escudo",
+    "name": "BLoqueio Com Escudo",
+    "type": "poder_geral",
+    "sub_type": "poder_de_combate",
+    "description": "Quando é atingido por um ataque, habilidade ou magia, você pode gastar 1 PM para receber resistência a dano contra este ataque igual ao bônus na Defesa que seu escudo fornece. Você só pode usar este poder se estiver usando um escudo.",
+    "requirements": [
+      {
+        "type": "shield_equipped",
+        "sub_type": "soft"
+      },
+      {
+        "type": "feature",
+        "sub_type": "hard",
+        "id": "estilo_de_arma_e_escudo"
+      }
+    ],
+    "effects": [
+      {
+        "type": "bonus",
+        "value": "igual_ao_bonus_na_defesa_que_o_escudo_fornece",
+        "requirement": "ser_atingido_por_ataque_habilidade_ou_magia"
+      }
+    ],
+    "costs": [
+      {
+        "value": 1,
+        "type": "PM"
+      }
+    ]
+  },
+  "carga_de_cavalaria": {
+    "id": "carga_de_cavalaria",
+    "name": "Carga De Cavalaria",
+    "type": "poder_geral",
+    "sub_type": "poder_de_combate",
+    "description": "Quando faz uma investida montada, você causa +2d8 pontos de dano. Além disso, pode continuar se movendo depois do ataque. Você deve se mover em linha reta e seu movimento máximo ainda é o dobro do seu deslocamento.",
+    "requirements": [
+      {
+        "type": "movement_action",
+        "sub_type": "soft",
+        "action": "investida_montada"
+      },
+      {
+        "type": "feature",
+        "sub_type": "hard",
+        "id": "ginete"
+      }
+    ],
+    "effects": [
+      {
+        "type": "damage_improvement",
+        "value": "2d8"
+      },
+      {
+        "type": "moviment_improvement",
+        "moviment": "move_atack_move"
+      }
+    ]
+  },
+  "combate_defensivo": {
+    "id": "combate_defensivo",
+    "name": "Combate Defensivo",
+    "type": "poder_geral",
+    "sub_type": "poder_de_combate",
+    "description": "Quando usa a ação atacar, você pode usar este poder. Se fizer isso, até seu próximo turno, sofre –2 em todos os testes de ataque, mas recebe +5 na Defesa.",
+    "requirements": [
+      {
+        "type": "attr_value",
+        "sub_type": "hard",
+        "attr": "int",
+        "value": 13
+      },
+      {
+        "type": "action_type",
+        "sub_type": "soft",
+        "action": "atacar"
+      }
+    ],
+    "effects": [
+      {
+        "type": "attack_penalty",
+        "value": -2,
+        "duration": "proximo_turno"
+      },
+      {
+        "type": "defense_improvement",
+        "value": 5,
+        "duration": "proximo_turno"
+      }
+    ]
+  },
+  "derrubar_aprimorado": {
+    "id": "derrubar_aprimorado",
+    "name": "Derrubar Aprimorado",
+    "type": "poder_geral",
+    "sub_type": "poder_de_combate",
+    "description": "Você recebe +2 em testes de ataque para derrubar. Quando derruba uma criatura com essa manobra, pode gastar 1 PM para fazer um ataque extra contra ela.",
+    "requirements": [
+      {
+        "type": "feature",
+        "sub_type": "hard",
+        "id": "combate_defensivo"
+      },
+      {
+        "type": "action_type",
+        "sub_type": "soft",
+        "action": "derrubar"
+      }
+    ],
+    "effects": [
+      {
+        "type": "attack_test_improvment",
+        "value": 2,
+        "duration": "instantanea"
+      },
+      {
+        "type": "extra_attack",
+        "requirements": "conseguir_derrubar",
+        "costs": {
+          "value": 1,
+          "type": "PM"
+        }
+      }
+    ]
+  },
+  "desarmar_aprimorado": {
+    "id": "desarmar_aprimorado",
+    "name": "Desarmer Aprimorado",
+    "type": "poder_geral",
+    "sub_type": "poder_de_combate",
+    "description": "Você recebe +2 em testes de ataque para desarmar. Quando desarma uma criatura, pode gastar 1 PM para arremessar a arma dela para longe. Para definir onde a arma cai, role 1d8 para a direção (sendo “1\" diretamente à sua frente “2\" à frente e à direita e assim por diante, em sentido horário) e 1d6 para a distância (medida em quadrados de 1,5m a partir da criatura desarmada).",
+    "requirements": [
+      {
+        "type": "feature",
+        "sub_type": "hard",
+        "id": "combate_defensivo"
+      },
+      {
+        "type": "action_type",
+        "sub_type": "soft",
+        "action": "desarmar"
+      }
+    ],
+    "effects": [
+      {
+        "type": "attack_test_improvment",
+        "value": 2,
+        "duration": "instantanea"
+      },
+      {
+        "type": "extra_action",
+        "action": "arremesar",
+        "requirements": "conseguir_desarmar",
+        "costs": {
+          "value": 1,
+          "type": "PM"
+        },
+        "details": "ver_descrição"
+      }
+    ]
+  },
+  "disparo_preciso": {
+    "id": "disparo_preciso",
+    "name": "Disparo Preciso",
+    "type": "poder_geral",
+    "sub_type": "poder_de_combate",
+    "description": "Você pode fazer ataques à distância contra oponentes envolvidos em combate corpo a corpo sem sofrer a penalidade padrão de –5 no teste de ataque.",
+    "requirements": [
+      {
+        "type": "feature",
+        "sub_type": "hard",
+        "id": [
+          "estilo_de_disparo",
+          "estilo_de_arremesso"
+        ]
+      },
+      {
+        "type": "enemy_type",
+        "sub_type": "soft",
+        "enemy": "envolvido_em_combate_corpo_a_corpo"
+      },
+      {
+        "type": "attack_type",
+        "sub_type": "soft",
+        "attack": "ataque_a_ddistancia"
+      }
+    ],
+    "effects": [
+      {
+        "type": "remove_debuff",
+        "value": -5,
+        "debuff": "teste_de_ataque"
+      }
+    ]
+  },
+  "disparo_rapido": {
+    "id": "disparo_rapido",
+    "name": "Disparo Rápido",
+    "type": "poder_geral",
+    "sub_type": "poder_de_combate",
+    "description": "Se estiver usando uma arma de ataque à distância e gastar uma ação completa para atacar, você pode fazer um ataque adicional com ela (se puder recarregá-la como ação livre). Se fizer isso, sofre –2 em todos os testes de ataque até o seu próximo turno.",
+    "requirements": [
+      {
+        "type": "attr_value",
+        "sub_type": "hard",
+        "attr": "des",
+        "value": 13
+      },
+      {
+        "type": "weapon_type",
+        "sub_type": "soft",
+        "weapons": "a_distancia"
+      },
+      {
+        "type": "feature",
+        "sub_type": "hard",
+        "id": [
+          "estilo_de_disparo",
+          "estilo_de_arremeso"
+        ]
+      }
+    ],
+    "effects": [
+      {
+        "type": "extra_attack",
+        "requirements": [
+          {
+            "action": "livre",
+            "mavouver": "recarregar"
+          }
+        ]
+      },
+      {
+        "type": "attack_penalty",
+        "value": -2,
+        "duration": "proximo_turno"
+      }
+    ],
+    "costs": [
+      {
+        "value": 1,
+        "type": "acao_completa"
+      }
+    ]
+  },
+  "empunhadura_poderosa": {
+    "id": "empunhadura_poderosa",
+    "name": "Empunhadura Poderosa",
+    "type": "poder_geral",
+    "sub_type": "poder_de_combate",
+    "description": "Ao usar uma arma feita para uma categoria de tamanho maior que a sua, a penalidade que você sofre nos testes de ataque diminui para –2 (normalmente, uma criatura que use uma arma feita para uma categoria de tamanho maior sofre uma penalidade de –5 nos testes de ataque).",
+    "requirements": [
+      {
+        "type": "attr_value",
+        "sub_type": "hard",
+        "attr": "for",
+        "value": 17
+      },
+      {
+        "type": "weapon_type",
+        "sub_type": "soft",
+        "weapons": "categoria_de_tamanho_maior_que_a_sua"
+      }
+    ],
+    "effects": [
+      {
+        "type": "change_penalty",
+        "initial_value": -5,
+        "final_value": -2
+      }
+    ]
+  },
+  "encouracado": {
+    "id": "encouracado",
+    "name": "Encouraçado",
+    "type": "poder_geral",
+    "sub_type": "poder_de_combate",
+    "description": "Se estiver usando uma armadura pesada, você recebe +2 na Defesa. Esse bônus aumenta em +2 para cada outro poder que você possua que tenha Encouraçado como pré-requisito.",
+    "requirements": [
+      {
+        "type": "armor_type",
+        "sub_type": "soft",
+        "armor": "pesada"
+      },
+      {
+        "type": "feature",
+        "sub_type": "hard",
+        "id": "proficiencia_com_armaduras_pesadaas"
+      }
+    ],
+    "effects": [
+      {
+        "type": "defense_improvement",
+        "value": 2,
+        "duration": "permanente"
+      }
+    ]
+  },
+  "esquiva": {
+    "id": "esquiva",
+    "name": "Esquiva",
+    "type": "poder_geral",
+    "sub_type": "poder_de_combate",
+    "description": "Você recebe +2 em Defesa e Reflexos.",
+    "requirements": [
+      {
+        "type": "attr_value",
+        "sub_type": "hard",
+        "attr": "des",
+        "value": 13
+      }
+    ],
+    "effects": [
+      {
+        "type": "expertise_improvement",
+        "value": 2,
+        "expertise": "reflexos",
+        "duration": "permanente"
+      },
+      {
+        "type": "defense_improvement",
+        "value": 2,
+        "duration": "permanente"
+      }
+    ]
+  },
+  "estilo_de_arma_e_escudo": {
+    "id": "estilo_de_arma_e_escudo",
+    "name": "Estilo de Arma e Escudo",
+    "type": "poder_geral",
+    "sub_type": "poder_de_combate",
+    "description": "Se você estiver usando um escudo, o bônus na Defesa que ele fornece aumenta em +2.",
+    "requirements": [
+      {
+        "type": "expertise",
+        "sub_type": "hard",
+        "id": "luta"
+      },
+      {
+        "type": "feature",
+        "sub_type": "hard",
+        "id": "proeficiencia_com_escudos"
+      }
+    ],
+    "effects": [
+      {
+        "type": "defense_improvement",
+        "value": 2,
+        "duration": "permanente",
+        "requirements": "estar_usando_escudo"
+      }
+    ]
+  },
+  "estilo_de_arma_longa": {
+    "id": "estilo_de_arma_longa",
+    "name": "Estilo de Arma Longa",
+    "type": "poder_geral",
+    "sub_type": "poder_de_combate",
+    "description": "Você recebe +2 em testes de ataque com armas alongadas e pode atacar alvos adjacentes com essas armas.",
+    "requirements": [
+      {
+        "type": "attr_value",
+        "sub_type": "hard",
+        "attr": "for",
+        "value": 13
+      },
+      {
+        "type": "skill_training",
+        "sub_type": "hard",
+        "skill": "luta"
+      }
+    ],
+    "effects": [
+      {
+        "type": "attack_improvement",
+        "value": 2,
+        "duration": "permanente",
+        "requirements": {
+          "weapon": "arma_longa"
+        }
+      }
+    ]
+  },
+  "estilo_de_arremeso": {
+    "id": "estilo_de_arremeso",
+    "name": "Estilo de Arremeso",
+    "type": "poder_geral",
+    "sub_type": "poder_de_combate",
+    "description": "Você pode sacar armas de arremesso como uma ação livre e recebe +2 nas rolagens de dano com elas.",
+    "requirements": [
+      {
+        "type": "weapon_type",
+        "sub_type": "soft",
+        "weapons": "arremesso"
+      },
+      {
+        "type": "expertise",
+        "sub_type": "hard",
+        "skill": "pontaria"
+      }
+    ],
+    "effects": [
+      {
+        "type": "change_acction",
+        "sub_type": "sacar_armas",
+        "action": "livre"
+      },
+      {
+        "type": "damage_improvement",
+        "value": 2,
+        "duration": "permanente"
+      }
+    ]
+  },
+  "estilo_de_disparo": {
+    "id": "estilo_de_disparo",
+    "name": "Estilo de Disparo",
+    "type": "poder_geral",
+    "sub_type": "poder_de_combate",
+    "description": "Se estiver usando uma arma de disparo, você soma o bônus de Destreza nas rolagens de dano.",
+    "requirements": [
+      {
+        "type": "weapon_type",
+        "sub_type": "soft",
+        "weapons": "disparo"
+      },
+      {
+        "type": "expertise",
+        "sub_type": "hard",
+        "skill": "pontaria"
+      }
+    ],
+    "effects": [
+      {
+        "type": "add_damage_attr",
+        "attr": "des"
+      }
+    ]
+  },
+  "estilo_de_duas_armas": {
+    "id": "estilo_de_duas_armas",
+    "name": "Estilo de Duas Armas",
+    "type": "poder_geral",
+    "sub_type": "poder_de_combate",
+    "description": "Se estiver usando duas armas (e pelo menos uma delas for leve) e fizer a ação atacar, você pode fazer dois ataques, um com cada arma. Se fizer isso, sofre –2 em todos os testes de ataque até o seu próximo turno. Se você possuir Ambidestria, não sofre essa penalidade.",
+    "requirements": [
+      {
+        "type": "attr_value",
+        "sub_type": "hard",
+        "attr": "des",
+        "value": 15
+      },
+      {
+        "type": "dual_weapons",
+        "sub_type": "soft",
+        "weapons": "pelo_menos_uma_leve"
+      },
+      {
+        "type": "action_type",
+        "sub_type": "soft",
+        "action": "atacar"
+      },
+      {
+        "type": "expertise",
+        "sub_type": "hard",
+        "id": "luta"
+      }
+    ],
+    "effects": [
+      {
+        "type": "extra_attack",
+        "action": "livre"
+      },
+      {
+        "type": "attack_penalty",
+        "value": -2,
+        "duration": "proximo_turno",
+        "extra_details": {
+          "type": "feature_cancel_effect",
+          "fearure": "ambidestria"
+        }
+      }
+    ]
+  },
+  "estilo_de_duas_maos": {
+    "id": "estilo_de_duas_maos",
+    "name": "Estilo de Duas Mãos",
+    "type": "poder_geral",
+    "sub_type": "poder_de_combate",
+    "description": "Se estiver usando uma arma corpo a corpo com as duas mãos, você recebe +5 nas rolagens de dano. Este poder não pode ser usado com armas leves.",
+    "requirements": [
+      {
+        "type": "attr_value",
+        "sub_type": "hard",
+        "attr": "for",
+        "value": 15
+      },
+      {
+        "type": "weapon_type",
+        "sub_type": "soft",
+        "weapons": "corpo_a_corpo_duas_maos"
+      },
+      {
+        "type": "expertise",
+        "sub_type": "hard",
+        "skill": "luta"
+      }
+    ],
+    "effects": [
+      {
+        "type": "damage_improvement",
+        "value": 5,
+        "duration": "permanente"
+      }
+    ]
+  },
+  "estilo_de_uma_arma": {
+    "id": "estilo_de_uma_arma",
+    "name": "Estilo de Uma Arma",
+    "type": "poder_geral",
+    "sub_type": "poder_de_combate",
+    "description": "Se estiver usando uma arma corpo a corpo em uma das mãos e nada na outra, você recebe +2 na Defesa e nos testes de ataque com essa arma (exceto ataques desarmados)",
+    "requirements": [
+      {
+        "type": "weapon_type",
+        "sub_type": "soft",
+        "weapons": [
+          "corpo_a_corpo",
+          "desarmado"
+        ]
+      },
+      {
+        "type": "expertise",
+        "sub_type": "hard",
+        "skill": "luta"
+      }
+    ],
+    "effects": [
+      {
+        "type": "attack_improvement",
+        "value": 2,
+        "duration": "permanente",
+        "requirements": {
+          "weapon": "corpo_a_corpo"
+        }
+      },
+      {
+        "type": "defense_improvement",
+        "value": 2,
+        "duration": "permanente"
+      }
+    ]
+  },
+  "estilo_desarmado": {
+    "id": "estilo_desarmado",
+    "name": "Estilo Desarmado",
+    "type": "poder_geral",
+    "sub_type": "poder_de_combate",
+    "description": "Seus ataques desarmados causam 1d6 pontos de dano e podem causar dano letal ou não letal (sem penalidades).",
+    "requirements": [
+      {
+        "type": "weapon_type",
+        "sub_type": "soft",
+        "weapons": "desarmado"
+      },
+      {
+        "type": "expertise",
+        "sub_type": "hard",
+        "skill": "luta"
+      }
+    ],
+    "effects": [
+      {
+        "type": "damage_improvement",
+        "value": "1d6",
+        "duration": "permanente"
+      },
+      {
+        "type": "damege_type",
+        "damege": [
+          "letal",
+          "nao_letal"
+        ]
+      }
+    ]
+  },
+  "fanatico": {
+    "id": "fanatico",
+    "name": "Fanático",
+    "type": "poder_geral",
+    "sub_type": "poder_de_combate",
+    "description": "Seu deslocamento não é reduzido por usar armaduras pesadas.",
+    "requirements": [
+      {
+        "type": "armor_type",
+        "sub_type": "soft",
+        "aermor": "pesada"
+      },
+      {
+        "type": "feature",
+        "sub_type": "hard",
+        "id": "encouracado"
+      },
+      {
+        "type": "level",
+        "sub_type": "hard",
+        "value": 12
+      }
+    ],
+    "effects": [
+      {
+        "type": "move_improvement",
+        "move": "normal"
+      }
+    ]
+  },
+  "finta_aprimorada": {
+    "id": "finta_aprimorada",
+    "name": "Finta_Aprimorada",
+    "type": "poder_geral",
+    "sub_type": "poder_de_combate",
+    "description": "Você recebe +2 em testes de Enganação para fintar e pode fintar como uma ação de movimento.",
+    "requirements": [
+      {
+        "type": "maneuver_type",
+        "sub_type": "soft",
+        "maneuver": "finta"
+      },
+      {
+        "type": "expertise",
+        "sub_type": "hard",
+        "id": "luta"
+      },
+      {
+        "type": "expertise",
+        "sub_type": "hard",
+        "skill": "enganacao"
+      }
+    ],
+    "effects": [
+      {
+        "type": "maneuver_skill_test",
+        "skill": "enganacao",
+        "value": 2
+      },
+      {
+        "type": "change_action_type",
+        "action": "movimento"
+      }
+    ]
+  },
+  "foco_em_arma": {
+    "id": "foco_em_arma",
+    "name": "Foco em Arma",
+    "type": "poder_geral",
+    "sub_type": "poder_de_combate",
+    "description": "Escolha uma arma. Você recebe +2 em testes de ataque com essa arma. Você pode escolher este poder outras vezes para armas diferentes.",
+    "requirements": [
+      {
+        "type": "weapon_type",
+        "sub_type": "soft",
+        "weapons": "a_sua_escolha"
+      },
+      {
+        "type": "feature",
+        "sub_type": "hard",
+        "id": "proficiencia_com_arma_escolhida"
+      }
+    ],
+    "effects": [
+      {
+        "type": "attack_improvement",
+        "value": 2,
+        "duration": "permanente_para_a_arma_escolhida"
+      }
+    ]
+  },
+  "ginete": {
+    "id": "ginete",
+    "name": "Ginete",
+    "type": "poder_geral",
+    "sub_type": "poder_de_combate",
+    "description": "Você passa automaticamente em testes de Cavalgar para não cair da montaria quando sofre dano. Além disso, não sofre penalidades para atacar à distância ou lançar magias quando montado.",
+    "requirements": [
+      {
+        "type": "expertise",
+        "sub_type": "hard",
+        "id": "cavalgar"
+      }
+    ],
+    "effects": [
+      {
+        "type": ""
+      }
+    ]
+  },
+  "inexpugnavel": {
+    "id": "inexpugnavel",
+    "name": "Inexpugnável",
+    "type": "poder_geral",
+    "sub_type": "poder_de_combate",
+    "description": "Se estiver usando uma armadura pesada, você recebe +2 em todos os testes de resistência.",
+    "requirements": [
+      {
+        "type": "lvl_de_personagem",
+        "sub_type": "hard",
+        "value": 6
+      },
+      {
+        "type": "armor_type",
+        "sub_type": "soft",
+        "armor": "pesada"
+      },
+      {
+        "type": "feature",
+        "sub_type": "hard",
+        "id": "encouracado"
+      }
+    ],
+    "effects": [
+      {
+        "type": "resistence_test_improvement",
+        "value": 2,
+        "duration": "permanente"
+      }
+    ]
+  },
+  "mira_apurada": {
+    "id": "mira_apurada",
+    "name": "Mira Apurada",
+    "type": "poder_geral",
+    "sub_type": "poder_de_combate",
+    "description": "Você pode gastar uma ação de movimento para mirar. Se fizer isso, recebe +2 em testes de ataque e na margem de ameaça com ataques à distância até o fim do turno.",
+    "requirements": [
+      {
+        "type": "attr_value",
+        "sub_type": "hard",
+        "attr": "sab",
+        "value": 13
+      },
+      {
+        "type": "feature",
+        "sub_type": "hard",
+        "id": "disparo_preciso"
+      },
+      {
+        "type": "attack_type",
+        "sub_type": "soft",
+        "attack": "a_distancia"
+      }
+    ],
+    "effects": [
+      {
+        "type": "critical_improvement",
+        "value": 2,
+        "duration": "fim_do_turno"
+      },
+      {
+        "type": "attack_test_improvement",
+        "value": 2,
+        "duration": "fim_do_turno"
+      }
+    ],
+    "costs": [
+      {
+        "value": 1,
+        "type": "move_action"
+      }
+    ]
+  },
+  "piqueiro": {
+    "id": "piqueiro",
+    "name": "Piqueiro",
+    "type": "poder_geral",
+    "sub_type": "poder_de_combate",
+    "description": "Uma vez por rodada, se estiver empunhando uma arma alongada e um inimigo entrar voluntariamente em seu alcance corpo a corpo, você pode gastar 1 PM para fazer um ataque corpo a corpo contra este oponente com esta arma. Se o oponente tiver se aproximado fazendo uma investida, seu ataque causa dois dados de dano extra do mesmo tipo.",
+    "requirements": [
+      {
+        "type": "power",
+        "sub_type": "hard",
+        "power": "estilo_de_arma_longa"
+      }
+    ],
+    "effects": [
+      {
+        "type": "active",
+        "cost": "1 PM",
+        "trigger": "inimigo_entra_no_alcance"
+      }
+    ]
+  },
+  "presenca_aterradora": {
+    "id": "presenca_aterradora",
+    "name": "Presença Aterradora",
+    "type": "poder_geral",
+    "sub_type": "poder_de_combate",
+    "description": "Você pode gastar uma ação padrão e 1 PM para assustar todas as criaturas a sua escolha em alcance curto. Veja a perícia Intimidação para as regras de assustar.",
+    "requirements": [
+      {
+        "type": "range_type",
+        "sub_type": "soft",
+        "range": "curto"
+      },
+      {
+        "type": "expertise",
+        "sub_type": "hard",
+        "skill": "intimidacao"
+      }
+    ],
+    "effects": [
+      {
+        "type": "target_type",
+        "target": "criaturas_a_sua_escoha"
+      }
+    ],
+    "costs": [
+      {
+        "value": 1,
+        "type": "PM"
+      },
+      {
+        "value": 1,
+        "type": "acao_padrao"
+      }
+    ]
+  },
+  "proficiencia": {
+    "id": "proficiencia",
+    "name": "Proficiência",
+    "type": "poder_geral",
+    "sub_type": "poder_de_combate",
+    "description": "Escolha uma proficiência: armas marciais, armas de fogo, armaduras pesadas ou escudos (se for proficiente em armas marciais, você também pode escolher armas exóticas). Você recebe essa proficiência. Você pode escolher este poder outras vezes para proficiências diferentes.",
+    "requirements": [],
+    "effects": [
+      {
+        "type": "receive_feature",
+        "feature": "a_sua_scolha"
+      }
+    ]
+  },
+  "quebrar_aprimorado": {
+    "id": "quebrar_aprimorado",
+    "name": "Quebrar Aprimorado",
+    "type": "poder_geral",
+    "sub_type": "poder_de_combate",
+    "description": "Você recebe +2 em testes de ataque para quebrar. Quando reduz os PV de uma arma para 0 ou menos, você pode gastar 1 PM para realizar um ataque extra contra o usuário dela. O ataque adicional usa os mesmos valores de ataque e dano, mas os dados devem ser rolados novamente.",
+    "requirements": [
+      {
+        "type": "maneuver_type",
+        "sub_type": "soft",
+        "maneuver": "quebrar"
+      },
+      {
+        "type": "feature",
+        "sub_type": "hard",
+        "id": "ataque_poderoso"
+      }
+    ],
+    "effects": [
+      {
+        "type": "manouver_test_improvement",
+        "manouver": "quebrar",
+        "value": 2
+      },
+      {
+        "type": "extra_attack"
+      }
+    ]
+  },
+  "reflexos_de_combate": {
+    "id": "reflexos_de_combate",
+    "name": "Reflexos de Combate",
+    "type": "poder_geral",
+    "sub_type": "poder_de_combate",
+    "description": "Você ganha uma ação de movimento extra no seu primeiro turno de cada combate.",
+    "requirements": [
+      {
+        "type": "attr_value",
+        "sub_type": "hard",
+        "attr": "des",
+        "value": 13
+      }
+    ],
+    "effects": [
+      {
+        "type": "extra_move_action",
+        "requirement": "primeiro_turno_do_combate"
+      }
+    ]
+  },
+  "saque_rapido": {
+    "id": "saque_rapido",
+    "name": "Saque Rápido",
+    "type": "poder_geral",
+    "sub_type": "poder_de_combate",
+    "description": "Você recebe +2 em Iniciativa e pode sacar ou guardar itens como uma ação livre (em vez de ação de movimento). Além disso, a ação que você gasta para recarregar uma arma de disparo diminui em uma categoria (ação completa para padrão, padrão para movimento, movimento para livre).",
+    "requirements": [
+      {
+        "type": "expertise",
+        "sub_type": "hard",
+        "skill": "iniciativa"
+      }
+    ],
+    "effects": [
+      {
+        "type": "expertise_improvement",
+        "value": 2,
+        "skill": "iniciativa"
+      },
+      {
+        "type": "change_action_type",
+        "action": "livre",
+        "sub_action": [
+          "sacar",
+          "guardar"
+        ]
+      }
+    ]
+  },
+  "trespassar": {
+    "id": "trespassar",
+    "name": "Trespassar",
+    "type": "poder_geral",
+    "sub_type": "poder_de_combate",
+    "description": "Quando você faz um ataque corpo a corpo e reduz os pontos de vida do alvo para 0 ou menos, pode gastar 1 PM para fazer um ataque adicional contra outra criatura dentro do seu alcance. O ataque adicional usa os mesmos valores de ataque e dano, masb os dados devem ser rolados novamente.",
+    "requirements": [
+      {
+        "type": "feature",
+        "sub_type": "hard",
+        "id": "ataque_poderoso"
+      },
+      {
+        "type": "attack_type",
+        "sub_type": "soft",
+        "attack": "corpo_a_corpo"
+      },
+      {
+        "type": "targed_life",
+        "sub_type": "soft",
+        "value": [
+          0,
+          "<0"
+        ]
+      }
+    ],
+    "effects": [
+      {
+        "type": "extra_attack",
+        "attack": "outra_criatura_no_alcance"
+      }
+    ],
+    "costs": [
+      {
+        "value": 1,
+        "type": "PM"
+      }
+    ]
+  },
+  "vitalidade": {
+    "id": "vitalidade",
+    "name": "Vitalidade",
+    "type": "poder_geral",
+    "sub_type": "poder_de_combate",
+    "description": "Você recebe +1 PV por nível de personagem e +2 em Fortitude.",
+    "requirements": [
+      {
+        "type": "attr_value",
+        "sub_type": "hard",
+        "attr": "con",
+        "value": 13
+      }
+    ],
+    "effects": [
+      {
+        "type": "PV_improvement",
+        "value": 1,
+        "extra_details": "por_nivel_do_personagem"
+      },
+      {
+        "type": "skill_improvement",
+        "value": 2,
+        "skill": "fortitude"
+      }
+    ]
+  }
+}

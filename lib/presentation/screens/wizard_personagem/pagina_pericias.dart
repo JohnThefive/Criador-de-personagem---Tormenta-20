@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../domain/services/data_services/call_pericias.dart';
-import '../../domain/entities/personagem/pericias.dart'; // Importe a entidade Pericia
-import '../controllers/personagem_cubit.dart';
+import '../../../domain/services/data_services/call_pericias.dart';
+import '../../../domain/entities/personagem/pericias.dart'; // Importe a entidade Pericia
+import '../../controllers/personagem_cubit.dart';
 
 class PaginaSelecaoPericias extends StatelessWidget {
   final PersonagemState state;
@@ -67,18 +67,15 @@ class PaginaSelecaoPericias extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           sliver: SliverGrid(
             gridDelegate: gridDelegate,
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                final pericia = periciasFixas[index];
-                return _PericiaCard(
-                  pericia: pericia,
-                  isFixed: true,
-                  isSelected: true,
-                  activeColor: const Color.fromARGB(255, 238, 255, 1),
-                );
-              },
-              childCount: periciasFixas.length,
-            ),
+            delegate: SliverChildBuilderDelegate((context, index) {
+              final pericia = periciasFixas[index];
+              return _PericiaCard(
+                pericia: pericia,
+                isFixed: true,
+                isSelected: true,
+                activeColor: const Color.fromARGB(255, 238, 255, 1),
+              );
+            }, childCount: periciasFixas.length),
           ),
         ),
 
@@ -104,7 +101,8 @@ class PaginaSelecaoPericias extends StatelessWidget {
                       "${state.selecoesPericiaClasse.length} / ${classeDef.qtdPericiasEscolha}",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: state.selecoesPericiaClasse.length ==
+                        color:
+                            state.selecoesPericiaClasse.length ==
                                 classeDef.qtdPericiasEscolha
                             ? Colors.green
                             : const Color.fromARGB(255, 255, 230, 0),
@@ -124,28 +122,24 @@ class PaginaSelecaoPericias extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           sliver: SliverGrid(
             gridDelegate: gridDelegate,
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                final pericia = periciasOpcoes[index];
-                final key = pericia.key;
-                final isSelected = state.selecoesPericiaClasse.contains(key);
-                final isBlocked =
-                    state.selecoesPericiaInteligencia.contains(key);
+            delegate: SliverChildBuilderDelegate((context, index) {
+              final pericia = periciasOpcoes[index];
+              final key = pericia.key;
+              final isSelected = state.selecoesPericiaClasse.contains(key);
+              final isBlocked = state.selecoesPericiaInteligencia.contains(key);
 
-                return _PericiaCard(
-                  pericia: pericia,
-                  isSelected: isSelected,
-                  isBlocked: isBlocked,
-                  activeColor: const Color.fromARGB(255, 255, 251, 0),
-                  onTap: isBlocked
-                      ? null
-                      : () => context
-                          .read<PersonagemCubit>()
-                          .togglePericiaClasse(key),
-                );
-              },
-              childCount: periciasOpcoes.length,
-            ),
+              return _PericiaCard(
+                pericia: pericia,
+                isSelected: isSelected,
+                isBlocked: isBlocked,
+                activeColor: const Color.fromARGB(255, 255, 251, 0),
+                onTap: isBlocked
+                    ? null
+                    : () => context.read<PersonagemCubit>().togglePericiaClasse(
+                        key,
+                      ),
+              );
+            }, childCount: periciasOpcoes.length),
           ),
         ),
 
@@ -172,7 +166,8 @@ class PaginaSelecaoPericias extends StatelessWidget {
                         "${state.selecoesPericiaInteligencia.length} / $limiteInteligencia",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: state.selecoesPericiaInteligencia.length ==
+                          color:
+                              state.selecoesPericiaInteligencia.length ==
                                   limiteInteligencia
                               ? Colors.green
                               : const Color.fromARGB(255, 255, 230, 0),
@@ -192,28 +187,26 @@ class PaginaSelecaoPericias extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(16, 0, 16, 32),
             sliver: SliverGrid(
               gridDelegate: gridDelegate,
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  final pericia = periciasExtrasDisponiveis[index];
-                  final key = pericia.key;
-                  final isSelected =
-                      state.selecoesPericiaInteligencia.contains(key);
-                  final isBlocked = state.selecoesPericiaClasse.contains(key);
+              delegate: SliverChildBuilderDelegate((context, index) {
+                final pericia = periciasExtrasDisponiveis[index];
+                final key = pericia.key;
+                final isSelected = state.selecoesPericiaInteligencia.contains(
+                  key,
+                );
+                final isBlocked = state.selecoesPericiaClasse.contains(key);
 
-                  return _PericiaCard(
-                    pericia: pericia,
-                    isSelected: isSelected,
-                    isBlocked: isBlocked,
-                    activeColor: const Color.fromARGB(255, 255, 255, 0),
-                    onTap: isBlocked
-                        ? null
-                        : () => context
+                return _PericiaCard(
+                  pericia: pericia,
+                  isSelected: isSelected,
+                  isBlocked: isBlocked,
+                  activeColor: const Color.fromARGB(255, 255, 255, 0),
+                  onTap: isBlocked
+                      ? null
+                      : () => context
                             .read<PersonagemCubit>()
                             .togglePericiaInteligencia(key),
-                  );
-                },
-                childCount: periciasExtrasDisponiveis.length,
-              ),
+                );
+              }, childCount: periciasExtrasDisponiveis.length),
             ),
           ),
         ] else ...[
@@ -292,9 +285,7 @@ class _PericiaCard extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       fontSize: 14,
                       color: isBlocked ? Colors.grey : Colors.black,
-                      decoration: isBlocked
-                          ? TextDecoration.lineThrough
-                          : null,
+                      decoration: isBlocked ? TextDecoration.lineThrough : null,
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,

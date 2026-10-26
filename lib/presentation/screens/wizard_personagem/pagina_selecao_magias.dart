@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../domain/entities/magia/magia.dart';
-import '../../domain/services/poderes_e_magias/aprendizado_magia_service.dart';
-import '../controllers/personagem_cubit.dart';
+import '../../../domain/entities/magia/magia.dart';
+import '../../../domain/services/poderes_e_magias/aprendizado_magia_service.dart';
+import '../../controllers/personagem_cubit.dart';
 
 class PaginaSelecaoMagias extends StatefulWidget {
   final PersonagemState state;

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../domain/entities/combate/combatente.dart';
-import '../../domain/entities/combate/estado_vida_combatente.dart';
-import '../../domain/entities/combate/grid_tatico.dart';
-import '../../domain/entities/combate/inimigos_treino.dart';
-import '../../domain/entities/personagem/personagem.dart';
-import '../../domain/services/combate_engine.dart';
-import '../controllers/combate_cubit.dart';
-import '../controllers/combate_state.dart';
+import '../../../../domain/entities/combate/combatente.dart';
+import '../../../../domain/entities/combate/estado_vida_combatente.dart';
+import '../../../../domain/entities/combate/grid_tatico.dart';
+import '../../../../domain/entities/combate/inimigos_treino.dart';
+import '../../../../domain/entities/personagem/personagem.dart';
+import '../../../../domain/services/combate_engine.dart';
+import '../../../controllers/combate_cubit.dart';
+import '../../../controllers/combate_state.dart';
 
 class AbaCombateView extends StatefulWidget {
   final Personagem personagem;

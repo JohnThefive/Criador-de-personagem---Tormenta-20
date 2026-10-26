@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:t20_creator/presentation/controllers/home_cubit.dart';
-import 'package:t20_creator/presentation/screens/pagina_pericias.dart';
-import 'package:t20_creator/presentation/screens/pagina_racas.dart';
-import 'package:t20_creator/presentation/screens/pagina_selecao_classe.dart';
-import 'package:t20_creator/presentation/screens/pagina_origens.dart';
-import 'package:t20_creator/presentation/screens/pagina_divindades.dart';
-import 'package:t20_creator/presentation/screens/pagina_selecao_magias.dart';
-import 'package:t20_creator/presentation/screens/pagina_selecao_equipamento.dart';
-import '../controllers/personagem_cubit.dart';
-import '../widgets/atributo_card_compra.dart';
+import 'package:t20_creator/presentation/screens/wizard_personagem/pagina_pericias.dart';
+import 'package:t20_creator/presentation/screens/wizard_personagem/pagina_racas.dart';
+import 'package:t20_creator/presentation/screens/wizard_personagem/pagina_selecao_classe.dart';
+import 'package:t20_creator/presentation/screens/wizard_personagem/pagina_origens.dart';
+import 'package:t20_creator/presentation/screens/wizard_personagem/pagina_divindades.dart';
+import 'package:t20_creator/presentation/screens/wizard_personagem/pagina_selecao_magias.dart';
+import 'package:t20_creator/presentation/screens/wizard_personagem/pagina_selecao_equipamento.dart';
+import '../../controllers/personagem_cubit.dart';
+import '../../widgets/atributo_card_compra.dart';
 // Importe seus widgets de AtributoCard e a lógica de Rolagem aqui
 
 class CharacterCreatorScreen extends StatefulWidget {
@@ -578,7 +578,8 @@ class _PaginaFinalizacaoState extends State<_PaginaFinalizacao> {
                             child: CircleAvatar(
                               radius: 50,
                               backgroundColor: const Color(0xFFF3F4F6),
-                              child: (p.caminhoFoto != null &&
+                              child:
+                                  (p.caminhoFoto != null &&
                                       p.caminhoFoto!.isNotEmpty)
                                   ? ClipOval(
                                       child: Image.file(
@@ -586,8 +587,7 @@ class _PaginaFinalizacaoState extends State<_PaginaFinalizacao> {
                                         width: 100,
                                         height: 100,
                                         fit: BoxFit.cover,
-                                        errorBuilder: (_, _, _) =>
-                                            const Icon(
+                                        errorBuilder: (_, _, _) => const Icon(
                                           Icons.person_outline_rounded,
                                           size: 52,
                                           color: Color(0xFF9CA3AF),
@@ -639,8 +639,8 @@ class _PaginaFinalizacaoState extends State<_PaginaFinalizacao> {
                                             strokeWidth: 2,
                                             valueColor:
                                                 AlwaysStoppedAnimation<Color>(
-                                              Colors.white,
-                                            ),
+                                                  Colors.white,
+                                                ),
                                           ),
                                         )
                                       : const Icon(
@@ -655,8 +655,7 @@ class _PaginaFinalizacaoState extends State<_PaginaFinalizacao> {
                         ],
                       ),
                       const SizedBox(height: 8),
-                      if (p.caminhoFoto != null &&
-                          p.caminhoFoto!.isNotEmpty)
+                      if (p.caminhoFoto != null && p.caminhoFoto!.isNotEmpty)
                         TextButton.icon(
                           onPressed: _selecionandoFoto
                               ? null

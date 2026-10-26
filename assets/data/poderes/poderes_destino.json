@@ -1,0 +1,625 @@
+{
+  "acrobatico": {
+    "id": "acrobatico",
+    "name": "Acrobático",
+    "type": "poder_geral",
+    "sub_type": "poder_de_destino",
+    "description": "Você pode usar seu modificador de Destreza em vez de Força em testes de Atletismo. Além disso, terreno difícil não reduz seu deslocamento nem o impede de realizar investidas.",
+    "requirements": [
+      {
+        "type": "attr_value",
+        "sub_type": "hard",
+        "attr": "des",
+        "value": 15
+      }
+    ],
+    "effects": [
+      {
+        "type": "switch_skill_attr",
+        "skill": "atletismo",
+        "attr": "des"
+      },
+      {
+        "type": "move_improvement",
+        "description": "terreno difícil não reduz seu deslocamento"
+      },
+      {
+        "type": "maneuver_improvment",
+        "description": "terreno difícil não impede de realizar investidas"
+      }
+    ]
+  },
+  "ao_sabor_do_destino": {
+    "id": "ao_sabor_do_destino",
+    "name": "Ao Sabor do Destino",
+    "type": "poder_geral",
+    "sub_type": "poder_de_destino",
+    "description": "Você recebe diversos benefícios, de acordo com seu nível de personagem e a tabela abaixo.\nOs bônus não são cumulativos (os bônus em atributos e perícias devem ser aplicados num atributo ou perícia diferente a cada vez). Quando você utiliza voluntariamente qualquer item mágico (exceto poções), perde o benefício deste poder até o fim da aventura. Você ainda pode lançar magias, receber magias benéficas ou beneficiar-se de itens usados por outros — por exemplo, pode “ir de carona” em um tapete voador, mas não pode você mesmo conduzi-lo.",
+    "requirements": [
+      {
+        "type": "character_lvl",
+        "sub_type": "hard",
+        "value": 5
+      }
+    ],
+    "effects": [
+      {
+        "type": "skill_improvment",
+        "skill": "a_sua_escolha",
+        "value": 2,
+        "requirement": "character_lvl_5"
+      },
+      {
+        "type": "defense_improvment",
+        "value": 1,
+        "requirement": "character_lvl_6"
+      },
+      {
+        "type": "damage_test_improvment",
+        "value": 1,
+        "requirement": "character_lvl_7"
+      },
+      {
+        "type": "attr_improvment",
+        "skill": "a_sua_escolha",
+        "value": 2,
+        "requirement": "character_lvl_8"
+      },
+      {
+        "type": "skill_improvment",
+        "skill": "a_sua_escolha",
+        "value": 2,
+        "requirement": "character_lvl_10"
+      },
+      {
+        "type": "defense_improvment",
+        "value": 2,
+        "requirement": "character_lvl_11"
+      },
+      {
+        "type": "damage_test_improvment",
+        "value": 2,
+        "requirement": "character_lvl_12"
+      },
+      {
+        "type": "attr_improvment",
+        "skill": "a_sua_escolha",
+        "value": 2,
+        "requirement": "character_lvl_13"
+      },
+      {
+        "type": "skill_improvment",
+        "skill": "a_sua_escolha",
+        "value": 2,
+        "requirement": "character_lvl_15"
+      },
+      {
+        "type": "defense_improvment",
+        "value": 3,
+        "requirement": "character_lvl_16"
+      },
+      {
+        "type": "damage_test_improvment",
+        "value": 3,
+        "requirement": "character_lvl_17"
+      },
+      {
+        "type": "attr_improvment",
+        "skill": "a_sua_escolha",
+        "value": 2,
+        "requirement": "character_lvl_18"
+      },
+      {
+        "type": "skill_improvment",
+        "skill": "a_sua_escolha",
+        "value": 2,
+        "requirement": "character_lvl_20"
+      }
+    ]
+  },
+  "aparencia_inofensiva": {
+    "id": "aparencia_inofensiva",
+    "name": "Aparência Inofensiva",
+    "type": "poder_geral",
+    "sub_type": "poder_de_destino",
+    "description": "A primeira criatura inteligente (Int 3 ou mais) que atacar você em uma cena deve fazer um teste de Vontade (CD Car). Se falhar, perderá sua ação. Este poder só funciona uma vez por cena; independentemente de a criatura falhar ou não no teste, poderá atacá-lo nas rodadas seguintes.",
+    "requirements": [
+      {
+        "type": "attr_value",
+        "sub_type": "hard",
+        "attr": "car",
+        "value": 13
+      },
+      {
+        "type": "enemy_attr_value",
+        "sub_type": "soft",
+        "attr": "int",
+        "value": 3
+      }
+    ],
+    "effects": [
+      {
+        "type": "resistence_test",
+        "test": "vontade",
+        "attr": "car",
+        "description": "Se falhar, perderá sua ação",
+        "requirement": "primeiro_ataque_da_cena"
+      }
+    ]
+  },
+  "atletico": {
+    "id": "atletico",
+    "name": "Atlético",
+    "type": "poder_geral",
+    "sub_type": "poder_de_destino",
+    "description": "Você recebe +2 em Atletismo e +3m em seu deslocamento.",
+    "requirements": [
+      {
+        "type": "attr_value",
+        "sub_type": "hard",
+        "attr": "for",
+        "value": 15
+      }
+    ],
+    "effects": [
+      {
+        "type": "skill_improvement",
+        "skill": "atletismo",
+        "value": 2,
+        "duration": "permanente"
+      },
+      {
+        "type": "move_improvement",
+        "value": 3,
+        "duration": "permanente"
+      }
+    ]
+  },
+  "atraente": {
+    "id": "atraente",
+    "name": "Atraente",
+    "type": "poder_geral",
+    "sub_type": "poder_de_destino",
+    "description": "Você recebe +2 em testes de perícias baseadas em Carisma contra criaturas que possam se sentir fisicamente atraídas por você.",
+    "requirements": [
+      {
+        "type": "attr_value",
+        "sub_type": "hard",
+        "attr": "car",
+        "value": 13
+      },
+      {
+        "type": "creature_type",
+        "sub_type": "soft",
+        "creature": "que_podem_se_sentir_atraidas_por_voce"
+      }
+    ],
+    "effects": [
+      {
+        "type": "skil_test_improvement",
+        "skill": "baseadas_em_car",
+        "value": 2
+      }
+    ]
+  },
+  "comandar": {
+    "id": "comandar",
+    "name": "Comandar",
+    "type": "poder_geral",
+    "sub_type": "poder_de_destino",
+    "description": "Você pode gastar uma ação de movimento e 1 PM para gritar ordens para seus aliados em alcance médio. Eles recebem +1 em testes de perícia até o fim da cena.",
+    "requirements": [
+      {
+        "type": "attr_value",
+        "sub_type": "hard",
+        "attr": "car",
+        "value": 13
+      },
+      {
+        "type": "range",
+        "sub_type": "soft",
+        "description": "medio"
+      }
+    ],
+    "effects": [
+      {
+        "type": "skiill_test_improvement",
+        "value": 1,
+        "duration": "fim_da_cena"
+      }
+    ],
+    "costs": [
+      {
+        "value": 1,
+        "type": "PM"
+      },
+      {
+        "value": 1,
+        "type": "acao_de_movimento"
+      }
+    ]
+  },
+  "costas_largas": {
+    "id": "costas_largas",
+    "name": "Costas Largas",
+    "type": "poder_geral",
+    "sub_type": "poder_de_destino",
+    "description": "Seu limite de carga aumenta em 5 espaços e você pode se beneficiar de um item vestido adicional.",
+    "requirements": [
+      {
+        "type": "attr_value",
+        "sub_type": "hard",
+        "attr": "con",
+        "value": 13
+      },
+      {
+        "type": "attr_value",
+        "sub_type": "hard",
+        "attr": "for",
+        "value": 13
+      }
+    ],
+    "effects": [
+      {
+        "type": "inventory_improvement",
+        "value": 5,
+        "duration": "permanente"
+      }
+    ]
+  },
+  "foco_em_pericia": {
+    "id": "foco_em_pericia",
+    "name": "Foco em Perícia",
+    "type": "poder_geral",
+    "sub_type": "poder_de_destino",
+    "description": "Escolha uma perícia. Quando faz um teste dessa perícia, você pode gastar 1 PM para rolar dois dados e usar o melhor resultado. Você pode escolher este poder outras vezes para perícias diferentes. Este poder não pode ser aplicado em Luta e Pontaria (mas veja Foco em Arma).",
+    "requirements": [
+      {
+        "type": "expertise",
+        "sub_type": "hard",
+        "id": "pericia_escolhida"
+      }
+    ],
+    "effects": [
+      {
+        "type": "improve dice roll",
+        "description": "role_dois_dados_e_fique_com_o_maior_resultado"
+      }
+    ],
+    "costs": [
+      {
+        "value": 1,
+        "type": "PM"
+      }
+    ]
+  },
+  "inventario_organizado": {
+    "id": "inventario_organizado",
+    "name": "Inventário Organizado",
+    "type": "poder_geral",
+    "sub_type": "poder_de_destino",
+    "description": "Você soma sua Inteligência no limite de espaços que pode carregar. Para você, itens muito leves ou pequenos, que normalmente ocupam meio espaço, em vez disso ocupam 1/4 de espaço.",
+    "requirements": [
+      {
+        "type": "attr_value",
+        "sub_type": "hard",
+        "attr": "int",
+        "value": 13
+      }
+    ],
+    "effects": [
+      {
+        "type": "inventory_improvement",
+        "value": "int_modifier",
+        "duration": "permanente"
+      }
+    ]
+  },
+  "investigador": {
+    "id": "investigador",
+    "name": "Investigador",
+    "type": "poder_geral",
+    "sub_type": "poder_de_destino",
+    "description": "Você recebe +2 em Investigação e soma seu bônus de Inteligência em Intuição.",
+    "requirements": [
+      {
+        "type": "attr_value",
+        "sub_type": "hard",
+        "attr": "int",
+        "value": 13
+      }
+    ],
+    "effects": [
+      {
+        "type": "skill_improvement",
+        "skill": "investigacao",
+        "value": 2,
+        "duration": "permanente"
+      },
+      {
+        "type": "add_attr_bonus_to_skill",
+        "attr": "int",
+        "skill": "intuicao"
+      }
+    ]
+  },
+  "lobo_solitario": {
+    "id": "lobo_solitario",
+    "name": "Lobo Solitário",
+    "type": "poder_geral",
+    "sub_type": "poder_de_destino",
+    "description": "Você recebe +1 em testes de perícia e Defesa se estiver sem nenhum aliado em alcance curto. Você não sofre penalidade por usar a perícia Cura em si mesmo.",
+    "requirements": null,
+    "effects": [
+      {
+        "type": "skill_test_improvment",
+        "skill": "all",
+        "value": 1,
+        "requirement": "estar_sozinho_em_alcance_curto"
+      },
+      {
+        "type": "defense_improvement",
+        "value": 1,
+        "requirement": "estar_sozinho_em_alcance_curto"
+      },
+      {
+        "type": "remove_skill_penalty",
+        "skill": "cura",
+        "requirement": "ser_usada_em_si_mesmo"
+      }
+    ]
+  },
+  "medicina": {
+    "id": "medicina",
+    "name": "Medicina",
+    "type": "poder_geral",
+    "sub_type": "poder_de_destino",
+    "description": "Você pode gastar uma ação completa para fazer um teste de Cura (CD 15) em uma criatura. Se você passar, ela recupera 1d6 PV, mais 1d6 para cada 5 pontos pelos quais o resultado do teste exceder a CD (2d6 com um resultado 20, 3d6 com um resultado 25 e assim por diante). Você só pode usar este poder uma vez por dia numa mesma criatura.",
+    "requirements": [
+      {
+        "type": "attr_value",
+        "sub_type": "hard",
+        "attr": "sab",
+        "value": 13
+      },
+      {
+        "type": "target_use",
+        "sub_type": "soft",
+        "target": "uma_criatura",
+        "use": "uma_vez_por_dia"
+      },
+      {
+        "type": "skill_training",
+        "sub_type": "hard",
+        "skill": "cura"
+      }
+    ],
+    "effects": [
+      {}
+    ],
+    "costs": [
+      {
+        "value": 1,
+        "type": "acao_completa"
+      }
+    ]
+  },
+  "parceiro": {
+    "id": "parceiro",
+    "name": "Parceiro",
+    "type": "poder_geral",
+    "sub_type": "poder_de_destino",
+    "description": "Você possui um parceiro animal ou humanoide que o acompanha em aventuras. Escolha os detalhes dele, como nome, aparência e personalidade. Em termos de jogo é um aliado iniciante de um tipo a sua escolha (veja a página 246). O parceiro obedece às suas ordens e se arrisca para ajudá-lo. Entretanto, se for maltratado, pode parar de segui-lo (de acordo como mestre). Se perder seu parceiro, você recebe outro no início da próxima aventura.",
+    "requirements": [
+      {
+        "type": "character_level",
+        "sub_type": "hard",
+        "value": 6
+      },
+      {
+        "type": "skill_training",
+        "sub_type": "hard",
+        "skill": [
+          "adestramento",
+          "diplomacia"
+        ]
+      }
+    ],
+    "effects": [
+      {
+        "type": "receive_partner",
+        "partner_type": [
+          "animal",
+          "humanoide"
+        ],
+        "details": "veja_descrição"
+      }
+    ]
+  },
+  "sentidos_agucados": {
+    "id": "sentidos_agucados",
+    "name": "Sentidos Aguçados",
+    "type": "poder_geral",
+    "sub_type": "poder_de_destino",
+    "description": "Você recebe +2 em Percepção, não fica desprevenido contra inimigos que não possa ver e, sempre que erra um ataque devido a camuflagem ou camuflagem total, pode rolar mais uma vez o dado da chance de falha.",
+    "requirements": [
+      {
+        "type": "attr_value",
+        "sub_type": "hard",
+        "attr": "sab",
+        "value": 13
+      },
+      {
+        "type": "skill_training",
+        "sub_type": "hard",
+        "skill": "percepcao"
+      }
+    ],
+    "effects": [
+      {
+        "type": "roll_dice_again",
+        "requirements": "errar_ataque_devido_camuflagem_total_ou_parcial"
+      },
+      {
+        "type": "skill_improvement",
+        "skill": "percepcao",
+        "value": 2,
+        "duration": "permanente"
+      }
+    ]
+  },
+  "sortudo": {
+    "id": "sortudo",
+    "name": "Sortudo",
+    "type": "poder_geral",
+    "sub_type": "poder_de_destino",
+    "description": "Você pode gastar 3 PM para rolar novamente um teste recém realizado (apenas uma vez por teste).",
+    "requirements": [
+      {
+        "type": "use",
+        "sub_type": "soft",
+        "use": "uma_vez_por_teste"
+      }
+    ],
+    "effects": [
+      {
+        "type": "roll_dice_again",
+        "requirements": "teste_recem_realizado"
+      }
+    ],
+    "costs": [
+      {
+        "value": 3,
+        "type": "PM"
+      }
+    ]
+  },
+  "surto_heroico": {
+    "id": "surto_heroico",
+    "name": "Surto Heroico",
+    "type": "poder_geral",
+    "sub_type": "poder_de_destino",
+    "description": "Uma vez por rodada, você pode gastar 5 PM para realizar uma ação padrão ou de movimento adicional.",
+    "requirements": [
+      {
+        "type": "use",
+        "sub_type": "soft",
+        "use": "uma_vez_por_rodada"
+      }
+    ],
+    "effects": [
+      {
+        "type": "extra_action",
+        "action": [
+          "padrão",
+          "movimento"
+        ]
+      }
+    ],
+    "costs": [
+      {
+        "value": 5,
+        "type": "PM"
+      }
+    ]
+  },
+  "torcida": {
+    "id": "torcida",
+    "name": "Torcida",
+    "type": "poder_geral",
+    "sub_type": "poder_de_destino",
+    "description": "Você recebe +2 em testes de perícia e Defesa quando tem a torcida a seu favor. Entenda-se por “torcida\" qualquer número de criaturas inteligentes em alcance médio que não esteja realizando nenhuma ação além de torcer por você.",
+    "requirements": [
+      {
+        "type": "attr_value",
+        "sub_type": "hard",
+        "attr": "car",
+        "value": 13
+      },
+      {
+        "type": "range",
+        "sub_type": "soft",
+        "range": "medio"
+      },
+      {
+        "type": "support",
+        "sub_type": "hard",
+        "support": "ao_menos_uma_criatura_inteligente_que_nao_faça_acoes_alem_de_torcer_por_voce"
+      }
+    ],
+    "effects": [
+      {
+        "type": "skill_improvment",
+        "skill": "all",
+        "value": 2,
+        "duration": "enquanto_houver_torcida"
+      },
+      {
+        "type": "defense_improvement",
+        "value": 2,
+        "duration": "enquanto_houver_torcida"
+      }
+    ]
+  },
+  "treinamento_em_pericia": {
+    "id": "treinamento_em_pericia",
+    "name": "Treinamento em Perícia",
+    "type": "poder_geral",
+    "sub_type": "poder_de_destino",
+    "description": "Você se torna treinado em uma perícia a sua escolha. Você pode escolher este poder outras vezes para perícias diferentes.",
+    "requirements": null,
+    "effects": [
+      {
+        "type": "skill_improvement",
+        "skill": "a_sua_escolha",
+        "improvement": "se_torna_treinado",
+        "requirement": "uma_vez_por_pericia"
+      }
+    ]
+  },
+  "veneficio": {
+    "id": "veneficio",
+    "name": "Venefício",
+    "type": "poder_geral",
+    "sub_type": "poder_de_destino",
+    "description": "Quando usa um veneno, você não corre risco de se envenenar acidentalmente. Além disso, a CD para resistir aos seus venenos aumenta em +2.",
+    "requirements": [
+      {
+        "type": "skill_training",
+        "sub_type": "hard",
+        "skill": "oficio_alquimia"
+      }
+    ],
+    "effects": [
+      {}
+    ]
+  },
+  "vontade_de_ferro": {
+    "id": "vontade_de_ferro",
+    "name": "Vontade de Ferro",
+    "type": "poder_geral",
+    "sub_type": "poder_de_destino",
+    "description": "Você recebe +1 PM para cada dois níveis de personagem e +2 em Vontade.",
+    "requirements": [
+      {
+        "type": "attr_value",
+        "sub_type": "hard",
+        "attr": "sab",
+        "value": 13
+      }
+    ],
+    "effects": [
+      {
+        "type": "pm_improvement",
+        "value": "1pm_a_cada_2_lvl",
+        "duration": "permanente"
+      },
+      {
+        "type": "skill_improvement",
+        "skill": "vontade",
+        "value": 2,
+        "duration": "permanente"
+      }
+    ]
+  }
+}

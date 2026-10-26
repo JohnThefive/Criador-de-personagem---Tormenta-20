@@ -96,11 +96,21 @@ class PersonagemState {
                ? [poderConcedidoSelecionado]
                : const []);
 
+  int get metaBeneficiosOrigem {
+    if (origemSelecionada == null) return 2;
+    final opcoesDisponiveis =
+        origemSelecionada!.periciasOpcoes.length +
+        origemSelecionada!.poderesGeraisOpcoes.length +
+        (origemSelecionada!.poderUnico.key.isNotEmpty ? 1 : 0);
+    return opcoesDisponiveis < 2 ? opcoesDisponiveis : 2;
+  }
+
   int get totalBeneficiosOrigem =>
       periciasEscolhidasOrigem.length + poderesEscolhidosOrigem.length;
 
   bool get concluiuOrigem =>
-      origemSelecionada != null && totalBeneficiosOrigem == 2;
+      origemSelecionada != null &&
+      totalBeneficiosOrigem == metaBeneficiosOrigem;
 
   Set<String> get todasPericiasTreinadasAteOrigem {
     final fixas = personagem.classes.isNotEmpty
@@ -692,7 +702,7 @@ class PersonagemCubit extends Cubit<PersonagemState> {
     if (pericias.contains(siglaPericia)) {
       pericias.remove(siglaPericia);
     } else {
-      if (state.totalBeneficiosOrigem < 2) {
+      if (state.totalBeneficiosOrigem < state.metaBeneficiosOrigem) {
         pericias.add(siglaPericia);
       }
     }
@@ -705,7 +715,7 @@ class PersonagemCubit extends Cubit<PersonagemState> {
     if (index >= 0) {
       poderes.removeAt(index);
     } else {
-      if (state.totalBeneficiosOrigem < 2) {
+      if (state.totalBeneficiosOrigem < state.metaBeneficiosOrigem) {
         poderes.add(poder);
       }
     }

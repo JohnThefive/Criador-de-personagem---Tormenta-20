@@ -18,7 +18,7 @@ import 'package:t20_creator/domain/services/data_services/call_pericias.dart';
 // Importe seus arquivos
 import 'presentation/controllers/home_cubit.dart';
 import 'presentation/controllers/personagem_cubit.dart';
-import 'presentation/screens/home_screen.dart';
+import 'presentation/screens/home/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -53,12 +53,12 @@ class T20App extends StatelessWidget {
         BlocProvider(create: (context) => PersonagemCubit()),
       ],
       child: MaterialApp(
-        title: 'T20 - CRIADOR DE HEROIS',
+        title: 'T20 - Criador de heróis',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.red,
           useMaterial3: true,
-          // Define a cor de fundo padrão do Scaffold se quiser
+          // Define a cor de fundo padrão do Scaffold para as telas existentes
           scaffoldBackgroundColor: const Color(0xFFD32F2F),
         ),
 

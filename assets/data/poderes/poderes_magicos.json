@@ -1,0 +1,260 @@
+{
+  "celebrar_ritual": {
+    "id": "celebrar_ritual",
+    "name": "Celebrar Ritual",
+    "type": "poder_geral",
+    "sub_type": "poder_de_magia",
+    "description": "rituais. Isso dobra seu limite de PM, mas muda a execução para 1 hora (ou o dobro, o que for maior). Você gasta T$ 10 em incensos, oferendas etc. por PM do custo total. Após esse gasto, paga apenas metade do custo em PM da magia (após aplicar quaisquer outros efeitos de redução). Assim, um arcanista de 8º nível pode lançar uma magia de 16 PM gastando T$ 160 e 8 PM.",
+    "requirements": [
+      {
+        "type": "expertise",
+        "sub_type": "hard",
+        "skill": [
+          "misticismo",
+          "religiao"
+        ]
+      },
+      {
+        "type": "character_lvl",
+        "sub_type": "hard",
+        "value": 8
+      },
+      {
+        "type": "expertise",
+        "sub_type": "soft",
+        "skill": "lancar_magias"
+      }
+    ],
+    "effects": [
+      {
+        "type": "PM_limit_improvement",
+        "bonus": "dobro_do_limite"
+      },
+      {
+        "type": "change_execution",
+        "execution": "1_hora"
+      },
+      {
+        "type": "PM_cost_reduction",
+        "value": "¹/2"
+      }
+    ],
+    "costs": [
+      {
+        "value": 10,
+        "type": "tibares_por_PM_do_custo_total"
+      }
+    ]
+  },
+  "escrever_pergaminho": {
+    "id": "escrever_pergaminho",
+    "name": "Escrever Pergaminho",
+    "type": "poder_geral",
+    "sub_type": "poder_de_magia",
+    "description": "Você pode usar a perícia Ofício (escriba) para fabricar pergaminhos com magias que conheça. Veja a página 121 para a regra de fabricar itens e a página 327 para a regra de pergaminhos. De acordo com o mestre, você pode usar outros objetos similares, como runas, tabuletas de argila etc.",
+    "requirements": [
+      {
+        "type": "class_feature",
+        "sub_type": "hard",
+        "id": "magias"
+      },
+      {
+        "type": "skill_training",
+        "sub_type": "hard",
+        "skill": "oficio_escriba"
+      },
+      {
+        "type": "expertise",
+        "sub_type": "soft",
+        "skill": "lancar_magias"
+      }
+    ],
+    "effects": [
+      {
+        "type": "create_item",
+        "item": "pergaminho",
+        "create": [
+          "pag_121",
+          "pag_327"
+        ]
+      }
+    ]
+  },
+  "foco_em_magia": {
+    "id": "foco_em_magia",
+    "name": "Foco em Magia",
+    "type": "poder_geral",
+    "sub_type": "poder_de_magia",
+    "description": "Escolha uma magia. Seu custo diminui em –1 PM (cumulativo com outras reduções de custo). Você pode escolher este poder outras vezes para magias diferentes.",
+    "requirements": [
+      {
+        "type": "expertise",
+        "sub_type": "soft",
+        "skill": "lancar_magias"
+      }
+    ],
+    "effects": [
+      {
+        "type": "PM_cost_reduction",
+        "reduction": -1
+      }
+    ]
+  },
+  "magia_acelerada": {
+    "id": "magia_acelerada",
+    "name": "Magia Acelerada",
+    "type": "poder_geral",
+    "sub_type": "poder_de_magia",
+    "description": "Muda a execução da magia para ação livre. Você só pode aplicar este aprimoramento em magias com execução de movimento, padrão ou completa e só pode lançar uma magia como ação livre por rodada.",
+    "requirements": [
+      {
+        "type": "magic_circle",
+        "sub_type": "hard",
+        "value": 2
+      },
+      {
+        "type": "execution_type",
+        "sub_type": "soft",
+        "execution": [
+          "movimento",
+          "padrao",
+          "completa"
+        ]
+      },
+      {
+        "type": "expertise",
+        "sub_type": "soft",
+        "skill": "lancar_magias"
+      }
+    ],
+    "effects": [
+      {
+        "type": "change_execution",
+        "execution": "livre",
+        "duration": "1_magia_por_rodada"
+      }
+    ],
+    "costs": [
+      {
+        "value": 4,
+        "type": "PM"
+      }
+    ]
+  },
+  "magia_ampliada": {
+    "id": "magia_ampliada",
+    "name": "Magia Ampliada",
+    "type": "poder_geral",
+    "sub_type": "poder_de_magia",
+    "description": "Aumenta o alcance da magia em um passo (de curto para médio, de médio para longo) ou dobra a área de efeito da magia. Por exemplo, uma Bola de Fogo ampliada tem seu alcance aumentado para longo ou sua área aumentada para 12m de raio.",
+    "requirements": [
+      {
+        "type": "expertise",
+        "sub_type": "soft",
+        "skill": "lancar_magias"
+      }
+    ],
+    "effects": [
+      {
+        "type": "range_improvement",
+        "value": "1_passo"
+      },
+      {
+        "type": "range_effect_improvement",
+        "value": "dobro_da_area"
+      }
+    ],
+    "costs": [
+      {
+        "value": 2,
+        "type": "PM"
+      }
+    ]
+  },
+  "magia_discreta": {
+    "id": "magia_discreta",
+    "name": "Magia Discreta",
+    "type": "poder_geral",
+    "sub_type": "poder_de_magia",
+    "description": "Você lança a magia sem gesticular e falar, usando apenas concentração. Isso permite lançar magias com as mãos presas, amordaçado etc. Também permite lançar magias arcanas usando armadura sem teste de Misticismo. Outros personagens só percebem que você lançou uma magia se passarem num teste de Misticismo (CD 20).",
+    "requirements": [
+      {
+        "type": "expertise",
+        "sub_type": "soft",
+        "skill": "lancar_magias"
+      }
+    ],
+    "effects": [
+      {}
+    ],
+    "costs": [
+      {
+        "value": 2,
+        "type": "PM"
+      }
+    ]
+  },
+  "magia_ilimitada": {
+    "id": "magia_ilimitada",
+    "name": "Magia Ilimitada",
+    "type": "poder_geral",
+    "sub_type": "poder_de_magia",
+    "description": "Você soma seu modificador do atributo-chave no limite de PM que pode gastar numa magia. Por exemplo, um mago de 5º nível com Int 18 (+4) e este poder pode gastar até 9 PM em cada magia.",
+    "requirements": [
+      {
+        "type": "expertise",
+        "sub_type": "soft",
+        "skill": "lancar_magias"
+      }
+    ],
+    "effects": [
+      {
+        "type": "add_attr_PM_limit",
+        "attr": "atributo_chave"
+      }
+    ]
+  },
+  "preparar_pocao": {
+    "id": "preparar_pocao",
+    "name": "Preparar Poção",
+    "type": "poder_geral",
+    "sub_type": "poder_de_magia",
+    "description": "Você pode usar a perícia Ofício (alquimia) para fabricar poções com magias que conheça de 1º e 2º círculos. Veja a página 121 para a regra de fabricar itens e a página 327 para a regra de poções.",
+    "requirements": [
+      {
+        "type": "magic_circle",
+        "sub_type": "soft",
+        "circle": [
+          "1",
+          "2"
+        ]
+      },
+      {
+        "type": "class_feature",
+        "sub_type": "hard",
+        "id": "magias"
+      },
+      {
+        "type": "skill_training",
+        "sub_type": "soft",
+        "skill": "oficio_alquimia"
+      },
+      {
+        "type": "expertise",
+        "sub_type": "soft",
+        "skill": "lancar_magias"
+      }
+    ],
+    "effects": [
+      {
+        "type": "create_item",
+        "item": "pocao",
+        "create": [
+          "pag_121",
+          "pag_327"
+        ],
+        "requirement": "cohecer_a_magia_desejada"
+      }
+    ]
+  }
+}

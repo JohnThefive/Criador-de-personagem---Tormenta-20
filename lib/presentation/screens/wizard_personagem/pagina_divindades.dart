@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../domain/entities/personagem/divindade.dart';
-import '../../domain/services/data_services/call_divindades.dart';
-import '../../domain/validators/validador_divindade.dart';
-import '../controllers/personagem_cubit.dart';
-import '../../helpers/deuses_jpeg.dart';
+import '../../../domain/entities/personagem/divindade.dart';
+import '../../../domain/services/data_services/call_divindades.dart';
+import '../../../domain/validators/validador_divindade.dart';
+import '../../controllers/personagem_cubit.dart';
+import '../../../helpers/deuses_jpeg.dart';
 
 class PaginaSelecaoDivindade extends StatefulWidget {
   final PersonagemState state;
@@ -253,33 +253,37 @@ class _PaginaSelecaoDivindadeState extends State<PaginaSelecaoDivindade> {
                                   borderRadius: BorderRadius.circular(20),
                                 ),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
+                                    const SizedBox(width: 8),
                                     if (!elegibilidade.ehElegivel) ...[
                                       const Icon(
                                         Icons.block,
-                                        size: 13,
+                                        size: 14,
                                         color: Colors.white70,
                                       ),
-                                      const SizedBox(width: 4),
+                                      const SizedBox(width: 6),
+                                    ] else if (isSelected) ...[
+                                      const Icon(
+                                        Icons.arrow_right,
+                                        size: 16,
+                                        color: Colors.black87,
+                                      ),
                                     ],
-                                    SimboloDivindade(
-                                      idDivindade: divindade.id,
-                                      tamanho: 22,
-                                    ),
-                                    const SizedBox(width: 6),
-                                    Flexible(
+                                    Expanded(
                                       child: Text(
                                         divindade.nome,
-                                        textAlign: TextAlign.start,
                                         style: TextStyle(
                                           color: isSelected
                                               ? Colors.black
                                               : (!elegibilidade.ehElegivel
-                                                    ? Colors.white70
+                                                    ? Colors.white60
                                                     : Colors.white),
-                                          fontWeight: FontWeight.bold,
+                                          fontWeight: isSelected
+                                              ? FontWeight.w900
+                                              : FontWeight.w600,
                                           fontSize: 13,
+                                          letterSpacing: 0.3,
                                         ),
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,

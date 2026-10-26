@@ -49,3 +49,6 @@ build/
 .env 
 .idea/
 .vscode/
+
+
+AGENTS.md

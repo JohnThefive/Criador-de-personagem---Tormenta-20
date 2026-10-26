@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../domain/entities/personagem/raca.dart';
-import '../controllers/personagem_cubit.dart';
-import '../../domain/services/data_services/call_racas.dart';
-import '../widgets/rpg_icon.dart';
+import '../../../domain/entities/personagem/raca.dart';
+import '../../controllers/personagem_cubit.dart';
+import '../../../domain/services/data_services/call_racas.dart';
+import '../../widgets/rpg_icon.dart';
 
 class PaginaSelecaoRaca extends StatefulWidget {
   final PersonagemState state;

@@ -51,7 +51,10 @@ class Divindade {
     }
   }
 
-  factory Divindade.fromJson(Map<String, dynamic> json) {
+  factory Divindade.fromJson(
+    Map<String, dynamic> json, {
+    Map<String, Poder>? catalogoPoderes,
+  }) {
     CanalizacaoOpcao parseCanalizacao(dynamic valor) {
       final str = valor?.toString().trim().toLowerCase() ?? '';
       if (str == 'apenasnegativa' || str == 'negativa') {
@@ -63,15 +66,43 @@ class Divindade {
       return CanalizacaoOpcao.apenasPositiva;
     }
 
-    final poderesList = (json['poderesConcedidos'] as List<dynamic>? ?? [])
-        .map((p) => Poder.fromJson(Map<String, dynamic>.from(p as Map)))
-        .toList();
+    final List<Poder> poderesList = [];
+    if (json['poderesConcedidos'] is List) {
+      poderesList.addAll(
+        (json['poderesConcedidos'] as List<dynamic>)
+            .map((p) => Poder.fromJson(Map<String, dynamic>.from(p as Map))),
+      );
+    }
 
     final List<String> poderesIds = List<String>.from(
       json['poderesConcedidosIds'] ?? const [],
     );
     if (poderesIds.isEmpty && poderesList.isNotEmpty) {
       poderesIds.addAll(poderesList.map((p) => p.key));
+    }
+
+    if (poderesList.isEmpty && catalogoPoderes != null && poderesIds.isNotEmpty) {
+      for (final id in poderesIds) {
+        final idNorm = id.trim().toLowerCase();
+        final poder = catalogoPoderes[idNorm] ??
+            catalogoPoderes[idNorm.replaceAll('-', '_')] ??
+            catalogoPoderes[idNorm.replaceAll('_', '-')];
+        if (poder != null) {
+          poderesList.add(poder);
+        } else {
+          final nomeFormatado = id
+              .split('_')
+              .map((w) => w.isNotEmpty ? '${w[0].toUpperCase()}${w.substring(1)}' : '')
+              .join(' ');
+          poderesList.add(
+            Poder(
+              key: id,
+              nome: nomeFormatado,
+              descricao: 'Poder concedido divino de Tormenta 20.',
+            ),
+          );
+        }
+      }
     }
 
     return Divindade(

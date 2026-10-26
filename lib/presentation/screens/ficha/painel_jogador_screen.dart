@@ -2,17 +2,17 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import '../../domain/entities/personagem/personagem.dart';
-import '../controllers/ficha_cubit.dart';
-import 'aba_combate_view.dart';
-import 'ficha/aba_geral_view.dart';
-import 'ficha/aba_habilidades_view.dart';
-import 'ficha/aba_historia_view.dart';
-import 'ficha/aba_inventario_view.dart';
-import 'ficha/aba_magias_view.dart';
-import 'ficha/dialogo_rolagem_dado.dart';
-import 'ficha/dialogos_ficha.dart';
-import 'selecao_poderes_screen.dart';
+import '../../../domain/entities/personagem/personagem.dart';
+import '../../controllers/ficha_cubit.dart';
+import 'comabte/aba_combate_view.dart';
+import 'aba_geral_view.dart';
+import 'aba_habilidades_view.dart';
+import 'aba_historia_view.dart';
+import 'aba_inventario_view.dart';
+import 'aba_magias_view.dart';
+import 'dialogo_rolagem_dado.dart';
+import 'dialogos_ficha.dart';
+import '../wizard_personagem/selecao_poderes_screen.dart';
 
 class PainelJogadorScreen extends StatelessWidget {
   final Personagem personagemInicial;
@@ -300,10 +300,8 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
             final atualizado = await Navigator.push<Personagem>(
               context,
               MaterialPageRoute(
-                builder: (_) => SelecaoPoderesScreen(
-                  personagem: p,
-                  indiceClasse: 0,
-                ),
+                builder: (_) =>
+                    SelecaoPoderesScreen(personagem: p, indiceClasse: 0),
               ),
             );
             if (mounted && atualizado != null) {

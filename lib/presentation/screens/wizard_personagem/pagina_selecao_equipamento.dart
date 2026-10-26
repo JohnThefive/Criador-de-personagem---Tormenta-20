@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../domain/entities/equipamento/arma.dart';
-import '../../domain/entities/equipamento/protecao.dart';
-import '../../domain/services/data_services/call_armas.dart';
-import '../controllers/personagem_cubit.dart';
+import '../../../domain/entities/equipamento/arma.dart';
+import '../../../domain/entities/equipamento/protecao.dart';
+import '../../../domain/services/data_services/call_armas.dart';
+import '../../controllers/personagem_cubit.dart';
 
 class PaginaSelecaoEquipamento extends StatefulWidget {
   final PersonagemState state;

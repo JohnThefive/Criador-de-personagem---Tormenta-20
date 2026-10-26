@@ -67,6 +67,8 @@ flutter:
   assets:
     - assets/data/
     - assets/data/deuses/
+    - assets/data/origens/
+    - assets/data/poderes/
     - assets/data/classes_data/
     - assets/data/classes_data/especifico_classe/guerreiro/
     - assets/data/classes_data/especifico_classe/inventor/

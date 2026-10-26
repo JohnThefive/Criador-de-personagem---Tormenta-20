@@ -10,21 +10,23 @@ import '../../../domain/services/data_services/call_companheiros.dart';
 import '../../../domain/services/data_services/call_montaria_sagrada.dart';
 import '../../widgets/modal_escolha_companheiro.dart';
 import '../../controllers/ficha_cubit.dart';
-import '../selecao_poderes_screen.dart';
+import '../wizard_personagem/selecao_poderes_screen.dart';
 
 class AbaHabilidadesView extends StatelessWidget {
   const AbaHabilidadesView({super.key});
 
-  Future<void> _abrirSelecaoPoderes(BuildContext context, FichaCubit cubit, {int indiceClasse = 0}) async {
+  Future<void> _abrirSelecaoPoderes(
+    BuildContext context,
+    FichaCubit cubit, {
+    int indiceClasse = 0,
+  }) async {
     final p = cubit.personagem;
     if (p.classes.isEmpty) return;
     final atualizado = await Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => SelecaoPoderesScreen(
-          personagem: p,
-          indiceClasse: indiceClasse,
-        ),
+        builder: (_) =>
+            SelecaoPoderesScreen(personagem: p, indiceClasse: indiceClasse),
       ),
     );
     if (!context.mounted) return;
@@ -83,21 +85,28 @@ class AbaHabilidadesView extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               ...caminhos.map((cam) {
-                final selecionado = classeDoPersonagem.caminhoEscolhido?.nome == cam.nome;
+                final selecionado =
+                    classeDoPersonagem.caminhoEscolhido?.nome == cam.nome;
                 return Card(
                   margin: const EdgeInsets.only(bottom: 8),
                   color: selecionado ? Colors.red.shade50 : Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                     side: BorderSide(
-                      color: selecionado ? const Color(0xFFD32F2F) : Colors.grey.shade300,
+                      color: selecionado
+                          ? const Color(0xFFD32F2F)
+                          : Colors.grey.shade300,
                       width: selecionado ? 2 : 1,
                     ),
                   ),
                   child: ListTile(
                     leading: Icon(
-                      selecionado ? Icons.check_circle : Icons.radio_button_unchecked,
-                      color: selecionado ? const Color(0xFFD32F2F) : Colors.grey,
+                      selecionado
+                          ? Icons.check_circle
+                          : Icons.radio_button_unchecked,
+                      color: selecionado
+                          ? const Color(0xFFD32F2F)
+                          : Colors.grey,
                     ),
                     title: Text(
                       cam.nome,
@@ -109,19 +118,25 @@ class AbaHabilidadesView extends StatelessWidget {
                       final clAtualizada = classeDoPersonagem.copyWith(
                         caminhoEscolhido: cam,
                       );
-                      final novasClasses = List<ClasseDoPersonagem>.from(p.classes);
+                      final novasClasses = List<ClasseDoPersonagem>.from(
+                        p.classes,
+                      );
                       final idx = p.classes.indexOf(classeDoPersonagem);
                       if (idx >= 0) {
                         novasClasses[idx] = clAtualizada;
                       } else {
                         novasClasses[0] = clAtualizada;
                       }
-                      final novoP = p.copyWith(classe_do_personagem: novasClasses);
+                      final novoP = p.copyWith(
+                        classe_do_personagem: novasClasses,
+                      );
                       await cubit.atualizarPersonagem(novoP);
                       if (!context.mounted) return;
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text('Caminho "${cam.nome}" escolhido com sucesso!'),
+                          content: Text(
+                            'Caminho "${cam.nome}" escolhido com sucesso!',
+                          ),
                           backgroundColor: const Color(0xFFD32F2F),
                         ),
                       );
@@ -136,7 +151,10 @@ class AbaHabilidadesView extends StatelessWidget {
     );
   }
 
-  void _mostrarModalAssumirFormaSelvagem(BuildContext context, FichaCubit cubit) {
+  void _mostrarModalAssumirFormaSelvagem(
+    BuildContext context,
+    FichaCubit cubit,
+  ) {
     final p = cubit.personagem;
     final nivelDruida = p.nivelDruida;
     final formas = BancoDeFormasSelvagens.todas;
@@ -223,7 +241,11 @@ class AbaHabilidadesView extends StatelessWidget {
                             children: [
                               Row(
                                 children: [
-                                  const Icon(Icons.pets, color: Color(0xFF33691E), size: 20),
+                                  const Icon(
+                                    Icons.pets,
+                                    color: Color(0xFF33691E),
+                                    size: 20,
+                                  ),
                                   const SizedBox(width: 8),
                                   Expanded(
                                     child: Text(
@@ -235,7 +257,10 @@ class AbaHabilidadesView extends StatelessWidget {
                                     ),
                                   ),
                                   Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 6,
+                                      vertical: 2,
+                                    ),
                                     decoration: BoxDecoration(
                                       color: const Color(0xFFE8F5E9),
                                       borderRadius: BorderRadius.circular(6),
@@ -254,7 +279,10 @@ class AbaHabilidadesView extends StatelessWidget {
                               const SizedBox(height: 4),
                               Text(
                                 forma.descricaoGeral,
-                                style: const TextStyle(fontSize: 12, color: Colors.black87),
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.black87,
+                                ),
                               ),
                               const SizedBox(height: 8),
                               Container(
@@ -278,12 +306,18 @@ class AbaHabilidadesView extends StatelessWidget {
                                     if (nivelForma.armasNaturais.isNotEmpty)
                                       Text(
                                         'Armas Naturais: ${nivelForma.armasNaturais.map((a) => "${a.tipo == 'duas_armas' ? '2x ' : ''}${a.dano} (${a.critico})").join(", ")}',
-                                        style: const TextStyle(fontSize: 11, color: Colors.black87),
+                                        style: const TextStyle(
+                                          fontSize: 11,
+                                          color: Colors.black87,
+                                        ),
                                       ),
                                     if (nivelForma.tamanho != null)
                                       Text(
                                         'Tamanho: ${nivelForma.tamanho}${nivelForma.deslocamento != null ? ' | Deslocamento: ${nivelForma.deslocamento}' : ''}',
-                                        style: const TextStyle(fontSize: 11, color: Colors.black54),
+                                        style: const TextStyle(
+                                          fontSize: 11,
+                                          color: Colors.black54,
+                                        ),
                                       ),
                                   ],
                                 ),
@@ -293,7 +327,9 @@ class AbaHabilidadesView extends StatelessWidget {
                                 width: double.infinity,
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: temPm ? const Color(0xFF2E7D32) : Colors.grey.shade400,
+                                    backgroundColor: temPm
+                                        ? const Color(0xFF2E7D32)
+                                        : Colors.grey.shade400,
                                     foregroundColor: Colors.white,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(8),
@@ -302,11 +338,19 @@ class AbaHabilidadesView extends StatelessWidget {
                                   onPressed: temPm
                                       ? () {
                                           Navigator.pop(ctx);
-                                          cubit.atualizarPersonagem(p.assumirFormaSelvagem(forma));
-                                          ScaffoldMessenger.of(context).showSnackBar(
+                                          cubit.atualizarPersonagem(
+                                            p.assumirFormaSelvagem(forma),
+                                          );
+                                          ScaffoldMessenger.of(
+                                            context,
+                                          ).showSnackBar(
                                             SnackBar(
-                                              content: Text('Você assumiu a ${forma.nome}!'),
-                                              backgroundColor: const Color(0xFF2E7D32),
+                                              content: Text(
+                                                'Você assumiu a ${forma.nome}!',
+                                              ),
+                                              backgroundColor: const Color(
+                                                0xFF2E7D32,
+                                              ),
                                             ),
                                           );
                                         }
@@ -337,7 +381,10 @@ class AbaHabilidadesView extends StatelessWidget {
     );
   }
 
-  void _mostrarModalEscolhaCompanheiroPainel(BuildContext context, FichaCubit cubit) {
+  void _mostrarModalEscolhaCompanheiroPainel(
+    BuildContext context,
+    FichaCubit cubit,
+  ) {
     final p = cubit.personagem;
     mostrarModalEscolhaCompanheiro(
       context: context,
@@ -351,10 +398,18 @@ class AbaHabilidadesView extends StatelessWidget {
     );
   }
 
-  void _mostrarDialogoEditarMontaria(BuildContext context, FichaCubit cubit, MontariaSagrada montariaAtual) {
+  void _mostrarDialogoEditarMontaria(
+    BuildContext context,
+    FichaCubit cubit,
+    MontariaSagrada montariaAtual,
+  ) {
     final p = cubit.personagem;
-    final nomeController = TextEditingController(text: montariaAtual.nomeCustomizado);
-    final especieController = TextEditingController(text: montariaAtual.especie);
+    final nomeController = TextEditingController(
+      text: montariaAtual.nomeCustomizado,
+    );
+    final especieController = TextEditingController(
+      text: montariaAtual.especie,
+    );
 
     showDialog(
       context: context,
@@ -391,8 +446,12 @@ class AbaHabilidadesView extends StatelessWidget {
               foregroundColor: Colors.white,
             ),
             onPressed: () {
-              final novoNome = nomeController.text.trim().isEmpty ? 'Cavalo de Guerra' : nomeController.text.trim();
-              final novaEspecie = especieController.text.trim().isEmpty ? 'Cavalo de Guerra' : especieController.text.trim();
+              final novoNome = nomeController.text.trim().isEmpty
+                  ? 'Cavalo de Guerra'
+                  : nomeController.text.trim();
+              final novaEspecie = especieController.text.trim().isEmpty
+                  ? 'Cavalo de Guerra'
+                  : especieController.text.trim();
               cubit.atualizarPersonagem(
                 p.atualizarMontariaSagrada(
                   montariaAtual.copyWith(
@@ -416,10 +475,15 @@ class AbaHabilidadesView extends StatelessWidget {
     });
   }
 
-  Widget _buildBannerFormaSelvagemAtiva(BuildContext context, FichaCubit cubit) {
+  Widget _buildBannerFormaSelvagemAtiva(
+    BuildContext context,
+    FichaCubit cubit,
+  ) {
     final p = cubit.personagem;
     final forma = p.formaSelvagemAtiva!;
-    final modsTexto = forma.modificadores.entries.map((e) => '+${e.value} ${e.key}').join(', ');
+    final modsTexto = forma.modificadores.entries
+        .map((e) => '+${e.value} ${e.key}')
+        .join(', ');
 
     return Container(
       padding: const EdgeInsets.all(12),
@@ -489,7 +553,9 @@ class AbaHabilidadesView extends StatelessWidget {
               onPressed: () {
                 cubit.atualizarPersonagem(p.reverterFormaSelvagem());
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Você reverteu à sua forma normal.')),
+                  const SnackBar(
+                    content: Text('Você reverteu à sua forma normal.'),
+                  ),
                 );
               },
               icon: const Icon(Icons.undo, size: 16),
@@ -565,7 +631,8 @@ class AbaHabilidadesView extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                onPressed: () => _mostrarModalAssumirFormaSelvagem(context, cubit),
+                onPressed: () =>
+                    _mostrarModalAssumirFormaSelvagem(context, cubit),
                 icon: const Icon(Icons.flash_on, size: 16),
                 label: const Text(
                   'Assumir Forma Selvagem',
@@ -603,7 +670,9 @@ class AbaHabilidadesView extends StatelessWidget {
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(
-                    comp != null ? 'Companheiro Animal: ${comp.nome}' : 'Companheiro Animal',
+                    comp != null
+                        ? 'Companheiro Animal: ${comp.nome}'
+                        : 'Companheiro Animal',
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 14,
@@ -612,13 +681,18 @@ class AbaHabilidadesView extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 6,
+                    vertical: 2,
+                  ),
                   decoration: BoxDecoration(
                     color: Colors.amber.shade200,
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: Text(
-                    TipoCompanheiroAnimal.tierParaNivel(nivelDruida).toUpperCase(),
+                    TipoCompanheiroAnimal.tierParaNivel(
+                      nivelDruida,
+                    ).toUpperCase(),
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 10,
@@ -630,7 +704,10 @@ class AbaHabilidadesView extends StatelessWidget {
             ),
             const SizedBox(height: 6),
             if (comp != null) ...[
-              Text(comp.descricao, style: const TextStyle(fontSize: 12, color: Colors.black87)),
+              Text(
+                comp.descricao,
+                style: const TextStyle(fontSize: 12, color: Colors.black87),
+              ),
               const SizedBox(height: 6),
               Container(
                 padding: const EdgeInsets.all(8),
@@ -661,7 +738,8 @@ class AbaHabilidadesView extends StatelessWidget {
                     backgroundColor: Colors.brown,
                     foregroundColor: Colors.white,
                   ),
-                  onPressed: () => _mostrarModalEscolhaCompanheiroPainel(context, cubit),
+                  onPressed: () =>
+                      _mostrarModalEscolhaCompanheiroPainel(context, cubit),
                   child: const Text('Escolher Tipo de Companheiro'),
                 ),
               ),
@@ -674,10 +752,15 @@ class AbaHabilidadesView extends StatelessWidget {
 
   Widget _buildCardMontariaSagrada(BuildContext context, FichaCubit cubit) {
     final p = cubit.personagem;
-    final montaria = p.montariaSagrada ??
+    final montaria =
+        p.montariaSagrada ??
         MontariaSagrada(
-          nomeCustomizado: BancoDeRegrasMontariaSagrada.animalPadraoParaTamanho(p.tamanho),
-          especie: BancoDeRegrasMontariaSagrada.animalPadraoParaTamanho(p.tamanho),
+          nomeCustomizado: BancoDeRegrasMontariaSagrada.animalPadraoParaTamanho(
+            p.tamanho,
+          ),
+          especie: BancoDeRegrasMontariaSagrada.animalPadraoParaTamanho(
+            p.tamanho,
+          ),
         );
     final tier = p.tierMontariaSagrada;
     final deslocamento = p.deslocamentoMontadoMetros;
@@ -712,10 +795,14 @@ class AbaHabilidadesView extends StatelessWidget {
                 IconButton(
                   icon: const Icon(Icons.edit, size: 18, color: Colors.brown),
                   tooltip: 'Personalizar Montaria',
-                  onPressed: () => _mostrarDialogoEditarMontaria(context, cubit, montaria),
+                  onPressed: () =>
+                      _mostrarDialogoEditarMontaria(context, cubit, montaria),
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 6,
+                    vertical: 2,
+                  ),
                   decoration: BoxDecoration(
                     color: Colors.amber.shade200,
                     borderRadius: BorderRadius.circular(6),
@@ -764,12 +851,19 @@ class AbaHabilidadesView extends StatelessWidget {
                 ),
                 child: Row(
                   children: [
-                    const Icon(Icons.check_circle, color: Colors.green, size: 18),
+                    const Icon(
+                      Icons.check_circle,
+                      color: Colors.green,
+                      size: 18,
+                    ),
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
                         'Variante Mundana Ativa: Animal físico permanente (sem custo de PM).',
-                        style: TextStyle(fontSize: 11, color: Colors.green.shade900),
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: Colors.green.shade900,
+                        ),
                       ),
                     ),
                   ],
@@ -780,11 +874,15 @@ class AbaHabilidadesView extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      montaria.invocada ? 'Status: Invocada na Cena (Ativa)' : 'Status: Em Repouso / Dispensada',
+                      montaria.invocada
+                          ? 'Status: Invocada na Cena (Ativa)'
+                          : 'Status: Em Repouso / Dispensada',
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
-                        color: montaria.invocada ? Colors.green.shade800 : Colors.grey.shade700,
+                        color: montaria.invocada
+                            ? Colors.green.shade800
+                            : Colors.grey.shade700,
                       ),
                     ),
                   ),
@@ -793,30 +891,43 @@ class AbaHabilidadesView extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFFD32F2F),
                         foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 6,
+                        ),
                       ),
                       onPressed: () {
                         cubit.atualizarPersonagem(p.dispensarMontariaSagrada());
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Montaria sagrada dispensada.')),
+                          const SnackBar(
+                            content: Text('Montaria sagrada dispensada.'),
+                          ),
                         );
                       },
                       icon: const Icon(Icons.close, size: 14),
-                      label: const Text('Dispensar', style: TextStyle(fontSize: 11)),
+                      label: const Text(
+                        'Dispensar',
+                        style: TextStyle(fontSize: 11),
+                      ),
                     )
                   else
                     ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.brown,
                         foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 6,
+                        ),
                       ),
                       onPressed: () {
                         const custo = 2;
                         if (p.pmAtual < custo) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
-                              content: Text('PM insuficiente para invocar a montaria sagrada (custa 2 PM).'),
+                              content: Text(
+                                'PM insuficiente para invocar a montaria sagrada (custa 2 PM).',
+                              ),
                               backgroundColor: Colors.red,
                             ),
                           );
@@ -825,13 +936,18 @@ class AbaHabilidadesView extends StatelessWidget {
                         cubit.atualizarPersonagem(p.invocarMontariaSagrada());
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text('${montaria.nomeCustomizado} invocada! (-2 PM)'),
+                            content: Text(
+                              '${montaria.nomeCustomizado} invocada! (-2 PM)',
+                            ),
                             backgroundColor: Colors.green.shade700,
                           ),
                         );
                       },
                       icon: const Icon(Icons.auto_awesome, size: 14),
-                      label: const Text('Invocar (2 PM)', style: TextStyle(fontSize: 11)),
+                      label: const Text(
+                        'Invocar (2 PM)',
+                        style: TextStyle(fontSize: 11),
+                      ),
                     ),
                 ],
               ),
@@ -852,17 +968,25 @@ class AbaHabilidadesView extends StatelessWidget {
               ),
               value: montaria.isVarianteMundana,
               onChanged: (val) {
-                cubit.atualizarPersonagem(p.alternarVarianteMundanaMontaria(val));
+                cubit.atualizarPersonagem(
+                  p.alternarVarianteMundanaMontaria(val),
+                );
               },
             ),
             Theme(
-              data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+              data: Theme.of(
+                context,
+              ).copyWith(dividerColor: Colors.transparent),
               child: ExpansionTile(
                 tilePadding: EdgeInsets.zero,
                 childrenPadding: EdgeInsets.zero,
                 title: const Text(
                   'Propriedades Sagradas',
-                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.brown),
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.brown,
+                  ),
                 ),
                 children: BancoDeRegrasMontariaSagrada.propriedades.map((prop) {
                   return Padding(
@@ -872,10 +996,19 @@ class AbaHabilidadesView extends StatelessWidget {
                       children: [
                         const Text(
                           '• ',
-                          style: TextStyle(color: Colors.brown, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                            color: Colors.brown,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         Expanded(
-                          child: Text(prop, style: const TextStyle(fontSize: 11, color: Colors.black87)),
+                          child: Text(
+                            prop,
+                            style: const TextStyle(
+                              fontSize: 11,
+                              color: Colors.black87,
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -943,7 +1076,11 @@ class AbaHabilidadesView extends StatelessWidget {
                 subtitle: Text(classeDoPersonagem.caminhoEscolhido!.descricao),
                 trailing: classe.caminhosParaNivel(nivel).length > 1
                     ? IconButton(
-                        icon: const Icon(Icons.edit, size: 18, color: Colors.brown),
+                        icon: const Icon(
+                          Icons.edit,
+                          size: 18,
+                          color: Colors.brown,
+                        ),
                         tooltip: 'Alterar caminho',
                         onPressed: () => _mostrarModalEscolhaCaminho(
                           context,
@@ -955,7 +1092,8 @@ class AbaHabilidadesView extends StatelessWidget {
                     : null,
               ),
             ),
-          ] else if (classeDoPersonagem != null && classe.caminhosParaNivel(nivel).isNotEmpty) ...[
+          ] else if (classeDoPersonagem != null &&
+              classe.caminhosParaNivel(nivel).isNotEmpty) ...[
             Card(
               color: Colors.red.shade50,
               shape: RoundedRectangleBorder(
@@ -969,10 +1107,16 @@ class AbaHabilidadesView extends StatelessWidget {
                   classe.idClasse == 'cavaleiro'
                       ? 'Caminho do Cavaleiro (5º Nível)'
                       : 'Especialização / Caminho Disponível',
-                  style: const TextStyle(fontWeight: FontWeight.bold, color: Color(0xFFD32F2F)),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFFD32F2F),
+                  ),
                 ),
                 subtitle: const Text('Toque para escolher seu caminho!'),
-                trailing: const Icon(Icons.chevron_right, color: Color(0xFFD32F2F)),
+                trailing: const Icon(
+                  Icons.chevron_right,
+                  color: Color(0xFFD32F2F),
+                ),
                 onTap: () => _mostrarModalEscolhaCaminho(
                   context,
                   cubit,
@@ -992,7 +1136,10 @@ class AbaHabilidadesView extends StatelessWidget {
                   children: [
                     Text(
                       e.key,
-                      style: const TextStyle(fontWeight: FontWeight.bold, color: Color(0xFFD32F2F)),
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFFD32F2F),
+                      ),
                     ),
                     const SizedBox(height: 4),
                     Text(e.value, style: const TextStyle(fontSize: 13)),
@@ -1001,9 +1148,15 @@ class AbaHabilidadesView extends StatelessWidget {
               ),
             ),
           ),
-          if (p.temPoderFormaSelvagem) ...[_buildCardFormaSelvagem(context, cubit)],
-          if (p.temPoderCompanheiroAnimal) ...[_buildCardCompanheiroAnimal(context, cubit)],
-          if (p.temMontariaSagrada) ...[_buildCardMontariaSagrada(context, cubit)],
+          if (p.temPoderFormaSelvagem) ...[
+            _buildCardFormaSelvagem(context, cubit),
+          ],
+          if (p.temPoderCompanheiroAnimal) ...[
+            _buildCardCompanheiroAnimal(context, cubit),
+          ],
+          if (p.temMontariaSagrada) ...[
+            _buildCardMontariaSagrada(context, cubit),
+          ],
           if (classeDoPersonagem != null) ...[
             const SizedBox(height: 10),
             Row(
@@ -1017,7 +1170,9 @@ class AbaHabilidadesView extends StatelessWidget {
                 TextButton.icon(
                   onPressed: () => _abrirSelecaoPoderes(context, cubit),
                   icon: Icon(
-                    classeDoPersonagem.temPoderPendente ? Icons.add_circle : Icons.tune,
+                    classeDoPersonagem.temPoderPendente
+                        ? Icons.add_circle
+                        : Icons.tune,
                     size: 18,
                   ),
                   label: Text(
@@ -1062,7 +1217,10 @@ class AbaHabilidadesView extends StatelessWidget {
                         )
                       : null,
                   trailing: classeDoPersonagem.temPoderPendente
-                      ? const Icon(Icons.chevron_right, color: Color(0xFFD32F2F))
+                      ? const Icon(
+                          Icons.chevron_right,
+                          color: Color(0xFFD32F2F),
+                        )
                       : null,
                   onTap: () => _abrirSelecaoPoderes(context, cubit),
                 ),
@@ -1079,7 +1237,11 @@ class AbaHabilidadesView extends StatelessWidget {
                     ),
                     subtitle: Text(poder.descricao),
                     trailing: IconButton(
-                      icon: const Icon(Icons.settings, color: Colors.grey, size: 20),
+                      icon: const Icon(
+                        Icons.settings,
+                        color: Colors.grey,
+                        size: 20,
+                      ),
                       tooltip: 'Gerenciar poderes',
                       onPressed: () => _abrirSelecaoPoderes(context, cubit),
                     ),
@@ -1107,7 +1269,10 @@ class AbaHabilidadesView extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(e.key, style: const TextStyle(fontWeight: FontWeight.bold)),
+                    Text(
+                      e.key,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
                     const SizedBox(height: 4),
                     Text(e.value, style: const TextStyle(fontSize: 13)),
                   ],
@@ -1124,7 +1289,9 @@ class AbaHabilidadesView extends StatelessWidget {
               color: Colors.white,
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
-                color: p.punicaoDivinaAtiva ? Colors.red.shade700 : Colors.red.shade200,
+                color: p.punicaoDivinaAtiva
+                    ? Colors.red.shade700
+                    : Colors.red.shade200,
                 width: p.punicaoDivinaAtiva ? 2 : 1,
               ),
               boxShadow: [
@@ -1166,7 +1333,10 @@ class AbaHabilidadesView extends StatelessWidget {
                     ),
                     if (p.ehDevotoFiel)
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 4,
+                        ),
                         decoration: BoxDecoration(
                           color: Colors.amber.shade100,
                           borderRadius: BorderRadius.circular(12),
@@ -1193,19 +1363,29 @@ class AbaHabilidadesView extends StatelessWidget {
                       padding: EdgeInsets.zero,
                       labelPadding: const EdgeInsets.symmetric(horizontal: 8),
                       backgroundColor: Colors.grey.shade100,
-                      avatar: const Icon(Icons.colorize, size: 14, color: Colors.brown),
-                      label: Text('Arma: ${p.divindade!.armaPreferida}', style: const TextStyle(fontSize: 11)),
+                      avatar: const Icon(
+                        Icons.colorize,
+                        size: 14,
+                        color: Colors.brown,
+                      ),
+                      label: Text(
+                        'Arma: ${p.divindade!.armaPreferida}',
+                        style: const TextStyle(fontSize: 11),
+                      ),
                     ),
                     if (p.canalizacaoEnergia != null)
                       Chip(
                         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         padding: EdgeInsets.zero,
                         labelPadding: const EdgeInsets.symmetric(horizontal: 8),
-                        backgroundColor: p.canalizacaoEnergia == TipoEnergia.positiva
+                        backgroundColor:
+                            p.canalizacaoEnergia == TipoEnergia.positiva
                             ? Colors.green.shade50
                             : Colors.purple.shade50,
                         avatar: Icon(
-                          p.canalizacaoEnergia == TipoEnergia.positiva ? Icons.favorite : Icons.dark_mode,
+                          p.canalizacaoEnergia == TipoEnergia.positiva
+                              ? Icons.favorite
+                              : Icons.dark_mode,
                           size: 14,
                           color: p.canalizacaoEnergia == TipoEnergia.positiva
                               ? Colors.green.shade700
@@ -1235,7 +1415,11 @@ class AbaHabilidadesView extends StatelessWidget {
                     padding: const EdgeInsets.only(bottom: 4),
                     child: Text(
                       '• $regra',
-                      style: TextStyle(fontSize: 12, color: Colors.grey.shade800, height: 1.25),
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.grey.shade800,
+                        height: 1.25,
+                      ),
                     ),
                   ),
                 ),
@@ -1245,7 +1429,11 @@ class AbaHabilidadesView extends StatelessWidget {
           const SizedBox(height: 14),
           const Text(
             'Poderes Concedidos:',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Colors.black87),
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 15,
+              color: Colors.black87,
+            ),
           ),
           const SizedBox(height: 6),
           if (p.poderesConcedidos.isEmpty)
@@ -1263,15 +1451,21 @@ class AbaHabilidadesView extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                   side: BorderSide(
-                    color: p.punicaoDivinaAtiva ? Colors.red.shade300 : Colors.grey.shade300,
+                    color: p.punicaoDivinaAtiva
+                        ? Colors.red.shade300
+                        : Colors.grey.shade300,
                   ),
                 ),
-                color: p.punicaoDivinaAtiva ? Colors.red.shade50.withValues(alpha: 0.5) : Colors.white,
+                color: p.punicaoDivinaAtiva
+                    ? Colors.red.shade50.withValues(alpha: 0.5)
+                    : Colors.white,
                 child: ListTile(
                   dense: true,
                   leading: Icon(
                     p.punicaoDivinaAtiva ? Icons.block : Icons.auto_awesome,
-                    color: p.punicaoDivinaAtiva ? Colors.red.shade800 : Colors.amber.shade800,
+                    color: p.punicaoDivinaAtiva
+                        ? Colors.red.shade800
+                        : Colors.amber.shade800,
                     size: 22,
                   ),
                   title: Row(
@@ -1280,14 +1474,21 @@ class AbaHabilidadesView extends StatelessWidget {
                         poderConcedido.nome,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: p.punicaoDivinaAtiva ? Colors.red.shade900 : Colors.black87,
-                          decoration: p.punicaoDivinaAtiva ? TextDecoration.lineThrough : null,
+                          color: p.punicaoDivinaAtiva
+                              ? Colors.red.shade900
+                              : Colors.black87,
+                          decoration: p.punicaoDivinaAtiva
+                              ? TextDecoration.lineThrough
+                              : null,
                         ),
                       ),
                       if (p.punicaoDivinaAtiva) ...[
                         const SizedBox(width: 6),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 6,
+                            vertical: 2,
+                          ),
                           decoration: BoxDecoration(
                             color: Colors.red.shade100,
                             borderRadius: BorderRadius.circular(6),
@@ -1308,7 +1509,9 @@ class AbaHabilidadesView extends StatelessWidget {
                     poderConcedido.descricao,
                     style: TextStyle(
                       fontSize: 12,
-                      color: p.punicaoDivinaAtiva ? Colors.grey.shade600 : Colors.grey.shade800,
+                      color: p.punicaoDivinaAtiva
+                          ? Colors.grey.shade600
+                          : Colors.grey.shade800,
                     ),
                   ),
                 ),
@@ -1333,7 +1536,10 @@ class AbaHabilidadesView extends StatelessWidget {
               (pg) => Card(
                 margin: const EdgeInsets.only(bottom: 8),
                 child: ListTile(
-                  title: Text(pg.nome, style: const TextStyle(fontWeight: FontWeight.bold)),
+                  title: Text(
+                    pg.nome,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
                   subtitle: Text(pg.descricao),
                 ),
               ),
