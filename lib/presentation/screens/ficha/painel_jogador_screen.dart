@@ -3,26 +3,35 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../domain/entities/personagem/personagem.dart';
+import '../../../domain/repositories/i_personagem_repository.dart';
 import '../../controllers/ficha_cubit.dart';
-import 'comabte/aba_combate_view.dart';
 import 'aba_geral_view.dart';
+import 'aba_pericias_view.dart';
 import 'aba_habilidades_view.dart';
-import 'aba_historia_view.dart';
-import 'aba_inventario_view.dart';
 import 'aba_magias_view.dart';
+import 'aba_inventario_view.dart';
+import 'aba_historia_view.dart';
 import 'dialogo_rolagem_dado.dart';
 import 'dialogos_ficha.dart';
 import '../wizard_personagem/selecao_poderes_screen.dart';
 
 class PainelJogadorScreen extends StatelessWidget {
   final Personagem personagemInicial;
+  final IPersonagemRepository? repository;
 
-  const PainelJogadorScreen({super.key, required this.personagemInicial});
+  const PainelJogadorScreen({
+    super.key,
+    required this.personagemInicial,
+    this.repository,
+  });
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => FichaCubit(personagemInicial: personagemInicial),
+      create: (_) => FichaCubit(
+        personagemInicial: personagemInicial,
+        repository: repository,
+      ),
       child: const _PainelJogadorView(),
     );
   }
@@ -40,12 +49,12 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
   late final TabController _tabController;
 
   final List<Tab> _abas = const [
-    Tab(icon: Icon(Icons.dashboard_outlined, size: 20), text: 'Geral'),
-    Tab(icon: Icon(Icons.sports_kabaddi_rounded, size: 20), text: 'Combate'),
-    Tab(icon: Icon(Icons.auto_awesome_outlined, size: 20), text: 'Habilidades'),
-    Tab(icon: Icon(Icons.menu_book_outlined, size: 20), text: 'Magias'),
-    Tab(icon: Icon(Icons.backpack_outlined, size: 20), text: 'Inventário'),
-    Tab(icon: Icon(Icons.history_edu_outlined, size: 20), text: 'História'),
+    Tab(icon: Icon(Icons.shield_outlined, size: 19), text: 'Geral'),
+    Tab(icon: Icon(Icons.fact_check_outlined, size: 19), text: 'Perícias'),
+    Tab(icon: Icon(Icons.auto_awesome_outlined, size: 19), text: 'Habilidades'),
+    Tab(icon: Icon(Icons.menu_book_outlined, size: 19), text: 'Magias'),
+    Tab(icon: Icon(Icons.backpack_outlined, size: 19), text: 'Inventário'),
+    Tab(icon: Icon(Icons.edit_note_rounded, size: 20), text: 'Notas'),
   ];
 
   @override
@@ -61,44 +70,38 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
   }
 
   void _abrirRoladorGeral() {
-    final dados = [4, 6, 8, 10, 12, 20, 100];
-    showModalBottomSheet(
+    const dados = [4, 6, 8, 10, 12, 20, 100];
+    showModalBottomSheet<void>(
       context: context,
       backgroundColor: Colors.white,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
-      builder: (ctx) {
-        return Padding(
+      builder: (ctx) => SafeArea(
+        child: Padding(
           padding: const EdgeInsets.all(20),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               const Text(
-                'Rolador de Dados (T20)',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                'Rolador Livre de Dados (T20)',
+                style: TextStyle(fontWeight: FontWeight.w800, fontSize: 18),
               ),
               const SizedBox(height: 16),
               Wrap(
-                spacing: 12,
-                runSpacing: 12,
+                spacing: 10,
+                runSpacing: 10,
                 alignment: WrapAlignment.center,
                 children: dados.map((d) {
                   return ElevatedButton(
                     style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(68, 48),
                       backgroundColor: d == 20
                           ? const Color(0xFFD32F2F)
-                          : Colors.grey.shade900,
+                          : const Color(0xFF1E293B),
                       foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 12,
-                      ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
-                        side: BorderSide(
-                          color: d == 20 ? Colors.redAccent : Colors.white24,
-                        ),
                       ),
                     ),
                     onPressed: () {
@@ -107,14 +110,14 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
                         context,
                         lados: d,
                         mod: 0,
-                        rotulo: 'Rolagem d$d',
+                        rotulo: 'Rolagem 1d$d',
                       );
                     },
                     child: Text(
                       'd$d',
                       style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 15,
                       ),
                     ),
                   );
@@ -122,14 +125,32 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
               ),
             ],
           ),
-        );
-      },
+        ),
+      ),
+    );
+  }
+
+  Future<void> _editarIdentidadeCabecalho(FichaCubit cubit) async {
+    final p = cubit.personagem;
+    await showDialog<void>(
+      context: context,
+      builder: (_) => _DialogoIdentidadeTopo(
+        nomeInicial: p.nome,
+        alinhamentoInicial: p.alinhamento,
+        idadeInicial: p.idade,
+        onSalvar: (nome, alinhamento, idade) => cubit
+            .atualizarCabecalhoIdentidade(
+              nome: nome,
+              alinhamento: alinhamento,
+              idade: idade,
+            ),
+      ),
     );
   }
 
   Future<void> _abrirOpcoesFoto(FichaCubit cubit) async {
     final p = cubit.personagem;
-    showModalBottomSheet(
+    showModalBottomSheet<void>(
       context: context,
       backgroundColor: Colors.white,
       shape: const RoundedRectangleBorder(
@@ -199,21 +220,11 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
 
       if (pickedFile != null && mounted) {
         await cubit.atualizarFoto(pickedFile.path);
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Foto do herói atualizada com sucesso!'),
-            ),
-          );
-        }
       }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Não foi possível carregar a imagem: $e'),
-            backgroundColor: Colors.black87,
-          ),
+          SnackBar(content: Text('Não foi possível carregar a imagem: $e')),
         );
       }
     }
@@ -223,7 +234,7 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
     final p = cubit.personagem;
     final ajuste = await showDialog<int>(
       context: context,
-      builder: (ctx) => AjusteRecursoDialog(
+      builder: (_) => AjusteRecursoDialog(
         titulo: 'Ajustar Pontos de Vida (PV)',
         labelRecurso: 'Vida Atual',
         valorAtual: p.pvAtual,
@@ -248,7 +259,7 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
     final p = cubit.personagem;
     final ajuste = await showDialog<int>(
       context: context,
-      builder: (ctx) => AjusteRecursoDialog(
+      builder: (_) => AjusteRecursoDialog(
         titulo: 'Ajustar Pontos de Mana (PM)',
         labelRecurso: 'Mana Atual',
         valorAtual: p.pmAtual,
@@ -261,21 +272,10 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
     );
 
     if (ajuste != null && mounted) {
-      if (p.punicaoDivinaAtiva && ajuste > 0) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text(
-              'O personagem está sob Punição Divina e não pode recuperar Pontos de Mana!',
-            ),
-            backgroundColor: Color(0xFFB71C1C),
-          ),
-        );
-        return;
-      }
       if (ajuste < 0) {
-        cubit.gastarPM(-ajuste);
+        await cubit.tentarAtivarComPM(-ajuste);
       } else if (ajuste > 0) {
-        cubit.recuperarPM(ajuste);
+        await cubit.recuperarPM(ajuste);
       }
     }
   }
@@ -289,11 +289,10 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
     final pendentes = cl.poderesPendentes;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
       child: Material(
-        color: const Color(0xFF1E1E2C),
+        color: const Color(0xFF0F172A),
         borderRadius: BorderRadius.circular(12),
-        elevation: 3,
         child: InkWell(
           borderRadius: BorderRadius.circular(12),
           onTap: () async {
@@ -309,52 +308,22 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
             }
           },
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             child: Row(
               children: [
-                const Icon(Icons.stars_rounded, color: Colors.amber, size: 24),
-                const SizedBox(width: 10),
+                const Icon(Icons.stars_rounded, color: Colors.amber, size: 22),
+                const SizedBox(width: 8),
                 Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Text(
-                        'Evolução Disponível!',
-                        style: TextStyle(
-                          color: Colors.amber,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 13,
-                        ),
-                      ),
-                      Text(
-                        'Você pode escolher $pendentes ${pendentes == 1 ? "poder" : "poderes"} em ${cl.classeDefinicao.nome}',
-                        style: const TextStyle(
-                          color: Colors.white70,
-                          fontSize: 11,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 6,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.amber,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: const Text(
-                    'Escolher',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
+                  child: Text(
+                    'Evolução disponível: escolher $pendentes ${pendentes == 1 ? "poder" : "poderes"} em ${cl.classeDefinicao.nome}',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
                       fontSize: 12,
                     ),
                   ),
                 ),
+                const Icon(Icons.chevron_right, color: Colors.amber),
               ],
             ),
           ),
@@ -367,13 +336,14 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
     final p = cubit.personagem;
     final temFoto = p.caminhoFoto != null && p.caminhoFoto!.isNotEmpty;
 
-    final classeNome = p.classes.isNotEmpty
-        ? p.classes[0].classeDefinicao.nome
+    final resumoClasses = p.classes.isNotEmpty
+        ? p.classes
+              .map((c) => '${c.classeDefinicao.nome} ${c.nivel}')
+              .join(' / ')
         : 'Sem Classe';
     final racaNome = p.raca?.nome ?? 'Sem Raça';
     final nivel = p.nivelPersonagem > 0 ? p.nivelPersonagem : 1;
     final modIniciativa = p.getValorPericia('INICIATIVA');
-    final bonusTreino = p.bonusTreinamento;
 
     final double progressoPV = p.pvTotal > 0
         ? (p.pvAtual / p.pvTotal).clamp(0.0, 1.0)
@@ -382,199 +352,156 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
         ? (p.pmAtual / p.pmTotal).clamp(0.0, 1.0)
         : 1.0;
 
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(14, 0, 14, 10),
       child: Column(
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Avatar com edição segura
-              Stack(
-                children: [
-                  GestureDetector(
-                    onTap: () => _abrirOpcoesFoto(cubit),
-                    child: Container(
-                      width: 68,
-                      height: 68,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white,
-                        border: Border.all(color: Colors.white, width: 2),
-                        boxShadow: const [
-                          BoxShadow(color: Colors.black26, blurRadius: 4),
-                        ],
-                      ),
-                      child: ClipOval(
-                        child: temFoto
-                            ? Image.file(
-                                File(p.caminhoFoto!),
-                                fit: BoxFit.cover,
-                                width: 68,
-                                height: 68,
-                                cacheWidth: 200,
-                                cacheHeight: 200,
-                                errorBuilder: (ctx, err, stack) => const Icon(
-                                  Icons.account_circle,
-                                  size: 64,
-                                  color: Colors.grey,
-                                ),
-                              )
-                            : const Icon(
-                                Icons.account_circle,
-                                size: 64,
-                                color: Colors.grey,
-                              ),
-                      ),
-                    ),
+              // Retrato circular
+              GestureDetector(
+                onTap: () => _abrirOpcoesFoto(cubit),
+                child: Container(
+                  width: 60,
+                  height: 60,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white,
+                    border: Border.all(color: Colors.white, width: 2),
                   ),
-                  Positioned(
-                    right: 0,
-                    bottom: 0,
-                    child: GestureDetector(
-                      onTap: () => _abrirOpcoesFoto(cubit),
-                      child: Container(
-                        padding: const EdgeInsets.all(4),
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.circle,
-                          boxShadow: [
-                            BoxShadow(color: Colors.black38, blurRadius: 3),
-                          ],
-                        ),
-                        child: const Icon(
-                          Icons.camera_alt,
-                          size: 13,
-                          color: Color(0xFFD32F2F),
-                        ),
-                      ),
-                    ),
+                  child: ClipOval(
+                    child: temFoto
+                        ? Image.file(
+                            File(p.caminhoFoto!),
+                            fit: BoxFit.cover,
+                            width: 60,
+                            height: 60,
+                            cacheWidth: 180,
+                            cacheHeight: 180,
+                            errorBuilder: (_, _, _) => const Icon(
+                              Icons.account_circle,
+                              size: 56,
+                              color: Colors.grey,
+                            ),
+                          )
+                        : const Icon(
+                            Icons.account_circle,
+                            size: 56,
+                            color: Colors.grey,
+                          ),
                   ),
-                ],
+                ),
               ),
-              const SizedBox(width: 14),
+              const SizedBox(width: 12),
 
-              // Identidade e Estatísticas Principais
+              // Identidade, Alinhamento & Idade no topo e Iniciativa em 1 toque
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
+                    Text(
+                      '$racaNome • $resumoClasses',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 12.5,
+                        fontWeight: FontWeight.w800,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 3),
+                    // Alinhamento e Idade no topo da tela (clicável para editar)
+                    InkWell(
+                      key: const Key('topo_alinhamento_idade'),
+                      onTap: () => _editarIdentidadeCabecalho(cubit),
+                      borderRadius: BorderRadius.circular(6),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 2),
+                        child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            const Text(
-                              'Nível: ',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 13,
+                            const Icon(
+                              Icons.balance_rounded,
+                              size: 13,
+                              color: Colors.white70,
+                            ),
+                            const SizedBox(width: 4),
+                            Flexible(
+                              child: Text(
+                                '${p.alinhamento} • ${p.idade} anos',
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 11.5,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
-                            InkWell(
-                              onTap: () => cubit.alterarNivel(-1),
-                              child: const Icon(
-                                Icons.arrow_drop_down,
-                                color: Colors.white,
-                                size: 22,
-                              ),
-                            ),
-                            Text(
-                              '$nivel',
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                              ),
-                            ),
-                            InkWell(
-                              onTap: () => cubit.alterarNivel(1),
-                              child: const Icon(
-                                Icons.arrow_drop_up,
-                                color: Colors.white,
-                                size: 22,
-                              ),
+                            const SizedBox(width: 4),
+                            const Icon(
+                              Icons.edit_outlined,
+                              size: 12,
+                              color: Colors.white70,
                             ),
                           ],
                         ),
-                        Flexible(
-                          child: Text(
-                            'PV Máx: ${p.pvTotal}',
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 12,
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                        const SizedBox(width: 4),
-                        Flexible(
-                          child: Text(
-                            'Def: ${p.defesaBase}',
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 12,
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 2),
-                    Text(
-                      '$racaNome • $classeNome',
-                      style: const TextStyle(
-                        color: Colors.white70,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
                       ),
-                      overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: 4),
                     Wrap(
                       spacing: 8,
                       runSpacing: 4,
+                      crossAxisAlignment: WrapCrossAlignment.center,
                       children: [
-                        InkWell(
-                          onTap: () => mostrarDialogoRolagemDado(
-                            context,
-                            lados: 20,
-                            mod: modIniciativa,
-                            rotulo: 'Iniciativa',
-                          ),
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 6,
-                              vertical: 2,
-                            ),
-                            decoration: BoxDecoration(
-                              color: Colors.black26,
-                              borderRadius: BorderRadius.circular(6),
-                            ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const Icon(
-                                  Icons.casino,
-                                  size: 14,
-                                  color: Colors.amber,
+                        // Gatilho 1 toque de Iniciativa
+                        Semantics(
+                          button: true,
+                          label: 'Rolar Iniciativa',
+                          child: Material(
+                            color: Colors.black26,
+                            borderRadius: BorderRadius.circular(8),
+                            child: InkWell(
+                              key: const Key('btn_rolar_iniciativa_topo'),
+                              borderRadius: BorderRadius.circular(8),
+                              onTap: () => mostrarDialogoRolagemPericia(
+                                context,
+                                personagem: p,
+                                periciaKey: 'INICIATIVA',
+                              ),
+                              child: ConstrainedBox(
+                                constraints: const BoxConstraints(
+                                  minHeight: 34,
                                 ),
-                                const SizedBox(width: 4),
-                                Text(
-                                  'Iniciativa ${modIniciativa >= 0 ? "+$modIniciativa" : "$modIniciativa"}',
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 11,
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 9,
+                                    vertical: 5,
+                                  ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      const Icon(
+                                        Icons.casino_rounded,
+                                        size: 14,
+                                        color: Colors.amberAccent,
+                                      ),
+                                      const SizedBox(width: 5),
+                                      Text(
+                                        'Iniciativa ${modIniciativa >= 0 ? "+$modIniciativa" : "$modIniciativa"}',
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w800,
+                                          fontSize: 11.5,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                              ],
+                              ),
                             ),
                           ),
                         ),
+                        // Stepper compacto de Nível
                         Container(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 6,
@@ -582,23 +509,44 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
                           ),
                           decoration: BoxDecoration(
                             color: Colors.black26,
-                            borderRadius: BorderRadius.circular(6),
+                            borderRadius: BorderRadius.circular(8),
                           ),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              const Icon(
-                                Icons.shield,
-                                size: 14,
-                                color: Colors.lightBlueAccent,
+                              InkWell(
+                                onTap: () => cubit.alterarNivel(-1),
+                                child: const Padding(
+                                  padding: EdgeInsets.all(4),
+                                  child: Icon(
+                                    Icons.remove,
+                                    size: 14,
+                                    color: Colors.white,
+                                  ),
+                                ),
                               ),
-                              const SizedBox(width: 4),
-                              Text(
-                                'Treino +$bonusTreino',
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 11,
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 4,
+                                ),
+                                child: Text(
+                                  'Nív $nivel',
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 11.5,
+                                  ),
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () => cubit.alterarNivel(1),
+                                child: const Padding(
+                                  padding: EdgeInsets.all(4),
+                                  child: Icon(
+                                    Icons.add,
+                                    size: 14,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
                             ],
@@ -617,183 +565,27 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
           // Barras de PV e PM
           Row(
             children: [
-              // Barra de Vida (PV)
               Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Flexible(
-                          child: GestureDetector(
-                            onTap: () => _mostrarDialogoAjustePV(cubit),
-                            child: Text(
-                              'PV ${p.pvAtual}/${p.pvTotal}',
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 11,
-                              ),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            InkWell(
-                              onTap: () => cubit.aplicarDano(1),
-                              child: Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 5,
-                                  vertical: 1,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: Colors.black38,
-                                  borderRadius: BorderRadius.circular(3),
-                                ),
-                                child: const Text(
-                                  '-1',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 10,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 3),
-                            InkWell(
-                              onTap: () => cubit.curarPV(1),
-                              child: Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 5,
-                                  vertical: 1,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: Colors.black38,
-                                  borderRadius: BorderRadius.circular(3),
-                                ),
-                                child: const Text(
-                                  '+1',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 10,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 2),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(6),
-                      child: LinearProgressIndicator(
-                        value: progressoPV,
-                        minHeight: 8,
-                        backgroundColor: Colors.black26,
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                          progressoPV > 0.3
-                              ? const Color(0xFF4CAF50)
-                              : Colors.amberAccent,
-                        ),
-                      ),
-                    ),
-                  ],
+                child: _BarraRecursoTopo(
+                  rotulo: 'PV ${p.pvAtual}/${p.pvTotal}',
+                  progresso: progressoPV,
+                  corBarra: progressoPV > 0.3
+                      ? const Color(0xFF4ADE80)
+                      : Colors.amberAccent,
+                  onTapTexto: () => _mostrarDialogoAjustePV(cubit),
+                  onMenosUm: () => cubit.aplicarDano(1),
+                  onMaisUm: () => cubit.curarPV(1),
                 ),
               ),
-
-              const SizedBox(width: 14),
-
-              // Barra de Mana (PM)
+              const SizedBox(width: 12),
               Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Flexible(
-                          child: GestureDetector(
-                            onTap: () => _mostrarDialogoAjustePM(cubit),
-                            child: Text(
-                              'PM ${p.pmAtual}/${p.pmTotal}',
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 11,
-                              ),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            InkWell(
-                              onTap: () => cubit.gastarPM(1),
-                              child: Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 5,
-                                  vertical: 1,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: Colors.black38,
-                                  borderRadius: BorderRadius.circular(3),
-                                ),
-                                child: const Text(
-                                  '-1',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 10,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 3),
-                            InkWell(
-                              onTap: () => cubit.recuperarPM(1),
-                              child: Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 5,
-                                  vertical: 1,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: Colors.black38,
-                                  borderRadius: BorderRadius.circular(3),
-                                ),
-                                child: const Text(
-                                  '+1',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 10,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 2),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(6),
-                      child: LinearProgressIndicator(
-                        value: progressoPM,
-                        minHeight: 8,
-                        backgroundColor: Colors.black26,
-                        valueColor: const AlwaysStoppedAnimation<Color>(
-                          Color(0xFF29B6F6),
-                        ),
-                      ),
-                    ),
-                  ],
+                child: _BarraRecursoTopo(
+                  rotulo: 'PM ${p.pmAtual}/${p.pmTotal}',
+                  progresso: progressoPM,
+                  corBarra: const Color(0xFF38BDF8),
+                  onTapTexto: () => _mostrarDialogoAjustePM(cubit),
+                  onMenosUm: () => cubit.tentarAtivarComPM(1),
+                  onMaisUm: () => cubit.recuperarPM(1),
                 ),
               ),
             ],
@@ -805,85 +597,100 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
 
   @override
   Widget build(BuildContext context) {
-    const t20Red = Color.fromARGB(255, 220, 20, 20);
+    const t20Red = Color(0xFFC62828);
     final cubit = context.watch<FichaCubit>();
     final p = cubit.state.personagem;
 
     return Scaffold(
       backgroundColor: t20Red,
       body: SafeArea(
+        bottom: false,
         child: Column(
           children: [
-            // Top App Bar
+            // Barra Superior enxuta
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
               child: Row(
                 children: [
                   IconButton(
+                    constraints: const BoxConstraints(
+                      minWidth: 44,
+                      minHeight: 44,
+                    ),
                     icon: const Icon(
                       Icons.arrow_back_ios_new_rounded,
                       color: Colors.white,
-                      size: 22,
+                      size: 20,
                     ),
                     onPressed: () => Navigator.pop(context),
                   ),
                   Expanded(
-                    child: Text(
-                      p.nome,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
+                    child: InkWell(
+                      onTap: () => _editarIdentidadeCabecalho(cubit),
+                      child: Text(
+                        p.nome,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w900,
+                          fontSize: 18,
+                        ),
+                        overflow: TextOverflow.ellipsis,
                       ),
-                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                   IconButton(
+                    constraints: const BoxConstraints(
+                      minWidth: 44,
+                      minHeight: 44,
+                    ),
                     icon: const Icon(
                       Icons.casino_outlined,
                       color: Colors.white,
                     ),
-                    tooltip: 'Rolador de Dados',
+                    tooltip: 'Rolador Livre de Dados',
                     onPressed: _abrirRoladorGeral,
                   ),
                 ],
               ),
             ),
 
-            // Cabeçalho fixo no topo
+            // Cabeçalho de sessão fixo
             _buildCabecalhoFixo(context, cubit),
 
             // Banner de evolução pendente
             if (p.classes.any((c) => c.temPoderPendente))
               _buildBannerEvolucaoPendente(cubit),
 
-            // Abas deslizando
+            // Área principal das 6 abas da Ficha
             Expanded(
               child: Container(
                 width: double.infinity,
                 decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(26)),
+                  color: Color(0xFFF1F5F9),
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
                 ),
                 child: Column(
                   children: [
                     Container(
-                      decoration: BoxDecoration(
-                        color: Colors.grey.shade100,
-                        borderRadius: const BorderRadius.vertical(
-                          top: Radius.circular(26),
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(24),
+                        ),
+                        border: Border(
+                          bottom: BorderSide(color: Color(0xFFE2E8F0)),
                         ),
                       ),
                       child: TabBar(
                         controller: _tabController,
                         isScrollable: true,
-                        tabAlignment: TabAlignment.center,
+                        tabAlignment: TabAlignment.start,
                         indicatorColor: const Color(0xFFD32F2F),
                         indicatorWeight: 3,
                         labelColor: const Color(0xFFD32F2F),
-                        unselectedLabelColor: Colors.black54,
+                        unselectedLabelColor: const Color(0xFF64748B),
                         labelStyle: const TextStyle(
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w800,
                           fontSize: 13,
                         ),
                         tabs: _abas,
@@ -892,17 +699,13 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
                     Expanded(
                       child: TabBarView(
                         controller: _tabController,
-                        children: [
-                          const AbaGeralView(),
-                          AbaCombateView(
-                            personagem: p,
-                            onPersonagemAtualizado: (novo) =>
-                                cubit.atualizarPersonagem(novo),
-                          ),
-                          const AbaHabilidadesView(),
-                          const AbaMagiasView(),
-                          const AbaInventarioView(),
-                          const AbaHistoriaView(),
+                        children: const [
+                          AbaGeralView(),
+                          AbaPericiasView(),
+                          AbaHabilidadesView(),
+                          AbaMagiasView(),
+                          AbaInventarioView(),
+                          AbaHistoriaView(),
                         ],
                       ),
                     ),
@@ -913,43 +716,238 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
           ],
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
-        shape: const CircularNotchedRectangle(),
-        color: Colors.black,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+    );
+  }
+}
+
+class _BarraRecursoTopo extends StatelessWidget {
+  final String rotulo;
+  final double progresso;
+  final Color corBarra;
+  final VoidCallback onTapTexto;
+  final VoidCallback onMenosUm;
+  final VoidCallback onMaisUm;
+
+  const _BarraRecursoTopo({
+    required this.rotulo,
+    required this.progresso,
+    required this.corBarra,
+    required this.onTapTexto,
+    required this.onMenosUm,
+    required this.onMaisUm,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            IconButton(
-              icon: const Icon(Icons.settings, color: Colors.white),
-              tooltip: 'Configurações',
-              onPressed: () {},
+            Flexible(
+              child: InkWell(
+                onTap: onTapTexto,
+                borderRadius: BorderRadius.circular(6),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  child: Text(
+                    rotulo,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 12,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ),
             ),
-            IconButton(
-              icon: const Icon(Icons.person, color: Colors.white),
-              tooltip: 'Perfil',
-              onPressed: () => _tabController.animateTo(0),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                InkWell(
+                  onTap: onMenosUm,
+                  borderRadius: BorderRadius.circular(4),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 7,
+                      vertical: 3,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.black26,
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: const Text(
+                      '-1',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 11,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 4),
+                InkWell(
+                  onTap: onMaisUm,
+                  borderRadius: BorderRadius.circular(4),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 7,
+                      vertical: 3,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.black26,
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: const Text(
+                      '+1',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 11,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(width: 44),
-            IconButton(
-              icon: const Icon(Icons.history_edu, color: Colors.white),
-              tooltip: 'História / Notas',
-              onPressed: () => _tabController.animateTo(5),
+          ],
+        ),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(6),
+          child: LinearProgressIndicator(
+            value: progresso,
+            minHeight: 8,
+            backgroundColor: Colors.black26,
+            valueColor: AlwaysStoppedAnimation<Color>(corBarra),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _DialogoIdentidadeTopo extends StatefulWidget {
+  final String nomeInicial;
+  final String alinhamentoInicial;
+  final int idadeInicial;
+  final void Function(String nome, String alinhamento, int idade) onSalvar;
+
+  const _DialogoIdentidadeTopo({
+    required this.nomeInicial,
+    required this.alinhamentoInicial,
+    required this.idadeInicial,
+    required this.onSalvar,
+  });
+
+  @override
+  State<_DialogoIdentidadeTopo> createState() => _DialogoIdentidadeTopoState();
+}
+
+class _DialogoIdentidadeTopoState extends State<_DialogoIdentidadeTopo> {
+  late final TextEditingController _nomeCtrl;
+  late final TextEditingController _alinhamentoCtrl;
+  late final TextEditingController _idadeCtrl;
+
+  static const _alinhamentosPadrao = [
+    'Leal e Bondoso',
+    'Neutro e Bondoso',
+    'Caótico e Bondoso',
+    'Leal e Neutro',
+    'Neutro',
+    'Caótico e Neutro',
+    'Leal e Maligno',
+    'Neutro e Maligno',
+    'Caótico e Maligno',
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    _nomeCtrl = TextEditingController(text: widget.nomeInicial);
+    _alinhamentoCtrl = TextEditingController(text: widget.alinhamentoInicial);
+    _idadeCtrl = TextEditingController(text: '${widget.idadeInicial}');
+  }
+
+  @override
+  void dispose() {
+    _nomeCtrl.dispose();
+    _alinhamentoCtrl.dispose();
+    _idadeCtrl.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Identidade, Alinhamento & Idade'),
+      content: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            TextField(
+              controller: _nomeCtrl,
+              decoration: const InputDecoration(
+                labelText: 'Nome do Personagem',
+                border: OutlineInputBorder(),
+              ),
             ),
-            IconButton(
-              icon: const Icon(Icons.backpack, color: Colors.white),
-              tooltip: 'Inventário',
-              onPressed: () => _tabController.animateTo(4),
+            const SizedBox(height: 10),
+            TextField(
+              controller: _idadeCtrl,
+              keyboardType: TextInputType.number,
+              decoration: const InputDecoration(
+                labelText: 'Idade (anos)',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 10),
+            TextField(
+              controller: _alinhamentoCtrl,
+              decoration: const InputDecoration(
+                labelText: 'Alinhamento',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 8),
+            Wrap(
+              spacing: 6,
+              runSpacing: 6,
+              children: _alinhamentosPadrao.map((al) {
+                return ActionChip(
+                  visualDensity: VisualDensity.compact,
+                  label: Text(al, style: const TextStyle(fontSize: 11)),
+                  onPressed: () => setState(() => _alinhamentoCtrl.text = al),
+                );
+              }).toList(),
             ),
           ],
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.white,
-        onPressed: _abrirRoladorGeral,
-        child: const Icon(Icons.casino, color: Color(0xFFD32F2F), size: 30),
-      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: const Text('CANCELAR'),
+        ),
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xFFD32F2F),
+            foregroundColor: Colors.white,
+          ),
+          onPressed: () {
+            widget.onSalvar(
+              _nomeCtrl.text.trim(),
+              _alinhamentoCtrl.text.trim(),
+              int.tryParse(_idadeCtrl.text) ?? widget.idadeInicial,
+            );
+            Navigator.pop(context);
+          },
+          child: const Text('SALVAR'),
+        ),
+      ],
     );
   }
 }

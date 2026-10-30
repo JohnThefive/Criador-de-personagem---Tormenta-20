@@ -1,7 +1,9 @@
 import 'package:t20_creator/domain/entities/personagem/poder.dart';
 import '../equipamento/arma.dart';
 import '../equipamento/protecao.dart';
+import '../equipamento/item_vestido.dart';
 import 'proficiencias.dart';
+import 'efeito_temporario.dart';
 import '../habilidades_complexas/forma_selvagem.dart';
 import '../habilidades_complexas/golpe_pessoal.dart';
 import '../habilidades_complexas/engenhoca.dart';
@@ -24,15 +26,26 @@ class Personagem {
   final Raca? raca;
   final List<ClasseDoPersonagem> classes; // Índice [0] é a classe inicial
   final List<String> periciasTreinadas;
+  final Map<String, int> outrosBonusPericias; // Bônus diversos por perícia ("Outros")
 
   // Campos referentes a origem e equipamento
   final Origem? origem;
   final List<Poder> poderesGerais; // Armazena poderes de origem / gerais
-  final List<String> itensInventario; // Recebe os itens gratuitos da origem
+  final List<String> itensInventario; // Recebe os itens da mochila
+  final List<ItemVestido> itensVestidosExtras; // Slots 2, 3 e 4 de itens vestidos (Slot 1 = armaduraEquipada)
   final List<Arma> armas; // Armas equipadas/carregadas
-  final Protecao? armaduraEquipada; // Armadura equipada
-  final Protecao? escudoEquipado; // Escudo equipado
-  final int tibares; // Dinheiro em T$ (Tibar)
+  final Protecao? armaduraEquipada; // Armadura equipada (Slot 1 vestido)
+  final Protecao? escudoEquipado; // Escudo equipado (Empunhado)
+  final int tibaresCobre; // TC (0,1 T$)
+  final int tibares; // Dinheiro padrão em T$ (Tibar de Prata)
+  final int tibaresOuro; // TO (10 T$)
+
+  // Defesa, Redução de Dano, Efeitos Temporários e Proficiências extras
+  final int outrosBonusDefesa;
+  final int rdPadrao;
+  final List<String> rdsDiversas;
+  final List<String> proficienciasExtras;
+  final List<EfeitoTemporario> efeitosTemporarios;
 
   // Golpes Pessoais (customizados para Guerreiro)
   final List<GolpePessoal> golpesPessoais;
@@ -55,6 +68,7 @@ class Personagem {
 
   // Magias aprendidas / conhecidas pelo personagem
   final List<String> magiasConhecidas;
+  final int outrosBonusCDMagia;
 
   Poder? get poderConcedido =>
       poderesConcedidos.isNotEmpty ? poderesConcedidos.first : null;
@@ -62,12 +76,14 @@ class Personagem {
   List<Poder> get poderesConcedidosAtivos =>
       punicaoDivinaAtiva ? const [] : poderesConcedidos;
 
-  // Finalização e personalização do personagem
+  // Finalização, anotações e progressão do personagem
   final String id; // Identificador único
   final int idade;
   final String alinhamento; // Ex: "Caótico e Bom", "Leal e Neutro"
   final String
   descricaoAparencia; // Breve biografia/descrição escrita pelo jogador
+  final String anotacoes; // Texto livre de sessão do jogador
+  final Map<int, String> notasProgressaoPorNivel; // Distinções/revisões por nível
   final String? caminhoFoto; // Caminho local da imagem escolhida no celular
   final String tamanho; // Padrão: "Médio"
   final String peso; // Ex: "70 kg"
@@ -89,14 +105,24 @@ class Personagem {
     this.raca,
     this.classes = const [],
     this.periciasTreinadas = const [],
+    this.outrosBonusPericias = const {},
     // Campos referentes a origem e equipamento
     this.origem,
     this.poderesGerais = const [],
     this.itensInventario = const [],
+    this.itensVestidosExtras = const [],
     this.armas = const [],
     this.armaduraEquipada,
     this.escudoEquipado,
+    this.tibaresCobre = 0,
     this.tibares = 0,
+    this.tibaresOuro = 0,
+    // Defesa, RD e efeitos temporários
+    this.outrosBonusDefesa = 0,
+    this.rdPadrao = 0,
+    this.rdsDiversas = const [],
+    this.proficienciasExtras = const [],
+    this.efeitosTemporarios = const [],
     // Golpes Pessoais (customizados para Guerreiro)
     this.golpesPessoais = const [],
     // Engenhocas (customizadas para Inventor)
@@ -113,11 +139,14 @@ class Personagem {
     this.canalizacaoEnergia,
     this.punicaoDivinaAtiva = false,
     this.magiasConhecidas = const [],
+    this.outrosBonusCDMagia = 0,
     // Campos de personalização (com fallback para id se vier nulo)
     String? id,
     this.idade = 20,
     this.alinhamento = 'Neutro',
     this.descricaoAparencia = '',
+    this.anotacoes = '',
+    this.notasProgressaoPorNivel = const {},
     this.caminhoFoto,
     this.tamanho = 'Médio',
     this.peso = '70 kg',
@@ -162,13 +191,22 @@ class Personagem {
       raca: null,
       classes: const [],
       periciasTreinadas: const [],
+      outrosBonusPericias: const {},
       origem: null,
       poderesGerais: const [],
       itensInventario: const [],
+      itensVestidosExtras: const [],
       armas: const [],
       armaduraEquipada: null,
       escudoEquipado: null,
+      tibaresCobre: 0,
       tibares: 0,
+      tibaresOuro: 0,
+      outrosBonusDefesa: 0,
+      rdPadrao: 0,
+      rdsDiversas: const [],
+      proficienciasExtras: const [],
+      efeitosTemporarios: const [],
       golpesPessoais: const [],
       engenhocas: const [],
       formaSelvagemAtiva: null,
@@ -177,10 +215,13 @@ class Personagem {
       divindade: null,
       poderConcedido: null,
       magiasConhecidas: const [],
+      outrosBonusCDMagia: 0,
       atributosVariaveisRaca: const [],
       idade: 20,
       alinhamento: 'Neutro',
       descricaoAparencia: '',
+      anotacoes: '',
+      notasProgressaoPorNivel: const {},
       caminhoFoto: null,
       tamanho: 'Médio',
       peso: '70 kg',
@@ -200,16 +241,25 @@ class Personagem {
     // ignore: non_constant_identifier_names
     List<ClasseDoPersonagem>? classe_do_personagem,
     List<String>? periciasTreinadas,
+    Map<String, int>? outrosBonusPericias,
     // Campos referentes a origem e equipamento
     Origem? origem,
     List<Poder>? poderesGerais,
     List<String>? itensInventario,
+    List<ItemVestido>? itensVestidosExtras,
     List<Arma>? armas,
     Protecao? armaduraEquipada,
     bool anularArmadura = false,
     Protecao? escudoEquipado,
     bool anularEscudo = false,
+    int? tibaresCobre,
     int? tibares,
+    int? tibaresOuro,
+    int? outrosBonusDefesa,
+    int? rdPadrao,
+    List<String>? rdsDiversas,
+    List<String>? proficienciasExtras,
+    List<EfeitoTemporario>? efeitosTemporarios,
     List<GolpePessoal>? golpesPessoais,
     List<Engenhoca>? engenhocas,
     // Campos de poderes de Druida
@@ -229,10 +279,13 @@ class Personagem {
     bool? punicaoDivinaAtiva,
     bool anularDivindade = false,
     List<String>? magiasConhecidas,
+    int? outrosBonusCDMagia,
     // Campos de personalização
     int? idade,
     String? alinhamento,
     String? descricaoAparencia,
+    String? anotacoes,
+    Map<int, String>? notasProgressaoPorNivel,
     String? caminhoFoto,
     bool anularFoto = false,
     String? tamanho,
@@ -252,9 +305,11 @@ class Personagem {
           atributosVariaveisRaca ?? this.atributosVariaveisRaca,
       classes: classe_do_personagem ?? classes,
       periciasTreinadas: periciasTreinadas ?? this.periciasTreinadas,
+      outrosBonusPericias: outrosBonusPericias ?? this.outrosBonusPericias,
       origem: origem ?? this.origem,
       poderesGerais: poderesGerais ?? this.poderesGerais,
       itensInventario: itensInventario ?? this.itensInventario,
+      itensVestidosExtras: itensVestidosExtras ?? this.itensVestidosExtras,
       armas: armas ?? this.armas,
       armaduraEquipada: anularArmadura
           ? null
@@ -262,7 +317,14 @@ class Personagem {
       escudoEquipado: anularEscudo
           ? null
           : (escudoEquipado ?? this.escudoEquipado),
+      tibaresCobre: tibaresCobre ?? this.tibaresCobre,
       tibares: tibares ?? this.tibares,
+      tibaresOuro: tibaresOuro ?? this.tibaresOuro,
+      outrosBonusDefesa: outrosBonusDefesa ?? this.outrosBonusDefesa,
+      rdPadrao: rdPadrao ?? this.rdPadrao,
+      rdsDiversas: rdsDiversas ?? this.rdsDiversas,
+      proficienciasExtras: proficienciasExtras ?? this.proficienciasExtras,
+      efeitosTemporarios: efeitosTemporarios ?? this.efeitosTemporarios,
       golpesPessoais: golpesPessoais ?? this.golpesPessoais,
       engenhocas: engenhocas ?? this.engenhocas,
       formaSelvagemAtiva: anularFormaSelvagem
@@ -288,9 +350,13 @@ class Personagem {
           ? false
           : (punicaoDivinaAtiva ?? this.punicaoDivinaAtiva),
       magiasConhecidas: magiasConhecidas ?? this.magiasConhecidas,
+      outrosBonusCDMagia: outrosBonusCDMagia ?? this.outrosBonusCDMagia,
       idade: idade ?? this.idade,
       alinhamento: alinhamento ?? this.alinhamento,
       descricaoAparencia: descricaoAparencia ?? this.descricaoAparencia,
+      anotacoes: anotacoes ?? this.anotacoes,
+      notasProgressaoPorNivel:
+          notasProgressaoPorNivel ?? this.notasProgressaoPorNivel,
       caminhoFoto: anularFoto ? null : (caminhoFoto ?? this.caminhoFoto),
       tamanho: tamanho ?? this.tamanho,
       peso: peso ?? this.peso,
@@ -564,10 +630,26 @@ class Personagem {
     return armas;
   }
 
-  /// Redução de dano total ativa
-  int get rdTotal => estaEmFormaSelvagem ? formaSelvagemAtiva!.rd : 0;
+  // --- BÔNUS DE EFEITOS TEMPORÁRIOS ATIVOS ---
+  int get bonusEfeitosDefesa => efeitosTemporarios
+      .where((e) => e.ativo)
+      .fold(0, (soma, e) => soma + e.modDefesa);
 
-  // Este método calcula o valor final para exibir na tela (Base + Raça Fixa + Raça Variável + Forma Selvagem)
+  int get bonusEfeitosPericias => efeitosTemporarios
+      .where((e) => e.ativo)
+      .fold(0, (soma, e) => soma + e.modPericias);
+
+  int get bonusEfeitosRd => efeitosTemporarios
+      .where((e) => e.ativo)
+      .fold(0, (soma, e) => soma + e.modRd);
+
+  /// Redução de dano padrão total ativa (RD Padrão + Forma Selvagem + Efeitos Temporários)
+  int get rdTotal {
+    final rdForma = estaEmFormaSelvagem ? formaSelvagemAtiva!.rd : 0;
+    final soma = rdPadrao + rdForma + bonusEfeitosRd;
+    return soma < 0 ? 0 : soma;
+  }
+
   // Este método calcula o valor final para exibir na tela (Base + Raça Fixa + Raça Variável + Forma Selvagem)
   int getValorFinal(String sigla, {List<String>? bonusVariaveis}) {
     final variaveisEfetivos = bonusVariaveis ?? atributosVariaveisRaca;
@@ -666,13 +748,71 @@ class Personagem {
     };
   }
 
+  /// Retorna a sigla do atributo-chave principal de conjuração do personagem (ex: INT, SAB, CAR)
+  String? get atributoChaveMagiaPrincipal {
+    for (final c in classes) {
+      final sigla = _obterAtributoChaveConjuracao(c);
+      if (sigla != null) return sigla;
+    }
+    if (raca?.id.toLowerCase() == 'qareen') return 'CAR';
+    if (magiasConhecidas.isNotEmpty) return 'INT';
+    return null;
+  }
+
+  /// Deslocamento base terrestre em metros (ex: Elfo - Graça de Glórienn: 12m; Anão, Golem, Hynne: 6m; Padrão: 9m)
+  int get deslocamentoBaseMetros {
+    final rId = raca?.id.toLowerCase() ?? '';
+    if (rId == 'elfo') return 12;
+    if (rId == 'anao' || rId == 'anão' || rId == 'golem' || rId == 'hynne') {
+      return 6;
+    }
+    return 9;
+  }
+
+  /// Deslocamento efetivo em metros (Anão e Golem nunca têm deslocamento reduzido por carga ou armadura)
+  int get deslocamentoEfetivoMetros {
+    final rId = raca?.id.toLowerCase() ?? '';
+    final imuneReducao = rId == 'anao' || rId == 'anão' || rId == 'golem';
+    int desc = deslocamentoBaseMetros;
+    if (!imuneReducao && (usaArmaduraPesada || estaSobrecarregado)) {
+      desc = (desc - 3).clamp(1, 99);
+    }
+    return desc;
+  }
+
+  /// Bônus racial inato e passivo de Defesa (ex: Minotauro - Couro Rígido: +1; Trog - Reptiliano: +1; Golem - Chassi: +2)
+  int get bonusRacialDefesa {
+    final rId = raca?.id.toLowerCase() ?? '';
+    if (rId == 'golem') return 2;
+    if (rId == 'minotauro' || rId == 'trog') return 1;
+    return 0;
+  }
+
+  /// Bônus racial inato em perícias (ex: Elfo - Sentidos Élficos: +2 Misticismo e Percepção; Goblin - Rato das Ruas: +2 Fortitude; etc.)
+  int bonusRacialPericia(String periciaKey) {
+    final rId = raca?.id.toLowerCase() ?? '';
+    final keyUpper = periciaKey.toUpperCase();
+    if (rId == 'elfo') {
+      if (keyUpper == 'MISTICISMO' || keyUpper == 'PERCEPCAO') return 2;
+    } else if (rId == 'goblin') {
+      if (keyUpper == 'FORTITUDE') return 2;
+    } else if (rId == 'hynne') {
+      if (keyUpper == 'ENGANACAO') return 2;
+    } else if (rId == 'suraggel_aggelus') {
+      if (keyUpper == 'DIPLOMACIA' || keyUpper == 'INTUICAO') return 2;
+    } else if (rId == 'suraggel_sulfure') {
+      if (keyUpper == 'ENGANACAO' || keyUpper == 'FURTIVIDADE') return 2;
+    }
+    return 0;
+  }
+
   // --- CÁLCULO DE DEFESA E PROTEÇÕES (TORMENTA 20) ---
   int get bonusArmadura => armaduraEquipada?.bonusDefesa ?? 0;
   int get bonusEscudo => escudoEquipado?.bonusDefesa ?? 0;
   bool get usaArmaduraPesada => armaduraEquipada?.ehArmaduraPesada ?? false;
 
   /// Defesa final calculada reativamente:
-  /// Defesa = 10 + (usaArmaduraPesada ? 0 : modDES) + bonusArmadura + bonusEscudo + bonusForma + bonusCompanheiro
+  /// Defesa = 10 + (usaArmaduraPesada ? 0 : modDES) + bonusArmadura + bonusEscudo + bonusRacial + bonusForma + bonusCompanheiro + outrosBonusDefesa + bonusEfeitosDefesa
   int get defesaFinal {
     final modDes = getValorFinal('DES');
     final modDesAplicado = usaArmaduraPesada ? 0 : modDes;
@@ -689,8 +829,11 @@ class Personagem {
         modDesAplicado +
         bonusArmadura +
         bonusEscudo +
+        bonusRacialDefesa +
         bonusForma +
-        bonusCompanheiro;
+        bonusCompanheiro +
+        outrosBonusDefesa +
+        bonusEfeitosDefesa;
   }
 
   /// Defesa básica sem armaduras (10 + DES)
@@ -744,6 +887,39 @@ class Personagem {
     return 2;
   }
 
+  /// Verifica se a perícia é concedida de forma fixa ou exclusiva por alguma classe
+  bool ehPericiaTreinadaFixaDeClasse(String periciaKey) {
+    final upper = periciaKey.toUpperCase();
+    return classes.any(
+      (c) =>
+          c.classeDefinicao.periciasFixas.any((p) => p.toUpperCase() == upper) ||
+          c.periciasExclusivasEscolhidas.values.any(
+            (p) => p.toUpperCase() == upper,
+          ),
+    );
+  }
+
+  /// Verifica se o personagem possui treinamento na perícia (manual ou de classe)
+  bool ehPericiaTreinada(String periciaKey) {
+    final upper = periciaKey.toUpperCase();
+    final manual = periciasTreinadas.any((p) => p.toUpperCase() == upper);
+    return manual || ehPericiaTreinadaFixaDeClasse(periciaKey);
+  }
+
+  /// Retorna o bônus diverso ("Outros") cadastrado manualmente para a perícia
+  int obterOutrosBonusPericia(String periciaKey) {
+    if (outrosBonusPericias.containsKey(periciaKey)) {
+      return outrosBonusPericias[periciaKey]!;
+    }
+    final upper = periciaKey.toUpperCase();
+    for (final entry in outrosBonusPericias.entries) {
+      if (entry.key.toUpperCase() == upper) {
+        return entry.value;
+      }
+    }
+    return 0;
+  }
+
   // Cálculo final da perícia
   int getValorPericia(String periciaKey, {int? penalidadeArmaduraCustom}) {
     final pericia = BancoDePericias.getByKey(periciaKey);
@@ -751,16 +927,11 @@ class Personagem {
     int metadeNivel = (nivelPersonagem / 2).floor();
     int modAtributo = getValorFinal(pericia.atributoChave);
 
-    // Verifica se é treinada manualmente, por perícia fixa limpa, ou via escolha exclusiva da classe
-    bool ehTreinadaManuais = periciasTreinadas.contains(periciaKey);
-    bool ehTreinadaPorClasse = classes.any(
-      (c) =>
-          c.classeDefinicao.periciasFixas.contains(periciaKey) ||
-          c.periciasExclusivasEscolhidas.values.contains(periciaKey),
-    );
-
-    bool ehTreinada = ehTreinadaManuais || ehTreinadaPorClasse;
-    int bonusTreino = ehTreinada ? bonusTreinamento : 0;
+    bool treinada = ehPericiaTreinada(periciaKey);
+    int bonusTreino = treinada ? bonusTreinamento : 0;
+    int bonusOutros = obterOutrosBonusPericia(periciaKey);
+    int bonusRacial = bonusRacialPericia(periciaKey);
+    int bonusEfeitos = bonusEfeitosPericias;
 
     final penalidade = penalidadeArmaduraCustom ?? penalidadeArmaduraTotal;
 
@@ -773,7 +944,13 @@ class Personagem {
       penalidadeAplicada = penalidade;
     }
 
-    return metadeNivel + modAtributo + bonusTreino - penalidadeAplicada;
+    return metadeNivel +
+        modAtributo +
+        bonusTreino +
+        bonusOutros +
+        bonusRacial +
+        bonusEfeitos -
+        penalidadeAplicada;
   }
 
   // --- REGRAS DE PROFICIÊNCIAS ---
@@ -808,6 +985,11 @@ class Personagem {
     (c) => c.classeDefinicao.idClasse.toLowerCase() == 'arcanista',
   );
 
+  // --- PATRIMÔNIO EM TIBARES ---
+  /// Equivalente total em T$ considerando TC (0,1 T$), T$ (1 T$) e TO (10 T$)
+  double get patrimonioTotalTibares =>
+      tibares + (tibaresOuro * 10.0) + (tibaresCobre * 0.1);
+
   // --- CAPACIDADE DE CARGA (TORMENTA 20) ---
   int get limiteCarga =>
       RegrasCargaService.calcularLimiteCarga(getValorFinal('FOR'));
@@ -817,6 +999,8 @@ class Personagem {
     itensInventario: itensInventario,
     armadura: armaduraEquipada,
     escudo: escudoEquipado,
+    engenhocas: engenhocas,
+    itensVestidosExtras: itensVestidosExtras,
   );
 
   bool get estaSobrecarregado => cargaAtual > limiteCarga;

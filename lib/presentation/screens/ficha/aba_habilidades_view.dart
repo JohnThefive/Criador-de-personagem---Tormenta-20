@@ -11,9 +11,17 @@ import '../../../domain/services/data_services/call_montaria_sagrada.dart';
 import '../../widgets/modal_escolha_companheiro.dart';
 import '../../controllers/ficha_cubit.dart';
 import '../wizard_personagem/selecao_poderes_screen.dart';
+import 'secoes_habilidades_progressao.dart';
 
-class AbaHabilidadesView extends StatelessWidget {
+class AbaHabilidadesView extends StatefulWidget {
   const AbaHabilidadesView({super.key});
+
+  @override
+  State<AbaHabilidadesView> createState() => _AbaHabilidadesViewState();
+}
+
+class _AbaHabilidadesViewState extends State<AbaHabilidadesView> {
+  int _secaoSelecionada = 0; // 0: Iniciais & Classe | 1: Proficiências | 2: Progressão
 
   Future<void> _abrirSelecaoPoderes(
     BuildContext context,
@@ -1022,6 +1030,82 @@ class AbaHabilidadesView extends StatelessWidget {
     );
   }
 
+  Widget _buildSeletorSecao() {
+    const opcoes = [
+      (0, 'Iniciais & Classe', Icons.auto_awesome_outlined),
+      (1, 'Proficiências', Icons.shield_moon_outlined),
+      (2, 'Progressão', Icons.timeline_rounded),
+    ];
+
+    return Container(
+      padding: const EdgeInsets.all(4),
+      decoration: BoxDecoration(
+        color: const Color(0xFFE2E8F0),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Row(
+        children: opcoes.map((item) {
+          final ativo = _secaoSelecionada == item.$1;
+          return Expanded(
+            child: InkWell(
+              key: Key('subaba_habilidades_${item.$1}'),
+              borderRadius: BorderRadius.circular(9),
+              onTap: () => setState(() => _secaoSelecionada = item.$1),
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(minHeight: 44),
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 160),
+                  padding: const EdgeInsets.symmetric(horizontal: 6),
+                  decoration: BoxDecoration(
+                    color: ativo ? Colors.white : Colors.transparent,
+                    borderRadius: BorderRadius.circular(9),
+                    boxShadow: ativo
+                        ? [
+                            BoxShadow(
+                              color: Colors.black.withValues(alpha: 0.06),
+                              blurRadius: 4,
+                              offset: const Offset(0, 1),
+                            ),
+                          ]
+                        : null,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        item.$3,
+                        size: 15,
+                        color: ativo
+                            ? const Color(0xFFD32F2F)
+                            : const Color(0xFF64748B),
+                      ),
+                      const SizedBox(width: 4),
+                      Flexible(
+                        child: Text(
+                          item.$2,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: ativo
+                                ? FontWeight.w800
+                                : FontWeight.w600,
+                            color: ativo
+                                ? const Color(0xFF0F172A)
+                                : const Color(0xFF475569),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          );
+        }).toList(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final cubit = context.watch<FichaCubit>();
@@ -1031,507 +1115,129 @@ class AbaHabilidadesView extends StatelessWidget {
     final nivel = classeDoPersonagem?.nivel ?? 1;
 
     return ListView(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.fromLTRB(12, 12, 12, 28),
       children: [
-        if (classe != null) ...[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Classe: ${classe.nome}',
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                  color: Color(0xFFD32F2F),
-                ),
+        _buildSeletorSecao(),
+        const SizedBox(height: 14),
+        if (_secaoSelecionada == 1)
+          SecaoProficienciasEGerais(personagem: p, cubit: cubit)
+        else if (_secaoSelecionada == 2)
+          SecaoProgressaoPersonagem(
+            personagem: p,
+            cubit: cubit,
+            onGerenciarPoderes: () => _abrirSelecaoPoderes(context, cubit),
+          )
+        else ...[
+          // --- BLOCO 1: HABILIDADES INICIAIS (RAÇA, ORIGEM E DEVOÇÃO) ---
+          const Padding(
+            padding: EdgeInsets.only(bottom: 8),
+            child: Text(
+              'Habilidades Iniciais (Raça, Origem & Devoção)',
+              style: TextStyle(
+                fontWeight: FontWeight.w900,
+                fontSize: 15,
+                color: Color(0xFF0F172A),
               ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFD32F2F),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Text(
-                  'Nível $nivel',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 11,
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
-          const SizedBox(height: 6),
-          if (classeDoPersonagem?.caminhoEscolhido != null) ...[
-            Card(
-              color: Colors.amber.shade50,
-              margin: const EdgeInsets.only(bottom: 8),
-              child: ListTile(
-                leading: const Icon(Icons.star, color: Colors.amber),
-                title: Text(
-                  'Caminho: ${classeDoPersonagem!.caminhoEscolhido!.nome}',
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-                subtitle: Text(classeDoPersonagem.caminhoEscolhido!.descricao),
-                trailing: classe.caminhosParaNivel(nivel).length > 1
-                    ? IconButton(
-                        icon: const Icon(
-                          Icons.edit,
-                          size: 18,
-                          color: Colors.brown,
-                        ),
-                        tooltip: 'Alterar caminho',
-                        onPressed: () => _mostrarModalEscolhaCaminho(
-                          context,
-                          cubit,
-                          classeDoPersonagem,
-                          classe.caminhosParaNivel(nivel),
-                        ),
-                      )
-                    : null,
+          if (p.raca != null) ...[
+            Text(
+              'Raça: ${p.raca!.nome}',
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 14.5,
+                color: Color(0xFFD32F2F),
               ),
             ),
-          ] else if (classeDoPersonagem != null &&
-              classe.caminhosParaNivel(nivel).isNotEmpty) ...[
-            Card(
-              color: Colors.red.shade50,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-                side: BorderSide(color: Colors.red.shade300),
-              ),
-              margin: const EdgeInsets.only(bottom: 8),
-              child: ListTile(
-                leading: const Icon(Icons.stars, color: Color(0xFFD32F2F)),
-                title: Text(
-                  classe.idClasse == 'cavaleiro'
-                      ? 'Caminho do Cavaleiro (5º Nível)'
-                      : 'Especialização / Caminho Disponível',
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFFD32F2F),
-                  ),
-                ),
-                subtitle: const Text('Toque para escolher seu caminho!'),
-                trailing: const Icon(
-                  Icons.chevron_right,
-                  color: Color(0xFFD32F2F),
-                ),
-                onTap: () => _mostrarModalEscolhaCaminho(
-                  context,
-                  cubit,
-                  classeDoPersonagem,
-                  classe.caminhosParaNivel(nivel),
-                ),
-              ),
-            ),
-          ],
-          ...classe.habilidadesFixas.entries.map(
-            (e) => Card(
-              margin: const EdgeInsets.only(bottom: 8),
-              child: Padding(
-                padding: const EdgeInsets.all(12),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      e.key,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFFD32F2F),
-                      ),
+            const SizedBox(height: 6),
+            ...p.raca!.habilidadesRaca.entries.map(
+              (e) {
+                // Habilidades inatas de raça são predominantemente passivas (deslocamento, visão, defesas, etc.)
+                // Apenas habilidades que explicitamente dizem "gastar X PM" exibem botão de gasto de PM.
+                final consomePM = RegExp(r'gastar\s+\d+\s+PM', caseSensitive: false).hasMatch(e.value);
+
+                return Card(
+                  margin: const EdgeInsets.only(bottom: 8),
+                  child: Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      e.key,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 6,
+                                      vertical: 2,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: consomePM
+                                          ? const Color(0xFFE0F2FE)
+                                          : const Color(0xFFF1F5F9),
+                                      borderRadius: BorderRadius.circular(6),
+                                      border: Border.all(
+                                        color: consomePM
+                                            ? const Color(0xFF7DD3FC)
+                                            : const Color(0xFFCBD5E1),
+                                      ),
+                                    ),
+                                    child: Text(
+                                      consomePM ? 'Ativa' : 'Passiva • Inata',
+                                      style: TextStyle(
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w700,
+                                        color: consomePM
+                                            ? const Color(0xFF0369A1)
+                                            : const Color(0xFF64748B),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 4),
+                              Text(e.value, style: const TextStyle(fontSize: 13)),
+                            ],
+                          ),
+                        ),
+                        if (consomePM) ...[
+                          const SizedBox(width: 8),
+                          BotaoAtivarPoderPM(nomePoder: e.key, cubit: cubit),
+                        ],
+                      ],
                     ),
-                    const SizedBox(height: 4),
-                    Text(e.value, style: const TextStyle(fontSize: 13)),
-                  ],
-                ),
-              ),
+                  ),
+                );
+              },
             ),
-          ),
-          if (p.temPoderFormaSelvagem) ...[
-            _buildCardFormaSelvagem(context, cubit),
           ],
-          if (p.temPoderCompanheiroAnimal) ...[
-            _buildCardCompanheiroAnimal(context, cubit),
-          ],
-          if (p.temMontariaSagrada) ...[
-            _buildCardMontariaSagrada(context, cubit),
-          ],
-          if (classeDoPersonagem != null) ...[
-            const SizedBox(height: 10),
-            Row(
-              children: [
-                const Expanded(
-                  child: Text(
-                    'Poderes de Classe:',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                  ),
-                ),
-                TextButton.icon(
-                  onPressed: () => _abrirSelecaoPoderes(context, cubit),
-                  icon: Icon(
-                    classeDoPersonagem.temPoderPendente
-                        ? Icons.add_circle
-                        : Icons.tune,
-                    size: 18,
-                  ),
-                  label: Text(
-                    classeDoPersonagem.temPoderPendente
-                        ? 'Escolher (${classeDoPersonagem.poderesPendentes})'
-                        : 'Gerenciar',
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  style: TextButton.styleFrom(
-                    foregroundColor: classeDoPersonagem.temPoderPendente
-                        ? const Color(0xFFD32F2F)
-                        : Colors.blueGrey,
-                  ),
-                ),
-              ],
+          if (p.origem != null) ...[
+            const SizedBox(height: 6),
+            Text(
+              'Origem: ${p.origem!.nome}',
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 14.5,
+                color: Color(0xFFD32F2F),
+              ),
             ),
             const SizedBox(height: 4),
-            if (classeDoPersonagem.poderesEscolhidos.isEmpty)
-              Card(
-                margin: const EdgeInsets.only(bottom: 8),
-                color: Colors.amber.shade50,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  side: BorderSide(color: Colors.amber.shade300),
-                ),
-                child: ListTile(
-                  leading: const Icon(Icons.info_outline, color: Colors.amber),
-                  title: Text(
-                    classeDoPersonagem.nivel >= 2
-                        ? 'Nenhum poder de classe escolhido ainda.'
-                        : 'Poderes de classe começam a ser escolhidos no 2º nível.',
-                    style: const TextStyle(fontSize: 13),
-                  ),
-                  subtitle: classeDoPersonagem.temPoderPendente
-                      ? const Text(
-                          'Toque para aprender um novo poder de classe!',
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFFD32F2F),
-                          ),
-                        )
-                      : null,
-                  trailing: classeDoPersonagem.temPoderPendente
-                      ? const Icon(
-                          Icons.chevron_right,
-                          color: Color(0xFFD32F2F),
-                        )
-                      : null,
-                  onTap: () => _abrirSelecaoPoderes(context, cubit),
-                ),
-              )
-            else
-              ...classeDoPersonagem.poderesEscolhidos.map(
-                (poder) => Card(
-                  margin: const EdgeInsets.only(bottom: 8),
-                  child: ListTile(
-                    leading: const Icon(Icons.bolt, color: Color(0xFFD32F2F)),
-                    title: Text(
-                      poder.nome,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    subtitle: Text(poder.descricao),
-                    trailing: IconButton(
-                      icon: const Icon(
-                        Icons.settings,
-                        color: Colors.grey,
-                        size: 20,
-                      ),
-                      tooltip: 'Gerenciar poderes',
-                      onPressed: () => _abrirSelecaoPoderes(context, cubit),
-                    ),
-                  ),
-                ),
-              ),
-            const Divider(height: 24),
-          ],
-        ],
-        if (p.raca != null) ...[
-          Text(
-            'Raça: ${p.raca!.nome}',
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-              color: Color(0xFFD32F2F),
+            Text(
+              p.origem!.descricao,
+              style: const TextStyle(fontSize: 12.5, color: Color(0xFF475569)),
             ),
-          ),
-          const SizedBox(height: 6),
-          ...p.raca!.habilidadesRaca.entries.map(
-            (e) => Card(
-              margin: const EdgeInsets.only(bottom: 8),
-              child: Padding(
-                padding: const EdgeInsets.all(12),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      e.key,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(e.value, style: const TextStyle(fontSize: 13)),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          const Divider(height: 24),
-        ],
-        if (p.divindade != null) ...[
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(
-                color: p.punicaoDivinaAtiva
-                    ? Colors.red.shade700
-                    : Colors.red.shade200,
-                width: p.punicaoDivinaAtiva ? 2 : 1,
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.05),
-                  blurRadius: 4,
-                  offset: const Offset(0, 2),
-                ),
-              ],
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            p.divindade!.nome,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                              color: Color(0xFFD32F2F),
-                            ),
-                          ),
-                          Text(
-                            p.divindade!.titulo,
-                            style: TextStyle(
-                              fontSize: 13,
-                              color: Colors.grey.shade700,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    if (p.ehDevotoFiel)
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 8,
-                          vertical: 4,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Colors.amber.shade100,
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: Colors.amber.shade700),
-                        ),
-                        child: Text(
-                          'Devoto Fiel',
-                          style: TextStyle(
-                            fontSize: 11,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.amber.shade900,
-                          ),
-                        ),
-                      ),
-                  ],
-                ),
-                const SizedBox(height: 8),
-                Wrap(
-                  spacing: 6,
-                  runSpacing: 6,
-                  children: [
-                    Chip(
-                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      padding: EdgeInsets.zero,
-                      labelPadding: const EdgeInsets.symmetric(horizontal: 8),
-                      backgroundColor: Colors.grey.shade100,
-                      avatar: const Icon(
-                        Icons.colorize,
-                        size: 14,
-                        color: Colors.brown,
-                      ),
-                      label: Text(
-                        'Arma: ${p.divindade!.armaPreferida}',
-                        style: const TextStyle(fontSize: 11),
-                      ),
-                    ),
-                    if (p.canalizacaoEnergia != null)
-                      Chip(
-                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        padding: EdgeInsets.zero,
-                        labelPadding: const EdgeInsets.symmetric(horizontal: 8),
-                        backgroundColor:
-                            p.canalizacaoEnergia == TipoEnergia.positiva
-                            ? Colors.green.shade50
-                            : Colors.purple.shade50,
-                        avatar: Icon(
-                          p.canalizacaoEnergia == TipoEnergia.positiva
-                              ? Icons.favorite
-                              : Icons.dark_mode,
-                          size: 14,
-                          color: p.canalizacaoEnergia == TipoEnergia.positiva
-                              ? Colors.green.shade700
-                              : Colors.purple.shade700,
-                        ),
-                        label: Text(
-                          'Energia ${p.canalizacaoEnergia == TipoEnergia.positiva ? "Positiva" : "Negativa"}',
-                          style: TextStyle(
-                            fontSize: 11,
-                            fontWeight: FontWeight.bold,
-                            color: p.canalizacaoEnergia == TipoEnergia.positiva
-                                ? Colors.green.shade900
-                                : Colors.purple.shade900,
-                          ),
-                        ),
-                      ),
-                  ],
-                ),
-                const Divider(height: 20),
-                const Text(
-                  'Obrigações & Restrições:',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
-                ),
-                const SizedBox(height: 4),
-                ...p.divindade!.obrigacoesERestricoes.map(
-                  (regra) => Padding(
-                    padding: const EdgeInsets.only(bottom: 4),
-                    child: Text(
-                      '• $regra',
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.grey.shade800,
-                        height: 1.25,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 14),
-          const Text(
-            'Poderes Concedidos:',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 15,
-              color: Colors.black87,
-            ),
-          ),
-          const SizedBox(height: 6),
-          if (p.poderesConcedidos.isEmpty)
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 4),
-              child: Text(
-                'Nenhum poder concedido associado.',
-                style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
-              ),
-            )
-          else
-            ...p.poderesConcedidos.map(
-              (poderConcedido) => Card(
-                margin: const EdgeInsets.only(bottom: 8),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  side: BorderSide(
-                    color: p.punicaoDivinaAtiva
-                        ? Colors.red.shade300
-                        : Colors.grey.shade300,
-                  ),
-                ),
-                color: p.punicaoDivinaAtiva
-                    ? Colors.red.shade50.withValues(alpha: 0.5)
-                    : Colors.white,
-                child: ListTile(
-                  dense: true,
-                  leading: Icon(
-                    p.punicaoDivinaAtiva ? Icons.block : Icons.auto_awesome,
-                    color: p.punicaoDivinaAtiva
-                        ? Colors.red.shade800
-                        : Colors.amber.shade800,
-                    size: 22,
-                  ),
-                  title: Row(
-                    children: [
-                      Text(
-                        poderConcedido.nome,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: p.punicaoDivinaAtiva
-                              ? Colors.red.shade900
-                              : Colors.black87,
-                          decoration: p.punicaoDivinaAtiva
-                              ? TextDecoration.lineThrough
-                              : null,
-                        ),
-                      ),
-                      if (p.punicaoDivinaAtiva) ...[
-                        const SizedBox(width: 6),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 6,
-                            vertical: 2,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.red.shade100,
-                            borderRadius: BorderRadius.circular(6),
-                          ),
-                          child: Text(
-                            'INATIVO',
-                            style: TextStyle(
-                              fontSize: 9,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.red.shade900,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ],
-                  ),
-                  subtitle: Text(
-                    poderConcedido.descricao,
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: p.punicaoDivinaAtiva
-                          ? Colors.grey.shade600
-                          : Colors.grey.shade800,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          const Divider(height: 24),
-        ],
-        if (p.origem != null) ...[
-          Text(
-            'Origem: ${p.origem!.nome}',
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-              color: Color(0xFFD32F2F),
-            ),
-          ),
-          const SizedBox(height: 6),
-          Text(p.origem!.descricao, style: const TextStyle(fontSize: 13)),
-          const SizedBox(height: 8),
-          if (p.poderesGerais.isNotEmpty)
+            const SizedBox(height: 8),
             ...p.poderesGerais.map(
               (pg) => Card(
                 margin: const EdgeInsets.only(bottom: 8),
@@ -1541,9 +1247,444 @@ class AbaHabilidadesView extends StatelessWidget {
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   subtitle: Text(pg.descricao),
+                  trailing: BotaoAtivarPoderPM(
+                    nomePoder: pg.nome,
+                    cubit: cubit,
+                  ),
                 ),
               ),
             ),
+          ],
+          if (p.divindade != null) ...[
+            const SizedBox(height: 8),
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(
+                  color: p.punicaoDivinaAtiva
+                      ? Colors.red.shade700
+                      : Colors.red.shade200,
+                  width: p.punicaoDivinaAtiva ? 2 : 1,
+                ),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Divindade: ${p.divindade!.nome}',
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: Color(0xFFD32F2F),
+                              ),
+                            ),
+                            Text(
+                              p.divindade!.titulo,
+                              style: TextStyle(
+                                fontSize: 12.5,
+                                color: Colors.grey.shade700,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      if (p.ehDevotoFiel)
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 4,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.amber.shade100,
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(color: Colors.amber.shade700),
+                          ),
+                          child: Text(
+                            'Devoto Fiel',
+                            style: TextStyle(
+                              fontSize: 11,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.amber.shade900,
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  Wrap(
+                    spacing: 6,
+                    runSpacing: 6,
+                    children: [
+                      Chip(
+                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        padding: EdgeInsets.zero,
+                        labelPadding: const EdgeInsets.symmetric(horizontal: 8),
+                        backgroundColor: Colors.grey.shade100,
+                        avatar: const Icon(
+                          Icons.colorize,
+                          size: 14,
+                          color: Colors.brown,
+                        ),
+                        label: Text(
+                          'Arma: ${p.divindade!.armaPreferida}',
+                          style: const TextStyle(fontSize: 11),
+                        ),
+                      ),
+                      if (p.canalizacaoEnergia != null)
+                        Chip(
+                          materialTapTargetSize:
+                              MaterialTapTargetSize.shrinkWrap,
+                          padding: EdgeInsets.zero,
+                          labelPadding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                          ),
+                          backgroundColor:
+                              p.canalizacaoEnergia == TipoEnergia.positiva
+                              ? Colors.green.shade50
+                              : Colors.purple.shade50,
+                          label: Text(
+                            'Energia ${p.canalizacaoEnergia == TipoEnergia.positiva ? "Positiva" : "Negativa"}',
+                            style: TextStyle(
+                              fontSize: 11,
+                              fontWeight: FontWeight.bold,
+                              color:
+                                  p.canalizacaoEnergia == TipoEnergia.positiva
+                                  ? Colors.green.shade900
+                                  : Colors.purple.shade900,
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                  const Divider(height: 18),
+                  const Text(
+                    'Obrigações & Restrições:',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12.5),
+                  ),
+                  const SizedBox(height: 4),
+                  ...p.divindade!.obrigacoesERestricoes.map(
+                    (regra) => Padding(
+                      padding: const EdgeInsets.only(bottom: 3),
+                      child: Text(
+                        '• $regra',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.grey.shade800,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 10),
+            const Text(
+              'Poderes Concedidos:',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+            ),
+            const SizedBox(height: 6),
+            if (p.poderesConcedidos.isEmpty)
+              Text(
+                'Nenhum poder concedido associado.',
+                style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
+              )
+            else
+              ...p.poderesConcedidos.map(
+                (poderConcedido) => Card(
+                  margin: const EdgeInsets.only(bottom: 8),
+                  color: p.punicaoDivinaAtiva
+                      ? Colors.red.shade50.withValues(alpha: 0.5)
+                      : Colors.white,
+                  child: ListTile(
+                    dense: true,
+                    leading: Icon(
+                      p.punicaoDivinaAtiva ? Icons.block : Icons.auto_awesome,
+                      color: p.punicaoDivinaAtiva
+                          ? Colors.red.shade800
+                          : Colors.amber.shade800,
+                    ),
+                    title: Text(
+                      poderConcedido.nome,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        decoration: p.punicaoDivinaAtiva
+                            ? TextDecoration.lineThrough
+                            : null,
+                      ),
+                    ),
+                    subtitle: Text(poderConcedido.descricao),
+                    trailing: p.punicaoDivinaAtiva
+                        ? null
+                        : BotaoAtivarPoderPM(
+                            nomePoder: poderConcedido.nome,
+                            cubit: cubit,
+                          ),
+                  ),
+                ),
+              ),
+          ],
+
+          const Divider(height: 28),
+
+          // --- BLOCO 2: CLASSE E PODERES ESCOLHIDOS ---
+          if (classe != null) ...[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Classe: ${classe.nome}',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w900,
+                    fontSize: 16,
+                    color: Color(0xFFD32F2F),
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 3,
+                  ),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFD32F2F),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Text(
+                    'Nível $nivel',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 11,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 6),
+            if (classeDoPersonagem?.caminhoEscolhido != null) ...[
+              Card(
+                color: Colors.amber.shade50,
+                margin: const EdgeInsets.only(bottom: 8),
+                child: ListTile(
+                  leading: const Icon(Icons.star, color: Colors.amber),
+                  title: Text(
+                    'Caminho: ${classeDoPersonagem!.caminhoEscolhido!.nome}',
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Text(
+                    classeDoPersonagem.caminhoEscolhido!.descricao,
+                  ),
+                  trailing: classe.caminhosParaNivel(nivel).length > 1
+                      ? IconButton(
+                          icon: const Icon(
+                            Icons.edit,
+                            size: 18,
+                            color: Colors.brown,
+                          ),
+                          tooltip: 'Alterar caminho',
+                          onPressed: () => _mostrarModalEscolhaCaminho(
+                            context,
+                            cubit,
+                            classeDoPersonagem,
+                            classe.caminhosParaNivel(nivel),
+                          ),
+                        )
+                      : null,
+                ),
+              ),
+            ] else if (classeDoPersonagem != null &&
+                classe.caminhosParaNivel(nivel).isNotEmpty) ...[
+              Card(
+                color: Colors.red.shade50,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  side: BorderSide(color: Colors.red.shade300),
+                ),
+                margin: const EdgeInsets.only(bottom: 8),
+                child: ListTile(
+                  leading: const Icon(Icons.stars, color: Color(0xFFD32F2F)),
+                  title: Text(
+                    classe.idClasse == 'cavaleiro'
+                        ? 'Caminho do Cavaleiro (5º Nível)'
+                        : 'Especialização / Caminho Disponível',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFFD32F2F),
+                    ),
+                  ),
+                  subtitle: const Text('Toque para escolher seu caminho!'),
+                  trailing: const Icon(
+                    Icons.chevron_right,
+                    color: Color(0xFFD32F2F),
+                  ),
+                  onTap: () => _mostrarModalEscolhaCaminho(
+                    context,
+                    cubit,
+                    classeDoPersonagem,
+                    classe.caminhosParaNivel(nivel),
+                  ),
+                ),
+              ),
+            ],
+            ...classe.habilidadesFixas.entries.map(
+              (e) {
+                final consomePM = RegExp(r'gastar\s+\d+\s+PM', caseSensitive: false).hasMatch(e.value);
+                return Card(
+                  margin: const EdgeInsets.only(bottom: 8),
+                  child: Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      e.key,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Color(0xFFD32F2F),
+                                      ),
+                                    ),
+                                  ),
+                                  if (!consomePM)
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 6,
+                                        vertical: 2,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: const Color(0xFFF1F5F9),
+                                        borderRadius: BorderRadius.circular(6),
+                                        border: Border.all(
+                                          color: const Color(0xFFCBD5E1),
+                                        ),
+                                      ),
+                                      child: const Text(
+                                        'Passiva',
+                                        style: TextStyle(
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.w700,
+                                          color: Color(0xFF64748B),
+                                        ),
+                                      ),
+                                    ),
+                                ],
+                              ),
+                              const SizedBox(height: 4),
+                              Text(e.value, style: const TextStyle(fontSize: 13)),
+                            ],
+                          ),
+                        ),
+                        if (consomePM) ...[
+                          const SizedBox(width: 8),
+                          BotaoAtivarPoderPM(nomePoder: e.key, cubit: cubit),
+                        ],
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+            if (p.temPoderFormaSelvagem) ...[
+              _buildCardFormaSelvagem(context, cubit),
+            ],
+            if (p.temPoderCompanheiroAnimal) ...[
+              _buildCardCompanheiroAnimal(context, cubit),
+            ],
+            if (p.temMontariaSagrada) ...[
+              _buildCardMontariaSagrada(context, cubit),
+            ],
+            if (classeDoPersonagem != null) ...[
+              const SizedBox(height: 10),
+              Row(
+                children: [
+                  const Expanded(
+                    child: Text(
+                      'Poderes de Classe Escolhidos:',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ),
+                  TextButton.icon(
+                    onPressed: () => _abrirSelecaoPoderes(context, cubit),
+                    icon: Icon(
+                      classeDoPersonagem.temPoderPendente
+                          ? Icons.add_circle
+                          : Icons.tune,
+                      size: 18,
+                    ),
+                    label: Text(
+                      classeDoPersonagem.temPoderPendente
+                          ? 'Escolher (${classeDoPersonagem.poderesPendentes})'
+                          : 'Gerenciar',
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    style: TextButton.styleFrom(
+                      foregroundColor: classeDoPersonagem.temPoderPendente
+                          ? const Color(0xFFD32F2F)
+                          : Colors.blueGrey,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 4),
+              if (classeDoPersonagem.poderesEscolhidos.isEmpty)
+                Card(
+                  margin: const EdgeInsets.only(bottom: 8),
+                  color: Colors.amber.shade50,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    side: BorderSide(color: Colors.amber.shade300),
+                  ),
+                  child: ListTile(
+                    leading: const Icon(
+                      Icons.info_outline,
+                      color: Colors.amber,
+                    ),
+                    title: Text(
+                      classeDoPersonagem.nivel >= 2
+                          ? 'Nenhum poder de classe escolhido ainda.'
+                          : 'Poderes de classe começam a ser escolhidos no 2º nível.',
+                      style: const TextStyle(fontSize: 13),
+                    ),
+                    onTap: () => _abrirSelecaoPoderes(context, cubit),
+                  ),
+                )
+              else
+                ...classeDoPersonagem.poderesEscolhidos.map(
+                  (poder) => Card(
+                    margin: const EdgeInsets.only(bottom: 8),
+                    child: ListTile(
+                      leading: const Icon(Icons.bolt, color: Color(0xFFD32F2F)),
+                      title: Text(
+                        poder.nome,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      subtitle: Text(poder.descricao),
+                      trailing: BotaoAtivarPoderPM(
+                        nomePoder: poder.nome,
+                        cubit: cubit,
+                      ),
+                    ),
+                  ),
+                ),
+            ],
+          ],
         ],
       ],
     );

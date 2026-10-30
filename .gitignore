@@ -52,3 +52,5 @@ build/
 
 
 AGENTS.md
+graphify-out
+generate_graph_html.py
