@@ -69,75 +69,23 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
     super.dispose();
   }
 
-  void _abrirRoladorGeral() {
-    const dados = [4, 6, 8, 10, 12, 20, 100];
-    showModalBottomSheet<void>(
-      context: context,
-      backgroundColor: Colors.white,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (ctx) => SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text(
-                'Rolador Livre de Dados (T20)',
-                style: TextStyle(fontWeight: FontWeight.w800, fontSize: 18),
-              ),
-              const SizedBox(height: 16),
-              Wrap(
-                spacing: 10,
-                runSpacing: 10,
-                alignment: WrapAlignment.center,
-                children: dados.map((d) {
-                  return ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: const Size(68, 48),
-                      backgroundColor: d == 20
-                          ? const Color(0xFFD32F2F)
-                          : const Color(0xFF1E293B),
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    onPressed: () {
-                      Navigator.pop(ctx);
-                      mostrarDialogoRolagemDado(
-                        context,
-                        lados: d,
-                        mod: 0,
-                        rotulo: 'Rolagem 1d$d',
-                      );
-                    },
-                    child: Text(
-                      'd$d',
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w800,
-                        fontSize: 15,
-                      ),
-                    ),
-                  );
-                }).toList(),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
   Future<void> _editarIdentidadeCabecalho(FichaCubit cubit) async {
     final p = cubit.personagem;
+    final resumoClasses = p.classes.isNotEmpty
+        ? p.classes
+              .map((c) => '${c.classeDefinicao.nome} ${c.nivel}')
+              .join(' / ')
+        : 'Sem Classe';
     await showDialog<void>(
       context: context,
       builder: (_) => _DialogoIdentidadeTopo(
         nomeInicial: p.nome,
         alinhamentoInicial: p.alinhamento,
         idadeInicial: p.idade,
+        raca: p.raca?.nome ?? 'Sem Raça',
+        origem: p.origem?.nome ?? 'Sem Origem',
+        classes: resumoClasses,
+        divindade: p.divindade?.nome ?? 'Nenhuma',
         onSalvar: (nome, alinhamento, idade) => cubit
             .atualizarCabecalhoIdentidade(
               nome: nome,
@@ -342,6 +290,8 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
               .join(' / ')
         : 'Sem Classe';
     final racaNome = p.raca?.nome ?? 'Sem Raça';
+    final origemNome = p.origem?.nome ?? 'Sem Origem';
+    final divindadeNome = p.divindade?.nome ?? 'Nenhuma';
     final nivel = p.nivelPersonagem > 0 ? p.nivelPersonagem : 1;
     final modIniciativa = p.getValorPericia('INICIATIVA');
 
@@ -359,57 +309,54 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Retrato circular
+              // Retrato circular do personagem
               GestureDetector(
                 onTap: () => _abrirOpcoesFoto(cubit),
                 child: Container(
-                  width: 60,
-                  height: 60,
+                  width: 52,
+                  height: 52,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.white,
                     border: Border.all(color: Colors.white, width: 2),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.black26,
+                        blurRadius: 4,
+                        offset: Offset(0, 2),
+                      ),
+                    ],
                   ),
                   child: ClipOval(
                     child: temFoto
                         ? Image.file(
                             File(p.caminhoFoto!),
                             fit: BoxFit.cover,
-                            width: 60,
-                            height: 60,
-                            cacheWidth: 180,
-                            cacheHeight: 180,
+                            width: 52,
+                            height: 52,
+                            cacheWidth: 160,
+                            cacheHeight: 160,
                             errorBuilder: (_, _, _) => const Icon(
                               Icons.account_circle,
-                              size: 56,
+                              size: 48,
                               color: Colors.grey,
                             ),
                           )
                         : const Icon(
                             Icons.account_circle,
-                            size: 56,
+                            size: 48,
                             color: Colors.grey,
                           ),
                   ),
                 ),
               ),
-              const SizedBox(width: 12),
+              const SizedBox(width: 10),
 
-              // Identidade, Alinhamento & Idade no topo e Iniciativa em 1 toque
+              // Alinhamento, Idade, Iniciativa e Nível
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      '$racaNome • $resumoClasses',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 12.5,
-                        fontWeight: FontWeight.w800,
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    const SizedBox(height: 3),
                     // Alinhamento e Idade no topo da tela (clicável para editar)
                     InkWell(
                       key: const Key('topo_alinhamento_idade'),
@@ -431,7 +378,7 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
                                 '${p.alinhamento} • ${p.idade} anos',
                                 style: const TextStyle(
                                   color: Colors.white,
-                                  fontSize: 11.5,
+                                  fontSize: 12,
                                   fontWeight: FontWeight.w600,
                                 ),
                                 overflow: TextOverflow.ellipsis,
@@ -447,7 +394,7 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
                         ),
                       ),
                     ),
-                    const SizedBox(height: 4),
+                    const SizedBox(height: 3),
                     Wrap(
                       spacing: 8,
                       runSpacing: 4,
@@ -470,12 +417,12 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
                               ),
                               child: ConstrainedBox(
                                 constraints: const BoxConstraints(
-                                  minHeight: 34,
+                                  minHeight: 30,
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
-                                    horizontal: 9,
-                                    vertical: 5,
+                                    horizontal: 8,
+                                    vertical: 4,
                                   ),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.min,
@@ -517,10 +464,10 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
                               InkWell(
                                 onTap: () => cubit.alterarNivel(-1),
                                 child: const Padding(
-                                  padding: EdgeInsets.all(4),
+                                  padding: EdgeInsets.all(3),
                                   child: Icon(
                                     Icons.remove,
-                                    size: 14,
+                                    size: 13,
                                     color: Colors.white,
                                   ),
                                 ),
@@ -541,10 +488,10 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
                               InkWell(
                                 onTap: () => cubit.alterarNivel(1),
                                 child: const Padding(
-                                  padding: EdgeInsets.all(4),
+                                  padding: EdgeInsets.all(3),
                                   child: Icon(
                                     Icons.add,
-                                    size: 14,
+                                    size: 13,
                                     color: Colors.white,
                                   ),
                                 ),
@@ -560,7 +507,50 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
             ],
           ),
 
-          const SizedBox(height: 10),
+          const SizedBox(height: 8),
+
+          // 4 Caixas Oficiais da Ficha Tormenta 20: Raça, Origem, Classe & Nível, Divindade
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 5),
+            decoration: BoxDecoration(
+              color: Colors.black.withValues(alpha: 0.18),
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: Colors.white.withValues(alpha: 0.15)),
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: _buildItemCabecalhoT20(
+                    rotulo: 'RAÇA',
+                    valor: racaNome,
+                  ),
+                ),
+                Container(width: 1, height: 26, color: Colors.white24),
+                Expanded(
+                  child: _buildItemCabecalhoT20(
+                    rotulo: 'ORIGEM',
+                    valor: origemNome,
+                  ),
+                ),
+                Container(width: 1, height: 26, color: Colors.white24),
+                Expanded(
+                  child: _buildItemCabecalhoT20(
+                    rotulo: 'CLASSE & NÍV',
+                    valor: resumoClasses,
+                  ),
+                ),
+                Container(width: 1, height: 26, color: Colors.white24),
+                Expanded(
+                  child: _buildItemCabecalhoT20(
+                    rotulo: 'DIVINDADE',
+                    valor: divindadeNome,
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          const SizedBox(height: 8),
 
           // Barras de PV e PM
           Row(
@@ -595,6 +585,44 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
     );
   }
 
+  Widget _buildItemCabecalhoT20({
+    required String rotulo,
+    required String valor,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 1),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            rotulo,
+            style: TextStyle(
+              fontSize: 8.5,
+              fontWeight: FontWeight.w800,
+              letterSpacing: 0.5,
+              color: Colors.white.withValues(alpha: 0.72),
+            ),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+          const SizedBox(height: 1),
+          Text(
+            valor,
+            style: const TextStyle(
+              fontSize: 11.5,
+              fontWeight: FontWeight.w900,
+              color: Colors.white,
+            ),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     const t20Red = Color(0xFFC62828);
@@ -607,7 +635,7 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
         bottom: false,
         child: Column(
           children: [
-            // Barra Superior enxuta
+            // Barra Superior enxuta com Nome e Ação de Voltar (Sem dado no topo direito)
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
               child: Row(
@@ -627,28 +655,37 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
                   Expanded(
                     child: InkWell(
                       onTap: () => _editarIdentidadeCabecalho(cubit),
-                      child: Text(
-                        p.nome,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w900,
-                          fontSize: 18,
+                      borderRadius: BorderRadius.circular(8),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 6,
+                          vertical: 4,
                         ),
-                        overflow: TextOverflow.ellipsis,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Flexible(
+                              child: Text(
+                                p.nome,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w900,
+                                  fontSize: 19,
+                                  letterSpacing: 0.3,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                            const SizedBox(width: 6),
+                            const Icon(
+                              Icons.edit_outlined,
+                              color: Colors.white70,
+                              size: 15,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  IconButton(
-                    constraints: const BoxConstraints(
-                      minWidth: 44,
-                      minHeight: 44,
-                    ),
-                    icon: const Icon(
-                      Icons.casino_outlined,
-                      color: Colors.white,
-                    ),
-                    tooltip: 'Rolador Livre de Dados',
-                    onPressed: _abrirRoladorGeral,
                   ),
                 ],
               ),
@@ -833,12 +870,20 @@ class _DialogoIdentidadeTopo extends StatefulWidget {
   final String nomeInicial;
   final String alinhamentoInicial;
   final int idadeInicial;
+  final String raca;
+  final String origem;
+  final String classes;
+  final String divindade;
   final void Function(String nome, String alinhamento, int idade) onSalvar;
 
   const _DialogoIdentidadeTopo({
     required this.nomeInicial,
     required this.alinhamentoInicial,
     required this.idadeInicial,
+    required this.raca,
+    required this.origem,
+    required this.classes,
+    required this.divindade,
     required this.onSalvar,
   });
 
@@ -882,12 +927,42 @@ class _DialogoIdentidadeTopoState extends State<_DialogoIdentidadeTopo> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Identidade, Alinhamento & Idade'),
+      title: const Text('Identidade do Personagem'),
       content: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            Container(
+              padding: const EdgeInsets.all(10),
+              margin: const EdgeInsets.only(bottom: 12),
+              decoration: BoxDecoration(
+                color: const Color(0xFFF1F5F9),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: const Color(0xFFE2E8F0)),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '${widget.raca} • ${widget.classes}',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w800,
+                      fontSize: 12.5,
+                      color: Color(0xFF0F172A),
+                    ),
+                  ),
+                  const SizedBox(height: 3),
+                  Text(
+                    'Origem: ${widget.origem} | Divindade: ${widget.divindade}',
+                    style: const TextStyle(
+                      fontSize: 11.5,
+                      color: Color(0xFF64748B),
+                    ),
+                  ),
+                ],
+              ),
+            ),
             TextField(
               controller: _nomeCtrl,
               decoration: const InputDecoration(

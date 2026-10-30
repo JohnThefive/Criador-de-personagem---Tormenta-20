@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../domain/entities/personagem/efeito_temporario.dart';
+import '../../../domain/entities/personagem/personagem.dart';
 import '../../../domain/services/calculo_ficha_service.dart';
 import '../../controllers/ficha_cubit.dart';
 import '../../controllers/ficha_state.dart';
@@ -378,7 +379,12 @@ class AbaGeralView extends StatelessWidget {
         return ListView(
           padding: const EdgeInsets.fromLTRB(12, 12, 12, 28),
           children: [
-            // 1. BLOCO DE DEFESA AMPLIADO + RD PADRÃO COMPACTO
+            // 1. ATRIBUTOS (GATILHO ROLAGEM 1 TOQUE - HORIZONTAIS / DEITADOS ESTILO T20)
+            _buildBarraAtributosHorizontal(context, p),
+
+            const SizedBox(height: 12),
+
+            // 2. BLOCO DE DEFESA AMPLIADO + RD PADRÃO COMPACTO
             IntrinsicHeight(
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -596,96 +602,14 @@ class AbaGeralView extends StatelessWidget {
               ),
             ),
 
+            const SizedBox(height: 12),
+
+            // 3. RESUMO TÁTICO EXPANDIDO (DESLOCAMENTO, PENALIDADE E CARGA)
+            _buildResumoTatico(p),
+
             const SizedBox(height: 14),
 
-            // 2. GRADE DE ATRIBUTOS (1 TOQUE = ROLAR TESTE DE ATRIBUTO)
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text(
-                  'Atributos',
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w800,
-                    color: Color(0xFF0F172A),
-                  ),
-                ),
-                Flexible(
-                  child: Text(
-                    'Toque para rolar 1d20 + Atributo',
-                    style: TextStyle(fontSize: 11.5, color: Color(0xFF64748B)),
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 8),
-            GridView.count(
-              crossAxisCount: 3,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              mainAxisSpacing: 8,
-              crossAxisSpacing: 8,
-              childAspectRatio: 1.85,
-              children: CalculoFichaService.ordemAtributos.map((sigla) {
-                final valor = p.getValorFinal(sigla);
-                final textoValor = valor >= 0 ? '+$valor' : '$valor';
-                return Semantics(
-                  button: true,
-                  label: 'Rolar atributo $sigla $textoValor',
-                  child: Material(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
-                    child: InkWell(
-                      key: Key('card_atributo_$sigla'),
-                      borderRadius: BorderRadius.circular(12),
-                      onTap: () => mostrarDialogoRolagemAtributo(
-                        context,
-                        personagem: p,
-                        siglaAtributo: sigla,
-                      ),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: const Color(0xFFE2E8F0)),
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 10,
-                          vertical: 6,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              sigla,
-                              style: const TextStyle(
-                                fontSize: 12.5,
-                                fontWeight: FontWeight.w900,
-                                color: Color(0xFF64748B),
-                              ),
-                            ),
-                            Text(
-                              textoValor,
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w900,
-                                color: valor < 0
-                                    ? const Color(0xFFB91C1C)
-                                    : const Color(0xFF0F172A),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                );
-              }).toList(),
-            ),
-
-            const SizedBox(height: 18),
-
-            // 3. EFEITOS TEMPORÁRIOS (BUFFS, DEBUFFS, CONDIÇÕES, PERDA DE VIDA E NOTAS)
+            // 4. EFEITOS TEMPORÁRIOS (BUFFS, DEBUFFS, CONDIÇÕES, PERDA DE VIDA E NOTAS)
             Container(
               padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
@@ -911,6 +835,249 @@ class AbaGeralView extends StatelessWidget {
           ],
         );
       },
+    );
+  }
+
+  Widget _buildBarraAtributosHorizontal(BuildContext context, Personagem p) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: const [
+            Text(
+              'Atributos',
+              style: TextStyle(
+                fontSize: 14.5,
+                fontWeight: FontWeight.w800,
+                color: Color(0xFF0F172A),
+              ),
+            ),
+            Flexible(
+              child: Text(
+                'Toque para rolar 1d20 + Atributo',
+                style: TextStyle(fontSize: 11, color: Color(0xFF64748B)),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 6),
+        Row(
+          children: CalculoFichaService.ordemAtributos
+              .asMap()
+              .entries
+              .map((entry) {
+                final idx = entry.key;
+                final sigla = entry.value;
+                final valor = p.getValorFinal(sigla);
+                final textoValor = valor >= 0 ? '+$valor' : '$valor';
+
+                return Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.only(left: idx == 0 ? 0 : 4),
+                    child: Semantics(
+                      button: true,
+                      label: 'Rolar atributo $sigla $textoValor',
+                      child: Material(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(8),
+                        elevation: 1,
+                        shadowColor: Colors.black12,
+                        child: InkWell(
+                          key: Key('card_atributo_$sigla'),
+                          borderRadius: BorderRadius.circular(8),
+                          onTap: () => mostrarDialogoRolagemAtributo(
+                            context,
+                            personagem: p,
+                            siglaAtributo: sigla,
+                          ),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                color: const Color(0xFFCBD5E1),
+                                width: 1,
+                              ),
+                            ),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                // Faixa vermelha Tormenta 20
+                                Container(
+                                  width: double.infinity,
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 2.5,
+                                  ),
+                                  decoration: const BoxDecoration(
+                                    color: Color(0xFFC62828),
+                                    borderRadius: BorderRadius.vertical(
+                                      top: Radius.circular(7),
+                                    ),
+                                  ),
+                                  child: Text(
+                                    sigla,
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                      fontSize: 10.5,
+                                      fontWeight: FontWeight.w900,
+                                      color: Colors.white,
+                                      letterSpacing: 0.5,
+                                    ),
+                                  ),
+                                ),
+                                // Valor do modificador
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 5,
+                                  ),
+                                  child: FittedBox(
+                                    fit: BoxFit.scaleDown,
+                                    child: Text(
+                                      textoValor,
+                                      style: TextStyle(
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w900,
+                                        color: valor < 0
+                                            ? const Color(0xFFB91C1C)
+                                            : const Color(0xFF0F172A),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              })
+              .toList(),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildResumoTatico(Personagem p) {
+    final penalidade = p.penalidadeArmaduraTotal;
+    final estaSobrecarregado = p.estaSobrecarregado;
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
+      ),
+      child: Row(
+        children: [
+          // Deslocamento
+          Expanded(
+            child: _buildItemTatico(
+              icone: Icons.directions_run_rounded,
+              corIcone: const Color(0xFF0284C7),
+              rotulo: 'DESLOCAMENTO',
+              valor: '${p.deslocamentoEfetivoMetros}m',
+              subtitulo: p.deslocamentoEfetivoMetros != p.deslocamentoBaseMetros
+                  ? 'Base ${p.deslocamentoBaseMetros}m'
+                  : null,
+            ),
+          ),
+          Container(width: 1, height: 28, color: const Color(0xFFE2E8F0)),
+          // Penalidade de Armadura
+          Expanded(
+            child: _buildItemTatico(
+              icone: Icons.shield_outlined,
+              corIcone: penalidade < 0
+                  ? const Color(0xFFDC2626)
+                  : const Color(0xFF475569),
+              rotulo: 'PENALIDADE',
+              valor: penalidade == 0 ? '0' : '$penalidade',
+              corValor: penalidade < 0 ? const Color(0xFFDC2626) : null,
+              subtitulo: 'Armadura/Escudo',
+            ),
+          ),
+          Container(width: 1, height: 28, color: const Color(0xFFE2E8F0)),
+          // Capacidade de Carga
+          Expanded(
+            child: _buildItemTatico(
+              icone: Icons.fitness_center_rounded,
+              corIcone: estaSobrecarregado
+                  ? const Color(0xFFDC2626)
+                  : const Color(0xFF16A34A),
+              rotulo: 'CARGA',
+              valor: '${p.cargaAtual}/${p.limiteCarga}',
+              corValor: estaSobrecarregado ? const Color(0xFFDC2626) : null,
+              subtitulo: estaSobrecarregado ? 'Sobrepeso!' : 'Espaços',
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildItemTatico({
+    required IconData icone,
+    required Color corIcone,
+    required String rotulo,
+    required String valor,
+    Color? corValor,
+    String? subtitulo,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 4),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(icone, size: 13, color: corIcone),
+              const SizedBox(width: 3),
+              Flexible(
+                child: Text(
+                  rotulo,
+                  style: const TextStyle(
+                    fontSize: 8.5,
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: 0.4,
+                    color: Color(0xFF64748B),
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 1),
+          Text(
+            valor,
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w900,
+              color: corValor ?? const Color(0xFF0F172A),
+            ),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+          if (subtitulo != null)
+            Text(
+              subtitulo,
+              style: TextStyle(
+                fontSize: 8.5,
+                fontWeight: FontWeight.w600,
+                color: subtitulo.contains('!')
+                    ? const Color(0xFFDC2626)
+                    : const Color(0xFF94A3B8),
+              ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+        ],
+      ),
     );
   }
 }
