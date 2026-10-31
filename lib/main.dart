@@ -60,6 +60,30 @@ class T20App extends StatelessWidget {
           useMaterial3: true,
           // Define a cor de fundo padrão do Scaffold para as telas existentes
           scaffoldBackgroundColor: const Color(0xFFD32F2F),
+          cardTheme: CardThemeData(
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+          bottomSheetTheme: const BottomSheetThemeData(
+            showDragHandle: true,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+            ),
+          ),
+          inputDecorationTheme: InputDecorationTheme(
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: const BorderSide(
+                color: Color(0xFFD32F2F),
+                width: 1.5,
+              ),
+            ),
+          ),
         ),
 
         // home: define qual é a PRIMEIRA tela que o usuário vê.

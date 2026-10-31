@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../domain/entities/equipamento/arma.dart';
@@ -13,20 +14,22 @@ import 'ficha_state.dart';
 
 class FichaCubit extends Cubit<FichaState> {
   final IPersonagemRepository _repository;
+  final Duration _debounceDuration;
+  Timer? _debounceTimer;
+  Personagem? _personagemPendentePersistir;
+  Completer<void>? _salvarCompleter;
 
   FichaCubit({
     required Personagem personagemInicial,
     IPersonagemRepository? repository,
+    Duration debounceDuration = const Duration(milliseconds: 250),
   }) : _repository = repository ?? const PersonagemStorageService(),
+       _debounceDuration = debounceDuration,
        super(FichaState(personagem: personagemInicial));
 
   Personagem get personagem => state.personagem;
 
-  void limparMensagens() {
-    emit(state.copyWith(anularErro: true, anularSucesso: true));
-  }
-
-  /// Atualiza o personagem no estado e persiste automaticamente no repositório (sem botão salvar)
+  /// Atualiza o personagem no estado e persiste automaticamente no repositório (com debounce)
   Future<void> atualizarPersonagem(
     Personagem novo, {
     bool salvar = true,
@@ -46,11 +49,54 @@ class FichaCubit extends Cubit<FichaState> {
   }
 
   Future<void> _persistir(Personagem p) async {
+    _personagemPendentePersistir = p;
+
+    if (_debounceDuration == Duration.zero) {
+      await _executarPersistenciaImediata();
+      return;
+    }
+
+    _debounceTimer?.cancel();
+    _salvarCompleter ??= Completer<void>();
+    _debounceTimer = Timer(_debounceDuration, () {
+      _executarPersistenciaImediata();
+    });
+  }
+
+  Future<void> _executarPersistenciaImediata() async {
+    final p = _personagemPendentePersistir;
+    _personagemPendentePersistir = null;
+    _debounceTimer?.cancel();
+    _debounceTimer = null;
+
+    final completer = _salvarCompleter;
+    _salvarCompleter = null;
+
+    if (p == null) {
+      completer?.complete();
+      return;
+    }
+
     try {
       await _repository.salvar(p);
+      completer?.complete();
     } catch (e) {
       emit(state.copyWith(mensagemErro: 'Erro ao salvar alterações: $e'));
+      completer?.completeError(e);
     }
+  }
+
+  /// Força a gravação imediata no repositório caso haja alguma alteração pendente de debounce
+  Future<void> flush() async {
+    if (_personagemPendentePersistir != null) {
+      await _executarPersistenciaImediata();
+    }
+  }
+
+  @override
+  Future<void> close() async {
+    await flush();
+    return super.close();
   }
 
   /// Altera o nível do personagem (+1 ou -1) dentro do limite de 1 a 20
@@ -169,32 +215,22 @@ class FichaCubit extends Cubit<FichaState> {
 
   /// Realiza descanso normal (recupera Nível + CON em PV e Nível em PM)
   Future<void> descansoNormal() async {
-    final con = state.personagem.getValorFinal('CON');
-    final nivel = state.personagem.nivelPersonagem > 0
-        ? state.personagem.nivelPersonagem
-        : 1;
-    final curaNormalPV = max(1, nivel + con);
-    final curaNormalPM = max(1, nivel);
-
-    var atualizado = state.personagem.curarPV(curaNormalPV);
+    var atualizado = state.personagem
+        .curarPV(state.personagem.curaDescansoNormalPV);
     if (!state.personagem.punicaoDivinaAtiva) {
-      atualizado = atualizado.recuperarPM(curaNormalPM);
+      atualizado = atualizado
+          .recuperarPM(state.personagem.curaDescansoNormalPM);
     }
     await atualizarPersonagem(atualizado);
   }
 
   /// Realiza descanso confortável (o dobro do descanso normal)
   Future<void> descansoConfortavel() async {
-    final con = state.personagem.getValorFinal('CON');
-    final nivel = state.personagem.nivelPersonagem > 0
-        ? state.personagem.nivelPersonagem
-        : 1;
-    final curaNormalPV = max(1, nivel + con) * 2;
-    final curaNormalPM = max(1, nivel) * 2;
-
-    var atualizado = state.personagem.curarPV(curaNormalPV);
+    var atualizado = state.personagem
+        .curarPV(state.personagem.curaDescansoNormalPV * 2);
     if (!state.personagem.punicaoDivinaAtiva) {
-      atualizado = atualizado.recuperarPM(curaNormalPM);
+      atualizado = atualizado
+          .recuperarPM(state.personagem.curaDescansoNormalPM * 2);
     }
     await atualizarPersonagem(atualizado);
   }
@@ -257,12 +293,6 @@ class FichaCubit extends Cubit<FichaState> {
     );
   }
 
-  /// Incrementa ou decrementa o campo "Outros" de uma perícia
-  Future<void> ajustarOutrosBonusPericia(String periciaKey, int delta) async {
-    final atual = state.personagem.obterOutrosBonusPericia(periciaKey);
-    await definirOutrosBonusPericia(periciaKey, atual + delta);
-  }
-
   // --- EFEITOS TEMPORÁRIOS (BUFFS, DEBUFFS, CONDIÇÕES E NOTAS) ---
 
   Future<void> adicionarEfeitoTemporario(EfeitoTemporario efeito) async {
@@ -321,10 +351,6 @@ class FichaCubit extends Cubit<FichaState> {
     );
   }
 
-  Future<void> ajustarOutrosBonusDefesa(int delta) async {
-    await definirOutrosBonusDefesa(state.personagem.outrosBonusDefesa + delta);
-  }
-
   Future<void> definirRdPadrao(int valor) async {
     await atualizarPersonagem(
       state.personagem.copyWith(rdPadrao: valor.clamp(0, 99)),
@@ -372,12 +398,6 @@ class FichaCubit extends Cubit<FichaState> {
   Future<void> definirOutrosBonusCDMagia(int valor) async {
     await atualizarPersonagem(
       state.personagem.copyWith(outrosBonusCDMagia: valor.clamp(-50, 99)),
-    );
-  }
-
-  Future<void> ajustarOutrosBonusCDMagia(int delta) async {
-    await definirOutrosBonusCDMagia(
-      state.personagem.outrosBonusCDMagia + delta,
     );
   }
 

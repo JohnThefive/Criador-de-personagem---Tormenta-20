@@ -208,9 +208,10 @@ class CombateEngine {
 
   int _rolarDado(int faces) => _random.nextInt(faces) + 1;
 
+  static final _regexDanoArma = RegExp(r'^(\d+)[dD](\d+)');
+
   _DadosArmaInfo _extrairDadosArma(String danoStr) {
-    final exp = RegExp(r'^(\d+)[dD](\d+)');
-    final match = exp.firstMatch(danoStr.trim());
+    final match = _regexDanoArma.firstMatch(danoStr.trim());
     if (match != null) {
       return _DadosArmaInfo(
         quantidade: int.parse(match.group(1)!),

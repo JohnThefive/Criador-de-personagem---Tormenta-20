@@ -372,6 +372,7 @@ class CalculoFichaService {
     Personagem p,
     String periciaKey, {
     Pericia? periciaObjeto,
+    int? penalidadeArmaduraCustom,
   }) {
     final pericia = periciaObjeto ?? BancoDePericias.getByKey(periciaKey);
     final metadeNivel = (p.nivelPersonagem / 2).floor();
@@ -383,13 +384,14 @@ class CalculoFichaService {
     final bonusOutros = p.obterOutrosBonusPericia(pericia.key);
     final bonusEfeitos = p.bonusEfeitosPericias;
 
-    final sofrePenalidade =
-        pericia.penalidadeArmadura ||
-        (p.usaProtecaoSemProficiencia &&
-            (pericia.atributoChave == 'FOR' || pericia.atributoChave == 'DES'));
-    final penalidadeAplicada = sofrePenalidade ? p.penalidadeArmaduraTotal : 0;
+    final sofrePenalidade = p.periciaSofrePenalidade(pericia);
+    final penalidade = penalidadeArmaduraCustom ?? p.penalidadeArmaduraTotal;
+    final penalidadeAplicada = sofrePenalidade ? penalidade : 0;
 
-    final total = p.getValorPericia(pericia.key);
+    final total = p.getValorPericia(
+      pericia.key,
+      penalidadeArmaduraCustom: penalidade,
+    );
     final bloqueada = pericia.somenteTreinada && !ehTreinada;
 
     return ComposicaoPericia(
@@ -415,20 +417,32 @@ class CalculoFichaService {
     List<Pericia>? catalogoCustom,
     bool apenasTreinadas = false,
     String filtroBusca = '',
+    int? penalidadeArmaduraCustom,
   }) {
     final catalogo = catalogoCustom ?? BancoDePericias.todas;
     final termo = _normalizarOrdenacao(filtroBusca);
+    final penalidadeArmadura =
+        penalidadeArmaduraCustom ?? p.penalidadeArmaduraTotal;
+
+    final cacheNorm = <String, String>{};
+    String norm(String s) =>
+        cacheNorm.putIfAbsent(s, () => _normalizarOrdenacao(s));
 
     final grupos = <GrupoPericiasAtributo>[];
     for (final sigla in ordemAtributos) {
       final periciasDoAtributo = catalogo
           .where((per) => per.atributoChave.toUpperCase() == sigla)
-          .map((per) => detalharPericia(p, per.key, periciaObjeto: per))
+          .map((per) => detalharPericia(
+                p,
+                per.key,
+                periciaObjeto: per,
+                penalidadeArmaduraCustom: penalidadeArmadura,
+              ))
           .where((comp) {
             if (apenasTreinadas && !comp.ehTreinada) return false;
             if (termo.isNotEmpty) {
-              final nomeNorm = _normalizarOrdenacao(comp.pericia.label);
-              final keyNorm = _normalizarOrdenacao(comp.pericia.key);
+              final nomeNorm = norm(comp.pericia.label);
+              final keyNorm = norm(comp.pericia.key);
               return nomeNorm.contains(termo) || keyNorm.contains(termo);
             }
             return true;
@@ -436,9 +450,7 @@ class CalculoFichaService {
           .toList();
 
       periciasDoAtributo.sort(
-        (a, b) => _normalizarOrdenacao(
-          a.pericia.label,
-        ).compareTo(_normalizarOrdenacao(b.pericia.label)),
+        (a, b) => norm(a.pericia.label).compareTo(norm(b.pericia.label)),
       );
 
       if (periciasDoAtributo.isNotEmpty) {
@@ -504,43 +516,10 @@ class CalculoFichaService {
     );
   }
 
-  /// Rolador genérico para dados livres (d4, d6, d8, d10, d12, d20, d100).
-  static ResultadoRolagemDado rolarDadosLivres({
-    required int quantidadeDados,
-    required int facesDado,
-    int modificador = 0,
-    String? tituloCustom,
-    Random? random,
-  }) {
-    final rng = random ?? Random();
-    final qtd = quantidadeDados.clamp(1, 30);
-    final valores = List.generate(qtd, (_) => rng.nextInt(facesDado) + 1);
-
-    return ResultadoRolagemDado(
-      titulo: tituloCustom ?? '${qtd}d$facesDado',
-      subtitulo: 'Rolagem Livre',
-      quantidadeDados: qtd,
-      facesDado: facesDado,
-      valoresDados: valores,
-      parcelasFixas: modificador != 0
-          ? [ParcelaCalculo(rotulo: 'Bônus', valor: modificador)]
-          : const [],
-    );
-  }
-
   /// Decompõe a Defesa e a Redução de Dano Padrão do personagem.
   static ComposicaoDefesa detalharDefesaERd(Personagem p) {
     final modDesOrig = p.getValorFinal('DES');
     final modDesAplicado = p.usaArmaduraPesada ? 0 : modDesOrig;
-    final bonusForma =
-        (p.estaEmFormaSelvagem &&
-            p.formaSelvagemAtiva!.modificadores.containsKey('DEFESA'))
-        ? p.formaSelvagemAtiva!.modificadores['DEFESA']!
-        : 0;
-    final bonusCompanheiro =
-        (p.temPoderCompanheiroAnimal && p.tipoCompanheiroAnimal == 'GUARDIAO')
-        ? (p.nivelDruida >= 12 ? 3 : (p.nivelDruida >= 6 ? 2 : 1))
-        : 0;
     final rdForma = p.estaEmFormaSelvagem ? p.formaSelvagemAtiva!.rd : 0;
 
     return ComposicaoDefesa(
@@ -552,8 +531,8 @@ class CalculoFichaService {
       bonusEscudo: p.bonusEscudo,
       nomeEscudo: p.escudoEquipado?.nome,
       bonusRacialDefesa: p.bonusRacialDefesa,
-      bonusFormaSelvagem: bonusForma,
-      bonusCompanheiro: bonusCompanheiro,
+      bonusFormaSelvagem: p.bonusFormaDefesa,
+      bonusCompanheiro: p.bonusCompanheiroDefesa,
       outrosBonusDefesa: p.outrosBonusDefesa,
       bonusEfeitos: p.bonusEfeitosDefesa,
       defesaFinal: p.defesaFinal,
@@ -818,15 +797,21 @@ class CalculoFichaService {
     );
   }
 
+  static final _regexA = RegExp(r'[áàâãä]');
+  static final _regexE = RegExp(r'[éèêë]');
+  static final _regexI = RegExp(r'[íìîï]');
+  static final _regexO = RegExp(r'[óòôõö]');
+  static final _regexU = RegExp(r'[úùûü]');
+
   static String _normalizarOrdenacao(String texto) {
     return texto
         .toLowerCase()
         .trim()
-        .replaceAll(RegExp(r'[áàâãä]'), 'a')
-        .replaceAll(RegExp(r'[éèêë]'), 'e')
-        .replaceAll(RegExp(r'[íìîï]'), 'i')
-        .replaceAll(RegExp(r'[óòôõö]'), 'o')
-        .replaceAll(RegExp(r'[úùûü]'), 'u')
+        .replaceAll(_regexA, 'a')
+        .replaceAll(_regexE, 'e')
+        .replaceAll(_regexI, 'i')
+        .replaceAll(_regexO, 'o')
+        .replaceAll(_regexU, 'u')
         .replaceAll('ç', 'c');
   }
 }

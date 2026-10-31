@@ -3,20 +3,17 @@ import '../../domain/entities/personagem/personagem.dart';
 
 class FichaState extends Equatable {
   final Personagem personagem;
-  final bool salvando;
   final String? mensagemErro;
   final String? mensagemSucesso;
 
   const FichaState({
     required this.personagem,
-    this.salvando = false,
     this.mensagemErro,
     this.mensagemSucesso,
   });
 
   FichaState copyWith({
     Personagem? personagem,
-    bool? salvando,
     String? mensagemErro,
     String? mensagemSucesso,
     bool anularErro = false,
@@ -24,7 +21,6 @@ class FichaState extends Equatable {
   }) {
     return FichaState(
       personagem: personagem ?? this.personagem,
-      salvando: salvando ?? this.salvando,
       mensagemErro: anularErro ? null : (mensagemErro ?? this.mensagemErro),
       mensagemSucesso: anularSucesso
           ? null
@@ -35,7 +31,6 @@ class FichaState extends Equatable {
   @override
   List<Object?> get props => [
     personagem,
-    salvando,
     mensagemErro,
     mensagemSucesso,
   ];

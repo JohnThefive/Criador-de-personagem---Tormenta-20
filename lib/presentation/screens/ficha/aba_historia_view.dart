@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../controllers/ficha_cubit.dart';
 import '../../controllers/ficha_state.dart';
+import '../../widgets/card_metrica_clicavel.dart';
 import 'dialogos_ficha.dart';
 
 class AbaHistoriaView extends StatefulWidget {
@@ -86,6 +87,16 @@ class _AbaHistoriaViewState extends State<AbaHistoriaView> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<FichaCubit, FichaState>(
+      buildWhen: (prev, curr) {
+        final p1 = prev.personagem;
+        final p2 = curr.personagem;
+        return p1.anotacoes != p2.anotacoes ||
+            p1.descricaoAparencia != p2.descricaoAparencia ||
+            p1.tamanho != p2.tamanho ||
+            p1.altura != p2.altura ||
+            p1.peso != p2.peso ||
+            p1.caminhoFoto != p2.caminhoFoto;
+      },
       builder: (context, state) {
         final cubit = context.read<FichaCubit>();
         final p = state.personagem;
@@ -187,9 +198,11 @@ class _AbaHistoriaViewState extends State<AbaHistoriaView> {
                   Row(
                     children: [
                       Expanded(
-                        child: _ChipDadoFisico(
+                        child: CardMetricaClicavel(
                           rotulo: 'Tamanho',
                           valor: p.tamanho,
+                          tamanhoRotulo: 10.5,
+                          tamanhoValor: 13,
                           onTap: () => _editarCampoFisico(
                             context,
                             cubit,
@@ -202,9 +215,11 @@ class _AbaHistoriaViewState extends State<AbaHistoriaView> {
                       ),
                       const SizedBox(width: 8),
                       Expanded(
-                        child: _ChipDadoFisico(
+                        child: CardMetricaClicavel(
                           rotulo: 'Altura',
                           valor: p.altura,
+                          tamanhoRotulo: 10.5,
+                          tamanhoValor: 13,
                           onTap: () => _editarCampoFisico(
                             context,
                             cubit,
@@ -217,9 +232,11 @@ class _AbaHistoriaViewState extends State<AbaHistoriaView> {
                       ),
                       const SizedBox(width: 8),
                       Expanded(
-                        child: _ChipDadoFisico(
+                        child: CardMetricaClicavel(
                           rotulo: 'Peso',
                           valor: p.peso,
+                          tamanhoRotulo: 10.5,
+                          tamanhoValor: 13,
                           onTap: () => _editarCampoFisico(
                             context,
                             cubit,
@@ -269,60 +286,6 @@ class _AbaHistoriaViewState extends State<AbaHistoriaView> {
           ],
         );
       },
-    );
-  }
-}
-
-class _ChipDadoFisico extends StatelessWidget {
-  final String rotulo;
-  final String valor;
-  final VoidCallback onTap;
-
-  const _ChipDadoFisico({
-    required this.rotulo,
-    required this.valor,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: const Color(0xFFF8FAFC),
-      borderRadius: BorderRadius.circular(10),
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(10),
-        child: Container(
-          constraints: const BoxConstraints(minHeight: 48),
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: const Color(0xFFE2E8F0)),
-          ),
-          child: Column(
-            children: [
-              Text(
-                rotulo,
-                style: const TextStyle(
-                  fontSize: 10.5,
-                  color: Color(0xFF64748B),
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              const SizedBox(height: 2),
-              Text(
-                valor,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w800,
-                  color: Color(0xFF0F172A),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 }

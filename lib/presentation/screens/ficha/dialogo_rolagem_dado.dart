@@ -39,34 +39,11 @@ Future<void> mostrarDialogoRolagemAtributo(
   );
 }
 
-/// Mantido com assinatura compatível para rolagens livres de dados (d4..d100) e legado.
-Future<void> mostrarDialogoRolagemDado(
-  BuildContext context, {
-  required int lados,
-  required int mod,
-  required String rotulo,
-}) {
-  return showDialog<void>(
-    context: context,
-    builder: (_) => _DialogoRolagemInteligente(
-      gerarRolagem: (modSituacional) => CalculoFichaService.rolarDadosLivres(
-        quantidadeDados: 1,
-        facesDado: lados,
-        modificador: mod,
-        tituloCustom: rotulo,
-      ),
-      permitirSituacional: lados == 20,
-    ),
-  );
-}
-
 class _DialogoRolagemInteligente extends StatefulWidget {
   final ResultadoRolagemDado Function(int modSituacional) gerarRolagem;
-  final bool permitirSituacional;
 
   const _DialogoRolagemInteligente({
     required this.gerarRolagem,
-    this.permitirSituacional = true,
   });
 
   @override
@@ -403,75 +380,73 @@ class _DialogoRolagemInteligenteState
                 ),
               ),
 
-              if (widget.permitirSituacional) ...[
-                const SizedBox(height: 12),
-                Wrap(
-                  alignment: WrapAlignment.spaceBetween,
-                  crossAxisAlignment: WrapCrossAlignment.center,
-                  spacing: 8,
-                  runSpacing: 6,
-                  children: [
-                    const Text(
-                      'Mod. Situacional:',
-                      style: TextStyle(
-                        fontSize: 12.5,
-                        fontWeight: FontWeight.w700,
-                        color: Color(0xFF475569),
-                      ),
+              const SizedBox(height: 12),
+              Wrap(
+                alignment: WrapAlignment.spaceBetween,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                spacing: 8,
+                runSpacing: 6,
+                children: [
+                  const Text(
+                    'Mod. Situacional:',
+                    style: TextStyle(
+                      fontSize: 12.5,
+                      fontWeight: FontWeight.w700,
+                      color: Color(0xFF475569),
                     ),
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        _BotaoAjusteSituacional(
-                          rotulo: '-2',
-                          onTap: () =>
-                              _ajustarSituacional(_modSituacional - 2),
-                        ),
-                        const SizedBox(width: 4),
-                        _BotaoAjusteSituacional(
-                          rotulo: '-1',
-                          onTap: () =>
-                              _ajustarSituacional(_modSituacional - 1),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
-                          child: InkWell(
-                            onTap: () => _ajustarSituacional(0),
-                            borderRadius: BorderRadius.circular(6),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 6,
-                                vertical: 8,
-                              ),
-                              child: Text(
-                                _modSituacional >= 0
-                                    ? '+$_modSituacional'
-                                    : '$_modSituacional',
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.w800,
-                                  fontSize: 14,
-                                  color: Color(0xFF0F172A),
-                                ),
+                  ),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      _BotaoAjusteSituacional(
+                        rotulo: '-2',
+                        onTap: () =>
+                            _ajustarSituacional(_modSituacional - 2),
+                      ),
+                      const SizedBox(width: 4),
+                      _BotaoAjusteSituacional(
+                        rotulo: '-1',
+                        onTap: () =>
+                            _ajustarSituacional(_modSituacional - 1),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: InkWell(
+                          onTap: () => _ajustarSituacional(0),
+                          borderRadius: BorderRadius.circular(6),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 6,
+                              vertical: 8,
+                            ),
+                            child: Text(
+                              _modSituacional >= 0
+                                  ? '+$_modSituacional'
+                                  : '$_modSituacional',
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w800,
+                                fontSize: 14,
+                                color: Color(0xFF0F172A),
                               ),
                             ),
                           ),
                         ),
-                        _BotaoAjusteSituacional(
-                          rotulo: '+1',
-                          onTap: () =>
-                              _ajustarSituacional(_modSituacional + 1),
-                        ),
-                        const SizedBox(width: 4),
-                        _BotaoAjusteSituacional(
-                          rotulo: '+2',
-                          onTap: () =>
-                              _ajustarSituacional(_modSituacional + 2),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
+                      ),
+                      _BotaoAjusteSituacional(
+                        rotulo: '+1',
+                        onTap: () =>
+                            _ajustarSituacional(_modSituacional + 1),
+                      ),
+                      const SizedBox(width: 4),
+                      _BotaoAjusteSituacional(
+                        rotulo: '+2',
+                        onTap: () =>
+                            _ajustarSituacional(_modSituacional + 2),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
 
               const SizedBox(height: 16),
 

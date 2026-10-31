@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:t20_creator/domain/entities/personagem/poder.dart';
 import '../equipamento/arma.dart';
 import '../equipamento/protecao.dart';
@@ -12,6 +13,7 @@ import '../../services/data_services/call_montaria_sagrada.dart';
 import '../../services/regras_carga_service.dart';
 
 import 'atributos.dart';
+import 'pericias.dart';
 import 'raca.dart';
 import 'classe_do_personagem.dart';
 import 'origem.dart';
@@ -434,6 +436,14 @@ class Personagem {
     return copyWith(punicaoDivinaAtiva: false);
   }
 
+  /// Recuperação padrão de descanso (Nível + CON em PV, mínimo 1)
+  int get curaDescansoNormalPV =>
+      max(1, (nivelPersonagem > 0 ? nivelPersonagem : 1) + getValorFinal('CON'));
+
+  /// Recuperação padrão de descanso (Nível em PM, mínimo 1)
+  int get curaDescansoNormalPM =>
+      max(1, nivelPersonagem > 0 ? nivelPersonagem : 1);
+
   // Getters específicos de Druida
   bool get estaEmFormaSelvagem => formaSelvagemAtiva != null;
 
@@ -811,27 +821,29 @@ class Personagem {
   int get bonusEscudo => escudoEquipado?.bonusDefesa ?? 0;
   bool get usaArmaduraPesada => armaduraEquipada?.ehArmaduraPesada ?? false;
 
+  int get bonusFormaDefesa =>
+      (estaEmFormaSelvagem &&
+              formaSelvagemAtiva!.modificadores.containsKey('DEFESA'))
+          ? formaSelvagemAtiva!.modificadores['DEFESA']!
+          : 0;
+
+  int get bonusCompanheiroDefesa =>
+      (temPoderCompanheiroAnimal && tipoCompanheiroAnimal == 'GUARDIAO')
+          ? (nivelDruida >= 12 ? 3 : (nivelDruida >= 6 ? 2 : 1))
+          : 0;
+
   /// Defesa final calculada reativamente:
   /// Defesa = 10 + (usaArmaduraPesada ? 0 : modDES) + bonusArmadura + bonusEscudo + bonusRacial + bonusForma + bonusCompanheiro + outrosBonusDefesa + bonusEfeitosDefesa
   int get defesaFinal {
     final modDes = getValorFinal('DES');
     final modDesAplicado = usaArmaduraPesada ? 0 : modDes;
-    int bonusForma = 0;
-    if (estaEmFormaSelvagem &&
-        formaSelvagemAtiva!.modificadores.containsKey('DEFESA')) {
-      bonusForma = formaSelvagemAtiva!.modificadores['DEFESA']!;
-    }
-    final bonusCompanheiro =
-        (temPoderCompanheiroAnimal && tipoCompanheiroAnimal == 'GUARDIAO')
-        ? (nivelDruida >= 12 ? 3 : (nivelDruida >= 6 ? 2 : 1))
-        : 0;
     return 10 +
         modDesAplicado +
         bonusArmadura +
         bonusEscudo +
         bonusRacialDefesa +
-        bonusForma +
-        bonusCompanheiro +
+        bonusFormaDefesa +
+        bonusCompanheiroDefesa +
         outrosBonusDefesa +
         bonusEfeitosDefesa;
   }
@@ -843,7 +855,9 @@ class Personagem {
   }
 
   /// Penalidade total cumulativa de armadura (armadura + escudo + 2 se sobrecarregado)
-  int get penalidadeArmaduraTotal {
+  late final int penalidadeArmaduraTotal = _calcularPenalidadeArmaduraTotal();
+
+  int _calcularPenalidadeArmaduraTotal() {
     int total =
         (armaduraEquipada?.penalidadeArmadura ?? 0) +
         (escudoEquipado?.penalidadeArmadura ?? 0);
@@ -887,69 +901,59 @@ class Personagem {
     return 2;
   }
 
+  late final Set<String> _periciasFixasClasseUpper = classes
+      .expand(
+        (c) => [
+          ...c.classeDefinicao.periciasFixas.map((p) => p.toUpperCase()),
+          ...c.periciasExclusivasEscolhidas.values.map((p) => p.toUpperCase()),
+        ],
+      )
+      .toSet();
+
+  late final Set<String> _periciasTreinadasTotalUpper = {
+    ...periciasTreinadas.map((p) => p.toUpperCase()),
+    ..._periciasFixasClasseUpper,
+  };
+
+  late final Map<String, int> _outrosBonusUpper = outrosBonusPericias.map(
+    (k, v) => MapEntry(k.toUpperCase(), v),
+  );
+
   /// Verifica se a perícia é concedida de forma fixa ou exclusiva por alguma classe
   bool ehPericiaTreinadaFixaDeClasse(String periciaKey) {
-    final upper = periciaKey.toUpperCase();
-    return classes.any(
-      (c) =>
-          c.classeDefinicao.periciasFixas.any((p) => p.toUpperCase() == upper) ||
-          c.periciasExclusivasEscolhidas.values.any(
-            (p) => p.toUpperCase() == upper,
-          ),
-    );
+    return _periciasFixasClasseUpper.contains(periciaKey.toUpperCase());
   }
 
   /// Verifica se o personagem possui treinamento na perícia (manual ou de classe)
   bool ehPericiaTreinada(String periciaKey) {
-    final upper = periciaKey.toUpperCase();
-    final manual = periciasTreinadas.any((p) => p.toUpperCase() == upper);
-    return manual || ehPericiaTreinadaFixaDeClasse(periciaKey);
+    return _periciasTreinadasTotalUpper.contains(periciaKey.toUpperCase());
   }
 
   /// Retorna o bônus diverso ("Outros") cadastrado manualmente para a perícia
   int obterOutrosBonusPericia(String periciaKey) {
-    if (outrosBonusPericias.containsKey(periciaKey)) {
-      return outrosBonusPericias[periciaKey]!;
-    }
-    final upper = periciaKey.toUpperCase();
-    for (final entry in outrosBonusPericias.entries) {
-      if (entry.key.toUpperCase() == upper) {
-        return entry.value;
-      }
-    }
-    return 0;
+    return outrosBonusPericias[periciaKey] ??
+        _outrosBonusUpper[periciaKey.toUpperCase()] ??
+        0;
   }
+
+  /// Indica se a perícia sofre penalidade de armadura no personagem
+  bool periciaSofrePenalidade(Pericia pericia) =>
+      pericia.penalidadeArmadura ||
+      (usaProtecaoSemProficiencia &&
+          (pericia.atributoChave == 'FOR' || pericia.atributoChave == 'DES'));
 
   // Cálculo final da perícia
   int getValorPericia(String periciaKey, {int? penalidadeArmaduraCustom}) {
     final pericia = BancoDePericias.getByKey(periciaKey);
-
-    int metadeNivel = (nivelPersonagem / 2).floor();
-    int modAtributo = getValorFinal(pericia.atributoChave);
-
-    bool treinada = ehPericiaTreinada(periciaKey);
-    int bonusTreino = treinada ? bonusTreinamento : 0;
-    int bonusOutros = obterOutrosBonusPericia(periciaKey);
-    int bonusRacial = bonusRacialPericia(periciaKey);
-    int bonusEfeitos = bonusEfeitosPericias;
-
     final penalidade = penalidadeArmaduraCustom ?? penalidadeArmaduraTotal;
+    final penalidadeAplicada = periciaSofrePenalidade(pericia) ? penalidade : 0;
 
-    int penalidadeAplicada = 0;
-    if (pericia.penalidadeArmadura) {
-      penalidadeAplicada = penalidade;
-    } else if (usaProtecaoSemProficiencia &&
-        (pericia.atributoChave == 'FOR' || pericia.atributoChave == 'DES')) {
-      // Regra T20: se não tiver proficiência, a penalidade afeta TODAS as perícias de FOR e DES
-      penalidadeAplicada = penalidade;
-    }
-
-    return metadeNivel +
-        modAtributo +
-        bonusTreino +
-        bonusOutros +
-        bonusRacial +
-        bonusEfeitos -
+    return (nivelPersonagem / 2).floor() +
+        getValorFinal(pericia.atributoChave) +
+        (ehPericiaTreinada(periciaKey) ? bonusTreinamento : 0) +
+        obterOutrosBonusPericia(periciaKey) +
+        bonusRacialPericia(periciaKey) +
+        bonusEfeitosPericias -
         penalidadeAplicada;
   }
 
@@ -994,7 +998,7 @@ class Personagem {
   int get limiteCarga =>
       RegrasCargaService.calcularLimiteCarga(getValorFinal('FOR'));
 
-  int get cargaAtual => RegrasCargaService.calcularEspacosOcupados(
+  late final int cargaAtual = RegrasCargaService.calcularEspacosOcupados(
     armas: armas,
     itensInventario: itensInventario,
     armadura: armaduraEquipada,

@@ -16,7 +16,9 @@ import 'package:t20_creator/domain/repositories/i_personagem_repository.dart';
 import 'package:t20_creator/domain/services/calculo_ficha_service.dart';
 import 'package:t20_creator/domain/services/data_services/call_magias.dart';
 import 'package:t20_creator/domain/services/data_services/call_pericias.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t20_creator/domain/services/personagem_storage_service.dart';
+import 'package:t20_creator/presentation/controllers/ficha_cubit.dart';
 import 'package:t20_creator/presentation/screens/ficha/painel_jogador_screen.dart';
 
 class FakePersonagemRepository implements IPersonagemRepository {
@@ -233,6 +235,19 @@ void main() {
       final nomes = grupoDes.pericias.map((cp) => cp.pericia.label).toList();
       // Acrobacia antes de Iniciativa, antes de Pontaria
       expect(nomes, containsAllInOrder(['Acrobacia', 'Iniciativa', 'Pontaria']));
+    });
+
+    test('agruparPericiasPorAtributo com penalidadeArmaduraCustom repassa penalidade customizada', () {
+      final p = Personagem.inicial();
+      final grupos = CalculoFichaService.agruparPericiasPorAtributo(
+        p,
+        penalidadeArmaduraCustom: 5,
+      );
+
+      final grupoDes = grupos.firstWhere((g) => g.siglaAtributo == 'DES');
+      final acro = grupoDes.pericias.firstWhere((cp) => cp.pericia.key == 'ACROBACIA');
+      expect(acro.penalidadeArmaduraAplicada, equals(5));
+      expect(acro.total, equals(-5)); // ½ nível 0 + DES 0 - penalidade 5 = -5
     });
 
     test('Bônus raciais inatos (Elfo: Graça de Glórienn e Sentidos Élficos) são passivos e aplicados automaticamente', () {
@@ -763,6 +778,34 @@ void main() {
 
       expect(repo.salvo?.pmAtual, equals(0));
       expect(find.textContaining('PM insuficiente'), findsOneWidget);
+    });
+
+    testWidgets('Isolamento de rebuilds: alterações em anotações ou tibares não quebram nem causam erro na UI do Painel',
+        (tester) async {
+      await tester.binding.setSurfaceSize(const Size(480, 900));
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: PainelJogadorScreen(
+            personagemInicial: pUi,
+            repository: repo,
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      final cubit =
+          tester.element(find.byType(TabBarView)).read<FichaCubit>();
+
+      // Atualiza anotações e tibares (não devem desestabilizar ou quebrar o Painel ou Abas)
+      cubit.atualizarAnotacoes('Nova pista secreta sobre a Tormenta');
+      await tester.pump();
+
+      expect(find.text('Kaelen'), findsOneWidget);
+
+      cubit.ajustarTibares(deltaPrata: 100);
+      await tester.pump();
+      expect(find.text('Kaelen'), findsOneWidget);
     });
   });
 }

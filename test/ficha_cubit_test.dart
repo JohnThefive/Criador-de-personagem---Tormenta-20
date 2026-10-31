@@ -7,10 +7,12 @@ import 'package:t20_creator/presentation/controllers/ficha_cubit.dart';
 
 class FakePersonagemRepository implements IPersonagemRepository {
   Personagem? salvo;
+  int chamadasSalvar = 0;
 
   @override
   Future<void> salvar(Personagem p) async {
     salvo = p;
+    chamadasSalvar++;
   }
 
   @override
@@ -60,7 +62,11 @@ void main() {
     });
 
     test('Dano e Cura de PV alteram estado e persistem', () async {
-      final cubit = FichaCubit(personagemInicial: personagemBase, repository: repo);
+      final cubit = FichaCubit(
+        personagemInicial: personagemBase,
+        repository: repo,
+        debounceDuration: Duration.zero,
+      );
 
       await cubit.aplicarDano(7);
       expect(cubit.state.personagem.pvAtual, equals(13));
@@ -69,6 +75,35 @@ void main() {
       await cubit.curarPV(4);
       expect(cubit.state.personagem.pvAtual, equals(17));
       expect(repo.salvo?.pvAtual, equals(17));
+    });
+
+    test('Debounce agrupa múltiplos cliques rápidos de PV/PM em uma única gravação em disco', () async {
+      final cubit = FichaCubit(
+        personagemInicial: personagemBase,
+        repository: repo,
+        debounceDuration: const Duration(milliseconds: 100),
+      );
+
+      // 5 cliques rápidos de -1 PV consecutivos
+      await cubit.aplicarDano(1);
+      await cubit.aplicarDano(1);
+      await cubit.aplicarDano(1);
+      await cubit.aplicarDano(1);
+      await cubit.aplicarDano(1);
+
+      // Estado reage instantaneamente na memória/UI
+      expect(cubit.state.personagem.pvAtual, equals(15));
+      // Mas o disco ainda não foi atingido devido ao debounce
+      expect(repo.chamadasSalvar, equals(0));
+
+      // Aguarda expiração da janela de debounce
+      await Future.delayed(const Duration(milliseconds: 140));
+
+      // Gravou apenas 1 vez em disco com o valor final acumulado
+      expect(repo.chamadasSalvar, equals(1));
+      expect(repo.salvo?.pvAtual, equals(15));
+
+      await cubit.close();
     });
 
     test('Gasto e Recuperação de PM respeitam limites e punição divina', () async {

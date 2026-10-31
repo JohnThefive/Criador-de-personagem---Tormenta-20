@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import '../../../domain/entities/personagem/personagem.dart';
 import '../../../domain/repositories/i_personagem_repository.dart';
 import '../../controllers/ficha_cubit.dart';
+import '../../controllers/ficha_state.dart';
 import 'aba_geral_view.dart';
 import 'aba_pericias_view.dart';
 import 'aba_habilidades_view.dart';
@@ -280,8 +281,11 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
     );
   }
 
-  Widget _buildCabecalhoFixo(BuildContext context, FichaCubit cubit) {
-    final p = cubit.personagem;
+  Widget _buildCabecalhoFixo(
+    BuildContext context,
+    FichaCubit cubit,
+    Personagem p,
+  ) {
     final temFoto = p.caminhoFoto != null && p.caminhoFoto!.isNotEmpty;
 
     final resumoClasses = p.classes.isNotEmpty
@@ -626,8 +630,7 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
   @override
   Widget build(BuildContext context) {
     const t20Red = Color(0xFFC62828);
-    final cubit = context.watch<FichaCubit>();
-    final p = cubit.state.personagem;
+    final cubit = context.read<FichaCubit>();
 
     return Scaffold(
       backgroundColor: t20Red,
@@ -653,38 +656,43 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
                     onPressed: () => Navigator.pop(context),
                   ),
                   Expanded(
-                    child: InkWell(
-                      onTap: () => _editarIdentidadeCabecalho(cubit),
-                      borderRadius: BorderRadius.circular(8),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 6,
-                          vertical: 4,
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Flexible(
-                              child: Text(
-                                p.nome,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w900,
-                                  fontSize: 19,
-                                  letterSpacing: 0.3,
+                    child: BlocSelector<FichaCubit, FichaState, String>(
+                      selector: (state) => state.personagem.nome,
+                      builder: (context, nome) {
+                        return InkWell(
+                          onTap: () => _editarIdentidadeCabecalho(cubit),
+                          borderRadius: BorderRadius.circular(8),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 6,
+                              vertical: 4,
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Flexible(
+                                  child: Text(
+                                    nome,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w900,
+                                      fontSize: 19,
+                                      letterSpacing: 0.3,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
                                 ),
-                                overflow: TextOverflow.ellipsis,
-                              ),
+                                const SizedBox(width: 6),
+                                const Icon(
+                                  Icons.edit_outlined,
+                                  color: Colors.white70,
+                                  size: 15,
+                                ),
+                              ],
                             ),
-                            const SizedBox(width: 6),
-                            const Icon(
-                              Icons.edit_outlined,
-                              color: Colors.white70,
-                              size: 15,
-                            ),
-                          ],
-                        ),
-                      ),
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ],
@@ -692,11 +700,38 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
             ),
 
             // Cabeçalho de sessão fixo
-            _buildCabecalhoFixo(context, cubit),
+            BlocBuilder<FichaCubit, FichaState>(
+              buildWhen: (prev, curr) {
+                final p1 = prev.personagem;
+                final p2 = curr.personagem;
+                return p1.nome != p2.nome ||
+                    p1.caminhoFoto != p2.caminhoFoto ||
+                    p1.alinhamento != p2.alinhamento ||
+                    p1.idade != p2.idade ||
+                    p1.nivelPersonagem != p2.nivelPersonagem ||
+                    p1.pvAtual != p2.pvAtual ||
+                    p1.pvTotal != p2.pvTotal ||
+                    p1.pmAtual != p2.pmAtual ||
+                    p1.pmTotal != p2.pmTotal ||
+                    p1.raca?.nome != p2.raca?.nome ||
+                    p1.origem?.nome != p2.origem?.nome ||
+                    p1.divindade?.nome != p2.divindade?.nome ||
+                    p1.classes != p2.classes ||
+                    p1.atributos != p2.atributos;
+              },
+              builder: (context, state) =>
+                  _buildCabecalhoFixo(context, cubit, state.personagem),
+            ),
 
             // Banner de evolução pendente
-            if (p.classes.any((c) => c.temPoderPendente))
-              _buildBannerEvolucaoPendente(cubit),
+            BlocSelector<FichaCubit, FichaState, bool>(
+              selector: (state) =>
+                  state.personagem.classes.any((c) => c.temPoderPendente),
+              builder: (context, temPendente) {
+                if (!temPendente) return const SizedBox.shrink();
+                return _buildBannerEvolucaoPendente(cubit);
+              },
+            ),
 
             // Área principal das 6 abas da Ficha
             Expanded(
@@ -852,14 +887,12 @@ class _BarraRecursoTopo extends StatelessWidget {
             ),
           ],
         ),
-        ClipRRect(
+        LinearProgressIndicator(
+          value: progresso,
+          minHeight: 8,
           borderRadius: BorderRadius.circular(6),
-          child: LinearProgressIndicator(
-            value: progresso,
-            minHeight: 8,
-            backgroundColor: Colors.black26,
-            valueColor: AlwaysStoppedAnimation<Color>(corBarra),
-          ),
+          backgroundColor: Colors.black26,
+          valueColor: AlwaysStoppedAnimation<Color>(corBarra),
         ),
       ],
     );

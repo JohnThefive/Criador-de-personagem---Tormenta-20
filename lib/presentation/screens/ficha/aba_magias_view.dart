@@ -93,6 +93,18 @@ class _AbaMagiasViewState extends State<AbaMagiasView> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<FichaCubit, FichaState>(
+      buildWhen: (prev, curr) {
+        final p1 = prev.personagem;
+        final p2 = curr.personagem;
+        return p1.magiasConhecidas != p2.magiasConhecidas ||
+            p1.outrosBonusCDMagia != p2.outrosBonusCDMagia ||
+            p1.pmAtual != p2.pmAtual ||
+            p1.pmTotal != p2.pmTotal ||
+            p1.nivelPersonagem != p2.nivelPersonagem ||
+            p1.atributos != p2.atributos ||
+            p1.classes != p2.classes ||
+            p1.punicaoDivinaAtiva != p2.punicaoDivinaAtiva;
+      },
       builder: (context, state) {
         final cubit = context.read<FichaCubit>();
         final p = state.personagem;
@@ -122,10 +134,15 @@ class _AbaMagiasViewState extends State<AbaMagiasView> {
           return true;
         }).toList();
 
-        return ListView(
-          padding: const EdgeInsets.fromLTRB(12, 12, 12, 28),
-          children: [
-            // 1. CONTA DE TESTE DE RESISTÊNCIA (CD) ESTILIZADA
+        return CustomScrollView(
+          slivers: [
+            SliverPadding(
+              padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
+              sliver: SliverToBoxAdapter(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    // 1. CONTA DE TESTE DE RESISTÊNCIA (CD) ESTILIZADA
             Container(
               padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
@@ -357,38 +374,53 @@ class _AbaMagiasViewState extends State<AbaMagiasView> {
                 ),
               ),
             ],
-
-            const SizedBox(height: 12),
+                    const SizedBox(height: 12),
+                  ],
+                ),
+              ),
+            ),
 
             if (magiasFiltradas.isEmpty)
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 32,
-                  horizontal: 16,
-                ),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(14),
-                  border: Border.all(color: const Color(0xFFE2E8F0)),
-                ),
-                child: const Text(
-                  'Nenhuma magia registrada neste filtro. Use "Adicionar Magia" para preencher seu grimório.',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Color(0xFF64748B), fontSize: 13),
+              SliverPadding(
+                padding: const EdgeInsets.fromLTRB(12, 0, 12, 28),
+                sliver: SliverToBoxAdapter(
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 32,
+                      horizontal: 16,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(14),
+                      border: Border.all(color: const Color(0xFFE2E8F0)),
+                    ),
+                    child: const Text(
+                      'Nenhuma magia registrada neste filtro. Use "Adicionar Magia" para preencher seu grimório.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Color(0xFF64748B), fontSize: 13),
+                    ),
+                  ),
                 ),
               )
             else
-              ...magiasFiltradas.map(
-                (magia) => _CardMagiaInterativo(
-                  key: ValueKey('magia_card_${magia.id}'),
-                  magia: magia,
-                  cdTotal: cdInfo.cdTotal,
-                  pmDisponivel: p.pmAtual,
-                  sobPunicaoDivina: p.punicaoDivinaAtiva,
-                  compactoAmpliado: modoAmpliado,
-                  onLancar: (custo) =>
-                      _lancarMagia(context, cubit, magia, custo),
-                  onRemover: () => cubit.removerMagiaConhecida(magia.id),
+              SliverPadding(
+                padding: const EdgeInsets.fromLTRB(12, 0, 12, 28),
+                sliver: SliverList.builder(
+                  itemCount: magiasFiltradas.length,
+                  itemBuilder: (context, index) {
+                    final magia = magiasFiltradas[index];
+                    return _CardMagiaInterativo(
+                      key: ValueKey('magia_card_${magia.id}'),
+                      magia: magia,
+                      cdTotal: cdInfo.cdTotal,
+                      pmDisponivel: p.pmAtual,
+                      sobPunicaoDivina: p.punicaoDivinaAtiva,
+                      compactoAmpliado: modoAmpliado,
+                      onLancar: (custo) =>
+                          _lancarMagia(context, cubit, magia, custo),
+                      onRemover: () => cubit.removerMagiaConhecida(magia.id),
+                    );
+                  },
                 ),
               ),
           ],

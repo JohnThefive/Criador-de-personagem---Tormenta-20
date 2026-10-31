@@ -88,6 +88,8 @@ Widget _buildAvatar(
               File(personagem.caminhoFoto!),
               width: size,
               height: size,
+              cacheWidth: 160,
+              cacheHeight: 160,
               fit: BoxFit.cover,
               errorBuilder: (_, _, _) =>
                   _buildAvatarFallback(personagem, colorScheme),

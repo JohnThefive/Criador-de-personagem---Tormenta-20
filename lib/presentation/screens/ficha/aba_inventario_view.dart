@@ -7,6 +7,7 @@ import '../../../domain/services/data_services/call_armas.dart';
 import '../../../domain/services/regras_carga_service.dart';
 import '../../controllers/ficha_cubit.dart';
 import '../../controllers/ficha_state.dart';
+import '../../widgets/card_metrica_clicavel.dart';
 import 'dialogos_ficha.dart';
 
 class AbaInventarioView extends StatelessWidget {
@@ -43,10 +44,6 @@ class AbaInventarioView extends StatelessWidget {
     await showModalBottomSheet<void>(
       context: context,
       isScrollControlled: true,
-      backgroundColor: Colors.white,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
       builder: (ctx) => DraggableScrollableSheet(
         initialChildSize: 0.72,
         minChildSize: 0.45,
@@ -54,15 +51,6 @@ class AbaInventarioView extends StatelessWidget {
         expand: false,
         builder: (_, scrollController) => Column(
           children: [
-            Container(
-              margin: const EdgeInsets.only(top: 12, bottom: 8),
-              width: 40,
-              height: 4,
-              decoration: BoxDecoration(
-                color: Colors.grey.shade300,
-                borderRadius: BorderRadius.circular(2),
-              ),
-            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: Row(
@@ -223,10 +211,6 @@ class AbaInventarioView extends StatelessWidget {
     await showModalBottomSheet<void>(
       context: context,
       isScrollControlled: true,
-      backgroundColor: Colors.white,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
       builder: (ctx) => DraggableScrollableSheet(
         initialChildSize: 0.75,
         minChildSize: 0.45,
@@ -234,15 +218,6 @@ class AbaInventarioView extends StatelessWidget {
         expand: false,
         builder: (_, scrollController) => Column(
           children: [
-            Container(
-              margin: const EdgeInsets.only(top: 12, bottom: 8),
-              width: 40,
-              height: 4,
-              decoration: BoxDecoration(
-                color: Colors.grey.shade300,
-                borderRadius: BorderRadius.circular(2),
-              ),
-            ),
             const Padding(
               padding: EdgeInsets.all(12),
               child: Text(
@@ -314,6 +289,22 @@ class AbaInventarioView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<FichaCubit, FichaState>(
+      buildWhen: (prev, curr) {
+        final p1 = prev.personagem;
+        final p2 = curr.personagem;
+        return p1.armas != p2.armas ||
+            p1.armaduraEquipada != p2.armaduraEquipada ||
+            p1.escudoEquipado != p2.escudoEquipado ||
+            p1.itensVestidosExtras != p2.itensVestidosExtras ||
+            p1.itensInventario != p2.itensInventario ||
+            p1.engenhocas != p2.engenhocas ||
+            p1.tibares != p2.tibares ||
+            p1.tibaresCobre != p2.tibaresCobre ||
+            p1.tibaresOuro != p2.tibaresOuro ||
+            p1.cargaAtual != p2.cargaAtual ||
+            p1.limiteCarga != p2.limiteCarga ||
+            p1.atributos != p2.atributos;
+      },
       builder: (context, state) {
         final cubit = context.read<FichaCubit>();
         final p = state.personagem;
@@ -322,10 +313,15 @@ class AbaInventarioView extends StatelessWidget {
             ? (carga.cargaAtual / carga.limiteCarga).clamp(0.0, 1.0)
             : 1.0;
 
-        return ListView(
-          padding: const EdgeInsets.fromLTRB(12, 12, 12, 28),
-          children: [
-            // 1. ÁREA DE CARGAS (ESPAÇOS / CAPACIDADE)
+        return CustomScrollView(
+          slivers: [
+            SliverPadding(
+              padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
+              sliver: SliverToBoxAdapter(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    // 1. ÁREA DE CARGAS (ESPAÇOS / CAPACIDADE)
             Container(
               padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
@@ -377,20 +373,17 @@ class AbaInventarioView extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 8),
-                  ClipRRect(
+                  LinearProgressIndicator(
+                    value: progressoCarga,
+                    minHeight: 9,
                     borderRadius: BorderRadius.circular(6),
-                    child: LinearProgressIndicator(
-                      value: progressoCarga,
-                      minHeight: 9,
-                      backgroundColor: const Color(0xFFE2E8F0),
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        carga.sobrecarregado
-                            ? const Color(0xFFDC2626)
-                            : (progressoCarga > 0.8
-                                  ? const Color(0xFFF59E0B)
-                                  : const Color(0xFF10B981)),
-                      ),
+                    backgroundColor: const Color(0xFFE2E8F0),
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      carga.sobrecarregado
+                          ? const Color(0xFFDC2626)
+                          : (progressoCarga > 0.8
+                                ? const Color(0xFFF59E0B)
+                                : const Color(0xFF10B981)),
                     ),
                   ),
                   if (carga.sobrecarregado) ...[
@@ -455,12 +448,21 @@ class AbaInventarioView extends StatelessWidget {
                   Row(
                     children: [
                       Expanded(
-                        child: _CardMoedaTibar(
+                        child: CardMetricaClicavel(
                           keyWidget: const Key('card_tibar_cobre'),
-                          sigla: 'TC',
+                          rotulo: 'TC',
                           subtitulo: 'Cobre (0,1)',
-                          valor: p.tibaresCobre,
-                          corDestaque: const Color(0xFF9A3412),
+                          valor: '${p.tibaresCobre}',
+                          corRotulo: const Color(0xFF9A3412),
+                          tamanhoRotulo: 11.5,
+                          pesoRotulo: FontWeight.w900,
+                          tamanhoValor: 18,
+                          pesoValor: FontWeight.w900,
+                          minHeight: 62,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 8,
+                          ),
                           onTap: () => _editarMoeda(
                             context,
                             titulo: 'Tibares de Cobre (TC)',
@@ -471,12 +473,21 @@ class AbaInventarioView extends StatelessWidget {
                       ),
                       const SizedBox(width: 8),
                       Expanded(
-                        child: _CardMoedaTibar(
+                        child: CardMetricaClicavel(
                           keyWidget: const Key('card_tibar_prata'),
-                          sigla: 'T\$',
+                          rotulo: 'T\$',
                           subtitulo: 'Padrão (1)',
-                          valor: p.tibares,
-                          corDestaque: const Color(0xFF334155),
+                          valor: '${p.tibares}',
+                          corRotulo: const Color(0xFF334155),
+                          tamanhoRotulo: 11.5,
+                          pesoRotulo: FontWeight.w900,
+                          tamanhoValor: 18,
+                          pesoValor: FontWeight.w900,
+                          minHeight: 62,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 8,
+                          ),
                           onTap: () => _editarMoeda(
                             context,
                             titulo: 'Tibares Padrão (T\$)',
@@ -487,12 +498,21 @@ class AbaInventarioView extends StatelessWidget {
                       ),
                       const SizedBox(width: 8),
                       Expanded(
-                        child: _CardMoedaTibar(
+                        child: CardMetricaClicavel(
                           keyWidget: const Key('card_tibar_ouro'),
-                          sigla: 'TO',
+                          rotulo: 'TO',
                           subtitulo: 'Ouro (10)',
-                          valor: p.tibaresOuro,
-                          corDestaque: const Color(0xFFB45309),
+                          valor: '${p.tibaresOuro}',
+                          corRotulo: const Color(0xFFB45309),
+                          tamanhoRotulo: 11.5,
+                          pesoRotulo: FontWeight.w900,
+                          tamanhoValor: 18,
+                          pesoValor: FontWeight.w900,
+                          minHeight: 62,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 8,
+                          ),
                           onTap: () => _editarMoeda(
                             context,
                             titulo: 'Tibares de Ouro (TO)',
@@ -662,68 +682,109 @@ class AbaInventarioView extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(height: 14),
-
-            // 4. MOCHILA OTIMIZADA (ALTA DENSIDADE DE LINHAS)
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(14),
-                border: Border.all(color: const Color(0xFFE2E8F0)),
+                    const SizedBox(height: 14),
+                  ],
+                ),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(14, 8, 8, 4),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Mochila (${p.itensInventario.length} itens)',
-                          style: const TextStyle(
-                            fontWeight: FontWeight.w800,
-                            fontSize: 15,
-                            color: Color(0xFF0F172A),
-                          ),
-                        ),
-                        TextButton.icon(
-                          key: const Key('btn_adicionar_item_mochila'),
-                          style: TextButton.styleFrom(
-                            minimumSize: const Size(44, 44),
-                            foregroundColor: const Color(0xFFD32F2F),
-                          ),
-                          onPressed: () =>
-                              _adicionarOuEditarItemMochila(context, cubit),
-                          icon: const Icon(Icons.add_rounded, size: 20),
-                          label: const Text(
-                            'Novo Item',
-                            style: TextStyle(fontWeight: FontWeight.w800),
-                          ),
-                        ),
-                      ],
-                    ),
+            ),
+
+            // 4. MOCHILA OTIMIZADA (CABEÇALHO + SLIVERLIST VIRTUALIZADO)
+            SliverPadding(
+              padding: EdgeInsets.fromLTRB(
+                12,
+                0,
+                12,
+                p.itensInventario.isEmpty ? 28 : 0,
+              ),
+              sliver: SliverToBoxAdapter(
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: p.itensInventario.isEmpty
+                        ? BorderRadius.circular(14)
+                        : const BorderRadius.vertical(top: Radius.circular(14)),
+                    border: Border.all(color: const Color(0xFFE2E8F0)),
                   ),
-                  const Divider(height: 1),
-                  if (p.itensInventario.isEmpty)
-                    const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 22),
-                      child: Center(
-                        child: Text(
-                          'Mochila vazia. Toque em "Novo Item" para registrar consumíveis e equipamentos.',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 12.5,
-                            color: Color(0xFF94A3B8),
-                          ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(14, 8, 8, 4),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Mochila (${p.itensInventario.length} itens)',
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w800,
+                                fontSize: 15,
+                                color: Color(0xFF0F172A),
+                              ),
+                            ),
+                            TextButton.icon(
+                              key: const Key('btn_adicionar_item_mochila'),
+                              style: TextButton.styleFrom(
+                                minimumSize: const Size(44, 44),
+                                foregroundColor: const Color(0xFFD32F2F),
+                              ),
+                              onPressed: () =>
+                                  _adicionarOuEditarItemMochila(context, cubit),
+                              icon: const Icon(Icons.add_rounded, size: 20),
+                              label: const Text(
+                                'Novo Item',
+                                style: TextStyle(fontWeight: FontWeight.w800),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    )
-                  else
-                    ...List.generate(p.itensInventario.length, (idx) {
-                      final item = p.itensInventario[idx];
-                      final esp = RegrasCargaService.obterEspacoItem(item);
-                      return Column(
+                      const Divider(height: 1),
+                      if (p.itensInventario.isEmpty)
+                        const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 22),
+                          child: Center(
+                            child: Text(
+                              'Mochila vazia. Toque em "Novo Item" para registrar consumíveis e equipamentos.',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 12.5,
+                                color: Color(0xFF94A3B8),
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
+            if (p.itensInventario.isNotEmpty)
+              SliverPadding(
+                padding: const EdgeInsets.fromLTRB(12, 0, 12, 28),
+                sliver: SliverList.builder(
+                  itemCount: p.itensInventario.length,
+                  itemBuilder: (context, idx) {
+                    final item = p.itensInventario[idx];
+                    final esp = RegrasCargaService.obterEspacoItem(item);
+                    final ehUltimo = idx == p.itensInventario.length - 1;
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border(
+                          left: const BorderSide(color: Color(0xFFE2E8F0)),
+                          right: const BorderSide(color: Color(0xFFE2E8F0)),
+                          bottom: ehUltimo
+                              ? const BorderSide(color: Color(0xFFE2E8F0))
+                              : BorderSide.none,
+                        ),
+                        borderRadius: ehUltimo
+                            ? const BorderRadius.vertical(
+                                bottom: Radius.circular(14),
+                              )
+                            : BorderRadius.zero,
+                      ),
+                      child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           InkWell(
@@ -799,84 +860,17 @@ class AbaInventarioView extends StatelessWidget {
                               ),
                             ),
                           ),
-                          if (idx < p.itensInventario.length - 1)
+                          if (!ehUltimo)
                             const Divider(height: 1, color: Color(0xFFF1F5F9)),
                         ],
-                      );
-                    }),
-                ],
+                      ),
+                    );
+                  },
+                ),
               ),
-            ),
           ],
         );
       },
-    );
-  }
-}
-
-class _CardMoedaTibar extends StatelessWidget {
-  final Key? keyWidget;
-  final String sigla;
-  final String subtitulo;
-  final int valor;
-  final Color corDestaque;
-  final VoidCallback onTap;
-
-  const _CardMoedaTibar({
-    this.keyWidget,
-    required this.sigla,
-    required this.subtitulo,
-    required this.valor,
-    required this.corDestaque,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: const Color(0xFFF8FAFC),
-      borderRadius: BorderRadius.circular(10),
-      child: InkWell(
-        key: keyWidget,
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(10),
-        child: Container(
-          constraints: const BoxConstraints(minHeight: 62),
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: const Color(0xFFE2E8F0)),
-          ),
-          child: Column(
-            children: [
-              Text(
-                sigla,
-                style: TextStyle(
-                  fontSize: 11.5,
-                  fontWeight: FontWeight.w900,
-                  color: corDestaque,
-                ),
-              ),
-              const SizedBox(height: 2),
-              Text(
-                '$valor',
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w900,
-                  color: Color(0xFF0F172A),
-                ),
-              ),
-              Text(
-                subtitulo,
-                style: const TextStyle(
-                  fontSize: 9.5,
-                  color: Color(0xFF64748B),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 }

@@ -42,24 +42,43 @@ class _AbaPericiasViewState extends State<AbaPericiasView> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<FichaCubit, FichaState>(
+      buildWhen: (prev, curr) {
+        final p1 = prev.personagem;
+        final p2 = curr.personagem;
+        return p1.atributos != p2.atributos ||
+            p1.nivelPersonagem != p2.nivelPersonagem ||
+            p1.periciasTreinadas != p2.periciasTreinadas ||
+            p1.outrosBonusPericias != p2.outrosBonusPericias ||
+            p1.efeitosTemporarios != p2.efeitosTemporarios ||
+            p1.classes != p2.classes ||
+            p1.raca != p2.raca ||
+            p1.penalidadeArmaduraTotal != p2.penalidadeArmaduraTotal ||
+            p1.usaProtecaoSemProficiencia != p2.usaProtecaoSemProficiencia;
+      },
       builder: (context, state) {
         final cubit = context.read<FichaCubit>();
         final personagem = state.personagem;
 
+        final penArmadura = personagem.penalidadeArmaduraTotal;
         final grupos = CalculoFichaService.agruparPericiasPorAtributo(
           personagem,
           apenasTreinadas: _apenasTreinadas,
           filtroBusca: _termoBusca,
+          penalidadeArmaduraCustom: penArmadura,
         );
 
         final metadeNivel = (personagem.nivelPersonagem / 2).floor();
         final bonusTreino = personagem.bonusTreinamento;
-        final penArmadura = personagem.penalidadeArmaduraTotal;
 
-        return ListView(
-          padding: const EdgeInsets.fromLTRB(12, 12, 12, 28),
-          children: [
-            // Bloco de apoio explicando o cálculo do Total
+        return CustomScrollView(
+          slivers: [
+            SliverPadding(
+              padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
+              sliver: SliverToBoxAdapter(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    // Bloco de apoio explicando o cálculo do Total
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
@@ -198,31 +217,48 @@ class _AbaPericiasViewState extends State<AbaPericiasView> {
               ],
             ),
 
-            const SizedBox(height: 12),
+                    const SizedBox(height: 12),
+                  ],
+                ),
+              ),
+            ),
 
             if (grupos.isEmpty)
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 36),
-                child: Center(
-                  child: Text(
-                    'Nenhuma perícia encontrada para o filtro selecionado.',
-                    style: TextStyle(color: Color(0xFF64748B)),
+              const SliverPadding(
+                padding: EdgeInsets.fromLTRB(12, 0, 12, 28),
+                sliver: SliverToBoxAdapter(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 36),
+                    child: Center(
+                      child: Text(
+                        'Nenhuma perícia encontrada para o filtro selecionado.',
+                        style: TextStyle(color: Color(0xFF64748B)),
+                      ),
+                    ),
                   ),
                 ),
               )
             else
-              ...grupos.map(
-                (grupo) => _BlocoAtributoPericias(
-                  grupo: grupo,
-                  onRolarPericia: (comp) => mostrarDialogoRolagemPericia(
-                    context,
-                    personagem: personagem,
-                    periciaKey: comp.pericia.key,
-                  ),
-                  onAlternarTreino: (comp) =>
-                      cubit.alternarTreinoPericia(comp.pericia.key),
-                  onEditarOutros: (comp) =>
-                      _abrirEditorOutrosBonus(context, cubit, comp),
+              SliverPadding(
+                padding: const EdgeInsets.fromLTRB(12, 0, 12, 28),
+                sliver: SliverList.builder(
+                  itemCount: grupos.length,
+                  itemBuilder: (context, index) {
+                    final grupo = grupos[index];
+                    return _BlocoAtributoPericias(
+                      key: ValueKey('grupo_pericia_${grupo.siglaAtributo}'),
+                      grupo: grupo,
+                      onRolarPericia: (comp) => mostrarDialogoRolagemPericia(
+                        context,
+                        personagem: personagem,
+                        periciaKey: comp.pericia.key,
+                      ),
+                      onAlternarTreino: (comp) =>
+                          cubit.alternarTreinoPericia(comp.pericia.key),
+                      onEditarOutros: (comp) =>
+                          _abrirEditorOutrosBonus(context, cubit, comp),
+                    );
+                  },
                 ),
               ),
           ],
@@ -239,6 +275,7 @@ class _BlocoAtributoPericias extends StatelessWidget {
   final void Function(ComposicaoPericia comp) onEditarOutros;
 
   const _BlocoAtributoPericias({
+    super.key,
     required this.grupo,
     required this.onRolarPericia,
     required this.onAlternarTreino,

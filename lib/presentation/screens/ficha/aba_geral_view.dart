@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../domain/entities/personagem/efeito_temporario.dart';
@@ -101,10 +100,8 @@ class AbaGeralView extends StatelessWidget {
 
   void _mostrarModalDescanso(BuildContext context, FichaCubit cubit) {
     final p = cubit.personagem;
-    final con = p.getValorFinal('CON');
-    final nivel = p.nivelPersonagem > 0 ? p.nivelPersonagem : 1;
-    final curaNormalPV = max(1, nivel + con);
-    final curaNormalPM = max(1, nivel);
+    final curaNormalPV = p.curaDescansoNormalPV;
+    final curaNormalPM = p.curaDescansoNormalPM;
 
     showModalBottomSheet<void>(
       context: context,
@@ -231,10 +228,6 @@ class AbaGeralView extends StatelessWidget {
     await showModalBottomSheet<void>(
       context: context,
       isScrollControlled: true,
-      backgroundColor: Colors.white,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
       builder: (ctx) => DraggableScrollableSheet(
         initialChildSize: 0.72,
         minChildSize: 0.45,
@@ -242,15 +235,6 @@ class AbaGeralView extends StatelessWidget {
         expand: false,
         builder: (_, scrollController) => Column(
           children: [
-            Container(
-              margin: const EdgeInsets.only(top: 12, bottom: 8),
-              width: 40,
-              height: 4,
-              decoration: BoxDecoration(
-                color: Colors.grey.shade300,
-                borderRadius: BorderRadius.circular(2),
-              ),
-            ),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: Text(
@@ -371,6 +355,35 @@ class AbaGeralView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<FichaCubit, FichaState>(
+      buildWhen: (prev, curr) {
+        final p1 = prev.personagem;
+        final p2 = curr.personagem;
+        return p1.atributos != p2.atributos ||
+            p1.nivelPersonagem != p2.nivelPersonagem ||
+            p1.experienciaAtual != p2.experienciaAtual ||
+            p1.pvAtual != p2.pvAtual ||
+            p1.pvTotal != p2.pvTotal ||
+            p1.pmAtual != p2.pmAtual ||
+            p1.pmTotal != p2.pmTotal ||
+            p1.outrosBonusDefesa != p2.outrosBonusDefesa ||
+            p1.rdPadrao != p2.rdPadrao ||
+            p1.rdsDiversas != p2.rdsDiversas ||
+            p1.armaduraEquipada != p2.armaduraEquipada ||
+            p1.escudoEquipado != p2.escudoEquipado ||
+            p1.itensVestidosExtras != p2.itensVestidosExtras ||
+            p1.armas != p2.armas ||
+            p1.cargaAtual != p2.cargaAtual ||
+            p1.limiteCarga != p2.limiteCarga ||
+            p1.efeitosTemporarios != p2.efeitosTemporarios ||
+            p1.punicaoDivinaAtiva != p2.punicaoDivinaAtiva ||
+            p1.formaSelvagemAtiva != p2.formaSelvagemAtiva ||
+            p1.montariaSagrada != p2.montariaSagrada ||
+            p1.tipoCompanheiroAnimal != p2.tipoCompanheiroAnimal ||
+            p1.classes != p2.classes ||
+            p1.raca != p2.raca ||
+            p1.origem != p2.origem ||
+            p1.divindade != p2.divindade;
+      },
       builder: (context, state) {
         final cubit = context.read<FichaCubit>();
         final p = state.personagem;
@@ -385,10 +398,9 @@ class AbaGeralView extends StatelessWidget {
             const SizedBox(height: 12),
 
             // 2. BLOCO DE DEFESA AMPLIADO + RD PADRÃO COMPACTO
-            IntrinsicHeight(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
                   // Bloco Maior de Defesa (Flex 7)
                   Expanded(
                     flex: 7,
@@ -600,7 +612,6 @@ class AbaGeralView extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
 
             const SizedBox(height: 12),
 
@@ -1095,27 +1106,6 @@ class _BotaoMiniStepper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Tooltip(
-      message: tooltip,
-      child: Material(
-        color: const Color(0xFFF1F5F9),
-        borderRadius: BorderRadius.circular(10),
-        child: InkWell(
-          onTap: onTap,
-          borderRadius: BorderRadius.circular(10),
-          child: const SizedBox(
-            width: 44,
-            height: 44,
-            child: Center(child: Icon(Icons.exposure, size: 0)),
-          ),
-        ),
-      ),
-    ).buildWithIcon(icon, onTap, tooltip);
-  }
-}
-
-extension on Widget {
-  Widget buildWithIcon(IconData icon, VoidCallback onTap, String tooltip) {
     return Tooltip(
       message: tooltip,
       child: Material(

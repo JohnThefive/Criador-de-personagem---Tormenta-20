@@ -104,12 +104,14 @@ class RegrasCargaService {
         espacosEngenhocas;
   }
 
+  static final _regexEspacoExplicito = RegExp(r'\((\d+)\s*esp');
+
   /// Determina o espaço ocupado por itens gerais (padrão T20)
   static int obterEspacoItem(String nomeItem) {
     final nomeLower = nomeItem.toLowerCase().trim();
 
     // Suporte a sufixo explícito ex: "Corda (2 esp)" ou "(0 esp)"
-    final matchExplicito = RegExp(r'\((\d+)\s*esp').firstMatch(nomeLower);
+    final matchExplicito = _regexEspacoExplicito.firstMatch(nomeLower);
     if (matchExplicito != null) {
       return int.tryParse(matchExplicito.group(1)!) ?? 1;
     }

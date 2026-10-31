@@ -46,13 +46,24 @@ class PersonagemStorageService implements IPersonagemRepository {
   @override
   Future<void> excluir(String id) => excluirPersonagem(id);
 
+  static Directory? _cachedDiretorioPersonagens;
+
+  @visibleForTesting
+  static void limparCacheDiretorio() {
+    _cachedDiretorioPersonagens = null;
+  }
+
   // Retorna a pasta interna onde o app tem permissão de escrita no Android
   static Future<Directory> _getDiretorioPersonagens() async {
+    if (_cachedDiretorioPersonagens != null) {
+      return _cachedDiretorioPersonagens!;
+    }
     final appDir = await getApplicationDocumentsDirectory();
     final pasta = Directory('${appDir.path}/personagens');
     if (!await pasta.exists()) {
       await pasta.create(recursive: true);
     }
+    _cachedDiretorioPersonagens = pasta;
     return pasta;
   }
 
