@@ -688,16 +688,26 @@ class Personagem {
     return soma < 0 ? 0 : soma;
   }
 
+  /// Todos os poderes ativos (classes + gerais + concedidos + Deformidade), sem duplicatas.
+  /// Cacheado por instância: Personagem é imutável.
+  late final List<Poder> poderesAtivos =
+      MotorModificadoresService.montarPoderesAtivos(this);
+
+  /// Chaves normalizadas (trim + lowercase) de [poderesAtivos] para lookup O(1).
+  late final Set<String> chavesPoderesAtivos = {
+    for (final pod in poderesAtivos) pod.key.trim().toLowerCase(),
+  };
+
   /// Total de poderes da Tormenta para pré-requisitos e escalonamento (inclui Deformidade do Lefou)
-  int get totalPoderesTormenta =>
+  late final int totalPoderesTormenta =
       MotorModificadoresService.contarPoderesTormentaParaEscalamento(this);
 
   /// Quantidade de poderes da Tormenta que causam perda de Carisma
-  int get poderesTormentaComPerdaCarisma =>
+  late final int poderesTormentaComPerdaCarisma =
       MotorModificadoresService.contarPoderesTormentaComPerdaCarisma(this);
 
   /// Perda de Carisma oriunda de Poderes da Tormenta (1 no primeiro + 1 a cada 2 outros)
-  int get perdaCarismaTormenta =>
+  late final int perdaCarismaTormenta =
       MotorModificadoresService.calcularPerdaCarismaTormenta(this);
 
   /// Em Tormenta 20: um personagem reduzido a menos que Car –5 torna-se um NPC sob controle do mestre.
@@ -722,7 +732,8 @@ class Personagem {
   }
 
   // RF03 / RN02 — Nível Total de Personagem (Soma dos níveis individuais de todas as classes)
-  int get nivelPersonagem => MotorMulticlasseService.calcularNivelTotal(this);
+  late final int nivelPersonagem =
+      MotorMulticlasseService.calcularNivelTotal(this);
 
   // RF10 / RN09 — Patamar de jogo baseado no nível total
   PatamarJogo get patamar => MotorMulticlasseService.identificarPatamar(this);
@@ -747,7 +758,7 @@ class Personagem {
       distribuicaoMulticlasse.formatarTexto();
 
   // RF06 / RN04 / RV05 — Pontos de Vida Totais (PV na multiclasse usa ganho de nível subsequente)
-  int get pvTotal => MotorMulticlasseService.calcularPvTotal(this);
+  late final int pvTotal = MotorMulticlasseService.calcularPvTotal(this);
 
   /// Bônus racial de Pontos de Vida (ex: Anão - Duro como Pedra: +3 PV no 1º nível, +1 por nível seguinte)
   int get bonusRacialPV {
@@ -770,7 +781,7 @@ class Personagem {
   }
 
   // RF07 / RN05 — Pontos de Mana Totais (soma de todas as classes)
-  int get pmTotal => MotorMulticlasseService.calcularPmTotal(this);
+  late final int pmTotal = MotorMulticlasseService.calcularPmTotal(this);
 
   String? _obterAtributoChaveConjuracao(ClasseDoPersonagem c) {
     return switch (c.classeDefinicao.idClasse.toLowerCase()) {

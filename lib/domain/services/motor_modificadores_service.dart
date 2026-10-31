@@ -12,9 +12,12 @@ import '../entities/personagem/poder.dart';
 /// - Melhorias e Encantos de Armas e Proteções (Itens Superiores e Mágicos)
 /// - Itens Gerais / Vestuário / Esotéricos
 class MotorModificadoresService {
-  /// Retorna todos os poderes ativos do personagem (Classes + Gerais + Concedidos + Deformidade Lefou),
-  /// sem duplicatas por `key`.
-  static List<Poder> obterTodosPoderesAtivos(Personagem p) {
+  /// Retorna todos os poderes ativos do personagem (cacheado em [Personagem.poderesAtivos]).
+  static List<Poder> obterTodosPoderesAtivos(Personagem p) => p.poderesAtivos;
+
+  /// Monta a lista de poderes ativos (Classes + Gerais + Concedidos + Deformidade Lefou),
+  /// sem duplicatas por `key`. Use [obterTodosPoderesAtivos] — este é o builder do cache.
+  static List<Poder> montarPoderesAtivos(Personagem p) {
     final vistos = <String>{};
     final resultado = <Poder>[];
 
@@ -40,16 +43,12 @@ class MotorModificadoresService {
     }
     adicionar(p.poderTormentaDeformidade);
 
-    return resultado;
+    return List.unmodifiable(resultado);
   }
 
   /// Verifica se o personagem possui um poder específico (por `key` ou id).
-  static bool possuiPoder(Personagem p, String key) {
-    final alvo = key.trim().toLowerCase();
-    return obterTodosPoderesAtivos(p).any(
-      (pod) => pod.key.trim().toLowerCase() == alvo,
-    );
-  }
+  static bool possuiPoder(Personagem p, String key) =>
+      p.chavesPoderesAtivos.contains(key.trim().toLowerCase());
 
   /// Conta o total de Poderes da Tormenta que o personagem possui para fins de
   /// pré-requisitos e escalonamento ("para cada dois outros poderes da Tormenta").
@@ -58,7 +57,7 @@ class MotorModificadoresService {
   /// - Cada um dos 2 bônus de Deformidade (+2 em perícia ou poder da Tormenta substituto)
   ///   conta como 1 poder da Tormenta para pré-requisitos e escalonamento.
   static int contarPoderesTormentaParaEscalamento(Personagem p) {
-    final poderesTormenta = obterTodosPoderesAtivos(p)
+    final poderesTormenta = p.poderesAtivos
         .where((pod) => pod.ehPoderTormenta)
         .length;
 
@@ -137,7 +136,7 @@ class MotorModificadoresService {
     int bonus = 0;
 
     // 1. Poderes da Tormenta passivos escaláveis
-    final totalTormenta = contarPoderesTormentaParaEscalamento(p);
+    final totalTormenta = p.totalPoderesTormenta;
     final outrosTormenta = max(0, totalTormenta - 1);
     final bonusEscaladoTormenta = 1 + (outrosTormenta ~/ 2);
 
@@ -212,7 +211,7 @@ class MotorModificadoresService {
   static int calcularBonusDeclarativoDefesa(Personagem p) {
     int bonus = 0;
 
-    final totalTormenta = contarPoderesTormentaParaEscalamento(p);
+    final totalTormenta = p.totalPoderesTormenta;
     final outrosTormenta = max(0, totalTormenta - 1);
 
     // Poder da Tormenta: Carapaça (+1 + 1 a cada 2 outros poderes da Tormenta)
@@ -266,7 +265,7 @@ class MotorModificadoresService {
   static int calcularBonusDeclarativoRD(Personagem p) {
     int rd = 0;
 
-    final totalTormenta = contarPoderesTormentaParaEscalamento(p);
+    final totalTormenta = p.totalPoderesTormenta;
     final outrosTormenta = max(0, totalTormenta - 1);
 
     if (possuiPoder(p, 'carapaca_corrompida')) {
@@ -301,7 +300,7 @@ class MotorModificadoresService {
   static int calcularBonusDeclarativoLimiteCarga(Personagem p) {
     int bonus = 0;
     if (possuiPoder(p, 'bolsoes_insanos')) {
-      final totalTormenta = contarPoderesTormentaParaEscalamento(p);
+      final totalTormenta = p.totalPoderesTormenta;
       final outrosTormenta = max(0, totalTormenta - 1);
       bonus += 2 + outrosTormenta;
     }
