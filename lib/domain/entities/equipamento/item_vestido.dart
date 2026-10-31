@@ -7,12 +7,18 @@ class ItemVestido {
   final String nome;
   final String beneficio;
   final int espacos;
+  final int bonusDefesa;
+  final int bonusCDMagia;
+  final Map<String, int> bonusPericias;
 
   const ItemVestido({
     required this.slotIndex,
     required this.nome,
     this.beneficio = '',
     this.espacos = 1,
+    this.bonusDefesa = 0,
+    this.bonusCDMagia = 0,
+    this.bonusPericias = const {},
   });
 
   ItemVestido copyWith({
@@ -20,12 +26,18 @@ class ItemVestido {
     String? nome,
     String? beneficio,
     int? espacos,
+    int? bonusDefesa,
+    int? bonusCDMagia,
+    Map<String, int>? bonusPericias,
   }) {
     return ItemVestido(
       slotIndex: slotIndex ?? this.slotIndex,
       nome: nome ?? this.nome,
       beneficio: beneficio ?? this.beneficio,
       espacos: espacos ?? this.espacos,
+      bonusDefesa: bonusDefesa ?? this.bonusDefesa,
+      bonusCDMagia: bonusCDMagia ?? this.bonusCDMagia,
+      bonusPericias: bonusPericias ?? this.bonusPericias,
     );
   }
 
@@ -35,6 +47,9 @@ class ItemVestido {
       'nome': nome,
       'beneficio': beneficio,
       'espacos': espacos,
+      if (bonusDefesa != 0) 'bonusDefesa': bonusDefesa,
+      if (bonusCDMagia != 0) 'bonusCDMagia': bonusCDMagia,
+      if (bonusPericias.isNotEmpty) 'bonusPericias': bonusPericias,
     };
   }
 
@@ -44,6 +59,13 @@ class ItemVestido {
       nome: json['nome']?.toString() ?? '',
       beneficio: json['beneficio']?.toString() ?? '',
       espacos: ((json['espacos'] as num?)?.toInt() ?? 1).clamp(0, 10),
+      bonusDefesa: (json['bonusDefesa'] as num?)?.toInt() ?? 0,
+      bonusCDMagia: (json['bonusCDMagia'] as num?)?.toInt() ?? 0,
+      bonusPericias:
+          (json['bonusPericias'] as Map?)?.map(
+            (k, v) => MapEntry(k.toString().toUpperCase(), (v as num).toInt()),
+          ) ??
+          const {},
     );
   }
 }

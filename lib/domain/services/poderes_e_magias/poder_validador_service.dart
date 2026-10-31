@@ -3,6 +3,8 @@ import '../../entities/personagem/classe_do_personagem.dart';
 import '../../entities/personagem/poder.dart';
 import '../data_services/call_poderes.dart';
 import '../data_services/call_pericias.dart';
+import '../motor_modificadores_service.dart';
+import 'aprendizado_magia_service.dart';
 
 class ItemRequisito {
   final String descricao;
@@ -28,29 +30,74 @@ class ResultadoElegibilidade {
 }
 
 class PoderValidadorService {
-  /// Valida se um personagem em uma classe específica é elegível para aprender um poder.
+  /// Valida se um personagem em uma classe específica é elegível para aprender um poder
+  /// (seja poder de classe ou poder geral/Tormenta).
   static ResultadoElegibilidade validar({
     required Personagem personagem,
     required ClasseDoPersonagem classeDoPersonagem,
     required Poder poder,
   }) {
-    // 1. Checa se o personagem já possui este poder
-    final bool jaPossui = classeDoPersonagem.poderesEscolhidos.any(
-      (p) => p.key == poder.key,
-    );
+    final permiteMultiplas =
+        poder.regrasCustomizacao?.permiteMultiplasInstancias == true ||
+        poder.key.toUpperCase() == 'AUMENTO_DE_ATRIBUTO';
+
+    // 1. Checa se o personagem já possui este poder (em qualquer classe, geral ou Deformidade)
+    final bool jaPossui =
+        !permiteMultiplas &&
+        (classeDoPersonagem.poderesEscolhidos.any(
+              (p) => p.key.toLowerCase() == poder.key.toLowerCase(),
+            ) ||
+            MotorModificadoresService.possuiPoder(personagem, poder.key));
 
     final List<ItemRequisito> requisitos = [];
 
-    // 2. Validação de Nível Mínimo na Classe
+    final bool ehPoderGeralOuTormenta =
+        poder.ehPoderTormenta ||
+        poder.tipo?.toLowerCase() == 'poder_geral' ||
+        (poder.categoria != null &&
+            poder.categoria!.toLowerCase().startsWith('poder_'));
+
+    // RV07: Se o poder pertence exclusivamente a determinadas classes no catálogo,
+    // impede que seja liberado utilizando o nível ou o slot de outra classe!
+    if (!ehPoderGeralOuTormenta) {
+      final classesDonas = BancoDePoderes.obterClassesDonasDoPoder(poder.key);
+      final idClasseAtualUpper =
+          classeDoPersonagem.classeDefinicao.idClasse.toUpperCase();
+      if (classesDonas.isNotEmpty &&
+          !classesDonas.contains(idClasseAtualUpper)) {
+        requisitos.add(
+          ItemRequisito(
+            descricao: 'Exclusivo de ${classesDonas.join(" / ")}',
+            atendido: false,
+          ),
+        );
+      }
+    }
+
+    // 2. Validação de Nível Mínimo (Nível de Personagem para Poderes Gerais;
+    //    Nível Individual na Classe para Poderes de Classe — RF05 / RN08 / RV07)
     if (poder.nivelMinimo > 1) {
-      final bool atendeNivel = classeDoPersonagem.nivel >= poder.nivelMinimo;
-      final nomeClasse = classeDoPersonagem.classeDefinicao.nome;
-      requisitos.add(
-        ItemRequisito(
-          descricao: '${poder.nivelMinimo}º nível de $nomeClasse',
-          atendido: atendeNivel,
-        ),
-      );
+      if (ehPoderGeralOuTormenta) {
+        final nivPers = personagem.nivelPersonagem > 0
+            ? personagem.nivelPersonagem
+            : classeDoPersonagem.nivel;
+        final bool atendeNivel = nivPers >= poder.nivelMinimo;
+        requisitos.add(
+          ItemRequisito(
+            descricao: '${poder.nivelMinimo}º nível de personagem',
+            atendido: atendeNivel,
+          ),
+        );
+      } else {
+        final bool atendeNivel = classeDoPersonagem.nivel >= poder.nivelMinimo;
+        final nomeClasse = classeDoPersonagem.classeDefinicao.nome;
+        requisitos.add(
+          ItemRequisito(
+            descricao: '${poder.nivelMinimo}º nível de $nomeClasse',
+            atendido: atendeNivel,
+          ),
+        );
+      }
     }
 
     // 3. Validação de Caminho / Especialização (ex: Mago, Bruxo, Feiticeiro)
@@ -72,7 +119,6 @@ class PoderValidadorService {
 
     // 4. Validação de Atributos Exigidos (ex: FOR 13 -> Mod +1, DES 15 -> Mod +2)
     poder.atributosExigidos.forEach((sigla, valorExigido) {
-      // Converte valor de atributo no formato clássico (13, 15) para modificador se necessário
       final int modNecessario = valorExigido >= 10
           ? ((valorExigido - 10) ~/ 2)
           : valorExigido;
@@ -82,12 +128,49 @@ class PoderValidadorService {
 
       requisitos.add(
         ItemRequisito(
-          descricao:
-              '$sigla $modNecessario (${sigla.toUpperCase()} $valorExigido)',
+          descricao: '${sigla.toUpperCase()} +$modNecessario',
           atendido: atendeAtributo,
         ),
       );
     });
+
+    // 4b. Validação de Atributos Máximos (ex: Repulsivo exige CAR -1 ou menor)
+    poder.atributosMaximos.forEach((sigla, valorMaximo) {
+      final int modAtual = personagem.getValorFinal(sigla.toUpperCase());
+      final bool atendeMax = modAtual <= valorMaximo;
+      requisitos.add(
+        ItemRequisito(
+          descricao: '${sigla.toUpperCase()} $valorMaximo ou menor',
+          atendido: atendeMax,
+        ),
+      );
+    });
+
+    // 4c. Validação de Quantidade Mínima de Outros Poderes da Tormenta
+    if (poder.poderesTormentaMinimos > 0) {
+      final int totalTormenta = personagem.totalPoderesTormenta;
+      final bool atendeTormenta = totalTormenta >= poder.poderesTormentaMinimos;
+      final String descTormenta = poder.poderesTormentaMinimos == 1
+          ? 'Outro poder da Tormenta ($totalTormenta/1)'
+          : '${poder.poderesTormentaMinimos} outros poderes da Tormenta ($totalTormenta/${poder.poderesTormentaMinimos})';
+      requisitos.add(
+        ItemRequisito(descricao: descTormenta, atendido: atendeTormenta),
+      );
+    }
+
+    // 4d. Validação de Círculo Mágico Mínimo
+    if (poder.circuloMagicoMinimo != null && poder.circuloMagicoMinimo! > 0) {
+      final int circMax = AprendizadoMagiaService.obterCirculoMaximoPersonagem(
+        personagem,
+      );
+      final bool atendeCirculo = circMax >= poder.circuloMagicoMinimo!;
+      requisitos.add(
+        ItemRequisito(
+          descricao: 'Lançar magias de ${poder.circuloMagicoMinimo}º círculo',
+          atendido: atendeCirculo,
+        ),
+      );
+    }
 
     // 5. Validação de Perícias Exigidas
     for (final periciaExigida in poder.periciasExigidas) {
@@ -138,7 +221,23 @@ class PoderValidadorService {
     required String periciaExigida,
   }) {
     final exigidaNorm = _normalizarTexto(periciaExigida);
-    return personagem.periciasTreinadas.any((treinada) {
+    final listaExplicita = <String>[
+      ...personagem.periciasTreinadas,
+      ...personagem.classes.expand((c) => c.periciasExclusivasEscolhidas.values),
+    ];
+
+    if (listaExplicita.isEmpty) {
+      if (personagem.ehPericiaTreinada(periciaExigida)) return true;
+      for (final per in BancoDePericias.todas) {
+        if (_normalizarTexto(per.key) == exigidaNorm ||
+            _normalizarTexto(per.label) == exigidaNorm) {
+          if (personagem.ehPericiaTreinada(per.key)) return true;
+        }
+      }
+      return false;
+    }
+
+    return listaExplicita.any((treinada) {
       if (treinada.toUpperCase() == periciaExigida.toUpperCase()) return true;
       if (_normalizarTexto(treinada) == exigidaNorm) return true;
 
@@ -163,31 +262,26 @@ class PoderValidadorService {
   }) {
     final chaveNorm = _normalizarTexto(poderKeyOrName);
 
-    // Checa poderes de classe
-    final naClasse = classeDoPersonagem.poderesEscolhidos.any(
-      (p) =>
-          p.key.toUpperCase() == poderKeyOrName.toUpperCase() ||
-          _normalizarTexto(p.key) == chaveNorm ||
-          _normalizarTexto(p.nome) == chaveNorm,
-    );
-    if (naClasse) return true;
+    final todosPoderes = <Poder>[
+      ...classeDoPersonagem.poderesEscolhidos,
+      ...MotorModificadoresService.obterTodosPoderesAtivos(personagem),
+    ];
 
-    // Checa poderes gerais
-    final nosGerais = personagem.poderesGerais.any(
-      (p) =>
-          p.key.toUpperCase() == poderKeyOrName.toUpperCase() ||
+    for (final p in todosPoderes) {
+      if (p.key.toUpperCase() == poderKeyOrName.toUpperCase() ||
           _normalizarTexto(p.key) == chaveNorm ||
-          _normalizarTexto(p.nome) == chaveNorm,
-    );
-    if (nosGerais) return true;
-
-    // Checa poder concedido
-    if (personagem.poderConcedido != null) {
-      final pc = personagem.poderConcedido!;
-      if (pc.key.toUpperCase() == poderKeyOrName.toUpperCase() ||
-          _normalizarTexto(pc.key) == chaveNorm ||
-          _normalizarTexto(pc.nome) == chaveNorm) {
+          _normalizarTexto(p.nome) == chaveNorm) {
         return true;
+      }
+    }
+
+    // Também checa habilidades de classe adquiridas na tabela de progressão (ex: Magias, Ataque Especial)
+    for (final c in personagem.classes) {
+      for (int n = 1; n <= c.nivel; n++) {
+        final habs = c.classeDefinicao.tabelaDeProgressao[n] ?? const [];
+        for (final h in habs) {
+          if (_normalizarTexto(h).contains(chaveNorm)) return true;
+        }
       }
     }
 
@@ -195,7 +289,9 @@ class PoderValidadorService {
   }
 
   static String _obterNomePoder(String poderKeyOrName) {
-    final p = BancoDePoderes.getByKey(poderKeyOrName);
+    final p =
+        BancoDePoderes.getByKey(poderKeyOrName) ??
+        BancoDePoderesGerais.getByKey(poderKeyOrName);
     if (p != null) return p.nome;
     return poderKeyOrName;
   }

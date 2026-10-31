@@ -2,14 +2,20 @@ import 'dart:async';
 import 'dart:math';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../domain/entities/equipamento/arma.dart';
+import '../../domain/entities/equipamento/item_geral.dart';
 import '../../domain/entities/equipamento/item_vestido.dart';
 import '../../domain/entities/equipamento/protecao.dart';
+import '../../domain/entities/habilidades_complexas/linhagem_arcanista.dart';
+import '../../domain/entities/personagem/classe.dart';
 import '../../domain/entities/personagem/classe_do_personagem.dart';
 import '../../domain/entities/personagem/efeito_temporario.dart';
 import '../../domain/entities/personagem/personagem.dart';
 import '../../domain/repositories/i_personagem_repository.dart';
 import '../../domain/services/calculo_ficha_service.dart';
+import '../../domain/services/data_services/call_magias.dart';
+import '../../domain/services/motor_multiclasse_service.dart';
 import '../../domain/services/personagem_storage_service.dart';
+import '../../domain/services/poderes_e_magias/aprendizado_magia_service.dart';
 import 'ficha_state.dart';
 
 class FichaCubit extends Cubit<FichaState> {
@@ -99,29 +105,129 @@ class FichaCubit extends Cubit<FichaState> {
     return super.close();
   }
 
-  /// Altera o nível do personagem (+1 ou -1) dentro do limite de 1 a 20
+  /// Altera o nível da classe principal (+1 ou -1) dentro do limite total de 1 a 20
   Future<bool> alterarNivel(int delta) async {
-    if (state.personagem.classes.isEmpty) return false;
-    final cl = state.personagem.classes[0];
-    final novoNivel = cl.nivel + delta;
+    return alterarNivelClasse(0, delta);
+  }
 
-    if (novoNivel < 1 || novoNivel > 20) return false;
-
-    final novasClasses = List<ClasseDoPersonagem>.from(state.personagem.classes)
-      ..[0] = cl.copyWith(nivel: novoNivel);
-
-    var atualizado = state.personagem.copyWith(
-      classe_do_personagem: novasClasses,
-    );
-    if (atualizado.pvAtual > atualizado.pvTotal) {
-      atualizado = atualizado.copyWith(pvAtual: atualizado.pvTotal);
+  /// RF01 / RN01 / RV01 / RV04 — Sobe 1 nível de personagem atribuindo-o explicitamente à `classeEscolhida`
+  /// (seja uma classe já registrada ou uma nova classe via multiclasse).
+  Future<bool> subirNivelSelecionandoClasse(
+    Classe classeEscolhida, {
+    CaminhoDeClasse? caminho,
+    Linhagem? linhagem,
+  }) async {
+    try {
+      final tinhaClasse = state.personagem.classes.any(
+        (c) =>
+            c.classeDefinicao.idClasse.toLowerCase() ==
+            classeEscolhida.idClasse.toLowerCase(),
+      );
+      final atualizado = MotorMulticlasseService.adquirirNivelEmClasse(
+        personagem: state.personagem,
+        classeEscolhida: classeEscolhida,
+        caminhoInicial: caminho,
+        linhagemInicial: linhagem,
+      );
+      final nvIndividual = atualizado.nivelNaClasse(classeEscolhida.idClasse);
+      final msg = tinhaClasse
+          ? 'Nível adquirido: ${classeEscolhida.nome} Nv. $nvIndividual (Total ${atualizado.nivelPersonagem} • ${atualizado.nomePatamar})!'
+          : 'Nova classe adquirida: ${classeEscolhida.nome} Nv. 1 (Total ${atualizado.nivelPersonagem} • ${atualizado.nomePatamar})!';
+      await atualizarPersonagem(atualizado, mensagemSucesso: msg);
+      return true;
+    } on ExcecaoValidacaoMulticlasse catch (e) {
+      emit(state.copyWith(mensagemErro: e.mensagem, anularSucesso: true));
+      return false;
     }
-    if (atualizado.pmAtual > atualizado.pmTotal) {
-      atualizado = atualizado.copyWith(pmAtual: atualizado.pmTotal);
+  }
+
+  /// Altera o nível de uma classe específica (`indiceClasse`) respeitando o teto de Nível 20 (RV01),
+  /// mantendo histórico cronológico (RF02 / RF12) e removendo classes secundárias zeradas (RV02).
+  Future<bool> alterarNivelClasse(int indiceClasse, int delta) async {
+    if (delta == 0 ||
+        indiceClasse < 0 ||
+        indiceClasse >= state.personagem.classes.length) {
+      return false;
+    }
+
+    final novoNivelTotal = state.personagem.nivelPersonagem + delta;
+    if (novoNivelTotal < 1 ||
+        novoNivelTotal > MotorMulticlasseService.nivelMaximoPersonagem) {
+      if (novoNivelTotal > MotorMulticlasseService.nivelMaximoPersonagem) {
+        emit(
+          state.copyWith(
+            mensagemErro: 'O personagem já atingiu o nível máximo (20).',
+            anularSucesso: true,
+          ),
+        );
+      }
+      return false;
+    }
+
+    final cl = state.personagem.classes[indiceClasse];
+    if (indiceClasse == 0 && cl.nivel + delta <= 0) {
+      return false; // Classe inicial não pode ir abaixo de 1
+    }
+    if (cl.nivel + delta < 0) {
+      return false;
+    }
+
+    Personagem atualizado = state.personagem;
+    if (delta > 0) {
+      for (int i = 0; i < delta; i++) {
+        atualizado = MotorMulticlasseService.adquirirNivelEmClasse(
+          personagem: atualizado,
+          classeEscolhida: cl.classeDefinicao,
+        );
+      }
+    } else {
+      for (int i = 0; i < delta.abs(); i++) {
+        atualizado = MotorMulticlasseService.removerNivelDeClasse(
+          personagem: atualizado,
+          indiceClasse: indiceClasse,
+        );
+      }
     }
 
     await atualizarPersonagem(atualizado);
     return true;
+  }
+
+  /// Adiciona uma nova classe (Multiclasse) no Nível 1 ou sobe +1 nível caso já possua a classe.
+  Future<bool> adicionarMulticlasse(
+    Classe novaClasseDefinicao, {
+    CaminhoDeClasse? caminho,
+    Linhagem? linhagem,
+  }) async {
+    return subirNivelSelecionandoClasse(
+      novaClasseDefinicao,
+      caminho: caminho,
+      linhagem: linhagem,
+    );
+  }
+
+  /// Define ou altera o caminho de classe (ex: Mago / Bruxo / Feiticeiro em Arcanista multiclasse)
+  Future<void> definirCaminhoClasse(
+    int indiceClasse,
+    CaminhoDeClasse caminho,
+  ) async {
+    if (indiceClasse < 0 || indiceClasse >= state.personagem.classes.length) {
+      return;
+    }
+    final novasClasses = List<ClasseDoPersonagem>.from(state.personagem.classes);
+    novasClasses[indiceClasse] = novasClasses[indiceClasse].copyWith(
+      caminhoEscolhido: caminho,
+    );
+    final atualizado = state.personagem.copyWith(
+      classe_do_personagem: novasClasses,
+    );
+    await atualizarPersonagem(
+      atualizado.copyWith(
+        pmAtual: state.personagem.pmAtual.clamp(0, atualizado.pmTotal),
+      ),
+      mensagemSucesso:
+          'Caminho de ${novasClasses[indiceClasse].classeDefinicao.nome} alterado para ${caminho.nome}.',
+    );
   }
 
   // --- PONTOS DE VIDA E MANA ---
@@ -401,12 +507,36 @@ class FichaCubit extends Cubit<FichaState> {
     );
   }
 
-  Future<void> adicionarMagiaConhecida(String magiaId) async {
-    if (state.personagem.magiasConhecidas.contains(magiaId)) return;
+  Future<bool> adicionarMagiaConhecida(
+    String magiaId, {
+    bool validarCirculoClasse = false,
+  }) async {
+    if (state.personagem.magiasConhecidas.contains(magiaId)) return false;
+
+    if (validarCirculoClasse) {
+      try {
+        final magia = BancoDeMagias.getById(magiaId);
+        if (!AprendizadoMagiaService.podeAprenderMagiaNoPersonagem(
+          state.personagem,
+          magia,
+        )) {
+          emit(
+            state.copyWith(
+              mensagemErro:
+                  '[RV07] A magia "${magia.nome}" (${magia.circulo}º Círculo ${magia.tipo}) exige nível superior na classe conjuradora correspondente.',
+              anularSucesso: true,
+            ),
+          );
+          return false;
+        }
+      } catch (_) {}
+    }
+
     final lista = [...state.personagem.magiasConhecidas, magiaId];
     await atualizarPersonagem(
       state.personagem.copyWith(magiasConhecidas: lista),
     );
+    return true;
   }
 
   Future<void> removerMagiaConhecida(String magiaId) async {
@@ -501,11 +631,51 @@ class FichaCubit extends Cubit<FichaState> {
     await atualizarPersonagem(state.personagem.copyWith(armas: lista));
   }
 
+  Future<void> atualizarArmaInventario(int index, Arma armaAtualizada) async {
+    final lista = List<Arma>.from(state.personagem.armas);
+    if (index < 0 || index >= lista.length) return;
+    lista[index] = armaAtualizada;
+    await atualizarPersonagem(state.personagem.copyWith(armas: lista));
+  }
+
   Future<void> removerArmaInventario(int index) async {
     final lista = List<Arma>.from(state.personagem.armas);
     if (index < 0 || index >= lista.length) return;
     lista.removeAt(index);
     await atualizarPersonagem(state.personagem.copyWith(armas: lista));
+  }
+
+  Future<void> adicionarItemGeral(
+    ItemGeral item, {
+    bool vestirEmSlotLivre = false,
+  }) async {
+    if (vestirEmSlotLivre && item.ehVestido) {
+      final ocupados = state.personagem.itensVestidosExtras
+          .map((e) => e.slotIndex)
+          .toSet();
+      int? slotLivre;
+      for (final s in [1, 2, 3]) {
+        if (!ocupados.contains(s)) {
+          slotLivre = s;
+          break;
+        }
+      }
+      if (slotLivre != null) {
+        await salvarItemVestidoExtra(
+          ItemVestido(
+            slotIndex: slotLivre,
+            nome: item.nome,
+            beneficio: item.efeitoResumo,
+            espacos: item.espacos,
+            bonusDefesa: item.bonusDefesa,
+            bonusCDMagia: item.bonusCDMagia,
+            bonusPericias: item.bonusPericias,
+          ),
+        );
+        return;
+      }
+    }
+    await adicionarItemMochila(item.nome);
   }
 
   Future<void> definirTibares({int? cobre, int? prata, int? ouro}) async {

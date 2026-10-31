@@ -49,9 +49,16 @@ class BancoDeMagias {
 
     for (var circulo in circulos) {
       try {
-        final String response = await rootBundle.loadString(
-          'assets/data/magias/${circulo}_circulo.json',
-        );
+        String response;
+        try {
+          response = await rootBundle.loadString(
+            'assets/data/magias/${circulo}_circulo.json',
+          );
+        } catch (_) {
+          final file = File('assets/data/magias/${circulo}_circulo.json');
+          if (!file.existsSync()) continue;
+          response = file.readAsStringSync();
+        }
         final List<dynamic> data = json.decode(response) as List<dynamic>;
 
         final magiasCirculo = data

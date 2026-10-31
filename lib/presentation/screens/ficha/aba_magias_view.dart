@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../domain/entities/magia/magia.dart';
+import '../../../domain/entities/personagem/personagem.dart';
 import '../../../domain/services/calculo_ficha_service.dart';
 import '../../../domain/services/data_services/call_magias.dart';
+import '../../../domain/services/poderes_e_magias/aprendizado_magia_service.dart';
 import '../../controllers/ficha_cubit.dart';
 import '../../controllers/ficha_state.dart';
 import 'dialogos_ficha.dart';
@@ -51,6 +53,9 @@ class _AbaMagiasViewState extends State<AbaMagiasView> {
     FichaCubit cubit,
   ) async {
     final todas = BancoDeMagias.todas;
+    final circuloMax = AprendizadoMagiaService.obterCirculoMaximoPersonagem(
+      cubit.personagem,
+    );
     await showModalBottomSheet<void>(
       context: context,
       isScrollControlled: true,
@@ -59,9 +64,14 @@ class _AbaMagiasViewState extends State<AbaMagiasView> {
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (_) => _ModalCatalogoMagias(
+        personagem: cubit.personagem,
         todasMagias: todas,
         conhecidasIds: cubit.personagem.magiasConhecidas,
-        onAdicionar: (id) => cubit.adicionarMagiaConhecida(id),
+        circuloMaximoDesbloqueado: circuloMax,
+        onAdicionar: (id, validarClasse) => cubit.adicionarMagiaConhecida(
+          id,
+          validarCirculoClasse: validarClasse,
+        ),
       ),
     );
   }
@@ -225,7 +235,7 @@ class _AbaMagiasViewState extends State<AbaMagiasView> {
                             ),
                             const SizedBox(height: 4),
                             Text(
-                              'Mana Atual: ${p.pmAtual} / ${p.pmTotal} PM',
+                              'Mana Atual: ${p.pmAtual} / ${p.pmTotal} PM • Até ${AprendizadoMagiaService.obterCirculoMaximoPersonagem(p)}º Círculo',
                               style: const TextStyle(
                                 color: Color(0xFF38BDF8),
                                 fontSize: 12,
@@ -272,6 +282,50 @@ class _AbaMagiasViewState extends State<AbaMagiasView> {
                 ],
               ),
             ),
+
+            if (AprendizadoMagiaService.calcularMagiasPendentesPersonagem(p) >
+                0) ...[
+              const SizedBox(height: 10),
+              Material(
+                color: const Color(0xFF1E1B4B),
+                borderRadius: BorderRadius.circular(12),
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(12),
+                  onTap: () => _abrirCatalogoMagias(context, cubit),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 10,
+                    ),
+                    child: Row(
+                      children: [
+                        const Icon(
+                          Icons.auto_stories_rounded,
+                          color: Colors.amberAccent,
+                          size: 20,
+                        ),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: Text(
+                            'Evolução de Grimório: ${AprendizadoMagiaService.calcularMagiasPendentesPersonagem(p)} magia(s) pendente(s) para aprender (até o ${AprendizadoMagiaService.obterCirculoMaximoPersonagem(p)}º Círculo)',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ),
+                        const Icon(
+                          Icons.add_circle_outline,
+                          color: Colors.amberAccent,
+                          size: 20,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
 
             const SizedBox(height: 12),
 
@@ -635,13 +689,17 @@ class _CardMagiaInterativoState extends State<_CardMagiaInterativo> {
 }
 
 class _ModalCatalogoMagias extends StatefulWidget {
+  final Personagem personagem;
   final List<Magia> todasMagias;
   final List<String> conhecidasIds;
-  final ValueChanged<String> onAdicionar;
+  final int circuloMaximoDesbloqueado;
+  final void Function(String magiaId, bool validarClasse) onAdicionar;
 
   const _ModalCatalogoMagias({
+    required this.personagem,
     required this.todasMagias,
     required this.conhecidasIds,
+    this.circuloMaximoDesbloqueado = 1,
     required this.onAdicionar,
   });
 
@@ -652,9 +710,19 @@ class _ModalCatalogoMagias extends StatefulWidget {
 class _ModalCatalogoMagiasState extends State<_ModalCatalogoMagias> {
   String _busca = '';
   int _circulo = 0;
+  bool _liberarExtraOuRacial = false;
 
   @override
   Widget build(BuildContext context) {
+    final circArcano = AprendizadoMagiaService.obterCirculoMaximoPorTipoMagia(
+      widget.personagem,
+      'arcana',
+    );
+    final circDivino = AprendizadoMagiaService.obterCirculoMaximoPorTipoMagia(
+      widget.personagem,
+      'divina',
+    );
+
     final filtradas = widget.todasMagias.where((m) {
       if (_circulo > 0 && m.circulo != _circulo) return false;
       if (_busca.isNotEmpty &&
@@ -677,7 +745,12 @@ class _ModalCatalogoMagiasState extends State<_ModalCatalogoMagias> {
               'Catálogo de Magias (T20)',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 2),
+            Text(
+              'Círculos por classe: Arcana ${circArcano > 0 ? "$circArcanoº" : "—"} • Divina ${circDivino > 0 ? "$circDivinoº" : "—"}',
+              style: const TextStyle(fontSize: 12, color: Colors.black54),
+            ),
+            const SizedBox(height: 8),
             TextField(
               onChanged: (v) => setState(() => _busca = v),
               decoration: const InputDecoration(
@@ -687,21 +760,42 @@ class _ModalCatalogoMagiasState extends State<_ModalCatalogoMagias> {
                 isDense: true,
               ),
             ),
-            const SizedBox(height: 8),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [0, 1, 2, 3, 4, 5].map((c) {
-                  return Padding(
-                    padding: const EdgeInsets.only(right: 6),
-                    child: ChoiceChip(
-                      selected: _circulo == c,
-                      label: Text(c == 0 ? 'Todos' : '$cº'),
-                      onSelected: (_) => setState(() => _circulo = c),
+            const SizedBox(height: 6),
+            Row(
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [0, 1, 2, 3, 4, 5].map((c) {
+                        final acimaDoLimite =
+                            c > 0 && c > widget.circuloMaximoDesbloqueado;
+                        return Padding(
+                          padding: const EdgeInsets.only(right: 6),
+                          child: ChoiceChip(
+                            selected: _circulo == c,
+                            label: Text(
+                              c == 0
+                                  ? 'Todos'
+                                  : (acimaDoLimite ? '$cº 🔒' : '$cº'),
+                            ),
+                            onSelected: (_) => setState(() => _circulo = c),
+                          ),
+                        );
+                      }).toList(),
                     ),
-                  );
-                }).toList(),
-              ),
+                  ),
+                ),
+                FilterChip(
+                  selected: _liberarExtraOuRacial,
+                  visualDensity: VisualDensity.compact,
+                  label: const Text(
+                    'Extra/Poder',
+                    style: TextStyle(fontSize: 11),
+                  ),
+                  onSelected: (v) => setState(() => _liberarExtraOuRacial = v),
+                ),
+              ],
             ),
             const SizedBox(height: 8),
             Expanded(
@@ -712,25 +806,42 @@ class _ModalCatalogoMagiasState extends State<_ModalCatalogoMagias> {
                 itemBuilder: (_, idx) {
                   final m = filtradas[idx];
                   final jaConhece = widget.conhecidasIds.contains(m.id);
+                  final liberadaNaClasse =
+                      AprendizadoMagiaService.podeAprenderMagiaNoPersonagem(
+                        widget.personagem,
+                        m,
+                      );
+                  final podeSelecionar =
+                      !jaConhece && (liberadaNaClasse || _liberarExtraOuRacial);
+
                   return ListTile(
                     dense: true,
+                    enabled: podeSelecionar || jaConhece,
                     title: Text(
                       m.nome,
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                     subtitle: Text(
-                      '${m.circulo}º Círculo • ${m.tipo.toUpperCase()} • ${m.escola}',
+                      liberadaNaClasse
+                          ? '${m.circulo}º Círculo • ${m.tipo.toUpperCase()} • ${m.escola}'
+                          : '${m.circulo}º Círculo • ${m.tipo.toUpperCase()} • 🔒 Requer nível na classe conjuradora',
                     ),
                     trailing: jaConhece
                         ? const Icon(Icons.check_circle, color: Colors.green)
-                        : const Icon(
-                            Icons.add_circle_outline,
-                            color: Color(0xFFD32F2F),
-                          ),
-                    onTap: jaConhece
+                        : (podeSelecionar
+                              ? const Icon(
+                                  Icons.add_circle_outline,
+                                  color: Color(0xFFD32F2F),
+                                )
+                              : const Icon(
+                                  Icons.lock_outline,
+                                  color: Colors.grey,
+                                  size: 18,
+                                )),
+                    onTap: !podeSelecionar
                         ? null
                         : () {
-                            widget.onAdicionar(m.id);
+                            widget.onAdicionar(m.id, !_liberarExtraOuRacial);
                             Navigator.pop(context);
                           },
                   );

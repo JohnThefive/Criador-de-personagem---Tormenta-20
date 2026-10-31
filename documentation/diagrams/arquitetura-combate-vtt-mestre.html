@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>T20 Creator — Arquitetura VTT, Combate & Painel do Mestre (LAN)</title>
+  <!-- Self-contained rendering: system monospace stack, no web-font fetch.
+       The two scripts below are OPTIONAL and power only the PNG/PDF export
+       buttons; the diagram renders fully offline without them. -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js" integrity="sha384-ZZ1pncU3bQe8y31yfZdMFdSpttDoPmOZg2wguVK9almUodir1PghgT0eY7Mrty8H" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js" integrity="sha384-en/ztfPSRkGfME4KIm05joYXynqzUgbsG5nMrj/xEFAHXkeZfO3yMK8QQ+mP7p1/" crossorigin="anonymous"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'JetBrains Mono', ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+      background: #020617;
+      min-height: 100vh;
+      padding: 2rem;
+      color: white;
+    }
+
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+
+    .header {
+      margin-bottom: 1.75rem;
+    }
+
+    .header-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .pulse-dot {
+      width: 12px;
+      height: 12px;
+      background: #22d3ee;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+    }
+
+    .subtitle {
+      color: #94a3b8;
+      font-size: 0.85rem;
+      margin-left: 1.75rem;
+    }
+
+    .diagram-container {
+      background: rgba(15, 23, 42, 0.5);
+      border-radius: 1rem;
+      border: 1px solid #1e293b;
+      padding: 1.5rem;
+      overflow-x: auto;
+    }
+
+    svg {
+      width: 100%;
+      min-width: 980px;
+      display: block;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1rem;
+      margin-top: 1.75rem;
+    }
+
+    .card {
+      background: rgba(15, 23, 42, 0.5);
+      border-radius: 0.75rem;
+      border: 1px solid #1e293b;
+      padding: 1.25rem;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .card-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .card-dot.cyan { background: #22d3ee; }
+    .card-dot.emerald { background: #34d399; }
+    .card-dot.violet { background: #a78bfa; }
+    .card-dot.amber { background: #fbbf24; }
+    .card-dot.rose { background: #fb7185; }
+
+    .card h3 {
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+
+    .card ul {
+      list-style: none;
+      color: #94a3b8;
+      font-size: 0.75rem;
+      line-height: 1.45;
+    }
+
+    .card li {
+      margin-bottom: 0.4rem;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 1.5rem;
+      color: #475569;
+      font-size: 0.75rem;
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 0.5rem;
+      margin-left: auto;
+      flex-shrink: 0;
+      align-items: center;
+    }
+    .toolbar-toggle {
+      background: transparent;
+      border: none;
+      color: #475569;
+      cursor: pointer;
+      font-size: 1.25rem;
+      line-height: 1;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.375rem;
+      transition: color 0.2s, background 0.2s;
+    }
+    .toolbar-toggle:hover { color: #94a3b8; background: rgba(30, 41, 59, 0.5); }
+    .toolbar-actions {
+      display: none;
+      gap: 0.5rem;
+    }
+    .toolbar.expanded .toolbar-actions { display: flex; }
+    .toolbar-actions button {
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid #334155;
+      color: #94a3b8;
+      padding: 0.375rem 0.75rem;
+      border-radius: 0.375rem;
+      font-family: inherit;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .toolbar-actions button:hover {
+      background: rgba(51, 65, 85, 0.8);
+      color: white;
+      border-color: #475569;
+    }
+
+    @media print {
+      body { background: #020617; padding: 1rem; }
+      .toolbar { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="report-container">
+    <div class="header">
+      <div class="header-row">
+        <div class="pulse-dot"></div>
+        <h1>T20 Creator — Combate VTT 2D, Sandbox Offline &amp; Painel do Mestre (LAN)</h1>
+        <div class="toolbar">
+          <div class="toolbar-actions">
+            <button onclick="copyAsImage(this)">📋 Copy</button>
+            <button onclick="downloadPNG(this)">🖼️ PNG</button>
+            <button onclick="downloadPDF(this)">📄 PDF</button>
+          </div>
+          <button class="toolbar-toggle" onclick="this.parentElement.classList.toggle('expanded')" title="Export options" aria-label="Export options">⋯</button>
+        </div>
+      </div>
+      <p class="subtitle">ADR-002 • Topologia Single-Leader em Rede Local (Wi-Fi/Hotspot) + Loopback em Memória para Treino vs. NPCs</p>
+    </div>
+
+    <div class="diagram-container">
+      <svg viewBox="0 0 1120 740">
+        <defs>
+          <marker id="arrow-slate" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#64748b" />
+          </marker>
+          <marker id="arrow-cyan" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#22d3ee" />
+          </marker>
+          <marker id="arrow-emerald" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#34d399" />
+          </marker>
+          <marker id="arrow-orange" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#fb923c" />
+          </marker>
+          <marker id="arrow-rose" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#fb7185" />
+          </marker>
+          <marker id="arrow-sky" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#38bdf8" />
+          </marker>
+          <marker id="arrow-violet" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#a78bfa" />
+          </marker>
+          <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.5"/>
+          </pattern>
+        </defs>
+
+        <!-- Background Grid -->
+        <rect width="100%" height="100%" fill="url(#grid)" />
+
+        <!-- =================================================================
+             BOUNDARY ZONES
+             ================================================================= -->
+        <!-- Left Boundary: Player Device -->
+        <rect x="20" y="30" width="470" height="615" rx="12" fill="rgba(34, 211, 238, 0.03)" stroke="#fbbf24" stroke-width="1" stroke-dasharray="8,4"/>
+        <text x="36" y="50" fill="#fbbf24" font-size="10" font-weight="600">Dispositivo do Jogador (1..6 Clientes LAN ou Solo Offline)</text>
+
+        <!-- Right Boundary: GM Host Device -->
+        <rect x="630" y="30" width="470" height="615" rx="12" fill="rgba(52, 211, 153, 0.03)" stroke="#fbbf24" stroke-width="1" stroke-dasharray="8,4"/>
+        <text x="646" y="50" fill="#fbbf24" font-size="10" font-weight="600">Dispositivo do Mestre — Host LAN Autoritativo (Android / Desktop)</text>
+
+        <!-- Security Sub-boundary around Embedded Server -->
+        <rect x="645" y="302" width="440" height="88" rx="8" fill="transparent" stroke="#fb7185" stroke-width="1" stroke-dasharray="4,4"/>
+        <text x="655" y="314" fill="#fb7185" font-size="8">LAN Wi-Fi / Hotspot :47200 (PIN + Session Token)</text>
+
+        <!-- =================================================================
+             ARROWS (Drawn BEFORE masked boxes so lines stay cleanly behind)
+             ================================================================= -->
+
+        <!-- Player Internal Vertical Flows -->
+        <line x1="145" y1="143" x2="145" y2="193" stroke="#22d3ee" stroke-width="1.5" marker-end="url(#arrow-cyan)"/>
+        <line x1="365" y1="143" x2="365" y2="193" stroke="#22d3ee" stroke-width="1.5" marker-end="url(#arrow-cyan)"/>
+        <line x1="145" y1="263" x2="145" y2="318" stroke="#fb923c" stroke-width="1.5" marker-end="url(#arrow-orange)"/>
+        <line x1="365" y1="318" x2="365" y2="265" stroke="#fb923c" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#arrow-orange)"/>
+        <text x="373" y="295" fill="#fb923c" font-size="8">⓪ Loopback 0ms</text>
+
+        <line x1="145" y1="382" x2="145" y2="433" stroke="#34d399" stroke-width="1.5" marker-end="url(#arrow-emerald)"/>
+        <line x1="245" y1="230" x2="268" y2="230" stroke="#64748b" stroke-width="1.2" stroke-dasharray="3,3"/>
+        <line x1="200" y1="263" x2="320" y2="433" stroke="#a78bfa" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow-violet)"/>
+        <text x="292" y="418" fill="#a78bfa" font-size="8">⑤ AutoSave 250ms</text>
+
+        <line x1="145" y1="507" x2="145" y2="553" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#arrow-sky)"/>
+
+        <!-- Cross-LAN Flows (Corridor x=470..655) -->
+        <!-- 1. Handshake & Sheet Sync -->
+        <line x1="470" y1="333" x2="653" y2="333" stroke="#fb7185" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow-rose)"/>
+        <text x="560" y="325" fill="#fb7185" font-size="8" text-anchor="middle">① POST /join (PIN + Ficha)</text>
+
+        <!-- 2. Bidirectional WS Commands -->
+        <line x1="470" y1="354" x2="653" y2="354" stroke="#fb923c" stroke-width="1.6" marker-end="url(#arrow-orange)"/>
+        <text x="560" y="348" fill="#fb923c" font-size="8" text-anchor="middle">② WS Command (cmdId)</text>
+
+        <!-- 3. Authoritative Broadcast Events -->
+        <line x1="655" y1="373" x2="472" y2="373" stroke="#34d399" stroke-width="1.6" marker-end="url(#arrow-emerald)"/>
+        <text x="560" y="386" fill="#34d399" font-size="8" text-anchor="middle">③ WS Event (seq++, &lt;2KB)</text>
+
+        <!-- 4. Static Map/Portrait Asset HTTP Cache -->
+        <line x1="655" y1="588" x2="472" y2="588" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow-sky)"/>
+        <text x="560" y="580" fill="#38bdf8" font-size="8" text-anchor="middle">④ GET /assets/{sha256}</text>
+
+        <!-- GM Internal Vertical Flows -->
+        <line x1="755" y1="143" x2="755" y2="193" stroke="#22d3ee" stroke-width="1.5" marker-end="url(#arrow-cyan)"/>
+        <line x1="975" y1="195" x2="975" y2="145" stroke="#22d3ee" stroke-width="1.5" marker-end="url(#arrow-cyan)"/>
+        <line x1="865" y1="263" x2="865" y2="318" stroke="#34d399" stroke-width="1.5" marker-end="url(#arrow-emerald)"/>
+        <line x1="755" y1="382" x2="755" y2="433" stroke="#34d399" stroke-width="1.5" marker-end="url(#arrow-emerald)"/>
+        <line x1="975" y1="382" x2="975" y2="433" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#arrow-sky)"/>
+        <line x1="755" y1="507" x2="755" y2="553" stroke="#a78bfa" stroke-width="1.5" marker-end="url(#arrow-violet)"/>
+
+        <!-- =================================================================
+             LEFT SIDE BOXES — PLAYER DEVICE (Opaque mask + Semantic rect)
+             ================================================================= -->
+
+        <!-- J1: Ficha & VTT Jogador -->
+        <rect x="45" y="75" width="200" height="68" rx="6" fill="#0f172a"/>
+        <rect x="45" y="75" width="200" height="68" rx="6" fill="rgba(8, 51, 68, 0.4)" stroke="#22d3ee" stroke-width="1.5"/>
+        <text x="145" y="98" fill="white" font-size="11" font-weight="600" text-anchor="middle">Painel &amp; VTT Jogador</text>
+        <text x="145" y="115" fill="#94a3b8" font-size="9" text-anchor="middle">PainelJogadorScreen</text>
+        <text x="145" y="129" fill="#22d3ee" font-size="8" text-anchor="middle">VttCanvas • Ataque 1-Toque</text>
+
+        <!-- J2: Arena Treino Offline -->
+        <rect x="270" y="75" width="200" height="68" rx="6" fill="#0f172a"/>
+        <rect x="270" y="75" width="200" height="68" rx="6" fill="rgba(8, 51, 68, 0.4)" stroke="#22d3ee" stroke-width="1.5"/>
+        <text x="370" y="98" fill="white" font-size="11" font-weight="600" text-anchor="middle">Arena Treino (Offline)</text>
+        <text x="370" y="115" fill="#94a3b8" font-size="9" text-anchor="middle">Teste de Build vs. NPCs</text>
+        <text x="370" y="129" fill="#22d3ee" font-size="8" text-anchor="middle">Clone Sandbox Descartável</text>
+
+        <!-- J3: FichaCubit & SessaoCombateCubit -->
+        <rect x="45" y="195" width="200" height="68" rx="6" fill="#0f172a"/>
+        <rect x="45" y="195" width="200" height="68" rx="6" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.5"/>
+        <text x="145" y="218" fill="white" font-size="11" font-weight="600" text-anchor="middle">Ficha &amp; Combate Cubits</text>
+        <text x="145" y="235" fill="#94a3b8" font-size="9" text-anchor="middle">FichaSessionBridge</text>
+        <text x="145" y="249" fill="#34d399" font-size="8" text-anchor="middle">Aplica apenas PV/PM/Efeitos</text>
+
+        <!-- J4: Host Local + IA de NPCs -->
+        <rect x="270" y="195" width="200" height="68" rx="6" fill="#0f172a"/>
+        <rect x="270" y="195" width="200" height="68" rx="6" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.5"/>
+        <text x="370" y="218" fill="white" font-size="11" font-weight="600" text-anchor="middle">Host Sandbox + NPC AI</text>
+        <text x="370" y="235" fill="#94a3b8" font-size="9" text-anchor="middle">NpcTacticalAiService</text>
+        <text x="370" y="249" fill="#34d399" font-size="8" text-anchor="middle">Mesmo Coordinator em RAM</text>
+
+        <!-- J5: CombatSessionTransport -->
+        <rect x="45" y="320" width="425" height="62" rx="6" fill="#0f172a"/>
+        <rect x="45" y="320" width="425" height="62" rx="6" fill="rgba(251, 146, 60, 0.3)" stroke="#fb923c" stroke-width="1.5"/>
+        <text x="257" y="342" fill="white" font-size="11" font-weight="600" text-anchor="middle">CombatSessionTransport (Interface Unificada)</text>
+        <text x="257" y="359" fill="#94a3b8" font-size="9" text-anchor="middle">LanWsClientTransport (Backoff+Jitter) | LoopbackTransport (Offline)</text>
+        <text x="257" y="373" fill="#fb923c" font-size="8" text-anchor="middle">Pronto p/ futuro CloudRelayTransport sem alterar UI ou Domínio</text>
+
+        <!-- J6: Core de Domínio T20 -->
+        <rect x="45" y="435" width="200" height="72" rx="6" fill="#0f172a"/>
+        <rect x="45" y="435" width="200" height="72" rx="6" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.5"/>
+        <text x="145" y="458" fill="white" font-size="11" font-weight="600" text-anchor="middle">Domínio T20 (Dart Puro)</text>
+        <text x="145" y="475" fill="#94a3b8" font-size="9" text-anchor="middle">CalculoFichaService</text>
+        <text x="145" y="490" fill="#94a3b8" font-size="9" text-anchor="middle">PreviewAtaque • Carga</text>
+
+        <!-- J7: PersonagemStorageService -->
+        <rect x="270" y="435" width="200" height="72" rx="6" fill="#0f172a"/>
+        <rect x="270" y="435" width="200" height="72" rx="6" fill="rgba(76, 29, 149, 0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+        <text x="370" y="458" fill="white" font-size="11" font-weight="600" text-anchor="middle">PersonagemStorage</text>
+        <text x="370" y="475" fill="#94a3b8" font-size="9" text-anchor="middle">personagens/*.json (v2)</text>
+        <text x="370" y="490" fill="#a78bfa" font-size="8" text-anchor="middle">Build protegida localmente</text>
+
+        <!-- J8: Cache Local de Assets & Degradação -->
+        <rect x="45" y="555" width="425" height="65" rx="6" fill="#0f172a"/>
+        <rect x="45" y="555" width="425" height="65" rx="6" fill="rgba(8, 51, 68, 0.4)" stroke="#38bdf8" stroke-width="1.5"/>
+        <text x="257" y="578" fill="white" font-size="11" font-weight="600" text-anchor="middle">Cache Imutável de Mapas/Fotos &amp; Fallback Offline</text>
+        <text x="257" y="595" fill="#94a3b8" font-size="9" text-anchor="middle">Cache por SHA-256 em disco • Se LAN cair, ficha continua 100% operável</text>
+
+        <!-- =================================================================
+             RIGHT SIDE BOXES — GM HOST DEVICE (Opaque mask + Semantic rect)
+             ================================================================= -->
+
+        <!-- M1: Painel do Mestre & VTT -->
+        <rect x="655" y="75" width="200" height="68" rx="6" fill="#0f172a"/>
+        <rect x="655" y="75" width="200" height="68" rx="6" fill="rgba(8, 51, 68, 0.4)" stroke="#22d3ee" stroke-width="1.5"/>
+        <text x="755" y="98" fill="white" font-size="11" font-weight="600" text-anchor="middle">Painel do Mestre &amp; VTT</text>
+        <text x="755" y="115" fill="#94a3b8" font-size="9" text-anchor="middle">Grid 2D • Terrenos • Alcance</text>
+        <text x="755" y="129" fill="#22d3ee" font-size="8" text-anchor="middle">Controle de Turno e Monstros</text>
+
+        <!-- M2: Inspetor / Avaliador de Fichas -->
+        <rect x="875" y="75" width="205" height="68" rx="6" fill="#0f172a"/>
+        <rect x="875" y="75" width="205" height="68" rx="6" fill="rgba(8, 51, 68, 0.4)" stroke="#22d3ee" stroke-width="1.5"/>
+        <text x="977" y="98" fill="white" font-size="11" font-weight="600" text-anchor="middle">Avaliador de Fichas</text>
+        <text x="977" y="115" fill="#94a3b8" font-size="9" text-anchor="middle">Auditoria de Bônus/Regras</text>
+        <text x="977" y="129" fill="#22d3ee" font-size="8" text-anchor="middle">Leitura + Selo Aprovado</text>
+
+        <!-- M3: MestreSessionCubit -->
+        <rect x="655" y="195" width="425" height="68" rx="6" fill="#0f172a"/>
+        <rect x="655" y="195" width="425" height="68" rx="6" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.5"/>
+        <text x="867" y="218" fill="white" font-size="11" font-weight="600" text-anchor="middle">HostSessionCoordinator (Autoridade Single-Leader)</text>
+        <text x="867" y="235" fill="#94a3b8" font-size="9" text-anchor="middle">Ordenação Monotônica (seq++) • Deduplicação commandId (500)</text>
+        <text x="867" y="249" fill="#34d399" font-size="8" text-anchor="middle">Replay Incremental (lastSeq) • Sem Split-Brain</text>
+
+        <!-- M4: Embedded HTTP + WS Server -->
+        <rect x="655" y="320" width="425" height="62" rx="6" fill="#0f172a"/>
+        <rect x="655" y="320" width="425" height="62" rx="6" fill="rgba(136, 19, 55, 0.4)" stroke="#fb7185" stroke-width="1.5"/>
+        <text x="867" y="342" fill="white" font-size="11" font-weight="600" text-anchor="middle">LanEmbeddedServer (dart:io HttpServer)</text>
+        <text x="867" y="359" fill="#94a3b8" font-size="9" text-anchor="middle">QR Code IP:Porta • WS /api/v1/ws • HTTP /api/v1/assets • Heartbeat 10s</text>
+
+        <!-- M5: Motor Oficial de Combate -->
+        <rect x="655" y="435" width="205" height="72" rx="6" fill="#0f172a"/>
+        <rect x="655" y="435" width="205" height="72" rx="6" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.5"/>
+        <text x="757" y="458" fill="white" font-size="11" font-weight="600" text-anchor="middle">Motor Tático T20</text>
+        <text x="757" y="475" fill="#94a3b8" font-size="9" text-anchor="middle">CombateEngine + RD</text>
+        <text x="757" y="490" fill="#94a3b8" font-size="9" text-anchor="middle">MovimentoEngine (1,5m/9m/30m)</text>
+
+        <!-- M6: Espelho Read-Only das Fichas -->
+        <rect x="875" y="435" width="205" height="72" rx="6" fill="#0f172a"/>
+        <rect x="875" y="435" width="205" height="72" rx="6" fill="rgba(8, 51, 68, 0.4)" stroke="#38bdf8" stroke-width="1.5"/>
+        <text x="977" y="458" fill="white" font-size="11" font-weight="600" text-anchor="middle">Espelho de Fichas (RAM)</text>
+        <text x="977" y="475" fill="#94a3b8" font-size="9" text-anchor="middle">Snapshots dos Jogadores</text>
+        <text x="977" y="490" fill="#38bdf8" font-size="8" text-anchor="middle">Somente Leitura p/ Auditoria</text>
+
+        <!-- M7: MesaStorageService -->
+        <rect x="655" y="555" width="425" height="65" rx="6" fill="#0f172a"/>
+        <rect x="655" y="555" width="425" height="65" rx="6" fill="rgba(76, 29, 149, 0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+        <text x="867" y="578" fill="white" font-size="11" font-weight="600" text-anchor="middle">MesaStorageService (Persistência Atômica de Sessão)</text>
+        <text x="867" y="595" fill="#94a3b8" font-size="9" text-anchor="middle">mesas/mesa_{id}.json (write tmp → rename) • Bestiário Local + Mapas</text>
+
+        <!-- =================================================================
+             LEGEND (Outside all boundary boxes: y >= 675)
+             ================================================================= -->
+        <text x="30" y="682" fill="white" font-size="10" font-weight="600">Legenda:</text>
+
+        <rect x="95" y="672" width="16" height="10" rx="2" fill="rgba(8, 51, 68, 0.4)" stroke="#22d3ee" stroke-width="1"/>
+        <text x="117" y="681" fill="#94a3b8" font-size="8">Frontend / UI</text>
+
+        <rect x="205" y="672" width="16" height="10" rx="2" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1"/>
+        <text x="227" y="681" fill="#94a3b8" font-size="8">Serviço / Motor Dart</text>
+
+        <rect x="350" y="672" width="16" height="10" rx="2" fill="rgba(251, 146, 60, 0.3)" stroke="#fb923c" stroke-width="1"/>
+        <text x="372" y="681" fill="#94a3b8" font-size="8">Barramento Transporte</text>
+
+        <rect x="505" y="672" width="16" height="10" rx="2" fill="rgba(136, 19, 55, 0.4)" stroke="#fb7185" stroke-width="1"/>
+        <text x="527" y="681" fill="#94a3b8" font-size="8">Gateway LAN / Auth PIN</text>
+
+        <rect x="665" y="672" width="16" height="10" rx="2" fill="rgba(76, 29, 149, 0.4)" stroke="#a78bfa" stroke-width="1"/>
+        <text x="687" y="681" fill="#94a3b8" font-size="8">Persistência Local</text>
+
+        <rect x="800" y="672" width="16" height="10" rx="2" fill="rgba(8, 51, 68, 0.4)" stroke="#38bdf8" stroke-width="1"/>
+        <text x="822" y="681" fill="#94a3b8" font-size="8">Cache / Espelho RAM</text>
+
+        <line x1="945" y1="677" x2="968" y2="677" stroke="#94a3b8" stroke-width="1.5"/>
+        <text x="974" y="681" fill="#94a3b8" font-size="8">Fluxo Síncrono/WS</text>
+
+        <line x1="95" y1="705" x2="118" y2="705" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,4"/>
+        <text x="124" y="709" fill="#94a3b8" font-size="8">Handshake / Cache / Async</text>
+
+        <rect x="285" y="699" width="16" height="10" rx="2" fill="transparent" stroke="#fbbf24" stroke-width="1" stroke-dasharray="5,3"/>
+        <text x="307" y="709" fill="#94a3b8" font-size="8">Fronteira de Dispositivo (LAN)</text>
+      </svg>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-dot emerald"></div>
+          <h3>1. Mesmo Motor: Offline &amp; LAN</h3>
+        </div>
+        <ul>
+          <li>• <strong>LoopbackTransport:</strong> O treino solo contra NPCs usa exatamente o mesmo <code>HostSessionCoordinator</code> e <code>CombateEngine</code> em RAM (0ms).</li>
+          <li>• <strong>Isolamento Sandbox:</strong> No treino offline, o combate roda sobre um clone descartável da ficha sem gastar PV/PM reais da campanha.</li>
+          <li>• <strong>Pronto p/ Nuvem:</strong> Migrar p/ internet (Discord) exige apenas criar um <code>CloudRelayTransport</code>.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-dot rose"></div>
+          <h3>2. Autoridade &amp; Proteção da Ficha</h3>
+        </div>
+        <ul>
+          <li>• <strong>Single-Leader (CP na Sala):</strong> O aparelho do Mestre ordena todos os turnos, posições e rolagens com <code>seq++</code> monotônico.</li>
+          <li>• <strong>Auditoria sem God-Mode:</strong> O Mestre inspeciona 100% da memória de cálculo da ficha e aprova na mesa, mas não sobrescreve a build base.</li>
+          <li>• <strong>Separação WS vs. HTTP:</strong> Frames WS &lt; 2KB (~17MB em 4h); mapas de 4MB vão por HTTP com cache SHA-256.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-dot cyan"></div>
+          <h3>3. Resiliência em Sessão de 4h</h3>
+        </div>
+        <ul>
+          <li>• <strong>Idempotência (commandId):</strong> Evita duplo gasto de PM ou ataque duplicado se o Wi-Fi oscilar no clique.</li>
+          <li>• <strong>Reconexão c/ Replay:</strong> Ao desbloquear a tela do celular, o cliente envia <code>lastSeq</code> e recebe só os deltas perdidos.</li>
+          <li>• <strong>Degradação Graciosa:</strong> Se o Wi-Fi cair, o painel do jogador permanece 100% funcional p/ consulta e rolagem manual.</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="footer">
+      T20 Creator • ADR-002 System Design • Tormenta 20 Jogo do Ano
+    </p>
+  </div>
+
+  <script>
+    async function copyAsImage(btn) {
+      const orig = btn.textContent;
+      try {
+        const el = document.getElementById('report-container');
+        const r = el.getBoundingClientRect();
+        const pad = 32;
+        const canvas = await html2canvas(document.body, { backgroundColor: '#020617', scale: 2, useCORS: true, ignoreElements: (e) => e.classList && e.classList.contains('toolbar'), x: r.left + window.scrollX - pad, y: r.top + window.scrollY - pad, width: r.width + pad * 2, height: r.height + pad * 2 });
+        const blob = await new Promise(r => canvas.toBlob(r, 'image/png'));
+        await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
+        btn.textContent = '✓ Copied!';
+      } catch (e) {
+        btn.textContent = '✗ Failed';
+      }
+      setTimeout(() => btn.textContent = orig, 2000);
+    }
+
+    async function downloadPNG(btn) {
+      const orig = btn.textContent;
+      btn.textContent = '⏳ ...';
+      try {
+        const el = document.getElementById('report-container');
+        const r = el.getBoundingClientRect();
+        const pad = 32;
+        const canvas = await html2canvas(document.body, { backgroundColor: '#020617', scale: 2, useCORS: true, ignoreElements: (e) => e.classList && e.classList.contains('toolbar'), x: r.left + window.scrollX - pad, y: r.top + window.scrollY - pad, width: r.width + pad * 2, height: r.height + pad * 2 });
+        const link = document.createElement('a');
+        link.download = 't20-creator-adr002-architecture.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+        btn.textContent = '✓ Done!';
+      } catch (e) {
+        btn.textContent = '✗ Failed';
+      }
+      setTimeout(() => btn.textContent = orig, 2000);
+    }
+
+    async function downloadPDF(btn) {
+      const orig = btn.textContent;
+      btn.textContent = '⏳ ...';
+      try {
+        const el = document.getElementById('report-container');
+        const r = el.getBoundingClientRect();
+        const pad = 32;
+        const canvas = await html2canvas(document.body, { backgroundColor: '#020617', scale: 2, useCORS: true, ignoreElements: (e) => e.classList && e.classList.contains('toolbar'), x: r.left + window.scrollX - pad, y: r.top + window.scrollY - pad, width: r.width + pad * 2, height: r.height + pad * 2 });
+        const imgData = canvas.toDataURL('image/png');
+        const { jsPDF } = window.jspdf;
+        const orientation = canvas.width > canvas.height ? 'landscape' : 'portrait';
+        const pdf = new jsPDF({ orientation, unit: 'px', format: [canvas.width, canvas.height], hotfixes: ['px_scaling'] });
+        pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
+        pdf.save('t20-creator-adr002-architecture.pdf');
+        btn.textContent = '✓ Done!';
+      } catch (e) {
+        btn.textContent = '✗ Failed';
+      }
+      setTimeout(() => btn.textContent = orig, 2000);
+    }
+  </script>
+</body>
+</html>

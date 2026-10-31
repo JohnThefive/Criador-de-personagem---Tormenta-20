@@ -9,6 +9,22 @@ import '../../domain/services/personagem_storage_service.dart';
 
 enum FiltroPoderes { todos, disponiveis, adquiridos, bloqueados }
 
+enum CategoriaEvolucaoPoder {
+  classe,
+  combate,
+  destino,
+  magia,
+  tormenta;
+
+  String get label => switch (this) {
+    CategoriaEvolucaoPoder.classe => 'Poderes de Classe',
+    CategoriaEvolucaoPoder.combate => 'Combate',
+    CategoriaEvolucaoPoder.destino => 'Destino',
+    CategoriaEvolucaoPoder.magia => 'Magia',
+    CategoriaEvolucaoPoder.tormenta => 'Tormenta',
+  };
+}
+
 class ItemPoderEvolucao {
   final Poder poder;
   final ResultadoElegibilidade elegibilidade;
@@ -23,6 +39,7 @@ class ItemPoderEvolucao {
 class EvolucaoState {
   final Personagem personagem;
   final int indiceClasse;
+  final CategoriaEvolucaoPoder categoria;
   final FiltroPoderes filtro;
   final String busca;
   final List<ItemPoderEvolucao> todosItens;
@@ -33,6 +50,7 @@ class EvolucaoState {
   const EvolucaoState({
     required this.personagem,
     this.indiceClasse = 0,
+    this.categoria = CategoriaEvolucaoPoder.classe,
     this.filtro = FiltroPoderes.todos,
     this.busca = '',
     this.todosItens = const [],
@@ -57,7 +75,7 @@ class EvolucaoState {
     final query = busca.trim().toLowerCase();
 
     return todosItens.where((item) {
-      // 1. Filtro por categoria
+      // 1. Filtro por status
       switch (filtro) {
         case FiltroPoderes.disponiveis:
           if (!item.podeAprender) return false;
@@ -86,6 +104,7 @@ class EvolucaoState {
   EvolucaoState copyWith({
     Personagem? personagem,
     int? indiceClasse,
+    CategoriaEvolucaoPoder? categoria,
     FiltroPoderes? filtro,
     String? busca,
     List<ItemPoderEvolucao>? todosItens,
@@ -98,6 +117,7 @@ class EvolucaoState {
     return EvolucaoState(
       personagem: personagem ?? this.personagem,
       indiceClasse: indiceClasse ?? this.indiceClasse,
+      categoria: categoria ?? this.categoria,
       filtro: filtro ?? this.filtro,
       busca: busca ?? this.busca,
       todosItens: todosItens ?? this.todosItens,
@@ -116,9 +136,16 @@ class EvolucaoCubit extends Cubit<EvolucaoState> {
   EvolucaoCubit({
     required Personagem personagem,
     int indiceClasse = 0,
+    CategoriaEvolucaoPoder categoriaInicial = CategoriaEvolucaoPoder.classe,
     IPersonagemRepository? repository,
   }) : _repository = repository ?? const PersonagemStorageService(),
-       super(EvolucaoState(personagem: personagem, indiceClasse: indiceClasse)) {
+       super(
+         EvolucaoState(
+           personagem: personagem,
+           indiceClasse: indiceClasse,
+           categoria: categoriaInicial,
+         ),
+       ) {
     _recalcularItens();
   }
 
@@ -128,6 +155,12 @@ class EvolucaoCubit extends Cubit<EvolucaoState> {
 
   void alterarFiltro(FiltroPoderes novoFiltro) {
     emit(state.copyWith(filtro: novoFiltro));
+  }
+
+  void alterarCategoria(CategoriaEvolucaoPoder novaCategoria) {
+    if (state.categoria == novaCategoria) return;
+    emit(state.copyWith(categoria: novaCategoria));
+    _recalcularItens();
   }
 
   void selecionarClasse(int indice) {
@@ -141,7 +174,7 @@ class EvolucaoCubit extends Cubit<EvolucaoState> {
     emit(state.copyWith(anularErro: true, anularSucesso: true));
   }
 
-  /// Recalcula os poderes da classe com suas respectivas regras de elegibilidade
+  /// Recalcula os poderes da categoria selecionada com suas respectivas regras de elegibilidade
   void _recalcularItens([Personagem? personagemAtualizado]) {
     final p = personagemAtualizado ?? state.personagem;
     if (p.classes.isEmpty || state.indiceClasse >= p.classes.length) {
@@ -150,9 +183,15 @@ class EvolucaoCubit extends Cubit<EvolucaoState> {
     }
 
     final classeAtual = p.classes[state.indiceClasse];
-    final todosPoderes = BancoDePoderes.poderesDaClasse(
-      classeAtual.classeDefinicao.idClasse,
-    );
+    final List<Poder> todosPoderes = switch (state.categoria) {
+      CategoriaEvolucaoPoder.classe => BancoDePoderes.poderesDaClasse(
+        classeAtual.classeDefinicao.idClasse,
+      ),
+      CategoriaEvolucaoPoder.combate => BancoDePoderesGerais.poderesCombate,
+      CategoriaEvolucaoPoder.destino => BancoDePoderesGerais.poderesDestino,
+      CategoriaEvolucaoPoder.magia => BancoDePoderesGerais.poderesMagia,
+      CategoriaEvolucaoPoder.tormenta => BancoDePoderesGerais.poderesTormenta,
+    };
 
     final listaItens = todosPoderes.map((poder) {
       final resultado = PoderValidadorService.validar(

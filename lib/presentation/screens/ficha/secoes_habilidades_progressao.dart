@@ -483,6 +483,7 @@ class SecaoProgressaoPersonagem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final etapas = CalculoFichaService.gerarTrilhaProgressao(personagem);
+    final dist = personagem.distribuicaoMulticlasse;
 
     if (etapas.isEmpty) {
       return const Padding(
@@ -496,6 +497,92 @@ class SecaoProgressaoPersonagem extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        // RF10 & RF11 — Visualização da Distribuição dos Níveis e Patamar
+        Container(
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(14),
+            border: Border.all(color: const Color(0xFFCBD5E1)),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  const Icon(
+                    Icons.workspace_premium_rounded,
+                    color: Color(0xFFD32F2F),
+                    size: 20,
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      'Personagem: ${dist.nomePersonagem}',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w800,
+                        fontSize: 14.5,
+                        color: Color(0xFF0F172A),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 9,
+                      vertical: 4,
+                    ),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFFEF2F2),
+                      borderRadius: BorderRadius.circular(999),
+                      border: Border.all(color: const Color(0xFFFCA5A5)),
+                    ),
+                    child: Text(
+                      'Patamar: ${dist.patamar.label}',
+                      style: const TextStyle(
+                        fontSize: 11.5,
+                        fontWeight: FontWeight.w800,
+                        color: Color(0xFFB91C1C),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 6),
+              Text(
+                'Nível total: ${dist.nivelTotal} (Faixa ${dist.patamar.faixaNiveis})',
+                style: const TextStyle(
+                  fontSize: 12.5,
+                  fontWeight: FontWeight.w700,
+                  color: Color(0xFF334155),
+                ),
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                'Classes:',
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w800,
+                  color: Color(0xFF475569),
+                ),
+              ),
+              const SizedBox(height: 4),
+              ...dist.classes.map(
+                (c) => Padding(
+                  padding: const EdgeInsets.only(bottom: 2),
+                  child: Text(
+                    '- ${c.nomeClasse}: ${c.nivel}${c.ehClasseInicial ? " (Classe Inicial)" : " (Multiclasse)"}',
+                    style: const TextStyle(
+                      fontSize: 12.5,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFF1E293B),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 10),
         Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
@@ -513,7 +600,7 @@ class SecaoProgressaoPersonagem extends StatelessWidget {
               const SizedBox(width: 8),
               const Expanded(
                 child: Text(
-                  'Registro nível a nível de classes, poderes e distinções para conferência rápida na mesa.',
+                  'Progressão cronológica distinguindo o Nível Geral do personagem e o Nível Individual na classe.',
                   style: TextStyle(fontSize: 12, color: Color(0xFF475569)),
                 ),
               ),
@@ -532,7 +619,11 @@ class SecaoProgressaoPersonagem extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: const Color(0xFFE2E8F0)),
+              border: Border.all(
+                color: etapa.novoPatamarAlcancado
+                    ? const Color(0xFFF59E0B)
+                    : const Color(0xFFE2E8F0),
+              ),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -559,13 +650,26 @@ class SecaoProgressaoPersonagem extends StatelessWidget {
                     ),
                     const SizedBox(width: 8),
                     Expanded(
-                      child: Text(
-                        '${etapa.nomeClasse} ${etapa.nivelNaClasse}${etapa.caminhoEscolhido != null ? " (${etapa.caminhoEscolhido})" : ""}',
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w800,
-                          fontSize: 14,
-                          color: Color(0xFF0F172A),
-                        ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '${etapa.nomeClasse} — Nv. ${etapa.nivelNaClasse} na classe${etapa.caminhoEscolhido != null ? " (${etapa.caminhoEscolhido})" : ""}',
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w800,
+                              fontSize: 13.5,
+                              color: Color(0xFF0F172A),
+                            ),
+                          ),
+                          Text(
+                            'Patamar: ${etapa.patamar.label} • +${etapa.pvAdquiridos} PV / +${etapa.pmAdquiridos} PM',
+                            style: const TextStyle(
+                              fontSize: 11,
+                              fontWeight: FontWeight.w600,
+                              color: Color(0xFF64748B),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     IconButton(
@@ -586,6 +690,56 @@ class SecaoProgressaoPersonagem extends StatelessWidget {
                     ),
                   ],
                 ),
+                if (etapa.novoPatamarAlcancado ||
+                    etapa.ehAquisicaoNovaMulticlasse) ...[
+                  const SizedBox(height: 6),
+                  Wrap(
+                    spacing: 6,
+                    runSpacing: 4,
+                    children: [
+                      if (etapa.novoPatamarAlcancado)
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 3,
+                          ),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFFFFBEB),
+                            borderRadius: BorderRadius.circular(6),
+                            border: Border.all(color: const Color(0xFFFCD34D)),
+                          ),
+                          child: Text(
+                            'Novo Patamar: ${etapa.patamar.label}',
+                            style: const TextStyle(
+                              fontSize: 11,
+                              fontWeight: FontWeight.w800,
+                              color: Color(0xFFB45309),
+                            ),
+                          ),
+                        ),
+                      if (etapa.ehAquisicaoNovaMulticlasse)
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 3,
+                          ),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFEFF6FF),
+                            borderRadius: BorderRadius.circular(6),
+                            border: Border.all(color: const Color(0xFFBFDBFE)),
+                          ),
+                          child: const Text(
+                            'Multiclasse (PV subsequente • sem perícias/proficiências iniciais)',
+                            style: TextStyle(
+                              fontSize: 10.5,
+                              fontWeight: FontWeight.w700,
+                              color: Color(0xFF1D4ED8),
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                ],
                 if (etapa.marcosIniciais.isNotEmpty) ...[
                   const SizedBox(height: 6),
                   Wrap(
@@ -618,7 +772,7 @@ class SecaoProgressaoPersonagem extends StatelessWidget {
                 if (etapa.habilidadesDeClasse.isNotEmpty) ...[
                   const SizedBox(height: 6),
                   Text(
-                    'Habilidades de Classe: ${etapa.habilidadesDeClasse.join(", ")}',
+                    'Características da Classe (Nv. ${etapa.nivelNaClasse}): ${etapa.habilidadesDeClasse.join(", ")}',
                     style: const TextStyle(
                       fontSize: 12,
                       color: Color(0xFF475569),

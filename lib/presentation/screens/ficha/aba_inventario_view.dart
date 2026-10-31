@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../domain/entities/equipamento/arma.dart';
+import '../../../domain/entities/equipamento/item_geral.dart';
 import '../../../domain/entities/equipamento/item_vestido.dart';
+import '../../../domain/entities/equipamento/protecao.dart';
 import '../../../domain/services/data_services/call_armaduras.dart';
 import '../../../domain/services/data_services/call_armas.dart';
 import '../../../domain/services/regras_carga_service.dart';
@@ -286,6 +288,448 @@ class AbaInventarioView extends StatelessWidget {
     }
   }
 
+  Future<void> _mostrarModalMelhoriasArma(
+    BuildContext context,
+    FichaCubit cubit,
+    int indexArma,
+    Arma armaInicial,
+  ) async {
+    final melhorias = List<String>.from(armaInicial.melhorias);
+    final encantos = List<String>.from(armaInicial.encantos);
+
+    await showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.white,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (ctx) => StatefulBuilder(
+        builder: (ctx, setModalState) {
+          void toggleMelhoria(String id) {
+            setModalState(() {
+              if (melhorias.contains(id)) {
+                melhorias.remove(id);
+              } else if (melhorias.length < 4) {
+                melhorias.add(id);
+              }
+            });
+          }
+
+          void toggleEncanto(String id) {
+            setModalState(() {
+              if (encantos.contains(id)) {
+                encantos.remove(id);
+              } else if (encantos.length < 3) {
+                encantos.add(id);
+              }
+            });
+          }
+
+          final preview = armaInicial.copyWith(
+            melhorias: List<String>.from(melhorias),
+            encantos: List<String>.from(encantos),
+          );
+
+          return DraggableScrollableSheet(
+            initialChildSize: 0.78,
+            minChildSize: 0.5,
+            maxChildSize: 0.94,
+            expand: false,
+            builder: (_, scrollController) => Padding(
+              padding: const EdgeInsets.all(16),
+              child: ListView(
+                controller: scrollController,
+                children: [
+                  Text(
+                    'Melhorias & Encantos — ${armaInicial.nome}',
+                    style: const TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    'Dano ${preview.danoEfetivo} (${preview.criticoFormatado}) • Atq +${preview.bonusAtaqueMelhorias} • Dano +${preview.bonusDanoMelhorias} • ${preview.espacosEfetivos} esp.',
+                    style: const TextStyle(
+                      fontSize: 12.5,
+                      fontWeight: FontWeight.w700,
+                      color: Color(0xFFB91C1C),
+                    ),
+                  ),
+                  const SizedBox(height: 14),
+                  Text(
+                    'MELHORIAS SUPERIORES (${melhorias.length}/4)',
+                    style: const TextStyle(
+                      fontSize: 11.5,
+                      fontWeight: FontWeight.w900,
+                      color: Color(0xFF475569),
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  Wrap(
+                    spacing: 6,
+                    runSpacing: 6,
+                    children: CatalogoItensGeraisEMelhorias
+                        .melhoriasArmasDisponiveis
+                        .entries
+                        .map((e) {
+                          final sel = melhorias.contains(e.key);
+                          return FilterChip(
+                            selected: sel,
+                            label: Text(
+                              e.value,
+                              style: const TextStyle(fontSize: 11.5),
+                            ),
+                            selectedColor: const Color(0xFFFEE2E2),
+                            checkmarkColor: const Color(0xFFB91C1C),
+                            onSelected: (_) => toggleMelhoria(e.key),
+                          );
+                        })
+                        .toList(),
+                  ),
+                  const Divider(height: 24),
+                  Text(
+                    'ENCANTOS MÁGICOS (${encantos.length}/3)',
+                    style: const TextStyle(
+                      fontSize: 11.5,
+                      fontWeight: FontWeight.w900,
+                      color: Color(0xFF475569),
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  Wrap(
+                    spacing: 6,
+                    runSpacing: 6,
+                    children: CatalogoItensGeraisEMelhorias
+                        .encantosArmasDisponiveis
+                        .entries
+                        .map((e) {
+                          final sel = encantos.contains(e.key);
+                          return FilterChip(
+                            selected: sel,
+                            label: Text(
+                              e.value,
+                              style: const TextStyle(fontSize: 11.5),
+                            ),
+                            selectedColor: const Color(0xFFE0E7FF),
+                            checkmarkColor: const Color(0xFF3730A3),
+                            onSelected: (_) => toggleEncanto(e.key),
+                          );
+                        })
+                        .toList(),
+                  ),
+                  const SizedBox(height: 18),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFFD32F2F),
+                      foregroundColor: Colors.white,
+                      minimumSize: const Size(double.infinity, 46),
+                    ),
+                    onPressed: () {
+                      cubit.atualizarArmaInventario(indexArma, preview);
+                      Navigator.pop(ctx);
+                    },
+                    child: const Text(
+                      'APLICAR MELHORIAS & ENCANTOS',
+                      style: TextStyle(fontWeight: FontWeight.w800),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Future<void> _mostrarModalMelhoriasProtecao(
+    BuildContext context,
+    FichaCubit cubit,
+    Protecao protecaoInicial, {
+    required bool ehEscudo,
+  }) async {
+    final melhorias = List<String>.from(protecaoInicial.melhorias);
+    final encantos = List<String>.from(protecaoInicial.encantos);
+
+    await showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.white,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (ctx) => StatefulBuilder(
+        builder: (ctx, setModalState) {
+          void toggleMelhoria(String id) {
+            setModalState(() {
+              if (melhorias.contains(id)) {
+                melhorias.remove(id);
+              } else if (melhorias.length < 4) {
+                melhorias.add(id);
+              }
+            });
+          }
+
+          void toggleEncanto(String id) {
+            setModalState(() {
+              if (encantos.contains(id)) {
+                encantos.remove(id);
+              } else if (encantos.length < 3) {
+                encantos.add(id);
+              }
+            });
+          }
+
+          final preview = protecaoInicial.copyWith(
+            melhorias: List<String>.from(melhorias),
+            encantos: List<String>.from(encantos),
+          );
+
+          return DraggableScrollableSheet(
+            initialChildSize: 0.72,
+            minChildSize: 0.45,
+            maxChildSize: 0.92,
+            expand: false,
+            builder: (_, scrollController) => Padding(
+              padding: const EdgeInsets.all(16),
+              child: ListView(
+                controller: scrollController,
+                children: [
+                  Text(
+                    'Melhorias & Encantos — ${protecaoInicial.nome}',
+                    style: const TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    'Defesa +${preview.bonusDefesaEfetivo} • Pen. -${preview.penalidadeArmaduraEfetiva.abs()} • RD ${preview.rdMelhorias} • ${preview.espacosEfetivos} esp.',
+                    style: const TextStyle(
+                      fontSize: 12.5,
+                      fontWeight: FontWeight.w700,
+                      color: Color(0xFFB91C1C),
+                    ),
+                  ),
+                  const SizedBox(height: 14),
+                  Text(
+                    'MELHORIAS SUPERIORES (${melhorias.length}/4)',
+                    style: const TextStyle(
+                      fontSize: 11.5,
+                      fontWeight: FontWeight.w900,
+                      color: Color(0xFF475569),
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  Wrap(
+                    spacing: 6,
+                    runSpacing: 6,
+                    children: CatalogoItensGeraisEMelhorias
+                        .melhoriasProtecoesDisponiveis
+                        .entries
+                        .map((e) {
+                          final sel = melhorias.contains(e.key);
+                          return FilterChip(
+                            selected: sel,
+                            label: Text(
+                              e.value,
+                              style: const TextStyle(fontSize: 11.5),
+                            ),
+                            selectedColor: const Color(0xFFFEE2E2),
+                            checkmarkColor: const Color(0xFFB91C1C),
+                            onSelected: (_) => toggleMelhoria(e.key),
+                          );
+                        })
+                        .toList(),
+                  ),
+                  const Divider(height: 24),
+                  Text(
+                    'ENCANTOS MÁGICOS (${encantos.length}/3)',
+                    style: const TextStyle(
+                      fontSize: 11.5,
+                      fontWeight: FontWeight.w900,
+                      color: Color(0xFF475569),
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  Wrap(
+                    spacing: 6,
+                    runSpacing: 6,
+                    children: CatalogoItensGeraisEMelhorias
+                        .encantosProtecoesDisponiveis
+                        .entries
+                        .map((e) {
+                          final sel = encantos.contains(e.key);
+                          return FilterChip(
+                            selected: sel,
+                            label: Text(
+                              e.value,
+                              style: const TextStyle(fontSize: 11.5),
+                            ),
+                            selectedColor: const Color(0xFFE0E7FF),
+                            checkmarkColor: const Color(0xFF3730A3),
+                            onSelected: (_) => toggleEncanto(e.key),
+                          );
+                        })
+                        .toList(),
+                  ),
+                  const SizedBox(height: 18),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFFD32F2F),
+                      foregroundColor: Colors.white,
+                      minimumSize: const Size(double.infinity, 46),
+                    ),
+                    onPressed: () {
+                      if (ehEscudo) {
+                        cubit.equiparEscudo(preview);
+                      } else {
+                        cubit.equiparArmadura(preview);
+                      }
+                      Navigator.pop(ctx);
+                    },
+                    child: const Text(
+                      'APLICAR MELHORIAS & ENCANTOS',
+                      style: TextStyle(fontWeight: FontWeight.w800),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Future<void> _abrirCatalogoItensGerais(
+    BuildContext context,
+    FichaCubit cubit,
+  ) async {
+    CategoriaItemGeral? filtroCat;
+    await showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.white,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (ctx) => StatefulBuilder(
+        builder: (ctx, setModalState) {
+          final itens = filtroCat == null
+              ? CatalogoItensGeraisEMelhorias.itensGerais
+              : CatalogoItensGeraisEMelhorias.itensPorCategoria(filtroCat!);
+
+          return DraggableScrollableSheet(
+            initialChildSize: 0.78,
+            minChildSize: 0.5,
+            maxChildSize: 0.94,
+            expand: false,
+            builder: (_, scrollController) => Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Catálogo de Itens Gerais (T20)',
+                    style: TextStyle(fontSize: 17, fontWeight: FontWeight.w900),
+                  ),
+                  const SizedBox(height: 4),
+                  const Text(
+                    'Alquímicos, Esotéricos, Vestuário, Alimentação e Ferramentas.',
+                    style: TextStyle(fontSize: 12, color: Colors.black54),
+                  ),
+                  const SizedBox(height: 10),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 6),
+                          child: ChoiceChip(
+                            selected: filtroCat == null,
+                            label: const Text('Todos'),
+                            onSelected: (_) =>
+                                setModalState(() => filtroCat = null),
+                          ),
+                        ),
+                        ...CategoriaItemGeral.values.map((cat) {
+                          return Padding(
+                            padding: const EdgeInsets.only(right: 6),
+                            child: ChoiceChip(
+                              selected: filtroCat == cat,
+                              label: Text(cat.label),
+                              onSelected: (_) =>
+                                  setModalState(() => filtroCat = cat),
+                            ),
+                          );
+                        }),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Expanded(
+                    child: ListView.separated(
+                      controller: scrollController,
+                      itemCount: itens.length,
+                      separatorBuilder: (_, _) => const Divider(height: 1),
+                      itemBuilder: (_, idx) {
+                        final item = itens[idx];
+                        return ListTile(
+                          dense: true,
+                          title: Text(
+                            '${item.nome} (T\$ ${item.precoTibares})',
+                            style: const TextStyle(fontWeight: FontWeight.w800),
+                          ),
+                          subtitle: Text(
+                            '${item.categoria.label} • ${item.espacos} esp. • ${item.efeitoResumo}',
+                            style: const TextStyle(fontSize: 11.5),
+                          ),
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              if (item.ehVestido)
+                                TextButton(
+                                  onPressed: () {
+                                    cubit.adicionarItemGeral(
+                                      item,
+                                      vestirEmSlotLivre: true,
+                                    );
+                                    Navigator.pop(ctx);
+                                  },
+                                  child: const Text(
+                                    'Vestir',
+                                    style: TextStyle(fontSize: 11.5),
+                                  ),
+                                ),
+                              IconButton(
+                                tooltip: 'Adicionar na mochila',
+                                icon: const Icon(
+                                  Icons.add_circle_outline,
+                                  color: Color(0xFFD32F2F),
+                                ),
+                                onPressed: () {
+                                  cubit.adicionarItemGeral(item);
+                                  Navigator.pop(ctx);
+                                },
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<FichaCubit, FichaState>(
@@ -556,14 +1000,24 @@ class AbaInventarioView extends StatelessWidget {
               key: const Key('slot_vestido_1'),
               numeroSlot: 1,
               rotuloTipo: 'Armadura',
-              titulo: p.armaduraEquipada?.nome ?? 'Sem armadura equipada',
+              titulo: p.armaduraEquipada != null
+                  ? '${p.armaduraEquipada!.nome}${p.armaduraEquipada!.ehSuperiorOuMagica ? " ✨" : ""}'
+                  : 'Sem armadura equipada',
               subtitulo: p.armaduraEquipada != null
-                  ? 'Defesa +${p.armaduraEquipada!.bonusDefesa} • Pen. -${p.armaduraEquipada!.penalidadeArmadura}'
+                  ? 'Defesa +${p.armaduraEquipada!.bonusDefesaEfetivo} • Pen. -${p.armaduraEquipada!.penalidadeArmaduraEfetiva.abs()}${p.armaduraEquipada!.rdMelhorias > 0 ? " • RD ${p.armaduraEquipada!.rdMelhorias}" : ""}'
                   : 'Toque para vestir uma armadura do catálogo',
-              espacos: p.armaduraEquipada?.espacos ?? 0,
+              espacos: p.armaduraEquipada?.espacosEfetivos ?? 0,
               ocupado: p.armaduraEquipada != null,
               icone: Icons.shield_outlined,
               onTap: () => _selecionarArmaduraSlot1(context, cubit),
+              onConfigurarMelhorias: p.armaduraEquipada != null
+                  ? () => _mostrarModalMelhoriasProtecao(
+                        context,
+                        cubit,
+                        p.armaduraEquipada!,
+                        ehEscudo: false,
+                      )
+                  : null,
             ),
             // Slots 2, 3 e 4: Itens Vestidos Extras
             for (int slotIdx = 1; slotIdx <= 3; slotIdx++)
@@ -660,20 +1114,35 @@ class AbaInventarioView extends StatelessWidget {
                     if (p.escudoEquipado != null)
                       _LinhaCompactaEquipamento(
                         icone: Icons.shield_rounded,
-                        nome: '${p.escudoEquipado!.nome} (Empunhado)',
+                        nome:
+                            '${p.escudoEquipado!.nome}${p.escudoEquipado!.ehSuperiorOuMagica ? " ✨" : ""} (Empunhado)',
                         detalhe:
-                            '+${p.escudoEquipado!.bonusDefesa} Def • Pen. -${p.escudoEquipado!.penalidadeArmadura}',
-                        espacos: p.escudoEquipado!.espacos,
+                            '+${p.escudoEquipado!.bonusDefesaEfetivo} Def • Pen. -${p.escudoEquipado!.penalidadeArmaduraEfetiva.abs()}${p.escudoEquipado!.rdMelhorias > 0 ? " • RD ${p.escudoEquipado!.rdMelhorias}" : ""}',
+                        espacos: p.escudoEquipado!.espacosEfetivos,
+                        onConfigurarMelhorias: () =>
+                            _mostrarModalMelhoriasProtecao(
+                              context,
+                              cubit,
+                              p.escudoEquipado!,
+                              ehEscudo: true,
+                            ),
                         onRemover: () => cubit.equiparEscudo(null),
                       ),
                     ...List.generate(p.armas.length, (idx) {
                       final Arma a = p.armas[idx];
+                      final extrasAtqDano =
+                          (a.bonusAtaqueMelhorias > 0 ||
+                              a.bonusDanoMelhorias > 0)
+                          ? ' • +${a.bonusAtaqueMelhorias} Atq / +${a.bonusDanoMelhorias} Dano'
+                          : '';
                       return _LinhaCompactaEquipamento(
                         icone: Icons.colorize_rounded,
-                        nome: a.nome,
+                        nome: '${a.nome}${a.ehSuperiorOuMagica ? " ✨" : ""}',
                         detalhe:
-                            'Dano ${a.dano} (${a.criticoFormatado}) • ${a.tipoDano.label}',
-                        espacos: a.espacos,
+                            'Dano ${a.danoEfetivo} (${a.criticoFormatado}) • ${a.tipoDano.label}$extrasAtqDano',
+                        espacos: a.espacosEfetivos,
+                        onConfigurarMelhorias: () =>
+                            _mostrarModalMelhoriasArma(context, cubit, idx, a),
                         onRemover: () => cubit.removerArmaInventario(idx),
                       );
                     }),
@@ -713,12 +1182,34 @@ class AbaInventarioView extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              'Mochila (${p.itensInventario.length} itens)',
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w800,
-                                fontSize: 15,
-                                color: Color(0xFF0F172A),
+                            Expanded(
+                              child: Text(
+                                'Mochila (${p.itensInventario.length} itens)',
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w800,
+                                  fontSize: 15,
+                                  color: Color(0xFF0F172A),
+                                ),
+                              ),
+                            ),
+                            TextButton.icon(
+                              key: const Key('btn_catalogo_itens_gerais'),
+                              style: TextButton.styleFrom(
+                                minimumSize: const Size(40, 44),
+                                foregroundColor: const Color(0xFF1E293B),
+                              ),
+                              onPressed: () =>
+                                  _abrirCatalogoItensGerais(context, cubit),
+                              icon: const Icon(
+                                Icons.inventory_2_outlined,
+                                size: 17,
+                              ),
+                              label: const Text(
+                                'Catálogo T20',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 12,
+                                ),
                               ),
                             ),
                             TextButton.icon(
@@ -884,6 +1375,7 @@ class _SlotItemVestidoCard extends StatelessWidget {
   final bool ocupado;
   final IconData icone;
   final VoidCallback onTap;
+  final VoidCallback? onConfigurarMelhorias;
 
   const _SlotItemVestidoCard({
     super.key,
@@ -895,6 +1387,7 @@ class _SlotItemVestidoCard extends StatelessWidget {
     required this.ocupado,
     required this.icone,
     required this.onTap,
+    this.onConfigurarMelhorias,
   });
 
   @override
@@ -970,6 +1463,21 @@ class _SlotItemVestidoCard extends StatelessWidget {
                     ],
                   ),
                 ),
+                if (onConfigurarMelhorias != null)
+                  IconButton(
+                    tooltip: 'Melhorias e Encantos',
+                    constraints: const BoxConstraints(
+                      minWidth: 36,
+                      minHeight: 36,
+                    ),
+                    padding: EdgeInsets.zero,
+                    onPressed: onConfigurarMelhorias,
+                    icon: const Icon(
+                      Icons.auto_awesome_outlined,
+                      size: 18,
+                      color: Color(0xFFD97706),
+                    ),
+                  ),
                 if (ocupado)
                   Container(
                     padding: const EdgeInsets.symmetric(
@@ -1008,6 +1516,7 @@ class _LinhaCompactaEquipamento extends StatelessWidget {
   final String nome;
   final String detalhe;
   final int espacos;
+  final VoidCallback? onConfigurarMelhorias;
   final VoidCallback onRemover;
 
   const _LinhaCompactaEquipamento({
@@ -1015,6 +1524,7 @@ class _LinhaCompactaEquipamento extends StatelessWidget {
     required this.nome,
     required this.detalhe,
     required this.espacos,
+    this.onConfigurarMelhorias,
     required this.onRemover,
   });
 
@@ -1047,6 +1557,18 @@ class _LinhaCompactaEquipamento extends StatelessWidget {
               ],
             ),
           ),
+          if (onConfigurarMelhorias != null)
+            IconButton(
+              tooltip: 'Melhorias e Encantos',
+              constraints: const BoxConstraints(minWidth: 36, minHeight: 36),
+              padding: EdgeInsets.zero,
+              onPressed: onConfigurarMelhorias,
+              icon: const Icon(
+                Icons.auto_awesome_outlined,
+                size: 18,
+                color: Color(0xFFD97706),
+              ),
+            ),
           Text(
             '$espacos esp',
             style: const TextStyle(

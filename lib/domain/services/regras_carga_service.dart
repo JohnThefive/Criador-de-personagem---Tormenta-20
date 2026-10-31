@@ -72,11 +72,12 @@ class RegrasCargaService {
     List<Engenhoca> engenhocas = const [],
     List<ItemVestido> itensVestidosExtras = const [],
   }) {
-    // Espaço ocupado pelas armas
-    int espacosArmas = armas.fold(0, (soma, a) => soma + a.espacos);
+    // Espaço ocupado pelas armas (considerando Mitral)
+    int espacosArmas = armas.fold(0, (soma, a) => soma + a.espacosEfetivos);
 
-    // Espaço ocupado por armaduras e escudos
-    int espacosProtecoes = (armadura?.espacos ?? 0) + (escudo?.espacos ?? 0);
+    // Espaço ocupado por armaduras e escudos (considerando Mitral)
+    int espacosProtecoes =
+        (armadura?.espacosEfetivos ?? 0) + (escudo?.espacosEfetivos ?? 0);
 
     // Espaço ocupado pelos slots extras de itens vestidos (Slots 2, 3 e 4)
     int espacosVestidosExtras = itensVestidosExtras.fold(
@@ -137,8 +138,7 @@ class RegrasCargaService {
 
   /// Verifica o status detalhado de carga do personagem
   static StatusCarga avaliarCarga(Personagem personagem) {
-    final modForca = personagem.getValorFinal('FOR');
-    final limite = calcularLimiteCarga(modForca);
+    final limite = personagem.limiteCarga;
     final atual = calcularEspacosOcupados(
       armas: personagem.armas,
       itensInventario: personagem.itensInventario,

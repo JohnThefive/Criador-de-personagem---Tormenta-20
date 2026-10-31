@@ -118,9 +118,13 @@ class ContinueCharacterCard extends StatelessWidget {
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
 
-    final classeNome = personagem.classes.isNotEmpty
-        ? personagem.classes[0].classeDefinicao.nome
-        : 'Sem Classe';
+    final classeNome = personagem.classes.isEmpty
+        ? 'Sem Classe'
+        : (personagem.classes.length == 1
+              ? personagem.classes.first.classeDefinicao.nome
+              : personagem.classes
+                    .map((c) => '${c.classeDefinicao.nome} ${c.nivel}')
+                    .join(' / '));
     final racaNome = personagem.raca?.nome ?? 'Sem Raça';
     final nivel = personagem.nivelPersonagem > 0
         ? personagem.nivelPersonagem
@@ -242,7 +246,7 @@ class ContinueCharacterCard extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(6),
                               ),
                               child: Text(
-                                'Nível $nivel',
+                                'Nível $nivel • ${personagem.nomePatamar}',
                                 style: textTheme.labelSmall?.copyWith(
                                   fontWeight: FontWeight.bold,
                                   color: colorScheme.onSurfaceVariant,
@@ -289,9 +293,13 @@ class CharacterCard extends StatelessWidget {
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
 
-    final classeNome = personagem.classes.isNotEmpty
-        ? personagem.classes[0].classeDefinicao.nome
-        : 'Sem Classe';
+    final classeNome = personagem.classes.isEmpty
+        ? 'Sem Classe'
+        : (personagem.classes.length == 1
+              ? personagem.classes.first.classeDefinicao.nome
+              : personagem.classes
+                    .map((c) => '${c.classeDefinicao.nome} ${c.nivel}')
+                    .join(' / '));
     final racaNome = personagem.raca?.nome ?? 'Sem Raça';
     final nivel = personagem.nivelPersonagem > 0
         ? personagem.nivelPersonagem
@@ -359,7 +367,7 @@ class CharacterCard extends StatelessWidget {
                             borderRadius: BorderRadius.circular(5),
                           ),
                           child: Text(
-                            'Nvl $nivel',
+                            'Nvl $nivel • ${personagem.nomePatamar}',
                             style: textTheme.labelSmall?.copyWith(
                               fontSize: 10,
                               fontWeight: FontWeight.bold,

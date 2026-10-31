@@ -141,6 +141,8 @@ class Arma {
   final int precoTibar;
   final String alcance;
   final List<String> propriedades;
+  final List<String> melhorias;
+  final List<String> encantos;
 
   const Arma({
     required this.key,
@@ -157,7 +159,155 @@ class Arma {
     this.precoTibar = 0,
     this.alcance = 'Corpo a corpo',
     this.propriedades = const [],
+    this.melhorias = const [],
+    this.encantos = const [],
   });
+
+  Arma copyWith({
+    String? key,
+    String? nome,
+    String? descricao,
+    ProficienciaArma? proficiencia,
+    PropositoArma? proposito,
+    EmpunhaduraArma? empunhadura,
+    String? dano,
+    int? margemAmeaca,
+    int? multiplicadorCritico,
+    TipoDanoArma? tipoDano,
+    int? espacos,
+    int? precoTibar,
+    String? alcance,
+    List<String>? propriedades,
+    List<String>? melhorias,
+    List<String>? encantos,
+  }) {
+    return Arma(
+      key: key ?? this.key,
+      nome: nome ?? this.nome,
+      descricao: descricao ?? this.descricao,
+      proficiencia: proficiencia ?? this.proficiencia,
+      proposito: proposito ?? this.proposito,
+      empunhadura: empunhadura ?? this.empunhadura,
+      dano: dano ?? this.dano,
+      margemAmeaca: margemAmeaca ?? this.margemAmeaca,
+      multiplicadorCritico: multiplicadorCritico ?? this.multiplicadorCritico,
+      tipoDano: tipoDano ?? this.tipoDano,
+      espacos: espacos ?? this.espacos,
+      precoTibar: precoTibar ?? this.precoTibar,
+      alcance: alcance ?? this.alcance,
+      propriedades: propriedades ?? this.propriedades,
+      melhorias: melhorias ?? this.melhorias,
+      encantos: encantos ?? this.encantos,
+    );
+  }
+
+  /// Bônus de ataque proveniente de melhorias e encantos da arma.
+  /// No T20 JdA: Pungente (+2) substitui Certeira (+1); Magnífica (+4) substitui Formidável (+2).
+  /// Melhoria e encanto acumulam entre si.
+  int get bonusAtaqueMelhorias {
+    int bonusMelhoria = 0;
+    if (melhorias.contains('PUNGENTE')) {
+      bonusMelhoria = 2;
+    } else if (melhorias.contains('CERTEIRA')) {
+      bonusMelhoria = 1;
+    }
+
+    int bonusEncanto = 0;
+    if (encantos.contains('MAGNIFICA')) {
+      bonusEncanto = 4;
+    } else if (encantos.contains('FORMIDAVEL')) {
+      bonusEncanto = 2;
+    }
+
+    return bonusMelhoria + bonusEncanto;
+  }
+
+  /// Bônus numérico de dano proveniente de melhorias e encantos da arma.
+  /// No T20 JdA: Atroz (+2) substitui Cruel (+1); Magnífica (+4) substitui Formidável (+2).
+  int get bonusDanoMelhorias {
+    int bonusMelhoria = 0;
+    if (melhorias.contains('ATROZ')) {
+      bonusMelhoria = 2;
+    } else if (melhorias.contains('CRUEL')) {
+      bonusMelhoria = 1;
+    }
+    if (melhorias.contains('MATERIAL_GELO_ETERNO')) {
+      bonusMelhoria += 2;
+    }
+
+    int bonusEncanto = 0;
+    if (encantos.contains('MAGNIFICA')) {
+      bonusEncanto = 4;
+    } else if (encantos.contains('FORMIDAVEL')) {
+      bonusEncanto = 2;
+    }
+
+    return bonusMelhoria + bonusEncanto;
+  }
+
+  /// Bônus na Defesa fornecido pelo encanto Defensora (+2).
+  int get bonusDefesaEncanto => encantos.contains('DEFENSORA') ? 2 : 0;
+
+  /// Margem de ameaça efetiva considerando Precisa (+1), Mitral (+1) e Ameaçadora (duplica a margem).
+  int get margemAmeacaEfetiva {
+    int margem = margemAmeaca;
+    if (encantos.contains('AMEACADORA')) {
+      final int passosBase = (20 - margemAmeaca) + 1;
+      margem = 20 - (passosBase * 2) + 1;
+    }
+    if (melhorias.contains('PRECISA')) margem -= 1;
+    if (melhorias.contains('MATERIAL_MITRAL')) margem -= 1;
+    return margem.clamp(1, 20);
+  }
+
+  /// Multiplicador de crítico efetivo considerando Maciça (+1).
+  int get multiplicadorCriticoEfetivo {
+    int mult = multiplicadorCritico;
+    if (melhorias.contains('MACICA')) mult += 1;
+    return mult;
+  }
+
+  /// Passo de dano aumentado por Adamante e dados extras elementais de encantos.
+  String get danoEfetivo {
+    String base = dano;
+    if (melhorias.contains('MATERIAL_ADAMANTE')) {
+      base = _aumentarPassoDano(base);
+    }
+    final List<String> extras = [];
+    if (encantos.contains('FLAMEJANTE')) extras.add('1d6 fogo');
+    if (encantos.contains('CONGELANTE')) extras.add('1d6 frio');
+    if (encantos.contains('ELETRICA')) extras.add('1d6 eletr.');
+    if (encantos.contains('CORROSIVA')) extras.add('1d6 ácido');
+    if (encantos.contains('SAGRADA')) extras.add('1d6 luz');
+    if (encantos.contains('PROFANA')) extras.add('1d6 trevas');
+    if (extras.isEmpty) return base;
+    return '$base + ${extras.join(' + ')}';
+  }
+
+  static String _aumentarPassoDano(String d) {
+    const passos = {
+      '1d4': '1d6',
+      '1d6': '1d8',
+      '1d8': '1d10',
+      '1d10': '1d12',
+      '2d4': '2d6',
+      '1d12': '3d6',
+      '2d6': '2d8',
+      '2d8': '2d10',
+      '2d10': '3d8',
+      '3d6': '4d6',
+    };
+    return passos[d.trim().toLowerCase()] ?? d;
+  }
+
+  int get espacosEfetivos {
+    if (melhorias.contains('MATERIAL_MITRAL') && espacos > 0) {
+      return (espacos - 1).clamp(0, 20);
+    }
+    return espacos;
+  }
+
+  bool get ehSuperiorOuMagica => melhorias.isNotEmpty || encantos.isNotEmpty;
 
   /// Formatação do crítico no padrão clássico de Tormenta 20:
   /// Ex: se margem == 20 e mult == 2 -> 'x2'
@@ -165,10 +315,12 @@ class Arma {
   /// Se margem < 20 e mult == 2 -> '19/x2'
   /// Se margem < 20 e mult == 3 -> '19/x3'
   String get criticoFormatado {
-    if (margemAmeaca >= 20) {
-      return 'x$multiplicadorCritico';
+    final m = margemAmeacaEfetiva;
+    final mult = multiplicadorCriticoEfetivo;
+    if (m >= 20) {
+      return 'x$mult';
     }
-    return '$margemAmeaca/x$multiplicadorCritico';
+    return '$m/x$mult';
   }
 
   bool get ehCorpoACorpo => proposito == PropositoArma.corpoACorpo;
@@ -209,6 +361,8 @@ class Arma {
       precoTibar: (json['precoTibar'] as num?)?.toInt() ?? 0,
       alcance: json['alcance'] ?? 'Corpo a corpo',
       propriedades: List<String>.from(json['propriedades'] ?? []),
+      melhorias: List<String>.from(json['melhorias'] ?? []),
+      encantos: List<String>.from(json['encantos'] ?? []),
     );
   }
 
@@ -228,6 +382,8 @@ class Arma {
       'precoTibar': precoTibar,
       'alcance': alcance,
       'propriedades': propriedades,
+      if (melhorias.isNotEmpty) 'melhorias': melhorias,
+      if (encantos.isNotEmpty) 'encantos': encantos,
     };
   }
 }

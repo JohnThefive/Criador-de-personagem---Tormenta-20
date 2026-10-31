@@ -6,22 +6,22 @@ class ExecucaoMagia {
 
   factory ExecucaoMagia.fromJson(Map<String, dynamic> json) {
     return ExecucaoMagia(
-      tipo: json['tipo'] as String,
-      detalhes: json['detalhes'] as String?,
+      tipo: json['tipo']?.toString() ?? 'padrao',
+      detalhes: json['detalhes']?.toString(),
     );
   }
 }
 
 class AlcanceMagia {
-  final String tipo; // 'pessoal', 'toque', 'curto', 'medio', 'лго'
+  final String tipo; // 'pessoal', 'toque', 'curto', 'medio', 'longo'
   final String? detalhes;
 
   const AlcanceMagia({required this.tipo, this.detalhes});
 
   factory AlcanceMagia.fromJson(Map<String, dynamic> json) {
     return AlcanceMagia(
-      tipo: json['tipo'] as String,
-      detalhes: json['detalhes'] as String?,
+      tipo: json['tipo']?.toString() ?? 'pessoal',
+      detalhes: json['detalhes']?.toString(),
     );
   }
 }
@@ -34,8 +34,8 @@ class EfeitoMagia {
 
   factory EfeitoMagia.fromJson(Map<String, dynamic> json) {
     return EfeitoMagia(
-      tipo: json['tipo'] as String,
-      descricao: json['descricao'] as String?,
+      tipo: json['tipo']?.toString() ?? 'alvo',
+      descricao: json['descricao']?.toString(),
     );
   }
 }
@@ -48,8 +48,8 @@ class DuracaoMagia {
 
   factory DuracaoMagia.fromJson(Map<String, dynamic> json) {
     return DuracaoMagia(
-      tipo: json['tipo'] as String,
-      detalhes: json['detalhes'] as String?,
+      tipo: json['tipo']?.toString() ?? 'instantanea',
+      detalhes: json['detalhes']?.toString(),
     );
   }
 }
@@ -62,8 +62,8 @@ class ResistenciaMagia {
 
   factory ResistenciaMagia.fromJson(Map<String, dynamic> json) {
     return ResistenciaMagia(
-      tipoTeste: json['tipoTeste'] as String?,
-      resultadoSucesso: json['resultadoSucesso'] as String? ?? 'nenhuma',
+      tipoTeste: json['tipoTeste']?.toString(),
+      resultadoSucesso: json['resultadoSucesso']?.toString() ?? 'nenhuma',
     );
   }
 }
@@ -85,10 +85,10 @@ class AprimoramentoMagia {
 
   factory AprimoramentoMagia.fromJson(Map<String, dynamic> json) {
     return AprimoramentoMagia(
-      id: json['id'] as String,
-      descricao: json['descricao'] as String,
-      custoAdicionalPM: json['custoAdicionalPM'] as int? ?? 0,
-      preRequisitos: json['preRequisitos'] as String?,
+      id: json['id']?.toString() ?? '',
+      descricao: json['descricao']?.toString() ?? '',
+      custoAdicionalPM: (json['custoAdicionalPM'] as num?)?.toInt() ?? 0,
+      preRequisitos: json['preRequisitos']?.toString(),
       isTruque: json['isTruque'] as bool? ?? false,
     );
   }
@@ -97,7 +97,7 @@ class AprimoramentoMagia {
 class Magia {
   final String id;
   final String nome;
-  final String tipo; // 'arcana' ou 'divina'
+  final String tipo; // 'arcana', 'divina' ou 'universal'
   final int circulo; // 1 a 5
   final String escola; // ex: 'abjuracao', 'evocacao'
   final ExecucaoMagia execucao;
@@ -125,28 +125,33 @@ class Magia {
 
   factory Magia.fromJson(Map<String, dynamic> json) {
     return Magia(
-      id: json['id'] as String,
-      nome: json['nome'] as String,
-      tipo: json['tipo'] as String,
-      circulo: json['circulo'] as int,
-      escola: json['escola'] as String,
-      execucao: ExecucaoMagia.fromJson(
-        json['execucao'] as Map<String, dynamic>,
-      ),
-      alcance: AlcanceMagia.fromJson(json['alcance'] as Map<String, dynamic>),
-      efeito: EfeitoMagia.fromJson(json['efeito'] as Map<String, dynamic>),
-      duracao: DuracaoMagia.fromJson(json['duracao'] as Map<String, dynamic>),
-      resistencia: json['resistencia'] != null
+      id: json['id']?.toString() ?? '',
+      nome: json['nome']?.toString() ?? '',
+      tipo: json['tipo']?.toString() ?? 'arcana',
+      circulo: (json['circulo'] as num?)?.toInt() ?? 1,
+      escola: json['escola']?.toString() ?? 'universal',
+      execucao: json['execucao'] is Map<String, dynamic>
+          ? ExecucaoMagia.fromJson(json['execucao'] as Map<String, dynamic>)
+          : const ExecucaoMagia(tipo: 'padrao'),
+      alcance: json['alcance'] is Map<String, dynamic>
+          ? AlcanceMagia.fromJson(json['alcance'] as Map<String, dynamic>)
+          : const AlcanceMagia(tipo: 'pessoal'),
+      efeito: json['efeito'] is Map<String, dynamic>
+          ? EfeitoMagia.fromJson(json['efeito'] as Map<String, dynamic>)
+          : const EfeitoMagia(tipo: 'alvo'),
+      duracao: json['duracao'] is Map<String, dynamic>
+          ? DuracaoMagia.fromJson(json['duracao'] as Map<String, dynamic>)
+          : const DuracaoMagia(tipo: 'instantanea'),
+      resistencia: json['resistencia'] is Map<String, dynamic>
           ? ResistenciaMagia.fromJson(
               json['resistencia'] as Map<String, dynamic>,
             )
           : null,
-      descricao: json['descricao'] as String,
+      descricao: json['descricao']?.toString() ?? '',
       aprimoramentos:
           (json['aprimoramentos'] as List<dynamic>?)
-              ?.map(
-                (e) => AprimoramentoMagia.fromJson(e as Map<String, dynamic>),
-              )
+              ?.whereType<Map<String, dynamic>>()
+              .map(AprimoramentoMagia.fromJson)
               .toList() ??
           [],
     );

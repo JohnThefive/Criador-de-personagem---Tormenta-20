@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../domain/entities/personagem/poder.dart';
 import '../../../domain/entities/personagem/raca.dart';
 import '../../controllers/personagem_cubit.dart';
+import '../../../domain/services/data_services/call_pericias.dart';
+import '../../../domain/services/data_services/call_poderes.dart';
 import '../../../domain/services/data_services/call_racas.dart';
 import '../../widgets/rpg_icon.dart';
 
@@ -259,7 +262,11 @@ class _PaginaSelecaoRacaState extends State<PaginaSelecaoRaca> {
                                     .toList(),
                               )
                             else if (racaSelecionada.ehFlexivel)
-                              Chip(
+                              ActionChip(
+                                onPressed: () => _mostrarSeletorDeAtributos(
+                                  context,
+                                  racaSelecionada,
+                                ),
                                 label: const Text(
                                   "Escolha +1 em 3 atributos",
                                   style: TextStyle(fontWeight: FontWeight.bold),
@@ -267,6 +274,11 @@ class _PaginaSelecaoRacaState extends State<PaginaSelecaoRaca> {
                                 backgroundColor: Colors.blue[100],
                                 avatar: const Icon(Icons.touch_app, size: 16),
                               ),
+
+                            if (racaSelecionada.id.toLowerCase() == 'lefou') ...[
+                              const SizedBox(height: 16),
+                              _buildCardDeformidadeLefou(context),
+                            ],
 
                             const SizedBox(height: 16),
 
@@ -322,6 +334,301 @@ class _PaginaSelecaoRacaState extends State<PaginaSelecaoRaca> {
       ],
     );
   }
+
+  Widget _buildCardDeformidadeLefou(BuildContext context) {
+    final p = widget.state.personagem;
+    final pericias = p.periciasDeformidadeLefou;
+    final poder = p.poderTormentaDeformidade;
+    final totalEscolhido = pericias.length + (poder != null ? 1 : 0);
+
+    return Card(
+      color: Colors.red.shade50,
+      elevation: 1,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+        side: BorderSide(color: Colors.red.shade300),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(Icons.coronavirus, color: Colors.red.shade900, size: 20),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    "Deformidade (Lefou)",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                      color: Colors.red.shade900,
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 3,
+                  ),
+                  decoration: BoxDecoration(
+                    color: totalEscolhido == 2
+                        ? Colors.green.shade700
+                        : Colors.orange.shade800,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Text(
+                    "$totalEscolhido/2",
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 11,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 6),
+            const Text(
+              "Receba +2 em duas perícias (ou +2 em uma perícia e um Poder da Tormenta). Cada bônus conta como um Poder da Tormenta, sem perda de Carisma.",
+              style: TextStyle(fontSize: 12, color: Colors.black87),
+            ),
+            if (pericias.isNotEmpty || poder != null) ...[
+              const SizedBox(height: 8),
+              Wrap(
+                spacing: 6,
+                runSpacing: 4,
+                children: [
+                  ...pericias.map((k) {
+                    final label = BancoDePericias.getByKey(k).label;
+                    return Chip(
+                      label: Text(
+                        "+2 $label",
+                        style: const TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      backgroundColor: Colors.white,
+                      visualDensity: VisualDensity.compact,
+                    );
+                  }),
+                  if (poder != null)
+                    Chip(
+                      avatar: Icon(
+                        Icons.coronavirus,
+                        size: 14,
+                        color: Colors.red.shade900,
+                      ),
+                      label: Text(
+                        "Tormenta: ${poder.nome}",
+                        style: TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.red.shade900,
+                        ),
+                      ),
+                      backgroundColor: Colors.red.shade100,
+                      visualDensity: VisualDensity.compact,
+                    ),
+                ],
+              ),
+            ],
+            const SizedBox(height: 8),
+            SizedBox(
+              width: double.infinity,
+              child: OutlinedButton.icon(
+                onPressed: () => _mostrarModalDeformidadeLefou(context),
+                icon: const Icon(Icons.tune, size: 16),
+                label: const Text("Configurar Deformidade"),
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: Colors.red.shade900,
+                  side: BorderSide(color: Colors.red.shade700),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+void _mostrarModalDeformidadeLefou(BuildContext parentContext) {
+  showModalBottomSheet(
+    context: parentContext,
+    isScrollControlled: true,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+    ),
+    builder: (context) {
+      return BlocBuilder<PersonagemCubit, PersonagemState>(
+        bloc: parentContext.read<PersonagemCubit>(),
+        builder: (context, state) {
+          final cubit = parentContext.read<PersonagemCubit>();
+          final p = state.personagem;
+          final periciasEscolhidas = p.periciasDeformidadeLefou;
+          final poderTormenta = p.poderTormentaDeformidade;
+          final maxPericias = poderTormenta != null ? 1 : 2;
+          final todasPericias = BancoDePericias.todas;
+          final poderesTormenta = BancoDePoderesGerais.poderesTormenta.where((
+            pod,
+          ) {
+            return pod.poderesTormentaMinimos <= 1 &&
+                pod.poderesExigidos.isEmpty &&
+                pod.atributosExigidos.isEmpty;
+          }).toList();
+
+          return DraggableScrollableSheet(
+            expand: false,
+            initialChildSize: 0.82,
+            maxChildSize: 0.92,
+            minChildSize: 0.5,
+            builder: (context, scrollController) {
+              return Padding(
+                padding: const EdgeInsets.all(20),
+                child: ListView(
+                  controller: scrollController,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(Icons.coronavirus, color: Colors.red.shade900),
+                        const SizedBox(width: 8),
+                        const Expanded(
+                          child: Text(
+                            "Deformidade do Lefou",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      "Escolha até $maxPericias perícia(s) para receber +2. Você pode trocar 1 bônus de perícia por 1 Poder da Tormenta (sem perda de Carisma).",
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: Colors.black54,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    const Text(
+                      "1. Perícias com +2 (Deformidade)",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Wrap(
+                      spacing: 6,
+                      runSpacing: 6,
+                      children: todasPericias.map((pericia) {
+                        final selecionada = periciasEscolhidas.contains(
+                          pericia.key,
+                        );
+                        return FilterChip(
+                          label: Text(
+                            pericia.label,
+                            style: const TextStyle(fontSize: 12),
+                          ),
+                          selected: selecionada,
+                          selectedColor: Colors.red.shade100,
+                          checkmarkColor: Colors.red.shade900,
+                          onSelected: (_) =>
+                              cubit.togglePericiaDeformidadeLefou(pericia.key),
+                        );
+                      }).toList(),
+                    ),
+                    const Divider(height: 28),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Expanded(
+                          child: Text(
+                            "2. Opcional: Trocar 1 bônus por Poder da Tormenta",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
+                        if (poderTormenta != null)
+                          TextButton(
+                            onPressed: () =>
+                                cubit.selecionarPoderTormentaDeformidade(null),
+                            child: const Text("Remover poder"),
+                          ),
+                      ],
+                    ),
+                    const SizedBox(height: 6),
+                    ...poderesTormenta.map((Poder pod) {
+                      final isSelected = poderTormenta?.key == pod.key;
+                      return Card(
+                        color: isSelected ? Colors.red.shade50 : Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          side: BorderSide(
+                            color: isSelected
+                                ? Colors.red.shade700
+                                : Colors.grey.shade300,
+                          ),
+                        ),
+                        child: ListTile(
+                          dense: true,
+                          title: Text(
+                            pod.nome,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: isSelected
+                                  ? Colors.red.shade900
+                                  : Colors.black87,
+                            ),
+                          ),
+                          subtitle: Text(
+                            pod.descricao,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(fontSize: 11),
+                          ),
+                          trailing: Icon(
+                            isSelected
+                                ? Icons.check_circle
+                                : Icons.radio_button_unchecked,
+                            color: isSelected
+                                ? Colors.red.shade900
+                                : Colors.grey,
+                          ),
+                          onTap: () => cubit.selecionarPoderTormentaDeformidade(
+                            isSelected ? null : pod,
+                          ),
+                        ),
+                      );
+                    }),
+                    const SizedBox(height: 16),
+                    ElevatedButton(
+                      onPressed: () => Navigator.pop(context),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.red.shade900,
+                        minimumSize: const Size(double.infinity, 48),
+                      ),
+                      child: const Text(
+                        "CONCLUIR DEFORMIDADE",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          );
+        },
+      );
+    },
+  );
 }
 
 // Funções RElacionadas a atributos

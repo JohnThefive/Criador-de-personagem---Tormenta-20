@@ -11,6 +11,8 @@ import '../habilidades_complexas/engenhoca.dart';
 import '../habilidades_complexas/montaria_sagrada.dart';
 import '../../services/data_services/call_montaria_sagrada.dart';
 import '../../services/regras_carga_service.dart';
+import '../../services/motor_modificadores_service.dart';
+import '../../services/motor_multiclasse_service.dart';
 
 import 'atributos.dart';
 import 'pericias.dart';
@@ -27,6 +29,8 @@ class Personagem {
   final Map<String, Atributo> atributos; // Atributos BASE (Rolados/Comprados)
   final Raca? raca;
   final List<ClasseDoPersonagem> classes; // Índice [0] é a classe inicial
+  final List<String>
+  historicoClassesPorNivel; // RF02 / RF12: Histórico cronológico de classe escolhida em cada nível (1..N)
   final List<String> periciasTreinadas;
   final Map<String, int> outrosBonusPericias; // Bônus diversos por perícia ("Outros")
 
@@ -72,6 +76,10 @@ class Personagem {
   final List<String> magiasConhecidas;
   final int outrosBonusCDMagia;
 
+  // Deformidade do Lefou (+2 em 2 perícias OU +2 em 1 perícia + 1 Poder da Tormenta sem perda de Carisma)
+  final List<String> periciasDeformidadeLefou;
+  final Poder? poderTormentaDeformidade;
+
   Poder? get poderConcedido =>
       poderesConcedidos.isNotEmpty ? poderesConcedidos.first : null;
 
@@ -106,6 +114,7 @@ class Personagem {
     required this.atributos,
     this.raca,
     this.classes = const [],
+    this.historicoClassesPorNivel = const [],
     this.periciasTreinadas = const [],
     this.outrosBonusPericias = const {},
     // Campos referentes a origem e equipamento
@@ -142,6 +151,8 @@ class Personagem {
     this.punicaoDivinaAtiva = false,
     this.magiasConhecidas = const [],
     this.outrosBonusCDMagia = 0,
+    this.periciasDeformidadeLefou = const [],
+    this.poderTormentaDeformidade,
     // Campos de personalização (com fallback para id se vier nulo)
     String? id,
     this.idade = 20,
@@ -165,8 +176,6 @@ class Personagem {
        _pvAtual = pvAtual,
        _pmAtual = pmAtual;
 
-  bool get ehDevoto => divindade != null;
-
   bool get exigeDevocao {
     if (classes.isEmpty) return false;
     final idClasse = classes[0].classeDefinicao.idClasse.toLowerCase();
@@ -175,6 +184,8 @@ class Personagem {
         idClasse == 'druida' ||
         idClasse == 'paladino';
   }
+
+  bool get ehDevoto => divindade != null;
 
   bool get ehDevotoFiel => exigeDevocao;
 
@@ -192,6 +203,7 @@ class Personagem {
       },
       raca: null,
       classes: const [],
+      historicoClassesPorNivel: const [],
       periciasTreinadas: const [],
       outrosBonusPericias: const {},
       origem: null,
@@ -218,6 +230,8 @@ class Personagem {
       poderConcedido: null,
       magiasConhecidas: const [],
       outrosBonusCDMagia: 0,
+      periciasDeformidadeLefou: const [],
+      poderTormentaDeformidade: null,
       atributosVariaveisRaca: const [],
       idade: 20,
       alinhamento: 'Neutro',
@@ -242,6 +256,7 @@ class Personagem {
     List<String>? atributosVariaveisRaca,
     // ignore: non_constant_identifier_names
     List<ClasseDoPersonagem>? classe_do_personagem,
+    List<String>? historicoClassesPorNivel,
     List<String>? periciasTreinadas,
     Map<String, int>? outrosBonusPericias,
     // Campos referentes a origem e equipamento
@@ -282,6 +297,9 @@ class Personagem {
     bool anularDivindade = false,
     List<String>? magiasConhecidas,
     int? outrosBonusCDMagia,
+    List<String>? periciasDeformidadeLefou,
+    Poder? poderTormentaDeformidade,
+    bool anularPoderTormentaDeformidade = false,
     // Campos de personalização
     int? idade,
     String? alinhamento,
@@ -306,6 +324,8 @@ class Personagem {
       atributosVariaveisRaca:
           atributosVariaveisRaca ?? this.atributosVariaveisRaca,
       classes: classe_do_personagem ?? classes,
+      historicoClassesPorNivel:
+          historicoClassesPorNivel ?? this.historicoClassesPorNivel,
       periciasTreinadas: periciasTreinadas ?? this.periciasTreinadas,
       outrosBonusPericias: outrosBonusPericias ?? this.outrosBonusPericias,
       origem: origem ?? this.origem,
@@ -353,6 +373,11 @@ class Personagem {
           : (punicaoDivinaAtiva ?? this.punicaoDivinaAtiva),
       magiasConhecidas: magiasConhecidas ?? this.magiasConhecidas,
       outrosBonusCDMagia: outrosBonusCDMagia ?? this.outrosBonusCDMagia,
+      periciasDeformidadeLefou:
+          periciasDeformidadeLefou ?? this.periciasDeformidadeLefou,
+      poderTormentaDeformidade: anularPoderTormentaDeformidade
+          ? null
+          : (poderTormentaDeformidade ?? this.poderTormentaDeformidade),
       idade: idade ?? this.idade,
       alinhamento: alinhamento ?? this.alinhamento,
       descricaoAparencia: descricaoAparencia ?? this.descricaoAparencia,
@@ -653,14 +678,32 @@ class Personagem {
       .where((e) => e.ativo)
       .fold(0, (soma, e) => soma + e.modRd);
 
-  /// Redução de dano padrão total ativa (RD Padrão + Forma Selvagem + Efeitos Temporários)
+  int get bonusDeclarativoRd =>
+      MotorModificadoresService.calcularBonusDeclarativoRD(this);
+
+  /// Redução de dano padrão total ativa (RD Padrão + Forma Selvagem + Poderes/Equipamentos + Efeitos Temporários)
   int get rdTotal {
     final rdForma = estaEmFormaSelvagem ? formaSelvagemAtiva!.rd : 0;
-    final soma = rdPadrao + rdForma + bonusEfeitosRd;
+    final soma = rdPadrao + rdForma + bonusDeclarativoRd + bonusEfeitosRd;
     return soma < 0 ? 0 : soma;
   }
 
-  // Este método calcula o valor final para exibir na tela (Base + Raça Fixa + Raça Variável + Forma Selvagem)
+  /// Total de poderes da Tormenta para pré-requisitos e escalonamento (inclui Deformidade do Lefou)
+  int get totalPoderesTormenta =>
+      MotorModificadoresService.contarPoderesTormentaParaEscalamento(this);
+
+  /// Quantidade de poderes da Tormenta que causam perda de Carisma
+  int get poderesTormentaComPerdaCarisma =>
+      MotorModificadoresService.contarPoderesTormentaComPerdaCarisma(this);
+
+  /// Perda de Carisma oriunda de Poderes da Tormenta (1 no primeiro + 1 a cada 2 outros)
+  int get perdaCarismaTormenta =>
+      MotorModificadoresService.calcularPerdaCarismaTormenta(this);
+
+  /// Em Tormenta 20: um personagem reduzido a menos que Car –5 torna-se um NPC sob controle do mestre.
+  bool get dominadoPelaTormenta => getValorFinal('CAR') < -5;
+
+  // Este método calcula o valor final para exibir na tela (Base + Raça Fixa + Raça Variável + Forma Selvagem - Perda Tormenta)
   int getValorFinal(String sigla, {List<String>? bonusVariaveis}) {
     final variaveisEfetivos = bonusVariaveis ?? atributosVariaveisRaca;
 
@@ -672,42 +715,39 @@ class Personagem {
         formaSelvagemAtiva!.modificadores.containsKey(sigla)) {
       bonusForma = formaSelvagemAtiva!.modificadores[sigla]!;
     }
-    return base + bonusFixo + bonusVariavel + bonusForma;
+    int penalidadeTormenta = sigla.toUpperCase() == 'CAR'
+        ? perdaCarismaTormenta
+        : 0;
+    return base + bonusFixo + bonusVariavel + bonusForma - penalidadeTormenta;
   }
 
-  // Nível de Personagem (Soma dos níveis de todas as classes)
-  int get nivelPersonagem {
-    if (classes.isEmpty) return 0;
-    return classes.fold(0, (soma, c) => soma + c.nivel);
-  }
+  // RF03 / RN02 — Nível Total de Personagem (Soma dos níveis individuais de todas as classes)
+  int get nivelPersonagem => MotorMulticlasseService.calcularNivelTotal(this);
 
-  // Pontos de Vida Totais (PV)
-  int get pvTotal {
-    if (classes.isEmpty) return 0;
+  // RF10 / RN09 — Patamar de jogo baseado no nível total
+  PatamarJogo get patamar => MotorMulticlasseService.identificarPatamar(this);
+  String get nomePatamar => patamar.label;
 
-    int con = getValorFinal('CON');
-    int totalPV = 0;
+  // RF04 / RN03 — Consulta do nível individual de uma classe específica
+  int nivelNaClasse(String idOuNomeClasse) =>
+      MotorMulticlasseService.obterNivelIndividualClasse(this, idOuNomeClasse);
 
-    for (int i = 0; i < classes.length; i++) {
-      final item = classes[i];
-      final regras = item.classeDefinicao;
-      final bool ehClasseInicial = (i == 0);
+  // RF05 / RN08 / RV07 — Consulta das características adquiridas respeitando o nível individual da classe
+  List<String> caracteristicasDaClasse(String idOuNomeClasse) =>
+      MotorMulticlasseService.obterCaracteristicasAcumuladasDaClasse(
+        this,
+        idOuNomeClasse,
+      );
 
-      if (ehClasseInicial) {
-        totalPV += regras.pvInicial + con;
-        if (item.nivel > 1) {
-          int ganhoPorNivel = regras.pvPorNivel + con;
-          if (ganhoPorNivel < 1) ganhoPorNivel = 1;
-          totalPV += ganhoPorNivel * (item.nivel - 1);
-        }
-      } else {
-        int ganhoPorNivel = regras.pvPorNivel + con;
-        if (ganhoPorNivel < 1) ganhoPorNivel = 1;
-        totalPV += ganhoPorNivel * item.nivel;
-      }
-    }
-    return totalPV + bonusRacialPV;
-  }
+  // RF11 — Consulta da distribuição dos níveis entre classes
+  ResumoDistribuicaoMulticlasse get distribuicaoMulticlasse =>
+      MotorMulticlasseService.consultarDistribuicaoNiveis(this);
+
+  String get resumoDistribuicaoClassesTexto =>
+      distribuicaoMulticlasse.formatarTexto();
+
+  // RF06 / RN04 / RV05 — Pontos de Vida Totais (PV na multiclasse usa ganho de nível subsequente)
+  int get pvTotal => MotorMulticlasseService.calcularPvTotal(this);
 
   /// Bônus racial de Pontos de Vida (ex: Anão - Duro como Pedra: +3 PV no 1º nível, +1 por nível seguinte)
   int get bonusRacialPV {
@@ -729,25 +769,8 @@ class Personagem {
     return 0;
   }
 
-  // Pontos de Mana Totais (PM)
-  int get pmTotal {
-    if (classes.isEmpty) return 0;
-    int totalPM = 0;
-    for (int i = 0; i < classes.length; i++) {
-      final item = classes[i];
-      final def = item.classeDefinicao;
-      totalPM += (i == 0) ? def.pmInicial : (def.pmPorNivel * item.nivel);
-      if (i == 0 && item.nivel > 1) {
-        totalPM += def.pmPorNivel * (item.nivel - 1);
-      }
-      // Soma o atributo-chave da classe (independente de ter subclasse)
-      final siglaAtributo = _obterAtributoChaveConjuracao(item);
-      if (siglaAtributo != null) {
-        totalPM += getValorFinal(siglaAtributo);
-      }
-    }
-    return totalPM + bonusRacialPM;
-  }
+  // RF07 / RN05 — Pontos de Mana Totais (soma de todas as classes)
+  int get pmTotal => MotorMulticlasseService.calcularPmTotal(this);
 
   String? _obterAtributoChaveConjuracao(ClasseDoPersonagem c) {
     return switch (c.classeDefinicao.idClasse.toLowerCase()) {
@@ -798,11 +821,16 @@ class Personagem {
     return 0;
   }
 
-  /// Bônus racial inato em perícias (ex: Elfo - Sentidos Élficos: +2 Misticismo e Percepção; Goblin - Rato das Ruas: +2 Fortitude; etc.)
+  /// Bônus racial inato em perícias (ex: Elfo - Sentidos Élficos: +2 Misticismo e Percepção; Lefou - Deformidade: +2 nas perícias escolhidas; etc.)
   int bonusRacialPericia(String periciaKey) {
     final rId = raca?.id.toLowerCase() ?? '';
     final keyUpper = periciaKey.toUpperCase();
-    if (rId == 'elfo') {
+    if (rId == 'lefou') {
+      return MotorModificadoresService.calcularBonusDeformidadeLefouPericia(
+        this,
+        keyUpper,
+      );
+    } else if (rId == 'elfo') {
       if (keyUpper == 'MISTICISMO' || keyUpper == 'PERCEPCAO') return 2;
     } else if (rId == 'goblin') {
       if (keyUpper == 'FORTITUDE') return 2;
@@ -816,10 +844,20 @@ class Personagem {
     return 0;
   }
 
+  /// Bônus declarativo de Poderes (Tormenta e Gerais) e Equipamentos/Itens Vestidos na perícia
+  int bonusDeclarativoPericia(String periciaKey) =>
+      MotorModificadoresService.calcularBonusDeclarativoPericia(
+        this,
+        periciaKey,
+      );
+
   // --- CÁLCULO DE DEFESA E PROTEÇÕES (TORMENTA 20) ---
-  int get bonusArmadura => armaduraEquipada?.bonusDefesa ?? 0;
-  int get bonusEscudo => escudoEquipado?.bonusDefesa ?? 0;
+  int get bonusArmadura => armaduraEquipada?.bonusDefesaEfetivo ?? 0;
+  int get bonusEscudo => escudoEquipado?.bonusDefesaEfetivo ?? 0;
   bool get usaArmaduraPesada => armaduraEquipada?.ehArmaduraPesada ?? false;
+
+  int get bonusDeclarativoDefesa =>
+      MotorModificadoresService.calcularBonusDeclarativoDefesa(this);
 
   int get bonusFormaDefesa =>
       (estaEmFormaSelvagem &&
@@ -833,10 +871,14 @@ class Personagem {
           : 0;
 
   /// Defesa final calculada reativamente:
-  /// Defesa = 10 + (usaArmaduraPesada ? 0 : modDES) + bonusArmadura + bonusEscudo + bonusRacial + bonusForma + bonusCompanheiro + outrosBonusDefesa + bonusEfeitosDefesa
+  /// Defesa = 10 + (usaArmaduraPesada ? bonusDelicada : modDES) + bonusArmadura + bonusEscudo + bonusRacial + bonusForma + bonusCompanheiro + bonusDeclarativoDefesa + outrosBonusDefesa + bonusEfeitosDefesa
   int get defesaFinal {
     final modDes = getValorFinal('DES');
-    final modDesAplicado = usaArmaduraPesada ? 0 : modDes;
+    final modDesAplicado = usaArmaduraPesada
+        ? MotorModificadoresService.calcularBonusDestrezaDelicadaArmaduraPesada(
+            this,
+          )
+        : modDes;
     return 10 +
         modDesAplicado +
         bonusArmadura +
@@ -844,6 +886,7 @@ class Personagem {
         bonusRacialDefesa +
         bonusFormaDefesa +
         bonusCompanheiroDefesa +
+        bonusDeclarativoDefesa +
         outrosBonusDefesa +
         bonusEfeitosDefesa;
   }
@@ -859,8 +902,8 @@ class Personagem {
 
   int _calcularPenalidadeArmaduraTotal() {
     int total =
-        (armaduraEquipada?.penalidadeArmadura ?? 0) +
-        (escudoEquipado?.penalidadeArmadura ?? 0);
+        (armaduraEquipada?.penalidadeArmaduraEfetiva.abs() ?? 0) +
+        (escudoEquipado?.penalidadeArmaduraEfetiva.abs() ?? 0);
     if (estaSobrecarregado) {
       total += 2; // T20: sobrecarga adiciona -2 de penalidade de armadura
     }
@@ -901,14 +944,9 @@ class Personagem {
     return 2;
   }
 
-  late final Set<String> _periciasFixasClasseUpper = classes
-      .expand(
-        (c) => [
-          ...c.classeDefinicao.periciasFixas.map((p) => p.toUpperCase()),
-          ...c.periciasExclusivasEscolhidas.values.map((p) => p.toUpperCase()),
-        ],
-      )
-      .toSet();
+  // RF08 / RN06 / RV06 — Apenas a classe inicial concede perícias fixas/exclusivas automaticamente!
+  late final Set<String> _periciasFixasClasseUpper =
+      MotorMulticlasseService.obterPericiasIniciaisClasseConcedidas(this);
 
   late final Set<String> _periciasTreinadasTotalUpper = {
     ...periciasTreinadas.map((p) => p.toUpperCase()),
@@ -919,12 +957,12 @@ class Personagem {
     (k, v) => MapEntry(k.toUpperCase(), v),
   );
 
-  /// Verifica se a perícia é concedida de forma fixa ou exclusiva por alguma classe
+  /// Verifica se a perícia é concedida de forma fixa ou exclusiva pela classe inicial (RF08 / RN06)
   bool ehPericiaTreinadaFixaDeClasse(String periciaKey) {
     return _periciasFixasClasseUpper.contains(periciaKey.toUpperCase());
   }
 
-  /// Verifica se o personagem possui treinamento na perícia (manual ou de classe)
+  /// Verifica se o personagem possui treinamento na perícia (manual ou da classe inicial)
   bool ehPericiaTreinada(String periciaKey) {
     return _periciasTreinadasTotalUpper.contains(periciaKey.toUpperCase());
   }
@@ -953,37 +991,41 @@ class Personagem {
         (ehPericiaTreinada(periciaKey) ? bonusTreinamento : 0) +
         obterOutrosBonusPericia(periciaKey) +
         bonusRacialPericia(periciaKey) +
+        bonusDeclarativoPericia(periciaKey) +
         bonusEfeitosPericias -
         penalidadeAplicada;
   }
 
-  // --- REGRAS DE PROFICIÊNCIAS ---
-  bool get temProficienciaMarcial => classes.any(
-    (c) => c.classeDefinicao.proficiencias.contains(
-      TipoProficiencia.armasMarciais,
-    ),
-  );
+  // --- REGRAS DE PROFICIÊNCIAS (RF09 / RN07 / RV06: Multiclasse NÃO concede proficiências iniciais automaticamente) ---
+  late final Set<TipoProficiencia> _proficienciasIniciaisClasse =
+      MotorMulticlasseService.obterProficienciasIniciaisClasseConcedidas(this);
 
-  bool get temProficienciaSimples => classes.any(
-    (c) =>
-        c.classeDefinicao.proficiencias.contains(TipoProficiencia.armasSimples),
-  );
+  bool _temProficienciaExtraTexto(String termo) =>
+      proficienciasExtras.any((p) => p.toLowerCase().contains(termo));
 
-  bool get temProficienciaArmadurasLeves => classes.any(
-    (c) => c.classeDefinicao.proficiencias.contains(
-      TipoProficiencia.armadurasLeves,
-    ),
-  );
+  bool get temProficienciaMarcial =>
+      _proficienciasIniciaisClasse.contains(TipoProficiencia.armasMarciais) ||
+      _temProficienciaExtraTexto('marcia');
 
-  bool get temProficienciaArmadurasPesadas => classes.any(
-    (c) => c.classeDefinicao.proficiencias.contains(
-      TipoProficiencia.armadurasPesadas,
-    ),
-  );
+  bool get temProficienciaSimples =>
+      _proficienciasIniciaisClasse.contains(TipoProficiencia.armasSimples) ||
+      _temProficienciaExtraTexto('simples');
 
-  bool get temProficienciaEscudos => classes.any(
-    (c) => c.classeDefinicao.proficiencias.contains(TipoProficiencia.escudos),
-  );
+  bool get temProficienciaArmadurasLeves =>
+      _proficienciasIniciaisClasse.contains(TipoProficiencia.armadurasLeves) ||
+      _temProficienciaExtraTexto('armaduras leves') ||
+      _temProficienciaExtraTexto('armadura leve');
+
+  bool get temProficienciaArmadurasPesadas =>
+      _proficienciasIniciaisClasse.contains(
+        TipoProficiencia.armadurasPesadas,
+      ) ||
+      _temProficienciaExtraTexto('armaduras pesadas') ||
+      _temProficienciaExtraTexto('armadura pesada');
+
+  bool get temProficienciaEscudos =>
+      _proficienciasIniciaisClasse.contains(TipoProficiencia.escudos) ||
+      _temProficienciaExtraTexto('escudo');
 
   bool get ehArcanista => classes.any(
     (c) => c.classeDefinicao.idClasse.toLowerCase() == 'arcanista',
@@ -996,7 +1038,8 @@ class Personagem {
 
   // --- CAPACIDADE DE CARGA (TORMENTA 20) ---
   int get limiteCarga =>
-      RegrasCargaService.calcularLimiteCarga(getValorFinal('FOR'));
+      RegrasCargaService.calcularLimiteCarga(getValorFinal('FOR')) +
+      MotorModificadoresService.calcularBonusDeclarativoLimiteCarga(this);
 
   late final int cargaAtual = RegrasCargaService.calcularEspacosOcupados(
     armas: armas,

@@ -449,9 +449,13 @@ class PersonagemCubit extends Cubit<PersonagemState> {
     Raca novaRaca, {
     List<String> atributosVariaveis = const [],
   }) {
+    final ehLefou = novaRaca.id.toLowerCase() == 'lefou';
     final personagemAtualizado = state.personagem.copyWith(
       raca: novaRaca,
       atributosVariaveisRaca: atributosVariaveis,
+      periciasDeformidadeLefou:
+          ehLefou ? state.personagem.periciasDeformidadeLefou : const [],
+      anularPoderTormentaDeformidade: !ehLefou,
     );
 
     emit(
@@ -494,12 +498,72 @@ class PersonagemCubit extends Cubit<PersonagemState> {
     if (listaAtual.contains(sigla)) {
       listaAtual.remove(sigla);
     } else {
-      if (listaAtual.length <= 3) {
+      if (listaAtual.length < 3) {
         listaAtual.add(sigla);
       }
     }
 
-    emit(state.copyWith(atributosVariaveisRaca: listaAtual));
+    final personagemAtualizado = state.personagem.copyWith(
+      atributosVariaveisRaca: listaAtual,
+    );
+
+    emit(
+      state.copyWith(
+        personagem: personagemAtualizado,
+        atributosVariaveisRaca: listaAtual,
+      ),
+    );
+  }
+
+  // --- DEFORMIDADE DO LEFOU ---
+  void togglePericiaDeformidadeLefou(String nomePericia) {
+    final raca = state.personagem.raca;
+    if (raca == null || raca.id.toLowerCase() != 'lefou') return;
+
+    final maxPericias =
+        state.personagem.poderTormentaDeformidade != null ? 1 : 2;
+    final atuais = List<String>.from(state.personagem.periciasDeformidadeLefou);
+
+    if (atuais.contains(nomePericia)) {
+      atuais.remove(nomePericia);
+    } else {
+      if (atuais.length < maxPericias) {
+        atuais.add(nomePericia);
+      } else if (maxPericias == 1) {
+        atuais
+          ..clear()
+          ..add(nomePericia);
+      }
+    }
+
+    emit(
+      state.copyWith(
+        personagem: state.personagem.copyWith(
+          periciasDeformidadeLefou: atuais,
+        ),
+      ),
+    );
+  }
+
+  void selecionarPoderTormentaDeformidade(Poder? poder) {
+    final raca = state.personagem.raca;
+    if (raca == null || raca.id.toLowerCase() != 'lefou') return;
+
+    final periciasAtuais =
+        List<String>.from(state.personagem.periciasDeformidadeLefou);
+    if (poder != null && periciasAtuais.length > 1) {
+      periciasAtuais.removeRange(1, periciasAtuais.length);
+    }
+
+    emit(
+      state.copyWith(
+        personagem: state.personagem.copyWith(
+          periciasDeformidadeLefou: periciasAtuais,
+          poderTormentaDeformidade: poder,
+          anularPoderTormentaDeformidade: poder == null,
+        ),
+      ),
+    );
   }
 
   // Vamos começar a logica de seleção de classe

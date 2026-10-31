@@ -17,7 +17,18 @@ class ClasseDoPersonagem {
     this.caminhoEscolhido,
     this.poderesEscolhidos = const [],
     this.linhagemEscolhida,
-  }) : nivel = nivel.clamp(1, 20);
+  }) : nivel = _validarNivelIndividual(nivel);
+
+  static int _validarNivelIndividual(int valor) {
+    if (valor < 1 || valor > 20) {
+      throw ArgumentError.value(
+        valor,
+        'nivel',
+        'RV02: O nível individual de uma classe registrada deve ser um inteiro positivo entre 1 e 20.',
+      );
+    }
+    return valor;
+  }
 
   ClasseDoPersonagem copyWith({
     Classe? classeDefinicao,
@@ -31,7 +42,7 @@ class ClasseDoPersonagem {
   }) {
     return ClasseDoPersonagem(
       classeDefinicao: classeDefinicao ?? this.classeDefinicao,
-      nivel: (nivel ?? this.nivel).clamp(1, 20),
+      nivel: _validarNivelIndividual(nivel ?? this.nivel),
       periciasExclusivasEscolhidas:
           periciasExclusivasEscolhidas ?? this.periciasExclusivasEscolhidas,
       caminhoEscolhido: anularCaminho
@@ -49,6 +60,15 @@ class ClasseDoPersonagem {
       poderesEscolhidos.any((p) => p.nome == "Herança Aprimorada");
   bool get possuiHerancaSuperior =>
       poderesEscolhidos.any((p) => p.nome == "Herança Superior");
+
+  /// RF04 / RF05 / RN08 — Características da tabela de progressão adquiridas até o nível individual desta classe.
+  List<String> get caracteristicasAdquiridas {
+    final lista = <String>[];
+    for (int n = 1; n <= nivel; n++) {
+      lista.addAll(classeDefinicao.tabelaDeProgressao[n] ?? const <String>[]);
+    }
+    return List.unmodifiable(lista);
+  }
 
   /// No Tormenta 20, a cada nível a partir do 2º o personagem ganha um poder de classe.
   int get poderesPermitidos => (nivel - 1).clamp(0, 20);

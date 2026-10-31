@@ -28,6 +28,32 @@ class RegrasCustomizacaoPoder {
   };
 }
 
+class EscalamentoTormenta {
+  final String tipoPasso; // 'outros_poderes' ou 'todos_poderes'
+  final int divisor;
+  final String efeito;
+
+  const EscalamentoTormenta({
+    required this.tipoPasso,
+    this.divisor = 2,
+    required this.efeito,
+  });
+
+  factory EscalamentoTormenta.fromJson(Map<String, dynamic> json) {
+    return EscalamentoTormenta(
+      tipoPasso: json['tipoPasso']?.toString() ?? 'outros_poderes',
+      divisor: (json['divisor'] as num?)?.toInt() ?? 2,
+      efeito: json['efeito']?.toString() ?? '',
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+    'tipoPasso': tipoPasso,
+    'divisor': divisor,
+    'efeito': efeito,
+  };
+}
+
 class Poder {
   final String key;
   final String nome;
@@ -37,7 +63,12 @@ class Poder {
   final List<String> caminhosExigidos;
   final List<String> poderesExigidos;
   final Map<String, int> atributosExigidos;
+  final Map<String, int> atributosMaximos;
   final List<String> periciasExigidas;
+  final int poderesTormentaMinimos;
+  final int? circuloMagicoMinimo;
+  final String? categoria;
+  final EscalamentoTormenta? escalamentoTormenta;
   final String? referenciaTabela;
   final RegrasCustomizacaoPoder? regrasCustomizacao;
   final String? tipo;
@@ -52,7 +83,12 @@ class Poder {
     this.caminhosExigidos = const [],
     this.poderesExigidos = const [],
     this.atributosExigidos = const {},
+    this.atributosMaximos = const {},
     this.periciasExigidas = const [],
+    this.poderesTormentaMinimos = 0,
+    this.circuloMagicoMinimo,
+    this.categoria,
+    this.escalamentoTormenta,
     this.referenciaTabela,
     this.regrasCustomizacao,
     this.tipo,
@@ -61,6 +97,10 @@ class Poder {
 
   bool get temCustomizacao =>
       referenciaTabela != null || regrasCustomizacao != null;
+
+  bool get ehPoderTormenta =>
+      categoria?.toLowerCase() == 'poder_tormenta' ||
+      subTipo?.toLowerCase() == 'tormenta';
 
   static String _formatarIdentificador(String raw) {
     return raw
@@ -81,9 +121,14 @@ class Poder {
     final Map<String, int> atribExig = Map<String, int>.from(
       json['atributosExigidos'] ?? {},
     );
+    final Map<String, int> atribMax = Map<String, int>.from(
+      json['atributosMaximos'] ?? {},
+    );
     final List<String> periciasExig = List<String>.from(
       json['periciasExigidas'] ?? [],
     );
+    int tormentaMin = (json['poderesTormentaMinimos'] as num?)?.toInt() ?? 0;
+    int? circuloMin = (json['circuloMagicoMinimo'] as num?)?.toInt();
 
     if (prereq.isEmpty && json['dados_brutos'] != null) {
       final dadosBrutos = json['dados_brutos'];
@@ -92,6 +137,48 @@ class Poder {
         if (list is List && list.isNotEmpty) {
           prereq = list.map((e) => e.toString()).join(', ');
         }
+      }
+    }
+
+    // Extrai pré-requisitos de poderes da Tormenta (prerequisitos)
+    if (json['prerequisitos'] is Map) {
+      final mapPre = json['prerequisitos'] as Map;
+      final List<String> partesTormenta = [];
+      final minTorm = (mapPre['poderesTormentaMinimos'] as num?)?.toInt() ?? 0;
+      if (minTorm > tormentaMin) {
+        tormentaMin = minTorm;
+        partesTormenta.add(
+          minTorm == 1
+              ? 'Outro poder da Tormenta'
+              : '$minTorm outros poderes da Tormenta',
+        );
+      }
+      if (mapPre['poderesEspecificos'] is List) {
+        for (final pEsp in mapPre['poderesEspecificos'] as List) {
+          final pStr = pEsp.toString();
+          if (pStr.isNotEmpty && !poderesExig.contains(pStr)) {
+            poderesExig.add(pStr);
+            partesTormenta.add(_formatarIdentificador(pStr));
+          }
+        }
+      }
+      if (mapPre['atributos'] is Map) {
+        final mapAtrib = mapPre['atributos'] as Map;
+        mapAtrib.forEach((k, v) {
+          final keyStr = k.toString().toLowerCase();
+          final valInt = (v as num?)?.toInt() ?? 0;
+          if (keyStr == 'carisma_maximo' || keyStr == 'car_max') {
+            atribMax['CAR'] = valInt;
+            partesTormenta.add('CAR $valInt ou menor');
+          } else {
+            final sigla = keyStr.toUpperCase();
+            atribExig[sigla] = valInt;
+            partesTormenta.add('$sigla $valInt');
+          }
+        });
+      }
+      if (prereq.isEmpty && partesTormenta.isNotEmpty) {
+        prereq = partesTormenta.join(', ');
       }
     }
 
@@ -150,8 +237,9 @@ class Poder {
             }
             break;
           case 'magic_circle':
-            final val = item['value'] ?? item['circle'];
+            final val = (item['value'] ?? item['circle'] as num?)?.toInt();
             if (val != null) {
+              circuloMin = val;
               partesTexto.add('Lançar magias de $valº círculo');
             }
             break;
@@ -172,7 +260,16 @@ class Poder {
       caminhosExigidos: List<String>.from(json['caminhosExigidos'] ?? []),
       poderesExigidos: poderesExig,
       atributosExigidos: atribExig,
+      atributosMaximos: atribMax,
       periciasExigidas: periciasExig,
+      poderesTormentaMinimos: tormentaMin,
+      circuloMagicoMinimo: circuloMin,
+      categoria: json['categoria']?.toString(),
+      escalamentoTormenta: json['escalamentoTormenta'] is Map
+          ? EscalamentoTormenta.fromJson(
+              Map<String, dynamic>.from(json['escalamentoTormenta'] as Map),
+            )
+          : null,
       referenciaTabela: json['referenciaTabela']?.toString(),
       regrasCustomizacao: json['regrasCustomizacao'] != null
           ? RegrasCustomizacaoPoder.fromJson(
@@ -193,7 +290,15 @@ class Poder {
     if (caminhosExigidos.isNotEmpty) 'caminhosExigidos': caminhosExigidos,
     if (poderesExigidos.isNotEmpty) 'poderesExigidos': poderesExigidos,
     if (atributosExigidos.isNotEmpty) 'atributosExigidos': atributosExigidos,
+    if (atributosMaximos.isNotEmpty) 'atributosMaximos': atributosMaximos,
     if (periciasExigidas.isNotEmpty) 'periciasExigidas': periciasExigidas,
+    if (poderesTormentaMinimos > 0)
+      'poderesTormentaMinimos': poderesTormentaMinimos,
+    if (circuloMagicoMinimo != null)
+      'circuloMagicoMinimo': circuloMagicoMinimo,
+    if (categoria != null) 'categoria': categoria,
+    if (escalamentoTormenta != null)
+      'escalamentoTormenta': escalamentoTormenta!.toJson(),
     if (referenciaTabela != null) 'referenciaTabela': referenciaTabela,
     if (regrasCustomizacao != null)
       'regrasCustomizacao': regrasCustomizacao!.toJson(),

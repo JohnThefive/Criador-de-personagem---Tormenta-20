@@ -1045,6 +1045,8 @@ class _AbaHabilidadesViewState extends State<AbaHabilidadesView> {
             p1.divindade != p2.divindade ||
             p1.poderesGerais != p2.poderesGerais ||
             p1.poderesConcedidos != p2.poderesConcedidos ||
+            p1.poderTormentaDeformidade != p2.poderTormentaDeformidade ||
+            p1.periciasDeformidadeLefou != p2.periciasDeformidadeLefou ||
             p1.formaSelvagemAtiva != p2.formaSelvagemAtiva ||
             p1.montariaSagrada != p2.montariaSagrada ||
             p1.tipoCompanheiroAnimal != p2.tipoCompanheiroAnimal ||
@@ -1056,13 +1058,7 @@ class _AbaHabilidadesViewState extends State<AbaHabilidadesView> {
       },
       builder: (context, state) {
         final p = state.personagem;
-        final classeDoPersonagem = p.classes.isNotEmpty ? p.classes[0] : null;
-        final classe = classeDoPersonagem?.classeDefinicao;
-        final nivel = classeDoPersonagem?.nivel ?? 1;
-
         final habRaca = p.raca?.habilidadesRaca.entries.toList() ?? const [];
-        final habClasse = classe?.habilidadesFixas.entries.toList() ?? const [];
-        final poderesEscolhidos = classeDoPersonagem?.poderesEscolhidos ?? const [];
 
         return CustomScrollView(
           slivers: [
@@ -1138,6 +1134,24 @@ class _AbaHabilidadesViewState extends State<AbaHabilidadesView> {
                         cubit: cubit,
                       );
                     },
+                  ),
+                ),
+
+              if (p.poderTormentaDeformidade != null)
+                SliverPadding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  sliver: SliverToBoxAdapter(
+                    child: _CardHabilidadeItem(
+                      titulo:
+                          'Deformidade (Tormenta): ${p.poderTormentaDeformidade!.nome}',
+                      descricao: p.poderTormentaDeformidade!.descricao,
+                      consomePM: _regexGastarPM.hasMatch(
+                        p.poderTormentaDeformidade!.descricao,
+                      ),
+                      badgeTextoPassiva: 'Tormenta • Sem perda de CAR',
+                      corTitulo: const Color(0xFFB91C1C),
+                      cubit: cubit,
+                    ),
                   ),
                 ),
 
@@ -1401,65 +1415,85 @@ class _AbaHabilidadesViewState extends State<AbaHabilidadesView> {
                   ),
               ],
 
-              // --- BLOCO 2: CLASSE E PODERES ESCOLHIDOS ---
-              if (classe != null) ...[
+              // --- BLOCO 2: CLASSES E PODERES ESCOLHIDOS (SUPORTE A MULTICLASSE) ---
+              for (int idxCl = 0; idxCl < p.classes.length; idxCl++)
                 SliverPadding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  padding: EdgeInsets.fromLTRB(
+                    12,
+                    0,
+                    12,
+                    idxCl == p.classes.length - 1 ? 28 : 8,
+                  ),
                   sliver: SliverToBoxAdapter(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Divider(height: 28),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    child: Builder(
+                      builder: (_) {
+                        final classeDoPersonagem = p.classes[idxCl];
+                        final classe = classeDoPersonagem.classeDefinicao;
+                        final nivel = classeDoPersonagem.nivel;
+                        final habClasse =
+                            classe.habilidadesFixas.entries.toList();
+                        final poderesEscolhidos =
+                            classeDoPersonagem.poderesEscolhidos;
+
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              'Classe: ${classe.nome}',
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w900,
-                                fontSize: 16,
-                                color: Color(0xFFD32F2F),
-                              ),
-                            ),
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 8,
-                                vertical: 3,
-                              ),
-                              decoration: BoxDecoration(
-                                color: const Color(0xFFD32F2F),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Text(
-                                'Nível $nivel',
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 11,
+                            const Divider(height: 28),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Classe: ${classe.nome}${p.classes.length > 1 ? (idxCl == 0 ? " (Inicial)" : " (Multiclasse)") : ""}',
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.w900,
+                                    fontSize: 16,
+                                    color: Color(0xFFD32F2F),
+                                  ),
                                 ),
-                              ),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 8,
+                                    vertical: 3,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFFD32F2F),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Text(
+                                    'Nível $nivel',
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 11,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                        const SizedBox(height: 6),
-                        if (classeDoPersonagem?.caminhoEscolhido != null) ...[
-                          Card(
-                            color: Colors.amber.shade50,
-                            margin: const EdgeInsets.only(bottom: 8),
-                            child: ListTile(
-                              leading:
-                                  const Icon(Icons.star, color: Colors.amber),
-                              title: Text(
-                                'Caminho: ${classeDoPersonagem!.caminhoEscolhido!.nome}',
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              subtitle: Text(
-                                classeDoPersonagem
-                                    .caminhoEscolhido!.descricao,
-                              ),
-                              trailing:
-                                  classe.caminhosParaNivel(nivel).length > 1
+                            const SizedBox(height: 6),
+                            if (classeDoPersonagem.caminhoEscolhido !=
+                                null) ...[
+                              Card(
+                                color: Colors.amber.shade50,
+                                margin: const EdgeInsets.only(bottom: 8),
+                                child: ListTile(
+                                  leading: const Icon(
+                                    Icons.star,
+                                    color: Colors.amber,
+                                  ),
+                                  title: Text(
+                                    'Caminho: ${classeDoPersonagem.caminhoEscolhido!.nome}',
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  subtitle: Text(
+                                    classeDoPersonagem
+                                        .caminhoEscolhido!
+                                        .descricao,
+                                  ),
+                                  trailing:
+                                      classe.caminhosParaNivel(nivel).length > 1
                                       ? IconButton(
                                           icon: const Icon(
                                             Icons.edit,
@@ -1469,188 +1503,172 @@ class _AbaHabilidadesViewState extends State<AbaHabilidadesView> {
                                           tooltip: 'Alterar caminho',
                                           onPressed: () =>
                                               _mostrarModalEscolhaCaminho(
-                                            context,
-                                            cubit,
-                                            classeDoPersonagem,
-                                            classe.caminhosParaNivel(nivel),
-                                          ),
+                                                context,
+                                                cubit,
+                                                classeDoPersonagem,
+                                                classe.caminhosParaNivel(nivel),
+                                              ),
                                         )
                                       : null,
-                            ),
-                          ),
-                        ] else if (classeDoPersonagem != null &&
-                            classe.caminhosParaNivel(nivel).isNotEmpty) ...[
-                          Card(
-                            color: Colors.red.shade50,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              side: BorderSide(color: Colors.red.shade300),
-                            ),
-                            margin: const EdgeInsets.only(bottom: 8),
-                            child: ListTile(
-                              leading: const Icon(Icons.stars,
-                                  color: Color(0xFFD32F2F)),
-                              title: Text(
-                                classe.idClasse == 'cavaleiro'
-                                    ? 'Caminho do Cavaleiro (5º Nível)'
-                                    : 'Especialização / Caminho Disponível',
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0xFFD32F2F),
                                 ),
                               ),
-                              subtitle:
-                                  const Text('Toque para escolher seu caminho!'),
-                              trailing: const Icon(
-                                Icons.chevron_right,
-                                color: Color(0xFFD32F2F),
-                              ),
-                              onTap: () => _mostrarModalEscolhaCaminho(
-                                context,
-                                cubit,
-                                classeDoPersonagem,
-                                classe.caminhosParaNivel(nivel),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ],
-                    ),
-                  ),
-                ),
-
-                SliverPadding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  sliver: SliverList.builder(
-                    itemCount: habClasse.length,
-                    itemBuilder: (context, i) {
-                      final e = habClasse[i];
-                      return _CardHabilidadeItem(
-                        titulo: e.key,
-                        descricao: e.value,
-                        consomePM: _regexGastarPM.hasMatch(e.value),
-                        badgeTextoPassiva: 'Passiva',
-                        corTitulo: const Color(0xFFD32F2F),
-                        cubit: cubit,
-                      );
-                    },
-                  ),
-                ),
-
-                SliverPadding(
-                  padding: EdgeInsets.fromLTRB(
-                    12,
-                    0,
-                    12,
-                    poderesEscolhidos.isEmpty ? 28 : 0,
-                  ),
-                  sliver: SliverToBoxAdapter(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        if (p.temPoderFormaSelvagem)
-                          _buildCardFormaSelvagem(context, cubit),
-                        if (p.temPoderCompanheiroAnimal)
-                          _buildCardCompanheiroAnimal(context, cubit),
-                        if (p.temMontariaSagrada)
-                          _buildCardMontariaSagrada(context, cubit),
-                        if (classeDoPersonagem != null) ...[
-                          const SizedBox(height: 10),
-                          Row(
-                            children: [
-                              const Expanded(
-                                child: Text(
-                                  'Poderes de Classe Escolhidos:',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
+                            ] else if (classe
+                                .caminhosParaNivel(nivel)
+                                .isNotEmpty) ...[
+                              Card(
+                                color: Colors.red.shade50,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  side: BorderSide(color: Colors.red.shade300),
+                                ),
+                                margin: const EdgeInsets.only(bottom: 8),
+                                child: ListTile(
+                                  leading: const Icon(
+                                    Icons.stars,
+                                    color: Color(0xFFD32F2F),
+                                  ),
+                                  title: Text(
+                                    classe.idClasse == 'cavaleiro'
+                                        ? 'Caminho do Cavaleiro (5º Nível)'
+                                        : 'Especialização / Caminho Disponível',
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xFFD32F2F),
+                                    ),
+                                  ),
+                                  subtitle: const Text(
+                                    'Toque para escolher seu caminho!',
+                                  ),
+                                  trailing: const Icon(
+                                    Icons.chevron_right,
+                                    color: Color(0xFFD32F2F),
+                                  ),
+                                  onTap: () => _mostrarModalEscolhaCaminho(
+                                    context,
+                                    cubit,
+                                    classeDoPersonagem,
+                                    classe.caminhosParaNivel(nivel),
                                   ),
                                 ),
                               ),
-                              TextButton.icon(
-                                onPressed: () =>
-                                    _abrirSelecaoPoderes(context, cubit),
-                                icon: Icon(
-                                  classeDoPersonagem.temPoderPendente
-                                      ? Icons.add_circle
-                                      : Icons.tune,
-                                  size: 18,
-                                ),
-                                label: Text(
-                                  classeDoPersonagem.temPoderPendente
-                                      ? 'Escolher (${classeDoPersonagem.poderesPendentes})'
-                                      : 'Gerenciar',
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                style: TextButton.styleFrom(
-                                  foregroundColor:
-                                      classeDoPersonagem.temPoderPendente
-                                          ? const Color(0xFFD32F2F)
-                                          : Colors.blueGrey,
-                                ),
-                              ),
                             ],
-                          ),
-                          const SizedBox(height: 4),
-                          if (classeDoPersonagem.poderesEscolhidos.isEmpty)
-                            Card(
-                              margin: const EdgeInsets.only(bottom: 8),
-                              color: Colors.amber.shade50,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                side: BorderSide(
-                                    color: Colors.amber.shade300),
-                              ),
-                              child: ListTile(
-                                leading: const Icon(
-                                  Icons.info_outline,
-                                  color: Colors.amber,
+                            ...habClasse.map((e) {
+                              return _CardHabilidadeItem(
+                                titulo: e.key,
+                                descricao: e.value,
+                                consomePM: _regexGastarPM.hasMatch(e.value),
+                                badgeTextoPassiva: 'Passiva',
+                                corTitulo: const Color(0xFFD32F2F),
+                                cubit: cubit,
+                              );
+                            }),
+                            if (idxCl == 0 && p.temPoderFormaSelvagem)
+                              _buildCardFormaSelvagem(context, cubit),
+                            if (idxCl == 0 && p.temPoderCompanheiroAnimal)
+                              _buildCardCompanheiroAnimal(context, cubit),
+                            if (idxCl == 0 && p.temMontariaSagrada)
+                              _buildCardMontariaSagrada(context, cubit),
+                            const SizedBox(height: 10),
+                            Row(
+                              children: [
+                                const Expanded(
+                                  child: Text(
+                                    'Poderes de Classe Escolhidos:',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                    ),
+                                  ),
                                 ),
-                                title: Text(
-                                  classeDoPersonagem.nivel >= 2
-                                      ? 'Nenhum poder de classe escolhido ainda.'
-                                      : 'Poderes de classe começam a ser escolhidos no 2º nível.',
-                                  style: const TextStyle(fontSize: 13),
+                                TextButton.icon(
+                                  onPressed: () => _abrirSelecaoPoderes(
+                                    context,
+                                    cubit,
+                                    indiceClasse: idxCl,
+                                  ),
+                                  icon: Icon(
+                                    classeDoPersonagem.temPoderPendente
+                                        ? Icons.add_circle
+                                        : Icons.tune,
+                                    size: 18,
+                                  ),
+                                  label: Text(
+                                    classeDoPersonagem.temPoderPendente
+                                        ? 'Escolher (${classeDoPersonagem.poderesPendentes})'
+                                        : 'Gerenciar',
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  style: TextButton.styleFrom(
+                                    foregroundColor:
+                                        classeDoPersonagem.temPoderPendente
+                                        ? const Color(0xFFD32F2F)
+                                        : Colors.blueGrey,
+                                  ),
                                 ),
-                                onTap: () =>
-                                    _abrirSelecaoPoderes(context, cubit),
-                              ),
+                              ],
                             ),
-                        ],
-                      ],
-                    ),
-                  ),
-                ),
-
-                if (poderesEscolhidos.isNotEmpty)
-                  SliverPadding(
-                    padding: const EdgeInsets.fromLTRB(12, 0, 12, 28),
-                    sliver: SliverList.builder(
-                      itemCount: poderesEscolhidos.length,
-                      itemBuilder: (context, i) {
-                        final poder = poderesEscolhidos[i];
-                        return Card(
-                          margin: const EdgeInsets.only(bottom: 8),
-                          child: ListTile(
-                            leading: const Icon(Icons.bolt,
-                                color: Color(0xFFD32F2F)),
-                            title: Text(
-                              poder.nome,
-                              style:
-                                  const TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            subtitle: Text(poder.descricao),
-                            trailing: BotaoAtivarPoderPM(
-                              nomePoder: poder.nome,
-                              cubit: cubit,
-                            ),
-                          ),
+                            const SizedBox(height: 4),
+                            if (poderesEscolhidos.isEmpty)
+                              Card(
+                                margin: const EdgeInsets.only(bottom: 8),
+                                color: Colors.amber.shade50,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  side: BorderSide(
+                                    color: Colors.amber.shade300,
+                                  ),
+                                ),
+                                child: ListTile(
+                                  leading: const Icon(
+                                    Icons.info_outline,
+                                    color: Colors.amber,
+                                  ),
+                                  title: Text(
+                                    classeDoPersonagem.nivel >= 2
+                                        ? 'Nenhum poder de classe escolhido ainda.'
+                                        : 'Poderes de classe começam a ser escolhidos no 2º nível.',
+                                    style: const TextStyle(fontSize: 13),
+                                  ),
+                                  onTap: () => _abrirSelecaoPoderes(
+                                    context,
+                                    cubit,
+                                    indiceClasse: idxCl,
+                                  ),
+                                ),
+                              )
+                            else
+                              ...poderesEscolhidos.map((poder) {
+                                return Card(
+                                  margin: const EdgeInsets.only(bottom: 8),
+                                  child: ListTile(
+                                    leading: Icon(
+                                      poder.ehPoderTormenta
+                                          ? Icons.coronavirus
+                                          : Icons.bolt,
+                                      color: const Color(0xFFD32F2F),
+                                    ),
+                                    title: Text(
+                                      poder.nome,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    subtitle: Text(poder.descricao),
+                                    trailing: BotaoAtivarPoderPM(
+                                      nomePoder: poder.nome,
+                                      cubit: cubit,
+                                    ),
+                                  ),
+                                );
+                              }),
+                          ],
                         );
                       },
                     ),
                   ),
-              ],
+                ),
             ],
           ],
         );

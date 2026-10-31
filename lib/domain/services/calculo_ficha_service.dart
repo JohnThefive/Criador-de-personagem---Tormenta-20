@@ -7,6 +7,8 @@ import '../entities/personagem/personagem.dart';
 import '../entities/personagem/poder.dart';
 import '../entities/personagem/proficiencias.dart';
 import 'data_services/call_pericias.dart';
+import 'motor_modificadores_service.dart';
+import 'motor_multiclasse_service.dart';
 
 /// Representa uma parcela nomeada de um cálculo de Tormenta 20 para exibição transparente na UI.
 class ParcelaCalculo {
@@ -38,6 +40,7 @@ class ComposicaoPericia {
   final bool ehTreinoFixoClasse;
   final int bonusTreino;
   final int bonusRacial;
+  final int bonusDeclarativo;
   final int bonusOutros;
   final int bonusEfeitos;
   final int penalidadeArmaduraAplicada;
@@ -53,6 +56,7 @@ class ComposicaoPericia {
     required this.ehTreinoFixoClasse,
     required this.bonusTreino,
     this.bonusRacial = 0,
+    this.bonusDeclarativo = 0,
     required this.bonusOutros,
     required this.bonusEfeitos,
     required this.penalidadeArmaduraAplicada,
@@ -73,6 +77,9 @@ class ComposicaoPericia {
     }
     if (bonusRacial != 0) {
       lista.add(ParcelaCalculo(rotulo: 'Racial', valor: bonusRacial));
+    }
+    if (bonusDeclarativo != 0) {
+      lista.add(ParcelaCalculo(rotulo: 'Poderes/Itens', valor: bonusDeclarativo));
     }
     if (bonusOutros != 0) {
       lista.add(ParcelaCalculo(rotulo: 'Outros', valor: bonusOutros));
@@ -169,11 +176,13 @@ class ComposicaoDefesa {
   final int bonusRacialDefesa;
   final int bonusFormaSelvagem;
   final int bonusCompanheiro;
+  final int bonusDeclarativoDefesa;
   final int outrosBonusDefesa;
   final int bonusEfeitos;
   final int defesaFinal;
   final int rdPadrao;
   final int rdFormaSelvagem;
+  final int rdDeclarativa;
   final int rdEfeitos;
   final int rdTotal;
   final int penalidadeArmaduraTotal;
@@ -191,11 +200,13 @@ class ComposicaoDefesa {
     this.bonusRacialDefesa = 0,
     required this.bonusFormaSelvagem,
     required this.bonusCompanheiro,
+    this.bonusDeclarativoDefesa = 0,
     required this.outrosBonusDefesa,
     required this.bonusEfeitos,
     required this.defesaFinal,
     required this.rdPadrao,
     required this.rdFormaSelvagem,
+    this.rdDeclarativa = 0,
     required this.rdEfeitos,
     required this.rdTotal,
     required this.penalidadeArmaduraTotal,
@@ -226,6 +237,11 @@ class ComposicaoDefesa {
     }
     if (bonusCompanheiro != 0) {
       lista.add(ParcelaCalculo(rotulo: 'Parceiro', valor: bonusCompanheiro));
+    }
+    if (bonusDeclarativoDefesa != 0) {
+      lista.add(
+        ParcelaCalculo(rotulo: 'Poderes/Itens', valor: bonusDeclarativoDefesa),
+      );
     }
     if (outrosBonusDefesa != 0) {
       lista.add(ParcelaCalculo(rotulo: 'Outros', valor: outrosBonusDefesa));
@@ -279,24 +295,37 @@ class ResultadoGastoPM {
   });
 }
 
-/// Registro sequencial de um nível de personagem para revisão do jogador/mestre.
+/// Registro sequencial de um nível de personagem para revisão do jogador/mestre (RF12).
+/// Mantém distinção explícita entre progressão geral do personagem e progressão individual da classe.
 class EtapaProgressaoNivel {
   final int nivelPersonagem;
+  final PatamarJogo patamar;
+  final bool novoPatamarAlcancado;
   final String nomeClasse;
   final int nivelNaClasse;
+  final bool ehClasseInicial;
+  final bool ehAquisicaoNovaMulticlasse;
   final String? caminhoEscolhido;
   final List<String> habilidadesDeClasse;
   final Poder? poderEscolhido;
+  final int pvAdquiridos;
+  final int pmAdquiridos;
   final List<String> marcosIniciais;
   final String notaOuDistincao;
 
   const EtapaProgressaoNivel({
     required this.nivelPersonagem,
+    this.patamar = PatamarJogo.iniciante,
+    this.novoPatamarAlcancado = false,
     required this.nomeClasse,
     required this.nivelNaClasse,
+    this.ehClasseInicial = true,
+    this.ehAquisicaoNovaMulticlasse = false,
     this.caminhoEscolhido,
     this.habilidadesDeClasse = const [],
     this.poderEscolhido,
+    this.pvAdquiridos = 0,
+    this.pmAdquiridos = 0,
     this.marcosIniciais = const [],
     this.notaOuDistincao = '',
   });
@@ -381,6 +410,7 @@ class CalculoFichaService {
     final ehTreinada = p.ehPericiaTreinada(pericia.key);
     final bonusTreino = ehTreinada ? p.bonusTreinamento : 0;
     final bonusRacial = p.bonusRacialPericia(pericia.key);
+    final bonusDeclarativo = p.bonusDeclarativoPericia(pericia.key);
     final bonusOutros = p.obterOutrosBonusPericia(pericia.key);
     final bonusEfeitos = p.bonusEfeitosPericias;
 
@@ -402,6 +432,7 @@ class CalculoFichaService {
       ehTreinoFixoClasse: ehTreinoFixo,
       bonusTreino: bonusTreino,
       bonusRacial: bonusRacial,
+      bonusDeclarativo: bonusDeclarativo,
       bonusOutros: bonusOutros,
       bonusEfeitos: bonusEfeitos,
       penalidadeArmaduraAplicada: penalidadeAplicada,
@@ -519,7 +550,11 @@ class CalculoFichaService {
   /// Decompõe a Defesa e a Redução de Dano Padrão do personagem.
   static ComposicaoDefesa detalharDefesaERd(Personagem p) {
     final modDesOrig = p.getValorFinal('DES');
-    final modDesAplicado = p.usaArmaduraPesada ? 0 : modDesOrig;
+    final modDesAplicado = p.usaArmaduraPesada
+        ? MotorModificadoresService.calcularBonusDestrezaDelicadaArmaduraPesada(
+            p,
+          )
+        : modDesOrig;
     final rdForma = p.estaEmFormaSelvagem ? p.formaSelvagemAtiva!.rd : 0;
 
     return ComposicaoDefesa(
@@ -533,11 +568,13 @@ class CalculoFichaService {
       bonusRacialDefesa: p.bonusRacialDefesa,
       bonusFormaSelvagem: p.bonusFormaDefesa,
       bonusCompanheiro: p.bonusCompanheiroDefesa,
+      bonusDeclarativoDefesa: p.bonusDeclarativoDefesa,
       outrosBonusDefesa: p.outrosBonusDefesa,
       bonusEfeitos: p.bonusEfeitosDefesa,
       defesaFinal: p.defesaFinal,
       rdPadrao: p.rdPadrao,
       rdFormaSelvagem: rdForma,
+      rdDeclarativa: p.bonusDeclarativoRd,
       rdEfeitos: p.bonusEfeitosRd,
       rdTotal: p.rdTotal,
       penalidadeArmaduraTotal: p.penalidadeArmaduraTotal,
@@ -545,7 +582,7 @@ class CalculoFichaService {
     );
   }
 
-  /// Calcula a CD de Teste de Resistência de Magias (10 + ½ nível + Atributo-chave + Outros).
+  /// Calcula a CD de Teste de Resistência de Magias (10 + ½ nível + Atributo-chave + Outros + Itens/Poderes).
   static ComposicaoCDMagia detalharCDMagia(
     Personagem p, {
     String? atributoOverride,
@@ -554,7 +591,9 @@ class CalculoFichaService {
         .toUpperCase();
     final metadeNivel = (p.nivelPersonagem / 2).floor();
     final modAtrib = p.getValorFinal(sigla);
-    final outros = p.outrosBonusCDMagia;
+    final outros =
+        p.outrosBonusCDMagia +
+        MotorModificadoresService.calcularBonusDeclarativoCDMagia(p);
     final cd = 10 + metadeNivel + modAtrib + outros;
 
     return ComposicaoCDMagia(
@@ -638,77 +677,72 @@ class CalculoFichaService {
     );
   }
 
-  /// Constrói a linha do tempo sequencial nível a nível para a aba de Progressão de Personagem.
+  /// Constrói a linha do tempo sequencial nível a nível para a aba de Progressão de Personagem (RF12).
+  /// Distingue progressão geral do personagem (nível total, patamar) da progressão individual de cada classe.
   static List<EtapaProgressaoNivel> gerarTrilhaProgressao(Personagem p) {
     if (p.classes.isEmpty) return const [];
 
+    final registros = MotorMulticlasseService.consultarProgressaoPersonagem(p);
     final etapas = <EtapaProgressaoNivel>[];
-    int nivelGlobal = 0;
 
-    for (int idxClasse = 0; idxClasse < p.classes.length; idxClasse++) {
-      final itemClasse = p.classes[idxClasse];
-      final def = itemClasse.classeDefinicao;
-
-      for (int nivClasse = 1; nivClasse <= itemClasse.nivel; nivClasse++) {
-        nivelGlobal++;
-        final habilidadesDoNivel =
-            def.tabelaDeProgressao[nivClasse] ?? const <String>[];
-
-        Poder? poderDoNivel;
-        if (nivClasse >= 2) {
-          final indicePoder = nivClasse - 2;
-          if (indicePoder < itemClasse.poderesEscolhidos.length) {
-            poderDoNivel = itemClasse.poderesEscolhidos[indicePoder];
-          }
+    for (final reg in registros) {
+      final marcosIniciais = <String>[];
+      if (reg.nivelPersonagem == 1) {
+        if (p.raca != null) marcosIniciais.add('Raça: ${p.raca!.nome}');
+        if (p.origem != null) marcosIniciais.add('Origem: ${p.origem!.nome}');
+        if (p.divindade != null) {
+          marcosIniciais.add('Devoção: ${p.divindade!.nome}');
         }
-
-        final marcosIniciais = <String>[];
-        if (nivelGlobal == 1) {
-          if (p.raca != null) marcosIniciais.add('Raça: ${p.raca!.nome}');
-          if (p.origem != null) marcosIniciais.add('Origem: ${p.origem!.nome}');
-          if (p.divindade != null) {
-            marcosIniciais.add('Devoção: ${p.divindade!.nome}');
-          }
-          for (final pg in p.poderesGerais) {
-            marcosIniciais.add('Benefício Inicial: ${pg.nome}');
-          }
+        for (final pg in p.poderesGerais) {
+          marcosIniciais.add('Benefício Inicial: ${pg.nome}');
         }
-
-        etapas.add(
-          EtapaProgressaoNivel(
-            nivelPersonagem: nivelGlobal,
-            nomeClasse: def.nome,
-            nivelNaClasse: nivClasse,
-            caminhoEscolhido: nivClasse == 1
-                ? itemClasse.caminhoEscolhido?.nome
-                : null,
-            habilidadesDeClasse: habilidadesDoNivel,
-            poderEscolhido: poderDoNivel,
-            marcosIniciais: marcosIniciais,
-            notaOuDistincao: p.notasProgressaoPorNivel[nivelGlobal] ?? '',
-          ),
-        );
+        if (p.poderTormentaDeformidade != null) {
+          marcosIniciais.add(
+            'Deformidade (Tormenta): ${p.poderTormentaDeformidade!.nome}',
+          );
+        }
       }
+
+      etapas.add(
+        EtapaProgressaoNivel(
+          nivelPersonagem: reg.nivelPersonagem,
+          patamar: reg.patamar,
+          novoPatamarAlcancado: reg.novoPatamarAlcancado,
+          nomeClasse: reg.nomeClasse,
+          nivelNaClasse: reg.nivelIndividualClasse,
+          ehClasseInicial: reg.ehClasseInicial,
+          ehAquisicaoNovaMulticlasse: reg.ehAquisicaoNovaMulticlasse,
+          caminhoEscolhido: reg.caminhoEscolhido,
+          habilidadesDeClasse: reg.caracteristicasClasse,
+          poderEscolhido: reg.poderEscolhido,
+          pvAdquiridos: reg.pvAdquiridosNoNivel,
+          pmAdquiridos: reg.pmAdquiridosNoNivel,
+          marcosIniciais: marcosIniciais,
+          notaOuDistincao: p.notasProgressaoPorNivel[reg.nivelPersonagem] ?? '',
+        ),
+      );
     }
 
     return etapas;
   }
 
   /// Extrai proficiências de classe/extras, sentidos especiais, deslocamento e RDs diversas.
+  /// RF09 / RN07 / RV06: Proficiências iniciais automáticas provêm APENAS da classe inicial (`classes[0]`)!
   static ResumoProficienciasESentidos extrairProficienciasESentidos(
     Personagem p,
   ) {
     final profsSet = <String>{};
-    for (final c in p.classes) {
-      for (final prof in c.classeDefinicao.proficiencias) {
-        profsSet.add(switch (prof) {
-          TipoProficiencia.armasSimples => 'Armas Simples',
-          TipoProficiencia.armasMarciais => 'Armas Marciais',
-          TipoProficiencia.armadurasLeves => 'Armaduras Leves',
-          TipoProficiencia.armadurasPesadas => 'Armaduras Pesadas',
-          TipoProficiencia.escudos => 'Escudos',
-        });
-      }
+    for (final prof
+        in MotorMulticlasseService.obterProficienciasIniciaisClasseConcedidas(
+          p,
+        )) {
+      profsSet.add(switch (prof) {
+        TipoProficiencia.armasSimples => 'Armas Simples',
+        TipoProficiencia.armasMarciais => 'Armas Marciais',
+        TipoProficiencia.armadurasLeves => 'Armaduras Leves',
+        TipoProficiencia.armadurasPesadas => 'Armaduras Pesadas',
+        TipoProficiencia.escudos => 'Escudos',
+      });
     }
 
     // Deslocamento padrão e efetivo do personagem (considerando bônus raciais e armadura/sobrecarga)
@@ -743,7 +777,7 @@ class CalculoFichaService {
       });
     }
 
-    for (final pod in [...p.poderesGerais, ...p.poderesConcedidosAtivos]) {
+    for (final pod in MotorModificadoresService.obterTodosPoderesAtivos(p)) {
       final combinado =
           '${pod.nome.toLowerCase()} ${pod.descricao.toLowerCase()}';
       if (termosChave.any((t) => combinado.contains(t))) {
@@ -762,7 +796,7 @@ class CalculoFichaService {
 
   /// ADIANTAMENTO DE DOMÍNIO PARA COMBATE FUTURO:
   /// Prepara o cálculo de ataque, proficiência, margem de ameaça e fórmula de dano de uma arma,
-  /// deixando o contrato pronto para quando a refatoração de Combate for iniciada.
+  /// considerando melhorias, encantos e poderes como Acuidade com Arma.
   static PreviewAtaqueArma prepararPreviewAtaqueArma(Personagem p, Arma arma) {
     final compAtaque = detalharPericia(p, arma.periciaAtaque);
     final temProf = switch (arma.proficiencia) {
@@ -777,11 +811,34 @@ class CalculoFichaService {
     };
 
     final penNaoProf = temProf ? 0 : -2;
-    final bonusAtaque = compAtaque.total + penNaoProf;
-    final bonusDano = arma.somaForcaAoDano ? p.getValorFinal('FOR') : 0;
-    final sufixoDano = bonusDano == 0
+    final usaAcuidade =
+        MotorModificadoresService.possuiPoder(p, 'acuidade_com_arma') &&
+        (arma.empunhadura == EmpunhaduraArma.leve ||
+            arma.ehAgil ||
+            arma.proposito == PropositoArma.arremesso);
+    final diffAcuidadeAtaque =
+        (usaAcuidade &&
+                arma.ehCorpoACorpo &&
+                p.getValorFinal('DES') > p.getValorFinal('FOR'))
+            ? (p.getValorFinal('DES') - p.getValorFinal('FOR'))
+            : 0;
+
+    final bonusAtaque =
+        compAtaque.total +
+        penNaoProf +
+        arma.bonusAtaqueMelhorias +
+        diffAcuidadeAtaque;
+
+    int bonusDanoAtrib = 0;
+    if (arma.somaForcaAoDano) {
+      bonusDanoAtrib = usaAcuidade
+          ? max(p.getValorFinal('FOR'), p.getValorFinal('DES'))
+          : p.getValorFinal('FOR');
+    }
+    final bonusDanoTotal = bonusDanoAtrib + arma.bonusDanoMelhorias;
+    final sufixoDano = bonusDanoTotal == 0
         ? ''
-        : (bonusDano > 0 ? '+$bonusDano' : '$bonusDano');
+        : (bonusDanoTotal > 0 ? '+$bonusDanoTotal' : '$bonusDanoTotal');
 
     return PreviewAtaqueArma(
       arma: arma,
@@ -789,10 +846,11 @@ class CalculoFichaService {
       temProficienciaNaArma: temProf,
       penalidadeNaoProficiencia: penNaoProf,
       bonusAtaqueFinal: bonusAtaque,
-      bonusDanoAtributo: bonusDano,
-      formulaDanoCompleta: '${arma.dano}$sufixoDano (${arma.tipoDano.label})',
-      margemAmeaca: arma.margemAmeaca,
-      multiplicadorCritico: arma.multiplicadorCritico,
+      bonusDanoAtributo: bonusDanoTotal,
+      formulaDanoCompleta:
+          '${arma.danoEfetivo}$sufixoDano (${arma.tipoDano.label})',
+      margemAmeaca: arma.margemAmeacaEfetiva,
+      multiplicadorCritico: arma.multiplicadorCriticoEfetivo,
       criticoFormatado: arma.criticoFormatado,
     );
   }

@@ -23,6 +23,7 @@ import '../entities/habilidades_complexas/golpe_pessoal.dart';
 import '../entities/habilidades_complexas/engenhoca.dart';
 import '../entities/habilidades_complexas/montaria_sagrada.dart';
 import '../repositories/i_personagem_repository.dart';
+import 'motor_multiclasse_service.dart';
 
 class PersonagemStorageService implements IPersonagemRepository {
   const PersonagemStorageService();
@@ -148,13 +149,18 @@ class PersonagemStorageService implements IPersonagemRepository {
       'punicaoDivinaAtiva': p.punicaoDivinaAtiva,
       'magiasConhecidas': p.magiasConhecidas,
       'outrosBonusCDMagia': p.outrosBonusCDMagia,
+      'periciasDeformidadeLefou': p.periciasDeformidadeLefou,
+      'poderTormentaDeformidadeKey': p.poderTormentaDeformidade?.key,
       'itensInventario': p.itensInventario,
       'itensVestidosExtras': p.itensVestidosExtras
           .map((item) => item.toJson())
           .toList(),
       'armasKeys': p.armas.map((a) => a.key).toList(),
+      'armasJson': p.armas.map((a) => a.toJson()).toList(),
       'armaduraKey': p.armaduraEquipada?.key,
+      'armaduraJson': p.armaduraEquipada?.toJson(),
       'escudoKey': p.escudoEquipado?.key,
+      'escudoJson': p.escudoEquipado?.toJson(),
       'tibaresCobre': p.tibaresCobre,
       'tibares': p.tibares,
       'tibaresOuro': p.tibaresOuro,
@@ -186,6 +192,8 @@ class PersonagemStorageService implements IPersonagemRepository {
             },
           )
           .toList(),
+      'historicoClassesPorNivel':
+          MotorMulticlasseService.normalizarHistoricoClasses(p),
     };
   }
 
@@ -227,7 +235,8 @@ class PersonagemStorageService implements IPersonagemRepository {
         }
         pod ??=
             BancoDeOrigens.getHabilidadeUnica(keyStr) ??
-            BancoDePoderes.getByKey(keyStr);
+            BancoDePoderes.getByKey(keyStr) ??
+            BancoDePoderesGerais.getByKey(keyStr);
         if (pod != null && !poderesGeraisList.any((p) => p.key == pod!.key)) {
           poderesGeraisList.add(pod);
         }
@@ -272,7 +281,7 @@ class PersonagemStorageService implements IPersonagemRepository {
 
     final bool punicaoDivina = map['punicaoDivinaAtiva'] as bool? ?? false;
 
-    // Reconstrói classes com caminho e poderes escolhidos
+    // Reconstrói classes com caminho e poderes escolhidos (de classe ou gerais/Tormenta)
     List<ClasseDoPersonagem> classesList = [];
     if (map['classes'] != null) {
       for (var c in map['classes']) {
@@ -292,7 +301,10 @@ class PersonagemStorageService implements IPersonagemRepository {
         final List<dynamic> poderesKeysRaw = c['poderesEscolhidosKeys'] ?? [];
         final List<Poder> poderesCarregados = [];
         for (var k in poderesKeysRaw) {
-          final pod = BancoDePoderes.getByKey(k.toString());
+          final keyStr = k.toString();
+          final pod =
+              BancoDePoderes.getByKey(keyStr) ??
+              BancoDePoderesGerais.getByKey(keyStr);
           if (pod != null) {
             poderesCarregados.add(pod);
           }
@@ -318,26 +330,53 @@ class PersonagemStorageService implements IPersonagemRepository {
       }
     }
 
-    // Reconstrói armas a partir das chaves
-    final List<dynamic> armasKeysRaw = map['armasKeys'] ?? [];
+    // Reconstrói armas (priorizando armasJson para preservar melhorias e encantos)
     final List<Arma> armasList = [];
-    for (var k in armasKeysRaw) {
-      final arma = BancoDeArmas.getByKey(k.toString());
-      if (arma != null) {
-        armasList.add(arma);
+    if (map['armasJson'] is List) {
+      for (final rawArma in map['armasJson'] as List) {
+        if (rawArma is Map) {
+          armasList.add(Arma.fromJson(Map<String, dynamic>.from(rawArma)));
+        }
+      }
+    } else {
+      final List<dynamic> armasKeysRaw = map['armasKeys'] ?? [];
+      for (var k in armasKeysRaw) {
+        final arma = BancoDeArmas.getByKey(k.toString());
+        if (arma != null) {
+          armasList.add(arma);
+        }
       }
     }
 
-    // Reconstrói armadura e escudo
-    final String? armaduraKey = map['armaduraKey'];
-    final Protecao? armadura = armaduraKey != null
-        ? BancoDeArmaduras.getByKey(armaduraKey)
-        : null;
+    // Reconstrói armadura e escudo (priorizando armaduraJson/escudoJson para preservar melhorias e encantos)
+    Protecao? armadura;
+    if (map['armaduraJson'] is Map) {
+      armadura = Protecao.fromJson(
+        Map<String, dynamic>.from(map['armaduraJson'] as Map),
+      );
+    } else if (map['armaduraKey'] != null) {
+      armadura = BancoDeArmaduras.getByKey(map['armaduraKey'].toString());
+    }
 
-    final String? escudoKey = map['escudoKey'];
-    final Protecao? escudo = escudoKey != null
-        ? BancoDeArmaduras.getByKey(escudoKey)
-        : null;
+    Protecao? escudo;
+    if (map['escudoJson'] is Map) {
+      escudo = Protecao.fromJson(
+        Map<String, dynamic>.from(map['escudoJson'] as Map),
+      );
+    } else if (map['escudoKey'] != null) {
+      escudo = BancoDeArmaduras.getByKey(map['escudoKey'].toString());
+    }
+
+    final List<String> periciasDeformidade = List<String>.from(
+      map['periciasDeformidadeLefou'] ?? const [],
+    );
+    final String? poderDeformidadeKey = map['poderTormentaDeformidadeKey']
+        ?.toString();
+    final Poder? poderDeformidade =
+        (poderDeformidadeKey != null && poderDeformidadeKey.isNotEmpty)
+            ? (BancoDePoderesGerais.getByKey(poderDeformidadeKey) ??
+                  BancoDePoderes.getByKey(poderDeformidadeKey))
+            : null;
 
     final List<ItemVestido> itensVestidosList = [];
     if (map['itensVestidosExtras'] is List) {
@@ -430,6 +469,9 @@ class PersonagemStorageService implements IPersonagemRepository {
       atributos: atribs,
       raca: raca,
       classes: classesList,
+      historicoClassesPorNivel: List<String>.from(
+        map['historicoClassesPorNivel'] ?? const [],
+      ),
       origem: origem,
       poderesGerais: poderesGeraisList,
       divindade: divindade,
@@ -438,6 +480,8 @@ class PersonagemStorageService implements IPersonagemRepository {
       punicaoDivinaAtiva: punicaoDivina,
       magiasConhecidas: List<String>.from(map['magiasConhecidas'] ?? []),
       outrosBonusCDMagia: (map['outrosBonusCDMagia'] as num?)?.toInt() ?? 0,
+      periciasDeformidadeLefou: periciasDeformidade,
+      poderTormentaDeformidade: poderDeformidade,
       itensInventario: List<String>.from(
         map['itensInventario'] ?? (origem?.itensIniciais ?? const []),
       ),

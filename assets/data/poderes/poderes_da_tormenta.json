@@ -1,0 +1,560 @@
+[
+  {
+    "id": "anatomia_insana",
+    "nome": "Anatomia Insana",
+    "categoria": "poder_tormenta",
+    "livro": "tormenta20_jogo_do_ano",
+    "tipo": "passivo",
+    "ativacao": null,
+    "prerequisitos": {
+      "poderesTormentaMinimos": 0,
+      "poderesEspecificos": [],
+      "atributos": {}
+    },
+    "escalamentoTormenta": {
+      "tipoPasso": "outros_poderes",
+      "divisor": 2,
+      "efeito": "Aumenta a chance de ignorar dano adicional em +25% a cada 2 outros poderes da Tormenta."
+    },
+    "descricao": "Você tem 25% de chance (resultado “1” em 1d4) de ignorar o dano adicional de um acerto crítico ou ataque furtivo. A chance aumenta em +25% para cada dois outros poderes da Tormenta que você possui."
+  },
+  {
+    "id": "antenas",
+    "nome": "Antenas",
+    "categoria": "poder_tormenta",
+    "livro": "tormenta20_jogo_do_ano",
+    "tipo": "passivo",
+    "ativacao": null,
+    "prerequisitos": {
+      "poderesTormentaMinimos": 0,
+      "poderesEspecificos": [],
+      "atributos": {}
+    },
+    "escalamentoTormenta": {
+      "tipoPasso": "outros_poderes",
+      "divisor": 2,
+      "efeito": "Bônus em Iniciativa, Percepção e Vontade aumenta em +1 a cada 2 outros poderes da Tormenta."
+    },
+    "descricao": "Você recebe +1 em Iniciativa, Percepção e Vontade. Este bônus aumenta em +1 para cada dois outros poderes da Tormenta que você possui."
+  },
+  {
+    "id": "armamento_aberrante",
+    "nome": "Armamento Aberrante",
+    "categoria": "poder_tormenta",
+    "livro": "tormenta20_jogo_do_ano",
+    "tipo": "ativo",
+    "ativacao": {
+      "execucao": "movimento",
+      "custoPM": 1,
+      "duracao": "cena"
+    },
+    "prerequisitos": {
+      "poderesTormentaMinimos": 1,
+      "poderesEspecificos": [],
+      "atributos": {}
+    },
+    "escalamentoTormenta": {
+      "tipoPasso": "outros_poderes",
+      "divisor": 2,
+      "efeito": "Dano da arma aumenta em um passo a cada 2 outros poderes da Tormenta."
+    },
+    "descricao": "Você pode gastar uma ação de movimento e 1 PM para produzir uma versão orgânica de qualquer arma corpo a corpo ou de arremesso com a qual seja proficiente — ela brota do seu braço, ombro ou costas como uma planta grotesca e então se desprende. O dano da arma aumenta em um passo para cada dois outros poderes da Tormenta que você possui. A arma dura pela cena, então se desfaz numa poça de gosma. Pré-requisito: outro poder da Tormenta."
+  },
+  {
+    "id": "articulacoes_flexiveis",
+    "nome": "Articulações Flexíveis",
+    "categoria": "poder_tormenta",
+    "livro": "tormenta20_jogo_do_ano",
+    "tipo": "passivo",
+    "ativacao": null,
+    "prerequisitos": {
+      "poderesTormentaMinimos": 0,
+      "poderesEspecificos": [],
+      "atributos": {}
+    },
+    "escalamentoTormenta": {
+      "tipoPasso": "outros_poderes",
+      "divisor": 2,
+      "efeito": "Bônus em Acrobacia, Furtividade e Reflexos aumenta em +1 a cada 2 outros poderes da Tormenta."
+    },
+    "descricao": "Você recebe +1 em Acrobacia, Furtividade e Reflexos. Este bônus aumenta em +1 para cada dois outros poderes da Tormenta que você possui."
+  },
+  {
+    "id": "asas_insetoides",
+    "nome": "Asas Insetoides",
+    "categoria": "poder_tormenta",
+    "livro": "tormenta20_jogo_do_ano",
+    "tipo": "ativo",
+    "ativacao": {
+      "execucao": "livre",
+      "custoPM": 1,
+      "duracao": "fim_do_turno"
+    },
+    "prerequisitos": {
+      "poderesTormentaMinimos": 4,
+      "poderesEspecificos": [],
+      "atributos": {}
+    },
+    "escalamentoTormenta": {
+      "tipoPasso": "outros_poderes",
+      "divisor": 1,
+      "efeito": "Deslocamento de voo aumenta em +1,5m para cada outro poder da Tormenta."
+    },
+    "descricao": "Você pode gastar 1 PM para receber deslocamento de voo 9m até o fim do seu turno. O deslocamento aumenta em +1,5m para cada outro poder da Tormenta que você possui. Pré-requisitos: quatro outros poderes da Tormenta."
+  },
+  {
+    "id": "bolsoes_insanos",
+    "nome": "Bolsões Insanos",
+    "categoria": "poder_tormenta",
+    "livro": "tormenta20_jogo_do_ano",
+    "tipo": "passivo",
+    "ativacao": null,
+    "prerequisitos": {
+      "poderesTormentaMinimos": 0,
+      "poderesEspecificos": [],
+      "atributos": {}
+    },
+    "escalamentoTormenta": {
+      "tipoPasso": "outros_poderes",
+      "divisor": 1,
+      "efeito": "Limite de carga aumenta em +1 espaço para cada outro poder da Tormenta."
+    },
+    "descricao": "Seu corpo possui espaços vazios sob sua pele ou carapaça, possibilitando que você carregue mais itens, em lugares nos quais eles dificilmente serão achados. Seu limite de carga aumenta em 2 espaços, mais 1 espaço para cada outro poder da Tormenta que você possui, e você recebe +5 em testes de Ladinagem para ocultar itens nesses espaços."
+  },
+  {
+    "id": "carapaca",
+    "nome": "Carapaça",
+    "categoria": "poder_tormenta",
+    "livro": "tormenta20_jogo_do_ano",
+    "tipo": "passivo",
+    "ativacao": null,
+    "prerequisitos": {
+      "poderesTormentaMinimos": 0,
+      "poderesEspecificos": [],
+      "atributos": {}
+    },
+    "escalamentoTormenta": {
+      "tipoPasso": "outros_poderes",
+      "divisor": 2,
+      "efeito": "Bônus na Defesa aumenta em +1 a cada 2 outros poderes da Tormenta."
+    },
+    "descricao": "Sua pele é recoberta por placas quitinosas. Você recebe +1 na Defesa. Este bônus aumenta em +1 para cada dois outros poderes da Tormenta que você possui."
+  },
+  {
+    "id": "carapaca_corrompida",
+    "nome": "Carapaça Corrompida",
+    "categoria": "poder_tormenta",
+    "livro": "tormenta20_jogo_do_ano",
+    "tipo": "passivo",
+    "ativacao": null,
+    "prerequisitos": {
+      "poderesTormentaMinimos": 0,
+      "poderesEspecificos": ["carapaca"],
+      "atributos": {}
+    },
+    "escalamentoTormenta": {
+      "tipoPasso": "outros_poderes",
+      "divisor": 2,
+      "efeito": "RD aumenta em +1 a cada 2 outros poderes da Tormenta."
+    },
+    "descricao": "As placas quitinosas que recobrem seu corpo são especialmente grossas, formadas por matéria vermelha que parece repelir os elementos físicos de Arton. Você recebe redução de dano 1. Essa RD aumenta em +1 para cada dois outros poderes da Tormenta que você possui. Pré-requisito: Carapaça."
+  },
+  {
+    "id": "corpo_aberrante",
+    "nome": "Corpo Aberrante",
+    "categoria": "poder_tormenta",
+    "livro": "tormenta20_jogo_do_ano",
+    "tipo": "passivo",
+    "ativacao": null,
+    "prerequisitos": {
+      "poderesTormentaMinimos": 1,
+      "poderesEspecificos": [],
+      "atributos": {}
+    },
+    "escalamentoTormenta": {
+      "tipoPasso": "outros_poderes",
+      "divisor": 4,
+      "efeito": "Dano desarmado aumenta em um passo adicional a cada 4 outros poderes da Tormenta."
+    },
+    "descricao": "Crostas vermelhas em várias partes de seu corpo tornam seus ataques mais perigosos. Seu dano desarmado aumenta em um passo, mais um passo para cada quatro outros poderes da Tormenta que você possui. Pré-requisito: outro poder da Tormenta."
+  },
+  {
+    "id": "cuspir_enxame",
+    "nome": "Cuspir Enxame",
+    "categoria": "poder_tormenta",
+    "livro": "tormenta20_jogo_do_ano",
+    "tipo": "ativo",
+    "ativacao": {
+      "execucao": "completa",
+      "custoPM": 2,
+      "duracao": "sustentada"
+    },
+    "prerequisitos": {
+      "poderesTormentaMinimos": 0,
+      "poderesEspecificos": [],
+      "atributos": {}
+    },
+    "escalamentoTormenta": {
+      "tipoPasso": "outros_poderes",
+      "divisor": 2,
+      "efeito": "Permite gastar +1 PM para aumentar o dano em +1d6 a cada 2 outros poderes da Tormenta."
+    },
+    "descricao": "Você pode gastar uma ação completa e 2 PM para criar um enxame de insetos rubros em um ponto a sua escolha em alcance curto e com duração sustentada. O enxame tem tamanho Médio e pode passar pelo espaço de outras criaturas. Uma vez por rodada, você pode gastar uma ação de movimento para mover o enxame 9m. No final do seu turno, o enxame causa 2d6 pontos de dano de ácido a qualquer criatura no espaço que ele estiver ocupando. Para cada dois outros poderes da Tormenta que possui, você pode gastar +1 PM quando usa este poder para aumentar o dano do enxame em +1d6."
+  },
+  {
+    "id": "dentes_afiados",
+    "nome": "Dentes Afiados",
+    "categoria": "poder_tormenta",
+    "livro": "tormenta20_jogo_do_ano",
+    "tipo": "ativo",
+    "ativacao": {
+      "execucao": "reacao_agredir",
+      "custoPM": 1,
+      "duracao": "instantanea"
+    },
+    "prerequisitos": {
+      "poderesTormentaMinimos": 0,
+      "poderesEspecificos": [],
+      "atributos": {}
+    },
+    "escalamentoTormenta": null,
+    "descricao": "Você recebe uma arma natural de mordida (dano 1d4, crítico x2, corte). Uma vez por rodada, quando usa a ação agredir para atacar com outra arma, pode gastar 1 PM para fazer um ataque corpo a corpo extra com a mordida."
+  },
+  {
+    "id": "desprezar_a_realidade",
+    "nome": "Desprezar a Realidade",
+    "categoria": "poder_tormenta",
+    "livro": "tormenta20_jogo_do_ano",
+    "tipo": "ativo",
+    "ativacao": {
+      "execucao": "livre",
+      "custoPM": 2,
+      "duracao": "inicio_proximo_turno"
+    },
+    "prerequisitos": {
+      "poderesTormentaMinimos": 4,
+      "poderesEspecificos": [],
+      "atributos": {}
+    },
+    "escalamentoTormenta": {
+      "tipoPasso": "outros_poderes",
+      "divisor": 2,
+      "efeito": "Chance de falha aumenta em +5% (máximo 50%) a cada 2 outros poderes da Tormenta."
+    },
+    "descricao": "Você pode gastar 2 PM para ficar no limiar da realidade até o início de seu próximo turno. Nesse estado, você ignora terreno difícil e causa 20% de chance de falha em efeitos usados contra você (não apenas ataques). Para cada dois outros poderes de Tormenta que você possuir, essa chance aumenta em 5% (máximo de 50%). Pré-requisito: quatro outros poderes da Tormenta."
+  },
+  {
+    "id": "empunhadura_rubra",
+    "nome": "Empunhadura Rubra",
+    "categoria": "poder_tormenta",
+    "livro": "tormenta20_jogo_do_ano",
+    "tipo": "ativo",
+    "ativacao": {
+      "execucao": "livre",
+      "custoPM": 1,
+      "duracao": "cena"
+    },
+    "prerequisitos": {
+      "poderesTormentaMinimos": 0,
+      "poderesEspecificos": [],
+      "atributos": {}
+    },
+    "escalamentoTormenta": {
+      "tipoPasso": "outros_poderes",
+      "divisor": 2,
+      "efeito": "Bônus em Luta aumenta em +1 a cada 2 outros poderes da Tormenta."
+    },
+    "descricao": "Você pode gastar 1 PM para cobrir suas mãos com uma carapaça rubra. Até o final da cena, você recebe +1 em Luta. Este bônus aumenta em +1 para cada dois outros poderes da Tormenta que você possui."
+  },
+  {
+    "id": "fome_de_mana",
+    "nome": "Fome de Mana",
+    "categoria": "poder_tormenta",
+    "livro": "tormenta20_jogo_do_ano",
+    "tipo": "passivo",
+    "ativacao": null,
+    "prerequisitos": {
+      "poderesTormentaMinimos": 0,
+      "poderesEspecificos": [],
+      "atributos": {}
+    },
+    "escalamentoTormenta": {
+      "tipoPasso": "todos_poderes",
+      "divisor": 1,
+      "efeito": "Limite de PM temporários por cena é igual ao total de poderes da Tormenta possuídos."
+    },
+    "descricao": "Quando passa em um teste de resistência para resistir a uma habilidade mágica de um inimigo, você recebe 1 PM temporário cumulativo. Você pode ganhar um máximo de PM temporários por cena desta forma igual ao número de poderes da Tormenta que possui."
+  },
+  {
+    "id": "larva_explosiva",
+    "nome": "Larva Explosiva",
+    "categoria": "poder_tormenta",
+    "livro": "tormenta20_jogo_do_ano",
+    "tipo": "passivo",
+    "ativacao": null,
+    "prerequisitos": {
+      "poderesTormentaMinimos": 0,
+      "poderesEspecificos": ["dentes_afiados"],
+      "atributos": {}
+    },
+    "escalamentoTormenta": {
+      "tipoPasso": "outros_poderes",
+      "divisor": 2,
+      "efeito": "Dano da explosão aumenta em +2d4 a cada 2 outros poderes da Tormenta."
+    },
+    "descricao": "Se uma criatura que tenha sofrido dano de sua mordida nesta cena for reduzida a 0 ou menos PV, ela explode em chuva cáustica, morrendo e causando 4d4 pontos de dano de ácido em criaturas adjacentes. Para cada dois outros poderes da Tormenta que você possui, o dano aumenta em +2d4. Você é imune a esse dano. Pré-requisito: Dentes Afiados."
+  },
+  {
+    "id": "legiao_aberrante",
+    "nome": "Legião Aberrante",
+    "categoria": "poder_tormenta",
+    "livro": "tormenta20_jogo_do_ano",
+    "tipo": "passivo",
+    "ativacao": null,
+    "prerequisitos": {
+      "poderesTormentaMinimos": 3,
+      "poderesEspecificos": ["anatomia_insana"],
+      "atributos": {}
+    },
+    "escalamentoTormenta": {
+      "tipoPasso": "outros_poderes",
+      "divisor": 2,
+      "efeito": "Bônus contra manobras e resistência de efeito alvo aumenta em +1 a cada 2 outros poderes da Tormenta."
+    },
+    "descricao": "Seu corpo se transforma em uma massa de insetos rubros. Você pode atravessar qualquer espaço por onde seja possível passar uma moeda (mas considera esses espaços como terreno difícil) e recebe +1 em testes contra manobras de combate e de resistência contra efeitos que tenham você como alvo (mas não efeitos de área). Este bônus aumenta em +1 para cada dois outros poderes da Tormenta que você possui. Pré-requisito: Anatomia Insana, três outros poderes da Tormenta."
+  },
+  {
+    "id": "maos_membranosas",
+    "nome": "Mãos Membranosas",
+    "categoria": "poder_tormenta",
+    "livro": "tormenta20_jogo_do_ano",
+    "tipo": "passivo",
+    "ativacao": null,
+    "prerequisitos": {
+      "poderesTormentaMinimos": 0,
+      "poderesEspecificos": [],
+      "atributos": {}
+    },
+    "escalamentoTormenta": {
+      "tipoPasso": "outros_poderes",
+      "divisor": 2,
+      "efeito": "Bônus em Atletismo, Fortitude e agarrar aumenta em +1 a cada 2 outros poderes da Tormenta."
+    },
+    "descricao": "Você recebe +1 em Atletismo, Fortitude e testes de agarrar. Este bônus aumenta em +1 para cada dois outros poderes da Tormenta que você possui."
+  },
+  {
+    "id": "membros_estendidos",
+    "nome": "Membros Estendidos",
+    "categoria": "poder_tormenta",
+    "livro": "tormenta20_jogo_do_ano",
+    "tipo": "passivo",
+    "ativacao": null,
+    "prerequisitos": {
+      "poderesTormentaMinimos": 0,
+      "poderesEspecificos": [],
+      "atributos": {}
+    },
+    "escalamentoTormenta": {
+      "tipoPasso": "outros_poderes",
+      "divisor": 4,
+      "efeito": "Alcance corpo a corpo aumenta em +1,5m a cada 4 outros poderes da Tormenta."
+    },
+    "descricao": "Seus braços e armas naturais são grotescamente mais longos que o normal, o que aumenta seu alcance natural para ataques corpo a corpo em +1,5m. Para cada quatro outros poderes da Tormenta que você possui, esse alcance aumenta em +1,5m."
+  },
+  {
+    "id": "membros_extras",
+    "nome": "Membros Extras",
+    "categoria": "poder_tormenta",
+    "livro": "tormenta20_jogo_do_ano",
+    "tipo": "ativo",
+    "ativacao": {
+      "execucao": "reacao_agredir",
+      "custoPM": 2,
+      "duracao": "instantanea"
+    },
+    "prerequisitos": {
+      "poderesTormentaMinimos": 4,
+      "poderesEspecificos": [],
+      "atributos": {}
+    },
+    "escalamentoTormenta": null,
+    "descricao": "Você possui duas armas naturais de patas insetoides que saem de suas costas, ombros ou flancos. Uma vez por rodada, quando usa a ação agredir para atacar com outra arma, pode gastar 2 PM para fazer um ataque corpo a corpo extra com cada uma (dano 1d4, crítico x2, corte). Se possuir Ambidestria ou Estilo de Duas Armas, pode empunhar armas leves em suas patas insetoides (mas ainda precisa pagar 2 PM para atacar com elas e sofre a penalidade de –2 em todos os ataques). Pré-requisitos: quatro outros poderes da Tormenta."
+  },
+  {
+    "id": "mente_aberrante",
+    "nome": "Mente Aberrante",
+    "categoria": "poder_tormenta",
+    "livro": "tormenta20_jogo_do_ano",
+    "tipo": "passivo",
+    "ativacao": null,
+    "prerequisitos": {
+      "poderesTormentaMinimos": 0,
+      "poderesEspecificos": [],
+      "atributos": {}
+    },
+    "escalamentoTormenta": {
+      "tipoPasso": "outros_poderes",
+      "divisor": 2,
+      "efeito": "Resistência mental aumenta em +1 e o dano psíquico reativo em +1d6 a cada 2 outros poderes da Tormenta."
+    },
+    "descricao": "Você recebe resistência a efeitos mentais +1. Além disso, sempre que precisa fazer um teste de Vontade para resistir a uma habilidade, a criatura que usou essa habilidade sofre 1d6 pontos de dano psíquico. Para cada dois outros poderes da Tormenta que você possui o bônus em testes de resistência aumenta em +1 e o dano aumenta em +1d6."
+  },
+  {
+    "id": "olhos_vermelhos",
+    "nome": "Olhos Vermelhos",
+    "categoria": "poder_tormenta",
+    "livro": "tormenta20_jogo_do_ano",
+    "tipo": "passivo",
+    "ativacao": null,
+    "prerequisitos": {
+      "poderesTormentaMinimos": 0,
+      "poderesEspecificos": [],
+      "atributos": {}
+    },
+    "escalamentoTormenta": {
+      "tipoPasso": "outros_poderes",
+      "divisor": 2,
+      "efeito": "Bônus em Intimidação aumenta em +1 a cada 2 outros poderes da Tormenta."
+    },
+    "descricao": "Você recebe visão no escuro e +1 em Intimidação. Este bônus aumenta em +1 para cada dois outros poderes da Tormenta que você possui."
+  },
+  {
+    "id": "pele_corrompida",
+    "nome": "Pele Corrompida",
+    "categoria": "poder_tormenta",
+    "livro": "tormenta20_jogo_do_ano",
+    "tipo": "passivo",
+    "ativacao": null,
+    "prerequisitos": {
+      "poderesTormentaMinimos": 0,
+      "poderesEspecificos": [],
+      "atributos": {}
+    },
+    "escalamentoTormenta": {
+      "tipoPasso": "outros_poderes",
+      "divisor": 2,
+      "efeito": "RD elemental aumenta em +2 a cada 2 outros poderes da Tormenta."
+    },
+    "descricao": "Sua carne foi mesclada à matéria vermelha. Você recebe redução de ácido, eletricidade, fogo, frio, luz e trevas 2. Esta RD aumenta em +2 para cada dois outros poderes da Tormenta que você possui."
+  },
+  {
+    "id": "repulsivo",
+    "nome": "Repulsivo",
+    "categoria": "poder_tormenta",
+    "livro": "tormenta20_jogo_do_ano",
+    "tipo": "passivo",
+    "ativacao": null,
+    "prerequisitos": {
+      "poderesTormentaMinimos": 0,
+      "poderesEspecificos": [],
+      "atributos": {
+        "carisma_maximo": -1
+      }
+    },
+    "escalamentoTormenta": {
+      "tipoPasso": "todos_poderes",
+      "divisor": 1,
+      "efeito": "Penalidade aplicada no primeiro ataque do inimigo é igual ao total de poderes da Tormenta possuídos."
+    },
+    "descricao": "A presença da Tempestade Rubra em você é tão forte que é difícil olhar em sua direção. O primeiro ataque de cada inimigo contra você em cada cena sofre uma penalidade igual ao total de poderes da Tormenta que você possui (incluindo este). Após o primeiro ataque, os inimigos já se acostumaram com sua aparência atroz e não sofrem mais essa penalidade. Pré-requisito: Car –1 ou menor."
+  },
+  {
+    "id": "sangue_acido",
+    "nome": "Sangue Ácido",
+    "categoria": "poder_tormenta",
+    "livro": "tormenta20_jogo_do_ano",
+    "tipo": "passivo",
+    "ativacao": null,
+    "prerequisitos": {
+      "poderesTormentaMinimos": 0,
+      "poderesEspecificos": [],
+      "atributos": {}
+    },
+    "escalamentoTormenta": {
+      "tipoPasso": "todos_poderes",
+      "divisor": 1,
+      "efeito": "Dano de ácido reativo é igual a 1 ponto por poder da Tormenta possuído."
+    },
+    "descricao": "Quando você sofre dano por um ataque corpo a corpo, o atacante sofre 1 ponto de dano de ácido por poder da Tormenta que você possui."
+  },
+  {
+    "id": "secrecao_cicatrizante",
+    "nome": "Secreção Cicatrizante",
+    "categoria": "poder_tormenta",
+    "livro": "tormenta20_jogo_do_ano",
+    "tipo": "ativo",
+    "ativacao": {
+      "execucao": "padrao",
+      "custoPM": 2,
+      "duracao": "instantanea"
+    },
+    "prerequisitos": {
+      "poderesTormentaMinimos": 0,
+      "poderesEspecificos": [],
+      "atributos": {}
+    },
+    "escalamentoTormenta": {
+      "tipoPasso": "outros_poderes",
+      "divisor": 2,
+      "efeito": "Cura aumenta em +1d6+1 e a CD de resistência aumenta em +1 a cada 2 outros poderes da Tormenta."
+    },
+    "descricao": "Você pode gastar uma ação padrão e 2 PM para secretar um fluido rubro e viscoso sobre você mesmo ou uma criatura adjacente. O alvo recupera 2d6+2 PV mas fica enjoado por 1 rodada (Fort CD Con evita). Para cada dois outros poderes da Tormenta que você possui, a cura aumenta em +1d6+1 e a CD aumenta em +1."
+  },
+  {
+    "id": "simetria_radial",
+    "nome": "Simetria Radial",
+    "categoria": "poder_tormenta",
+    "livro": "tormenta20_jogo_do_ano",
+    "tipo": "passivo",
+    "ativacao": null,
+    "prerequisitos": {
+      "poderesTormentaMinimos": 4,
+      "poderesEspecificos": [],
+      "atributos": {}
+    },
+    "escalamentoTormenta": null,
+    "descricao": "Aos poucos, seu físico se rearranjou, abandonando a anatomia artoniana quase que por completo. Seus olhos ficam em lados opostos da cabeça e sua boca fica no topo. Seu tórax adquiriu forma tubular e seus braços e pernas são distribuídos em seu corpo de forma que você não tem mais dois “lados”. Você não pode ser flanqueado ou ficar caído e recebe um bônus de +5 para evitar ser agarrado. Pré-requisito: quatro outros poderes da Tormenta."
+  },
+  {
+    "id": "tempo_mistico",
+    "nome": "Tempo Místico",
+    "categoria": "poder_tormenta",
+    "livro": "tormenta20_jogo_do_ano",
+    "tipo": "ativo",
+    "ativacao": {
+      "execucao": "reacao_magia",
+      "custoPM": 2,
+      "duracao": "instantanea"
+    },
+    "prerequisitos": {
+      "poderesTormentaMinimos": 2,
+      "poderesEspecificos": [],
+      "atributos": {}
+    },
+    "escalamentoTormenta": null,
+    "descricao": "Você é capaz de acessar uma pequena parte do controle dos lefeu sobre o tempo. Uma vez por rodada, quando você lança uma magia com execução de movimento, padrão ou completa, pode gastar 2 PM e perder 1d6, 1d8 ou 1d12 PV para diminuir o tempo de execução da magia em um, dois ou três passos, respectivamente (até um mínimo de ação livre). Essa perda de vida só pode ser curada com descanso. Pré-requisito: dois outros poderes da Tormenta."
+  },
+  {
+    "id": "visco_rubro",
+    "nome": "Visco Rubro",
+    "categoria": "poder_tormenta",
+    "livro": "tormenta20_jogo_do_ano",
+    "tipo": "ativo",
+    "ativacao": {
+      "execucao": "livre",
+      "custoPM": 1,
+      "duracao": "cena"
+    },
+    "prerequisitos": {
+      "poderesTormentaMinimos": 0,
+      "poderesEspecificos": [],
+      "atributos": {}
+    },
+    "escalamentoTormenta": {
+      "tipoPasso": "outros_poderes",
+      "divisor": 2,
+      "efeito": "Bônus nas rolagens de dano corpo a corpo aumenta em +1 a cada 2 outros poderes da Tormenta."
+    },
+    "descricao": "Você pode gastar 1 PM para expelir um líquido grosso e corrosivo. Até o final da cena, você recebe +1 nas rolagens de dano corpo a corpo. Este bônus aumenta em +1 para cada dois outros poderes da Tormenta que você possui."
+  }
+]

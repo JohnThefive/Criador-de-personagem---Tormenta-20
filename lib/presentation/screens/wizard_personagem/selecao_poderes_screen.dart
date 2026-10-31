@@ -68,7 +68,7 @@ class _SelecaoPoderesView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    'Poderes de Classe',
+                    'Evolução de Poderes',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -76,7 +76,7 @@ class _SelecaoPoderesView extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '${classe.classeDefinicao.nome} (Nível ${classe.nivel})',
+                    '${classe.classeDefinicao.nome} (Nível ${classe.nivel}) • ${state.categoria.label}',
                     style: const TextStyle(fontSize: 13, color: Colors.white70),
                   ),
                 ],
@@ -95,9 +95,9 @@ class _SelecaoPoderesView extends StatelessWidget {
             body: Column(
               children: [
                 // 1. Painel Informativo de Evolução
-                _buildCabecalhoEvolucao(context, state),
+                _buildCabecalhoEvolucao(context, state, cubit),
 
-                // 2. Barra de Busca e Filtros
+                // 2. Barra de Busca, Categorias e Filtros
                 _buildBarraBuscaEFiltros(context, state, cubit),
 
                 // 3. Lista de Poderes
@@ -134,11 +134,16 @@ class _SelecaoPoderesView extends StatelessWidget {
     );
   }
 
-  Widget _buildCabecalhoEvolucao(BuildContext context, EvolucaoState state) {
+  Widget _buildCabecalhoEvolucao(
+    BuildContext context,
+    EvolucaoState state,
+    EvolucaoCubit cubit,
+  ) {
     final classe = state.classeAtual;
     final pendentes = state.poderesPendentes;
     final permitidos = state.poderesPermitidos;
     final escolhidos = classe.poderesEscolhidos.length;
+    final p = state.personagem;
 
     return Container(
       width: double.infinity,
@@ -155,6 +160,34 @@ class _SelecaoPoderesView extends StatelessWidget {
       ),
       child: Column(
         children: [
+          if (p.classes.length > 1) ...[
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: List.generate(p.classes.length, (idx) {
+                  final cItem = p.classes[idx];
+                  final selecionado = idx == state.indiceClasse;
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 8, bottom: 10),
+                    child: ChoiceChip(
+                      label: Text(
+                        '${cItem.classeDefinicao.nome} Nv.${cItem.nivel} (${cItem.poderesPendentes} vaga${cItem.poderesPendentes == 1 ? "" : "s"})',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: selecionado ? Colors.black : Colors.white70,
+                        ),
+                      ),
+                      selected: selecionado,
+                      selectedColor: Colors.amber,
+                      backgroundColor: const Color(0xFF2A2A3C),
+                      onSelected: (_) => cubit.selecionarClasse(idx),
+                    ),
+                  );
+                }),
+              ),
+            ),
+          ],
           Row(
             children: [
               Expanded(
@@ -168,7 +201,7 @@ class _SelecaoPoderesView extends StatelessWidget {
               Container(width: 1, height: 35, color: Colors.white24),
               Expanded(
                 child: _buildInfoItem(
-                  'Poderes da Classe',
+                  'Poderes no Nível',
                   '$escolhidos de $permitidos',
                   Icons.auto_awesome,
                   Colors.amber,
@@ -177,7 +210,7 @@ class _SelecaoPoderesView extends StatelessWidget {
               Container(width: 1, height: 35, color: Colors.white24),
               Expanded(
                 child: _buildInfoItem(
-                  'Disponíveis',
+                  'Vagas Livres',
                   '$pendentes',
                   Icons.add_circle_outline,
                   pendentes > 0 ? Colors.greenAccent : Colors.grey,
@@ -200,11 +233,49 @@ class _SelecaoPoderesView extends StatelessWidget {
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
-                      'Você possui $pendentes ${pendentes == 1 ? "poder" : "poderes"} de classe para escolher!',
+                      'Você possui $pendentes ${pendentes == 1 ? "vaga" : "vagas"}! A cada nível, escolha 1 Poder de Classe OU 1 Poder Geral (Combate, Destino, Magia ou Tormenta).',
                       style: const TextStyle(
                         color: Colors.amber,
                         fontWeight: FontWeight.bold,
-                        fontSize: 13,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+          if (state.categoria == CategoriaEvolucaoPoder.tormenta ||
+              p.totalPoderesTormenta > 0) ...[
+            const SizedBox(height: 10),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              decoration: BoxDecoration(
+                color: Colors.red.shade900.withValues(alpha: 0.28),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(
+                  color: Colors.redAccent.withValues(alpha: 0.5),
+                ),
+              ),
+              child: Row(
+                children: [
+                  const Icon(
+                    Icons.coronavirus_outlined,
+                    color: Colors.redAccent,
+                    size: 20,
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      p.dominadoPelaTormenta
+                          ? 'ALERTA: Carisma atual ${p.getValorFinal('CAR')} (menor que –5). O personagem perdeu a identidade e tornou-se um NPC sob controle do Mestre!'
+                          : 'Tormenta: ${p.totalPoderesTormenta} poder(es) ativo(s) • Penalidade: -${p.perdaCarismaTormenta} CAR (Carisma atual: ${p.getValorFinal('CAR')})',
+                      style: TextStyle(
+                        color: p.dominadoPelaTormenta
+                            ? Colors.redAccent
+                            : Colors.red.shade200,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
                       ),
                     ),
                   ),
@@ -251,13 +322,58 @@ class _SelecaoPoderesView extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.fromLTRB(14, 12, 14, 4),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Abas de Categoria (Poder de Classe OU Poder Geral)
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: CategoriaEvolucaoPoder.values.map((cat) {
+                final bool ativo = state.categoria == cat;
+                final bool ehTormenta = cat == CategoriaEvolucaoPoder.tormenta;
+                final Color corAtiva = ehTormenta
+                    ? Colors.redAccent
+                    : const Color(0xFF00A86B);
+                final String rotulo = cat == CategoriaEvolucaoPoder.classe
+                    ? 'Classe (${state.classeAtual.classeDefinicao.nome})'
+                    : cat.label;
+
+                return Padding(
+                  padding: const EdgeInsets.only(right: 8),
+                  child: ChoiceChip(
+                    label: Text(
+                      rotulo,
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: ativo ? FontWeight.bold : FontWeight.normal,
+                        color: ativo ? Colors.white : Colors.white70,
+                      ),
+                    ),
+                    selected: ativo,
+                    selectedColor: corAtiva,
+                    backgroundColor: const Color(0xFF222232),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      side: BorderSide(
+                        color: ativo ? corAtiva : Colors.white24,
+                        width: 1,
+                      ),
+                    ),
+                    showCheckmark: false,
+                    onSelected: (_) => cubit.alterarCategoria(cat),
+                  ),
+                );
+              }).toList(),
+            ),
+          ),
+          const SizedBox(height: 8),
+
           // Campo de busca
           TextField(
             onChanged: cubit.atualizarBusca,
             style: const TextStyle(color: Colors.white, fontSize: 14),
             decoration: InputDecoration(
-              hintText: 'Buscar poder pelo nome...',
+              hintText: 'Buscar poder em ${state.categoria.label}...',
               hintStyle: const TextStyle(color: Colors.white54, fontSize: 14),
               prefixIcon: const Icon(
                 Icons.search,
@@ -289,7 +405,7 @@ class _SelecaoPoderesView extends StatelessWidget {
           ),
           const SizedBox(height: 8),
 
-          // Chips de filtro
+          // Chips de filtro de status
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
@@ -409,6 +525,13 @@ class _SelecaoPoderesView extends StatelessWidget {
       return;
     }
 
+    final p = cubit.state.personagem;
+    final qtdTormentaAtual = p.poderesTormentaComPerdaCarisma;
+    final novaQtdTormenta = qtdTormentaAtual + 1;
+    final perdaAtual = p.perdaCarismaTormenta;
+    final novaPerda = 1 + ((novaQtdTormenta - 1) ~/ 2);
+    final vaiPerderCarisma = poder.ehPoderTormenta && (novaPerda > perdaAtual);
+
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
@@ -430,13 +553,34 @@ class _SelecaoPoderesView extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             const Text(
-              'Esta escolha gastará 1 vaga de poder de classe.',
+              'Esta escolha consumirá 1 vaga de poder do nível (você escolhe entre Poder de Classe ou Poder Geral).',
               style: TextStyle(
                 color: Colors.amber,
                 fontSize: 12,
                 fontStyle: FontStyle.italic,
               ),
             ),
+            if (poder.ehPoderTormenta) ...[
+              const SizedBox(height: 10),
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.red.shade900.withValues(alpha: 0.35),
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: Colors.redAccent),
+                ),
+                child: Text(
+                  vaiPerderCarisma
+                      ? 'Atenção (Poder da Tormenta): Ao escolher este poder, você perderá -1 de Carisma (Carisma passará para ${p.getValorFinal('CAR') - 1}).'
+                      : 'Poder da Tormenta: Este poder contará para o escalonamento da Tormenta. O próximo poder da Tormenta causará -1 de Carisma.',
+                  style: const TextStyle(
+                    color: Colors.redAccent,
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
           ],
         ),
         actions: [
