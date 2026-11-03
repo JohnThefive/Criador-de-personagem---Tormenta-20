@@ -1,10 +1,10 @@
-import '../entities/personagem/personagem.dart';
-import '../entities/equipamento/arma.dart';
-import '../entities/equipamento/protecao.dart';
-import '../entities/equipamento/item_vestido.dart';
-import '../entities/habilidades_complexas/engenhoca.dart';
-import 'data_services/call_armas.dart';
-import 'data_services/call_armaduras.dart';
+import '../../entities/personagem/personagem.dart';
+import '../../entities/equipamento/arma.dart';
+import '../../entities/equipamento/protecao.dart';
+import '../../entities/equipamento/item_vestido.dart';
+import '../../entities/habilidades_complexas/engenhoca.dart';
+import '../data_services/call_armas.dart';
+import '../data_services/call_armaduras.dart';
 
 class OpcoesArmasIniciais {
   final bool podeEscolherSimples;

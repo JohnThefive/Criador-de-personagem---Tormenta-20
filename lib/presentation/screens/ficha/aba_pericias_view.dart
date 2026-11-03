@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../domain/services/calculo_ficha_service.dart';
-import '../../controllers/ficha_cubit.dart';
-import '../../controllers/ficha_state.dart';
+import '../../../domain/services/ficha_services/calculo_ficha_service.dart';
+import '../../controllers/ficha_controller/ficha_cubit.dart';
+import '../../controllers/ficha_controller/ficha_state.dart';
 import 'dialogo_rolagem_dado.dart';
 
 class AbaPericiasView extends StatefulWidget {
@@ -79,143 +79,147 @@ class _AbaPericiasViewState extends State<AbaPericiasView> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     // Bloco de apoio explicando o cálculo do Total
-            Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: const Color(0xFFF8FAFC),
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: const Color(0xFFE2E8F0)),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.calculate_outlined,
-                        size: 18,
-                        color: Color(0xFFD32F2F),
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFF8FAFC),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: const Color(0xFFE2E8F0)),
                       ),
-                      const SizedBox(width: 6),
-                      const Expanded(
-                        child: Text(
-                          'Como é calculado o Total da Perícia',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w800,
-                            fontSize: 13,
-                            color: Color(0xFF0F172A),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.calculate_outlined,
+                                size: 18,
+                                color: Color(0xFFD32F2F),
+                              ),
+                              const SizedBox(width: 6),
+                              const Expanded(
+                                child: Text(
+                                  'Como é calculado o Total da Perícia',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 13,
+                                    color: Color(0xFF0F172A),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                  vertical: 3,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: const Color(
+                                    0xFFD32F2F,
+                                  ).withValues(alpha: 0.1),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Text(
+                                  '1 toque = Rolar',
+                                  style: const TextStyle(
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w800,
+                                    color: Color(0xFFD32F2F),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 8,
-                          vertical: 3,
-                        ),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFD32F2F).withValues(alpha: 0.1),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Text(
-                          '1 toque = Rolar',
-                          style: const TextStyle(
-                            fontSize: 11,
-                            fontWeight: FontWeight.w800,
-                            color: Color(0xFFD32F2F),
+                          const SizedBox(height: 6),
+                          Text(
+                            'Total = ½ Nível (+$metadeNivel) + Atributo + Treino (+$bonusTreino se treinada) + Outros − Pen. Armadura (${penArmadura > 0 ? "-$penArmadura" : "0"}).',
+                            style: const TextStyle(
+                              fontSize: 12,
+                              color: Color(0xFF475569),
+                              height: 1.35,
+                            ),
                           ),
-                        ),
+                          const SizedBox(height: 4),
+                          const Text(
+                            'Legenda: ✱ Somente treinada  •  🛡 Sofre penalidade de armadura/sobrecarga',
+                            style: TextStyle(
+                              fontSize: 11,
+                              color: Color(0xFF64748B),
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                  const SizedBox(height: 6),
-                  Text(
-                    'Total = ½ Nível (+$metadeNivel) + Atributo + Treino (+$bonusTreino se treinada) + Outros − Pen. Armadura (${penArmadura > 0 ? "-$penArmadura" : "0"}).',
-                    style: const TextStyle(
-                      fontSize: 12,
-                      color: Color(0xFF475569),
-                      height: 1.35,
                     ),
-                  ),
-                  const SizedBox(height: 4),
-                  const Text(
-                    'Legenda: ✱ Somente treinada  •  🛡 Sofre penalidade de armadura/sobrecarga',
-                    style: TextStyle(
-                      fontSize: 11,
-                      color: Color(0xFF64748B),
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
-              ),
-            ),
 
-            const SizedBox(height: 10),
+                    const SizedBox(height: 10),
 
-            // Barra de busca rápida + Filtro Treinadas
-            Row(
-              children: [
-                Expanded(
-                  child: SizedBox(
-                    height: 44,
-                    child: TextField(
-                      controller: _buscaController,
-                      onChanged: (val) => setState(() => _termoBusca = val),
-                      style: const TextStyle(fontSize: 13.5),
-                      decoration: InputDecoration(
-                        hintText: 'Buscar perícia (ex: Acrobacia)...',
-                        hintStyle: const TextStyle(fontSize: 13),
-                        prefixIcon: const Icon(Icons.search, size: 20),
-                        suffixIcon: _termoBusca.isNotEmpty
-                            ? IconButton(
-                                tooltip: 'Limpar busca',
-                                icon: const Icon(Icons.clear, size: 18),
-                                onPressed: () {
-                                  _buscaController.clear();
-                                  setState(() => _termoBusca = '');
-                                },
-                              )
-                            : null,
-                        contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 0,
-                        ),
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(
-                            color: Color(0xFFCBD5E1),
+                    // Barra de busca rápida + Filtro Treinadas
+                    Row(
+                      children: [
+                        Expanded(
+                          child: SizedBox(
+                            height: 44,
+                            child: TextField(
+                              controller: _buscaController,
+                              onChanged: (val) =>
+                                  setState(() => _termoBusca = val),
+                              style: const TextStyle(fontSize: 13.5),
+                              decoration: InputDecoration(
+                                hintText: 'Buscar perícia (ex: Acrobacia)...',
+                                hintStyle: const TextStyle(fontSize: 13),
+                                prefixIcon: const Icon(Icons.search, size: 20),
+                                suffixIcon: _termoBusca.isNotEmpty
+                                    ? IconButton(
+                                        tooltip: 'Limpar busca',
+                                        icon: const Icon(Icons.clear, size: 18),
+                                        onPressed: () {
+                                          _buscaController.clear();
+                                          setState(() => _termoBusca = '');
+                                        },
+                                      )
+                                    : null,
+                                contentPadding: const EdgeInsets.symmetric(
+                                  horizontal: 12,
+                                  vertical: 0,
+                                ),
+                                filled: true,
+                                fillColor: Colors.white,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: const BorderSide(
+                                    color: Color(0xFFCBD5E1),
+                                  ),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: const BorderSide(
+                                    color: Color(0xFFCBD5E1),
+                                  ),
+                                ),
+                              ),
+                            ),
                           ),
                         ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(
-                            color: Color(0xFFCBD5E1),
+                        const SizedBox(width: 8),
+                        SizedBox(
+                          height: 44,
+                          child: FilterChip(
+                            selected: _apenasTreinadas,
+                            selectedColor: const Color(0xFFFEE2E2),
+                            checkmarkColor: const Color(0xFFB91C1C),
+                            label: const Text(
+                              'Treinadas',
+                              style: TextStyle(
+                                fontSize: 12.5,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                            onSelected: (v) =>
+                                setState(() => _apenasTreinadas = v),
                           ),
                         ),
-                      ),
+                      ],
                     ),
-                  ),
-                ),
-                const SizedBox(width: 8),
-                SizedBox(
-                  height: 44,
-                  child: FilterChip(
-                    selected: _apenasTreinadas,
-                    selectedColor: const Color(0xFFFEE2E2),
-                    checkmarkColor: const Color(0xFFB91C1C),
-                    label: const Text(
-                      'Treinadas',
-                      style: TextStyle(
-                        fontSize: 12.5,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    onSelected: (v) => setState(() => _apenasTreinadas = v),
-                  ),
-                ),
-              ],
-            ),
 
                     const SizedBox(height: 12),
                   ],

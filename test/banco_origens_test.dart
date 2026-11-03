@@ -3,7 +3,7 @@ import 'package:t20_creator/domain/entities/personagem/origem.dart';
 import 'package:t20_creator/domain/services/data_services/call_origens.dart';
 import 'package:t20_creator/domain/services/data_services/call_poderes.dart';
 import 'package:t20_creator/domain/services/data_services/catalogo_service.dart';
-import 'package:t20_creator/presentation/controllers/personagem_cubit.dart';
+import 'package:t20_creator/presentation/controllers/ficha_controller/personagem_cubit.dart';
 
 void main() {
   setUpAll(() async {
@@ -36,10 +36,7 @@ void main() {
         final chavesResolvidas = acolito.poderesGeraisOpcoes
             .map((p) => p.key)
             .toList();
-        expect(
-          chavesResolvidas,
-          containsAll(['medicina', 'vontade_de_ferro']),
-        );
+        expect(chavesResolvidas, containsAll(['medicina', 'vontade_de_ferro']));
 
         // Verifica que todas as origens possuem poderUnico resolvido com descrição
         for (final origem in todas) {
@@ -56,7 +53,8 @@ void main() {
           expect(
             origem.poderUnico.descricao,
             isNotEmpty,
-            reason: 'Origem ${origem.id} (${origem.poderUnicoId}) sem descrição',
+            reason:
+                'Origem ${origem.id} (${origem.poderUnicoId}) sem descrição',
           );
         }
       },

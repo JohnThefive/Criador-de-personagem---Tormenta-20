@@ -1,9 +1,9 @@
 import 'dart:math';
-import '../entities/equipamento/arma.dart';
-import '../entities/combate/combatente.dart';
-import '../entities/combate/estado_vida_combatente.dart';
-import '../entities/combate/resultado_ataque.dart';
-import '../entities/combate/tipo_dano.dart';
+import '../../entities/equipamento/arma.dart';
+import '../../entities/combate/combatente.dart';
+import '../../entities/combate/estado_vida_combatente.dart';
+import '../../entities/combate/resultado_ataque.dart';
+import '../../entities/combate/tipo_dano.dart';
 
 enum StatusCombate { emAndamento, vitoria, derrota }
 

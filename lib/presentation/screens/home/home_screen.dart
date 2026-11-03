@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../domain/entities/personagem/personagem.dart';
-import '../../controllers/home_cubit.dart';
+import '../../controllers/home_controller/home_cubit.dart';
 import '../ficha/painel_jogador_screen.dart';
 import '../wizard_personagem/char_creation_screen.dart';
 import 'breakpoints.dart';

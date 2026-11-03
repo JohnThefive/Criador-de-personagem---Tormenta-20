@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
-import '../../domain/entities/combate/combatente.dart';
-import '../../domain/entities/combate/grid_tatico.dart';
-import '../../domain/entities/combate/resultado_ataque.dart';
-import '../../domain/services/combate_engine.dart';
+import '../../../domain/entities/combate/combatente.dart';
+import '../../../domain/entities/combate/grid_tatico.dart';
+import '../../../domain/entities/combate/resultado_ataque.dart';
+import '../../../domain/services/combate_services/combate_engine.dart';
 
 class CombateState extends Equatable {
   final List<Combatente> filaIniciativa;

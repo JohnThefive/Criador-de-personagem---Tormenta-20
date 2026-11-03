@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../domain/services/data_services/call_pericias.dart';
 import '../../../domain/entities/personagem/pericias.dart'; // Importe a entidade Pericia
-import '../../controllers/personagem_cubit.dart';
+import '../../controllers/ficha_controller/personagem_cubit.dart';
 
 class PaginaSelecaoPericias extends StatelessWidget {
   final PersonagemState state;

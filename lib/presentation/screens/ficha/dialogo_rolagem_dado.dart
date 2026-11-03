@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../domain/entities/personagem/personagem.dart';
-import '../../../domain/services/calculo_ficha_service.dart';
+import '../../../domain/services/ficha_services/calculo_ficha_service.dart';
 
 /// Abre o diálogo de rolagem inteligente de perícia em 1 toque,
 /// já preenchido e rolado com todas as parcelas vindas do domínio.
@@ -42,9 +42,7 @@ Future<void> mostrarDialogoRolagemAtributo(
 class _DialogoRolagemInteligente extends StatefulWidget {
   final ResultadoRolagemDado Function(int modSituacional) gerarRolagem;
 
-  const _DialogoRolagemInteligente({
-    required this.gerarRolagem,
-  });
+  const _DialogoRolagemInteligente({required this.gerarRolagem});
 
   @override
   State<_DialogoRolagemInteligente> createState() =>
@@ -243,11 +241,7 @@ class _DialogoRolagemInteligenteState
                         ),
                       ],
                     ),
-                    Container(
-                      width: 1.5,
-                      height: 44,
-                      color: corBordaDado,
-                    ),
+                    Container(width: 1.5, height: 44, color: corBordaDado),
                     Column(
                       children: [
                         const Text(
@@ -400,14 +394,12 @@ class _DialogoRolagemInteligenteState
                     children: [
                       _BotaoAjusteSituacional(
                         rotulo: '-2',
-                        onTap: () =>
-                            _ajustarSituacional(_modSituacional - 2),
+                        onTap: () => _ajustarSituacional(_modSituacional - 2),
                       ),
                       const SizedBox(width: 4),
                       _BotaoAjusteSituacional(
                         rotulo: '-1',
-                        onTap: () =>
-                            _ajustarSituacional(_modSituacional - 1),
+                        onTap: () => _ajustarSituacional(_modSituacional - 1),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -434,14 +426,12 @@ class _DialogoRolagemInteligenteState
                       ),
                       _BotaoAjusteSituacional(
                         rotulo: '+1',
-                        onTap: () =>
-                            _ajustarSituacional(_modSituacional + 1),
+                        onTap: () => _ajustarSituacional(_modSituacional + 1),
                       ),
                       const SizedBox(width: 4),
                       _BotaoAjusteSituacional(
                         rotulo: '+2',
-                        onTap: () =>
-                            _ajustarSituacional(_modSituacional + 2),
+                        onTap: () => _ajustarSituacional(_modSituacional + 2),
                       ),
                     ],
                   ),

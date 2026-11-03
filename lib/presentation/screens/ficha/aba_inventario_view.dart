@@ -6,9 +6,9 @@ import '../../../domain/entities/equipamento/item_vestido.dart';
 import '../../../domain/entities/equipamento/protecao.dart';
 import '../../../domain/services/data_services/call_armaduras.dart';
 import '../../../domain/services/data_services/call_armas.dart';
-import '../../../domain/services/regras_carga_service.dart';
-import '../../controllers/ficha_cubit.dart';
-import '../../controllers/ficha_state.dart';
+import '../../../domain/services/ficha_services/regras_carga_service.dart';
+import '../../controllers/ficha_controller/ficha_cubit.dart';
+import '../../controllers/ficha_controller/ficha_state.dart';
 import '../../widgets/card_metrica_clicavel.dart';
 import 'dialogos_ficha.dart';
 
@@ -23,10 +23,8 @@ class AbaInventarioView extends StatelessWidget {
   }) async {
     final res = await showDialog<int>(
       context: context,
-      builder: (_) => _DialogoCarteiraMoeda(
-        titulo: titulo,
-        valorAtual: valorAtual,
-      ),
+      builder: (_) =>
+          _DialogoCarteiraMoeda(titulo: titulo, valorAtual: valorAtual),
     );
     if (res != null) {
       onSalvar(res);
@@ -121,10 +119,7 @@ class AbaInventarioView extends StatelessWidget {
     );
   }
 
-  Future<void> _selecionarEscudo(
-    BuildContext context,
-    FichaCubit cubit,
-  ) async {
+  Future<void> _selecionarEscudo(BuildContext context, FichaCubit cubit) async {
     final escudos = BancoDeArmaduras.escudos();
     final atual = cubit.personagem.escudoEquipado;
 
@@ -766,390 +761,408 @@ class AbaInventarioView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     // 1. ÁREA DE CARGAS (ESPAÇOS / CAPACIDADE)
-            Container(
-              padding: const EdgeInsets.all(14),
-              decoration: BoxDecoration(
-                color: carga.sobrecarregado
-                    ? const Color(0xFFFEF2F2)
-                    : Colors.white,
-                borderRadius: BorderRadius.circular(14),
-                border: Border.all(
-                  color: carga.sobrecarregado
-                      ? const Color(0xFFEF4444)
-                      : const Color(0xFFE2E8F0),
-                ),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.fitness_center_rounded,
-                            size: 18,
-                            color: carga.sobrecarregado
-                                ? const Color(0xFFB91C1C)
-                                : const Color(0xFF334155),
-                          ),
-                          const SizedBox(width: 6),
-                          const Text(
-                            'Capacidade de Carga',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w800,
-                              fontSize: 14,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Text(
-                        '${carga.cargaAtual} / ${carga.limiteCarga} espaços (Máx: ${carga.cargaMaximaAbsoluta})',
-                        key: const Key('texto_resumo_carga'),
-                        style: TextStyle(
-                          fontWeight: FontWeight.w900,
-                          fontSize: 12.5,
+                    Container(
+                      padding: const EdgeInsets.all(14),
+                      decoration: BoxDecoration(
+                        color: carga.sobrecarregado
+                            ? const Color(0xFFFEF2F2)
+                            : Colors.white,
+                        borderRadius: BorderRadius.circular(14),
+                        border: Border.all(
                           color: carga.sobrecarregado
-                              ? const Color(0xFFB91C1C)
-                              : const Color(0xFF0F172A),
+                              ? const Color(0xFFEF4444)
+                              : const Color(0xFFE2E8F0),
                         ),
                       ),
-                    ],
-                  ),
-                  LinearProgressIndicator(
-                    value: progressoCarga,
-                    minHeight: 9,
-                    borderRadius: BorderRadius.circular(6),
-                    backgroundColor: const Color(0xFFE2E8F0),
-                    valueColor: AlwaysStoppedAnimation<Color>(
-                      carga.sobrecarregado
-                          ? const Color(0xFFDC2626)
-                          : (progressoCarga > 0.8
-                                ? const Color(0xFFF59E0B)
-                                : const Color(0xFF10B981)),
-                    ),
-                  ),
-                  if (carga.sobrecarregado) ...[
-                    const SizedBox(height: 6),
-                    const Text(
-                      '⚠ Sobrecarregado: Defesa limitada, -2 de penalidade de armadura e -3m no deslocamento!',
-                      style: TextStyle(
-                        fontSize: 11.5,
-                        fontWeight: FontWeight.w700,
-                        color: Color(0xFFB91C1C),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.fitness_center_rounded,
+                                    size: 18,
+                                    color: carga.sobrecarregado
+                                        ? const Color(0xFFB91C1C)
+                                        : const Color(0xFF334155),
+                                  ),
+                                  const SizedBox(width: 6),
+                                  const Text(
+                                    'Capacidade de Carga',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Text(
+                                '${carga.cargaAtual} / ${carga.limiteCarga} espaços (Máx: ${carga.cargaMaximaAbsoluta})',
+                                key: const Key('texto_resumo_carga'),
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w900,
+                                  fontSize: 12.5,
+                                  color: carga.sobrecarregado
+                                      ? const Color(0xFFB91C1C)
+                                      : const Color(0xFF0F172A),
+                                ),
+                              ),
+                            ],
+                          ),
+                          LinearProgressIndicator(
+                            value: progressoCarga,
+                            minHeight: 9,
+                            borderRadius: BorderRadius.circular(6),
+                            backgroundColor: const Color(0xFFE2E8F0),
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              carga.sobrecarregado
+                                  ? const Color(0xFFDC2626)
+                                  : (progressoCarga > 0.8
+                                        ? const Color(0xFFF59E0B)
+                                        : const Color(0xFF10B981)),
+                            ),
+                          ),
+                          if (carga.sobrecarregado) ...[
+                            const SizedBox(height: 6),
+                            const Text(
+                              '⚠ Sobrecarregado: Defesa limitada, -2 de penalidade de armadura e -3m no deslocamento!',
+                              style: TextStyle(
+                                fontSize: 11.5,
+                                fontWeight: FontWeight.w700,
+                                color: Color(0xFFB91C1C),
+                              ),
+                            ),
+                          ],
+                        ],
                       ),
                     ),
-                  ],
-                ],
-              ),
-            ),
 
-            const SizedBox(height: 12),
+                    const SizedBox(height: 12),
 
-            // 2. CONTROLE DE TIBARES EM DENOMINAÇÕES (TC, T$, TO)
-            Container(
-              padding: const EdgeInsets.all(14),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(14),
-                border: Border.all(color: const Color(0xFFE2E8F0)),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Row(
+                    // 2. CONTROLE DE TIBARES EM DENOMINAÇÕES (TC, T$, TO)
+                    Container(
+                      padding: const EdgeInsets.all(14),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(14),
+                        border: Border.all(color: const Color(0xFFE2E8F0)),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Icon(
-                            Icons.monetization_on_rounded,
-                            color: Color(0xFFD97706),
-                            size: 19,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Row(
+                                children: [
+                                  Icon(
+                                    Icons.monetization_on_rounded,
+                                    color: Color(0xFFD97706),
+                                    size: 19,
+                                  ),
+                                  SizedBox(width: 6),
+                                  Text(
+                                    'Bolsa de Tibares',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Text(
+                                'Total equiv.: T\$ ${p.patrimonioTotalTibares.toStringAsFixed(1)}',
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w800,
+                                  color: Color(0xFF92400E),
+                                ),
+                              ),
+                            ],
                           ),
-                          SizedBox(width: 6),
+                          const SizedBox(height: 10),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: CardMetricaClicavel(
+                                  keyWidget: const Key('card_tibar_cobre'),
+                                  rotulo: 'TC',
+                                  subtitulo: 'Cobre (0,1)',
+                                  valor: '${p.tibaresCobre}',
+                                  corRotulo: const Color(0xFF9A3412),
+                                  tamanhoRotulo: 11.5,
+                                  pesoRotulo: FontWeight.w900,
+                                  tamanhoValor: 18,
+                                  pesoValor: FontWeight.w900,
+                                  minHeight: 62,
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 8,
+                                    vertical: 8,
+                                  ),
+                                  onTap: () => _editarMoeda(
+                                    context,
+                                    titulo: 'Tibares de Cobre (TC)',
+                                    valorAtual: p.tibaresCobre,
+                                    onSalvar: (v) =>
+                                        cubit.definirTibares(cobre: v),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              Expanded(
+                                child: CardMetricaClicavel(
+                                  keyWidget: const Key('card_tibar_prata'),
+                                  rotulo: 'T\$',
+                                  subtitulo: 'Padrão (1)',
+                                  valor: '${p.tibares}',
+                                  corRotulo: const Color(0xFF334155),
+                                  tamanhoRotulo: 11.5,
+                                  pesoRotulo: FontWeight.w900,
+                                  tamanhoValor: 18,
+                                  pesoValor: FontWeight.w900,
+                                  minHeight: 62,
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 8,
+                                    vertical: 8,
+                                  ),
+                                  onTap: () => _editarMoeda(
+                                    context,
+                                    titulo: 'Tibares Padrão (T\$)',
+                                    valorAtual: p.tibares,
+                                    onSalvar: (v) =>
+                                        cubit.definirTibares(prata: v),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              Expanded(
+                                child: CardMetricaClicavel(
+                                  keyWidget: const Key('card_tibar_ouro'),
+                                  rotulo: 'TO',
+                                  subtitulo: 'Ouro (10)',
+                                  valor: '${p.tibaresOuro}',
+                                  corRotulo: const Color(0xFFB45309),
+                                  tamanhoRotulo: 11.5,
+                                  pesoRotulo: FontWeight.w900,
+                                  tamanhoValor: 18,
+                                  pesoValor: FontWeight.w900,
+                                  minHeight: 62,
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 8,
+                                    vertical: 8,
+                                  ),
+                                  onTap: () => _editarMoeda(
+                                    context,
+                                    titulo: 'Tibares de Ouro (TO)',
+                                    valorAtual: p.tibaresOuro,
+                                    onSalvar: (v) =>
+                                        cubit.definirTibares(ouro: v),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    const SizedBox(height: 14),
+
+                    // 3. QUATRO SLOTS SEPARADOS PARA ITENS VESTIDOS (SLOT 1 = ARMADURA)
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 2),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
                           Text(
-                            'Bolsa de Tibares',
+                            'Itens Vestidos (Limite: 4 Slots)',
                             style: TextStyle(
                               fontWeight: FontWeight.w800,
-                              fontSize: 14,
+                              fontSize: 15,
+                              color: Color(0xFF0F172A),
+                            ),
+                          ),
+                          Text(
+                            'Regra T20 JdA',
+                            style: TextStyle(
+                              fontSize: 11.5,
+                              color: Color(0xFF64748B),
                             ),
                           ),
                         ],
                       ),
-                      Text(
-                        'Total equiv.: T\$ ${p.patrimonioTotalTibares.toStringAsFixed(1)}',
-                        style: const TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w800,
-                          color: Color(0xFF92400E),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: CardMetricaClicavel(
-                          keyWidget: const Key('card_tibar_cobre'),
-                          rotulo: 'TC',
-                          subtitulo: 'Cobre (0,1)',
-                          valor: '${p.tibaresCobre}',
-                          corRotulo: const Color(0xFF9A3412),
-                          tamanhoRotulo: 11.5,
-                          pesoRotulo: FontWeight.w900,
-                          tamanhoValor: 18,
-                          pesoValor: FontWeight.w900,
-                          minHeight: 62,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 8,
-                          ),
-                          onTap: () => _editarMoeda(
-                            context,
-                            titulo: 'Tibares de Cobre (TC)',
-                            valorAtual: p.tibaresCobre,
-                            onSalvar: (v) => cubit.definirTibares(cobre: v),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: CardMetricaClicavel(
-                          keyWidget: const Key('card_tibar_prata'),
-                          rotulo: 'T\$',
-                          subtitulo: 'Padrão (1)',
-                          valor: '${p.tibares}',
-                          corRotulo: const Color(0xFF334155),
-                          tamanhoRotulo: 11.5,
-                          pesoRotulo: FontWeight.w900,
-                          tamanhoValor: 18,
-                          pesoValor: FontWeight.w900,
-                          minHeight: 62,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 8,
-                          ),
-                          onTap: () => _editarMoeda(
-                            context,
-                            titulo: 'Tibares Padrão (T\$)',
-                            valorAtual: p.tibares,
-                            onSalvar: (v) => cubit.definirTibares(prata: v),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: CardMetricaClicavel(
-                          keyWidget: const Key('card_tibar_ouro'),
-                          rotulo: 'TO',
-                          subtitulo: 'Ouro (10)',
-                          valor: '${p.tibaresOuro}',
-                          corRotulo: const Color(0xFFB45309),
-                          tamanhoRotulo: 11.5,
-                          pesoRotulo: FontWeight.w900,
-                          tamanhoValor: 18,
-                          pesoValor: FontWeight.w900,
-                          minHeight: 62,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 8,
-                          ),
-                          onTap: () => _editarMoeda(
-                            context,
-                            titulo: 'Tibares de Ouro (TO)',
-                            valorAtual: p.tibaresOuro,
-                            onSalvar: (v) => cubit.definirTibares(ouro: v),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-
-            const SizedBox(height: 14),
-
-            // 3. QUATRO SLOTS SEPARADOS PARA ITENS VESTIDOS (SLOT 1 = ARMADURA)
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 2),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Itens Vestidos (Limite: 4 Slots)',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w800,
-                      fontSize: 15,
-                      color: Color(0xFF0F172A),
                     ),
-                  ),
-                  Text(
-                    'Regra T20 JdA',
-                    style: TextStyle(fontSize: 11.5, color: Color(0xFF64748B)),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 8),
-            // Slot 1: Armadura Equipada
-            _SlotItemVestidoCard(
-              key: const Key('slot_vestido_1'),
-              numeroSlot: 1,
-              rotuloTipo: 'Armadura',
-              titulo: p.armaduraEquipada != null
-                  ? '${p.armaduraEquipada!.nome}${p.armaduraEquipada!.ehSuperiorOuMagica ? " ✨" : ""}'
-                  : 'Sem armadura equipada',
-              subtitulo: p.armaduraEquipada != null
-                  ? 'Defesa +${p.armaduraEquipada!.bonusDefesaEfetivo} • Pen. -${p.armaduraEquipada!.penalidadeArmaduraEfetiva.abs()}${p.armaduraEquipada!.rdMelhorias > 0 ? " • RD ${p.armaduraEquipada!.rdMelhorias}" : ""}'
-                  : 'Toque para vestir uma armadura do catálogo',
-              espacos: p.armaduraEquipada?.espacosEfetivos ?? 0,
-              ocupado: p.armaduraEquipada != null,
-              icone: Icons.shield_outlined,
-              onTap: () => _selecionarArmaduraSlot1(context, cubit),
-              onConfigurarMelhorias: p.armaduraEquipada != null
-                  ? () => _mostrarModalMelhoriasProtecao(
-                        context,
-                        cubit,
-                        p.armaduraEquipada!,
-                        ehEscudo: false,
-                      )
-                  : null,
-            ),
-            // Slots 2, 3 e 4: Itens Vestidos Extras
-            for (int slotIdx = 1; slotIdx <= 3; slotIdx++)
-              Builder(
-                builder: (_) {
-                  final itemExtra = p.itensVestidosExtras
-                      .where((i) => i.slotIndex == slotIdx)
-                      .firstOrNull;
-                  return _SlotItemVestidoCard(
-                    key: Key('slot_vestido_${slotIdx + 1}'),
-                    numeroSlot: slotIdx + 1,
-                    rotuloTipo: 'Vestuário',
-                    titulo: itemExtra?.nome ?? 'Slot ${slotIdx + 1} livre',
-                    subtitulo: itemExtra != null
-                        ? (itemExtra.beneficio.isNotEmpty
-                              ? itemExtra.beneficio
-                              : 'Item vestido equipado')
-                        : 'Toque para equipar capa, botas, amuleto, anel...',
-                    espacos: itemExtra?.espacos ?? 0,
-                    ocupado: itemExtra != null,
-                    icone: Icons.checkroom_rounded,
-                    onTap: () => _editarSlotVestidoExtra(
-                      context,
-                      cubit,
-                      slotIndex: slotIdx,
-                      atual: itemExtra,
-                    ),
-                  );
-                },
-              ),
-
-            const SizedBox(height: 12),
-
-            // ESCUDO EMPUNHADO & ARMAS CARREGADAS
-            Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(14),
-                border: Border.all(color: const Color(0xFFE2E8F0)),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Empunhados & Armas',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w800,
-                          fontSize: 14,
-                        ),
-                      ),
-                      Row(
-                        children: [
-                          TextButton.icon(
-                            onPressed: () => _selecionarEscudo(context, cubit),
-                            icon: const Icon(Icons.shield_rounded, size: 16),
-                            label: Text(
-                              p.escudoEquipado?.nome ?? 'Escudo',
-                              style: const TextStyle(fontSize: 12),
-                            ),
-                          ),
-                          IconButton(
-                            tooltip: 'Adicionar arma',
-                            constraints: const BoxConstraints(
-                              minWidth: 44,
-                              minHeight: 44,
-                            ),
-                            onPressed: () =>
-                                _selecionarNovaArma(context, cubit),
-                            icon: const Icon(
-                              Icons.add_circle,
-                              color: Color(0xFFD32F2F),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  if (p.escudoEquipado == null && p.armas.isEmpty)
-                    const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 6),
-                      child: Text(
-                        'Nenhum escudo ou arma carregada.',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Color(0xFF94A3B8),
-                        ),
-                      ),
-                    )
-                  else ...[
-                    if (p.escudoEquipado != null)
-                      _LinhaCompactaEquipamento(
-                        icone: Icons.shield_rounded,
-                        nome:
-                            '${p.escudoEquipado!.nome}${p.escudoEquipado!.ehSuperiorOuMagica ? " ✨" : ""} (Empunhado)',
-                        detalhe:
-                            '+${p.escudoEquipado!.bonusDefesaEfetivo} Def • Pen. -${p.escudoEquipado!.penalidadeArmaduraEfetiva.abs()}${p.escudoEquipado!.rdMelhorias > 0 ? " • RD ${p.escudoEquipado!.rdMelhorias}" : ""}',
-                        espacos: p.escudoEquipado!.espacosEfetivos,
-                        onConfigurarMelhorias: () =>
-                            _mostrarModalMelhoriasProtecao(
+                    const SizedBox(height: 8),
+                    // Slot 1: Armadura Equipada
+                    _SlotItemVestidoCard(
+                      key: const Key('slot_vestido_1'),
+                      numeroSlot: 1,
+                      rotuloTipo: 'Armadura',
+                      titulo: p.armaduraEquipada != null
+                          ? '${p.armaduraEquipada!.nome}${p.armaduraEquipada!.ehSuperiorOuMagica ? " ✨" : ""}'
+                          : 'Sem armadura equipada',
+                      subtitulo: p.armaduraEquipada != null
+                          ? 'Defesa +${p.armaduraEquipada!.bonusDefesaEfetivo} • Pen. -${p.armaduraEquipada!.penalidadeArmaduraEfetiva.abs()}${p.armaduraEquipada!.rdMelhorias > 0 ? " • RD ${p.armaduraEquipada!.rdMelhorias}" : ""}'
+                          : 'Toque para vestir uma armadura do catálogo',
+                      espacos: p.armaduraEquipada?.espacosEfetivos ?? 0,
+                      ocupado: p.armaduraEquipada != null,
+                      icone: Icons.shield_outlined,
+                      onTap: () => _selecionarArmaduraSlot1(context, cubit),
+                      onConfigurarMelhorias: p.armaduraEquipada != null
+                          ? () => _mostrarModalMelhoriasProtecao(
                               context,
                               cubit,
-                              p.escudoEquipado!,
-                              ehEscudo: true,
+                              p.armaduraEquipada!,
+                              ehEscudo: false,
+                            )
+                          : null,
+                    ),
+                    // Slots 2, 3 e 4: Itens Vestidos Extras
+                    for (int slotIdx = 1; slotIdx <= 3; slotIdx++)
+                      Builder(
+                        builder: (_) {
+                          final itemExtra = p.itensVestidosExtras
+                              .where((i) => i.slotIndex == slotIdx)
+                              .firstOrNull;
+                          return _SlotItemVestidoCard(
+                            key: Key('slot_vestido_${slotIdx + 1}'),
+                            numeroSlot: slotIdx + 1,
+                            rotuloTipo: 'Vestuário',
+                            titulo:
+                                itemExtra?.nome ?? 'Slot ${slotIdx + 1} livre',
+                            subtitulo: itemExtra != null
+                                ? (itemExtra.beneficio.isNotEmpty
+                                      ? itemExtra.beneficio
+                                      : 'Item vestido equipado')
+                                : 'Toque para equipar capa, botas, amuleto, anel...',
+                            espacos: itemExtra?.espacos ?? 0,
+                            ocupado: itemExtra != null,
+                            icone: Icons.checkroom_rounded,
+                            onTap: () => _editarSlotVestidoExtra(
+                              context,
+                              cubit,
+                              slotIndex: slotIdx,
+                              atual: itemExtra,
                             ),
-                        onRemover: () => cubit.equiparEscudo(null),
+                          );
+                        },
                       ),
-                    ...List.generate(p.armas.length, (idx) {
-                      final Arma a = p.armas[idx];
-                      final extrasAtqDano =
-                          (a.bonusAtaqueMelhorias > 0 ||
-                              a.bonusDanoMelhorias > 0)
-                          ? ' • +${a.bonusAtaqueMelhorias} Atq / +${a.bonusDanoMelhorias} Dano'
-                          : '';
-                      return _LinhaCompactaEquipamento(
-                        icone: Icons.colorize_rounded,
-                        nome: '${a.nome}${a.ehSuperiorOuMagica ? " ✨" : ""}',
-                        detalhe:
-                            'Dano ${a.danoEfetivo} (${a.criticoFormatado}) • ${a.tipoDano.label}$extrasAtqDano',
-                        espacos: a.espacosEfetivos,
-                        onConfigurarMelhorias: () =>
-                            _mostrarModalMelhoriasArma(context, cubit, idx, a),
-                        onRemover: () => cubit.removerArmaInventario(idx),
-                      );
-                    }),
-                  ],
-                ],
-              ),
-            ),
+
+                    const SizedBox(height: 12),
+
+                    // ESCUDO EMPUNHADO & ARMAS CARREGADAS
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(14),
+                        border: Border.all(color: const Color(0xFFE2E8F0)),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text(
+                                'Empunhados & Armas',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w800,
+                                  fontSize: 14,
+                                ),
+                              ),
+                              Row(
+                                children: [
+                                  TextButton.icon(
+                                    onPressed: () =>
+                                        _selecionarEscudo(context, cubit),
+                                    icon: const Icon(
+                                      Icons.shield_rounded,
+                                      size: 16,
+                                    ),
+                                    label: Text(
+                                      p.escudoEquipado?.nome ?? 'Escudo',
+                                      style: const TextStyle(fontSize: 12),
+                                    ),
+                                  ),
+                                  IconButton(
+                                    tooltip: 'Adicionar arma',
+                                    constraints: const BoxConstraints(
+                                      minWidth: 44,
+                                      minHeight: 44,
+                                    ),
+                                    onPressed: () =>
+                                        _selecionarNovaArma(context, cubit),
+                                    icon: const Icon(
+                                      Icons.add_circle,
+                                      color: Color(0xFFD32F2F),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          if (p.escudoEquipado == null && p.armas.isEmpty)
+                            const Padding(
+                              padding: EdgeInsets.symmetric(vertical: 6),
+                              child: Text(
+                                'Nenhum escudo ou arma carregada.',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Color(0xFF94A3B8),
+                                ),
+                              ),
+                            )
+                          else ...[
+                            if (p.escudoEquipado != null)
+                              _LinhaCompactaEquipamento(
+                                icone: Icons.shield_rounded,
+                                nome:
+                                    '${p.escudoEquipado!.nome}${p.escudoEquipado!.ehSuperiorOuMagica ? " ✨" : ""} (Empunhado)',
+                                detalhe:
+                                    '+${p.escudoEquipado!.bonusDefesaEfetivo} Def • Pen. -${p.escudoEquipado!.penalidadeArmaduraEfetiva.abs()}${p.escudoEquipado!.rdMelhorias > 0 ? " • RD ${p.escudoEquipado!.rdMelhorias}" : ""}',
+                                espacos: p.escudoEquipado!.espacosEfetivos,
+                                onConfigurarMelhorias: () =>
+                                    _mostrarModalMelhoriasProtecao(
+                                      context,
+                                      cubit,
+                                      p.escudoEquipado!,
+                                      ehEscudo: true,
+                                    ),
+                                onRemover: () => cubit.equiparEscudo(null),
+                              ),
+                            ...List.generate(p.armas.length, (idx) {
+                              final Arma a = p.armas[idx];
+                              final extrasAtqDano =
+                                  (a.bonusAtaqueMelhorias > 0 ||
+                                      a.bonusDanoMelhorias > 0)
+                                  ? ' • +${a.bonusAtaqueMelhorias} Atq / +${a.bonusDanoMelhorias} Dano'
+                                  : '';
+                              return _LinhaCompactaEquipamento(
+                                icone: Icons.colorize_rounded,
+                                nome:
+                                    '${a.nome}${a.ehSuperiorOuMagica ? " ✨" : ""}',
+                                detalhe:
+                                    'Dano ${a.danoEfetivo} (${a.criticoFormatado}) • ${a.tipoDano.label}$extrasAtqDano',
+                                espacos: a.espacosEfetivos,
+                                onConfigurarMelhorias: () =>
+                                    _mostrarModalMelhoriasArma(
+                                      context,
+                                      cubit,
+                                      idx,
+                                      a,
+                                    ),
+                                onRemover: () =>
+                                    cubit.removerArmaInventario(idx),
+                              );
+                            }),
+                          ],
+                        ],
+                      ),
+                    ),
 
                     const SizedBox(height: 14),
                   ],
@@ -1592,10 +1605,7 @@ class _DialogoCarteiraMoeda extends StatefulWidget {
   final String titulo;
   final int valorAtual;
 
-  const _DialogoCarteiraMoeda({
-    required this.titulo,
-    required this.valorAtual,
-  });
+  const _DialogoCarteiraMoeda({required this.titulo, required this.valorAtual});
 
   @override
   State<_DialogoCarteiraMoeda> createState() => _DialogoCarteiraMoedaState();

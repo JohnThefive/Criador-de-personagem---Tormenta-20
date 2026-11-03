@@ -5,7 +5,7 @@ import 'package:t20_creator/domain/entities/personagem/classe_do_personagem.dart
 import 'package:t20_creator/domain/entities/habilidades_complexas/montaria_sagrada.dart';
 import 'package:t20_creator/domain/entities/personagem/personagem.dart';
 import 'package:t20_creator/domain/services/data_services/call_montaria_sagrada.dart';
-import 'package:t20_creator/domain/services/personagem_storage_service.dart';
+import 'package:t20_creator/domain/services/ficha_services/personagem_storage_service.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();

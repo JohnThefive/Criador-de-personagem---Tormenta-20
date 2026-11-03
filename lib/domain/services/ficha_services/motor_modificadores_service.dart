@@ -1,8 +1,8 @@
 import 'dart:math';
 
-import '../entities/equipamento/item_geral.dart';
-import '../entities/personagem/personagem.dart';
-import '../entities/personagem/poder.dart';
+import '../../entities/equipamento/item_geral.dart';
+import '../../entities/personagem/personagem.dart';
+import '../../entities/personagem/poder.dart';
 
 /// Motor Declarativo de Modificadores do Tormenta 20 JdA.
 /// Centraliza o cálculo de bônus passivos e penalidades oriundos de:

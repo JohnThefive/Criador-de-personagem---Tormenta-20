@@ -4,9 +4,9 @@ import 'package:t20_creator/domain/entities/personagem/classe_do_personagem.dart
 import 'package:t20_creator/domain/entities/personagem/personagem.dart';
 import 'package:t20_creator/domain/repositories/i_personagem_repository.dart';
 import 'package:t20_creator/domain/services/data_services/call_classes.dart';
-import 'package:t20_creator/domain/services/personagem_storage_service.dart';
-import 'package:t20_creator/domain/services/tabela_experiencia_service.dart';
-import 'package:t20_creator/presentation/controllers/ficha_cubit.dart';
+import 'package:t20_creator/domain/services/ficha_services/personagem_storage_service.dart';
+import 'package:t20_creator/domain/services/ficha_services/tabela_experiencia_service.dart';
+import 'package:t20_creator/presentation/controllers/ficha_controller/ficha_cubit.dart';
 
 class _MemoriaPersonagemRepository implements IPersonagemRepository {
   final Map<String, Personagem> _dados = {};
@@ -46,38 +46,42 @@ void main() {
   });
 
   group('Tabela de Experiência Oficial T20 (TabelaExperienciaService)', () {
-    test('Valida todos os 20 patamares de XP da tabela oficial de Tormenta 20', () {
-      final tabelaEsperada = <int, int>{
-        1: 0,
-        2: 1000,
-        3: 3000,
-        4: 6000,
-        5: 10000,
-        6: 15000,
-        7: 21000,
-        8: 28000,
-        9: 36000,
-        10: 45000,
-        11: 55000,
-        12: 66000,
-        13: 78000,
-        14: 91000,
-        15: 105000,
-        16: 120000,
-        17: 136000,
-        18: 153000,
-        19: 171000,
-        20: 190000,
-      };
+    test(
+      'Valida todos os 20 patamares de XP da tabela oficial de Tormenta 20',
+      () {
+        final tabelaEsperada = <int, int>{
+          1: 0,
+          2: 1000,
+          3: 3000,
+          4: 6000,
+          5: 10000,
+          6: 15000,
+          7: 21000,
+          8: 28000,
+          9: 36000,
+          10: 45000,
+          11: 55000,
+          12: 66000,
+          13: 78000,
+          14: 91000,
+          15: 105000,
+          16: 120000,
+          17: 136000,
+          18: 153000,
+          19: 171000,
+          20: 190000,
+        };
 
-      for (final entry in tabelaEsperada.entries) {
-        expect(
-          TabelaExperienciaService.xpTotalParaNivel(entry.key),
-          equals(entry.value),
-          reason: 'Nível ${entry.key} deve exigir exatamente ${entry.value} XP cumulativo',
-        );
-      }
-    });
+        for (final entry in tabelaEsperada.entries) {
+          expect(
+            TabelaExperienciaService.xpTotalParaNivel(entry.key),
+            equals(entry.value),
+            reason:
+                'Nível ${entry.key} deve exigir exatamente ${entry.value} XP cumulativo',
+          );
+        }
+      },
+    );
 
     test('Calcula intervalo e progresso percentual corretamente', () {
       // Nível 1 com 500 XP (precisa de 1.000 para ir ao Nv. 2)
@@ -129,163 +133,200 @@ void main() {
   });
 
   group('Regras de Nível, XP e Modo Tabletop no Personagem', () {
-    test('Modo Solo: personagem sempre pode evoluir até o nível 20 independente de XP', () {
-      final guerreiroDef = BancoDeClasses.getById('guerreiro')!;
-      final p = Personagem(
-        nome: 'Guerreiro Solo',
-        atributos: _criarAtributos(),
-        classes: [ClasseDoPersonagem(classeDefinicao: guerreiroDef, nivel: 1)],
-        experienciaAtual: 0,
-        modoTabletopAtivo: false,
-      );
+    test(
+      'Modo Solo: personagem sempre pode evoluir até o nível 20 independente de XP',
+      () {
+        final guerreiroDef = BancoDeClasses.getById('guerreiro')!;
+        final p = Personagem(
+          nome: 'Guerreiro Solo',
+          atributos: _criarAtributos(),
+          classes: [
+            ClasseDoPersonagem(classeDefinicao: guerreiroDef, nivel: 1),
+          ],
+          experienciaAtual: 0,
+          modoTabletopAtivo: false,
+        );
 
-      expect(p.podeSubirDeNivel, isTrue);
-      expect(p.temXpSuficienteParaSubirNivel, isFalse);
-    });
+        expect(p.podeSubirDeNivel, isTrue);
+        expect(p.temXpSuficienteParaSubirNivel, isFalse);
+      },
+    );
 
-    test('Modo Tabletop: bloqueia subida de nível quando não tem XP e nem permissão do mestre', () {
-      final guerreiroDef = BancoDeClasses.getById('guerreiro')!;
-      final p = Personagem(
-        nome: 'Guerreiro de Mesa',
-        atributos: _criarAtributos(),
-        classes: [ClasseDoPersonagem(classeDefinicao: guerreiroDef, nivel: 1)],
-        experienciaAtual: 300,
-        modoTabletopAtivo: true,
-        permissaoMestreSubirNivel: false,
-      );
+    test(
+      'Modo Tabletop: bloqueia subida de nível quando não tem XP e nem permissão do mestre',
+      () {
+        final guerreiroDef = BancoDeClasses.getById('guerreiro')!;
+        final p = Personagem(
+          nome: 'Guerreiro de Mesa',
+          atributos: _criarAtributos(),
+          classes: [
+            ClasseDoPersonagem(classeDefinicao: guerreiroDef, nivel: 1),
+          ],
+          experienciaAtual: 300,
+          modoTabletopAtivo: true,
+          permissaoMestreSubirNivel: false,
+        );
 
-      expect(p.temXpSuficienteParaSubirNivel, isFalse);
-      expect(p.permissaoMestreSubirNivel, isFalse);
-      expect(p.podeSubirDeNivel, isFalse);
-    });
+        expect(p.temXpSuficienteParaSubirNivel, isFalse);
+        expect(p.permissaoMestreSubirNivel, isFalse);
+        expect(p.podeSubirDeNivel, isFalse);
+      },
+    );
 
-    test('Modo Tabletop: permite subida quando o jogador acumula XP suficiente', () {
-      final guerreiroDef = BancoDeClasses.getById('guerreiro')!;
-      final p = Personagem(
-        nome: 'Guerreiro Experiente',
-        atributos: _criarAtributos(),
-        classes: [ClasseDoPersonagem(classeDefinicao: guerreiroDef, nivel: 1)],
-        experienciaAtual: 1000, // Exatamente a meta para o Nível 2
-        modoTabletopAtivo: true,
-        permissaoMestreSubirNivel: false,
-      );
+    test(
+      'Modo Tabletop: permite subida quando o jogador acumula XP suficiente',
+      () {
+        final guerreiroDef = BancoDeClasses.getById('guerreiro')!;
+        final p = Personagem(
+          nome: 'Guerreiro Experiente',
+          atributos: _criarAtributos(),
+          classes: [
+            ClasseDoPersonagem(classeDefinicao: guerreiroDef, nivel: 1),
+          ],
+          experienciaAtual: 1000, // Exatamente a meta para o Nível 2
+          modoTabletopAtivo: true,
+          permissaoMestreSubirNivel: false,
+        );
 
-      expect(p.temXpSuficienteParaSubirNivel, isTrue);
-      expect(p.podeSubirDeNivel, isTrue);
-    });
+        expect(p.temXpSuficienteParaSubirNivel, isTrue);
+        expect(p.podeSubirDeNivel, isTrue);
+      },
+    );
 
-    test('Modo Tabletop: permite subida quando o mestre concede autorização explícita', () {
-      final guerreiroDef = BancoDeClasses.getById('guerreiro')!;
-      final p = Personagem(
-        nome: 'Guerreiro com Milestone',
-        atributos: _criarAtributos(),
-        classes: [ClasseDoPersonagem(classeDefinicao: guerreiroDef, nivel: 1)],
-        experienciaAtual: 0,
-        modoTabletopAtivo: true,
-        permissaoMestreSubirNivel: true, // Mestre liberou
-      );
+    test(
+      'Modo Tabletop: permite subida quando o mestre concede autorização explícita',
+      () {
+        final guerreiroDef = BancoDeClasses.getById('guerreiro')!;
+        final p = Personagem(
+          nome: 'Guerreiro com Milestone',
+          atributos: _criarAtributos(),
+          classes: [
+            ClasseDoPersonagem(classeDefinicao: guerreiroDef, nivel: 1),
+          ],
+          experienciaAtual: 0,
+          modoTabletopAtivo: true,
+          permissaoMestreSubirNivel: true, // Mestre liberou
+        );
 
-      expect(p.temXpSuficienteParaSubirNivel, isFalse);
-      expect(p.permissaoMestreSubirNivel, isTrue);
-      expect(p.podeSubirDeNivel, isTrue);
-    });
+        expect(p.temXpSuficienteParaSubirNivel, isFalse);
+        expect(p.permissaoMestreSubirNivel, isTrue);
+        expect(p.podeSubirDeNivel, isTrue);
+      },
+    );
 
-    test('Persistência JSON preserva experienciaAtual, modoTabletopAtivo e permissaoMestreSubirNivel', () {
-      final guerreiroDef = BancoDeClasses.getById('guerreiro')!;
-      final original = Personagem(
-        nome: 'Zaled',
-        atributos: _criarAtributos(),
-        classes: [ClasseDoPersonagem(classeDefinicao: guerreiroDef, nivel: 3)],
-        experienciaAtual: 4500,
-        modoTabletopAtivo: true,
-        permissaoMestreSubirNivel: false,
-      );
+    test(
+      'Persistência JSON preserva experienciaAtual, modoTabletopAtivo e permissaoMestreSubirNivel',
+      () {
+        final guerreiroDef = BancoDeClasses.getById('guerreiro')!;
+        final original = Personagem(
+          nome: 'Zaled',
+          atributos: _criarAtributos(),
+          classes: [
+            ClasseDoPersonagem(classeDefinicao: guerreiroDef, nivel: 3),
+          ],
+          experienciaAtual: 4500,
+          modoTabletopAtivo: true,
+          permissaoMestreSubirNivel: false,
+        );
 
-      final map = PersonagemStorageService.personagemToMap(original);
-      final recuperado = PersonagemStorageService.mapToPersonagem(map);
+        final map = PersonagemStorageService.personagemToMap(original);
+        final recuperado = PersonagemStorageService.mapToPersonagem(map);
 
-      expect(recuperado.experienciaAtual, equals(4500));
-      expect(recuperado.modoTabletopAtivo, isTrue);
-      expect(recuperado.permissaoMestreSubirNivel, isFalse);
-      expect(recuperado.nivelPersonagem, equals(3));
-    });
+        expect(recuperado.experienciaAtual, equals(4500));
+        expect(recuperado.modoTabletopAtivo, isTrue);
+        expect(recuperado.permissaoMestreSubirNivel, isFalse);
+        expect(recuperado.nivelPersonagem, equals(3));
+      },
+    );
   });
 
   group('FichaCubit - Integração de XP e Modo Tabletop', () {
-    test('Bloqueia subida de nível quando modo Tabletop está ativo e sem requisitos', () async {
-      final repo = _MemoriaPersonagemRepository();
-      final guerreiroDef = BancoDeClasses.getById('guerreiro')!;
-      final inicial = Personagem(
-        nome: 'Herói Tabletop',
-        atributos: _criarAtributos(),
-        classes: [ClasseDoPersonagem(classeDefinicao: guerreiroDef, nivel: 1)],
-        experienciaAtual: 200,
-        modoTabletopAtivo: true,
-        permissaoMestreSubirNivel: false,
-      );
+    test(
+      'Bloqueia subida de nível quando modo Tabletop está ativo e sem requisitos',
+      () async {
+        final repo = _MemoriaPersonagemRepository();
+        final guerreiroDef = BancoDeClasses.getById('guerreiro')!;
+        final inicial = Personagem(
+          nome: 'Herói Tabletop',
+          atributos: _criarAtributos(),
+          classes: [
+            ClasseDoPersonagem(classeDefinicao: guerreiroDef, nivel: 1),
+          ],
+          experienciaAtual: 200,
+          modoTabletopAtivo: true,
+          permissaoMestreSubirNivel: false,
+        );
 
-      final cubit = FichaCubit(
-        repository: repo,
-        personagemInicial: inicial,
-        debounceDuration: Duration.zero,
-      );
+        final cubit = FichaCubit(
+          repository: repo,
+          personagemInicial: inicial,
+          debounceDuration: Duration.zero,
+        );
 
-      // Tenta alterar nível na classe
-      final sucessoClasse = await cubit.alterarNivelClasse(0, 1);
-      expect(sucessoClasse, isFalse);
-      expect(cubit.state.personagem.nivelPersonagem, equals(1));
-      expect(cubit.state.mensagemErro, contains('Tabletop'));
+        // Tenta alterar nível na classe
+        final sucessoClasse = await cubit.alterarNivelClasse(0, 1);
+        expect(sucessoClasse, isFalse);
+        expect(cubit.state.personagem.nivelPersonagem, equals(1));
+        expect(cubit.state.mensagemErro, contains('Tabletop'));
 
-      // Tenta adicionar multiclasse
-      final arcanistaDef = BancoDeClasses.getById('arcanista')!;
-      final sucessoMulticlasse = await cubit.adicionarMulticlasse(arcanistaDef);
-      expect(sucessoMulticlasse, isFalse);
-      expect(cubit.state.personagem.nivelPersonagem, equals(1));
+        // Tenta adicionar multiclasse
+        final arcanistaDef = BancoDeClasses.getById('arcanista')!;
+        final sucessoMulticlasse = await cubit.adicionarMulticlasse(
+          arcanistaDef,
+        );
+        expect(sucessoMulticlasse, isFalse);
+        expect(cubit.state.personagem.nivelPersonagem, equals(1));
 
-      // Mestre concede permissão
-      await cubit.definirPermissaoMestre(true);
-      expect(cubit.state.personagem.podeSubirDeNivel, isTrue);
+        // Mestre concede permissão
+        await cubit.definirPermissaoMestre(true);
+        expect(cubit.state.personagem.podeSubirDeNivel, isTrue);
 
-      // Agora a subida funciona
-      final sucessoComPermissao = await cubit.alterarNivelClasse(0, 1);
-      expect(sucessoComPermissao, isTrue);
-      expect(cubit.state.personagem.nivelPersonagem, equals(2));
+        // Agora a subida funciona
+        final sucessoComPermissao = await cubit.alterarNivelClasse(0, 1);
+        expect(sucessoComPermissao, isTrue);
+        expect(cubit.state.personagem.nivelPersonagem, equals(2));
 
-      await cubit.close();
-    });
+        await cubit.close();
+      },
+    );
 
-    test('Desbloqueia subida de nível automaticamente ao adicionar XP suficiente', () async {
-      final repo = _MemoriaPersonagemRepository();
-      final guerreiroDef = BancoDeClasses.getById('guerreiro')!;
-      final inicial = Personagem(
-        nome: 'Herói Acumulador de XP',
-        atributos: _criarAtributos(),
-        classes: [ClasseDoPersonagem(classeDefinicao: guerreiroDef, nivel: 1)],
-        experienciaAtual: 200,
-        modoTabletopAtivo: true,
-        permissaoMestreSubirNivel: false,
-      );
+    test(
+      'Desbloqueia subida de nível automaticamente ao adicionar XP suficiente',
+      () async {
+        final repo = _MemoriaPersonagemRepository();
+        final guerreiroDef = BancoDeClasses.getById('guerreiro')!;
+        final inicial = Personagem(
+          nome: 'Herói Acumulador de XP',
+          atributos: _criarAtributos(),
+          classes: [
+            ClasseDoPersonagem(classeDefinicao: guerreiroDef, nivel: 1),
+          ],
+          experienciaAtual: 200,
+          modoTabletopAtivo: true,
+          permissaoMestreSubirNivel: false,
+        );
 
-      final cubit = FichaCubit(
-        repository: repo,
-        personagemInicial: inicial,
-        debounceDuration: Duration.zero,
-      );
+        final cubit = FichaCubit(
+          repository: repo,
+          personagemInicial: inicial,
+          debounceDuration: Duration.zero,
+        );
 
-      expect(cubit.state.personagem.podeSubirDeNivel, isFalse);
+        expect(cubit.state.personagem.podeSubirDeNivel, isFalse);
 
-      // Jogador ganha +800 XP (Total 1.000 XP)
-      await cubit.adicionarXP(800);
-      expect(cubit.state.personagem.experienciaAtual, equals(1000));
-      expect(cubit.state.personagem.temXpSuficienteParaSubirNivel, isTrue);
-      expect(cubit.state.personagem.podeSubirDeNivel, isTrue);
+        // Jogador ganha +800 XP (Total 1.000 XP)
+        await cubit.adicionarXP(800);
+        expect(cubit.state.personagem.experienciaAtual, equals(1000));
+        expect(cubit.state.personagem.temXpSuficienteParaSubirNivel, isTrue);
+        expect(cubit.state.personagem.podeSubirDeNivel, isTrue);
 
-      // Consegue subir para o Nível 2
-      final subiu = await cubit.alterarNivelClasse(0, 1);
-      expect(subiu, isTrue);
-      expect(cubit.state.personagem.nivelPersonagem, equals(2));
+        // Consegue subir para o Nível 2
+        final subiu = await cubit.alterarNivelClasse(0, 1);
+        expect(subiu, isTrue);
+        expect(cubit.state.personagem.nivelPersonagem, equals(2));
 
-      await cubit.close();
-    });
+        await cubit.close();
+      },
+    );
   });
 }

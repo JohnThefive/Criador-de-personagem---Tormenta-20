@@ -1,12 +1,12 @@
 import 'dart:math';
 
-import '../entities/equipamento/arma.dart';
-import '../entities/magia/magia.dart';
-import '../entities/personagem/pericias.dart';
-import '../entities/personagem/personagem.dart';
-import '../entities/personagem/poder.dart';
-import '../entities/personagem/proficiencias.dart';
-import 'data_services/call_pericias.dart';
+import '../../entities/equipamento/arma.dart';
+import '../../entities/magia/magia.dart';
+import '../../entities/personagem/pericias.dart';
+import '../../entities/personagem/personagem.dart';
+import '../../entities/personagem/poder.dart';
+import '../../entities/personagem/proficiencias.dart';
+import '../data_services/call_pericias.dart';
 import 'motor_modificadores_service.dart';
 import 'motor_multiclasse_service.dart';
 
@@ -79,7 +79,9 @@ class ComposicaoPericia {
       lista.add(ParcelaCalculo(rotulo: 'Racial', valor: bonusRacial));
     }
     if (bonusDeclarativo != 0) {
-      lista.add(ParcelaCalculo(rotulo: 'Poderes/Itens', valor: bonusDeclarativo));
+      lista.add(
+        ParcelaCalculo(rotulo: 'Poderes/Itens', valor: bonusDeclarativo),
+      );
     }
     if (bonusOutros != 0) {
       lista.add(ParcelaCalculo(rotulo: 'Outros', valor: bonusOutros));
@@ -275,7 +277,9 @@ class ComposicaoCDMagia {
     final modStr = modAtributo >= 0 ? '+$modAtributo' : '$modAtributo';
     final outrosStr = outrosBonus == 0
         ? ''
-        : (outrosBonus > 0 ? ' + $outrosBonus (Outros)' : ' - ${outrosBonus.abs()} (Outros)');
+        : (outrosBonus > 0
+              ? ' + $outrosBonus (Outros)'
+              : ' - ${outrosBonus.abs()} (Outros)');
     return '10 + ½ Nível (+$metadeNivel) + $siglaAtributo ($modStr)$outrosStr';
   }
 }
@@ -463,12 +467,14 @@ class CalculoFichaService {
     for (final sigla in ordemAtributos) {
       final periciasDoAtributo = catalogo
           .where((per) => per.atributoChave.toUpperCase() == sigla)
-          .map((per) => detalharPericia(
-                p,
-                per.key,
-                periciaObjeto: per,
-                penalidadeArmaduraCustom: penalidadeArmadura,
-              ))
+          .map(
+            (per) => detalharPericia(
+              p,
+              per.key,
+              periciaObjeto: per,
+              penalidadeArmaduraCustom: penalidadeArmadura,
+            ),
+          )
           .where((comp) {
             if (apenasTreinadas && !comp.ehTreinada) return false;
             if (termo.isNotEmpty) {
@@ -818,10 +824,10 @@ class CalculoFichaService {
             arma.proposito == PropositoArma.arremesso);
     final diffAcuidadeAtaque =
         (usaAcuidade &&
-                arma.ehCorpoACorpo &&
-                p.getValorFinal('DES') > p.getValorFinal('FOR'))
-            ? (p.getValorFinal('DES') - p.getValorFinal('FOR'))
-            : 0;
+            arma.ehCorpoACorpo &&
+            p.getValorFinal('DES') > p.getValorFinal('FOR'))
+        ? (p.getValorFinal('DES') - p.getValorFinal('FOR'))
+        : 0;
 
     final bonusAtaque =
         compAtaque.total +

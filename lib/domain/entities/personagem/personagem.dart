@@ -10,10 +10,10 @@ import '../habilidades_complexas/golpe_pessoal.dart';
 import '../habilidades_complexas/engenhoca.dart';
 import '../habilidades_complexas/montaria_sagrada.dart';
 import '../../services/data_services/call_montaria_sagrada.dart';
-import '../../services/regras_carga_service.dart';
-import '../../services/motor_modificadores_service.dart';
-import '../../services/motor_multiclasse_service.dart';
-import '../../services/tabela_experiencia_service.dart';
+import '../../services/ficha_services/regras_carga_service.dart';
+import '../../services/ficha_services/motor_modificadores_service.dart';
+import '../../services/ficha_services/motor_multiclasse_service.dart';
+import '../../services/ficha_services/tabela_experiencia_service.dart';
 
 import 'atributos.dart';
 import 'pericias.dart';
@@ -33,13 +33,15 @@ class Personagem {
   final List<String>
   historicoClassesPorNivel; // RF02 / RF12: Histórico cronológico de classe escolhida em cada nível (1..N)
   final List<String> periciasTreinadas;
-  final Map<String, int> outrosBonusPericias; // Bônus diversos por perícia ("Outros")
+  final Map<String, int>
+  outrosBonusPericias; // Bônus diversos por perícia ("Outros")
 
   // Campos referentes a origem e equipamento
   final Origem? origem;
   final List<Poder> poderesGerais; // Armazena poderes de origem / gerais
   final List<String> itensInventario; // Recebe os itens da mochila
-  final List<ItemVestido> itensVestidosExtras; // Slots 2, 3 e 4 de itens vestidos (Slot 1 = armaduraEquipada)
+  final List<ItemVestido>
+  itensVestidosExtras; // Slots 2, 3 e 4 de itens vestidos (Slot 1 = armaduraEquipada)
   final List<Arma> armas; // Armas equipadas/carregadas
   final Protecao? armaduraEquipada; // Armadura equipada (Slot 1 vestido)
   final Protecao? escudoEquipado; // Escudo equipado (Empunhado)
@@ -94,7 +96,8 @@ class Personagem {
   final String
   descricaoAparencia; // Breve biografia/descrição escrita pelo jogador
   final String anotacoes; // Texto livre de sessão do jogador
-  final Map<int, String> notasProgressaoPorNivel; // Distinções/revisões por nível
+  final Map<int, String>
+  notasProgressaoPorNivel; // Distinções/revisões por nível
   final String? caminhoFoto; // Caminho local da imagem escolhida no celular
   final String tamanho; // Padrão: "Médio"
   final String peso; // Ex: "70 kg"
@@ -506,8 +509,10 @@ class Personagem {
   }
 
   /// Recuperação padrão de descanso (Nível + CON em PV, mínimo 1)
-  int get curaDescansoNormalPV =>
-      max(1, (nivelPersonagem > 0 ? nivelPersonagem : 1) + getValorFinal('CON'));
+  int get curaDescansoNormalPV => max(
+    1,
+    (nivelPersonagem > 0 ? nivelPersonagem : 1) + getValorFinal('CON'),
+  );
 
   /// Recuperação padrão de descanso (Nível em PM, mínimo 1)
   int get curaDescansoNormalPM =>
@@ -776,8 +781,9 @@ class Personagem {
   }
 
   // RF03 / RN02 — Nível Total de Personagem (Soma dos níveis individuais de todas as classes)
-  late final int nivelPersonagem =
-      MotorMulticlasseService.calcularNivelTotal(this);
+  late final int nivelPersonagem = MotorMulticlasseService.calcularNivelTotal(
+    this,
+  );
 
   // RF10 / RN09 — Patamar de jogo baseado no nível total
   PatamarJogo get patamar => MotorMulticlasseService.identificarPatamar(this);
@@ -916,14 +922,14 @@ class Personagem {
 
   int get bonusFormaDefesa =>
       (estaEmFormaSelvagem &&
-              formaSelvagemAtiva!.modificadores.containsKey('DEFESA'))
-          ? formaSelvagemAtiva!.modificadores['DEFESA']!
-          : 0;
+          formaSelvagemAtiva!.modificadores.containsKey('DEFESA'))
+      ? formaSelvagemAtiva!.modificadores['DEFESA']!
+      : 0;
 
   int get bonusCompanheiroDefesa =>
       (temPoderCompanheiroAnimal && tipoCompanheiroAnimal == 'GUARDIAO')
-          ? (nivelDruida >= 12 ? 3 : (nivelDruida >= 6 ? 2 : 1))
-          : 0;
+      ? (nivelDruida >= 12 ? 3 : (nivelDruida >= 6 ? 2 : 1))
+      : 0;
 
   /// Defesa final calculada reativamente:
   /// Defesa = 10 + (usaArmaduraPesada ? bonusDelicada : modDES) + bonusArmadura + bonusEscudo + bonusRacial + bonusForma + bonusCompanheiro + bonusDeclarativoDefesa + outrosBonusDefesa + bonusEfeitosDefesa

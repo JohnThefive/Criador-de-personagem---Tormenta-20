@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t20_creator/domain/services/data_services/catalogo_service.dart';
 
 // Importe seus arquivos
-import 'presentation/controllers/home_cubit.dart';
-import 'presentation/controllers/personagem_cubit.dart';
+import 'presentation/controllers/home_controller/home_cubit.dart';
+import 'presentation/controllers/ficha_controller/personagem_cubit.dart';
 import 'presentation/screens/home/home_screen.dart';
 
 void main() {
@@ -47,9 +47,7 @@ class T20App extends StatelessWidget {
             ),
           ),
           inputDecorationTheme: InputDecorationTheme(
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: const BorderSide(

@@ -8,17 +8,17 @@ import 'package:t20_creator/domain/entities/personagem/proficiencias.dart';
 import 'package:t20_creator/domain/entities/habilidades_complexas/linhagem_arcanista.dart';
 import 'package:t20_creator/domain/entities/equipamento/arma.dart';
 import 'package:t20_creator/domain/entities/equipamento/protecao.dart';
-import 'package:t20_creator/domain/services/regras_carga_service.dart';
-import 'package:t20_creator/domain/services/personagem_storage_service.dart';
-import '../../domain/repositories/i_personagem_repository.dart';
-import '../../domain/entities/personagem/personagem.dart';
-import '../../domain/services/regras_atributos.dart';
-import '../../domain/entities/personagem/raca.dart';
-import '../../domain/entities/personagem/origem.dart';
-import '../../domain/entities/personagem/poder.dart';
-import '../../domain/entities/personagem/divindade.dart';
-import '../../domain/validators/validador_divindade.dart';
-import '../../domain/services/poderes_e_magias/aprendizado_magia_service.dart';
+import 'package:t20_creator/domain/services/ficha_services/regras_carga_service.dart';
+import 'package:t20_creator/domain/services/ficha_services/personagem_storage_service.dart';
+import '../../../domain/repositories/i_personagem_repository.dart';
+import '../../../domain/entities/personagem/personagem.dart';
+import '../../../domain/services/ficha_services/regras_atributos.dart';
+import '../../../domain/entities/personagem/raca.dart';
+import '../../../domain/entities/personagem/origem.dart';
+import '../../../domain/entities/personagem/poder.dart';
+import '../../../domain/entities/personagem/divindade.dart';
+import '../../../domain/validators/validador_divindade.dart';
+import '../../../domain/services/powers_service/aprendizado_magia_service.dart';
 
 // Enum para saber qual método o usuário escolheu nesta etapa
 enum MetodoAtributos { nenhum, compra, rolagem }
@@ -323,37 +323,37 @@ class PersonagemState extends Equatable {
 
   @override
   List<Object?> get props => [
-        personagem,
-        etapaAtual,
-        metodoAtributos,
-        origemSelecionada,
-        periciasEscolhidasOrigem,
-        poderesEscolhidosOrigem,
-        divindadeSelecionada,
-        poderesConcedidosSelecionados,
-        canalizacaoSelecionada,
-        modoEstritoDevocao,
-        valoresRolados,
-        alocacaoIndices,
-        pontosRestantesCompra,
-        atributosVariaveisRaca,
-        selecoesPericiaClasse,
-        selecoesPericiaInteligencia,
-        magiasSelecionadas,
-        armaSimplesInicial,
-        armaMarcialInicial,
-        armaduraInicial,
-        escudoInicial,
-        tibaresIniciais,
-      ];
+    personagem,
+    etapaAtual,
+    metodoAtributos,
+    origemSelecionada,
+    periciasEscolhidasOrigem,
+    poderesEscolhidosOrigem,
+    divindadeSelecionada,
+    poderesConcedidosSelecionados,
+    canalizacaoSelecionada,
+    modoEstritoDevocao,
+    valoresRolados,
+    alocacaoIndices,
+    pontosRestantesCompra,
+    atributosVariaveisRaca,
+    selecoesPericiaClasse,
+    selecoesPericiaInteligencia,
+    magiasSelecionadas,
+    armaSimplesInicial,
+    armaMarcialInicial,
+    armaduraInicial,
+    escudoInicial,
+    tibaresIniciais,
+  ];
 }
 
 class PersonagemCubit extends Cubit<PersonagemState> {
   final IPersonagemRepository _repository;
 
   PersonagemCubit({IPersonagemRepository? repository})
-      : _repository = repository ?? const PersonagemStorageService(),
-        super(PersonagemState(personagem: Personagem.inicial()));
+    : _repository = repository ?? const PersonagemStorageService(),
+      super(PersonagemState(personagem: Personagem.inicial()));
 
   // --- CONTROLE DE FLUXO (WIZARD) ---
 
@@ -480,8 +480,9 @@ class PersonagemCubit extends Cubit<PersonagemState> {
     final personagemAtualizado = state.personagem.copyWith(
       raca: novaRaca,
       atributosVariaveisRaca: atributosVariaveis,
-      periciasDeformidadeLefou:
-          ehLefou ? state.personagem.periciasDeformidadeLefou : const [],
+      periciasDeformidadeLefou: ehLefou
+          ? state.personagem.periciasDeformidadeLefou
+          : const [],
       anularPoderTormentaDeformidade: !ehLefou,
     );
 
@@ -547,8 +548,9 @@ class PersonagemCubit extends Cubit<PersonagemState> {
     final raca = state.personagem.raca;
     if (raca == null || raca.id.toLowerCase() != 'lefou') return;
 
-    final maxPericias =
-        state.personagem.poderTormentaDeformidade != null ? 1 : 2;
+    final maxPericias = state.personagem.poderTormentaDeformidade != null
+        ? 1
+        : 2;
     final atuais = List<String>.from(state.personagem.periciasDeformidadeLefou);
 
     if (atuais.contains(nomePericia)) {
@@ -565,9 +567,7 @@ class PersonagemCubit extends Cubit<PersonagemState> {
 
     emit(
       state.copyWith(
-        personagem: state.personagem.copyWith(
-          periciasDeformidadeLefou: atuais,
-        ),
+        personagem: state.personagem.copyWith(periciasDeformidadeLefou: atuais),
       ),
     );
   }
@@ -576,8 +576,9 @@ class PersonagemCubit extends Cubit<PersonagemState> {
     final raca = state.personagem.raca;
     if (raca == null || raca.id.toLowerCase() != 'lefou') return;
 
-    final periciasAtuais =
-        List<String>.from(state.personagem.periciasDeformidadeLefou);
+    final periciasAtuais = List<String>.from(
+      state.personagem.periciasDeformidadeLefou,
+    );
     if (poder != null && periciasAtuais.length > 1) {
       periciasAtuais.removeRange(1, periciasAtuais.length);
     }
@@ -600,7 +601,8 @@ class PersonagemCubit extends Cubit<PersonagemState> {
         ? state.personagem.classes[0].classeDefinicao
         : null;
     final mudouDeClasse =
-        classeAnterior != null && classeAnterior.idClasse != classeDefinicao.idClasse;
+        classeAnterior != null &&
+        classeAnterior.idClasse != classeDefinicao.idClasse;
 
     // Cria a instância da classe no Nível 1
     final novaClasse = ClasseDoPersonagem(
@@ -612,8 +614,7 @@ class PersonagemCubit extends Cubit<PersonagemState> {
       final temProfMarcial = classeDefinicao.proficiencias.contains(
         TipoProficiencia.armasMarciais,
       );
-      final ehArcanista =
-          classeDefinicao.idClasse.toLowerCase() == 'arcanista';
+      final ehArcanista = classeDefinicao.idClasse.toLowerCase() == 'arcanista';
       final temProfEscudo = classeDefinicao.proficiencias.contains(
         TipoProficiencia.escudos,
       );
@@ -625,8 +626,9 @@ class PersonagemCubit extends Cubit<PersonagemState> {
         );
       }
 
-      final periciasPreservadas =
-          List<String>.from(state.periciasEscolhidasOrigem);
+      final periciasPreservadas = List<String>.from(
+        state.periciasEscolhidasOrigem,
+      );
 
       final novoPersonagem = state.personagem.copyWith(
         classe_do_personagem: [novaClasse],
@@ -671,14 +673,14 @@ class PersonagemCubit extends Cubit<PersonagemState> {
 
     final novoPersonagem = state.personagem.copyWith(
       classe_do_personagem: [classeAtualizada],
-      magiasConhecidas:
-          mudouCaminho ? const [] : state.personagem.magiasConhecidas,
+      magiasConhecidas: mudouCaminho
+          ? const []
+          : state.personagem.magiasConhecidas,
     );
     emit(
       state.copyWith(
         personagem: novoPersonagem,
-        magiasSelecionadas:
-            mudouCaminho ? const [] : state.magiasSelecionadas,
+        magiasSelecionadas: mudouCaminho ? const [] : state.magiasSelecionadas,
       ),
     );
   }

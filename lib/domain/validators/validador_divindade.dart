@@ -1,7 +1,7 @@
 import '../entities/personagem/personagem.dart';
 import '../entities/personagem/divindade.dart';
 import '../entities/personagem/poder.dart';
-import '../services/poderes_e_magias/poder_validador_service.dart';
+import '../services/powers_service/poder_validador_service.dart';
 
 /// Resultado detalhado da validação de elegibilidade de devoção
 class ResultadoElegibilidadeDevocao {
@@ -107,10 +107,10 @@ class ValidadorDivindade {
       final motivoIncompativel = switch ((idClasse, idDivindade)) {
         ('paladino', _) when !deusesPermitidosPaladino.contains(idDivindade) =>
           'Paladinos só podem cultuar deuses com tendência compatível: '
-          'Arsenal, Khalmyr, Lena, Lin-Wu, Marah, Tanna-Toh, Thyatis ou Valkaria.',
+              'Arsenal, Khalmyr, Lena, Lin-Wu, Marah, Tanna-Toh, Thyatis ou Valkaria.',
         ('druida', _) when !deusesPermitidosDruida.contains(idDivindade) =>
           'Druidas só podem cultuar deuses da natureza ou do caos natural: '
-          'Aharadak, Allihanna, Megalokk ou Oceano.',
+              'Aharadak, Allihanna, Megalokk ou Oceano.',
         _ => null,
       };
 

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../domain/entities/magia/magia.dart';
 import '../../../domain/entities/personagem/personagem.dart';
-import '../../../domain/services/calculo_ficha_service.dart';
+import '../../../domain/services/ficha_services/calculo_ficha_service.dart';
 import '../../../domain/services/data_services/call_magias.dart';
-import '../../../domain/services/poderes_e_magias/aprendizado_magia_service.dart';
-import '../../controllers/ficha_cubit.dart';
-import '../../controllers/ficha_state.dart';
+import '../../../domain/services/powers_service/aprendizado_magia_service.dart';
+import '../../controllers/ficha_controller/ficha_cubit.dart';
+import '../../controllers/ficha_controller/ficha_state.dart';
 import 'dialogos_ficha.dart';
 
 class AbaMagiasView extends StatefulWidget {
@@ -124,15 +124,16 @@ class _AbaMagiasViewState extends State<AbaMagiasView> {
             _modoAmpliadoOverride ??
             (p.ehArcanista || p.magiasConhecidas.length >= 6);
 
-        final todasConhecidas = p.magiasConhecidas
-            .map((id) => BancoDeMagias.getById(id))
-            .where((m) => m.id != 'UNKNOWN')
-            .toList()
-          ..sort((a, b) {
-            final cmpCirc = a.circulo.compareTo(b.circulo);
-            if (cmpCirc != 0) return cmpCirc;
-            return a.nome.compareTo(b.nome);
-          });
+        final todasConhecidas =
+            p.magiasConhecidas
+                .map((id) => BancoDeMagias.getById(id))
+                .where((m) => m.id != 'UNKNOWN')
+                .toList()
+              ..sort((a, b) {
+                final cmpCirc = a.circulo.compareTo(b.circulo);
+                if (cmpCirc != 0) return cmpCirc;
+                return a.nome.compareTo(b.nome);
+              });
 
         final magiasFiltradas = todasConhecidas.where((m) {
           if (_circuloFiltro > 0 && m.circulo != _circuloFiltro) return false;
@@ -153,281 +154,298 @@ class _AbaMagiasViewState extends State<AbaMagiasView> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     // 1. CONTA DE TESTE DE RESISTÊNCIA (CD) ESTILIZADA
-            Container(
-              padding: const EdgeInsets.all(14),
-              decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  colors: [Color(0xFF1E1B4B), Color(0xFF312E81)],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-                borderRadius: BorderRadius.circular(16),
-                boxShadow: [
-                  BoxShadow(
-                    color: const Color(0xFF312E81).withValues(alpha: 0.25),
-                    blurRadius: 8,
-                    offset: const Offset(0, 3),
-                  ),
-                ],
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 8,
+                    Container(
+                      padding: const EdgeInsets.all(14),
+                      decoration: BoxDecoration(
+                        gradient: const LinearGradient(
+                          colors: [Color(0xFF1E1B4B), Color(0xFF312E81)],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
                         ),
-                        decoration: BoxDecoration(
-                          color: Colors.white.withValues(alpha: 0.14),
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(
-                            color: Colors.white.withValues(alpha: 0.25),
+                        borderRadius: BorderRadius.circular(16),
+                        boxShadow: [
+                          BoxShadow(
+                            color: const Color(
+                              0xFF312E81,
+                            ).withValues(alpha: 0.25),
+                            blurRadius: 8,
+                            offset: const Offset(0, 3),
                           ),
-                        ),
-                        child: Column(
-                          children: [
-                            const Text(
-                              'CD MAGIA',
-                              style: TextStyle(
-                                color: Color(0xFFC7D2FE),
-                                fontSize: 10,
-                                fontWeight: FontWeight.w900,
-                                letterSpacing: 0.6,
-                              ),
-                            ),
-                            Text(
-                              '${cdInfo.cdTotal}',
-                              key: const Key('valor_cd_magia'),
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 28,
-                                fontWeight: FontWeight.w900,
-                                height: 1.05,
-                              ),
-                            ),
-                          ],
-                        ),
+                        ],
                       ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              'Teste de Resistência',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w800,
-                                fontSize: 14,
-                              ),
-                            ),
-                            const SizedBox(height: 3),
-                            Text(
-                              cdInfo.formulaFormatada,
-                              style: const TextStyle(
-                                color: Color(0xFFE0E7FF),
-                                fontSize: 11.5,
-                                height: 1.3,
-                              ),
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              'Mana Atual: ${p.pmAtual} / ${p.pmTotal} PM • Até ${AprendizadoMagiaService.obterCirculoMaximoPersonagem(p)}º Círculo',
-                              style: const TextStyle(
-                                color: Color(0xFF38BDF8),
-                                fontSize: 12,
-                                fontWeight: FontWeight.w800,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      InkWell(
-                        borderRadius: BorderRadius.circular(8),
-                        onTap: () =>
-                            _editarBonusCD(context, cubit, p.outrosBonusCDMagia),
-                        child: ConstrainedBox(
-                          constraints: const BoxConstraints(
-                            minWidth: 44,
-                            minHeight: 44,
-                          ),
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 8,
-                              vertical: 6,
-                            ),
-                            decoration: BoxDecoration(
-                              color: Colors.white.withValues(alpha: 0.12),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Center(
-                              child: Text(
-                                'Outros\n${p.outrosBonusCDMagia >= 0 ? "+${p.outrosBonusCDMagia}" : "${p.outrosBonusCDMagia}"}',
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 10.5,
-                                  fontWeight: FontWeight.w700,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 12,
+                                  vertical: 8,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withValues(alpha: 0.14),
+                                  borderRadius: BorderRadius.circular(12),
+                                  border: Border.all(
+                                    color: Colors.white.withValues(alpha: 0.25),
+                                  ),
+                                ),
+                                child: Column(
+                                  children: [
+                                    const Text(
+                                      'CD MAGIA',
+                                      style: TextStyle(
+                                        color: Color(0xFFC7D2FE),
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w900,
+                                        letterSpacing: 0.6,
+                                      ),
+                                    ),
+                                    Text(
+                                      '${cdInfo.cdTotal}',
+                                      key: const Key('valor_cd_magia'),
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 28,
+                                        fontWeight: FontWeight.w900,
+                                        height: 1.05,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Text(
+                                      'Teste de Resistência',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w800,
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 3),
+                                    Text(
+                                      cdInfo.formulaFormatada,
+                                      style: const TextStyle(
+                                        color: Color(0xFFE0E7FF),
+                                        fontSize: 11.5,
+                                        height: 1.3,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      'Mana Atual: ${p.pmAtual} / ${p.pmTotal} PM • Até ${AprendizadoMagiaService.obterCirculoMaximoPersonagem(p)}º Círculo',
+                                      style: const TextStyle(
+                                        color: Color(0xFF38BDF8),
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w800,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              InkWell(
+                                borderRadius: BorderRadius.circular(8),
+                                onTap: () => _editarBonusCD(
+                                  context,
+                                  cubit,
+                                  p.outrosBonusCDMagia,
+                                ),
+                                child: ConstrainedBox(
+                                  constraints: const BoxConstraints(
+                                    minWidth: 44,
+                                    minHeight: 44,
+                                  ),
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 8,
+                                      vertical: 6,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white.withValues(
+                                        alpha: 0.12,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        'Outros\n${p.outrosBonusCDMagia >= 0 ? "+${p.outrosBonusCDMagia}" : "${p.outrosBonusCDMagia}"}',
+                                        textAlign: TextAlign.center,
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 10.5,
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    if (AprendizadoMagiaService.calcularMagiasPendentesPersonagem(
+                          p,
+                        ) >
+                        0) ...[
+                      const SizedBox(height: 10),
+                      Material(
+                        color: const Color(0xFF1E1B4B),
+                        borderRadius: BorderRadius.circular(12),
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(12),
+                          onTap: () => _abrirCatalogoMagias(context, cubit),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 10,
+                            ),
+                            child: Row(
+                              children: [
+                                const Icon(
+                                  Icons.auto_stories_rounded,
+                                  color: Colors.amberAccent,
+                                  size: 20,
+                                ),
+                                const SizedBox(width: 10),
+                                Expanded(
+                                  child: Text(
+                                    'Evolução de Grimório: ${AprendizadoMagiaService.calcularMagiasPendentesPersonagem(p)} magia(s) pendente(s) para aprender (até o ${AprendizadoMagiaService.obterCirculoMaximoPersonagem(p)}º Círculo)',
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ),
+                                const Icon(
+                                  Icons.add_circle_outline,
+                                  color: Colors.amberAccent,
+                                  size: 20,
+                                ),
+                              ],
                             ),
                           ),
                         ),
                       ),
                     ],
-                  ),
-                ],
-              ),
-            ),
 
-            if (AprendizadoMagiaService.calcularMagiasPendentesPersonagem(p) >
-                0) ...[
-              const SizedBox(height: 10),
-              Material(
-                color: const Color(0xFF1E1B4B),
-                borderRadius: BorderRadius.circular(12),
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(12),
-                  onTap: () => _abrirCatalogoMagias(context, cubit),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 10,
-                    ),
-                    child: Row(
+                    const SizedBox(height: 12),
+
+                    // 2. BARRA DE CONTROLE: VARIANTE GRIMÓRIO AMPLIADO + ADICIONAR MAGIA
+                    Wrap(
+                      alignment: WrapAlignment.spaceBetween,
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      spacing: 8,
+                      runSpacing: 8,
                       children: [
-                        const Icon(
-                          Icons.auto_stories_rounded,
-                          color: Colors.amberAccent,
-                          size: 20,
-                        ),
-                        const SizedBox(width: 10),
-                        Expanded(
-                          child: Text(
-                            'Evolução de Grimório: ${AprendizadoMagiaService.calcularMagiasPendentesPersonagem(p)} magia(s) pendente(s) para aprender (até o ${AprendizadoMagiaService.obterCirculoMaximoPersonagem(p)}º Círculo)',
+                        FilterChip(
+                          key: const Key('toggle_grimorio_ampliado'),
+                          selected: modoAmpliado,
+                          selectedColor: const Color(0xFFE0E7FF),
+                          checkmarkColor: const Color(0xFF3730A3),
+                          label: Text(
+                            p.ehArcanista
+                                ? 'Grimório Arcanista'
+                                : 'Área Ampliada',
                             style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700,
                               fontSize: 12,
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
+                          onSelected: (val) =>
+                              setState(() => _modoAmpliadoOverride = val),
+                        ),
+                        ElevatedButton.icon(
+                          key: const Key('btn_aprender_magia'),
+                          style: ElevatedButton.styleFrom(
+                            minimumSize: const Size(0, 44),
+                            backgroundColor: const Color(0xFFD32F2F),
+                            foregroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                          onPressed: () => _abrirCatalogoMagias(context, cubit),
+                          icon: const Icon(Icons.add, size: 18),
+                          label: const Text(
+                            'Adicionar Magia',
+                            style: TextStyle(
+                              fontSize: 12.5,
+                              fontWeight: FontWeight.w800,
                             ),
                           ),
                         ),
-                        const Icon(
-                          Icons.add_circle_outline,
-                          color: Colors.amberAccent,
-                          size: 20,
-                        ),
                       ],
                     ),
-                  ),
-                ),
-              ),
-            ],
 
-            const SizedBox(height: 12),
-
-            // 2. BARRA DE CONTROLE: VARIANTE GRIMÓRIO AMPLIADO + ADICIONAR MAGIA
-            Wrap(
-              alignment: WrapAlignment.spaceBetween,
-              crossAxisAlignment: WrapCrossAlignment.center,
-              spacing: 8,
-              runSpacing: 8,
-              children: [
-                FilterChip(
-                  key: const Key('toggle_grimorio_ampliado'),
-                  selected: modoAmpliado,
-                  selectedColor: const Color(0xFFE0E7FF),
-                  checkmarkColor: const Color(0xFF3730A3),
-                  label: Text(
-                    p.ehArcanista ? 'Grimório Arcanista' : 'Área Ampliada',
-                    style: const TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                  onSelected: (val) =>
-                      setState(() => _modoAmpliadoOverride = val),
-                ),
-                ElevatedButton.icon(
-                  key: const Key('btn_aprender_magia'),
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(0, 44),
-                    backgroundColor: const Color(0xFFD32F2F),
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                  onPressed: () => _abrirCatalogoMagias(context, cubit),
-                  icon: const Icon(Icons.add, size: 18),
-                  label: const Text(
-                    'Adicionar Magia',
-                    style: TextStyle(
-                      fontSize: 12.5,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-
-            // Filtros rápidos de círculo e busca (sempre visíveis na variante ampliada ou se tiver >= 4 magias)
-            if (modoAmpliado || todasConhecidas.length >= 4) ...[
-              const SizedBox(height: 10),
-              SizedBox(
-                height: 44,
-                child: TextField(
-                  controller: _buscaCtrl,
-                  onChanged: (v) => setState(() => _termoBusca = v),
-                  style: const TextStyle(fontSize: 13),
-                  decoration: InputDecoration(
-                    hintText: 'Filtrar magia ou escola...',
-                    prefixIcon: const Icon(Icons.search, size: 19),
-                    suffixIcon: _termoBusca.isNotEmpty
-                        ? IconButton(
-                            onPressed: () {
-                              _buscaCtrl.clear();
-                              setState(() => _termoBusca = '');
-                            },
-                            icon: const Icon(Icons.clear, size: 18),
-                          )
-                        : null,
-                    filled: true,
-                    fillColor: Colors.white,
-                    contentPadding: EdgeInsets.zero,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: const BorderSide(color: Color(0xFFCBD5E1)),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: const BorderSide(color: Color(0xFFCBD5E1)),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 8),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [0, 1, 2, 3, 4, 5].map((circ) {
-                    final sel = _circuloFiltro == circ;
-                    return Padding(
-                      padding: const EdgeInsets.only(right: 6),
-                      child: ChoiceChip(
-                        selected: sel,
-                        label: Text(circ == 0 ? 'Todos' : '$circº Círculo'),
-                        onSelected: (_) =>
-                            setState(() => _circuloFiltro = circ),
+                    // Filtros rápidos de círculo e busca (sempre visíveis na variante ampliada ou se tiver >= 4 magias)
+                    if (modoAmpliado || todasConhecidas.length >= 4) ...[
+                      const SizedBox(height: 10),
+                      SizedBox(
+                        height: 44,
+                        child: TextField(
+                          controller: _buscaCtrl,
+                          onChanged: (v) => setState(() => _termoBusca = v),
+                          style: const TextStyle(fontSize: 13),
+                          decoration: InputDecoration(
+                            hintText: 'Filtrar magia ou escola...',
+                            prefixIcon: const Icon(Icons.search, size: 19),
+                            suffixIcon: _termoBusca.isNotEmpty
+                                ? IconButton(
+                                    onPressed: () {
+                                      _buscaCtrl.clear();
+                                      setState(() => _termoBusca = '');
+                                    },
+                                    icon: const Icon(Icons.clear, size: 18),
+                                  )
+                                : null,
+                            filled: true,
+                            fillColor: Colors.white,
+                            contentPadding: EdgeInsets.zero,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: const BorderSide(
+                                color: Color(0xFFCBD5E1),
+                              ),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: const BorderSide(
+                                color: Color(0xFFCBD5E1),
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
-                    );
-                  }).toList(),
-                ),
-              ),
-            ],
+                      const SizedBox(height: 8),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: [0, 1, 2, 3, 4, 5].map((circ) {
+                            final sel = _circuloFiltro == circ;
+                            return Padding(
+                              padding: const EdgeInsets.only(right: 6),
+                              child: ChoiceChip(
+                                selected: sel,
+                                label: Text(
+                                  circ == 0 ? 'Todos' : '$circº Círculo',
+                                ),
+                                onSelected: (_) =>
+                                    setState(() => _circuloFiltro = circ),
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                    ],
                     const SizedBox(height: 12),
                   ],
                 ),

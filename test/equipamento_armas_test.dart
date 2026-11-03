@@ -6,8 +6,8 @@ import 'package:t20_creator/domain/entities/personagem/classe_do_personagem.dart
 import 'package:t20_creator/domain/entities/personagem/personagem.dart';
 import 'package:t20_creator/domain/services/data_services/call_classes.dart';
 import 'package:t20_creator/domain/services/data_services/catalogo_service.dart';
-import 'package:t20_creator/domain/services/regras_carga_service.dart';
-import 'package:t20_creator/presentation/controllers/personagem_cubit.dart';
+import 'package:t20_creator/domain/services/ficha_services/regras_carga_service.dart';
+import 'package:t20_creator/presentation/controllers/ficha_controller/personagem_cubit.dart';
 
 void main() {
   group('Módulo de Equipamento Inicial e Armas (Nível 1) - Tormenta 20', () {

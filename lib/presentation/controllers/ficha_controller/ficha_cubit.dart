@@ -1,21 +1,21 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../domain/entities/equipamento/arma.dart';
-import '../../domain/entities/equipamento/item_geral.dart';
-import '../../domain/entities/equipamento/item_vestido.dart';
-import '../../domain/entities/equipamento/protecao.dart';
-import '../../domain/entities/habilidades_complexas/linhagem_arcanista.dart';
-import '../../domain/entities/personagem/classe.dart';
-import '../../domain/entities/personagem/classe_do_personagem.dart';
-import '../../domain/entities/personagem/efeito_temporario.dart';
-import '../../domain/entities/personagem/personagem.dart';
-import '../../domain/repositories/i_personagem_repository.dart';
-import '../../domain/services/calculo_ficha_service.dart';
-import '../../domain/services/data_services/call_magias.dart';
-import '../../domain/services/motor_multiclasse_service.dart';
-import '../../domain/services/personagem_storage_service.dart';
-import '../../domain/services/poderes_e_magias/aprendizado_magia_service.dart';
+import '../../../domain/entities/equipamento/arma.dart';
+import '../../../domain/entities/equipamento/item_geral.dart';
+import '../../../domain/entities/equipamento/item_vestido.dart';
+import '../../../domain/entities/equipamento/protecao.dart';
+import '../../../domain/entities/habilidades_complexas/linhagem_arcanista.dart';
+import '../../../domain/entities/personagem/classe.dart';
+import '../../../domain/entities/personagem/classe_do_personagem.dart';
+import '../../../domain/entities/personagem/efeito_temporario.dart';
+import '../../../domain/entities/personagem/personagem.dart';
+import '../../../domain/repositories/i_personagem_repository.dart';
+import '../../../domain/services/ficha_services/calculo_ficha_service.dart';
+import '../../../domain/services/data_services/call_magias.dart';
+import '../../../domain/services/ficha_services/motor_multiclasse_service.dart';
+import '../../../domain/services/ficha_services/personagem_storage_service.dart';
+import '../../../domain/services/powers_service/aprendizado_magia_service.dart';
 import 'ficha_state.dart';
 
 class FichaCubit extends Cubit<FichaState> {
@@ -258,7 +258,9 @@ class FichaCubit extends Cubit<FichaState> {
     if (indiceClasse < 0 || indiceClasse >= state.personagem.classes.length) {
       return;
     }
-    final novasClasses = List<ClasseDoPersonagem>.from(state.personagem.classes);
+    final novasClasses = List<ClasseDoPersonagem>.from(
+      state.personagem.classes,
+    );
     novasClasses[indiceClasse] = novasClasses[indiceClasse].copyWith(
       caminhoEscolhido: caminho,
     );
@@ -403,22 +405,26 @@ class FichaCubit extends Cubit<FichaState> {
 
   /// Realiza descanso normal (recupera Nível + CON em PV e Nível em PM)
   Future<void> descansoNormal() async {
-    var atualizado = state.personagem
-        .curarPV(state.personagem.curaDescansoNormalPV);
+    var atualizado = state.personagem.curarPV(
+      state.personagem.curaDescansoNormalPV,
+    );
     if (!state.personagem.punicaoDivinaAtiva) {
-      atualizado = atualizado
-          .recuperarPM(state.personagem.curaDescansoNormalPM);
+      atualizado = atualizado.recuperarPM(
+        state.personagem.curaDescansoNormalPM,
+      );
     }
     await atualizarPersonagem(atualizado);
   }
 
   /// Realiza descanso confortável (o dobro do descanso normal)
   Future<void> descansoConfortavel() async {
-    var atualizado = state.personagem
-        .curarPV(state.personagem.curaDescansoNormalPV * 2);
+    var atualizado = state.personagem.curarPV(
+      state.personagem.curaDescansoNormalPV * 2,
+    );
     if (!state.personagem.punicaoDivinaAtiva) {
-      atualizado = atualizado
-          .recuperarPM(state.personagem.curaDescansoNormalPM * 2);
+      atualizado = atualizado.recuperarPM(
+        state.personagem.curaDescansoNormalPM * 2,
+      );
     }
     await atualizarPersonagem(atualizado);
   }

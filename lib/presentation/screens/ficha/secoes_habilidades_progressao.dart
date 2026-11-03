@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../domain/entities/personagem/personagem.dart';
-import '../../../domain/services/calculo_ficha_service.dart';
-import '../../controllers/ficha_cubit.dart';
+import '../../../domain/services/ficha_services/calculo_ficha_service.dart';
+import '../../controllers/ficha_controller/ficha_cubit.dart';
 import 'dialogos_ficha.dart';
 
 /// Botão compacto (>= 44px área útil) para ativar qualquer poder que consuma PM.
@@ -51,8 +51,7 @@ class BotaoAtivarPoderPM extends StatelessWidget {
                 spacing: 8,
                 runSpacing: 8,
                 children: [1, 2, 3, 4, 5, 6].map((custo) {
-                  final podePagar =
-                      !p.punicaoDivinaAtiva && p.pmAtual >= custo;
+                  final podePagar = !p.punicaoDivinaAtiva && p.pmAtual >= custo;
                   return ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       minimumSize: const Size(84, 44),
@@ -89,7 +88,9 @@ class BotaoAtivarPoderPM extends StatelessWidget {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(msg),
-          backgroundColor: ok ? const Color(0xFF0284C7) : const Color(0xFFB91C1C),
+          backgroundColor: ok
+              ? const Color(0xFF0284C7)
+              : const Color(0xFFB91C1C),
         ),
       );
     }

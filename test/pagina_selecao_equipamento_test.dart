@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:t20_creator/domain/services/data_services/call_armas.dart';
 import 'package:t20_creator/domain/services/data_services/call_classes.dart';
 import 'package:t20_creator/domain/services/data_services/catalogo_service.dart';
-import 'package:t20_creator/presentation/controllers/personagem_cubit.dart';
+import 'package:t20_creator/presentation/controllers/ficha_controller/personagem_cubit.dart';
 import 'package:t20_creator/presentation/screens/wizard_personagem/pagina_selecao_equipamento.dart';
 
 void main() {

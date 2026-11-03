@@ -6,7 +6,7 @@ import 'package:t20_creator/domain/entities/personagem/personagem.dart';
 import 'package:t20_creator/domain/entities/personagem/poder.dart';
 import 'package:t20_creator/domain/services/data_services/call_classes.dart';
 import 'package:t20_creator/domain/services/data_services/catalogo_service.dart';
-import 'package:t20_creator/domain/services/poderes_e_magias/poder_validador_service.dart';
+import 'package:t20_creator/domain/services/powers_service/poder_validador_service.dart';
 
 void main() {
   group('Evolução e PoderValidadorService - Tormenta 20', () {

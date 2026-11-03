@@ -7,7 +7,7 @@ import 'package:t20_creator/domain/entities/personagem/personagem.dart';
 import 'package:t20_creator/domain/entities/personagem/poder.dart';
 import 'package:t20_creator/domain/services/data_services/call_efeitos_golpe_pessoal.dart';
 import 'package:t20_creator/domain/services/data_services/call_classes.dart';
-import 'package:t20_creator/domain/services/personagem_storage_service.dart';
+import 'package:t20_creator/domain/services/ficha_services/personagem_storage_service.dart';
 
 void main() {
   setUpAll(() {

@@ -8,9 +8,9 @@ import 'package:t20_creator/domain/services/data_services/call_pericias.dart';
 import 'package:t20_creator/domain/services/data_services/call_classes.dart';
 import 'package:t20_creator/domain/services/data_services/call_regras_engenhocas.dart';
 import 'package:t20_creator/domain/services/data_services/catalogo_service.dart';
-import 'package:t20_creator/domain/services/personagem_storage_service.dart';
-import 'package:t20_creator/domain/services/poderes_e_magias/poder_validador_service.dart';
-import 'package:t20_creator/domain/services/regras_carga_service.dart';
+import 'package:t20_creator/domain/services/ficha_services/personagem_storage_service.dart';
+import 'package:t20_creator/domain/services/powers_service/poder_validador_service.dart';
+import 'package:t20_creator/domain/services/ficha_services/regras_carga_service.dart';
 
 void main() {
   setUpAll(() async {

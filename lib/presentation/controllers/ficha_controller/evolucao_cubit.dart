@@ -1,11 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../domain/entities/personagem/personagem.dart';
-import '../../domain/entities/personagem/classe_do_personagem.dart';
-import '../../domain/entities/personagem/poder.dart';
-import '../../domain/services/data_services/call_poderes.dart';
-import '../../domain/services/poderes_e_magias/poder_validador_service.dart';
-import '../../domain/repositories/i_personagem_repository.dart';
-import '../../domain/services/personagem_storage_service.dart';
+import '../../../domain/entities/personagem/personagem.dart';
+import '../../../domain/entities/personagem/classe_do_personagem.dart';
+import '../../../domain/entities/personagem/poder.dart';
+import '../../../domain/services/data_services/call_poderes.dart';
+import '../../../domain/services/powers_service/poder_validador_service.dart';
+import '../../../domain/repositories/i_personagem_repository.dart';
+import '../../../domain/services/ficha_services/personagem_storage_service.dart';
 
 enum FiltroPoderes { todos, disponiveis, adquiridos, bloqueados }
 

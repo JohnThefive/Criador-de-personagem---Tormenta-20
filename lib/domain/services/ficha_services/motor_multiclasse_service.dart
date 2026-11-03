@@ -1,10 +1,10 @@
 import 'dart:math';
-import '../entities/habilidades_complexas/linhagem_arcanista.dart';
-import '../entities/personagem/classe.dart';
-import '../entities/personagem/classe_do_personagem.dart';
-import '../entities/personagem/personagem.dart';
-import '../entities/personagem/poder.dart';
-import '../entities/personagem/proficiencias.dart';
+import '../../entities/habilidades_complexas/linhagem_arcanista.dart';
+import '../../entities/personagem/classe.dart';
+import '../../entities/personagem/classe_do_personagem.dart';
+import '../../entities/personagem/personagem.dart';
+import '../../entities/personagem/poder.dart';
+import '../../entities/personagem/proficiencias.dart';
 import 'motor_modificadores_service.dart';
 
 /// RF10 / RN09 — Patamar de jogo determinado pelo nível total do personagem.

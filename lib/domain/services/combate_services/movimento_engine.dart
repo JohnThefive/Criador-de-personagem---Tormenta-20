@@ -1,5 +1,5 @@
-import '../entities/combate/combatente.dart';
-import '../entities/combate/grid_tatico.dart';
+import '../../entities/combate/combatente.dart';
+import '../../entities/combate/grid_tatico.dart';
 
 class ResultadoCalculoMovimento {
   final Map<Posicao2D, double> custosMetros;

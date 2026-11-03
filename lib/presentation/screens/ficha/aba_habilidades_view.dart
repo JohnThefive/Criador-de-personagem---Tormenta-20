@@ -9,8 +9,8 @@ import '../../../domain/services/data_services/call_formas_selvagens.dart';
 import '../../../domain/services/data_services/call_companheiros.dart';
 import '../../../domain/services/data_services/call_montaria_sagrada.dart';
 import '../../widgets/modal_escolha_companheiro.dart';
-import '../../controllers/ficha_cubit.dart';
-import '../../controllers/ficha_state.dart';
+import '../../controllers/ficha_controller/ficha_cubit.dart';
+import '../../controllers/ficha_controller/ficha_state.dart';
 import '../wizard_personagem/selecao_poderes_screen.dart';
 import 'secoes_habilidades_progressao.dart';
 
@@ -22,10 +22,13 @@ class AbaHabilidadesView extends StatefulWidget {
 }
 
 class _AbaHabilidadesViewState extends State<AbaHabilidadesView> {
-  static final _regexGastarPM =
-      RegExp(r'gastar\s+\d+\s+PM', caseSensitive: false);
+  static final _regexGastarPM = RegExp(
+    r'gastar\s+\d+\s+PM',
+    caseSensitive: false,
+  );
 
-  int _secaoSelecionada = 0; // 0: Iniciais & Classe | 1: Proficiências | 2: Progressão
+  int _secaoSelecionada =
+      0; // 0: Iniciais & Classe | 1: Proficiências | 2: Progressão
 
   Future<void> _abrirSelecaoPoderes(
     BuildContext context,
@@ -1080,7 +1083,8 @@ class _AbaHabilidadesViewState extends State<AbaHabilidadesView> {
                   child: SecaoProgressaoPersonagem(
                     personagem: p,
                     cubit: cubit,
-                    onGerenciarPoderes: () => _abrirSelecaoPoderes(context, cubit),
+                    onGerenciarPoderes: () =>
+                        _abrirSelecaoPoderes(context, cubit),
                   ),
                 ),
               )
@@ -1175,7 +1179,9 @@ class _AbaHabilidadesViewState extends State<AbaHabilidadesView> {
                         Text(
                           p.origem!.descricao,
                           style: const TextStyle(
-                              fontSize: 12.5, color: Color(0xFF475569)),
+                            fontSize: 12.5,
+                            color: Color(0xFF475569),
+                          ),
                         ),
                         const SizedBox(height: 8),
                       ],
@@ -1193,8 +1199,7 @@ class _AbaHabilidadesViewState extends State<AbaHabilidadesView> {
                         child: ListTile(
                           title: Text(
                             pg.nome,
-                            style:
-                                const TextStyle(fontWeight: FontWeight.bold),
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                           subtitle: Text(pg.descricao),
                           trailing: BotaoAtivarPoderPM(
@@ -1266,10 +1271,10 @@ class _AbaHabilidadesViewState extends State<AbaHabilidadesView> {
                                       ),
                                       decoration: BoxDecoration(
                                         color: Colors.amber.shade100,
-                                        borderRadius:
-                                            BorderRadius.circular(12),
+                                        borderRadius: BorderRadius.circular(12),
                                         border: Border.all(
-                                            color: Colors.amber.shade700),
+                                          color: Colors.amber.shade700,
+                                        ),
                                       ),
                                       child: Text(
                                         'Devoto Fiel',
@@ -1292,7 +1297,8 @@ class _AbaHabilidadesViewState extends State<AbaHabilidadesView> {
                                         MaterialTapTargetSize.shrinkWrap,
                                     padding: EdgeInsets.zero,
                                     labelPadding: const EdgeInsets.symmetric(
-                                        horizontal: 8),
+                                      horizontal: 8,
+                                    ),
                                     backgroundColor: Colors.grey.shade100,
                                     avatar: const Icon(
                                       Icons.colorize,
@@ -1312,7 +1318,8 @@ class _AbaHabilidadesViewState extends State<AbaHabilidadesView> {
                                       labelPadding: const EdgeInsets.symmetric(
                                         horizontal: 8,
                                       ),
-                                      backgroundColor: p.canalizacaoEnergia ==
+                                      backgroundColor:
+                                          p.canalizacaoEnergia ==
                                               TipoEnergia.positiva
                                           ? Colors.green.shade50
                                           : Colors.purple.shade50,
@@ -1321,7 +1328,8 @@ class _AbaHabilidadesViewState extends State<AbaHabilidadesView> {
                                         style: TextStyle(
                                           fontSize: 11,
                                           fontWeight: FontWeight.bold,
-                                          color: p.canalizacaoEnergia ==
+                                          color:
+                                              p.canalizacaoEnergia ==
                                                   TipoEnergia.positiva
                                               ? Colors.green.shade900
                                               : Colors.purple.shade900,
@@ -1334,8 +1342,9 @@ class _AbaHabilidadesViewState extends State<AbaHabilidadesView> {
                               const Text(
                                 'Obrigações & Restrições:',
                                 style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 12.5),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12.5,
+                                ),
                               ),
                               const SizedBox(height: 4),
                               ...p.divindade!.obrigacoesERestricoes.map(
@@ -1357,14 +1366,18 @@ class _AbaHabilidadesViewState extends State<AbaHabilidadesView> {
                         const Text(
                           'Poderes Concedidos:',
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 14),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
                         ),
                         const SizedBox(height: 6),
                         if (p.poderesConcedidos.isEmpty)
                           Text(
                             'Nenhum poder concedido associado.',
                             style: TextStyle(
-                                fontSize: 12, color: Colors.grey.shade600),
+                              fontSize: 12,
+                              color: Colors.grey.shade600,
+                            ),
                           ),
                       ],
                     ),
@@ -1430,8 +1443,8 @@ class _AbaHabilidadesViewState extends State<AbaHabilidadesView> {
                         final classeDoPersonagem = p.classes[idxCl];
                         final classe = classeDoPersonagem.classeDefinicao;
                         final nivel = classeDoPersonagem.nivel;
-                        final habClasse =
-                            classe.habilidadesFixas.entries.toList();
+                        final habClasse = classe.habilidadesFixas.entries
+                            .toList();
                         final poderesEscolhidos =
                             classeDoPersonagem.poderesEscolhidos;
 
@@ -1672,8 +1685,8 @@ class _AbaHabilidadesViewState extends State<AbaHabilidadesView> {
             ],
           ],
         );
-  },
-);
+      },
+    );
   }
 }
 

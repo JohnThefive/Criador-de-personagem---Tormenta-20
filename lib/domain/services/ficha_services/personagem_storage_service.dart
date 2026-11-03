@@ -2,27 +2,27 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
-import '../entities/personagem/personagem.dart';
-import '../entities/personagem/atributos.dart';
-import 'data_services/call_racas.dart';
-import '../services/data_services/call_classes.dart';
-import 'data_services/call_origens.dart';
-import 'data_services/call_divindades.dart';
-import '../entities/personagem/divindade.dart';
-import 'data_services/call_poderes.dart';
-import 'data_services/call_armas.dart';
-import 'data_services/call_armaduras.dart';
-import '../entities/personagem/classe_do_personagem.dart';
-import '../entities/personagem/poder.dart';
-import '../entities/equipamento/arma.dart';
-import '../entities/equipamento/protecao.dart';
-import '../entities/equipamento/item_vestido.dart';
-import '../entities/personagem/efeito_temporario.dart';
-import '../entities/habilidades_complexas/forma_selvagem.dart';
-import '../entities/habilidades_complexas/golpe_pessoal.dart';
-import '../entities/habilidades_complexas/engenhoca.dart';
-import '../entities/habilidades_complexas/montaria_sagrada.dart';
-import '../repositories/i_personagem_repository.dart';
+import '../../entities/personagem/personagem.dart';
+import '../../entities/personagem/atributos.dart';
+import '../data_services/call_racas.dart';
+import '../data_services/call_classes.dart';
+import '../data_services/call_origens.dart';
+import '../data_services/call_divindades.dart';
+import '../../entities/personagem/divindade.dart';
+import '../data_services/call_poderes.dart';
+import '../data_services/call_armas.dart';
+import '../data_services/call_armaduras.dart';
+import '../../entities/personagem/classe_do_personagem.dart';
+import '../../entities/personagem/poder.dart';
+import '../../entities/equipamento/arma.dart';
+import '../../entities/equipamento/protecao.dart';
+import '../../entities/equipamento/item_vestido.dart';
+import '../../entities/personagem/efeito_temporario.dart';
+import '../../entities/habilidades_complexas/forma_selvagem.dart';
+import '../../entities/habilidades_complexas/golpe_pessoal.dart';
+import '../../entities/habilidades_complexas/engenhoca.dart';
+import '../../entities/habilidades_complexas/montaria_sagrada.dart';
+import '../../repositories/i_personagem_repository.dart';
 import 'motor_multiclasse_service.dart';
 
 class PersonagemStorageService implements IPersonagemRepository {
@@ -77,8 +77,8 @@ class PersonagemStorageService implements IPersonagemRepository {
       pasta = Directory('${appDir.path}/personagens');
       _cachedDiretorioPersonagens = pasta;
     }
-    if (!await pasta.exists()) {
-      await pasta.create(recursive: true);
+    if (!pasta.existsSync()) {
+      pasta.createSync(recursive: true);
     }
     return pasta;
   }
@@ -93,8 +93,8 @@ class PersonagemStorageService implements IPersonagemRepository {
       pasta = Directory('${appDir.path}/fotos');
       _cachedDiretorioFotos = pasta;
     }
-    if (!await pasta.exists()) {
-      await pasta.create(recursive: true);
+    if (!pasta.existsSync()) {
+      pasta.createSync(recursive: true);
     }
     return pasta;
   }
@@ -115,8 +115,8 @@ class PersonagemStorageService implements IPersonagemRepository {
   static Future<void> excluirFotoPersonagem(String id) async {
     final pasta = await _getDiretorioFotos();
     final foto = File('${pasta.path}/$id.jpg');
-    if (await foto.exists()) {
-      await foto.delete();
+    if (foto.existsSync()) {
+      foto.deleteSync();
     }
   }
 
@@ -444,9 +444,9 @@ class PersonagemStorageService implements IPersonagemRepository {
         ?.toString();
     final Poder? poderDeformidade =
         (poderDeformidadeKey != null && poderDeformidadeKey.isNotEmpty)
-            ? (BancoDePoderesGerais.getByKey(poderDeformidadeKey) ??
-                  BancoDePoderes.getByKey(poderDeformidadeKey))
-            : null;
+        ? (BancoDePoderesGerais.getByKey(poderDeformidadeKey) ??
+              BancoDePoderes.getByKey(poderDeformidadeKey))
+        : null;
 
     final List<ItemVestido> itensVestidosList = [];
     if (map['itensVestidosExtras'] is List) {

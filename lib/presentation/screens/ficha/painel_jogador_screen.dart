@@ -6,9 +6,9 @@ import '../../../domain/entities/personagem/classe.dart';
 import '../../../domain/entities/personagem/personagem.dart';
 import '../../../domain/repositories/i_personagem_repository.dart';
 import '../../../domain/services/data_services/call_classes.dart';
-import '../../../domain/services/personagem_storage_service.dart';
-import '../../controllers/ficha_cubit.dart';
-import '../../controllers/ficha_state.dart';
+import '../../../domain/services/ficha_services/personagem_storage_service.dart';
+import '../../controllers/ficha_controller/ficha_cubit.dart';
+import '../../controllers/ficha_controller/ficha_state.dart';
 import 'aba_geral_view.dart';
 import 'aba_pericias_view.dart';
 import 'aba_habilidades_view.dart';
@@ -90,8 +90,8 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
         origem: p.origem?.nome ?? 'Sem Origem',
         classes: resumoClasses,
         divindade: p.divindade?.nome ?? 'Nenhuma',
-        onSalvar: (nome, alinhamento, idade) => cubit
-            .atualizarCabecalhoIdentidade(
+        onSalvar: (nome, alinhamento, idade) =>
+            cubit.atualizarCabecalhoIdentidade(
               nome: nome,
               alinhamento: alinhamento,
               idade: idade,
@@ -177,9 +177,9 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
         final id = cubit.personagem.id;
         final caminhoPermanente =
             await PersonagemStorageService.salvarFotoPersonagem(
-          id,
-          pickedFile.path,
-        );
+              id,
+              pickedFile.path,
+            );
         if (mounted) {
           await cubit.atualizarFoto(caminhoPermanente);
         }
@@ -438,16 +438,14 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
                               size: 20,
                             ),
                             tooltip: 'A Importância do Nível',
-                            onPressed: () =>
-                                _mostrarInfoNivel(context),
+                            onPressed: () => _mostrarInfoNivel(context),
                           ),
                         ],
                       ),
                       const SizedBox(height: 6),
                       // Banner informativo clicável sobre a permanência e importância do nível
                       InkWell(
-                        onTap: () =>
-                            _mostrarInfoNivel(context),
+                        onTap: () => _mostrarInfoNivel(context),
                         borderRadius: BorderRadius.circular(8),
                         child: Container(
                           padding: const EdgeInsets.symmetric(
@@ -589,15 +587,22 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
                               children: [
                                 Text(
                                   'XP: ${p.experienciaAtual} / ${p.progressoXP.xpNecessarioProximoNivel} (${p.progressoXP.porcentagemFormatada})',
-                                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 11.5),
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 11.5,
+                                  ),
                                 ),
                                 if (p.modoTabletopAtivo)
                                   Text(
-                                    p.podeSubirDeNivel ? 'Evolução Liberada' : 'Requer ${p.progressoXP.xpRestanteParaUpar} XP / Mestre',
+                                    p.podeSubirDeNivel
+                                        ? 'Evolução Liberada'
+                                        : 'Requer ${p.progressoXP.xpRestanteParaUpar} XP / Mestre',
                                     style: TextStyle(
                                       fontSize: 10.5,
                                       fontWeight: FontWeight.bold,
-                                      color: p.podeSubirDeNivel ? Colors.green.shade800 : Colors.amber.shade900,
+                                      color: p.podeSubirDeNivel
+                                          ? Colors.green.shade800
+                                          : Colors.amber.shade900,
                                     ),
                                   ),
                               ],
@@ -606,10 +611,14 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
                             ClipRRect(
                               borderRadius: BorderRadius.circular(4),
                               child: LinearProgressIndicator(
-                                value: p.nivelPersonagem >= 20 ? 1.0 : p.progressoXP.porcentagem,
+                                value: p.nivelPersonagem >= 20
+                                    ? 1.0
+                                    : p.progressoXP.porcentagem,
                                 minHeight: 6,
                                 backgroundColor: const Color(0xFFE2E8F0),
-                                valueColor: const AlwaysStoppedAnimation(Color(0xFFD97706)),
+                                valueColor: const AlwaysStoppedAnimation(
+                                  Color(0xFFD97706),
+                                ),
                               ),
                             ),
                           ],
@@ -633,7 +642,8 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
                         final habsNivelAtual =
                             cl.classeDefinicao.tabelaDeProgressao[cl.nivel] ??
                             const <String>[];
-                        final caminhosNivel1 = cl.classeDefinicao.caminhosNivel1;
+                        final caminhosNivel1 =
+                            cl.classeDefinicao.caminhosNivel1;
 
                         return Card(
                           margin: const EdgeInsets.only(bottom: 8),
@@ -687,15 +697,11 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
                                               personagem: p,
                                               nomeClasse:
                                                   cl.classeDefinicao.nome,
-                                              novoNivelIndividual:
-                                                  cl.nivel + 1,
+                                              novoNivelIndividual: cl.nivel + 1,
                                               novoNivelTotal:
                                                   p.nivelPersonagem + 1,
-                                              onExecutar: () =>
-                                                  cubit.alterarNivelClasse(
-                                                    idx,
-                                                    1,
-                                                  ),
+                                              onExecutar: () => cubit
+                                                  .alterarNivelClasse(idx, 1),
                                             )
                                           : null,
                                       icon: const Icon(
@@ -730,11 +736,8 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
                                           cam.nome,
                                           style: const TextStyle(fontSize: 11),
                                         ),
-                                        onSelected: (_) =>
-                                            cubit.definirCaminhoClasse(
-                                              idx,
-                                              cam,
-                                            ),
+                                        onSelected: (_) => cubit
+                                            .definirCaminhoClasse(idx, cam),
                                       );
                                     }).toList(),
                                   ),
@@ -1128,11 +1131,7 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
               ),
               child: const Row(
                 children: [
-                  Icon(
-                    Icons.coronavirus,
-                    color: Colors.redAccent,
-                    size: 16,
-                  ),
+                  Icon(Icons.coronavirus, color: Colors.redAccent, size: 16),
                   SizedBox(width: 6),
                   Expanded(
                     child: Text(

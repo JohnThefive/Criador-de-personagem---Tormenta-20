@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../domain/entities/personagem/divindade.dart';
 import '../../../domain/services/data_services/call_divindades.dart';
 import '../../../domain/validators/validador_divindade.dart';
-import '../../controllers/personagem_cubit.dart';
+import '../../controllers/ficha_controller/personagem_cubit.dart';
 import '../../../helpers/deuses_jpeg.dart';
 
 class PaginaSelecaoDivindade extends StatefulWidget {

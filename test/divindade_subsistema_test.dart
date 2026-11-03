@@ -6,11 +6,11 @@ import 'package:t20_creator/domain/entities/personagem/classe_do_personagem.dart
 import 'package:t20_creator/domain/entities/personagem/divindade.dart';
 import 'package:t20_creator/domain/entities/personagem/personagem.dart';
 import 'package:t20_creator/domain/services/data_services/call_divindades.dart';
-import 'package:t20_creator/domain/services/personagem_storage_service.dart';
+import 'package:t20_creator/domain/services/ficha_services/personagem_storage_service.dart';
 import 'package:t20_creator/domain/services/data_services/catalogo_service.dart';
 import 'package:t20_creator/domain/validators/validador_divindade.dart';
 import 'package:t20_creator/helpers/deuses_jpeg.dart';
-import 'package:t20_creator/presentation/controllers/personagem_cubit.dart';
+import 'package:t20_creator/presentation/controllers/ficha_controller/personagem_cubit.dart';
 
 void main() {
   setUpAll(() async {

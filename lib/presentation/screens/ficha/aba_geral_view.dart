@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../domain/entities/personagem/efeito_temporario.dart';
 import '../../../domain/entities/personagem/personagem.dart';
-import '../../../domain/services/calculo_ficha_service.dart';
-import '../../controllers/ficha_cubit.dart';
-import '../../controllers/ficha_state.dart';
+import '../../../domain/services/ficha_services/calculo_ficha_service.dart';
+import '../../controllers/ficha_controller/ficha_cubit.dart';
+import '../../controllers/ficha_controller/ficha_state.dart';
 import 'dialogo_rolagem_dado.dart';
 import 'dialogos_ficha.dart';
 
@@ -61,11 +61,18 @@ class AbaGeralView extends StatelessWidget {
           children: [
             Row(
               children: [
-                const Icon(Icons.auto_graph, size: 18, color: Color(0xFFD97706)),
+                const Icon(
+                  Icons.auto_graph,
+                  size: 18,
+                  color: Color(0xFFD97706),
+                ),
                 const SizedBox(width: 6),
                 Text(
                   'Nível ${p.nivelPersonagem} • ${p.patamar.label}',
-                  style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 13),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w800,
+                    fontSize: 13,
+                  ),
                 ),
                 const Spacer(),
                 ActionChip(
@@ -90,8 +97,8 @@ class AbaGeralView extends StatelessWidget {
                   maxNivel
                       ? Colors.green
                       : (prog.temXpSuficienteParaUpar
-                          ? Colors.teal
-                          : Colors.amber.shade800),
+                            ? Colors.teal
+                            : Colors.amber.shade800),
                 ),
               ),
             ),
@@ -101,7 +108,10 @@ class AbaGeralView extends StatelessWidget {
               children: [
                 Text(
                   '${p.experienciaAtual} XP',
-                  style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                    fontSize: 11,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 Text(
                   maxNivel
@@ -127,8 +137,8 @@ class AbaGeralView extends StatelessWidget {
                     child: Text(
                       p.podeSubirDeNivel
                           ? (p.permissaoMestreSubirNivel
-                              ? 'Evolução liberada pelo mestre.'
-                              : 'XP suficiente para upar!')
+                                ? 'Evolução liberada pelo mestre.'
+                                : 'XP suficiente para upar!')
                           : 'Requer ${prog.xpRestanteParaUpar} XP ou aval do mestre.',
                       style: TextStyle(
                         fontSize: 11,
@@ -173,7 +183,10 @@ class AbaGeralView extends StatelessWidget {
                       visualDensity: VisualDensity.compact,
                     ),
                     onPressed: () => _dialogoXP(context, cubit, ajustar: true),
-                    child: const Text('Ajustar XP', style: TextStyle(fontSize: 12)),
+                    child: const Text(
+                      'Ajustar XP',
+                      style: TextStyle(fontSize: 12),
+                    ),
                   ),
                 ),
               ],
@@ -550,217 +563,215 @@ class AbaGeralView extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                  // Bloco Maior de Defesa (Flex 7)
-                  Expanded(
-                    flex: 7,
-                    child: Container(
-                      padding: const EdgeInsets.all(14),
-                      decoration: BoxDecoration(
-                        gradient: const LinearGradient(
-                          colors: [Color(0xFF1E293B), Color(0xFF0F172A)],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
+                // Bloco Maior de Defesa (Flex 7)
+                Expanded(
+                  flex: 7,
+                  child: Container(
+                    padding: const EdgeInsets.all(14),
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        colors: [Color(0xFF1E293B), Color(0xFF0F172A)],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      borderRadius: BorderRadius.circular(16),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withValues(alpha: 0.12),
+                          blurRadius: 8,
+                          offset: const Offset(0, 3),
                         ),
-                        borderRadius: BorderRadius.circular(16),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withValues(alpha: 0.12),
-                            blurRadius: 8,
-                            offset: const Offset(0, 3),
-                          ),
-                        ],
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Row(
-                                children: [
-                                  Icon(
-                                    Icons.shield_rounded,
-                                    color: Color(0xFF38BDF8),
-                                    size: 20,
-                                  ),
-                                  SizedBox(width: 6),
-                                  Text(
-                                    'DEFESA',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 12.5,
-                                      fontWeight: FontWeight.w900,
-                                      letterSpacing: 0.8,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              InkWell(
-                                key: const Key('btn_editar_outros_defesa'),
-                                borderRadius: BorderRadius.circular(8),
-                                onTap: () => _abrirEditorDefesaOutros(
-                                  context,
-                                  cubit,
-                                  p.outrosBonusDefesa,
-                                ),
-                                child: ConstrainedBox(
-                                  constraints: const BoxConstraints(
-                                    minHeight: 36,
-                                    minWidth: 44,
-                                  ),
-                                  child: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 8,
-                                      vertical: 5,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white.withValues(
-                                        alpha: 0.12,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        'Outros ${p.outrosBonusDefesa >= 0 ? "+${p.outrosBonusDefesa}" : "${p.outrosBonusDefesa}"}',
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 11,
-                                          fontWeight: FontWeight.w700,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 8),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.baseline,
-                            textBaseline: TextBaseline.alphabetic,
-                            children: [
-                              Text(
-                                '${compDefesa.defesaFinal}',
-                                key: const Key('valor_defesa_final'),
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 40,
-                                  fontWeight: FontWeight.w900,
-                                  height: 1.0,
-                                ),
-                              ),
-                              const SizedBox(width: 10),
-                              Expanded(
-                                child: Text(
-                                  compDefesa.parcelasDefesa
-                                      .map(
-                                        (parc) =>
-                                            '${parc.rotulo} ${parc.rotulo == "Base" ? "10" : parc.valorFormatado}',
-                                      )
-                                      .join(' • '),
-                                  style: const TextStyle(
-                                    color: Colors.white70,
-                                    fontSize: 11,
-                                    height: 1.3,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          if (compDefesa.usaProtecaoSemProficiencia) ...[
-                            const SizedBox(height: 8),
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 8,
-                                vertical: 4,
-                              ),
-                              decoration: BoxDecoration(
-                                color: const Color(
-                                  0xFFEF4444,
-                                ).withValues(alpha: 0.25),
-                                borderRadius: BorderRadius.circular(6),
-                              ),
-                              child: const Text(
-                                '⚠ Proteção sem proficiência (penalidade em FOR/DES)',
-                                style: TextStyle(
-                                  color: Color(0xFFFECACA),
-                                  fontSize: 10.5,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ],
-                      ),
+                      ],
                     ),
-                  ),
-
-                  const SizedBox(width: 10),
-
-                  // Bloco Compacto de RD Padrão (Flex 4)
-                  Expanded(
-                    flex: 4,
-                    child: Container(
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(16),
-                        border: Border.all(color: const Color(0xFFCBD5E1)),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          InkWell(
-                            onTap: () =>
-                                _abrirEditorRdPadrao(context, cubit, p.rdPadrao),
-                            child: Column(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Row(
                               children: [
-                                const Text(
-                                  'RD PADRÃO',
-                                  style: TextStyle(
-                                    fontSize: 11,
-                                    fontWeight: FontWeight.w900,
-                                    letterSpacing: 0.5,
-                                    color: Color(0xFF475569),
-                                  ),
+                                Icon(
+                                  Icons.shield_rounded,
+                                  color: Color(0xFF38BDF8),
+                                  size: 20,
                                 ),
-                                const SizedBox(height: 4),
+                                SizedBox(width: 6),
                                 Text(
-                                  '${compDefesa.rdTotal}',
-                                  key: const Key('valor_rd_padrao'),
-                                  style: const TextStyle(
-                                    fontSize: 30,
+                                  'DEFESA',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12.5,
                                     fontWeight: FontWeight.w900,
-                                    color: Color(0xFF0F172A),
-                                    height: 1.05,
+                                    letterSpacing: 0.8,
                                   ),
                                 ),
                               ],
                             ),
-                          ),
-                          const SizedBox(height: 6),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              _BotaoMiniStepper(
-                                icon: Icons.remove,
-                                tooltip: 'Reduzir RD padrão',
-                                onTap: () => cubit.ajustarRdPadrao(-1),
+                            InkWell(
+                              key: const Key('btn_editar_outros_defesa'),
+                              borderRadius: BorderRadius.circular(8),
+                              onTap: () => _abrirEditorDefesaOutros(
+                                context,
+                                cubit,
+                                p.outrosBonusDefesa,
                               ),
-                              const SizedBox(width: 8),
-                              _BotaoMiniStepper(
-                                icon: Icons.add,
-                                tooltip: 'Aumentar RD padrão',
-                                onTap: () => cubit.ajustarRdPadrao(1),
+                              child: ConstrainedBox(
+                                constraints: const BoxConstraints(
+                                  minHeight: 36,
+                                  minWidth: 44,
+                                ),
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 8,
+                                    vertical: 5,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withValues(alpha: 0.12),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      'Outros ${p.outrosBonusDefesa >= 0 ? "+${p.outrosBonusDefesa}" : "${p.outrosBonusDefesa}"}',
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 8),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          textBaseline: TextBaseline.alphabetic,
+                          children: [
+                            Text(
+                              '${compDefesa.defesaFinal}',
+                              key: const Key('valor_defesa_final'),
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 40,
+                                fontWeight: FontWeight.w900,
+                                height: 1.0,
+                              ),
+                            ),
+                            const SizedBox(width: 10),
+                            Expanded(
+                              child: Text(
+                                compDefesa.parcelasDefesa
+                                    .map(
+                                      (parc) =>
+                                          '${parc.rotulo} ${parc.rotulo == "Base" ? "10" : parc.valorFormatado}',
+                                    )
+                                    .join(' • '),
+                                style: const TextStyle(
+                                  color: Colors.white70,
+                                  fontSize: 11,
+                                  height: 1.3,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        if (compDefesa.usaProtecaoSemProficiencia) ...[
+                          const SizedBox(height: 8),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 4,
+                            ),
+                            decoration: BoxDecoration(
+                              color: const Color(
+                                0xFFEF4444,
+                              ).withValues(alpha: 0.25),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: const Text(
+                              '⚠ Proteção sem proficiência (penalidade em FOR/DES)',
+                              style: TextStyle(
+                                color: Color(0xFFFECACA),
+                                fontSize: 10.5,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ],
+                    ),
+                  ),
+                ),
+
+                const SizedBox(width: 10),
+
+                // Bloco Compacto de RD Padrão (Flex 4)
+                Expanded(
+                  flex: 4,
+                  child: Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(color: const Color(0xFFCBD5E1)),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        InkWell(
+                          onTap: () =>
+                              _abrirEditorRdPadrao(context, cubit, p.rdPadrao),
+                          child: Column(
+                            children: [
+                              const Text(
+                                'RD PADRÃO',
+                                style: TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w900,
+                                  letterSpacing: 0.5,
+                                  color: Color(0xFF475569),
+                                ),
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                '${compDefesa.rdTotal}',
+                                key: const Key('valor_rd_padrao'),
+                                style: const TextStyle(
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.w900,
+                                  color: Color(0xFF0F172A),
+                                  height: 1.05,
+                                ),
                               ),
                             ],
                           ),
-                        ],
-                      ),
+                        ),
+                        const SizedBox(height: 6),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            _BotaoMiniStepper(
+                              icon: Icons.remove,
+                              tooltip: 'Reduzir RD padrão',
+                              onTap: () => cubit.ajustarRdPadrao(-1),
+                            ),
+                            const SizedBox(width: 8),
+                            _BotaoMiniStepper(
+                              icon: Icons.add,
+                              tooltip: 'Aumentar RD padrão',
+                              onTap: () => cubit.ajustarRdPadrao(1),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
+            ),
 
             const SizedBox(height: 12),
 
@@ -1003,97 +1014,93 @@ class AbaGeralView extends StatelessWidget {
         ),
         const SizedBox(height: 6),
         Row(
-          children: CalculoFichaService.ordemAtributos
-              .asMap()
-              .entries
-              .map((entry) {
-                final idx = entry.key;
-                final sigla = entry.value;
-                final valor = p.getValorFinal(sigla);
-                final textoValor = valor >= 0 ? '+$valor' : '$valor';
+          children: CalculoFichaService.ordemAtributos.asMap().entries.map((
+            entry,
+          ) {
+            final idx = entry.key;
+            final sigla = entry.value;
+            final valor = p.getValorFinal(sigla);
+            final textoValor = valor >= 0 ? '+$valor' : '$valor';
 
-                return Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.only(left: idx == 0 ? 0 : 4),
-                    child: Semantics(
-                      button: true,
-                      label: 'Rolar atributo $sigla $textoValor',
-                      child: Material(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(8),
-                        elevation: 1,
-                        shadowColor: Colors.black12,
-                        child: InkWell(
-                          key: Key('card_atributo_$sigla'),
+            return Expanded(
+              child: Padding(
+                padding: EdgeInsets.only(left: idx == 0 ? 0 : 4),
+                child: Semantics(
+                  button: true,
+                  label: 'Rolar atributo $sigla $textoValor',
+                  child: Material(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8),
+                    elevation: 1,
+                    shadowColor: Colors.black12,
+                    child: InkWell(
+                      key: Key('card_atributo_$sigla'),
+                      borderRadius: BorderRadius.circular(8),
+                      onTap: () => mostrarDialogoRolagemAtributo(
+                        context,
+                        personagem: p,
+                        siglaAtributo: sigla,
+                      ),
+                      child: Container(
+                        decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          onTap: () => mostrarDialogoRolagemAtributo(
-                            context,
-                            personagem: p,
-                            siglaAtributo: sigla,
+                          border: Border.all(
+                            color: const Color(0xFFCBD5E1),
+                            width: 1,
                           ),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              border: Border.all(
-                                color: const Color(0xFFCBD5E1),
-                                width: 1,
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            // Faixa vermelha Tormenta 20
+                            Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 2.5,
+                              ),
+                              decoration: const BoxDecoration(
+                                color: Color(0xFFC62828),
+                                borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(7),
+                                ),
+                              ),
+                              child: Text(
+                                sigla,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  fontSize: 10.5,
+                                  fontWeight: FontWeight.w900,
+                                  color: Colors.white,
+                                  letterSpacing: 0.5,
+                                ),
                               ),
                             ),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                // Faixa vermelha Tormenta 20
-                                Container(
-                                  width: double.infinity,
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 2.5,
-                                  ),
-                                  decoration: const BoxDecoration(
-                                    color: Color(0xFFC62828),
-                                    borderRadius: BorderRadius.vertical(
-                                      top: Radius.circular(7),
-                                    ),
-                                  ),
-                                  child: Text(
-                                    sigla,
-                                    textAlign: TextAlign.center,
-                                    style: const TextStyle(
-                                      fontSize: 10.5,
-                                      fontWeight: FontWeight.w900,
-                                      color: Colors.white,
-                                      letterSpacing: 0.5,
-                                    ),
+                            // Valor do modificador
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 5),
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text(
+                                  textoValor,
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w900,
+                                    color: valor < 0
+                                        ? const Color(0xFFB91C1C)
+                                        : const Color(0xFF0F172A),
                                   ),
                                 ),
-                                // Valor do modificador
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 5,
-                                  ),
-                                  child: FittedBox(
-                                    fit: BoxFit.scaleDown,
-                                    child: Text(
-                                      textoValor,
-                                      style: TextStyle(
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.w900,
-                                        color: valor < 0
-                                            ? const Color(0xFFB91C1C)
-                                            : const Color(0xFF0F172A),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
-                          ),
+                          ],
                         ),
                       ),
                     ),
                   ),
-                );
-              })
-              .toList(),
+                ),
+              ),
+            );
+          }).toList(),
         ),
       ],
     );
@@ -1388,10 +1395,7 @@ class _FormularioEfeitoModal extends StatefulWidget {
   final EfeitoTemporario? existente;
   final ValueChanged<EfeitoTemporario> onSalvar;
 
-  const _FormularioEfeitoModal({
-    this.existente,
-    required this.onSalvar,
-  });
+  const _FormularioEfeitoModal({this.existente, required this.onSalvar});
 
   @override
   State<_FormularioEfeitoModal> createState() => _FormularioEfeitoModalState();

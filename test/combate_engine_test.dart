@@ -2,8 +2,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:t20_creator/domain/entities/equipamento/arma.dart';
 import 'package:t20_creator/domain/entities/combate/combatente.dart';
 import 'package:t20_creator/domain/entities/combate/grid_tatico.dart';
-import 'package:t20_creator/domain/services/combate_engine.dart';
-import 'package:t20_creator/presentation/controllers/combate_cubit.dart';
+import 'package:t20_creator/domain/services/combate_services/combate_engine.dart';
+import 'package:t20_creator/presentation/controllers/combate_controller/combate_cubit.dart';
 
 void main() {
   group('Núcleo Bélico de Combate Tormenta 20', () {

@@ -6,7 +6,7 @@ import 'package:t20_creator/domain/entities/personagem/classe_do_personagem.dart
 import 'package:t20_creator/domain/entities/personagem/personagem.dart';
 import 'package:t20_creator/domain/entities/personagem/raca.dart';
 import 'package:t20_creator/domain/repositories/i_personagem_repository.dart';
-import 'package:t20_creator/domain/services/calculo_ficha_service.dart';
+import 'package:t20_creator/domain/services/ficha_services/calculo_ficha_service.dart';
 import 'package:t20_creator/domain/services/data_services/call_armaduras.dart';
 import 'package:t20_creator/domain/services/data_services/call_armas.dart';
 import 'package:t20_creator/domain/services/data_services/call_classes.dart';
@@ -14,12 +14,12 @@ import 'package:t20_creator/domain/services/data_services/call_magias.dart';
 import 'package:t20_creator/domain/services/data_services/call_pericias.dart';
 import 'package:t20_creator/domain/services/data_services/call_poderes.dart';
 import 'package:t20_creator/domain/services/data_services/call_racas.dart';
-import 'package:t20_creator/domain/services/motor_modificadores_service.dart';
-import 'package:t20_creator/domain/services/personagem_storage_service.dart';
-import 'package:t20_creator/domain/services/poderes_e_magias/aprendizado_magia_service.dart';
-import 'package:t20_creator/presentation/controllers/evolucao_cubit.dart';
-import 'package:t20_creator/presentation/controllers/ficha_cubit.dart';
-import 'package:t20_creator/presentation/controllers/personagem_cubit.dart';
+import 'package:t20_creator/domain/services/ficha_services/motor_modificadores_service.dart';
+import 'package:t20_creator/domain/services/ficha_services/personagem_storage_service.dart';
+import 'package:t20_creator/domain/services/powers_service/aprendizado_magia_service.dart';
+import 'package:t20_creator/presentation/controllers/ficha_controller/evolucao_cubit.dart';
+import 'package:t20_creator/presentation/controllers/ficha_controller/ficha_cubit.dart';
+import 'package:t20_creator/presentation/controllers/ficha_controller/personagem_cubit.dart';
 
 class _FakePersonagemRepository implements IPersonagemRepository {
   final Map<String, Personagem> _db = {};
@@ -84,10 +84,7 @@ void main() {
         poderesTormenta.any((p) => p.key.toLowerCase() == 'carapaca'),
         isTrue,
       );
-      expect(
-        poderesTormenta.every((p) => p.ehPoderTormenta),
-        isTrue,
-      );
+      expect(poderesTormenta.every((p) => p.ehPoderTormenta), isTrue);
     });
 
     test(
@@ -221,9 +218,7 @@ void main() {
           raca: racaLefou,
           atributos: criarAtributos(car: 0),
           periciasDeformidadeLefou: ['LUTA', 'INTIMIDACAO'],
-          classes: [
-            ClasseDoPersonagem(classeDefinicao: guerreiro, nivel: 1),
-          ],
+          classes: [ClasseDoPersonagem(classeDefinicao: guerreiro, nivel: 1)],
         );
 
         // +2 nas duas perícias escolhidas
@@ -292,9 +287,7 @@ void main() {
           nome: 'Valente',
           atributos: criarAtributos(forca: 2, con: 2),
           periciasTreinadas: ['LUTA', 'FORTITUDE'],
-          classes: [
-            ClasseDoPersonagem(classeDefinicao: guerreiro, nivel: 3),
-          ],
+          classes: [ClasseDoPersonagem(classeDefinicao: guerreiro, nivel: 3)],
         );
 
         final cubit = EvolucaoCubit(personagem: p, repository: repo);
@@ -324,10 +317,7 @@ void main() {
           (item) => item.podeAprender,
         );
         await cubit.aprenderPoder(itemCombate.poder);
-        expect(
-          cubit.state.classeAtual.poderesEscolhidos.length,
-          equals(2),
-        );
+        expect(cubit.state.classeAtual.poderesEscolhidos.length, equals(2));
         expect(cubit.state.mensagemErro, isNotNull);
         await cubit.close();
       },
@@ -392,9 +382,7 @@ void main() {
         final pNivel5 = Personagem(
           nome: 'Mago',
           atributos: criarAtributos(intel: 4),
-          classes: [
-            ClasseDoPersonagem(classeDefinicao: arcanista, nivel: 5),
-          ],
+          classes: [ClasseDoPersonagem(classeDefinicao: arcanista, nivel: 5)],
           magiasConhecidas: BancoDeMagias.todas
               .where((m) => m.circulo == 1)
               .take(3)
@@ -478,9 +466,7 @@ void main() {
         final p = Personagem(
           nome: 'Mago de Batalha',
           atributos: criarAtributos(des: 3, intel: 4),
-          classes: [
-            ClasseDoPersonagem(classeDefinicao: arcanista, nivel: 4),
-          ],
+          classes: [ClasseDoPersonagem(classeDefinicao: arcanista, nivel: 4)],
           armaduraEquipada: armaduraSuperior,
           itensVestidosExtras: [
             ItemVestido(
@@ -548,9 +534,7 @@ void main() {
           atributos: criarAtributos(forca: 3, con: 2, intel: 3),
           periciasDeformidadeLefou: ['LUTA'],
           poderTormentaDeformidade: carapaca,
-          classes: [
-            ClasseDoPersonagem(classeDefinicao: guerreiro, nivel: 3),
-          ],
+          classes: [ClasseDoPersonagem(classeDefinicao: guerreiro, nivel: 3)],
           armas: [armaInicial],
         );
 

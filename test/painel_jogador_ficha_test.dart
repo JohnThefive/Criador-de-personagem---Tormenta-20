@@ -13,12 +13,12 @@ import 'package:t20_creator/domain/entities/personagem/personagem.dart';
 import 'package:t20_creator/domain/entities/personagem/proficiencias.dart';
 import 'package:t20_creator/domain/entities/personagem/raca.dart';
 import 'package:t20_creator/domain/repositories/i_personagem_repository.dart';
-import 'package:t20_creator/domain/services/calculo_ficha_service.dart';
+import 'package:t20_creator/domain/services/ficha_services/calculo_ficha_service.dart';
 import 'package:t20_creator/domain/services/data_services/call_magias.dart';
 import 'package:t20_creator/domain/services/data_services/call_pericias.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:t20_creator/domain/services/personagem_storage_service.dart';
-import 'package:t20_creator/presentation/controllers/ficha_cubit.dart';
+import 'package:t20_creator/domain/services/ficha_services/personagem_storage_service.dart';
+import 'package:t20_creator/presentation/controllers/ficha_controller/ficha_cubit.dart';
 import 'package:t20_creator/presentation/screens/ficha/painel_jogador_screen.dart';
 
 class FakePersonagemRepository implements IPersonagemRepository {
@@ -139,227 +139,267 @@ void main() {
   });
 
   group('CalculoFichaService - Domínio de Perícias e Rolagem 1 Toque', () {
-    test('detalharPericia decompõe ½ nível, atributo, treino e penalidade de armadura', () {
-      final p = Personagem.inicial().copyWith(
-        classe_do_personagem: [
-          ClasseDoPersonagem(
-            classeDefinicao: const Classe(
-              idClasse: 'guerreiro',
-              nome: 'Guerreiro',
-              pvInicial: 20,
-              pvPorNivel: 5,
-              pmInicial: 3,
-              pmPorNivel: 3,
-              proficiencias: [
-                TipoProficiencia.armadurasPesadas,
-                TipoProficiencia.armasMarciais,
-              ],
-              periciasFixas: ['LUTA', 'FORTITUDE'],
-              periciasOpcoes: ['INICIATIVA', 'ACROBACIA'],
-              qtdPericiasEscolha: 2,
-              descricaoclasse: 'Mestre combatente',
+    test(
+      'detalharPericia decompõe ½ nível, atributo, treino e penalidade de armadura',
+      () {
+        final p = Personagem.inicial().copyWith(
+          classe_do_personagem: [
+            ClasseDoPersonagem(
+              classeDefinicao: const Classe(
+                idClasse: 'guerreiro',
+                nome: 'Guerreiro',
+                pvInicial: 20,
+                pvPorNivel: 5,
+                pmInicial: 3,
+                pmPorNivel: 3,
+                proficiencias: [
+                  TipoProficiencia.armadurasPesadas,
+                  TipoProficiencia.armasMarciais,
+                ],
+                periciasFixas: ['LUTA', 'FORTITUDE'],
+                periciasOpcoes: ['INICIATIVA', 'ACROBACIA'],
+                qtdPericiasEscolha: 2,
+                descricaoclasse: 'Mestre combatente',
+              ),
+              nivel: 4, // ½ nível = 2, bônus treino = +2
             ),
-            nivel: 4, // ½ nível = 2, bônus treino = +2
+          ],
+          atributos: {
+            'FOR': const Atributo(nome: 'FOR', valor: 3),
+            'DES': const Atributo(nome: 'DES', valor: 2),
+            'CON': const Atributo(nome: 'CON', valor: 2),
+            'INT': const Atributo(nome: 'INT', valor: 0),
+            'SAB': const Atributo(nome: 'SAB', valor: 0),
+            'CAR': const Atributo(nome: 'CAR', valor: 0),
+          },
+          periciasTreinadas: ['ACROBACIA', 'LUTA'],
+          outrosBonusPericias: {'ACROBACIA': 1},
+          armaduraEquipada: const Protecao(
+            key: 'armadura_completa',
+            nome: 'Armadura Completa',
+            descricao: 'Pesada',
+            precoEmTibares: 1000,
+            bonusDefesa: 8,
+            penalidadeArmadura: 5,
+            espacos: 5,
+            tipo: TipoProtecao.armaduraPesada,
           ),
-        ],
-        atributos: {
-          'FOR': const Atributo(nome: 'FOR', valor: 3),
-          'DES': const Atributo(nome: 'DES', valor: 2),
-          'CON': const Atributo(nome: 'CON', valor: 2),
-          'INT': const Atributo(nome: 'INT', valor: 0),
-          'SAB': const Atributo(nome: 'SAB', valor: 0),
-          'CAR': const Atributo(nome: 'CAR', valor: 0),
-        },
-        periciasTreinadas: ['ACROBACIA', 'LUTA'],
-        outrosBonusPericias: {'ACROBACIA': 1},
-        armaduraEquipada: const Protecao(
-          key: 'armadura_completa',
-          nome: 'Armadura Completa',
-          descricao: 'Pesada',
-          precoEmTibares: 1000,
-          bonusDefesa: 8,
-          penalidadeArmadura: 5,
-          espacos: 5,
-          tipo: TipoProtecao.armaduraPesada,
-        ),
-      );
+        );
 
-      final compAcro = CalculoFichaService.detalharPericia(p, 'ACROBACIA');
-      expect(compAcro.metadeNivel, equals(2));
-      expect(compAcro.modAtributo, equals(2));
-      expect(compAcro.ehTreinada, isTrue);
-      expect(compAcro.bonusTreino, equals(2));
-      expect(compAcro.bonusOutros, equals(1));
-      expect(compAcro.penalidadeArmaduraAplicada, equals(5));
-      // Total = 2 + 2 + 2 + 1 - 5 = 2
-      expect(compAcro.total, equals(2));
-      expect(compAcro.parcelas.length, equals(5));
+        final compAcro = CalculoFichaService.detalharPericia(p, 'ACROBACIA');
+        expect(compAcro.metadeNivel, equals(2));
+        expect(compAcro.modAtributo, equals(2));
+        expect(compAcro.ehTreinada, isTrue);
+        expect(compAcro.bonusTreino, equals(2));
+        expect(compAcro.bonusOutros, equals(1));
+        expect(compAcro.penalidadeArmaduraAplicada, equals(5));
+        // Total = 2 + 2 + 2 + 1 - 5 = 2
+        expect(compAcro.total, equals(2));
+        expect(compAcro.parcelas.length, equals(5));
 
-      // Teste de rolagem com dado simulado fixo (15)
-      final rolagem = CalculoFichaService.rolarPericia(
-        p,
-        'ACROBACIA',
-        valorDadoFixoParaTeste: 15,
-      );
-      expect(rolagem.somaDados, equals(15));
-      expect(rolagem.totalModificadores, equals(2));
-      expect(rolagem.totalFinal, equals(17));
-      expect(rolagem.ehCriticoNatural, isFalse);
-    });
+        // Teste de rolagem com dado simulado fixo (15)
+        final rolagem = CalculoFichaService.rolarPericia(
+          p,
+          'ACROBACIA',
+          valorDadoFixoParaTeste: 15,
+        );
+        expect(rolagem.somaDados, equals(15));
+        expect(rolagem.totalModificadores, equals(2));
+        expect(rolagem.totalFinal, equals(17));
+        expect(rolagem.ehCriticoNatural, isFalse);
+      },
+    );
 
-    test('rolarPericia detecta 20 natural como crítico e 1 natural como falha', () {
-      final p = Personagem.inicial();
-      final crit = CalculoFichaService.rolarPericia(
-        p,
-        'LUTA',
-        valorDadoFixoParaTeste: 20,
-      );
-      expect(crit.ehCriticoNatural, isTrue);
-      expect(crit.ehFalhaCriticaNatural, isFalse);
+    test(
+      'rolarPericia detecta 20 natural como crítico e 1 natural como falha',
+      () {
+        final p = Personagem.inicial();
+        final crit = CalculoFichaService.rolarPericia(
+          p,
+          'LUTA',
+          valorDadoFixoParaTeste: 20,
+        );
+        expect(crit.ehCriticoNatural, isTrue);
+        expect(crit.ehFalhaCriticaNatural, isFalse);
 
-      final falha = CalculoFichaService.rolarPericia(
-        p,
-        'LUTA',
-        valorDadoFixoParaTeste: 1,
-      );
-      expect(falha.ehFalhaCriticaNatural, isTrue);
-      expect(falha.ehCriticoNatural, isFalse);
-    });
+        final falha = CalculoFichaService.rolarPericia(
+          p,
+          'LUTA',
+          valorDadoFixoParaTeste: 1,
+        );
+        expect(falha.ehFalhaCriticaNatural, isTrue);
+        expect(falha.ehCriticoNatural, isFalse);
+      },
+    );
 
-    test('agruparPericiasPorAtributo ordena por atributo e alfabeticamente', () {
-      final p = Personagem.inicial();
-      final grupos = CalculoFichaService.agruparPericiasPorAtributo(p);
+    test(
+      'agruparPericiasPorAtributo ordena por atributo e alfabeticamente',
+      () {
+        final p = Personagem.inicial();
+        final grupos = CalculoFichaService.agruparPericiasPorAtributo(p);
 
-      expect(grupos.isNotEmpty, isTrue);
-      final grupoDes = grupos.firstWhere((g) => g.siglaAtributo == 'DES');
-      final nomes = grupoDes.pericias.map((cp) => cp.pericia.label).toList();
-      // Acrobacia antes de Iniciativa, antes de Pontaria
-      expect(nomes, containsAllInOrder(['Acrobacia', 'Iniciativa', 'Pontaria']));
-    });
+        expect(grupos.isNotEmpty, isTrue);
+        final grupoDes = grupos.firstWhere((g) => g.siglaAtributo == 'DES');
+        final nomes = grupoDes.pericias.map((cp) => cp.pericia.label).toList();
+        // Acrobacia antes de Iniciativa, antes de Pontaria
+        expect(
+          nomes,
+          containsAllInOrder(['Acrobacia', 'Iniciativa', 'Pontaria']),
+        );
+      },
+    );
 
-    test('agruparPericiasPorAtributo com penalidadeArmaduraCustom repassa penalidade customizada', () {
-      final p = Personagem.inicial();
-      final grupos = CalculoFichaService.agruparPericiasPorAtributo(
-        p,
-        penalidadeArmaduraCustom: 5,
-      );
+    test(
+      'agruparPericiasPorAtributo com penalidadeArmaduraCustom repassa penalidade customizada',
+      () {
+        final p = Personagem.inicial();
+        final grupos = CalculoFichaService.agruparPericiasPorAtributo(
+          p,
+          penalidadeArmaduraCustom: 5,
+        );
 
-      final grupoDes = grupos.firstWhere((g) => g.siglaAtributo == 'DES');
-      final acro = grupoDes.pericias.firstWhere((cp) => cp.pericia.key == 'ACROBACIA');
-      expect(acro.penalidadeArmaduraAplicada, equals(5));
-      expect(acro.total, equals(-5)); // ½ nível 0 + DES 0 - penalidade 5 = -5
-    });
+        final grupoDes = grupos.firstWhere((g) => g.siglaAtributo == 'DES');
+        final acro = grupoDes.pericias.firstWhere(
+          (cp) => cp.pericia.key == 'ACROBACIA',
+        );
+        expect(acro.penalidadeArmaduraAplicada, equals(5));
+        expect(acro.total, equals(-5)); // ½ nível 0 + DES 0 - penalidade 5 = -5
+      },
+    );
 
-    test('Bônus raciais inatos (Elfo: Graça de Glórienn e Sentidos Élficos) são passivos e aplicados automaticamente', () {
-      final elfo = Personagem.inicial().copyWith(
-        raca: const Raca(
-          id: 'elfo',
-          nome: 'Elfo',
-          descricaoRaca: 'Elfos são graciosos.',
-          icone: 'player',
-          modificadores: {'INT': 2, 'DES': 1, 'CON': -1},
-          habilidadesRaca: {
-            'Graça de Glórienn': 'Seu deslocamento é 12m em vez de 9m.',
-            'Sangue Mágico': 'Você recebe +1 ponto de mana por nível.',
-            'Sentidos Élficos': 'Você possui visão na penumbra e recebe +2 em testes de Misticismo e Percepção.',
-          },
-        ),
-      );
+    test(
+      'Bônus raciais inatos (Elfo: Graça de Glórienn e Sentidos Élficos) são passivos e aplicados automaticamente',
+      () {
+        final elfo = Personagem.inicial().copyWith(
+          raca: const Raca(
+            id: 'elfo',
+            nome: 'Elfo',
+            descricaoRaca: 'Elfos são graciosos.',
+            icone: 'player',
+            modificadores: {'INT': 2, 'DES': 1, 'CON': -1},
+            habilidadesRaca: {
+              'Graça de Glórienn': 'Seu deslocamento é 12m em vez de 9m.',
+              'Sangue Mágico': 'Você recebe +1 ponto de mana por nível.',
+              'Sentidos Élficos':
+                  'Você possui visão na penumbra e recebe +2 em testes de Misticismo e Percepção.',
+            },
+          ),
+        );
 
-      // Deslocamento inato de 12m (8 quadrados)
-      expect(elfo.deslocamentoBaseMetros, equals(12));
-      expect(elfo.deslocamentoEfetivoMetros, equals(12));
-      final resumoSentidos = CalculoFichaService.extrairProficienciasESentidos(elfo);
-      expect(resumoSentidos.deslocamentoBase, contains('12m'));
+        // Deslocamento inato de 12m (8 quadrados)
+        expect(elfo.deslocamentoBaseMetros, equals(12));
+        expect(elfo.deslocamentoEfetivoMetros, equals(12));
+        final resumoSentidos =
+            CalculoFichaService.extrairProficienciasESentidos(elfo);
+        expect(resumoSentidos.deslocamentoBase, contains('12m'));
 
-      // Sentidos Élficos: +2 inato em Misticismo
-      expect(elfo.bonusRacialPericia('MISTICISMO'), equals(2));
-      final compMisticismo = CalculoFichaService.detalharPericia(elfo, 'MISTICISMO');
-      expect(compMisticismo.bonusRacial, equals(2));
-      expect(compMisticismo.parcelas.any((p) => p.rotulo == 'Racial' && p.valor == 2), isTrue);
-    });
+        // Sentidos Élficos: +2 inato em Misticismo
+        expect(elfo.bonusRacialPericia('MISTICISMO'), equals(2));
+        final compMisticismo = CalculoFichaService.detalharPericia(
+          elfo,
+          'MISTICISMO',
+        );
+        expect(compMisticismo.bonusRacial, equals(2));
+        expect(
+          compMisticismo.parcelas.any(
+            (p) => p.rotulo == 'Racial' && p.valor == 2,
+          ),
+          isTrue,
+        );
+      },
+    );
 
-    test('Bônus inato de Defesa (Minotauro: Couro Rígido) soma diretamente na Defesa sem custo de PM', () {
-      final minotauro = Personagem.inicial().copyWith(
-        raca: const Raca(
-          id: 'minotauro',
-          nome: 'Minotauro',
-          descricaoRaca: 'Guerreiros de chifres.',
-          icone: 'player',
-          modificadores: {'FOR': 2, 'CON': 1, 'SAB': -1},
-          habilidadesRaca: {
-            'Couro Rígido': 'Sua pele é dura como a de um touro. Você recebe +1 na Defesa.',
-          },
-        ),
-      );
+    test(
+      'Bônus inato de Defesa (Minotauro: Couro Rígido) soma diretamente na Defesa sem custo de PM',
+      () {
+        final minotauro = Personagem.inicial().copyWith(
+          raca: const Raca(
+            id: 'minotauro',
+            nome: 'Minotauro',
+            descricaoRaca: 'Guerreiros de chifres.',
+            icone: 'player',
+            modificadores: {'FOR': 2, 'CON': 1, 'SAB': -1},
+            habilidadesRaca: {
+              'Couro Rígido':
+                  'Sua pele é dura como a de um touro. Você recebe +1 na Defesa.',
+            },
+          ),
+        );
 
-      expect(minotauro.bonusRacialDefesa, equals(1));
-      final def = CalculoFichaService.detalharDefesaERd(minotauro);
-      expect(def.bonusRacialDefesa, equals(1));
-      expect(def.defesaFinal, equals(11)); // 10 base + 0 DES + 1 Racial
-      expect(def.parcelasDefesa.any((p) => p.rotulo == 'Racial' && p.valor == 1), isTrue);
-    });
+        expect(minotauro.bonusRacialDefesa, equals(1));
+        final def = CalculoFichaService.detalharDefesaERd(minotauro);
+        expect(def.bonusRacialDefesa, equals(1));
+        expect(def.defesaFinal, equals(11)); // 10 base + 0 DES + 1 Racial
+        expect(
+          def.parcelasDefesa.any((p) => p.rotulo == 'Racial' && p.valor == 1),
+          isTrue,
+        );
+      },
+    );
   });
 
   group('CalculoFichaService - Defesa, RD, Itens Vestidos e Tibares', () {
-    test('Defesa desconsidera DES quando usa armadura pesada e aplica efeitos temporários', () {
-      final p = Personagem.inicial().copyWith(
-        atributos: {
-          'FOR': const Atributo(nome: 'FOR', valor: 0),
-          'DES': const Atributo(nome: 'DES', valor: 3),
-          'CON': const Atributo(nome: 'CON', valor: 0),
-          'INT': const Atributo(nome: 'INT', valor: 0),
-          'SAB': const Atributo(nome: 'SAB', valor: 0),
-          'CAR': const Atributo(nome: 'CAR', valor: 0),
-        },
-        armaduraEquipada: const Protecao(
-          key: 'cota_malha',
-          nome: 'Cota de Malha',
-          descricao: 'Pesada',
-          precoEmTibares: 150,
-          bonusDefesa: 5,
-          penalidadeArmadura: 2,
-          espacos: 4,
-          tipo: TipoProtecao.armaduraPesada,
-        ),
-        escudoEquipado: const Protecao(
-          key: 'escudo_pesado',
-          nome: 'Escudo Pesado',
-          descricao: 'Escudo',
-          precoEmTibares: 30,
-          bonusDefesa: 2,
-          penalidadeArmadura: 2,
-          espacos: 2,
-          tipo: TipoProtecao.escudoPesado,
-        ),
-        rdPadrao: 2,
-        outrosBonusDefesa: 1,
-        efeitosTemporarios: [
-          const EfeitoTemporario(
-            id: 'buff_1',
-            nome: 'Escudo da Fé',
-            tipo: TipoEfeitoTemporario.buff,
-            modDefesa: 2,
-            ativo: true,
+    test(
+      'Defesa desconsidera DES quando usa armadura pesada e aplica efeitos temporários',
+      () {
+        final p = Personagem.inicial().copyWith(
+          atributos: {
+            'FOR': const Atributo(nome: 'FOR', valor: 0),
+            'DES': const Atributo(nome: 'DES', valor: 3),
+            'CON': const Atributo(nome: 'CON', valor: 0),
+            'INT': const Atributo(nome: 'INT', valor: 0),
+            'SAB': const Atributo(nome: 'SAB', valor: 0),
+            'CAR': const Atributo(nome: 'CAR', valor: 0),
+          },
+          armaduraEquipada: const Protecao(
+            key: 'cota_malha',
+            nome: 'Cota de Malha',
+            descricao: 'Pesada',
+            precoEmTibares: 150,
+            bonusDefesa: 5,
+            penalidadeArmadura: 2,
+            espacos: 4,
+            tipo: TipoProtecao.armaduraPesada,
           ),
-          const EfeitoTemporario(
-            id: 'buff_inativo',
-            nome: 'Pele de Pedra',
-            tipo: TipoEfeitoTemporario.buff,
-            modRd: 5,
-            ativo: false,
+          escudoEquipado: const Protecao(
+            key: 'escudo_pesado',
+            nome: 'Escudo Pesado',
+            descricao: 'Escudo',
+            precoEmTibares: 30,
+            bonusDefesa: 2,
+            penalidadeArmadura: 2,
+            espacos: 2,
+            tipo: TipoProtecao.escudoPesado,
           ),
-        ],
-      );
+          rdPadrao: 2,
+          outrosBonusDefesa: 1,
+          efeitosTemporarios: [
+            const EfeitoTemporario(
+              id: 'buff_1',
+              nome: 'Escudo da Fé',
+              tipo: TipoEfeitoTemporario.buff,
+              modDefesa: 2,
+              ativo: true,
+            ),
+            const EfeitoTemporario(
+              id: 'buff_inativo',
+              nome: 'Pele de Pedra',
+              tipo: TipoEfeitoTemporario.buff,
+              modRd: 5,
+              ativo: false,
+            ),
+          ],
+        );
 
-      final def = CalculoFichaService.detalharDefesaERd(p);
-      expect(def.destrezaLimitadaPorArmaduraPesada, isTrue);
-      expect(def.modDestrezaAplicado, equals(0));
-      // Defesa = 10 (base) + 0 (DES pesada) + 5 (armadura) + 2 (escudo) + 1 (outros) + 2 (efeito) = 20
-      expect(def.defesaFinal, equals(20));
-      // RD Total = 2 (padrão) + 0 (efeito inativo) = 2
-      expect(def.rdTotal, equals(2));
-    });
+        final def = CalculoFichaService.detalharDefesaERd(p);
+        expect(def.destrezaLimitadaPorArmaduraPesada, isTrue);
+        expect(def.modDestrezaAplicado, equals(0));
+        // Defesa = 10 (base) + 0 (DES pesada) + 5 (armadura) + 2 (escudo) + 1 (outros) + 2 (efeito) = 20
+        expect(def.defesaFinal, equals(20));
+        // RD Total = 2 (padrão) + 0 (efeito inativo) = 2
+        expect(def.rdTotal, equals(2));
+      },
+    );
 
     test('4 Slots de itens vestidos e 3 denominações de Tibares', () {
       final p = Personagem.inicial().copyWith(
@@ -399,68 +439,76 @@ void main() {
   });
 
   group('CalculoFichaService - Magias e Gasto Seguro de PM', () {
-    test('calcularCustoMagia e tentarGastarPM validam círculos e impedem PM negativo', () {
-      const magia1 = Magia(
-        id: 'curar_ferimentos',
-        nome: 'Curar Ferimentos',
-        tipo: 'divina',
-        circulo: 1,
-        escola: 'evocacao',
-        execucao: ExecucaoMagia(tipo: 'padrao'),
-        alcance: AlcanceMagia(tipo: 'toque'),
-        efeito: EfeitoMagia(tipo: 'alvo'),
-        duracao: DuracaoMagia(tipo: 'instantanea'),
-        descricao: 'Restaura vida.',
-        aprimoramentos: [
-          AprimoramentoMagia(
-            id: 'apr_1',
-            descricao: 'Aumenta a cura em +2d8+2',
-            custoAdicionalPM: 2,
-          ),
-        ],
-      );
-
-      // Custo base de 1º círculo = 1 PM
-      expect(CalculoFichaService.calcularCustoMagia(magia1, const []), equals(1));
-      // Custo com aprimoramento = 1 + 2 = 3 PM
-      expect(
-        CalculoFichaService.calcularCustoMagia(magia1, [magia1.aprimoramentos[0]]),
-        equals(3),
-      );
-
-      final pComPM = Personagem.inicial().copyWith(
-        classe_do_personagem: [
-          ClasseDoPersonagem(
-            classeDefinicao: const Classe(
-              idClasse: 'arcanista',
-              nome: 'Arcanista',
-              pvInicial: 8,
-              pvPorNivel: 2,
-              pmInicial: 6,
-              pmPorNivel: 6,
-              proficiencias: [],
-              periciasFixas: [],
-              periciasOpcoes: [],
-              qtdPericiasEscolha: 0,
-              descricaoclasse: '',
+    test(
+      'calcularCustoMagia e tentarGastarPM validam círculos e impedem PM negativo',
+      () {
+        const magia1 = Magia(
+          id: 'curar_ferimentos',
+          nome: 'Curar Ferimentos',
+          tipo: 'divina',
+          circulo: 1,
+          escola: 'evocacao',
+          execucao: ExecucaoMagia(tipo: 'padrao'),
+          alcance: AlcanceMagia(tipo: 'toque'),
+          efeito: EfeitoMagia(tipo: 'alvo'),
+          duracao: DuracaoMagia(tipo: 'instantanea'),
+          descricao: 'Restaura vida.',
+          aprimoramentos: [
+            AprimoramentoMagia(
+              id: 'apr_1',
+              descricao: 'Aumenta a cura em +2d8+2',
+              custoAdicionalPM: 2,
             ),
-            nivel: 1,
-          ),
-        ],
-        pmAtual: 2,
-      );
+          ],
+        );
 
-      // Gasto possível (1 PM)
-      final resSucesso = CalculoFichaService.tentarGastarPM(pComPM, 1);
-      expect(resSucesso.sucesso, isTrue);
-      expect(resSucesso.personagemAtualizado.pmAtual, equals(1));
+        // Custo base de 1º círculo = 1 PM
+        expect(
+          CalculoFichaService.calcularCustoMagia(magia1, const []),
+          equals(1),
+        );
+        // Custo com aprimoramento = 1 + 2 = 3 PM
+        expect(
+          CalculoFichaService.calcularCustoMagia(magia1, [
+            magia1.aprimoramentos[0],
+          ]),
+          equals(3),
+        );
 
-      // Gasto além do disponível (3 PM) -> Deve ser bloqueado e manter PM
-      final resFalha = CalculoFichaService.tentarGastarPM(pComPM, 3);
-      expect(resFalha.sucesso, isFalse);
-      expect(resFalha.personagemAtualizado.pmAtual, equals(2));
-      expect(resFalha.mensagemErro, contains('PM insuficiente'));
-    });
+        final pComPM = Personagem.inicial().copyWith(
+          classe_do_personagem: [
+            ClasseDoPersonagem(
+              classeDefinicao: const Classe(
+                idClasse: 'arcanista',
+                nome: 'Arcanista',
+                pvInicial: 8,
+                pvPorNivel: 2,
+                pmInicial: 6,
+                pmPorNivel: 6,
+                proficiencias: [],
+                periciasFixas: [],
+                periciasOpcoes: [],
+                qtdPericiasEscolha: 0,
+                descricaoclasse: '',
+              ),
+              nivel: 1,
+            ),
+          ],
+          pmAtual: 2,
+        );
+
+        // Gasto possível (1 PM)
+        final resSucesso = CalculoFichaService.tentarGastarPM(pComPM, 1);
+        expect(resSucesso.sucesso, isTrue);
+        expect(resSucesso.personagemAtualizado.pmAtual, equals(1));
+
+        // Gasto além do disponível (3 PM) -> Deve ser bloqueado e manter PM
+        final resFalha = CalculoFichaService.tentarGastarPM(pComPM, 3);
+        expect(resFalha.sucesso, isFalse);
+        expect(resFalha.personagemAtualizado.pmAtual, equals(2));
+        expect(resFalha.mensagemErro, contains('PM insuficiente'));
+      },
+    );
 
     test('Punição divina bloqueia totalmente o gasto de PM', () {
       final pPunido = Personagem.inicial().copyWith(
@@ -474,65 +522,68 @@ void main() {
   });
 
   group('CalculoFichaService - Adiantamento de Domínio para Combate Futuro', () {
-    test('prepararPreviewAtaqueArma calcula ataque, penalidade e crítico corretamente', () {
-      const espadaLonga = Arma(
-        key: 'espada_longa',
-        nome: 'Espada Longa',
-        descricao: 'Arma marcial de uma mão',
-        proficiencia: ProficienciaArma.marcial,
-        proposito: PropositoArma.corpoACorpo,
-        empunhadura: EmpunhaduraArma.umaMao,
-        dano: '1d8',
-        margemAmeaca: 19,
-        multiplicadorCritico: 2,
-        tipoDano: TipoDanoArma.corte,
-      );
+    test(
+      'prepararPreviewAtaqueArma calcula ataque, penalidade e crítico corretamente',
+      () {
+        const espadaLonga = Arma(
+          key: 'espada_longa',
+          nome: 'Espada Longa',
+          descricao: 'Arma marcial de uma mão',
+          proficiencia: ProficienciaArma.marcial,
+          proposito: PropositoArma.corpoACorpo,
+          empunhadura: EmpunhaduraArma.umaMao,
+          dano: '1d8',
+          margemAmeaca: 19,
+          multiplicadorCritico: 2,
+          tipoDano: TipoDanoArma.corte,
+        );
 
-      final p = Personagem.inicial().copyWith(
-        classe_do_personagem: [
-          ClasseDoPersonagem(
-            classeDefinicao: const Classe(
-              idClasse: 'guerreiro',
-              nome: 'Guerreiro',
-              pvInicial: 20,
-              pvPorNivel: 5,
-              pmInicial: 3,
-              pmPorNivel: 3,
-              proficiencias: [
-                TipoProficiencia.armasSimples,
-                TipoProficiencia.armasMarciais,
-              ],
-              periciasFixas: ['LUTA'],
-              periciasOpcoes: [],
-              qtdPericiasEscolha: 0,
-              descricaoclasse: '',
+        final p = Personagem.inicial().copyWith(
+          classe_do_personagem: [
+            ClasseDoPersonagem(
+              classeDefinicao: const Classe(
+                idClasse: 'guerreiro',
+                nome: 'Guerreiro',
+                pvInicial: 20,
+                pvPorNivel: 5,
+                pmInicial: 3,
+                pmPorNivel: 3,
+                proficiencias: [
+                  TipoProficiencia.armasSimples,
+                  TipoProficiencia.armasMarciais,
+                ],
+                periciasFixas: ['LUTA'],
+                periciasOpcoes: [],
+                qtdPericiasEscolha: 0,
+                descricaoclasse: '',
+              ),
+              nivel: 2, // ½ nível = 1, bônus treino = +2
             ),
-            nivel: 2, // ½ nível = 1, bônus treino = +2
-          ),
-        ],
-        atributos: {
-          'FOR': const Atributo(nome: 'FOR', valor: 3),
-          'DES': const Atributo(nome: 'DES', valor: 0),
-          'CON': const Atributo(nome: 'CON', valor: 0),
-          'INT': const Atributo(nome: 'INT', valor: 0),
-          'SAB': const Atributo(nome: 'SAB', valor: 0),
-          'CAR': const Atributo(nome: 'CAR', valor: 0),
-        },
-        periciasTreinadas: ['LUTA'],
-      );
+          ],
+          atributos: {
+            'FOR': const Atributo(nome: 'FOR', valor: 3),
+            'DES': const Atributo(nome: 'DES', valor: 0),
+            'CON': const Atributo(nome: 'CON', valor: 0),
+            'INT': const Atributo(nome: 'INT', valor: 0),
+            'SAB': const Atributo(nome: 'SAB', valor: 0),
+            'CAR': const Atributo(nome: 'CAR', valor: 0),
+          },
+          periciasTreinadas: ['LUTA'],
+        );
 
-      final preview = CalculoFichaService.prepararPreviewAtaqueArma(
-        p,
-        espadaLonga,
-      );
-      expect(preview.temProficienciaNaArma, isTrue);
-      expect(preview.penalidadeNaoProficiencia, equals(0));
-      // Ataque = 1 (½ nível) + 3 (FOR) + 2 (treino) = +6
-      expect(preview.bonusAtaqueFinal, equals(6));
-      expect(preview.bonusDanoAtributo, equals(3));
-      expect(preview.formulaDanoCompleta, equals('1d8+3 (Corte)'));
-      expect(preview.criticoFormatado, equals('19/x2'));
-    });
+        final preview = CalculoFichaService.prepararPreviewAtaqueArma(
+          p,
+          espadaLonga,
+        );
+        expect(preview.temProficienciaNaArma, isTrue);
+        expect(preview.penalidadeNaoProficiencia, equals(0));
+        // Ataque = 1 (½ nível) + 3 (FOR) + 2 (treino) = +6
+        expect(preview.bonusAtaqueFinal, equals(6));
+        expect(preview.bonusDanoAtributo, equals(3));
+        expect(preview.formulaDanoCompleta, equals('1d8+3 (Corte)'));
+        expect(preview.criticoFormatado, equals('19/x2'));
+      },
+    );
   });
 
   group('PersonagemStorageService - Serialização e Desserialização', () {
@@ -587,8 +638,14 @@ void main() {
       expect(restaurado.tibaresCobre, equals(50));
       expect(restaurado.tibares, equals(230));
       expect(restaurado.tibaresOuro, equals(12));
-      expect(restaurado.itensVestidosExtras.first.nome, equals('Amuleto Protetor'));
-      expect(restaurado.efeitosTemporarios.first.nome, equals('Benção de Valkaria'));
+      expect(
+        restaurado.itensVestidosExtras.first.nome,
+        equals('Amuleto Protetor'),
+      );
+      expect(
+        restaurado.efeitosTemporarios.first.nome,
+        equals('Benção de Valkaria'),
+      );
       expect(
         restaurado.notasProgressaoPorNivel[1],
         equals('Recebeu título honorário do mestre.'),
@@ -665,147 +722,163 @@ void main() {
       );
     });
 
-    testWidgets('Cabeçalho exibe Alinhamento, Idade e Iniciativa rola em 1 toque',
-        (tester) async {
-      await tester.binding.setSurfaceSize(const Size(480, 900));
+    testWidgets(
+      'Cabeçalho exibe Alinhamento, Idade e Iniciativa rola em 1 toque',
+      (tester) async {
+        await tester.binding.setSurfaceSize(const Size(480, 900));
 
-      await tester.pumpWidget(
-        MaterialApp(
-          home: PainelJogadorScreen(
-            personagemInicial: pUi,
-            repository: repo,
+        await tester.pumpWidget(
+          MaterialApp(
+            home: PainelJogadorScreen(personagemInicial: pUi, repository: repo),
           ),
-        ),
-      );
-      await tester.pumpAndSettle();
+        );
+        await tester.pumpAndSettle();
 
-      // Verifica Alinhamento e Idade no topo da tela
-      expect(find.byKey(const Key('topo_alinhamento_idade')), findsOneWidget);
-      expect(find.textContaining('Caótico e Bom • 22 anos'), findsOneWidget);
+        // Verifica Alinhamento e Idade no topo da tela
+        expect(find.byKey(const Key('topo_alinhamento_idade')), findsOneWidget);
+        expect(find.textContaining('Caótico e Bom • 22 anos'), findsOneWidget);
 
-      // Dispara rolagem de Iniciativa em 1 toque no cabeçalho
-      final btnIniciativa = find.byKey(const Key('btn_rolar_iniciativa_topo'));
-      expect(btnIniciativa, findsOneWidget);
-      await tester.tap(btnIniciativa);
-      await tester.pumpAndSettle();
+        // Dispara rolagem de Iniciativa em 1 toque no cabeçalho
+        final btnIniciativa = find.byKey(
+          const Key('btn_rolar_iniciativa_topo'),
+        );
+        expect(btnIniciativa, findsOneWidget);
+        await tester.tap(btnIniciativa);
+        await tester.pumpAndSettle();
 
-      // O diálogo deve abrir com a decomposição do cálculo e resultado final
-      expect(find.text('Iniciativa'), findsOneWidget);
-      expect(find.text('COMPOSIÇÃO DO CÁLCULO'), findsOneWidget);
-      expect(find.byKey(const Key('rolagem_valor_dado')), findsOneWidget);
-      expect(find.byKey(const Key('rolagem_resultado_final')), findsOneWidget);
+        // O diálogo deve abrir com a decomposição do cálculo e resultado final
+        expect(find.text('Iniciativa'), findsOneWidget);
+        expect(find.text('COMPOSIÇÃO DO CÁLCULO'), findsOneWidget);
+        expect(find.byKey(const Key('rolagem_valor_dado')), findsOneWidget);
+        expect(
+          find.byKey(const Key('rolagem_resultado_final')),
+          findsOneWidget,
+        );
 
-      // Fecha o modal de rolagem
-      await tester.tap(find.text('Concluir'));
-      await tester.pumpAndSettle();
-    });
+        // Fecha o modal de rolagem
+        await tester.tap(find.text('Concluir'));
+        await tester.pumpAndSettle();
+      },
+    );
 
-    testWidgets('Aba de Perícias exibe Total ao lado do nome e rola em 1 toque',
-        (tester) async {
-      await tester.binding.setSurfaceSize(const Size(480, 900));
+    testWidgets(
+      'Aba de Perícias exibe Total ao lado do nome e rola em 1 toque',
+      (tester) async {
+        await tester.binding.setSurfaceSize(const Size(480, 900));
 
-      await tester.pumpWidget(
-        MaterialApp(
-          home: PainelJogadorScreen(
-            personagemInicial: pUi,
-            repository: repo,
+        await tester.pumpWidget(
+          MaterialApp(
+            home: PainelJogadorScreen(personagemInicial: pUi, repository: repo),
           ),
-        ),
-      );
-      await tester.pumpAndSettle();
+        );
+        await tester.pumpAndSettle();
 
-      // Clica na aba Perícias
-      await tester.tap(find.text('Perícias'));
-      await tester.pumpAndSettle();
+        // Clica na aba Perícias
+        await tester.tap(find.text('Perícias'));
+        await tester.pumpAndSettle();
 
-      // Verifica texto de apoio sobre como é calculado o Total
-      expect(find.text('Como é calculado o Total da Perícia'), findsOneWidget);
+        // Verifica texto de apoio sobre como é calculado o Total
+        expect(
+          find.text('Como é calculado o Total da Perícia'),
+          findsOneWidget,
+        );
 
-      // Verifica se a linha de Iniciativa está presente com Total
-      expect(find.byKey(const Key('pericia_row_INICIATIVA')), findsOneWidget);
-      expect(find.byKey(const Key('pericia_total_INICIATIVA')), findsOneWidget);
+        // Verifica se a linha de Iniciativa está presente com Total
+        expect(find.byKey(const Key('pericia_row_INICIATIVA')), findsOneWidget);
+        expect(
+          find.byKey(const Key('pericia_total_INICIATIVA')),
+          findsOneWidget,
+        );
 
-      // 1 toque na linha de Iniciativa abre o diálogo de rolagem
-      await tester.tap(find.byKey(const Key('pericia_row_INICIATIVA')));
-      await tester.pumpAndSettle();
+        // 1 toque na linha de Iniciativa abre o diálogo de rolagem
+        await tester.tap(find.byKey(const Key('pericia_row_INICIATIVA')));
+        await tester.pumpAndSettle();
 
-      expect(find.text('Iniciativa'), findsNWidgets(2));
-      expect(find.text('COMPOSIÇÃO DO CÁLCULO'), findsOneWidget);
-      expect(find.byKey(const Key('rolagem_resultado_final')), findsOneWidget);
+        expect(find.text('Iniciativa'), findsNWidgets(2));
+        expect(find.text('COMPOSIÇÃO DO CÁLCULO'), findsOneWidget);
+        expect(
+          find.byKey(const Key('rolagem_resultado_final')),
+          findsOneWidget,
+        );
 
-      await tester.tap(find.text('Concluir'));
-      await tester.pumpAndSettle();
-    });
+        await tester.tap(find.text('Concluir'));
+        await tester.pumpAndSettle();
+      },
+    );
 
-    testWidgets('Aba de Magias: Lançar reduz PM, auto-persiste e impede PM negativo',
-        (tester) async {
-      await tester.binding.setSurfaceSize(const Size(480, 900));
+    testWidgets(
+      'Aba de Magias: Lançar reduz PM, auto-persiste e impede PM negativo',
+      (tester) async {
+        await tester.binding.setSurfaceSize(const Size(480, 900));
 
-      final pComApenas1PM = pUi.copyWith(pmAtual: 1);
+        final pComApenas1PM = pUi.copyWith(pmAtual: 1);
 
-      await tester.pumpWidget(
-        MaterialApp(
-          home: PainelJogadorScreen(
-            personagemInicial: pComApenas1PM,
-            repository: repo,
+        await tester.pumpWidget(
+          MaterialApp(
+            home: PainelJogadorScreen(
+              personagemInicial: pComApenas1PM,
+              repository: repo,
+            ),
           ),
-        ),
-      );
-      await tester.pumpAndSettle();
+        );
+        await tester.pumpAndSettle();
 
-      // Clica na aba Magias
-      await tester.tap(find.text('Magias'));
-      await tester.pumpAndSettle();
+        // Clica na aba Magias
+        await tester.tap(find.text('Magias'));
+        await tester.pumpAndSettle();
 
-      // Verifica o bloco de CD de magia estilizado
-      expect(find.text('CD MAGIA'), findsOneWidget);
-      expect(find.byKey(const Key('valor_cd_magia')), findsOneWidget);
+        // Verifica o bloco de CD de magia estilizado
+        expect(find.text('CD MAGIA'), findsOneWidget);
+        expect(find.byKey(const Key('valor_cd_magia')), findsOneWidget);
 
-      // Verifica botão Lançar (-1 PM)
-      final btnLancar = find.byKey(const Key('btn_lancar_magia_explosao_chamas'));
-      expect(btnLancar, findsOneWidget);
+        // Verifica botão Lançar (-1 PM)
+        final btnLancar = find.byKey(
+          const Key('btn_lancar_magia_explosao_chamas'),
+        );
+        expect(btnLancar, findsOneWidget);
 
-      // Executa o lançamento de magia (1 -> 0 PM)
-      await tester.tap(btnLancar);
-      await tester.pumpAndSettle();
+        // Executa o lançamento de magia (1 -> 0 PM)
+        await tester.tap(btnLancar);
+        await tester.pumpAndSettle();
 
-      // Deve ter deduzido 1 PM e salvo no repositório automaticamente
-      expect(repo.salvo?.pmAtual, equals(0));
+        // Deve ter deduzido 1 PM e salvo no repositório automaticamente
+        expect(repo.salvo?.pmAtual, equals(0));
 
-      // Próxima tentativa com 0 PM deve ser bloqueada sem deixar PM negativo
-      await tester.tap(btnLancar);
-      await tester.pumpAndSettle();
+        // Próxima tentativa com 0 PM deve ser bloqueada sem deixar PM negativo
+        await tester.tap(btnLancar);
+        await tester.pumpAndSettle();
 
-      expect(repo.salvo?.pmAtual, equals(0));
-      expect(find.textContaining('PM insuficiente'), findsOneWidget);
-    });
+        expect(repo.salvo?.pmAtual, equals(0));
+        expect(find.textContaining('PM insuficiente'), findsOneWidget);
+      },
+    );
 
-    testWidgets('Isolamento de rebuilds: alterações em anotações ou tibares não quebram nem causam erro na UI do Painel',
-        (tester) async {
-      await tester.binding.setSurfaceSize(const Size(480, 900));
+    testWidgets(
+      'Isolamento de rebuilds: alterações em anotações ou tibares não quebram nem causam erro na UI do Painel',
+      (tester) async {
+        await tester.binding.setSurfaceSize(const Size(480, 900));
 
-      await tester.pumpWidget(
-        MaterialApp(
-          home: PainelJogadorScreen(
-            personagemInicial: pUi,
-            repository: repo,
+        await tester.pumpWidget(
+          MaterialApp(
+            home: PainelJogadorScreen(personagemInicial: pUi, repository: repo),
           ),
-        ),
-      );
-      await tester.pumpAndSettle();
+        );
+        await tester.pumpAndSettle();
 
-      final cubit =
-          tester.element(find.byType(TabBarView)).read<FichaCubit>();
+        final cubit = tester
+            .element(find.byType(TabBarView))
+            .read<FichaCubit>();
 
-      // Atualiza anotações e tibares (não devem desestabilizar ou quebrar o Painel ou Abas)
-      cubit.atualizarAnotacoes('Nova pista secreta sobre a Tormenta');
-      await tester.pump();
+        // Atualiza anotações e tibares (não devem desestabilizar ou quebrar o Painel ou Abas)
+        cubit.atualizarAnotacoes('Nova pista secreta sobre a Tormenta');
+        await tester.pump();
 
-      expect(find.text('Kaelen'), findsOneWidget);
+        expect(find.text('Kaelen'), findsOneWidget);
 
-      cubit.ajustarTibares(deltaPrata: 100);
-      await tester.pump();
-      expect(find.text('Kaelen'), findsOneWidget);
-    });
+        cubit.ajustarTibares(deltaPrata: 100);
+        await tester.pump();
+        expect(find.text('Kaelen'), findsOneWidget);
+      },
+    );
   });
 }

@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:t20_creator/domain/entities/personagem/personagem.dart';
 import 'package:t20_creator/domain/repositories/i_personagem_repository.dart';
 import 'package:t20_creator/domain/services/data_services/catalogo_service.dart';
-import 'package:t20_creator/presentation/controllers/home_cubit.dart';
+import 'package:t20_creator/presentation/controllers/home_controller/home_cubit.dart';
 
 /// Implementação em memória de [IPersonagemRepository] usada para testes unitários,
 /// eliminando a necessidade de mockar canais de plataforma (PathProvider) ou I/O de disco.
@@ -60,7 +60,10 @@ void main() {
 
       expect(homeCubit.state.carregando, isFalse);
       expect(homeCubit.state.personagens.length, equals(2));
-      expect(homeCubit.state.personagens.map((p) => p.nome), containsAll(['Valeros', 'Seoni']));
+      expect(
+        homeCubit.state.personagens.map((p) => p.nome),
+        containsAll(['Valeros', 'Seoni']),
+      );
     });
 
     test('Deve excluir personagem através do repositório injetado', () async {
@@ -77,30 +80,33 @@ void main() {
       expect(excluido, isNull);
     });
 
-    test('Deve aguardar catalogosFuture antes de concluir o carregamento', () async {
-      final completer = Completer<void>();
-      final p = Personagem.inicial().copyWith(nome: 'Ezren');
-      await repository.salvar(p);
+    test(
+      'Deve aguardar catalogosFuture antes de concluir o carregamento',
+      () async {
+        final completer = Completer<void>();
+        final p = Personagem.inicial().copyWith(nome: 'Ezren');
+        await repository.salvar(p);
 
-      final cubitComEspera = HomeCubit(
-        repository: repository,
-        catalogosFuture: completer.future,
-      );
+        final cubitComEspera = HomeCubit(
+          repository: repository,
+          catalogosFuture: completer.future,
+        );
 
-      // Enquanto o catalogosFuture estiver pendente, mantém loading e lista vazia
-      expect(cubitComEspera.state.carregando, isTrue);
-      expect(cubitComEspera.state.personagens, isEmpty);
+        // Enquanto o catalogosFuture estiver pendente, mantém loading e lista vazia
+        expect(cubitComEspera.state.carregando, isTrue);
+        expect(cubitComEspera.state.personagens, isEmpty);
 
-      // Conclui o carregamento dos catálogos
-      completer.complete();
-      await pumpEventQueue();
+        // Conclui o carregamento dos catálogos
+        completer.complete();
+        await pumpEventQueue();
 
-      expect(cubitComEspera.state.carregando, isFalse);
-      expect(cubitComEspera.state.personagens.length, equals(1));
-      expect(cubitComEspera.state.personagens.first.nome, equals('Ezren'));
+        expect(cubitComEspera.state.carregando, isFalse);
+        expect(cubitComEspera.state.personagens.length, equals(1));
+        expect(cubitComEspera.state.personagens.first.nome, equals('Ezren'));
 
-      await cubitComEspera.close();
-    });
+        await cubitComEspera.close();
+      },
+    );
   });
 
   group('CatalogoService', () {
@@ -115,4 +121,3 @@ void main() {
     });
   });
 }
-

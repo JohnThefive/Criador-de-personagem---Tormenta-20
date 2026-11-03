@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../domain/entities/personagem/poder.dart';
 import '../../../domain/services/data_services/call_origens.dart';
 import '../../../domain/services/data_services/call_pericias.dart';
-import '../../controllers/personagem_cubit.dart';
+import '../../controllers/ficha_controller/personagem_cubit.dart';
 
 class PaginaSelecaoOrigem extends StatefulWidget {
   final PersonagemState state;
@@ -293,7 +293,10 @@ class _PaginaSelecaoOrigemState extends State<PaginaSelecaoOrigem> {
                             const SizedBox(height: 12),
 
                             // A. Poder Único (Destaque Especial, resolvido via poderUnicoId)
-                            if (origemSelecionada.poderUnico.key.isNotEmpty) ...[
+                            if (origemSelecionada
+                                .poderUnico
+                                .key
+                                .isNotEmpty) ...[
                               _buildCardPoderUnico(
                                 context,
                                 origemSelecionada.poderUnico,
@@ -303,7 +306,9 @@ class _PaginaSelecaoOrigemState extends State<PaginaSelecaoOrigem> {
                             ],
 
                             // B. Perícias Disponíveis
-                            if (origemSelecionada.periciasOpcoes.isNotEmpty) ...[
+                            if (origemSelecionada
+                                .periciasOpcoes
+                                .isNotEmpty) ...[
                               const Text(
                                 "Perícias Disponíveis:",
                                 style: TextStyle(

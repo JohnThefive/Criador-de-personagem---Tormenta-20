@@ -3,7 +3,7 @@ import 'package:t20_creator/domain/entities/equipamento/arma.dart';
 import 'package:t20_creator/domain/entities/equipamento/protecao.dart';
 import 'package:t20_creator/domain/entities/personagem/classe.dart';
 import 'package:t20_creator/domain/entities/personagem/proficiencias.dart';
-import 'package:t20_creator/presentation/controllers/personagem_cubit.dart';
+import 'package:t20_creator/presentation/controllers/ficha_controller/personagem_cubit.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();

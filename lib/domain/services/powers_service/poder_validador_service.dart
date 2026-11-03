@@ -3,7 +3,7 @@ import '../../entities/personagem/classe_do_personagem.dart';
 import '../../entities/personagem/poder.dart';
 import '../data_services/call_poderes.dart';
 import '../data_services/call_pericias.dart';
-import '../motor_modificadores_service.dart';
+import '../ficha_services/motor_modificadores_service.dart';
 import 'aprendizado_magia_service.dart';
 
 class ItemRequisito {
@@ -61,8 +61,8 @@ class PoderValidadorService {
     // impede que seja liberado utilizando o nível ou o slot de outra classe!
     if (!ehPoderGeralOuTormenta) {
       final classesDonas = BancoDePoderes.obterClassesDonasDoPoder(poder.key);
-      final idClasseAtualUpper =
-          classeDoPersonagem.classeDefinicao.idClasse.toUpperCase();
+      final idClasseAtualUpper = classeDoPersonagem.classeDefinicao.idClasse
+          .toUpperCase();
       if (classesDonas.isNotEmpty &&
           !classesDonas.contains(idClasseAtualUpper)) {
         requisitos.add(
@@ -223,7 +223,9 @@ class PoderValidadorService {
     final exigidaNorm = _normalizarTexto(periciaExigida);
     final listaExplicita = <String>[
       ...personagem.periciasTreinadas,
-      ...personagem.classes.expand((c) => c.periciasExclusivasEscolhidas.values),
+      ...personagem.classes.expand(
+        (c) => c.periciasExclusivasEscolhidas.values,
+      ),
     ];
 
     if (listaExplicita.isEmpty) {

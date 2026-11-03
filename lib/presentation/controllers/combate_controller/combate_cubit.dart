@@ -1,10 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../domain/entities/equipamento/arma.dart';
-import '../../domain/entities/combate/combatente.dart';
-import '../../domain/entities/combate/grid_tatico.dart';
-import '../../domain/entities/combate/tipo_acao.dart';
-import '../../domain/services/combate_engine.dart';
-import '../../domain/services/movimento_engine.dart';
+import '../../../domain/entities/equipamento/arma.dart';
+import '../../../domain/entities/combate/combatente.dart';
+import '../../../domain/entities/combate/grid_tatico.dart';
+import '../../../domain/entities/combate/tipo_acao.dart';
+import '../../../domain/services/combate_services/combate_engine.dart';
+import '../../../domain/services/combate_services/movimento_engine.dart';
 import 'combate_state.dart';
 
 class CombateCubit extends Cubit<CombateState> {

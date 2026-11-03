@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t20_creator/domain/entities/habilidades_complexas/linhagem_arcanista.dart';
+import '../../../domain/entities/personagem/classe.dart';
+import '../../../domain/entities/personagem/proficiencias.dart';
 import '../../../domain/services/data_services/call_classes.dart';
 import '../../../domain/services/data_services/call_poderes.dart';
-import '../../controllers/personagem_cubit.dart';
+import '../../../domain/services/powers_service/aprendizado_magia_service.dart';
+import '../../controllers/ficha_controller/personagem_cubit.dart';
 import '../../widgets/rpg_icon.dart';
 
 class PaginaSelecaoClasse extends StatefulWidget {
@@ -202,16 +205,10 @@ class _PaginaSelecaoClasseState extends State<PaginaSelecaoClasse> {
                       ),
                       const SizedBox(height: 16),
 
-                      // Equipamento Inicial
-                      ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.grey[400],
-                        ),
-                        child: const Text(
-                          "Equipamento inicial",
-                          style: TextStyle(color: Colors.black),
-                        ),
+                      // Painel de Proficiências e Equipamentos
+                      _PainelProficienciasEquipamentos(
+                        classe: classeSelecionada,
+                        caminho: caminhoSelecionado,
                       ),
                       const SizedBox(height: 16),
 
@@ -595,3 +592,186 @@ class _LinhagemCard extends StatelessWidget {
     );
   }
 }
+
+class _PainelProficienciasEquipamentos extends StatelessWidget {
+  final Classe classe;
+  final CaminhoDeClasse? caminho;
+
+  const _PainelProficienciasEquipamentos({
+    required this.classe,
+    this.caminho,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    // 1. Armas
+    final temMarciais =
+        classe.proficiencias.contains(TipoProficiencia.armasMarciais);
+    final textoArmas =
+        temMarciais ? 'Armas Marciais e Simples' : 'Apenas Armas Simples';
+
+    // 2. Armaduras e Escudos
+    final ehArcanista = classe.idClasse.trim().toLowerCase() == 'arcanista';
+    final temPesadas =
+        classe.proficiencias.contains(TipoProficiencia.armadurasPesadas);
+    final temLeves =
+        !ehArcanista ||
+        classe.proficiencias.contains(TipoProficiencia.armadurasLeves);
+    final temEscudos = classe.proficiencias.contains(TipoProficiencia.escudos);
+
+    String textoArmaduras;
+    if (!temLeves && !temPesadas && !temEscudos) {
+      textoArmaduras = 'Nenhuma';
+    } else if (temPesadas) {
+      textoArmaduras =
+          temEscudos
+              ? 'Armaduras Leves, Pesadas e Escudos'
+              : 'Armaduras Leves e Pesadas';
+    } else if (temLeves) {
+      textoArmaduras =
+          temEscudos ? 'Armaduras Leves e Escudos' : 'Armaduras Leves';
+    } else {
+      textoArmaduras = 'Escudos';
+    }
+
+    // 3. Conjuração / Foco Mágico
+    final regras = AprendizadoMagiaService.obterRegrasIniciais(
+      classe.idClasse,
+      caminhoId: caminho?.nome,
+    );
+
+    String textoConjuracao;
+    if (regras.isConjurador) {
+      final tipo = regras.tipoMagia == 'arcana' ? 'Arcana' : 'Divina';
+      if (ehArcanista && caminho == null) {
+        textoConjuracao = 'Conjuradora $tipo (atributo-chave: INT ou CAR)';
+      } else if (caminho?.temFocoMagico == true) {
+        textoConjuracao =
+            'Conjuradora $tipo (atributo-chave: ${regras.atributoChave}, requer Foco Mágico)';
+      } else {
+        textoConjuracao =
+            'Conjuradora $tipo (atributo-chave: ${regras.atributoChave})';
+      }
+    } else {
+      textoConjuracao = 'Não-conjuradora';
+    }
+
+    return Container(
+      decoration: BoxDecoration(
+        color: const Color(0xFFF9FAFB),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: const Color(0xFFE5E7EB)),
+      ),
+      padding: const EdgeInsets.all(14),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(
+                Icons.shield_outlined,
+                size: 18,
+                color: Colors.red[800],
+              ),
+              const SizedBox(width: 8),
+              Text(
+                'Proficiências e Equipamentos',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                  color: Colors.red[900],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          _itemInfo(
+            icone: Icons.sports_martial_arts,
+            rotulo: 'Armas',
+            valor: textoArmas,
+          ),
+          const SizedBox(height: 6),
+          _itemInfo(
+            icone: Icons.shield,
+            rotulo: 'Armaduras e Escudos',
+            valor: textoArmaduras,
+          ),
+          const SizedBox(height: 6),
+          _itemInfo(
+            icone: Icons.auto_fix_high,
+            rotulo: 'Conjuração / Foco Mágico',
+            valor: textoConjuracao,
+          ),
+          const SizedBox(height: 10),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+            decoration: BoxDecoration(
+              color: Colors.amber.shade50,
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: Colors.amber.shade200),
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(
+                  Icons.info_outline,
+                  size: 15,
+                  color: Colors.amber.shade900,
+                ),
+                const SizedBox(width: 6),
+                Expanded(
+                  child: Text(
+                    'Você selecionará e equipará suas armas, armadura e escudo na Etapa 6 (Equipamento Inicial).',
+                    style: TextStyle(
+                      fontSize: 11,
+                      color: Colors.brown.shade900,
+                      height: 1.3,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _itemInfo({
+    required IconData icone,
+    required String rotulo,
+    required String valor,
+  }) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Icon(icone, size: 14, color: const Color(0xFF6B7280)),
+        const SizedBox(width: 6),
+        Expanded(
+          child: Text.rich(
+            TextSpan(
+              children: [
+                TextSpan(
+                  text: '$rotulo: ',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12,
+                    color: Color(0xFF374151),
+                  ),
+                ),
+                TextSpan(
+                  text: valor,
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: Color(0xFF1F2937),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+

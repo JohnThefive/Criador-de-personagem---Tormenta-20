@@ -12,7 +12,7 @@ import 'package:t20_creator/domain/entities/combate/combatente.dart';
 import 'package:t20_creator/domain/services/data_services/call_classes.dart';
 import 'package:t20_creator/domain/services/data_services/call_companheiros.dart';
 import 'package:t20_creator/domain/services/data_services/call_formas_selvagens.dart';
-import 'package:t20_creator/domain/services/personagem_storage_service.dart';
+import 'package:t20_creator/domain/services/ficha_services/personagem_storage_service.dart';
 
 void main() {
   setUpAll(() async {

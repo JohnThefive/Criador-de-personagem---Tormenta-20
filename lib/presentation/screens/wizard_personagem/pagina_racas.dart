@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../domain/entities/personagem/poder.dart';
 import '../../../domain/entities/personagem/raca.dart';
-import '../../controllers/personagem_cubit.dart';
+import '../../controllers/ficha_controller/personagem_cubit.dart';
 import '../../../domain/services/data_services/call_pericias.dart';
 import '../../../domain/services/data_services/call_poderes.dart';
 import '../../../domain/services/data_services/call_racas.dart';
@@ -275,7 +275,8 @@ class _PaginaSelecaoRacaState extends State<PaginaSelecaoRaca> {
                                 avatar: const Icon(Icons.touch_app, size: 16),
                               ),
 
-                            if (racaSelecionada.id.toLowerCase() == 'lefou') ...[
+                            if (racaSelecionada.id.toLowerCase() ==
+                                'lefou') ...[
                               const SizedBox(height: 16),
                               _buildCardDeformidadeLefou(context),
                             ],

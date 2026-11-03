@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import '../../domain/entities/personagem/personagem.dart';
+import '../../../domain/entities/personagem/personagem.dart';
 
 class FichaState extends Equatable {
   final Personagem personagem;
@@ -29,9 +29,5 @@ class FichaState extends Equatable {
   }
 
   @override
-  List<Object?> get props => [
-    personagem,
-    mensagemErro,
-    mensagemSucesso,
-  ];
+  List<Object?> get props => [personagem, mensagemErro, mensagemSucesso];
 }
