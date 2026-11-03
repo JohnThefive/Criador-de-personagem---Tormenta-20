@@ -36,6 +36,9 @@ class PersonagemStorageService implements IPersonagemRepository {
 
   @override
   Future<Personagem?> obterPorId(String id) async {
+    if (kIsWeb) {
+      return _memoriaWeb[id];
+    }
     final todos = await carregarTodos();
     try {
       return todos.firstWhere((p) => p.id == id);
@@ -47,11 +50,13 @@ class PersonagemStorageService implements IPersonagemRepository {
   @override
   Future<void> excluir(String id) => excluirPersonagem(id);
 
+  static final Map<String, Personagem> _memoriaWeb = {};
   static Directory? _cachedDiretorioPersonagens;
   static Directory? _cachedDiretorioFotos;
 
   @visibleForTesting
   static void limparCacheDiretorio() {
+    _memoriaWeb.clear();
     _cachedDiretorioPersonagens = null;
     _cachedDiretorioFotos = null;
   }
@@ -104,6 +109,9 @@ class PersonagemStorageService implements IPersonagemRepository {
     String id,
     String caminhoOrigem,
   ) async {
+    if (kIsWeb) {
+      return caminhoOrigem;
+    }
     final pasta = await _getDiretorioFotos();
     final destino = File('${pasta.path}/$id.jpg');
     final origem = File(caminhoOrigem);
@@ -113,6 +121,7 @@ class PersonagemStorageService implements IPersonagemRepository {
 
   // Exclui o arquivo de foto do personagem caso exista
   static Future<void> excluirFotoPersonagem(String id) async {
+    if (kIsWeb) return;
     final pasta = await _getDiretorioFotos();
     final foto = File('${pasta.path}/$id.jpg');
     if (foto.existsSync()) {
@@ -122,6 +131,10 @@ class PersonagemStorageService implements IPersonagemRepository {
 
   // 1. SALVAR PERSONAGEM
   static Future<void> salvarPersonagem(Personagem p) async {
+    if (kIsWeb) {
+      _memoriaWeb[p.id] = p;
+      return;
+    }
     final pasta = await _getDiretorioPersonagens();
     final arquivoFinal = File('${pasta.path}/personagem_${p.id}.json');
     final arquivoTmp = File('${pasta.path}/personagem_${p.id}.json.tmp');
@@ -136,6 +149,9 @@ class PersonagemStorageService implements IPersonagemRepository {
 
   // 2. CARREGAR TODOS OS PERSONAGENS SALVOS
   static Future<List<Personagem>> carregarTodos() async {
+    if (kIsWeb) {
+      return _memoriaWeb.values.toList();
+    }
     final pasta = await _getDiretorioPersonagens();
     final entidades = await pasta.list().toList();
     final arquivos = entidades.whereType<File>().where(
@@ -170,6 +186,10 @@ class PersonagemStorageService implements IPersonagemRepository {
 
   // 3. EXCLUIR PERSONAGEM
   static Future<void> excluirPersonagem(String id) async {
+    if (kIsWeb) {
+      _memoriaWeb.remove(id);
+      return;
+    }
     final pasta = await _getDiretorioPersonagens();
     final arquivo = File('${pasta.path}/personagem_$id.json');
     if (await arquivo.exists()) {

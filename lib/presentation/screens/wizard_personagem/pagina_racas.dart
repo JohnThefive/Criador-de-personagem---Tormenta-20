@@ -86,92 +86,100 @@ class _PaginaSelecaoRacaState extends State<PaginaSelecaoRaca> {
                 width: _menuAberto ? 130 : 0,
                 color: Colors.red[600],
                 child: ClipRect(
-                  child: Column(
-                    children: [
-                      const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(
-                          "Escolha Uma Raça",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 12,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      const Divider(color: Colors.white54),
-                      Expanded(
-                        child: ListView.builder(
-                          itemCount: BancoDeRacas.todas.length,
-                          itemBuilder: (context, index) {
-                            final raca = BancoDeRacas.todas[index];
-                            final isSelected =
-                                racaSelecionada?.nome == raca.nome;
-
-                            return GestureDetector(
-                              onTap: () {
-                                context.read<PersonagemCubit>().selecionarRaca(
-                                  raca,
-                                );
-                                if (raca.ehFlexivel) {
-                                  // Chama a função Atualizando atributos
-                                  _mostrarSeletorDeAtributos(context, raca);
-                                }
-                              },
-                              child: Container(
-                                margin: const EdgeInsets.symmetric(
-                                  horizontal: 6,
-                                  vertical: 4,
-                                ),
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 8,
-                                  horizontal: 6,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: isSelected
-                                      ? Colors.grey[400]
-                                      : Colors.transparent,
-                                  borderRadius: BorderRadius.circular(16),
-                                ),
-                                child: Row(
-                                  children: [
-                                    CircleAvatar(
-                                      radius: 12,
-                                      backgroundColor: isSelected
-                                          ? Colors.brown.shade900
-                                          : Colors.red.shade900,
-                                      child: RpgIcon(
-                                        iconName: raca.icone,
-                                        size: 14,
-                                        color: isSelected
-                                            ? Colors.amber
-                                            : Colors.white,
-                                      ),
-                                    ),
-                                    const SizedBox(width: 6),
-                                    Expanded(
-                                      child: Text(
-                                        raca.nome,
-                                        style: TextStyle(
-                                          color: isSelected
-                                              ? Colors.black
-                                              : Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 13,
-                                        ),
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                  child: OverflowBox(
+                    minWidth: 0,
+                    maxWidth: 130,
+                    alignment: Alignment.topLeft,
+                    child: SizedBox(
+                      width: 130,
+                      child: Column(
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text(
+                              "Escolha Uma Raça",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12,
                               ),
-                            );
-                          },
-                        ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          const Divider(color: Colors.white54),
+                          Expanded(
+                            child: ListView.builder(
+                              itemCount: BancoDeRacas.todas.length,
+                              itemBuilder: (context, index) {
+                                final raca = BancoDeRacas.todas[index];
+                                final isSelected =
+                                    racaSelecionada?.nome == raca.nome;
+
+                                return GestureDetector(
+                                  onTap: () {
+                                    context.read<PersonagemCubit>().selecionarRaca(
+                                      raca,
+                                    );
+                                    if (raca.ehFlexivel) {
+                                      // Chama a função Atualizando atributos
+                                      _mostrarSeletorDeAtributos(context, raca);
+                                    }
+                                  },
+                                  child: Container(
+                                    margin: const EdgeInsets.symmetric(
+                                      horizontal: 6,
+                                      vertical: 4,
+                                    ),
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 8,
+                                      horizontal: 6,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: isSelected
+                                          ? Colors.grey[400]
+                                          : Colors.transparent,
+                                      borderRadius: BorderRadius.circular(16),
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        CircleAvatar(
+                                          radius: 12,
+                                          backgroundColor: isSelected
+                                              ? Colors.brown.shade900
+                                              : Colors.red.shade900,
+                                          child: RpgIcon(
+                                            iconName: raca.icone,
+                                            size: 14,
+                                            color: isSelected
+                                                ? Colors.amber
+                                                : Colors.white,
+                                          ),
+                                        ),
+                                        const SizedBox(width: 6),
+                                        Expanded(
+                                          child: Text(
+                                            raca.nome,
+                                            style: TextStyle(
+                                              color: isSelected
+                                                  ? Colors.black
+                                                  : Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 13,
+                                            ),
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
                 ),
               ),

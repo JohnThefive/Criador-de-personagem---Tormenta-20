@@ -44,20 +44,26 @@ class _PaginaSelecaoClasseState extends State<PaginaSelecaoClasse> {
           width: _menuAberto ? 130 : 0,
           color: Colors.red[600],
           child: ClipRect(
-            child: Column(
-              children: [
-                const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text(
-                    "Escolha Uma Classe",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12,
+            child: OverflowBox(
+              minWidth: 0,
+              maxWidth: 130,
+              alignment: Alignment.topLeft,
+              child: SizedBox(
+                width: 130,
+                child: Column(
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        "Escolha Uma Classe",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
                     ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
                 const Divider(color: Colors.white54),
                 Expanded(
                   child: ListView.builder(
@@ -128,8 +134,10 @@ class _PaginaSelecaoClasseState extends State<PaginaSelecaoClasse> {
             ),
           ),
         ),
+      ),
+    ),
 
-        // BOTÃO DE TOGGLE
+    // BOTÃO DE TOGGLE
         GestureDetector(
           onTap: () {
             setState(() {

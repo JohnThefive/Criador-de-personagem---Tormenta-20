@@ -1,8 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../domain/entities/personagem/personagem.dart';
 import '../../../domain/repositories/i_personagem_repository.dart';
 import '../../../domain/services/data_services/catalogo_service.dart';
 import '../../../domain/services/ficha_services/personagem_storage_service.dart';
+import '../../../helpers/debug_mock_character.dart';
 
 // Estado da Home (apenas o necessário)
 class HomeState {
@@ -23,11 +25,16 @@ class HomeState {
 class HomeCubit extends Cubit<HomeState> {
   final IPersonagemRepository _repository;
   final Future<void>? _catalogosFuture;
+  final bool _autoSeedDebug;
 
-  HomeCubit({IPersonagemRepository? repository, Future<void>? catalogosFuture})
-    : _repository = repository ?? const PersonagemStorageService(),
-      _catalogosFuture = catalogosFuture ?? CatalogoService.future,
-      super(const HomeState(personagens: [], carregando: true)) {
+  HomeCubit({
+    IPersonagemRepository? repository,
+    Future<void>? catalogosFuture,
+    bool? autoSeedDebug,
+  }) : _repository = repository ?? const PersonagemStorageService(),
+       _catalogosFuture = catalogosFuture ?? CatalogoService.future,
+       _autoSeedDebug = autoSeedDebug ?? (kDebugMode && repository == null),
+       super(const HomeState(personagens: [], carregando: true)) {
     carregarPersonagensReais();
   }
 
@@ -37,9 +44,19 @@ class HomeCubit extends Cubit<HomeState> {
       if (_catalogosFuture != null) {
         await _catalogosFuture;
       }
-      final fichas = await _repository.obterTodos();
+      var fichas = await _repository.obterTodos();
+
+      if (_autoSeedDebug && fichas.isEmpty) {
+        final mockHero = DebugMockCharacter.criarPersonagemTeste();
+        await _repository.salvar(mockHero);
+        fichas = await _repository.obterTodos();
+      }
+
       emit(state.copyWith(personagens: fichas, carregando: false));
-    } catch (_) {
+    } catch (e, stack) {
+      if (kDebugMode) {
+        debugPrint('Erro ao carregar personagens no HomeCubit: $e\n$stack');
+      }
       emit(state.copyWith(personagens: [], carregando: false));
     }
   }

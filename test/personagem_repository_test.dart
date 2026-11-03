@@ -107,6 +107,43 @@ void main() {
         await cubitComEspera.close();
       },
     );
+
+    test('Deve criar personagem de teste quando autoSeedDebug for true e repositório vazio', () async {
+      final repoVazio = InMemoryPersonagemRepository();
+      final cubitComSeed = HomeCubit(
+        repository: repoVazio,
+        autoSeedDebug: true,
+      );
+
+      await pumpEventQueue();
+
+      expect(cubitComSeed.state.personagens.length, equals(1));
+      expect(cubitComSeed.state.personagens.first.id, equals('debug_hero'));
+      expect(cubitComSeed.state.personagens.first.nome, contains('Herói de Teste'));
+
+      final salvoNoRepo = await repoVazio.obterPorId('debug_hero');
+      expect(salvoNoRepo, isNotNull);
+
+      await cubitComSeed.close();
+    });
+
+    test('Não deve criar personagem de teste quando repositório já possui fichas', () async {
+      final repoComFicha = InMemoryPersonagemRepository();
+      final existente = Personagem.inicial().copyWith(nome: 'Herói Existente');
+      await repoComFicha.salvar(existente);
+
+      final cubitComSeed = HomeCubit(
+        repository: repoComFicha,
+        autoSeedDebug: true,
+      );
+
+      await pumpEventQueue();
+
+      expect(cubitComSeed.state.personagens.length, equals(1));
+      expect(cubitComSeed.state.personagens.first.nome, equals('Herói Existente'));
+
+      await cubitComSeed.close();
+    });
   });
 
   group('CatalogoService', () {
