@@ -48,34 +48,90 @@ class PersonagemStorageService implements IPersonagemRepository {
   Future<void> excluir(String id) => excluirPersonagem(id);
 
   static Directory? _cachedDiretorioPersonagens;
+  static Directory? _cachedDiretorioFotos;
 
   @visibleForTesting
   static void limparCacheDiretorio() {
     _cachedDiretorioPersonagens = null;
+    _cachedDiretorioFotos = null;
+  }
+
+  @visibleForTesting
+  static void setDiretorioTeste(Directory? dir) {
+    _cachedDiretorioPersonagens = dir;
+  }
+
+  @visibleForTesting
+  static void setDiretorioFotosTeste(Directory? dir) {
+    _cachedDiretorioFotos = dir;
   }
 
   // Retorna a pasta interna onde o app tem permissão de escrita no Android
+  // Retorna a pasta interna onde o app tem permissão de escrita no Android
   static Future<Directory> _getDiretorioPersonagens() async {
+    Directory pasta;
     if (_cachedDiretorioPersonagens != null) {
-      return _cachedDiretorioPersonagens!;
+      pasta = _cachedDiretorioPersonagens!;
+    } else {
+      final appDir = await getApplicationDocumentsDirectory();
+      pasta = Directory('${appDir.path}/personagens');
+      _cachedDiretorioPersonagens = pasta;
     }
-    final appDir = await getApplicationDocumentsDirectory();
-    final pasta = Directory('${appDir.path}/personagens');
     if (!await pasta.exists()) {
       await pasta.create(recursive: true);
     }
-    _cachedDiretorioPersonagens = pasta;
     return pasta;
+  }
+
+  // Retorna a pasta interna de fotos dos personagens
+  static Future<Directory> _getDiretorioFotos() async {
+    Directory pasta;
+    if (_cachedDiretorioFotos != null) {
+      pasta = _cachedDiretorioFotos!;
+    } else {
+      final appDir = await getApplicationDocumentsDirectory();
+      pasta = Directory('${appDir.path}/fotos');
+      _cachedDiretorioFotos = pasta;
+    }
+    if (!await pasta.exists()) {
+      await pasta.create(recursive: true);
+    }
+    return pasta;
+  }
+
+  // Copia a foto do cache temporário para o diretório permanente de documentos
+  static Future<String> salvarFotoPersonagem(
+    String id,
+    String caminhoOrigem,
+  ) async {
+    final pasta = await _getDiretorioFotos();
+    final destino = File('${pasta.path}/$id.jpg');
+    final origem = File(caminhoOrigem);
+    await origem.copy(destino.path);
+    return destino.path;
+  }
+
+  // Exclui o arquivo de foto do personagem caso exista
+  static Future<void> excluirFotoPersonagem(String id) async {
+    final pasta = await _getDiretorioFotos();
+    final foto = File('${pasta.path}/$id.jpg');
+    if (await foto.exists()) {
+      await foto.delete();
+    }
   }
 
   // 1. SALVAR PERSONAGEM
   static Future<void> salvarPersonagem(Personagem p) async {
     final pasta = await _getDiretorioPersonagens();
-    final arquivo = File('${pasta.path}/personagem_${p.id}.json');
+    final arquivoFinal = File('${pasta.path}/personagem_${p.id}.json');
+    final arquivoTmp = File('${pasta.path}/personagem_${p.id}.json.tmp');
 
     // Converte o Personagem em Map e depois em String JSON
     final jsonString = jsonEncode(personagemToMap(p));
-    await arquivo.writeAsString(jsonString);
+
+    // Gravação atômica: grava no .tmp e depois renomeia para o arquivo final
+    await arquivoTmp.writeAsString(jsonString);
+    await arquivoTmp.rename(arquivoFinal.path);
   }
 
   // 2. CARREGAR TODOS OS PERSONAGENS SALVOS
@@ -96,6 +152,17 @@ class PersonagemStorageService implements IPersonagemRepository {
         if (kDebugMode) {
           print("Erro ao carregar personagem do arquivo ${arq.path}: $e");
         }
+        try {
+          final corrompido = File('${arq.path}.corrompido');
+          if (await corrompido.exists()) {
+            await corrompido.delete();
+          }
+          await arq.rename(corrompido.path);
+        } catch (renameErr) {
+          if (kDebugMode) {
+            print("Erro ao mover arquivo corrompido ${arq.path}: $renameErr");
+          }
+        }
       }
     }
     return lista;
@@ -108,6 +175,7 @@ class PersonagemStorageService implements IPersonagemRepository {
     if (await arquivo.exists()) {
       await arquivo.delete();
     }
+    await excluirFotoPersonagem(id);
   }
 
   // MÉTODOS PÚBLICOS DE SERIALIZAÇÃO / DESSERIALIZAÇÃO
@@ -135,6 +203,8 @@ class PersonagemStorageService implements IPersonagemRepository {
       'pvAtual': p.pvAtual,
       'pmAtual': p.pmAtual,
       'experienciaAtual': p.experienciaAtual,
+      'permissaoMestreSubirNivel': p.permissaoMestreSubirNivel,
+      'modoTabletopAtivo': p.modoTabletopAtivo,
       'racaNome': p.raca?.nome,
       'racaId': p.raca?.id,
       'atributosVariaveisRaca': p.atributosVariaveisRaca,
@@ -466,6 +536,9 @@ class PersonagemStorageService implements IPersonagemRepository {
       pvAtual: (map['pvAtual'] as num?)?.toInt(),
       pmAtual: (map['pmAtual'] as num?)?.toInt(),
       experienciaAtual: (map['experienciaAtual'] as num?)?.toInt() ?? 0,
+      permissaoMestreSubirNivel:
+          map['permissaoMestreSubirNivel'] as bool? ?? true,
+      modoTabletopAtivo: map['modoTabletopAtivo'] as bool? ?? false,
       atributos: atribs,
       raca: raca,
       classes: classesList,

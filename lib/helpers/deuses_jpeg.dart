@@ -5,31 +5,31 @@ import 'package:flutter/material.dart';
 String? resolverIconeDeus(String id) {
   final clean = id.toLowerCase().trim();
   final mapa = {
-    'aharadak': 'assets/icons/deuses/aharadak.jpeg',
-    'allihanna': 'assets/icons/deuses/allihanna.jpeg',
-    'arsenal': 'assets/icons/deuses/arsenal.jpeg',
-    'azgher': 'assets/icons/deuses/azgher.jpeg',
-    'asgher': 'assets/icons/deuses/azgher.jpeg',
-    'hyninn': 'assets/icons/deuses/hyninn.jpeg',
-    'kallyadranoch': 'assets/icons/deuses/kallyadranoch.jpeg',
-    'khalmyr': 'assets/icons/deuses/khalmyr.jpeg',
-    'lena': 'assets/icons/deuses/lena.jpeg',
-    'lin-wu': 'assets/icons/deuses/lin-wu.jpeg',
-    'wynna': 'assets/icons/deuses/wynna.jpeg',
-    'lynna': 'assets/icons/deuses/wynna.jpeg',
-    'marah': 'assets/icons/deuses/marah.jpeg',
-    'megalokk': 'assets/icons/deuses/megalokk.jpeg',
-    'nimb': 'assets/icons/deuses/nimb.jpeg',
-    'oceano': 'assets/icons/deuses/oceano.jpeg',
-    'sszzaas': 'assets/icons/deuses/sszzaas.jpeg',
-    'tanna-toh': 'assets/icons/deuses/tanna-toh.jpeg',
-    'tannatoh': 'assets/icons/deuses/tanna-toh.jpeg',
-    'tenebra': 'assets/icons/deuses/tenebra.jpeg',
-    'thwor': 'assets/icons/deuses/thwor.jpeg',
-    'thyatis': 'assets/icons/deuses/thyatis.jpeg',
-    'valkaria': 'assets/icons/deuses/valkaria.jpeg',
+    'aharadak': 'assets/icons/deuses/aharadak.webp',
+    'allihanna': 'assets/icons/deuses/allihanna.webp',
+    'arsenal': 'assets/icons/deuses/arsenal.webp',
+    'azgher': 'assets/icons/deuses/azgher.webp',
+    'asgher': 'assets/icons/deuses/azgher.webp',
+    'hyninn': 'assets/icons/deuses/hyninn.webp',
+    'kallyadranoch': 'assets/icons/deuses/kallyadranoch.webp',
+    'khalmyr': 'assets/icons/deuses/khalmyr.webp',
+    'lena': 'assets/icons/deuses/lena.webp',
+    'lin-wu': 'assets/icons/deuses/lin-wu.webp',
+    'wynna': 'assets/icons/deuses/wynna.webp',
+    'lynna': 'assets/icons/deuses/wynna.webp',
+    'marah': 'assets/icons/deuses/marah.webp',
+    'megalokk': 'assets/icons/deuses/megalokk.webp',
+    'nimb': 'assets/icons/deuses/nimb.webp',
+    'oceano': 'assets/icons/deuses/oceano.webp',
+    'sszzaas': 'assets/icons/deuses/sszzaas.webp',
+    'tanna-toh': 'assets/icons/deuses/tanna-toh.webp',
+    'tannatoh': 'assets/icons/deuses/tanna-toh.webp',
+    'tenebra': 'assets/icons/deuses/tenebra.webp',
+    'thwor': 'assets/icons/deuses/thwor.webp',
+    'thyatis': 'assets/icons/deuses/thyatis.webp',
+    'valkaria': 'assets/icons/deuses/valkaria.webp',
   };
-  return mapa[clean] ?? 'assets/icons/deuses/$clean.jpeg';
+  return mapa[clean] ?? 'assets/icons/deuses/$clean.webp';
 }
 
 // Widget de simbolo de divindade
@@ -68,6 +68,7 @@ class SimboloDivindade extends StatelessWidget {
             ? Image.asset(
                 assetPath,
                 fit: BoxFit.cover,
+                cacheWidth: (tamanho * 3).round(),
                 errorBuilder: (_, _, _) => Icon(
                   Icons.auto_awesome,
                   size: tamanho * 0.5,

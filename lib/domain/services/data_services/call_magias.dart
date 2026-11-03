@@ -1,5 +1,7 @@
+import 'dart:collection';
 import 'dart:convert';
-import 'dart:io';
+import 'dart:isolate';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:t20_creator/domain/entities/magia/magia.dart';
 
@@ -7,10 +9,7 @@ class BancoDeMagias {
   static final List<Magia> _todas = [];
   static final Map<String, Magia> _indexPorId = {};
 
-  static List<Magia> get todas {
-    _garantirCarregamento();
-    return List.unmodifiable(_todas);
-  }
+  static List<Magia> get todas => UnmodifiableListView(_todas);
 
   static void _reconstruirIndex() {
     _indexPorId.clear();
@@ -21,24 +20,11 @@ class BancoDeMagias {
     }
   }
 
-  static void _garantirCarregamento() {
-    if (_todas.isEmpty) {
-      const circulos = [1, 2, 3, 4, 5];
-      for (var circulo in circulos) {
-        try {
-          final file = File('assets/data/magias/${circulo}_circulo.json');
-          if (file.existsSync()) {
-            final raw = file.readAsStringSync();
-            final List<dynamic> data = json.decode(raw) as List<dynamic>;
-            final magiasCirculo = data
-                .map((item) => Magia.fromJson(item as Map<String, dynamic>))
-                .toList();
-            _todas.addAll(magiasCirculo);
-          }
-        } catch (_) {}
-      }
-      _reconstruirIndex();
-    }
+  static List<Magia> _parsearMagias(String raw) {
+    final List<dynamic> data = json.decode(raw) as List<dynamic>;
+    return data
+        .map((item) => Magia.fromJson(item as Map<String, dynamic>))
+        .toList();
   }
 
   static Future<void> carregarMagias() async {
@@ -49,29 +35,27 @@ class BancoDeMagias {
 
     for (var circulo in circulos) {
       try {
-        String response;
-        try {
-          response = await rootBundle.loadString(
-            'assets/data/magias/${circulo}_circulo.json',
-          );
-        } catch (_) {
-          final file = File('assets/data/magias/${circulo}_circulo.json');
-          if (!file.existsSync()) continue;
-          response = file.readAsStringSync();
-        }
-        final List<dynamic> data = json.decode(response) as List<dynamic>;
+        final response = await rootBundle.loadString(
+          'assets/data/magias/${circulo}_circulo.json',
+          cache: false,
+        );
 
-        final magiasCirculo = data
-            .map((item) => Magia.fromJson(item as Map<String, dynamic>))
-            .toList();
+        final List<Magia> magiasCirculo;
+        if (circulo == 1) {
+          magiasCirculo = await Isolate.run(() => _parsearMagias(response));
+        } else {
+          magiasCirculo = _parsearMagias(response);
+        }
         _todas.addAll(magiasCirculo);
-      } catch (e) {
-        // Caso algum círculo ainda não tenha arquivo criado, o app não quebra
+      } catch (e, stack) {
+        debugPrint('Erro ao carregar ${circulo}_circulo.json: $e\n$stack');
+        assert(false, 'Erro ao carregar ${circulo}_circulo.json: $e');
       }
     }
     _reconstruirIndex();
   }
 
+  @visibleForTesting
   static void carregarParaTestes(List<Magia> magias) {
     _todas.clear();
     _todas.addAll(magias);
@@ -82,7 +66,6 @@ class BancoDeMagias {
     required String tipo,
     required int circuloMaximo,
   }) {
-    _garantirCarregamento();
     return _todas
         .where(
           (m) =>
@@ -93,7 +76,6 @@ class BancoDeMagias {
   }
 
   static Magia getById(String id) {
-    _garantirCarregamento();
     final encontrada = _indexPorId[id] ??
         _indexPorId[id.toLowerCase()] ??
         _indexPorId[id.toUpperCase()];

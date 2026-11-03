@@ -1,0 +1,7 @@
+# Exemplo de configuração de assinatura de release para Android
+# Copie este arquivo para 'android/key.properties' e preencha com seus dados reais:
+#
+# storePassword=sua_senha_da_keystore
+# keyPassword=sua_senha_da_chave
+# keyAlias=seu_alias
+# storeFile=/caminho/completo/ou/relativo/para/upload-keystore.jks

@@ -1,41 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:t20_creator/domain/services/data_services/call_poderes.dart';
-import 'package:t20_creator/domain/services/data_services/call_armas.dart';
-import 'package:t20_creator/domain/services/data_services/call_armaduras.dart';
-import 'package:t20_creator/domain/services/data_services/call_racas.dart';
-import 'package:t20_creator/domain/services/data_services/call_classes.dart';
-import 'package:t20_creator/domain/services/data_services/call_origens.dart';
-import 'package:t20_creator/domain/services/data_services/call_formas_selvagens.dart';
-import 'package:t20_creator/domain/services/data_services/call_companheiros.dart';
-import 'package:t20_creator/domain/services/data_services/call_efeitos_golpe_pessoal.dart';
-import 'package:t20_creator/domain/services/data_services/call_regras_engenhocas.dart';
-import 'package:t20_creator/domain/services/data_services/call_montaria_sagrada.dart';
-import 'package:t20_creator/domain/services/data_services/call_divindades.dart';
-import 'package:t20_creator/domain/services/data_services/call_magias.dart';
-import 'package:t20_creator/domain/services/data_services/call_pericias.dart';
+import 'package:t20_creator/domain/services/data_services/catalogo_service.dart';
 
 // Importe seus arquivos
 import 'presentation/controllers/home_cubit.dart';
 import 'presentation/controllers/personagem_cubit.dart';
 import 'presentation/screens/home/home_screen.dart';
 
-void main() async {
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  await BancoDeRacas.carregar();
-  await BancoDeClasses.carregar();
-  await BancoDeOrigens.carregar();
-  await BancoDePoderes.carregar();
-  await BancoDeArmas.carregar();
-  await BancoDeArmaduras.carregar();
-  await BancoDeFormasSelvagens.carregar();
-  await BancoDeCompanheiros.carregar();
-  await BancoDeEfeitosGolpePessoal.carregar();
-  await BancoDeRegrasEngenhocas.carregar();
-  await BancoDeRegrasMontariaSagrada.carregar();
-  await BancoDeDivindades.carregar();
-  await BancoDeMagias.carregarMagias();
-  await BancoDePericias.carregarPericias();
+  CatalogoService.carregarTodos();
   runApp(const T20App());
 }
 

@@ -2,9 +2,15 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:t20_creator/domain/entities/personagem/origem.dart';
 import 'package:t20_creator/domain/services/data_services/call_origens.dart';
 import 'package:t20_creator/domain/services/data_services/call_poderes.dart';
+import 'package:t20_creator/domain/services/data_services/catalogo_service.dart';
 import 'package:t20_creator/presentation/controllers/personagem_cubit.dart';
 
 void main() {
+  setUpAll(() async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    await CatalogoService.carregarTodos();
+  });
+
   group('BancoDeOrigens, BancoDePoderesGerais e Entidade Origem', () {
     test(
       'carrega catalogo a partir do JSON normalizado e resolve poderUnicoId e poderesGeraisOpcoesIds',

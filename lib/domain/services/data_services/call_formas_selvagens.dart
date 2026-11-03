@@ -1,5 +1,6 @@
+import 'dart:collection';
 import 'dart:convert';
-import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import '../../entities/habilidades_complexas/forma_selvagem.dart';
 
@@ -31,44 +32,32 @@ class BancoDeFormasSelvagens {
   }
 
   static Future<void> carregar() async {
-    final raw = await rootBundle.loadString(
-      'assets/data/classes_data/especifico_classe/druida/formas_selvagens.json',
-    );
-    _dados = _parse(raw);
-    _reconstruirIndex();
-  }
-
-  static List<FormaSelvagem> get todas {
-    if (_dados.isEmpty) {
-      try {
-        final file = File(
-          'assets/data/classes_data/especifico_classe/druida/formas_selvagens.json',
-        );
-        if (file.existsSync()) {
-          _dados = _parse(file.readAsStringSync());
-          _reconstruirIndex();
-        }
-      } catch (_) {}
+    try {
+      final raw = await rootBundle.loadString(
+        'assets/data/classes_data/especifico_classe/druida/formas_selvagens.json',
+        cache: false,
+      );
+      _dados = _parse(raw);
+      _reconstruirIndex();
+    } catch (e, stack) {
+      debugPrint('Erro ao carregar formas_selvagens.json: $e\n$stack');
+      assert(false, 'Erro ao carregar formas_selvagens.json: $e');
     }
-    return List.unmodifiable(_dados);
   }
 
+  static List<FormaSelvagem> get todas => UnmodifiableListView(_dados);
+
+  @visibleForTesting
   static void carregarParaTestes(List<FormaSelvagem> formas) {
     _dados = List.from(formas);
     _reconstruirIndex();
   }
 
   static FormaSelvagem? getByKey(String key) {
-    if (_dados.isEmpty) {
-      final _ = todas;
-    }
     return _indexPorChave[key.trim().toUpperCase()];
   }
 
   static FormaSelvagem? getPorNome(String nome) {
-    if (_dados.isEmpty) {
-      final _ = todas;
-    }
     return _indexPorNome[nome.trim().toLowerCase()];
   }
 }

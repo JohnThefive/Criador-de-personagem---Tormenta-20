@@ -1,5 +1,5 @@
+import 'dart:collection';
 import 'dart:convert';
-import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import '../../entities/personagem/origem.dart';
@@ -65,19 +65,7 @@ class BancoDeOrigens {
   static Future<String> _carregarAssetComFallback(List<String> caminhos) async {
     for (final path in caminhos) {
       try {
-        return await rootBundle.loadString(path);
-      } catch (_) {}
-    }
-    return '';
-  }
-
-  static String _carregarArquivoSyncComFallback(List<String> caminhos) {
-    for (final path in caminhos) {
-      try {
-        final file = File(path);
-        if (file.existsSync()) {
-          return file.readAsStringSync();
-        }
+        return await rootBundle.loadString(path, cache: false);
       } catch (_) {}
     }
     return '';
@@ -96,8 +84,14 @@ class BancoDeOrigens {
         _catalogoHabilidadesUnicas = _parsearCatalogoHabilidades(
           rawHabilidades,
         );
+      } else {
+        debugPrint('Aviso: Nenhum arquivo de habilidades de origem encontrado.');
+        assert(false, 'Nenhum arquivo de habilidades de origem encontrado.');
       }
-    } catch (_) {}
+    } catch (e, stack) {
+      debugPrint('Erro ao carregar habilidades de origem: $e\n$stack');
+      assert(false, 'Erro ao carregar habilidades de origem: $e');
+    }
 
     try {
       final rawOrigens = await _carregarAssetComFallback([
@@ -107,34 +101,14 @@ class BancoDeOrigens {
       if (rawOrigens.isNotEmpty) {
         _dados = _parsearOrigens(rawOrigens, _catalogoHabilidadesUnicas);
         _reconstruirIndex();
+      } else {
+        debugPrint('Aviso: Nenhum arquivo de origens encontrado.');
+        assert(false, 'Nenhum arquivo de origens encontrado.');
       }
-    } catch (_) {}
-  }
-
-  static List<Origem> _obterDados() {
-    if (_dados.isEmpty) {
-      try {
-        final rawHabilidades = _carregarArquivoSyncComFallback([
-          'assets/data/origens/habilidades_origens.json',
-          'assets/data/origens/catalogo_habilidades_origem_basico.json',
-        ]);
-        if (rawHabilidades.isNotEmpty) {
-          _catalogoHabilidadesUnicas = _parsearCatalogoHabilidades(
-            rawHabilidades,
-          );
-        }
-
-        final rawOrigens = _carregarArquivoSyncComFallback([
-          'assets/data/origens/origens.json',
-          'assets/data/banco_origens.json',
-        ]);
-        if (rawOrigens.isNotEmpty) {
-          _dados = _parsearOrigens(rawOrigens, _catalogoHabilidadesUnicas);
-          _reconstruirIndex();
-        }
-      } catch (_) {}
+    } catch (e, stack) {
+      debugPrint('Erro ao carregar origens.json: $e\n$stack');
+      assert(false, 'Erro ao carregar origens.json: $e');
     }
-    return _dados;
   }
 
   /// Método para injetar dados durante a execução de testes automatizados
@@ -150,27 +124,24 @@ class BancoDeOrigens {
     _reconstruirIndex();
   }
 
-  /// Retorna todas as origens disponíveis (imutável)
-  static List<Origem> get todas => List.unmodifiable(_obterDados());
+  /// Retorna todas as origens disponíveis (imutável, sem cópia)
+  static List<Origem> get todas => UnmodifiableListView(_dados);
 
   /// Retorna se os dados já foram carregados
-  static bool get estaCarregado => _obterDados().isNotEmpty;
+  static bool get estaCarregado => _dados.isNotEmpty;
 
   /// Busca uma origem pelo ID único em O(1) (ex: "acolito", "soldado")
   static Origem? getById(String id) {
-    _obterDados();
     return _indexPorId[id.trim().toLowerCase()];
   }
 
   /// Busca uma origem pelo nome em O(1) (ex: "Acólito", "Soldado")
   static Origem? getByNome(String nome) {
-    _obterDados();
     return _indexPorNome[nome.trim().toLowerCase()];
   }
 
   /// Resolve os detalhes de uma habilidade única de origem pelo seu `poderUnicoId`
   static Poder? getHabilidadeUnica(String poderUnicoId) {
-    _obterDados();
     final norm = poderUnicoId.trim().toLowerCase();
     return _catalogoHabilidadesUnicas[norm] ??
         _catalogoHabilidadesUnicas[norm.replaceAll('-', '_')] ??

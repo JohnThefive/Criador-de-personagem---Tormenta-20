@@ -1,6 +1,8 @@
+import 'dart:async';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:t20_creator/domain/entities/personagem/personagem.dart';
 import 'package:t20_creator/domain/repositories/i_personagem_repository.dart';
+import 'package:t20_creator/domain/services/data_services/catalogo_service.dart';
 import 'package:t20_creator/presentation/controllers/home_cubit.dart';
 
 /// Implementação em memória de [IPersonagemRepository] usada para testes unitários,
@@ -74,5 +76,43 @@ void main() {
       final excluido = await repository.obterPorId(p.id);
       expect(excluido, isNull);
     });
+
+    test('Deve aguardar catalogosFuture antes de concluir o carregamento', () async {
+      final completer = Completer<void>();
+      final p = Personagem.inicial().copyWith(nome: 'Ezren');
+      await repository.salvar(p);
+
+      final cubitComEspera = HomeCubit(
+        repository: repository,
+        catalogosFuture: completer.future,
+      );
+
+      // Enquanto o catalogosFuture estiver pendente, mantém loading e lista vazia
+      expect(cubitComEspera.state.carregando, isTrue);
+      expect(cubitComEspera.state.personagens, isEmpty);
+
+      // Conclui o carregamento dos catálogos
+      completer.complete();
+      await pumpEventQueue();
+
+      expect(cubitComEspera.state.carregando, isFalse);
+      expect(cubitComEspera.state.personagens.length, equals(1));
+      expect(cubitComEspera.state.personagens.first.nome, equals('Ezren'));
+
+      await cubitComEspera.close();
+    });
+  });
+
+  group('CatalogoService', () {
+    tearDown(() {
+      CatalogoService.resetar();
+    });
+
+    test('resetar e obter future compartilhado', () {
+      final mockFuture = Future<void>.value();
+      CatalogoService.resetar(mockFuture);
+      expect(CatalogoService.future, equals(mockFuture));
+    });
   });
 }
+

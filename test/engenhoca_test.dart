@@ -1,8 +1,5 @@
-import 'dart:convert';
-import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:t20_creator/domain/entities/personagem/atributos.dart';
-import 'package:t20_creator/domain/entities/personagem/classe.dart';
 import 'package:t20_creator/domain/entities/personagem/classe_do_personagem.dart';
 import 'package:t20_creator/domain/entities/habilidades_complexas/engenhoca.dart';
 import 'package:t20_creator/domain/entities/personagem/personagem.dart';
@@ -10,28 +7,15 @@ import 'package:t20_creator/domain/entities/personagem/poder.dart';
 import 'package:t20_creator/domain/services/data_services/call_pericias.dart';
 import 'package:t20_creator/domain/services/data_services/call_classes.dart';
 import 'package:t20_creator/domain/services/data_services/call_regras_engenhocas.dart';
+import 'package:t20_creator/domain/services/data_services/catalogo_service.dart';
 import 'package:t20_creator/domain/services/personagem_storage_service.dart';
 import 'package:t20_creator/domain/services/poderes_e_magias/poder_validador_service.dart';
 import 'package:t20_creator/domain/services/regras_carga_service.dart';
 
 void main() {
-  setUpAll(() {
-    final arquivoClasses = File('assets/data/classes_data/banco_classe.json');
-    if (arquivoClasses.existsSync()) {
-      final jsonList = jsonDecode(arquivoClasses.readAsStringSync()) as List;
-      BancoDeClasses.carregarParaTestes(
-        jsonList.map((e) => Classe.fromJson(e)).toList(),
-      );
-    }
-
-    final arquivoRegras = File(
-      'assets/data/classes_data/especifico_classe/inventor/regras_engenhocas.json',
-    );
-    if (arquivoRegras.existsSync()) {
-      final jsonMap =
-          jsonDecode(arquivoRegras.readAsStringSync()) as Map<String, dynamic>;
-      BancoDeRegrasEngenhocas.carregarParaTestes(jsonMap);
-    }
+  setUpAll(() async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    await CatalogoService.carregarTodos();
   });
 
   group('Engenhoca - Payload e Serialização', () {

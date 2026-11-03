@@ -1,5 +1,6 @@
+import 'dart:collection';
 import 'dart:convert';
-import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import '../../entities/habilidades_complexas/golpe_pessoal.dart';
 
@@ -26,37 +27,28 @@ class BancoDeEfeitosGolpePessoal {
   }
 
   static Future<void> carregar() async {
-    final raw = await rootBundle.loadString(
-      'assets/data/classes_data/especifico_classe/guerreiro/efeitos_golpe_pessoal.json',
-    );
-    _dados = _parse(raw);
-    _reconstruirIndex();
-  }
-
-  static List<EfeitoGolpePessoal> get todos {
-    if (_dados.isEmpty) {
-      try {
-        final file = File(
-          'assets/data/classes_data/especifico_classe/guerreiro/efeitos_golpe_pessoal.json',
-        );
-        if (file.existsSync()) {
-          _dados = _parse(file.readAsStringSync());
-          _reconstruirIndex();
-        }
-      } catch (_) {}
+    try {
+      final raw = await rootBundle.loadString(
+        'assets/data/classes_data/especifico_classe/guerreiro/efeitos_golpe_pessoal.json',
+        cache: false,
+      );
+      _dados = _parse(raw);
+      _reconstruirIndex();
+    } catch (e, stack) {
+      debugPrint('Erro ao carregar efeitos_golpe_pessoal.json: $e\n$stack');
+      assert(false, 'Erro ao carregar efeitos_golpe_pessoal.json: $e');
     }
-    return List.unmodifiable(_dados);
   }
 
+  static List<EfeitoGolpePessoal> get todos => UnmodifiableListView(_dados);
+
+  @visibleForTesting
   static void carregarParaTestes(List<EfeitoGolpePessoal> efeitos) {
     _dados = List.from(efeitos);
     _reconstruirIndex();
   }
 
   static EfeitoGolpePessoal? getByKey(String key) {
-    if (_dados.isEmpty) {
-      final _ = todos;
-    }
     return _indexPorChave[key.trim().toUpperCase()];
   }
 

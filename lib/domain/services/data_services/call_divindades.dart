@@ -1,5 +1,6 @@
+import 'dart:collection';
 import 'dart:convert';
-import 'dart:io';
+import 'dart:isolate';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import '../../entities/personagem/divindade.dart';
@@ -68,22 +69,32 @@ class BancoDeDivindades {
       try {
         rawPoderes = await rootBundle.loadString(
           'assets/data/deuses/poderes_divinos.json',
+          cache: false,
         );
       } catch (_) {
         rawPoderes = await rootBundle.loadString(
           'assets/data/deuses/catalogo_poderes_concedidos.json',
+          cache: false,
         );
       }
-      _catalogoPoderes = _parsearCatalogoPoderes(rawPoderes);
-    } catch (_) {}
+      _catalogoPoderes =
+          await Isolate.run(() => _parsearCatalogoPoderes(rawPoderes));
+    } catch (e, stack) {
+      debugPrint('Erro ao carregar poderes divinos: $e\n$stack');
+      assert(false, 'Erro ao carregar poderes divinos: $e');
+    }
 
     try {
       final rawDeuses = await rootBundle.loadString(
         'assets/data/deuses/deuses.json',
+        cache: false,
       );
       _dados = _parsearJson(rawDeuses, _catalogoPoderes);
       _reconstruirIndex();
-    } catch (_) {}
+    } catch (e, stack) {
+      debugPrint('Erro ao carregar deuses.json: $e\n$stack');
+      assert(false, 'Erro ao carregar deuses.json: $e');
+    }
   }
 
   /// Método para injetar divindades e catálogo diretamente durante testes automatizados
@@ -99,53 +110,24 @@ class BancoDeDivindades {
     _reconstruirIndex();
   }
 
-  /// Fallback síncrono para execução em ambiente de testes unitários
-  static List<Divindade> _obterDados() {
-    if (_dados.isEmpty) {
-      try {
-        File filePoderes = File('assets/data/deuses/poderes_divinos.json');
-        if (!filePoderes.existsSync()) {
-          filePoderes = File(
-            'assets/data/deuses/catalogo_poderes_concedidos.json',
-          );
-        }
-        if (filePoderes.existsSync()) {
-          final rawPoderes = filePoderes.readAsStringSync();
-          _catalogoPoderes = _parsearCatalogoPoderes(rawPoderes);
-        }
-
-        final fileDeuses = File('assets/data/deuses/deuses.json');
-        if (fileDeuses.existsSync()) {
-          final rawDeuses = fileDeuses.readAsStringSync();
-          _dados = _parsearJson(rawDeuses, _catalogoPoderes);
-          _reconstruirIndex();
-        }
-      } catch (_) {}
-    }
-    return _dados;
-  }
-
-  /// Retorna a lista de todas as divindades registradas (imutável).
-  static List<Divindade> get todas => List.unmodifiable(_obterDados());
+  /// Retorna a lista de todas as divindades registradas (imutável, sem cópia).
+  static List<Divindade> get todas => UnmodifiableListView(_dados);
 
   /// Indica se os dados já foram carregados
-  static bool get estaCarregado => _obterDados().isNotEmpty;
+  static bool get estaCarregado => _dados.isNotEmpty;
 
   /// Busca uma divindade pelo seu ID único em O(1) (ex: "khalmyr", "valkaria")
   static Divindade? getById(String id) {
-    _obterDados();
     return _indexPorId[id.trim().toLowerCase()];
   }
 
   /// Busca uma divindade pelo seu nome em O(1) (ex: "Khalmyr", "Valkaria")
   static Divindade? getByNome(String nome) {
-    _obterDados();
     return _indexPorNome[nome.trim().toLowerCase()];
   }
 
   /// Busca um poder concedido específico no catálogo pelo seu ID/Key em O(1)
   static Poder? getPoderConcedido(String key) {
-    _obterDados();
     final clean = key.trim().toLowerCase();
     return _catalogoPoderes[clean] ??
         _catalogoPoderes[clean.replaceAll('-', '_')] ??
@@ -154,7 +136,6 @@ class BancoDeDivindades {
 
   /// Retorna todos os poderes únicos do catálogo de poderes concedidos
   static List<Poder> get todosPoderesConcedidos {
-    _obterDados();
     final Set<String> chavesVistas = {};
     final List<Poder> unicos = [];
     for (final p in _catalogoPoderes.values) {
@@ -162,7 +143,7 @@ class BancoDeDivindades {
         unicos.add(p);
       }
     }
-    return List.unmodifiable(unicos);
+    return UnmodifiableListView(unicos);
   }
 
   /// Retorna todos os poderes concedidos de uma divindade

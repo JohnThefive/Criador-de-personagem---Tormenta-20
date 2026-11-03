@@ -13,6 +13,7 @@ import '../../services/data_services/call_montaria_sagrada.dart';
 import '../../services/regras_carga_service.dart';
 import '../../services/motor_modificadores_service.dart';
 import '../../services/motor_multiclasse_service.dart';
+import '../../services/tabela_experiencia_service.dart';
 
 import 'atributos.dart';
 import 'pericias.dart';
@@ -103,6 +104,8 @@ class Personagem {
   final int? _pvAtual;
   final int? _pmAtual;
   final int experienciaAtual;
+  final bool permissaoMestreSubirNivel;
+  final bool modoTabletopAtivo;
 
   final List<String> atributosVariaveisRaca;
 
@@ -169,6 +172,8 @@ class Personagem {
     int? pvAtual,
     int? pmAtual,
     this.experienciaAtual = 0,
+    this.permissaoMestreSubirNivel = true,
+    this.modoTabletopAtivo = false,
   }) : id = id ?? DateTime.now().millisecondsSinceEpoch.toString(),
        poderesConcedidos =
            poderesConcedidos ??
@@ -245,6 +250,8 @@ class Personagem {
       pvAtual: null,
       pmAtual: null,
       experienciaAtual: 0,
+      permissaoMestreSubirNivel: true,
+      modoTabletopAtivo: false,
     );
   }
 
@@ -315,6 +322,8 @@ class Personagem {
     int? pvAtual,
     int? pmAtual,
     int? experienciaAtual,
+    bool? permissaoMestreSubirNivel,
+    bool? modoTabletopAtivo,
   }) {
     return Personagem(
       id: id ?? this.id,
@@ -391,10 +400,45 @@ class Personagem {
       pvAtual: pvAtual ?? _pvAtual,
       pmAtual: pmAtual ?? _pmAtual,
       experienciaAtual: experienciaAtual ?? this.experienciaAtual,
+      permissaoMestreSubirNivel:
+          permissaoMestreSubirNivel ?? this.permissaoMestreSubirNivel,
+      modoTabletopAtivo: modoTabletopAtivo ?? this.modoTabletopAtivo,
     );
   }
 
   // --- MÉTODOS DE MANIPULAÇÃO DE RECURSOS EM JOGO ---
+
+  Personagem definirXP(int novoTotal) {
+    return copyWith(experienciaAtual: novoTotal < 0 ? 0 : novoTotal);
+  }
+
+  Personagem definirPermissaoMestre(bool permitida) {
+    return copyWith(permissaoMestreSubirNivel: permitida);
+  }
+
+  Personagem alternarModoTabletop(bool ativo) {
+    return copyWith(modoTabletopAtivo: ativo);
+  }
+
+  /// Progresso detalhado da barra de XP de acordo com a tabela oficial de T20
+  ProgressoExperiencia get progressoXP =>
+      TabelaExperienciaService.calcularProgresso(
+        nivelAtual: nivelPersonagem,
+        xpAtual: experienciaAtual,
+      );
+
+  /// Indica se acumulou XP total suficiente para subir ao próximo nível
+  bool get temXpSuficienteParaSubirNivel => progressoXP.temXpSuficienteParaUpar;
+
+  /// Validação de autorização para evoluir:
+  /// - Até o nível 20
+  /// - Fora do modo Tabletop: livre (sempre pode subir)
+  /// - No modo Tabletop: precisa de XP suficiente OU de permissão expressa do mestre
+  bool get podeSubirDeNivel =>
+      nivelPersonagem < 20 &&
+      (!modoTabletopAtivo ||
+          temXpSuficienteParaSubirNivel ||
+          permissaoMestreSubirNivel);
 
   Personagem aplicarDano(int dano) {
     if (dano <= 0) return this;

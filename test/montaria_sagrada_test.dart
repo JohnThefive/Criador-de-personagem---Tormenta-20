@@ -10,6 +10,10 @@ import 'package:t20_creator/domain/services/personagem_storage_service.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
+  setUpAll(() async {
+    await BancoDeRegrasMontariaSagrada.carregar();
+  });
+
   group('BancoDeRegrasMontariaSagrada', () {
     test('carrega regras do arquivo JSON com sucesso', () {
       final regras = BancoDeRegrasMontariaSagrada.regras;

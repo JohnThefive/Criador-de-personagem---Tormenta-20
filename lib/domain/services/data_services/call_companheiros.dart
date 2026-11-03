@@ -1,5 +1,6 @@
+import 'dart:collection';
 import 'dart:convert';
-import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import '../../entities/habilidades_complexas/companheiro_animal.dart';
 
@@ -27,37 +28,28 @@ class BancoDeCompanheiros {
   }
 
   static Future<void> carregar() async {
-    final raw = await rootBundle.loadString(
-      'assets/data/classes_data/especifico_classe/druida/tipos_companheiro_animal.json',
-    );
-    _dados = _parse(raw);
-    _reconstruirIndex();
-  }
-
-  static List<TipoCompanheiroAnimal> get todos {
-    if (_dados.isEmpty) {
-      try {
-        final file = File(
-          'assets/data/classes_data/especifico_classe/druida/tipos_companheiro_animal.json',
-        );
-        if (file.existsSync()) {
-          _dados = _parse(file.readAsStringSync());
-          _reconstruirIndex();
-        }
-      } catch (_) {}
+    try {
+      final raw = await rootBundle.loadString(
+        'assets/data/classes_data/especifico_classe/druida/tipos_companheiro_animal.json',
+        cache: false,
+      );
+      _dados = _parse(raw);
+      _reconstruirIndex();
+    } catch (e, stack) {
+      debugPrint('Erro ao carregar tipos_companheiro_animal.json: $e\n$stack');
+      assert(false, 'Erro ao carregar tipos_companheiro_animal.json: $e');
     }
-    return List.unmodifiable(_dados);
   }
 
+  static List<TipoCompanheiroAnimal> get todos => UnmodifiableListView(_dados);
+
+  @visibleForTesting
   static void carregarParaTestes(List<TipoCompanheiroAnimal> tipos) {
     _dados = List.from(tipos);
     _reconstruirIndex();
   }
 
   static TipoCompanheiroAnimal? getByKey(String key) {
-    if (_dados.isEmpty) {
-      final _ = todos;
-    }
     return _indexPorChave[key.trim().toUpperCase()];
   }
 }

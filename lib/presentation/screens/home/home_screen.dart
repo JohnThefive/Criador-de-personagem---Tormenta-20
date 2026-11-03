@@ -13,6 +13,16 @@ import 'widgets/empty_home_state.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
+  // Tema da Home: Material 3 com superfícies neutras e o Vermelho Tormenta original como destaque.
+  // Aplicado como static final para isolar o design da Home sem reconstruir ThemeData e ColorScheme a cada frame.
+  static final ThemeData _homeTheme = ThemeData(
+    useMaterial3: true,
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: const Color(0xFFD32F2F), // Vermelho Tormenta anterior
+      brightness: Brightness.dark,
+    ),
+  );
+
   void _navegarCriarPersonagem(BuildContext context) {
     Navigator.push(
       context,
@@ -52,18 +62,8 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final windowSize = WindowSizeClass.of(context);
 
-    // Tema da Home: Material 3 com superfícies neutras e o Vermelho Tormenta original como destaque.
-    // Aplicado localmente para isolar e não interferir no design das outras telas do app.
-    final homeTheme = ThemeData(
-      useMaterial3: true,
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: const Color(0xFFD32F2F), // Vermelho Tormenta anterior
-        brightness: Brightness.dark,
-      ),
-    );
-
     return Theme(
-      data: homeTheme,
+      data: _homeTheme,
       child: Builder(
         builder: (context) {
           final colorScheme = Theme.of(context).colorScheme;

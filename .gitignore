@@ -54,3 +54,10 @@ build/
 AGENTS.md
 graphify-out
 generate_graph_html.py
+
+# Keystore & Android Signing
+**/android/key.properties
+*.jks
+*.keystore
+
+.agents

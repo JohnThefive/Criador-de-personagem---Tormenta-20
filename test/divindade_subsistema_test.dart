@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:t20_creator/domain/entities/personagem/atributos.dart';
 import 'package:t20_creator/domain/entities/personagem/classe.dart';
@@ -6,12 +7,15 @@ import 'package:t20_creator/domain/entities/personagem/divindade.dart';
 import 'package:t20_creator/domain/entities/personagem/personagem.dart';
 import 'package:t20_creator/domain/services/data_services/call_divindades.dart';
 import 'package:t20_creator/domain/services/personagem_storage_service.dart';
+import 'package:t20_creator/domain/services/data_services/catalogo_service.dart';
 import 'package:t20_creator/domain/validators/validador_divindade.dart';
+import 'package:t20_creator/helpers/deuses_jpeg.dart';
 import 'package:t20_creator/presentation/controllers/personagem_cubit.dart';
 
 void main() {
   setUpAll(() async {
-    // Garante que o ambiente de teste esteja limpo
+    TestWidgetsFlutterBinding.ensureInitialized();
+    await CatalogoService.carregarTodos();
   });
 
   group('Catálogo e Entidade Divindade', () {
@@ -44,6 +48,21 @@ void main() {
         expect(divindade.armaPreferida.isNotEmpty, isTrue);
         expect(divindade.obrigacoesERestricoes.isNotEmpty, isTrue);
         expect(divindade.poderesConcedidos.length, greaterThanOrEqualTo(3));
+      }
+    });
+
+    test('Todas as divindades possuem ícone WebP existente no disco', () {
+      for (final divindade in BancoDeDivindades.todas) {
+        final path = resolverIconeDeus(divindade.id);
+        expect(path, isNotNull);
+        expect(path, endsWith('.webp'));
+        final file = File(path!);
+        expect(file.existsSync(), isTrue, reason: 'Arquivo $path deve existir');
+        expect(
+          file.lengthSync(),
+          lessThan(30 * 1024),
+          reason: 'Ícone $path deve ter menos de 30 KB',
+        );
       }
     });
 

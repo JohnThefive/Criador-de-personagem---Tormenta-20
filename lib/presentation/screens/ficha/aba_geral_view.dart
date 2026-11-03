@@ -11,28 +11,177 @@ import 'dialogos_ficha.dart';
 class AbaGeralView extends StatelessWidget {
   const AbaGeralView({super.key});
 
-  Future<void> _mostrarDialogoAdicionarXP(
+  Future<void> _dialogoXP(
     BuildContext context,
-    FichaCubit cubit,
-  ) async {
+    FichaCubit cubit, {
+    bool ajustar = false,
+  }) async {
+    final p = cubit.personagem;
     final res = await showDialog<String>(
       context: context,
-      builder: (_) => const CampoTextoDialog(
-        titulo: 'Adicionar Experiência (XP)',
-        label: 'Pontos de XP a somar',
-        hint: 'Ex: 300',
+      builder: (_) => CampoTextoDialog(
+        titulo: ajustar ? 'Ajustar XP Total' : 'Adicionar XP',
+        valorInicial: ajustar ? '${p.experienciaAtual}' : '',
+        label: ajustar ? 'Pontos Totais de XP' : 'Pontos de XP a somar',
+        hint: ajustar ? 'Ex: 6000' : 'Ex: 500',
         keyboardType: TextInputType.number,
-        textoBotaoConfirmar: 'ADICIONAR',
-        corBotaoConfirmar: Color(0xFFD32F2F),
+        textoBotaoConfirmar: 'SALVAR',
+        corBotaoConfirmar: const Color(0xFFD32F2F),
       ),
     );
-
     if (res != null) {
-      final valor = int.tryParse(res) ?? 0;
-      if (valor > 0) {
-        cubit.adicionarXP(valor);
+      final val = int.tryParse(res) ?? 0;
+      if (ajustar) {
+        cubit.definirXP(val);
+      } else if (val > 0) {
+        cubit.adicionarXP(val);
       }
     }
+  }
+
+  Widget _buildCardExperienciaProgresso(
+    BuildContext context,
+    FichaCubit cubit,
+    Personagem p,
+  ) {
+    final prog = p.progressoXP;
+    final maxNivel = p.nivelPersonagem >= 20;
+
+    return Card(
+      margin: EdgeInsets.zero,
+      color: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+        side: const BorderSide(color: Color(0xFFE2E8F0)),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Row(
+              children: [
+                const Icon(Icons.auto_graph, size: 18, color: Color(0xFFD97706)),
+                const SizedBox(width: 6),
+                Text(
+                  'Nível ${p.nivelPersonagem} • ${p.patamar.label}',
+                  style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 13),
+                ),
+                const Spacer(),
+                ActionChip(
+                  visualDensity: VisualDensity.compact,
+                  label: Text(
+                    p.modoTabletopAtivo ? 'Tabletop' : 'Solo',
+                    style: const TextStyle(fontSize: 11),
+                  ),
+                  onPressed: () =>
+                      cubit.alternarModoTabletop(!p.modoTabletopAtivo),
+                ),
+              ],
+            ),
+            const SizedBox(height: 6),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(4),
+              child: LinearProgressIndicator(
+                value: maxNivel ? 1.0 : prog.porcentagem,
+                minHeight: 8,
+                backgroundColor: const Color(0xFFE2E8F0),
+                valueColor: AlwaysStoppedAnimation<Color>(
+                  maxNivel
+                      ? Colors.green
+                      : (prog.temXpSuficienteParaUpar
+                          ? Colors.teal
+                          : Colors.amber.shade800),
+                ),
+              ),
+            ),
+            const SizedBox(height: 4),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  '${p.experienciaAtual} XP',
+                  style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  maxNivel
+                      ? 'Nível Máximo'
+                      : '${prog.porcentagemFormatada} • Meta: ${prog.xpNecessarioProximoNivel} XP',
+                  style: const TextStyle(fontSize: 11, color: Colors.black54),
+                ),
+              ],
+            ),
+            if (p.modoTabletopAtivo) ...[
+              const SizedBox(height: 4),
+              Row(
+                children: [
+                  Icon(
+                    p.podeSubirDeNivel
+                        ? Icons.check_circle_outline
+                        : Icons.lock_clock,
+                    size: 14,
+                    color: p.podeSubirDeNivel ? Colors.green : Colors.orange,
+                  ),
+                  const SizedBox(width: 4),
+                  Expanded(
+                    child: Text(
+                      p.podeSubirDeNivel
+                          ? (p.permissaoMestreSubirNivel
+                              ? 'Evolução liberada pelo mestre.'
+                              : 'XP suficiente para upar!')
+                          : 'Requer ${prog.xpRestanteParaUpar} XP ou aval do mestre.',
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: p.podeSubirDeNivel
+                            ? Colors.green.shade800
+                            : Colors.orange.shade800,
+                      ),
+                    ),
+                  ),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      visualDensity: VisualDensity.compact,
+                      padding: EdgeInsets.zero,
+                    ),
+                    onPressed: () => cubit.definirPermissaoMestre(
+                      !p.permissaoMestreSubirNivel,
+                    ),
+                    child: Text(
+                      p.permissaoMestreSubirNivel ? 'Bloquear' : 'Liberar',
+                      style: const TextStyle(fontSize: 11),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+            const SizedBox(height: 6),
+            Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      visualDensity: VisualDensity.compact,
+                    ),
+                    onPressed: () => _dialogoXP(context, cubit, ajustar: false),
+                    child: const Text('+ XP', style: TextStyle(fontSize: 12)),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      visualDensity: VisualDensity.compact,
+                    ),
+                    onPressed: () => _dialogoXP(context, cubit, ajustar: true),
+                    child: const Text('Ajustar XP', style: TextStyle(fontSize: 12)),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   Future<void> _mostrarDialogoPunicaoDivina(
@@ -752,49 +901,28 @@ class AbaGeralView extends StatelessWidget {
 
             const SizedBox(height: 16),
 
-            // 4. ATALHOS DE SESSÃO: DESCANSO, EXPERIÊNCIA E PUNIÇÃO DIVINA
-            Row(
-              children: [
-                Expanded(
-                  child: OutlinedButton.icon(
-                    style: OutlinedButton.styleFrom(
-                      minimumSize: const Size(0, 48),
-                      backgroundColor: Colors.white,
-                      foregroundColor: const Color(0xFF0369A1),
-                      side: const BorderSide(color: Color(0xFFBAE6FD)),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    onPressed: () => _mostrarModalDescanso(context, cubit),
-                    icon: const Icon(Icons.nightlight_round, size: 19),
-                    label: const Text(
-                      'Descansar',
-                      style: TextStyle(fontWeight: FontWeight.w800),
-                    ),
-                  ),
+            // 5. PROGRESSO DE EXPERIÊNCIA & NÍVEL (T20)
+            _buildCardExperienciaProgresso(context, cubit, p),
+
+            const SizedBox(height: 12),
+
+            // 6. ATALHO DE SESSÃO: DESCANSO
+            OutlinedButton.icon(
+              style: OutlinedButton.styleFrom(
+                minimumSize: const Size(0, 46),
+                backgroundColor: Colors.white,
+                foregroundColor: const Color(0xFF0369A1),
+                side: const BorderSide(color: Color(0xFFBAE6FD)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
                 ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: OutlinedButton.icon(
-                    style: OutlinedButton.styleFrom(
-                      minimumSize: const Size(0, 48),
-                      backgroundColor: Colors.white,
-                      foregroundColor: const Color(0xFF4338CA),
-                      side: const BorderSide(color: Color(0xFFC7D2FE)),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    onPressed: () => _mostrarDialogoAdicionarXP(context, cubit),
-                    icon: const Icon(Icons.trending_up_rounded, size: 19),
-                    label: Text(
-                      'XP: ${p.experienciaAtual}',
-                      style: const TextStyle(fontWeight: FontWeight.w800),
-                    ),
-                  ),
-                ),
-              ],
+              ),
+              onPressed: () => _mostrarModalDescanso(context, cubit),
+              icon: const Icon(Icons.nightlight_round, size: 19),
+              label: const Text(
+                'Descansar (Normal, Confortável ou Restaurar 100%)',
+                style: TextStyle(fontWeight: FontWeight.w800),
+              ),
             ),
 
             if (p.divindade != null) ...[

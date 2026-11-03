@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -13,6 +14,7 @@ import 'package:t20_creator/presentation/screens/wizard_personagem/pagina_seleca
 import 'package:t20_creator/presentation/screens/wizard_personagem/pagina_selecao_equipamento.dart';
 import '../../controllers/personagem_cubit.dart';
 import '../../widgets/atributo_card_compra.dart';
+import '../../../domain/services/personagem_storage_service.dart';
 // Importe seus widgets de AtributoCard e a lógica de Rolagem aqui
 
 class CharacterCreatorScreen extends StatefulWidget {
@@ -40,7 +42,7 @@ class _CharacterCreatorScreenState extends State<CharacterCreatorScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<PersonagemCubit, PersonagemState>(
+    return BlocListener<PersonagemCubit, PersonagemState>(
       listenWhen: (previous, current) =>
           previous.etapaAtual != current.etapaAtual,
       listener: (context, state) {
@@ -51,115 +53,180 @@ class _CharacterCreatorScreenState extends State<CharacterCreatorScreen> {
           curve: Curves.easeInOut,
         );
       },
-      builder: (context, state) {
-        return PopScope(
-          canPop: false,
-          onPopInvokedWithResult: (didPop, result) {
-            if (didPop) {
-              return;
-            }
-            final cubit = context.read<PersonagemCubit>();
+      child: PopScope(
+        canPop: false,
+        onPopInvokedWithResult: (didPop, result) {
+          if (didPop) {
+            return;
+          }
+          final cubit = context.read<PersonagemCubit>();
+          final state = cubit.state;
 
-            // Se estiver avançado no Wizard (Raça, etc), volta uma etapa
-            if (state.etapaAtual > 0) {
-              cubit.voltarEtapa();
-            }
-            // Se estiver na etapa 0 mas já escolheu um método (Rolagem/Compra), reseta pro inicio
-            else if (state.metodoAtributos != MetodoAtributos.nenhum) {
-              cubit.escolherMetodoAtributos(MetodoAtributos.nenhum);
-            }
-            // 3. Se estiver no começo de tudo, limpa a memória e fecha a tela
-            else {
-              cubit.resetarCriacao(); // (Limpa o estado sujo)
-              Navigator.pop(context);
-            }
-          },
-          child: Scaffold(
-            backgroundColor: const Color(0xFFF4F6F8),
-            appBar: AppBar(
-              backgroundColor: Colors.white,
-              elevation: 1,
-              shadowColor: Colors.black.withValues(alpha: 0.08),
-              iconTheme: const IconThemeData(color: Color(0xFF1F2937)),
-              title: Text(
-                _getTituloEtapa(state.etapaAtual),
-                style: const TextStyle(
-                  color: Color(0xFF111827),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                ),
+          // Se estiver avançado no Wizard (Raça, etc), volta uma etapa
+          if (state.etapaAtual > 0) {
+            cubit.voltarEtapa();
+          }
+          // Se estiver na etapa 0 mas já escolheu um método (Rolagem/Compra), reseta pro inicio
+          else if (state.metodoAtributos != MetodoAtributos.nenhum) {
+            cubit.escolherMetodoAtributos(MetodoAtributos.nenhum);
+          }
+          // 3. Se estiver no começo de tudo, limpa a memória e fecha a tela
+          else {
+            cubit.resetarCriacao(); // (Limpa o estado sujo)
+            Navigator.pop(context);
+          }
+        },
+        child: Scaffold(
+          backgroundColor: const Color(0xFFF4F6F8),
+          appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(kToolbarHeight),
+            child: BlocSelector<
+                PersonagemCubit,
+                PersonagemState,
+                ({int etapaAtual, MetodoAtributos metodoAtributos, bool podeAvancar})>(
+              selector: (state) => (
+                etapaAtual: state.etapaAtual,
+                metodoAtributos: state.metodoAtributos,
+                podeAvancar: _deveMostrarBotaoAvancar(state),
               ),
-              leading: IconButton(
-                icon: const Icon(Icons.arrow_back),
-                onPressed: () {
-                  // Se estiver na primeira etapa, sai da tela. Se não, volta um passo.
-                  if (state.etapaAtual == 0 &&
-                      state.metodoAtributos == MetodoAtributos.nenhum) {
-                    Navigator.pop(context);
-                  } else {
-                    context.read<PersonagemCubit>().voltarEtapa();
-                  }
-                },
-              ),
-              // Botão de avançar só aparece quando uma atividade é concluida
-              actions: [
-                if (_deveMostrarBotaoAvancar(state))
-                  Padding(
-                    padding: const EdgeInsets.only(right: 8.0),
-                    child: TextButton(
-                      onPressed: () =>
-                          context.read<PersonagemCubit>().avancarEtapa(),
-                      style: TextButton.styleFrom(
-                        foregroundColor: const Color(0xFFB71C1C),
-                      ),
-                      child: const Row(
-                        children: [
-                          Text(
-                            "Próximo",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                            ),
-                          ),
-                          SizedBox(width: 4),
-                          Icon(Icons.arrow_forward_rounded, size: 18),
-                        ],
-                      ),
+              builder: (context, dados) {
+                return AppBar(
+                  backgroundColor: Colors.white,
+                  elevation: 1,
+                  shadowColor: Colors.black.withValues(alpha: 0.08),
+                  iconTheme: const IconThemeData(color: Color(0xFF1F2937)),
+                  title: Text(
+                    _getTituloEtapa(dados.etapaAtual),
+                    style: const TextStyle(
+                      color: Color(0xFF111827),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
                     ),
                   ),
-              ],
-            ),
-            body: PageView(
-              controller: _pageController,
-              physics:
-                  const NeverScrollableScrollPhysics(), // Bloqueia swipe manual
-              children: [
-                _PaginaAtributos(state: state), // 0: pagina de atributos
-                PaginaSelecaoRaca(state: state), // 1: pagina de seleção de raça
-                PaginaSelecaoClasse(
-                  state: state,
-                ), // 2: pagina de seleçao de classe
-                PaginaSelecaoPericias(
-                  state: state,
-                ), // 3: Pagina de seleção de pericias
-                PaginaSelecaoOrigem(
-                  state: state,
-                ), // 4: Pagina de seleção de origem
-                PaginaSelecaoDivindade(
-                  state: state,
-                ), // 5: Pagina de seleção de divindade
-                PaginaSelecaoEquipamento(
-                  state: state,
-                ), // 6: Pagina de equipamento e armas iniciais
-                PaginaSelecaoMagias(
-                  state: state,
-                ), // 7: Pagina de seleção de magias
-                _PaginaFinalizacao(), // 8: Última Etapa
-              ],
+                  leading: IconButton(
+                    icon: const Icon(Icons.arrow_back),
+                    onPressed: () {
+                      // Se estiver na primeira etapa, sai da tela. Se não, volta um passo.
+                      if (dados.etapaAtual == 0 &&
+                          dados.metodoAtributos == MetodoAtributos.nenhum) {
+                        Navigator.pop(context);
+                      } else {
+                        context.read<PersonagemCubit>().voltarEtapa();
+                      }
+                    },
+                  ),
+                  // Botão de avançar só aparece quando uma atividade é concluida
+                  actions: [
+                    if (dados.podeAvancar)
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: TextButton(
+                          onPressed: () =>
+                              context.read<PersonagemCubit>().avancarEtapa(),
+                          style: TextButton.styleFrom(
+                            foregroundColor: const Color(0xFFB71C1C),
+                          ),
+                          child: const Row(
+                            children: [
+                              Text(
+                                "Próximo",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                ),
+                              ),
+                              SizedBox(width: 4),
+                              Icon(Icons.arrow_forward_rounded, size: 18),
+                            ],
+                          ),
+                        ),
+                      ),
+                  ],
+                );
+              },
             ),
           ),
-        );
-      },
+          body: PageView(
+            controller: _pageController,
+            physics:
+                const NeverScrollableScrollPhysics(), // Bloqueia swipe manual
+            children: [
+              BlocBuilder<PersonagemCubit, PersonagemState>(
+                buildWhen: (prev, curr) =>
+                    prev.metodoAtributos != curr.metodoAtributos ||
+                    prev.pontosRestantesCompra != curr.pontosRestantesCompra ||
+                    prev.alocacaoIndices != curr.alocacaoIndices ||
+                    prev.valoresRolados != curr.valoresRolados ||
+                    prev.personagem.atributos != curr.personagem.atributos,
+                builder: (context, state) => _PaginaAtributos(state: state),
+              ),
+              BlocBuilder<PersonagemCubit, PersonagemState>(
+                buildWhen: (prev, curr) =>
+                    prev.personagem.raca != curr.personagem.raca ||
+                    prev.atributosVariaveisRaca != curr.atributosVariaveisRaca ||
+                    prev.personagem.atributos != curr.personagem.atributos,
+                builder: (context, state) => PaginaSelecaoRaca(state: state),
+              ),
+              BlocBuilder<PersonagemCubit, PersonagemState>(
+                buildWhen: (prev, curr) =>
+                    prev.personagem.classes != curr.personagem.classes,
+                builder: (context, state) => PaginaSelecaoClasse(state: state),
+              ),
+              BlocBuilder<PersonagemCubit, PersonagemState>(
+                buildWhen: (prev, curr) =>
+                    prev.selecoesPericiaClasse != curr.selecoesPericiaClasse ||
+                    prev.selecoesPericiaInteligencia !=
+                        curr.selecoesPericiaInteligencia ||
+                    prev.personagem.classes != curr.personagem.classes ||
+                    prev.personagem.atributos != curr.personagem.atributos,
+                builder: (context, state) =>
+                    PaginaSelecaoPericias(state: state),
+              ),
+              BlocBuilder<PersonagemCubit, PersonagemState>(
+                buildWhen: (prev, curr) =>
+                    prev.origemSelecionada != curr.origemSelecionada ||
+                    prev.periciasEscolhidasOrigem !=
+                        curr.periciasEscolhidasOrigem ||
+                    prev.poderesEscolhidosOrigem !=
+                        curr.poderesEscolhidosOrigem ||
+                    prev.personagem.classes != curr.personagem.classes,
+                builder: (context, state) => PaginaSelecaoOrigem(state: state),
+              ),
+              BlocBuilder<PersonagemCubit, PersonagemState>(
+                buildWhen: (prev, curr) =>
+                    prev.divindadeSelecionada != curr.divindadeSelecionada ||
+                    prev.poderesConcedidosSelecionados !=
+                        curr.poderesConcedidosSelecionados ||
+                    prev.canalizacaoSelecionada !=
+                        curr.canalizacaoSelecionada ||
+                    prev.modoEstritoDevocao != curr.modoEstritoDevocao,
+                builder: (context, state) =>
+                    PaginaSelecaoDivindade(state: state),
+              ),
+              BlocBuilder<PersonagemCubit, PersonagemState>(
+                buildWhen: (prev, curr) =>
+                    prev.armaSimplesInicial != curr.armaSimplesInicial ||
+                    prev.armaMarcialInicial != curr.armaMarcialInicial ||
+                    prev.armaduraInicial != curr.armaduraInicial ||
+                    prev.escudoInicial != curr.escudoInicial ||
+                    prev.tibaresIniciais != curr.tibaresIniciais ||
+                    prev.personagem.armas != curr.personagem.armas ||
+                    prev.personagem.itensInventario !=
+                        curr.personagem.itensInventario,
+                builder: (context, state) =>
+                    PaginaSelecaoEquipamento(state: state),
+              ),
+              BlocBuilder<PersonagemCubit, PersonagemState>(
+                buildWhen: (prev, curr) =>
+                    prev.magiasSelecionadas != curr.magiasSelecionadas ||
+                    prev.personagem.classes != curr.personagem.classes,
+                builder: (context, state) => PaginaSelecaoMagias(state: state),
+              ),
+              _PaginaFinalizacao(), // 8: Última Etapa
+            ],
+          ),
+        ),
+      ),
     );
   }
 
@@ -448,10 +515,82 @@ class _PaginaFinalizacaoState extends State<_PaginaFinalizacao> {
     'Caótico e Mau',
   ];
 
+  late final TextEditingController _nomeCtrl;
+  late final TextEditingController _idadeCtrl;
+  late final TextEditingController _pesoCtrl;
+  late final TextEditingController _alturaCtrl;
+  late final TextEditingController _descricaoCtrl;
+  Timer? _debounceTimer;
+  PersonagemCubit? _cubitRef;
+
   bool _salvando = false;
   bool _selecionandoFoto = false;
   final ImagePicker _picker = ImagePicker();
   DateTime? _ultimoCliqueFoto;
+
+  @override
+  void initState() {
+    super.initState();
+    final cubit = context.read<PersonagemCubit>();
+    _cubitRef = cubit;
+    final p = cubit.state.personagem;
+    _nomeCtrl = TextEditingController(
+      text: p.nome == 'Novo Aventureiro' ? '' : p.nome,
+    );
+    _idadeCtrl = TextEditingController(text: p.idade.toString());
+    _pesoCtrl = TextEditingController(text: p.peso);
+    _alturaCtrl = TextEditingController(text: p.altura);
+    _descricaoCtrl = TextEditingController(text: p.descricaoAparencia);
+  }
+
+  @override
+  void dispose() {
+    _debounceTimer?.cancel();
+    final cubit = _cubitRef;
+    if (cubit != null && !cubit.isClosed) {
+      _salvarAlteracoesPendentes(cubit);
+    }
+    _nomeCtrl.dispose();
+    _idadeCtrl.dispose();
+    _pesoCtrl.dispose();
+    _alturaCtrl.dispose();
+    _descricaoCtrl.dispose();
+    super.dispose();
+  }
+
+  void _salvarAlteracoesPendentes(PersonagemCubit cubit) {
+    final p = cubit.state.personagem;
+    final nomeTexto = _nomeCtrl.text.trim();
+    final novoNome = nomeTexto.isEmpty ? 'Novo Aventureiro' : _nomeCtrl.text;
+    if (novoNome != p.nome) {
+      cubit.atualizarNome(novoNome);
+    }
+    final novaIdade = int.tryParse(_idadeCtrl.text) ?? 20;
+    if (novaIdade != p.idade) {
+      cubit.atualizarIdade(novaIdade);
+    }
+    final pesoTexto = _pesoCtrl.text.trim();
+    final novoPeso = pesoTexto.isEmpty ? '70 kg' : pesoTexto;
+    if (novoPeso != p.peso) {
+      cubit.atualizarPeso(novoPeso);
+    }
+    final alturaTexto = _alturaCtrl.text.trim();
+    final novoAltura = alturaTexto.isEmpty ? '1.70 m' : alturaTexto;
+    if (novoAltura != p.altura) {
+      cubit.atualizarAltura(novoAltura);
+    }
+    if (_descricaoCtrl.text != p.descricaoAparencia) {
+      cubit.atualizarDescricao(_descricaoCtrl.text);
+    }
+  }
+
+  void _agendarAutoSave(VoidCallback acao) {
+    _debounceTimer?.cancel();
+    _debounceTimer = Timer(const Duration(milliseconds: 400), () {
+      if (!mounted) return;
+      acao();
+    });
+  }
 
   Future<void> _escolherFoto(BuildContext context) async {
     final agora = DateTime.now();
@@ -475,7 +614,15 @@ class _PaginaFinalizacaoState extends State<_PaginaFinalizacao> {
         imageQuality: 85,
       );
       if (pickedFile != null && context.mounted) {
-        context.read<PersonagemCubit>().atualizarFoto(pickedFile.path);
+        final id = context.read<PersonagemCubit>().state.personagem.id;
+        final caminhoPermanente =
+            await PersonagemStorageService.salvarFotoPersonagem(
+          id,
+          pickedFile.path,
+        );
+        if (context.mounted) {
+          context.read<PersonagemCubit>().atualizarFoto(caminhoPermanente);
+        }
       }
     } catch (e) {
       debugPrint('Erro ao selecionar foto da galeria: $e');
@@ -489,12 +636,30 @@ class _PaginaFinalizacaoState extends State<_PaginaFinalizacao> {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.watch<PersonagemCubit>();
-    final p = cubit.state.personagem;
+    final cubit = context.read<PersonagemCubit>();
 
-    return ListView(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-      children: [
+    return BlocBuilder<PersonagemCubit, PersonagemState>(
+      buildWhen: (prev, curr) {
+        final p1 = prev.personagem;
+        final p2 = curr.personagem;
+        return p1.caminhoFoto != p2.caminhoFoto ||
+            p1.alinhamento != p2.alinhamento ||
+            p1.pvTotal != p2.pvTotal ||
+            p1.pmTotal != p2.pmTotal ||
+            p1.defesaBase != p2.defesaBase ||
+            p1.tamanho != p2.tamanho ||
+            p1.tibares != p2.tibares ||
+            p1.cargaAtual != p2.cargaAtual ||
+            p1.limiteCarga != p2.limiteCarga ||
+            p1.armas != p2.armas ||
+            p1.itensInventario != p2.itensInventario;
+      },
+      builder: (context, state) {
+        final p = state.personagem;
+
+        return ListView(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          children: [
         // ==========================================
         // CARD 1: DADOS GERAIS, APARÊNCIA E HISTÓRIA
         // ==========================================
@@ -586,6 +751,8 @@ class _PaginaFinalizacaoState extends State<_PaginaFinalizacao> {
                                         File(p.caminhoFoto!),
                                         width: 100,
                                         height: 100,
+                                        cacheWidth: 300,
+                                        cacheHeight: 300,
                                         fit: BoxFit.cover,
                                         errorBuilder: (_, _, _) => const Icon(
                                           Icons.person_outline_rounded,
@@ -659,7 +826,12 @@ class _PaginaFinalizacaoState extends State<_PaginaFinalizacao> {
                         TextButton.icon(
                           onPressed: _selecionandoFoto
                               ? null
-                              : () => cubit.removerFoto(),
+                              : () {
+                                  PersonagemStorageService.excluirFotoPersonagem(
+                                    p.id,
+                                  );
+                                  cubit.removerFoto();
+                                },
                           icon: const Icon(
                             Icons.delete_outline,
                             size: 16,
@@ -695,7 +867,7 @@ class _PaginaFinalizacaoState extends State<_PaginaFinalizacao> {
 
                 // Campo Nome do Herói
                 TextFormField(
-                  initialValue: p.nome == 'Novo Aventureiro' ? '' : p.nome,
+                  controller: _nomeCtrl,
                   style: const TextStyle(
                     color: Color(0xFF1F2937),
                     fontWeight: FontWeight.w500,
@@ -727,9 +899,12 @@ class _PaginaFinalizacaoState extends State<_PaginaFinalizacao> {
                       ),
                     ),
                   ),
-                  onChanged: (val) => cubit.atualizarNome(
-                    val.trim().isEmpty ? 'Novo Aventureiro' : val,
-                  ),
+                  onChanged: (val) => _agendarAutoSave(() {
+                    final cubit = context.read<PersonagemCubit>();
+                    cubit.atualizarNome(
+                      val.trim().isEmpty ? 'Novo Aventureiro' : val,
+                    );
+                  }),
                 ),
                 const SizedBox(height: 14),
 
@@ -741,7 +916,7 @@ class _PaginaFinalizacaoState extends State<_PaginaFinalizacao> {
                     Expanded(
                       flex: 1,
                       child: TextFormField(
-                        initialValue: p.idade.toString(),
+                        controller: _idadeCtrl,
                         keyboardType: TextInputType.number,
                         style: const TextStyle(
                           color: Color(0xFF1F2937),
@@ -777,8 +952,10 @@ class _PaginaFinalizacaoState extends State<_PaginaFinalizacao> {
                             ),
                           ),
                         ),
-                        onChanged: (val) =>
-                            cubit.atualizarIdade(int.tryParse(val) ?? 20),
+                        onChanged: (val) => _agendarAutoSave(() {
+                          final cubit = context.read<PersonagemCubit>();
+                          cubit.atualizarIdade(int.tryParse(val) ?? 20);
+                        }),
                       ),
                     ),
                     const SizedBox(width: 12),
@@ -844,7 +1021,7 @@ class _PaginaFinalizacaoState extends State<_PaginaFinalizacao> {
                     // Peso
                     Expanded(
                       child: TextFormField(
-                        initialValue: p.peso,
+                        controller: _pesoCtrl,
                         style: const TextStyle(
                           color: Color(0xFF1F2937),
                           fontWeight: FontWeight.w500,
@@ -880,16 +1057,19 @@ class _PaginaFinalizacaoState extends State<_PaginaFinalizacao> {
                             ),
                           ),
                         ),
-                        onChanged: (val) => cubit.atualizarPeso(
-                          val.trim().isEmpty ? '70 kg' : val.trim(),
-                        ),
+                        onChanged: (val) => _agendarAutoSave(() {
+                          final cubit = context.read<PersonagemCubit>();
+                          cubit.atualizarPeso(
+                            val.trim().isEmpty ? '70 kg' : val.trim(),
+                          );
+                        }),
                       ),
                     ),
                     const SizedBox(width: 12),
                     // Altura
                     Expanded(
                       child: TextFormField(
-                        initialValue: p.altura,
+                        controller: _alturaCtrl,
                         style: const TextStyle(
                           color: Color(0xFF1F2937),
                           fontWeight: FontWeight.w500,
@@ -925,9 +1105,12 @@ class _PaginaFinalizacaoState extends State<_PaginaFinalizacao> {
                             ),
                           ),
                         ),
-                        onChanged: (val) => cubit.atualizarAltura(
-                          val.trim().isEmpty ? '1.70 m' : val.trim(),
-                        ),
+                        onChanged: (val) => _agendarAutoSave(() {
+                          final cubit = context.read<PersonagemCubit>();
+                          cubit.atualizarAltura(
+                            val.trim().isEmpty ? '1.70 m' : val.trim(),
+                          );
+                        }),
                       ),
                     ),
                   ],
@@ -936,8 +1119,8 @@ class _PaginaFinalizacaoState extends State<_PaginaFinalizacao> {
 
                 // Descrição Física e Personalidade
                 TextFormField(
+                  controller: _descricaoCtrl,
                   maxLines: 3,
-                  initialValue: p.descricaoAparencia,
                   style: const TextStyle(
                     color: Color(0xFF1F2937),
                     height: 1.35,
@@ -967,7 +1150,10 @@ class _PaginaFinalizacaoState extends State<_PaginaFinalizacao> {
                       ),
                     ),
                   ),
-                  onChanged: (val) => cubit.atualizarDescricao(val),
+                  onChanged: (val) => _agendarAutoSave(() {
+                    final cubit = context.read<PersonagemCubit>();
+                    cubit.atualizarDescricao(val);
+                  }),
                 ),
               ],
             ),
@@ -1381,6 +1567,9 @@ class _PaginaFinalizacaoState extends State<_PaginaFinalizacao> {
                 : () async {
                     setState(() => _salvando = true);
                     try {
+                      _debounceTimer?.cancel();
+                      _salvarAlteracoesPendentes(cubit);
+
                       // Salva localmente no disco do celular
                       await cubit.salvarPersonagemNoAparelho();
 
@@ -1405,7 +1594,7 @@ class _PaginaFinalizacaoState extends State<_PaginaFinalizacao> {
                                 const SizedBox(width: 10),
                                 Expanded(
                                   child: Text(
-                                    'Personagem "${p.nome}" salvo com sucesso!',
+                                    'Personagem "${cubit.state.personagem.nome}" salvo com sucesso!',
                                     style: const TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.w500,
@@ -1429,6 +1618,8 @@ class _PaginaFinalizacaoState extends State<_PaginaFinalizacao> {
         ),
         const SizedBox(height: 24),
       ],
+    );
+      },
     );
   }
 

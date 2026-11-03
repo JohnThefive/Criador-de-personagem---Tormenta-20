@@ -5,14 +5,20 @@ import 'package:t20_creator/domain/entities/personagem/classe_do_personagem.dart
 import 'package:t20_creator/domain/entities/personagem/personagem.dart';
 import 'package:t20_creator/domain/entities/personagem/poder.dart';
 import 'package:t20_creator/domain/services/data_services/call_classes.dart';
+import 'package:t20_creator/domain/services/data_services/catalogo_service.dart';
 import 'package:t20_creator/domain/services/poderes_e_magias/poder_validador_service.dart';
 
 void main() {
   group('Evolução e PoderValidadorService - Tormenta 20', () {
-    final classeGuerreiro = BancoDeClasses.todas.firstWhere(
-      (c) => c.idClasse.toUpperCase() == 'GUERREIRO',
-      orElse: () => BancoDeClasses.todas.first,
-    );
+    late final Classe classeGuerreiro;
+
+    setUpAll(() async {
+      TestWidgetsFlutterBinding.ensureInitialized();
+      await CatalogoService.carregarTodos();
+      classeGuerreiro = BancoDeClasses.todas.firstWhere(
+        (c) => c.idClasse.toUpperCase() == 'GUERREIRO',
+      );
+    });
 
     test('ClasseDoPersonagem calcula poderesPermitidos e poderesPendentes', () {
       final nivel1 = ClasseDoPersonagem(

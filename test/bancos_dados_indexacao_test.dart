@@ -12,9 +12,14 @@ import 'package:t20_creator/domain/services/data_services/call_origens.dart';
 import 'package:t20_creator/domain/services/data_services/call_pericias.dart';
 import 'package:t20_creator/domain/services/data_services/call_poderes.dart';
 import 'package:t20_creator/domain/services/data_services/call_racas.dart';
+import 'package:t20_creator/domain/services/data_services/catalogo_service.dart';
 
 void main() {
   group('Indexação O(1) de Bancos de Dados Estáticos', () {
+    setUpAll(() async {
+      TestWidgetsFlutterBinding.ensureInitialized();
+      await CatalogoService.carregarTodos();
+    });
     test('BancoDePoderes indexa e recupera poderes em O(1)', () {
       final mockPoder = const Poder(
         key: 'ATAQUE_PODEROSO',

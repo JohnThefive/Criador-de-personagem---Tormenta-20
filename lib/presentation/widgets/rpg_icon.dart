@@ -79,7 +79,6 @@ class RpgIcon extends StatelessWidget {
       placeholderBuilder: (context) => SizedBox(
         width: size,
         height: size,
-        child: const Center(child: CircularProgressIndicator(strokeWidth: 2)),
       ),
     );
   }

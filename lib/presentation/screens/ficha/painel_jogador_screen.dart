@@ -6,6 +6,7 @@ import '../../../domain/entities/personagem/classe.dart';
 import '../../../domain/entities/personagem/personagem.dart';
 import '../../../domain/repositories/i_personagem_repository.dart';
 import '../../../domain/services/data_services/call_classes.dart';
+import '../../../domain/services/personagem_storage_service.dart';
 import '../../controllers/ficha_cubit.dart';
 import '../../controllers/ficha_state.dart';
 import 'aba_geral_view.dart';
@@ -149,6 +150,9 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
                   ),
                   onTap: () {
                     Navigator.pop(ctx);
+                    PersonagemStorageService.excluirFotoPersonagem(
+                      cubit.personagem.id,
+                    );
                     cubit.removerFoto();
                   },
                 ),
@@ -170,7 +174,15 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
       );
 
       if (pickedFile != null && mounted) {
-        await cubit.atualizarFoto(pickedFile.path);
+        final id = cubit.personagem.id;
+        final caminhoPermanente =
+            await PersonagemStorageService.salvarFotoPersonagem(
+          id,
+          pickedFile.path,
+        );
+        if (mounted) {
+          await cubit.atualizarFoto(caminhoPermanente);
+        }
       }
     } catch (e) {
       if (mounted) {
@@ -284,6 +296,90 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
     );
   }
 
+  void _mostrarInfoNivel(BuildContext context) {
+    showDialog<void>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('A Importância do Nível'),
+        content: const Text(
+          'O nível em Tormenta 20 é definitivo e permanente:\n\n'
+          '• Aumenta Pontos de Vida (PV) e Mana (PM);\n'
+          '• Metade do nível é somada em todas as perícias;\n'
+          '• Desbloqueia poderes de classe, gerais e novos círculos de magia;\n'
+          '• Avança o patamar do herói (Iniciante, Veterano, Campeão e Lenda).',
+        ),
+        actions: [
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFFD32F2F),
+              foregroundColor: Colors.white,
+            ),
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text('Entendido'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _verificarEExecutarEvolucao({
+    required BuildContext context,
+    required Personagem personagem,
+    required String nomeClasse,
+    required int novoNivelIndividual,
+    required int novoNivelTotal,
+    required VoidCallback onExecutar,
+  }) {
+    if (personagem.modoTabletopAtivo && !personagem.podeSubirDeNivel) {
+      final progresso = personagem.progressoXP;
+      showDialog<void>(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: const Text('Evolução Bloqueada (Tabletop)'),
+          content: Text(
+            'No Modo Tabletop, a subida para o Nível $novoNivelTotal exige permissão do mestre ou ${progresso.xpRestanteParaUpar} XP restantes.\n\n'
+            'XP Atual: ${personagem.experienciaAtual} / ${progresso.xpNecessarioProximoNivel} XP.',
+          ),
+          actions: [
+            ElevatedButton(
+              onPressed: () => Navigator.pop(ctx),
+              child: const Text('Entendido'),
+            ),
+          ],
+        ),
+      );
+      return;
+    }
+
+    showDialog<void>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Confirmar Evolução'),
+        content: Text(
+          'Subir para o Nível $novoNivelIndividual em $nomeClasse (Nível Total $novoNivelTotal)?\n\n'
+          'A evolução em Tormenta 20 é permanente.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text('CANCELAR'),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFFD32F2F),
+              foregroundColor: Colors.white,
+            ),
+            onPressed: () {
+              Navigator.pop(ctx);
+              onExecutar();
+            },
+            child: const Text('CONFIRMAR'),
+          ),
+        ],
+      ),
+    );
+  }
+
   Future<void> _mostrarModalProgressaoEMulticlasse(FichaCubit cubit) async {
     final todasClasses = BancoDeClasses.todas;
     await showModalBottomSheet<void>(
@@ -335,12 +431,60 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
                               ),
                             ),
                           ),
+                          IconButton(
+                            icon: const Icon(
+                              Icons.info_outline_rounded,
+                              color: Color(0xFFD32F2F),
+                              size: 20,
+                            ),
+                            tooltip: 'A Importância do Nível',
+                            onPressed: () =>
+                                _mostrarInfoNivel(context),
+                          ),
                         ],
                       ),
                       const SizedBox(height: 6),
-                      const Text(
-                        'Escolha em qual classe adquirir cada novo nível (RF01). Características de classe respeitam exclusivamente o nível individual naquela classe.',
-                        style: TextStyle(fontSize: 12, color: Colors.black54),
+                      // Banner informativo clicável sobre a permanência e importância do nível
+                      InkWell(
+                        onTap: () =>
+                            _mostrarInfoNivel(context),
+                        borderRadius: BorderRadius.circular(8),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 8,
+                          ),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFFEF2F2),
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(color: const Color(0xFFFECACA)),
+                          ),
+                          child: const Row(
+                            children: [
+                              Icon(
+                                Icons.auto_awesome,
+                                color: Color(0xFFD32F2F),
+                                size: 16,
+                              ),
+                              SizedBox(width: 8),
+                              Expanded(
+                                child: Text(
+                                  'A evolução de nível em Tormenta 20 é permanente. Toque para entender a importância do nível.',
+                                  style: TextStyle(
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w700,
+                                    color: Color(0xFF991B1B),
+                                  ),
+                                ),
+                              ),
+                              Icon(
+                                Icons.chevron_right_rounded,
+                                color: Color(0xFFD32F2F),
+                                size: 16,
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                       const SizedBox(height: 12),
 
@@ -434,6 +578,44 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
                         ),
                       ),
 
+                      // Progresso de XP Compacto
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'XP: ${p.experienciaAtual} / ${p.progressoXP.xpNecessarioProximoNivel} (${p.progressoXP.porcentagemFormatada})',
+                                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 11.5),
+                                ),
+                                if (p.modoTabletopAtivo)
+                                  Text(
+                                    p.podeSubirDeNivel ? 'Evolução Liberada' : 'Requer ${p.progressoXP.xpRestanteParaUpar} XP / Mestre',
+                                    style: TextStyle(
+                                      fontSize: 10.5,
+                                      fontWeight: FontWeight.bold,
+                                      color: p.podeSubirDeNivel ? Colors.green.shade800 : Colors.amber.shade900,
+                                    ),
+                                  ),
+                              ],
+                            ),
+                            const SizedBox(height: 4),
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(4),
+                              child: LinearProgressIndicator(
+                                value: p.nivelPersonagem >= 20 ? 1.0 : p.progressoXP.porcentagem,
+                                minHeight: 6,
+                                backgroundColor: const Color(0xFFE2E8F0),
+                                valueColor: const AlwaysStoppedAnimation(Color(0xFFD97706)),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+
                       const SizedBox(height: 14),
                       const Text(
                         'CLASSES REGISTRADAS',
@@ -489,14 +671,6 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
                                         ],
                                       ),
                                     ),
-                                    IconButton(
-                                      tooltip: 'Reduzir nível nesta classe',
-                                      onPressed: () =>
-                                          cubit.alterarNivelClasse(idx, -1),
-                                      icon: const Icon(
-                                        Icons.remove_circle_outline,
-                                      ),
-                                    ),
                                     Text(
                                       'Nív ${cl.nivel}',
                                       style: const TextStyle(
@@ -504,11 +678,25 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
                                         fontSize: 15,
                                       ),
                                     ),
+                                    const SizedBox(width: 4),
                                     IconButton(
                                       tooltip: 'Adquirir nível nesta classe',
                                       onPressed: p.nivelPersonagem < 20
-                                          ? () =>
-                                                cubit.alterarNivelClasse(idx, 1)
+                                          ? () => _verificarEExecutarEvolucao(
+                                              context: context,
+                                              personagem: p,
+                                              nomeClasse:
+                                                  cl.classeDefinicao.nome,
+                                              novoNivelIndividual:
+                                                  cl.nivel + 1,
+                                              novoNivelTotal:
+                                                  p.nivelPersonagem + 1,
+                                              onExecutar: () =>
+                                                  cubit.alterarNivelClasse(
+                                                    idx,
+                                                    1,
+                                                  ),
+                                            )
                                           : null,
                                       icon: const Icon(
                                         Icons.add_circle_outline,
@@ -636,8 +824,14 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
                                   fontSize: 12,
                                 ),
                               ),
-                              onPressed: () => cubit.adicionarMulticlasse(
-                                novaCl,
+                              onPressed: () => _verificarEExecutarEvolucao(
+                                context: context,
+                                personagem: p,
+                                nomeClasse: novaCl.nome,
+                                novoNivelIndividual: 1,
+                                novoNivelTotal: p.nivelPersonagem + 1,
+                                onExecutar: () =>
+                                    cubit.adicionarMulticlasse(novaCl),
                               ),
                             );
                           }).toList(),
@@ -825,7 +1019,7 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
                             ),
                           ),
                         ),
-                        // Stepper compacto de Nível (toque abre Gerenciador de Multiclasse — RF01 / RF10)
+                        // Indicador de Nível (toque abre Gerenciador de Multiclasse/Evolução — RF01 / RF10)
                         Container(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 6,
@@ -835,31 +1029,19 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
                             color: Colors.black26,
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              InkWell(
-                                onTap: () => p.classes.length > 1
-                                    ? _mostrarModalProgressaoEMulticlasse(cubit)
-                                    : cubit.alterarNivel(-1),
-                                child: const Padding(
-                                  padding: EdgeInsets.all(3),
-                                  child: Icon(
-                                    Icons.remove,
-                                    size: 13,
-                                    color: Colors.white,
-                                  ),
-                                ),
+                          child: InkWell(
+                            key: const Key('btn_gerenciar_multiclasse'),
+                            onTap: () =>
+                                _mostrarModalProgressaoEMulticlasse(cubit),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 4,
+                                vertical: 2,
                               ),
-                              InkWell(
-                                key: const Key('btn_gerenciar_multiclasse'),
-                                onTap: () =>
-                                    _mostrarModalProgressaoEMulticlasse(cubit),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 4,
-                                  ),
-                                  child: Text(
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
                                     'Nív $nivel',
                                     style: const TextStyle(
                                       color: Colors.white,
@@ -867,22 +1049,17 @@ class _PainelJogadorViewState extends State<_PainelJogadorView>
                                       fontSize: 11.5,
                                     ),
                                   ),
-                                ),
+                                  if (nivel < 20) ...[
+                                    const SizedBox(width: 3),
+                                    const Icon(
+                                      Icons.add,
+                                      size: 13,
+                                      color: Colors.white,
+                                    ),
+                                  ],
+                                ],
                               ),
-                              InkWell(
-                                onTap: () => _mostrarModalProgressaoEMulticlasse(
-                                  cubit,
-                                ),
-                                child: const Padding(
-                                  padding: EdgeInsets.all(3),
-                                  child: Icon(
-                                    Icons.add,
-                                    size: 13,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
                         ),
                       ],

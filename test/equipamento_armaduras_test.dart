@@ -8,6 +8,7 @@ import 'package:t20_creator/domain/entities/equipamento/protecao.dart';
 import 'package:t20_creator/domain/entities/equipamento/arma.dart';
 import 'package:t20_creator/domain/services/data_services/call_armaduras.dart';
 import 'package:t20_creator/domain/services/data_services/call_classes.dart';
+import 'package:t20_creator/domain/services/data_services/catalogo_service.dart';
 
 import 'package:t20_creator/domain/services/regras_carga_service.dart';
 import 'package:t20_creator/presentation/controllers/personagem_cubit.dart';
@@ -59,9 +60,7 @@ void main() {
       habilidadesFixas: {},
     );
 
-    final arcanistaDef = BancoDeClasses.todas.firstWhere(
-      (c) => c.idClasse == 'arcanista',
-    );
+    late final Classe arcanistaDef;
     // Definições de proteções para os testes
     const armaduraCouro = Protecao(
       key: 'ARMADURA_COURO',
@@ -135,7 +134,12 @@ void main() {
       multiplicadorCriticoAtaque: 2,
     );
 
-    setUpAll(() {
+    setUpAll(() async {
+      TestWidgetsFlutterBinding.ensureInitialized();
+      await CatalogoService.carregarTodos();
+      arcanistaDef = BancoDeClasses.todas.firstWhere(
+        (c) => c.idClasse == 'arcanista',
+      );
       BancoDeArmaduras.carregarParaTestes([
         armaduraCouro,
         couroBatido,

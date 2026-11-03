@@ -1,5 +1,5 @@
+import 'dart:collection';
 import 'dart:convert';
-import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import '../../entities/equipamento/arma.dart';
@@ -15,32 +15,22 @@ class BancoDeArmas {
     }
   }
 
-  static void _garantirCarregamento() {
-    if (_dados.isEmpty) {
-      try {
-        final file = File('assets/data/equipment/banco_armas.json');
-        if (file.existsSync()) {
-          final raw = file.readAsStringSync();
-          final List<dynamic> jsonList = jsonDecode(raw);
-          _dados = jsonList
-              .map((item) => Arma.fromJson(item as Map<String, dynamic>))
-              .toList();
-          _reconstruirIndex();
-        }
-      } catch (_) {}
-    }
-  }
-
   static Future<void> carregar() async {
-    final raw = await rootBundle.loadString(
-      'assets/data/equipment/banco_armas.json',
-    );
-    final List<dynamic> jsonList = jsonDecode(raw);
+    try {
+      final raw = await rootBundle.loadString(
+        'assets/data/equipment/banco_armas.json',
+        cache: false,
+      );
+      final List<dynamic> jsonList = jsonDecode(raw);
 
-    _dados = jsonList
-        .map((item) => Arma.fromJson(item as Map<String, dynamic>))
-        .toList();
-    _reconstruirIndex();
+      _dados = jsonList
+          .map((item) => Arma.fromJson(item as Map<String, dynamic>))
+          .toList();
+      _reconstruirIndex();
+    } catch (e, stack) {
+      debugPrint('Erro ao carregar banco_armas.json: $e\n$stack');
+      assert(false, 'Erro ao carregar banco_armas.json: $e');
+    }
   }
 
   /// Método para injetar armas durante a execução de testes automatizados
@@ -51,14 +41,10 @@ class BancoDeArmas {
   }
 
   /// Retorna todas as armas cadastradas
-  static List<Arma> get todas {
-    _garantirCarregamento();
-    return List.unmodifiable(_dados);
-  }
+  static List<Arma> get todas => UnmodifiableListView(_dados);
 
   /// Retorna as armas filtradas por proficiência (Simples, Marcial, Exótica, Fogo)
   static List<Arma> armasPorProficiencia(ProficienciaArma prof) {
-    _garantirCarregamento();
     return _dados.where((a) => a.proficiencia == prof).toList();
   }
 
@@ -74,7 +60,6 @@ class BancoDeArmas {
 
   /// Busca uma arma específica pela chave em O(1) (ex: 'ADAGA', 'ESPADA_LONGA')
   static Arma? getByKey(String key) {
-    _garantirCarregamento();
     return _indexPorChave[key.trim().toUpperCase()];
   }
 }

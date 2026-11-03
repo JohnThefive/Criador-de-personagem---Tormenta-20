@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../domain/entities/personagem/personagem.dart';
 import '../../domain/repositories/i_personagem_repository.dart';
+import '../../domain/services/data_services/catalogo_service.dart';
 import '../../domain/services/personagem_storage_service.dart';
 
 // Estado da Home (apenas o necessário)
@@ -18,12 +19,16 @@ class HomeState {
   }
 }
 
-// Cubit da Home com injeção de IPersonagemRepository
+// Cubit da Home com injeção de IPersonagemRepository e Future de catálogos
 class HomeCubit extends Cubit<HomeState> {
   final IPersonagemRepository _repository;
+  final Future<void>? _catalogosFuture;
 
-  HomeCubit({IPersonagemRepository? repository})
-      : _repository = repository ?? const PersonagemStorageService(),
+  HomeCubit({
+    IPersonagemRepository? repository,
+    Future<void>? catalogosFuture,
+  })  : _repository = repository ?? const PersonagemStorageService(),
+        _catalogosFuture = catalogosFuture ?? CatalogoService.future,
         super(const HomeState(personagens: [], carregando: true)) {
     carregarPersonagensReais();
   }
@@ -31,6 +36,9 @@ class HomeCubit extends Cubit<HomeState> {
   Future<void> carregarPersonagensReais() async {
     emit(state.copyWith(carregando: true));
     try {
+      if (_catalogosFuture != null) {
+        await _catalogosFuture;
+      }
       final fichas = await _repository.obterTodos();
       emit(state.copyWith(personagens: fichas, carregando: false));
     } catch (_) {

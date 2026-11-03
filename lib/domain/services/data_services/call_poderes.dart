@@ -1,5 +1,6 @@
+import 'dart:collection';
 import 'dart:convert';
-import 'dart:io';
+import 'dart:isolate';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import '../../entities/personagem/poder.dart';
@@ -59,19 +60,7 @@ class BancoDePoderesGerais {
   static Future<String> _carregarAssetComFallback(List<String> caminhos) async {
     for (final path in caminhos) {
       try {
-        return await rootBundle.loadString(path);
-      } catch (_) {}
-    }
-    return '{}';
-  }
-
-  static String _carregarArquivoSyncComFallback(List<String> caminhos) {
-    for (final path in caminhos) {
-      try {
-        final file = File(path);
-        if (file.existsSync()) {
-          return file.readAsStringSync();
-        }
+        return await rootBundle.loadString(path, cache: false);
       } catch (_) {}
     }
     return '{}';
@@ -108,41 +97,9 @@ class BancoDePoderesGerais {
         categoriaDefault: 'poder_tormenta',
       );
       _reconstruirIndex();
-    } catch (_) {}
-  }
-
-  static void _garantirCarregadoSync() {
-    if (_indexPorChave.isEmpty) {
-      try {
-        final rawCombate = _carregarArquivoSyncComFallback([
-          'assets/data/poderes/poderes_combate.json',
-        ]);
-        final rawDestino = _carregarArquivoSyncComFallback([
-          'assets/data/poderes/poderes_destino.json',
-        ]);
-        final rawMagia = _carregarArquivoSyncComFallback([
-          'assets/data/poderes/poderes_magicos.json',
-          'assets/data/poderes/poderes_magia.json',
-        ]);
-        final rawTormenta = _carregarArquivoSyncComFallback([
-          'assets/data/poderes/poderes_da_tormenta.json',
-        ]);
-
-        _combate = _parsearMapaPoderes(
-          rawCombate,
-          categoriaDefault: 'poder_combate',
-        );
-        _destino = _parsearMapaPoderes(
-          rawDestino,
-          categoriaDefault: 'poder_destino',
-        );
-        _magia = _parsearMapaPoderes(rawMagia, categoriaDefault: 'poder_magia');
-        _tormenta = _parsearMapaPoderes(
-          rawTormenta,
-          categoriaDefault: 'poder_tormenta',
-        );
-        _reconstruirIndex();
-      } catch (_) {}
+    } catch (e, stack) {
+      debugPrint('Erro ao carregar poderes gerais: $e\n$stack');
+      assert(false, 'Erro ao carregar poderes gerais: $e');
     }
   }
 
@@ -162,32 +119,27 @@ class BancoDePoderesGerais {
 
   /// Lista completa de Poderes de Combate (`poderes_combate.json`)
   static List<Poder> get poderesCombate {
-    _garantirCarregadoSync();
-    return List.unmodifiable(_combate);
+    return UnmodifiableListView(_combate);
   }
 
   /// Lista completa de Poderes de Destino (`poderes_destino.json`)
   static List<Poder> get poderesDestino {
-    _garantirCarregadoSync();
-    return List.unmodifiable(_destino);
+    return UnmodifiableListView(_destino);
   }
 
   /// Lista completa de Poderes de Magia (`poderes_magicos.json` / `poderes_magia.json`)
   static List<Poder> get poderesMagia {
-    _garantirCarregadoSync();
-    return List.unmodifiable(_magia);
+    return UnmodifiableListView(_magia);
   }
 
   /// Lista completa de Poderes da Tormenta (`poderes_da_tormenta.json`)
   static List<Poder> get poderesTormenta {
-    _garantirCarregadoSync();
-    return List.unmodifiable(_tormenta);
+    return UnmodifiableListView(_tormenta);
   }
 
   /// Lista unificada com todos os Poderes Gerais (Combate, Destino, Magia e Tormenta)
   static List<Poder> get todos {
-    _garantirCarregadoSync();
-    return List.unmodifiable([
+    return UnmodifiableListView([
       ..._combate,
       ..._destino,
       ..._magia,
@@ -197,7 +149,6 @@ class BancoDePoderesGerais {
 
   /// Procura um poder geral pela sua chave/ID em O(1)
   static Poder? getByKey(String key) {
-    _garantirCarregadoSync();
     final clean = key.trim().toLowerCase();
     return _indexPorChave[clean] ??
         _indexPorChave[clean.replaceAll('-', '_')] ??
@@ -210,7 +161,6 @@ class BancoDePoderesGerais {
     required List<String> poderesGeraisOpcoesIds,
     required bool escolhaLivrePoderCombate,
   }) {
-    _garantirCarregadoSync();
     final List<Poder> resultado = [];
     final Set<String> vistos = {};
 
@@ -239,16 +189,28 @@ class BancoDePoderes {
   static final Map<String, Poder> _indexPorChave = {};
   static final Map<String, Set<String>> _classesDonasPorChave = {};
 
-  static void _popularMapas(Map<String, dynamic> jsonMap) {
+  static Map<String, List<Poder>> _parsearPoderesPorClasse(String raw) {
+    final dynamic decoded = jsonDecode(raw);
+    final Map<String, List<Poder>> mapa = {};
+    if (decoded is Map<String, dynamic>) {
+      decoded.forEach((chaveJson, lista) {
+        if (lista is List) {
+          final idUpper = chaveJson.toUpperCase();
+          mapa[idUpper] = lista
+              .map((p) => Poder.fromJson(p as Map<String, dynamic>))
+              .toList();
+        }
+      });
+    }
+    return mapa;
+  }
+
+  static void _popularMapas(Map<String, List<Poder>> parsed) {
     _dados = {};
     _indexPorChave.clear();
     _classesDonasPorChave.clear();
 
-    jsonMap.forEach((chaveJson, lista) {
-      final idUpper = chaveJson.toUpperCase();
-      final poderes = (lista as List)
-          .map((p) => Poder.fromJson(p as Map<String, dynamic>))
-          .toList();
+    parsed.forEach((idUpper, poderes) {
       _dados[idUpper] = poderes;
       for (final poder in poderes) {
         _indexPorChave[poder.key] = poder;
@@ -260,35 +222,22 @@ class BancoDePoderes {
     });
   }
 
-  static void _garantirCarregadoSync() {
-    if (_dados.isEmpty) {
-      try {
-        final file = File('assets/data/classes_data/banco_poderes_classe.json');
-        if (file.existsSync()) {
-          final raw = file.readAsStringSync();
-          _popularMapas(jsonDecode(raw) as Map<String, dynamic>);
-        }
-      } catch (_) {}
-    }
-  }
-
   static Future<void> carregar() async {
-    await BancoDePoderesGerais.carregar();
-
-    String raw;
     try {
-      raw = await rootBundle.loadString(
+      final raw = await rootBundle.loadString(
         'assets/data/classes_data/banco_poderes_classe.json',
+        cache: false,
       );
-    } catch (_) {
-      final file = File('assets/data/classes_data/banco_poderes_classe.json');
-      raw = file.existsSync() ? file.readAsStringSync() : '{}';
+      final parsed = await Isolate.run(() => _parsearPoderesPorClasse(raw));
+      _popularMapas(parsed);
+    } catch (e, stack) {
+      debugPrint('Erro ao carregar banco_poderes_classe.json: $e\n$stack');
+      assert(false, 'Erro ao carregar banco_poderes_classe.json: $e');
     }
-
-    _popularMapas(jsonDecode(raw) as Map<String, dynamic>);
   }
 
   /// Método para injetar poderes em testes automatizados
+  @visibleForTesting
   static void carregarParaTestes(Map<String, List<Poder>> dados) {
     _dados = {};
     _indexPorChave.clear();
@@ -308,20 +257,17 @@ class BancoDePoderes {
 
   // Busca os poderes passando diretamente o idClasse da entidade Classe
   static List<Poder> poderesDaClasse(String idClasse) {
-    _garantirCarregadoSync();
     return _dados[idClasse.toUpperCase()] ?? [];
   }
 
   /// Retorna o conjunto de IDs de classes (em maiúsculo) que possuem este poder como poder de classe,
   /// ou vazio caso seja um poder geral / customizado fora do catálogo de classes.
   static Set<String> obterClassesDonasDoPoder(String poderKey) {
-    _garantirCarregadoSync();
     return _classesDonasPorChave[poderKey.toUpperCase()] ?? const {};
   }
 
   /// Busca um poder específico em O(1) pela chave (classe ou poder geral)
   static Poder? getByKey(String key) {
-    _garantirCarregadoSync();
     return _indexPorChave[key] ??
         _indexPorChave[key.toUpperCase()] ??
         BancoDePoderesGerais.getByKey(key);

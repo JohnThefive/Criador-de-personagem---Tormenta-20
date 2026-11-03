@@ -105,8 +105,19 @@ class FichaCubit extends Cubit<FichaState> {
     return super.close();
   }
 
-  /// Altera o nível da classe principal (+1 ou -1) dentro do limite total de 1 a 20
+  /// RF01 / RN01 / RV01 / RV04 — Sobe o nível da classe principal (+delta) dentro do limite total de 1 a 20.
+  /// A redução de nível foi desabilitada permanentemente para manter a consistência de magias e poderes.
   Future<bool> alterarNivel(int delta) async {
+    if (delta < 0) {
+      emit(
+        state.copyWith(
+          mensagemErro:
+              'A redução de nível não é permitida. A evolução do personagem em Tormenta 20 é permanente.',
+          anularSucesso: true,
+        ),
+      );
+      return false;
+    }
     return alterarNivelClasse(0, delta);
   }
 
@@ -118,6 +129,18 @@ class FichaCubit extends Cubit<FichaState> {
     Linhagem? linhagem,
   }) async {
     try {
+      if (state.personagem.modoTabletopAtivo &&
+          !state.personagem.podeSubirDeNivel) {
+        emit(
+          state.copyWith(
+            mensagemErro:
+                'No modo de mesa (Tabletop), você precisa de XP suficiente ou da permissão do mestre para subir de nível.',
+            anularSucesso: true,
+          ),
+        );
+        return false;
+      }
+
       final tinhaClasse = state.personagem.classes.any(
         (c) =>
             c.classeDefinicao.idClasse.toLowerCase() ==
@@ -141,26 +164,47 @@ class FichaCubit extends Cubit<FichaState> {
     }
   }
 
-  /// Altera o nível de uma classe específica (`indiceClasse`) respeitando o teto de Nível 20 (RV01),
-  /// mantendo histórico cronológico (RF02 / RF12) e removendo classes secundárias zeradas (RV02).
+  /// Altera o nível de uma classe específica (`indiceClasse`) exclusivamente de forma ascendente (delta > 0),
+  /// respeitando o teto de Nível 20 (RV01) e mantendo histórico cronológico (RF02 / RF12).
+  /// Reduções de nível são bloqueadas para garantir a consistência das escolhas e magias do personagem.
   Future<bool> alterarNivelClasse(int indiceClasse, int delta) async {
-    if (delta == 0 ||
-        indiceClasse < 0 ||
-        indiceClasse >= state.personagem.classes.length) {
-      return false;
-    }
-
-    final novoNivelTotal = state.personagem.nivelPersonagem + delta;
-    if (novoNivelTotal < 1 ||
-        novoNivelTotal > MotorMulticlasseService.nivelMaximoPersonagem) {
-      if (novoNivelTotal > MotorMulticlasseService.nivelMaximoPersonagem) {
+    if (delta <= 0) {
+      if (delta < 0) {
         emit(
           state.copyWith(
-            mensagemErro: 'O personagem já atingiu o nível máximo (20).',
+            mensagemErro:
+                'A redução de nível não é permitida. A evolução do personagem em Tormenta 20 é permanente.',
             anularSucesso: true,
           ),
         );
       }
+      return false;
+    }
+
+    if (state.personagem.modoTabletopAtivo &&
+        !state.personagem.podeSubirDeNivel) {
+      emit(
+        state.copyWith(
+          mensagemErro:
+              'No modo de mesa (Tabletop), você precisa de XP suficiente ou da permissão do mestre para subir de nível.',
+          anularSucesso: true,
+        ),
+      );
+      return false;
+    }
+
+    if (indiceClasse < 0 || indiceClasse >= state.personagem.classes.length) {
+      return false;
+    }
+
+    final novoNivelTotal = state.personagem.nivelPersonagem + delta;
+    if (novoNivelTotal > MotorMulticlasseService.nivelMaximoPersonagem) {
+      emit(
+        state.copyWith(
+          mensagemErro: 'O personagem já atingiu o nível máximo (20).',
+          anularSucesso: true,
+        ),
+      );
       return false;
     }
 
@@ -313,8 +357,46 @@ class FichaCubit extends Cubit<FichaState> {
   /// Adiciona Pontos de Experiência (XP)
   Future<void> adicionarXP(int valor) async {
     if (valor <= 0) return;
-    final atualizado = state.personagem.adicionarXP(valor);
-    await atualizarPersonagem(atualizado);
+    final anterior = state.personagem;
+    final atualizado = anterior.adicionarXP(valor);
+    String? feedback = '+$valor XP adicionados!';
+    if (!anterior.temXpSuficienteParaSubirNivel &&
+        atualizado.temXpSuficienteParaSubirNivel) {
+      feedback =
+          '+$valor XP adicionados! Você acumulou XP suficiente para subir para o nível ${atualizado.nivelPersonagem + 1}!';
+    }
+    await atualizarPersonagem(atualizado, mensagemSucesso: feedback);
+  }
+
+  /// Define um valor exato para os Pontos de Experiência (XP) acumulados
+  Future<void> definirXP(int novoTotal) async {
+    final atualizado = state.personagem.definirXP(novoTotal);
+    await atualizarPersonagem(
+      atualizado,
+      mensagemSucesso: 'XP total ajustado para ${atualizado.experienciaAtual}.',
+    );
+  }
+
+  /// Concede ou revoga a autorização do mestre para subir de nível no modo Tabletop
+  Future<void> definirPermissaoMestre(bool permitida) async {
+    final atualizado = state.personagem.definirPermissaoMestre(permitida);
+    await atualizarPersonagem(
+      atualizado,
+      mensagemSucesso: permitida
+          ? 'O mestre autorizou a evolução de nível!'
+          : 'A evolução de nível depende de XP ou nova autorização.',
+    );
+  }
+
+  /// Alterna o modo de mesa (Tabletop) com mestre presente
+  Future<void> alternarModoTabletop(bool ativo) async {
+    final atualizado = state.personagem.alternarModoTabletop(ativo);
+    await atualizarPersonagem(
+      atualizado,
+      mensagemSucesso: ativo
+          ? 'Modo Tabletop ativado: subida de nível controlada por XP / Mestre.'
+          : 'Modo Solo ativado: subida de nível livre.',
+    );
   }
 
   // --- DESCANSOS ---

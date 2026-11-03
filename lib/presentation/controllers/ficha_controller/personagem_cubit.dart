@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t20_creator/domain/entities/personagem/classe.dart';
@@ -23,7 +24,7 @@ import '../../domain/services/poderes_e_magias/aprendizado_magia_service.dart';
 enum MetodoAtributos { nenhum, compra, rolagem }
 
 // Estado expandido
-class PersonagemState {
+class PersonagemState extends Equatable {
   final Personagem personagem;
   final int etapaAtual; // 0: Atributos, 1: Raça, 2: Classe...
   final MetodoAtributos metodoAtributos; // Controla a UI da etapa 0
@@ -319,6 +320,32 @@ class PersonagemState {
       tibaresIniciais: tibaresIniciais ?? this.tibaresIniciais,
     );
   }
+
+  @override
+  List<Object?> get props => [
+        personagem,
+        etapaAtual,
+        metodoAtributos,
+        origemSelecionada,
+        periciasEscolhidasOrigem,
+        poderesEscolhidosOrigem,
+        divindadeSelecionada,
+        poderesConcedidosSelecionados,
+        canalizacaoSelecionada,
+        modoEstritoDevocao,
+        valoresRolados,
+        alocacaoIndices,
+        pontosRestantesCompra,
+        atributosVariaveisRaca,
+        selecoesPericiaClasse,
+        selecoesPericiaInteligencia,
+        magiasSelecionadas,
+        armaSimplesInicial,
+        armaMarcialInicial,
+        armaduraInicial,
+        escudoInicial,
+        tibaresIniciais,
+      ];
 }
 
 class PersonagemCubit extends Cubit<PersonagemState> {
