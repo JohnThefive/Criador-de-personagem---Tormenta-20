@@ -6,6 +6,7 @@ import '../../../domain/entities/combate/tipo_acao.dart';
 import '../../../domain/services/combate_services/combate_engine.dart';
 import '../../../domain/services/combate_services/movimento_engine.dart';
 import 'combate_state.dart';
+import '../../../domain/entities/magia/magia.dart';
 
 class CombateCubit extends Cubit<CombateState> {
   final CombateEngine _engine;
@@ -269,6 +270,8 @@ class CombateCubit extends Cubit<CombateState> {
     required Combatente defensor,
     required Arma arma,
     bool alvoEngajadoEmCorpoACorpo = false,
+    int bonusAtaqueExtra = 0,
+    int bonusDanoExtra = 0,
   }) {
     final atacante = state.combatenteAtual;
     if (atacante == null) return;
@@ -311,6 +314,8 @@ class CombateCubit extends Cubit<CombateState> {
       alvoEngajadoEmCorpoACorpo: alvoEngajadoEmCorpoACorpo,
       mirou: state.mirouNesteTurno,
       ataqueNaoLetal: state.ataqueNaoLetalAtivo,
+      bonusAtaqueExtra: bonusAtaqueExtra,
+      bonusDanoExtra: bonusDanoExtra,
     );
 
     // Aplica o dano no defensor usando as regras de ciclo de vida do T20
@@ -450,7 +455,177 @@ class CombateCubit extends Cubit<CombateState> {
     );
   }
 
-  /// 10. IA Tática do Bot: move-se no grid em direção ao herói se necessário e agride
+  /// Converte o tipo de alcance da Magia para a distância máxima em metros no T20
+  double calcularAlcanceMetrosMagia(AlcanceMagia alcance) {
+    switch (alcance.tipo.toLowerCase()) {
+      case 'pessoal':
+        return 0.0;
+      case 'toque':
+        return 1.5;
+      case 'curto':
+        return 9.0;
+      case 'medio':
+      case 'médio':
+        return 30.0;
+      case 'longo':
+        return 90.0;
+      default:
+        return 9.0;
+    }
+  }
+
+  /// Retorna o custo base de PM em Tormenta 20 conforme o círculo da magia
+  int calcularCustoPmMagia(Magia magia) {
+    switch (magia.circulo) {
+      case 1:
+        return 1;
+      case 2:
+        return 3;
+      case 3:
+        return 6;
+      case 4:
+        return 10;
+      case 5:
+        return 15;
+      default:
+        return magia.circulo;
+    }
+  }
+
+  /// Executa o lançamento de magia com validação de PM, ação e alcance métrico
+  void lancarMagia({
+    required Magia magia,
+    Combatente? alvo,
+    int? valorDanoOuCura,
+    bool ehCura = false,
+  }) {
+    final lancador = state.combatenteAtual;
+    if (lancador == null) return;
+    final custoPm = calcularCustoPmMagia(magia);
+    // 1. Validação de PM suficiente
+    if (lancador.pmAtual < custoPm) {
+      emit(
+        state.copyWith(
+          logCombate: [
+            ...state.logCombate,
+            "⚠️ ${lancador.nome} não possui PM suficiente para lançar ${magia.nome}! (Exige $custoPm PM, tem ${lancador.pmAtual} PM).",
+          ],
+        ),
+      );
+      return;
+    }
+    // 2. Validação da Ação exigida (padrão, movimento, etc.)
+    final tipoAcao = magia.execucao.tipo.toLowerCase().contains('movimento')
+        ? TipoAcao.movimento
+        : TipoAcao.padrao;
+    if (!gastarAcao(tipoAcao)) {
+      emit(
+        state.copyWith(
+          logCombate: [
+            ...state.logCombate,
+            "⚠️ ${lancador.nome} não possui ação disponível para lançar ${magia.nome}!",
+          ],
+        ),
+      );
+      return;
+    }
+
+    // 3. Validação de Alcance no Grid Tático
+    final alcanceMaximo = calcularAlcanceMetrosMagia(magia.alcance);
+    final posLancador = state.posicoesCombatentes[lancador.id];
+    if (alvo != null &&
+        posLancador != null &&
+        magia.alcance.tipo != 'pessoal') {
+      final posAlvo = state.posicoesCombatentes[alvo.id];
+      if (posAlvo != null) {
+        final distMetros = posLancador.distanciaMetros(posAlvo);
+        if (distMetros > alcanceMaximo) {
+          emit(
+            state.copyWith(
+              logCombate: [
+                ...state.logCombate,
+                "⚠️ Alvo fora de alcance para ${magia.nome}! Distância: ${distMetros.toStringAsFixed(1)}m (Alcance ${magia.alcance.tipo}: ${alcanceMaximo}m).",
+              ],
+            ),
+          );
+          return;
+        }
+      }
+    }
+    // 4. Deduz o PM do Lançador e atualiza a fila de combate
+    final lancadorComMenosPm = lancador.copyWith(
+      pmAtual: lancador.pmAtual - custoPm,
+    );
+    List<Combatente> novaFila = state.filaIniciativa.map((c) {
+      return c.id == lancador.id ? lancadorComMenosPm : c;
+    }).toList();
+    // 5. Aplica dano ou cura no alvo se especificado
+    final novosLogs = <String>[
+      "✨ ${lancador.nome} lançou ${magia.nome} gastando $custoPm PM (restam ${lancadorComMenosPm.pmAtual} PM).",
+    ];
+    if (alvo != null && valorDanoOuCura != null && valorDanoOuCura > 0) {
+      novaFila = novaFila.map((c) {
+        if (c.id == alvo.id) {
+          if (ehCura) {
+            novosLogs.add("💚 ${alvo.nome} foi curado em $valorDanoOuCura PV!");
+            return c.aplicarCura(valorDanoOuCura);
+          } else {
+            novosLogs.add(
+              "💥 ${alvo.nome} sofreu $valorDanoOuCura de dano mágico de ${magia.nome}!",
+            );
+            return c.aplicarDano(valorDanoOuCura);
+          }
+        }
+        return c;
+      }).toList();
+    }
+    final statusFinal = _engine.verificarFimDeCombate(novaFila);
+    emit(
+      state.copyWith(
+        filaIniciativa: novaFila,
+        statusCombate: statusFinal,
+        logCombate: [...state.logCombate, ...novosLogs],
+      ),
+    );
+  }
+
+  /// 10. Aplica ajuste direto de dano ou cura no combatente (Pilar VTT: Resolução Rápida na Mesa)
+  void aplicarAjusteVtt({
+    required String combatenteId,
+    required int valor,
+    required String motivo,
+    bool ehCura = false,
+    bool ehMetade = false,
+  }) {
+    final valorFinal = ehMetade ? (valor / 2).floor() : valor;
+    if (valorFinal <= 0) return;
+
+    final novosLogs = <String>[];
+    final novaFila = state.filaIniciativa.map((c) {
+      if (c.id == combatenteId) {
+        if (ehCura) {
+          novosLogs.add("💚 ${c.nome} recuperou $valorFinal PV ($motivo).");
+          return c.aplicarCura(valorFinal);
+        } else {
+          final prefixo = ehMetade ? "💥 [1/2 Dano (Resistiu)]" : "💥 [Dano Total]";
+          novosLogs.add("$prefixo ${c.nome} sofreu $valorFinal de dano ($motivo).");
+          return c.aplicarDano(valorFinal);
+        }
+      }
+      return c;
+    }).toList();
+
+    final statusFinal = _engine.verificarFimDeCombate(novaFila);
+    emit(
+      state.copyWith(
+        filaIniciativa: novaFila,
+        statusCombate: statusFinal,
+        logCombate: [...state.logCombate, ...novosLogs],
+      ),
+    );
+  }
+
+  /// 11. IA Tática do Bot: move-se no grid em direção ao herói se necessário e agride
   void executarTurnoBot() {
     final bot = state.combatenteAtual;
     if (bot == null || !bot.podeAgir) {

@@ -9,6 +9,7 @@ import 'breakpoints.dart';
 import 'widgets/app_drawer.dart';
 import 'widgets/character_list_section.dart';
 import 'widgets/empty_home_state.dart';
+import '../arena/arena_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -55,6 +56,127 @@ class HomeScreen extends StatelessWidget {
         content: Text('Personagem "${personagem.nome}" excluído.'),
         behavior: SnackBarBehavior.floating,
       ),
+    );
+  }
+
+  void _abrirSeletorArena(BuildContext context, List<Personagem> personagens) {
+    if (personagens.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            'Crie ao menos um personagem antes de entrar na Arena!',
+          ),
+          behavior: SnackBarBehavior.floating,
+          backgroundColor: Color(0xFFC62828),
+        ),
+      );
+      return;
+    }
+
+    showModalBottomSheet<void>(
+      context: context,
+      backgroundColor: const Color(0xFF1E293B),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (modalContext) {
+        return SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.sports_kabaddi,
+                        color: Colors.amberAccent,
+                        size: 26,
+                      ),
+                      SizedBox(width: 10),
+                      Text(
+                        'Escolha seu Herói para a Arena',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  child: Text(
+                    'Uma cópia descartável será criada. Nada na sua ficha real será modificado.',
+                    style: TextStyle(color: Colors.white60, fontSize: 12),
+                  ),
+                ),
+                const Divider(color: Colors.white24, height: 20),
+                Flexible(
+                  child: ListView.separated(
+                    shrinkWrap: true,
+                    itemCount: personagens.length,
+                    separatorBuilder: (_, _) =>
+                        const Divider(color: Colors.white12, height: 1),
+                    itemBuilder: (ctx, index) {
+                      final p = personagens[index];
+                      final classeNivel = p.classes.isNotEmpty
+                          ? '${p.classes.first.classeDefinicao.nome} Nv ${p.nivelPersonagem}'
+                          : 'Nível ${p.nivelPersonagem}';
+
+                      return ListTile(
+                        leading: CircleAvatar(
+                          backgroundColor: const Color(0xFFD32F2F),
+                          child: Text(
+                            p.nome.isNotEmpty ? p.nome[0].toUpperCase() : '?',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        title: Text(
+                          p.nome,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        subtitle: Text(
+                          '$classeNivel • ${p.raca?.nome ?? "Sem Raça"} • ${p.pvTotal} PV',
+                          style: const TextStyle(
+                            color: Colors.white70,
+                            fontSize: 12,
+                          ),
+                        ),
+                        trailing: const Icon(
+                          Icons.play_arrow_rounded,
+                          color: Colors.amberAccent,
+                          size: 28,
+                        ),
+                        onTap: () {
+                          Navigator.pop(modalContext); // Fecha o modal seletor
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) =>
+                                  ArenaScreen(personagemOriginal: p),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 
@@ -124,6 +246,39 @@ class HomeScreen extends StatelessWidget {
                       onPressed: () => Scaffold.of(ctx).openDrawer(),
                     ),
                   ),
+                  actions: [
+                    FilledButton.tonalIcon(
+                      onPressed: () =>
+                          _abrirSeletorArena(context, state.personagens),
+                      style: FilledButton.styleFrom(
+                        backgroundColor: const Color(
+                          0xFFC62828,
+                        ).withValues(alpha: 0.2),
+                        foregroundColor: Colors.white,
+                        side: const BorderSide(
+                          color: Color(0xFFC62828),
+                          width: 1.2,
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 14,
+                          vertical: 8,
+                        ),
+                      ),
+                      icon: const Icon(
+                        Icons.sports_kabaddi,
+                        color: Colors.amberAccent,
+                        size: 20,
+                      ),
+                      label: const Text(
+                        'Modo Arena',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 13,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                  ],
                 ),
                 body: buildConteudoAdaptativo(),
               );

@@ -617,4 +617,95 @@ void main() {
       },
     );
   });
+
+  group('10. Pilares VTT: Modificadores Circunstanciais e Arbitragem Rápida', () {
+    const heroiVtt = Combatente(
+      id: 'heroi_vtt',
+      nome: 'Paladino',
+      pvMax: 30,
+      pvAtual: 30,
+      pmMax: 10,
+      pmAtual: 10,
+      defesa: 18,
+      deslocamentoMetros: 9.0,
+      modIniciativa: 4,
+      modLuta: 5,
+      modPontaria: 2,
+      modPercepcao: 3,
+      modForca: 3,
+      modDestreza: 1,
+      modConstituicao: 2,
+    );
+
+    const orcVtt = Combatente(
+      id: 'orc_vtt',
+      nome: 'Orc',
+      time: TimeCombatente.inimigo,
+      pvMax: 30,
+      pvAtual: 30,
+      pmMax: 0,
+      pmAtual: 0,
+      defesa: 15,
+      deslocamentoMetros: 9.0,
+      modIniciativa: 1,
+      modLuta: 6,
+      modPontaria: 0,
+      modPercepcao: 0,
+      modForca: 3,
+      modDestreza: 0,
+      modConstituicao: 2,
+    );
+
+    test('Pilar 3: aplicarAjusteVtt aplica Dano Total corretamente', () {
+      final cubit = CombateCubit();
+      cubit.iniciarCombate([heroiVtt, orcVtt]);
+
+      cubit.aplicarAjusteVtt(
+        combatenteId: 'orc_vtt',
+        valor: 12,
+        motivo: 'Bola de Fogo',
+        ehCura: false,
+        ehMetade: false,
+      );
+
+      final orcAtualizado = cubit.state.filaIniciativa.firstWhere((c) => c.id == 'orc_vtt');
+      expect(orcAtualizado.pvAtual, 18);
+      expect(cubit.state.logCombate.last, contains('sofreu 12 de dano'));
+    });
+
+    test('Pilar 3: aplicarAjusteVtt aplica Metade do Dano (Resistência) corretamente', () {
+      final cubit = CombateCubit();
+      cubit.iniciarCombate([heroiVtt, orcVtt]);
+
+      cubit.aplicarAjusteVtt(
+        combatenteId: 'orc_vtt',
+        valor: 15,
+        motivo: 'Reflexos CD 15',
+        ehCura: false,
+        ehMetade: true,
+      );
+
+      final orcAtualizado = cubit.state.filaIniciativa.firstWhere((c) => c.id == 'orc_vtt');
+      // Metade de 15 arredondado para baixo = 7 de dano
+      expect(orcAtualizado.pvAtual, 23);
+      expect(cubit.state.logCombate.last, contains('[1/2 Dano (Resistiu)]'));
+    });
+
+    test('Pilar 3: aplicarAjusteVtt aplica Cura sem ultrapassar pvMax', () {
+      final cubit = CombateCubit();
+      final heroiFerido = heroiVtt.copyWith(pvAtual: 10);
+      cubit.iniciarCombate([heroiFerido, orcVtt]);
+
+      cubit.aplicarAjusteVtt(
+        combatenteId: 'heroi_vtt',
+        valor: 15,
+        motivo: 'Curar Ferimentos',
+        ehCura: true,
+      );
+
+      final heroiAtualizado = cubit.state.filaIniciativa.firstWhere((c) => c.id == 'heroi_vtt');
+      expect(heroiAtualizado.pvAtual, 25);
+      expect(cubit.state.logCombate.last, contains('recuperou 15 PV'));
+    });
+  });
 }

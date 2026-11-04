@@ -99,6 +99,8 @@ class CombateEngine {
     bool mirou = false,
     bool ataqueNaoLetal = false,
     int? d20Teste,
+    int bonusAtaqueExtra = 0,
+    int bonusDanoExtra = 0,
   }) {
     final bool ehCorpoACorpo = arma.ehCorpoACorpo;
     final int bonusPericia = ehCorpoACorpo
@@ -118,7 +120,7 @@ class CombateEngine {
     // Rolagem do teste de ataque
     final d20 = d20Teste ?? _rolarDado(20);
     final totalAtaque =
-        d20 + bonusPericia + penalidadeDistancia + penalidadeNaoLetal;
+        d20 + bonusPericia + penalidadeDistancia + penalidadeNaoLetal + bonusAtaqueExtra;
 
     // Regras de Acerto:
     // - 20 Natural: Acerto automático
@@ -178,13 +180,13 @@ class CombateEngine {
       bonusAtributo = atacante.modForca;
     }
 
-    final int danoFinal = max(1, somaDadosDano + bonusAtributo);
+    final int danoFinal = max(1, somaDadosDano + bonusAtributo + bonusDanoExtra);
 
     final tipoRotulo = ataqueNaoLetal ? "Não Letal" : tipoDano.label;
 
     final String detalheDanoStr = ehCritico
-        ? "CRÍTICO (${arma.criticoFormatado})! Dados: $rolagensDano (Total: $somaDadosDano) + $bonusAtributo (FOR) = $danoFinal de $tipoRotulo"
-        : "Dados: $rolagensDano (Total: $somaDadosDano) + $bonusAtributo (FOR) = $danoFinal de $tipoRotulo";
+        ? "CRÍTICO (${arma.criticoFormatado})! Dados: $rolagensDano (Total: $somaDadosDano) + $bonusAtributo (FOR) ${bonusDanoExtra != 0 ? "+ $bonusDanoExtra (Bônus)" : ""} = $danoFinal de $tipoRotulo"
+        : "Dados: $rolagensDano (Total: $somaDadosDano) + $bonusAtributo (FOR) ${bonusDanoExtra != 0 ? "+ $bonusDanoExtra (Bônus)" : ""} = $danoFinal de $tipoRotulo";
 
     final String resumoStr = ehCritico
         ? "${atacante.nome} acertou um CRÍTICO em ${defensor.nome} com ${arma.nome}! Dano: $danoFinal ($tipoRotulo)."
