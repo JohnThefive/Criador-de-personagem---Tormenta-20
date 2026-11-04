@@ -89,5 +89,41 @@ void main() {
       expect(resultado.tipoVantagem, TipoVantagem.desvantagem);
       expect(resultado.decomposicao, contains('Desvantagem'));
     });
+
+    test('rolarDano calcula expressão de dano normal com bônus', () {
+      // nextInt(8) retornando 5 resulta em 1 + 5 = 6
+      final fake = FakeRandom([5]);
+      final service = DiceRollService(random: fake);
+
+      final resultado = service.rolarDano(
+        expressaoDano: '1d8+3',
+        bonusExtra: 1, // ex: +1 de Arma de Jade
+      );
+
+      expect(resultado.dadosRolados, [6]);
+      expect(resultado.bonusFixo, 4); // 3 da arma + 1 de bônus extra
+      expect(resultado.total, 10);
+      expect(resultado.ehCritico, isFalse);
+    });
+
+    test('rolarDano multiplica dados da arma no acerto crítico e inclui dados extras', () {
+      // Arma 1d8 com crítico x2 rola 2 dados: 7 (8) e 6 (7)
+      // Dado extra 1d6 rola 1 dado: 3 (4)
+      final fake = FakeRandom([7, 6, 3]);
+      final service = DiceRollService(random: fake);
+
+      final resultado = service.rolarDano(
+        expressaoDano: '1d8+3',
+        bonusExtra: 2,
+        dadoExtra: '1d6',
+        ehCritico: true,
+        multiplicadorCritico: 2,
+      );
+
+      expect(resultado.dadosRolados, [8, 7, 4]);
+      expect(resultado.bonusFixo, 5); // 3 da arma + 2 extra
+      expect(resultado.total, 24); // 8 + 7 + 4 + 5 = 24
+      expect(resultado.ehCritico, isTrue);
+    });
   });
 }

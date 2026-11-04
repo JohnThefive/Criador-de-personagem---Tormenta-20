@@ -386,12 +386,18 @@ class _ArenaScreenState extends State<ArenaScreen> {
           prev.combatenteAtual != curr.combatenteAtual ||
           prev.combatenteAtual?.pvAtual != curr.combatenteAtual?.pvAtual ||
           prev.combatenteAtual?.pmAtual != curr.combatenteAtual?.pmAtual ||
-          prev.combatenteAtual?.condicoesAtivas != curr.combatenteAtual?.condicoesAtivas,
+          prev.combatenteAtual?.condicoesAtivas != curr.combatenteAtual?.condicoesAtivas ||
+          prev.efeitosAtivos != curr.efeitosAtivos,
       builder: (context, state) {
         final atual = state.combatenteAtual;
         if (atual == null) return const SizedBox.shrink();
+        final efeitosDoCombatente = state.efeitosAtivos
+            .where((e) => e.combatenteId == atual.id)
+            .toList();
         return MiniFichaCombatenteWidget(
           combatente: atual,
+          efeitosAtivos: efeitosDoCombatente,
+          onRemoverEfeito: (id) => cubit.removerEfeitoAtivo(id),
           onAjusteClicado: () =>
               exibirModalArbitragemVtt(context, atual, cubit),
         );

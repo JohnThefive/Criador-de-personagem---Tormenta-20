@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import '../../../domain/entities/combate/combatente.dart';
+import '../../../domain/entities/combate/efeito_ativo_combate.dart';
 import '../../../domain/entities/combate/grid_tatico.dart';
 import '../../../domain/entities/combate/resultado_ataque.dart';
 import '../../../domain/services/combate_services/combate_engine.dart';
@@ -21,6 +22,7 @@ class CombateState extends Equatable {
   final StatusCombate statusCombate;
   final List<String> logCombate;
   final ResultadoAtaque? ultimoResultadoAtaque;
+  final List<EfeitoAtivoCombate> efeitosAtivos;
 
   const CombateState({
     this.filaIniciativa = const [],
@@ -39,6 +41,7 @@ class CombateState extends Equatable {
     this.statusCombate = StatusCombate.emAndamento,
     this.logCombate = const [],
     this.ultimoResultadoAtaque,
+    this.efeitosAtivos = const [],
   });
 
   Combatente? get combatenteAtual =>
@@ -73,6 +76,7 @@ class CombateState extends Equatable {
     List<String>? logCombate,
     ResultadoAtaque? ultimoResultadoAtaque,
     bool limparUltimoAtaque = false,
+    List<EfeitoAtivoCombate>? efeitosAtivos,
   }) {
     return CombateState(
       filaIniciativa: filaIniciativa ?? this.filaIniciativa,
@@ -95,6 +99,7 @@ class CombateState extends Equatable {
       ultimoResultadoAtaque: limparUltimoAtaque
           ? null
           : (ultimoResultadoAtaque ?? this.ultimoResultadoAtaque),
+      efeitosAtivos: efeitosAtivos ?? this.efeitosAtivos,
     );
   }
 
@@ -116,5 +121,6 @@ class CombateState extends Equatable {
     statusCombate,
     logCombate,
     ultimoResultadoAtaque,
+    efeitosAtivos,
   ];
 }

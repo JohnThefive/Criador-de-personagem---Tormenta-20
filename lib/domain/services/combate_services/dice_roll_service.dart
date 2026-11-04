@@ -36,7 +36,26 @@ class ResultadoD20 {
   String toString() => 'ResultadoD20(total: $total, $decomposicao)';
 }
 
-/// Serviço desacoplado e testável para rolagens de d20 com Random injetável.
+class ResultadoDano {
+  final int total;
+  final List<int> dadosRolados;
+  final int bonusFixo;
+  final bool ehCritico;
+  final String decomposicao;
+
+  const ResultadoDano({
+    required this.total,
+    required this.dadosRolados,
+    required this.bonusFixo,
+    this.ehCritico = false,
+    required this.decomposicao,
+  });
+
+  @override
+  String toString() => 'ResultadoDano(total: $total, $decomposicao)';
+}
+
+/// Serviço desacoplado e testável para rolagens de d20 e dano com Random injetável.
 class DiceRollService {
   final Random _random;
 
@@ -71,6 +90,71 @@ class DiceRollService {
       modificador: modificador,
       nomeModificador: nomeModificador,
       tipoVantagem: vantagem,
+    );
+  }
+
+  /// Rola dados de dano baseados em expressão (ex: "1d8", "1d8+3", "2d6")
+  /// Em Tormenta 20, acertos críticos multiplicam a quantidade de dados da arma (ex: 1d8 x2 -> 2d8)
+  ResultadoDano rolarDano({
+    required String expressaoDano,
+    int bonusExtra = 0,
+    String? dadoExtra,
+    bool ehCritico = false,
+    int multiplicadorCritico = 2,
+  }) {
+    final regex = RegExp(r'(\d+)\s*d\s*(\d+)(?:\s*([+-])\s*(\d+))?', caseSensitive: false);
+    final match = regex.firstMatch(expressaoDano.trim());
+
+    int qtdDados = 1;
+    int faces = 6;
+    int bonusBase = 0;
+
+    if (match != null) {
+      qtdDados = int.tryParse(match.group(1) ?? '1') ?? 1;
+      faces = int.tryParse(match.group(2) ?? '6') ?? 6;
+      if (match.group(3) != null && match.group(4) != null) {
+        final sinal = match.group(3) == '-' ? -1 : 1;
+        bonusBase = sinal * (int.tryParse(match.group(4)!) ?? 0);
+      }
+    }
+
+    if (ehCritico) {
+      qtdDados *= multiplicadorCritico;
+    }
+
+    final dadosRolados = <int>[];
+    for (int i = 0; i < qtdDados; i++) {
+      dadosRolados.add(1 + _random.nextInt(faces));
+    }
+
+    // Processa dado extra opcional (ex: "+1d6")
+    if (dadoExtra != null && dadoExtra.trim().isNotEmpty) {
+      final extraMatch = RegExp(r'(\d+)\s*d\s*(\d+)', caseSensitive: false).firstMatch(dadoExtra.trim());
+      if (extraMatch != null) {
+        final extraQtd = int.tryParse(extraMatch.group(1) ?? '1') ?? 1;
+        final extraFaces = int.tryParse(extraMatch.group(2) ?? '6') ?? 6;
+        for (int i = 0; i < extraQtd; i++) {
+          dadosRolados.add(1 + _random.nextInt(extraFaces));
+        }
+      }
+    }
+
+    final somaDados = dadosRolados.fold<int>(0, (a, b) => a + b);
+    final totalBonus = bonusBase + bonusExtra;
+    final total = max(1, somaDados + totalBonus);
+
+    final prefixoCritico = ehCritico ? ' [CRÍTICO x$multiplicadorCritico]' : '';
+    final extraStr = dadoExtra != null && dadoExtra.isNotEmpty ? ' + $dadoExtra' : '';
+    final bonusStr = totalBonus != 0 ? (totalBonus > 0 ? ' + $totalBonus' : ' - ${totalBonus.abs()}') : '';
+
+    final decomposicao = '$expressaoDano$prefixoCritico$extraStr (dados: ${dadosRolados.join('+')})$bonusStr = $total';
+
+    return ResultadoDano(
+      total: total,
+      dadosRolados: dadosRolados,
+      bonusFixo: totalBonus,
+      ehCritico: ehCritico,
+      decomposicao: decomposicao,
     );
   }
 }

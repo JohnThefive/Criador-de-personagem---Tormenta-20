@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../domain/entities/equipamento/arma.dart';
 import '../../../domain/entities/combate/combatente.dart';
+import '../../../domain/entities/combate/efeito_ativo_combate.dart';
 import '../../../domain/entities/combate/grid_tatico.dart';
 import '../../../domain/entities/combate/tipo_acao.dart';
 import '../../../domain/services/combate_services/combate_engine.dart';
@@ -10,6 +11,7 @@ import '../../../domain/entities/magia/magia.dart';
 
 class CombateCubit extends Cubit<CombateState> {
   final CombateEngine _engine;
+  Map<String, dynamic>? _ultimoDanoManual;
 
   CombateCubit({CombateEngine? engine})
     : _engine = engine ?? CombateEngine(),
@@ -440,6 +442,21 @@ class CombateCubit extends Cubit<CombateState> {
       novoCombatente = combatenteAposInicio;
     }
 
+    // Processa duração dos efeitos ativos na virada de rodada
+    List<EfeitoAtivoCombate> novosEfeitos = state.efeitosAtivos;
+    if (novaRodada > state.rodadaAtual) {
+      final atualizados = <EfeitoAtivoCombate>[];
+      for (final efeito in state.efeitosAtivos) {
+        final rest = efeito.rodadasRestantes - 1;
+        if (rest > 0) {
+          atualizados.add(efeito.copyWith(rodadasRestantes: rest));
+        } else {
+          novosLogs.add("⌛ O efeito '${efeito.nome}' expirou.");
+        }
+      }
+      novosEfeitos = atualizados;
+    }
+
     final statusFinal = _engine.verificarFimDeCombate(filaAtualizada);
 
     novosLogs.add(
@@ -460,6 +477,7 @@ class CombateCubit extends Cubit<CombateState> {
         custosMovimento: const {},
         statusCombate: statusFinal,
         limparUltimoAtaque: true,
+        efeitosAtivos: novosEfeitos,
         logCombate: [...state.logCombate, ...novosLogs],
       ),
     );
@@ -635,7 +653,138 @@ class CombateCubit extends Cubit<CombateState> {
     );
   }
 
-  /// 11. IA Tática do Bot: move-se no grid em direção ao herói se necessário e agride
+  /// 11. Aplicação manual de dano/cura com registro para desfazer (Pilar 3: Sistema de Honestidade)
+  void aplicarDanoManual({
+    required Combatente alvo,
+    required int dano,
+    required String descricaoAcao,
+    bool consomeAcaoPadrao = true,
+    bool ehCura = false,
+  }) {
+    if (consomeAcaoPadrao) {
+      gastarAcao(TipoAcao.padrao);
+    }
+
+    _ultimoDanoManual = {
+      'alvoId': alvo.id,
+      'pvAnterior': alvo.pvAtual,
+      'dano': dano,
+      'ehCura': ehCura,
+      'descricao': descricaoAcao,
+    };
+
+    final novaFila = state.filaIniciativa.map((c) {
+      if (c.id == alvo.id) {
+        return ehCura ? c.aplicarCura(dano) : c.aplicarDano(dano);
+      }
+      return c;
+    }).toList();
+
+    final statusFinal = _engine.verificarFimDeCombate(novaFila);
+
+    emit(
+      state.copyWith(
+        filaIniciativa: novaFila,
+        statusCombate: statusFinal,
+        logCombate: [
+          ...state.logCombate,
+          descricaoAcao,
+        ],
+      ),
+    );
+  }
+
+  /// Retorna se há um dano recente disponível para reversão
+  bool get podeDesfazerDano => _ultimoDanoManual != null;
+
+  /// Reverte a última aplicação de dano/cura manual
+  void desfazerUltimoDano() {
+    if (_ultimoDanoManual == null) return;
+    final alvoId = _ultimoDanoManual!['alvoId'] as String;
+    final pvAnterior = _ultimoDanoManual!['pvAnterior'] as int;
+
+    final novaFila = state.filaIniciativa.map((c) {
+      if (c.id == alvoId) {
+        return c.copyWith(pvAtual: pvAnterior);
+      }
+      return c;
+    }).toList();
+
+    final statusFinal = _engine.verificarFimDeCombate(novaFila);
+    _ultimoDanoManual = null;
+
+    emit(
+      state.copyWith(
+        filaIniciativa: novaFila,
+        statusCombate: statusFinal,
+        logCombate: [
+          ...state.logCombate,
+          "↩️ Última aplicação de dano/cura foi desfeita.",
+        ],
+      ),
+    );
+  }
+
+  /// Adiciona um efeito ativo (ex: buffs de magia) no combatente
+  void adicionarEfeitoAtivo(EfeitoAtivoCombate efeito, {int? custoPm}) {
+    List<Combatente> novaFila = state.filaIniciativa;
+    final novosLogs = <String>[];
+
+    if (custoPm != null && custoPm > 0) {
+      final combatente = state.filaIniciativa.firstWhere(
+        (c) => c.id == efeito.combatenteId,
+        orElse: () => state.combatenteAtual!,
+      );
+
+      if (combatente.pmAtual < custoPm) {
+        emit(
+          state.copyWith(
+            logCombate: [
+              ...state.logCombate,
+              "⚠️ ${combatente.nome} não tem PM suficiente (${combatente.pmAtual} PM) para ativar ${efeito.nome} ($custoPm PM)!",
+            ],
+          ),
+        );
+        return;
+      }
+
+      novaFila = novaFila.map((c) {
+        if (c.id == combatente.id) {
+          return c.copyWith(pmAtual: c.pmAtual - custoPm);
+        }
+        return c;
+      }).toList();
+      novosLogs.add("✨ ${combatente.nome} ativou o efeito '${efeito.nome}' gastando $custoPm PM.");
+    } else {
+      novosLogs.add("✨ Efeito '${efeito.nome}' ativado (${efeito.descricaoEfeito}).");
+    }
+
+    emit(
+      state.copyWith(
+        filaIniciativa: novaFila,
+        efeitosAtivos: [...state.efeitosAtivos, efeito],
+        logCombate: [...state.logCombate, ...novosLogs],
+      ),
+    );
+  }
+
+  /// Remove um efeito ativo pelo ID
+  void removerEfeitoAtivo(String efeitoId) {
+    final efeito = state.efeitosAtivos.where((e) => e.id == efeitoId).firstOrNull;
+    if (efeito == null) return;
+
+    emit(
+      state.copyWith(
+        efeitosAtivos: state.efeitosAtivos.where((e) => e.id != efeitoId).toList(),
+        logCombate: [
+          ...state.logCombate,
+          "❌ Efeito '${efeito.nome}' foi removido.",
+        ],
+      ),
+    );
+  }
+
+  /// 12. IA Tática do Bot: move-se no grid em direção ao herói se necessário e agride
   void executarTurnoBot() {
     final bot = state.combatenteAtual;
     if (bot == null || !bot.podeAgir) {

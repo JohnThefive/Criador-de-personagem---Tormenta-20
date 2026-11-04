@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import '../../../../domain/entities/combate/combatente.dart';
+import '../../../../domain/entities/combate/efeito_ativo_combate.dart';
 
 class MiniFichaCombatenteWidget extends StatelessWidget {
   final Combatente combatente;
   final VoidCallback? onAjusteClicado;
+  final List<EfeitoAtivoCombate> efeitosAtivos;
+  final void Function(String efeitoId)? onRemoverEfeito;
 
   const MiniFichaCombatenteWidget({
     super.key,
     required this.combatente,
     this.onAjusteClicado,
+    this.efeitosAtivos = const [],
+    this.onRemoverEfeito,
   });
 
   @override
@@ -257,6 +262,37 @@ class MiniFichaCombatenteWidget extends StatelessWidget {
                     '🗡️ ${a.nome} (${a.dano}, ${a.criticoFormatado})',
                     style: const TextStyle(color: Colors.white70, fontSize: 10),
                   ),
+                );
+              }).toList(),
+            ),
+          ],
+
+          // Efeitos Ativos (Sistema de Honestidade)
+          if (efeitosAtivos.isNotEmpty) ...[
+            const SizedBox(height: 6),
+            Wrap(
+              spacing: 6,
+              runSpacing: 4,
+              children: efeitosAtivos.map((e) {
+                final bonusStr = [
+                  if (e.bonusAtaque != 0) '${e.bonusAtaque > 0 ? "+" : ""}${e.bonusAtaque} Atq',
+                  if (e.bonusDano != 0) '${e.bonusDano > 0 ? "+" : ""}${e.bonusDano} Dano',
+                ].join(', ');
+
+                return Chip(
+                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  visualDensity: VisualDensity.compact,
+                  backgroundColor: Colors.purple.shade900.withValues(alpha: 0.6),
+                  side: BorderSide(color: Colors.purpleAccent.withValues(alpha: 0.5)),
+                  avatar: const Icon(Icons.auto_awesome, size: 12, color: Colors.purpleAccent),
+                  label: Text(
+                    '${e.nome}${bonusStr.isNotEmpty ? " ($bonusStr)" : ""} • ${e.rodadasRestantes}r',
+                    style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
+                  ),
+                  deleteIcon: onRemoverEfeito != null
+                      ? const Icon(Icons.close, size: 12, color: Colors.white70)
+                      : null,
+                  onDeleted: onRemoverEfeito != null ? () => onRemoverEfeito!(e.id) : null,
                 );
               }).toList(),
             ),

@@ -16,6 +16,7 @@ class D20Dice extends StatefulWidget {
   final VoidCallback? onRolagemConcluida;
   final Color? corPrimaria;
   final Color? corBorda;
+  final Duration duracao;
 
   const D20Dice({
     super.key,
@@ -25,6 +26,7 @@ class D20Dice extends StatefulWidget {
     this.onRolagemConcluida,
     this.corPrimaria,
     this.corBorda,
+    this.duracao = const Duration(milliseconds: 1500),
   });
 
   @override
@@ -43,7 +45,7 @@ class _D20DiceState extends State<D20Dice> with SingleTickerProviderStateMixin {
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 1600),
+      duration: widget.duracao,
     );
 
     _rotacaoAnim = CurvedAnimation(
