@@ -71,8 +71,11 @@ class ArenaPainelAcoes extends StatelessWidget {
       color: const Color(0xFF1E293B),
       child: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          Wrap(
+            alignment: WrapAlignment.spaceBetween,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 8,
+            runSpacing: 4,
             children: [
               Text(
                 'Ações: Padrão [${state.acoesPadraoRestantes}] | Movimento [${state.acoesMovimentoRestantes}]',

@@ -63,18 +63,22 @@ class MiniFichaCombatenteWidget extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              Text(
-                combatente.estadoVida.label,
-                style: TextStyle(
-                  color: combatente.podeAgir
-                      ? Colors.greenAccent
-                      : Colors.orangeAccent,
-                  fontSize: 11,
-                  fontWeight: FontWeight.w600,
+              const SizedBox(width: 6),
+              Flexible(
+                child: Text(
+                  combatente.estadoVida.label,
+                  style: TextStyle(
+                    color: combatente.podeAgir
+                        ? Colors.greenAccent
+                        : Colors.orangeAccent,
+                    fontSize: 11,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
               if (onAjusteClicado != null) ...[
-                const SizedBox(width: 8),
+                const SizedBox(width: 6),
                 InkWell(
                   onTap: onAjusteClicado,
                   borderRadius: BorderRadius.circular(4),
@@ -211,8 +215,9 @@ class MiniFichaCombatenteWidget extends StatelessWidget {
           const SizedBox(height: 8),
 
           // Métricas Rápidas: Defesa, Deslocamento e Ataques
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          Wrap(
+            spacing: 10,
+            runSpacing: 4,
             children: [
               _buildBadge('Defesa', '${combatente.defesa}', Icons.shield),
               _buildBadge(
