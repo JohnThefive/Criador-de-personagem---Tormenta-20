@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../domain/entities/combate/combatente.dart';
 import '../../../../domain/entities/combate/inimigos_treino.dart';
 import '../../../../domain/entities/personagem/personagem.dart';
+import '../../../widgets/character_avatar_widget.dart';
 
 class SelecaoInimigosView extends StatelessWidget {
   final Personagem heroi;
@@ -35,9 +36,12 @@ class SelecaoInimigosView extends StatelessWidget {
             ),
             child: Row(
               children: [
-                const CircleAvatar(
-                  backgroundColor: Colors.blue,
-                  child: Icon(Icons.person, color: Colors.white),
+                CharacterAvatarWidget(
+                  personagem: heroi,
+                  size: 48,
+                  borderRadius: 12,
+                  useHero: true,
+                  heroTag: 'arena-selector-${heroi.id}',
                 ),
                 const SizedBox(width: 12),
                 Expanded(

@@ -54,48 +54,17 @@ Future<void> confirmarExclusaoPersonagem({
   }
 }
 
-/// Fallback para avatar do personagem caso não haja foto.
-Widget _buildAvatarFallback(Personagem personagem, ColorScheme colorScheme) {
-  if (personagem.raca != null && personagem.raca!.icone.isNotEmpty) {
-    return Center(
-      child: RpgIcon(
-        iconName: personagem.raca!.icone,
-        size: 32,
-        color: colorScheme.onSurfaceVariant,
-      ),
-    );
-  }
-  return Icon(Icons.person, color: colorScheme.onSurfaceVariant, size: 34);
-}
+import '../../../widgets/character_avatar_widget.dart';
 
-/// Avatar com suporte a imagem local em arquivo e fallback estilizado.
 Widget _buildAvatar(
   Personagem personagem,
   ColorScheme colorScheme, {
   double size = 56,
 }) {
-  final temFoto =
-      personagem.caminhoFoto != null && personagem.caminhoFoto!.isNotEmpty;
-
-  return ClipRRect(
-    borderRadius: BorderRadius.circular(12),
-    child: Container(
-      width: size,
-      height: size,
-      color: colorScheme.surfaceContainerHighest,
-      child: temFoto
-          ? Image.file(
-              File(personagem.caminhoFoto!),
-              width: size,
-              height: size,
-              cacheWidth: 160,
-              cacheHeight: 160,
-              fit: BoxFit.cover,
-              errorBuilder: (_, _, _) =>
-                  _buildAvatarFallback(personagem, colorScheme),
-            )
-          : _buildAvatarFallback(personagem, colorScheme),
-    ),
+  return CharacterAvatarWidget(
+    personagem: personagem,
+    size: size,
+    useHero: true,
   );
 }
 

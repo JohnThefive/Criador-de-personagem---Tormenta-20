@@ -9,6 +9,7 @@ import 'breakpoints.dart';
 import 'widgets/app_drawer.dart';
 import 'widgets/character_list_section.dart';
 import 'widgets/empty_home_state.dart';
+import '../../widgets/character_avatar_widget.dart';
 import '../arena/arena_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -129,15 +130,12 @@ class HomeScreen extends StatelessWidget {
                           : 'Nível ${p.nivelPersonagem}';
 
                       return ListTile(
-                        leading: CircleAvatar(
-                          backgroundColor: const Color(0xFFD32F2F),
-                          child: Text(
-                            p.nome.isNotEmpty ? p.nome[0].toUpperCase() : '?',
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                        leading: CharacterAvatarWidget(
+                          personagem: p,
+                          size: 44,
+                          borderRadius: 10,
+                          useHero: true,
+                          heroTag: 'arena-selector-${p.id}',
                         ),
                         title: Text(
                           p.nome,
