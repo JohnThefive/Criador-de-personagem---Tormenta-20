@@ -15,11 +15,12 @@ class CombateCubit extends Cubit<CombateState> {
     : _engine = engine ?? CombateEngine(),
       super(const CombateState());
 
-  /// 1. Inicia o combate, define posições no grid 2D e rola a iniciativa
+  /// 1. Inicia o combate, define posições no grid 2D e ordena/rola a iniciativa
   void iniciarCombate(
     List<Combatente> participantes, {
     GridMapa? mapa,
     Map<String, Posicao2D>? posicoesIniciais,
+    Map<String, int>? iniciativas,
   }) {
     if (participantes.isEmpty) return;
 
@@ -53,7 +54,16 @@ class CombateCubit extends Cubit<CombateState> {
       }
     }
 
-    final filaOrdenada = _engine.rolarIniciativa(participantes);
+    final List<Combatente> filaOrdenada;
+    if (iniciativas != null) {
+      final participantesComIniciativa = participantes.map((p) {
+        final val = iniciativas[p.id];
+        return val != null ? p.copyWith(iniciativaValor: val) : p;
+      }).toList();
+      filaOrdenada = _engine.ordenarIniciativa(participantesComIniciativa);
+    } else {
+      filaOrdenada = _engine.rolarIniciativa(participantes);
+    }
     final primeiro = filaOrdenada.first;
 
     final novoLog = [

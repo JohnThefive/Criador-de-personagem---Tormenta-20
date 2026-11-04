@@ -1,7 +1,6 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import '../../../../domain/entities/personagem/personagem.dart';
-import '../../../widgets/rpg_icon.dart';
+import '../../../widgets/character_avatar_widget.dart';
 
 /// Diálogo de confirmação para exclusão de um personagem.
 Future<void> confirmarExclusaoPersonagem({
@@ -53,8 +52,6 @@ Future<void> confirmarExclusaoPersonagem({
     onConfirmar();
   }
 }
-
-import '../../../widgets/character_avatar_widget.dart';
 
 Widget _buildAvatar(
   Personagem personagem,

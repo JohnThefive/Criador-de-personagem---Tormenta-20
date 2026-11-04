@@ -39,6 +39,21 @@ class CombateEngine {
     return list;
   }
 
+  /// Ordena os combatentes respeitando valores pré-definidos de iniciativa e desempates do T20
+  List<Combatente> ordenarIniciativa(List<Combatente> participantes) {
+    final list = List<Combatente>.from(participantes);
+    list.sort((a, b) {
+      if (b.iniciativaValor != a.iniciativaValor) {
+        return b.iniciativaValor.compareTo(a.iniciativaValor);
+      }
+      if (b.modIniciativa != a.modIniciativa) {
+        return b.modIniciativa.compareTo(a.modIniciativa);
+      }
+      return b.id.compareTo(a.id);
+    });
+    return list;
+  }
+
   /// Permite atrasar a iniciativa voluntariamente até o limite de (-10 - modIniciativa)
   List<Combatente> atrasarIniciativa({
     required List<Combatente> filaAtual,

@@ -37,7 +37,6 @@ class _ArenaScreenState extends State<ArenaScreen> {
   FaseArena _fase = FaseArena.selecaoInimigos;
   final List<Combatente> _inimigosEscolhidos = [];
 
-  bool _rolandoIniciativa = false;
   bool _relatorioExibido = false;
 
   @override
@@ -50,28 +49,33 @@ class _ArenaScreenState extends State<ArenaScreen> {
     _inimigosEscolhidos.add(InimigosTreino.orcGuerreiro);
   }
 
-  void _executarRolagemIniciativa(CombateCubit cubit) {
-    setState(() => _rolandoIniciativa = true);
+  void _iniciarCombateComIniciativas(
+    CombateCubit cubit,
+    int totalHeroi,
+    Map<String, int> totaisInimigos,
+  ) {
+    final heroi = Combatente.doPersonagem(_clonePersonagem);
+    final posicoes = <String, Posicao2D>{heroi.id: const Posicao2D(1, 3)};
 
-    Future.delayed(const Duration(milliseconds: 350), () {
-      final heroi = Combatente.doPersonagem(_clonePersonagem);
-      final posicoes = <String, Posicao2D>{heroi.id: const Posicao2D(1, 3)};
+    int yIni = 2;
+    for (final inimigo in _inimigosEscolhidos) {
+      posicoes[inimigo.id] = Posicao2D(8, yIni);
+      yIni = (yIni + 2).clamp(0, 7);
+    }
 
-      int yIni = 2;
-      for (final inimigo in _inimigosEscolhidos) {
-        posicoes[inimigo.id] = Posicao2D(8, yIni);
-        yIni = (yIni + 2).clamp(0, 7);
-      }
+    final mapaIniciativas = <String, int>{
+      heroi.id: totalHeroi,
+      ...totaisInimigos,
+    };
 
-      cubit.iniciarCombate([
-        heroi,
-        ..._inimigosEscolhidos,
-      ], posicoesIniciais: posicoes);
+    cubit.iniciarCombate(
+      [heroi, ..._inimigosEscolhidos],
+      posicoesIniciais: posicoes,
+      iniciativas: mapaIniciativas,
+    );
 
-      setState(() {
-        _rolandoIniciativa = false;
-        _fase = FaseArena.combateAtivo;
-      });
+    setState(() {
+      _fase = FaseArena.combateAtivo;
     });
   }
 
@@ -130,8 +134,13 @@ class _ArenaScreenState extends State<ArenaScreen> {
                 ),
                 FaseArena.rolarIniciativa => RolarIniciativaView(
                   heroi: _clonePersonagem,
-                  rolando: _rolandoIniciativa,
-                  onRolar: () => _executarRolagemIniciativa(cubit),
+                  inimigos: _inimigosEscolhidos,
+                  onIniciarCombate: (totalHeroi, totaisInimigos) =>
+                      _iniciarCombateComIniciativas(
+                        cubit,
+                        totalHeroi,
+                        totaisInimigos,
+                      ),
                 ),
                 FaseArena.combateAtivo => Column(
                   children: [

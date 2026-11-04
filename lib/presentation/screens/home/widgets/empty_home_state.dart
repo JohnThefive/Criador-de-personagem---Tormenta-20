@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'home_action_card.dart';
 
 /// Exibido na HomeScreen quando ainda não existem personagens salvos.
