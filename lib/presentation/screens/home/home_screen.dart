@@ -92,7 +92,7 @@ class HomeScreen extends StatelessWidget {
                   child: Row(
                     children: [
                       Icon(
-                        Icons.sports_kabaddi,
+                        Icons.stadium_outlined,
                         color: Colors.amberAccent,
                         size: 26,
                       ),
@@ -203,12 +203,16 @@ class HomeScreen extends StatelessWidget {
                 if (!temPersonagens) {
                   return EmptyHomeState(
                     onCriarPersonagem: () => _navegarCriarPersonagem(context),
+                    onModoArena: () =>
+                        _abrirSeletorArena(context, state.personagens),
                   );
                 }
 
                 return CharacterListSection(
                   personagens: state.personagens,
                   onCriarPersonagem: () => _navegarCriarPersonagem(context),
+                  onModoArena: () =>
+                      _abrirSeletorArena(context, state.personagens),
                   onAbrirPersonagem: (p) => _navegarAbrirPersonagem(context, p),
                   onExcluirPersonagem: (p) => _excluirPersonagem(context, p),
                 );
@@ -247,37 +251,13 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   actions: [
-                    FilledButton.tonalIcon(
+                    IconButton(
+                      icon: const Icon(Icons.stadium_outlined),
+                      tooltip: 'Modo Arena Tática',
                       onPressed: () =>
                           _abrirSeletorArena(context, state.personagens),
-                      style: FilledButton.styleFrom(
-                        backgroundColor: const Color(
-                          0xFFC62828,
-                        ).withValues(alpha: 0.2),
-                        foregroundColor: Colors.white,
-                        side: const BorderSide(
-                          color: Color(0xFFC62828),
-                          width: 1.2,
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 14,
-                          vertical: 8,
-                        ),
-                      ),
-                      icon: const Icon(
-                        Icons.sports_kabaddi,
-                        color: Colors.amberAccent,
-                        size: 20,
-                      ),
-                      label: const Text(
-                        'Modo Arena',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 13,
-                        ),
-                      ),
                     ),
-                    const SizedBox(width: 12),
+                    const SizedBox(width: 8),
                   ],
                 ),
                 body: buildConteudoAdaptativo(),

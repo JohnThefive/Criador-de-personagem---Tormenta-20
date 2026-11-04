@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import '../../../../domain/entities/personagem/personagem.dart';
 import 'character_card.dart';
 
+import 'home_action_card.dart';
+
 /// Seção principal exibida quando existem personagens salvos.
 ///
 /// Apresenta:
-/// 1. Botão "Criar personagem" no topo
+/// 1. Ações principais (Criar Personagem & Modo Arena)
 /// 2. Card de destaque "Continuar: <último personagem>"
 /// 3. Lista ou grade adaptativa com os demais personagens
 class CharacterListSection extends StatelessWidget {
   final List<Personagem> personagens;
   final VoidCallback onCriarPersonagem;
+  final VoidCallback onModoArena;
   final void Function(Personagem personagem) onAbrirPersonagem;
   final void Function(Personagem personagem) onExcluirPersonagem;
 
@@ -18,6 +21,7 @@ class CharacterListSection extends StatelessWidget {
     super.key,
     required this.personagens,
     required this.onCriarPersonagem,
+    required this.onModoArena,
     required this.onAbrirPersonagem,
     required this.onExcluirPersonagem,
   });
@@ -47,30 +51,47 @@ class CharacterListSection extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // 1. Botão "Criar personagem" no topo
-              FilledButton.icon(
-                onPressed: onCriarPersonagem,
-                style: FilledButton.styleFrom(
-                  backgroundColor: colorScheme.primary,
-                  foregroundColor: colorScheme.onPrimary,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 16,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  elevation: 1,
-                ),
-                icon: const Icon(Icons.add, size: 24),
-                label: Text(
-                  'Criar Personagem',
-                  style: textTheme.titleMedium?.copyWith(
-                    color: colorScheme.onPrimary,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
+              // 1. Ações Principais no topo (Criar Personagem & Modo Arena)
+              constraints.maxWidth >= 460
+                  ? Row(
+                      children: [
+                        Expanded(
+                          child: HomeActionCard(
+                            title: 'Criar Personagem',
+                            icon: Icons.add,
+                            onPressed: onCriarPersonagem,
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: HomeActionCard(
+                            title: 'Modo Arena',
+                            icon: Icons.stadium_outlined,
+                            isSecondary: true,
+                            tooltip: 'Testar personagem em combate tático',
+                            onPressed: onModoArena,
+                          ),
+                        ),
+                      ],
+                    )
+                  : Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        HomeActionCard(
+                          title: 'Criar Personagem',
+                          icon: Icons.add,
+                          onPressed: onCriarPersonagem,
+                        ),
+                        const SizedBox(height: 10),
+                        HomeActionCard(
+                          title: 'Modo Arena',
+                          icon: Icons.stadium_outlined,
+                          isSecondary: true,
+                          tooltip: 'Testar personagem em combate tático',
+                          onPressed: onModoArena,
+                        ),
+                      ],
+                    ),
               const SizedBox(height: 20),
 
               // 2. Card "Continuar: <último personagem>"

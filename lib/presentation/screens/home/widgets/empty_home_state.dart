@@ -1,10 +1,15 @@
-import 'package:flutter/material.dart';
+import 'home_action_card.dart';
 
 /// Exibido na HomeScreen quando ainda não existem personagens salvos.
 class EmptyHomeState extends StatelessWidget {
   final VoidCallback onCriarPersonagem;
+  final VoidCallback? onModoArena;
 
-  const EmptyHomeState({super.key, required this.onCriarPersonagem});
+  const EmptyHomeState({
+    super.key,
+    required this.onCriarPersonagem,
+    this.onModoArena,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -58,33 +63,28 @@ class EmptyHomeState extends StatelessWidget {
               ),
               const SizedBox(height: 32),
 
-              // Botão de Criar Personagem em destaque
+              // Botões de Ação usando HomeActionCard
               SizedBox(
                 width: double.infinity,
-                child: FilledButton.icon(
+                child: HomeActionCard(
+                  title: 'Criar Personagem',
+                  icon: Icons.add,
                   onPressed: onCriarPersonagem,
-                  style: FilledButton.styleFrom(
-                    backgroundColor: colorScheme.primary,
-                    foregroundColor: colorScheme.onPrimary,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 24,
-                      vertical: 16,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    elevation: 2,
-                  ),
-                  icon: const Icon(Icons.add, size: 24),
-                  label: Text(
-                    'Criar personagem',
-                    style: textTheme.titleMedium?.copyWith(
-                      color: colorScheme.onPrimary,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
                 ),
               ),
+              if (onModoArena != null) ...[
+                const SizedBox(height: 12),
+                SizedBox(
+                  width: double.infinity,
+                  child: HomeActionCard(
+                    title: 'Modo Arena',
+                    icon: Icons.stadium_outlined,
+                    isSecondary: true,
+                    tooltip: 'Testar personagem em combate tático',
+                    onPressed: onModoArena,
+                  ),
+                ),
+              ],
             ],
           ),
         ),
