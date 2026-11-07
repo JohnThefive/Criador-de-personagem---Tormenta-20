@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t20_creator/presentation/screens/arena/widgets/selecao_inimigos.dart';
-import 'package:t20_creator/presentation/widgets/vtt_board_widget.dart';
+import 'widgets/vtt_board_widget.dart';
 
 import '../../../domain/entities/combate/combatente.dart';
 import '../../../domain/entities/combate/grid_tatico.dart';
@@ -90,7 +90,12 @@ class _ArenaScreenState extends State<ArenaScreen> {
               !_relatorioExibido &&
               _fase == FaseArena.combateAtivo) {
             _relatorioExibido = true;
-            exibirRelatorioFinal(context, state, _stats);
+            exibirRelatorioFinal(
+              context,
+              state,
+              _stats,
+              clonePersonagem: _clonePersonagem,
+            );
           }
         },
         child: Builder(

@@ -19,7 +19,7 @@ import 'package:t20_creator/domain/services/data_services/call_pericias.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t20_creator/domain/services/ficha_services/personagem_storage_service.dart';
 import 'package:t20_creator/presentation/controllers/ficha_controller/ficha_cubit.dart';
-import 'package:t20_creator/presentation/screens/ficha/painel_jogador_screen.dart';
+import 'package:t20_creator/presentation/screens/ficha/ficha_screen.dart';
 
 class FakePersonagemRepository implements IPersonagemRepository {
   Personagem? salvo;

@@ -59,6 +59,7 @@
         "atributoChave": "SAB",
         "somenteTreinada": false,
         "penalidadeArmadura": false,
+        "exigeFerramenta": true,
         "descricao": "Você sabe tratar ferimentos, doenças e venenos.",
         "acoesExecutadas": "Cuidados Prolongados, Necropsia, Primeiros socorros, Tratemento(precisa de Treinamento)"
     },
@@ -158,6 +159,7 @@
         "atributoChave": "DES",
         "somenteTreinada": true,
         "penalidadeArmadura": true,
+        "exigeFerramenta": true,
         "descricao": "Com mãos leves e mente suja, você sabe exercer as tarefas de um ladrão.",
         "acoesExecutadas": "Abrir fechaduras,Ocultar, Bater Carteira, Sabotagem"
     },
@@ -194,6 +196,7 @@
         "atributoChave": "INT",
         "somenteTreinada": false,
         "penalidadeArmadura": false,
+        "exigeFerramenta": true,
         "descricao": "Permite fabricar itens de uma categoria específica (ex: Armeiro, Alquimista, Engenhoqueiro).",
         "acoesExecutadas": "Fabricar item, ganhar sustento, reparar item."
     },
@@ -203,6 +206,7 @@
         "atributoChave": "INT",
         "somenteTreinada": true,
         "penalidadeArmadura": false,
+        "exigeFerramenta": true,
         "descricao": "Permite projetar, fabricar, ativar e consertar engenhocas e dispositivos tecnológicos.",
         "acoesExecutadas": "Fabricar engenhoca, ativar engenhoca, consertar engenhoca enguiçada."
     },
@@ -212,6 +216,7 @@
         "atributoChave": "INT",
         "somenteTreinada": true,
         "penalidadeArmadura": false,
+        "exigeFerramenta": true,
         "descricao": "Permite preparar itens alquímicos, poções, ácidos, venenos e bombas.",
         "acoesExecutadas": "Fabricar itens alquímicos e poções, identificar substâncias químicas."
     },
@@ -221,6 +226,7 @@
         "atributoChave": "INT",
         "somenteTreinada": true,
         "penalidadeArmadura": false,
+        "exigeFerramenta": true,
         "descricao": "Permite forjar, modificar e reparar armas, escudos e armaduras.",
         "acoesExecutadas": "Fabricar armas e proteções, aplicar melhorias de equipamento, reparar itens danificados."
     },
@@ -230,6 +236,7 @@
         "atributoChave": "INT",
         "somenteTreinada": false,
         "penalidadeArmadura": false,
+        "exigeFerramenta": true,
         "descricao": "Permite cozinhar pratos especiais, rações de viagem e refeições nutritivas com bônus temporários.",
         "acoesExecutadas": "Cozinhar pratos especiais, identificar alimentos envenenados ou estragados."
     },
@@ -239,6 +246,7 @@
         "atributoChave": "INT",
         "somenteTreinada": false,
         "penalidadeArmadura": false,
+        "exigeFerramenta": true,
         "descricao": "Permite confeccionar itens de vestuário, couro, madeira, alvenaria e artigos gerais.",
         "acoesExecutadas": "Fabricar itens comuns de artesanato, reparos em artigos do dia a dia."
     },

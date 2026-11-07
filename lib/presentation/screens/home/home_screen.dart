@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../domain/entities/personagem/personagem.dart';
 import '../../controllers/home_controller/home_cubit.dart';
-import '../ficha/painel_jogador_screen.dart';
+import '../ficha/ficha_screen.dart';
 import '../wizard_personagem/char_creation_screen.dart';
-import 'breakpoints.dart';
+import 'widgets/breakpoints.dart';
 import 'widgets/app_drawer.dart';
 import 'widgets/character_list_section.dart';
 import 'widgets/empty_home_state.dart';
@@ -40,8 +40,7 @@ class HomeScreen extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) =>
-            PainelJogadorScreen(personagemInicial: personagem),
+        builder: (context) => FichaScreen(personagemInicial: personagem),
       ),
     ).then((_) {
       if (context.mounted) {
@@ -248,15 +247,6 @@ class HomeScreen extends StatelessWidget {
                       onPressed: () => Scaffold.of(ctx).openDrawer(),
                     ),
                   ),
-                  actions: [
-                    IconButton(
-                      icon: const Icon(Icons.stadium_outlined),
-                      tooltip: 'Modo Arena Tática',
-                      onPressed: () =>
-                          _abrirSeletorArena(context, state.personagens),
-                    ),
-                    const SizedBox(width: 8),
-                  ],
                 ),
                 body: buildConteudoAdaptativo(),
               );

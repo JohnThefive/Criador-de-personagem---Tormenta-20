@@ -5,8 +5,11 @@ import 'package:t20_creator/domain/entities/combate/efeito_ativo_combate.dart';
 import 'package:t20_creator/domain/entities/combate/monstro.dart';
 import 'package:t20_creator/domain/entities/equipamento/arma.dart';
 import 'package:t20_creator/domain/services/combate_services/arena_stats_collector.dart';
+import 'package:t20_creator/domain/services/combate_services/combate_engine.dart';
 import 'package:t20_creator/presentation/controllers/combate_controller/combate_cubit.dart';
+import 'package:t20_creator/presentation/controllers/combate_controller/combate_state.dart';
 import 'package:t20_creator/presentation/screens/arena/widgets/arena_ataque_sheet.dart';
+import 'package:t20_creator/presentation/screens/arena/widgets/arena_relatorio_dialog.dart';
 
 void main() {
   group('CombateCubit - Sistema de Honestidade & Efeitos Ativos', () {
@@ -154,9 +157,7 @@ void main() {
       expect(cubit.state.efeitosAtivos, isEmpty);
     });
 
-    test('aplicarDanoManual aplica dano e desfazerUltimoDano reverte', () {
-      expect(cubit.podeDesfazerDano, isFalse);
-
+    test('aplicarDanoManual aplica dano letal e cura corretamente', () {
       cubit.aplicarDanoManual(
         alvo: inimigo,
         dano: 8,
@@ -165,13 +166,17 @@ void main() {
 
       final inimigoAposDano = cubit.state.filaIniciativa.firstWhere((c) => c.id == 'inimigo_1');
       expect(inimigoAposDano.pvAtual, equals(12));
-      expect(cubit.podeDesfazerDano, isTrue);
 
-      // Reverte o dano
-      cubit.desfazerUltimoDano();
-      final inimigoAposUndo = cubit.state.filaIniciativa.firstWhere((c) => c.id == 'inimigo_1');
-      expect(inimigoAposUndo.pvAtual, equals(20));
-      expect(cubit.podeDesfazerDano, isFalse);
+      // Aplica cura
+      cubit.aplicarDanoManual(
+        alvo: inimigo,
+        dano: 5,
+        descricaoAcao: 'Teste de Cura Manual',
+        ehCura: true,
+      );
+
+      final inimigoAposCura = cubit.state.filaIniciativa.firstWhere((c) => c.id == 'inimigo_1');
+      expect(inimigoAposCura.pvAtual, equals(17));
     });
   });
 
@@ -293,6 +298,104 @@ void main() {
       expect(find.textContaining('vs Defesa: 12'), findsOneWidget);
 
       cubit.close();
+    });
+
+    test('ArenaStatsCollector calcula métricas (DPR, Taxa de Acerto, Pico de Dano) corretamente', () {
+      final stats = ArenaStatsCollector();
+
+      // Ataque 1: Acerto com 15 de dano (não crítico)
+      stats.registrarAtaque(acerto: true, ehCritico: false, dano: 15);
+      // Ataque 2: Erro
+      stats.registrarAtaque(acerto: false, ehCritico: false, dano: 0);
+      // Ataque 3: Acerto Crítico com 35 de dano
+      stats.registrarAtaque(acerto: true, ehCritico: true, dano: 35);
+
+      // Magia: 2 PM gastos, causou 10 de dano
+      stats.registrarMagia(custoPm: 2, dano: 10);
+
+      // Registra dano recebido
+      stats.registrarDanoRecebido(12);
+
+      final relatorio = stats.gerarRelatorio(rodadas: 3, vitoria: true);
+
+      expect(relatorio.rodadasTotais, equals(3));
+      expect(relatorio.totalAtaquesRealizados, equals(3));
+      expect(relatorio.totalAcertos, equals(2));
+      expect(relatorio.totalErros, equals(1));
+      expect(relatorio.totalCriticos, equals(1));
+      expect(relatorio.danoTotalCausado, equals(60)); // 15 + 35 + 10
+      expect(relatorio.maiorDanoGolpe, equals(35));
+      expect(relatorio.danoTotalRecebido, equals(12));
+      expect(relatorio.pmGasto, equals(2));
+      expect(relatorio.magiasLancadas, equals(1));
+      expect(relatorio.dpr, closeTo(20.0, 0.01)); // 60 / 3
+      expect(relatorio.taxaAcerto, closeTo(66.67, 0.1)); // 2 / 3 * 100
+      expect(relatorio.taxaCritico, closeTo(50.0, 0.1)); // 1 / 2 acertos * 100
+      expect(relatorio.danoMedioPorAcerto, closeTo(30.0, 0.01)); // 60 / 2 = 30.0
+      expect(relatorio.vitoria, isTrue);
+
+      // Teste de atualização e sobrescrita de dano recebido
+      stats.atualizarDanoRecebido(25);
+      expect(stats.danoRecebido, equals(25));
+
+      final relatorioAtualizado = stats.gerarRelatorio(
+        rodadas: 3,
+        vitoria: true,
+        danoRecebidoOverride: 30,
+      );
+      expect(relatorioAtualizado.danoTotalRecebido, equals(30));
+    });
+
+    testWidgets('exibirRelatorioFinal extrai e exibe dano sofrido do combatente heroi', (tester) async {
+      final stats = ArenaStatsCollector();
+      const monstroHeroi = Monstro(
+        id: 'heroi_1',
+        nome: 'Sir Valen',
+        nd: '1',
+        papel: PapelMonstro.solo,
+        tipoCriatura: 'Humanoide',
+        pvMax: 30,
+        defesa: 15,
+        deslocamentoMetros: 9.0,
+        iniciativa: 15,
+        percepcao: 5,
+        modForca: 3,
+        modDestreza: 2,
+        modConstituicao: 2,
+        ataques: [],
+      );
+
+      // Herói começou com 30 PV e está com 16 PV (sofreu 14 de dano)
+      final heroiMachucado = CombatenteMonstro.doMonstro(
+        monstroHeroi,
+        time: TimeCombatente.heroi,
+        pvAtual: 16,
+      );
+
+      final state = CombateState(
+        filaIniciativa: [heroiMachucado],
+        statusCombate: StatusCombate.vitoria,
+        rodadaAtual: 2,
+      );
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Builder(
+            builder: (context) => ElevatedButton(
+              onPressed: () => exibirRelatorioFinal(context, state, stats),
+              child: const Text('Abrir'),
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.text('Abrir'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('VITÓRIA NA ARENA!'), findsOneWidget);
+      // O dano sofrido deve ser 14 PV (30 - 16)
+      expect(find.text('14 PV'), findsOneWidget);
+      expect(stats.danoRecebido, equals(14));
     });
   });
 }

@@ -8,6 +8,8 @@ class Pericia {
   final String descricao; // descricao curta do que a percia faz
   final String
   acoesExecutadas; // ações que voce pode fazer com bonus graças a pericia
+  final bool
+  exigeFerramenta; // R5: indica se a perícia exige kit/ferramenta (-5 sem ela)
 
   const Pericia({
     required this.key,
@@ -17,6 +19,7 @@ class Pericia {
     required this.penalidadeArmadura,
     required this.descricao,
     required this.acoesExecutadas,
+    this.exigeFerramenta = false,
   });
 
   factory Pericia.fromJson(Map<String, dynamic> json) {
@@ -28,6 +31,7 @@ class Pericia {
       penalidadeArmadura: json['penalidadeArmadura'] as bool,
       descricao: json['descricao'] as String,
       acoesExecutadas: json['acoesExecutadas'] as String,
+      exigeFerramenta: json['exigeFerramenta'] as bool? ?? false,
     );
   }
 }

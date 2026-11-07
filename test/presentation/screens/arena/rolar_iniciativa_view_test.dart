@@ -3,8 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:t20_creator/domain/entities/combate/inimigos_treino.dart';
 import 'package:t20_creator/domain/entities/personagem/personagem.dart';
 import 'package:t20_creator/presentation/screens/arena/widgets/rolar_iniciativa_view.dart';
-import 'package:t20_creator/presentation/widgets/d20_dice.dart';
-import 'package:t20_creator/presentation/widgets/roll_result_view.dart';
+import 'package:t20_creator/presentation/screens/arena/widgets/d20_dice.dart';
+import 'package:t20_creator/presentation/screens/arena/widgets/roll_result_view.dart';
 
 void main() {
   final heroi = Personagem(

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../domain/entities/combate/combatente.dart';
 import '../../../../domain/entities/combate/efeito_ativo_combate.dart';
 import '../../../../domain/entities/magia/magia.dart';
+import '../../../../domain/services/combate_services/arena_stats_collector.dart';
 import '../../../../domain/services/data_services/call_magias.dart';
 import '../../../controllers/combate_controller/combate_cubit.dart';
 
@@ -17,12 +18,14 @@ class ArenaMagiaSheet extends StatefulWidget {
   final Combatente heroi;
   final List<Combatente> todos;
   final CombateCubit cubit;
+  final ArenaStatsCollector? stats;
 
   const ArenaMagiaSheet({
     super.key,
     required this.heroi,
     required this.todos,
     required this.cubit,
+    this.stats,
   });
 
   static Future<void> exibir(
@@ -30,6 +33,7 @@ class ArenaMagiaSheet extends StatefulWidget {
     required Combatente heroi,
     required List<Combatente> todos,
     required CombateCubit cubit,
+    ArenaStatsCollector? stats,
   }) {
     return showModalBottomSheet<void>(
       context: context,
@@ -42,6 +46,7 @@ class ArenaMagiaSheet extends StatefulWidget {
         heroi: heroi,
         todos: todos,
         cubit: cubit,
+        stats: stats,
       ),
     );
   }
@@ -114,14 +119,9 @@ class _ArenaMagiaSheetState extends State<ArenaMagiaSheet> {
       combatenteId: widget.heroi.id,
     );
 
+    widget.stats?.registrarMagia(custoPm: custoPm);
     widget.cubit.adicionarEfeitoAtivo(efeito, custoPm: custoPm);
     Navigator.pop(context);
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('✨ Efeito "${magia.nome}" ativado no combatente!'),
-        backgroundColor: Colors.purple.shade800,
-      ),
-    );
   }
 
   void _copiarParaOLog(int custoPm) {
@@ -132,15 +132,14 @@ class _ArenaMagiaSheetState extends State<ArenaMagiaSheet> {
       valor: 0,
       motivo: log,
     );
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Magia registrada no log de combate!')),
-    );
   }
 
   void _lancarMagiaDanoOuCura(int custoPm, bool ehCura, {bool ehMetade = false}) {
     final magia = _magiaSelecionada!;
     final valor = int.tryParse(_valorDanoCuraController.text) ?? 0;
+    final danoFinal = ehCura ? 0 : (ehMetade ? (valor / 2).floor() : valor);
 
+    widget.stats?.registrarMagia(custoPm: custoPm, dano: danoFinal);
     Navigator.pop(context);
     widget.cubit.lancarMagia(
       magia: magia,

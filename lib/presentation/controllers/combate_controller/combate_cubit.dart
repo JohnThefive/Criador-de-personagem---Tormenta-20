@@ -6,16 +6,19 @@ import '../../../domain/entities/combate/grid_tatico.dart';
 import '../../../domain/entities/combate/tipo_acao.dart';
 import '../../../domain/services/combate_services/combate_engine.dart';
 import '../../../domain/services/combate_services/movimento_engine.dart';
+import '../../../domain/services/habilidades_services/relogio_e_cena_service.dart';
 import 'combate_state.dart';
 import '../../../domain/entities/magia/magia.dart';
 
 class CombateCubit extends Cubit<CombateState> {
   final CombateEngine _engine;
-  Map<String, dynamic>? _ultimoDanoManual;
+  final void Function(EventoTurnClock evento)? onEventoTurnClock;
 
-  CombateCubit({CombateEngine? engine})
-    : _engine = engine ?? CombateEngine(),
-      super(const CombateState());
+  CombateCubit({
+    CombateEngine? engine,
+    this.onEventoTurnClock,
+  })  : _engine = engine ?? CombateEngine(),
+        super(const CombateState());
 
   /// 1. Inicia o combate, define posições no grid 2D e ordena/rola a iniciativa
   void iniciarCombate(
@@ -95,6 +98,10 @@ class CombateCubit extends Cubit<CombateState> {
         logCombate: novoLog,
         limparUltimoAtaque: true,
       ),
+    );
+
+    onEventoTurnClock?.call(
+      TurnoIniciado(personagemId: primeiro.id, rodada: 1),
     );
   }
 
@@ -332,16 +339,26 @@ class CombateCubit extends Cubit<CombateState> {
 
     // Aplica o dano no defensor usando as regras de ciclo de vida do T20
     List<Combatente> novaFila = state.filaIniciativa;
+    bool defensorMorreu = false;
     if (resultado.acerto && resultado.danoTotal > 0) {
       novaFila = novaFila.map((c) {
         if (c.id == defensor.id) {
-          return c.aplicarDano(
+          final ferido = c.aplicarDano(
             resultado.danoTotal,
             naoLetal: state.ataqueNaoLetalAtivo,
+            tipo: resultado.tipoDano,
           );
+          if (ferido.estaMorto && !c.estaMorto) {
+            defensorMorreu = true;
+          }
+          return ferido;
         }
         return c;
       }).toList();
+    }
+
+    if (defensorMorreu) {
+      onEventoTurnClock?.call(PersonagemMorreu(defensor.id));
     }
 
     final statusFinal = _engine.verificarFimDeCombate(novaFila);
@@ -421,17 +438,60 @@ class CombateCubit extends Cubit<CombateState> {
 
     int proximoIndex = state.indiceTurnoAtual + 1;
     int novaRodada = state.rodadaAtual;
+    bool avancouRodada = false;
 
     if (proximoIndex >= state.filaIniciativa.length) {
       proximoIndex = 0;
       novaRodada++;
+      avancouRodada = true;
     }
 
-    var novoCombatente = state.filaIniciativa[proximoIndex];
+    List<Combatente> filaAtualizada = List.from(state.filaIniciativa);
     final novosLogs = <String>[];
 
+    // R70: A partir da 2ª rodada, os surpreendidos agem normalmente (remove CondicaoCombatente.surpreendido)
+    if (avancouRodada && novaRodada >= 2) {
+      filaAtualizada = filaAtualizada.map((c) {
+        if (c.ehSurpreendido) {
+          return c.copyWith(
+            condicoesAtivas: c.condicoesAtivas
+                .where((cond) => cond != CondicaoCombatente.surpreendido)
+                .toList(),
+          );
+        }
+        return c;
+      }).toList();
+    }
+
+    var novoCombatente = filaAtualizada[proximoIndex];
+
+    // R69 e R70: Surpreendidos pulam a 1ª rodada (salvo imunes a surpresa)
+    if (novaRodada == 1 &&
+        novoCombatente.ehSurpreendido &&
+        !novoCombatente.imuneASurpresa) {
+      novosLogs.add(
+        "⚡ ${novoCombatente.nome} está SURPREENDIDO e não age na 1ª rodada (R69/R70)!",
+      );
+      proximoIndex++;
+      if (proximoIndex >= filaAtualizada.length) {
+        proximoIndex = 0;
+        novaRodada++;
+        avancouRodada = true;
+        filaAtualizada = filaAtualizada.map((c) {
+          if (c.ehSurpreendido) {
+            return c.copyWith(
+              condicoesAtivas: c.condicoesAtivas
+                  .where((cond) => cond != CondicaoCombatente.surpreendido)
+                  .toList(),
+            );
+          }
+          return c;
+        }).toList();
+      }
+      novoCombatente = filaAtualizada[proximoIndex];
+    }
+
     // Processa início do turno (ex: Teste de Sangramento / Estabilização)
-    List<Combatente> filaAtualizada = List.from(state.filaIniciativa);
     final (combatenteAposInicio, logInicio) = _engine.processarInicioTurno(
       novoCombatente,
     );
@@ -455,7 +515,12 @@ class CombateCubit extends Cubit<CombateState> {
         }
       }
       novosEfeitos = atualizados;
+      onEventoTurnClock?.call(RodadaAvancada(novaRodada));
     }
+
+    onEventoTurnClock?.call(
+      TurnoIniciado(personagemId: novoCombatente.id, rodada: novaRodada),
+    );
 
     final statusFinal = _engine.verificarFimDeCombate(filaAtualizada);
 
@@ -665,14 +730,6 @@ class CombateCubit extends Cubit<CombateState> {
       gastarAcao(TipoAcao.padrao);
     }
 
-    _ultimoDanoManual = {
-      'alvoId': alvo.id,
-      'pvAnterior': alvo.pvAtual,
-      'dano': dano,
-      'ehCura': ehCura,
-      'descricao': descricaoAcao,
-    };
-
     final novaFila = state.filaIniciativa.map((c) {
       if (c.id == alvo.id) {
         return ehCura ? c.aplicarCura(dano) : c.aplicarDano(dano);
@@ -694,35 +751,9 @@ class CombateCubit extends Cubit<CombateState> {
     );
   }
 
-  /// Retorna se há um dano recente disponível para reversão
-  bool get podeDesfazerDano => _ultimoDanoManual != null;
-
-  /// Reverte a última aplicação de dano/cura manual
-  void desfazerUltimoDano() {
-    if (_ultimoDanoManual == null) return;
-    final alvoId = _ultimoDanoManual!['alvoId'] as String;
-    final pvAnterior = _ultimoDanoManual!['pvAnterior'] as int;
-
-    final novaFila = state.filaIniciativa.map((c) {
-      if (c.id == alvoId) {
-        return c.copyWith(pvAtual: pvAnterior);
-      }
-      return c;
-    }).toList();
-
-    final statusFinal = _engine.verificarFimDeCombate(novaFila);
-    _ultimoDanoManual = null;
-
-    emit(
-      state.copyWith(
-        filaIniciativa: novaFila,
-        statusCombate: statusFinal,
-        logCombate: [
-          ...state.logCombate,
-          "↩️ Última aplicação de dano/cura foi desfeita.",
-        ],
-      ),
-    );
+  /// Registra uma mensagem informativa ou aviso diretamente no log de combate (sem pop-ups intrusivos)
+  void registrarLog(String mensagem) {
+    emit(state.copyWith(logCombate: [...state.logCombate, mensagem]));
   }
 
   /// Adiciona um efeito ativo (ex: buffs de magia) no combatente

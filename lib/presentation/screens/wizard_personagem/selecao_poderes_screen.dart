@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../domain/entities/personagem/personagem.dart';
 import '../../../domain/entities/personagem/poder.dart';
 import '../../controllers/ficha_controller/evolucao_cubit.dart';
-import '../../widgets/modal_escolha_companheiro.dart';
+import '../ficha/widgets/modal_escolha_companheiro.dart';
 
 class SelecaoPoderesScreen extends StatelessWidget {
   final Personagem personagem;

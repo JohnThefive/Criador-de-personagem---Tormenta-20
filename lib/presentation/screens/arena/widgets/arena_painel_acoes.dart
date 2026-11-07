@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../domain/entities/combate/combatente.dart';
 import '../../../../domain/services/combate_services/arena_stats_collector.dart';
+import '../../../../domain/services/combate_services/calculadora_tatica_t20.dart';
 import '../../../controllers/combate_controller/combate_cubit.dart';
 import '../../../controllers/combate_controller/combate_state.dart';
 import 'arena_arbitragem_dialog.dart';
@@ -135,6 +136,7 @@ class ArenaPainelAcoes extends StatelessWidget {
                         heroi: atual,
                         todos: state.filaIniciativa,
                         cubit: cubit,
+                        stats: stats,
                       )
                     : null,
               ),
@@ -156,7 +158,11 @@ class ArenaPainelAcoes extends StatelessWidget {
 
               // Botão Arbitragem VTT na Mesa
               OutlinedButton.icon(
-                icon: const Icon(Icons.tune, size: 16, color: Colors.amberAccent),
+                icon: const Icon(
+                  Icons.tune,
+                  size: 16,
+                  color: Colors.amberAccent,
+                ),
                 label: const Text(
                   'Ajuste Mesa',
                   style: TextStyle(color: Colors.amberAccent),
@@ -164,7 +170,8 @@ class ArenaPainelAcoes extends StatelessWidget {
                 style: OutlinedButton.styleFrom(
                   side: const BorderSide(color: Colors.amberAccent),
                 ),
-                onPressed: () => exibirModalArbitragemVtt(context, atual, cubit),
+                onPressed: () =>
+                    exibirModalArbitragemVtt(context, atual, cubit),
               ),
 
               // Botão Passar Turno
@@ -189,10 +196,8 @@ class ArenaPainelAcoes extends StatelessWidget {
     List<Combatente> inimigos,
   ) {
     if (heroi.armas.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Este combatente não possui armas equipadas!'),
-        ),
+      cubit.registrarLog(
+        '⚠️ ${heroi.nome} não possui armas equipadas para atacar!',
       );
       return;
     }
@@ -210,6 +215,36 @@ class ArenaPainelAcoes extends StatelessWidget {
       return;
     }
 
+    // Diagnóstico comparativo de armas para apoio à decisão
+    final alvoPadrao = inimigos.where((c) => c.pvAtual > 0).firstOrNull ?? inimigos.first;
+    final avaliacoesArmas = <String, AvaliacaoAtaque>{};
+    for (final arma in heroi.armas) {
+      final modAtq = (arma.ehCorpoACorpo ? heroi.modLuta : heroi.modPontaria) + arma.bonusAtaqueMelhorias;
+      final modDano = arma.somaForcaAoDano ? heroi.modForca : 0;
+      avaliacoesArmas[arma.key] = CalculadoraTaticaT20.calcularAvaliacaoAtaque(
+        arma: arma,
+        modAtaqueTotal: modAtq,
+        modDanoTotal: modDano,
+        defesaAlvo: alvoPadrao.defesa,
+      );
+    }
+
+    String? melhorDanoKey;
+    double maxED = -1;
+    String? melhorAcertoKey;
+    double maxAcerto = -1;
+
+    for (final entry in avaliacoesArmas.entries) {
+      if (entry.value.danoEsperado > maxED) {
+        maxED = entry.value.danoEsperado;
+        melhorDanoKey = entry.key;
+      }
+      if (entry.value.probabilidadeAcerto > maxAcerto) {
+        maxAcerto = entry.value.probabilidadeAcerto;
+        melhorAcertoKey = entry.key;
+      }
+    }
+
     // Modal seletor de armas se houver mais de uma
     showModalBottomSheet<void>(
       context: context,
@@ -224,50 +259,134 @@ class ArenaPainelAcoes extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Escolha a Arma para o Ataque:',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                ),
-              ),
-              const SizedBox(height: 12),
-              ...heroi.armas.map(
-                (arma) => ListTile(
-                  tileColor: const Color(0xFF0F172A),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  leading: Icon(
-                    arma.ehCorpoACorpo ? Icons.sports_kabaddi : Icons.gps_fixed,
-                    color: Colors.amberAccent,
-                  ),
-                  title: Text(
-                    arma.nome,
-                    style: const TextStyle(
+              Row(
+                children: [
+                  const Icon(Icons.compare_arrows, size: 18, color: Colors.cyanAccent),
+                  const SizedBox(width: 8),
+                  const Text(
+                    'Escolha a Arma para o Ataque:',
+                    style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
+                      fontSize: 16,
                     ),
                   ),
-                  subtitle: Text(
-                    'Dano: ${arma.dano} (${arma.criticoFormatado})',
-                    style: const TextStyle(color: Colors.white70, fontSize: 11),
+                  const Spacer(),
+                  Text(
+                    'vs Defesa ${alvoPadrao.defesa}',
+                    style: const TextStyle(color: Colors.white54, fontSize: 11),
                   ),
-                  onTap: () {
-                    Navigator.pop(ctx);
-                    ArenaAtaqueSheet.exibir(
-                      context,
-                      heroi: heroi,
-                      arma: arma,
-                      inimigos: inimigos,
-                      efeitosAtivos: state.efeitosAtivos,
-                      cubit: cubit,
-                      stats: stats,
-                    );
-                  },
-                ),
+                ],
               ),
+              const SizedBox(height: 12),
+              ...heroi.armas.map((arma) {
+                final aval = avaliacoesArmas[arma.key];
+                final ehMelhorDano = arma.key == melhorDanoKey && heroi.armas.length > 1;
+                final ehMelhorAcerto = arma.key == melhorAcertoKey && !ehMelhorDano && heroi.armas.length > 1;
+
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 8.0),
+                  child: ListTile(
+                    tileColor: const Color(0xFF0F172A),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      side: BorderSide(
+                        color: ehMelhorDano
+                            ? Colors.amberAccent.withValues(alpha: 0.5)
+                            : (ehMelhorAcerto ? Colors.cyanAccent.withValues(alpha: 0.5) : Colors.white12),
+                      ),
+                    ),
+                    leading: Icon(
+                      arma.ehCorpoACorpo ? Icons.sports_kabaddi : Icons.gps_fixed,
+                      color: Colors.amberAccent,
+                    ),
+                    title: Text(
+                      arma.nome,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Dano: ${arma.dano} (${arma.criticoFormatado})',
+                          style: const TextStyle(color: Colors.white70, fontSize: 11),
+                        ),
+                        if (aval != null) ...[
+                          const SizedBox(height: 2),
+                          Text(
+                            'Acerto: ${aval.probabilidadePercentualFormatada} • Dano Esperado: ${aval.danoEsperadoFormatado} PV',
+                            style: const TextStyle(color: Colors.cyanAccent, fontSize: 11),
+                          ),
+                        ],
+                      ],
+                    ),
+                    trailing: ehMelhorDano
+                        ? Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFF78350F),
+                              borderRadius: BorderRadius.circular(6),
+                              border: Border.all(color: Colors.amberAccent),
+                            ),
+                            child: const Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(Icons.trending_up, size: 12, color: Colors.amberAccent),
+                                SizedBox(width: 4),
+                                Text(
+                                  'MAIOR DANO',
+                                  style: TextStyle(
+                                    color: Colors.amberAccent,
+                                    fontSize: 9,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                        : (ehMelhorAcerto
+                            ? Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFF0C4A6E),
+                                  borderRadius: BorderRadius.circular(6),
+                                  border: Border.all(color: Colors.cyanAccent),
+                                ),
+                                child: const Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(Icons.gps_fixed, size: 12, color: Colors.cyanAccent),
+                                    SizedBox(width: 4),
+                                    Text(
+                                      'MAIOR ACERTO',
+                                      style: TextStyle(
+                                        color: Colors.cyanAccent,
+                                        fontSize: 9,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            : null),
+                    onTap: () {
+                      Navigator.pop(ctx);
+                      ArenaAtaqueSheet.exibir(
+                        context,
+                        heroi: heroi,
+                        arma: arma,
+                        inimigos: inimigos,
+                        efeitosAtivos: state.efeitosAtivos,
+                        cubit: cubit,
+                        stats: stats,
+                      );
+                    },
+                  ),
+                );
+              }),
             ],
           ),
         ),

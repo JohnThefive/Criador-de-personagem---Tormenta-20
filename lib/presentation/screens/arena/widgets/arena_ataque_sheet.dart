@@ -4,10 +4,11 @@ import '../../../../domain/entities/combate/combatente.dart';
 import '../../../../domain/entities/combate/efeito_ativo_combate.dart';
 import '../../../../domain/entities/equipamento/arma.dart';
 import '../../../../domain/services/combate_services/arena_stats_collector.dart';
+import '../../../../domain/services/combate_services/calculadora_tatica_t20.dart';
 import '../../../../domain/services/combate_services/dice_roll_service.dart';
 import '../../../controllers/combate_controller/combate_cubit.dart';
-import '../../../widgets/d20_dice.dart';
-import '../../../widgets/roll_result_view.dart';
+import 'd20_dice.dart';
+import 'roll_result_view.dart';
 
 /// Modal bottom sheet para resolução de Ataques no Modo Arena usando o Sistema de Honestidade.
 ///
@@ -18,7 +19,7 @@ import '../../../widgets/roll_result_view.dart';
 /// 4. Animação rápida de D20 icosaedro 3D (~1.0s).
 /// 5. Apresentação BG3 do resultado do teste e comparação contra Defesa.
 /// 6. Rolagem de dano com multiplicador crítico T20 (apenas dados da arma multiplicam).
-/// 7. Confirmação com ação de desfazer dano.
+/// 7. Confirmação do dano aplicado e encerramento da ação.
 class ArenaAtaqueSheet extends StatefulWidget {
   final Combatente heroi;
   final Arma arma;
@@ -177,13 +178,18 @@ class _ArenaAtaqueSheetState extends State<ArenaAtaqueSheet> {
   }
 
   void _aceitarEAplicar() {
-    final scaffoldMessenger = ScaffoldMessenger.of(context);
     final navigator = Navigator.of(context);
 
     final danoFinal = _resultadoDano?.total ?? 0;
     final acaoDescricao = _acertou
         ? '⚔️ ${widget.heroi.nome} atacou ${_alvo.nome} com ${widget.arma.nome}: ACERTOU! (${_resultadoAtaque?.total ?? 0} vs Defesa ${_alvo.defesa}) causando $danoFinal de dano${_ehCritico ? " [CRÍTICO]" : ""}.'
         : '🛡️ ${widget.heroi.nome} atacou ${_alvo.nome} com ${widget.arma.nome}: ERROU (${_resultadoAtaque?.total ?? 0} vs Defesa ${_alvo.defesa}).';
+
+    widget.stats.registrarAtaque(
+      acerto: _acertou,
+      ehCritico: _ehCritico,
+      dano: danoFinal,
+    );
 
     widget.cubit.aplicarDanoManual(
       alvo: _alvo,
@@ -193,24 +199,6 @@ class _ArenaAtaqueSheetState extends State<ArenaAtaqueSheet> {
     );
 
     navigator.pop();
-
-    scaffoldMessenger.showSnackBar(
-      SnackBar(
-        content: Text(
-          _acertou
-              ? 'Dano de $danoFinal aplicado a ${_alvo.nome}!'
-              : 'Ataque contra ${_alvo.nome} errou.',
-        ),
-        duration: const Duration(seconds: 4),
-        action: SnackBarAction(
-          label: 'Desfazer Dano',
-          textColor: Colors.amberAccent,
-          onPressed: () {
-            widget.cubit.desfazerUltimoDano();
-          },
-        ),
-      ),
-    );
   }
 
   @override
@@ -268,12 +256,18 @@ class _ArenaAtaqueSheetState extends State<ArenaAtaqueSheet> {
             const Divider(color: Colors.white24, height: 16),
 
             // 2. Seletor de Alvo
-            Text(
-              '🎯 Alvo:',
-              style: textTheme.labelLarge?.copyWith(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
+            Row(
+              children: [
+                const Icon(Icons.gps_fixed, size: 14, color: Colors.amberAccent),
+                const SizedBox(width: 6),
+                Text(
+                  'Alvo:',
+                  style: textTheme.labelLarge?.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 4),
             DropdownButton<Combatente>(
@@ -298,12 +292,18 @@ class _ArenaAtaqueSheetState extends State<ArenaAtaqueSheet> {
             const SizedBox(height: 12),
 
             // 3. Modificadores Circunstanciais (Sistema de Honestidade)
-            Text(
-              '⚙️ Modificadores e Circunstâncias:',
-              style: textTheme.labelLarge?.copyWith(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
+            Row(
+              children: [
+                const Icon(Icons.tune, size: 14, color: Colors.cyanAccent),
+                const SizedBox(width: 6),
+                Text(
+                  'Modificadores e Circunstâncias:',
+                  style: textTheme.labelLarge?.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 6),
             Wrap(
@@ -315,10 +315,16 @@ class _ArenaAtaqueSheetState extends State<ArenaAtaqueSheet> {
                 FilterChip(
                   label: const Text('Flanco (+2)'),
                   selected: _flanco,
-                  selectedColor: Colors.amberAccent.withValues(alpha: 0.3),
+                  backgroundColor: const Color(0xFF0F172A),
+                  selectedColor: const Color(0xFF78350F),
                   checkmarkColor: Colors.amberAccent,
+                  side: BorderSide(
+                    color: _flanco ? Colors.amberAccent : Colors.white24,
+                    width: 1.2,
+                  ),
                   labelStyle: TextStyle(
-                    color: _flanco ? Colors.amberAccent : Colors.white70,
+                    color: _flanco ? Colors.amberAccent : Colors.white,
+                    fontWeight: _flanco ? FontWeight.bold : FontWeight.normal,
                     fontSize: 12,
                   ),
                   onSelected: _ataqueConcluido
@@ -331,10 +337,16 @@ class _ArenaAtaqueSheetState extends State<ArenaAtaqueSheet> {
                   FilterChip(
                     label: Text('Buffs (+$_bonusBuffsAtaque Atq / +$_bonusBuffsDano Dano)'),
                     selected: _aplicarBuffs,
-                    selectedColor: Colors.purpleAccent.withValues(alpha: 0.3),
+                    backgroundColor: const Color(0xFF0F172A),
+                    selectedColor: const Color(0xFF581C87),
                     checkmarkColor: Colors.purpleAccent,
+                    side: BorderSide(
+                      color: _aplicarBuffs ? Colors.purpleAccent : Colors.white24,
+                      width: 1.2,
+                    ),
                     labelStyle: TextStyle(
-                      color: _aplicarBuffs ? Colors.purpleAccent : Colors.white70,
+                      color: _aplicarBuffs ? Colors.purpleAccent : Colors.white,
+                      fontWeight: _aplicarBuffs ? FontWeight.bold : FontWeight.normal,
                       fontSize: 12,
                     ),
                     onSelected: _ataqueConcluido
@@ -346,6 +358,23 @@ class _ArenaAtaqueSheetState extends State<ArenaAtaqueSheet> {
                 ChoiceChip(
                   label: const Text('Normal'),
                   selected: _vantagem == TipoVantagem.normal,
+                  backgroundColor: const Color(0xFF0F172A),
+                  selectedColor: const Color(0xFF1E3A8A),
+                  side: BorderSide(
+                    color: _vantagem == TipoVantagem.normal
+                        ? Colors.lightBlueAccent
+                        : Colors.white24,
+                    width: 1.2,
+                  ),
+                  labelStyle: TextStyle(
+                    color: _vantagem == TipoVantagem.normal
+                        ? Colors.lightBlueAccent
+                        : Colors.white,
+                    fontWeight: _vantagem == TipoVantagem.normal
+                        ? FontWeight.bold
+                        : FontWeight.normal,
+                    fontSize: 12,
+                  ),
                   onSelected: _ataqueConcluido
                       ? null
                       : (_) => setState(() => _vantagem = TipoVantagem.normal),
@@ -353,11 +382,22 @@ class _ArenaAtaqueSheetState extends State<ArenaAtaqueSheet> {
                 ChoiceChip(
                   label: const Text('Vantagem'),
                   selected: _vantagem == TipoVantagem.vantagem,
-                  selectedColor: Colors.greenAccent.withValues(alpha: 0.3),
+                  backgroundColor: const Color(0xFF0F172A),
+                  selectedColor: const Color(0xFF14532D),
+                  side: BorderSide(
+                    color: _vantagem == TipoVantagem.vantagem
+                        ? Colors.greenAccent
+                        : Colors.white24,
+                    width: 1.2,
+                  ),
                   labelStyle: TextStyle(
                     color: _vantagem == TipoVantagem.vantagem
                         ? Colors.greenAccent
-                        : Colors.white70,
+                        : Colors.white,
+                    fontWeight: _vantagem == TipoVantagem.vantagem
+                        ? FontWeight.bold
+                        : FontWeight.normal,
+                    fontSize: 12,
                   ),
                   onSelected: _ataqueConcluido
                       ? null
@@ -366,11 +406,22 @@ class _ArenaAtaqueSheetState extends State<ArenaAtaqueSheet> {
                 ChoiceChip(
                   label: const Text('Desvantagem'),
                   selected: _vantagem == TipoVantagem.desvantagem,
-                  selectedColor: Colors.redAccent.withValues(alpha: 0.3),
+                  backgroundColor: const Color(0xFF0F172A),
+                  selectedColor: const Color(0xFF7F1D1D),
+                  side: BorderSide(
+                    color: _vantagem == TipoVantagem.desvantagem
+                        ? Colors.redAccent
+                        : Colors.white24,
+                    width: 1.2,
+                  ),
                   labelStyle: TextStyle(
                     color: _vantagem == TipoVantagem.desvantagem
                         ? Colors.redAccent
-                        : Colors.white70,
+                        : Colors.white,
+                    fontWeight: _vantagem == TipoVantagem.desvantagem
+                        ? FontWeight.bold
+                        : FontWeight.normal,
+                    fontSize: 12,
                   ),
                   onSelected: _ataqueConcluido
                       ? null
@@ -433,7 +484,8 @@ class _ArenaAtaqueSheetState extends State<ArenaAtaqueSheet> {
                 ),
               ],
             ),
-            const SizedBox(height: 12),
+            // Diagnóstico Tático de Apoio à Decisão (sem emojis)
+            _buildPainelAnaliseTatica(),
 
             // 4. Área de Rolagem do D20
             Center(
@@ -455,8 +507,8 @@ class _ArenaAtaqueSheetState extends State<ArenaAtaqueSheet> {
                     RollResultView(
                       resultado: _resultadoAtaque!,
                       titulo: _acertou
-                          ? (_ehCritico ? '⭐ ACERTO CRÍTICO! ⭐' : '⚔️ ACERTOU! ⚔️')
-                          : '🛡️ ERROU! 🛡️',
+                          ? (_ehCritico ? 'ACERTO CRÍTICO!' : 'ACERTOU O ATAQUE!')
+                          : 'ERROU O ATAQUE',
                     ),
                     const SizedBox(height: 8),
                     Container(
@@ -509,73 +561,97 @@ class _ArenaAtaqueSheetState extends State<ArenaAtaqueSheet> {
                 ),
               ),
 
-            // 6. Seção de Dano após o ataque
+            // 6. Seção pós-ataque: Dano se acertou, ou botão direto se errou
             if (_ataqueConcluido) ...[
-              const Divider(color: Colors.white24, height: 20),
-              Text(
-                '💥 Rolagem de Dano (${widget.arma.dano}${_ehCritico ? " [CRÍTICO x${widget.arma.multiplicadorCritico}]" : ""}):',
-                style: textTheme.labelLarge?.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
+              if (_acertou) ...[
+                const Divider(color: Colors.white24, height: 20),
+                Text(
+                  '💥 Rolagem de Dano (${widget.arma.dano}${_ehCritico ? " [CRÍTICO x${widget.arma.multiplicadorCritico}]" : ""}):',
+                  style: textTheme.labelLarge?.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 8),
+                const SizedBox(height: 8),
 
-              if (_resultadoDano == null)
-                SizedBox(
-                  width: double.infinity,
-                  height: 48,
-                  child: ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.orange.shade800,
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    icon: const Icon(Icons.flash_on),
-                    label: Text(
-                      _ehCritico ? '⚡ Rolar Dano Crítico!' : 'Rolar Dano',
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    onPressed: _executarRolagemDano,
-                  ),
-                )
-              else ...[
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF0F172A),
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Colors.orangeAccent),
-                  ),
-                  child: Column(
-                    children: [
-                      Text(
-                        'Total de Dano: ${_resultadoDano!.total}',
-                        style: const TextStyle(
-                          color: Colors.orangeAccent,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
+                if (_resultadoDano == null)
+                  SizedBox(
+                    width: double.infinity,
+                    height: 48,
+                    child: ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.orange.shade800,
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      const SizedBox(height: 4),
-                      Text(
-                        _resultadoDano!.decomposicao,
-                        style: const TextStyle(color: Colors.white70, fontSize: 12),
-                        textAlign: TextAlign.center,
+                      icon: const Icon(Icons.flash_on),
+                      label: Text(
+                        _ehCritico ? '⚡ Rolar Dano Crítico!' : 'Rolar Dano',
+                        style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
-                    ],
+                      onPressed: _executarRolagemDano,
+                    ),
+                  )
+                else ...[
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF0F172A),
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: Colors.orangeAccent),
+                    ),
+                    child: Column(
+                      children: [
+                        Text(
+                          'Total de Dano: ${_resultadoDano!.total}',
+                          style: const TextStyle(
+                            color: Colors.orangeAccent,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          _resultadoDano!.decomposicao,
+                          style: const TextStyle(color: Colors.white70, fontSize: 12),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                const SizedBox(height: 12),
+                  const SizedBox(height: 12),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 48,
+                    child: ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.green.shade700,
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      icon: const Icon(Icons.check_circle_outline),
+                      label: const Text(
+                        'Aceitar Resultado e Aplicar Dano',
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                      ),
+                      onPressed: _aceitarEAplicar,
+                    ),
+                  ),
+                ],
+              ] else ...[
+                // QUANDO ERRA O ALVO: Vai DIRETO para Aceitar Resultado sem rolar dano
+                const Divider(color: Colors.white24, height: 20),
                 SizedBox(
                   width: double.infinity,
                   height: 48,
                   child: ElevatedButton.icon(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green.shade700,
+                      backgroundColor: const Color(0xFF334155),
                       foregroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -583,7 +659,7 @@ class _ArenaAtaqueSheetState extends State<ArenaAtaqueSheet> {
                     ),
                     icon: const Icon(Icons.check_circle_outline),
                     label: const Text(
-                      'Aceitar Resultado e Aplicar',
+                      'Aceitar Resultado (Errou o Ataque)',
                       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                     ),
                     onPressed: _aceitarEAplicar,
@@ -593,6 +669,137 @@ class _ArenaAtaqueSheetState extends State<ArenaAtaqueSheet> {
             ],
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildPainelAnaliseTatica() {
+    final int bonusAtributoDano =
+        widget.arma.somaForcaAoDano ? widget.heroi.modForca : 0;
+    final avaliacao = CalculadoraTaticaT20.calcularAvaliacaoAtaque(
+      arma: widget.arma,
+      modAtaqueTotal: _modificadorTotalAtaque,
+      modDanoTotal: bonusAtributoDano + _modificadorTotalDano,
+      defesaAlvo: _alvo.defesa,
+      temVantagem: _vantagem == TipoVantagem.vantagem,
+      temDesvantagem: _vantagem == TipoVantagem.desvantagem,
+    );
+
+    final Color corProb;
+    if (avaliacao.probabilidadeAcerto >= 0.65) {
+      corProb = Colors.greenAccent;
+    } else if (avaliacao.probabilidadeAcerto >= 0.45) {
+      corProb = Colors.amberAccent;
+    } else {
+      corProb = Colors.orangeAccent;
+    }
+
+    return Container(
+      margin: const EdgeInsets.only(top: 8, bottom: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      decoration: BoxDecoration(
+        color: const Color(0xFF0F172A),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: Colors.white12),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Row(
+            children: [
+              const Icon(Icons.analytics_outlined, size: 14, color: Colors.cyanAccent),
+              const SizedBox(width: 6),
+              const Text(
+                'DIAGNÓSTICO TÁTICO',
+                style: TextStyle(
+                  color: Colors.cyanAccent,
+                  fontSize: 11,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 0.8,
+                ),
+              ),
+              const Spacer(),
+              Text(
+                'vs Defesa ${_alvo.defesa}',
+                style: const TextStyle(color: Colors.white54, fontSize: 11),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Row(
+            children: [
+              // 1. Chance de Acerto
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text('Chance de Acerto', style: TextStyle(color: Colors.white60, fontSize: 10)),
+                    const SizedBox(height: 2),
+                    Row(
+                      children: [
+                        Icon(Icons.gps_fixed, size: 13, color: corProb),
+                        const SizedBox(width: 4),
+                        Text(
+                          avaliacao.probabilidadePercentualFormatada,
+                          style: TextStyle(color: corProb, fontWeight: FontWeight.bold, fontSize: 15),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Container(width: 1, height: 28, color: Colors.white12),
+              const SizedBox(width: 10),
+              // 2. Dano Médio
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text('Dano Médio', style: TextStyle(color: Colors.white60, fontSize: 10)),
+                    const SizedBox(height: 2),
+                    Row(
+                      children: [
+                        const Icon(Icons.flash_on, size: 13, color: Colors.orangeAccent),
+                        const SizedBox(width: 4),
+                        Text(
+                          '${avaliacao.danoMedioFormatado} PV',
+                          style: const TextStyle(color: Colors.orangeAccent, fontWeight: FontWeight.bold, fontSize: 15),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Container(width: 1, height: 28, color: Colors.white12),
+              const SizedBox(width: 10),
+              // 3. Dano Esperado
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text('Dano Esperado', style: TextStyle(color: Colors.white60, fontSize: 10)),
+                    const SizedBox(height: 2),
+                    Row(
+                      children: [
+                        const Icon(Icons.trending_up, size: 13, color: Colors.lightGreenAccent),
+                        const SizedBox(width: 4),
+                        Text(
+                          avaliacao.danoEsperadoFormatado,
+                          style: const TextStyle(color: Colors.lightGreenAccent, fontWeight: FontWeight.bold, fontSize: 15),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 6),
+          Text(
+            'Margem Crítica: ${widget.arma.margemAmeaca}-20 (x${widget.arma.multiplicadorCritico}) • ${(avaliacao.probabilidadeCritico * 100).toStringAsFixed(0)}% de chance de crítico',
+            style: const TextStyle(color: Colors.white38, fontSize: 10),
+          ),
+        ],
       ),
     );
   }

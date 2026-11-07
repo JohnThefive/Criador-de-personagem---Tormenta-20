@@ -5,7 +5,7 @@ import 'package:t20_creator/presentation/screens/arena/arena_screen.dart';
 import 'package:t20_creator/presentation/screens/arena/widgets/arena_banner_turno.dart';
 import 'package:t20_creator/presentation/screens/arena/widgets/arena_iniciativa_bar.dart';
 import 'package:t20_creator/presentation/screens/arena/widgets/arena_terminal_log.dart';
-import 'package:t20_creator/presentation/widgets/vtt_board_widget.dart';
+import 'package:t20_creator/presentation/screens/arena/widgets/vtt_board_widget.dart';
 
 void main() {
   final heroi = Personagem(

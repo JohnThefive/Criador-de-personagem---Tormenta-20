@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import '../../../../domain/entities/combate/combatente.dart';
 import '../../../../domain/entities/personagem/personagem.dart';
 import '../../../../domain/services/combate_services/dice_roll_service.dart';
-import '../../../widgets/d20_dice.dart';
-import '../../../widgets/roll_result_view.dart';
+import 'd20_dice.dart';
+import 'roll_result_view.dart';
 import '../../../widgets/character_avatar_widget.dart';
 
 enum EtapaIniciativa {

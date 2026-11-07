@@ -3,8 +3,9 @@ import '../equipamento/arma.dart';
 import '../personagem/personagem.dart';
 import 'estado_vida_combatente.dart';
 import 'monstro.dart';
+import 'tipo_dano.dart';
 
-enum CondicaoCombatente { surpreendido, caido, indefeso }
+enum CondicaoCombatente { surpreendido, caido, indefeso, cego, desprevenido, invisivel }
 
 enum TimeCombatente { heroi, inimigo }
 
@@ -31,6 +32,8 @@ sealed class Combatente {
   int get modConstituicao;
   List<Arma> get armas;
   List<CondicaoCombatente> get condicoesAtivas;
+  bool get imuneACritico;
+  bool get imuneASurpresa;
 
   const Combatente._();
 
@@ -57,6 +60,8 @@ sealed class Combatente {
     required int modConstituicao,
     List<Arma> armas,
     List<CondicaoCombatente> condicoesAtivas,
+    bool imuneACritico,
+    bool imuneASurpresa,
   }) = CombatenteGenerico;
 
   /// Constrói um CombatenteJogador a partir da ficha do Personagem
@@ -71,16 +76,30 @@ sealed class Combatente {
     int? pmAtual,
   }) = CombatenteMonstro.doMonstro;
 
-  /// Limite de morte no T20: PV <= min(-10, -(pvMaximo / 2))
+  /// Limite de morte no T20: PV <= min(-10, -(pvMaximo / 2)) (R71 / A2)
   int get limiteMorte => min(-10, -(pvMax / 2).floor());
 
-  bool get estaInconsciente => estadoVida.estaInconsciente || pvAtual <= 0;
+  bool get estaInconsciente =>
+      estadoVida.estaInconsciente ||
+      pvAtual <= 0 ||
+      (pvAtual > 0 && danoNaoLetal >= pvAtual);
   bool get estaMorto => estadoVida == EstadoVidaCombatente.morto;
   bool get estaIncapacitado => estaInconsciente || estaMorto;
-  bool get podeAgir => estadoVida == EstadoVidaCombatente.ativo && pvAtual > 0;
+  bool get podeAgir =>
+      estadoVida == EstadoVidaCombatente.ativo &&
+      pvAtual > 0 &&
+      danoNaoLetal < pvAtual;
   bool get ehSurpreendido =>
       condicoesAtivas.contains(CondicaoCombatente.surpreendido);
   bool get estaCaido => condicoesAtivas.contains(CondicaoCombatente.caido);
+  bool get estaIndefeso => condicoesAtivas.contains(CondicaoCombatente.indefeso);
+  bool get estaCego => condicoesAtivas.contains(CondicaoCombatente.cego);
+  bool get estaDesprevenido =>
+      condicoesAtivas.contains(CondicaoCombatente.desprevenido) ||
+      ehSurpreendido ||
+      estaIndefeso;
+  bool get estaInvisivel =>
+      condicoesAtivas.contains(CondicaoCombatente.invisivel);
 
   Combatente copyWith({
     TimeCombatente? time,
@@ -93,13 +112,26 @@ sealed class Combatente {
     List<CondicaoCombatente>? condicoesAtivas,
   });
 
-  /// Aplica dano letal ou não letal conforme regras do T20
-  Combatente aplicarDano(int valor, {bool naoLetal = false}) {
+  /// Aplica dano letal ou não letal conforme regras do T20 (R66, R71, R72)
+  Combatente aplicarDano(
+    int valor, {
+    bool naoLetal = false,
+    TipoDano? tipo,
+    int rd = 0,
+    bool ignoraReducaoDano = false,
+  }) {
     if (valor <= 0) return this;
 
+    // Redução de dano (RD), a menos que seja perda de vida / ignora RD
+    int danoEfetivo = valor;
+    if (!ignoraReducaoDano && rd > 0) {
+      danoEfetivo = max(0, danoEfetivo - rd);
+    }
+    if (danoEfetivo <= 0) return this;
+
     if (naoLetal) {
-      final novoDanoNaoLetal = danoNaoLetal + valor;
-      // Dano não-letal faz desmaiar quando soma >= PV atual, mas não sangra
+      final novoDanoNaoLetal = danoNaoLetal + danoEfetivo;
+      // Dano não-letal faz desmaiar quando soma >= PV atual, mas não sangra nem mata (R72)
       final novoEstado =
           (novoDanoNaoLetal >= pvAtual &&
               estadoVida == EstadoVidaCombatente.ativo)
@@ -109,36 +141,54 @@ sealed class Combatente {
       return copyWith(danoNaoLetal: novoDanoNaoLetal, estadoVida: novoEstado);
     }
 
-    // Dano Letal
-    final novoPv = pvAtual - valor;
+    // Dano Letal (R71)
+    final novoPv = pvAtual - danoEfetivo;
     EstadoVidaCombatente novoEstado = estadoVida;
 
     if (novoPv <= limiteMorte) {
       novoEstado = EstadoVidaCombatente.morto;
     } else if (novoPv <= 0) {
-      // Se já estava estabilizado e tomou dano letal novo, volta a sangrar
+      // Se já estava estabilizado e tomou dano letal novo, volta a sangrar (R71)
       novoEstado = EstadoVidaCombatente.inconscienteSangrando;
     }
 
     return copyWith(pvAtual: novoPv, estadoVida: novoEstado);
   }
 
-  /// Aplica cura: se PV voltar a ser > 0, acorda e volta a ficar ativo
+  /// Aplica cura: primeiro remove dano não-letal, sobra vai para PV (R71, R72)
+  /// Qualquer cura >= 1 PV estabiliza o personagem; PV positivo acorda.
   Combatente aplicarCura(int valor) {
     if (valor <= 0) return this;
     if (estadoVida == EstadoVidaCombatente.morto) return this;
 
-    final novoPv = min(pvMax, pvAtual + valor);
-    EstadoVidaCombatente novoEstado = estadoVida;
+    int novoDanoNaoLetal = danoNaoLetal;
+    int sobraCura = valor;
 
-    if (novoPv > 0) {
-      novoEstado = EstadoVidaCombatente.ativo;
-    } else {
-      // Qualquer cura estabiliza o personagem
-      novoEstado = EstadoVidaCombatente.estabilizado;
+    if (novoDanoNaoLetal > 0) {
+      final curaNaoLetal = min(sobraCura, novoDanoNaoLetal);
+      novoDanoNaoLetal -= curaNaoLetal;
+      sobraCura -= curaNaoLetal;
     }
 
-    return copyWith(pvAtual: novoPv, estadoVida: novoEstado);
+    final novoPv = min(pvMax, pvAtual + sobraCura);
+    EstadoVidaCombatente novoEstado = estadoVida;
+
+    if (novoPv <= 0) {
+      // Qualquer cura estabiliza o personagem (R71)
+      novoEstado = EstadoVidaCombatente.estabilizado;
+    } else if (novoDanoNaoLetal >= novoPv) {
+      // Ainda inconsciente devido a dano não letal acumulado (R72)
+      novoEstado = EstadoVidaCombatente.estabilizado;
+    } else {
+      // PV positivo e dano não-letal < PV -> acorda e volta a ficar ativo (R71)
+      novoEstado = EstadoVidaCombatente.ativo;
+    }
+
+    return copyWith(
+      pvAtual: novoPv,
+      danoNaoLetal: novoDanoNaoLetal,
+      estadoVida: novoEstado,
+    );
   }
 
   /// Realiza o teste de Constituição (CD 15) no início do turno se estiver sangrando
@@ -257,6 +307,13 @@ class CombatenteJogador extends Combatente {
 
   @override
   List<Arma> get armas => List.unmodifiable(ficha.armasEfetivas);
+
+  @override
+  bool get imuneACritico => ficha.raca?.id.toLowerCase() == 'golem';
+
+  @override
+  bool get imuneASurpresa =>
+      ficha.chavesPoderesAtivos.contains('esquiva_sobrenatural');
 
   @override
   CombatenteJogador copyWith({
@@ -381,6 +438,20 @@ class CombatenteMonstro extends Combatente {
       fichaMonstro.ataques.map((a) => a.toArma(id)).toList();
 
   @override
+  bool get imuneACritico =>
+      fichaMonstro.tipoCriatura.toLowerCase().contains('construto') ||
+      fichaMonstro.tipoCriatura.toLowerCase().contains('morto-vivo') ||
+      fichaMonstro.habilidades.any((h) =>
+          h.toLowerCase().contains('imunidade a crítico') ||
+          h.toLowerCase().contains('imunidade a acertos críticos'));
+
+  @override
+  bool get imuneASurpresa =>
+      fichaMonstro.habilidades.any((h) =>
+          h.toLowerCase().contains('percepção às cegas') ||
+          h.toLowerCase().contains('esquiva sobrenatural'));
+
+  @override
   CombatenteMonstro copyWith({
     TimeCombatente? time,
     EstadoVidaCombatente? estadoVida,
@@ -451,6 +522,10 @@ class CombatenteGenerico extends Combatente {
   final List<Arma> armas;
   @override
   final List<CondicaoCombatente> condicoesAtivas;
+  @override
+  final bool imuneACritico;
+  @override
+  final bool imuneASurpresa;
 
   const CombatenteGenerico({
     required this.id,
@@ -474,6 +549,8 @@ class CombatenteGenerico extends Combatente {
     required this.modConstituicao,
     this.armas = const [],
     this.condicoesAtivas = const [],
+    this.imuneACritico = false,
+    this.imuneASurpresa = false,
   }) : super._();
 
   @override
@@ -486,6 +563,8 @@ class CombatenteGenerico extends Combatente {
     int? iniciativaValor,
     double? deslocamentoMetros,
     List<CondicaoCombatente>? condicoesAtivas,
+    bool? imuneACritico,
+    bool? imuneASurpresa,
   }) {
     return CombatenteGenerico(
       id: id,
@@ -509,6 +588,8 @@ class CombatenteGenerico extends Combatente {
       modConstituicao: modConstituicao,
       armas: armas,
       condicoesAtivas: condicoesAtivas ?? this.condicoesAtivas,
+      imuneACritico: imuneACritico ?? this.imuneACritico,
+      imuneASurpresa: imuneASurpresa ?? this.imuneASurpresa,
     );
   }
 }

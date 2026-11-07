@@ -85,11 +85,14 @@ class MovimentoEngine {
             final bool mesmoTime = ocupante.time == timeAtivo;
 
             if (!mesmoTime) {
-              // Inimigo: se estiver ativo, bloqueia passagem totalmente
-              if (ocupante.podeAgir) {
+              // R73: Inimigos só se caídos/indefesos ou incapazes de agir; conta como terreno difícil
+              final permiteAtravessar =
+                  ocupante.estaCaido ||
+                  ocupante.estaIndefeso ||
+                  !ocupante.podeAgir;
+              if (!permiteAtravessar) {
                 continue;
               } else {
-                // Inimigo caído/inconsciente: permite atravessar, mas conta como terreno difícil
                 ocupanteContaComoTerrenoDificil = true;
               }
             }
