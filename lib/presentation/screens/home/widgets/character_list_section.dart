@@ -14,6 +14,7 @@ class CharacterListSection extends StatelessWidget {
   final List<Personagem> personagens;
   final VoidCallback onCriarPersonagem;
   final VoidCallback onModoArena;
+  final VoidCallback? onPainelMestre;
   final void Function(Personagem personagem) onAbrirPersonagem;
   final void Function(Personagem personagem) onExcluirPersonagem;
 
@@ -22,6 +23,7 @@ class CharacterListSection extends StatelessWidget {
     required this.personagens,
     required this.onCriarPersonagem,
     required this.onModoArena,
+    this.onPainelMestre,
     required this.onAbrirPersonagem,
     required this.onExcluirPersonagem,
   });
@@ -51,8 +53,8 @@ class CharacterListSection extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // 1. Ações Principais no topo (Criar Personagem & Modo Arena)
-              constraints.maxWidth >= 460
+              // 1. Ações Principais no topo (Criar Personagem, Modo Arena & Painel do Mestre)
+              constraints.maxWidth >= 560
                   ? Row(
                       children: [
                         Expanded(
@@ -62,7 +64,7 @@ class CharacterListSection extends StatelessWidget {
                             onPressed: onCriarPersonagem,
                           ),
                         ),
-                        const SizedBox(width: 12),
+                        const SizedBox(width: 10),
                         Expanded(
                           child: HomeActionCard(
                             title: 'Modo Arena',
@@ -72,6 +74,18 @@ class CharacterListSection extends StatelessWidget {
                             onPressed: onModoArena,
                           ),
                         ),
+                        if (onPainelMestre != null) ...[
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: HomeActionCard(
+                              title: 'Painel do Mestre',
+                              icon: Icons.shield_moon_outlined,
+                              isSecondary: true,
+                              tooltip: 'Campanhas, Aventuras, Sessões LAN e Mapas',
+                              onPressed: onPainelMestre,
+                            ),
+                          ),
+                        ],
                       ],
                     )
                   : Column(
@@ -90,6 +104,16 @@ class CharacterListSection extends StatelessWidget {
                           tooltip: 'Testar personagem em combate tático',
                           onPressed: onModoArena,
                         ),
+                        if (onPainelMestre != null) ...[
+                          const SizedBox(height: 10),
+                          HomeActionCard(
+                            title: 'Painel do Mestre',
+                            icon: Icons.shield_moon_outlined,
+                            isSecondary: true,
+                            tooltip: 'Campanhas, Aventuras, Sessões LAN e Mapas',
+                            onPressed: onPainelMestre,
+                          ),
+                        ],
                       ],
                     ),
               const SizedBox(height: 20),

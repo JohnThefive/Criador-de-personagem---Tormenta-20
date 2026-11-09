@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../domain/entities/personagem/personagem.dart';
 import '../../../domain/repositories/i_personagem_repository.dart';
+import '../../../domain/services/powers_service/aprendizado_magia_service.dart';
 import '../../controllers/ficha_controller/ficha_cubit.dart';
 import '../../controllers/ficha_controller/ficha_state.dart';
 
@@ -172,10 +173,13 @@ class _FichaViewState extends State<_FichaView>
                   FichaCabecalhoWidget(personagem: state.personagem),
             ),
 
-            // Banner de evolução pendente
+            // Banner de evolução pendente (Poderes ou Magias pendentes)
             BlocSelector<FichaCubit, FichaState, bool>(
               selector: (state) =>
-                  state.personagem.classes.any((c) => c.temPoderPendente),
+                  state.personagem.classes.any((c) => c.temPoderPendente) ||
+                  AprendizadoMagiaService.calcularMagiasPendentesPersonagem(
+                    state.personagem,
+                  ) > 0,
               builder: (context, temPendente) {
                 if (!temPendente) return const SizedBox.shrink();
                 return const FichaBannerEvolucao();

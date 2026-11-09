@@ -16,6 +16,7 @@ import '../../../domain/services/data_services/call_magias.dart';
 import '../../../domain/services/ficha_services/motor_multiclasse_service.dart';
 import '../../../domain/services/ficha_services/personagem_storage_service.dart';
 import '../../../domain/services/powers_service/aprendizado_magia_service.dart';
+import '../../../domain/entities/personagem/resumo_level_up.dart';
 import 'ficha_state.dart';
 
 class FichaCubit extends Cubit<FichaState> {
@@ -247,6 +248,44 @@ class FichaCubit extends Cubit<FichaState> {
       novaClasseDefinicao,
       caminho: caminho,
       linhagem: linhagem,
+    );
+  }
+
+  /// Sobe 1 nível na classe do índice informado e retorna o [ResumoLevelUp] completo para o fluxo guiado.
+  Future<ResumoLevelUp?> subirNivelComResumo(int indiceClasse) async {
+    final anterior = state.personagem;
+    final sucesso = await alterarNivelClasse(indiceClasse, 1);
+    if (!sucesso) return null;
+    return ResumoLevelUp.calcular(
+      anterior: anterior,
+      atualizado: state.personagem,
+      indiceClasse: indiceClasse,
+    );
+  }
+
+  /// Adiciona uma nova multiclasse e retorna o [ResumoLevelUp] completo para o fluxo guiado.
+  Future<ResumoLevelUp?> adicionarMulticlasseComResumo(
+    Classe novaClasseDefinicao, {
+    CaminhoDeClasse? caminho,
+    Linhagem? linhagem,
+  }) async {
+    final anterior = state.personagem;
+    final sucesso = await adicionarMulticlasse(
+      novaClasseDefinicao,
+      caminho: caminho,
+      linhagem: linhagem,
+    );
+    if (!sucesso) return null;
+    final idx = state.personagem.classes.indexWhere(
+      (c) =>
+          c.classeDefinicao.idClasse.toLowerCase() ==
+          novaClasseDefinicao.idClasse.toLowerCase(),
+    );
+    final indiceEfetivo = idx >= 0 ? idx : state.personagem.classes.length - 1;
+    return ResumoLevelUp.calcular(
+      anterior: anterior,
+      atualizado: state.personagem,
+      indiceClasse: indiceEfetivo,
     );
   }
 

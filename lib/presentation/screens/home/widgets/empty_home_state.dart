@@ -5,11 +5,13 @@ import 'home_action_card.dart';
 class EmptyHomeState extends StatelessWidget {
   final VoidCallback onCriarPersonagem;
   final VoidCallback? onModoArena;
+  final VoidCallback? onPainelMestre;
 
   const EmptyHomeState({
     super.key,
     required this.onCriarPersonagem,
     this.onModoArena,
+    this.onPainelMestre,
   });
 
   @override
@@ -83,6 +85,19 @@ class EmptyHomeState extends StatelessWidget {
                     isSecondary: true,
                     tooltip: 'Testar personagem em combate tático',
                     onPressed: onModoArena,
+                  ),
+                ),
+              ],
+              if (onPainelMestre != null) ...[
+                const SizedBox(height: 12),
+                SizedBox(
+                  width: double.infinity,
+                  child: HomeActionCard(
+                    title: 'Painel do Mestre',
+                    icon: Icons.shield_moon_outlined,
+                    isSecondary: true,
+                    tooltip: 'Campanhas, Aventuras, Sessões LAN e Mapas',
+                    onPressed: onPainelMestre,
                   ),
                 ),
               ],

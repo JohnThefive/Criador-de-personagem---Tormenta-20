@@ -385,6 +385,251 @@ class CombateCubit extends Cubit<CombateState> {
     );
   }
 
+  /// 7b. Executa a ação padrão Fintar (Enganação vs Reflexos)
+  void executarFintar({
+    required Combatente defensor,
+    int? d20Enganacao,
+    int? d20Reflexos,
+  }) {
+    final atacante = state.combatenteAtual;
+    if (atacante == null) return;
+    if (!gastarAcao(TipoAcao.padrao)) {
+      emit(
+        state.copyWith(
+          logCombate: [
+            ...state.logCombate,
+            "⚠️ ${atacante.nome} não possui Ação Padrão para Fintar!",
+          ],
+        ),
+      );
+      return;
+    }
+
+    final resultado = _engine.executarFintar(
+      atacante: atacante,
+      defensor: defensor,
+      d20Enganacao: d20Enganacao,
+      d20Reflexos: d20Reflexos,
+    );
+
+    final novaFila = state.filaIniciativa.map((c) {
+      return c.id == defensor.id ? resultado.defensorAtualizado : c;
+    }).toList();
+
+    emit(
+      state.copyWith(
+        filaIniciativa: novaFila,
+        logCombate: [...state.logCombate, resultado.log],
+      ),
+    );
+  }
+
+  /// 7c. Executa a manobra Atropelar durante o movimento (Luta vs Luta)
+  void executarAtropelar({
+    required Combatente defensor,
+    int? d20Atacante,
+    int? d20Defensor,
+  }) {
+    final atacante = state.combatenteAtual;
+    if (atacante == null) return;
+
+    if (!gastarAcao(TipoAcao.movimento)) {
+      if (!gastarAcao(TipoAcao.padrao)) {
+        emit(
+          state.copyWith(
+            logCombate: [
+              ...state.logCombate,
+              "⚠️ ${atacante.nome} não possui ações para Atropelar!",
+            ],
+          ),
+        );
+        return;
+      }
+    }
+
+    final resultado = _engine.executarAtropelar(
+      atacante: atacante,
+      defensor: defensor,
+      d20Atacante: d20Atacante,
+      d20Defensor: d20Defensor,
+    );
+
+    final novaFila = state.filaIniciativa.map((c) {
+      return c.id == defensor.id ? resultado.defensorAtualizado : c;
+    }).toList();
+
+    emit(
+      state.copyWith(
+        filaIniciativa: novaFila,
+        logCombate: [...state.logCombate, resultado.log],
+      ),
+    );
+  }
+
+  /// 7d. Executa a ação completa Investida (+2 no ataque, -2 na Defesa)
+  void executarInvestida({
+    required Combatente defensor,
+    required Arma arma,
+    int? d20Teste,
+  }) {
+    final atacante = state.combatenteAtual;
+    if (atacante == null) return;
+
+    if (state.acoesPadraoRestantes < 1 || state.acoesMovimentoRestantes < 1) {
+      emit(
+        state.copyWith(
+          logCombate: [
+            ...state.logCombate,
+            "⚠️ Investida é uma AÇÃO COMPLETA (exige 1 Padrão e 1 Movimento disponíveis)!",
+          ],
+        ),
+      );
+      return;
+    }
+
+    final posAtacante = state.posicoesCombatentes[atacante.id];
+    final posDefensor = state.posicoesCombatentes[defensor.id];
+    double distanciaMetros = 3.0;
+
+    if (posAtacante != null && posDefensor != null) {
+      distanciaMetros = posAtacante.distanciaMetros(posDefensor);
+      if (distanciaMetros < 3.0) {
+        emit(
+          state.copyWith(
+            logCombate: [
+              ...state.logCombate,
+              "⚠️ Investida exige distância mínima de 3 metros (2 quadrados)!",
+            ],
+          ),
+        );
+        return;
+      }
+      final dobroDeslocamento = atacante.deslocamentoMetros * 2;
+      if (distanciaMetros > dobroDeslocamento) {
+        emit(
+          state.copyWith(
+            logCombate: [
+              ...state.logCombate,
+              "⚠️ Alvo muito distante (${distanciaMetros.toStringAsFixed(1)}m)! Máximo em investida: ${dobroDeslocamento.toStringAsFixed(1)}m.",
+            ],
+          ),
+        );
+        return;
+      }
+    }
+
+    gastarAcao(TipoAcao.completa);
+
+    // Reposiciona o atacante adjacente ao defensor no grid
+    final novasPosicoes = Map<String, Posicao2D>.from(state.posicoesCombatentes);
+    if (posAtacante != null && posDefensor != null) {
+      final adjacentes = [
+        Posicao2D(posDefensor.x + 1, posDefensor.y),
+        Posicao2D(posDefensor.x - 1, posDefensor.y),
+        Posicao2D(posDefensor.x, posDefensor.y + 1),
+        Posicao2D(posDefensor.x, posDefensor.y - 1),
+      ];
+      final destino = adjacentes.where((p) =>
+        state.mapaGrid.dentroDosLimites(p) &&
+        !novasPosicoes.values.contains(p) &&
+        state.mapaGrid.obterTerreno(p) != TipoTerreno.obstaculo
+      ).firstOrNull ?? posAtacante;
+
+      novasPosicoes[atacante.id] = destino;
+    }
+
+    final resInvestida = _engine.executarInvestida(
+      atacante: atacante,
+      defensor: defensor,
+      arma: arma,
+      distanciaMetros: distanciaMetros,
+      d20Teste: d20Teste,
+    );
+
+    List<Combatente> novaFila = state.filaIniciativa;
+    bool defensorMorreu = false;
+    if (resInvestida.ataque.acerto && resInvestida.ataque.danoTotal > 0) {
+      novaFila = novaFila.map((c) {
+        if (c.id == defensor.id) {
+          final ferido = c.aplicarDano(
+            resInvestida.ataque.danoTotal,
+            tipo: resInvestida.ataque.tipoDano,
+          );
+          if (ferido.estaMorto && !c.estaMorto) defensorMorreu = true;
+          return ferido;
+        }
+        return c;
+      }).toList();
+    }
+
+    if (defensorMorreu) {
+      onEventoTurnClock?.call(PersonagemMorreu(defensor.id));
+    }
+
+    final statusFinal = _engine.verificarFimDeCombate(novaFila);
+
+    emit(
+      state.copyWith(
+        filaIniciativa: novaFila,
+        posicoesCombatentes: novasPosicoes,
+        deslocamentoRestanteMetros: 0,
+        ultimoResultadoAtaque: resInvestida.ataque,
+        statusCombate: statusFinal,
+        logCombate: [
+          ...state.logCombate,
+          resInvestida.log,
+          if (resInvestida.ataque.acerto) "💥 ${resInvestida.ataque.detalheDano}",
+        ],
+      ),
+    );
+  }
+
+  /// 7e. Executa a manobra Quebrar contra arma ou escudo do oponente
+  void executarManobraQuebrar({
+    required Combatente defensor,
+    required Arma armaAtacante,
+    required String nomeItem,
+    required int defesaItem,
+    required int pvItem,
+    required int rdItem,
+    int? d20Teste,
+  }) {
+    final atacante = state.combatenteAtual;
+    if (atacante == null) return;
+
+    if (!gastarAcao(TipoAcao.padrao)) {
+      emit(
+        state.copyWith(
+          logCombate: [
+            ...state.logCombate,
+            "⚠️ ${atacante.nome} não possui Ação Padrão para a manobra Quebrar!",
+          ],
+        ),
+      );
+      return;
+    }
+
+    final res = _engine.executarManobraQuebrar(
+      atacante: atacante,
+      armaAtacante: armaAtacante,
+      defesaObjeto: defesaItem,
+      pvMaxObjeto: pvItem,
+      pvAtualObjeto: pvItem,
+      rdObjeto: rdItem,
+      d20Teste: d20Teste,
+    );
+
+    emit(
+      state.copyWith(
+        logCombate: [
+          ...state.logCombate,
+          "⚔️ Manobra Quebrar contra $nomeItem de ${defensor.nome}:",
+          res.log,
+        ],
+      ),
+    );
+  }
+
   /// Atualiza o combatente na fila de iniciativa e recalcula status de vitória/derrota
   void atualizarCombatente(Combatente atualizado) {
     final novaFila = state.filaIniciativa.map((c) {

@@ -7,6 +7,7 @@ import '../../../controllers/combate_controller/combate_state.dart';
 import 'arena_arbitragem_dialog.dart';
 import 'arena_ataque_sheet.dart';
 import 'arena_magia_sheet.dart';
+import 'arena_manobras_sheet.dart';
 
 /// Barra de ações táticas do Modo Arena.
 ///
@@ -119,6 +120,25 @@ class ArenaPainelAcoes extends StatelessWidget {
                 ),
                 onPressed: state.acoesPadraoRestantes > 0
                     ? () => _iniciarFluxoAtaque(context, atual, inimigos)
+                    : null,
+              ),
+
+              // Botão Manobras de Batalha (Fintar, Atropelar, Investida, Quebrar)
+              ElevatedButton.icon(
+                icon: const Icon(Icons.sports_martial_arts, size: 16),
+                label: const Text('Manobras'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFFD97706),
+                  foregroundColor: Colors.white,
+                ),
+                onPressed: (state.acoesPadraoRestantes > 0 || state.acoesMovimentoRestantes > 0)
+                    ? () => ArenaManobrasSheet.exibir(
+                        context,
+                        heroi: atual,
+                        inimigos: inimigos,
+                        cubit: cubit,
+                        state: state,
+                      )
                     : null,
               ),
 

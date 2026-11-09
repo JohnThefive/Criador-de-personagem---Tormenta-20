@@ -88,6 +88,39 @@ class AprendizadoMagiaService {
     return 0;
   }
 
+  /// Retorna o novo círculo desbloqueado especificamente ao atingir `nivelClasse` (ou null se nenhum círculo novo foi liberado neste nível)
+  static int? circuloDesbloqueadoNoNivel(String classeId, int nivelClasse) {
+    if (nivelClasse <= 1) return null;
+    final circAtual = obterCirculoMaximoClasse(classeId, nivelClasse);
+    final circAnterior = obterCirculoMaximoClasse(classeId, nivelClasse - 1);
+    if (circAtual > circAnterior) {
+      return circAtual;
+    }
+    return null;
+  }
+
+  /// Calcula quantas novas magias de classe o personagem ganha especificamente ao atingir `nivelClasse`
+  static int magiasGanhasNoNivel(
+    String classeId,
+    int nivelClasse, {
+    String? caminhoId,
+  }) {
+    if (nivelClasse <= 1) {
+      return obterRegrasIniciais(classeId, caminhoId: caminhoId).qtdMagiasIniciais;
+    }
+    final atual = calcularTotalMagiasPermitidasClasse(
+      classeId,
+      nivelClasse,
+      caminhoId: caminhoId,
+    );
+    final anterior = calcularTotalMagiasPermitidasClasse(
+      classeId,
+      nivelClasse - 1,
+      caminhoId: caminhoId,
+    );
+    return (atual - anterior).clamp(0, 20);
+  }
+
   /// Calcula o total de magias de classe que a classe conjuradora tem direito até o `nivelClasse`
   static int calcularTotalMagiasPermitidasClasse(
     String classeId,

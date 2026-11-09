@@ -8,6 +8,7 @@ import '../../../../domain/services/powers_service/aprendizado_magia_service.dar
 import '../../../controllers/ficha_controller/ficha_cubit.dart';
 import '../../../controllers/ficha_controller/ficha_state.dart';
 import 'dialogos_ficha.dart';
+import 'modal_catalogo_magias.dart';
 
 class AbaMagiasView extends StatefulWidget {
   const AbaMagiasView({super.key});
@@ -52,27 +53,10 @@ class _AbaMagiasViewState extends State<AbaMagiasView> {
     BuildContext context,
     FichaCubit cubit,
   ) async {
-    final todas = BancoDeMagias.todas;
-    final circuloMax = AprendizadoMagiaService.obterCirculoMaximoPersonagem(
-      cubit.personagem,
-    );
-    await showModalBottomSheet<void>(
+    await abrirModalCatalogoMagias(
       context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.white,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (_) => _ModalCatalogoMagias(
-        personagem: cubit.personagem,
-        todasMagias: todas,
-        conhecidasIds: cubit.personagem.magiasConhecidas,
-        circuloMaximoDesbloqueado: circuloMax,
-        onAdicionar: (id, validarClasse) => cubit.adicionarMagiaConhecida(
-          id,
-          validarCirculoClasse: validarClasse,
-        ),
-      ),
+      personagem: cubit.personagem,
+      cubit: cubit,
     );
   }
 
@@ -706,169 +690,3 @@ class _CardMagiaInterativoState extends State<_CardMagiaInterativo> {
   }
 }
 
-class _ModalCatalogoMagias extends StatefulWidget {
-  final Personagem personagem;
-  final List<Magia> todasMagias;
-  final List<String> conhecidasIds;
-  final int circuloMaximoDesbloqueado;
-  final void Function(String magiaId, bool validarClasse) onAdicionar;
-
-  const _ModalCatalogoMagias({
-    required this.personagem,
-    required this.todasMagias,
-    required this.conhecidasIds,
-    this.circuloMaximoDesbloqueado = 1,
-    required this.onAdicionar,
-  });
-
-  @override
-  State<_ModalCatalogoMagias> createState() => _ModalCatalogoMagiasState();
-}
-
-class _ModalCatalogoMagiasState extends State<_ModalCatalogoMagias> {
-  String _busca = '';
-  int _circulo = 0;
-  bool _liberarExtraOuRacial = false;
-
-  @override
-  Widget build(BuildContext context) {
-    final circArcano = AprendizadoMagiaService.obterCirculoMaximoPorTipoMagia(
-      widget.personagem,
-      'arcana',
-    );
-    final circDivino = AprendizadoMagiaService.obterCirculoMaximoPorTipoMagia(
-      widget.personagem,
-      'divina',
-    );
-
-    final filtradas = widget.todasMagias.where((m) {
-      if (_circulo > 0 && m.circulo != _circulo) return false;
-      if (_busca.isNotEmpty &&
-          !m.nome.toLowerCase().contains(_busca.toLowerCase())) {
-        return false;
-      }
-      return true;
-    }).toList();
-
-    return DraggableScrollableSheet(
-      initialChildSize: 0.82,
-      minChildSize: 0.5,
-      maxChildSize: 0.95,
-      expand: false,
-      builder: (_, scrollController) => Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            const Text(
-              'Catálogo de Magias (T20)',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
-            ),
-            const SizedBox(height: 2),
-            Text(
-              'Círculos por classe: Arcana ${circArcano > 0 ? "$circArcanoº" : "—"} • Divina ${circDivino > 0 ? "$circDivinoº" : "—"}',
-              style: const TextStyle(fontSize: 12, color: Colors.black54),
-            ),
-            const SizedBox(height: 8),
-            TextField(
-              onChanged: (v) => setState(() => _busca = v),
-              decoration: const InputDecoration(
-                hintText: 'Buscar magia por nome...',
-                prefixIcon: Icon(Icons.search),
-                border: OutlineInputBorder(),
-                isDense: true,
-              ),
-            ),
-            const SizedBox(height: 6),
-            Row(
-              children: [
-                Expanded(
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [0, 1, 2, 3, 4, 5].map((c) {
-                        final acimaDoLimite =
-                            c > 0 && c > widget.circuloMaximoDesbloqueado;
-                        return Padding(
-                          padding: const EdgeInsets.only(right: 6),
-                          child: ChoiceChip(
-                            selected: _circulo == c,
-                            label: Text(
-                              c == 0
-                                  ? 'Todos'
-                                  : (acimaDoLimite ? '$cº 🔒' : '$cº'),
-                            ),
-                            onSelected: (_) => setState(() => _circulo = c),
-                          ),
-                        );
-                      }).toList(),
-                    ),
-                  ),
-                ),
-                FilterChip(
-                  selected: _liberarExtraOuRacial,
-                  visualDensity: VisualDensity.compact,
-                  label: const Text(
-                    'Extra/Poder',
-                    style: TextStyle(fontSize: 11),
-                  ),
-                  onSelected: (v) => setState(() => _liberarExtraOuRacial = v),
-                ),
-              ],
-            ),
-            const SizedBox(height: 8),
-            Expanded(
-              child: ListView.separated(
-                controller: scrollController,
-                itemCount: filtradas.length,
-                separatorBuilder: (_, _) => const Divider(height: 1),
-                itemBuilder: (_, idx) {
-                  final m = filtradas[idx];
-                  final jaConhece = widget.conhecidasIds.contains(m.id);
-                  final liberadaNaClasse =
-                      AprendizadoMagiaService.podeAprenderMagiaNoPersonagem(
-                        widget.personagem,
-                        m,
-                      );
-                  final podeSelecionar =
-                      !jaConhece && (liberadaNaClasse || _liberarExtraOuRacial);
-
-                  return ListTile(
-                    dense: true,
-                    enabled: podeSelecionar || jaConhece,
-                    title: Text(
-                      m.nome,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    subtitle: Text(
-                      liberadaNaClasse
-                          ? '${m.circulo}º Círculo • ${m.tipo.toUpperCase()} • ${m.escola}'
-                          : '${m.circulo}º Círculo • ${m.tipo.toUpperCase()} • 🔒 Requer nível na classe conjuradora',
-                    ),
-                    trailing: jaConhece
-                        ? const Icon(Icons.check_circle, color: Colors.green)
-                        : (podeSelecionar
-                              ? const Icon(
-                                  Icons.add_circle_outline,
-                                  color: Color(0xFFD32F2F),
-                                )
-                              : const Icon(
-                                  Icons.lock_outline,
-                                  color: Colors.grey,
-                                  size: 18,
-                                )),
-                    onTap: !podeSelecionar
-                        ? null
-                        : () {
-                            widget.onAdicionar(m.id, !_liberarExtraOuRacial);
-                            Navigator.pop(context);
-                          },
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}

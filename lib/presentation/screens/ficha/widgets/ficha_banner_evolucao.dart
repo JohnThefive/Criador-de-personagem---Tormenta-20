@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../domain/entities/personagem/personagem.dart';
+import '../../../../domain/entities/personagem/resumo_level_up.dart';
+import '../../../../domain/services/powers_service/aprendizado_magia_service.dart';
 import '../../../controllers/ficha_controller/ficha_cubit.dart';
-import '../../wizard_personagem/selecao_poderes_screen.dart';
+import 'dialog_level_up_wizard.dart';
 
-/// Banner exibido no topo da Ficha quando há evolução ou poderes pendentes de escolha.
+/// Banner exibido no topo da Ficha quando há evolução, poderes ou magias pendentes de escolha.
 class FichaBannerEvolucao extends StatelessWidget {
   const FichaBannerEvolucao({super.key});
 
@@ -13,33 +14,51 @@ class FichaBannerEvolucao extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<FichaCubit>();
     final p = cubit.personagem;
-    final idxPendente = p.classes.indexWhere((c) => c.temPoderPendente);
-    final indiceEfetivo = idxPendente >= 0 ? idxPendente : 0;
     if (p.classes.isEmpty) return const SizedBox.shrink();
 
+    final idxPendente = p.classes.indexWhere((c) => c.temPoderPendente);
+    final indiceEfetivo = idxPendente >= 0 ? idxPendente : 0;
     final cl = p.classes[indiceEfetivo];
-    final pendentes = cl.poderesPendentes;
+
+    final pendentesPoderes = cl.poderesPendentes;
+    final pendentesMagias =
+        AprendizadoMagiaService.calcularMagiasPendentesPersonagem(p);
+
+    if (pendentesPoderes <= 0 && pendentesMagias <= 0) {
+      return const SizedBox.shrink();
+    }
+
+    String texto;
+    if (pendentesPoderes > 0 && pendentesMagias > 0) {
+      texto =
+          'Evolução disponível: $pendentesPoderes ${pendentesPoderes == 1 ? "poder" : "poderes"} e $pendentesMagias ${pendentesMagias == 1 ? "magia" : "magias"} para escolher!';
+    } else if (pendentesPoderes > 0) {
+      texto =
+          'Evolução disponível: escolher $pendentesPoderes ${pendentesPoderes == 1 ? "poder" : "poderes"} em ${cl.classeDefinicao.nome}';
+    } else {
+      texto =
+          'Evolução disponível: escolher $pendentesMagias ${pendentesMagias == 1 ? "nova magia" : "novas magias"} para o grimório!';
+    }
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
       child: Material(
         color: const Color(0xFF0F172A),
         borderRadius: BorderRadius.circular(12),
+        elevation: 3,
         child: InkWell(
           borderRadius: BorderRadius.circular(12),
-          onTap: () async {
-            final atualizado = await Navigator.push<Personagem>(
-              context,
-              MaterialPageRoute(
-                builder: (_) => SelecaoPoderesScreen(
-                  personagem: p,
-                  indiceClasse: indiceEfetivo,
-                ),
-              ),
+          onTap: () {
+            final resumo = ResumoLevelUp.calcular(
+              anterior: p,
+              atualizado: p,
+              indiceClasse: indiceEfetivo,
             );
-            if (context.mounted && atualizado != null) {
-              cubit.atualizarPersonagem(atualizado);
-            }
+            mostrarDialogLevelUpWizard(
+              context: context,
+              resumo: resumo,
+              cubit: cubit,
+            );
           },
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -49,7 +68,7 @@ class FichaBannerEvolucao extends StatelessWidget {
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(
-                    'Evolução disponível: escolher $pendentes ${pendentes == 1 ? "poder" : "poderes"} em ${cl.classeDefinicao.nome}',
+                    texto,
                     style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w700,

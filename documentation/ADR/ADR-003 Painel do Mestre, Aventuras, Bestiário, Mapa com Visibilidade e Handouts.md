@@ -275,3 +275,4 @@ Total estimado: 12 a 16 semanas-pessoa em dedicação integral. M1 a M4 são út
 6. O preset de painel é por mestre ou por aventura?
 7. O `MovimentoEngine` já trata criaturas de tamanho maior que 1 célula, diagonais e terreno difícil?
 8. A entidade `Monstro` atual tem todos os campos do `MonstroTemplate` (ataques estruturados, RD, resistências)?
+ 

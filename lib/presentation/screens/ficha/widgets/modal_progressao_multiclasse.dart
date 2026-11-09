@@ -7,6 +7,7 @@ import '../../../../domain/services/data_services/call_classes.dart';
 import '../../../controllers/ficha_controller/ficha_cubit.dart';
 import '../../../controllers/ficha_controller/ficha_state.dart';
 import '../../wizard_personagem/selecao_poderes_screen.dart';
+import 'dialog_level_up_wizard.dart';
 
 /// Exibe diálogo informativo sobre a importância e permanência do nível em Tormenta 20.
 void mostrarInfoNivel(BuildContext context) {
@@ -418,8 +419,19 @@ Future<void> mostrarModalProgressaoEMulticlasse(
                                             novoNivelIndividual: cl.nivel + 1,
                                             novoNivelTotal:
                                                 p.nivelPersonagem + 1,
-                                            onExecutar: () => cubit
-                                                .alterarNivelClasse(idx, 1),
+                                            onExecutar: () async {
+                                              final resumo = await cubit
+                                                  .subirNivelComResumo(idx);
+                                              if (context.mounted &&
+                                                  resumo != null) {
+                                                Navigator.of(context).pop();
+                                                mostrarDialogLevelUpWizard(
+                                                  context: context,
+                                                  resumo: resumo,
+                                                  cubit: cubit,
+                                                );
+                                              }
+                                            },
                                           )
                                         : null,
                                     icon: const Icon(
@@ -551,8 +563,18 @@ Future<void> mostrarModalProgressaoEMulticlasse(
                               nomeClasse: novaCl.nome,
                               novoNivelIndividual: 1,
                               novoNivelTotal: p.nivelPersonagem + 1,
-                              onExecutar: () =>
-                                  cubit.adicionarMulticlasse(novaCl),
+                              onExecutar: () async {
+                                final resumo = await cubit
+                                    .adicionarMulticlasseComResumo(novaCl);
+                                if (context.mounted && resumo != null) {
+                                  Navigator.of(context).pop();
+                                  mostrarDialogLevelUpWizard(
+                                    context: context,
+                                    resumo: resumo,
+                                    cubit: cubit,
+                                  );
+                                }
+                              },
                             ),
                           );
                         }).toList(),

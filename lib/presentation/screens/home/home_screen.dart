@@ -11,6 +11,7 @@ import 'widgets/character_list_section.dart';
 import 'widgets/empty_home_state.dart';
 import '../../widgets/character_avatar_widget.dart';
 import '../arena/arena_screen.dart';
+import '../mestre/mestre_painel_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -34,6 +35,13 @@ class HomeScreen extends StatelessWidget {
         context.read<HomeCubit>().carregarPersonagensReais();
       }
     });
+  }
+
+  void _navegarPainelMestre(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => const MestrePainelScreen()),
+    );
   }
 
   void _navegarAbrirPersonagem(BuildContext context, Personagem personagem) {
@@ -202,6 +210,7 @@ class HomeScreen extends StatelessWidget {
                     onCriarPersonagem: () => _navegarCriarPersonagem(context),
                     onModoArena: () =>
                         _abrirSeletorArena(context, state.personagens),
+                    onPainelMestre: () => _navegarPainelMestre(context),
                   );
                 }
 
@@ -210,6 +219,7 @@ class HomeScreen extends StatelessWidget {
                   onCriarPersonagem: () => _navegarCriarPersonagem(context),
                   onModoArena: () =>
                       _abrirSeletorArena(context, state.personagens),
+                  onPainelMestre: () => _navegarPainelMestre(context),
                   onAbrirPersonagem: (p) => _navegarAbrirPersonagem(context, p),
                   onExcluirPersonagem: (p) => _excluirPersonagem(context, p),
                 );
