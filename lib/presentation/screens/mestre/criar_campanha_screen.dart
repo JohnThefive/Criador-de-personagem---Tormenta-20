@@ -144,8 +144,9 @@ class _CriarCampanhaScreenState extends State<CriarCampanhaScreen> {
               if (texto.contains(' ')) {
                 return 'O código LAN não pode conter espaços';
               }
-              if (texto.length < 4) {
-                return 'Use ao menos 4 caracteres ou deixe em branco';
+              final normalizado = MestreCubit.normalizarCodigoLan(texto);
+              if (!RegExp(r'^T20-\d{4}$').hasMatch(normalizado)) {
+                return 'Use o formato T20-0000 (4 dígitos) ou deixe em branco';
               }
               return null;
             },

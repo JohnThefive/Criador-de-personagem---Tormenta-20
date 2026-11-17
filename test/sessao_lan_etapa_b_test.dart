@@ -137,10 +137,21 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('Conectado na sessão $codigoSala'), findsOneWidget);
+      expect(find.byKey(const Key('mini_mapa_aba_sessao')), findsOneWidget);
       expect(find.text('Abrir Mapa da Mesa'), findsOneWidget);
 
+      // Jogador pode expandir o mini-mapa global e continuar vendo-o em outras abas (ex: Geral)
+      await tester.tap(find.byKey(const Key('toggle_mini_mapa_ficha')));
+      await tester.pumpAndSettle();
+      expect(find.byKey(const Key('mini_mapa_global_ficha')), findsOneWidget);
+
+      await tester.ensureVisible(find.text('Geral'));
+      await tester.tap(find.text('Geral'));
+      await tester.pumpAndSettle();
+      expect(find.byKey(const Key('mini_mapa_global_ficha')), findsOneWidget);
+
       // Alteração de PV no FichaCubit dispara sincronização para o MestreCubit
-      final ctxView = tester.element(find.byType(AbaSessaoView));
+      final ctxView = tester.element(find.byType(TabBarView));
       final fichaCubit = ctxView.read<FichaCubit>();
       await fichaCubit.atualizarPersonagem(
         fichaCubit.personagem.copyWith(pvAtual: 29),

@@ -46,5 +46,7 @@ abstract class SessaoHostService {
 
   Future<void> publicarSnapshotMesa(SnapshotMesa snapshot);
 
+  Future<String?> descobrirIpLocal();
+
   Future<void> dispose();
 }

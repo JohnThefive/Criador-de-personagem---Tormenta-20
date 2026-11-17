@@ -38,6 +38,125 @@ class SessaoHostLanService implements SessaoHostService {
 
   int? get portaAtiva => _httpServer?.port;
 
+  static bool _ehIpPrivadoPreferencial(String ip) {
+    if (ip.startsWith('192.168.')) return true;
+    if (ip.startsWith('172.')) {
+      final partes = ip.split('.');
+      if (partes.length == 4) {
+        final segundo = int.tryParse(partes[1]) ?? 0;
+        if (segundo >= 16 && segundo <= 31) return true;
+      }
+    }
+    return false;
+  }
+
+  static bool _ehInterfaceCelularOuVpn(String nome) {
+    final n = nome.toLowerCase();
+    return n.startsWith('rmnet') ||
+        n.startsWith('ccmni') ||
+        n.startsWith('pdp') ||
+        n.startsWith('tun') ||
+        n.startsWith('tap') ||
+        n.startsWith('ppp') ||
+        n.startsWith('dummy') ||
+        n.startsWith('clat') ||
+        n.startsWith('v4-');
+  }
+
+  static bool _ehInterfaceWifiOuHotspot(String nome) {
+    final n = nome.toLowerCase();
+    return n.contains('wlan') ||
+        n.startsWith('ap') ||
+        n.contains('swlan') ||
+        n.contains('wifi') ||
+        n.contains('softap') ||
+        n.startsWith('rndis') ||
+        n.startsWith('eth') ||
+        n.startsWith('en') ||
+        n.startsWith('p2p');
+  }
+
+  /// Seleciona o melhor IPv4 de LAN dentre os candidatos `(nomeInterface, ip)`.
+  /// Prioriza interfaces Wi-Fi/Hotspot (`wlan0`, `ap0`, etc.) e faixas `192.168.x.x` / `172.16-31.x.x`
+  /// em vez de redes móveis (`rmnet`, `ccmni`) ou túneis VPN (`tun`).
+  static String? selecionarMelhorIpLan(
+    Iterable<({String interfaceName, String address})> candidatos,
+  ) {
+    String? melhorIp;
+    int melhorScore = -999;
+
+    for (final c in candidatos) {
+      final ip = c.address.trim();
+      if (ip.isEmpty || ip.startsWith('127.') || ip.startsWith('169.254.')) {
+        continue;
+      }
+      int score = 0;
+      if (_ehInterfaceCelularOuVpn(c.interfaceName)) {
+        score -= 50;
+      }
+      if (_ehInterfaceWifiOuHotspot(c.interfaceName)) {
+        score += 40;
+      }
+      if (_ehIpPrivadoPreferencial(ip)) {
+        score += 30;
+      } else if (ip.startsWith('10.')) {
+        score += 10;
+      }
+      if (score > melhorScore) {
+        melhorScore = score;
+        melhorIp = ip;
+      }
+    }
+    return melhorIp;
+  }
+
+  @override
+  Future<String?> descobrirIpLocal() async {
+    try {
+      final interfaces = await NetworkInterface.list(
+        type: InternetAddressType.IPv4,
+        includeLinkLocal: false,
+      );
+      final candidatos = <({String interfaceName, String address})>[];
+      for (final iface in interfaces) {
+        for (final addr in iface.addresses) {
+          if (!addr.isLoopback) {
+            candidatos.add((
+              interfaceName: iface.name,
+              address: addr.address,
+            ));
+          }
+        }
+      }
+      return selecionarMelhorIpLan(candidatos);
+    } catch (_) {}
+    return null;
+  }
+
+  Future<List<InternetAddress>> _obterEnderecosBroadcast() async {
+    final destinos = <String, InternetAddress>{
+      '255.255.255.255': InternetAddress('255.255.255.255'),
+    };
+    try {
+      final interfaces = await NetworkInterface.list(
+        type: InternetAddressType.IPv4,
+        includeLinkLocal: false,
+      );
+      for (final iface in interfaces) {
+        if (_ehInterfaceCelularOuVpn(iface.name)) continue;
+        for (final addr in iface.addresses) {
+          if (addr.isLoopback) continue;
+          final partes = addr.address.split('.');
+          if (partes.length == 4) {
+            final bcast = '${partes[0]}.${partes[1]}.${partes[2]}.255';
+            destinos[bcast] = InternetAddress(bcast);
+          }
+        }
+      }
+    } catch (_) {}
+    return destinos.values.toList();
+  }
+
   @override
   Future<void> iniciar({
     required String ip,
@@ -47,7 +166,11 @@ class SessaoHostLanService implements SessaoHostService {
     await encerrar();
     _codigoSalaAtivo = codigoSala.trim().toUpperCase();
 
-    _httpServer = await HttpServer.bind(InternetAddress.anyIPv4, porta);
+    _httpServer = await HttpServer.bind(
+      InternetAddress.anyIPv4,
+      porta,
+      shared: true,
+    );
     _httpServer!.listen((HttpRequest req) async {
       if (!WebSocketTransformer.isUpgradeRequest(req)) {
         req.response
@@ -59,27 +182,38 @@ class SessaoHostLanService implements SessaoHostService {
       _escutarCliente(socket);
     });
 
+    final ipReal = await descobrirIpLocal() ?? ip;
+    final broadcasts = await _obterEnderecosBroadcast();
+
     // Anúncio UDP na LAN para descoberta automática pelo código da sala
-    _udpSocket = await RawDatagramSocket.bind(InternetAddress.anyIPv4, 0);
+    _udpSocket = await RawDatagramSocket.bind(
+      InternetAddress.anyIPv4,
+      0,
+      reuseAddress: true,
+    );
     _udpSocket!.broadcastEnabled = true;
     final anuncioBytes = utf8.encode(
       jsonEncode({
         'app': 't20_creator',
         'codigoSala': _codigoSalaAtivo,
-        'ip': ip,
+        'ip': ipReal,
         'porta': _httpServer!.port,
       }),
     );
 
-    _anuncioTimer = Timer.periodic(const Duration(seconds: 2), (_) {
-      try {
-        _udpSocket?.send(
-          anuncioBytes,
-          InternetAddress('255.255.255.255'),
-          portaDescobertaUdp,
-        );
-      } catch (_) {}
-    });
+    void enviarAnuncio() {
+      for (final destino in broadcasts) {
+        try {
+          _udpSocket?.send(anuncioBytes, destino, portaDescobertaUdp);
+        } catch (_) {}
+      }
+    }
+
+    enviarAnuncio();
+    _anuncioTimer = Timer.periodic(
+      const Duration(seconds: 2),
+      (_) => enviarAnuncio(),
+    );
   }
 
   void _escutarCliente(WebSocket socket) {

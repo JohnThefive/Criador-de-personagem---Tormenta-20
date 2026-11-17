@@ -22,7 +22,9 @@ class TipoCompanheiroAnimal {
       nome: json['nome']?.toString() ?? '',
       descricao: json['descricao']?.toString() ?? '',
       exemplos: rawExemplos.map((e) => e.toString()).toList(),
-      beneficiosPorTier: rawBen.map((k, v) => MapEntry(k.toString(), v.toString())),
+      beneficiosPorTier: rawBen.map(
+        (k, v) => MapEntry(k.toString(), v.toString()),
+      ),
     );
   }
 
@@ -46,6 +48,8 @@ class TipoCompanheiroAnimal {
 
   String getBeneficioParaNivel(int nivelDruida) {
     final tier = tierParaNivel(nivelDruida);
-    return beneficiosPorTier[tier] ?? beneficiosPorTier.values.firstOrNull ?? '';
+    return beneficiosPorTier[tier] ??
+        beneficiosPorTier.values.firstOrNull ??
+        '';
   }
 }

@@ -243,5 +243,8 @@ class _LoopbackHostService implements SessaoHostService {
   }
 
   @override
+  Future<String?> descobrirIpLocal() async => '127.0.0.1';
+
+  @override
   Future<void> dispose() async {}
 }

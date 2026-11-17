@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../domain/entities/entidade_sessao_lan/sessao_lan_modelos.dart';
 import '../../../domain/entities/personagem/personagem.dart';
 import '../../../domain/repositories/i_personagem_repository.dart';
 import '../../../domain/services/powers_service/aprendizado_magia_service.dart';
@@ -10,6 +11,7 @@ import '../../../domain/services/sessao_lan/sessao_loopback_transport.dart';
 import '../../controllers/ficha_controller/ficha_cubit.dart';
 import '../../controllers/ficha_controller/ficha_state.dart';
 import '../../controllers/ficha_controller/sessao_jogador_cubit.dart';
+import '../../controllers/ficha_controller/sessao_jogador_state.dart';
 
 import 'widgets/aba_geral_view.dart';
 import 'widgets/aba_habilidades_view.dart';
@@ -20,6 +22,7 @@ import 'widgets/aba_pericias_view.dart';
 import 'widgets/aba_sessao_view.dart';
 import 'widgets/ficha_banner_evolucao.dart';
 import 'widgets/ficha_cabecalho_widget.dart';
+import 'widgets/mapa_jogador_screen.dart';
 
 /// Tela principal da Ficha do Personagem (Painel do Jogador).
 ///
@@ -99,6 +102,7 @@ class _FichaView extends StatefulWidget {
 class _FichaViewState extends State<_FichaView>
     with SingleTickerProviderStateMixin {
   late final TabController _tabController;
+  bool _mostrarMiniMapaNaFicha = false;
 
   final List<Tab> _abas = const [
     Tab(icon: Icon(Icons.shield_outlined, size: 19), text: 'Geral'),
@@ -231,7 +235,18 @@ class _FichaViewState extends State<_FichaView>
               },
             ),
 
-            // Área principal das 6 abas da Ficha
+            // Mini-mapa retrátil da Mesa LAN (visível em todas as abas quando conectado)
+            BlocBuilder<SessaoJogadorCubit, SessaoJogadorState>(
+              builder: (context, sessaoState) {
+                final snap = sessaoState.ultimoSnapshot;
+                if (!sessaoState.estaConectado || snap == null) {
+                  return const SizedBox.shrink();
+                }
+                return _buildPainelMiniMapaFicha(context, snap);
+              },
+            ),
+
+            // Área principal das 7 abas da Ficha
             Expanded(
               child: Container(
                 width: double.infinity,
@@ -284,6 +299,119 @@ class _FichaViewState extends State<_FichaView>
                 ),
               ),
             ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPainelMiniMapaFicha(BuildContext context, SnapshotMesa snap) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(12, 0, 12, 8),
+      child: Container(
+        decoration: BoxDecoration(
+          color: const Color(0xFF0F172A),
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(color: Colors.white24),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            InkWell(
+              key: const Key('toggle_mini_mapa_ficha'),
+              borderRadius: BorderRadius.circular(14),
+              onTap: () => setState(
+                () => _mostrarMiniMapaNaFicha = !_mostrarMiniMapaNaFicha,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 7,
+                ),
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.map_outlined,
+                      color: Color(0xFFFBBF24),
+                      size: 16,
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        '${snap.nomeMapa} • Rd ${snap.rodadaCombate}',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w700,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    if (_mostrarMiniMapaNaFicha)
+                      IconButton(
+                        constraints: const BoxConstraints(
+                          minWidth: 28,
+                          minHeight: 28,
+                        ),
+                        padding: EdgeInsets.zero,
+                        icon: const Icon(
+                          Icons.open_in_full_rounded,
+                          color: Colors.white70,
+                          size: 16,
+                        ),
+                        tooltip: 'Tela cheia',
+                        onPressed: () {
+                          if (widget.onAbrirMapaMesa != null) {
+                            widget.onAbrirMapaMesa!();
+                            return;
+                          }
+                          final fichaCubit = context.read<FichaCubit>();
+                          final sessaoCubit = context.read<SessaoJogadorCubit>();
+                          Navigator.of(context).push(
+                            MaterialPageRoute<void>(
+                              builder: (_) => MultiBlocProvider(
+                                providers: [
+                                  BlocProvider.value(value: fichaCubit),
+                                  BlocProvider.value(value: sessaoCubit),
+                                ],
+                                child: const MapaJogadorScreen(),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    const SizedBox(width: 4),
+                    Text(
+                      _mostrarMiniMapaNaFicha ? 'Ocultar' : 'Ver mapa',
+                      style: const TextStyle(
+                        color: Color(0xFFFBBF24),
+                        fontSize: 11.5,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    const SizedBox(width: 2),
+                    Icon(
+                      _mostrarMiniMapaNaFicha
+                          ? Icons.keyboard_arrow_up_rounded
+                          : Icons.keyboard_arrow_down_rounded,
+                      color: const Color(0xFFFBBF24),
+                      size: 18,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            if (_mostrarMiniMapaNaFicha)
+              ClipRRect(
+                borderRadius: const BorderRadius.vertical(
+                  bottom: Radius.circular(13),
+                ),
+                child: const SizedBox(
+                  key: Key('mini_mapa_global_ficha'),
+                  height: 185,
+                  child: MapaMesaJogadorWidget(compacto: true),
+                ),
+              ),
           ],
         ),
       ),

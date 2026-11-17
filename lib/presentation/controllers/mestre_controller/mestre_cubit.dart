@@ -49,6 +49,12 @@ class MestreCubit extends Cubit<MestreState> {
       aplicarAtualizacaoPersonagemLan,
     );
     _acoesMapaLanSub = host.acoesMapa.listen(aplicarAcaoMapaJogadorLan);
+    unawaited(() async {
+      final ip = await host.descobrirIpLocal();
+      if (!isClosed && ip != null && ip.isNotEmpty && ip != state.ipHostLocal) {
+        emit(state.copyWith(ipHostLocal: ip));
+      }
+    }());
   }
 
   /// Snapshot completo da ficha enviado pelo jogador via LAN (se disponível).
@@ -351,6 +357,69 @@ class MestreCubit extends Cubit<MestreState> {
   /// Gera um código curto de sala LAN no formato `T20-XXXX`.
   String gerarCodigoLanSugerido() => 'T20-${1000 + _random.nextInt(8999)}';
 
+  /// Normaliza um código de sala para o formato `T20-XXXX` quando informados
+  /// apenas 4 dígitos (`7492`) ou `T207492` sem hífen.
+  static String normalizarCodigoLan(String raw) {
+    final limpo = raw.trim().toUpperCase().replaceAll(
+      RegExp(r'[^A-Z0-9-]'),
+      '',
+    );
+    if (limpo.isEmpty) return '';
+    if (RegExp(r'^\d{4}$').hasMatch(limpo)) {
+      return 'T20-$limpo';
+    }
+    if (RegExp(r'^T20\d{4}$').hasMatch(limpo)) {
+      return 'T20-${limpo.substring(3)}';
+    }
+    return limpo;
+  }
+
+  /// Retorna o código LAN efetivo da sessão/campanha ativa normalizado.
+  String get codigoSalaLanAtivo {
+    final sesCodigo = state.sessaoAtual?.codigoSalaLan.trim();
+    if (sesCodigo != null && sesCodigo.isNotEmpty) {
+      return normalizarCodigoLan(sesCodigo);
+    }
+    final campCodigo = state.campanhaAtual?.codigoConexaoLan?.trim();
+    if (campCodigo != null && campCodigo.isNotEmpty) {
+      return normalizarCodigoLan(campCodigo);
+    }
+    return 'T20-0000';
+  }
+
+  Future<void> _sincronizarHostLanAtivo() async {
+    if (_hostService == null || state.statusLan == StatusConexaoLan.desligado) {
+      return;
+    }
+    final codigoSala = codigoSalaLanAtivo;
+    final ipDetectado = await _hostService!.descobrirIpLocal();
+    final ipFinal = (ipDetectado != null && ipDetectado.isNotEmpty)
+        ? ipDetectado
+        : state.ipHostLocal;
+    if (!isClosed && ipFinal != state.ipHostLocal) {
+      emit(
+        state.copyWith(
+          ipHostLocal: ipFinal,
+          logsRedeLan: [
+            ...state.logsRedeLan,
+            '🌐 [Host LAN] IP local detectado: $ipFinal:${state.portaHostLan}.',
+          ],
+        ),
+      );
+    }
+    await _hostService!.iniciar(
+      ip: ipFinal,
+      porta: state.portaHostLan,
+      codigoSala: codigoSala,
+    );
+    final mapa = state.mapaAtual;
+    if (mapa != null) {
+      await _hostService!.publicarSnapshotMesa(
+        SnapshotMesa.sanitizadoDeMapa(mapa),
+      );
+    }
+  }
+
   /// Envia um mapa para o acervo da campanha (adiciona ou atualiza pelo id).
   void enviarMapaParaCampanha({
     required String campanhaId,
@@ -485,6 +554,7 @@ class MestreCubit extends Cubit<MestreState> {
         mapaSelecionadoId: mapaId ?? state.mapaSelecionadoId,
       ),
     );
+    unawaited(_sincronizarHostLanAtivo());
   }
 
   void selecionarCampanha(String campanhaId) {
@@ -505,6 +575,7 @@ class MestreCubit extends Cubit<MestreState> {
         celulasAlcancaveisToken: const {},
       ),
     );
+    unawaited(_sincronizarHostLanAtivo());
   }
 
   CampanhaMestre criarCampanha({
@@ -515,10 +586,9 @@ class MestreCubit extends Cubit<MestreState> {
     bool criarEstruturaPadrao = true,
   }) {
     final id = _nextId('camp');
-    final codigoLimpo = codigoConexaoLan?.trim();
-    final codigoFinal = (codigoLimpo == null || codigoLimpo.isEmpty)
-        ? null
-        : codigoLimpo.toUpperCase();
+    final codigoNormalizado = normalizarCodigoLan(codigoConexaoLan ?? '');
+    final codigoFinal =
+        codigoNormalizado.isEmpty ? null : codigoNormalizado;
 
     if (!criarEstruturaPadrao) {
       final novaCampanha = CampanhaMestre(
@@ -619,6 +689,7 @@ class MestreCubit extends Cubit<MestreState> {
         celulasAlcancaveisToken: const {},
       ),
     );
+    unawaited(_sincronizarHostLanAtivo());
   }
 
   AventuraMestre? criarAventura({
@@ -720,6 +791,7 @@ class MestreCubit extends Cubit<MestreState> {
         mapaSelecionadoId: ses.mapaAtivoId ?? state.mapaSelecionadoId,
       ),
     );
+    unawaited(_sincronizarHostLanAtivo());
   }
 
   SessaoJogo? criarSessao({
@@ -776,27 +848,37 @@ class MestreCubit extends Cubit<MestreState> {
         ? StatusConexaoLan.aguardandoJogadores
         : StatusConexaoLan.desligado;
 
-    final codigoSala = state.sessaoAtual?.codigoSalaLan ?? 'T20-0000';
+    final codigoSala = codigoSalaLanAtivo;
     if (_hostService != null) {
       if (novoStatus == StatusConexaoLan.aguardandoJogadores) {
-        unawaited(
-          _hostService!
-              .iniciar(
-                ip: state.ipHostLocal,
-                porta: state.portaHostLan,
-                codigoSala: codigoSala,
-              )
-              .then((_) {
-                final mapa = state.mapaAtual;
-                if (mapa != null) {
-                  unawaited(
-                    _hostService!.publicarSnapshotMesa(
-                      SnapshotMesa.sanitizadoDeMapa(mapa),
-                    ),
-                  );
-                }
-              }),
-        );
+        unawaited(() async {
+          final ipDetectado = await _hostService!.descobrirIpLocal();
+          final ipFinal = (ipDetectado != null && ipDetectado.isNotEmpty)
+              ? ipDetectado
+              : state.ipHostLocal;
+          if (!isClosed && ipFinal != state.ipHostLocal) {
+            emit(
+              state.copyWith(
+                ipHostLocal: ipFinal,
+                logsRedeLan: [
+                  ...state.logsRedeLan,
+                  '🌐 [Host LAN] IP local detectado: $ipFinal:${state.portaHostLan}.',
+                ],
+              ),
+            );
+          }
+          await _hostService!.iniciar(
+            ip: ipFinal,
+            porta: state.portaHostLan,
+            codigoSala: codigoSala,
+          );
+          final mapa = state.mapaAtual;
+          if (mapa != null) {
+            await _hostService!.publicarSnapshotMesa(
+              SnapshotMesa.sanitizadoDeMapa(mapa),
+            );
+          }
+        }());
       } else {
         unawaited(_hostService!.encerrar());
       }
@@ -818,10 +900,22 @@ class MestreCubit extends Cubit<MestreState> {
     final ses = state.sessaoAtual;
     if (ses == null) return;
     final novoCodigo = 'T20-${1000 + _random.nextInt(8999)}';
-    final campanhas = _substituirSessao(
+    var campanhas = _substituirSessao(
       ses.copyWith(codigoSalaLan: novoCodigo),
     );
     if (campanhas == null) return;
+    final campAtual = state.campanhaAtual;
+    if (campAtual != null &&
+        campAtual.codigoConexaoLan != null &&
+        campAtual.codigoConexaoLan!.isNotEmpty) {
+      campanhas = campanhas
+          .map(
+            (c) => c.id == campAtual.id
+                ? c.copyWith(codigoConexaoLan: novoCodigo)
+                : c,
+          )
+          .toList();
+    }
     emit(
       state.copyWith(
         campanhas: campanhas,
@@ -831,6 +925,7 @@ class MestreCubit extends Cubit<MestreState> {
         ],
       ),
     );
+    unawaited(_sincronizarHostLanAtivo());
   }
 
   /// Recebe uma [SolicitacaoEntradaSessao] real ou via Loopback e coloca no
@@ -842,8 +937,13 @@ class MestreCubit extends Cubit<MestreState> {
     final ses = state.sessaoAtual;
     if (ses == null) return;
 
-    if (solicitacao.codigoSala.trim().toUpperCase() !=
-        ses.codigoSalaLan.trim().toUpperCase()) {
+    final codigoRecebido = normalizarCodigoLan(solicitacao.codigoSala);
+    final codigoSessao = normalizarCodigoLan(ses.codigoSalaLan);
+    final codigoCampanha = normalizarCodigoLan(
+      state.campanhaAtual?.codigoConexaoLan ?? '',
+    );
+    if (codigoRecebido != codigoSessao &&
+        (codigoCampanha.isEmpty || codigoRecebido != codigoCampanha)) {
       return;
     }
 
@@ -1077,6 +1177,16 @@ class MestreCubit extends Cubit<MestreState> {
         custosMovimentoToken: const {},
       ),
     );
+    final mapa = state.mapaAtual;
+    if (mapa != null &&
+        _hostService != null &&
+        state.statusLan != StatusConexaoLan.desligado) {
+      unawaited(
+        _hostService!.publicarSnapshotMesa(
+          SnapshotMesa.sanitizadoDeMapa(mapa),
+        ),
+      );
+    }
   }
 
   void criarMapa({
@@ -2157,6 +2267,16 @@ class MestreCubit extends Cubit<MestreState> {
   }
 
   void enviarMapaAosJogadores() {
+    final mapa = state.mapaAtual;
+    if (mapa != null &&
+        _hostService != null &&
+        state.statusLan != StatusConexaoLan.desligado) {
+      unawaited(
+        _hostService!.publicarSnapshotMesa(
+          SnapshotMesa.sanitizadoDeMapa(mapa),
+        ),
+      );
+    }
     emit(state.copyWith(enviandoMapaAosJogadores: true));
     Future.delayed(const Duration(milliseconds: 600), () {
       if (!isClosed) {

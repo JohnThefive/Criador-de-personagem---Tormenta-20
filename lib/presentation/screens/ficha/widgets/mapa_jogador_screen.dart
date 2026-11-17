@@ -7,34 +7,15 @@ import '../../../controllers/ficha_controller/ficha_cubit.dart';
 import '../../../controllers/ficha_controller/sessao_jogador_cubit.dart';
 import '../../../controllers/ficha_controller/sessao_jogador_state.dart';
 
-/// Visão do mapa da mesa enviada pelo Mestre para o Jogador, permitindo mover o próprio token.
-class MapaJogadorScreen extends StatefulWidget {
+/// Visão em tela cheia do mapa da mesa enviada pelo Mestre para o Jogador.
+class MapaJogadorScreen extends StatelessWidget {
   const MapaJogadorScreen({super.key});
 
   @override
-  State<MapaJogadorScreen> createState() => _MapaJogadorScreenState();
-}
-
-class _MapaJogadorScreenState extends State<MapaJogadorScreen> {
-  String? _tokenSelecionadoId;
-
-  Color _corFundoMapa(PresetFundoMapa preset) => switch (preset) {
-    PresetFundoMapa.masmorraPedra => const Color(0xFF1E293B),
-    PresetFundoMapa.florestaArton => const Color(0xFF143321),
-    PresetFundoMapa.tavernaMadeira => const Color(0xFF3E2723),
-    PresetFundoMapa.desertoHalakTur => const Color(0xFF4E3B1E),
-    PresetFundoMapa.areaTormenta => const Color(0xFF3B0A1E),
-    PresetFundoMapa.imagemCustomizada => const Color(0xFF1E293B),
-  };
-
-  @override
   Widget build(BuildContext context) {
-    final meuCharId = context.read<FichaCubit>().personagem.id;
-
     return BlocBuilder<SessaoJogadorCubit, SessaoJogadorState>(
       builder: (context, state) {
         final snap = state.ultimoSnapshot;
-        final movendoProprio = _tokenSelecionadoId == meuCharId;
 
         return Scaffold(
           backgroundColor: const Color(0xFF0F172A),
@@ -75,44 +56,94 @@ class _MapaJogadorScreenState extends State<MapaJogadorScreen> {
                     style: TextStyle(color: Colors.white70),
                   ),
                 )
-              : Column(
-                  children: [
-                    if (movendoProprio)
-                      Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 6,
-                        ),
-                        color: const Color(0xFF1E3A8A),
-                        child: const Text(
-                          'Toque em uma célula revelada para mover seu personagem.',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    Expanded(
-                      child: InteractiveViewer(
-                        minScale: 0.5,
-                        maxScale: 3.0,
-                        boundaryMargin: const EdgeInsets.all(64),
-                        child: Center(child: _buildGrid(snap, meuCharId)),
-                      ),
+              : const MapaMesaJogadorWidget(),
+        );
+      },
+    );
+  }
+}
+
+/// Widget interativo do mapa tático do jogador (pode ser usado em tela cheia
+/// ou em miniatura embutida dentro da Ficha).
+class MapaMesaJogadorWidget extends StatefulWidget {
+  final bool compacto;
+
+  const MapaMesaJogadorWidget({super.key, this.compacto = false});
+
+  @override
+  State<MapaMesaJogadorWidget> createState() => _MapaMesaJogadorWidgetState();
+}
+
+class _MapaMesaJogadorWidgetState extends State<MapaMesaJogadorWidget> {
+  String? _tokenSelecionadoId;
+
+  Color _corFundoMapa(PresetFundoMapa preset) => switch (preset) {
+    PresetFundoMapa.masmorraPedra => const Color(0xFF1E293B),
+    PresetFundoMapa.florestaArton => const Color(0xFF143321),
+    PresetFundoMapa.tavernaMadeira => const Color(0xFF3E2723),
+    PresetFundoMapa.desertoHalakTur => const Color(0xFF4E3B1E),
+    PresetFundoMapa.areaTormenta => const Color(0xFF3B0A1E),
+    PresetFundoMapa.imagemCustomizada => const Color(0xFF1E293B),
+  };
+
+  @override
+  Widget build(BuildContext context) {
+    final meuCharId = context.read<FichaCubit>().personagem.id;
+
+    return BlocBuilder<SessaoJogadorCubit, SessaoJogadorState>(
+      builder: (context, state) {
+        final snap = state.ultimoSnapshot;
+        if (!state.estaConectado || snap == null) {
+          return const Center(
+            child: Text(
+              'Aguardando mapa ativo da sessão...',
+              style: TextStyle(color: Colors.white70),
+            ),
+          );
+        }
+
+        final movendoProprio = _tokenSelecionadoId == meuCharId;
+
+        return Container(
+          color: const Color(0xFF0F172A),
+          child: Column(
+            children: [
+              if (movendoProprio)
+                Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: widget.compacto ? 4 : 6,
+                  ),
+                  color: const Color(0xFF1E3A8A),
+                  child: Text(
+                    'Toque em uma célula revelada para mover seu personagem.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: widget.compacto ? 11 : 12,
+                      fontWeight: FontWeight.w600,
                     ),
-                    _buildBarraTokenSelecionado(snap, meuCharId),
-                  ],
+                  ),
                 ),
+              Expanded(
+                child: InteractiveViewer(
+                  minScale: widget.compacto ? 0.35 : 0.5,
+                  maxScale: 3.0,
+                  boundaryMargin: EdgeInsets.all(widget.compacto ? 24 : 64),
+                  child: Center(child: _buildGrid(snap, meuCharId)),
+                ),
+              ),
+              _buildBarraTokenSelecionado(snap, meuCharId),
+            ],
+          ),
         );
       },
     );
   }
 
   Widget _buildGrid(SnapshotMesa snap, String meuCharId) {
-    const double cellSize = 40;
+    final double cellSize = widget.compacto ? 26 : 40;
     final larguraPx = snap.largura * cellSize;
     final alturaPx = snap.altura * cellSize;
 
@@ -208,22 +239,24 @@ class _MapaJogadorScreenState extends State<MapaJogadorScreen> {
               : (tok.ehHeroi ? Colors.lightBlueAccent : Colors.redAccent));
 
     return Container(
-      margin: const EdgeInsets.all(2),
+      margin: EdgeInsets.all(widget.compacto ? 1.5 : 2),
       decoration: BoxDecoration(
         color: tok.ehHeroi ? const Color(0xFF1E3A8A) : const Color(0xFF7F1D1D),
         shape: BoxShape.circle,
         border: Border.all(
           color: corBorda,
-          width: selecionado || ehTurno ? 3 : 2,
+          width: selecionado || ehTurno
+              ? (widget.compacto ? 2.5 : 3)
+              : (widget.compacto ? 1.5 : 2),
         ),
       ),
       child: Center(
         child: Text(
           tok.nome.isEmpty ? '?' : tok.nome.substring(0, 1).toUpperCase(),
-          style: const TextStyle(
+          style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
-            fontSize: 13,
+            fontSize: widget.compacto ? 10 : 13,
           ),
         ),
       ),
@@ -237,23 +270,29 @@ class _MapaJogadorScreenState extends State<MapaJogadorScreen> {
     if (tok == null) return const SizedBox.shrink();
 
     final mostrarPv = tok.id == meuCharId || tok.ehHeroi;
+    final texto = mostrarPv
+        ? '${tok.nome} • PV ${tok.pvAtual}/${tok.pvMax} • PM ${tok.pmAtual}/${tok.pmMax}${tok.condicoes.isNotEmpty ? ' • ${tok.condicoes.join(", ")}' : ''}'
+        : '${tok.nome}${tok.condicoes.isNotEmpty ? ' • Condições: ${tok.condicoes.join(", ")}' : ''}';
+
+    final conteudo = Text(
+      texto,
+      style: TextStyle(
+        color: Colors.white,
+        fontWeight: FontWeight.w600,
+        fontSize: widget.compacto ? 11.5 : 13,
+      ),
+    );
+
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(12),
-      color: const Color(0xFF1E293B),
-      child: SafeArea(
-        top: false,
-        child: Text(
-          mostrarPv
-              ? '${tok.nome} • PV ${tok.pvAtual}/${tok.pvMax} • PM ${tok.pmAtual}/${tok.pmMax}${tok.condicoes.isNotEmpty ? ' • ${tok.condicoes.join(", ")}' : ''}'
-              : '${tok.nome}${tok.condicoes.isNotEmpty ? ' • Condições: ${tok.condicoes.join(", ")}' : ''}',
-          style: const TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.w600,
-            fontSize: 13,
-          ),
-        ),
+      padding: EdgeInsets.symmetric(
+        horizontal: 12,
+        vertical: widget.compacto ? 6 : 12,
       ),
+      color: const Color(0xFF1E293B),
+      child: widget.compacto
+          ? conteudo
+          : SafeArea(top: false, child: conteudo),
     );
   }
 }

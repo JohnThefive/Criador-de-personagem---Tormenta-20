@@ -209,7 +209,7 @@ class _AbaSessaoViewState extends State<AbaSessaoView> {
                   onChanged: cubit.definirHostManual,
                   decoration: InputDecoration(
                     labelText: 'IP / Host do Mestre (opcional)',
-                    hintText: 'Ex.: 192.168.0.10:8765',
+                    hintText: 'Ex.: 192.168.0.10:7777',
                     filled: true,
                     fillColor: const Color(0xFFF8FAFC),
                     border: OutlineInputBorder(
@@ -391,13 +391,53 @@ class _AbaSessaoViewState extends State<AbaSessaoView> {
             ),
           ],
           if (state.estaConectado && state.ultimoSnapshot != null) ...[
-            const SizedBox(height: 10),
-            Text(
-              'Mapa ativo: ${state.ultimoSnapshot!.nomeMapa}',
-              style: const TextStyle(
-                fontSize: 12.5,
-                fontWeight: FontWeight.w600,
-                color: Color(0xFF475569),
+            const SizedBox(height: 12),
+            Row(
+              children: [
+                const Icon(
+                  Icons.map_outlined,
+                  size: 16,
+                  color: Color(0xFF475569),
+                ),
+                const SizedBox(width: 6),
+                Expanded(
+                  child: Text(
+                    'Mapa ativo: ${state.ultimoSnapshot!.nomeMapa}',
+                    style: const TextStyle(
+                      fontSize: 12.5,
+                      fontWeight: FontWeight.w700,
+                      color: Color(0xFF334155),
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 2,
+                  ),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFE2E8F0),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Text(
+                    'Rodada ${state.ultimoSnapshot!.rodadaCombate}',
+                    style: const TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w700,
+                      color: Color(0xFF1E293B),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            ClipRRect(
+              key: const Key('mini_mapa_aba_sessao'),
+              borderRadius: BorderRadius.circular(12),
+              child: const SizedBox(
+                height: 230,
+                child: MapaMesaJogadorWidget(compacto: true),
               ),
             ),
             const SizedBox(height: 8),
@@ -405,12 +445,12 @@ class _AbaSessaoViewState extends State<AbaSessaoView> {
               key: const Key('botao_abrir_mapa_mesa'),
               style: FilledButton.styleFrom(
                 backgroundColor: const Color(0xFF0F172A),
-                minimumSize: const Size.fromHeight(46),
+                minimumSize: const Size.fromHeight(44),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
-              icon: const Icon(Icons.map_outlined, size: 18),
+              icon: const Icon(Icons.open_in_full_rounded, size: 17),
               label: const Text(
                 'Abrir Mapa da Mesa',
                 style: TextStyle(fontWeight: FontWeight.bold),

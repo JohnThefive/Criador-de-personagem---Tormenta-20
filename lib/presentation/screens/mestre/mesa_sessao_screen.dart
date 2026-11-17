@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../domain/entities/mestre/modelos_mestre.dart';
 import '../../controllers/mestre_controller/mestre_cubit.dart';
@@ -108,6 +109,8 @@ class _AbaJogadoresSessao extends StatelessWidget {
         final codigoLan = (camp?.codigoConexaoLan?.isNotEmpty ?? false)
             ? camp!.codigoConexaoLan!
             : sessao?.codigoSalaLan;
+        final salaAberta = state.statusLan != StatusConexaoLan.desligado;
+        final ipPorta = '${state.ipHostLocal}:${state.portaHostLan}';
         final idsNoMapa = (mapa?.tokens ?? const <TokenNoMapa>[])
             .map((t) => t.id)
             .toSet();
@@ -135,22 +138,101 @@ class _AbaJogadoresSessao extends StatelessWidget {
                   Card(
                     elevation: 0,
                     color: colorScheme.surfaceContainerHigh,
-                    child: ListTile(
-                      minTileHeight: 56,
-                      leading: Icon(
-                        Icons.event_note_outlined,
-                        color: colorScheme.primary,
-                      ),
-                      title: Text(
-                        sessao.titulo,
-                        style: textTheme.titleSmall?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      subtitle: Text(
-                        codigoLan != null
-                            ? 'Código LAN: $codigoLan'
-                            : 'Sessão local ativa',
+                    child: Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            minTileHeight: 48,
+                            leading: Icon(
+                              salaAberta
+                                  ? Icons.wifi_tethering
+                                  : Icons.event_note_outlined,
+                              color: salaAberta
+                                  ? Colors.green.shade700
+                                  : colorScheme.primary,
+                            ),
+                            title: Text(
+                              sessao.titulo,
+                              style: textTheme.titleSmall?.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            subtitle: Text(
+                              codigoLan != null
+                                  ? 'Código LAN: $codigoLan'
+                                  : 'Sessão local ativa',
+                            ),
+                            trailing: codigoLan != null
+                                ? IconButton(
+                                    icon: const Icon(Icons.copy, size: 20),
+                                    tooltip: 'Copiar código e IP',
+                                    onPressed: () {
+                                      Clipboard.setData(
+                                        ClipboardData(
+                                          text:
+                                              'Código: $codigoLan | IP: $ipPorta',
+                                        ),
+                                      );
+                                      ScaffoldMessenger.of(
+                                        context,
+                                      ).showSnackBar(
+                                        const SnackBar(
+                                          content: Text(
+                                            'Código e IP copiados!',
+                                          ),
+                                          behavior: SnackBarBehavior.floating,
+                                        ),
+                                      );
+                                    },
+                                  )
+                                : null,
+                          ),
+                          const Divider(height: 12),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.lan_outlined,
+                                size: 16,
+                                color: colorScheme.onSurfaceVariant,
+                              ),
+                              const SizedBox(width: 6),
+                              Expanded(
+                                child: Text(
+                                  'IP do Mestre: $ipPorta • ${salaAberta ? "Sala Aberta" : "Sala Fechada"}',
+                                  style: textTheme.bodySmall?.copyWith(
+                                    color: colorScheme.onSurfaceVariant,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                              FilledButton.icon(
+                                key: const Key('botao_alternar_sala_lan'),
+                                style: FilledButton.styleFrom(
+                                  backgroundColor: salaAberta
+                                      ? colorScheme.error
+                                      : colorScheme.primary,
+                                  foregroundColor: salaAberta
+                                      ? colorScheme.onError
+                                      : colorScheme.onPrimary,
+                                  minimumSize: const Size(120, 40),
+                                ),
+                                icon: Icon(
+                                  salaAberta
+                                      ? Icons.stop_circle_outlined
+                                      : Icons.wifi_tethering,
+                                  size: 18,
+                                ),
+                                label: Text(
+                                  salaAberta ? 'Encerrar LAN' : 'Abrir Sala LAN',
+                                ),
+                                onPressed: cubit.alternarServidorLan,
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -178,7 +260,7 @@ class _AbaJogadoresSessao extends StatelessWidget {
                           ),
                           const SizedBox(height: 6),
                           Text(
-                            'Convide jogadores na tela da campanha para eles aparecerem automaticamente aqui.',
+                            'Abra a Sala LAN acima para que os jogadores se conectem usando o Código LAN ou o IP do Mestre.',
                             style: textTheme.bodySmall?.copyWith(
                               color: colorScheme.onSurfaceVariant,
                             ),
@@ -191,47 +273,109 @@ class _AbaJogadoresSessao extends StatelessWidget {
                 else
                   ...elenco.map((heroi) {
                     final jaNoMapa = idsNoMapa.contains(heroi.characterId);
+                    final pendente =
+                        heroi.statusRevisao == StatusRevisaoFicha.pendente ||
+                        heroi.statusRevisao == StatusRevisaoFicha.desatualizada;
+
                     return Card(
                       elevation: 0,
                       margin: const EdgeInsets.only(bottom: 10),
                       color: colorScheme.surfaceContainer,
-                      child: ListTile(
-                        minTileHeight: 60,
-                        leading: CircleAvatar(
-                          backgroundColor: colorScheme.primaryContainer,
-                          foregroundColor: colorScheme.onPrimaryContainer,
-                          child: Text(
-                            heroi.nomePersonagem.isNotEmpty
-                                ? heroi.nomePersonagem[0].toUpperCase()
-                                : '?',
-                          ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 8,
                         ),
-                        title: Text(
-                          heroi.nomePersonagem,
-                          style: textTheme.titleSmall?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        subtitle: Text(
-                          '${heroi.nomeJogador} • PV ${heroi.pvAtual}/${heroi.pvMax} • PM ${heroi.pmAtual}/${heroi.pmMax}',
-                        ),
-                        trailing: jaNoMapa
-                            ? Chip(
-                                label: const Text('No mapa'),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            ListTile(
+                              contentPadding: EdgeInsets.zero,
+                              minTileHeight: 52,
+                              leading: CircleAvatar(
                                 backgroundColor: colorScheme.primaryContainer,
-                              )
-                            : FilledButton.tonal(
-                                style: FilledButton.styleFrom(
-                                  minimumSize: const Size(48, 48),
+                                foregroundColor: colorScheme.onPrimaryContainer,
+                                child: Text(
+                                  heroi.nomePersonagem.isNotEmpty
+                                      ? heroi.nomePersonagem[0].toUpperCase()
+                                      : '?',
                                 ),
-                                onPressed: mapa == null
-                                    ? null
-                                    : () {
-                                        cubit.adicionarHeroiNoMapa(heroi);
-                                        onIrParaMapa();
-                                      },
-                                child: const Text('No mapa'),
                               ),
+                              title: Text(
+                                heroi.nomePersonagem,
+                                style: textTheme.titleSmall?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              subtitle: Text(
+                                '${heroi.nomeJogador} • PV ${heroi.pvAtual}/${heroi.pvMax} • PM ${heroi.pmAtual}/${heroi.pmMax}',
+                              ),
+                              trailing: pendente
+                                  ? null
+                                  : (jaNoMapa
+                                        ? Chip(
+                                            label: const Text('No mapa'),
+                                            backgroundColor:
+                                                colorScheme.primaryContainer,
+                                          )
+                                        : FilledButton.tonal(
+                                            style: FilledButton.styleFrom(
+                                              minimumSize: const Size(48, 44),
+                                            ),
+                                            onPressed: mapa == null
+                                                ? null
+                                                : () {
+                                                    cubit.adicionarHeroiNoMapa(
+                                                      heroi,
+                                                    );
+                                                    onIrParaMapa();
+                                                  },
+                                            child: const Text('No mapa'),
+                                          )),
+                            ),
+                            if (pendente) ...[
+                              const SizedBox(height: 6),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      'Aguardando aprovação para entrar na mesa',
+                                      style: textTheme.bodySmall?.copyWith(
+                                        color: colorScheme.primary,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
+                                  OutlinedButton(
+                                    key: Key(
+                                      'botao_recusar_jogador_${heroi.characterId}',
+                                    ),
+                                    onPressed: () =>
+                                        cubit.atualizarStatusRevisaoFicha(
+                                          heroi.characterId,
+                                          StatusRevisaoFicha.recusada,
+                                        ),
+                                    child: const Text('Recusar'),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  FilledButton.icon(
+                                    key: Key(
+                                      'botao_aprovar_jogador_${heroi.characterId}',
+                                    ),
+                                    icon: const Icon(Icons.check, size: 16),
+                                    label: const Text('Aprovar'),
+                                    onPressed: () =>
+                                        cubit.atualizarStatusRevisaoFicha(
+                                          heroi.characterId,
+                                          StatusRevisaoFicha.aprovada,
+                                        ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ],
+                        ),
                       ),
                     );
                   }),

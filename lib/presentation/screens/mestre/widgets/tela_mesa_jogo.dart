@@ -344,28 +344,44 @@ class _TelaMesaJogoState extends State<TelaMesaJogo> {
               ),
               const SizedBox(width: 6),
 
-              // Indicador discreto da LAN (ponto + n/6)
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                decoration: BoxDecoration(
-                  color: MestreCores.escuroSurfaceContainer,
+              // Indicador interativo da LAN (toque abre/encerra a sala LAN)
+              Tooltip(
+                message: info.salaAberta
+                    ? 'Sala LAN aberta (toque para encerrar)'
+                    : 'Sala LAN fechada (toque para abrir)',
+                child: InkWell(
+                  key: const Key('badge_lan_mesa_jogo'),
                   borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: MestreCores.escuroOutline),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.circle, size: 7, color: corPonto),
-                    const SizedBox(width: 5),
-                    Text(
-                      '${info.conectados}/${info.total}',
-                      style: MestreCores.estiloMono.copyWith(
-                        color: MestreCores.escuroOnSurface,
-                        fontSize: 11,
+                  onTap: () => widget.cubit.alternarServidorLan(),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
+                    decoration: BoxDecoration(
+                      color: MestreCores.escuroSurfaceContainer,
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(
+                        color: info.salaAberta
+                            ? MestreCores.statusOnlineEscuro
+                            : MestreCores.escuroOutline,
                       ),
                     ),
-                  ],
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.circle, size: 7, color: corPonto),
+                        const SizedBox(width: 5),
+                        Text(
+                          '${info.conectados}/${info.total}',
+                          style: MestreCores.estiloMono.copyWith(
+                            color: MestreCores.escuroOnSurface,
+                            fontSize: 11,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
               const SizedBox(width: 8),

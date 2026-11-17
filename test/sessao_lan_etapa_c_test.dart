@@ -20,6 +20,7 @@ import 'package:t20_creator/presentation/controllers/ficha_controller/sessao_jog
 import 'package:t20_creator/presentation/controllers/mestre_controller/mestre_cubit.dart';
 import 'package:t20_creator/presentation/screens/ficha/ficha_screen.dart';
 import 'package:t20_creator/presentation/screens/ficha/widgets/mapa_jogador_screen.dart';
+import 'package:t20_creator/presentation/screens/mestre/mesa_sessao_screen.dart';
 import 'package:t20_creator/presentation/screens/mestre/mestre_painel_screen.dart';
 
 class _RepoMemoria implements IPersonagemRepository {
@@ -278,6 +279,76 @@ void main() {
 
       await tester.pumpWidget(const MaterialApp(home: SizedBox.shrink()));
       await tester.pumpAndSettle();
+    });
+
+    test('selecionarMelhorIpLan prioriza wlan0/ap0 (Wi-Fi/Hotspot) sobre rmnet/tun (4G/VPN)', () {
+      final ipEscolhido = SessaoHostLanService.selecionarMelhorIpLan(const [
+        (interfaceName: 'rmnet_data0', address: '10.45.12.8'),
+        (interfaceName: 'tun0', address: '10.8.0.2'),
+        (interfaceName: 'wlan0', address: '192.168.0.105'),
+      ]);
+      expect(ipEscolhido, equals('192.168.0.105'));
+    });
+
+    testWidgets('MesaSessaoScreen permite abrir Sala LAN e aprovar jogador pendente direto pela aba Jogadores', (tester) async {
+      final transport = SessaoLoopbackTransport();
+      addTearDown(transport.dispose);
+
+      final mestre = MestreCubit(
+        autoPersistir: false,
+        sessaoHostService: transport.host,
+      );
+      addTearDown(mestre.close);
+
+      final heroi = _heroiTeste();
+      final fichaCubit = FichaCubit(
+        personagemInicial: heroi,
+        repository: _RepoMemoria(),
+        debounceDuration: Duration.zero,
+      );
+      addTearDown(fichaCubit.close);
+
+      final sessaoCubit = SessaoJogadorCubit(
+        clienteService: transport.cliente,
+        lerFichaState: () => fichaCubit.state,
+        autoCarregarPreferencias: false,
+        autoPersistirPreferencias: false,
+      );
+      addTearDown(sessaoCubit.close);
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: MesaSessaoScreen(cubit: mestre, abaInicial: 2),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      // Mestre abre a Sala LAN direto pelo botão da aba Jogadores
+      expect(find.text('Abrir Sala LAN'), findsOneWidget);
+      await tester.tap(find.byKey(const Key('botao_alternar_sala_lan')));
+      await tester.pumpAndSettle();
+      expect(find.text('Encerrar LAN'), findsOneWidget);
+
+      // Jogador solicita conexão
+      sessaoCubit.definirCodigoSala(mestre.codigoSalaLanAtivo);
+      await sessaoCubit.conectar();
+      await tester.pumpAndSettle();
+
+      expect(
+        sessaoCubit.state.estadoConexao,
+        equals(EstadoConexaoJogador.aguardandoAprovacao),
+      );
+      expect(find.text('Aprovar'), findsOneWidget);
+
+      // Mestre aprova diretamente pela UI da aba Jogadores
+      await tester.tap(find.byKey(const Key('botao_aprovar_jogador_char_lan_1')));
+      await tester.pumpAndSettle();
+
+      expect(
+        sessaoCubit.state.estadoConexao,
+        equals(EstadoConexaoJogador.conectado),
+      );
+      expect(sessaoCubit.state.ultimoSnapshot, isNotNull);
     });
   });
 }
