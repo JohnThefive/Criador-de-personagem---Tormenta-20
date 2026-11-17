@@ -5,6 +5,7 @@ import '../../../../domain/entities/combate/grid_tatico.dart';
 import '../../../../domain/entities/mestre/modelos_mestre.dart';
 import '../../../controllers/mestre_controller/mestre_cubit.dart';
 import '../../../controllers/mestre_controller/mestre_state.dart';
+import '../../../widgets/app_safe_scaffold.dart';
 import '../theme/mestre_theme.dart';
 import 'mestre_battlemap_widget.dart';
 import 'tela_bestiario_mestre.dart';
@@ -46,7 +47,7 @@ class _TelaMesaJogoState extends State<TelaMesaJogo> {
   bool _fogModoRevelar = true; // true: revelar, false: ocultar
   bool _painelIniciativaAberto = false;
   Offset? _posicaoMiniFicha;
-  bool _miniFichaMinimizada = false;
+  bool? _miniFichaMinimizada;
 
   @override
   Widget build(BuildContext context) {
@@ -923,6 +924,7 @@ class _TelaMesaJogoState extends State<TelaMesaJogo> {
     final inicial =
         nomeTrim.isEmpty ? '?' : nomeTrim.substring(0, 1).toUpperCase();
     final monstro = token.monstro;
+    final minimizada = _miniFichaMinimizada ?? token.ehHeroi;
 
     final ehTablet = maxW >= 600;
     final larguraCard = ehTablet ? 344.0 : (maxW - 16).clamp(240.0, 380.0);
@@ -1017,7 +1019,7 @@ class _TelaMesaJogoState extends State<TelaMesaJogo> {
                                 ),
                               ),
                               Text(
-                                _miniFichaMinimizada
+                                minimizada
                                     ? 'PV ${token.pvAtual}/${token.pvMax} • Def ${token.defesa} • ${token.deslocamentoMetros}m'
                                     : [
                                         if (monstro != null)
@@ -1040,7 +1042,7 @@ class _TelaMesaJogoState extends State<TelaMesaJogo> {
                             ],
                           ),
                         ),
-                        if (!_miniFichaMinimizada) ...[
+                        if (!minimizada) ...[
                           IconButton(
                             constraints: const BoxConstraints(
                               minWidth: 32,
@@ -1083,17 +1085,17 @@ class _TelaMesaJogoState extends State<TelaMesaJogo> {
                           ),
                           padding: EdgeInsets.zero,
                           icon: Icon(
-                            _miniFichaMinimizada
+                            minimizada
                                 ? Icons.expand_more
                                 : Icons.expand_less,
                             size: 20,
                             color: MestreCores.escuroOuro,
                           ),
-                          tooltip: _miniFichaMinimizada
+                          tooltip: minimizada
                               ? 'Expandir ficha'
                               : 'Minimizar ficha',
                           onPressed: () => setState(
-                            () => _miniFichaMinimizada = !_miniFichaMinimizada,
+                            () => _miniFichaMinimizada = !minimizada,
                           ),
                         ),
                         IconButton(
@@ -1115,7 +1117,7 @@ class _TelaMesaJogoState extends State<TelaMesaJogo> {
                     ),
                   ),
 
-                  if (!_miniFichaMinimizada) ...[
+                  if (!minimizada) ...[
                     const SizedBox(height: 8),
 
                     // PV e PM com botões rápidos (+/-) e toque para lote/RD
@@ -1394,12 +1396,13 @@ class _TelaMesaJogoState extends State<TelaMesaJogo> {
 
     showModalBottomSheet<void>(
       context: context,
+      isScrollControlled: true,
       backgroundColor: MestreCores.escuroSurface,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
       ),
-      builder: (ctx) => Padding(
-        padding: const EdgeInsets.all(16),
+      builder: (ctx) => AppBottomSheetContainer(
+        scrollable: true,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -1436,6 +1439,7 @@ class _TelaMesaJogoState extends State<TelaMesaJogo> {
   void _exibirSheetTrocarMapa(BuildContext context) {
     showModalBottomSheet<void>(
       context: context,
+      isScrollControlled: true,
       backgroundColor: MestreCores.escuroSurface,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
@@ -1445,8 +1449,8 @@ class _TelaMesaJogoState extends State<TelaMesaJogo> {
         builder: (ctx, currentState) {
           final aventura = currentState.aventuraAtual;
           final mapaAtivoId = currentState.mapaAtual?.id;
-          return Padding(
-            padding: const EdgeInsets.all(16),
+          return AppBottomSheetContainer(
+            scrollable: true,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -1545,9 +1549,11 @@ class _SheetCriarTokenCombatenteState
     return DefaultTabController(
       length: 2,
       initialIndex: widget.abaInicial.clamp(0, 1),
-      child: SizedBox(
-        height: alturaModal,
-        child: Column(
+      child: SafeArea(
+        top: false,
+        child: SizedBox(
+          height: alturaModal,
+          child: Column(
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 12, 8, 0),
@@ -1873,6 +1879,7 @@ class _SheetCriarTokenCombatenteState
               ),
             ),
           ],
+          ),
         ),
       ),
     );

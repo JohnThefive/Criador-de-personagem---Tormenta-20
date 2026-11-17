@@ -7,6 +7,7 @@ import '../../../../domain/services/combate_services/arena_stats_collector.dart'
 import '../../../../domain/services/combate_services/calculadora_tatica_t20.dart';
 import '../../../../domain/services/combate_services/dice_roll_service.dart';
 import '../../../controllers/combate_controller/combate_cubit.dart';
+import '../../../widgets/app_safe_scaffold.dart';
 import 'd20_dice.dart';
 import 'roll_result_view.dart';
 
@@ -207,13 +208,7 @@ class _ArenaAtaqueSheetState extends State<ArenaAtaqueSheet> {
     final textTheme = theme.textTheme;
     final vivos = widget.inimigos.where((c) => c.pvAtual > 0).toList();
 
-    return Padding(
-      padding: EdgeInsets.only(
-        left: 16,
-        right: 16,
-        top: 16,
-        bottom: MediaQuery.of(context).viewInsets.bottom + 16,
-      ),
+    return AppBottomSheetContainer(
       child: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,

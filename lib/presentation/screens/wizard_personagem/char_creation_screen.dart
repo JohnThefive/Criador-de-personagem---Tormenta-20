@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../controllers/ficha_controller/personagem_cubit.dart';
+import '../../widgets/app_safe_scaffold.dart';
 import 'widgets/pagina_atributos.dart';
 import 'widgets/pagina_divindades.dart';
 import 'widgets/pagina_finalizacao.dart';
@@ -81,6 +82,7 @@ class _CharacterCreatorScreenState extends State<CharacterCreatorScreen> {
                   ),
                   builder: (context, dados) {
                     return AppBar(
+                      systemOverlayStyle: T20SystemUi.estiloClaro,
                       backgroundColor: Colors.white,
                       elevation: 1,
                       shadowColor: Colors.black.withValues(alpha: 0.08),
@@ -152,7 +154,9 @@ class _CharacterCreatorScreenState extends State<CharacterCreatorScreen> {
                   },
                 ),
           ),
-          body: PageView(
+          body: SafeArea(
+            top: false,
+            child: PageView(
             controller: _pageController,
             physics: const NeverScrollableScrollPhysics(),
             children: [
@@ -230,6 +234,7 @@ class _CharacterCreatorScreenState extends State<CharacterCreatorScreen> {
               ),
               const PaginaFinalizacao(),
             ],
+            ),
           ),
         ),
       ),

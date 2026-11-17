@@ -6,10 +6,12 @@ import 'package:t20_creator/domain/services/data_services/catalogo_service.dart'
 import 'presentation/controllers/home_controller/home_cubit.dart';
 import 'presentation/controllers/ficha_controller/personagem_cubit.dart';
 import 'presentation/screens/home/home_screen.dart';
+import 'presentation/widgets/app_safe_scaffold.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  CatalogoService.carregarTodos();
+  await T20SystemUi.configurarEdgeToEdge();
+  await CatalogoService.carregarTodos();
   runApp(const T20App());
 }
 
@@ -34,6 +36,9 @@ class T20App extends StatelessWidget {
           useMaterial3: true,
           // Define a cor de fundo padrão do Scaffold para as telas existentes
           scaffoldBackgroundColor: const Color(0xFFD32F2F),
+          appBarTheme: const AppBarTheme(
+            systemOverlayStyle: T20SystemUi.estiloEscuro,
+          ),
           cardTheme: CardThemeData(
             elevation: 0,
             shape: RoundedRectangleBorder(

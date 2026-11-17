@@ -5,6 +5,7 @@ import '../../../controllers/ficha_controller/ficha_cubit.dart';
 import '../../../controllers/ficha_controller/ficha_state.dart';
 import '../../../controllers/ficha_controller/sessao_jogador_cubit.dart';
 import '../../../controllers/ficha_controller/sessao_jogador_state.dart';
+import '../../../widgets/app_safe_scaffold.dart';
 import 'mapa_jogador_screen.dart';
 
 /// Aba "Sessão" da Ficha do Personagem para conexão à mesa LAN do Mestre.
@@ -88,22 +89,32 @@ class _AbaSessaoViewState extends State<AbaSessaoView> {
     return BlocConsumer<SessaoJogadorCubit, SessaoJogadorState>(
       listener: (context, state) => _sincronizarControllers(state),
       builder: (context, state) {
-        return SingleChildScrollView(
-          padding: const EdgeInsets.fromLTRB(12, 12, 12, 28),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              if (state.podeEditarConexao) ...[
-                _buildCardFormularioConexao(context, state),
-                const SizedBox(height: 12),
-                _buildCardPreviaFicha(context),
-              ] else ...[
-                _buildCardStatusConectado(context, state),
-                const SizedBox(height: 12),
-                _buildCardPreviaFicha(context),
-              ],
-            ],
-          ),
+        return CustomScrollView(
+          slivers: [
+            appNestedOverlapInjector(context),
+            SliverPadding(
+              padding: appListPaddingWithBottomInset(
+                context,
+                const EdgeInsets.fromLTRB(12, 12, 12, 28),
+              ),
+              sliver: SliverToBoxAdapter(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    if (state.podeEditarConexao) ...[
+                      _buildCardFormularioConexao(context, state),
+                      const SizedBox(height: 12),
+                      _buildCardPreviaFicha(context),
+                    ] else ...[
+                      _buildCardStatusConectado(context, state),
+                      const SizedBox(height: 12),
+                      _buildCardPreviaFicha(context),
+                    ],
+                  ],
+                ),
+              ),
+            ),
+          ],
         );
       },
     );

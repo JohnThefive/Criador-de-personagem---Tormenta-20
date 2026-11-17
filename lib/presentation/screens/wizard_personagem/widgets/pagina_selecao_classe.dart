@@ -7,7 +7,9 @@ import '../../../../domain/services/data_services/call_classes.dart';
 import '../../../../domain/services/data_services/call_poderes.dart';
 import '../../../../domain/services/powers_service/aprendizado_magia_service.dart';
 import '../../../controllers/ficha_controller/personagem_cubit.dart';
+import '../../../widgets/app_safe_scaffold.dart';
 import '../../../widgets/rpg_icon.dart';
+import '../../../widgets/seletor_mestre_detalhe_responsivo.dart';
 
 class PaginaSelecaoClasse extends StatefulWidget {
   final PersonagemState state;
@@ -19,8 +21,6 @@ class PaginaSelecaoClasse extends StatefulWidget {
 }
 
 class _PaginaSelecaoClasseState extends State<PaginaSelecaoClasse> {
-  bool _menuAberto = true;
-
   @override
   Widget build(BuildContext context) {
     final classeSelecionada = widget.state.personagem.classes.isNotEmpty
@@ -35,54 +35,144 @@ class _PaginaSelecaoClasseState extends State<PaginaSelecaoClasse> {
         ? BancoDePoderes.poderesDaClasse(classeSelecionada.idClasse)
         : <dynamic>[];
 
-    return Row(
-      children: [
-        // MENU LATERAL
-        AnimatedContainer(
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeInOut,
-          width: _menuAberto ? 130 : 0,
-          color: Colors.red[600],
-          child: ClipRect(
-            child: OverflowBox(
-              minWidth: 0,
-              maxWidth: 130,
-              alignment: Alignment.topLeft,
-              child: SizedBox(
-                width: 130,
-                child: Column(
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
-                        "Escolha Uma Classe",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
+    return SeletorMestreDetalheResponsivo(
+      temSelecaoInicial: classeSelecionada != null,
+      labelVoltarLista: 'Todas as Classes',
+      resumoSelecionado: classeSelecionada?.nome,
+      corListaWide: Colors.red[600]!,
+      corAlcaWide: Colors.red[800]!,
+      listaBuilder:
+          (
+            context, {
+            required modoCompacto,
+            required onItemSelecionado,
+          }) {
+            return Column(
+              children: [
+                Container(
+                  width: double.infinity,
+                  color: modoCompacto ? Colors.red[600] : Colors.transparent,
+                  padding: const EdgeInsets.all(10),
+                  child: Text(
+                    "Escolha Uma Classe",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: modoCompacto ? 14 : 12,
                     ),
-                const Divider(color: Colors.white54),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                if (!modoCompacto)
+                  const Divider(color: Colors.white54, height: 1),
                 Expanded(
                   child: ListView.builder(
+                    padding: appListPaddingWithBottomInset(
+                      context,
+                      EdgeInsets.symmetric(
+                        horizontal: modoCompacto ? 12 : 8,
+                        vertical: modoCompacto ? 10 : 4,
+                      ),
+                    ),
                     itemCount: BancoDeClasses.todas.length,
                     itemBuilder: (context, index) {
                       final classe = BancoDeClasses.todas[index];
                       final isSelected = classeSelecionada?.nome == classe.nome;
 
-                      return GestureDetector(
-                        onTap: () {
-                          context.read<PersonagemCubit>().selecionarClasse(
-                            classe,
-                          );
-                        },
-                        child: Container(
-                          margin: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 4,
+                      void selecionar() {
+                        context.read<PersonagemCubit>().selecionarClasse(
+                          classe,
+                        );
+                        onItemSelecionado();
+                      }
+
+                      if (modoCompacto) {
+                        return Card(
+                          elevation: isSelected ? 2 : 0.5,
+                          margin: const EdgeInsets.only(bottom: 8),
+                          color: isSelected ? Colors.red[50] : Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            side: BorderSide(
+                              color: isSelected
+                                  ? Colors.red[700]!
+                                  : Colors.grey.shade300,
+                              width: isSelected ? 1.8 : 1,
+                            ),
                           ),
+                          child: InkWell(
+                            onTap: selecionar,
+                            borderRadius: BorderRadius.circular(12),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 14,
+                                vertical: 12,
+                              ),
+                              child: Row(
+                                children: [
+                                  CircleAvatar(
+                                    radius: 18,
+                                    backgroundColor: isSelected
+                                        ? Colors.brown.shade900
+                                        : Colors.red.shade700,
+                                    child: RpgIcon(
+                                      iconName: classe.iconeSvg,
+                                      size: 18,
+                                      color: isSelected
+                                          ? Colors.amber
+                                          : Colors.white,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 12),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          classe.nome,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16,
+                                            color: isSelected
+                                                ? Colors.red[900]
+                                                : Colors.black87,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 2),
+                                        Text(
+                                          "PV ${classe.pvInicial} (+${classe.pvPorNivel}/nív) • PM ${classe.pmInicial} (+${classe.pmPorNivel}/nív)",
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.grey[700],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  if (isSelected)
+                                    Icon(
+                                      Icons.check_circle,
+                                      color: Colors.red[700],
+                                      size: 20,
+                                    ),
+                                  const SizedBox(width: 4),
+                                  Icon(
+                                    Icons.chevron_right,
+                                    color: Colors.grey[600],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      }
+
+                      return GestureDetector(
+                        onTap: selecionar,
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(vertical: 4),
                           padding: const EdgeInsets.symmetric(
                             vertical: 8,
                             horizontal: 6,
@@ -131,49 +221,45 @@ class _PaginaSelecaoClasseState extends State<PaginaSelecaoClasse> {
                   ),
                 ),
               ],
-            ),
-          ),
-        ),
-      ),
-    ),
-
-    // BOTÃO DE TOGGLE
-        GestureDetector(
-          onTap: () {
-            setState(() {
-              _menuAberto = !_menuAberto;
-            });
+            );
           },
-          child: Container(
-            width: 24,
-            height: double.infinity,
-            color: Colors.red[800],
-            child: Icon(
-              _menuAberto ? Icons.chevron_left : Icons.chevron_right,
-              color: Colors.white,
-            ),
-          ),
-        ),
+      detalheBuilder:
+          (
+            context, {
+            required modoCompacto,
+            required onVoltarLista,
+          }) {
+            if (classeSelecionada == null) {
+              return const Center(
+                child: Padding(
+                  padding: EdgeInsets.all(24),
+                  child: Text(
+                    "Selecione uma classe na lista.",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 16, color: Colors.grey),
+                  ),
+                ),
+              );
+            }
 
-        // CONTEÚDO PRINCIPAL
-        Expanded(
-          child: Container(
-            color: Colors.white,
-            child: classeSelecionada == null
-                ? const Center(child: Text("Selecione uma classe ao lado."))
-                : ListView(
-                    padding: const EdgeInsets.all(16),
-                    children: [
+            return ListView(
+              padding: appListPaddingWithBottomInset(
+                context,
+                const EdgeInsets.all(16),
+              ),
+              children: [
                       // Fonte
                       Row(
                         children: [
                           Icon(Icons.circle, color: Colors.red[700], size: 12),
                           const SizedBox(width: 4),
-                          const Text(
-                            "Fonte: Tormenta 20",
-                            style: TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.bold,
+                          const Flexible(
+                            child: Text(
+                              "Fonte: Tormenta 20",
+                              style: TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ],
@@ -247,11 +333,13 @@ class _PaginaSelecaoClasseState extends State<PaginaSelecaoClasse> {
                       if (classeSelecionada.caminhosNivel1.isNotEmpty) ...[
                         Row(
                           children: [
-                            const Text(
-                              "Caminhos Arcanos",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
+                            const Flexible(
+                              child: Text(
+                                "Caminhos Arcanos",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                ),
                               ),
                             ),
                             const SizedBox(width: 8),
@@ -323,11 +411,13 @@ class _PaginaSelecaoClasseState extends State<PaginaSelecaoClasse> {
                           children: [
                             Icon(Icons.bloodtype, color: Colors.red[700]),
                             const SizedBox(width: 8),
-                            const Text(
-                              "Linhagem Sobrenatural",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
+                            const Expanded(
+                              child: Text(
+                                "Linhagem Sobrenatural",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                ),
                               ),
                             ),
                           ],
@@ -468,17 +558,21 @@ class _PaginaSelecaoClasseState extends State<PaginaSelecaoClasse> {
                                         color: Colors.orange[700],
                                       ),
                                       const SizedBox(width: 4),
-                                      Text(
-                                        poder.nome,
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 14,
+                                      Expanded(
+                                        child: Text(
+                                          poder.nome,
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 14,
+                                          ),
                                         ),
                                       ),
                                     ],
                                   ),
                                   const SizedBox(height: 4),
                                   Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         poder.descricao,
@@ -505,10 +599,8 @@ class _PaginaSelecaoClasseState extends State<PaginaSelecaoClasse> {
                         ),
                       ],
                     ],
-                  ),
-          ),
-        ),
-      ],
+                  );
+          },
     );
   }
 
@@ -682,12 +774,14 @@ class _PainelProficienciasEquipamentos extends StatelessWidget {
                 color: Colors.red[800],
               ),
               const SizedBox(width: 8),
-              Text(
-                'Proficiências e Equipamentos',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14,
-                  color: Colors.red[900],
+              Expanded(
+                child: Text(
+                  'Proficiências e Equipamentos',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                    color: Colors.red[900],
+                  ),
                 ),
               ),
             ],

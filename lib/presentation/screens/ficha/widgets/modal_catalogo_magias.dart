@@ -4,6 +4,7 @@ import '../../../../domain/entities/personagem/personagem.dart';
 import '../../../../domain/services/data_services/call_magias.dart';
 import '../../../../domain/services/powers_service/aprendizado_magia_service.dart';
 import '../../../controllers/ficha_controller/ficha_cubit.dart';
+import '../../../widgets/app_safe_scaffold.dart';
 
 /// Modal para consulta e aprendizado de magias de Tormenta 20.
 /// Valida círculos liberados por classe/tradição e permite desbloquear magias extras.
@@ -151,6 +152,10 @@ class _ModalCatalogoMagiasState extends State<ModalCatalogoMagias> {
             Expanded(
               child: ListView.separated(
                 controller: scrollController,
+                padding: appListPaddingWithBottomInset(
+                  context,
+                  const EdgeInsets.only(bottom: 16),
+                ),
                 itemCount: filtradas.length,
                 separatorBuilder: (_, _) => const Divider(height: 1),
                 itemBuilder: (_, idx) {

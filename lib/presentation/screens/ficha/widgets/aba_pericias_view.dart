@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../domain/services/ficha_services/calculo_ficha_service.dart';
 import '../../../controllers/ficha_controller/ficha_cubit.dart';
 import '../../../controllers/ficha_controller/ficha_state.dart';
+import '../../../widgets/app_safe_scaffold.dart';
 import 'dialogo_rolagem_dado.dart';
 
 class AbaPericiasView extends StatefulWidget {
@@ -72,6 +73,7 @@ class _AbaPericiasViewState extends State<AbaPericiasView> {
 
         return CustomScrollView(
           slivers: [
+            appNestedOverlapInjector(context),
             SliverPadding(
               padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
               sliver: SliverToBoxAdapter(
@@ -265,6 +267,7 @@ class _AbaPericiasViewState extends State<AbaPericiasView> {
                   },
                 ),
               ),
+            appBottomSafeSliver(context, extra: 0),
           ],
         );
       },

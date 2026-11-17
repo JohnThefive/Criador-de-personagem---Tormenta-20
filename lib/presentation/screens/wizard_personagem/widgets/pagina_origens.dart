@@ -4,6 +4,8 @@ import '../../../../domain/entities/personagem/poder.dart';
 import '../../../../domain/services/data_services/call_origens.dart';
 import '../../../../domain/services/data_services/call_pericias.dart';
 import '../../../controllers/ficha_controller/personagem_cubit.dart';
+import '../../../widgets/app_safe_scaffold.dart';
+import '../../../widgets/seletor_mestre_detalhe_responsivo.dart';
 
 class PaginaSelecaoOrigem extends StatefulWidget {
   final PersonagemState state;
@@ -15,7 +17,6 @@ class PaginaSelecaoOrigem extends StatefulWidget {
 }
 
 class _PaginaSelecaoOrigemState extends State<PaginaSelecaoOrigem> {
-  bool _menuAberto = true;
   String _filtroPoderes = '';
   final TextEditingController _buscaController = TextEditingController();
 
@@ -35,22 +36,23 @@ class _PaginaSelecaoOrigemState extends State<PaginaSelecaoOrigem> {
       children: [
         // HUD Superior com contador de benefícios
         Container(
+          width: double.infinity,
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
           color: Colors.grey[200],
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Wrap(
+            alignment: WrapAlignment.spaceBetween,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 8,
+            runSpacing: 6,
             children: [
-              Expanded(
-                child: Text(
-                  origemSelecionada != null
-                      ? "Origem: ${origemSelecionada.nome}"
-                      : "Nenhuma origem selecionada",
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
-                    color: Colors.black87,
-                  ),
-                  overflow: TextOverflow.ellipsis,
+              Text(
+                origemSelecionada != null
+                    ? "Origem: ${origemSelecionada.nome}"
+                    : "Nenhuma origem selecionada",
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                  color: Colors.black87,
                 ),
               ),
               Container(
@@ -78,54 +80,145 @@ class _PaginaSelecaoOrigemState extends State<PaginaSelecaoOrigem> {
         ),
         const Divider(height: 1),
 
-        // Área principal (Menu Lateral + Painel de Detalhes)
+        // Área principal responsiva (lista em tela cheia no celular; lado a lado >= 600 dp)
         Expanded(
-          child: Row(
-            children: [
-              // Menu Lateral Animado
-              AnimatedContainer(
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.easeInOut,
-                width: _menuAberto ? 130 : 0,
-                color: Colors.red[600],
-                child: ClipRect(
-                  child: Column(
+          child: SeletorMestreDetalheResponsivo(
+            temSelecaoInicial: origemSelecionada != null,
+            labelVoltarLista: 'Todas as Origens',
+            resumoSelecionado: origemSelecionada?.nome,
+            corListaWide: Colors.red[600]!,
+            corAlcaWide: Colors.red[800]!,
+            listaBuilder:
+                (
+                  context, {
+                  required modoCompacto,
+                  required onItemSelecionado,
+                }) {
+                  return Column(
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.all(8.0),
+                      Container(
+                        width: double.infinity,
+                        color: modoCompacto
+                            ? Colors.red[600]
+                            : Colors.transparent,
+                        padding: const EdgeInsets.all(10),
                         child: Text(
-                          "Escolha uma Origem",
+                          modoCompacto
+                              ? "Escolha uma Origem"
+                              : "Escolha uma Origem",
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
-                            fontSize: 12,
+                            fontSize: modoCompacto ? 14 : 12,
                           ),
                           textAlign: TextAlign.center,
                         ),
                       ),
-                      const Divider(color: Colors.white54),
+                      if (!modoCompacto)
+                        const Divider(color: Colors.white54, height: 1),
                       Expanded(
                         child: ListView.builder(
+                          padding: appListPaddingWithBottomInset(
+                            context,
+                            EdgeInsets.symmetric(
+                              horizontal: modoCompacto ? 12 : 8,
+                              vertical: modoCompacto ? 10 : 4,
+                            ),
+                          ),
                           itemCount: BancoDeOrigens.todas.length,
                           itemBuilder: (context, index) {
                             final origem = BancoDeOrigens.todas[index];
                             final isSelected =
                                 origemSelecionada?.id == origem.id;
 
-                            return GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  _filtroPoderes = '';
-                                  _buscaController.clear();
-                                });
-                                cubit.selecionarOrigem(origem);
-                              },
-                              child: Container(
-                                margin: const EdgeInsets.symmetric(
-                                  horizontal: 8,
-                                  vertical: 4,
+                            void selecionar() {
+                              setState(() {
+                                _filtroPoderes = '';
+                                _buscaController.clear();
+                              });
+                              cubit.selecionarOrigem(origem);
+                              onItemSelecionado();
+                            }
+
+                            if (modoCompacto) {
+                              return Card(
+                                elevation: isSelected ? 2 : 0.5,
+                                margin: const EdgeInsets.only(bottom: 8),
+                                color: isSelected
+                                    ? Colors.red[50]
+                                    : Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  side: BorderSide(
+                                    color: isSelected
+                                        ? Colors.red[700]!
+                                        : Colors.grey.shade300,
+                                    width: isSelected ? 1.8 : 1,
+                                  ),
                                 ),
+                                child: InkWell(
+                                  onTap: selecionar,
+                                  borderRadius: BorderRadius.circular(12),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 14,
+                                      vertical: 12,
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                origem.nome,
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 16,
+                                                  color: isSelected
+                                                      ? Colors.red[900]
+                                                      : Colors.black87,
+                                                ),
+                                              ),
+                                              const SizedBox(height: 2),
+                                              Text(
+                                                origem.descricao,
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: Colors.grey[700],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        const SizedBox(width: 8),
+                                        if (isSelected)
+                                          Icon(
+                                            Icons.check_circle,
+                                            color: Colors.red[700],
+                                            size: 20,
+                                          ),
+                                        const SizedBox(width: 4),
+                                        Icon(
+                                          Icons.chevron_right,
+                                          color: Colors.grey[600],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }
+
+                            return GestureDetector(
+                              onTap: selecionar,
+                              child: Container(
+                                margin: const EdgeInsets.symmetric(vertical: 4),
                                 padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
                                   vertical: 12,
                                 ),
                                 decoration: BoxDecoration(
@@ -144,7 +237,7 @@ class _PaginaSelecaoOrigemState extends State<PaginaSelecaoOrigem> {
                                     fontWeight: FontWeight.bold,
                                     fontSize: 15,
                                   ),
-                                  maxLines: 1,
+                                  maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                 ),
                               ),
@@ -153,38 +246,33 @@ class _PaginaSelecaoOrigemState extends State<PaginaSelecaoOrigem> {
                         ),
                       ),
                     ],
-                  ),
-                ),
-              ),
+                  );
+                },
+            detalheBuilder:
+                (
+                  context, {
+                  required modoCompacto,
+                  required onVoltarLista,
+                }) {
+                  if (origemSelecionada == null) {
+                    return const Center(
+                      child: Padding(
+                        padding: EdgeInsets.all(24),
+                        child: Text(
+                          "Selecione uma origem no menu ao lado.",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 16, color: Colors.grey),
+                        ),
+                      ),
+                    );
+                  }
 
-              // Botão Retrátil
-              GestureDetector(
-                onTap: () => setState(() => _menuAberto = !_menuAberto),
-                child: Container(
-                  width: 24,
-                  height: double.infinity,
-                  color: Colors.red[800],
-                  child: Icon(
-                    _menuAberto ? Icons.chevron_left : Icons.chevron_right,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-
-              // Painel de Detalhes da Origem
-              Expanded(
-                child: Container(
-                  color: Colors.white,
-                  child: origemSelecionada == null
-                      ? const Center(
-                          child: Text(
-                            "Selecione uma origem no menu ao lado.",
-                            style: TextStyle(fontSize: 16, color: Colors.grey),
-                          ),
-                        )
-                      : ListView(
-                          padding: const EdgeInsets.all(16),
-                          children: [
+                  return ListView(
+                    padding: appListPaddingWithBottomInset(
+                      context,
+                      const EdgeInsets.all(16),
+                    ),
+                    children: [
                             // Título da Origem
                             Text(
                               origemSelecionada.nome,
@@ -236,17 +324,33 @@ class _PaginaSelecaoOrigemState extends State<PaginaSelecaoOrigem> {
                               children: origemSelecionada.itensIniciais.map((
                                 item,
                               ) {
-                                return Chip(
-                                  backgroundColor: Colors.grey[100],
-                                  side: BorderSide(color: Colors.grey[350]!),
-                                  avatar: const Icon(
-                                    Icons.check,
-                                    size: 16,
-                                    color: Colors.green,
+                                return Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 10,
+                                    vertical: 6,
                                   ),
-                                  label: Text(
-                                    item,
-                                    style: const TextStyle(fontSize: 12),
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey[100],
+                                    borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(color: Colors.grey[350]!),
+                                  ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      const Icon(
+                                        Icons.check,
+                                        size: 16,
+                                        color: Colors.green,
+                                      ),
+                                      const SizedBox(width: 6),
+                                      Flexible(
+                                        child: Text(
+                                          item,
+                                          style: const TextStyle(fontSize: 12),
+                                          softWrap: true,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 );
                               }).toList(),
@@ -255,27 +359,33 @@ class _PaginaSelecaoOrigemState extends State<PaginaSelecaoOrigem> {
                             const Divider(),
 
                             // 2. Benefícios da Origem
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Text(
-                                  "Benefícios da Origem",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
+                            SizedBox(
+                              width: double.infinity,
+                              child: Wrap(
+                                alignment: WrapAlignment.spaceBetween,
+                                crossAxisAlignment: WrapCrossAlignment.center,
+                                spacing: 8,
+                                runSpacing: 4,
+                                children: [
+                                  const Text(
+                                    "Benefícios da Origem",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  metaBeneficios == 2
-                                      ? "Escolha exatamente 2"
-                                      : "Escolha $metaBeneficios benefício",
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: Colors.grey[700],
-                                    fontStyle: FontStyle.italic,
+                                  Text(
+                                    metaBeneficios == 2
+                                        ? "Escolha exatamente 2"
+                                        : "Escolha $metaBeneficios benefício",
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: Colors.grey[700],
+                                      fontStyle: FontStyle.italic,
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                             const SizedBox(height: 4),
                             Text(
@@ -335,34 +445,31 @@ class _PaginaSelecaoOrigemState extends State<PaginaSelecaoOrigem> {
                                       .periciaJaTreinada(sigla);
 
                                   return ChoiceChip(
-                                    label: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Text(
-                                          pericia.label,
-                                          style: TextStyle(
-                                            color: jaTreinadaNaClasse
-                                                ? Colors.grey[500]
-                                                : (isSelected
-                                                      ? Colors.red[900]
-                                                      : Colors.black87),
-                                          ),
-                                        ),
-                                        if (jaTreinadaNaClasse)
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                              left: 4,
+                                    label: Text.rich(
+                                      TextSpan(
+                                        children: [
+                                          TextSpan(
+                                            text: pericia.label,
+                                            style: TextStyle(
+                                              color: jaTreinadaNaClasse
+                                                  ? Colors.grey[500]
+                                                  : (isSelected
+                                                        ? Colors.red[900]
+                                                        : Colors.black87),
                                             ),
-                                            child: Text(
-                                              "(Já treinada)",
+                                          ),
+                                          if (jaTreinadaNaClasse)
+                                            TextSpan(
+                                              text: " (Já treinada)",
                                               style: TextStyle(
                                                 fontSize: 10,
                                                 fontStyle: FontStyle.italic,
                                                 color: Colors.grey[500],
                                               ),
                                             ),
-                                          ),
-                                      ],
+                                        ],
+                                      ),
+                                      softWrap: true,
                                     ),
                                     selected: isSelected,
                                     selectedColor: Colors.red[100],
@@ -396,10 +503,15 @@ class _PaginaSelecaoOrigemState extends State<PaginaSelecaoOrigem> {
                             if (origemSelecionada
                                 .poderesGeraisOpcoes
                                 .isNotEmpty) ...[
-                              Row(
-                                children: [
-                                  const Expanded(
-                                    child: Text(
+                              SizedBox(
+                                width: double.infinity,
+                                child: Wrap(
+                                  alignment: WrapAlignment.spaceBetween,
+                                  crossAxisAlignment: WrapCrossAlignment.center,
+                                  spacing: 8,
+                                  runSpacing: 4,
+                                  children: [
+                                    const Text(
                                       "Poderes Gerais Disponíveis:",
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
@@ -407,31 +519,31 @@ class _PaginaSelecaoOrigemState extends State<PaginaSelecaoOrigem> {
                                         color: Colors.black87,
                                       ),
                                     ),
-                                  ),
-                                  if (origemSelecionada
-                                      .escolhaLivrePoderCombate)
-                                    Container(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 8,
-                                        vertical: 3,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color: Colors.red[50],
-                                        borderRadius: BorderRadius.circular(12),
-                                        border: Border.all(
-                                          color: Colors.red[300]!,
+                                    if (origemSelecionada
+                                        .escolhaLivrePoderCombate)
+                                      Container(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 8,
+                                          vertical: 3,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: Colors.red[50],
+                                          borderRadius: BorderRadius.circular(12),
+                                          border: Border.all(
+                                            color: Colors.red[300]!,
+                                          ),
+                                        ),
+                                        child: Text(
+                                          "Todos os Poderes de Combate",
+                                          style: TextStyle(
+                                            fontSize: 11,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.red[900],
+                                          ),
                                         ),
                                       ),
-                                      child: Text(
-                                        "Todos os Poderes de Combate",
-                                        style: TextStyle(
-                                          fontSize: 11,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.red[900],
-                                        ),
-                                      ),
-                                    ),
-                                ],
+                                  ],
+                                ),
                               ),
                               const SizedBox(height: 8),
 
@@ -495,10 +607,8 @@ class _PaginaSelecaoOrigemState extends State<PaginaSelecaoOrigem> {
                             ],
                             const SizedBox(height: 24),
                           ],
-                        ),
-                ),
-              ),
-            ],
+                  );
+                },
           ),
         ),
       ],

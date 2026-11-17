@@ -262,8 +262,9 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: MediaQuery(
-              data: const MediaQueryData(disableAnimations: true),
+            body: Builder(
+              builder: (ctx) => MediaQuery(
+                data: MediaQuery.of(ctx).copyWith(disableAnimations: true),
               child: ArenaAtaqueSheet(
                 heroi: heroi,
                 arma: arma,
@@ -271,6 +272,7 @@ void main() {
                 efeitosAtivos: const [],
                 cubit: cubit,
                 stats: stats,
+              ),
               ),
             ),
           ),

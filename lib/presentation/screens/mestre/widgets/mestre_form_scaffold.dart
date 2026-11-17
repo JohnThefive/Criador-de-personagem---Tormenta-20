@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../widgets/app_safe_scaffold.dart';
 import '../../home/widgets/home_action_card.dart';
 
 /// Estrutura base mobile-first para as subtelas de criação do Mestre.
@@ -34,6 +35,7 @@ class MestreFormScaffold extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
+        systemOverlayStyle: T20SystemUi.estiloEscuro,
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: Column(

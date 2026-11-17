@@ -3,6 +3,7 @@ import '../../../../domain/entities/combate/combatente.dart';
 import '../../../../domain/entities/equipamento/arma.dart';
 import '../../../controllers/combate_controller/combate_cubit.dart';
 import '../../../controllers/combate_controller/combate_state.dart';
+import '../../../widgets/app_safe_scaffold.dart';
 
 /// Modal Tático de Manobras de Batalha (R61, R63, R76).
 ///
@@ -76,13 +77,9 @@ class _ArenaManobrasSheetState extends State<ArenaManobrasSheet> {
   Widget build(BuildContext context) {
     final vivos = widget.inimigos.where((i) => i.pvAtual > 0).toList();
 
-    return Padding(
-      padding: EdgeInsets.only(
-        left: 16,
-        right: 16,
-        top: 16,
-        bottom: MediaQuery.of(context).viewInsets.bottom + 20,
-      ),
+    return AppBottomSheetContainer(
+      scrollable: true,
+      padding: const EdgeInsets.fromLTRB(16, 16, 16, 20),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,

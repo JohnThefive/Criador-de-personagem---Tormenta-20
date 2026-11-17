@@ -4,6 +4,7 @@ import '../../../../domain/entities/equipamento/arma.dart';
 import '../../../../domain/entities/equipamento/protecao.dart';
 import '../../../../domain/services/data_services/call_armas.dart';
 import '../../../controllers/ficha_controller/personagem_cubit.dart';
+import '../../../widgets/app_safe_scaffold.dart';
 
 class PaginaSelecaoEquipamento extends StatefulWidget {
   final PersonagemState state;
@@ -1495,7 +1496,10 @@ class _ModalSeletorArmasState extends State<_ModalSeletorArmas> {
                     ),
                   )
                 : ListView.separated(
-                    padding: const EdgeInsets.all(16),
+                    padding: appListPaddingWithBottomInset(
+                      context,
+                      const EdgeInsets.all(16),
+                    ),
                     itemCount: armasFiltradas.length,
                     separatorBuilder: (_, _) => const SizedBox(height: 12),
                     itemBuilder: (context, index) {
@@ -1833,7 +1837,10 @@ class _ModalSeletorProtecoesState extends State<_ModalSeletorProtecoes> {
                     ),
                   )
                 : ListView.separated(
-                    padding: const EdgeInsets.all(16),
+                    padding: appListPaddingWithBottomInset(
+                      context,
+                      const EdgeInsets.all(16),
+                    ),
                     itemCount: protecoesFiltradas.length,
                     separatorBuilder: (_, _) => const SizedBox(height: 12),
                     itemBuilder: (context, index) {

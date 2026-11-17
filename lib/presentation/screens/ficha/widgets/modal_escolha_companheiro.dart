@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../domain/entities/habilidades_complexas/companheiro_animal.dart';
 import '../../../../domain/services/data_services/call_companheiros.dart';
+import '../../../widgets/app_safe_scaffold.dart';
 
 void mostrarModalEscolhaCompanheiro({
   required BuildContext context,
@@ -55,6 +56,10 @@ void mostrarModalEscolhaCompanheiro({
               Expanded(
                 child: ListView.builder(
                   controller: scrollController,
+                  padding: appListPaddingWithBottomInset(
+                    context,
+                    const EdgeInsets.only(bottom: 16),
+                  ),
                   itemCount: companheiros.length,
                   itemBuilder: (_, index) {
                     final comp = companheiros[index];

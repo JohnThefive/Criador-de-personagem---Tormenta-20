@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import '../../../../domain/entities/personagem/personagem.dart';
 import '../../../../domain/services/ficha_services/personagem_storage_service.dart';
 import '../../../controllers/ficha_controller/ficha_cubit.dart';
+import '../../../widgets/app_safe_scaffold.dart';
 import 'dialogo_rolagem_dado.dart';
 import 'dialogos_ficha.dart';
 import 'modal_progressao_multiclasse.dart';
@@ -40,7 +41,165 @@ Future<void> mostrarDialogoIdentidade(
   );
 }
 
-/// Cabeçalho fixo da Ficha do Jogador no topo da tela, contendo avatar,
+Future<void> _abrirOpcoesFotoPersonagem(
+  BuildContext context,
+  FichaCubit cubit,
+) async {
+  final p = cubit.personagem;
+  showModalBottomSheet<void>(
+    context: context,
+    isScrollControlled: true,
+    backgroundColor: Colors.white,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+    ),
+    builder: (ctx) => AppBottomSheetContainer(
+      scrollable: true,
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Text(
+            'Retrato do Personagem',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+          ),
+          const SizedBox(height: 8),
+          ListTile(
+            leading: const Icon(
+              Icons.photo_library_outlined,
+              color: Color(0xFFD32F2F),
+            ),
+            title: const Text('Escolher da Galeria'),
+            onTap: () {
+              Navigator.pop(ctx);
+              _processarImagemPersonagem(context, cubit, ImageSource.gallery);
+            },
+          ),
+          ListTile(
+            leading: const Icon(
+              Icons.camera_alt_outlined,
+              color: Color(0xFFD32F2F),
+            ),
+            title: const Text('Tirar Nova Foto'),
+            onTap: () {
+              Navigator.pop(ctx);
+              _processarImagemPersonagem(context, cubit, ImageSource.camera);
+            },
+          ),
+          if (p.caminhoFoto != null && p.caminhoFoto!.isNotEmpty)
+            ListTile(
+              leading: const Icon(Icons.delete_outline, color: Colors.red),
+              title: const Text(
+                'Remover Foto Atual',
+                style: TextStyle(color: Colors.red),
+              ),
+              onTap: () {
+                Navigator.pop(ctx);
+                PersonagemStorageService.excluirFotoPersonagem(
+                  cubit.personagem.id,
+                );
+                cubit.removerFoto();
+              },
+            ),
+        ],
+      ),
+    ),
+  );
+}
+
+Future<void> _processarImagemPersonagem(
+  BuildContext context,
+  FichaCubit cubit,
+  ImageSource source,
+) async {
+  try {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(
+      source: source,
+      maxWidth: 800,
+      maxHeight: 800,
+      imageQuality: 85,
+    );
+
+    if (pickedFile != null && context.mounted) {
+      final id = cubit.personagem.id;
+      final caminhoPermanente =
+          await PersonagemStorageService.salvarFotoPersonagem(
+            id,
+            pickedFile.path,
+          );
+      if (context.mounted) {
+        await cubit.atualizarFoto(caminhoPermanente);
+      }
+    }
+  } catch (e) {
+    if (context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Não foi possível carregar a imagem: $e')),
+      );
+    }
+  }
+}
+
+/// Abre o diálogo de ajuste detalhado de Pontos de Vida (PV).
+Future<void> mostrarDialogoAjustePV(
+  BuildContext context,
+  FichaCubit cubit,
+) async {
+  final p = cubit.personagem;
+  final ajuste = await showDialog<int>(
+    context: context,
+    builder: (_) => AjusteRecursoDialog(
+      titulo: 'Ajustar Pontos de Vida (PV)',
+      labelRecurso: 'Vida Atual',
+      valorAtual: p.pvAtual,
+      valorTotal: p.pvTotal,
+      labelReducao: 'DANO (-)',
+      corReducao: Colors.red.shade700,
+      labelAumento: 'CURA (+)',
+      corAumento: Colors.green.shade700,
+    ),
+  );
+
+  if (ajuste != null && context.mounted) {
+    if (ajuste < 0) {
+      cubit.aplicarDano(-ajuste);
+    } else if (ajuste > 0) {
+      cubit.curarPV(ajuste);
+    }
+  }
+}
+
+/// Abre o diálogo de ajuste detalhado de Pontos de Mana (PM).
+Future<void> mostrarDialogoAjustePM(
+  BuildContext context,
+  FichaCubit cubit,
+) async {
+  final p = cubit.personagem;
+  final ajuste = await showDialog<int>(
+    context: context,
+    builder: (_) => AjusteRecursoDialog(
+      titulo: 'Ajustar Pontos de Mana (PM)',
+      labelRecurso: 'Mana Atual',
+      valorAtual: p.pmAtual,
+      valorTotal: p.pmTotal,
+      labelReducao: 'GASTAR (-)',
+      corReducao: Colors.orange.shade800,
+      labelAumento: 'RECUPERAR (+)',
+      corAumento: Colors.blue.shade700,
+    ),
+  );
+
+  if (ajuste != null && context.mounted) {
+    if (ajuste < 0) {
+      await cubit.tentarAtivarComPM(-ajuste);
+    } else if (ajuste > 0) {
+      await cubit.recuperarPM(ajuste);
+    }
+  }
+}
+
+/// Cabeçalho completo da Ficha do Jogador, contendo avatar,
 /// identidade, iniciativa, nível, as 4 caixas T20 e as barras de PV/PM.
 class FichaCabecalhoWidget extends StatelessWidget {
   final Personagem personagem;
@@ -49,159 +208,6 @@ class FichaCabecalhoWidget extends StatelessWidget {
     super.key,
     required this.personagem,
   });
-
-  Future<void> _abrirOpcoesFoto(BuildContext context, FichaCubit cubit) async {
-    final p = cubit.personagem;
-    showModalBottomSheet<void>(
-      context: context,
-      backgroundColor: Colors.white,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (ctx) => SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 12),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text(
-                'Retrato do Personagem',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
-              ),
-              const SizedBox(height: 8),
-              ListTile(
-                leading: const Icon(
-                  Icons.photo_library_outlined,
-                  color: Color(0xFFD32F2F),
-                ),
-                title: const Text('Escolher da Galeria'),
-                onTap: () {
-                  Navigator.pop(ctx);
-                  _processarImagem(context, cubit, ImageSource.gallery);
-                },
-              ),
-              ListTile(
-                leading: const Icon(
-                  Icons.camera_alt_outlined,
-                  color: Color(0xFFD32F2F),
-                ),
-                title: const Text('Tirar Nova Foto'),
-                onTap: () {
-                  Navigator.pop(ctx);
-                  _processarImagem(context, cubit, ImageSource.camera);
-                },
-              ),
-              if (p.caminhoFoto != null && p.caminhoFoto!.isNotEmpty)
-                ListTile(
-                  leading: const Icon(Icons.delete_outline, color: Colors.red),
-                  title: const Text(
-                    'Remover Foto Atual',
-                    style: TextStyle(color: Colors.red),
-                  ),
-                  onTap: () {
-                    Navigator.pop(ctx);
-                    PersonagemStorageService.excluirFotoPersonagem(
-                      cubit.personagem.id,
-                    );
-                    cubit.removerFoto();
-                  },
-                ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Future<void> _processarImagem(
-    BuildContext context,
-    FichaCubit cubit,
-    ImageSource source,
-  ) async {
-    try {
-      final picker = ImagePicker();
-      final pickedFile = await picker.pickImage(
-        source: source,
-        maxWidth: 800,
-        maxHeight: 800,
-        imageQuality: 85,
-      );
-
-      if (pickedFile != null && context.mounted) {
-        final id = cubit.personagem.id;
-        final caminhoPermanente =
-            await PersonagemStorageService.salvarFotoPersonagem(
-              id,
-              pickedFile.path,
-            );
-        if (context.mounted) {
-          await cubit.atualizarFoto(caminhoPermanente);
-        }
-      }
-    } catch (e) {
-      if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Não foi possível carregar a imagem: $e')),
-        );
-      }
-    }
-  }
-
-  Future<void> _mostrarDialogoAjustePV(
-    BuildContext context,
-    FichaCubit cubit,
-  ) async {
-    final p = cubit.personagem;
-    final ajuste = await showDialog<int>(
-      context: context,
-      builder: (_) => AjusteRecursoDialog(
-        titulo: 'Ajustar Pontos de Vida (PV)',
-        labelRecurso: 'Vida Atual',
-        valorAtual: p.pvAtual,
-        valorTotal: p.pvTotal,
-        labelReducao: 'DANO (-)',
-        corReducao: Colors.red.shade700,
-        labelAumento: 'CURA (+)',
-        corAumento: Colors.green.shade700,
-      ),
-    );
-
-    if (ajuste != null && context.mounted) {
-      if (ajuste < 0) {
-        cubit.aplicarDano(-ajuste);
-      } else if (ajuste > 0) {
-        cubit.curarPV(ajuste);
-      }
-    }
-  }
-
-  Future<void> _mostrarDialogoAjustePM(
-    BuildContext context,
-    FichaCubit cubit,
-  ) async {
-    final p = cubit.personagem;
-    final ajuste = await showDialog<int>(
-      context: context,
-      builder: (_) => AjusteRecursoDialog(
-        titulo: 'Ajustar Pontos de Mana (PM)',
-        labelRecurso: 'Mana Atual',
-        valorAtual: p.pmAtual,
-        valorTotal: p.pmTotal,
-        labelReducao: 'GASTAR (-)',
-        corReducao: Colors.orange.shade800,
-        labelAumento: 'RECUPERAR (+)',
-        corAumento: Colors.blue.shade700,
-      ),
-    );
-
-    if (ajuste != null && context.mounted) {
-      if (ajuste < 0) {
-        await cubit.tentarAtivarComPM(-ajuste);
-      } else if (ajuste > 0) {
-        await cubit.recuperarPM(ajuste);
-      }
-    }
-  }
 
   Widget _buildItemCabecalhoT20({
     required String rotulo,
@@ -264,7 +270,7 @@ class FichaCabecalhoWidget extends StatelessWidget {
         : 1.0;
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(14, 0, 14, 10),
+      padding: const EdgeInsets.fromLTRB(12, 0, 12, 8),
       child: Column(
         children: [
           Row(
@@ -272,10 +278,10 @@ class FichaCabecalhoWidget extends StatelessWidget {
             children: [
               // Retrato circular do personagem
               GestureDetector(
-                onTap: () => _abrirOpcoesFoto(context, cubit),
+                onTap: () => _abrirOpcoesFotoPersonagem(context, cubit),
                 child: Container(
-                  width: 52,
-                  height: 52,
+                  width: 46,
+                  height: 46,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.white,
@@ -293,19 +299,19 @@ class FichaCabecalhoWidget extends StatelessWidget {
                         ? Image.file(
                             File(p.caminhoFoto!),
                             fit: BoxFit.cover,
-                            width: 52,
-                            height: 52,
+                            width: 46,
+                            height: 46,
                             cacheWidth: 160,
                             cacheHeight: 160,
                             errorBuilder: (_, _, _) => const Icon(
                               Icons.account_circle,
-                              size: 48,
+                              size: 42,
                               color: Colors.grey,
                             ),
                           )
                         : const Icon(
                             Icons.account_circle,
-                            size: 48,
+                            size: 42,
                             color: Colors.grey,
                           ),
                   ),
@@ -460,50 +466,128 @@ class FichaCabecalhoWidget extends StatelessWidget {
             ],
           ),
 
-          const SizedBox(height: 8),
+          const SizedBox(height: 6),
 
           // 4 Caixas Oficiais da Ficha Tormenta 20: Raça, Origem, Classe & Nível, Divindade
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 5),
-            decoration: BoxDecoration(
-              color: Colors.black.withValues(alpha: 0.18),
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: Colors.white.withValues(alpha: 0.15)),
-            ),
-            child: Row(
-              children: [
-                Expanded(
-                  child: _buildItemCabecalhoT20(
-                    rotulo: 'RAÇA',
-                    valor: racaNome,
+          LayoutBuilder(
+            builder: (context, constraints) {
+              final usarGrid2x2 = constraints.maxWidth < 300;
+              return Container(
+                padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 5),
+                decoration: BoxDecoration(
+                  color: Colors.black.withValues(alpha: 0.18),
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                    color: Colors.white.withValues(alpha: 0.15),
                   ),
                 ),
-                Container(width: 1, height: 26, color: Colors.white24),
-                Expanded(
-                  child: _buildItemCabecalhoT20(
-                    rotulo: 'ORIGEM',
-                    valor: origemNome,
-                  ),
-                ),
-                Container(width: 1, height: 26, color: Colors.white24),
-                Expanded(
-                  child: InkWell(
-                    onTap: () => mostrarModalProgressaoEMulticlasse(context, cubit),
-                    child: _buildItemCabecalhoT20(
-                      rotulo: 'CLASSE & NÍV',
-                      valor: resumoClasses,
-                    ),
-                  ),
-                ),
-                Container(width: 1, height: 26, color: Colors.white24),
-                Expanded(
-                  child: _buildItemCabecalhoT20(
-                    rotulo: 'DIVINDADE',
-                    valor: divindadeNome,
-                  ),
-                ),
-              ],
-            ),
+                child: usarGrid2x2
+                    ? Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Row(
+                            children: [
+                              Expanded(
+                                child: _buildItemCabecalhoT20(
+                                  rotulo: 'RAÇA',
+                                  valor: racaNome,
+                                ),
+                              ),
+                              Container(
+                                width: 1,
+                                height: 24,
+                                color: Colors.white24,
+                              ),
+                              Expanded(
+                                child: _buildItemCabecalhoT20(
+                                  rotulo: 'ORIGEM',
+                                  valor: origemNome,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const Divider(height: 6, color: Colors.white12),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: InkWell(
+                                  onTap: () =>
+                                      mostrarModalProgressaoEMulticlasse(
+                                        context,
+                                        cubit,
+                                      ),
+                                  child: _buildItemCabecalhoT20(
+                                    rotulo: 'CLASSE & NÍV',
+                                    valor: resumoClasses,
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                width: 1,
+                                height: 24,
+                                color: Colors.white24,
+                              ),
+                              Expanded(
+                                child: _buildItemCabecalhoT20(
+                                  rotulo: 'DIVINDADE',
+                                  valor: divindadeNome,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      )
+                    : Row(
+                        children: [
+                          Expanded(
+                            child: _buildItemCabecalhoT20(
+                              rotulo: 'RAÇA',
+                              valor: racaNome,
+                            ),
+                          ),
+                          Container(
+                            width: 1,
+                            height: 26,
+                            color: Colors.white24,
+                          ),
+                          Expanded(
+                            child: _buildItemCabecalhoT20(
+                              rotulo: 'ORIGEM',
+                              valor: origemNome,
+                            ),
+                          ),
+                          Container(
+                            width: 1,
+                            height: 26,
+                            color: Colors.white24,
+                          ),
+                          Expanded(
+                            child: InkWell(
+                              onTap: () => mostrarModalProgressaoEMulticlasse(
+                                context,
+                                cubit,
+                              ),
+                              child: _buildItemCabecalhoT20(
+                                rotulo: 'CLASSE & NÍV',
+                                valor: resumoClasses,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            width: 1,
+                            height: 26,
+                            color: Colors.white24,
+                          ),
+                          Expanded(
+                            child: _buildItemCabecalhoT20(
+                              rotulo: 'DIVINDADE',
+                              valor: divindadeNome,
+                            ),
+                          ),
+                        ],
+                      ),
+              );
+            },
           ),
 
           if (p.dominadoPelaTormenta) ...[
@@ -535,7 +619,7 @@ class FichaCabecalhoWidget extends StatelessWidget {
             ),
           ],
 
-          const SizedBox(height: 8),
+          const SizedBox(height: 6),
 
           // Barras de PV e PM
           Row(
@@ -547,7 +631,7 @@ class FichaCabecalhoWidget extends StatelessWidget {
                   corBarra: progressoPV > 0.3
                       ? const Color(0xFF4ADE80)
                       : Colors.amberAccent,
-                  onTapTexto: () => _mostrarDialogoAjustePV(context, cubit),
+                  onTapTexto: () => mostrarDialogoAjustePV(context, cubit),
                   onMenosUm: () => cubit.aplicarDano(1),
                   onMaisUm: () => cubit.curarPV(1),
                 ),
@@ -558,12 +642,203 @@ class FichaCabecalhoWidget extends StatelessWidget {
                   rotulo: 'PM ${p.pmAtual}/${p.pmTotal}',
                   progresso: progressoPM,
                   corBarra: const Color(0xFF38BDF8),
-                  onTapTexto: () => _mostrarDialogoAjustePM(context, cubit),
+                  onTapTexto: () => mostrarDialogoAjustePM(context, cubit),
                   onMenosUm: () => cubit.tentarAtivarComPM(1),
                   onMaisUm: () => cubit.recuperarPM(1),
                 ),
               ),
             ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Barra compacta exibida ao recolher o cabeçalho da ficha (Nome + PV + PM com -1/+1).
+class FichaCabecalhoCompactoWidget extends StatelessWidget {
+  final Personagem personagem;
+  final VoidCallback onVoltar;
+  final VoidCallback? onExpandirDetalhes;
+
+  const FichaCabecalhoCompactoWidget({
+    super.key,
+    required this.personagem,
+    required this.onVoltar,
+    this.onExpandirDetalhes,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final cubit = context.read<FichaCubit>();
+    final p = personagem;
+    final temFoto = p.caminhoFoto != null && p.caminhoFoto!.isNotEmpty;
+    final double progressoPV = p.pvTotal > 0
+        ? (p.pvAtual / p.pvTotal).clamp(0.0, 1.0)
+        : 1.0;
+    final double progressoPM = p.pmTotal > 0
+        ? (p.pmAtual / p.pmTotal).clamp(0.0, 1.0)
+        : 1.0;
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(4, 2, 10, 6),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            children: [
+              IconButton(
+                constraints: const BoxConstraints(minWidth: 36, minHeight: 36),
+                padding: EdgeInsets.zero,
+                visualDensity: VisualDensity.compact,
+                icon: const Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  color: Colors.white,
+                  size: 18,
+                ),
+                onPressed: onVoltar,
+              ),
+              GestureDetector(
+                onTap: () => _abrirOpcoesFotoPersonagem(context, cubit),
+                child: Container(
+                  width: 26,
+                  height: 26,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white,
+                    border: Border.all(color: Colors.white, width: 1.5),
+                  ),
+                  child: ClipOval(
+                    child: temFoto
+                        ? Image.file(
+                            File(p.caminhoFoto!),
+                            fit: BoxFit.cover,
+                            width: 26,
+                            height: 26,
+                            cacheWidth: 96,
+                            cacheHeight: 96,
+                            errorBuilder: (_, _, _) => const Icon(
+                              Icons.account_circle,
+                              size: 22,
+                              color: Colors.grey,
+                            ),
+                          )
+                        : const Icon(
+                            Icons.account_circle,
+                            size: 22,
+                            color: Colors.grey,
+                          ),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: InkWell(
+                  onTap: () => mostrarDialogoIdentidade(context, cubit),
+                  borderRadius: BorderRadius.circular(6),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 4,
+                      vertical: 2,
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Flexible(
+                          child: Text(
+                            p.nome,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w900,
+                              fontSize: 16,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        const SizedBox(width: 4),
+                        const Icon(
+                          Icons.edit_outlined,
+                          color: Colors.white70,
+                          size: 13,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              if (onExpandirDetalhes != null)
+                Tooltip(
+                  message: 'Expandir cabeçalho',
+                  child: InkWell(
+                    key: const Key('btn_expandir_cabecalho_ficha'),
+                    onTap: onExpandirDetalhes,
+                    borderRadius: BorderRadius.circular(8),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.black26,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: const Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            Icons.keyboard_arrow_down_rounded,
+                            color: Colors.white,
+                            size: 16,
+                          ),
+                          SizedBox(width: 2),
+                          Text(
+                            'Detalhes',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 11,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+            ],
+          ),
+          const SizedBox(height: 2),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 6),
+            child: Row(
+              children: [
+                Expanded(
+                  child: BarraRecursoTopo(
+                    compacto: true,
+                    rotulo: 'PV ${p.pvAtual}/${p.pvTotal}',
+                    progresso: progressoPV,
+                    corBarra: progressoPV > 0.3
+                        ? const Color(0xFF4ADE80)
+                        : Colors.amberAccent,
+                    onTapTexto: () => mostrarDialogoAjustePV(context, cubit),
+                    onMenosUm: () => cubit.aplicarDano(1),
+                    onMaisUm: () => cubit.curarPV(1),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: BarraRecursoTopo(
+                    compacto: true,
+                    rotulo: 'PM ${p.pmAtual}/${p.pmTotal}',
+                    progresso: progressoPM,
+                    corBarra: const Color(0xFF38BDF8),
+                    onTapTexto: () => mostrarDialogoAjustePM(context, cubit),
+                    onMenosUm: () => cubit.tentarAtivarComPM(1),
+                    onMaisUm: () => cubit.recuperarPM(1),
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -579,6 +854,7 @@ class BarraRecursoTopo extends StatelessWidget {
   final VoidCallback onTapTexto;
   final VoidCallback onMenosUm;
   final VoidCallback onMaisUm;
+  final bool compacto;
 
   const BarraRecursoTopo({
     super.key,
@@ -588,12 +864,14 @@ class BarraRecursoTopo extends StatelessWidget {
     required this.onTapTexto,
     required this.onMenosUm,
     required this.onMaisUm,
+    this.compacto = false,
   });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -603,19 +881,21 @@ class BarraRecursoTopo extends StatelessWidget {
                 onTap: onTapTexto,
                 borderRadius: BorderRadius.circular(6),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  padding: EdgeInsets.symmetric(vertical: compacto ? 2 : 4),
                   child: Text(
                     rotulo,
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w800,
-                      fontSize: 12,
+                      fontSize: compacto ? 11 : 12,
                     ),
+                    maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ),
             ),
+            const SizedBox(width: 4),
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -623,20 +903,20 @@ class BarraRecursoTopo extends StatelessWidget {
                   onTap: onMenosUm,
                   borderRadius: BorderRadius.circular(4),
                   child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 7,
-                      vertical: 3,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: compacto ? 6 : 7,
+                      vertical: compacto ? 2 : 3,
                     ),
                     decoration: BoxDecoration(
                       color: Colors.black26,
                       borderRadius: BorderRadius.circular(4),
                     ),
-                    child: const Text(
+                    child: Text(
                       '-1',
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w800,
-                        fontSize: 11,
+                        fontSize: compacto ? 10.5 : 11,
                       ),
                     ),
                   ),
@@ -646,20 +926,20 @@ class BarraRecursoTopo extends StatelessWidget {
                   onTap: onMaisUm,
                   borderRadius: BorderRadius.circular(4),
                   child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 7,
-                      vertical: 3,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: compacto ? 6 : 7,
+                      vertical: compacto ? 2 : 3,
                     ),
                     decoration: BoxDecoration(
                       color: Colors.black26,
                       borderRadius: BorderRadius.circular(4),
                     ),
-                    child: const Text(
+                    child: Text(
                       '+1',
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w800,
-                        fontSize: 11,
+                        fontSize: compacto ? 10.5 : 11,
                       ),
                     ),
                   ),
@@ -670,7 +950,7 @@ class BarraRecursoTopo extends StatelessWidget {
         ),
         LinearProgressIndicator(
           value: progresso,
-          minHeight: 8,
+          minHeight: compacto ? 5 : 8,
           borderRadius: BorderRadius.circular(6),
           backgroundColor: Colors.black26,
           valueColor: AlwaysStoppedAnimation<Color>(corBarra),

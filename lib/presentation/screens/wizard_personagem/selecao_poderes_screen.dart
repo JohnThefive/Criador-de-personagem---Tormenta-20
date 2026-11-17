@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../domain/entities/personagem/personagem.dart';
 import '../../../domain/entities/personagem/poder.dart';
 import '../../controllers/ficha_controller/evolucao_cubit.dart';
+import '../../widgets/app_safe_scaffold.dart';
 import '../ficha/widgets/modal_escolha_companheiro.dart';
 
 class SelecaoPoderesScreen extends StatelessWidget {
@@ -64,6 +65,7 @@ class _SelecaoPoderesView extends StatelessWidget {
           },
           child: Scaffold(
             appBar: AppBar(
+              systemOverlayStyle: T20SystemUi.estiloEscuro,
               title: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -92,7 +94,9 @@ class _SelecaoPoderesView extends StatelessWidget {
               ],
             ),
             backgroundColor: const Color(0xFF12121A),
-            body: Column(
+            body: SafeArea(
+              top: false,
+              child: Column(
               children: [
                 // 1. Painel Informativo de Evolução
                 _buildCabecalhoEvolucao(context, state, cubit),
@@ -127,6 +131,7 @@ class _SelecaoPoderesView extends StatelessWidget {
                         ),
                 ),
               ],
+              ),
             ),
           ),
         );

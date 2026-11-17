@@ -6,6 +6,7 @@ import '../../../../domain/services/data_services/call_magias.dart';
 import '../../../../domain/services/powers_service/aprendizado_magia_service.dart';
 import '../../../controllers/ficha_controller/ficha_cubit.dart';
 import '../../../controllers/ficha_controller/ficha_state.dart';
+import '../../../widgets/app_safe_scaffold.dart';
 import 'dialogos_ficha.dart';
 import 'modal_catalogo_magias.dart';
 
@@ -130,6 +131,7 @@ class _AbaMagiasViewState extends State<AbaMagiasView> {
 
         return CustomScrollView(
           slivers: [
+            appNestedOverlapInjector(context),
             SliverPadding(
               padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
               sliver: SliverToBoxAdapter(
@@ -478,6 +480,7 @@ class _AbaMagiasViewState extends State<AbaMagiasView> {
                   },
                 ),
               ),
+            appBottomSafeSliver(context, extra: 0),
           ],
         );
       },

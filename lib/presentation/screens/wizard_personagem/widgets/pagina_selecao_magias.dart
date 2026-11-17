@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../domain/entities/magia/magia.dart';
 import '../../../../domain/services/powers_service/aprendizado_magia_service.dart';
 import '../../../controllers/ficha_controller/personagem_cubit.dart';
+import '../../../widgets/app_safe_scaffold.dart';
 
 class PaginaSelecaoMagias extends StatefulWidget {
   final PersonagemState state;
@@ -503,7 +504,10 @@ class _PaginaSelecaoMagiasState extends State<PaginaSelecaoMagias> {
           builder: (_, controller) {
             return ListView(
               controller: controller,
-              padding: const EdgeInsets.all(20),
+              padding: appListPaddingWithBottomInset(
+                context,
+                const EdgeInsets.all(20),
+              ),
               children: [
                 Center(
                   child: Container(

@@ -5,6 +5,7 @@ import '../../../domain/entities/mestre/modelos_mestre.dart';
 import '../../../domain/services/sessao_lan/sessao_host_lan_service.dart';
 import '../../controllers/mestre_controller/mestre_cubit.dart';
 import '../../controllers/mestre_controller/mestre_state.dart';
+import '../../widgets/app_safe_scaffold.dart';
 import '../home/widgets/breakpoints.dart';
 import 'campanha_detalhe_screen.dart';
 import 'criar_campanha_screen.dart';
@@ -106,6 +107,7 @@ class _MestrePainelScreenState extends State<MestrePainelScreen> {
                     onVoltarHome: () => Navigator.of(context).pop(),
                   ),
                   appBar: AppBar(
+                    systemOverlayStyle: T20SystemUi.estiloEscuro,
                     backgroundColor: Colors.transparent,
                     elevation: 0,
                     title: Text(

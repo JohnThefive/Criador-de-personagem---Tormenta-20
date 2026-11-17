@@ -6,6 +6,7 @@ import '../../../../domain/entities/magia/magia.dart';
 import '../../../../domain/services/combate_services/arena_stats_collector.dart';
 import '../../../../domain/services/data_services/call_magias.dart';
 import '../../../controllers/combate_controller/combate_cubit.dart';
+import '../../../widgets/app_safe_scaffold.dart';
 
 /// Modal bottom sheet para gerenciamento e lançamento de magias no Modo Arena.
 ///
@@ -159,7 +160,7 @@ class _ArenaMagiaSheetState extends State<ArenaMagiaSheet> {
         : <String>[];
 
     if (magiasIds.isEmpty) {
-      return Padding(
+      return AppBottomSheetContainer(
         padding: const EdgeInsets.all(24),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -178,13 +179,7 @@ class _ArenaMagiaSheetState extends State<ArenaMagiaSheet> {
 
     final magias = magiasIds.map((id) => BancoDeMagias.getById(id)).toList();
 
-    return Padding(
-      padding: EdgeInsets.only(
-        left: 16,
-        right: 16,
-        top: 16,
-        bottom: MediaQuery.of(context).viewInsets.bottom + 16,
-      ),
+    return AppBottomSheetContainer(
       child: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,

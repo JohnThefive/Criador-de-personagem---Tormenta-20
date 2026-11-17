@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../domain/entities/combate/combatente.dart';
 import '../../../controllers/combate_controller/combate_cubit.dart';
+import '../../../widgets/app_safe_scaffold.dart';
 
 /// Modal de Arbitragem Rápida na Mesa (Pilar 3: VTT Tabletop Assistant)
 /// Permite ao jogador ou mestre aplicar dano total, metade do dano (teste de resistência)
@@ -25,13 +26,8 @@ void exibirModalArbitragemVtt(
         builder: (context, setModalState) {
           final ehHeroi = combatente.time == TimeCombatente.heroi;
 
-          return Padding(
-            padding: EdgeInsets.only(
-              left: 16,
-              right: 16,
-              top: 16,
-              bottom: MediaQuery.of(ctx).viewInsets.bottom + 16,
-            ),
+          return AppBottomSheetContainer(
+            scrollable: true,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,

@@ -4,6 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import '../../../../domain/entities/combate/grid_tatico.dart';
 import '../../../../domain/entities/mestre/modelos_mestre.dart';
 import '../../../controllers/mestre_controller/mestre_cubit.dart';
+import '../../../widgets/app_safe_scaffold.dart';
 import '../theme/mestre_theme.dart';
 
 /// PARTE 3 — Tela "Criar/Editar mapa" (Tormenta 20 - Android/Flutter)
@@ -207,6 +208,7 @@ class _TelaEditorMapaState extends State<TelaEditorMapa> with SingleTickerProvid
       child: Scaffold(
         backgroundColor: MestreCores.escuroBackground,
         appBar: AppBar(
+          systemOverlayStyle: T20SystemUi.estiloEscuro,
           backgroundColor: MestreCores.escuroSurface,
           foregroundColor: MestreCores.escuroOnSurface,
           elevation: 0,
@@ -237,27 +239,30 @@ class _TelaEditorMapaState extends State<TelaEditorMapa> with SingleTickerProvid
             ),
           ],
         ),
-        body: LayoutBuilder(
-          builder: (context, constraints) {
-            final isTablet = constraints.maxWidth >= 840;
-            if (isTablet) {
-              return Row(
-                children: [
-                  Expanded(child: _buildCanvasPreview()),
-                  const VerticalDivider(color: MestreCores.escuroOutline, width: 1),
-                  SizedBox(width: 340, child: _buildPainelControles()),
-                ],
-              );
-            } else {
-              return Column(
-                children: [
-                  Expanded(flex: 3, child: _buildCanvasPreview()),
-                  const Divider(color: MestreCores.escuroOutline, height: 1),
-                  Expanded(flex: 4, child: _buildPainelControles()),
-                ],
-              );
-            }
-          },
+        body: SafeArea(
+          top: false,
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              final isTablet = constraints.maxWidth >= 840;
+              if (isTablet) {
+                return Row(
+                  children: [
+                    Expanded(child: _buildCanvasPreview()),
+                    const VerticalDivider(color: MestreCores.escuroOutline, width: 1),
+                    SizedBox(width: 340, child: _buildPainelControles()),
+                  ],
+                );
+              } else {
+                return Column(
+                  children: [
+                    Expanded(flex: 3, child: _buildCanvasPreview()),
+                    const Divider(color: MestreCores.escuroOutline, height: 1),
+                    Expanded(flex: 4, child: _buildPainelControles()),
+                  ],
+                );
+              }
+            },
+          ),
         ),
       ),
     );

@@ -22,6 +22,7 @@ import 'package:t20_creator/presentation/screens/ficha/ficha_screen.dart';
 import 'package:t20_creator/presentation/screens/ficha/widgets/mapa_jogador_screen.dart';
 import 'package:t20_creator/presentation/screens/mestre/mesa_sessao_screen.dart';
 import 'package:t20_creator/presentation/screens/mestre/mestre_painel_screen.dart';
+import 'package:t20_creator/presentation/screens/mestre/widgets/tela_escudo_notas.dart';
 
 class _RepoMemoria implements IPersonagemRepository {
   @override
@@ -349,6 +350,93 @@ void main() {
         equals(EstadoConexaoJogador.conectado),
       );
       expect(sessaoCubit.state.ultimoSnapshot, isNotNull);
+    });
+
+    testWidgets('Mapa do Jogador exibe terreno difícil, obstáculo e alcance de movimento; Escudo exibe mini-aba Personagens com ficha completa', (tester) async {
+      final transport = SessaoLoopbackTransport();
+      addTearDown(transport.dispose);
+
+      final mestre = MestreCubit(
+        autoPersistir: false,
+        sessaoHostService: transport.host,
+      );
+      addTearDown(mestre.close);
+      mestre.alternarServidorLan();
+      await tester.pump();
+
+      final heroi = _heroiTeste().copyWith(
+        magiasConhecidas: const ['Curar Ferimentos'],
+        itensInventario: const ['Mochila de Aventureiro'],
+        anotacoes: 'Segredo da guilda',
+      );
+      final fichaCubit = FichaCubit(
+        personagemInicial: heroi,
+        repository: _RepoMemoria(),
+        debounceDuration: Duration.zero,
+      );
+      addTearDown(fichaCubit.close);
+
+      final sessaoCubit = SessaoJogadorCubit(
+        clienteService: transport.cliente,
+        lerFichaState: () => fichaCubit.state,
+        autoCarregarPreferencias: false,
+        autoPersistirPreferencias: false,
+      );
+      addTearDown(sessaoCubit.close);
+
+      sessaoCubit.definirCodigoSala(mestre.codigoSalaLanAtivo);
+      await sessaoCubit.conectar();
+      await tester.pump();
+      mestre.atualizarStatusRevisaoFicha(
+        'char_lan_1',
+        StatusRevisaoFicha.aprovada,
+      );
+      await tester.pumpAndSettle();
+
+      // 1. Verifica terrenos e alcance de movimento no mapa do jogador
+      await tester.pumpWidget(
+        MaterialApp(
+          home: MultiBlocProvider(
+            providers: [
+              BlocProvider.value(value: fichaCubit),
+              BlocProvider.value(value: sessaoCubit),
+            ],
+            child: const MapaJogadorScreen(),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      // Terrenos do mapa inicial (4,2 obstáculo; 5,4 difícil) estão presentes no snapshot e na grade
+      expect(find.byKey(const ValueKey('celula_obstaculo_4_2')), findsOneWidget);
+      expect(find.byKey(const ValueKey('celula_dificil_5_4')), findsOneWidget);
+
+      // Ao tocar no próprio token ('V'), destaca células alcançáveis e mostra alcance em metros
+      await tester.tap(find.text('V').first);
+      await tester.pumpAndSettle();
+      expect(find.textContaining('Alcance: 9.0m'), findsOneWidget);
+      expect(find.byKey(const ValueKey('celula_alcancavel_2_1')), findsOneWidget);
+
+      // 2. Verifica mini-aba "Personagens" no Escudo do Mestre com a ficha completa
+      await tester.pumpWidget(
+        MaterialApp(
+          home: TelaEscudoNotas(cubit: mestre, abaInicial: 2),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.text('Personagens'), findsOneWidget);
+      expect(find.textContaining('Valeros • Guerreiro 5'), findsOneWidget);
+      expect(find.textContaining('Curar Ferimentos'), findsOneWidget);
+      expect(find.textContaining('Mochila de Aventureiro'), findsOneWidget);
+      expect(find.textContaining('Segredo da guilda'), findsOneWidget);
+
+      // Tocar na ficha para recolher e expandir novamente não deve lançar erro de PageStorage
+      await tester.tap(find.textContaining('Valeros • Guerreiro 5'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.textContaining('Valeros • Guerreiro 5'));
+      await tester.pumpAndSettle();
+      expect(find.textContaining('Curar Ferimentos'), findsOneWidget);
     });
   });
 }

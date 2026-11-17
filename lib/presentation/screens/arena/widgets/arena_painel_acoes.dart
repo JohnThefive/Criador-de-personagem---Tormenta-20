@@ -5,6 +5,7 @@ import '../../../../domain/services/combate_services/arena_stats_collector.dart'
 import '../../../../domain/services/combate_services/calculadora_tatica_t20.dart';
 import '../../../controllers/combate_controller/combate_cubit.dart';
 import '../../../controllers/combate_controller/combate_state.dart';
+import '../../../widgets/app_safe_scaffold.dart';
 import 'arena_arbitragem_dialog.dart';
 import 'arena_ataque_sheet.dart';
 import 'arena_magia_sheet.dart';
@@ -293,14 +294,14 @@ class ArenaPainelAcoes extends StatelessWidget {
     // Modal seletor de armas se houver mais de uma
     showModalBottomSheet<void>(
       context: context,
+      isScrollControlled: true,
       backgroundColor: const Color(0xFF1E293B),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
-      builder: (ctx) => SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
+      builder: (ctx) => AppBottomSheetContainer(
+        scrollable: true,
+        child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -435,7 +436,6 @@ class ArenaPainelAcoes extends StatelessWidget {
             ],
           ),
         ),
-      ),
     );
   }
 
@@ -446,12 +446,12 @@ class ArenaPainelAcoes extends StatelessWidget {
   ) {
     showModalBottomSheet<void>(
       context: context,
+      isScrollControlled: true,
       backgroundColor: const Color(0xFF1E293B),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
-      builder: (ctx) => Padding(
-        padding: const EdgeInsets.all(16),
+      builder: (ctx) => AppBottomSheetContainer(
         child: ListView.separated(
           shrinkWrap: true,
           itemCount: habilidades.length,

@@ -5,6 +5,8 @@ import '../../../../domain/services/data_services/call_divindades.dart';
 import '../../../../domain/validators/validador_divindade.dart';
 import '../../../controllers/ficha_controller/personagem_cubit.dart';
 import '../../../../helpers/deuses_jpeg.dart';
+import '../../../widgets/app_safe_scaffold.dart';
+import '../../../widgets/seletor_mestre_detalhe_responsivo.dart';
 
 class PaginaSelecaoDivindade extends StatefulWidget {
   final PersonagemState state;
@@ -16,8 +18,6 @@ class PaginaSelecaoDivindade extends StatefulWidget {
 }
 
 class _PaginaSelecaoDivindadeState extends State<PaginaSelecaoDivindade> {
-  bool _menuAberto = true;
-
   @override
   Widget build(BuildContext context) {
     final divindadeSelecionada = widget.state.divindadeSelecionada;
@@ -32,28 +32,35 @@ class _PaginaSelecaoDivindadeState extends State<PaginaSelecaoDivindade> {
       children: [
         // HUD Superior Informativo
         Container(
+          width: double.infinity,
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           color: Colors.grey[200],
-          child: Row(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+              Text(
+                divindadeSelecionada != null
+                    ? "Devoto de ${divindadeSelecionada.nome}"
+                    : (exigeDevocao
+                          ? "Devoção Obrigatória (Escolha um Deus)"
+                          : "Sem Divindade (Não Devoto)"),
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                  color: Colors.black87,
+                ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+              const SizedBox(height: 6),
+              SizedBox(
+                width: double.infinity,
+                child: Wrap(
+                  spacing: 8,
+                  runSpacing: 6,
+                  alignment: WrapAlignment.spaceBetween,
+                  crossAxisAlignment: WrapCrossAlignment.center,
                   children: [
-                    Text(
-                      divindadeSelecionada != null
-                          ? "Devoto de ${divindadeSelecionada.nome}"
-                          : (exigeDevocao
-                                ? "Devoção Obrigatória (Escolha um Deus)"
-                                : "Sem Divindade (Não Devoto)"),
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                        color: Colors.black87,
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    const SizedBox(height: 2),
                     Text(
                       modoEstrito
                           ? "Modo Estrito (Regras Oficiais T20)"
@@ -66,151 +73,201 @@ class _PaginaSelecaoDivindadeState extends State<PaginaSelecaoDivindade> {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 6,
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            cubit.alternarModoEstritoDevocao(!modoEstrito);
+                          },
+                          borderRadius: BorderRadius.circular(14),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 4,
+                            ),
+                            decoration: BoxDecoration(
+                              color: modoEstrito
+                                  ? Colors.white
+                                  : Colors.deepPurple[50],
+                              border: Border.all(
+                                color: modoEstrito
+                                    ? Colors.grey[400]!
+                                    : Colors.deepPurple[400]!,
+                              ),
+                              borderRadius: BorderRadius.circular(14),
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(
+                                  modoEstrito
+                                      ? Icons.gavel
+                                      : Icons.lock_open_rounded,
+                                  size: 14,
+                                  color: modoEstrito
+                                      ? Colors.grey[800]
+                                      : Colors.deepPurple[800],
+                                ),
+                                const SizedBox(width: 4),
+                                Text(
+                                  modoEstrito ? "Estrito" : "Livre",
+                                  style: TextStyle(
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.bold,
+                                    color: modoEstrito
+                                        ? Colors.grey[800]
+                                        : Colors.deepPurple[800],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        _buildBadgeStatus(),
+                      ],
+                    ),
                   ],
                 ),
               ),
-              const SizedBox(width: 8),
-              // Botão de alternar Modo Estrito / Livre
-              InkWell(
-                onTap: () {
-                  cubit.alternarModoEstritoDevocao(!modoEstrito);
-                },
-                borderRadius: BorderRadius.circular(14),
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 4,
-                  ),
-                  decoration: BoxDecoration(
-                    color: modoEstrito ? Colors.white : Colors.deepPurple[50],
-                    border: Border.all(
-                      color: modoEstrito
-                          ? Colors.grey[400]!
-                          : Colors.deepPurple[400]!,
-                    ),
-                    borderRadius: BorderRadius.circular(14),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        modoEstrito ? Icons.gavel : Icons.lock_open_rounded,
-                        size: 14,
-                        color: modoEstrito
-                            ? Colors.grey[800]
-                            : Colors.deepPurple[800],
-                      ),
-                      const SizedBox(width: 4),
-                      Text(
-                        modoEstrito ? "Estrito" : "Livre",
-                        style: TextStyle(
-                          fontSize: 11,
-                          fontWeight: FontWeight.bold,
-                          color: modoEstrito
-                              ? Colors.grey[800]
-                              : Colors.deepPurple[800],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(width: 8),
-              _buildBadgeStatus(),
             ],
           ),
         ),
         const Divider(height: 1),
 
-        // Área principal (Menu Lateral + Painel de Detalhes)
+        // Área principal responsiva (lista em tela cheia no celular; lado a lado >= 600 dp)
         Expanded(
-          child: Row(
-            children: [
-              // Menu Lateral Animado
-              AnimatedContainer(
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.easeInOut,
-                width: _menuAberto ? 140 : 0,
-                color: const Color(0xFFD32F2F),
-                child: ClipRect(
-                  child: Column(
+          child: SeletorMestreDetalheResponsivo(
+            temSelecaoInicial: divindadeSelecionada != null,
+            labelVoltarLista: 'Todas as Divindades',
+            resumoSelecionado: divindadeSelecionada?.nome ?? 'Não Devoto',
+            corListaWide: const Color(0xFFD32F2F),
+            corAlcaWide: const Color(0xFFB71C1C),
+            listaBuilder:
+                (
+                  context, {
+                  required modoCompacto,
+                  required onItemSelecionado,
+                }) {
+                  return Column(
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.all(8.0),
+                      Container(
+                        width: double.infinity,
+                        color: modoCompacto
+                            ? const Color(0xFFD32F2F)
+                            : Colors.transparent,
+                        padding: const EdgeInsets.all(10),
                         child: Text(
                           "Panteão de Arton",
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
-                            fontSize: 12,
+                            fontSize: modoCompacto ? 14 : 12,
                           ),
                           textAlign: TextAlign.center,
                         ),
                       ),
-                      const Divider(color: Colors.white54, height: 1),
+                      if (!modoCompacto)
+                        const Divider(color: Colors.white54, height: 1),
 
                       // Opção 0: Não ser devoto (Pular)
-                      GestureDetector(
-                        onTap: () {
-                          if (exigeDevocao) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  "Sua classe (${widget.state.personagem.classes[0].classeDefinicao.nome}) "
-                                  "exige a escolha obrigatória de uma divindade nas regras oficiais.",
-                                ),
-                                duration: const Duration(seconds: 3),
-                              ),
-                            );
-                            return;
-                          }
-                          cubit.selecionarDivindade(null);
-                        },
-                        child: Container(
-                          margin: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 6,
-                          ),
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 10,
-                            horizontal: 6,
-                          ),
-                          decoration: BoxDecoration(
-                            color: divindadeSelecionada == null
-                                ? Colors.grey[300]
-                                : (exigeDevocao
-                                      ? Colors.black26
-                                      : Colors.transparent),
-                            borderRadius: BorderRadius.circular(16),
-                            border: Border.all(color: Colors.white38, width: 1),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                exigeDevocao ? Icons.lock : Icons.block,
-                                size: 14,
-                                color: divindadeSelecionada == null
-                                    ? Colors.black
-                                    : Colors.white,
-                              ),
-                              const SizedBox(width: 4),
-                              Flexible(
-                                child: Text(
-                                  "Não Devoto",
-                                  style: TextStyle(
-                                    color: divindadeSelecionada == null
-                                        ? Colors.black
-                                        : (exigeDevocao
-                                              ? Colors.white38
-                                              : Colors.white),
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 13,
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: modoCompacto ? 12 : 8,
+                          vertical: 6,
+                        ),
+                        child: InkWell(
+                          onTap: () {
+                            if (exigeDevocao) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    "Sua classe (${widget.state.personagem.classes[0].classeDefinicao.nome}) "
+                                    "exige a escolha obrigatória de uma divindade nas regras oficiais.",
                                   ),
-                                  overflow: TextOverflow.ellipsis,
+                                  duration: const Duration(seconds: 3),
                                 ),
+                              );
+                              return;
+                            }
+                            cubit.selecionarDivindade(null);
+                            onItemSelecionado();
+                          },
+                          borderRadius: BorderRadius.circular(14),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 10,
+                              horizontal: 10,
+                            ),
+                            decoration: BoxDecoration(
+                              color: modoCompacto
+                                  ? (divindadeSelecionada == null
+                                        ? Colors.grey[100]
+                                        : (exigeDevocao
+                                              ? Colors.grey[200]
+                                              : Colors.white))
+                                  : (divindadeSelecionada == null
+                                        ? Colors.grey[300]
+                                        : (exigeDevocao
+                                              ? Colors.black26
+                                              : Colors.transparent)),
+                              borderRadius: BorderRadius.circular(14),
+                              border: Border.all(
+                                color: modoCompacto
+                                    ? (divindadeSelecionada == null
+                                          ? Colors.red[700]!
+                                          : Colors.grey.shade300)
+                                    : Colors.white38,
+                                width: modoCompacto && divindadeSelecionada == null
+                                    ? 1.6
+                                    : 1,
                               ),
-                            ],
+                            ),
+                            child: Row(
+                              mainAxisAlignment: modoCompacto
+                                  ? MainAxisAlignment.start
+                                  : MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  exigeDevocao ? Icons.lock : Icons.block,
+                                  size: modoCompacto ? 18 : 14,
+                                  color: modoCompacto
+                                      ? (exigeDevocao
+                                            ? Colors.grey[500]
+                                            : Colors.black87)
+                                      : (divindadeSelecionada == null
+                                            ? Colors.black
+                                            : Colors.white),
+                                ),
+                                const SizedBox(width: 8),
+                                Expanded(
+                                  child: Text(
+                                    "Não Devoto",
+                                    style: TextStyle(
+                                      color: modoCompacto
+                                          ? (exigeDevocao
+                                                ? Colors.grey[600]
+                                                : Colors.black87)
+                                          : (divindadeSelecionada == null
+                                                ? Colors.black
+                                                : (exigeDevocao
+                                                      ? Colors.white38
+                                                      : Colors.white)),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: modoCompacto ? 15 : 13,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                                if (modoCompacto)
+                                  Icon(
+                                    Icons.chevron_right,
+                                    color: Colors.grey[600],
+                                  ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -219,6 +276,13 @@ class _PaginaSelecaoDivindadeState extends State<PaginaSelecaoDivindade> {
                       // Lista das Divindades
                       Expanded(
                         child: ListView.builder(
+                          padding: appListPaddingWithBottomInset(
+                            context,
+                            EdgeInsets.symmetric(
+                              horizontal: modoCompacto ? 12 : 8,
+                              vertical: modoCompacto ? 6 : 4,
+                            ),
+                          ),
                           itemCount: BancoDeDivindades.todas.length,
                           itemBuilder: (context, index) {
                             final divindade = BancoDeDivindades.todas[index];
@@ -233,15 +297,115 @@ class _PaginaSelecaoDivindadeState extends State<PaginaSelecaoDivindade> {
                                   modoEstrito: modoEstrito,
                                 );
 
-                            return GestureDetector(
-                              onTap: () {
-                                cubit.selecionarDivindade(divindade);
-                              },
-                              child: Container(
-                                margin: const EdgeInsets.symmetric(
-                                  horizontal: 8,
-                                  vertical: 4,
+                            void selecionar() {
+                              cubit.selecionarDivindade(divindade);
+                              onItemSelecionado();
+                            }
+
+                            if (modoCompacto) {
+                              return Card(
+                                elevation: isSelected ? 2 : 0.5,
+                                margin: const EdgeInsets.only(bottom: 8),
+                                color: isSelected
+                                    ? Colors.red[50]
+                                    : Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  side: BorderSide(
+                                    color: isSelected
+                                        ? Colors.red[700]!
+                                        : Colors.grey.shade300,
+                                    width: isSelected ? 1.8 : 1,
+                                  ),
                                 ),
+                                child: InkWell(
+                                  onTap: selecionar,
+                                  borderRadius: BorderRadius.circular(12),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 12,
+                                      vertical: 10,
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        SimboloDivindade(
+                                          idDivindade: divindade.id,
+                                          tamanho: 36,
+                                        ),
+                                        const SizedBox(width: 12),
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  if (!elegibilidade
+                                                      .ehElegivel) ...[
+                                                    Icon(
+                                                      Icons.block,
+                                                      size: 14,
+                                                      color: Colors.red[700],
+                                                    ),
+                                                    const SizedBox(width: 4),
+                                                  ],
+                                                  Expanded(
+                                                    child: Text(
+                                                      divindade.nome,
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 15,
+                                                        color: isSelected
+                                                            ? Colors.red[900]
+                                                            : (!elegibilidade
+                                                                      .ehElegivel
+                                                                  ? Colors
+                                                                        .grey[700]
+                                                                  : Colors
+                                                                        .black87),
+                                                      ),
+                                                      maxLines: 1,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              Text(
+                                                divindade.titulo,
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: Colors.grey[700],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        const SizedBox(width: 6),
+                                        if (isSelected)
+                                          Icon(
+                                            Icons.check_circle,
+                                            color: Colors.red[700],
+                                            size: 20,
+                                          ),
+                                        Icon(
+                                          Icons.chevron_right,
+                                          color: Colors.grey[600],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }
+
+                            return GestureDetector(
+                              onTap: selecionar,
+                              child: Container(
+                                margin: const EdgeInsets.symmetric(vertical: 4),
                                 padding: const EdgeInsets.symmetric(
                                   vertical: 10,
                                   horizontal: 6,
@@ -297,34 +461,18 @@ class _PaginaSelecaoDivindadeState extends State<PaginaSelecaoDivindade> {
                         ),
                       ),
                     ],
-                  ),
-                ),
-              ),
-
-              // Botão Retrátil
-              GestureDetector(
-                onTap: () => setState(() => _menuAberto = !_menuAberto),
-                child: Container(
-                  width: 24,
-                  height: double.infinity,
-                  color: const Color(0xFFB71C1C),
-                  child: Icon(
-                    _menuAberto ? Icons.chevron_left : Icons.chevron_right,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-
-              // Painel de Conteúdo
-              Expanded(
-                child: Container(
-                  color: Colors.white,
-                  child: divindadeSelecionada == null
+                  );
+                },
+            detalheBuilder:
+                (
+                  context, {
+                  required modoCompacto,
+                  required onVoltarLista,
+                }) {
+                  return divindadeSelecionada == null
                       ? _buildPainelNaoDevoto(exigeDevocao)
-                      : _buildPainelDivindade(divindadeSelecionada, cubit),
-                ),
-              ),
-            ],
+                      : _buildPainelDivindade(divindadeSelecionada, cubit);
+                },
           ),
         ),
       ],
@@ -450,9 +598,12 @@ class _PaginaSelecaoDivindadeState extends State<PaginaSelecaoDivindade> {
   }
 
   Widget _buildPainelNaoDevoto(bool exigeDevocao) {
-    return Padding(
-      padding: const EdgeInsets.all(24.0),
-      child: Center(
+    return Center(
+      child: SingleChildScrollView(
+        padding: appListPaddingWithBottomInset(
+          context,
+          const EdgeInsets.all(24.0),
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -489,21 +640,36 @@ class _PaginaSelecaoDivindadeState extends State<PaginaSelecaoDivindade> {
             ),
             const SizedBox(height: 20),
             if (!exigeDevocao)
-              Chip(
-                backgroundColor: Colors.green[50],
-                side: BorderSide(color: Colors.green[400]!),
-                avatar: const Icon(
-                  Icons.check_circle,
-                  size: 18,
-                  color: Colors.green,
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 8,
                 ),
-                label: const Text(
-                  "Você pode avançar sem escolher um deus",
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.green,
-                  ),
+                decoration: BoxDecoration(
+                  color: Colors.green[50],
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: Colors.green[400]!),
+                ),
+                child: const Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.check_circle,
+                      size: 18,
+                      color: Colors.green,
+                    ),
+                    SizedBox(width: 8),
+                    Flexible(
+                      child: Text(
+                        "Você pode avançar sem escolher um deus",
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.green,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
           ],
@@ -525,7 +691,10 @@ class _PaginaSelecaoDivindadeState extends State<PaginaSelecaoDivindade> {
     final canalizacaoAtual = widget.state.canalizacaoSelecionada;
 
     return ListView(
-      padding: const EdgeInsets.all(16),
+      padding: appListPaddingWithBottomInset(
+        context,
+        const EdgeInsets.all(16),
+      ),
       children: [
         // Símbolo Sagrado, Nome e Título da Divindade
         Row(
@@ -652,36 +821,21 @@ class _PaginaSelecaoDivindadeState extends State<PaginaSelecaoDivindade> {
           spacing: 8,
           runSpacing: 6,
           children: [
-            Chip(
-              backgroundColor: Colors.grey[100],
-              side: BorderSide(color: Colors.grey[300]!),
-              avatar: const Icon(
-                Icons.auto_awesome,
-                size: 16,
-                color: Colors.indigo,
-              ),
-              label: Text(
-                "Símbolo: ${divindade.simboloSagrado}",
-                style: const TextStyle(fontSize: 12),
-              ),
+            _buildSpecBadge(
+              icone: Icons.auto_awesome,
+              corIcone: Colors.indigo,
+              texto: "Símbolo: ${divindade.simboloSagrado}",
             ),
-            Chip(
-              backgroundColor: Colors.grey[100],
-              side: BorderSide(color: Colors.grey[300]!),
-              avatar: const Icon(Icons.colorize, size: 16, color: Colors.brown),
-              label: Text(
-                "Arma: ${divindade.armaPreferida}",
-                style: const TextStyle(fontSize: 12),
-              ),
+            _buildSpecBadge(
+              icone: Icons.colorize,
+              corIcone: Colors.brown,
+              texto: "Arma: ${divindade.armaPreferida}",
             ),
-            Chip(
-              backgroundColor: Colors.grey[100],
-              side: BorderSide(color: Colors.grey[300]!),
-              avatar: const Icon(Icons.bolt, size: 16, color: Colors.amber),
-              label: Text(
-                "Canalização: ${_nomeCanalizacaoOpcao(divindade.canalizacaoPermitida)}",
-                style: const TextStyle(fontSize: 12),
-              ),
+            _buildSpecBadge(
+              icone: Icons.bolt,
+              corIcone: Colors.amber.shade800,
+              texto:
+                  "Canalização: ${_nomeCanalizacaoOpcao(divindade.canalizacaoPermitida)}",
             ),
           ],
         ),
@@ -715,12 +869,14 @@ class _PaginaSelecaoDivindadeState extends State<PaginaSelecaoDivindade> {
                 children: [
                   Icon(Icons.gavel, color: Colors.red[900], size: 20),
                   const SizedBox(width: 8),
-                  Text(
-                    "Obrigações & Restrições",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                      color: Colors.red[950],
+                  Expanded(
+                    child: Text(
+                      "Obrigações & Restrições",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                        color: Colors.red[950],
+                      ),
                     ),
                   ),
                 ],
@@ -893,25 +1049,31 @@ class _PaginaSelecaoDivindadeState extends State<PaginaSelecaoDivindade> {
         const Divider(),
 
         // Seletor de Poder Concedido
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Text(
-              "Poderes Concedidos",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-            ),
-            Text(
-              ehDevotoFiel
-                  ? "Escolha 2 poderes (${widget.state.poderesConcedidosSelecionados.length}/2)"
-                  : "Escolha 1 poder (${widget.state.poderesConcedidosSelecionados.length}/1)",
-              style: TextStyle(
-                fontSize: 12,
-                color: ehDevotoFiel ? Colors.green[800] : Colors.grey[700],
-                fontWeight: ehDevotoFiel ? FontWeight.bold : FontWeight.normal,
-                fontStyle: FontStyle.italic,
+        SizedBox(
+          width: double.infinity,
+          child: Wrap(
+            alignment: WrapAlignment.spaceBetween,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 8,
+            runSpacing: 4,
+            children: [
+              const Text(
+                "Poderes Concedidos",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),
-            ),
-          ],
+              Text(
+                ehDevotoFiel
+                    ? "Escolha 2 poderes (${widget.state.poderesConcedidosSelecionados.length}/2)"
+                    : "Escolha 1 poder (${widget.state.poderesConcedidosSelecionados.length}/1)",
+                style: TextStyle(
+                  fontSize: 12,
+                  color: ehDevotoFiel ? Colors.green[800] : Colors.grey[700],
+                  fontWeight: ehDevotoFiel ? FontWeight.bold : FontWeight.normal,
+                  fontStyle: FontStyle.italic,
+                ),
+              ),
+            ],
+          ),
         ),
         const SizedBox(height: 8),
 
@@ -984,7 +1146,10 @@ class _PaginaSelecaoDivindadeState extends State<PaginaSelecaoDivindade> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
+                          Wrap(
+                            spacing: 6,
+                            runSpacing: 4,
+                            crossAxisAlignment: WrapCrossAlignment.center,
                             children: [
                               Text(
                                 poder.nome,
@@ -993,8 +1158,7 @@ class _PaginaSelecaoDivindadeState extends State<PaginaSelecaoDivindade> {
                                   fontSize: 15,
                                 ),
                               ),
-                              if (isSelected) ...[
-                                const SizedBox(width: 6),
+                              if (isSelected)
                                 Container(
                                   padding: const EdgeInsets.symmetric(
                                     horizontal: 6,
@@ -1019,7 +1183,6 @@ class _PaginaSelecaoDivindadeState extends State<PaginaSelecaoDivindade> {
                                     ),
                                   ),
                                 ),
-                              ],
                             ],
                           ),
                           const SizedBox(height: 4),
@@ -1066,6 +1229,35 @@ class _PaginaSelecaoDivindadeState extends State<PaginaSelecaoDivindade> {
         }),
         const SizedBox(height: 20),
       ],
+    );
+  }
+
+  Widget _buildSpecBadge({
+    required IconData icone,
+    required Color corIcone,
+    required String texto,
+  }) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      decoration: BoxDecoration(
+        color: Colors.grey[100],
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: Colors.grey[300]!),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icone, size: 16, color: corIcone),
+          const SizedBox(width: 6),
+          Flexible(
+            child: Text(
+              texto,
+              style: const TextStyle(fontSize: 12),
+              softWrap: true,
+            ),
+          ),
+        ],
+      ),
     );
   }
 

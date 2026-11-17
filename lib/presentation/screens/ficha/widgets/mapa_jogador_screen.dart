@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../domain/entities/combate/combatente.dart';
 import '../../../../domain/entities/combate/grid_tatico.dart';
 import '../../../../domain/entities/entidade_sessao_lan/sessao_lan_modelos.dart';
 import '../../../../domain/entities/mestre/modelos_mestre.dart';
+import '../../../../domain/services/combate_services/movimento_engine.dart';
 import '../../../controllers/ficha_controller/ficha_cubit.dart';
 import '../../../controllers/ficha_controller/sessao_jogador_cubit.dart';
 import '../../../controllers/ficha_controller/sessao_jogador_state.dart';
+import '../../../widgets/app_safe_scaffold.dart';
 
 /// Visão em tela cheia do mapa da mesa enviada pelo Mestre para o Jogador.
 class MapaJogadorScreen extends StatelessWidget {
@@ -20,6 +23,7 @@ class MapaJogadorScreen extends StatelessWidget {
         return Scaffold(
           backgroundColor: const Color(0xFF0F172A),
           appBar: AppBar(
+            systemOverlayStyle: T20SystemUi.estiloEscuro,
             backgroundColor: const Color(0xFF1E293B),
             foregroundColor: Colors.white,
             title: Text(snap?.nomeMapa ?? 'Mapa da Mesa'),
@@ -49,14 +53,17 @@ class MapaJogadorScreen extends StatelessWidget {
                 ),
             ],
           ),
-          body: !state.estaConectado || snap == null
-              ? const Center(
-                  child: Text(
-                    'Aguardando mapa ativo da sessão...',
-                    style: TextStyle(color: Colors.white70),
-                  ),
-                )
-              : const MapaMesaJogadorWidget(),
+          body: SafeArea(
+            top: false,
+            child: !state.estaConectado || snap == null
+                ? const Center(
+                    child: Text(
+                      'Aguardando mapa ativo da sessão...',
+                      style: TextStyle(color: Colors.white70),
+                    ),
+                  )
+                : const MapaMesaJogadorWidget(),
+          ),
         );
       },
     );
@@ -86,9 +93,79 @@ class _MapaMesaJogadorWidgetState extends State<MapaMesaJogadorWidget> {
     PresetFundoMapa.imagemCustomizada => const Color(0xFF1E293B),
   };
 
+  ({Set<Posicao2D> destinos, Map<Posicao2D, double> custos}) _calcularAlcance(
+    SnapshotMesa snap,
+    String meuCharId,
+    double meuDeslocamentoFicha,
+  ) {
+    final selId = _tokenSelecionadoId;
+    if (selId == null) {
+      return (destinos: const {}, custos: const {});
+    }
+    final tok = snap.tokensVisiveis.where((t) => t.id == selId).firstOrNull;
+    if (tok == null) {
+      return (destinos: const {}, custos: const {});
+    }
+
+    final deslocamento = tok.id == meuCharId
+        ? meuDeslocamentoFicha
+        : tok.deslocamentoMetros;
+
+    final posicoes = <String, Posicao2D>{
+      for (final t in snap.tokensVisiveis) t.id: t.posicao,
+    };
+    final combatentes = <String, Combatente>{
+      for (final t in snap.tokensVisiveis)
+        t.id: Combatente(
+          id: t.id,
+          nome: t.nome,
+          time: t.ehHeroi ? TimeCombatente.heroi : TimeCombatente.inimigo,
+          pvMax: t.pvMax,
+          pvAtual: t.pvAtual,
+          pmMax: t.pmMax,
+          pmAtual: t.pmAtual,
+          defesa: t.defesa,
+          deslocamentoMetros: t.id == meuCharId
+              ? meuDeslocamentoFicha
+              : t.deslocamentoMetros,
+          modIniciativa: t.iniciativa ?? 0,
+          modLuta: 0,
+          modPontaria: 0,
+          modPercepcao: 0,
+          modForca: 0,
+          modDestreza: 0,
+          modConstituicao: 0,
+        ),
+    };
+
+    final resultado = MovimentoEngine.calcularAlcancaveis(
+      mapa: GridMapa(
+        largura: snap.largura,
+        altura: snap.altura,
+        terrenos: snap.terrenos,
+      ),
+      inicio: tok.posicao,
+      deslocamentoMaximoMetros: deslocamento,
+      posicoesCombatentes: posicoes,
+      combatentesPorId: combatentes,
+      combatenteAtivoId: tok.id,
+    );
+
+    return (
+      destinos: resultado.destinosValidos,
+      custos: resultado.custosMetros,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final meuCharId = context.read<FichaCubit>().personagem.id;
+    final personagem = context.select(
+      (FichaCubit c) => (
+        id: c.personagem.id,
+        deslocamento: c.personagem.deslocamentoEfetivoMetros.toDouble(),
+      ),
+    );
+    final meuCharId = personagem.id;
 
     return BlocBuilder<SessaoJogadorCubit, SessaoJogadorState>(
       builder: (context, state) {
@@ -103,6 +180,11 @@ class _MapaMesaJogadorWidgetState extends State<MapaMesaJogadorWidget> {
         }
 
         final movendoProprio = _tokenSelecionadoId == meuCharId;
+        final alcance = _calcularAlcance(
+          snap,
+          meuCharId,
+          personagem.deslocamento,
+        );
 
         return Container(
           color: const Color(0xFF0F172A),
@@ -116,14 +198,28 @@ class _MapaMesaJogadorWidgetState extends State<MapaMesaJogadorWidget> {
                     vertical: widget.compacto ? 4 : 6,
                   ),
                   color: const Color(0xFF1E3A8A),
-                  child: Text(
-                    'Toque em uma célula revelada para mover seu personagem.',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: widget.compacto ? 11 : 12,
-                      fontWeight: FontWeight.w600,
-                    ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        'Toque em uma célula revelada para mover seu personagem.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: widget.compacto ? 11 : 12,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      Text(
+                        'Alcance: ${personagem.deslocamento.toStringAsFixed(1)}m (${(personagem.deslocamento / 1.5).floor()}□) • Difícil = 3m/□',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.cyanAccent,
+                          fontSize: widget.compacto ? 10 : 11,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               Expanded(
@@ -131,10 +227,21 @@ class _MapaMesaJogadorWidgetState extends State<MapaMesaJogadorWidget> {
                   minScale: widget.compacto ? 0.35 : 0.5,
                   maxScale: 3.0,
                   boundaryMargin: EdgeInsets.all(widget.compacto ? 24 : 64),
-                  child: Center(child: _buildGrid(snap, meuCharId)),
+                  child: Center(
+                    child: _buildGrid(
+                      snap,
+                      meuCharId,
+                      alcance.destinos,
+                      alcance.custos,
+                    ),
+                  ),
                 ),
               ),
-              _buildBarraTokenSelecionado(snap, meuCharId),
+              _buildBarraTokenSelecionado(
+                snap,
+                meuCharId,
+                personagem.deslocamento,
+              ),
             ],
           ),
         );
@@ -142,7 +249,12 @@ class _MapaMesaJogadorWidgetState extends State<MapaMesaJogadorWidget> {
     );
   }
 
-  Widget _buildGrid(SnapshotMesa snap, String meuCharId) {
+  Widget _buildGrid(
+    SnapshotMesa snap,
+    String meuCharId,
+    Set<Posicao2D> alcancaveis,
+    Map<Posicao2D, double> custos,
+  ) {
     final double cellSize = widget.compacto ? 26 : 40;
     final larguraPx = snap.largura * cellSize;
     final alturaPx = snap.altura * cellSize;
@@ -156,7 +268,7 @@ class _MapaMesaJogadorWidgetState extends State<MapaMesaJogadorWidget> {
       ),
       child: Stack(
         children: [
-          // Grade e Fog of War
+          // Grade, Terrenos, Alcance e Fog of War
           for (int y = 0; y < snap.altura; y++)
             for (int x = 0; x < snap.largura; x++)
               Positioned(
@@ -164,7 +276,14 @@ class _MapaMesaJogadorWidgetState extends State<MapaMesaJogadorWidget> {
                 top: y * cellSize,
                 width: cellSize,
                 height: cellSize,
-                child: _buildCelula(snap, x, y, meuCharId),
+                child: _buildCelula(
+                  snap,
+                  x,
+                  y,
+                  meuCharId,
+                  alcancaveis,
+                  custos,
+                ),
               ),
           // Tokens visíveis ao jogador
           for (final tok in snap.tokensVisiveis)
@@ -194,11 +313,40 @@ class _MapaMesaJogadorWidgetState extends State<MapaMesaJogadorWidget> {
     );
   }
 
-  Widget _buildCelula(SnapshotMesa snap, int x, int y, String meuCharId) {
+  Widget _buildCelula(
+    SnapshotMesa snap,
+    int x,
+    int y,
+    String meuCharId,
+    Set<Posicao2D> alcancaveis,
+    Map<Posicao2D, double> custos,
+  ) {
     final pos = Posicao2D(x, y);
     final revelada =
         snap.celulasReveladas.isEmpty || snap.celulasReveladas.contains(pos);
-    final podeMoverAqui = _tokenSelecionadoId == meuCharId && revelada;
+    final terreno = revelada
+        ? (snap.terrenos[pos] ?? TipoTerreno.normal)
+        : TipoTerreno.normal;
+    final alcancavel = revelada && alcancaveis.contains(pos);
+    final custo = custos[pos];
+    final podeMoverAqui =
+        _tokenSelecionadoId == meuCharId &&
+        revelada &&
+        terreno != TipoTerreno.obstaculo &&
+        (alcancaveis.isEmpty || alcancavel);
+
+    Color corCelula;
+    if (!revelada) {
+      corCelula = Colors.black.withValues(alpha: 0.78);
+    } else if (terreno == TipoTerreno.obstaculo) {
+      corCelula = Colors.black.withValues(alpha: 0.72);
+    } else if (alcancavel) {
+      corCelula = const Color(0xFF38BDF8).withValues(alpha: 0.35);
+    } else if (terreno == TipoTerreno.dificil) {
+      corCelula = const Color(0xFFD97706).withValues(alpha: 0.35);
+    } else {
+      corCelula = Colors.transparent;
+    }
 
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
@@ -209,18 +357,68 @@ class _MapaMesaJogadorWidgetState extends State<MapaMesaJogadorWidget> {
             }
           : null,
       child: Container(
+        key: revelada && terreno == TipoTerreno.obstaculo
+            ? ValueKey('celula_obstaculo_${x}_$y')
+            : (revelada && terreno == TipoTerreno.dificil
+                  ? ValueKey('celula_dificil_${x}_$y')
+                  : (alcancavel ? ValueKey('celula_alcancavel_${x}_$y') : null)),
         decoration: BoxDecoration(
-          color: revelada
-              ? Colors.transparent
-              : Colors.black.withValues(alpha: 0.78),
-          border: snap.gridVisivel
-              ? Border.all(
-                  color: Colors.white.withValues(
-                    alpha: snap.opacidadeGrid * 0.45,
+          color: corCelula,
+          border: alcancavel
+              ? Border.all(color: Colors.cyanAccent, width: 1.4)
+              : (snap.gridVisivel
+                    ? Border.all(
+                        color: Colors.white.withValues(
+                          alpha: snap.opacidadeGrid * 0.45,
+                        ),
+                        width: 0.5,
+                      )
+                    : null),
+        ),
+        child: Stack(
+          children: [
+            if (revelada && terreno == TipoTerreno.obstaculo)
+              Center(
+                child: Icon(
+                  Icons.close,
+                  size: widget.compacto ? 13 : 18,
+                  color: Colors.white38,
+                ),
+              ),
+            if (revelada && terreno == TipoTerreno.dificil)
+              Positioned(
+                top: 1,
+                right: 1,
+                child: Icon(
+                  Icons.change_history_rounded,
+                  size: widget.compacto ? 9 : 12,
+                  color: Colors.amberAccent,
+                ),
+              ),
+            if (alcancavel && custo != null)
+              Positioned(
+                right: 1,
+                bottom: 1,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 2,
+                    vertical: 0.5,
                   ),
-                  width: 0.5,
-                )
-              : null,
+                  decoration: BoxDecoration(
+                    color: Colors.black87,
+                    borderRadius: BorderRadius.circular(3),
+                  ),
+                  child: Text(
+                    '${custo.toStringAsFixed(1)}m',
+                    style: TextStyle(
+                      color: Colors.cyanAccent,
+                      fontSize: widget.compacto ? 6.5 : 8,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+          ],
         ),
       ),
     );
@@ -263,16 +461,23 @@ class _MapaMesaJogadorWidgetState extends State<MapaMesaJogadorWidget> {
     );
   }
 
-  Widget _buildBarraTokenSelecionado(SnapshotMesa snap, String meuCharId) {
+  Widget _buildBarraTokenSelecionado(
+    SnapshotMesa snap,
+    String meuCharId,
+    double meuDeslocamentoFicha,
+  ) {
     final tok = snap.tokensVisiveis
         .where((t) => t.id == _tokenSelecionadoId)
         .firstOrNull;
     if (tok == null) return const SizedBox.shrink();
 
     final mostrarPv = tok.id == meuCharId || tok.ehHeroi;
+    final desl = tok.id == meuCharId
+        ? meuDeslocamentoFicha
+        : tok.deslocamentoMetros;
     final texto = mostrarPv
-        ? '${tok.nome} • PV ${tok.pvAtual}/${tok.pvMax} • PM ${tok.pmAtual}/${tok.pmMax}${tok.condicoes.isNotEmpty ? ' • ${tok.condicoes.join(", ")}' : ''}'
-        : '${tok.nome}${tok.condicoes.isNotEmpty ? ' • Condições: ${tok.condicoes.join(", ")}' : ''}';
+        ? '${tok.nome} • PV ${tok.pvAtual}/${tok.pvMax} • PM ${tok.pmAtual}/${tok.pmMax} • Desl ${desl.toStringAsFixed(1)}m${tok.condicoes.isNotEmpty ? ' • ${tok.condicoes.join(", ")}' : ''}'
+        : '${tok.nome} • Desl ${desl.toStringAsFixed(1)}m${tok.condicoes.isNotEmpty ? ' • Condições: ${tok.condicoes.join(", ")}' : ''}';
 
     final conteudo = Text(
       texto,

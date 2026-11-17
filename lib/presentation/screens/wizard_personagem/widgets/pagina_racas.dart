@@ -6,6 +6,7 @@ import '../../../controllers/ficha_controller/personagem_cubit.dart';
 import '../../../../domain/services/data_services/call_pericias.dart';
 import '../../../../domain/services/data_services/call_poderes.dart';
 import '../../../../domain/services/data_services/call_racas.dart';
+import '../../../widgets/app_safe_scaffold.dart';
 import '../../../widgets/rpg_icon.dart';
 
 class PaginaSelecaoRaca extends StatefulWidget {
@@ -496,9 +497,13 @@ void _mostrarModalDeformidadeLefou(BuildContext parentContext) {
             minChildSize: 0.5,
             builder: (context, scrollController) {
               return Padding(
-                padding: const EdgeInsets.all(20),
+                padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
                 child: ListView(
                   controller: scrollController,
+                  padding: appListPaddingWithBottomInset(
+                    context,
+                    const EdgeInsets.only(bottom: 20),
+                  ),
                   children: [
                     Row(
                       children: [
@@ -644,6 +649,7 @@ void _mostrarModalDeformidadeLefou(BuildContext parentContext) {
 void _mostrarSeletorDeAtributos(BuildContext parentContext, Raca raca) {
   showModalBottomSheet(
     context: parentContext,
+    isScrollControlled: true,
     isDismissible: false, // O usuário é obrigado a terminar ou cancelar
     enableDrag: false, // Não deixa fechar arrastando para baixo
     shape: const RoundedRectangleBorder(
@@ -659,10 +665,11 @@ void _mostrarSeletorDeAtributos(BuildContext parentContext, Raca raca) {
           final faltam = 3 - selecoes.length;
 
           //Tela de seleção de atributos
-          return Container(
+          return AppBottomSheetContainer(
+            scrollable: true,
             padding: const EdgeInsets.all(24),
-            height: 450, // Altura do painel
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
                   "Bônus de ${raca.nome}",
@@ -723,7 +730,7 @@ void _mostrarSeletorDeAtributos(BuildContext parentContext, Raca raca) {
                   }).toList(),
                 ),
 
-                const Spacer(),
+                const SizedBox(height: 24),
 
                 // Botão de confirmar escolha
                 ElevatedButton(

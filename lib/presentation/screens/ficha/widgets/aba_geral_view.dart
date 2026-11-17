@@ -5,6 +5,7 @@ import '../../../../domain/entities/personagem/personagem.dart';
 import '../../../../domain/services/ficha_services/calculo_ficha_service.dart';
 import '../../../controllers/ficha_controller/ficha_cubit.dart';
 import '../../../controllers/ficha_controller/ficha_state.dart';
+import '../../../widgets/app_safe_scaffold.dart';
 import 'dialogo_rolagem_dado.dart';
 import 'dialogos_ficha.dart';
 
@@ -67,14 +68,18 @@ class AbaGeralView extends StatelessWidget {
                   color: Color(0xFFD97706),
                 ),
                 const SizedBox(width: 6),
-                Text(
-                  'Nível ${p.nivelPersonagem} • ${p.patamar.label}',
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w800,
-                    fontSize: 13,
+                Expanded(
+                  child: Text(
+                    'Nível ${p.nivelPersonagem} • ${p.patamar.label}',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w800,
+                      fontSize: 13,
+                    ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                const Spacer(),
+                const SizedBox(width: 8),
                 ActionChip(
                   visualDensity: VisualDensity.compact,
                   label: Text(
@@ -407,7 +412,10 @@ class AbaGeralView extends StatelessWidget {
             Expanded(
               child: ListView.separated(
                 controller: scrollController,
-                padding: const EdgeInsets.fromLTRB(16, 4, 16, 20),
+                padding: appListPaddingWithBottomInset(
+                  context,
+                  const EdgeInsets.fromLTRB(16, 4, 16, 20),
+                ),
                 itemCount: condicoes.length,
                 separatorBuilder: (_, _) => const Divider(height: 1),
                 itemBuilder: (_, index) {
@@ -551,9 +559,16 @@ class AbaGeralView extends StatelessWidget {
         final p = state.personagem;
         final compDefesa = CalculoFichaService.detalharDefesaERd(p);
 
-        return ListView(
-          padding: const EdgeInsets.fromLTRB(12, 12, 12, 28),
-          children: [
+        return CustomScrollView(
+          slivers: [
+            appNestedOverlapInjector(context),
+            SliverPadding(
+              padding: appListPaddingWithBottomInset(
+                context,
+                const EdgeInsets.fromLTRB(12, 12, 12, 28),
+              ),
+              sliver: SliverList.list(
+                children: [
             // 1. ATRIBUTOS (GATILHO ROLAGEM 1 TOQUE - HORIZONTAIS / DEITADOS ESTILO T20)
             _buildBarraAtributosHorizontal(context, p),
 
@@ -586,42 +601,46 @@ class AbaGeralView extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Row(
-                              children: [
-                                Icon(
-                                  Icons.shield_rounded,
-                                  color: Color(0xFF38BDF8),
-                                  size: 20,
-                                ),
-                                SizedBox(width: 6),
-                                Text(
-                                  'DEFESA',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 12.5,
-                                    fontWeight: FontWeight.w900,
-                                    letterSpacing: 0.8,
+                        SizedBox(
+                          width: double.infinity,
+                          child: Wrap(
+                            alignment: WrapAlignment.spaceBetween,
+                            crossAxisAlignment: WrapCrossAlignment.center,
+                            spacing: 6,
+                            runSpacing: 4,
+                            children: [
+                              const Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(
+                                    Icons.shield_rounded,
+                                    color: Color(0xFF38BDF8),
+                                    size: 20,
                                   ),
-                                ),
-                              ],
-                            ),
-                            InkWell(
-                              key: const Key('btn_editar_outros_defesa'),
-                              borderRadius: BorderRadius.circular(8),
-                              onTap: () => _abrirEditorDefesaOutros(
-                                context,
-                                cubit,
-                                p.outrosBonusDefesa,
+                                  SizedBox(width: 6),
+                                  Text(
+                                    'DEFESA',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 12.5,
+                                      fontWeight: FontWeight.w900,
+                                      letterSpacing: 0.8,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              child: ConstrainedBox(
-                                constraints: const BoxConstraints(
-                                  minHeight: 36,
-                                  minWidth: 44,
+                              InkWell(
+                                key: const Key('btn_editar_outros_defesa'),
+                                borderRadius: BorderRadius.circular(8),
+                                onTap: () => _abrirEditorDefesaOutros(
+                                  context,
+                                  cubit,
+                                  p.outrosBonusDefesa,
                                 ),
                                 child: Container(
+                                  constraints: const BoxConstraints(
+                                    minHeight: 34,
+                                  ),
                                   padding: const EdgeInsets.symmetric(
                                     horizontal: 8,
                                     vertical: 5,
@@ -630,20 +649,18 @@ class AbaGeralView extends StatelessWidget {
                                     color: Colors.white.withValues(alpha: 0.12),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  child: Center(
-                                    child: Text(
-                                      'Outros ${p.outrosBonusDefesa >= 0 ? "+${p.outrosBonusDefesa}" : "${p.outrosBonusDefesa}"}',
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 11,
-                                        fontWeight: FontWeight.w700,
-                                      ),
+                                  child: Text(
+                                    'Outros ${p.outrosBonusDefesa >= 0 ? "+${p.outrosBonusDefesa}" : "${p.outrosBonusDefesa}"}',
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w700,
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                         const SizedBox(height: 8),
                         Row(
@@ -712,7 +729,10 @@ class AbaGeralView extends StatelessWidget {
                 Expanded(
                   flex: 4,
                   child: Container(
-                    padding: const EdgeInsets.all(12),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 12,
+                    ),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(16),
@@ -728,6 +748,7 @@ class AbaGeralView extends StatelessWidget {
                             children: [
                               const Text(
                                 'RD PADRÃO',
+                                textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: 11,
                                   fontWeight: FontWeight.w900,
@@ -750,15 +771,16 @@ class AbaGeralView extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 6),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                        Wrap(
+                          spacing: 4,
+                          runSpacing: 4,
+                          alignment: WrapAlignment.center,
                           children: [
                             _BotaoMiniStepper(
                               icon: Icons.remove,
                               tooltip: 'Reduzir RD padrão',
                               onTap: () => cubit.ajustarRdPadrao(-1),
                             ),
-                            const SizedBox(width: 8),
                             _BotaoMiniStepper(
                               icon: Icons.add,
                               tooltip: 'Aumentar RD padrão',
@@ -982,6 +1004,9 @@ class AbaGeralView extends StatelessWidget {
                 ),
               ),
             ],
+                ],
+              ),
+            ),
           ],
         );
       },
@@ -1430,7 +1455,9 @@ class _FormularioEfeitoModalState extends State<_FormularioEfeitoModal> {
 
   @override
   Widget build(BuildContext context) {
-    final bottomInset = MediaQuery.of(context).viewInsets.bottom;
+    final bottomInset =
+        MediaQuery.viewInsetsOf(context).bottom +
+        MediaQuery.viewPaddingOf(context).bottom;
 
     return Padding(
       padding: EdgeInsets.fromLTRB(20, 16, 20, bottomInset + 20),

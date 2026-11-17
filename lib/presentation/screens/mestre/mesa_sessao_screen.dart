@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../domain/entities/mestre/modelos_mestre.dart';
 import '../../controllers/mestre_controller/mestre_cubit.dart';
 import '../../controllers/mestre_controller/mestre_state.dart';
+import '../../widgets/app_safe_scaffold.dart';
 import 'theme/mestre_theme.dart';
 import 'widgets/tela_escudo_notas.dart';
 import 'widgets/tela_mesa_jogo.dart';
@@ -38,46 +39,49 @@ class _MesaSessaoScreenState extends State<MesaSessaoScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: MestreCores.homeStyleTheme,
-      child: BlocProvider.value(
-        value: widget.cubit,
-        child: Scaffold(
-          body: IndexedStack(
-            index: _abaAtiva,
-            children: [
-              TelaMesaJogo(
-                cubit: widget.cubit,
-                onVoltarBiblioteca: () => Navigator.of(context).pop(),
-              ),
-              TelaEscudoNotas(cubit: widget.cubit),
-              _AbaJogadoresSessao(
-                cubit: widget.cubit,
-                onIrParaMapa: () => setState(() => _abaAtiva = 0),
-              ),
-            ],
-          ),
-          bottomNavigationBar: NavigationBar(
-            selectedIndex: _abaAtiva,
-            onDestinationSelected: (index) =>
-                setState(() => _abaAtiva = index),
-            destinations: const [
-              NavigationDestination(
-                icon: Icon(Icons.map_outlined),
-                selectedIcon: Icon(Icons.map),
-                label: 'Mapa',
-              ),
-              NavigationDestination(
-                icon: Icon(Icons.shield_outlined),
-                selectedIcon: Icon(Icons.shield),
-                label: 'Escudo',
-              ),
-              NavigationDestination(
-                icon: Icon(Icons.group_outlined),
-                selectedIcon: Icon(Icons.group),
-                label: 'Jogadores',
-              ),
-            ],
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: T20SystemUi.estiloEscuro,
+      child: Theme(
+        data: MestreCores.homeStyleTheme,
+        child: BlocProvider.value(
+          value: widget.cubit,
+          child: Scaffold(
+            body: IndexedStack(
+              index: _abaAtiva,
+              children: [
+                TelaMesaJogo(
+                  cubit: widget.cubit,
+                  onVoltarBiblioteca: () => Navigator.of(context).pop(),
+                ),
+                TelaEscudoNotas(cubit: widget.cubit),
+                _AbaJogadoresSessao(
+                  cubit: widget.cubit,
+                  onIrParaMapa: () => setState(() => _abaAtiva = 0),
+                ),
+              ],
+            ),
+            bottomNavigationBar: NavigationBar(
+              selectedIndex: _abaAtiva,
+              onDestinationSelected: (index) =>
+                  setState(() => _abaAtiva = index),
+              destinations: const [
+                NavigationDestination(
+                  icon: Icon(Icons.map_outlined),
+                  selectedIcon: Icon(Icons.map),
+                  label: 'Mapa',
+                ),
+                NavigationDestination(
+                  icon: Icon(Icons.shield_outlined),
+                  selectedIcon: Icon(Icons.shield),
+                  label: 'Escudo',
+                ),
+                NavigationDestination(
+                  icon: Icon(Icons.group_outlined),
+                  selectedIcon: Icon(Icons.group),
+                  label: 'Jogadores',
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -117,6 +121,7 @@ class _AbaJogadoresSessao extends StatelessWidget {
 
         return Scaffold(
           appBar: AppBar(
+            systemOverlayStyle: T20SystemUi.estiloEscuro,
             backgroundColor: Colors.transparent,
             elevation: 0,
             leading: IconButton(

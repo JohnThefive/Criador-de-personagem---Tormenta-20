@@ -11,6 +11,7 @@ import '../../../domain/services/combate_services/arena_stats_collector.dart';
 import '../../../domain/services/ficha_services/personagem_storage_service.dart';
 import '../../controllers/combate_controller/combate_cubit.dart';
 import '../../controllers/combate_controller/combate_state.dart';
+import '../../widgets/app_safe_scaffold.dart';
 
 import 'widgets/arena_arbitragem_dialog.dart';
 import 'widgets/arena_banner_turno.dart';
@@ -120,6 +121,7 @@ class _ArenaScreenState extends State<ArenaScreen> {
             return Scaffold(
               backgroundColor: const Color(0xFF0F172A),
               appBar: AppBar(
+                systemOverlayStyle: T20SystemUi.estiloEscuro,
                 backgroundColor: const Color(0xFFC62828),
                 title: const Text(
                   'Arena Tática T20',

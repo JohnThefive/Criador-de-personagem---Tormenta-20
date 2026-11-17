@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../domain/entities/personagem/personagem.dart';
 import '../../controllers/home_controller/home_cubit.dart';
+import '../../widgets/app_safe_scaffold.dart';
 import '../ficha/ficha_screen.dart';
 import '../wizard_personagem/char_creation_screen.dart';
 import 'widgets/breakpoints.dart';
@@ -86,15 +88,15 @@ class HomeScreen extends StatelessWidget {
 
     showModalBottomSheet<void>(
       context: context,
+      isScrollControlled: true,
       backgroundColor: const Color(0xFF1E293B),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (modalContext) {
-        return SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
-            child: Column(
+        return AppBottomSheetContainer(
+          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
+          child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -182,7 +184,6 @@ class HomeScreen extends StatelessWidget {
                 ),
               ],
             ),
-          ),
         );
       },
     );
@@ -192,80 +193,84 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final windowSize = WindowSizeClass.of(context);
 
-    return Theme(
-      data: _homeTheme,
-      child: Builder(
-        builder: (context) {
-          final colorScheme = Theme.of(context).colorScheme;
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: T20SystemUi.estiloEscuro,
+      child: Theme(
+        data: _homeTheme,
+        child: Builder(
+          builder: (context) {
+            final colorScheme = Theme.of(context).colorScheme;
 
-          return BlocBuilder<HomeCubit, HomeState>(
-            builder: (context, state) {
-              final temPersonagens = state.personagens.isNotEmpty;
+            return BlocBuilder<HomeCubit, HomeState>(
+              builder: (context, state) {
+                final temPersonagens = state.personagens.isNotEmpty;
 
-              // Conteúdo central adaptativo da tela
-              Widget buildConteudo() {
-                if (state.carregando) {
-                  return const Center(child: CircularProgressIndicator());
-                }
+                // Conteúdo central adaptativo da tela
+                Widget buildConteudo() {
+                  if (state.carregando) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
 
-                if (!temPersonagens) {
-                  return EmptyHomeState(
+                  if (!temPersonagens) {
+                    return EmptyHomeState(
+                      onCriarPersonagem: () => _navegarCriarPersonagem(context),
+                      onModoArena: () =>
+                          _abrirSeletorArena(context, state.personagens),
+                      onPainelMestre: () => _navegarPainelMestre(context),
+                    );
+                  }
+
+                  return CharacterListSection(
+                    personagens: state.personagens,
                     onCriarPersonagem: () => _navegarCriarPersonagem(context),
                     onModoArena: () =>
                         _abrirSeletorArena(context, state.personagens),
                     onPainelMestre: () => _navegarPainelMestre(context),
+                    onAbrirPersonagem: (p) => _navegarAbrirPersonagem(context, p),
+                    onExcluirPersonagem: (p) => _excluirPersonagem(context, p),
                   );
                 }
 
-                return CharacterListSection(
-                  personagens: state.personagens,
-                  onCriarPersonagem: () => _navegarCriarPersonagem(context),
-                  onModoArena: () =>
-                      _abrirSeletorArena(context, state.personagens),
-                  onPainelMestre: () => _navegarPainelMestre(context),
-                  onAbrirPersonagem: (p) => _navegarAbrirPersonagem(context, p),
-                  onExcluirPersonagem: (p) => _excluirPersonagem(context, p),
-                );
-              }
+                // Conteúdo com limites de largura para telas médias e expandidas
+                Widget buildConteudoAdaptativo() {
+                  final conteudo = buildConteudo();
 
-              // Conteúdo com limites de largura para telas médias e expandidas
-              Widget buildConteudoAdaptativo() {
-                final conteudo = buildConteudo();
+                  if (windowSize.isCompact) {
+                    return SafeArea(child: conteudo);
+                  }
 
-                if (windowSize.isCompact) {
-                  return SafeArea(child: conteudo);
+                  final double maxContentWidth = windowSize.isMedium ? 720 : 1000;
+
+                  return SafeArea(
+                    child: Center(
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(maxWidth: maxContentWidth),
+                        child: conteudo,
+                      ),
+                    ),
+                  );
                 }
 
-                final double maxContentWidth = windowSize.isMedium ? 720 : 1000;
-
-                return SafeArea(
-                  child: Center(
-                    child: ConstrainedBox(
-                      constraints: BoxConstraints(maxWidth: maxContentWidth),
-                      child: conteudo,
+                return Scaffold(
+                  drawer: const AppDrawer(isPermanent: false),
+                  appBar: AppBar(
+                    systemOverlayStyle: T20SystemUi.estiloEscuro,
+                    backgroundColor: Colors.transparent,
+                    elevation: 0,
+                    leading: Builder(
+                      builder: (ctx) => IconButton(
+                        icon: Icon(Icons.menu, color: colorScheme.onSurface),
+                        tooltip: 'Abrir menu de navegação',
+                        onPressed: () => Scaffold.of(ctx).openDrawer(),
+                      ),
                     ),
                   ),
+                  body: buildConteudoAdaptativo(),
                 );
-              }
-
-              return Scaffold(
-                drawer: const AppDrawer(isPermanent: false),
-                appBar: AppBar(
-                  backgroundColor: Colors.transparent,
-                  elevation: 0,
-                  leading: Builder(
-                    builder: (ctx) => IconButton(
-                      icon: Icon(Icons.menu, color: colorScheme.onSurface),
-                      tooltip: 'Abrir menu de navegação',
-                      onPressed: () => Scaffold.of(ctx).openDrawer(),
-                    ),
-                  ),
-                ),
-                body: buildConteudoAdaptativo(),
-              );
-            },
-          );
-        },
+              },
+            );
+          },
+        ),
       ),
     );
   }

@@ -6,6 +6,7 @@ import '../../../../domain/entities/personagem/personagem.dart';
 import '../../../../domain/services/data_services/call_classes.dart';
 import '../../../controllers/ficha_controller/ficha_cubit.dart';
 import '../../../controllers/ficha_controller/ficha_state.dart';
+import '../../../widgets/app_safe_scaffold.dart';
 import '../../wizard_personagem/selecao_poderes_screen.dart';
 import 'dialog_level_up_wizard.dart';
 
@@ -129,11 +130,13 @@ Future<void> mostrarModalProgressaoEMulticlasse(
               minChildSize: 0.45,
               maxChildSize: 0.94,
               expand: false,
-              builder: (_, scrollController) => Padding(
-                padding: const EdgeInsets.all(16),
-                child: ListView(
-                  controller: scrollController,
-                  children: [
+              builder: (_, scrollController) => ListView(
+                controller: scrollController,
+                padding: appListPaddingWithBottomInset(
+                  context,
+                  const EdgeInsets.all(16),
+                ),
+                children: [
                     Row(
                       children: [
                         const Icon(
@@ -582,7 +585,6 @@ Future<void> mostrarModalProgressaoEMulticlasse(
                     ],
                   ],
                 ),
-              ),
             );
           },
         ),

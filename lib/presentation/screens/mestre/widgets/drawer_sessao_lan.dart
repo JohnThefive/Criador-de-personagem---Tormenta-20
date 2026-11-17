@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../domain/entities/mestre/modelos_mestre.dart';
 import '../../../controllers/mestre_controller/mestre_cubit.dart';
 import '../../../controllers/mestre_controller/mestre_state.dart';
+import '../../../widgets/app_safe_scaffold.dart';
 import '../theme/mestre_theme.dart';
 
 /// PARTE 1 — Gaveta "Sessão e LAN" (Tormenta 20 - Android/Flutter)
@@ -946,7 +947,8 @@ class DrawerSessaoLan extends StatelessWidget {
           builder: (ctx, state) {
             final pinAtual = state.sessaoAtual?.codigoSalaLan ?? 'T20-4829';
 
-            return Padding(
+            return AppBottomSheetContainer(
+              scrollable: true,
               padding: const EdgeInsets.all(20),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -1189,7 +1191,8 @@ class DrawerSessaoLan extends StatelessWidget {
         builder: (ctx, state) {
           final elenco = state.sessaoAtual?.elenco ?? const [];
 
-          return Padding(
+          return AppBottomSheetContainer(
+            scrollable: true,
             padding: const EdgeInsets.all(20),
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -1422,7 +1425,8 @@ class DrawerSessaoLan extends StatelessWidget {
       ),
       builder: (ctx) => BlocBuilder<MestreCubit, MestreState>(
         bloc: cubit,
-        builder: (ctx, state) => Padding(
+        builder: (ctx, state) => AppBottomSheetContainer(
+          scrollable: true,
           padding: const EdgeInsets.all(20),
           child: Column(
             mainAxisSize: MainAxisSize.min,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../controllers/ficha_controller/ficha_cubit.dart';
 import '../../../controllers/ficha_controller/ficha_state.dart';
+import '../../../widgets/app_safe_scaffold.dart';
 import 'card_metrica_clicavel.dart';
 import 'dialogos_ficha.dart';
 
@@ -101,9 +102,16 @@ class _AbaHistoriaViewState extends State<AbaHistoriaView> {
         final cubit = context.read<FichaCubit>();
         final p = state.personagem;
 
-        return ListView(
-          padding: const EdgeInsets.fromLTRB(12, 12, 12, 28),
-          children: [
+        return CustomScrollView(
+          slivers: [
+            appNestedOverlapInjector(context),
+            SliverPadding(
+              padding: appListPaddingWithBottomInset(
+                context,
+                const EdgeInsets.fromLTRB(12, 12, 12, 28),
+              ),
+              sliver: SliverList.list(
+                children: [
             // 1. ANOTAÇÕES LIVRES DE SESSÃO (AUTO-SAVE)
             Container(
               padding: const EdgeInsets.all(14),
@@ -280,6 +288,9 @@ class _AbaHistoriaViewState extends State<AbaHistoriaView> {
                       ),
                     ),
                   ),
+                ],
+              ),
+            ),
                 ],
               ),
             ),

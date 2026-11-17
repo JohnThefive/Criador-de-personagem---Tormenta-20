@@ -287,6 +287,7 @@ class SnapshotMesa extends Equatable {
   final PresetFundoMapa presetFundo;
   final bool gridVisivel;
   final double opacidadeGrid;
+  final Map<Posicao2D, TipoTerreno> terrenos;
   final Set<Posicao2D> celulasReveladas;
   final List<TokenNoMapa> tokensVisiveis;
 
@@ -300,6 +301,7 @@ class SnapshotMesa extends Equatable {
     this.presetFundo = PresetFundoMapa.masmorraPedra,
     this.gridVisivel = true,
     this.opacidadeGrid = 0.35,
+    this.terrenos = const {},
     this.celulasReveladas = const {},
     this.tokensVisiveis = const [],
   });
@@ -344,6 +346,7 @@ class SnapshotMesa extends Equatable {
       presetFundo: mapa.presetFundo,
       gridVisivel: mapa.gridVisivel,
       opacidadeGrid: mapa.opacidadeGrid,
+      terrenos: Map<Posicao2D, TipoTerreno>.from(mapa.terrenos),
       celulasReveladas: Set<Posicao2D>.from(mapa.celulasReveladas),
       tokensVisiveis: tokensSeguros,
     );
@@ -359,6 +362,16 @@ class SnapshotMesa extends Equatable {
         'presetFundo': presetFundo.name,
         'gridVisivel': gridVisivel,
         'opacidadeGrid': opacidadeGrid,
+        'terrenos': terrenos.entries
+            .where((e) => e.value != TipoTerreno.normal)
+            .map(
+              (e) => {
+                'x': e.key.x,
+                'y': e.key.y,
+                'tipo': e.value.name,
+              },
+            )
+            .toList(growable: false),
         'celulasReveladas': celulasReveladas
             .map((p) => {'x': p.x, 'y': p.y})
             .toList(growable: false),
@@ -367,8 +380,24 @@ class SnapshotMesa extends Equatable {
       };
 
   factory SnapshotMesa.fromJson(Map<String, dynamic> json) {
+    final terrenosRaw = json['terrenos'] as List<dynamic>? ?? const [];
     final reveladasRaw = json['celulasReveladas'] as List<dynamic>? ?? const [];
     final tokensRaw = json['tokensVisiveis'] as List<dynamic>? ?? const [];
+
+    final mapaTerrenos = <Posicao2D, TipoTerreno>{};
+    for (final item in terrenosRaw.whereType<Map>()) {
+      final x = (item['x'] as num?)?.toInt();
+      final y = (item['y'] as num?)?.toInt();
+      final tipoStr = item['tipo']?.toString();
+      if (x == null || y == null || tipoStr == null) continue;
+      final tipo = TipoTerreno.values.firstWhere(
+        (t) => t.name == tipoStr,
+        orElse: () => TipoTerreno.normal,
+      );
+      if (tipo != TipoTerreno.normal) {
+        mapaTerrenos[Posicao2D(x, y)] = tipo;
+      }
+    }
 
     return SnapshotMesa(
       mapaId: (json['mapaId'] ?? '').toString(),
@@ -383,6 +412,7 @@ class SnapshotMesa extends Equatable {
       ),
       gridVisivel: json['gridVisivel'] != false,
       opacidadeGrid: (json['opacidadeGrid'] as num?)?.toDouble() ?? 0.35,
+      terrenos: mapaTerrenos,
       celulasReveladas: reveladasRaw
           .whereType<Map>()
           .map(
@@ -411,6 +441,7 @@ class SnapshotMesa extends Equatable {
         presetFundo,
         gridVisivel,
         opacidadeGrid,
+        terrenos,
         celulasReveladas,
         tokensVisiveis,
       ];

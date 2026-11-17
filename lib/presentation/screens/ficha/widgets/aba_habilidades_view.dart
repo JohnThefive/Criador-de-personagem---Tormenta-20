@@ -11,6 +11,7 @@ import '../../../../domain/services/data_services/call_montaria_sagrada.dart';
 import 'modal_escolha_companheiro.dart';
 import '../../../controllers/ficha_controller/ficha_cubit.dart';
 import '../../../controllers/ficha_controller/ficha_state.dart';
+import '../../../widgets/app_safe_scaffold.dart';
 import '../../wizard_personagem/selecao_poderes_screen.dart';
 import 'secoes_habilidades_progressao.dart';
 
@@ -203,6 +204,10 @@ class _AbaHabilidadesViewState extends State<AbaHabilidadesView> {
                 Expanded(
                   child: ListView.builder(
                     controller: scrollController,
+                    padding: appListPaddingWithBottomInset(
+                      context,
+                      const EdgeInsets.only(bottom: 16),
+                    ),
                     itemCount: formas.length,
                     itemBuilder: (_, index) {
                       final forma = formas[index];
@@ -1065,6 +1070,7 @@ class _AbaHabilidadesViewState extends State<AbaHabilidadesView> {
 
         return CustomScrollView(
           slivers: [
+            appNestedOverlapInjector(context),
             SliverPadding(
               padding: const EdgeInsets.fromLTRB(12, 12, 12, 14),
               sliver: SliverToBoxAdapter(child: _buildSeletorSecao()),
@@ -1683,6 +1689,7 @@ class _AbaHabilidadesViewState extends State<AbaHabilidadesView> {
                   ),
                 ),
             ],
+            appBottomSafeSliver(context, extra: 0),
           ],
         );
       },
