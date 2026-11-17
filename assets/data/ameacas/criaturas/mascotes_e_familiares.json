@@ -1,0 +1,834 @@
+[
+  {
+    "id": "bogum",
+    "nome": "Bogum",
+    "nd": "0.5",
+    "regiao": "mascotes_e_familiares",
+    "papel": "lacaio",
+    "tipo": "construto",
+    "subtipo": null,
+    "tamanho": "minusculo",
+    "iniciativa": 2,
+    "percepcao": 5,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 11,
+    "resistencias": {
+      "fortitude": -1,
+      "reflexos": 5,
+      "vontade": 2
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 5,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": -3,
+      "des": 2,
+      "con": 0,
+      "int": -4,
+      "sab": 1,
+      "car": -3
+    },
+    "pericias": {
+      "furtividade": 9,
+      "sobrevivencia": 7
+    },
+    "ataques": [
+      {
+        "nome": "Galho",
+        "bonusAtaque": 7,
+        "dano": "1d3+2",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Cuspe venenoso (à distância)",
+        "bonusAtaque": 9,
+        "dano": "1d4+7",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "acido",
+        "alcance": "curto",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Natureza Vegetal",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O bogum é um construto de matéria vegetal, não metal ou pedra."
+      },
+      {
+        "nome": "Veneno",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 13,
+        "resistenciaTipo": null,
+        "descricao": "Veneno urticante: cego e vulnerável por 1 rodada (Fortitude CD 13 evita)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "escudeiro",
+    "nome": "Escudeiro",
+    "nd": "0.5",
+    "regiao": "mascotes_e_familiares",
+    "papel": "especial",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "pequeno",
+    "iniciativa": 3,
+    "percepcao": 3,
+    "sentidos": [
+      "visao_na_penumbra"
+    ],
+    "defesa": 15,
+    "resistencias": {
+      "fortitude": 6,
+      "reflexos": 3,
+      "vontade": -1
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 14,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 9.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 1,
+      "con": 1,
+      "int": -3,
+      "sab": 1,
+      "car": -3
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Cauda",
+        "bonusAtaque": 9,
+        "dano": "1d6+7",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [],
+    "equipamento": [],
+    "tesouro": "carapaca ossea (cd 15 para extrair; vale t$ 50 para fabricar um escudo superior).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "fofo",
+    "nome": "Fofo",
+    "nd": "0.5",
+    "regiao": "mascotes_e_familiares",
+    "papel": "lacaio",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "minusculo",
+    "iniciativa": 4,
+    "percepcao": 5,
+    "sentidos": [
+      "percepcao_as_cegas"
+    ],
+    "defesa": 10,
+    "resistencias": {
+      "fortitude": 7,
+      "reflexos": 2,
+      "vontade": 0
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 8,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 2,
+      "con": 5,
+      "int": -4,
+      "sab": 2,
+      "car": -1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Pancada (x2)",
+        "bonusAtaque": 7,
+        "dano": "1d4+4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "gamba",
+    "nome": "Gambá",
+    "nd": "0.5",
+    "regiao": "mascotes_e_familiares",
+    "papel": "lacaio",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "minusculo",
+    "iniciativa": 2,
+    "percepcao": 7,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 10,
+    "resistencias": {
+      "fortitude": 3,
+      "reflexos": 5,
+      "vontade": 0
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 8,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 9.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 2,
+      "con": 2,
+      "int": -4,
+      "sab": 3,
+      "car": -2
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 8,
+        "dano": "1d4+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Almíscar Fedorento",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 13,
+        "resistenciaTipo": null,
+        "descricao": "O gambá expele um jato de almíscar contra uma criatura em alcance curto, que fica enjoada por 1d4 rodadas (Fortitude CD 13 evita; criaturas com Faro ou Sentidos Aguçados sofrem –5 nesse teste)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "homunculo",
+    "nome": "Homúnculo",
+    "nd": "1",
+    "regiao": "mascotes_e_familiares",
+    "papel": "lacaio",
+    "tipo": "construto",
+    "subtipo": null,
+    "tamanho": "minusculo",
+    "iniciativa": 6,
+    "percepcao": 4,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 14,
+    "resistencias": {
+      "fortitude": 8,
+      "reflexos": 5,
+      "vontade": 3
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 11,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 9.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": -1,
+      "des": 2,
+      "con": 2,
+      "int": null,
+      "sab": 0,
+      "car": -1
+    },
+    "pericias": {
+      "furtividade": 9,
+      "ladinagem": 6
+    },
+    "ataques": [
+      {
+        "nome": "Ferrão venenoso",
+        "bonusAtaque": 11,
+        "dano": "1d4+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Dardo venenoso (à distância)",
+        "bonusAtaque": 11,
+        "dano": "1d3+4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "curto",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Veneno",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 16,
+        "resistenciaTipo": null,
+        "descricao": "Peçonha comum: perde 1d12 pontos de vida (Fortitude CD 16 evita)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "1d4 doses de peconha comum (cd 16 para extrair).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "killbone",
+    "nome": "Kill'Bone",
+    "nd": "0.5",
+    "regiao": "mascotes_e_familiares",
+    "papel": "lacaio",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 5,
+    "percepcao": 5,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 14,
+    "resistencias": {
+      "fortitude": 5,
+      "reflexos": 3,
+      "vontade": 0
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 8,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 15.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 3,
+      "con": 2,
+      "int": -4,
+      "sab": 3,
+      "car": -2
+    },
+    "pericias": {
+      "sobrevivencia": 5
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 8,
+        "dano": "1d6+4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Rolamento Ofensivo",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": "acao_de_movimento",
+        "cdResistencia": 13,
+        "resistenciaTipo": null,
+        "descricao": "O kill'bone se enrola em uma bola espinhosa e percorre até o dobro do seu deslocamento, passando por qualquer criatura no caminho (não pode passar duas vezes pelo mesmo espaço). Criaturas atropeladas sofrem 2d6+4 pontos de dano de perfuração (Reflexos CD 13 reduz à metade). Recarga (ação de movimento)."
+      },
+      {
+        "nome": "Percepção e Sobrevivência contra Trolls",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "+5 em Percepção e Sobrevivência quando usadas contra trolls (já contabilizado nos valores listados)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "malafex",
+    "nome": "Malafex",
+    "nd": "0.5",
+    "regiao": "mascotes_e_familiares",
+    "papel": "especial",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "minusculo",
+    "iniciativa": 6,
+    "percepcao": 7,
+    "sentidos": [
+      "visao_na_penumbra"
+    ],
+    "defesa": 13,
+    "resistencias": {
+      "fortitude": 2,
+      "reflexos": 6,
+      "vontade": 2
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 13,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 3.0,
+      "voo": 18.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": -2,
+      "des": 3,
+      "con": 1,
+      "int": -4,
+      "sab": 3,
+      "car": 2
+    },
+    "pericias": {
+      "furtividade": 10,
+      "sobrevivencia": 5
+    },
+    "ataques": [
+      {
+        "nome": "Garras",
+        "bonusAtaque": 5,
+        "dano": "1d4+6",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Inverter Sorte",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Sempre que outra criatura, exceto devotos de Nimb, em alcance médio do malafex faz um teste, se o d20 rolar um valor par, o resultado do teste será o contrário do obtido: um sucesso será uma falha e uma falha será um sucesso. O malafex pode desativar essa habilidade à vontade e não há como saber se ela está ativa ou não antes de fazer o teste."
+      },
+      {
+        "nome": "Mergulho",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz uma investida alada, o malafex pode continuar se movendo depois do ataque. Deve se mover em linha reta e seu movimento máximo ainda é limitado ao dobro do seu deslocamento."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "tentacute",
+    "nome": "Tentacute",
+    "nd": "0.5",
+    "regiao": "mascotes_e_familiares",
+    "papel": "lacaio",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "minusculo",
+    "iniciativa": 9,
+    "percepcao": 11,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 14,
+    "resistencias": {
+      "fortitude": 3,
+      "reflexos": 7,
+      "vontade": 0
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 8,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 9.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": -1,
+      "des": 5,
+      "con": 1,
+      "int": -3,
+      "sab": 4,
+      "car": -2
+    },
+    "pericias": {
+      "furtividade": 14
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 8,
+        "dano": "1d4+4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Curiosidade Larápia",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O tentacute pode fazer testes de Furtividade no lugar de Ladinagem para ocultar e punga."
+      },
+      {
+        "nome": "Serelepe",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O tentacute pode fazer uma ação de movimento adicional por rodada, mas somente para se deslocar."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "tropa_de_tentacutes",
+    "nome": "Tropa de Tentacutes",
+    "nd": "2",
+    "regiao": "mascotes_e_familiares",
+    "papel": "lacaio",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 10,
+    "percepcao": 12,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 19,
+    "resistencias": {
+      "fortitude": 7,
+      "reflexos": 14,
+      "vontade": 3
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 17,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 9.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 5,
+      "con": 1,
+      "int": -3,
+      "sab": 4,
+      "car": -2
+    },
+    "pericias": {
+      "furtividade": 10
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 13,
+        "dano": "1d4+4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Bando",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Representa um bando de tentacutes agindo em conjunto (veja Manual de Criação de Ameaças, 'Como Criar Bandos')."
+      },
+      {
+        "nome": "Cacofonia",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Criaturas em alcance curto da tropa de tentacutes sofrem –2 em testes de perícias e são consideradas em condição ruim para lançar magias."
+      },
+      {
+        "nome": "Curiosidade Larápia",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A tropa pode fazer testes de Furtividade no lugar de Ladinagem para ocultar e punga."
+      },
+      {
+        "nome": "Mãozinhas Marotas",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A tropa faz 1d6 testes de punga contra criaturas adjacentes (pode fazer mais de um teste contra a mesma criatura, para objetos diferentes)."
+      },
+      {
+        "nome": "Serelepe",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A tropa pode fazer uma ação de movimento adicional por rodada, mas somente para se deslocar."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "verilemur",
+    "nome": "Verilêmur",
+    "nd": "0.5",
+    "regiao": "mascotes_e_familiares",
+    "papel": "especial",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "minusculo",
+    "iniciativa": 4,
+    "percepcao": 7,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 13,
+    "resistencias": {
+      "fortitude": 0,
+      "reflexos": 3,
+      "vontade": 5
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 12,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 2,
+      "con": 1,
+      "int": -4,
+      "sab": 3,
+      "car": -1
+    },
+    "pericias": {
+      "intuicao": 10
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 7,
+        "dano": "1d4+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Aura de Ordem (mágica)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 15,
+        "resistenciaTipo": "vontade",
+        "descricao": "O verilêmur emana uma aura de ordem com 9m de raio. Criaturas que comecem seu turno dentro da aura sofrem –10 em Acrobacia, Enganação, Furtividade e Ladinagem, não podem mentir deliberadamente e seus efeitos de encantamento, ilusão e transmutação são dissipados (Vontade CD 15 reduz a penalidade para –5, permite mentir e não dissipa os efeitos)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  }
+]

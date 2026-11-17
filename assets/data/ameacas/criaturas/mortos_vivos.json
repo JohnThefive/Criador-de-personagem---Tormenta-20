@@ -1,0 +1,2487 @@
+[
+  {
+    "id": "carnical",
+    "nome": "Carniçal",
+    "nd": "1",
+    "regiao": "mortos_vivos",
+    "papel": "solo",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 6,
+    "percepcao": 1,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 15,
+    "resistencias": {
+      "fortitude": 1,
+      "reflexos": 5,
+      "vontade": 10
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 33,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 3,
+      "con": 0,
+      "int": -2,
+      "sab": 1,
+      "car": 0
+    },
+    "pericias": {
+      "atletismo": 6,
+      "furtividade": 7
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 9,
+        "dano": "1d6+3",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 9,
+        "dano": "1d4+3",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Doença",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura mordida por um carniçal é exposta à doença febre do carniçal (Ameaças de Arton, p.359)."
+      },
+      {
+        "nome": "Paralisia",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 16,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura atingida pela mordida do carniçal fica paralisada por 1d4 rodadas (Fortitude CD 16 evita e a criatura não pode mais ser paralisada por esta habilidade até o fim da cena)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "cavalo_esqueleto",
+    "nome": "Cavalo Esqueleto",
+    "nd": "1",
+    "regiao": "mortos_vivos",
+    "papel": "solo",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 3,
+    "percepcao": 5,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 16,
+    "resistencias": {
+      "fortitude": 11,
+      "reflexos": 5,
+      "vontade": 0
+    },
+    "rd": {
+      "corte": 5,
+      "frio": 5,
+      "perfuracao": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 30,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 15.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 1,
+      "con": 0,
+      "int": null,
+      "sab": 1,
+      "car": -5
+    },
+    "pericias": {
+      "atletismo": 9
+    },
+    "ataques": [
+      {
+        "nome": "Cascos",
+        "bonusAtaque": 9,
+        "dano": "2d6+5",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Pavor Equestre",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 14,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura que comece seu turno vendo um cavalo esqueleto fica abalada por 1d4 rodadas (Vontade CD 14 evita e a criatura não pode mais ser abalada por esta habilidade até o fim da cena)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "fantasma",
+    "nome": "Fantasma",
+    "nd": "7",
+    "regiao": "mortos_vivos",
+    "papel": "especial",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 10,
+    "percepcao": 9,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 29,
+    "resistencias": {
+      "fortitude": 7,
+      "reflexos": 14,
+      "vontade": 20
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "incorporeo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 190,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 0.0,
+      "voo": 12.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": null,
+      "des": 3,
+      "con": 0,
+      "int": 1,
+      "sab": 2,
+      "car": 4
+    },
+    "pericias": {
+      "furtividade": 15,
+      "intimidacao": 13
+    },
+    "ataques": [
+      {
+        "nome": "Toque drenante",
+        "bonusAtaque": 23,
+        "dano": "6d8+20",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "trevas",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Assustar",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 24,
+        "resistenciaTipo": null,
+        "descricao": "O fantasma se revela subitamente, saindo de um esconderijo ou de dentro de um objeto, como um armário ou parede. Ele só pode usar esta habilidade se estiver escondido, e apenas uma vez por cena. Cada criatura em alcance curto capaz de ver o fantasma fica abalada (Vontade CD 24 evita). Se falhar no teste de Vontade por 5 ou mais, a criatura fica apavorada e, se falhar por 10 ou mais, também envelhece 2d4 anos. Medo."
+      },
+      {
+        "nome": "Drenar Vida",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 24,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura atingida pelo toque drenante do fantasma tem seus PV máximos reduzidos em 10 por 1 dia, cumulativamente (Fortitude CD 24 evita). Caso os PV máximos da criatura sejam reduzidos a 0 desta forma, ela fica inconsciente até que eles sejam restabelecidos."
+      },
+      {
+        "nome": "Memento",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Um fantasma reduzido a 0 PV desaparece e ressurge 1d4 dias depois. Para derrotá-lo permanentemente é necessário confrontá-lo com aquilo que ainda o prende a este mundo (seu memento — um objeto ou lugar ligado diretamente ao seu assunto inacabado). Quando isso acontece, o fantasma pode ser destruído normalmente."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "fantasma_ancestral",
+    "nome": "Fantasma Ancestral",
+    "nd": "14",
+    "regiao": "mortos_vivos",
+    "papel": "especial",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 18,
+    "percepcao": 15,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 40,
+    "resistencias": {
+      "fortitude": 12,
+      "reflexos": 18,
+      "vontade": 23
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "incorporeo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 410,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 0.0,
+      "voo": 15.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": null,
+      "des": 5,
+      "con": 0,
+      "int": 1,
+      "sab": 2,
+      "car": 6
+    },
+    "pericias": {
+      "furtividade": 22,
+      "intimidacao": 19
+    },
+    "ataques": [
+      {
+        "nome": "Toque drenante (x2)",
+        "bonusAtaque": 33,
+        "dano": "6d8+41",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "trevas",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Assustar",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 33,
+        "resistenciaTipo": null,
+        "descricao": "O fantasma ancestral se revela subitamente, saindo de um esconderijo ou de dentro de um objeto, como um armário ou parede. Ele só pode usar esta habilidade se estiver escondido, e apenas uma vez por cena. Cada criatura em alcance curto capaz de ver o fantasma fica abalada (Vontade CD 33 evita). Se falhar no teste de Vontade por 5 ou mais, a criatura fica apavorada e, se falhar por 10 ou mais, também envelhece 2d4 anos. Medo."
+      },
+      {
+        "nome": "Drenar Vida",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 33,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura atingida pelo toque drenante do fantasma ancestral tem seus PV máximos reduzidos em 20 por 1 dia, cumulativamente (Fortitude CD 33 evita). Caso os PV máximos da criatura sejam reduzidos a 0 desta forma, ela fica inconsciente até que eles sejam restabelecidos."
+      },
+      {
+        "nome": "Face Sombria da Morte",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Criaturas imunes a dano de trevas sofrem metade do dano de trevas do fantasma, e mortos-vivos não recuperam pontos de vida com esse dano."
+      },
+      {
+        "nome": "Lamento dos Mortos",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 38,
+        "resistenciaTipo": null,
+        "descricao": "Quando os pontos de vida do fantasma são reduzidos a 205 ou menos, ele passa a emitir uma violenta aura de energia negativa com 9m de raio. Cada criatura que comece seu turno nesta área sofre 20d6 pontos de dano de trevas e fica debilitada e esmorecida (Vontade CD 38 reduz para fraca e frustrada)."
+      },
+      {
+        "nome": "Memento",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Um fantasma reduzido a 0 PV desaparece e ressurge 1d4 dias depois. Para derrotá-lo permanentemente é necessário confrontá-lo com aquilo que ainda o prende a este mundo. Quando isso acontece, o fantasma perde sua habilidade Face Sombria da Morte e pode ser destruído normalmente."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "garra_zumbi",
+    "nome": "Garra-Zumbi",
+    "nd": "0.25",
+    "regiao": "mortos_vivos",
+    "papel": "lacaio",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "minusculo",
+    "iniciativa": 4,
+    "percepcao": 1,
+    "sentidos": [
+      "percepcao_as_cegas"
+    ],
+    "defesa": 10,
+    "resistencias": {
+      "fortitude": 0,
+      "reflexos": 2,
+      "vontade": -1
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "efeitos_de_sentidos"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 5,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 9.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 1,
+      "des": 2,
+      "con": 1,
+      "int": null,
+      "sab": -1,
+      "car": null
+    },
+    "pericias": {
+      "furtividade": 11
+    },
+    "ataques": [
+      {
+        "nome": "Pancada",
+        "bonusAtaque": 7,
+        "dano": "1d6+5",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Usa a manobra agarrar com a pancada contra uma criatura Média ou menor (teste +12)."
+      },
+      {
+        "nome": "Estrangular",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada um de seus turnos, a garra-zumbi causa 2d6+2 pontos de dano de impacto na criatura que estiver agarrando. Uma criatura agarrada desta forma não pode falar."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "garra_zumbi_enxame",
+    "nome": "Garra-Zumbi Enxame",
+    "nd": "3",
+    "regiao": "mortos_vivos",
+    "papel": "lacaio",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 6,
+    "percepcao": 1,
+    "sentidos": [
+      "percepcao_as_cegas"
+    ],
+    "defesa": 19,
+    "resistencias": {
+      "fortitude": 9,
+      "reflexos": 14,
+      "vontade": 4
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "efeitos_de_sentidos"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 40,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 9.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 4,
+      "con": 3,
+      "int": null,
+      "sab": -3,
+      "car": null
+    },
+    "pericias": {},
+    "ataques": [],
+    "habilidades": [
+      {
+        "nome": "Enxame",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Qualquer criatura que comece seu turno no espaço do enxame, ou entre nele, sofre 6d6 pontos de dano de impacto (ou 8d6 contra criaturas agarradas)."
+      },
+      {
+        "nome": "Maré Estranguladora",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No fim do seu turno, o enxame faz uma manobra agarrar contra todas as criaturas em seu espaço (teste +16). Enquanto estiver agarrada dessa forma, uma criatura fica caída e não pode falar."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "garra_zumbi_gigante",
+    "nome": "Garra-Zumbi Gigante",
+    "nd": "5",
+    "regiao": "mortos_vivos",
+    "papel": "solo",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 4,
+    "percepcao": -3,
+    "sentidos": [
+      "percepcao_as_cegas"
+    ],
+    "defesa": 25,
+    "resistencias": {
+      "fortitude": 17,
+      "reflexos": 11,
+      "vontade": 5
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "efeitos_de_sentidos"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 200,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 12.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 8,
+      "des": 0,
+      "con": 5,
+      "int": null,
+      "sab": -3,
+      "car": null
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Pancada",
+        "bonusAtaque": 17,
+        "dano": "2d8+18",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Usa a manobra agarrar com a pancada contra uma criatura Enorme ou menor (teste +24)."
+      },
+      {
+        "nome": "Estrangular",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada um de seus turnos, a garra-zumbi gigante causa 4d8+12 pontos de dano de impacto na criatura que estiver agarrando. Uma criatura agarrada desta forma não pode falar."
+      },
+      {
+        "nome": "Mestre de Manobras",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A garra-zumbi recebe +5 em testes de manobras (já contabilizado)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "garra_zumbi_ogro",
+    "nome": "Garra-Zumbi Ogro",
+    "nd": "2",
+    "regiao": "mortos_vivos",
+    "papel": "especial",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 4,
+    "percepcao": -3,
+    "sentidos": [
+      "percepcao_as_cegas"
+    ],
+    "defesa": 16,
+    "resistencias": {
+      "fortitude": 0,
+      "reflexos": 2,
+      "vontade": -3
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "efeitos_de_sentidos"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 35,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 12.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 1,
+      "con": 3,
+      "int": null,
+      "sab": -3,
+      "car": null
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Pancada",
+        "bonusAtaque": 14,
+        "dano": "2d6+10",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Usa a manobra agarrar com a pancada contra uma criatura Grande ou menor (teste +19)."
+      },
+      {
+        "nome": "Forte Demais...",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada um de seus turnos, a garra-zumbi ogro causa 4d6+10 pontos de dano de impacto na criatura que estiver agarrando. Uma criatura agarrada desta forma não pode falar."
+      },
+      {
+        "nome": "...Para Morrer de Novo!",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Todo dano de corte, impacto e perfuração que a garra-zumbi sofre é reduzido à metade."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "gigante_esqueleto",
+    "nome": "Gigante Esqueleto",
+    "nd": "5",
+    "regiao": "mortos_vivos",
+    "papel": "solo",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 4,
+    "percepcao": 4,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 24,
+    "resistencias": {
+      "fortitude": 17,
+      "reflexos": 5,
+      "vontade": 11
+    },
+    "rd": {
+      "corte": 5,
+      "frio": 5,
+      "perfuracao": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 210,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": -1,
+      "con": 4,
+      "int": null,
+      "sab": 0,
+      "car": -1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Tacape (x2)",
+        "bonusAtaque": 17,
+        "dano": "2d6+14",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Arremessar Rochas",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 20,
+        "resistenciaTipo": null,
+        "descricao": "O gigante esqueleto arremessa rochas em um quadrado de 3m em alcance curto. Criaturas nessa área sofrem 2d6+14 pontos de dano (Reflexos CD 20 reduz à metade)."
+      },
+      {
+        "nome": "Monte de Ossos",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando sofre um acerto crítico, o gigante se desfaz em uma pilha de ossos. Ele fica caído e vulnerável, falha automaticamente em testes de Reflexos e precisa gastar uma ação de movimento para se remontar e encerrar estes efeitos."
+      }
+    ],
+    "equipamento": [
+      "Tacape aumentado"
+    ],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "hidra_esqueleto",
+    "nome": "Hidra Esqueleto",
+    "nd": "11",
+    "regiao": "mortos_vivos",
+    "papel": "solo",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 9,
+    "percepcao": 9,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 39,
+    "resistencias": {
+      "fortitude": 24,
+      "reflexos": 18,
+      "vontade": 9
+    },
+    "rd": {
+      "corte": 10,
+      "frio": 10,
+      "perfuracao": 10
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 550,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 9.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 10,
+      "des": 0,
+      "con": 10,
+      "int": null,
+      "sab": -1,
+      "car": -5
+    },
+    "pericias": {
+      "furtividade": 4
+    },
+    "ataques": [
+      {
+        "nome": "Mordida (x5)",
+        "bonusAtaque": 34,
+        "dano": "3d6+16",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Quebra-Ossos",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "As cabeças da hidra são seu ponto fraco e é possível atacá-las diretamente (Defesa 41). Se o ataque acertar e causar pelo menos 25 pontos de dano de impacto, a cabeça é decepada e a hidra perde um ataque de mordida. Entretanto, 1d4 rodadas após a cabeça ser decepada, duas novas nascem em seu lugar (a hidra pode ter até dez cabeças). Para impedir o nascimento de novas cabeças é necessário purificar o pescoço, o que exige causar 25 pontos de dano de luz. Se todas as cabeças da hidra forem decepadas e todos seus pescoços forem purificados, ela morre."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "lacedon",
+    "nome": "Lacedon",
+    "nd": "2",
+    "regiao": "mortos_vivos",
+    "papel": "solo",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 6,
+    "percepcao": 2,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 18,
+    "resistencias": {
+      "fortitude": 3,
+      "reflexos": 7,
+      "vontade": 12
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 65,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 9.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 3,
+      "con": 0,
+      "int": -2,
+      "sab": 1,
+      "car": 0
+    },
+    "pericias": {
+      "atletismo": 7,
+      "furtividade": 8
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 12,
+        "dano": "1d6+4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 12,
+        "dano": "1d4+4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Doença",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura mordida por um lacedon é exposta à doença febre do carniçal."
+      },
+      {
+        "nome": "Lamento dos Afogados",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 17,
+        "resistenciaTipo": null,
+        "descricao": "Quando morre, o lacedon emite um último lamento. Criaturas em alcance médio perdem 1 PM (Vontade CD 17 evita)."
+      },
+      {
+        "nome": "Paralisia",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 17,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura atingida pela mordida do lacedon fica paralisada por 1d4 rodadas (Fortitude CD 17 evita e a criatura não pode mais ser paralisada por esta habilidade até o fim da cena)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "livido",
+    "nome": "Lívido",
+    "nd": "3",
+    "regiao": "mortos_vivos",
+    "papel": "especial",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 3,
+    "percepcao": 4,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 19,
+    "resistencias": {
+      "fortitude": 3,
+      "reflexos": 9,
+      "vontade": 15
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [
+      "luz"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 70,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 3,
+      "con": 0,
+      "int": 1,
+      "sab": 1,
+      "car": 0
+    },
+    "pericias": {
+      "enganacao": 8,
+      "furtividade": 8
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 12,
+        "dano": "1d6+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 12,
+        "dano": "1d4+3",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Doença",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura mordida por um lívido é exposta à doença febre do carniçal."
+      },
+      {
+        "nome": "Odor Pungente",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 20,
+        "resistenciaTipo": null,
+        "descricao": "Criaturas que comecem seus turnos em alcance curto do lívido ficam enjoadas por 1 rodada e perdem 1d6 PV (Fortitude CD 20 evita). Veneno."
+      },
+      {
+        "nome": "Paralisia",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 20,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura atingida pela mordida do lívido fica paralisada por 1d4 rodadas (Fortitude CD 20 evita e a criatura não pode mais ser paralisada por esta habilidade até o fim da cena)."
+      },
+      {
+        "nome": "Trapaceiro do Além",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 20,
+        "resistenciaTipo": null,
+        "descricao": "O lívido arremessa uma isca putrefata que contamina uma criatura em alcance médio (Reflexos CD 20 evita). Até o fim da cena, todos os mortos-vivos recebem +1d6 em suas rolagens de dano contra a criatura contaminada e seus ataques contra ela causam sangramento. Recarga (movimento)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "1d4-1 doses de isca putrefata (cd 18 para extrair).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "mamute_esqueleto",
+    "nome": "Mamute Esqueleto",
+    "nd": "8",
+    "regiao": "mortos_vivos",
+    "papel": "solo",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 10,
+    "percepcao": 9,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 33,
+    "resistencias": {
+      "fortitude": 21,
+      "reflexos": 8,
+      "vontade": 15
+    },
+    "rd": {
+      "corte": 5,
+      "frio": 5,
+      "perfuracao": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 340,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 0,
+      "con": 4,
+      "int": null,
+      "sab": 1,
+      "car": -1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Presas",
+        "bonusAtaque": 26,
+        "dano": "2d8+26",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Pancada (x2)",
+        "bonusAtaque": 26,
+        "dano": "1d6+19",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Atropelamento",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 26,
+        "resistenciaTipo": null,
+        "descricao": "O mamute esqueleto percorre até o dobro de seu deslocamento. Ele pode passar pelo espaço ocupado de quaisquer inimigos menores que ele, mas não pode passar duas vezes pelo mesmo espaço. Criaturas atropeladas desta forma sofrem 2d8+26 pontos de dano de impacto e ficam caídas (Reflexos CD 26 reduz à metade e evita a condição). Recarga (movimento)."
+      },
+      {
+        "nome": "Monte de Ossos",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando sofre um acerto crítico, o mamute se desfaz em uma pilha de ossos. Ele fica caído e vulnerável, falha automaticamente em testes de Reflexos e precisa gastar uma ação de movimento para se remontar e encerrar estes efeitos."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "mortalha",
+    "nome": "Mortalha",
+    "nd": "11",
+    "regiao": "mortos_vivos",
+    "papel": "solo",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 19,
+    "percepcao": 13,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 38,
+    "resistencias": {
+      "fortitude": 11,
+      "reflexos": 24,
+      "vontade": 18
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "incorporeo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 475,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 0.0,
+      "voo": 18.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": null,
+      "des": 8,
+      "con": 0,
+      "int": 3,
+      "sab": 2,
+      "car": 3
+    },
+    "pericias": {
+      "furtividade": 22
+    },
+    "ataques": [
+      {
+        "nome": "Toque drenante (x2)",
+        "bonusAtaque": 34,
+        "dano": "3d10+24",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "trevas",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Cria Tumular",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura viva reduzida a 0 PV ou menos pelo toque drenante da mortalha ressurge no início da próxima rodada como uma aparição (Tormenta20, p.298) e não pode mais ser revivida. Quando a mortalha é destruída, as aparições que ela criou se desfazem e suas almas retornam aos corpos originais (caso ainda estejam vivos), que despertam com 1 PV."
+      },
+      {
+        "nome": "Drenar Vitalidade",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 31,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura viva atingida pelo toque drenante da mortalha deve fazer um teste de Fortitude (CD 31). Se falhar, fica fraca e a mortalha recebe 30 PV temporários cumulativos."
+      },
+      {
+        "nome": "Maldição Mortuária",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 31,
+        "resistenciaTipo": null,
+        "descricao": "A mortalha profere uma maldição mortuária contra uma criatura em alcance médio (Fortitude CD 31 evita)."
+      },
+      {
+        "nome": "Fraqueza Solar",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Enquanto estiver exposta à luz solar natural, a mortalha fica debilitada."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "manto da mortalha (cd 26 para extrair, vale t$ 6.000 e 1 pm para fabricar um item com os encantos fantasmagorico ou tumular).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "mumia",
+    "nome": "Múmia",
+    "nd": "5",
+    "regiao": "mortos_vivos",
+    "papel": "solo",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 3,
+    "percepcao": 8,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 22,
+    "resistencias": {
+      "fortitude": 11,
+      "reflexos": 5,
+      "vontade": 17
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [
+      "fogo"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 192,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 1,
+      "con": 2,
+      "int": 0,
+      "sab": 3,
+      "car": 2
+    },
+    "pericias": {
+      "furtividade": 10
+    },
+    "ataques": [
+      {
+        "nome": "Pancada (x2)",
+        "bonusAtaque": 17,
+        "dano": "2d10+10",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Desespero",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 20,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura que comece seu turno vendo uma múmia fica apavorada (Vontade CD 20 evita e a criatura não pode mais ser apavorada por esta habilidade até o fim da cena)."
+      },
+      {
+        "nome": "Doença",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura atingida por uma pancada da múmia é exposta à doença podridão da múmia."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "necrodraco_esqueleto",
+    "nome": "Necrodraco Esqueleto",
+    "nd": "12",
+    "regiao": "mortos_vivos",
+    "papel": "solo",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 13,
+    "percepcao": 18,
+    "sentidos": [
+      "percepcao_as_cegas",
+      "visao_no_escuro"
+    ],
+    "defesa": 44,
+    "resistencias": {
+      "fortitude": 24,
+      "reflexos": 11,
+      "vontade": 18
+    },
+    "rd": {
+      "luz": 10,
+      "corte": 10,
+      "frio": 10,
+      "perfuracao": 10
+    },
+    "imunidadesEfeitos": [
+      "atordoado",
+      "metamorfose",
+      "paralisia"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 610,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 24.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 10,
+      "des": 1,
+      "con": 8,
+      "int": 5,
+      "sab": 6,
+      "car": 0
+    },
+    "pericias": {
+      "atletismo": 20
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 36,
+        "dano": "4d10+30",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 36,
+        "dano": "3d10+30",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Sopro",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 34,
+        "resistenciaTipo": null,
+        "descricao": "Criaturas em um cone de 15m sofrem 12d12 pontos de dano de trevas e não podem recuperar pontos de vida por 1 rodada (Reflexos CD 34 reduz à metade e evita a restrição de cura). Recarga (movimento)."
+      },
+      {
+        "nome": "Varrer",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando o necrodraco esqueleto faz um ataque corpo a corpo e reduz os pontos de vida do alvo a 0 ou menos, pode realizar um ataque adicional contra outra criatura dentro do seu alcance."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao",
+    "recursoExtraivel": {
+      "nome": "1d6 doses de terra de cemitério",
+      "pericia": "sobrevivencia",
+      "cdBase": 27
+    }
+  },
+  {
+    "id": "necrodraco_lich",
+    "nome": "Necrodraco Lich",
+    "nd": "20",
+    "regiao": "mortos_vivos",
+    "papel": "solo",
+    "tipo": "mortoVivo",
+    "subtipo": "dragao",
+    "tamanho": "colossal",
+    "iniciativa": 16,
+    "percepcao": 20,
+    "sentidos": [
+      "percepcao_as_cegas_medio",
+      "visao_no_escuro"
+    ],
+    "defesa": 63,
+    "resistencias": {
+      "fortitude": 34,
+      "reflexos": 24,
+      "vontade": 30
+    },
+    "rd": {
+      "luz": 20
+    },
+    "imunidadesEfeitos": [
+      "atordoado",
+      "metamorfose",
+      "paralisia"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [
+      "luz"
+    ],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +5"
+    ],
+    "pv": 1400,
+    "pm": 133,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 36.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 12,
+      "des": 0,
+      "con": 8,
+      "int": 12,
+      "sab": 4,
+      "car": 5
+    },
+    "pericias": {
+      "conhecimento": 28,
+      "cura": 20,
+      "enganacao": 21,
+      "intimidacao": 21,
+      "intuicao": 20,
+      "misticismo": 28,
+      "oficio_alquimista": 28,
+      "religiao": 20
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 55,
+        "dano": "4d20+50",
+        "danoExtra": "1d20 trevas",
+        "margemAmeaca": 16,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 50,
+        "dano": "4d20+50",
+        "danoExtra": "1d20 trevas",
+        "margemAmeaca": 16,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Aura Aterradora",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 53,
+        "resistenciaTipo": "vontade",
+        "descricao": "Aura Aterradora (Vontade CD 53 evita)."
+      },
+      {
+        "nome": "Couro Necromântico",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O couro do necrodraco reduz todo dano de corte, impacto e perfuração que ele sofre à metade. Se ele passar num teste de resistência contra uma magia que o tenha como alvo, ela é revertida contra o conjurador."
+      },
+      {
+        "nome": "Filactério",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Caso o necrodraco seja morto, ele retorna completamente recuperado em 1d10 dias. A única forma de derrotá-lo permanentemente é destruir seu filactério."
+      },
+      {
+        "nome": "Fluxo de Mana",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O necrodraco pode manter dois efeitos sustentados simultaneamente com apenas uma ação livre (mas pagando o custo de cada um)."
+      },
+      {
+        "nome": "Magia Acelerada",
+        "acao": "livre",
+        "custoPm": 4,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando lança uma magia com execução de ação completa ou menor, o necrodraco muda a execução dela para livre."
+      },
+      {
+        "nome": "Sopro Tenebroso",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 53,
+        "resistenciaTipo": null,
+        "descricao": "Todas as criaturas em um cone de 18m sofrem 20d12 pontos de dano de trevas e, por 1 rodada, não podem recuperar pontos de vida de nenhuma forma (Fortitude CD 53 reduz à metade e evita a restrição de cura). O necrodraco recupera PV igual à metade do dano do sopro. Recarga (movimento)."
+      },
+      {
+        "nome": "Varrer",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando o necrodraco faz um ataque corpo a corpo e reduz os pontos de vida do alvo a 0 ou menos, pode realizar um ataque adicional contra outra criatura dentro do seu alcance."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 53,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como conjurador arcano de 20º nível (CD 53, limite de PM 25): Campo de Força (reação, 11 PM, RD 70 contra o dano sofrido), Controlar o Tempo (padrão, 15 PM), Dissipar Magia (padrão, 3 PM), Enfeitiçar (padrão, 1 PM), Tentáculos de Trevas (padrão, 18 PM, esfera de 12m, agarra e esmaga, 12d6 de trevas), Toque da Morte (padrão, 25 PM, 10d8+18 de trevas; alvo com menos da metade dos PV faz Fortitude ou tem os PV reduzidos a –10), Toque Vampírico (padrão, 19 PM, ataque corpo a corpo com +20d6 de trevas, cura metade do dano), Velocidade (padrão, 10 PM, sustentada, ação padrão adicional por turno)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "dobro e fragmento de filacterio.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "necrodraco_zumbi",
+    "nome": "Necrodraco Zumbi",
+    "nd": "14",
+    "regiao": "mortos_vivos",
+    "papel": "solo",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 14,
+    "percepcao": 19,
+    "sentidos": [
+      "percepcao_as_cegas",
+      "visao_no_escuro"
+    ],
+    "defesa": 47,
+    "resistencias": {
+      "fortitude": 28,
+      "reflexos": 13,
+      "vontade": 22
+    },
+    "rd": {
+      "luz": 15
+    },
+    "imunidadesEfeitos": [
+      "atordoado",
+      "metamorfose",
+      "paralisia"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 720,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 24.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 12,
+      "des": 1,
+      "con": 9,
+      "int": 6,
+      "sab": 6,
+      "car": 0
+    },
+    "pericias": {
+      "atletismo": 23
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 36,
+        "dano": "4d12+35",
+        "danoExtra": null,
+        "margemAmeaca": 17,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 36,
+        "dano": "3d12+35",
+        "danoExtra": null,
+        "margemAmeaca": 17,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Aura de Podridão",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura que comece seu turno em um raio de 30m do necrodraco zumbi é exposta à doença calafrio diabólico. Devido à virulência do necrodraco, a CD para resistir a essa doença é 38."
+      },
+      {
+        "nome": "Sopro",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 38,
+        "resistenciaTipo": null,
+        "descricao": "Cada criatura em um cone de 15m sofre 15d12 pontos de dano de trevas e fica debilitada e esmorecida (Reflexos CD 38 reduz à metade e diminui para fraca e frustrada). Recarga (movimento)."
+      },
+      {
+        "nome": "Varrer",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando o necrodraco faz um ataque corpo a corpo e reduz os pontos de vida do alvo a 0 ou menos, pode realizar um ataque adicional contra outra criatura dentro do seu alcance."
+      },
+      {
+        "nome": "Fraqueza Zumbi",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O necrodraco sofre o dobro de dano de acertos críticos ou de ataques feitos contra seu cérebro (Defesa 57)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao",
+    "recursoExtraivel": {
+      "nome": "2d4 doses de terra de cemitério",
+      "pericia": "sobrevivencia",
+      "cdBase": 29
+    }
+  },
+  {
+    "id": "ogro_esqueleto",
+    "nome": "Ogro Esqueleto",
+    "nd": "3",
+    "regiao": "mortos_vivos",
+    "papel": "solo",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 3,
+    "percepcao": 0,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 19,
+    "resistencias": {
+      "fortitude": 15,
+      "reflexos": 3,
+      "vontade": 4
+    },
+    "rd": {
+      "corte": 5,
+      "frio": 5,
+      "perfuracao": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 99,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 1,
+      "con": 3,
+      "int": null,
+      "sab": -1,
+      "car": -1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Tacape",
+        "bonusAtaque": 14,
+        "dano": "1d12+15",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Morto Demais...",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por cena, se for desarmado, o ogro esqueleto retira um de seus próprios ossos para utilizar de arma, com as mesmas estatísticas de seu tacape."
+      },
+      {
+        "nome": "...Para Morrer Novamente!",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Todo dano de corte, frio e perfuração que o ogro sofre é reduzido à metade (antes de aplicar a redução de dano)."
+      }
+    ],
+    "equipamento": [
+      "Tacape aumentado"
+    ],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "rei_tirano_esqueleto",
+    "nome": "Rei-Tirano Esqueleto",
+    "nd": "12",
+    "regiao": "mortos_vivos",
+    "papel": "solo",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 10,
+    "percepcao": 9,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 43,
+    "resistencias": {
+      "fortitude": 26,
+      "reflexos": 20,
+      "vontade": 12
+    },
+    "rd": {
+      "corte": 10,
+      "frio": 10,
+      "perfuracao": 10
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 625,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 10,
+      "des": 0,
+      "con": 4,
+      "int": null,
+      "sab": -1,
+      "car": -4
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 37,
+        "dano": "6d10+31",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Cauda",
+        "bonusAtaque": 37,
+        "dano": "6d6+26",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Usa a manobra agarrar com a mordida (teste +42)."
+      },
+      {
+        "nome": "Cauda Avassaladora",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 35,
+        "resistenciaTipo": null,
+        "descricao": "Quando acerta um ataque de cauda, o rei-tirano esqueleto arremessa a vítima 1d8 x 1,5m em uma direção à escolha dele (Fortitude CD 35 evita). A vítima fica caída e, se atingir algum obstáculo, sofre 1d8 pontos de dano de impacto para cada 1,5m que foi arremessada."
+      },
+      {
+        "nome": "Engolir",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada um dos turnos do rei-tirano, a criatura engolida sofre 6d6+16 pontos de dano de corte mais 6d6+16 pontos de dano de trevas. Ela pode escapar causando um total de 50 pontos de dano a ele (Defesa 15) ou, se for Minúscula, gastando uma ação de movimento. A criatura engolida não fica cega nem tem cobertura contra efeitos do lado de fora (e vice-versa)."
+      },
+      {
+        "nome": "Monte de Ossos",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando sofre um acerto crítico, o rei-tirano se desfaz em uma pilha de ossos. Ele fica caído e vulnerável, falha automaticamente em testes de Reflexos e precisa gastar uma ação de movimento para se remontar e encerrar estes efeitos."
+      },
+      {
+        "nome": "Visão Baseada em Movimento",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O rei-tirano sofre –10 em testes de Percepção para encontrar criaturas que não estejam se movendo (em termos de jogo, criaturas que tenham feito apenas ações mentais em seu turno anterior)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "dentes do rei-tirano (cd 27 para extrair, valem t$ 1.500 para fabricar armas superiores).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "senhor_das_mumias",
+    "nome": "Senhor das Múmias",
+    "nd": "15",
+    "regiao": "mortos_vivos",
+    "papel": "especial",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 14,
+    "percepcao": 20,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 48,
+    "resistencias": {
+      "fortitude": 22,
+      "reflexos": 15,
+      "vontade": 28
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [
+      "fogo"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 532,
+    "pm": 95,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 2,
+      "con": 3,
+      "int": 2,
+      "sab": 5,
+      "car": 7
+    },
+    "pericias": {
+      "diplomacia": 22,
+      "enganacao": 20,
+      "furtividade": 15,
+      "intuicao": 18
+    },
+    "ataques": [
+      {
+        "nome": "Ankh solar",
+        "bonusAtaque": 41,
+        "dano": "1d6+25",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Pancada",
+        "bonusAtaque": 41,
+        "dano": "3d10+25",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Desespero Superior",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 42,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura que comece seu turno vendo uma múmia fica apavorada (Vontade CD 42 evita e a criatura não pode mais ser apavorada por esta habilidade até o fim da cena)."
+      },
+      {
+        "nome": "Doença",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura atingida por uma pancada do senhor das múmias é exposta à doença podridão da múmia. A força da maldição do senhor das múmias faz com que a CD para resistir a essa doença seja 42."
+      },
+      {
+        "nome": "Maldição da Múmia",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura que falhe em um teste de resistência contra uma magia do senhor das múmias não pode recuperar pontos de vida por 1 rodada."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 42,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como clérigo de 15º nível (CD 42): Disfarce Ilusório (padrão, 3 PM, muda a própria aparência até o fim da cena, +20 em Enganação para disfarce), Enxame de Pestes (completa, 15 PM, sustentada, dois enxames de gafanhotos de fogo, 5d12 de fogo por turno cada), Infligir Ferimentos (padrão, 10 PM, ataque corpo a corpo que causa +5d8+5 de trevas e deixa fraco), Perdição (padrão, 7 PM, –4 em testes de ataque e rolagens de dano), Poeira da Podridão (padrão, 14 PM, nuvem de 6m de raio, 6d8+24 de trevas por rodada e impede cura)."
+      }
+    ],
+    "equipamento": [
+      "Ankh solar harmonizado",
+      "Símbolo sagrado",
+      "Traje de seda banhado a ouro"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "tarso",
+    "nome": "Tarso, Dragão-Rei dos Mortos",
+    "nd": "22",
+    "regiao": "mortos_vivos",
+    "papel": "solo",
+    "tipo": "mortoVivo",
+    "subtipo": "dragao",
+    "tamanho": "colossal",
+    "iniciativa": 23,
+    "percepcao": 25,
+    "sentidos": [
+      "percepcao_as_cegas_longo",
+      "visao_no_escuro"
+    ],
+    "defesa": 70,
+    "resistencias": {
+      "fortitude": 38,
+      "reflexos": 25,
+      "vontade": 33
+    },
+    "rd": {
+      "luz": 30
+    },
+    "imunidadesEfeitos": [
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [
+      "luz"
+    ],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +10"
+    ],
+    "pv": 3800,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 24.0,
+      "voo": 45.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 15,
+      "des": 5,
+      "con": 10,
+      "int": 18,
+      "sab": 7,
+      "car": 8
+    },
+    "pericias": {
+      "conhecimento": 36,
+      "cura": 25,
+      "diplomacia": 26,
+      "enganacao": 26,
+      "intimidacao": 26,
+      "intuicao": 25,
+      "misticismo": 36,
+      "nobreza": 36,
+      "oficio_alquimista": 36,
+      "religiao": 25
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 65,
+        "dano": "5d20+50",
+        "danoExtra": "1d20 trevas",
+        "margemAmeaca": 16,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 65,
+        "dano": "5d20+50",
+        "danoExtra": "1d20 trevas",
+        "margemAmeaca": 16,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Arcano de Batalha",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Tarso soma sua Inteligência nas rolagens de dano quando lança magias (já contabilizado)."
+      },
+      {
+        "nome": "Aura Aterradora",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 55,
+        "resistenciaTipo": "vontade",
+        "descricao": "Aura Aterradora. Vontade CD 55 evita (se falhar por 10 ou mais, a criatura morre automaticamente). A aura afeta apenas criaturas escolhidas. Medo."
+      },
+      {
+        "nome": "Conjuração Cadavérica",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura que falhe na resistência contra uma das magias de Tarso sofre 2d20 pontos de dano de trevas e fica enjoada."
+      },
+      {
+        "nome": "Couro Necromântico",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O dano de fontes mundanas que Tarso sofre é reduzido à metade. Se ele passar num teste de resistência contra uma magia que o tem como alvo, ela é revertida contra o conjurador."
+      },
+      {
+        "nome": "Dilacerar",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se Tarso acertar dois ataques de garra em uma mesma criatura no mesmo turno, causa mais 5d20+50 pontos de dano."
+      },
+      {
+        "nome": "Filactério",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Caso Tarso seja morto, ele retorna completamente recuperado em 1d10 dias. A única forma de derrotá-lo permanentemente é destruir seu filactério."
+      },
+      {
+        "nome": "Fluxo de Mana",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Tarso pode manter dois efeitos sustentados simultaneamente com apenas uma ação livre (mas pagando o custo de cada um)."
+      },
+      {
+        "nome": "Metamorfose Dracônica",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Tarso costuma assumir a forma de um pequeno esqueleto de aparência amigável."
+      },
+      {
+        "nome": "Necromante Ancestral",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 55,
+        "resistenciaTipo": null,
+        "descricao": "Tarso lança qualquer magia, arcana ou divina, como um conjurador arcano de 20º nível sem gastar PM (CD 55, 57 para necromancia, limite 38 PM). Uma vez por rodada, ele pode lançar uma dessas magias como ação livre."
+      },
+      {
+        "nome": "Protegido Indefeso",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Tarso pode escolher até uma criatura como seu protegido por vez. Ele sempre sabe a localização e condição exatas do protegido, e pode usar a magia Teletransporte para a localização dele como uma ação livre, sem necessidade de teste de Misticismo."
+      },
+      {
+        "nome": "Sopro Tenebroso",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 55,
+        "resistenciaTipo": null,
+        "descricao": "Criaturas em um cone de 30m sofrem 30d12 pontos de dano de ácido, frio ou trevas, à escolha de Tarso, e, por 1 rodada, não podem recuperar PV de nenhuma forma (Fortitude CD 55 reduz o dano à metade e evita a restrição de cura). Tarso recupera PV igual à metade do dano total do sopro. Recarga (movimento)."
+      },
+      {
+        "nome": "Trevas Profundas",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Todo dano de trevas causado por Tarso ignora redução de dano e, contra criaturas imunes a trevas, ainda causa metade do dano."
+      },
+      {
+        "nome": "Varrer",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando Tarso faz um ataque corpo a corpo e reduz os PV do alvo a 0 ou menos, pode realizar um ataque adicional contra outra criatura dentro do seu alcance."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao, fragmento de filacterio e um sorvete.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "urso_pardo_esqueleto",
+    "nome": "Urso Pardo Esqueleto",
+    "nd": "4",
+    "regiao": "mortos_vivos",
+    "papel": "solo",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 4,
+    "percepcao": 3,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 20,
+    "resistencias": {
+      "fortitude": 4,
+      "reflexos": 16,
+      "vontade": 10
+    },
+    "rd": {
+      "corte": 5,
+      "frio": 5,
+      "perfuracao": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 180,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": -1,
+      "con": 4,
+      "int": null,
+      "sab": -1,
+      "car": -3
+    },
+    "pericias": {
+      "atletismo": 9
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 15,
+        "dano": "1d8+4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 15,
+        "dano": "1d6+4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Usa a manobra agarrar com a mordida (teste +17)."
+      },
+      {
+        "nome": "Garras Destruidoras",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando causa dano com suas garras, o urso pardo esqueleto pode rolar novamente qualquer resultado 1 ou 2 na rolagem de dano."
+      },
+      {
+        "nome": "Ossos Pontiagudos",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 18,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada um de seus turnos, o urso causa 2d6+7 pontos de dano de perfuração em uma criatura Média ou menor que esteja agarrando. Se a criatura sofrer dano desta forma, ela fica sangrando (Fortitude CD 18 evita o sangramento)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  }
+]

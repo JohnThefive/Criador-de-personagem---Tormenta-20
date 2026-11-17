@@ -1,0 +1,2384 @@
+[
+  {
+    "id": "aranha_gigante",
+    "nome": "Aranha Gigante",
+    "nd": "2",
+    "regiao": "masmorras",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 7,
+    "percepcao": 3,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 19,
+    "resistencias": {
+      "fortitude": 8,
+      "reflexos": 11,
+      "vontade": 3
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 77,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 4,
+      "con": 1,
+      "int": -5,
+      "sab": 0,
+      "car": -4
+    },
+    "pericias": {
+      "furtividade": 9
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 12,
+        "dano": "2d6+8",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": "veneno"
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Teia",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 18,
+        "resistenciaTipo": "reflexos",
+        "descricao": "Dispara teia em quadrado 3m de lado em alcance curto. Criaturas ficam enredadas (Ref CD 18 evita). Também pode cobrir área 6x6m de teia semi-transparente (Percepção CD 20 para ver)."
+      },
+      {
+        "nome": "Veneno",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 18,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Condição fraco (Fort CD 18 evita)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "1d4 doses de veneno de aranha gigante (cd 17 para extrair, t$ 45 cada)",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "asa_assassina",
+    "nome": "Asa-Assassina",
+    "nd": "1",
+    "regiao": "masmorras",
+    "papel": "lacaio",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "minusculo",
+    "iniciativa": 8,
+    "percepcao": 4,
+    "sentidos": [
+      "visao_na_penumbra"
+    ],
+    "defesa": 15,
+    "resistencias": {
+      "fortitude": 3,
+      "reflexos": 10,
+      "vontade": 3
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 10,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 3.0,
+      "voo": 12.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": -3,
+      "des": 4,
+      "con": 1,
+      "int": -4,
+      "sab": 2,
+      "car": -4
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Asa afiada",
+        "bonusAtaque": 10,
+        "dano": "2d4+6",
+        "danoExtra": null,
+        "margemAmeaca": 17,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Asas Mortais",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 16,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz um acerto crítico em uma criatura, a asa-assassina tenta decepar a cabeça dela. A vítima fica inconsciente e sangrando (Fortitude CD 16 evita ambos). Este sangramento é cumulativo com aquele causado por ser reduzido a 0 PV ou menos; trate cada um separadamente. A critério do mestre, algumas criaturas, como certos construtos, mortos-vivos ou monstros com nenhuma ou várias cabeças, podem ser imunes a esta habilidade."
+      },
+      {
+        "nome": "Mergulho",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz uma investida alada, a asa-assassina pode continuar se movendo depois do ataque. Ela deve se mover em linha reta e seu movimento máximo ainda é o dobro do seu deslocamento."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "asas afiadas (cd 16 para extrair, vale t$ 100 para fabricar uma arma de corte superior).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "brawar",
+    "nome": "Brawar",
+    "nd": "14",
+    "regiao": "masmorras",
+    "papel": "solo",
+    "tipo": "construto",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 6,
+    "percepcao": 14,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 46,
+    "resistencias": {
+      "fortitude": 28,
+      "reflexos": 22,
+      "vontade": 14
+    },
+    "rd": {
+      "geral": 25
+    },
+    "imunidadesEfeitos": [
+      "magia_com_excecoes"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 700,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 14,
+      "des": -1,
+      "con": 12,
+      "int": null,
+      "sab": 1,
+      "car": -5
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Picareta (x2)",
+        "bonusAtaque": 40,
+        "dano": "2d12+30",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 4,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Fale Amigo e Passe",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 38,
+        "resistenciaTipo": null,
+        "descricao": "Um anão pode gastar uma ação padrão para fazer um teste de Diplomacia (CD 38) contra o brawar. Se passar, deixa-o pasmo por 1 rodada; se falhar, o brawar não pode mais ser pasmo desta forma nesta cena. Se o brawar estiver pasmo desta forma, um anão pode gastar uma ação padrão para fazer um teste de Conhecimento ou Nobreza (CD 38). Se passar nesse segundo teste, o brawar para de lutar."
+      },
+      {
+        "nome": "Imunidade a Magia",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O brawar é imune a efeitos mágicos, com a seguinte exceção: efeitos mágicos de fogo concedem a ele uma ação padrão adicional em seu próximo turno e curam PV em quantidade igual à metade do dano que causariam."
+      },
+      {
+        "nome": "Picareta Destruidora",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Os ataques de picareta do brawar ignoram 10 pontos da RD de objetos."
+      },
+      {
+        "nome": "Pisotear",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 38,
+        "resistenciaTipo": null,
+        "descricao": "O brawar pisoteia o chão, gerando uma onda de choque em uma área de 9m ao seu redor. Criaturas nessa área sofrem 15d10 pontos de dano de impacto e ficam caídas (Reflexos CD 38 reduz o dano à metade e evita a condição)."
+      }
+    ],
+    "equipamento": [
+      "Picareta aumentada maciça de adamante"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "centopeia_dragao",
+    "nome": "Centopeia-Dragão",
+    "nd": "7",
+    "regiao": "masmorras",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 10,
+    "percepcao": 8,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 27,
+    "resistencias": {
+      "fortitude": 20,
+      "reflexos": 14,
+      "vontade": 9
+    },
+    "rd": {
+      "fogo": 10
+    },
+    "imunidadesEfeitos": [
+      "condicao_caido"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 275,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 15.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 11,
+      "des": 3,
+      "con": 9,
+      "int": -4,
+      "sab": 1,
+      "car": 0
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 24,
+        "dano": "2d8+18",
+        "danoExtra": "2d6 fogo",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando acerta mordida, pode usar agarrar (teste +29)."
+      },
+      {
+        "nome": "Aura de Calor",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada turno, criaturas em alcance curto sofrem 4d6+9 de fogo."
+      },
+      {
+        "nome": "Engolir",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se começar o turno agarrando criatura Média ou menor, pode engoli-la (teste de agarrar). Engolida: sofre 2d6+18 impacto + 4d6+9 fogo por turno da centopeia. Pode escapar causando 20 de dano ao estômago (Defesa 10)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "2d4 doses de essencia abissal (cd 22 para extrair)",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "cocatriz",
+    "nome": "Cocatriz",
+    "nd": "3",
+    "regiao": "masmorras",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "pequeno",
+    "iniciativa": 10,
+    "percepcao": 4,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 22,
+    "resistencias": {
+      "fortitude": 9,
+      "reflexos": 13,
+      "vontade": 5
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 98,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 12.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 5,
+      "con": 1,
+      "int": -5,
+      "sab": 1,
+      "car": -2
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Bicada",
+        "bonusAtaque": 14,
+        "dano": "2d4+8",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Evasão",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando passa em um teste de Reflexos para reduzir o dano de um efeito à metade, em vez disso não sofre nenhum dano."
+      },
+      {
+        "nome": "Bicada Petrificante",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 19,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura que sofra dano da bicada da cocatriz fica lenta (Fortitude CD 19 evita). Se já estiver lenta, fica petrificada permanentemente. Efeitos que removem paralisia revertem a petrificação."
+      },
+      {
+        "nome": "Voo de Galinha",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A cocatriz só consegue percorrer curtas distâncias voando; ela sempre termina seu movimento sobre o chão ou outra superfície firme."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "1d4-1 ovos de cocatriz (cada ovo permite preparar uma refeicao coc-au-triz).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "cocatriz_real",
+    "nome": "Cocatriz-Real",
+    "nd": "7",
+    "regiao": "masmorras",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 17,
+    "percepcao": 8,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 32,
+    "resistencias": {
+      "fortitude": 20,
+      "reflexos": 12,
+      "vontade": 7
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 250,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 12.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 7,
+      "con": 3,
+      "int": -5,
+      "sab": 1,
+      "car": -2
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Bicada",
+        "bonusAtaque": 24,
+        "dano": "2d8+12",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Cauda de serpente",
+        "bonusAtaque": 20,
+        "dano": "1d8+10",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Evasão",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando passa em um teste de Reflexos para reduzir o dano de um efeito à metade, em vez disso não sofre nenhum dano."
+      },
+      {
+        "nome": "Bicada Petrificante",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 26,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura que sofra dano da bicada da cocatriz-real fica lenta (Fortitude CD 26 evita). Se já estiver lenta, fica petrificada permanentemente. Efeitos que removem paralisia revertem a petrificação."
+      },
+      {
+        "nome": "Voo de Galinha",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A cocatriz só consegue percorrer curtas distâncias voando; ela sempre termina seu movimento sobre o chão ou outra superfície firme."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "1 dose de lagrima petrea (cd 22 para extrair) e 1d4 ovos de cocatriz (cada ovo permite preparar uma refeicao coc-au-triz).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "glooop",
+    "nome": "Glooop",
+    "nd": "2",
+    "regiao": "masmorras",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 0,
+    "percepcao": -5,
+    "sentidos": [
+      "percepcao_as_cegas"
+    ],
+    "defesa": 19,
+    "resistencias": {
+      "fortitude": 13,
+      "reflexos": 7,
+      "vontade": 2
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "acido"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 68,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": -1,
+      "con": 2,
+      "int": null,
+      "sab": -5,
+      "car": -5
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Pancada",
+        "bonusAtaque": 12,
+        "dano": "2d6+3",
+        "danoExtra": "2d6 acido",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Usa a manobra agarrar com a pancada (teste +14)."
+      },
+      {
+        "nome": "Engolir",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada um dos turnos do glooop, a criatura engolida sofre 2d6+3 pontos de dano de impacto mais 2d6 pontos de dano de ácido. Ela pode escapar causando um total de 10 pontos de dano a ele (Defesa 10)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "glop",
+    "nome": "Glop",
+    "nd": "0.25",
+    "regiao": "masmorras",
+    "papel": "especial",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "pequeno",
+    "iniciativa": 0,
+    "percepcao": 0,
+    "sentidos": [
+      "percepcao_as_cegas"
+    ],
+    "defesa": 10,
+    "resistencias": {
+      "fortitude": 0,
+      "reflexos": 2,
+      "vontade": -5
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "acido"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 10,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 0,
+      "con": 0,
+      "int": null,
+      "sab": -5,
+      "car": -5
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Pancada",
+        "bonusAtaque": 7,
+        "dano": "1d4",
+        "danoExtra": "1d4 acido",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto_acido",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [],
+    "equipamento": [],
+    "tesouro": "nenhum",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "golem_de_ferro",
+    "nome": "Golem de Ferro",
+    "nd": "10",
+    "regiao": "masmorras",
+    "papel": "solo",
+    "tipo": "construto",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 4,
+    "percepcao": 9,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 36,
+    "resistencias": {
+      "fortitude": 24,
+      "reflexos": 14,
+      "vontade": 11
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [
+      "magia_com_excecoes"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 400,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 12,
+      "des": -1,
+      "con": 10,
+      "int": null,
+      "sab": 0,
+      "car": -5
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Pancada (x2)",
+        "bonusAtaque": 30,
+        "dano": "2d10+25",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Imunidade a Magia",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Imune a efeitos mágicos, exceto: eletricidade deixa lento por 1d6 rodadas; fogo remove lento e cura 1 PV para cada 3 pontos de dano."
+      },
+      {
+        "nome": "Sopro",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 30,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Nuvem de gás venenoso em cubo de 3m. Criaturas perdem 6d12 PV e ficam enjoadas (Fort CD 30 reduz à metade e evita). Recarga (movimento). Veneno."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "guerreiro_de_chifres",
+    "nome": "Guerreiro de Chifres",
+    "nd": "3",
+    "regiao": "masmorras",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": "demonio",
+    "tamanho": "medio",
+    "iniciativa": 6,
+    "percepcao": 3,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 21,
+    "resistencias": {
+      "fortitude": 13,
+      "reflexos": 11,
+      "vontade": 9
+    },
+    "rd": {
+      "geral": 5,
+      "fogo": 10,
+      "frio": 10
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "acido",
+      "veneno"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 100,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 3,
+      "con": 4,
+      "int": -2,
+      "sab": 1,
+      "car": -1
+    },
+    "pericias": {
+      "atletismo": 8,
+      "intimidacao": 4
+    },
+    "ataques": [
+      {
+        "nome": "Machado de guerra",
+        "bonusAtaque": 14,
+        "dano": "1d12+16",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Chifres",
+        "bonusAtaque": 14,
+        "dano": "2d6+10",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Marrada",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Faz uma investida e ataca com machado de guerra e chifres. Os dois ataques recebem +2 da investida, mas devem ser feitos contra o mesmo alvo."
+      }
+    ],
+    "equipamento": [
+      "Machado de guerra cruel"
+    ],
+    "tesouro": "padrao",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "gargula",
+    "nome": "Gárgula",
+    "nd": "2",
+    "regiao": "masmorras",
+    "papel": "solo",
+    "tipo": "construto",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 3,
+    "percepcao": 3,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 19,
+    "resistencias": {
+      "fortitude": 13,
+      "reflexos": 7,
+      "vontade": 2
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [
+      "condicao_petrificado"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 65,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 18.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 2,
+      "con": 4,
+      "int": -2,
+      "sab": 1,
+      "car": -2
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 12,
+        "dano": "1d6+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Imobilidade",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 35,
+        "resistenciaTipo": null,
+        "descricao": "Pode permanecer completamente imóvel. Um personagem deve passar em Percepção CD 35 para perceber que é uma criatura e não uma estátua."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "harpia_saqueadora",
+    "nome": "Harpia Saqueadora",
+    "nd": "4",
+    "regiao": "masmorras",
+    "papel": "lacaio",
+    "tipo": "monstro",
+    "subtipo": "harpia",
+    "tamanho": "medio",
+    "iniciativa": 13,
+    "percepcao": 7,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 18,
+    "resistencias": {
+      "fortitude": 10,
+      "reflexos": 15,
+      "vontade": 5
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 32,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 12.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 1,
+      "des": 4,
+      "con": 2,
+      "int": -1,
+      "sab": 3,
+      "car": 2
+    },
+    "pericias": {
+      "intimidacao": 8,
+      "sobrevivencia": 9
+    },
+    "ataques": [
+      {
+        "nome": "Maça",
+        "bonusAtaque": 20,
+        "dano": "1d8+11",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 20,
+        "dano": "1d6+11",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Grito Aterrorizante",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 18,
+        "resistenciaTipo": null,
+        "descricao": "A harpia saqueadora emite um grito estridente e apavorante. Criaturas em alcance curto ficam abaladas (Vontade CD 18 evita e a criatura não pode mais ser abalada por esta habilidade até o fim da cena)."
+      },
+      {
+        "nome": "Rasante",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A harpia faz uma investida e ataca com sua maça e uma garra (ou com as duas garras, se estiver desarmada). Os dois ataques recebem o bônus de +2 da investida, mas devem ser feitos contra o mesmo alvo. Após o ataque, a harpia pode continuar seu movimento, até o limite de seu deslocamento."
+      }
+    ],
+    "equipamento": [
+      "Maça"
+    ],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "mamae_glop",
+    "nome": "Mamãe Glop",
+    "nd": "2",
+    "regiao": "masmorras",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 2,
+    "percepcao": -1,
+    "sentidos": [
+      "percepcao_as_cegas"
+    ],
+    "defesa": 17,
+    "resistencias": {
+      "fortitude": 13,
+      "reflexos": 7,
+      "vontade": 2
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "acido"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 70,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": -1,
+      "con": 2,
+      "int": null,
+      "sab": -3,
+      "car": -3
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Pancada",
+        "bonusAtaque": 12,
+        "dano": "2d6+2",
+        "danoExtra": "2d6 acido",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Glops Filhinhos",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A mamãe glop está sempre acompanhada por 1d4 glops, que a protegem instintivamente. Esses glops, assim como aqueles gerados pela Meiose Glópica, não rendem pontos de experiência."
+      },
+      {
+        "nome": "Meiose Glópica",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando ameaçada, a mamãe pode gerar outros glops filhinhos para protegê-la. No início de cada turno da mamãe, role um dado; em um resultado par, um glop surge num espaço adjacente a ela. Ele age normalmente, no turno da mamãe, a partir da próxima rodada."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "mantor",
+    "nome": "Mantor",
+    "nd": "5",
+    "regiao": "masmorras",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 11,
+    "percepcao": 8,
+    "sentidos": [
+      "percepcao_as_cegas",
+      "visao_no_escuro"
+    ],
+    "defesa": 24,
+    "resistencias": {
+      "fortitude": 11,
+      "reflexos": 17,
+      "vontade": 5
+    },
+    "rd": {
+      "trevas": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 200,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 0.0,
+      "voo": 18.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 5,
+      "con": 2,
+      "int": -1,
+      "sab": 2,
+      "car": 0
+    },
+    "pericias": {
+      "furtividade": 11
+    },
+    "ataques": [
+      {
+        "nome": "Aguilhão",
+        "bonusAtaque": 17,
+        "dano": "1d10+8",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "4,5m",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 17,
+        "dano": "1d10+8",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Emantar",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O mantor se joga sobre uma criatura adjacente Enorme ou menor e usa a manobra agarrar (teste +22). Enquanto estiver agarrada, a criatura fica cega, sofre metade de todo dano sofrido pelo mantor e, no início de cada turno do mantor, sofre 2d10+8 pontos de dano de perfuração. O mantor só pode manter uma criatura agarrada por vez e não pode usar sua mordida nesta situação."
+      },
+      {
+        "nome": "Imobilidade",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 35,
+        "resistenciaTipo": null,
+        "descricao": "Um mantor pode permanecer completamente imóvel. Se ele estiver assim, um personagem deve passar em um teste de Percepção (CD 35) para perceber que ele é uma criatura e não um pedaço de tecido."
+      },
+      {
+        "nome": "Manto de Tenebra",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Em escuridão total, o mantor recebe camuflagem total, mesmo contra criaturas que vejam no escuro (sua Furtividade sobe para +21 no escuro)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "metade, mais couro de mantor (cd 20 para extrair, vale t$ 150 para fabricar um manto do mantor).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "manticora",
+    "nome": "Mantícora",
+    "nd": "6",
+    "regiao": "masmorras",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 7,
+    "percepcao": 8,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 26,
+    "resistencias": {
+      "fortitude": 18,
+      "reflexos": 7,
+      "vontade": 12
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 240,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 15.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 7,
+      "des": 2,
+      "con": 5,
+      "int": -2,
+      "sab": 1,
+      "car": -1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 18,
+        "dano": "1d10+12",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 18,
+        "dano": "1d8+12",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Espinhos",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 22,
+        "resistenciaTipo": "reflexos",
+        "descricao": "Dispara 1d4 espinhos da cauda. Cada espinho atinge uma criatura em alcance médio causando 1d8+7 de perfuração (Ref CD 22 reduz à metade). Recarga (movimento)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao mais espinhos (cd 21 para extrair, t$ 150 cada como materia-prima para flechas superiores)",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "mimico",
+    "nome": "Mímico",
+    "nd": "6",
+    "regiao": "masmorras",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 9,
+    "percepcao": 8,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 26,
+    "resistencias": {
+      "fortitude": 18,
+      "reflexos": 12,
+      "vontade": 6
+    },
+    "rd": {
+      "frio": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "acido"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 220,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 4,
+      "con": 3,
+      "int": -2,
+      "sab": 3,
+      "car": 0
+    },
+    "pericias": {
+      "enganacao": 15,
+      "furtividade": 2
+    },
+    "ataques": [
+      {
+        "nome": "Tentáculo (x2)",
+        "bonusAtaque": 20,
+        "dano": "2d8+15",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Abocanhar",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se o mímico começar seu turno agarrando uma criatura Média ou menor, poderá fazer um teste de agarrar contra ela. Se vencer, abocanha a criatura. Uma criatura abocanhada continua agarrada e sofre 4d8+25 pontos de dano de corte no início de cada turno do mímico. O mímico pode manter uma criatura abocanhada por vez, e pode atacar com seus tentáculos normalmente enquanto faz isso. Uma criatura abocanhada pode escapar vencendo uma manobra agarrar contra o mímico."
+      },
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Usa a manobra agarrar com seu tentáculo (teste +20)."
+      },
+      {
+        "nome": "Ataque Furtivo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Causa +3d6 de dano adicional quando ataca um alvo desprevenido ou surpreso."
+      },
+      {
+        "nome": "Cuspe Material",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 22,
+        "resistenciaTipo": null,
+        "descricao": "O mímico cospe parte de seu conteúdo, como moedas e outros objetos diminutos, em um cone de 6m. Criaturas nessa área sofrem 6d4+6 pontos de dano de perfuração (Reflexos CD 22 reduz à metade; uma criatura abocanhada falha automaticamente nesse teste)."
+      },
+      {
+        "nome": "Imobilidade",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 40,
+        "resistenciaTipo": null,
+        "descricao": "Um mímico pode permanecer completamente imóvel. Se ele estiver assim, um personagem deve passar em um teste de Percepção (CD 40) para perceber que ele é uma criatura e não um objeto."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "orc_chefe",
+    "nome": "Orc Chefe",
+    "nd": "2",
+    "regiao": "masmorras",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "orc",
+    "tamanho": "medio",
+    "iniciativa": 5,
+    "percepcao": 3,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 19,
+    "resistencias": {
+      "fortitude": 13,
+      "reflexos": 7,
+      "vontade": 2
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 66,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 2,
+      "con": 4,
+      "int": 0,
+      "sab": 0,
+      "car": 0
+    },
+    "pericias": {
+      "intimidacao": 4,
+      "sobrevivencia": 5
+    },
+    "ataques": [
+      {
+        "nome": "Machado de batalha",
+        "bonusAtaque": 11,
+        "dano": "1d8+12",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Urro Selvagem",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Recebe +2 em testes de ataque e rolagens de dano corpo a corpo até o final da cena, mas não pode fazer ações que exijam calma e concentração."
+      },
+      {
+        "nome": "Sensibilidade a Luz",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando exposto a luz do sol ou similar, o orc fica ofuscado."
+      }
+    ],
+    "equipamento": [
+      "Gibão de peles",
+      "machado de batalha"
+    ],
+    "tesouro": "padrao",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "orc_combatente",
+    "nome": "Orc Combatente",
+    "nd": "0.5",
+    "regiao": "masmorras",
+    "papel": "lacaio",
+    "tipo": "humanoide",
+    "subtipo": "orc",
+    "tamanho": "medio",
+    "iniciativa": 4,
+    "percepcao": 1,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 14,
+    "resistencias": {
+      "fortitude": 5,
+      "reflexos": 3,
+      "vontade": 0
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 8,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 1,
+      "con": 2,
+      "int": -1,
+      "sab": -1,
+      "car": -1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Maça",
+        "bonusAtaque": 9,
+        "dano": "1d8+7",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Sensibilidade a Luz",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando exposto a luz do sol ou similar, o orc fica ofuscado."
+      }
+    ],
+    "equipamento": [
+      "Couro batido",
+      "maça"
+    ],
+    "tesouro": "metade",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "orc_mutante",
+    "nome": "Orc Mutante",
+    "nd": "5",
+    "regiao": "masmorras",
+    "papel": "lacaio",
+    "tipo": "humanoide",
+    "subtipo": "orc",
+    "tamanho": "medio",
+    "iniciativa": 8,
+    "percepcao": 5,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 22,
+    "resistencias": {
+      "fortitude": 15,
+      "reflexos": 11,
+      "vontade": 7
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 55,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 2,
+      "con": 4,
+      "int": -2,
+      "sab": -2,
+      "car": -2
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Machado de guerra",
+        "bonusAtaque": 20,
+        "dano": "1d12+18",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 20,
+        "dano": "1d6+18",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Terceiro Braço",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se acerta o ataque de machado de guerra e o de mordida na mesma criatura na mesma rodada, causa mais 1d6+9 pontos de dano de corte."
+      },
+      {
+        "nome": "Sensibilidade a Luz",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando exposto a luz do sol ou similar, o orc fica ofuscado."
+      }
+    ],
+    "equipamento": [
+      "Machado de guerra"
+    ],
+    "tesouro": "padrao",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "quimera",
+    "nome": "Quimera",
+    "nd": "8",
+    "regiao": "masmorras",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 7,
+    "percepcao": 10,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 33,
+    "resistencias": {
+      "fortitude": 21,
+      "reflexos": 15,
+      "vontade": 8
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 333,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 12.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 3,
+      "con": 4,
+      "int": 0,
+      "sab": 1,
+      "car": -2
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Mordida (x3)",
+        "bonusAtaque": 26,
+        "dano": "3d8+7",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 24,
+        "dano": "2d6+10",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Mente Tripla",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz um teste de Percepção ou Vontade, a quimera joga três dados e usa o melhor resultado."
+      },
+      {
+        "nome": "Três Cabeças",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 26,
+        "resistenciaTipo": null,
+        "descricao": "Uma quimera tem três cabeças distintas que concedem habilidades especiais, escolhidas entre as descritas a seguir (a \"quimera clássica\" tem cabeças de Bode, Leão e Dragão). Águia: quando faz uma investida, pode atacar com esta cabeça e suas duas garras, os três ataques recebendo o bônus de +2 da investida contra o mesmo alvo. Bode: uma das mordidas muda para marrada (dano de impacto); ao acertar uma investida com esta cabeça, arremessa a vítima 1d6 x 1,5m (Fortitude CD 26 evita), causando-lhe queda e, se atingir obstáculo, 1d6 de dano de impacto por 1,5m arremessado. Dragão: pode gastar uma ação padrão para cuspir fogo em cone de 6m, 10d6+20 de dano de fogo (Reflexos CD 26 reduz à metade; recarga movimento). Gorlogg: ao acertar mordida com esta cabeça, pode usar a manobra derrubar como ação livre (teste +28). Hidra: cura acelerada 20/ácido ou fogo. Javali: se sofrer dano, recebe +5 em testes de ataque e rolagens de dano até o fim de seu próximo turno. Leão: ao acertar mordida com esta cabeça, pode usar a manobra agarrar como ação livre (teste +28). Serpente: uma criatura atingida por mordida desta cabeça perde 2d12 PV durante 3 rodadas (Fortitude CD 26 reduz para 1 rodada; veneno). Tigre: se acertar os dois ataques de garra na mesma criatura na mesma rodada, causa mais 4d6+20 de dano. Tubarão: ganha deslocamento de natação 9m; uma criatura atingida por mordida desta cabeça fica sangrando (Fortitude CD 26 evita)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "coracao de quimera (cd 23 para extrair, vale t$ 300 para fabricar tres doses de elixir quimerico).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "rato_gigante",
+    "nome": "Rato Gigante",
+    "nd": "0.25",
+    "regiao": "masmorras",
+    "papel": "lacaio",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "pequeno",
+    "iniciativa": 5,
+    "percepcao": 4,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 12,
+    "resistencias": {
+      "fortitude": 0,
+      "reflexos": 3,
+      "vontade": -2
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 3,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 2,
+      "con": 1,
+      "int": -4,
+      "sab": 1,
+      "car": -3
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 7,
+        "dano": "1d4+3",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": "doença"
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Doença",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Criatura mordida é exposta a infecção do esgoto."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "slark",
+    "nome": "Slark",
+    "nd": "1",
+    "regiao": "masmorras",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "slark",
+    "tamanho": "medio",
+    "iniciativa": 7,
+    "percepcao": 4,
+    "sentidos": [
+      "sensibilidade_a_luz",
+      "visao_no_escuro"
+    ],
+    "defesa": 12,
+    "resistencias": {
+      "fortitude": 8,
+      "reflexos": 1,
+      "vontade": 4
+    },
+    "rd": {
+      "acido": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 15,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 6.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": -1,
+      "des": 3,
+      "con": 2,
+      "int": -1,
+      "sab": 1,
+      "car": -2
+    },
+    "pericias": {
+      "furtividade": 8
+    },
+    "ataques": [
+      {
+        "nome": "Garras",
+        "bonusAtaque": 10,
+        "dano": "1d6+9",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Queda Livre",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se estiver em terreno elevado, o slark cai sobre uma criatura e faz um ataque de garras. Ele recebe o bônus por terreno elevado (+2 no teste de ataque) e, se a criatura estiver surpreendida, causa +2d6 pontos de dano."
+      },
+      {
+        "nome": "Saliva",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 14,
+        "resistenciaTipo": null,
+        "descricao": "O slark cospe em uma criatura em alcance curto. A criatura fica cega por 1 rodada e qualquer fonte de iluminação mundana que esteja empunhando se apaga (Reflexos CD 14 evita ambos os efeitos)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "tigre_de_hyninn",
+    "nome": "Tigre-de-Hyninn",
+    "nd": "5",
+    "regiao": "masmorras",
+    "papel": "especial",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 10,
+    "percepcao": 7,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 25,
+    "resistencias": {
+      "fortitude": 8,
+      "reflexos": 20,
+      "vontade": 5
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "confuso",
+      "metamorfose"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 165,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 4,
+      "con": 2,
+      "int": -1,
+      "sab": 1,
+      "car": -1
+    },
+    "pericias": {
+      "furtividade": 16
+    },
+    "ataques": [
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 17,
+        "dano": "1d8+3",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida (1d3)",
+        "bonusAtaque": 17,
+        "dano": "1d6+3",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Tentáculo (1d4+1)",
+        "bonusAtaque": 17,
+        "dano": "1d6+3",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Borrão",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O tigre-de-Hyninn tem 25% de chance de ignorar ataques e efeitos (incluindo de área) contra ele. Esta habilidade permanece ativa mesmo que ele morra."
+      },
+      {
+        "nome": "Entre Planos",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Até o próximo turno do tigre, a chance de falha de seu Borrão aumenta para 50%."
+      },
+      {
+        "nome": "Profusão de Partes",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Cada tigre tem 1d3 cabeças e 1d4+1 tentáculos. Isso determina quantos ataques de mordida (um por cabeça) e de tentáculos ele tem."
+      },
+      {
+        "nome": "Resistência a Devotos de Khalmyr",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Recebe +5 em testes de resistência contra efeitos causados por devotos de Khalmyr."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "residuos (cd 20 para extrair, valem t$ 150 para fabricar pocoes e pergaminhos contendo magias de ilusao).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "tigre_de_hyninn_primordial",
+    "nome": "Tigre-de-Hyninn Primordial",
+    "nd": "11",
+    "regiao": "masmorras",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 17,
+    "percepcao": 12,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 42,
+    "resistencias": {
+      "fortitude": 14,
+      "reflexos": 29,
+      "vontade": 10
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "confuso",
+      "metamorfose"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 480,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 6,
+      "con": 3,
+      "int": -1,
+      "sab": 1,
+      "car": -1
+    },
+    "pericias": {
+      "furtividade": 25
+    },
+    "ataques": [
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 34,
+        "dano": "2d8+12",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida (1d3)",
+        "bonusAtaque": 34,
+        "dano": "2d6+12",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Tentáculo (1d4+1)",
+        "bonusAtaque": 34,
+        "dano": "2d6+12",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Borrão",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O tigre-de-Hyninn tem 25% de chance de ignorar ataques e efeitos (incluindo de área) contra ele. Esta habilidade permanece ativa mesmo que ele morra."
+      },
+      {
+        "nome": "Entre Planos",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Até o próximo turno do tigre, a chance de falha de seu Borrão aumenta para 50%."
+      },
+      {
+        "nome": "Não Está Mais Aqui!",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por cena, o tigre pode se teleportar para qualquer lugar a sua escolha a até 500m, desde que conheça o local de destino."
+      },
+      {
+        "nome": "Profusão de Partes",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Cada tigre tem 1d3 cabeças e 1d4+1 tentáculos. Isso determina quantos ataques de mordida (um por cabeça) e de tentáculos ele tem."
+      },
+      {
+        "nome": "Resistência a Devotos de Khalmyr",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Recebe +5 em testes de resistência contra efeitos causados por devotos de Khalmyr."
+      },
+      {
+        "nome": "Sopro",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "no_inicio_de_cada_rodada_do_tigre_jogue_um_dado_recarrega_com_um_resultado_par",
+        "cdResistencia": 31,
+        "resistenciaTipo": null,
+        "descricao": "O tigre sopra energia caótica em um cone de 6m. Criaturas na área sofrem 6d8 pontos de dano mental e ficam confusas por 1d3 rodadas (Vontade CD 31 reduz à metade e evita a condição). Recarga (no início de cada rodada do tigre, jogue um dado; recarrega com um resultado par)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "residuos (cd 26 para extrair, valem t$ 300 para fabricar pocoes e pergaminhos contendo magias de ilusao).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "trog",
+    "nome": "Trog",
+    "nd": "1",
+    "regiao": "masmorras",
+    "papel": "lacaio",
+    "tipo": "humanoide",
+    "subtipo": "trog",
+    "tamanho": "medio",
+    "iniciativa": 3,
+    "percepcao": 0,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 16,
+    "resistencias": {
+      "fortitude": 10,
+      "reflexos": 5,
+      "vontade": 1
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 11,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 1,
+      "con": 3,
+      "int": -2,
+      "sab": 0,
+      "car": -1
+    },
+    "pericias": {
+      "furtividade": 7
+    },
+    "ataques": [
+      {
+        "nome": "Lança",
+        "bonusAtaque": 11,
+        "dano": "1d6+5",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 11,
+        "dano": "1d6+5",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Azagaia (à distância)",
+        "bonusAtaque": 9,
+        "dano": "1d6+5",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Mau Cheiro",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 15,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Expele gás fétido. Criaturas em alcance curto ficam enjoadas por 1d6 rodadas (Fort CD 15 evita). Imunidade por um dia após resistir."
+      },
+      {
+        "nome": "Sangue Frio",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Sofre 1 ponto de dano adicional por dado de dano de frio."
+      }
+    ],
+    "equipamento": [
+      "Azagaias x2",
+      "lança"
+    ],
+    "tesouro": "metade",
+    "recursoExtraivel": null
+  }
+]

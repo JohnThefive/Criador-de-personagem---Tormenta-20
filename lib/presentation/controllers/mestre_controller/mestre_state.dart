@@ -37,8 +37,6 @@ class MestreState {
   final PapelView papelVisualizacao;
 
   // Escudo do Mestre (RF-M4)
-  final List<RegraCard> regrasRapidas;
-  final String buscaRegra;
   final List<PerigoMestre> perigos;
   final List<String> historicoNomes;
   final String? nomeGeradoAtual;
@@ -50,6 +48,7 @@ class MestreState {
   final Posicao2D? pontoOrigemMedicao;
   final Posicao2D? pontoDestinoMedicao;
   final List<Posicao2D> pingsAtivos;
+  final int revisaoBestiario;
 
   const MestreState({
     required this.campanhas,
@@ -69,8 +68,6 @@ class MestreState {
     this.custosMovimentoToken = const {},
     this.movimentoLivreMestre = false,
     this.papelVisualizacao = const VisaoMestre(),
-    this.regrasRapidas = const [],
-    this.buscaRegra = '',
     this.perigos = const [],
     this.historicoNomes = const [],
     this.nomeGeradoAtual,
@@ -80,6 +77,7 @@ class MestreState {
     this.pontoOrigemMedicao,
     this.pontoDestinoMedicao,
     this.pingsAtivos = const [],
+    this.revisaoBestiario = 0,
   });
 
   CampanhaMestre? get campanhaAtual {
@@ -130,6 +128,7 @@ class MestreState {
     String? aventuraSelecionadaId,
     String? sessaoSelecionadaId,
     String? mapaSelecionadoId,
+    bool limparSelecaoContexto = false,
     StatusConexaoLan? statusLan,
     String? ipHostLocal,
     int? portaHostLan,
@@ -143,8 +142,6 @@ class MestreState {
     Map<Posicao2D, double>? custosMovimentoToken,
     bool? movimentoLivreMestre,
     PapelView? papelVisualizacao,
-    List<RegraCard>? regrasRapidas,
-    String? buscaRegra,
     List<PerigoMestre>? perigos,
     List<String>? historicoNomes,
     String? nomeGeradoAtual,
@@ -153,17 +150,25 @@ class MestreState {
     DateTime? ultimoEnvioMapa,
     Posicao2D? pontoOrigemMedicao,
     bool limparMedicao = false,
+    bool limparDestinoMedicao = false,
     Posicao2D? pontoDestinoMedicao,
     List<Posicao2D>? pingsAtivos,
+    int? revisaoBestiario,
   }) {
     return MestreState(
       campanhas: campanhas ?? this.campanhas,
-      campanhaSelecionadaId:
-          campanhaSelecionadaId ?? this.campanhaSelecionadaId,
-      aventuraSelecionadaId:
-          aventuraSelecionadaId ?? this.aventuraSelecionadaId,
-      sessaoSelecionadaId: sessaoSelecionadaId ?? this.sessaoSelecionadaId,
-      mapaSelecionadoId: mapaSelecionadoId ?? this.mapaSelecionadoId,
+      campanhaSelecionadaId: limparSelecaoContexto
+          ? campanhaSelecionadaId
+          : (campanhaSelecionadaId ?? this.campanhaSelecionadaId),
+      aventuraSelecionadaId: limparSelecaoContexto
+          ? aventuraSelecionadaId
+          : (aventuraSelecionadaId ?? this.aventuraSelecionadaId),
+      sessaoSelecionadaId: limparSelecaoContexto
+          ? sessaoSelecionadaId
+          : (sessaoSelecionadaId ?? this.sessaoSelecionadaId),
+      mapaSelecionadoId: limparSelecaoContexto
+          ? mapaSelecionadoId
+          : (mapaSelecionadoId ?? this.mapaSelecionadoId),
       statusLan: statusLan ?? this.statusLan,
       ipHostLocal: ipHostLocal ?? this.ipHostLocal,
       portaHostLan: portaHostLan ?? this.portaHostLan,
@@ -180,8 +185,6 @@ class MestreState {
       custosMovimentoToken: custosMovimentoToken ?? this.custosMovimentoToken,
       movimentoLivreMestre: movimentoLivreMestre ?? this.movimentoLivreMestre,
       papelVisualizacao: papelVisualizacao ?? this.papelVisualizacao,
-      regrasRapidas: regrasRapidas ?? this.regrasRapidas,
-      buscaRegra: buscaRegra ?? this.buscaRegra,
       perigos: perigos ?? this.perigos,
       historicoNomes: historicoNomes ?? this.historicoNomes,
       nomeGeradoAtual: nomeGeradoAtual ?? this.nomeGeradoAtual,
@@ -191,9 +194,11 @@ class MestreState {
       ultimoEnvioMapa: ultimoEnvioMapa ?? this.ultimoEnvioMapa,
       pontoOrigemMedicao:
           limparMedicao ? null : (pontoOrigemMedicao ?? this.pontoOrigemMedicao),
-      pontoDestinoMedicao:
-          limparMedicao ? null : (pontoDestinoMedicao ?? this.pontoDestinoMedicao),
+      pontoDestinoMedicao: (limparMedicao || limparDestinoMedicao)
+          ? null
+          : (pontoDestinoMedicao ?? this.pontoDestinoMedicao),
       pingsAtivos: pingsAtivos ?? this.pingsAtivos,
+      revisaoBestiario: revisaoBestiario ?? this.revisaoBestiario,
     );
   }
 }

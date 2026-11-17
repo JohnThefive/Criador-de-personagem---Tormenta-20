@@ -1,0 +1,1999 @@
+[
+  {
+    "id": "alzeras",
+    "nome": "Alzeras",
+    "nd": "11",
+    "regiao": "reino_dos_mortos",
+    "papel": "especial",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 18,
+    "percepcao": 16,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 29,
+    "resistencias": {
+      "fortitude": 11,
+      "reflexos": 18,
+      "vontade": 24
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "atordoado",
+      "incorporeo",
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +5"
+    ],
+    "pv": 385,
+    "pm": 130,
+    "deslocamento": {
+      "terrestre": 0.0,
+      "voo": 12.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": null,
+      "des": 4,
+      "con": 2,
+      "int": 6,
+      "sab": 2,
+      "car": 3
+    },
+    "pericias": {
+      "furtividade": 18,
+      "intuicao": 11,
+      "misticismo": 25
+    },
+    "ataques": [],
+    "habilidades": [
+      {
+        "nome": "Contramágica Aprimorada",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, o alzeras faz uma contramágica."
+      },
+      {
+        "nome": "Conjuração Odiosa",
+        "acao": "livre",
+        "custoPm": 2,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando lança uma magia, o alzeras pode impregná-la com ódio. Criaturas que falhem na resistência contra a magia sofrem 4d8+4 pontos de dano de corte, impacto ou perfuração (à escolha do alzeras)."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 33,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como mago de 13º nível (CD 33): Amarras Etéreas (padrão, 6 PM, laços que agarram), Armadura Arcana (reação, 10 PM, +9 na Defesa contra um ataque), Dissipar Magia (padrão, 3 PM), Imobilizar (padrão, 6 PM, até duas criaturas paralisadas), Leque Cromático (padrão, 6 PM, cone de 4,5m, atordoado e ofuscado), Marionete (padrão, 10 PM, sustentada), Raio do Enfraquecimento (padrão, 8 PM, exausto), Selo de Mana (padrão, 6 PM), Sussurros Insanos (padrão, 3 PM, confuso), Teia (padrão, 2 PM, cubo de 6m, enredado)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "tomo do rancor.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "aparicao",
+    "nome": "Aparição",
+    "nd": "5",
+    "regiao": "reino_dos_mortos",
+    "papel": "especial",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 10,
+    "percepcao": 6,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 23,
+    "resistencias": {
+      "fortitude": 5,
+      "reflexos": 17,
+      "vontade": 11
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [
+      "luz_solar"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 110,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 0.0,
+      "voo": 18.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": null,
+      "des": 6,
+      "con": null,
+      "int": 0,
+      "sab": 2,
+      "car": 2
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Toque drenante",
+        "bonusAtaque": 18,
+        "dano": "3d8+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "trevas",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Toque Drenante",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 21,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Criatura atingida deve fazer Fort CD 21 ou ficar fraca; a aparição recebe 20 PV temporários cumulativos."
+      },
+      {
+        "nome": "Incorpóreo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A aparição é incorpórea."
+      },
+      {
+        "nome": "Vulnerabilidade à Luz do Dia",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Exposta a luz solar natural, fica debilitada."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "arquilich_ferren_asloth",
+    "nome": "Arquilich Ferren Asloth",
+    "nd": "21",
+    "regiao": "reino_dos_mortos",
+    "papel": "solo",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 27,
+    "percepcao": 22,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 66,
+    "resistencias": {
+      "fortitude": 31,
+      "reflexos": 27,
+      "vontade": 39
+    },
+    "rd": {
+      "magico": 20
+    },
+    "imunidadesEfeitos": [
+      "adivinhacao",
+      "efeitos_mentais",
+      "metamorfose"
+    ],
+    "imunidadesDano": [
+      "eletricidade",
+      "frio"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +5"
+    ],
+    "pv": 2418,
+    "pm": 255,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 1,
+      "des": 6,
+      "con": 4,
+      "int": 15,
+      "sab": 4,
+      "car": 7
+    },
+    "pericias": {
+      "conhecimento": 36,
+      "diplomacia": 25,
+      "enganacao": 25,
+      "intimidacao": 25,
+      "intuicao": 25,
+      "investigacao": 31,
+      "misticismo": 36,
+      "nobreza": 31,
+      "oficio_alquimista": 31,
+      "religiao": 20
+    },
+    "ataques": [
+      {
+        "nome": "Cajado da destruição",
+        "bonusAtaque": 57,
+        "dano": "2d6+16",
+        "danoExtra": "10d6+10 frio",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Toque gélido",
+        "bonusAtaque": 55,
+        "dano": "10d6+10",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "frio",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Arcano de Batalha",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Arquilich Ferren Asloth soma sua Inteligência nas rolagens de dano quando lança magias (já contabilizado)."
+      },
+      {
+        "nome": "Aura de Medo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 55,
+        "resistenciaTipo": null,
+        "descricao": "Criaturas em um raio de 30m de Ferren ficam abaladas (Vontade CD 55 evita e a criatura não pode mais ser abalada por esta habilidade até o fim da cena)."
+      },
+      {
+        "nome": "Conhecimento Sequestrado",
+        "acao": "reacao",
+        "custoPm": 3,
+        "recarga": null,
+        "cdResistencia": 55,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando vê outra criatura lançando uma magia em alcance médio, Ferren pode tomar essa magia. A criatura deve fazer um teste de Vontade (CD 55); se falhar, não pode mais lançar essa magia até o fim da cena, e durante esse período ela se torna uma magia conhecida para Ferren."
+      },
+      {
+        "nome": "Contramágica Superior",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando vê uma magia ser conjurada, Ferren faz uma contramágica. Se usar Dissipar Magia para isso, ele rola dois dados e usa o melhor resultado."
+      },
+      {
+        "nome": "Dança da Morte",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início de seu turno, Ferren refaz os testes de resistência de cada condição que o esteja afetando. Se ele passar, o efeito se encerra."
+      },
+      {
+        "nome": "Despertar dos Mortos",
+        "acao": "completa",
+        "custoPm": 10,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Ferren conjura um morto-vivo à escolha dele, feito de energia negativa e de até ND 19. A criatura surge em um espaço desocupado em alcance curto, obedece aos comandos de Ferren e age na mesma iniciativa dele. O morto-vivo permanece até ser destruído, até o fim da cena ou até ser dispensado por Ferren (ação livre). O Arquilich só pode manter um morto-vivo conjurado por esta habilidade por vez."
+      },
+      {
+        "nome": "Drenar Vida",
+        "acao": "livre",
+        "custoPm": 1,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando lança uma magia que causa dano, Ferren muda o tipo desse dano para trevas. Para cada criatura que falhar no teste de resistência contra essa magia, Ferren recupera uma quantidade de PV igual à metade do dano causado."
+      },
+      {
+        "nome": "Fluxo de Mana",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Ferren pode manter dois efeitos sustentados simultaneamente com apenas uma ação livre (mas pagando o custo de cada um)."
+      },
+      {
+        "nome": "Magia Acelerada",
+        "acao": "livre",
+        "custoPm": 4,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando lança uma magia com execução de ação completa ou menor, Ferren muda a execução dela para livre."
+      },
+      {
+        "nome": "Magia Discreta",
+        "acao": "livre",
+        "custoPm": 2,
+        "recarga": null,
+        "cdResistencia": 30,
+        "resistenciaTipo": null,
+        "descricao": "Quando lança uma magia, Ferren não precisa gesticular ou falar, e pode lançá-la com as mãos presas, amordaçado etc. Perceber que ele lançou uma magia exige passar em um teste de Misticismo (CD 30)."
+      },
+      {
+        "nome": "Presença Opressora",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 55,
+        "resistenciaTipo": null,
+        "descricao": "Quando uma criatura ataca Ferren, deve passar em um teste de Vontade (CD 55) ou não conseguirá machucá-lo, perderá a ação e sofrerá 12d6 pontos de dano psíquico. Se passar, a criatura não é mais afetada por esta habilidade até o fim da cena."
+      },
+      {
+        "nome": "Regente Sombrio",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Ferren tem controle total sobre seus domínios. Uma vez por rodada, ele pode mudar o clima de qualquer região de Aslothia como se tivesse lançado Controlar o Clima. Além disso, pode manipular suas terras, impedindo que criaturas ou efeitos cruzem suas fronteiras, e é capaz de saber a localização exata de qualquer criatura que conheça e que esteja dentro de Aslothia."
+      },
+      {
+        "nome": "Rigor Mortis",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura que falhe na resistência contra uma magia de Ferren perde sua próxima ação de movimento."
+      },
+      {
+        "nome": "Sacrificar Servo",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando sofre dano, Ferren sacrifica uma de suas criaturas invocadas para reduzir esse dano a 0."
+      },
+      {
+        "nome": "Toque Paralisante",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 55,
+        "resistenciaTipo": null,
+        "descricao": "Os ataques corpo a corpo de Ferren causam 10d6+10 pontos de dano de frio extras (já contabilizados). Uma criatura que sofra esse dano de frio fica paralisada por 1d6 rodadas (Fortitude CD 55 evita)."
+      },
+      {
+        "nome": "Visão Tumular",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Ferren está permanentemente sob efeito da magia Visão Mística com o aprimoramento que permite enxergar criaturas e objetos invisíveis."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 57,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como mago de 20º nível (CD 57, limite de PM 35). Além das magias listadas, pode lançar qualquer magia de abjuração, convocação ou necromancia, arcana ou divina: Desespero Esmagador (padrão, 8 PM), Dissipar Magia (padrão, 3 PM), Ferver Sangue (padrão, 35 PM, sustentada, 14d8+29 de fogo por rodada, explode ao matar), Legião (padrão, 15 PM, sustentada), Marionete (padrão, 10 PM, sustentada), Rogar Maldição (padrão, 10 PM), Tentáculos de Trevas (padrão, 10 PM, 8d6+8 de trevas ao esmagar), Toque da Morte (padrão, 25 PM, 10d8+35 de trevas), Toque Vampírico (padrão, 35 PM, +36d6+51 de trevas, cura metade), Velocidade (padrão, 10 PM, sustentada)."
+      }
+    ],
+    "equipamento": [
+      "Amuleto do Abutre",
+      "Cajado da destruição",
+      "Robe do arquimago"
+    ],
+    "tesouro": "triplo.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "cemiterio_vivo",
+    "nome": "Cemitério Vivo",
+    "nd": "17",
+    "regiao": "reino_dos_mortos",
+    "papel": "solo",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "colossal",
+    "iniciativa": 13,
+    "percepcao": 14,
+    "sentidos": [
+      "percepcao_as_cegas_medio",
+      "visao_no_escuro"
+    ],
+    "defesa": 54,
+    "resistencias": {
+      "fortitude": 35,
+      "reflexos": 12,
+      "vontade": 24
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [
+      "atordoado",
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +5"
+    ],
+    "pv": 1125,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 13,
+      "des": -1,
+      "con": 10,
+      "int": null,
+      "sab": 1,
+      "car": 2
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Pancada (x4)",
+        "bonusAtaque": 49,
+        "dano": "4d10+40",
+        "danoExtra": "2d8 trevas",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Adquirir Cadáver",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O cemitério vivo agarra um humanoide inconsciente ou morto ao seu alcance."
+      },
+      {
+        "nome": "Aura de Profanação",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 44,
+        "resistenciaTipo": null,
+        "descricao": "O cemitério exala uma aura de poeira carregada de energia negativa. Qualquer criatura viva que entre em um raio de 9m do cemitério, ou inicie seu turno nesta área, sofre 5d8+20 pontos de dano de trevas e recebe imunidade a cura mágica por 1 rodada (Fortitude CD 44 reduz à metade e evita a imunidade a cura)."
+      },
+      {
+        "nome": "Finalmente Livres",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando o cemitério é destruído, ele se desmancha em um amontoado de terra, tumbas e corpos. Todas as criaturas absorvidas há menos de uma semana retornam à vida, mas os espíritos dos corpos consumidos há mais tempo se levantam como mortos-vivos amargurados e furiosos, gerando 1d4+1 falanges. Essas falanges agem normalmente a partir da rodada seguinte, na iniciativa original do cemitério."
+      },
+      {
+        "nome": "Herança Profana",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando o cemitério é destruído, uma esfera de 500m ao redor do espaço onde ele foi derrotado se torna corrompida por um ano. Enquanto a área estiver corrompida, criaturas vivas dentro dela não recuperam pontos de vida por efeitos mágicos e sofrem 2d8+2 pontos de dano de trevas por rodada. Uma magia Consagrar com o aprimoramento permanente remove essa corrupção."
+      },
+      {
+        "nome": "Tumba Viva",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se começar seu turno agarrando um humanoide Grande ou menor, inconsciente ou morto, o cemitério abre um espaço em seu peito e coloca a criatura em seu interior, absorvendo-a. Ao fazer isso, ele ganha 20 PV temporários por nível da criatura. Uma criatura absorvida dessa forma só pode ser libertada com a destruição do cemitério."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "dobro.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "chacal_zumbi",
+    "nome": "Chacal-Zumbi",
+    "nd": "2",
+    "regiao": "reino_dos_mortos",
+    "papel": "especial",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 6,
+    "percepcao": 5,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 19,
+    "resistencias": {
+      "fortitude": 7,
+      "reflexos": 13,
+      "vontade": 2
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 35,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 3,
+      "con": 3,
+      "int": null,
+      "sab": 0,
+      "car": -1
+    },
+    "pericias": {
+      "furtividade": 6,
+      "sobrevivencia": 8
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 14,
+        "dano": "1d6+8",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Doença",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 16,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura mordida por um chacal é exposta à doença febre necrótica (Fortitude CD 16 evita)."
+      },
+      {
+        "nome": "Matilha Zumbi",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O chacal-zumbi recebe +1 em testes de perícia para cada outro morto-vivo aliado em alcance curto."
+      },
+      {
+        "nome": "Fraqueza Zumbi",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O chacal-zumbi sofre o dobro de dano de acertos críticos ou de ataques feitos contra seu cérebro (Defesa 29)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "esqueleto",
+    "nome": "Esqueleto",
+    "nd": "2",
+    "regiao": "reino_dos_mortos",
+    "papel": "lacaio",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 7,
+    "percepcao": 3,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 19,
+    "resistencias": {
+      "fortitude": 3,
+      "reflexos": 7,
+      "vontade": 12
+    },
+    "rd": {
+      "corte": 5,
+      "frio": 5,
+      "perfuracao": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 14,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 3,
+      "con": 0,
+      "int": null,
+      "sab": 0,
+      "car": -5
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Espada longa",
+        "bonusAtaque": 14,
+        "dano": "2d8+12",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [],
+    "equipamento": [
+      "Escudo pesado",
+      "espada longa"
+    ],
+    "tesouro": "nenhum",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "esqueleto_de_elite",
+    "nome": "Esqueleto de Elite",
+    "nd": "4",
+    "regiao": "reino_dos_mortos",
+    "papel": "especial",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 10,
+    "percepcao": 4,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 25,
+    "resistencias": {
+      "fortitude": 4,
+      "reflexos": 10,
+      "vontade": 16
+    },
+    "rd": {
+      "corte": 5,
+      "frio": 5,
+      "perfuracao": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 60,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 4,
+      "con": 2,
+      "int": null,
+      "sab": 0,
+      "car": -5
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Espada longa",
+        "bonusAtaque": 18,
+        "dano": "2d8+15",
+        "danoExtra": "2d8 trevas",
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [],
+    "equipamento": [
+      "Escudo pesado",
+      "espada longa",
+      "meia armadura"
+    ],
+    "tesouro": "nenhum",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "falange",
+    "nome": "Falange",
+    "nd": "8",
+    "regiao": "reino_dos_mortos",
+    "papel": "solo",
+    "tipo": "mortoVivo",
+    "subtipo": "bando",
+    "tamanho": "grande",
+    "iniciativa": 12,
+    "percepcao": 6,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 25,
+    "resistencias": {
+      "fortitude": 6,
+      "reflexos": 12,
+      "vontade": 18
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 300,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 4,
+      "con": null,
+      "int": null,
+      "sab": 0,
+      "car": -5
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "[Bando] Espada longa",
+        "bonusAtaque": 28,
+        "dano": "4d8+30",
+        "danoExtra": "4d8 trevas",
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Bando",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se o ataque exceder a Defesa por 10+, causa dobro de dano. Se errar, ainda causa metade do dano. Imune a manobras e efeitos que afetam apenas uma criatura sem dano. Sofre +50% de dano de área."
+      }
+    ],
+    "equipamento": [
+      "Escudo pesado",
+      "espada longa",
+      "meia armadura (1d8 cada)"
+    ],
+    "tesouro": "nenhum",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "lich",
+    "nome": "Lich",
+    "nd": "15",
+    "regiao": "reino_dos_mortos",
+    "papel": "especial",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 14,
+    "percepcao": 18,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 48,
+    "resistencias": {
+      "fortitude": 27,
+      "reflexos": 20,
+      "vontade": 33
+    },
+    "rd": {
+      "magico": 20
+    },
+    "imunidadesEfeitos": [
+      "metamorfose"
+    ],
+    "imunidadesDano": [
+      "eletricidade",
+      "frio"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +5"
+    ],
+    "pv": 560,
+    "pm": 170,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": -2,
+      "des": 1,
+      "con": 3,
+      "int": 9,
+      "sab": 3,
+      "car": 2
+    },
+    "pericias": {
+      "conhecimento": 24,
+      "cura": 16,
+      "furtividade": 14,
+      "intimidacao": 15,
+      "misticismo": 27,
+      "oficio_alquimista": 27,
+      "religiao": 16
+    },
+    "ataques": [
+      {
+        "nome": "Toque gélido",
+        "bonusAtaque": 41,
+        "dano": "6d6+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "frio",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Arcano de Batalha",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O lich soma sua Inteligência nas rolagens de dano quando lança magias (já contabilizado)."
+      },
+      {
+        "nome": "Aura de Medo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 42,
+        "resistenciaTipo": null,
+        "descricao": "Criaturas em um raio de 30m do lich ficam abaladas (Vontade CD 42 evita e a criatura não pode mais ser abalada por esta habilidade até o fim da cena)."
+      },
+      {
+        "nome": "Drenar Vida",
+        "acao": "livre",
+        "custoPm": 1,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando lança uma magia que causa dano, o lich muda o tipo desse dano para trevas. Para cada criatura que falhar no teste de resistência contra essa magia, o lich recupera uma quantidade de PV igual à metade do dano causado."
+      },
+      {
+        "nome": "Fluxo de Mana",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O lich pode manter dois efeitos sustentados simultaneamente com apenas uma ação livre (mas pagando o custo de cada um)."
+      },
+      {
+        "nome": "Magia Acelerada",
+        "acao": "livre",
+        "custoPm": 4,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando lança uma magia com execução de ação completa ou menor, o lich muda a execução dela para livre."
+      },
+      {
+        "nome": "Sacrificar Servo",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando sofre dano, o lich sacrifica uma de suas criaturas invocadas para reduzir esse dano a 0."
+      },
+      {
+        "nome": "Toque Paralisante",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 42,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura que sofra dano do toque gélido do lich fica paralisada por 1d6 rodadas (Fortitude CD 42 evita)."
+      },
+      {
+        "nome": "Filactério",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Um lich morto retorna completamente recuperado em 1d10 dias. A única forma de derrotá-lo permanentemente é destruir seu filactério: item mágico maior com Defesa 20, RD 40, 50 PV e aura mágica poderosa, que o lich sempre sabe localizar."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 42,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como mago de 17º nível (CD 42, limite de PM 26): Conjurar Monstro (completa, 23 PM, sustentada, zumbi Enorme), Conjurar Mortos-Vivos (completa, 10 PM, sustentada, seis sombras Médias), Profanar (padrão, 1 PM), Raio Polar (padrão, 16 PM, 14d8+9 de frio e paralisado em bloco de gelo), Relâmpago (padrão, 14 PM, 14d8+9 de eletricidade), Toque da Morte (padrão, 25 PM, 10d8+19 de trevas), Toque Vampírico (padrão, 19 PM, +20d6+9 de trevas, cura metade)."
+      }
+    ],
+    "equipamento": [
+      "Essência de mana x5",
+      "Robe do arquimago",
+      "Terra de cemitério x2"
+    ],
+    "tesouro": "dobro e fragmento de filacterio.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "lich_de_aslothia",
+    "nome": "Lich de Aslothia",
+    "nd": "18",
+    "regiao": "reino_dos_mortos",
+    "papel": "especial",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 21,
+    "percepcao": 17,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 52,
+    "resistencias": {
+      "fortitude": 29,
+      "reflexos": 22,
+      "vontade": 35
+    },
+    "rd": {
+      "magico": 20
+    },
+    "imunidadesEfeitos": [
+      "metamorfose"
+    ],
+    "imunidadesDano": [
+      "eletricidade",
+      "frio"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +5"
+    ],
+    "pv": 800,
+    "pm": 180,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": -1,
+      "des": 4,
+      "con": 2,
+      "int": 12,
+      "sab": 2,
+      "car": 7
+    },
+    "pericias": {
+      "conhecimento": 29,
+      "cura": 17,
+      "diplomacia": 22,
+      "intimidacao": 22,
+      "intuicao": 17,
+      "misticismo": 32,
+      "nobreza": 29,
+      "oficio_alquimista": 29
+    },
+    "ataques": [
+      {
+        "nome": "Toque gélido",
+        "bonusAtaque": 47,
+        "dano": "9d6+9",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "frio",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Arcano de Batalha",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O lich de Aslothia soma sua Inteligência nas rolagens de dano quando lança magias (já contabilizado)."
+      },
+      {
+        "nome": "Aura de Medo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 46,
+        "resistenciaTipo": null,
+        "descricao": "Criaturas em um raio de 30m do lich ficam abaladas (Vontade CD 46 evita e a criatura não pode mais ser abalada por esta habilidade até o fim da cena)."
+      },
+      {
+        "nome": "Contramágica Superior",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando vê uma magia ser conjurada, o lich faz uma contramágica. Se usar Dissipar Magia para isso, ele rola dois dados e usa o melhor resultado."
+      },
+      {
+        "nome": "Drenar Vida",
+        "acao": "livre",
+        "custoPm": 1,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando lança uma magia que causa dano, o lich muda o tipo desse dano para trevas. Para cada criatura que falhar no teste de resistência contra essa magia, o lich recupera uma quantidade de PV igual à metade do dano causado."
+      },
+      {
+        "nome": "Fluxo de Mana",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O lich pode manter dois efeitos sustentados simultaneamente com apenas uma ação livre (mas pagando o custo de cada um)."
+      },
+      {
+        "nome": "Magia Acelerada",
+        "acao": "livre",
+        "custoPm": 4,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando lança uma magia com execução de ação completa ou menor, o lich muda a execução dela para livre."
+      },
+      {
+        "nome": "Magia Discreta",
+        "acao": "livre",
+        "custoPm": 2,
+        "recarga": null,
+        "cdResistencia": 20,
+        "resistenciaTipo": null,
+        "descricao": "Quando lança uma magia, o lich não precisa gesticular ou falar, e pode lançar a magia com as mãos presas, amordaçado etc. Perceber que ele lançou uma magia exige passar em um teste de Misticismo (CD 20)."
+      },
+      {
+        "nome": "Presença Majestosa",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 46,
+        "resistenciaTipo": null,
+        "descricao": "Quando uma criatura ataca o lich, deve passar em um teste de Vontade (CD 46) ou não conseguirá machucá-lo e perderá a ação. Uma criatura que passe no teste de Vontade não é mais afetada por esta habilidade até o fim da cena."
+      },
+      {
+        "nome": "Rigor Mortis",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura que falhe na resistência contra uma das magias do lich perde sua próxima ação de movimento."
+      },
+      {
+        "nome": "Sacrificar Servo",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando sofre dano, o lich sacrifica uma de suas criaturas invocadas para reduzir esse dano a 0."
+      },
+      {
+        "nome": "Toque Paralisante",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 46,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura que sofra dano do toque gélido do lich fica paralisada por 1d6 rodadas (Fortitude CD 46 evita)."
+      },
+      {
+        "nome": "Filactério",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Um lich morto retorna completamente recuperado em 1d10 dias. A única forma de derrotá-lo permanentemente é destruir seu filactério."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 46,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como mago de 18º nível (CD 46, limite de PM 30): Conjurar Mortos-Vivos (completa, 20 PM, sustentada, onze sombras Médias), Desespero Esmagador (padrão, 8 PM, debilitado e esmorecido), Dissipar Magia (padrão, 3 PM), Legião (padrão, 15 PM, sustentada, até 10 criaturas obedientes), Marionete (padrão, 10 PM, sustentada), Rogar Maldição (padrão, 10 PM, esmorecido permanente e muda), Toque da Morte (padrão, 25 PM, 10d8+22 de trevas), Toque Vampírico (padrão, 29 PM, +30d6+12 de trevas, cura metade), Velocidade (padrão, 10 PM, sustentada)."
+      }
+    ],
+    "equipamento": [
+      "Coroa majestosa",
+      "Essência de mana x5",
+      "Robe do arquimago"
+    ],
+    "tesouro": "dobro e fragmento de filacterio.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "lider_mercenario_de_aslothia",
+    "nome": "Líder Mercenário de Aslothia",
+    "nd": "5",
+    "regiao": "reino_dos_mortos",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 5,
+    "percepcao": 3,
+    "sentidos": [],
+    "defesa": 24,
+    "resistencias": {
+      "fortitude": 17,
+      "reflexos": 5,
+      "vontade": 11
+    },
+    "rd": {
+      "magia": 5
+    },
+    "imunidadesEfeitos": [
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 200,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 1,
+      "con": 3,
+      "int": 0,
+      "sab": 1,
+      "car": 1
+    },
+    "pericias": {
+      "atletismo": 8,
+      "intimidacao": 7
+    },
+    "ataques": [
+      {
+        "nome": "Alabarda",
+        "bonusAtaque": 17,
+        "dano": "1d10+26",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Espada curta (x2)",
+        "bonusAtaque": 17,
+        "dano": "1d6+16",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Capangas Descartáveis",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, o líder mercenário pode fazer com que um aliado adjacente sofra dano de um ataque ou habilidade em vez dele próprio. Se a criatura morrer com esse dano, o líder pode fazer um ataque corpo a corpo contra o agressor. O alvo desse ataque é considerado desprevenido."
+      },
+      {
+        "nome": "Inescrupuloso",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O mercenário recebe +2 em testes de ataque e +1d6 em rolagens de dano contra criaturas flanqueadas, sob efeito de alguma condição ou que sigam algum código de conduta (como Código de Honra ou Código do Herói)."
+      }
+    ],
+    "equipamento": [
+      "Alabarda cruel",
+      "Brunea",
+      "Escudo leve",
+      "Espada curta"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "mercenario_de_aslothia",
+    "nome": "Mercenário de Aslothia",
+    "nd": "3",
+    "regiao": "reino_dos_mortos",
+    "papel": "lacaio",
+    "tipo": "monstro",
+    "subtipo": "lefou",
+    "tamanho": "medio",
+    "iniciativa": 1,
+    "percepcao": 1,
+    "sentidos": [],
+    "defesa": 20,
+    "resistencias": {
+      "fortitude": 14,
+      "reflexos": 4,
+      "vontade": 9
+    },
+    "rd": {
+      "magia": 5,
+      "medo": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 21,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 0,
+      "con": 2,
+      "int": -1,
+      "sab": 0,
+      "car": 0
+    },
+    "pericias": {
+      "atletismo": 6,
+      "intimidacao": 5
+    },
+    "ataques": [
+      {
+        "nome": "Maça",
+        "bonusAtaque": 16,
+        "dano": "1d8+12",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Inescrupuloso",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O mercenário recebe +2 em testes de ataque e +1d6 em rolagens de dano contra criaturas flanqueadas, sob efeito de alguma condição ou que sigam algum código de conduta (como Código de Honra ou Código do Herói)."
+      }
+    ],
+    "equipamento": [
+      "Gibão de peles",
+      "Maça"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "morgue_raz",
+    "nome": "Morgue'raz",
+    "nd": "9",
+    "regiao": "reino_dos_mortos",
+    "papel": "solo",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 11,
+    "percepcao": 8,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 34,
+    "resistencias": {
+      "fortitude": 21,
+      "reflexos": 15,
+      "vontade": 9
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 378,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 8,
+      "des": 3,
+      "con": 4,
+      "int": -1,
+      "sab": 0,
+      "car": 0
+    },
+    "pericias": {
+      "furtividade": 11
+    },
+    "ataques": [
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 27,
+        "dano": "1d8+18",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Tripas-tentáculos",
+        "bonusAtaque": 27,
+        "dano": "1d6+18",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Usa a manobra agarrar com as tripas-tentáculos (teste +29)."
+      },
+      {
+        "nome": "Aura de Fedor",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 26,
+        "resistenciaTipo": null,
+        "descricao": "Qualquer criatura que entre em um raio de 9m do morgue'raz, ou inicie seu turno nesta área, fica enjoada por 1d4 rodadas (Fortitude CD 26 evita)."
+      },
+      {
+        "nome": "Criar Lacaios",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Criaturas mortas por um morgue'raz se erguem uma semana depois da morte como carniçais. Os carniçais obedecem instintivamente ao morgue'raz, a menos que ele já tenha sido destruído ou esteja a mais de 10 quilômetros."
+      },
+      {
+        "nome": "Devorar por Dentro",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 26,
+        "resistenciaTipo": null,
+        "descricao": "Se o morgue'raz iniciar seu turno agarrando uma criatura, tripas-vermes se alojam na vítima, causando o dano da tripa-tentáculo. Além disso, a vítima fica fraca até o fim do dia (Fortitude CD 26 evita). Sempre que deixar um alvo fraco dessa forma, o morgue'raz recupera uma quantidade de PV igual à metade do dano causado por esta habilidade."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "necromante",
+    "nome": "Necromante",
+    "nd": "7",
+    "regiao": "reino_dos_mortos",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "elfo",
+    "tamanho": "medio",
+    "iniciativa": 9,
+    "percepcao": 9,
+    "sentidos": [
+      "visao_na_penumbra"
+    ],
+    "defesa": 23,
+    "resistencias": {
+      "fortitude": 7,
+      "reflexos": 14,
+      "vontade": 20
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 180,
+    "pm": 55,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 2,
+      "con": 1,
+      "int": 5,
+      "sab": 0,
+      "car": 0
+    },
+    "pericias": {
+      "conhecimento": 14,
+      "misticismo": 16,
+      "furtividade": 15
+    },
+    "ataques": [
+      {
+        "nome": "Adaga",
+        "bonusAtaque": 22,
+        "dano": "1d4",
+        "danoExtra": "1d8 trevas",
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Ergam-se!",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Gasta 5 PM. Conjura seis mortos-vivos em espaços em alcance curto (For 3, Des 3, Def 25, 1 PV, dano 2d8 trevas). Desaparecem ao fim da cena."
+      },
+      {
+        "nome": "Sacrificar Servo",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando sofre dano, sacrifica um morto-vivo conjurado para reduzir esse dano a 0."
+      },
+      {
+        "nome": "Magias (mago 7º, CD 26/28 necromancia)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Amedrontar (7 PM), Armadura Arcana (7 PM, +7 Def), Crânio Voador (6 PM, 6d8+6 trevas + abalado), Toque Vampírico (6 PM, 10d6 trevas, recupera metade)."
+      }
+    ],
+    "equipamento": [
+      "Adaga",
+      "essência de mana"
+    ],
+    "tesouro": "dobro",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "turba_zumbi",
+    "nome": "Turba Zumbi",
+    "nd": "2",
+    "regiao": "reino_dos_mortos",
+    "papel": "solo",
+    "tipo": "mortoVivo",
+    "subtipo": "bando",
+    "tamanho": "grande",
+    "iniciativa": 1,
+    "percepcao": 1,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 11,
+    "resistencias": {
+      "fortitude": 5,
+      "reflexos": 1,
+      "vontade": 1
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 100,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": -1,
+      "con": 3,
+      "int": null,
+      "sab": -1,
+      "car": 0
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Mordida (bando)",
+        "bonusAtaque": 17,
+        "dano": "2d6+12",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Bando",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se o ataque excede a Defesa por 10+, causa dobro do dano. Se erra, causa metade. Imune a manobras e efeitos que afetem apenas uma criatura sem dano, mas sofre +50% de efeitos de área. Trespassar pode fazer um ataque adicional contra o bando uma vez por turno."
+      },
+      {
+        "nome": "Fraqueza Zumbi",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Sofre o dobro de dano de acertos críticos ou ataques contra cérebros (Defesa 21)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "vampiro",
+    "nome": "Vampiro",
+    "nd": "12",
+    "regiao": "reino_dos_mortos",
+    "papel": "solo",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 15,
+    "percepcao": 13,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 45,
+    "resistencias": {
+      "fortitude": 12,
+      "reflexos": 26,
+      "vontade": 20
+    },
+    "rd": {
+      "luz": 10
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 550,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 18.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 10,
+      "des": 7,
+      "con": null,
+      "int": 5,
+      "sab": 5,
+      "car": 7
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Espada longa (x2)",
+        "bonusAtaque": 36,
+        "dano": "2d8+5",
+        "danoExtra": "2d10 trevas",
+        "margemAmeaca": 17,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra",
+        "bonusAtaque": 36,
+        "dano": "2d6+25",
+        "danoExtra": "2d10 trevas",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Dominação Vampírica",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 29,
+        "resistenciaTipo": "vontade",
+        "descricao": "Sussurra palavras de controle para humanoide em alcance curto: fica confuso, enfeitiçado ou fascinado até o fim da cena, ou perde memórias da última hora (Von CD 29 evita)."
+      },
+      {
+        "nome": "Drenar Sangue",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Drena sangue de criatura que esteja agarrando: 6d6 dano de perfuração, recupera a mesma quantidade em PV. Criatura morta assim ressurge como vampiro na próxima noite."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "wisphago",
+    "nome": "Wisphago",
+    "nd": "8",
+    "regiao": "reino_dos_mortos",
+    "papel": "solo",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 12,
+    "percepcao": 11,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 33,
+    "resistencias": {
+      "fortitude": 21,
+      "reflexos": 8,
+      "vontade": 15
+    },
+    "rd": {
+      "magia": 5
+    },
+    "imunidadesEfeitos": [
+      "confusao"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 344,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 15.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 4,
+      "con": 5,
+      "int": -2,
+      "sab": 3,
+      "car": 1
+    },
+    "pericias": {
+      "atletismo": 14,
+      "sobrevivencia": 16
+    },
+    "ataques": [
+      {
+        "nome": "Mordida (x2)",
+        "bonusAtaque": 26,
+        "dano": "1d8+12",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Devorar Magia",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando o wisphago passa em um teste de resistência contra uma magia arcana por 5 ou mais, devora essa magia; ela é anulada e ele recebe uma quantidade de PV temporários cumulativos igual ao total de PM gastos na magia."
+      },
+      {
+        "nome": "Faro para Magos",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O wisphago recebe um bônus de +10 em testes de Sobrevivência para rastrear criaturas que tenham lançado uma magia arcana na última semana."
+      },
+      {
+        "nome": "Fome de Mana",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura atingida pela mordida do wisphago perde 1d4 PM."
+      },
+      {
+        "nome": "Vomitar Magia",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 24,
+        "resistenciaTipo": null,
+        "descricao": "O wisphago lança uma magia que tenha devorado durante o último mês com Devorar Magia (CD 24). Ele não precisa pagar nenhum custo da magia e pode aplicar seus aprimoramentos (limitado a 10 PM de custo total da magia). Ele só pode lançar cada magia devorada uma vez. O wisphago começa o encontro com 1d6 magias arcanas de 1º círculo e 1d4 magias arcanas de 2º círculo."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "1d6+2 dentes de wisphago (cd 23 para extrair).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "zumbi",
+    "nome": "Zumbi",
+    "nd": "0.25",
+    "regiao": "reino_dos_mortos",
+    "papel": "solo",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": -1,
+    "percepcao": -1,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 11,
+    "resistencias": {
+      "fortitude": 3,
+      "reflexos": -1,
+      "vontade": -1
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "efeitos_de_mente",
+      "necromancia_que_afeta_apenas_vivos"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 20,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": -1,
+      "con": null,
+      "int": null,
+      "sab": -1,
+      "car": -5
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 7,
+        "dano": "1d6+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Fraqueza Zumbi",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Zumbis sofrem o dobro de dano de ataques que acertem a cabeça ou de efeitos que os atingem enquanto estão caídos."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum",
+    "recursoExtraivel": null
+  }
+]

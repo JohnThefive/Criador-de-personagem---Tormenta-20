@@ -83,6 +83,8 @@ flutter:
     - assets/data/magias/3_circulo.json
     - assets/data/magias/4_circulo.json
     - assets/data/magias/5_circulo.json
+    - assets/data/ameacas/
+    - assets/data/ameacas/criaturas/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

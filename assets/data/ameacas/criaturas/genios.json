@@ -1,0 +1,811 @@
+[
+  {
+    "id": "allaraz",
+    "nome": "Allaraz",
+    "nd": "14",
+    "regiao": "genios",
+    "papel": "especial",
+    "tipo": "espirito",
+    "subtipo": "genio",
+    "tamanho": "grande",
+    "iniciativa": 17,
+    "percepcao": 11,
+    "sentidos": [],
+    "defesa": 44,
+    "resistencias": {
+      "fortitude": 14,
+      "reflexos": 22,
+      "vontade": 28
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "dano_de_luz"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +5"
+    ],
+    "pv": 490,
+    "pm": 113,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 15.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 4,
+      "con": 3,
+      "int": 2,
+      "sab": 4,
+      "car": 8
+    },
+    "pericias": {
+      "conhecimento": 15,
+      "diplomacia": 20,
+      "misticismo": 20,
+      "religiao": 17
+    },
+    "ataques": [
+      {
+        "nome": "Pancada (x2)",
+        "bonusAtaque": 37,
+        "dano": "4d8+25",
+        "danoExtra": "2d6 luz",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Dentro de uma Lampadazinha",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Para cada dia sem um pacto ativo, perde 1 PM; ao chegar a 0, sofre um efeito debilitante, revertido ao firmar novo pacto."
+      },
+      {
+        "nome": "Poderes Cósmicos Fenomenais",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Firma pacto com uma criatura voluntária, tornando-se parceiro iniciante e reduzindo o custo de suas habilidades em -1 PM enquanto presente."
+      },
+      {
+        "nome": "Servo dos Deuses",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Pode lançar Viagem Planar sem componente material, apenas em si mesmo."
+      },
+      {
+        "nome": "Contramágica Aprimorada",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, o allaraz faz uma contramágica."
+      },
+      {
+        "nome": "Proteger Criação",
+        "acao": "reacao",
+        "custoPm": 10,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando uma criatura em alcance curto sofre dano, o allaraz concede RD 50 a ela contra esse dano."
+      },
+      {
+        "nome": "Reverter Destruição",
+        "acao": "completa",
+        "custoPm": 5,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Criaturas em alcance curto à escolha do allaraz que tenham sofrido dano nessa cena recuperam 6d8+6 PV."
+      },
+      {
+        "nome": "Magias (feiticeiro 14º, CD 40, limite de PM 22)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Dissipar Magia (padrão, 3 PM): dissipa magias com CD igual ou menor ao teste de Misticismo. Explosão Caleidoscópica (padrão, 10 PM): raio de 6m, atordoadas 1 rodada e enjoadas 1d4 rodadas. Flecha de Luz (padrão, 16 PM): duas criaturas em alcance médio sofrem 6d8+6 de dano de luz e ficam cegas 1d4 rodadas depois ofuscadas. Globo de Invulnerabilidade (padrão, 10 PM, sustentada): esfera de 3m detém magias de até 3º círculo. Leque Cromático (padrão, 8 PM): cone de 4,5m, atordoadas 1 rodada (1x por cena, Von anula), ofuscadas e vulneráveis. Raio Solar (padrão, 18 PM): linha de 30m, 10d8 (10d12 em mortos-vivos) de dano de luz, cegas 1d4 rodadas e ofuscadas 1 rodada (Ref reduz à metade e evita). Selo de Mana (padrão, 10 PM): criaturas escolhidas em alcance curto precisam passar em Vontade ao gastar PM, senão a ação falha mas o custo é pago."
+      },
+      {
+        "nome": "Parceiro",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Iniciante: lança magia de ilusão ou evocação de 1º círculo (atributo-chave Carisma). Veterano: pode lançar Campo de Força. Mestre: gasta 4 PM para curar 5d8+5 PV em alcance curto, 1x por rodada."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "dabbus",
+    "nome": "Dabbus",
+    "nd": "15",
+    "regiao": "genios",
+    "papel": "especial",
+    "tipo": "espirito",
+    "subtipo": "genio",
+    "tamanho": "grande",
+    "iniciativa": 18,
+    "percepcao": 9,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 48,
+    "resistencias": {
+      "fortitude": 15,
+      "reflexos": 22,
+      "vontade": 28
+    },
+    "rd": {
+      "magia_arcana": 10
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "trevas"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 525,
+    "pm": 98,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 15.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 5,
+      "con": 4,
+      "int": 2,
+      "sab": 2,
+      "car": 8
+    },
+    "pericias": {
+      "enganacao": 21,
+      "intimidacao": 21,
+      "misticismo": 17
+    },
+    "ataques": [
+      {
+        "nome": "Pancada (x2)",
+        "bonusAtaque": 41,
+        "dano": "3d10+25",
+        "danoExtra": "2d8 trevas",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Conduta Dabbus",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Um dabbus só aceita amos malignos ou devotos de deuses de energia apenas negativa; normalmente não serve a personagens jogadores."
+      },
+      {
+        "nome": "Dentro de uma Lampadazinha",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Para cada dia sem um pacto ativo, perde 1 PM; ao chegar a 0, sofre um efeito debilitante, revertido ao firmar novo pacto."
+      },
+      {
+        "nome": "Servo dos Deuses",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Pode lançar Viagem Planar sem componente material, apenas em si mesmo."
+      },
+      {
+        "nome": "Devorar Magia",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando passa no teste de resistência contra uma magia da qual foi alvo, não sofre nenhum efeito e recupera PM igual ao valor gasto nela."
+      },
+      {
+        "nome": "Magia Acelerada",
+        "acao": "livre",
+        "custoPm": 4,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando lança uma magia com execução de ação completa ou menor, muda a execução dela para livre."
+      },
+      {
+        "nome": "Ódio Ancestral",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando o dabbus reduz os PV de um inimigo a 0 ou menos, recupera metade do dano que causou a esse inimigo."
+      },
+      {
+        "nome": "Magias (feiticeiro 15º, CD 42)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Crânio Voador de Vladislav (padrão, 9 PM): dois crânios causam 6d8+6 de dano de trevas e deixam abaladas (Fort reduz à metade e evita). Desintegrar (padrão, 14 PM): 12d12 de dano de essência (Fort reduz para 3d12); reduzido a 0 PV vira pó. Manto das Trevas (padrão, 6 PM, sustentada): fica incorpóreo e teleporta-se entre sombras; sofre 1 dano/rodada sob luz solar. Tentáculos de Trevas (padrão, 10 PM): tentáculos em esfera de 6m agarram e esmagam criaturas, 8d6 de dano de trevas. Toque Vampírico (padrão, 15 PM): ataque corpo a corpo causa +15d6 de trevas e cura a metade desse dano. Transformação de Guerra (padrão, 6 PM, sustentada): +6 em Defesa/ataque/dano corpo a corpo e 30 PV temporários, mas não pode lançar outras magias. Velocidade (padrão, 10 PM, sustentada): ação padrão adicional por turno. Vitalidade Fantasma (padrão, 10 PM): esfera de 6m, 3d10 de dano de trevas a vivos (Fort reduz à metade), cura PV temporários iguais ao dano total."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "gizzehi",
+    "nome": "Gizzehi",
+    "nd": "12",
+    "regiao": "genios",
+    "papel": "especial",
+    "tipo": "espirito",
+    "subtipo": "genio",
+    "tamanho": "grande",
+    "iniciativa": 13,
+    "percepcao": 12,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 39,
+    "resistencias": {
+      "fortitude": 11,
+      "reflexos": 27,
+      "vontade": 19
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "encantamento"
+    ],
+    "imunidadesDano": [
+      "fogo"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 412,
+    "pm": 85,
+    "deslocamento": {
+      "terrestre": 0.0,
+      "voo": 12.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": -1,
+      "des": 3,
+      "con": 2,
+      "int": 2,
+      "sab": 1,
+      "car": 7
+    },
+    "pericias": {
+      "diplomacia": 19,
+      "enganacao": 22,
+      "misticismo": 14
+    },
+    "ataques": [
+      {
+        "nome": "Pancada",
+        "bonusAtaque": 27,
+        "dano": "1d3+3",
+        "danoExtra": "8d6 fogo",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Dentro de uma Lampadazinha",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Para cada dia sem um pacto ativo, perde 1 PM; ao chegar a 0, sofre um efeito debilitante, revertido ao firmar novo pacto."
+      },
+      {
+        "nome": "Poderes Cósmicos Fenomenais",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Firma pacto com uma criatura voluntária, tornando-se parceiro iniciante e reduzindo o custo de suas habilidades em -1 PM enquanto presente."
+      },
+      {
+        "nome": "Servo dos Deuses",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Pode lançar Viagem Planar sem componente material, apenas em si mesmo."
+      },
+      {
+        "nome": "Magias (feiticeiro 15º, CD 35)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Açoite Flamejante (movimento, 7 PM, sustentada): ataque padrão causa 6d8 de dano de fogo e deixa em chamas e enredado (Ref reduz à metade e evita). Coluna de Chamas (padrão, 13 PM): cilindro de 3m de raio e 30m de altura em alcance longo, 13d6 de dano de fogo + 6d6 de luz (Ref reduz à metade). Controlar Fogo (padrão, 3 PM): cria, molda, move ou extingue chamas em alcance médio. Explosão Caleidoscópica (padrão, 10 PM): raio de 6m, atordoadas 1 rodada e enjoadas 1d4 rodadas (Fort muda para desprevenidas; 1x por cena). Marca da Obediência (padrão, 6 PM): criatura adjacente não ataca até o fim da cena (Von evita; falha causa 3d6 de dano psíquico)."
+      },
+      {
+        "nome": "Parceiro",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Iniciante: ataques corpo a corpo deixam o alvo em chamas mágicas. Veterano: dano das chamas aumenta para 1d8. Mestre: apagar o fogo exige ação completa em vez de padrão."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "jairuan",
+    "nome": "Jairuan",
+    "nd": "6",
+    "regiao": "genios",
+    "papel": "especial",
+    "tipo": "espirito",
+    "subtipo": "genio",
+    "tamanho": "grande",
+    "iniciativa": 10,
+    "percepcao": 5,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 21,
+    "resistencias": {
+      "fortitude": 12,
+      "reflexos": 16,
+      "vontade": 8
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "encantamento"
+    ],
+    "imunidadesDano": [
+      "eletricidade"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 158,
+    "pm": 41,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 12.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 5,
+      "con": 3,
+      "int": 2,
+      "sab": 1,
+      "car": 4
+    },
+    "pericias": {
+      "atletismo": 14,
+      "intimidacao": 9,
+      "misticismo": 9
+    },
+    "ataques": [
+      {
+        "nome": "Cimitarra (x2)",
+        "bonusAtaque": 18,
+        "dano": "1d8+10",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Dentro de uma Lampadazinha",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Para cada dia sem um pacto ativo, perde 1 PM; ao chegar a 0, sofre um efeito debilitante definido pelo mestre, revertido ao firmar novo pacto."
+      },
+      {
+        "nome": "Poderes Cósmicos Fenomenais",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Firma pacto com uma criatura voluntária, tornando-se parceiro iniciante e reduzindo o custo de suas habilidades em -1 PM enquanto presente."
+      },
+      {
+        "nome": "Servo dos Deuses",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Pode lançar Viagem Planar sem componente material, apenas em si mesmo."
+      },
+      {
+        "nome": "Vendaval",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 22,
+        "resistenciaTipo": "reflexos",
+        "descricao": "Criaturas em uma área de 3m em alcance médio sofrem 4d8+25 pontos de dano de impacto (Ref CD 22 reduz à metade). Recarga (movimento)."
+      },
+      {
+        "nome": "Magias (feiticeiro 6º, CD 22)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Enfeitiçar (padrão, 1 PM): humanoide em alcance curto fica enfeitiçado (Von evita). Invisibilidade (padrão, 5 PM): fica invisível até o fim da cena ou ação hostil, camuflagem total, +10 em Furtividade contra ouvir. Relâmpago (padrão, 5 PM): 8d6 de dano de eletricidade em linha de 30m (Ref reduz à metade)."
+      },
+      {
+        "nome": "Parceiro",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Iniciante: lança uma magia de encantamento ou ilusão de 1º círculo (atributo-chave Carisma). Veterano: deslocamento 12m (normal e voo). Mestre: deslocamento 18m (normal e voo), pode carregar uma criatura Média ou menor voando sem penalidade."
+      }
+    ],
+    "equipamento": [
+      "cimitarra"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "kemooz",
+    "nome": "Kemooz",
+    "nd": "9",
+    "regiao": "genios",
+    "papel": "especial",
+    "tipo": "espirito",
+    "subtipo": "genio",
+    "tamanho": "grande",
+    "iniciativa": 10,
+    "percepcao": 14,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 34,
+    "resistencias": {
+      "fortitude": 21,
+      "reflexos": 6,
+      "vontade": 15
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [
+      "encantamento"
+    ],
+    "imunidadesDano": [
+      "acido"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 280,
+    "pm": 57,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 9.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 1,
+      "con": 5,
+      "int": 2,
+      "sab": 3,
+      "car": 0
+    },
+    "pericias": {
+      "atletismo": 14,
+      "misticismo": 12
+    },
+    "ataques": [
+      {
+        "nome": "Pancada",
+        "bonusAtaque": 25,
+        "dano": "2d8+42",
+        "danoExtra": "6d8 acido",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Dentro de uma Lampadazinha",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Para cada dia sem um pacto ativo, perde 1 PM; ao chegar a 0, sofre um efeito debilitante, revertido ao firmar novo pacto."
+      },
+      {
+        "nome": "Poderes Cósmicos Fenomenais",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Firma pacto com uma criatura voluntária, tornando-se parceiro iniciante e reduzindo o custo de suas habilidades em -1 PM enquanto presente."
+      },
+      {
+        "nome": "Servo dos Deuses",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Pode lançar Viagem Planar sem componente material, apenas em si mesmo."
+      },
+      {
+        "nome": "Terraformista",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se o kemooz estiver em contato com o solo, o custo de sua magia Controlar Terra é reduzido à metade (após outros efeitos redutores)."
+      },
+      {
+        "nome": "Magias (feiticeiro 9º, CD 30)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Amarras Etéreas (padrão, 6 PM): laços agarram criatura em alcance médio (Ref evita); cada laço Defesa 10, 10 PV, RD 5, imune a dano mágico. Controlar Terra (padrão, 9 PM): transforma 9 cubos de terra em alcance longo em parede (RD 8, 50 PV) com cobertura total. Jato Corrosivo (padrão, 9 PM): linha de 9m causa 10d6 de dano de ácido (10d6+4 a construtos/objetos; Ref reduz à metade)."
+      },
+      {
+        "nome": "Parceiro",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Iniciante: cria um cubo de terra 1,5m (RD 5, 30 PV) a até 9m, até 4 cubos simultâneos. Veterano: +2 na Defesa. Mestre: pode lançar Controlar Terra (atributo-chave Carisma)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "yazzu",
+    "nome": "Yazzu",
+    "nd": "10",
+    "regiao": "genios",
+    "papel": "especial",
+    "tipo": "espirito",
+    "subtipo": "genio",
+    "tamanho": "grande",
+    "iniciativa": 14,
+    "percepcao": 5,
+    "sentidos": [],
+    "defesa": 31,
+    "resistencias": {
+      "fortitude": 23,
+      "reflexos": 18,
+      "vontade": 10
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "encantamento"
+    ],
+    "imunidadesDano": [
+      "frio"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 292,
+    "pm": 72,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 12.0,
+      "natacao": 12.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 5,
+      "con": 2,
+      "int": 1,
+      "sab": 0,
+      "car": 3
+    },
+    "pericias": {
+      "atletismo": 12,
+      "diplomacia": 18,
+      "furtividade": 14,
+      "ladinagem": 14,
+      "misticismo": 12
+    },
+    "ataques": [
+      {
+        "nome": "Tridente (x2)",
+        "bonusAtaque": 25,
+        "dano": "1d10+18",
+        "danoExtra": "1d6 frio",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Tridente (à distância)",
+        "bonusAtaque": 23,
+        "dano": "1d10+18",
+        "danoExtra": "1d6 frio",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Dentro de uma Lampadazinha",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Para cada dia sem um pacto ativo, perde 1 PM; ao chegar a 0, sofre um efeito debilitante, revertido ao firmar novo pacto."
+      },
+      {
+        "nome": "Poderes Cósmicos Fenomenais",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Firma pacto com uma criatura voluntária, tornando-se parceiro iniciante e reduzindo o custo de suas habilidades em -1 PM enquanto presente."
+      },
+      {
+        "nome": "Servo dos Deuses",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Pode lançar Viagem Planar sem componente material, apenas em si mesmo."
+      },
+      {
+        "nome": "Contracorrente",
+        "acao": "reacao",
+        "custoPm": 3,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz um ataque à distância com seu tridente, teleporta-se para um espaço livre adjacente ao alvo."
+      },
+      {
+        "nome": "Onda Poderosa",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 32,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Cria uma onda num quadrado de 6m em alcance médio; criaturas na área são empurradas 6m e sofrem 8d10 de dano de impacto (Fort CD 32 reduz à metade e evita o empurrão)."
+      },
+      {
+        "nome": "Turbilhão",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Faz uma manobra derrubar com o tridente (teste +29) contra todas as criaturas adjacentes."
+      },
+      {
+        "nome": "Magias (feiticeiro 12º, CD 32)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 32,
+        "resistenciaTipo": null,
+        "descricao": "Área Escorregadia (padrão, 1 PM): criaturas em 3m de lado em alcance curto fazem Reflexos CD 32 ou caem; movimento posterior exige Acrobacia CD 15. Controlar Água (padrão, 6 PM): controla água numa esfera de 30m até o fim da cena. Criar Elementos (padrão, 6 PM): preenche espaço Colossal com água ou gelo. Dardo Gélido (padrão, 7 PM): 8d6 de dano de frio e lento por 1 rodada (Fort reduz à metade e evita). Salto Dimensional (reação, 5 PM): +5 na Defesa e Reflexos contra um ataque iminente, depois salta para espaço adjacente."
+      },
+      {
+        "nome": "Parceiro",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Iniciante: +2 contra manobras de combate e efeitos de movimento. Veterano: cria onda 4,5m causando 4d4 de dano e caído, 1x por rodada por 4 PM. Mestre: bônus sobe para +4 e dano da onda para 4d6."
+      }
+    ],
+    "equipamento": [
+      "tridente_aumentado_banhado_a_ouro"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  }
+]

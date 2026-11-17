@@ -1,0 +1,771 @@
+[
+  {
+    "id": "aspecto_de_allihanna",
+    "nome": "Aspecto de Allihanna",
+    "nd": "5",
+    "regiao": "aspectos",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 6,
+    "percepcao": 6,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 24,
+    "resistencias": {
+      "fortitude": 17,
+      "reflexos": 11,
+      "vontade": 5
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 200,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 2,
+      "con": 4,
+      "int": -4,
+      "sab": 2,
+      "car": 0
+    },
+    "pericias": {
+      "atletismo": 8,
+      "sobrevivencia": 10
+    },
+    "ataques": [
+      {
+        "nome": "Galhada",
+        "bonusAtaque": 17,
+        "dano": "1d8+9",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 17,
+        "dano": "1d8+9",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Sem Redução por Terreno Difícil Natural",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O aspecto não sofre redução de deslocamento por terreno difícil de origem natural."
+      },
+      {
+        "nome": "Rugido de Centenas",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "padrao",
+        "cdResistencia": 20,
+        "resistenciaTipo": "vontade",
+        "descricao": "O aspecto de Allihanna emite um poderoso rugido. Todas as criaturas em um raio de 9m ficam paralisadas por 1 rodada e abaladas (Von CD 20 evita). Uma criatura só pode ser paralisada por esta habilidade uma vez por cena. Medo. Recarga (padrão)."
+      },
+      {
+        "nome": "Parceiro",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O aspecto de Allihanna é um parceiro veterano que fornece os benefícios de dois tipos de parceiro, escolhidos entre os disponíveis para companheiros animais. Uma vez por rodada, pode gastar uma ação de movimento e 2 PM para mudar os tipos escolhidos. Só segue um devoto de Allihanna."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "3d4 racoes de viagem (cd 20 para extrair).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "aspecto_de_kallyadranoch",
+    "nome": "Aspecto de Kallyadranoch",
+    "nd": "6",
+    "regiao": "aspectos",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "dragao",
+    "tamanho": "grande",
+    "iniciativa": 10,
+    "percepcao": 9,
+    "sentidos": [
+      "percepcao_as_cegas",
+      "visao_no_escuro"
+    ],
+    "defesa": 28,
+    "resistencias": {
+      "fortitude": 18,
+      "reflexos": 6,
+      "vontade": 12
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +2"
+    ],
+    "pv": 280,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 18.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 8,
+      "des": 3,
+      "con": 6,
+      "int": 2,
+      "sab": 2,
+      "car": 4
+    },
+    "pericias": {
+      "atletismo": 13,
+      "intimidacao": 11,
+      "misticismo": 9
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 21,
+        "dano": "2d6+14",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 21,
+        "dano": "1d8+14",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Aura Aterradora",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 23,
+        "resistenciaTipo": "vontade",
+        "descricao": "Aura Aterradora de dragão (Vontade CD 23 evita)."
+      },
+      {
+        "nome": "Escamas Multicor",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A essência dracônica do aspecto muda constantemente. No início de cada rodada role 1d6 para determinar seu elemento; o aspecto é imune a dano do tipo de sua essência atual: 1) Ácido (vulnerável por 1d4 rodadas); 2) Eletricidade (ofuscado por 1d4 rodadas); 3) Fogo (em chamas); 4) Frio (lento por 1d4 rodadas); 5) Luz (cego por 1d4 rodadas); 6) Trevas (enjoado por 1d4 rodadas)."
+      },
+      {
+        "nome": "Sopro",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 23,
+        "resistenciaTipo": "reflexos",
+        "descricao": "O aspecto usa um dos sopros abaixo; dano e condição conforme a essência dracônica atual (Ref CD 23 reduz à metade e evita a condição). Cone de 9m: 6d12 de dano. Explosão (esfera de 6m em alcance médio): 6d12 de dano. Linha de 12m: 6d12 de dano, com dados máximos gerando dado extra em cascata. Nuvem (cubo de 6m por 2 rodadas): 6d6 de dano a quem começar o turno na área. Recarga (movimento)."
+      },
+      {
+        "nome": "Varrer",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando o aspecto faz um ataque corpo a corpo e reduz os PV do alvo a 0 ou menos, pode realizar um ataque adicional contra outra criatura dentro do seu alcance."
+      },
+      {
+        "nome": "Parceiro",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No improvável caso de o aspecto considerar alguém digno de cavalgá-lo em combate, funciona como um parceiro dragão jovem mestre."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "dobro",
+    "recursoExtraivel": {
+      "nome": "3 peças de couro de dragão de tipos definidos aleatoriamente",
+      "pericia": "sobrevivencia",
+      "cdBase": 21
+    }
+  },
+  {
+    "id": "aspecto_de_khalmyr",
+    "nome": "Aspecto de Khalmyr",
+    "nd": "5",
+    "regiao": "aspectos",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "anao",
+    "tamanho": "medio",
+    "iniciativa": 4,
+    "percepcao": 6,
+    "sentidos": [],
+    "defesa": 24,
+    "resistencias": {
+      "fortitude": 11,
+      "reflexos": 5,
+      "vontade": 17
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [
+      "acertos_criticos",
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 200,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 0,
+      "con": 5,
+      "int": 0,
+      "sab": 2,
+      "car": 5
+    },
+    "pericias": {
+      "atletismo": 9,
+      "diplomacia": 11,
+      "intuicao": 11,
+      "nobreza": 6,
+      "religiao": 11
+    },
+    "ataques": [
+      {
+        "nome": "Espada-Calibre (x2)",
+        "bonusAtaque": 17,
+        "dano": "1d8+15",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Espada-Calibre (à distância)",
+        "bonusAtaque": 17,
+        "dano": "2d6+7",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Cura Pelas Mãos",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O aspecto de Khalmyr cura 5 pontos de vida por luz de uma criatura adjacente."
+      },
+      {
+        "nome": "Destruir o Crime",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando o aspecto ataca em corpo a corpo um devoto que, a critério do mestre, seja culpado de um crime, ele recebe +5 no teste de ataque e +9 na rolagem de dano."
+      },
+      {
+        "nome": "Espada-Calibre",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando ataca em corpo a corpo com sua espada-calibre, o aspecto pode disparar sua bala para causar +7 pontos de dano de perfuração. Recarga (movimento)."
+      },
+      {
+        "nome": "Ordenar Sorte",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, o aspecto pode escolher 10 em um teste qualquer."
+      },
+      {
+        "nome": "Parceiro",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O aspecto de Khalmyr é um parceiro veterano que fornece +3 na Defesa e imunidade a acertos críticos e medo. Apoia apenas personagens que considere dignos e que não tenham cometido crimes."
+      }
+    ],
+    "equipamento": [
+      "armadura_completa",
+      "balas_x20",
+      "escudo_pesado",
+      "espada_calibre"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "aspecto_de_lin_wu",
+    "nome": "Aspecto de Lin-Wu",
+    "nd": "4",
+    "regiao": "aspectos",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": "dragao",
+    "tamanho": "grande",
+    "iniciativa": 6,
+    "percepcao": 12,
+    "sentidos": [
+      "percepcao_as_cegas",
+      "visao_no_escuro"
+    ],
+    "defesa": 22,
+    "resistencias": {
+      "fortitude": 12,
+      "reflexos": 4,
+      "vontade": 16
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [
+      "atordoamento",
+      "medo",
+      "metabolismo",
+      "metamorfose",
+      "paralisia"
+    ],
+    "imunidadesDano": [
+      "eletricidade"
+    ],
+    "vulnerabilidadesDano": [
+      "acido"
+    ],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +2"
+    ],
+    "pv": 158,
+    "pm": 36,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 24.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 7,
+      "des": 2,
+      "con": 6,
+      "int": 4,
+      "sab": 6,
+      "car": 5
+    },
+    "pericias": {
+      "conhecimento": 10,
+      "diplomacia": 11,
+      "intuicao": 12,
+      "misticismo": 10,
+      "religiao": 12
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 14,
+        "dano": "1d8+7",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 14,
+        "dano": "1d6+5",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Conduta Honrosa",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O aspecto emana uma aura de honra de 9m de raio. Criaturas à escolha do aspecto nessa área recebem +2 em testes de perícia, desde que ajam de forma exemplar (obedecendo ao Código de Honra, Código do Herói ou às Obrigações & Restrições de Lin-Wu). Uma criatura que viole esses códigos perde o bônus e só pode recuperá-lo realizando um rito em nome de Lin-Wu."
+      },
+      {
+        "nome": "Dragão Divino",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O aspecto possui todas as habilidades de dragões celestiais (Magia Celestial, Metamorfose Celestial, Presença Celestial)."
+      },
+      {
+        "nome": "Magias (clérigo 6º, CD 20)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Arma Mágica (padrão, 5 PM): arma adjacente se torna mágica, +1 em ataque/dano, +1d6 de dano de eletricidade até o fim da cena. Bênção (padrão, 3 PM): aliados em alcance curto +2 em ataque e dano até o fim da cena. Curar Ferimentos (padrão, 5 PM): criatura adjacente cura 6d8+6 PV. Oração (padrão, 3 PM, sustentada): aspecto e aliados em alcance curto +2 em perícias e dano; inimigos em alcance curto -2. Orientação (padrão, 1 PM): criatura em alcance curto rola dois dados e usa o melhor no próximo teste de perícia."
+      },
+      {
+        "nome": "Parceiro",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O aspecto de Lin-Wu é um parceiro montaria (Grande) que concede deslocamento de voo 24m, +2 em Nobreza e Vontade, e a habilidade Conduta Honrosa. Violar os códigos impostos por essa habilidade impede o uso futuro desta montaria."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "aspecto_de_marah",
+    "nome": "Aspecto de Marah",
+    "nd": "4",
+    "regiao": "aspectos",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": "aggelus",
+    "tamanho": "medio",
+    "iniciativa": 6,
+    "percepcao": 13,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 21,
+    "resistencias": {
+      "fortitude": 5,
+      "reflexos": 12,
+      "vontade": 17
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 132,
+    "pm": 25,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 2,
+      "con": 1,
+      "int": 2,
+      "sab": 3,
+      "car": 5
+    },
+    "pericias": {
+      "acrobacia": 12,
+      "atuacao": 16,
+      "conhecimento": 6,
+      "diplomacia": 13,
+      "enganacao": 11,
+      "intuicao": 9,
+      "misticismo": 6
+    },
+    "ataques": [],
+    "habilidades": [
+      {
+        "nome": "Evasão",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O aspecto de Marah possui Evasão."
+      },
+      {
+        "nome": "Aura de Marah",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O aspecto emana uma aura de calmaria de 9m de raio. Criaturas nessa área sofrem -5 em testes de ataque e em rolagens de dano."
+      },
+      {
+        "nome": "Eclético",
+        "acao": "reacao",
+        "custoPm": 1,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando vai fazer um teste de perícia, o aspecto recebe os benefícios de ser treinado nessa perícia para esse teste."
+      },
+      {
+        "nome": "Presença Divina",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 20,
+        "resistenciaTipo": "reflexos",
+        "descricao": "No início de seu turno, cada personagem em alcance curto do aspecto deve fazer um teste de Reflexos (CD 20). Se passar, desvia o olhar. Se falhar, fica fascinado; se já estiver fascinado, fica enfeitiçado. Um personagem pode fechar os olhos como reação para ficar imune, mas sofre os efeitos de estar cego por uma rodada."
+      },
+      {
+        "nome": "Magias (barda 5º, CD 22; custo de Luz reduzido em -1 PM já contabilizado)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Criar Ilusão (padrão, 5 PM): ilusões com imagens, sons e texturas em alcance médio, até 6 cubos de 1,5m (Von desacredita e permite atravessar). Curar Ferimentos (padrão, 4 PM): criatura adjacente cura 5d8+5 PV. Luz (padrão, 5 PM): criatura adjacente recebe +10 em Diplomacia e redução de trevas 10 até o fim da cena. Tranquilidade (padrão, 4 PM): até três criaturas em alcance curto ficam indiferentes e não podem agir hostilmente (Von reduz para -2 em ataque) até o fim da cena; ações hostis dissipam a magia."
+      },
+      {
+        "nome": "Parceiro",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O aspecto de Marah é um parceiro veterano que fornece +2 em Atuação e Diplomacia e na CD de habilidades que causem enfeitiçado, fascinado ou pasmo sem causar dano, além de permitir usar Músicas de bardo sem empunhar instrumento. Viola as Obrigações & Restrições de Marah e o aspecto deixa de apoiar."
+      }
+    ],
+    "equipamento": [
+      "camisa_bufante_aprimorada",
+      "capa_esvoacante_aprimorada",
+      "instrumento_musical_aprimorado",
+      "sapatos_de_camurca_aprimorados"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "aspecto_de_valkaria",
+    "nome": "Aspecto de Valkaria",
+    "nd": "5",
+    "regiao": "aspectos",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "humana",
+    "tamanho": "medio",
+    "iniciativa": 12,
+    "percepcao": 4,
+    "sentidos": [],
+    "defesa": 24,
+    "resistencias": {
+      "fortitude": 11,
+      "reflexos": 17,
+      "vontade": 5
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [
+      "efeitos_de_movimento",
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +2"
+    ],
+    "pv": 180,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 6,
+      "con": 4,
+      "int": 2,
+      "sab": 0,
+      "car": 3
+    },
+    "pericias": {
+      "acrobacia": 12,
+      "atletismo": 8
+    },
+    "ataques": [
+      {
+        "nome": "Florete (x2)",
+        "bonusAtaque": 18,
+        "dano": "1d6+8",
+        "danoExtra": null,
+        "margemAmeaca": 15,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Evasão",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O aspecto de Valkaria possui Evasão."
+      },
+      {
+        "nome": "Almejar o Impossível",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando o aspecto de Valkaria faz um teste de perícia, um resultado de 19 ou mais no dado sempre é um sucesso, não importando o valor a ser alcançado."
+      },
+      {
+        "nome": "Arrumar Encrenca",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O aspecto pode passar por espaços ocupados por inimigos sem redução em seu deslocamento e sem necessidade de testes de Acrobacia."
+      },
+      {
+        "nome": "Bloqueio Contundente",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando é atingido por um ataque corpo a corpo, o aspecto pode fazer um teste de ataque. Se o resultado for maior que o do oponente, evita o ataque e causa 2d6 pontos de dano de perfuração a ele."
+      },
+      {
+        "nome": "Esgrima Acrobática",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O aspecto percorre até metade de seu deslocamento e, até o final do turno, recebe +5 em testes de ataque, em rolagens de dano e na margem de ameaça."
+      },
+      {
+        "nome": "Estocada Oportunista",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando passa por um espaço ocupado por um inimigo, o aspecto pode fazer um ataque corpo a corpo contra ele."
+      },
+      {
+        "nome": "Parceiro",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O aspecto de Valkaria é um parceiro veterano que fornece +2 em Acrobacia e em testes opostos e de resistência contra efeitos de movimento, além de permitir usar Bloqueio Contundente (causando dano igual ao dano básico da arma, se evitar o ataque). Viola as Obrigações & Restrições de Valkaria e o aspecto deixa de apoiar."
+      }
+    ],
+    "equipamento": [
+      "couraca_sob_medida",
+      "florete_certeiro_preciso",
+      "sapato_de_camurca_aprimorado"
+    ],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  }
+]

@@ -40,14 +40,28 @@ class MovimentoEngine {
     final combatenteAtivo = combatentesPorId[combatenteAtivoId];
     final TimeCombatente timeAtivo =
         combatenteAtivo?.time ?? TimeCombatente.heroi;
+    final int spanAtivo = combatenteAtivo?.tamanhoQuadrados ?? 1;
 
-    // Mapeamento de ocupantes por posição
+    // Criatura com DES nula ("–") ou sem deslocamento não pode se mover.
+    if (combatenteAtivo?.temDestrezaNula == true ||
+        deslocamentoMaximoMetros <= 0) {
+      return ResultadoCalculoMovimento(
+        custosMetros: {inicio: 0.0},
+        destinosValidos: const {},
+        antecessores: {inicio: null},
+      );
+    }
+
+    // Mapeamento de ocupantes em todas as células do seu footprint N×N.
     final ocupantesPorPosicao = <Posicao2D, Combatente>{};
     for (final entry in posicoesCombatentes.entries) {
       final cId = entry.key;
       final pos = entry.value;
       if (cId != combatenteAtivoId && combatentesPorId.containsKey(cId)) {
-        ocupantesPorPosicao[pos] = combatentesPorId[cId]!;
+        final ocupante = combatentesPorId[cId]!;
+        for (final celula in pos.celulasOcupadas(ocupante.tamanhoQuadrados)) {
+          ocupantesPorPosicao[celula] = ocupante;
+        }
       }
     }
 
@@ -73,35 +87,42 @@ class MovimentoEngine {
 
           final vizinho = Posicao2D(atual.posicao.x + dx, atual.posicao.y + dy);
 
-          if (!mapa.dentroDosLimites(vizinho)) continue;
+          if (!mapa.areaDentroDosLimites(vizinho, spanAtivo)) continue;
 
-          final terreno = mapa.obterTerreno(vizinho);
-          if (terreno == TipoTerreno.obstaculo) continue;
-
-          final ocupante = ocupantesPorPosicao[vizinho];
+          bool podeEntrar = true;
+          bool temTerrenoDificil = false;
           bool ocupanteContaComoTerrenoDificil = false;
 
-          if (ocupante != null) {
-            final bool mesmoTime = ocupante.time == timeAtivo;
+          for (final celula in vizinho.celulasOcupadas(spanAtivo)) {
+            final terreno = mapa.obterTerreno(celula);
+            if (terreno == TipoTerreno.obstaculo) {
+              podeEntrar = false;
+              break;
+            }
+            if (terreno == TipoTerreno.dificil) {
+              temTerrenoDificil = true;
+            }
 
-            if (!mesmoTime) {
+            final ocupante = ocupantesPorPosicao[celula];
+            if (ocupante != null && ocupante.time != timeAtivo) {
               // R73: Inimigos só se caídos/indefesos ou incapazes de agir; conta como terreno difícil
               final permiteAtravessar =
                   ocupante.estaCaido ||
                   ocupante.estaIndefeso ||
                   !ocupante.podeAgir;
               if (!permiteAtravessar) {
-                continue;
-              } else {
-                ocupanteContaComoTerrenoDificil = true;
+                podeEntrar = false;
+                break;
               }
+              ocupanteContaComoTerrenoDificil = true;
             }
           }
 
+          if (!podeEntrar) continue;
+
           final bool ehDiag = (dx.abs() == 1 && dy.abs() == 1);
           final bool ehTerrenoDificil =
-              (terreno == TipoTerreno.dificil) ||
-              ocupanteContaComoTerrenoDificil;
+              temTerrenoDificil || ocupanteContaComoTerrenoDificil;
 
           // Regras de custo em metros:
           // Ortogonal normal: 1.5m
@@ -129,12 +150,16 @@ class MovimentoEngine {
       }
     }
 
-    // Destinos válidos: Qualquer célula alcançável (diferente do início)
-    // que NÃO termine sobre outro combatente (aliado ou inimigo)
+    // Destinos válidos: Qualquer âncora alcançável (diferente do início)
+    // cujo footprint N×N NÃO sobreponha nenhum combatente (aliado ou inimigo)
     final destinosValidos = <Posicao2D>{};
     for (final entry in custos.entries) {
       final pos = entry.key;
-      if (pos != inicio && !ocupantesPorPosicao.containsKey(pos)) {
+      if (pos == inicio) continue;
+      final sobrepoeOcupante = pos
+          .celulasOcupadas(spanAtivo)
+          .any(ocupantesPorPosicao.containsKey);
+      if (!sobrepoeOcupante) {
         destinosValidos.add(pos);
       }
     }

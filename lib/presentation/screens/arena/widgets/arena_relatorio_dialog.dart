@@ -19,6 +19,7 @@ void exibirRelatorioFinal(
   CombateState state,
   ArenaStatsCollector stats, {
   Personagem? clonePersonagem,
+  VoidCallback? onSelecionarNovosInimigos,
 }) {
   final vitoria = state.statusCombate == StatusCombate.vitoria;
 
@@ -228,28 +229,82 @@ void exibirRelatorioFinal(
                   ),
                   const SizedBox(height: 20),
 
-                  // 4. Botão de Saída
-                  SizedBox(
-                    height: 48,
-                    child: ElevatedButton.icon(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFC62828),
-                        foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                  // 4. Botões de Ação
+                  if (onSelecionarNovosInimigos != null) ...[
+                    SizedBox(
+                      height: 48,
+                      child: ElevatedButton.icon(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFFC62828),
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                         ),
+                        icon: const Icon(Icons.replay_rounded),
+                        label: const Text(
+                          'Escolher Novos Inimigos',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.pop(ctx);
+                          onSelecionarNovosInimigos();
+                        },
                       ),
-                      icon: const Icon(Icons.arrow_back),
-                      label: const Text(
-                        'Voltar à Tela Inicial',
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                      ),
-                      onPressed: () {
-                        Navigator.pop(ctx);
-                        Navigator.pop(context);
-                      },
                     ),
-                  ),
+                    const SizedBox(height: 10),
+                    SizedBox(
+                      height: 44,
+                      child: OutlinedButton.icon(
+                        style: OutlinedButton.styleFrom(
+                          foregroundColor: Colors.white70,
+                          side: const BorderSide(color: Colors.white24),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        icon: const Icon(Icons.arrow_back, size: 18),
+                        label: const Text(
+                          'Voltar à Tela Inicial',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.pop(ctx);
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ),
+                  ] else
+                    SizedBox(
+                      height: 48,
+                      child: ElevatedButton.icon(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFFC62828),
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        icon: const Icon(Icons.arrow_back),
+                        label: const Text(
+                          'Voltar à Tela Inicial',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.pop(ctx);
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ),
                 ],
               ),
             ),

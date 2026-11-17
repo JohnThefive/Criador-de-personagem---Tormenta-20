@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../domain/entities/mestre/modelos_mestre.dart';
 import '../../../controllers/mestre_controller/mestre_cubit.dart';
 import '../../../controllers/mestre_controller/mestre_state.dart';
@@ -8,14 +9,12 @@ import '../theme/mestre_theme.dart';
 /// Responsabilidade ÚNICA: escolher um mapa já criado e criar a partir dele.
 /// Não contém editor aqui.
 class TelaBibliotecaMapas extends StatefulWidget {
-  final MestreState state;
   final MestreCubit cubit;
   final void Function(MapaBatalhaMestre mapa) onAbrirMesaJogo;
   final void Function({MapaBatalhaMestre? mapaParaEditar}) onAbrirEditorMapa;
 
   const TelaBibliotecaMapas({
     super.key,
-    required this.state,
     required this.cubit,
     required this.onAbrirMesaJogo,
     required this.onAbrirEditorMapa,
@@ -29,26 +28,45 @@ class _TelaBibliotecaMapasState extends State<TelaBibliotecaMapas> {
   String _filtroBusca = '';
   String _criterioOrdenacao = 'recentes'; // 'recentes', 'nome', 'tamanho'
 
-  @override
-  Widget build(BuildContext context) {
-    final aventura = widget.state.aventuraAtual;
-    final todosMapas = aventura?.mapas ?? const <MapaBatalhaMestre>[];
+  List<MapaBatalhaMestre>? _cachedOrigem;
+  String _cachedFiltro = '';
+  String _cachedCriterio = '';
+  List<MapaBatalhaMestre> _cachedOrdenados = const [];
 
-    // Filtra por termo de busca
-    var mapasFiltrados = todosMapas.where((m) {
-      if (_filtroBusca.trim().isEmpty) return true;
-      return m.nome.toLowerCase().contains(_filtroBusca.toLowerCase());
-    }).toList();
-
-    // Ordenação
-    if (_criterioOrdenacao == 'nome') {
-      mapasFiltrados.sort((a, b) => a.nome.compareTo(b.nome));
-    } else if (_criterioOrdenacao == 'tamanho') {
-      mapasFiltrados.sort((a, b) => (b.largura * b.altura).compareTo(a.largura * a.altura));
-    } else {
-      mapasFiltrados.sort((a, b) => b.criadoEm.compareTo(a.criadoEm));
+  List<MapaBatalhaMestre> _obterMapasOrdenados(
+    List<MapaBatalhaMestre> todosMapas,
+  ) {
+    if (identical(_cachedOrigem, todosMapas) &&
+        _cachedFiltro == _filtroBusca &&
+        _cachedCriterio == _criterioOrdenacao) {
+      return _cachedOrdenados;
     }
 
+    final termo = _filtroBusca.trim().toLowerCase();
+    final filtrados = todosMapas.where((m) {
+      if (termo.isEmpty) return true;
+      return m.nome.toLowerCase().contains(termo);
+    }).toList();
+
+    if (_criterioOrdenacao == 'nome') {
+      filtrados.sort((a, b) => a.nome.compareTo(b.nome));
+    } else if (_criterioOrdenacao == 'tamanho') {
+      filtrados.sort(
+        (a, b) => (b.largura * b.altura).compareTo(a.largura * a.altura),
+      );
+    } else {
+      filtrados.sort((a, b) => b.criadoEm.compareTo(a.criadoEm));
+    }
+
+    _cachedOrigem = todosMapas;
+    _cachedFiltro = _filtroBusca;
+    _cachedCriterio = _criterioOrdenacao;
+    _cachedOrdenados = filtrados;
+    return filtrados;
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MestreCores.escuroBackground,
       body: SafeArea(
@@ -56,33 +74,53 @@ class _TelaBibliotecaMapasState extends State<TelaBibliotecaMapas> {
           children: [
             _buildBarraBuscaEOrdenacao(context),
             Expanded(
-              child: mapasFiltrados.isEmpty
-                  ? _buildEstadoVazio(context)
-                  : LayoutBuilder(
-                      builder: (context, constraints) {
-                        final isTablet = constraints.maxWidth >= 600;
-                        if (isTablet) {
-                          final colunas = constraints.maxWidth >= 900 ? 4 : 3;
-                          return GridView.builder(
-                            padding: const EdgeInsets.all(16),
-                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: colunas,
-                              crossAxisSpacing: 16,
-                              mainAxisSpacing: 16,
-                              childAspectRatio: 1.15,
-                            ),
-                            itemCount: mapasFiltrados.length,
-                            itemBuilder: (context, idx) => _buildCardMapaTablet(context, mapasFiltrados[idx]),
-                          );
-                        } else {
-                          return ListView.builder(
-                            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-                            itemCount: mapasFiltrados.length,
-                            itemBuilder: (context, idx) => _buildCardMapaCelular(context, mapasFiltrados[idx]),
-                          );
-                        }
-                      },
-                    ),
+              child: BlocSelector<MestreCubit, MestreState,
+                  List<MapaBatalhaMestre>>(
+                bloc: widget.cubit,
+                selector: (s) =>
+                    s.aventuraAtual?.mapas ?? const <MapaBatalhaMestre>[],
+                builder: (context, todosMapas) {
+                  final mapasFiltrados = _obterMapasOrdenados(todosMapas);
+                  if (mapasFiltrados.isEmpty) {
+                    return _buildEstadoVazio(context);
+                  }
+                  return LayoutBuilder(
+                    builder: (context, constraints) {
+                      final isTablet = constraints.maxWidth >= 600;
+                      if (isTablet) {
+                        final colunas = constraints.maxWidth >= 900 ? 4 : 3;
+                        return GridView.builder(
+                          padding: const EdgeInsets.all(16),
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: colunas,
+                            crossAxisSpacing: 16,
+                            mainAxisSpacing: 16,
+                            childAspectRatio: 1.15,
+                          ),
+                          itemCount: mapasFiltrados.length,
+                          itemBuilder: (context, idx) => _buildCardMapaTablet(
+                            context,
+                            mapasFiltrados[idx],
+                          ),
+                        );
+                      } else {
+                        return ListView.builder(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 14,
+                            vertical: 8,
+                          ),
+                          itemCount: mapasFiltrados.length,
+                          itemBuilder: (context, idx) => _buildCardMapaCelular(
+                            context,
+                            mapasFiltrados[idx],
+                          ),
+                        );
+                      }
+                    },
+                  );
+                },
+              ),
             ),
           ],
         ),
@@ -91,7 +129,10 @@ class _TelaBibliotecaMapasState extends State<TelaBibliotecaMapas> {
         backgroundColor: MestreCores.escuroOuro,
         foregroundColor: MestreCores.escuroOuroTexto,
         icon: const Icon(Icons.add_location_alt_outlined),
-        label: const Text('+ Novo mapa', style: TextStyle(fontWeight: FontWeight.bold)),
+        label: const Text(
+          '+ Novo mapa',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         onPressed: () => widget.onAbrirEditorMapa(),
       ),
     );
@@ -109,21 +150,33 @@ class _TelaBibliotecaMapasState extends State<TelaBibliotecaMapas> {
         children: [
           Expanded(
             child: TextField(
-              style: const TextStyle(color: MestreCores.escuroOnSurface, fontSize: 13),
+              style: const TextStyle(
+                color: MestreCores.escuroOnSurface,
+                fontSize: 13,
+              ),
               decoration: InputDecoration(
                 hintText: 'Buscar mapa...',
-                hintStyle: const TextStyle(color: MestreCores.escuroOnSurfaceVariant, fontSize: 13),
-                prefixIcon: const Icon(Icons.search, size: 18, color: MestreCores.escuroOnSurfaceVariant),
+                hintStyle: const TextStyle(
+                  color: MestreCores.escuroOnSurfaceVariant,
+                  fontSize: 13,
+                ),
+                prefixIcon: const Icon(
+                  Icons.search,
+                  size: 18,
+                  color: MestreCores.escuroOnSurfaceVariant,
+                ),
                 contentPadding: const EdgeInsets.symmetric(vertical: 8),
                 filled: true,
                 fillColor: MestreCores.escuroSurfaceContainer,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(color: MestreCores.escuroOutline),
+                  borderSide:
+                      const BorderSide(color: MestreCores.escuroOutline),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(color: MestreCores.escuroOutline),
+                  borderSide:
+                      const BorderSide(color: MestreCores.escuroOutline),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
@@ -138,12 +191,22 @@ class _TelaBibliotecaMapasState extends State<TelaBibliotecaMapas> {
             value: _criterioOrdenacao,
             dropdownColor: MestreCores.escuroSurfaceContainer,
             underline: const SizedBox.shrink(),
-            icon: const Icon(Icons.sort, color: MestreCores.escuroOuro, size: 20),
-            style: const TextStyle(color: MestreCores.escuroOnSurface, fontSize: 12),
+            icon: const Icon(
+              Icons.sort,
+              color: MestreCores.escuroOuro,
+              size: 20,
+            ),
+            style: const TextStyle(
+              color: MestreCores.escuroOnSurface,
+              fontSize: 12,
+            ),
             items: const [
               DropdownMenuItem(value: 'recentes', child: Text('Mais recentes')),
               DropdownMenuItem(value: 'nome', child: Text('Nome A-Z')),
-              DropdownMenuItem(value: 'tamanho', child: Text('Tamanho do Grid')),
+              DropdownMenuItem(
+                value: 'tamanho',
+                child: Text('Tamanho do Grid'),
+              ),
             ],
             onChanged: (val) {
               if (val != null) setState(() => _criterioOrdenacao = val);
@@ -173,7 +236,6 @@ class _TelaBibliotecaMapasState extends State<TelaBibliotecaMapas> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Miniatura Larga
             SizedBox(
               height: 120,
               child: _buildMiniaturaGrid(mapa),
@@ -200,14 +262,26 @@ class _TelaBibliotecaMapasState extends State<TelaBibliotecaMapas> {
                           children: [
                             Text(
                               'Grid: ${mapa.largura}×${mapa.altura} (${(mapa.largura * 1.5).toStringAsFixed(1)}m × ${(mapa.altura * 1.5).toStringAsFixed(1)}m)',
-                              style: const TextStyle(color: MestreCores.escuroOnSurfaceVariant, fontSize: 11),
+                              style: const TextStyle(
+                                color: MestreCores.escuroOnSurfaceVariant,
+                                fontSize: 11,
+                              ),
                             ),
                             const SizedBox(width: 8),
-                            const Text('•', style: TextStyle(color: MestreCores.escuroOnSurfaceVariant)),
+                            const Text(
+                              '•',
+                              style: TextStyle(
+                                color: MestreCores.escuroOnSurfaceVariant,
+                              ),
+                            ),
                             const SizedBox(width: 8),
                             Text(
                               '${mapa.tokens.length} combatentes',
-                              style: const TextStyle(color: MestreCores.escuroOuro, fontSize: 11, fontWeight: FontWeight.w600),
+                              style: const TextStyle(
+                                color: MestreCores.escuroOuro,
+                                fontSize: 11,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ],
                         ),
@@ -265,7 +339,10 @@ class _TelaBibliotecaMapasState extends State<TelaBibliotecaMapas> {
                         ),
                         Text(
                           '${mapa.largura}×${mapa.altura} • ${mapa.tokens.length} tokens',
-                          style: const TextStyle(color: MestreCores.escuroOnSurfaceVariant, fontSize: 11),
+                          style: const TextStyle(
+                            color: MestreCores.escuroOnSurfaceVariant,
+                            fontSize: 11,
+                          ),
                         ),
                       ],
                     ),
@@ -285,29 +362,12 @@ class _TelaBibliotecaMapasState extends State<TelaBibliotecaMapas> {
   // ---------------------------------------------------------------------------
 
   Widget _buildMiniaturaGrid(MapaBatalhaMestre mapa) {
-    Color corFundo;
-    switch (mapa.presetFundo) {
-      case PresetFundoMapa.florestaArton:
-        corFundo = const Color(0xFF132A13);
-        break;
-      case PresetFundoMapa.tavernaMadeira:
-        corFundo = const Color(0xFF38220F);
-        break;
-      case PresetFundoMapa.desertoHalakTur:
-        corFundo = const Color(0xFF4A3B18);
-        break;
-      case PresetFundoMapa.areaTormenta:
-        corFundo = const Color(0xFF3F0B18);
-        break;
-      default:
-        corFundo = const Color(0xFF1C1917);
-    }
+    final corFundo = MestreCores.corFundoPreset(mapa.presetFundo);
 
     return Container(
       color: corFundo,
       child: Stack(
         children: [
-          // Grade simulada
           Positioned.fill(
             child: CustomPaint(
               painter: _MiniaturaGridPainter(
@@ -317,7 +377,6 @@ class _TelaBibliotecaMapasState extends State<TelaBibliotecaMapas> {
               ),
             ),
           ),
-          // Badge de status
           Positioned(
             top: 8,
             left: 8,
@@ -330,7 +389,11 @@ class _TelaBibliotecaMapasState extends State<TelaBibliotecaMapas> {
               ),
               child: Text(
                 '${mapa.largura}×${mapa.altura}',
-                style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 10,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),
@@ -345,7 +408,11 @@ class _TelaBibliotecaMapasState extends State<TelaBibliotecaMapas> {
 
   Widget _buildMenuOpcoesMapa(BuildContext context, MapaBatalhaMestre mapa) {
     return PopupMenuButton<String>(
-      icon: const Icon(Icons.more_vert, size: 18, color: MestreCores.escuroOnSurfaceVariant),
+      icon: const Icon(
+        Icons.more_vert,
+        size: 18,
+        color: MestreCores.escuroOnSurfaceVariant,
+      ),
       color: MestreCores.escuroSurfaceContainer,
       onSelected: (val) {
         if (val == 'editar') {
@@ -359,44 +426,47 @@ class _TelaBibliotecaMapasState extends State<TelaBibliotecaMapas> {
         }
       },
       itemBuilder: (context) => const [
-        PopupMenuItem(value: 'editar', child: Text('Editar (Grade & Imagem)', style: TextStyle(color: MestreCores.escuroOuro))),
-        PopupMenuItem(value: 'renomear', child: Text('Renomear', style: TextStyle(color: MestreCores.escuroOnSurface))),
-        PopupMenuItem(value: 'duplicar', child: Text('Duplicar', style: TextStyle(color: MestreCores.escuroOnSurface))),
-        PopupMenuItem(value: 'excluir', child: Text('Excluir', style: TextStyle(color: MestreCores.statusAlertaEscuro))),
+        PopupMenuItem(
+          value: 'editar',
+          child: Text(
+            'Editar (Grade & Imagem)',
+            style: TextStyle(color: MestreCores.escuroOuro),
+          ),
+        ),
+        PopupMenuItem(
+          value: 'renomear',
+          child: Text(
+            'Renomear',
+            style: TextStyle(color: MestreCores.escuroOnSurface),
+          ),
+        ),
+        PopupMenuItem(
+          value: 'duplicar',
+          child: Text(
+            'Duplicar',
+            style: TextStyle(color: MestreCores.escuroOnSurface),
+          ),
+        ),
+        PopupMenuItem(
+          value: 'excluir',
+          child: Text(
+            'Excluir',
+            style: TextStyle(color: MestreCores.statusAlertaEscuro),
+          ),
+        ),
       ],
     );
   }
 
-  void _exibirDialogRenomearMapa(BuildContext context, MapaBatalhaMestre mapa) {
-    final controller = TextEditingController(text: mapa.nome);
+  void _exibirDialogRenomearMapa(
+    BuildContext context,
+    MapaBatalhaMestre mapa,
+  ) {
     showDialog(
       context: context,
-      builder: (ctx) => AlertDialog(
-        backgroundColor: MestreCores.escuroSurface,
-        title: const Text('Renomear Mapa', style: TextStyle(color: MestreCores.escuroOnSurface)),
-        content: TextField(
-          controller: controller,
-          style: const TextStyle(color: MestreCores.escuroOnSurface),
-          decoration: const InputDecoration(
-            labelText: 'Novo nome do mapa',
-            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: MestreCores.escuroOutline)),
-            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: MestreCores.escuroOuro)),
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(ctx),
-            child: const Text('Cancelar', style: TextStyle(color: MestreCores.escuroOnSurfaceVariant)),
-          ),
-          FilledButton(
-            style: FilledButton.styleFrom(backgroundColor: MestreCores.escuroOuro, foregroundColor: MestreCores.escuroOuroTexto),
-            onPressed: () {
-              widget.cubit.renomearMapa(mapa.id, controller.text);
-              Navigator.pop(ctx);
-            },
-            child: const Text('Salvar'),
-          ),
-        ],
+      builder: (_) => _DialogRenomearMapa(
+        nomeInicial: mapa.nome,
+        onSalvar: (novoNome) => widget.cubit.renomearMapa(mapa.id, novoNome),
       ),
     );
   }
@@ -406,15 +476,26 @@ class _TelaBibliotecaMapasState extends State<TelaBibliotecaMapas> {
       context: context,
       builder: (ctx) => AlertDialog(
         backgroundColor: MestreCores.escuroSurface,
-        title: const Text('Excluir Mapa', style: TextStyle(color: MestreCores.escuroOnSurface)),
-        content: Text('Tem certeza que deseja excluir o mapa "${mapa.nome}"?', style: const TextStyle(color: MestreCores.escuroOnSurfaceVariant)),
+        title: const Text(
+          'Excluir Mapa',
+          style: TextStyle(color: MestreCores.escuroOnSurface),
+        ),
+        content: Text(
+          'Tem certeza que deseja excluir o mapa "${mapa.nome}"?',
+          style: const TextStyle(color: MestreCores.escuroOnSurfaceVariant),
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: const Text('Cancelar', style: TextStyle(color: MestreCores.escuroOnSurfaceVariant)),
+            child: const Text(
+              'Cancelar',
+              style: TextStyle(color: MestreCores.escuroOnSurfaceVariant),
+            ),
           ),
           FilledButton(
-            style: FilledButton.styleFrom(backgroundColor: MestreCores.statusAlertaEscuro),
+            style: FilledButton.styleFrom(
+              backgroundColor: MestreCores.statusAlertaEscuro,
+            ),
             onPressed: () {
               widget.cubit.excluirMapa(mapa.id);
               Navigator.pop(ctx);
@@ -437,7 +518,11 @@ class _TelaBibliotecaMapasState extends State<TelaBibliotecaMapas> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(Icons.map_outlined, size: 54, color: MestreCores.escuroOnSurfaceVariant),
+            const Icon(
+              Icons.map_outlined,
+              size: 54,
+              color: MestreCores.escuroOnSurfaceVariant,
+            ),
             const SizedBox(height: 14),
             const Text(
               'Nenhum mapa ainda',
@@ -452,7 +537,10 @@ class _TelaBibliotecaMapasState extends State<TelaBibliotecaMapas> {
             const Text(
               'Crie um mapa tático com grid e imagem para a sua sessão.',
               textAlign: TextAlign.center,
-              style: TextStyle(color: MestreCores.escuroOnSurfaceVariant, fontSize: 13),
+              style: TextStyle(
+                color: MestreCores.escuroOnSurfaceVariant,
+                fontSize: 13,
+              ),
             ),
             const SizedBox(height: 18),
             FilledButton.icon(
@@ -462,7 +550,10 @@ class _TelaBibliotecaMapasState extends State<TelaBibliotecaMapas> {
                 minimumSize: const Size(180, 48),
               ),
               icon: const Icon(Icons.add_location_alt_outlined),
-              label: const Text('Criar mapa', style: TextStyle(fontWeight: FontWeight.bold)),
+              label: const Text(
+                'Criar mapa',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
               onPressed: () => widget.onAbrirEditorMapa(),
             ),
           ],
@@ -472,17 +563,95 @@ class _TelaBibliotecaMapasState extends State<TelaBibliotecaMapas> {
   }
 }
 
+class _DialogRenomearMapa extends StatefulWidget {
+  final String nomeInicial;
+  final void Function(String novoNome) onSalvar;
+
+  const _DialogRenomearMapa({
+    required this.nomeInicial,
+    required this.onSalvar,
+  });
+
+  @override
+  State<_DialogRenomearMapa> createState() => _DialogRenomearMapaState();
+}
+
+class _DialogRenomearMapaState extends State<_DialogRenomearMapa> {
+  late final TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController(text: widget.nomeInicial);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      backgroundColor: MestreCores.escuroSurface,
+      title: const Text(
+        'Renomear Mapa',
+        style: TextStyle(color: MestreCores.escuroOnSurface),
+      ),
+      content: TextField(
+        controller: _controller,
+        style: const TextStyle(color: MestreCores.escuroOnSurface),
+        decoration: const InputDecoration(
+          labelText: 'Novo nome do mapa',
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: MestreCores.escuroOutline),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: MestreCores.escuroOuro),
+          ),
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: const Text(
+            'Cancelar',
+            style: TextStyle(color: MestreCores.escuroOnSurfaceVariant),
+          ),
+        ),
+        FilledButton(
+          style: FilledButton.styleFrom(
+            backgroundColor: MestreCores.escuroOuro,
+            foregroundColor: MestreCores.escuroOuroTexto,
+          ),
+          onPressed: () {
+            widget.onSalvar(_controller.text);
+            Navigator.pop(context);
+          },
+          child: const Text('Salvar'),
+        ),
+      ],
+    );
+  }
+}
+
 class _MiniaturaGridPainter extends CustomPainter {
   final int largura;
   final int altura;
   final double opacidade;
 
-  _MiniaturaGridPainter({required this.largura, required this.altura, required this.opacidade});
+  _MiniaturaGridPainter({
+    required this.largura,
+    required this.altura,
+    required this.opacidade,
+  });
 
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.white.withValues(alpha: (opacidade * 0.4).clamp(0.05, 0.5))
+      ..color =
+          Colors.white.withValues(alpha: (opacidade * 0.4).clamp(0.05, 0.5))
       ..strokeWidth = 0.8
       ..style = PaintingStyle.stroke;
 
@@ -490,15 +659,25 @@ class _MiniaturaGridPainter extends CustomPainter {
     final cellH = size.height / altura;
 
     for (int x = 0; x <= largura; x++) {
-      canvas.drawLine(Offset(x * cellW, 0), Offset(x * cellW, size.height), paint);
+      canvas.drawLine(
+        Offset(x * cellW, 0),
+        Offset(x * cellW, size.height),
+        paint,
+      );
     }
     for (int y = 0; y <= altura; y++) {
-      canvas.drawLine(Offset(0, y * cellH), Offset(size.width, y * cellH), paint);
+      canvas.drawLine(
+        Offset(0, y * cellH),
+        Offset(size.width, y * cellH),
+        paint,
+      );
     }
   }
 
   @override
   bool shouldRepaint(covariant _MiniaturaGridPainter oldDelegate) {
-    return oldDelegate.largura != largura || oldDelegate.altura != altura || oldDelegate.opacidade != opacidade;
+    return oldDelegate.largura != largura ||
+        oldDelegate.altura != altura ||
+        oldDelegate.opacidade != opacidade;
   }
 }

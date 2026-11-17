@@ -1,306 +1,301 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../domain/entities/mestre/modelos_mestre.dart';
+import '../../../domain/services/sessao_lan/sessao_host_lan_service.dart';
 import '../../controllers/mestre_controller/mestre_cubit.dart';
 import '../../controllers/mestre_controller/mestre_state.dart';
+import '../home/widgets/breakpoints.dart';
+import 'campanha_detalhe_screen.dart';
+import 'criar_campanha_screen.dart';
+import 'mesa_sessao_screen.dart';
 import 'theme/mestre_theme.dart';
-import 'widgets/drawer_sessao_lan.dart';
+import 'widgets/campanha_card.dart';
+import 'widgets/mestre_drawer.dart';
+import 'widgets/mestre_empty_state.dart';
+import 'widgets/tela_bestiario_mestre.dart';
 import 'widgets/tela_biblioteca_mapas.dart';
 import 'widgets/tela_editor_mapa.dart';
 import 'widgets/tela_escudo_notas.dart';
-import 'widgets/tela_mesa_jogo.dart';
 
-/// Painel do Mestre (Tormenta 20 - Android/Flutter)
-/// Baseado no PROMPT DE DESIGN:
-/// - PARTE 0: Fundação (Vinho e Ouro, Máximo espaço livre, alvos >= 48dp)
-/// - PARTE 1: Gaveta "Sessão e LAN" (Árvore acordeão, menus, 5 sheets)
-/// - PARTE 2: Tela "Mapas" (Biblioteca + Seleção)
-/// - PARTE 3: Tela "Criar/Editar mapa" (Canvas com pinch-zoom/pan + abas de ajuste)
-/// - PARTE 4: Tela "Mesa de jogo" (Canvas quase total, UI mínima e translúcida)
-/// - PARTE 5: Tela "Escudo e Notas" (5 abas, busca global, consulta em 2 toques)
+/// Painel do Mestre mobile-first com navegação por Drawer lateral.
+///
+/// Integra a lista de campanhas (com fluxo Campanha > Aventura > Sessão),
+/// a Biblioteca de Mapas e o Escudo e Notas sem alterar o comportamento
+/// interno das telas já existentes.
 class MestrePainelScreen extends StatefulWidget {
-  const MestrePainelScreen({super.key});
+  final MestreCubit? cubit;
+
+  const MestrePainelScreen({super.key, this.cubit});
 
   @override
   State<MestrePainelScreen> createState() => _MestrePainelScreenState();
 }
 
 class _MestrePainelScreenState extends State<MestrePainelScreen> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  int _destinoSelecionado = 0; // 0: Mapas, 1: Escudo e Notas
-  bool _painelLateralTabletAberto = false; // Tablet paisagem: gaveta recolhida por padrão
+  late final MestreCubit _cubit;
+  late final bool _cubitProprio;
+  SessaoHostLanService? _hostLan;
+  int _destinoSelecionado = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _cubitProprio = widget.cubit == null;
+    if (_cubitProprio) {
+      _hostLan = SessaoHostLanService();
+      _cubit = MestreCubit(sessaoHostService: _hostLan);
+    } else {
+      _cubit = widget.cubit!;
+    }
+  }
+
+  @override
+  void dispose() {
+    if (_cubitProprio) {
+      _cubit.close();
+      unawaited(_hostLan?.dispose());
+    }
+    super.dispose();
+  }
+
+  void _abrirCriarCampanha(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute<String?>(
+        builder: (_) => CriarCampanhaScreen(cubit: _cubit),
+      ),
+    );
+  }
+
+  void _abrirDetalheCampanha(BuildContext context, CampanhaMestre campanha) {
+    _cubit.selecionarCampanha(campanha.id);
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (_) =>
+            CampanhaDetalheScreen(cubit: _cubit, campanhaId: campanha.id),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => MestreCubit(),
-      child: BlocBuilder<MestreCubit, MestreState>(
-        builder: (context, state) {
-          final cubit = context.read<MestreCubit>();
+    final destinoAtual = MestreDestinoDrawer.values[_destinoSelecionado];
 
-          return LayoutBuilder(
-            builder: (context, constraints) {
-              final isTabletLandscape = constraints.maxWidth >= 840;
+    return Theme(
+      data: MestreCores.homeStyleTheme,
+      child: Builder(
+        builder: (themedContext) {
+          final colorScheme = Theme.of(themedContext).colorScheme;
+          final textTheme = Theme.of(themedContext).textTheme;
 
-              return Scaffold(
-                key: _scaffoldKey,
-                backgroundColor: MestreCores.escuroBackground,
-                drawer: isTabletLandscape
-                    ? null
-                    : DrawerSessaoLan(
-                        state: state,
-                        cubit: cubit,
-                        onFechar: () => _scaffoldKey.currentState?.closeDrawer(),
+          return BlocProvider.value(
+            value: _cubit,
+            child: BlocSelector<MestreCubit, MestreState, List<CampanhaMestre>>(
+              bloc: _cubit,
+              selector: (s) => s.campanhas,
+              builder: (context, campanhas) {
+                final mostrarFabCampanha =
+                    _destinoSelecionado == 0 && campanhas.isNotEmpty;
+
+                return Scaffold(
+                  drawer: MestreDrawer(
+                    destinoSelecionado: _destinoSelecionado,
+                    onSelecionarDestino: (index) {
+                      setState(() => _destinoSelecionado = index);
+                    },
+                    onVoltarHome: () => Navigator.of(context).pop(),
+                  ),
+                  appBar: AppBar(
+                    backgroundColor: Colors.transparent,
+                    elevation: 0,
+                    title: Text(
+                      destinoAtual.titulo,
+                      style: textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
                       ),
-                appBar: _buildAppBarComChipContexto(context, state, cubit, isTabletLandscape),
-                body: SafeArea(
-                  child: Row(
-                    children: [
-                      // Tablet Paisagem: NavigationRail de 56 dp
-                      if (isTabletLandscape) ...[
-                        _buildNavigationRailTablet(context, cubit),
-                        if (_painelLateralTabletAberto) ...[
-                          const VerticalDivider(color: MestreCores.escuroOutline, width: 1),
-                          SizedBox(
-                            width: 320,
-                            child: DrawerSessaoLan(
-                              state: state,
-                              cubit: cubit,
-                              onFechar: () => setState(() => _painelLateralTabletAberto = false),
-                            ),
-                          ),
-                        ],
-                        const VerticalDivider(color: MestreCores.escuroOutline, width: 1),
-                      ],
-
-                      // Conteúdo Principal: Máximo de Espaço Livre
-                      Expanded(
-                        child: AnimatedSwitcher(
-                          duration: const Duration(milliseconds: 200),
-                          child: _buildDestinoPrincipal(context, state, cubit),
+                    ),
+                    actions: [
+                      IconButton(
+                        icon: const Icon(Icons.home_outlined),
+                        tooltip: 'Voltar para Heróis',
+                        constraints: const BoxConstraints(
+                          minWidth: 48,
+                          minHeight: 48,
                         ),
+                        onPressed: () => Navigator.of(context).pop(),
                       ),
                     ],
                   ),
-                ),
-                bottomNavigationBar: isTabletLandscape
-                    ? null
-                    : _buildBottomNavigationBarCelular(context),
-              );
-            },
-          );
-        },
-      ),
-    );
-  }
-
-  // ---------------------------------------------------------------------------
-  // APP BAR COM CHIP DE CONTEXTO (40 DP) NO TOPO
-  // "Campanha › Aventura › Sessão 3 · ● 4/6"
-  // ---------------------------------------------------------------------------
-
-  PreferredSizeWidget _buildAppBarComChipContexto(
-    BuildContext context,
-    MestreState state,
-    MestreCubit cubit,
-    bool isTabletLandscape,
-  ) {
-    final salaAberta = state.statusLan != StatusConexaoLan.desligado;
-    final conectados = state.sessaoAtual?.elenco.where((e) => e.conectadoViaLan).length ?? 0;
-    final total = state.sessaoAtual?.elenco.length ?? 0;
-    final corPonto = salaAberta ? MestreCores.statusOnlineEscuro : MestreCores.statusOffline;
-
-    final textoContexto = '${state.campanhaAtual?.nome ?? "Campanha"} › '
-        '${state.aventuraAtual?.nome ?? "Aventura"} › '
-        '${state.sessaoAtual?.titulo ?? "Sessão"}';
-
-    return AppBar(
-      backgroundColor: MestreCores.escuroSurface,
-      foregroundColor: MestreCores.escuroOnSurface,
-      elevation: 0,
-      centerTitle: false,
-      leading: IconButton(
-        icon: const Icon(Icons.arrow_back),
-        tooltip: 'Voltar ao Menu Principal',
-        onPressed: () => Navigator.pop(context),
-      ),
-      title: InkWell(
-        onTap: () {
-          if (isTabletLandscape) {
-            setState(() => _painelLateralTabletAberto = !_painelLateralTabletAberto);
-          } else {
-            _scaffoldKey.currentState?.openDrawer();
-          }
-        },
-        borderRadius: BorderRadius.circular(20),
-        child: Container(
-          height: 40,
-          padding: const EdgeInsets.symmetric(horizontal: 12),
-          decoration: BoxDecoration(
-            color: MestreCores.escuroSurfaceContainer,
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: MestreCores.escuroOutline),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Icon(Icons.hub_outlined, size: 16, color: MestreCores.escuroOuro),
-              const SizedBox(width: 8),
-              Flexible(
-                child: Text(
-                  textoContexto,
-                  style: const TextStyle(
-                    color: MestreCores.escuroOnSurface,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
+                  body: SafeArea(
+                    child: IndexedStack(
+                      index: _destinoSelecionado,
+                      children: [
+                        _ListaCampanhasView(
+                          cubit: _cubit,
+                          onCriarCampanha: () => _abrirCriarCampanha(context),
+                          onAbrirCampanha: (camp) =>
+                              _abrirDetalheCampanha(context, camp),
+                        ),
+                        TelaBibliotecaMapas(
+                          key: const ValueKey('tela_biblioteca_mapas'),
+                          cubit: _cubit,
+                          onAbrirMesaJogo: (mapa) {
+                            _cubit.selecionarMapa(mapa.id);
+                            Navigator.of(context).push(
+                              MaterialPageRoute<void>(
+                                builder: (_) => MesaSessaoScreen(cubit: _cubit),
+                              ),
+                            );
+                          },
+                          onAbrirEditorMapa: ({mapaParaEditar}) {
+                            Navigator.of(context).push(
+                              MaterialPageRoute<void>(
+                                builder: (ctx) => TelaEditorMapa(
+                                  mapaOriginal: mapaParaEditar,
+                                  cubit: _cubit,
+                                  onSalvo: () => Navigator.of(ctx).pop(),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                        TelaBestiarioMestre(
+                          key: const ValueKey('tela_bestiario_mestre'),
+                          cubit: _cubit,
+                          autoCarregar:
+                              _destinoSelecionado ==
+                              MestreDestinoDrawer.bestiario.index,
+                        ),
+                        TelaEscudoNotas(
+                          key: const ValueKey('tela_escudo_notas'),
+                          cubit: _cubit,
+                        ),
+                      ],
+                    ),
                   ),
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-              const SizedBox(width: 8),
-              Icon(Icons.circle, size: 7, color: corPonto),
-              const SizedBox(width: 4),
-              Text(
-                '$conectados/$total',
-                style: MestreCores.estiloMono.copyWith(color: MestreCores.escuroOnSurfaceVariant, fontSize: 11),
-              ),
-              const SizedBox(width: 4),
-              const Icon(Icons.arrow_drop_down, size: 18, color: MestreCores.escuroOuro),
-            ],
-          ),
-        ),
-      ),
-      actions: [
-        IconButton(
-          icon: Icon(
-            _painelLateralTabletAberto ? Icons.menu_open : Icons.menu,
-            color: MestreCores.escuroOuro,
-          ),
-          tooltip: 'Abrir / Fechar Sessão e LAN',
-          onPressed: () {
-            if (isTabletLandscape) {
-              setState(() => _painelLateralTabletAberto = !_painelLateralTabletAberto);
-            } else {
-              _scaffoldKey.currentState?.openDrawer();
-            }
-          },
-        ),
-      ],
-    );
-  }
-
-  // ---------------------------------------------------------------------------
-  // NAVIGATION RAIL (TABLET PAISAGEM: 56 DP)
-  // ---------------------------------------------------------------------------
-
-  Widget _buildNavigationRailTablet(BuildContext context, MestreCubit cubit) {
-    return NavigationRail(
-      backgroundColor: MestreCores.escuroSurface,
-      selectedIndex: _destinoSelecionado,
-      onDestinationSelected: (idx) => setState(() => _destinoSelecionado = idx),
-      minWidth: 56,
-      labelType: NavigationRailLabelType.all,
-      selectedIconTheme: const IconThemeData(color: MestreCores.escuroOuro),
-      unselectedIconTheme: const IconThemeData(color: MestreCores.escuroOnSurfaceVariant),
-      selectedLabelTextStyle: const TextStyle(
-        color: MestreCores.escuroOuro,
-        fontSize: 10,
-        fontWeight: FontWeight.bold,
-      ),
-      unselectedLabelTextStyle: const TextStyle(
-        color: MestreCores.escuroOnSurfaceVariant,
-        fontSize: 10,
-      ),
-      destinations: const [
-        NavigationRailDestination(
-          icon: Icon(Icons.map_outlined),
-          selectedIcon: Icon(Icons.map),
-          label: Text('Mapas'),
-        ),
-        NavigationRailDestination(
-          icon: Icon(Icons.shield_outlined),
-          selectedIcon: Icon(Icons.shield),
-          label: Text('Escudo e Notas'),
-        ),
-      ],
-    );
-  }
-
-  // ---------------------------------------------------------------------------
-  // BARRA INFERIOR (CELULAR & TABLET RETRATO: 56 DP)
-  // ---------------------------------------------------------------------------
-
-  Widget _buildBottomNavigationBarCelular(BuildContext context) {
-    return NavigationBar(
-      height: 56,
-      backgroundColor: MestreCores.escuroSurface,
-      indicatorColor: MestreCores.escuroVinho,
-      selectedIndex: _destinoSelecionado,
-      onDestinationSelected: (idx) => setState(() => _destinoSelecionado = idx),
-      destinations: const [
-        NavigationDestination(
-          icon: Icon(Icons.map_outlined, color: MestreCores.escuroOnSurfaceVariant),
-          selectedIcon: Icon(Icons.map, color: MestreCores.escuroOuro),
-          label: 'Mapas',
-        ),
-        NavigationDestination(
-          icon: Icon(Icons.shield_outlined, color: MestreCores.escuroOnSurfaceVariant),
-          selectedIcon: Icon(Icons.shield, color: MestreCores.escuroOuro),
-          label: 'Escudo e Notas',
-        ),
-      ],
-    );
-  }
-
-  // ---------------------------------------------------------------------------
-  // CONTEÚDO PRINCIPAL (DESTINO SELECIONADO)
-  // ---------------------------------------------------------------------------
-
-  Widget _buildDestinoPrincipal(BuildContext context, MestreState state, MestreCubit cubit) {
-    if (_destinoSelecionado == 0) {
-      // Destino 0: Biblioteca de Mapas (Parte 2)
-      return TelaBibliotecaMapas(
-        key: const ValueKey('tela_biblioteca_mapas'),
-        state: state,
-        cubit: cubit,
-        onAbrirMesaJogo: (mapa) {
-          cubit.selecionarMapa(mapa.id);
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (ctx) => BlocProvider.value(
-                value: cubit,
-                child: BlocBuilder<MestreCubit, MestreState>(
-                  builder: (ctx, s) => TelaMesaJogo(
-                    state: s,
-                    cubit: cubit,
-                    onVoltarBiblioteca: () => Navigator.pop(ctx),
+                  bottomNavigationBar: NavigationBar(
+                    selectedIndex: _destinoSelecionado,
+                    onDestinationSelected: (index) =>
+                        setState(() => _destinoSelecionado = index),
+                    destinations: const [
+                      NavigationDestination(
+                        icon: Icon(Icons.campaign_outlined),
+                        selectedIcon: Icon(Icons.campaign),
+                        label: 'Campanhas',
+                      ),
+                      NavigationDestination(
+                        icon: Icon(Icons.map_outlined),
+                        selectedIcon: Icon(Icons.map),
+                        label: 'Mapas',
+                      ),
+                      NavigationDestination(
+                        icon: Icon(Icons.pets_outlined),
+                        selectedIcon: Icon(Icons.pets),
+                        label: 'Bestiário',
+                      ),
+                      NavigationDestination(
+                        icon: Icon(Icons.shield_outlined),
+                        selectedIcon: Icon(Icons.shield),
+                        label: 'Escudo',
+                      ),
+                    ],
                   ),
-                ),
-              ),
+                  floatingActionButton: mostrarFabCampanha
+                      ? FloatingActionButton.extended(
+                          heroTag: 'mestre_campanhas_fab',
+                          backgroundColor: colorScheme.primary,
+                          foregroundColor: colorScheme.onPrimary,
+                          icon: const Icon(Icons.add),
+                          label: const Text(
+                            'Nova campanha',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          onPressed: () => _abrirCriarCampanha(context),
+                        )
+                      : null,
+                );
+              },
             ),
           );
         },
-        onAbrirEditorMapa: ({mapaParaEditar}) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (ctx) => TelaEditorMapa(
-                mapaOriginal: mapaParaEditar,
-                cubit: cubit,
-                onSalvo: () => Navigator.pop(ctx),
-              ),
-            ),
+      ),
+    );
+  }
+}
+
+class _ListaCampanhasView extends StatelessWidget {
+  final MestreCubit cubit;
+  final VoidCallback onCriarCampanha;
+  final ValueChanged<CampanhaMestre> onAbrirCampanha;
+
+  const _ListaCampanhasView({
+    required this.cubit,
+    required this.onCriarCampanha,
+    required this.onAbrirCampanha,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final windowSize = WindowSizeClass.of(context);
+    final double maxWidth = windowSize.isCompact
+        ? double.infinity
+        : (windowSize.isMedium ? 720 : 920);
+
+    return BlocSelector<
+      MestreCubit,
+      MestreState,
+      ({List<CampanhaMestre> campanhas, String? ativaId})
+    >(
+      bloc: cubit,
+      selector: (s) => (campanhas: s.campanhas, ativaId: s.campanhaAtual?.id),
+      builder: (context, data) {
+        if (data.campanhas.isEmpty) {
+          return MestreEmptyState(
+            icon: Icons.campaign_outlined,
+            titulo: 'Nenhuma campanha ainda',
+            subtitulo:
+                'Crie sua primeira campanha para organizar aventuras, sessões e mapas.',
+            textoBotao: 'Nova campanha',
+            onAcaoPrincipal: onCriarCampanha,
           );
-        },
-      );
-    } else {
-      // Destino 1: Escudo e Notas (Parte 5)
-      return TelaEscudoNotas(
-        key: const ValueKey('tela_escudo_notas'),
-        state: state,
-        cubit: cubit,
-      );
-    }
+        }
+
+        final colorScheme = Theme.of(context).colorScheme;
+        final textTheme = Theme.of(context).textTheme;
+
+        return Center(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: maxWidth),
+            child: ListView.separated(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 96),
+              itemCount: data.campanhas.length + 1,
+              separatorBuilder: (_, _) => const SizedBox(height: 10),
+              itemBuilder: (context, index) {
+                if (index == 0) {
+                  return Padding(
+                    padding: const EdgeInsets.only(left: 4, bottom: 4),
+                    child: Text(
+                      'Suas campanhas',
+                      style: textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: colorScheme.onSurface,
+                      ),
+                    ),
+                  );
+                }
+
+                final camp = data.campanhas[index - 1];
+                return CampanhaCard(
+                  campanha: camp,
+                  selecionada: camp.id == data.ativaId,
+                  onTap: () => onAbrirCampanha(camp),
+                  onExcluir: () => cubit.excluirCampanha(camp.id),
+                );
+              },
+            ),
+          ),
+        );
+      },
+    );
   }
 }

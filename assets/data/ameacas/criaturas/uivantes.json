@@ -1,0 +1,1576 @@
+[
+  {
+    "id": "carcaju",
+    "nome": "Carcaju",
+    "nd": "1",
+    "regiao": "uivantes",
+    "papel": "especial",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "pequeno",
+    "iniciativa": 6,
+    "percepcao": 5,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 15,
+    "resistencias": {
+      "fortitude": 10,
+      "reflexos": 5,
+      "vontade": 0
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 26,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 9.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 2,
+      "con": 3,
+      "int": -4,
+      "sab": 1,
+      "car": 0
+    },
+    "pericias": {
+      "atletismo": 6,
+      "intimidacao": 4,
+      "sobrevivencia": 8
+    },
+    "ataques": [
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 9,
+        "dano": "1d4+2",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 9,
+        "dano": "1d6+2",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Evasão",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando passa em um teste de Reflexos para reduzir o dano de um efeito à metade, em vez disso não sofre nenhum dano."
+      },
+      {
+        "nome": "O Melhor no que Faz",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando sofre dano, o carcaju recebe +2 em testes de ataque e rolagens de dano até o fim de seu próximo turno."
+      },
+      {
+        "nome": "Resiliência",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O carcaju não fica inconsciente quando é reduzido a 0 PV ou menos. Quando é reduzido a -13 PV morre, ou fica inconsciente no caso de dano não letal."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "golem_de_nor_enorme",
+    "nome": "Golem de Nor Enorme",
+    "nd": "10",
+    "regiao": "uivantes",
+    "papel": "solo",
+    "tipo": "construto",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 12,
+    "percepcao": 15,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 35,
+    "resistencias": {
+      "fortitude": 11,
+      "reflexos": 8,
+      "vontade": 16
+    },
+    "rd": {
+      "fogo": 15
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "frio"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 370,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 7,
+      "des": 0,
+      "con": 9,
+      "int": null,
+      "sab": 0,
+      "car": -5
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Espada Longa (x2)",
+        "bonusAtaque": 29,
+        "dano": "2d10+29",
+        "danoExtra": "1d4+2 frio",
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Aura Congelante",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 28,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Uma vez por cena, o golem de Nor enorme recebe 100 PV temporários. Se uma criatura acertar um ataque corpo a corpo contra o golem enquanto ele tem estes PV temporários, fica enredada (Fort CD 28 evita)."
+      },
+      {
+        "nome": "Imunidade a Magia",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O golem é imune a efeitos mágicos, com a seguinte exceção: efeitos mágicos de frio curam PV em quantidade igual à metade do dano que causariam."
+      },
+      {
+        "nome": "Sentinela Eterno",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O golem ataca uma criatura que entre em seu alcance corpo a corpo voluntariamente. Se acertar esse ataque, o golem deixa a criatura lenta e, se ela estava fazendo uma investida, ele causa +3d8 pontos de dano de frio. O golem pode usar esta habilidade uma vez por rodada contra cada criatura."
+      }
+    ],
+    "equipamento": [
+      "Escudo pesado de gelo eterno",
+      "Espada longa aumentada de gelo eterno"
+    ],
+    "tesouro": "lascas gelidas (cd 25 para extrair, valem t$ 600 para fabricar itens de gelo eterno).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "golem_de_nor_grande",
+    "nome": "Golem de Nor Grande",
+    "nd": "8",
+    "regiao": "uivantes",
+    "papel": "solo",
+    "tipo": "construto",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 10,
+    "percepcao": 13,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 32,
+    "resistencias": {
+      "fortitude": 21,
+      "reflexos": 7,
+      "vontade": 15
+    },
+    "rd": {
+      "fogo": 15
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "frio"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 290,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 0,
+      "con": 5,
+      "int": null,
+      "sab": 0,
+      "car": -5
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Espada Longa (x2)",
+        "bonusAtaque": 26,
+        "dano": "2d8+25",
+        "danoExtra": "1d4+2 frio",
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Aura Congelante",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 24,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Uma vez por cena, o golem de Nor grande recebe 50 PV temporários. Se uma criatura acertar um ataque corpo a corpo contra o golem enquanto ele tem estes PV temporários, fica enredada (Fort CD 24 evita)."
+      },
+      {
+        "nome": "Imunidade a Magia",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O golem é imune a efeitos mágicos, com a seguinte exceção: efeitos mágicos de frio curam PV em quantidade igual à metade do dano que causariam."
+      }
+    ],
+    "equipamento": [
+      "Escudo pesado de gelo eterno",
+      "Espada longa aumentada de gelo eterno"
+    ],
+    "tesouro": "lascas gelidas (cd 23 para extrair, valem t$ 200 para fabricar itens de gelo eterno).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "golem_de_nor_medio",
+    "nome": "Golem de Nor Médio",
+    "nd": "1",
+    "regiao": "uivantes",
+    "papel": "solo",
+    "tipo": "construto",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 3,
+    "percepcao": 6,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 17,
+    "resistencias": {
+      "fortitude": 11,
+      "reflexos": -1,
+      "vontade": 5
+    },
+    "rd": {
+      "fogo": 10
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "frio"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 35,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 0,
+      "con": 3,
+      "int": null,
+      "sab": 0,
+      "car": -5
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Espada Longa",
+        "bonusAtaque": 9,
+        "dano": "1d8+9",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Aura Congelante",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 14,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Uma vez por cena, o golem de Nor recebe 25 PV temporários. Se uma criatura acertar um ataque corpo a corpo contra o golem enquanto ele tem estes PV temporários, fica enredada (Fort CD 14 evita)."
+      }
+    ],
+    "equipamento": [
+      "Escudo pesado",
+      "Espada longa"
+    ],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "keylor",
+    "nome": "Keylor",
+    "nd": "9",
+    "regiao": "uivantes",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "gigante",
+    "tamanho": "grande",
+    "iniciativa": 8,
+    "percepcao": 9,
+    "sentidos": [
+      "visao_na_penumbra"
+    ],
+    "defesa": 34,
+    "resistencias": {
+      "fortitude": 21,
+      "reflexos": 8,
+      "vontade": 16
+    },
+    "rd": {
+      "frio": 10
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 360,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 0,
+      "con": 4,
+      "int": 1,
+      "sab": 1,
+      "car": -1
+    },
+    "pericias": {
+      "sobrevivencia": 11
+    },
+    "ataques": [
+      {
+        "nome": "Machado de Guerra (x2)",
+        "bonusAtaque": 27,
+        "dano": "3d6+28",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Arremessar Rochas",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 28,
+        "resistenciaTipo": "reflexos",
+        "descricao": "Criaturas em um quadrado de 3m em alcance curto sofrem 4d6+20 pontos de dano (Ref CD 28 reduz à metade)."
+      },
+      {
+        "nome": "Aura de Frio",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada turno do Keylor, todas as criaturas em um raio de 3m sofrem 2d6+8 pontos de dano de frio."
+      },
+      {
+        "nome": "Varrer",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando o Keylor faz um ataque corpo a corpo e reduz os pontos de vida do alvo a 0 ou menos, pode fazer um ataque adicional contra outra criatura dentro do seu alcance."
+      }
+    ],
+    "equipamento": [
+      "Gibão de peles",
+      "Machado de guerra aumentado"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "lyuba",
+    "nome": "Lyuba",
+    "nd": "14",
+    "regiao": "uivantes",
+    "papel": "solo",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 11,
+    "percepcao": 13,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 45,
+    "resistencias": {
+      "fortitude": 31,
+      "reflexos": 15,
+      "vontade": 19
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [
+      "fogo"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 715,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 12,
+      "des": 0,
+      "con": 8,
+      "int": -3,
+      "sab": 2,
+      "car": 0
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Presas Espectrais",
+        "bonusAtaque": 39,
+        "dano": "2d12+35",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Tromba",
+        "bonusAtaque": 39,
+        "dano": "2d12+30",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": "doença"
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Atropelamento",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 38,
+        "resistenciaTipo": "reflexos",
+        "descricao": "O lyuba percorre até o dobro de seu deslocamento. Ele pode passar pelo espaço ocupado de quaisquer inimigos menores que ele, mas não pode passar duas vezes pelo mesmo espaço. Criaturas atropeladas desta forma sofrem 4d8+35 pontos de dano de impacto e ficam caídas (Ref CD 38 reduz à metade e evita a condição). Recarga (movimento)."
+      },
+      {
+        "nome": "Caçador de Caçadores",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O lyuba causa +1d12 pontos de dano contra criaturas não nativas das Uivantes."
+      },
+      {
+        "nome": "Constrição",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada um de seus turnos, o lyuba causa 4d12+30 pontos de dano de impacto na criatura que estiver agarrando com a tromba."
+      },
+      {
+        "nome": "Definhamento",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura atingida pela tromba do lyuba é exposta à doença podridão da múmia."
+      },
+      {
+        "nome": "Desespero",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 38,
+        "resistenciaTipo": "vontade",
+        "descricao": "Uma criatura que comece seu turno vendo o lyuba fica apavorada (Von CD 38 evita e a criatura não pode ser apavorada por esta habilidade até o fim da cena)."
+      },
+      {
+        "nome": "Presas Espectrais",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 38,
+        "resistenciaTipo": "fortitude",
+        "descricao": "As presas do lyuba contam como armas mágicas e afetam criaturas incorpóreas. Uma criatura atingida pelas presas fica fraca (Fort CD 38 evita). Cada vez que deixa uma criatura fraca com esta habilidade, o lyuba recebe 30 PV temporários cumulativos."
+      },
+      {
+        "nome": "Tromba",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se o lyuba acerta um ataque de tromba, pode fazer a manobra agarrar ou derrubar (teste +44)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao, mais couro do lyuba (cd 29 para extrair, reduz em 1 pm o custo para fabricar um item com o encanto fantasmagorico).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "mamute",
+    "nome": "Mamute",
+    "nd": "8",
+    "regiao": "uivantes",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 8,
+    "percepcao": 11,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 33,
+    "resistencias": {
+      "fortitude": 24,
+      "reflexos": 8,
+      "vontade": 12
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 310,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 0,
+      "con": 4,
+      "int": -4,
+      "sab": 1,
+      "car": 0
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Presas",
+        "bonusAtaque": 27,
+        "dano": "2d6+29",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Tromba",
+        "bonusAtaque": 27,
+        "dano": "2d6+25",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Arremessar",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 26,
+        "resistenciaTipo": "reflexos",
+        "descricao": "Se começar seu turno agarrando uma criatura Média ou menor, o mamute arremessa a vítima 1d6 x1,5m em uma direção à escolha dele. A vítima sofre 2d6 pontos de dano de impacto, fica caída e, se atingir algum obstáculo, sofre +2d6 pontos de dano (Ref CD 26 reduz à metade e evita a condição). Recarga (movimento)."
+      },
+      {
+        "nome": "Atropelamento",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 26,
+        "resistenciaTipo": "reflexos",
+        "descricao": "O mamute percorre até o dobro de seu deslocamento. Ele pode passar pelo espaço ocupado de quaisquer inimigos menores que ele, mas não pode passar duas vezes pelo mesmo espaço. Criaturas atropeladas desta forma sofrem 2d8+9 pontos de dano de impacto e ficam caídas (Ref CD 26 reduz à metade e evita a condição). Recarga (movimento)."
+      },
+      {
+        "nome": "Pisotear",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 26,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Uma criatura que o mamute esteja agarrando, ou que esteja caída adjacente a ele, sofre 4d8+58 pontos de dano de impacto e fica fraca por 1 rodada (Fort CD 26 reduz o dano à metade e evita a condição)."
+      },
+      {
+        "nome": "Tromba",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se o mamute acerta um ataque de tromba, pode fazer a manobra agarrar ou derrubar (teste +32)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "marfim (cd 23 para extrair, vale t$ 1.000 para fabricar armas superiores) e pele de mamute (cd 23 para extrair, vale t$ 1.000 para fabricar armaduras leves superiores).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "minotauro_chefe_da_manada",
+    "nome": "Minotauro Chefe da Manada",
+    "nd": "6",
+    "regiao": "uivantes",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "minotauro",
+    "tamanho": "medio",
+    "iniciativa": 11,
+    "percepcao": 10,
+    "sentidos": [
+      "faro"
+    ],
+    "defesa": 26,
+    "resistencias": {
+      "fortitude": 17,
+      "reflexos": 11,
+      "vontade": 5
+    },
+    "rd": {
+      "frio": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 232,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 4,
+      "con": 3,
+      "int": -1,
+      "sab": 3,
+      "car": -2
+    },
+    "pericias": {
+      "atletismo": 9,
+      "furtividade": 11,
+      "sobrevivencia": 10
+    },
+    "ataques": [
+      {
+        "nome": "Machado de Batalha (x2)",
+        "bonusAtaque": 19,
+        "dano": "2d8+12",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Chifres",
+        "bonusAtaque": 19,
+        "dano": "1d6+12",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Liderança Brutal",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Aliados do minotauro chefe da Manada em alcance curto recebem os bônus em ataque e dano de sua habilidade Marca da Presa."
+      },
+      {
+        "nome": "Marca da Presa",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O chefe analisa uma criatura em alcance curto. Até o fim da cena, ele recebe +2 em testes de perícia e +1d8 em rolagens de dano contra essa criatura (esses bônus são dobrados contra anões, elfos e humanos)."
+      },
+      {
+        "nome": "Ver Vermelho",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se tiver sido alvo de um efeito hostil (ataque, habilidade, magia...) desde o fim de seu último turno, o minotauro recebe +2 em testes de perícia."
+      },
+      {
+        "nome": "Instinto Nevado",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Em ambientes nevados, a perícia Sobrevivência do minotauro aumenta para +12 (em vez de +10)."
+      }
+    ],
+    "equipamento": [
+      "Gibão de peles",
+      "Machado de batalha preciso x2"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "minotauro_da_manada",
+    "nome": "Minotauro da Manada",
+    "nd": "2",
+    "regiao": "uivantes",
+    "papel": "lacaio",
+    "tipo": "humanoide",
+    "subtipo": "minotauro",
+    "tamanho": "medio",
+    "iniciativa": 3,
+    "percepcao": 4,
+    "sentidos": [
+      "faro"
+    ],
+    "defesa": 18,
+    "resistencias": {
+      "fortitude": 11,
+      "reflexos": 6,
+      "vontade": 3
+    },
+    "rd": {
+      "frio": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 16,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 0,
+      "con": 3,
+      "int": 0,
+      "sab": 1,
+      "car": -2
+    },
+    "pericias": {
+      "atletismo": 9,
+      "intimidacao": 7
+    },
+    "ataques": [
+      {
+        "nome": "Machado de Batalha",
+        "bonusAtaque": 13,
+        "dano": "2d8+5",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Chifres",
+        "bonusAtaque": 13,
+        "dano": "1d6+5",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Capturar",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O minotauro da Manada recebe +2 em testes de agarrar e pode se deslocar normalmente enquanto arrasta uma criatura. Uma criatura arrastada desta forma sofre 1d4 pontos de dano de impacto para cada 3m que for arrastada."
+      },
+      {
+        "nome": "Ver Vermelho",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se tiver sido alvo de um efeito hostil (ataque, habilidade, magia...) desde o fim de seu último turno, o minotauro recebe +2 em testes de perícia."
+      }
+    ],
+    "equipamento": [
+      "Gibão de peles",
+      "Machado de batalha"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "ogro_furioso",
+    "nome": "Ogro Furioso",
+    "nd": "5",
+    "regiao": "uivantes",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "gigante",
+    "tamanho": "grande",
+    "iniciativa": 5,
+    "percepcao": 2,
+    "sentidos": [
+      "visao_na_penumbra"
+    ],
+    "defesa": 24,
+    "resistencias": {
+      "fortitude": 17,
+      "reflexos": 11,
+      "vontade": 0
+    },
+    "rd": {
+      "frio": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 222,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 1,
+      "con": 3,
+      "int": -1,
+      "sab": 0,
+      "car": -2
+    },
+    "pericias": {
+      "atletismo": 11,
+      "intimidacao": 11,
+      "intuicao": -3
+    },
+    "ataques": [
+      {
+        "nome": "Tacape",
+        "bonusAtaque": 17,
+        "dano": "4d12+14",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Burro Demais...",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O ogro furioso sofre -5 em testes de Intuição e Vontade (já contabilizado)."
+      },
+      {
+        "nome": "...Para Morrer!",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Todo o dano de corte, impacto e perfuração que o ogro sofre é reduzido à metade."
+      },
+      {
+        "nome": "Fúria Imparável",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O ogro não fica inconsciente quando é reduzido a 0 PV ou menos e só morre quando é reduzido a -111 PV."
+      },
+      {
+        "nome": "Raiva Inflamável",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Cada vez que acerta um ataque ou é atingido por um ataque, o ogro recebe um bônus cumulativo de +1 em testes de ataque e rolagens de dano até o fim da cena."
+      }
+    ],
+    "equipamento": [
+      "Gibão de peles",
+      "Tacape aumentado"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "soterrado_vagante",
+    "nome": "Soterrado Vagante",
+    "nd": "2",
+    "regiao": "uivantes",
+    "papel": "lacaio",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 2,
+    "percepcao": 3,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 20,
+    "resistencias": {
+      "fortitude": 1,
+      "reflexos": 5,
+      "vontade": 10
+    },
+    "rd": {
+      "geral": 5,
+      "frio": 10
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [
+      "fogo"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 21,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": -1,
+      "con": 0,
+      "int": null,
+      "sab": 2,
+      "car": -1
+    },
+    "pericias": {
+      "furtividade": 2
+    },
+    "ataques": [
+      {
+        "nome": "Punho (x2)",
+        "bonusAtaque": 14,
+        "dano": "2d6+6",
+        "danoExtra": "1d4+2 frio",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Usa a manobra agarrar com o punho (teste +16)."
+      },
+      {
+        "nome": "Constrição Congelante",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada um de seus turnos, o soterrado vagante causa 4d6 pontos de dano de frio em cada criatura que estiver agarrando. Esse dano aumenta em +1d6 para cada rodada consecutiva que o soterrado estiver agarrando essa criatura."
+      },
+      {
+        "nome": "Esquife de Gelo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O soterrado sofre 1 ponto de dano adicional por dado de dano de fogo."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "stagh",
+    "nome": "Stagh",
+    "nd": "3",
+    "regiao": "uivantes",
+    "papel": "lacaio",
+    "tipo": "espirito",
+    "subtipo": "elemental",
+    "tamanho": "pequeno",
+    "iniciativa": 6,
+    "percepcao": 4,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 22,
+    "resistencias": {
+      "fortitude": 7,
+      "reflexos": 12,
+      "vontade": 4
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "acertos_criticos",
+      "atordoado",
+      "cansaco",
+      "efeitos_de_metabolismo",
+      "paralisia"
+    ],
+    "imunidadesDano": [
+      "frio"
+    ],
+    "vulnerabilidadesDano": [
+      "fogo"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 35,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 9.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 3,
+      "con": 3,
+      "int": -4,
+      "sab": 1,
+      "car": -1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 16,
+        "dano": "1d6+4",
+        "danoExtra": "1d6 frio",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Aura de Frio",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 17,
+        "resistenciaTipo": "fortitude",
+        "descricao": "No início de cada turno do stagh, todas as criaturas em um raio de 9m sofrem 1d6+3 pontos de dano de frio (Fort CD 17 reduz à metade)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "1 dose de eter elemental (frio) (cd 18 para extrair).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "urso_das_neves",
+    "nome": "Urso das Neves",
+    "nd": "5",
+    "regiao": "uivantes",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 6,
+    "percepcao": 9,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 22,
+    "resistencias": {
+      "fortitude": 17,
+      "reflexos": 11,
+      "vontade": 5
+    },
+    "rd": {
+      "geral": 5,
+      "frio": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 220,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 12.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 7,
+      "des": 1,
+      "con": 6,
+      "int": -4,
+      "sab": 2,
+      "car": -2
+    },
+    "pericias": {
+      "atletismo": 12
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 17,
+        "dano": "1d8+7",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 17,
+        "dano": "1d6+7",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Usa a manobra agarrar com a mordida (teste +19)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "1d3 pecas de cristais de sol (cd 20 para extrair).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "verme_do_gelo_adulto",
+    "nome": "Verme do Gelo Adulto",
+    "nd": "18",
+    "regiao": "uivantes",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "colossal",
+    "iniciativa": 22,
+    "percepcao": 19,
+    "sentidos": [
+      "faro",
+      "percepcao_as_cegas",
+      "visao_no_escuro"
+    ],
+    "defesa": 56,
+    "resistencias": {
+      "fortitude": 32,
+      "reflexos": 26,
+      "vontade": 18
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [
+      "caido",
+      "encantamento"
+    ],
+    "imunidadesDano": [
+      "frio"
+    ],
+    "vulnerabilidadesDano": [
+      "fogo"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 1100,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 15.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 18.0
+    },
+    "atributos": {
+      "for": 7,
+      "des": 3,
+      "con": 5,
+      "int": -5,
+      "sab": 3,
+      "car": -4
+    },
+    "pericias": {
+      "furtividade": 22
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 49,
+        "dano": "10d12+100",
+        "danoExtra": "10d8 frio",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Usa a manobra agarrar com a mordida (teste +59)."
+      },
+      {
+        "nome": "Engolir",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada um dos turnos do verme do gelo adulto, a criatura engolida sofre 6d6+30 pontos de dano de impacto mais 4d6+40 pontos de dano de frio. Ela pode escapar causando um total de 200 pontos de dano a ele (Defesa 25, redução de dano 0)."
+      },
+      {
+        "nome": "Espasmo Mortal",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 47,
+        "resistenciaTipo": "reflexos",
+        "descricao": "Quando o verme é morto, seu corpo explode, fazendo com que estacas de gelo se projetem do chão em um raio de 6m. Criaturas nessa área sofrem 10d8 pontos de dano de corte mais 10d8 pontos de dano de frio e ficam caídas (Ref CD 47 evita). A área afetada se torna terreno difícil e concede cobertura leve para criaturas dentro dela. Causar dano de fogo mágico a qualquer parte dessa área destrói as estacas nos espaços correspondentes."
+      },
+      {
+        "nome": "Frio Extremo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O verme projeta uma aura de frio extremo que enfraquece todas as chamas em um raio de 9m. Nessa área, habilidades de fogo custam +1 PM para ser usadas e causam -1 ponto de dano por dado."
+      },
+      {
+        "nome": "Sopro Glacial",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 47,
+        "resistenciaTipo": "reflexos",
+        "descricao": "Todas as criaturas em um cone de 12m sofrem 10d12 pontos de dano de frio e ficam lentas (Ref CD 47 reduz o dano à metade e evita a condição). Recarga (movimento)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao mais 2d6 doses de gelo extremo (cd 33 para extrair).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "verme_do_gelo_larva",
+    "nome": "Verme do Gelo Larva",
+    "nd": "10",
+    "regiao": "uivantes",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 10,
+    "percepcao": 13,
+    "sentidos": [
+      "faro",
+      "percepcao_as_cegas",
+      "visao_no_escuro"
+    ],
+    "defesa": 36,
+    "resistencias": {
+      "fortitude": 22,
+      "reflexos": 16,
+      "vontade": 10
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "frio"
+    ],
+    "vulnerabilidadesDano": [
+      "fogo"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 400,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 15.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 1,
+      "con": 4,
+      "int": -5,
+      "sab": 2,
+      "car": -3
+    },
+    "pericias": {
+      "furtividade": 5
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 29,
+        "dano": "4d8+52",
+        "danoExtra": "4d6 frio",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Usa a manobra agarrar com a mordida (teste +34)."
+      },
+      {
+        "nome": "Engolir",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada um dos turnos do verme do gelo larva, a criatura engolida sofre 2d6+20 pontos de dano de impacto mais 4d6+10 pontos de dano de frio. Ela pode escapar causando um total de 25 pontos de dano a ele (Defesa 15, redução de dano 0)."
+      },
+      {
+        "nome": "Espasmo Mortal",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 30,
+        "resistenciaTipo": "reflexos",
+        "descricao": "Quando o verme é morto, seu corpo explode, fazendo com que estacas de gelo se projetem do chão em um raio de 6m. Criaturas nessa área sofrem 4d6 pontos de dano de corte mais 4d6 pontos de dano de frio e ficam caídas (Ref CD 30 evita). A área afetada se torna terreno difícil e concede cobertura leve para criaturas dentro dela. Causar dano de fogo mágico a qualquer parte dessa área destrói as estacas nos espaços correspondentes."
+      },
+      {
+        "nome": "Sopro Glacial",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 30,
+        "resistenciaTipo": "reflexos",
+        "descricao": "Todas as criaturas em um cone de 12m sofrem 8d10 pontos de dano de frio e ficam lentas (Ref CD 30 reduz o dano à metade e evita a condição). Recarga (movimento)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "2d4 doses de gelo extremo (cd 25 para extrair).",
+    "recursoExtraivel": null
+  }
+]

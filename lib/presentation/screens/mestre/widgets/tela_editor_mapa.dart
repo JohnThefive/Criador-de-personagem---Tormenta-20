@@ -62,7 +62,7 @@ class _TelaEditorMapaState extends State<TelaEditorMapa> with SingleTickerProvid
     _ajusteEscala = m?.ajusteEscala ?? 1.0;
     _ajusteRotacaoGraus = m?.ajusteRotacaoGraus ?? 0.0;
     _corFundoHex = m?.corFundoHex ?? '#1E1E24';
-    _comecarComTudoOculto = m != null && m.celulasReveladas.isEmpty;
+    _comecarComTudoOculto = m != null ? m.celulasReveladas.isEmpty : false;
 
     _nomeController = TextEditingController(text: m?.nome ?? 'Novo Mapa Tático');
     _notasController = TextEditingController(text: m?.notas ?? '');
@@ -83,23 +83,55 @@ class _TelaEditorMapaState extends State<TelaEditorMapa> with SingleTickerProvid
   }
 
   void _salvar() {
-    final nome = _nomeController.text.trim().isEmpty ? 'Mapa Sem Nome' : _nomeController.text.trim();
-    final celulasReveladas = <Posicao2D>{};
-    if (!_comecarComTudoOculto) {
-      for (int y = 0; y < _altura; y++) {
-        for (int x = 0; x < _largura; x++) {
-          celulasReveladas.add(Posicao2D(x, y));
-        }
-      }
-    }
+    final nome = _nomeController.text.trim().isEmpty
+        ? 'Mapa Sem Nome'
+        : _nomeController.text.trim();
 
     if (widget.mapaOriginal != null) {
-      final mapaEditado = widget.mapaOriginal!.copyWith(
+      final original = widget.mapaOriginal!;
+      final Set<Posicao2D> celulasReveladas;
+      if (_comecarComTudoOculto) {
+        celulasReveladas = <Posicao2D>{};
+      } else if (original.celulasReveladas.isEmpty) {
+        celulasReveladas = {
+          for (int y = 0; y < _altura; y++)
+            for (int x = 0; x < _largura; x++) Posicao2D(x, y),
+        };
+      } else {
+        celulasReveladas = original.celulasReveladas
+            .where((p) =>
+                p.x >= 0 && p.x < _largura && p.y >= 0 && p.y < _altura)
+            .toSet();
+      }
+
+      final tokensAjustados = original.tokens
+          .map(
+            (t) => t.copyWith(
+              posicao: Posicao2D(
+                t.posicao.x.clamp(0, _largura - 1),
+                t.posicao.y.clamp(0, _altura - 1),
+              ),
+            ),
+          )
+          .toList();
+
+      final terrenosAjustados = Map<Posicao2D, TipoTerreno>.fromEntries(
+        original.terrenos.entries.where(
+          (e) =>
+              e.key.x >= 0 &&
+              e.key.x < _largura &&
+              e.key.y >= 0 &&
+              e.key.y < _altura,
+        ),
+      );
+
+      final mapaEditado = original.copyWith(
         nome: nome,
         largura: _largura,
         altura: _altura,
         presetFundo: _presetFundo,
         imagemCaminhoLocal: _imagemCaminhoLocal,
+        limparImagemCustomizada: _imagemCaminhoLocal == null,
         opacidadeGrid: _opacidadeGrid,
         gridVisivel: _gridVisivel,
         ajusteOffsetX: _ajusteOffsetX,
@@ -109,6 +141,8 @@ class _TelaEditorMapaState extends State<TelaEditorMapa> with SingleTickerProvid
         corFundoHex: _corFundoHex,
         notas: _notasController.text.trim(),
         celulasReveladas: celulasReveladas,
+        tokens: tokensAjustados,
+        terrenos: terrenosAjustados,
       );
       widget.cubit.salvarConfiguracoesMapaCompleto(mapaEditado);
     } else {
@@ -118,6 +152,15 @@ class _TelaEditorMapaState extends State<TelaEditorMapa> with SingleTickerProvid
         altura: _altura,
         preset: _presetFundo,
         imagemCaminhoLocal: _imagemCaminhoLocal,
+        opacidadeGrid: _opacidadeGrid,
+        gridVisivel: _gridVisivel,
+        ajusteOffsetX: _ajusteOffsetX,
+        ajusteOffsetY: _ajusteOffsetY,
+        ajusteEscala: _ajusteEscala,
+        ajusteRotacaoGraus: _ajusteRotacaoGraus,
+        corFundoHex: _corFundoHex,
+        notas: _notasController.text.trim(),
+        comecarComTudoOculto: _comecarComTudoOculto,
       );
     }
     widget.onSalvo();
@@ -239,22 +282,36 @@ class _TelaEditorMapaState extends State<TelaEditorMapa> with SingleTickerProvid
                 width: _largura * 36.0,
                 height: _altura * 36.0,
                 decoration: BoxDecoration(
-                  color: _obterCorFundoPreset(),
-                  border: Border.all(color: MestreCores.escuroOuro.withValues(alpha: 0.6), width: 1.5),
-                  boxShadow: const [BoxShadow(color: Colors.black87, blurRadius: 10, spreadRadius: 2)],
+                  color: MestreCores.corFundoPreset(_presetFundo),
+                  border: Border.all(
+                    color: MestreCores.escuroOuro.withValues(alpha: 0.6),
+                    width: 1.5,
+                  ),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black87,
+                      blurRadius: 10,
+                      spreadRadius: 2,
+                    ),
+                  ],
                 ),
                 child: Stack(
                   children: [
                     // Imagem de fundo ajustável
                     if (_imagemCaminhoLocal != null)
                       Positioned.fill(
-                        child: Transform.translate(
-                          offset: Offset(_ajusteOffsetX, _ajusteOffsetY),
-                          child: Transform.rotate(
-                            angle: _ajusteRotacaoGraus * (3.1415926535 / 180),
-                            child: Transform.scale(
-                              scale: _ajusteEscala,
-                              child: _construirImagemFundo(),
+                        child: ClipRect(
+                          child: RepaintBoundary(
+                            child: Transform.translate(
+                              offset: Offset(_ajusteOffsetX, _ajusteOffsetY),
+                              child: Transform.rotate(
+                                angle:
+                                    _ajusteRotacaoGraus * (3.1415926535 / 180),
+                                child: Transform.scale(
+                                  scale: _ajusteEscala,
+                                  child: _construirImagemFundo(),
+                                ),
+                              ),
                             ),
                           ),
                         ),
@@ -263,11 +320,13 @@ class _TelaEditorMapaState extends State<TelaEditorMapa> with SingleTickerProvid
                     // Grid Tático Customizado
                     if (_gridVisivel)
                       Positioned.fill(
-                        child: CustomPaint(
-                          painter: _GridEditorPainter(
-                            largura: _largura,
-                            altura: _altura,
-                            opacidade: _opacidadeGrid,
+                        child: RepaintBoundary(
+                          child: CustomPaint(
+                            painter: _GridEditorPainter(
+                              largura: _largura,
+                              altura: _altura,
+                              opacidade: _opacidadeGrid,
+                            ),
                           ),
                         ),
                       ),
@@ -298,34 +357,21 @@ class _TelaEditorMapaState extends State<TelaEditorMapa> with SingleTickerProvid
   }
 
   Widget _construirImagemFundo() {
-    if (_imagemCaminhoLocal == null) return const SizedBox.shrink();
-    if (_imagemCaminhoLocal!.startsWith('/') || _imagemCaminhoLocal!.contains(Platform.pathSeparator)) {
-      final file = File(_imagemCaminhoLocal!);
-      if (file.existsSync()) {
-        return Image.file(file, fit: BoxFit.cover);
-      }
+    final caminho = _imagemCaminhoLocal;
+    if (caminho == null || caminho.trim().isEmpty) {
+      return const SizedBox.shrink();
     }
-    return Container(
-      color: Colors.black45,
-      child: const Center(
-        child: Icon(Icons.broken_image, color: Colors.white54, size: 36),
+    return Image.file(
+      File(caminho),
+      fit: BoxFit.cover,
+      cacheWidth: 1600,
+      errorBuilder: (_, _, _) => Container(
+        color: Colors.black45,
+        child: const Center(
+          child: Icon(Icons.broken_image, color: Colors.white54, size: 36),
+        ),
       ),
     );
-  }
-
-  Color _obterCorFundoPreset() {
-    switch (_presetFundo) {
-      case PresetFundoMapa.florestaArton:
-        return const Color(0xFF132A13);
-      case PresetFundoMapa.tavernaMadeira:
-        return const Color(0xFF38220F);
-      case PresetFundoMapa.desertoHalakTur:
-        return const Color(0xFF4A3B18);
-      case PresetFundoMapa.areaTormenta:
-        return const Color(0xFF3F0B18);
-      default:
-        return const Color(0xFF1C1917);
-    }
   }
 
   // ---------------------------------------------------------------------------
@@ -581,8 +627,10 @@ class _TelaEditorMapaState extends State<TelaEditorMapa> with SingleTickerProvid
     try {
       final picker = ImagePicker();
       final picked = await picker.pickImage(source: ImageSource.gallery);
+      if (!mounted) return;
       if (picked != null) {
         final length = await picked.length();
+        if (!mounted) return;
         setState(() {
           _imagemCaminhoLocal = picked.path;
           _presetFundo = PresetFundoMapa.imagemCustomizada;
@@ -590,7 +638,17 @@ class _TelaEditorMapaState extends State<TelaEditorMapa> with SingleTickerProvid
         });
         _marcarAlteracao();
       }
-    } catch (_) {}
+    } catch (_) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            'Não foi possível carregar a imagem selecionada da galeria.',
+          ),
+          backgroundColor: MestreCores.statusAlertaEscuro,
+        ),
+      );
+    }
   }
 
   // ABA 3: OPÇÕES

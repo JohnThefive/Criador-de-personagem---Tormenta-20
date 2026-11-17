@@ -1,0 +1,2011 @@
+[
+  {
+    "id": "canceronte",
+    "nome": "Canceronte",
+    "nd": "3",
+    "regiao": "sob_as_ondas",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 8,
+    "percepcao": 4,
+    "sentidos": [
+      "visao_na_penumbra"
+    ],
+    "defesa": 21,
+    "resistencias": {
+      "fortitude": 15,
+      "reflexos": 9,
+      "vontade": 3
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 110,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 12.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 2,
+      "con": 5,
+      "int": -4,
+      "sab": 0,
+      "car": -2
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 14,
+        "dano": "1d8+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Fortificação 25%",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Golpes críticos e ataques furtivos contra o canceronte têm 25% de chance de não causar efeito adicional."
+      },
+      {
+        "nome": "Autotomia",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O canceronte pode sacrificar uma de suas garras para se livrar de um perigo maior. Quando faz isso, ele automaticamente passa em um teste para evitar uma condição de movimento (como um teste de ataque para se libertar de um agarramento), mas perde um de seus ataques de garra. Uma garra sacrificada desta forma se regenera em um mês."
+      },
+      {
+        "nome": "Quebrar Tudo!",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O canceronte recebe +2 em testes de ataque para quebrar (teste total +18) e causa +1d8 pontos de dano contra objetos."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "1d6 postas de canceronte (cd 18 para extrair; cada posta vale t$ 12 para preparar um banquete de canceronte).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "canceronte_de_guerra",
+    "nome": "Canceronte de Guerra",
+    "nd": "16",
+    "regiao": "sob_as_ondas",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "colossal",
+    "iniciativa": 10,
+    "percepcao": 11,
+    "sentidos": [
+      "visao_na_penumbra"
+    ],
+    "defesa": 53,
+    "resistencias": {
+      "fortitude": 30,
+      "reflexos": 24,
+      "vontade": 16
+    },
+    "rd": {
+      "geral": 15
+    },
+    "imunidadesEfeitos": [
+      "encantamento"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 825,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 18.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 10,
+      "des": 0,
+      "con": 8,
+      "int": -4,
+      "sab": 0,
+      "car": -2
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Garra (x4)",
+        "bonusAtaque": 45,
+        "dano": "4d10+25",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Fortificação 25%",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Golpes críticos e ataques furtivos contra o canceronte de guerra têm 25% de chance de não causar efeito adicional."
+      },
+      {
+        "nome": "Abordagem",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 30,
+        "resistenciaTipo": null,
+        "descricao": "Um personagem pode gastar uma ação de movimento e fazer um teste de Atletismo (CD 30) para escalar o canceronte de guerra. Se falhar por 5 ou mais, cai na frente do monstro e sofre 4d6 pontos de dano da queda. Se passar em três desses testes, chega na escotilha em sua barriga. Abrir a escotilha exige um teste de Ladinagem ou Força (CD 30). Cada canceronte possui uma equipe de cinco sahuagin (ataque +35, 3d6+25 pontos de dano de perfuração, Defesa 28, 60 PV e usa os testes de resistência do canceronte) em seu interior, para impedir que intrusos cheguem à concha de comando. Na concha de comando está o capitão (ataque +36, 3d8+25 pontos de dano de perfuração, Defesa 30, 100 PV e usa os testes de resistência do canceronte). Uma vez que o capitão seja morto, o canceronte para de lutar."
+      },
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Usa a manobra agarrar com uma garra (teste +55)."
+      },
+      {
+        "nome": "Atropelamento",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 42,
+        "resistenciaTipo": "reflexos",
+        "descricao": "O canceronte percorre até o dobro de seu deslocamento. Ele pode passar pelo espaço ocupado de quaisquer inimigos menores que ele, mas não pode passar duas vezes pelo mesmo espaço. Criaturas atropeladas desta forma sofrem 10d10+50 pontos de dano de impacto e ficam caídas (Reflexos CD 42 reduz à metade e evita a condição). Recarga (movimento)."
+      },
+      {
+        "nome": "Autotomia",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O canceronte pode sacrificar uma de suas garras para se livrar de um perigo maior. Quando faz isso, ele automaticamente passa em um teste para evitar uma condição de movimento (como um teste de ataque para se libertar de um agarramento), mas perde um de seus ataques de garra. Uma garra sacrificada desta forma se regenera em um mês."
+      },
+      {
+        "nome": "Guilhotinar",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se o canceronte começar seu turno agarrando uma criatura menor que ele, poderá fazer um teste de agarrar contra ela. Se vencer, a criatura sofre 8d10+50 pontos de dano de impacto e fica debilitada (ou inconsciente, se já estiver debilitada)."
+      },
+      {
+        "nome": "Máquina de Cerco",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O canceronte recebe +2 em testes de ataque para quebrar (teste total +57) e seus ataques ignoram redução de dano de objetos."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "metade mais 2d4 postas de canceronte (cd 31 para extrair; cada posta vale t$ 12 para preparar um banquete de canceronte).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "cardume_de_selakos",
+    "nome": "Cardume de Selakos",
+    "nd": "9",
+    "regiao": "sob_as_ondas",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 12,
+    "percepcao": 9,
+    "sentidos": [
+      "faro",
+      "percepcao_as_cegas"
+    ],
+    "defesa": 18,
+    "resistencias": {
+      "fortitude": 20,
+      "reflexos": 15,
+      "vontade": 9
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 390,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 0.0,
+      "voo": 0.0,
+      "natacao": 18.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 3,
+      "con": 3,
+      "int": -4,
+      "sab": 2,
+      "car": -2
+    },
+    "pericias": {
+      "furtividade": 9
+    },
+    "ataques": [
+      {
+        "nome": "Mordida [Bando] (x2)",
+        "bonusAtaque": 27,
+        "dano": "4d8+14",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Frenesi Mortal",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O cardume de selakos faz um ataque de mordida contra cada criatura adjacente ou em quadrados ocupados por ele. Ele faz um único teste de ataque e compara o resultado com a Defesa de cada alvo. Criaturas que sofram dano dessa forma ficam sangrando."
+      },
+      {
+        "nome": "Faro do Caçador",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O cardume não fica desprevenido contra inimigos que estejam sangrando."
+      },
+      {
+        "nome": "Turbilhão Aquático",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O cardume pode ocupar o espaço de outras criaturas."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "equivalente a 1d4+1 selakos.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "elfo_do_mar_chefe",
+    "nome": "Elfo-do-Mar Chefe",
+    "nd": "6",
+    "regiao": "sob_as_ondas",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "elfo_do_mar",
+    "tamanho": "medio",
+    "iniciativa": 12,
+    "percepcao": 10,
+    "sentidos": [
+      "percepcao_as_cegas_embaixo_d_agua",
+      "visao_na_penumbra"
+    ],
+    "defesa": 29,
+    "resistencias": {
+      "fortitude": 12,
+      "reflexos": 18,
+      "vontade": 6
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 230,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 9.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 5,
+      "con": 3,
+      "int": -1,
+      "sab": 3,
+      "car": 2
+    },
+    "pericias": {
+      "atletismo": 9,
+      "cavalgar": 10,
+      "diplomacia": 7,
+      "furtividade": 10,
+      "guerra": 6,
+      "sobrevivencia": 10
+    },
+    "ataques": [
+      {
+        "nome": "Tridente (x2)",
+        "bonusAtaque": 22,
+        "dano": "1d8+15",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Rede",
+        "bonusAtaque": 20,
+        "dano": "1d4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": "agarrar"
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Caçador Submarino",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz um teste de perícia (exceto testes de ataque) em um terreno aquático, o elfo-do-mar chefe rola dois dados e usa o melhor resultado."
+      },
+      {
+        "nome": "Ginete de Selako",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O elfo-do-mar possui um selako como parceiro montaria Grande. Se estiver montado, seu deslocamento muda para 15m, ele recebe +2d6 em uma rolagem de dano corpo a corpo uma vez por rodada e, quando acerta um ataque corpo a corpo, o alvo fica sangrando."
+      },
+      {
+        "nome": "Investida Aquática",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O elfo-do-mar realiza uma investida e faz seus dois ataques com tridente. Os dois ataques recebem o bônus de +2 da investida e causam +1d8 pontos de dano, mas devem ser feitos contra o mesmo alvo."
+      }
+    ],
+    "equipamento": [
+      "Couraça",
+      "Escudo leve",
+      "Rede",
+      "Tridente equilibrado"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "elfo_do_mar_druida",
+    "nome": "Elfo-do-Mar Druida",
+    "nd": "10",
+    "regiao": "sob_as_ondas",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "elfo_do_mar",
+    "tamanho": "medio",
+    "iniciativa": 14,
+    "percepcao": 15,
+    "sentidos": [
+      "percepcao_as_cegas_embaixo_d_agua",
+      "visao_na_penumbra"
+    ],
+    "defesa": 31,
+    "resistencias": {
+      "fortitude": 14,
+      "reflexos": 20,
+      "vontade": 24
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 250,
+    "pm": 54,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 9.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 1,
+      "des": 5,
+      "con": 2,
+      "int": -2,
+      "sab": 6,
+      "car": 2
+    },
+    "pericias": {
+      "adestramento": 15,
+      "cura": 15,
+      "religiao": 15,
+      "sobrevivencia": 15
+    },
+    "ataques": [
+      {
+        "nome": "Arpão",
+        "bonusAtaque": 22,
+        "dano": "1d10",
+        "danoExtra": "1d12+18 perfuracao",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Arpão (à distância)",
+        "bonusAtaque": 24,
+        "dano": "1d10+25",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Companheiro Animal",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O druida sempre está acompanhado de um canceronte que serve como um parceiro adepto guardião veterano (já contabilizado)."
+      },
+      {
+        "nome": "Forma Animal",
+        "acao": "completa",
+        "custoPm": 6,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O druida adquire a forma de uma orca. Ele recebe +5 em Força, +4 na Defesa, um ataque corpo a corpo de mordida +26 (2d6+28) e um de pancada +26 (2d6+28) e seu tamanho muda para Grande. Nessa forma, ele não pode falar, mas pode lançar magias e empunhar catalisadores e esotéricos."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 32,
+        "resistenciaTipo": null,
+        "descricao": "O elfo-do-mar druida lança magias como um druida do Oceano de 10º nível (CD 32): Controlar Água (padrão, 6 PM; controla a água em uma esfera de 30m em alcance longo até o fim da cena); Curar Ferimentos (padrão, 9 PM; uma criatura em alcance curto cura 10d8+10 pontos de vida); Despedaçar (padrão, 9 PM; um alvo em alcance curto sofre 5d8+10 pontos de dano de impacto, ou o dobro sem aplicar RD se for um construto ou objeto mundano Pequeno, e fica atordoado — Fortitude reduz o dano à metade e evita a condição; uma criatura só pode ser atordoada por esta magia uma vez por cena); Escudo da Fé (reação, 7 PM; quando uma criatura em alcance curto sofre um ataque, ela recebe camuflagem contra ataques à distância e +5 na Defesa até seu próximo turno); Suporte Ambiental (padrão, 5 PM; por 1 dia, criaturas escolhidas em alcance curto ficam imunes aos efeitos de calor e frio extremos, podem respirar na água e não sufocam em fumaça densa)."
+      },
+      {
+        "nome": "Dependência de Água",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se ficar um dia sem contato com água, o elfo-do-mar não recupera PM até voltar para a água."
+      }
+    ],
+    "equipamento": [
+      "Arpão",
+      "Escudo leve",
+      "Essência de mana x2",
+      "Gibão de peles",
+      "Ramo verdejante x5",
+      "Símbolo sagrado do Oceano"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "elfo_do_mar_pescador",
+    "nome": "Elfo-do-Mar Pescador",
+    "nd": "2",
+    "regiao": "sob_as_ondas",
+    "papel": "lacaio",
+    "tipo": "humanoide",
+    "subtipo": "elfo_do_mar",
+    "tamanho": "medio",
+    "iniciativa": 7,
+    "percepcao": 7,
+    "sentidos": [
+      "percepcao_as_cegas_embaixo_d_agua",
+      "visao_na_penumbra"
+    ],
+    "defesa": 18,
+    "resistencias": {
+      "fortitude": 8,
+      "reflexos": 11,
+      "vontade": 3
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 14,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 9.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 4,
+      "con": 3,
+      "int": -1,
+      "sab": 2,
+      "car": 0
+    },
+    "pericias": {
+      "furtividade": 7,
+      "sobrevivencia": 7
+    },
+    "ataques": [
+      {
+        "nome": "Arpão",
+        "bonusAtaque": 12,
+        "dano": "1d10+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Arpão (à distância)",
+        "bonusAtaque": 14,
+        "dano": "1d10+10",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Caçador Submarino",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz um teste de perícia (exceto testes de ataque) em um terreno aquático, o elfo-do-mar pescador rola dois dados e usa o melhor resultado."
+      }
+    ],
+    "equipamento": [
+      "Arpão",
+      "Gibão de peles"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "enguia_rainha",
+    "nome": "Enguia Rainha",
+    "nd": "19",
+    "regiao": "sob_as_ondas",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "colossal",
+    "iniciativa": 23,
+    "percepcao": 19,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 54,
+    "resistencias": {
+      "fortitude": 32,
+      "reflexos": 26,
+      "vontade": 19
+    },
+    "rd": {
+      "geral": 15
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 1150,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 0.0,
+      "voo": 0.0,
+      "natacao": 12.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 12,
+      "des": 4,
+      "con": 11,
+      "int": -4,
+      "sab": 3,
+      "car": -1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 52,
+        "dano": "4d12+46",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Cauda (x2)",
+        "bonusAtaque": 52,
+        "dano": "3d12+32",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Usa a manobra agarrar com a mordida (teste +62)."
+      },
+      {
+        "nome": "Constrição",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada um de seus turnos, a Enguia Rainha causa 6d12+32 pontos de dano de impacto em cada criatura que esteja agarrando."
+      },
+      {
+        "nome": "Engolir",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada um dos turnos da Enguia, a criatura engolida sofre 4d12+20 pontos de dano de impacto mais 4d12+20 pontos de dano de ácido. Ela pode escapar causando um total de 200 pontos de dano a ela (Defesa 25, redução de dano 5)."
+      },
+      {
+        "nome": "Majestade Elétrica",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 47,
+        "resistenciaTipo": "fortitude",
+        "descricao": "A Enguia se cobre com eletricidade natural. Criaturas agarradas sofrem 10d8 pontos de dano de eletricidade (Fort CD 47 reduz à metade). Além disso, até a próxima rodada, qualquer criatura que faça um ataque corpo a corpo contra a Enguia sofre 6d8 pontos de dano de eletricidade."
+      },
+      {
+        "nome": "Sopro",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 47,
+        "resistenciaTipo": "reflexos",
+        "descricao": "A Enguia sopra vapor fervente em um cone de 18m. Cada criatura nessa área sofre 12d12 pontos de dano, metade fogo e metade ácido, e é recoberta por uma substância corrosiva que causa 4d12 pontos de dano de ácido pelas próximas 1d4 rodadas (Ref CD 47 reduz o dano à metade e evita a substância). Recarga (movimento)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao mais suco gastrico (cd 34 para extrair, vale t$ 2.000 para fabricar itens que causem dano de acido).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "enxame_de_aguas_vivas",
+    "nome": "Enxame de Águas-vivas",
+    "nd": "6",
+    "regiao": "sob_as_ondas",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 9,
+    "percepcao": 6,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 27,
+    "resistencias": {
+      "fortitude": 12,
+      "reflexos": 18,
+      "vontade": 6
+    },
+    "rd": {
+      "impacto": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "acido"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 255,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 0.0,
+      "voo": 0.0,
+      "natacao": 12.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 4,
+      "con": 3,
+      "int": -4,
+      "sab": 1,
+      "car": -4
+    },
+    "pericias": {
+      "furtividade": 9
+    },
+    "ataques": [],
+    "habilidades": [
+      {
+        "nome": "Enxame",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O enxame de águas-vivas causa automaticamente 4d6+10 pontos de dano de perfuração mais 4d6+12 pontos de dano de ácido a qualquer criatura em seu espaço, sem necessidade de teste de ataque."
+      },
+      {
+        "nome": "Corpo Aquático",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Fora d'água, o enxame de águas-vivas evapora e morre em 1d8 horas. Nesse tempo, qualquer criatura que tocar nele sofre 2d6 pontos de dano de ácido."
+      },
+      {
+        "nome": "Grudar nas Costas",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando uma criatura sai do espaço do enxame, algumas águas-vivas ficam presas em suas costas. A criatura continua sofrendo metade do dano da habilidade Enxame até gastar uma ação de movimento para se livrar das águas-vivas."
+      },
+      {
+        "nome": "Mesclar-se",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Enquanto está submerso em água, o enxame tem camuflagem leve."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "filamentos corrosivos (cd 21 para extrair, valem t$ 60 para fabricar acidos).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "irukanjin",
+    "nome": "Irukanjin",
+    "nd": "4",
+    "regiao": "sob_as_ondas",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "irukanjin",
+    "tamanho": "medio",
+    "iniciativa": 6,
+    "percepcao": 3,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 20,
+    "resistencias": {
+      "fortitude": 10,
+      "reflexos": 5,
+      "vontade": 0
+    },
+    "rd": {
+      "acido": 5,
+      "impacto": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 126,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 0.0,
+      "voo": 0.0,
+      "natacao": 12.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 3,
+      "con": 2,
+      "int": 4,
+      "sab": 1,
+      "car": -2
+    },
+    "pericias": {
+      "furtividade": 12
+    },
+    "ataques": [
+      {
+        "nome": "Tentáculo (x2)",
+        "bonusAtaque": 16,
+        "dano": "3d4+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": "Inocular Ácido"
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Impacto Mental",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 18,
+        "resistenciaTipo": "vontade",
+        "descricao": "Uma criatura em alcance médio sofre 4d6 pontos de dano psíquico e fica atordoada por 1d4 rodadas (Von CD 18 reduz à metade e evita a condição). Uma criatura só pode ser atordoada por esta habilidade uma vez por cena. Recarga (movimento)."
+      },
+      {
+        "nome": "Inocular Ácido",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 18,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Uma criatura atingida por um tentáculo do irukanjin sofre 2d4 pontos de dano de ácido e fica lenta. Se já estiver lenta, fica paralisada por 1 rodada (Fort CD 18 reduz à metade e evita a condição)."
+      },
+      {
+        "nome": "Mesclar-se",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Enquanto está submerso em água, o irukanjin tem camuflagem leve."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "kraken",
+    "nome": "Kraken",
+    "nd": "19",
+    "regiao": "sob_as_ondas",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "colossal",
+    "iniciativa": 22,
+    "percepcao": 20,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 59,
+    "resistencias": {
+      "fortitude": 32,
+      "reflexos": 19,
+      "vontade": 26
+    },
+    "rd": {
+      "geral": 20
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +5"
+    ],
+    "pv": 1145,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 24.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 15,
+      "des": 5,
+      "con": 12,
+      "int": 10,
+      "sab": 4,
+      "car": 7
+    },
+    "pericias": {
+      "atletismo": 35,
+      "diplomacia": 27,
+      "enganacao": 27,
+      "intimidacao": 27
+    },
+    "ataques": [
+      {
+        "nome": "Tentáculo (x8)",
+        "bonusAtaque": 50,
+        "dano": "2d10+30",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 50,
+        "dano": "2d12+23",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Usa a manobra agarrar com um tentáculo (teste +60)."
+      },
+      {
+        "nome": "Chamado do Mar",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 47,
+        "resistenciaTipo": "vontade",
+        "descricao": "O kraken pode dominar até 10 criaturas em alcance longo, como o efeito básico da magia Legião (Von CD 47 evita). Esta habilidade não tem efeito sobre criaturas em terra firme (mas afeta alvos que estejam em embarcações ou outras superfícies sobre o mar). Uma criatura que passe no teste de Vontade se torna imune a esta habilidade até o fim da cena."
+      },
+      {
+        "nome": "Constrição",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada um de seus turnos, o kraken causa 4d10+30 pontos de dano de impacto em cada criatura que estiver agarrando."
+      },
+      {
+        "nome": "Dominar as Marés",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O kraken pode alterar o clima em uma esfera de 2km ao seu redor (como o efeito básico da magia Controlar o Clima). Esta habilidade não afeta o clima sobre terra firme."
+      },
+      {
+        "nome": "Nuvem de Tinta",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O kraken expele uma nuvem de tinta num cone de 30m. Criaturas a até 1,5m têm camuflagem leve e criaturas a partir de 3m têm camuflagem total. Dentro da nuvem, criaturas têm seu deslocamento reduzido para 3m (independente de seu deslocamento normal) e sofrem -5 em testes de ataque e rolagens de dano. O kraken é imune aos efeitos da nuvem."
+      },
+      {
+        "nome": "Terror do Mar Profundo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O kraken começa o combate submerso, usando apenas quatro tentáculos para atacar. Cada tentáculo conta como uma criatura separada, com 115 PV, Defesa 54, imunidade a efeitos mentais e medo e demais características iguais às do kraken. Enquanto está submerso, o kraken não pode ser afetado por nenhum efeito, habilidade ou ataque. Quando os quatro tentáculos são destruídos, o kraken perde esta habilidade e emerge. Ele continua atacando usando seus outros quatro tentáculos e sua mordida."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "dobro, 1d6 pecas de pena de kraken (cd 34 para extrair) e 2d4 postas de kraken (cd 34 para extrair, cada posta vale t$ 20 para preparar um sashimi de kraken).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "mega_selako",
+    "nome": "Mega-Selako",
+    "nd": "12",
+    "regiao": "sob_as_ondas",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "colossal",
+    "iniciativa": 20,
+    "percepcao": 10,
+    "sentidos": [
+      "faro",
+      "percepcao_as_cegas"
+    ],
+    "defesa": 38,
+    "resistencias": {
+      "fortitude": 26,
+      "reflexos": 18,
+      "vontade": 8
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 630,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 0.0,
+      "voo": 0.0,
+      "natacao": 18.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 7,
+      "des": 6,
+      "con": 7,
+      "int": -4,
+      "sab": 2,
+      "car": -3
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Mordida (x2)",
+        "bonusAtaque": 34,
+        "dano": "4d12+40",
+        "danoExtra": null,
+        "margemAmeaca": 17,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Bote de Mandíbula",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O mega-selako faz uma investida contra uma criatura. Se acertar esse ataque, ele causa +6d12 pontos de dano e a vítima fica sangrando."
+      },
+      {
+        "nome": "Dentes Afiados",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Os ataques do mega-selako ignoram 5 pontos de redução de dano de seus alvos."
+      },
+      {
+        "nome": "Devorar",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando acerta um ataque em uma criatura Enorme ou menor com seu Bote de Mandíbula, o mega-selako a engole. Uma criatura engolida fica agarrada e sofre 8d12+40 pontos de dano de impacto no início de cada turno do mega-selako. O mega-selako só pode manter uma criatura engolida por vez. Uma criatura engolida pode escapar causando 50 pontos de dano ao estômago do mega-selako (Defesa 10). Isso faz com que a criatura seja regurgitada na frente do monstro."
+      },
+      {
+        "nome": "Faro do Caçador",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O mega-selako não fica desprevenido contra inimigos que estejam sangrando."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "couro de selako x1d4 (cd 27 para extrair, cada couro vale t$ 30 para fabricar um traje selako) e dentes de selako x1d4+1 (cd 27 para extrair, cada dente vale t$ 300 para fabricar uma arma superior).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "nereida",
+    "nome": "Nereida",
+    "nd": "12",
+    "regiao": "sob_as_ondas",
+    "papel": "especial",
+    "tipo": "espirito",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 13,
+    "percepcao": 9,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 41,
+    "resistencias": {
+      "fortitude": 20,
+      "reflexos": 12,
+      "vontade": 26
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "frio"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 412,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 18.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 3,
+      "con": 2,
+      "int": 1,
+      "sab": -1,
+      "car": 7
+    },
+    "pericias": {
+      "atuacao": 19,
+      "diplomacia": 19,
+      "intimidacao": 19
+    },
+    "ataques": [
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 32,
+        "dano": "2d6+12",
+        "danoExtra": "4d6 frio",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Convocação Marinha",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A nereida convoca 2d6 redemoinhos em alcance curto. Os redemoinhos agem a partir da próxima rodada dela. Eles têm deslocamento 9m (normal e de natação) e podem gastar uma ação padrão para causar 2d6 pontos de dano de frio em uma criatura adjacente. Os redemoinhos têm For -1, Des 2, Defesa 26, 1 PV e falham automaticamente em qualquer teste de resistência ou oposto. Eles desaparecem quando morrem ou no fim da cena. Recarga (movimento)."
+      },
+      {
+        "nome": "Elencar",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 35,
+        "resistenciaTipo": "vontade",
+        "descricao": "Uma criatura em alcance curto \"recebe um papel\" entre os listados abaixo. A nereida só pode conceder um papel por criatura e seus efeitos duram 1d4+1 rodadas (Von CD 35 reduz para 1 rodada): Coadjuvante (todo dano causado pela criatura é reduzido à metade); Par Romântico (a criatura fica enfeitiçada e, sempre que estiver adjacente à nereida, a nereida recebe +5 em testes de perícia e rolagens de dano contra outras criaturas); Vilão (a criatura sofre +2d6 pontos de dano de frio dos ataques da nereida)."
+      },
+      {
+        "nome": "Presença Majestosa",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 35,
+        "resistenciaTipo": "vontade",
+        "descricao": "Qualquer criatura que tente atacar a nereida deve fazer um teste de Vontade (CD 35). Se falhar, não consegue atacá-la e perde a ação. Uma criatura que passe no teste de Vontade não é mais afetada por esta habilidade até o fim da cena."
+      },
+      {
+        "nome": "Terror Blindado",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A nereida assume sua forma guerreira até o fim da cena. Ela recebe imunidade a acertos críticos e às condições atordoado, cego, debilitado, enjoado, envenenado, exausto, fatigado, fraco, lento, ofuscado e paralisado. Além disso, no início de cada um de seus turnos, ela causa 4d8 pontos de dano de frio em todas as criaturas adjacentes e cura uma quantidade de PV igual à metade de todo esse dano."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "2d6 doses de eter elemental (frio) (cd 27 para extrair).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "peixe_recife",
+    "nome": "Peixe-Recife",
+    "nd": "6",
+    "regiao": "sob_as_ondas",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 6,
+    "percepcao": 5,
+    "sentidos": [
+      "percepcao_as_cegas"
+    ],
+    "defesa": 29,
+    "resistencias": {
+      "fortitude": 18,
+      "reflexos": 6,
+      "vontade": 12
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 250,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 0.0,
+      "voo": 0.0,
+      "natacao": 12.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 0,
+      "con": 5,
+      "int": -4,
+      "sab": 0,
+      "car": -2
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Cabeçada",
+        "bonusAtaque": 20,
+        "dano": "4d8+20",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Emergir",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 22,
+        "resistenciaTipo": "fortitude",
+        "descricao": "O peixe-recife emerge à superfície, atingindo todas as criaturas em um quadrado de 6m imediatamente acima dele. Criaturas nessa área sofrem 4d10 pontos de dano de impacto e são arremessadas 1d4 x1,5m em direção oposta ao peixe (Fort CD 22 reduz à metade e evita o arremesso). Cada vítima fica caída e, se atingir algum obstáculo, sofre 1d6 pontos de dano de impacto para cada 1,5m que foi arremessada."
+      },
+      {
+        "nome": "Soçobrar",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 22,
+        "resistenciaTipo": "reflexos",
+        "descricao": "O peixe atira seu corpanzil contra uma embarcação (ou outro objeto semelhante), fazendo com que ele balance violentamente. Todas as criaturas na embarcação sofrem 2d8+10 pontos de dano de impacto e ficam atordoadas por 1 rodada e caídas (Ref CD 22 reduz o dano à metade e evita as condições)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "platan",
+    "nome": "Platan",
+    "nd": "2",
+    "regiao": "sob_as_ondas",
+    "papel": "especial",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 6,
+    "percepcao": 5,
+    "sentidos": [
+      "percepcao_as_cegas",
+      "visao_na_penumbra"
+    ],
+    "defesa": 18,
+    "resistencias": {
+      "fortitude": 7,
+      "reflexos": 12,
+      "vontade": 3
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 30,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 0.0,
+      "voo": 0.0,
+      "natacao": 12.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 1,
+      "des": 3,
+      "con": 2,
+      "int": -4,
+      "sab": 2,
+      "car": 3
+    },
+    "pericias": {
+      "acrobacia": 11
+    },
+    "ataques": [],
+    "habilidades": [
+      {
+        "nome": "Ataque Sônico",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 16,
+        "resistenciaTipo": "fortitude",
+        "descricao": "O platan causa 6d6 pontos de dano de impacto em uma criatura em alcance curto (Fort CD 16 reduz à metade)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "pliorex",
+    "nome": "Pliorex",
+    "nd": "5",
+    "regiao": "sob_as_ondas",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 6,
+    "percepcao": 5,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 24,
+    "resistencias": {
+      "fortitude": 17,
+      "reflexos": 11,
+      "vontade": 5
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 200,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 15.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 7,
+      "des": 1,
+      "con": 6,
+      "int": -5,
+      "sab": 0,
+      "car": -1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 17,
+        "dano": "2d8+15",
+        "danoExtra": "1d12 acido",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Usa a manobra agarrar com a mordida (teste +22)."
+      },
+      {
+        "nome": "Giro da Morte",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se o pliorex estiver agarrando uma criatura dentro d'água e usar a manobra agarrar novamente para causar dano, causa +2d8 pontos de dano."
+      },
+      {
+        "nome": "Predador das Profundezas",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se estiver agarrando uma criatura Grande ou menor dentro d'água, o pliorex pode se mover a seu deslocamento normal arrastando o alvo (em vez de metade)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "pliorex_abissal",
+    "nome": "Pliorex Abissal",
+    "nd": "10",
+    "regiao": "sob_as_ondas",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "colossal",
+    "iniciativa": 11,
+    "percepcao": 10,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 36,
+    "resistencias": {
+      "fortitude": 22,
+      "reflexos": 16,
+      "vontade": 10
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 400,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 15.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 9,
+      "des": 1,
+      "con": 7,
+      "int": -5,
+      "sab": 0,
+      "car": -1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 29,
+        "dano": "4d8+35",
+        "danoExtra": "2d12 acido",
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Abalroar",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 30,
+        "resistenciaTipo": "reflexos",
+        "descricao": "O pliorex abissal percorre até o dobro do seu deslocamento nadando em linha reta e abalroando qualquer criatura ou embarcação em seu caminho. Uma criatura ou embarcação abalroada desta forma sofre 4d10+20 pontos de dano de impacto e, se for uma criatura, começa a se afogar (Ref CD 30 reduz à metade e evita o afogamento)."
+      },
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Usa a manobra agarrar com a mordida (teste +39)."
+      },
+      {
+        "nome": "Giro da Morte",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se o pliorex abissal estiver agarrando uma criatura dentro d'água e usar a manobra agarrar novamente para causar dano, causa +6d8 pontos de dano."
+      },
+      {
+        "nome": "Predador das Profundezas",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se estiver agarrando uma criatura Grande ou menor dentro d'água, o pliorex abissal pode se mover a seu deslocamento normal arrastando o alvo (em vez de metade)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "selako",
+    "nome": "Selako",
+    "nd": "2",
+    "regiao": "sob_as_ondas",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 7,
+    "percepcao": 4,
+    "sentidos": [
+      "faro",
+      "percepcao_as_cegas"
+    ],
+    "defesa": 18,
+    "resistencias": {
+      "fortitude": 12,
+      "reflexos": 7,
+      "vontade": 2
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 90,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 0.0,
+      "voo": 0.0,
+      "natacao": 18.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 3,
+      "con": 3,
+      "int": -4,
+      "sab": 2,
+      "car": -2
+    },
+    "pericias": {
+      "furtividade": 6
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 12,
+        "dano": "2d8+7",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Bote de Mandíbula",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O selako faz uma investida contra uma criatura. Se acertar esse ataque, ele causa +2d6 pontos de dano e a vítima fica sangrando."
+      },
+      {
+        "nome": "Faro do Caçador",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O selako não fica desprevenido contra inimigos que estejam sangrando."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "couro de selako (cd 17 para extrair, vale t$ 30 para fabricar um traje selako) e dentes de selako (cd 17 para extrair, valem t$ 300 para fabricar uma arma superior).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "selako_tigre",
+    "nome": "Selako-Tigre",
+    "nd": "6",
+    "regiao": "sob_as_ondas",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 14,
+    "percepcao": 6,
+    "sentidos": [
+      "faro",
+      "percepcao_as_cegas"
+    ],
+    "defesa": 25,
+    "resistencias": {
+      "fortitude": 17,
+      "reflexos": 11,
+      "vontade": 5
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 260,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 0.0,
+      "voo": 0.0,
+      "natacao": 18.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 4,
+      "con": 3,
+      "int": -4,
+      "sab": 2,
+      "car": -2
+    },
+    "pericias": {
+      "furtividade": 10
+    },
+    "ataques": [
+      {
+        "nome": "Mordida (x2)",
+        "bonusAtaque": 18,
+        "dano": "3d10+12",
+        "danoExtra": null,
+        "margemAmeaca": 17,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Bote de Mandíbula",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O selako-tigre faz uma investida contra uma criatura. Se acertar esse ataque, ele causa +4d10 pontos de dano e a vítima fica sangrando."
+      },
+      {
+        "nome": "Dentes Afiados",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Os ataques do selako-tigre ignoram 5 pontos de redução de dano de seus alvos."
+      },
+      {
+        "nome": "Faro do Caçador",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O selako-tigre não fica desprevenido contra inimigos que estejam sangrando."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "couro de selako x2 (cd 21 para extrair, vale t$ 30 para fabricar um traje selako) e dentes de selako x2 (cd 21 para extrair, valem t$ 300 para fabricar uma arma superior).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "agua_viva",
+    "nome": "Água-viva",
+    "nd": "1",
+    "regiao": "sob_as_ondas",
+    "papel": "lacaio",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "pequeno",
+    "iniciativa": 5,
+    "percepcao": 3,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 15,
+    "resistencias": {
+      "fortitude": 5,
+      "reflexos": 10,
+      "vontade": 1
+    },
+    "rd": {
+      "impacto": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "acido"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 9,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 0.0,
+      "voo": 0.0,
+      "natacao": 12.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 3,
+      "con": 1,
+      "int": -4,
+      "sab": 1,
+      "car": -2
+    },
+    "pericias": {
+      "furtividade": 7
+    },
+    "ataques": [
+      {
+        "nome": "Tentáculo (x2)",
+        "bonusAtaque": 11,
+        "dano": "1d6+2",
+        "danoExtra": "1d6 acido",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Corpo Aquático",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Fora d'água, a água-viva evapora e morre em 1d8 horas. Nesse tempo, qualquer criatura que tocar nela sofre 1d6 pontos de dano de ácido."
+      },
+      {
+        "nome": "Mesclar-se",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Enquanto está submersa em água, a água-viva tem camuflagem leve."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "filamentos corrosivos (cd 16 para extrair, valem t$ 10 para fabricar acidos).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "agua_viva_gigante",
+    "nome": "Água-viva Gigante",
+    "nd": "8",
+    "regiao": "sob_as_ondas",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 11,
+    "percepcao": 7,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 33,
+    "resistencias": {
+      "fortitude": 15,
+      "reflexos": 21,
+      "vontade": 8
+    },
+    "rd": {
+      "impacto": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "acido"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 320,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 0.0,
+      "voo": 0.0,
+      "natacao": 12.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 4,
+      "con": 3,
+      "int": -4,
+      "sab": 1,
+      "car": -3
+    },
+    "pericias": {
+      "furtividade": 12
+    },
+    "ataques": [
+      {
+        "nome": "Tentáculo (x2)",
+        "bonusAtaque": 26,
+        "dano": "3d6+22",
+        "danoExtra": "3d6 acido",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Corpo Aquático",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Fora d'água, a água-viva gigante evapora e morre em 1d8 horas. Nesse tempo, qualquer criatura que tocar nela sofre 3d6 pontos de dano de ácido."
+      },
+      {
+        "nome": "Mesclar-se",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Enquanto está submersa em água, a água-viva gigante tem camuflagem leve."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "filamentos corrosivos (cd 23 para extrair, valem t$ 120 para fabricar acidos).",
+    "recursoExtraivel": null
+  }
+]

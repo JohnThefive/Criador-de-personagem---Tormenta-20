@@ -1,0 +1,1328 @@
+[
+  {
+    "id": "dragonete",
+    "nome": "Dragonete",
+    "nd": "4",
+    "regiao": "fadas",
+    "papel": "especial",
+    "tipo": "espirito",
+    "subtipo": null,
+    "tamanho": "pequeno",
+    "iniciativa": 11,
+    "percepcao": 6,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 21,
+    "resistencias": {
+      "fortitude": 6,
+      "reflexos": 14,
+      "vontade": 10
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +2"
+    ],
+    "pv": 100,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 12.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 4,
+      "con": 1,
+      "int": -1,
+      "sab": 2,
+      "car": 4
+    },
+    "pericias": {
+      "furtividade": 12,
+      "intuicao": 8,
+      "misticismo": 5
+    },
+    "ataques": [
+      {
+        "nome": "Garra",
+        "bonusAtaque": 14,
+        "dano": "1d8+8",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 14,
+        "dano": "1d6+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Baforada Iridescente",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 20,
+        "resistenciaTipo": "vontade",
+        "descricao": "O dragonete sopra um pó iridescente. Criaturas em um cone de 4,5m ficam atordoadas por 1 rodada e ofuscadas (Von CD 20 evita). Uma criatura só pode ficar atordoada por esta habilidade uma vez por cena. Recarga (movimento)."
+      },
+      {
+        "nome": "Ladrão de Magias",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando uma criatura em alcance curto se torna alvo de uma magia, o dragonete 'rouba' seu efeito para si mesmo; a magia funciona normalmente, mas o dragonete se torna seu novo alvo."
+      },
+      {
+        "nome": "Sumiço",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O dragonete fica invisível como pela magia Invisibilidade."
+      },
+      {
+        "nome": "Visão Arcana",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O dragonete está sempre sob o efeito básico de Visão Mística."
+      },
+      {
+        "nome": "Parceiro",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Um dragonete parceiro fornece: Iniciante, -1 PM no custo de magias de encantamento e ilusão. Veterano, aumenta o alcance dessas magias em um passo. Mestre, a redução de custo se torna cumulativa com outras e fica sempre sob Visão Mística."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "driade",
+    "nome": "Dríade",
+    "nd": "4",
+    "regiao": "fadas",
+    "papel": "especial",
+    "tipo": "espirito",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 7,
+    "percepcao": 12,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 21,
+    "resistencias": {
+      "fortitude": 4,
+      "reflexos": 11,
+      "vontade": 15
+    },
+    "rd": {
+      "adamante": 5
+    },
+    "imunidadesEfeitos": [
+      "efeitos_mentais"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 98,
+    "pm": 24,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": -1,
+      "des": 3,
+      "con": 0,
+      "int": 1,
+      "sab": 5,
+      "car": 6
+    },
+    "pericias": {
+      "adestramento": 12,
+      "diplomacia": 12,
+      "intuicao": 9,
+      "furtividade": 9,
+      "misticismo": 6,
+      "sobrevivencia": 15
+    },
+    "ataques": [],
+    "habilidades": [
+      {
+        "nome": "Sem Redução por Terreno Difícil Natural",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A dríade não sofre redução de deslocamento por terreno difícil de origem natural."
+      },
+      {
+        "nome": "Caminhar em Árvores",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A dríade entra em uma árvore adjacente maior do que ela e pode permanecer dentro percebendo os arredores normalmente (sem executar outras ações). Pode sair na mesma árvore ou em qualquer outra em um raio de 1km como ação livre. Se estiver dentro de uma árvore destruída, reaparece e perde 10d6 PV."
+      },
+      {
+        "nome": "Simbiose",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A verdadeira forma de uma dríade é uma enorme árvore. Quando sua forma humanoide é destruída, outra surge em poucos dias nessa árvore. A forma humanoide não pode se afastar mais de 1km da floresta onde repousa sua árvore, ou perde 8d6 PV por hora (cura apenas ao retornar). A única forma de matar uma dríade é destruir sua árvore."
+      },
+      {
+        "nome": "Magias (conjuradora 4º, CD 20)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Comando (padrão, 4 PM): duas criaturas em alcance curto ficam pasmas por 1 rodada no início do próximo turno (Von evita, 1x por cena por criatura). Controlar Plantas (padrão, 2 PM): quadrado de 9m de vegetação em alcance curto vira terreno difícil; criaturas na área ficam enredadas e imóveis (Ref evita). Enfeitiçar (padrão, 1 PM): humanoide em alcance curto fica enfeitiçado (Von anula). Tranquilidade (padrão, 2 PM): criatura em alcance curto fica indiferente e não pode agir hostilmente (Von reduz a -2 em ataque) até o fim da cena."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "duende_maior",
+    "nome": "Duende Maior",
+    "nd": "5",
+    "regiao": "fadas",
+    "papel": "especial",
+    "tipo": "espirito",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 6,
+    "percepcao": 8,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 22,
+    "resistencias": {
+      "fortitude": 6,
+      "reflexos": 12,
+      "vontade": 16
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 127,
+    "pm": 34,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 1,
+      "des": 2,
+      "con": 2,
+      "int": 2,
+      "sab": 2,
+      "car": 4
+    },
+    "pericias": {
+      "conhecimento": 8,
+      "enganacao": 10,
+      "furtividade": 8,
+      "misticismo": 8
+    },
+    "ataques": [
+      {
+        "nome": "Adaga",
+        "bonusAtaque": 15,
+        "dano": "1d4+8",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Evasão",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O duende maior possui Evasão."
+      },
+      {
+        "nome": "Sortudo",
+        "acao": "reacao",
+        "custoPm": 3,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz um teste, o duende maior o rola novamente."
+      },
+      {
+        "nome": "Tabu",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 30,
+        "resistenciaTipo": null,
+        "descricao": "Todo duende possui um tabu que pode ser descoberto com um teste de Conhecimento (CD 30) ou de Investigação (CD 20). Um personagem que conheça o tabu pode forçar o duende a ajudar com um teste de Enganação oposto a Vontade. Quando impedido de cumprir seu tabu, o duende morre em 1d4+1 dias."
+      },
+      {
+        "nome": "Magia Discreta",
+        "acao": "livre",
+        "custoPm": 2,
+        "recarga": null,
+        "cdResistencia": 20,
+        "resistenciaTipo": null,
+        "descricao": "Quando lança uma magia, o duende não precisa gesticular ou falar e pode lançar com as mãos presas, amordaçado etc. Perceber que ele lançou uma magia exige passar em um teste de Misticismo (CD 20)."
+      },
+      {
+        "nome": "Magias (conjurador arcano 5º, CD 22)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Enfeitiçar (padrão, 1 PM): humanoide em alcance curto fica enfeitiçado (Vontade evita). Dissipar Magia (padrão, 3 PM): dissipa magias com CD igual ou menor ao teste de Misticismo. Invisibilidade (padrão, 5 PM): fica invisível até o fim da cena ou até ação hostil, com camuflagem total e +10 em Furtividade contra ouvir. Sussurros Insanos (padrão, 3 PM): humanoide em alcance curto fica confuso (Von anula)."
+      }
+    ],
+    "equipamento": [
+      "adaga"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "duende_menor",
+    "nome": "Duende Menor",
+    "nd": "1",
+    "regiao": "fadas",
+    "papel": "especial",
+    "tipo": "espirito",
+    "subtipo": null,
+    "tamanho": "pequeno",
+    "iniciativa": 4,
+    "percepcao": 6,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 14,
+    "resistencias": {
+      "fortitude": 1,
+      "reflexos": 6,
+      "vontade": 10
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 22,
+    "pm": 9,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": -1,
+      "des": 2,
+      "con": -1,
+      "int": 0,
+      "sab": 2,
+      "car": 3
+    },
+    "pericias": {
+      "conhecimento": 2,
+      "enganacao": 5,
+      "furtividade": 6
+    },
+    "ataques": [
+      {
+        "nome": "Adaga",
+        "bonusAtaque": 7,
+        "dano": "1d4+4",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Evasão",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O duende menor possui Evasão."
+      },
+      {
+        "nome": "Sortudo",
+        "acao": "reacao",
+        "custoPm": 3,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz um teste, o duende menor o rola novamente."
+      },
+      {
+        "nome": "Tabu",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 30,
+        "resistenciaTipo": null,
+        "descricao": "Todo duende possui um tabu que pode ser descoberto com um teste de Conhecimento (CD 30) ou de Investigação (CD 20) para interrogar plebeus da região. Um personagem que conheça o tabu pode forçar o duende a ajudar com um teste de Enganação oposto a Vontade. Quando impedido de cumprir seu tabu, o duende morre em 1d4+1 dias."
+      },
+      {
+        "nome": "Magias (conjurador arcano 1º, CD 16)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Enfeitiçar (padrão, 1 PM): humanoide em alcance curto fica enfeitiçado (Vontade evita). Criar Ilusão (padrão, 1 PM): ilusão com imagens em alcance médio, até 4 cubos de 1,5m (Von desacredita). Sono (padrão, 1 PM): humanoide em alcance curto fica inconsciente e caído, ou exausto por 1 rodada depois fatigado se em combate (Von reduz para fatigado por 1d4 rodadas)."
+      }
+    ],
+    "equipamento": [
+      "adaga"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "eiradaan_guardiao",
+    "nome": "Eiradaan Guardião",
+    "nd": "7",
+    "regiao": "fadas",
+    "papel": "especial",
+    "tipo": "espirito",
+    "subtipo": "eiradaan",
+    "tamanho": "medio",
+    "iniciativa": 12,
+    "percepcao": 10,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 28,
+    "resistencias": {
+      "fortitude": 7,
+      "reflexos": 14,
+      "vontade": 20
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +2"
+    ],
+    "pv": 215,
+    "pm": 35,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 4,
+      "con": 2,
+      "int": 1,
+      "sab": 3,
+      "car": 5
+    },
+    "pericias": {
+      "atletismo": 9,
+      "conhecimento": 8,
+      "diplomacia": 12,
+      "intuicao": 10,
+      "misticismo": 10,
+      "sobrevivencia": 10
+    },
+    "ataques": [
+      {
+        "nome": "Espada Longa de Mitral (x2)",
+        "bonusAtaque": 22,
+        "dano": "3d8+20",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Canção da Melancolia",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz um teste de Vontade contra efeitos mentais, o eiradaan guardião rola dois dados e usa o pior resultado."
+      },
+      {
+        "nome": "Essência Feérica",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O eiradaan pode falar com animais livremente."
+      },
+      {
+        "nome": "Magia Acelerada",
+        "acao": "livre",
+        "custoPm": 4,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando lança uma magia com execução de ação completa ou menor, muda a execução dela para livre."
+      },
+      {
+        "nome": "Sentidos Místicos",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O eiradaan está sempre sob o efeito básico de Visão Mística."
+      },
+      {
+        "nome": "Magias (feiticeiro 7º, CD 26; custo de aprimoramentos reduzido em -1 PM, já contabilizado)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Amarras Etéreas (padrão, 5 PM): laços de energia agarram criatura em alcance médio (Ref evita); cada laço tem Defesa 10, 10 PV, RD 5, imune a dano mágico. Dissipar Magia (padrão, 3 PM): dissipa magias com CD igual ou menor ao teste de Misticismo. Enfeitiçar (padrão, 5 PM): humanoides em alcance curto ficam enfeitiçados até ação hostil (Von evita). Relâmpago (padrão, 6 PM): 8d8 de dano de eletricidade em criaturas escolhidas em alcance médio (Ref reduz à metade). Velocidade (padrão, 3 PM, sustentada): ação padrão adicional por turno, não usável para lançar magias."
+      }
+    ],
+    "equipamento": [
+      "espada_longa_de_mitral"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "eiradaan_nobre",
+    "nome": "Eiradaan Nobre",
+    "nd": "13",
+    "regiao": "fadas",
+    "papel": "especial",
+    "tipo": "espirito",
+    "subtipo": "eiradaan",
+    "tamanho": "medio",
+    "iniciativa": 16,
+    "percepcao": 14,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 41,
+    "resistencias": {
+      "fortitude": 14,
+      "reflexos": 19,
+      "vontade": 26
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +4"
+    ],
+    "pv": 470,
+    "pm": 65,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 4,
+      "con": 3,
+      "int": 2,
+      "sab": 4,
+      "car": 6
+    },
+    "pericias": {
+      "cavalgar": 16,
+      "conhecimento": 14,
+      "diplomacia": 18,
+      "intuicao": 14,
+      "misticismo": 14,
+      "sobrevivencia": 14
+    },
+    "ataques": [
+      {
+        "nome": "Espada Longa de Mitral (x2)",
+        "bonusAtaque": 35,
+        "dano": "4d8+52",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Canção da Melancolia",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz um teste de Vontade contra efeitos mentais, o eiradaan nobre rola dois dados e usa o pior resultado."
+      },
+      {
+        "nome": "Código de Honra",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O eiradaan não pode atacar um oponente pelas costas (não se beneficia do bônus de flanquear), caído, desprevenido ou incapaz de lutar."
+      },
+      {
+        "nome": "Duelo",
+        "acao": "livre",
+        "custoPm": 2,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O eiradaan escolhe um oponente em alcance curto e recebe +2 em testes de ataque e rolagens de dano contra ele até o fim da cena ou até atacar outro oponente."
+      },
+      {
+        "nome": "Montaria Celestial",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O eiradaan cavalga um gamo celestial, parceiro montaria Grande. Montado, seu deslocamento se torna 15m e recebe uma ação de movimento extra (apenas para se deslocar)."
+      },
+      {
+        "nome": "Sentidos Místicos",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O eiradaan está sempre sob o efeito básico de Visão Mística."
+      },
+      {
+        "nome": "Magias (feiticeiro 13º, CD 37; lança magias montado sem testes de concentração; custo de aprimoramentos reduzido em -1 PM, já contabilizado)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Concentração de Combate (padrão, 7 PM): até o fim da cena, ataques do eiradaan rolam dois dados e usam o melhor; ataques contra ele rolam dois e usam o pior. Libertação (padrão, 9 PM): fica imune a efeitos de movimento. Relâmpago (padrão, 15 PM): 16d8 de dano de eletricidade em criaturas escolhidas em alcance médio (Ref reduz à metade). Selo de Mana (padrão, 6 PM): criatura adjacente deve passar em Vontade sempre que gastar PM, ou a ação falha mas os PM são gastos mesmo assim. Velocidade (padrão, 3 PM, sustentada): ação padrão adicional por turno, não usável para magias."
+      },
+      {
+        "nome": "Parceiro (Gamo)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O gamo é um parceiro montaria (Grande). Iniciante: deslocamento 12m, ignora terreno difícil. Veterano: deslocamento de voo 12m. Mestre: gasta uma ação completa e 10 PM para transportar a si e ao gamo para o Plano Etéreo."
+      }
+    ],
+    "equipamento": [
+      "espada_longa_de_mitral"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "ninfa",
+    "nome": "Ninfa",
+    "nd": "6",
+    "regiao": "fadas",
+    "papel": "especial",
+    "tipo": "espirito",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 8,
+    "percepcao": 6,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 22,
+    "resistencias": {
+      "fortitude": 6,
+      "reflexos": 12,
+      "vontade": 18
+    },
+    "rd": {
+      "adamante": 5
+    },
+    "imunidadesEfeitos": [
+      "encantamento"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +5"
+    ],
+    "pv": 144,
+    "pm": 42,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 4,
+      "con": 1,
+      "int": 3,
+      "sab": 3,
+      "car": 7
+    },
+    "pericias": {
+      "adestramento": 17,
+      "diplomacia": 17,
+      "enganacao": 17,
+      "intuicao": 10,
+      "sobrevivencia": 10
+    },
+    "ataques": [
+      {
+        "nome": "Pancada",
+        "bonusAtaque": 18,
+        "dano": "1d3+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Beleza Insuportável",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 24,
+        "resistenciaTipo": "vontade",
+        "descricao": "No início de cada turno da ninfa, se ela estiver nua, cada criatura em alcance médio deve fazer um teste de Vontade (CD 24). Se passar, desvia o olhar. Se falhar, fica paralisada e esmorecida; se já estiver esmorecida, perde 1 ponto cumulativo de Constituição permanentemente. Falhar por 3 rodadas sucessivas mata a criatura. Fechar os olhos como reação dá imunidade, mas causa os efeitos de cego por 1 rodada."
+      },
+      {
+        "nome": "Coração Aprisionado",
+        "acao": "padrao",
+        "custoPm": 3,
+        "recarga": null,
+        "cdResistencia": 24,
+        "resistenciaTipo": "vontade",
+        "descricao": "A ninfa aprisiona o coração de uma criatura em alcance curto (Von CD 24 evita). Uma criatura com o coração aprisionado recebe +2 em testes de perícia, mas não pode contrariar as ordens da ninfa ou se afastar mais de 30m dela. O coração permanece aprisionado até a ninfa libertá-lo ou ser morta."
+      },
+      {
+        "nome": "Magias (conjuradora arcana 6º, CD 24)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Curar Ferimentos (padrão, 5 PM): criatura adjacente cura 6d8+6 PV. Marca da Obediência (padrão, 6 PM): criatura adjacente não ataca a ninfa ou aliados até o fim da cena (Von evita, repetível a cada turno; falha causa 3d6 de dano psíquico). Santuário (padrão, 1 PM): criatura tocada fica protegida de ações hostis (quem tentar perde a ação, Von evita) até agir hostilmente ou fim da cena."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "naiade",
+    "nome": "Náiade",
+    "nd": "3",
+    "regiao": "fadas",
+    "papel": "especial",
+    "tipo": "espirito",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 7,
+    "percepcao": 7,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 19,
+    "resistencias": {
+      "fortitude": 7,
+      "reflexos": 13,
+      "vontade": 9
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "encantamento"
+    ],
+    "imunidadesDano": [
+      "frio"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 74,
+    "pm": 18,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 18.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 4,
+      "con": 1,
+      "int": 1,
+      "sab": 3,
+      "car": 4
+    },
+    "pericias": {
+      "conhecimento": 6,
+      "furtividade": 9,
+      "intuicao": 10,
+      "sobrevivencia": 10
+    },
+    "ataques": [],
+    "habilidades": [
+      {
+        "nome": "Abraço das Águas",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 19,
+        "resistenciaTipo": "fortitude",
+        "descricao": "A náiade faz um teste de Agarrar (bônus +12) oposto contra uma criatura adjacente. Uma criatura agarrada deve fazer um teste de Fortitude por rodada (CD 19) para não se afogar; a cada falha, sofre 1 ponto de dano temporário de Constituição até morrer ou respirar novamente. A vítima não percebe o que está acontecendo e se sente confortável; para agir em seu turno, precisa passar em um teste de Vontade (CD 19)."
+      },
+      {
+        "nome": "Linguagem Natural",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A náiade pode falar com animais livremente."
+      },
+      {
+        "nome": "Magias (conjuradora arcana 3º, CD 19)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Criar Ilusão (padrão, 1 PM): ilusão com imagens em alcance médio, até 4 cubos de 1,5m. Dardo Gélido (padrão, 3 PM): criatura em alcance curto sofre 4d6 de dano de frio e fica lenta por 1 rodada (Fort reduz à metade e evita). Imagem Espelhada (padrão, 3 PM): três cópias ilusórias concedem +6 na Defesa, perdendo 1 cópia e -2 na Defesa a cada erro sofrido."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "satiro_arqueiro",
+    "nome": "Sátiro Arqueiro",
+    "nd": "2",
+    "regiao": "fadas",
+    "papel": "lacaio",
+    "tipo": "espirito",
+    "subtipo": "satiro",
+    "tamanho": "medio",
+    "iniciativa": 6,
+    "percepcao": 2,
+    "sentidos": [
+      "visao_na_penumbra"
+    ],
+    "defesa": 18,
+    "resistencias": {
+      "fortitude": 7,
+      "reflexos": 12,
+      "vontade": 3
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 13,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 1,
+      "des": 3,
+      "con": 1,
+      "int": 0,
+      "sab": -1,
+      "car": 2
+    },
+    "pericias": {
+      "atletismo": 6,
+      "atuacao": 7
+    },
+    "ataques": [
+      {
+        "nome": "Chifres",
+        "bonusAtaque": 9,
+        "dano": "1d6+1",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Arco Curto",
+        "bonusAtaque": 14,
+        "dano": "1d6+3",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Disparo Rápido",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O sátiro arqueiro faz dois ataques de arco curto com uma penalidade de -2 em cada teste."
+      },
+      {
+        "nome": "Flautista Mágico",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 16,
+        "resistenciaTipo": null,
+        "descricao": "O sátiro lança uma das magias abaixo como um bardo, com os efeitos descritos, mas sem gastar PM (CD 16); só pode usar esta habilidade empunhando sua flauta. Amedrontar: animal ou humanoide em alcance curto fica apavorado por 1 rodada e depois abalado (Von reduz para abalado por 1d4 rodadas). Enfeitiçar: animal ou humanoide em alcance curto fica enfeitiçado (Von anula). Hipnotismo: animal ou humanoide em alcance curto fica fascinado (Von anula e deixa imune por 1 dia). Sono: humanoide em alcance curto fica inconsciente e caído, ou exausto por 1 rodada depois fatigado se em combate (Von reduz para fatigado por 1d4 rodadas)."
+      }
+    ],
+    "equipamento": [
+      "arco_curto",
+      "armadura_de_couro",
+      "flechas_x10",
+      "flauta"
+    ],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "silfide_encantadora",
+    "nome": "Sílfide Encantadora",
+    "nd": "8",
+    "regiao": "fadas",
+    "papel": "especial",
+    "tipo": "espirito",
+    "subtipo": "silfide",
+    "tamanho": "minusculo",
+    "iniciativa": 9,
+    "percepcao": 5,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 25,
+    "resistencias": {
+      "fortitude": 7,
+      "reflexos": 21,
+      "vontade": 15
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "encantamento"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 211,
+    "pm": 60,
+    "deslocamento": {
+      "terrestre": 0.0,
+      "voo": 12.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": -2,
+      "des": 4,
+      "con": 2,
+      "int": 1,
+      "sab": -1,
+      "car": 6
+    },
+    "pericias": {
+      "diplomacia": 16,
+      "enganacao": 16,
+      "furtividade": 17
+    },
+    "ataques": [],
+    "habilidades": [
+      {
+        "nome": "Enganadora Nata",
+        "acao": "reacao",
+        "custoPm": 3,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando é alvo de uma ação hostil, a sílfide encantadora muda o alvo da ação para uma criatura em alcance médio cujo nome ela conheça."
+      },
+      {
+        "nome": "Eu Não Acredito em Fadas",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando um inimigo passa em um teste de Vontade contra a sílfide, ela perde 5 PV."
+      },
+      {
+        "nome": "Oi, Qual o Seu Nome?",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura que de alguma forma revele seu nome verdadeiro à sílfide sofre -2 em testes de resistência contra ela."
+      },
+      {
+        "nome": "Onomancia Feérica",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, a sílfide dá uma ordem (como o efeito básico de Comando) a uma criatura em alcance médio que tenha revelado seu nome a ela."
+      },
+      {
+        "nome": "Raio Arcano",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 28,
+        "resistenciaTipo": "reflexos",
+        "descricao": "Uma criatura em alcance curto sofre 4d12+12 pontos de dano de essência (Ref CD 28 reduz à metade)."
+      },
+      {
+        "nome": "Magias (feiticeira 9º, CD 28, limite de PM 9)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Adaga Mental (padrão, 6 PM): 4d6 de dano psíquico e atordoada por 1 rodada (Von reduz à metade e evita; sem percepção da magia se falhar; 1x por cena). Criar Ilusão (padrão, 4 PM, sustentada): imagens e sons em alcance médio, até 6 cubos de 1,5m. Disfarce Ilusório (padrão, 3 PM): muda aparência até o fim da cena, +20 em Enganação. Imobilizar (padrão, 6 PM): animal ou humanoide fica paralisado (Von reduz para lento; novo teste a cada rodada com ação completa). Invisibilidade (padrão, 4 PM): invisível até ação hostil ou fim da cena, camuflagem total, +10 em Furtividade contra ouvir."
+      }
+    ],
+    "equipamento": [
+      "bolsa_de_po_canalizadora",
+      "gorro_de_ervas"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "silfide_travessa",
+    "nome": "Sílfide Travessa",
+    "nd": "1",
+    "regiao": "fadas",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": "silfide",
+    "tamanho": "minusculo",
+    "iniciativa": 3,
+    "percepcao": 0,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 10,
+    "resistencias": {
+      "fortitude": 0,
+      "reflexos": 11,
+      "vontade": 5
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 40,
+    "pm": 18,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 12.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": -2,
+      "des": 2,
+      "con": 0,
+      "int": 1,
+      "sab": -1,
+      "car": 3
+    },
+    "pericias": {
+      "diplomacia": 7,
+      "enganacao": 7,
+      "furtividade": 9
+    },
+    "ataques": [],
+    "habilidades": [
+      {
+        "nome": "Eu Não Acredito em Fadas",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando um inimigo passa em um teste de Vontade contra a sílfide travessa, ela perde 5 PV."
+      },
+      {
+        "nome": "Oi, Qual o Seu Nome?",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura que de alguma forma revele seu nome verdadeiro à sílfide sofre -2 em testes de resistência contra ela."
+      },
+      {
+        "nome": "Raio Arcano",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 16,
+        "resistenciaTipo": "reflexos",
+        "descricao": "Uma criatura em alcance curto sofre 2d12 pontos de dano de essência (Ref CD 16 reduz à metade)."
+      },
+      {
+        "nome": "Magias (feiticeira 3º, CD 16, limite de PM 3)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Adaga Mental (padrão, 1 PM): 2d6 de dano psíquico e atordoada por 1 rodada (Von reduz dano à metade e evita condição, 1x por cena). Criar Ilusão (padrão, 1 PM): ilusão com imagens em alcance médio, até 4 cubos de 1,5m. Disfarce Ilusório (padrão, 3 PM): muda a própria aparência até o fim da cena, +20 em Enganação para disfarce. Luz (padrão, 1 PM): criatura fica ofuscada pela cena (Von evita)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "velha_bruxa",
+    "nome": "Velha Bruxa",
+    "nd": "9",
+    "regiao": "fadas",
+    "papel": "especial",
+    "tipo": "espirito",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 7,
+    "percepcao": 10,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 31,
+    "resistencias": {
+      "fortitude": 16,
+      "reflexos": 9,
+      "vontade": 20
+    },
+    "rd": {
+      "adamante": 10
+    },
+    "imunidadesEfeitos": [
+      "doencas",
+      "encantamento"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 270,
+    "pm": 63,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 1,
+      "con": 2,
+      "int": 4,
+      "sab": 1,
+      "car": 3
+    },
+    "pericias": {
+      "conhecimento": 12,
+      "enganacao": 13,
+      "misticismo": 14
+    },
+    "ataques": [
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 25,
+        "dano": "2d6+16",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 25,
+        "dano": "1d6+14",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Careta Horripilante",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 30,
+        "resistenciaTipo": "vontade",
+        "descricao": "Criaturas em alcance curto ficam abaladas (Von CD 30 evita e fica imune por 1 dia)."
+      },
+      {
+        "nome": "Dê um Trocado Para Esta Bruxa",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 30,
+        "resistenciaTipo": "vontade",
+        "descricao": "A velha bruxa pede algo a transeuntes. Quem se oferece a atender faz um teste de Vontade (CD 30); se falhar, fica enfeitiçado, seguindo-a aonde mandar."
+      },
+      {
+        "nome": "Voar, Voar",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A bruxa pode voar usando um pilão, vassoura ou outro instrumento, que concede deslocamento de voo 18m apenas para ela."
+      },
+      {
+        "nome": "Magias (bruxa 9º, CD 30; foco arcano é o objeto que usa para voar)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Conjurar Monstro (completa, 6 PM, sustentada): invoca monstro Grande (Defesa 31, imune a Fort/Von, For 7, Des 2, 75 PV, deslocamento 12m) que se move o dobro ou causa 4d6+10 de dano de impacto a até 3m. Muralha Elemental (padrão, 9 PM): muralha de fogo de até 30m por 3m, 2d8 de dano de fogo a até 6m ao lançar e no início dos turnos da bruxa; atravessar causa 12d8. Rogar Maldição (padrão, 6 PM, sustentada): criatura em alcance curto fica debilitada, lenta e esmorecida, incapaz de se comunicar ou lançar magias (Fort evita). Vidência (completa, 6 PM, sustentada): vê e ouve criatura à escolha em alcance ilimitado (Von evita, modificado pela familiaridade)."
+      }
+    ],
+    "equipamento": [
+      "vassoura_ou_pilao"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  }
+]

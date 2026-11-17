@@ -1,0 +1,1489 @@
+[
+  {
+    "id": "fado",
+    "nome": "Fado",
+    "nd": "8",
+    "regiao": "celestiais",
+    "papel": "solo",
+    "tipo": "construto",
+    "subtipo": "inevitavel",
+    "tamanho": "grande",
+    "iniciativa": 10,
+    "percepcao": 13,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 31,
+    "resistencias": {
+      "fortitude": 21,
+      "reflexos": 8,
+      "vontade": 15
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "fogo"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +5"
+    ],
+    "pv": 330,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 24.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 2,
+      "con": 4,
+      "int": null,
+      "sab": 3,
+      "car": -2
+    },
+    "pericias": {
+      "religiao": 11,
+      "sobrevivencia": 11
+    },
+    "ataques": [
+      {
+        "nome": "Corrente de Espinhos Sagrada (x2)",
+        "bonusAtaque": 23,
+        "dano": "1d10+17",
+        "danoExtra": "2d6 fogo",
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Encontrar o Culpado",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Sempre sabe a localização da criatura que deve caçar, como sob efeito permanente de Localização com área equivalente a toda Arton."
+      },
+      {
+        "nome": "Investir a Culpa",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Contra a criatura que deve caçar, recebe +5 em testes de perícia e seus ataques causam +2d6 de dano de luz."
+      },
+      {
+        "nome": "Visão da Justiça",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Está permanentemente sob o efeito básico da magia Visão da Verdade."
+      },
+      {
+        "nome": "Derrubar e Desarmar",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se o fado acerta um ataque de corrente de espinhos, pode fazer a manobra derrubar ou a manobra desarmar (teste +29)."
+      }
+    ],
+    "equipamento": [
+      "corrente_de_espinhos_sagrada"
+    ],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "furia_extrema",
+    "nome": "Fúria Extrema",
+    "nd": "20",
+    "regiao": "celestiais",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": "celestial",
+    "tamanho": "colossal",
+    "iniciativa": 20,
+    "percepcao": 20,
+    "sentidos": [
+      "percepcao_as_cegas_longo"
+    ],
+    "defesa": 61,
+    "resistencias": {
+      "fortitude": 32,
+      "reflexos": 30,
+      "vontade": 20
+    },
+    "rd": {
+      "geral": 40
+    },
+    "imunidadesEfeitos": [
+      "efeitos_mentais",
+      "efeitos_de_metabolismo",
+      "efeitos_de_movimento",
+      "medo",
+      "metamorfose"
+    ],
+    "imunidadesDano": [
+      "trevas"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 1200,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 15.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 15,
+      "des": 10,
+      "con": 15,
+      "int": 0,
+      "sab": 8,
+      "car": 10
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Lâmina Flamejante (x2)",
+        "bonusAtaque": 54,
+        "dano": "5d8+20",
+        "danoExtra": "5d8+20 luz",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "fogo",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Celeridade Divina",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O fúria extrema pode executar uma ação padrão adicional em cada um de seus turnos."
+      },
+      {
+        "nome": "Fogo Sagrado",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O dano de fogo e de luz causados pelo fúria ignoram 30 pontos de redução de dano cada e, contra criaturas imunes a fogo ou luz, ainda causam metade do dano. Quando sofre dano de fogo ou luz, o fúria recupera PV em vez de perdê-los."
+      },
+      {
+        "nome": "Halo de Terror Absoluto",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 49,
+        "resistenciaTipo": "vontade",
+        "descricao": "No início de cada turno do fúria, criaturas em um raio de 9m sofrem 6d8 de dano de fogo e 6d8 de dano de luz e ficam apavoradas (Von CD 49 reduz à metade e muda a condição para abalado). Uma criatura imune a medo ainda fica abalada se falhar na resistência, mas não se passar."
+      },
+      {
+        "nome": "Liberar Essência Celestial",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 49,
+        "resistenciaTipo": "reflexos",
+        "descricao": "Caso o fúria seja reduzido a 0 PV ou menos, explode, causando 15d8 de dano de fogo e 15d8 de dano de luz em todas criaturas em um raio de 30m (Ref CD 49 reduz à metade)."
+      },
+      {
+        "nome": "Olhar Fumegante",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 49,
+        "resistenciaTipo": "reflexos",
+        "descricao": "Uma criatura em alcance longo sofre 15d8 de dano de fogo e 15d8 de dano de luz, fica ofuscada por 1 rodada e em chamas (Ref CD 49 reduz à metade e evita as condições). Recarga (movimento)."
+      },
+      {
+        "nome": "Retribuição",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 49,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Quando uma criatura causa dano ao fúria, sofre a mesma quantidade de dano (Fort CD 49 reduz à metade)."
+      },
+      {
+        "nome": "Teletransporte",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O fúria se teletransporta para um espaço desocupado que possa perceber a até 30m."
+      },
+      {
+        "nome": "Ver Além da Mentira",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O fúria extrema está permanentemente sob o efeito básico da magia Visão da Verdade."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "lamina flamejante (cd 35 para extrair, reduz em 1 pm o custo para fabricar uma vingadora sagrada).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "luminar",
+    "nome": "Luminar",
+    "nd": "1",
+    "regiao": "celestiais",
+    "papel": "especial",
+    "tipo": "espirito",
+    "subtipo": "celestial",
+    "tamanho": "minusculo",
+    "iniciativa": 12,
+    "percepcao": 8,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 10,
+    "resistencias": {
+      "fortitude": 0,
+      "reflexos": 0,
+      "vontade": 0
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "dano_exceto_trevas",
+      "efeitos_de_sentidos"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 1,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 0.0,
+      "voo": 9.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": null,
+      "des": 5,
+      "con": null,
+      "int": -2,
+      "sab": 1,
+      "car": 1
+    },
+    "pericias": {
+      "diplomacia": 8,
+      "intuicao": 8
+    },
+    "ataques": [],
+    "habilidades": [
+      {
+        "nome": "Ser de Luz",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O luminar não tem corpo físico; sua manifestação no plano material é apenas uma luz que varia de intensidade, iluminando um raio de 9m. É imune a todos os tipos de dano, exceto trevas, e é destruído quando sofre dano desse tipo."
+      },
+      {
+        "nome": "Abençoar",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Criaturas à escolha do luminar em alcance curto recebem +1 em testes de ataque e de resistência até o fim da cena."
+      },
+      {
+        "nome": "Aliviar",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O luminar emite uma luz suave que cura 2d8+2 PV de uma criatura em alcance curto."
+      },
+      {
+        "nome": "Sacrifício",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O luminar se transforma em uma luz forte que aquece um raio de 9m. Criaturas escolhidas pelo luminar nessa área curam 6d8+6 pontos de vida. Após usar esta habilidade, o luminar desaparece para sempre."
+      },
+      {
+        "nome": "Parceiro",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Um luminar parceiro fornece: Iniciante, 1x por rodada gasta 1 PM para curar 2d4 PV por luz ou causar 2d4 de dano não letal de luz em alcance curto. Veterano, como acima, mais 2 PM por +2 em ataque e resistência (self e aliados em alcance curto) por 1 rodada. Mestre, como acima, mas cura/dano sobe para 6d4 por 3 PM."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "muhir",
+    "nome": "Muhir",
+    "nd": "15",
+    "regiao": "celestiais",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": "celestial",
+    "tamanho": "medio",
+    "iniciativa": 20,
+    "percepcao": 9,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 50,
+    "resistencias": {
+      "fortitude": 22,
+      "reflexos": 28,
+      "vontade": 15
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [
+      "encantamento",
+      "dano_de_luz"
+    ],
+    "imunidadesDano": [
+      "eletricidade",
+      "fogo"
+    ],
+    "vulnerabilidadesDano": [
+      "trevas"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 750,
+    "pm": 77,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 7,
+      "des": 7,
+      "con": 6,
+      "int": 3,
+      "sab": 2,
+      "car": 6
+    },
+    "pericias": {
+      "atuacao": 19,
+      "cura": 15,
+      "intimidacao": 19,
+      "religiao": 15
+    },
+    "ataques": [
+      {
+        "nome": "Espada Bastarda (x2)",
+        "bonusAtaque": 41,
+        "dano": "4d8+25",
+        "danoExtra": "1d6 fogo",
+        "margemAmeaca": 17,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Pistola (x2)",
+        "bonusAtaque": 39,
+        "dano": "2d6+20",
+        "danoExtra": "1d6 fogo",
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 4,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Evasão Aprimorada",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O muhir possui Evasão Aprimorada."
+      },
+      {
+        "nome": "Armas Divinas",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Qualquer arma empunhada pelo muhir causa +1d6 de dano de fogo (já contabilizado) e se torna sagrada."
+      },
+      {
+        "nome": "Foco Momentâneo",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O muhir escolhe uma perícia. Até o fim da cena, ou até usar de novo, recebe +10 nessa perícia, mas sofre -5 em todas as demais."
+      },
+      {
+        "nome": "Golpe Pessoal",
+        "acao": "reacao",
+        "custoPm": 3,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando acerta uma criatura com ataque corpo a corpo, também causa 10d6 de dano de eletricidade em criaturas à escolha em alcance médio da criatura atingida."
+      },
+      {
+        "nome": "Investida Surpreendente",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando o muhir faz uma investida, a criatura atacada fica surpreendida contra esse ataque (uma vez por cena por criatura)."
+      },
+      {
+        "nome": "Não Tão Rápido!",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando uma criatura em alcance natural do muhir se move voluntariamente para fora desse alcance, ele faz um ataque à distância com uma pistola contra ela, sem a penalidade usual de -5 contra oponente em combate corpo a corpo."
+      },
+      {
+        "nome": "Saque Rápido",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O muhir pode sacar ou guardar itens como ação livre e recarregar sua pistola como ação de movimento."
+      },
+      {
+        "nome": "Magias (conjurador divino 15º, CD 40)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Heroísmo (padrão, 12 PM): criatura adjacente imune a medo, 40 PV temporários, +6 em ataque/dano contra inimigo de maior ND. Libertação (padrão, 15 PM): cinco criaturas em alcance curto imunes a efeitos de movimento. Sopro da Salvação (padrão, 14 PM): cone de 9m cura 4d8+4 PV e remove uma longa lista de condições."
+      }
+    ],
+    "equipamento": [
+      "armadura_dos_neladriel",
+      "balas_x20",
+      "espada_bastarda_certeira_precisa",
+      "pistola_certeira_maciza_x2"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "orel",
+    "nome": "Orel",
+    "nd": "16",
+    "regiao": "celestiais",
+    "papel": "especial",
+    "tipo": "espirito",
+    "subtipo": "celestial",
+    "tamanho": "grande",
+    "iniciativa": 8,
+    "percepcao": 19,
+    "sentidos": [
+      "percepcao_as_cegas_medio"
+    ],
+    "defesa": 51,
+    "resistencias": {
+      "fortitude": 24,
+      "reflexos": 16,
+      "vontade": 30
+    },
+    "rd": {
+      "geral": 20
+    },
+    "imunidadesEfeitos": [
+      "encantamento"
+    ],
+    "imunidadesDano": [
+      "eletricidade"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +5"
+    ],
+    "pv": 400,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 0.0,
+      "voo": 18.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 0,
+      "con": 1,
+      "int": 5,
+      "sab": 5,
+      "car": 4
+    },
+    "pericias": {
+      "conhecimento": 19,
+      "diplomacia": 18,
+      "intuicao": 19,
+      "misticismo": 19,
+      "religiao": 21
+    },
+    "ataques": [
+      {
+        "nome": "Feixe Luminoso (x4)",
+        "bonusAtaque": 44,
+        "dano": "8d6+27",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "luz",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Aura de Bondade",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 44,
+        "resistenciaTipo": "vontade",
+        "descricao": "O orel emana uma aura de bondade com 9m de raio. Aliados dentro recebem imunidade a encantamento e +5 na Defesa e em testes de resistência. Inimigos que comecem seus turnos na área ficam cegos (Von CD 44 evita)."
+      },
+      {
+        "nome": "Conjurador Angelical",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 44,
+        "resistenciaTipo": null,
+        "descricao": "O orel pode lançar e sustentar qualquer magia arcana de 4º círculo ou menor sem gastar PM, como um mago de 16º nível (CD 44)."
+      },
+      {
+        "nome": "Geometria Divina",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O orel lança duas magias com execução de ação padrão ou menor."
+      },
+      {
+        "nome": "Recomposição Divina",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início do seu turno, se não tiver sido reduzido a 0 PV ou menos, o orel volta a ter 400 PV."
+      },
+      {
+        "nome": "Sentidos Superiores",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O orel está sempre sob o efeito básico da magia Visão da Verdade."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "parcus",
+    "nome": "Parcus",
+    "nd": "14",
+    "regiao": "celestiais",
+    "papel": "solo",
+    "tipo": "construto",
+    "subtipo": "inevitavel",
+    "tamanho": "medio",
+    "iniciativa": 10,
+    "percepcao": 15,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 44,
+    "resistencias": {
+      "fortitude": 22,
+      "reflexos": 14,
+      "vontade": 28
+    },
+    "rd": {
+      "geral": 15
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "eletricidade",
+      "trevas"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +5"
+    ],
+    "pv": 700,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 7,
+      "des": 3,
+      "con": 4,
+      "int": 0,
+      "sab": 4,
+      "car": 3
+    },
+    "pericias": {
+      "conhecimento": 11,
+      "intuicao": 20,
+      "misticismo": 11,
+      "sobrevivencia": 15
+    },
+    "ataques": [
+      {
+        "nome": "Punho Trovejante (x2)",
+        "bonusAtaque": 34,
+        "dano": "2d8+12",
+        "danoExtra": "2d8 eletricidade",
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 3,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Encontrar o Culpado",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Sempre sabe a localização da criatura que deve caçar, como sob efeito permanente de Localização com área equivalente a toda Arton."
+      },
+      {
+        "nome": "Investir a Culpa",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Contra a criatura que deve caçar, recebe +5 em testes de perícia e seus ataques causam +2d6 de dano de luz."
+      },
+      {
+        "nome": "Visão da Justiça",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Está permanentemente sob o efeito básico da magia Visão da Verdade."
+      },
+      {
+        "nome": "Aura de Luz",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada turno do parcus, todas as criaturas em um raio de 9m dele sofrem 8d6 pontos de dano de luz."
+      },
+      {
+        "nome": "Aura Antimagia",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O parcus está permanentemente cercado por uma aura de 9m de raio que gera um efeito semelhante ao da magia Campo Antimagia."
+      },
+      {
+        "nome": "Corrente de Relâmpagos",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 37,
+        "resistenciaTipo": "reflexos",
+        "descricao": "Criaturas à escolha do parcus em alcance médio sofrem 8d8 de dano de eletricidade e 8d8 de dano de luz (Ref CD 37 reduz à metade). Recarga (movimento)."
+      },
+      {
+        "nome": "Sentença de Re-Morte",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 37,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Uma vez por cena, marca uma criatura em alcance curto. Até o fim da cena, não pode curar PV nem receber PV temporários e, se for morto-vivo, fica alquebrada (Fort CD 37 evita o efeito sobre PV e reduz a condição para esmorecido)."
+      },
+      {
+        "nome": "Vingador Celestial",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando é reduzido a 350 PV ou menos, até o fim da cena recebe deslocamento de voo 12m, sua cura acelerada aumenta para 15, seu dano de luz se torna maximizado e a área de suas auras aumenta para 30m."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "pilly",
+    "nome": "Pilly",
+    "nd": "3",
+    "regiao": "celestiais",
+    "papel": "lacaio",
+    "tipo": "espirito",
+    "subtipo": "celestial",
+    "tamanho": "minusculo",
+    "iniciativa": 7,
+    "percepcao": 3,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 18,
+    "resistencias": {
+      "fortitude": 8,
+      "reflexos": 14,
+      "vontade": 5
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 22,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 0.0,
+      "voo": 18.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": -3,
+      "des": 4,
+      "con": -1,
+      "int": 1,
+      "sab": 0,
+      "car": 3
+    },
+    "pericias": {
+      "acrobacia": 9,
+      "conhecimento": 6,
+      "diplomacia": 8
+    },
+    "ataques": [],
+    "habilidades": [
+      {
+        "nome": "Raio Iridescente",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 18,
+        "resistenciaTipo": "reflexos",
+        "descricao": "O pilly dispara um raio colorido em criaturas em alcance médio a sua escolha. Cada criatura sofre 2d4+6 pontos de dano de eletricidade (Ref CD 18 reduz à metade)."
+      },
+      {
+        "nome": "Sono Tranquilo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 18,
+        "resistenciaTipo": "fortitude",
+        "descricao": "O pilly emana um pó fino de suas asas, que cobre um raio de 9m. Criaturas à escolha dele nessa área ficam inconscientes e caídas (Fort CD 18 reduz para exaustas por 1d4 rodadas). Cansaço."
+      },
+      {
+        "nome": "Velocidade Celestial",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O pilly aumenta seu deslocamento para 24m por 1 rodada, mas nesse turno só pode executar ações de movimento. Só pode usar esta habilidade no início do seu turno."
+      },
+      {
+        "nome": "Parceiro",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Um pilly parceiro fornece: Iniciante, reduz o custo de magias divinas de encantamento em -1 PM. Veterano, como acima, mais deslocamento de voo 9m. Mestre, reduz o custo em -2 PM."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "probo",
+    "nome": "Probo",
+    "nd": "11",
+    "regiao": "celestiais",
+    "papel": "solo",
+    "tipo": "construto",
+    "subtipo": "inevitavel",
+    "tamanho": "medio",
+    "iniciativa": 7,
+    "percepcao": 13,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 40,
+    "resistencias": {
+      "fortitude": 16,
+      "reflexos": 9,
+      "vontade": 22
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "frio"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +5"
+    ],
+    "pv": 550,
+    "pm": 58,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 2,
+      "con": 3,
+      "int": 0,
+      "sab": 3,
+      "car": 1
+    },
+    "pericias": {
+      "conhecimento": 9,
+      "diplomacia": 10,
+      "intuicao": 10,
+      "misticismo": 9,
+      "nobreza": 9,
+      "religiao": 10
+    },
+    "ataques": [
+      {
+        "nome": "Espada Bastarda Sagrada (x3)",
+        "bonusAtaque": 26,
+        "dano": "1d10+23",
+        "danoExtra": "2d6 frio",
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Encontrar o Culpado",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Sempre sabe a localização da criatura que deve caçar, como sob efeito permanente de Localização com área equivalente a toda Arton."
+      },
+      {
+        "nome": "Investir a Culpa",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Contra a criatura que deve caçar, recebe +5 em testes de perícia e seus ataques causam +2d6 de dano de luz."
+      },
+      {
+        "nome": "Visão da Justiça",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Está permanentemente sob o efeito básico da magia Visão da Verdade."
+      },
+      {
+        "nome": "Analisar Suspeito",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O probo analisa uma criatura em alcance médio. Até o fim do dia, recebe +3 em testes de perícia contra ela."
+      },
+      {
+        "nome": "Ler Seus Direitos",
+        "acao": "movimento",
+        "custoPm": 3,
+        "recarga": null,
+        "cdResistencia": 31,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Uma criatura em alcance curto fica pasma por 1 rodada, ou atordoada por 1 rodada se for a criatura que o probo deve caçar (Fort CD 31 evita)."
+      },
+      {
+        "nome": "Negar Recurso",
+        "acao": "movimento",
+        "custoPm": 3,
+        "recarga": null,
+        "cdResistencia": 31,
+        "resistenciaTipo": "vontade",
+        "descricao": "Uma criatura em alcance médio faz um teste de Vontade (CD 31); se falhar, não pode utilizar uma habilidade à escolha do probo até o fim da cena (cada magia conta como habilidade). Uma criatura só pode ter uma habilidade negada por vez."
+      },
+      {
+        "nome": "Magias (clérigo 11º, CD 31)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Disfarce Ilusório (padrão, 3 PM): muda a própria aparência até o fim da cena, +20 em Enganação para disfarce (Von desacredita). Dissipar Magia (padrão, 3 PM): dissipa magias com CD igual ou menor ao teste de Misticismo. Imobilizar (padrão, 7 PM): criatura em alcance curto fica paralisada (Von muda para lenta; pode repetir o teste a cada rodada com ação completa). Silêncio (padrão, 3 PM, sustentada): esfera de 6m em alcance médio, criaturas ficam surdas e não podem lançar magias."
+      }
+    ],
+    "equipamento": [
+      "espada_bastarda_sagrada",
+      "loriga_segmentada"
+    ],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "protetor",
+    "nome": "Protetor",
+    "nd": "7",
+    "regiao": "celestiais",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": "celestial",
+    "tamanho": "medio",
+    "iniciativa": 9,
+    "percepcao": 10,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 32,
+    "resistencias": {
+      "fortitude": 18,
+      "reflexos": 9,
+      "vontade": 14
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +3"
+    ],
+    "pv": 280,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 18.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 2,
+      "con": 4,
+      "int": 1,
+      "sab": 3,
+      "car": 4
+    },
+    "pericias": {
+      "diplomacia": 13,
+      "intuicao": 12,
+      "religiao": 12
+    },
+    "ataques": [
+      {
+        "nome": "Maça",
+        "bonusAtaque": 24,
+        "dano": "2d8+20",
+        "danoExtra": "4d6+10 luz",
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Aura Protetora",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Aliados do protetor em alcance curto recebem +2 na Defesa e em testes de resistência até o fim da cena."
+      },
+      {
+        "nome": "Rasante",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando um protetor executa uma investida voando contra um inimigo no solo, seu ataque causa +4d6 pontos de dano de luz."
+      },
+      {
+        "nome": "Voo em Formação",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se dois ou mais protetores estiverem voando e adjacentes entre si, cada um recebe +2 em testes de ataque e na Defesa e não pode ser flanqueado."
+      }
+    ],
+    "equipamento": [
+      "escudo_pesado",
+      "maca_banhada_a_ouro"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "pegaso",
+    "nome": "Pégaso",
+    "nd": "3",
+    "regiao": "celestiais",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 5,
+    "percepcao": 3,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 21,
+    "resistencias": {
+      "fortitude": 13,
+      "reflexos": 10,
+      "vontade": 4
+    },
+    "rd": {
+      "magia_arcana": 5
+    },
+    "imunidadesEfeitos": [
+      "encantamento",
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 105,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 15.0,
+      "voo": 24.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 2,
+      "con": 3,
+      "int": 0,
+      "sab": 2,
+      "car": 2
+    },
+    "pericias": {
+      "atletismo": 11,
+      "intuicao": 10
+    },
+    "ataques": [
+      {
+        "nome": "Cascos",
+        "bonusAtaque": 14,
+        "dano": "2d8+5",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Investida Aérea",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz uma investida alada, o pégaso causa +2d8 de dano com seus cascos e pode continuar se movendo depois do ataque, no mesmo sentido, até o dobro de seu deslocamento."
+      },
+      {
+        "nome": "Parceiro",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O pégaso é um parceiro montaria (Grande) que aceita apenas devotos de deuses com paladinos. Iniciante: +2 em Intuição, deslocamento 15m (ainda não voa com cavaleiro). Veterano: deslocamento de voo 15m, +2 em Vontade. Mestre: ação de movimento extra por turno (só para deslocar-se) e +2 em testes de ataque."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "pegaso_de_khalmyr",
+    "nome": "Pégaso de Khalmyr",
+    "nd": "15",
+    "regiao": "celestiais",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": "celestial",
+    "tamanho": "grande",
+    "iniciativa": 16,
+    "percepcao": 19,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 50,
+    "resistencias": {
+      "fortitude": 22,
+      "reflexos": 15,
+      "vontade": 28
+    },
+    "rd": {
+      "magia_arcana": 15
+    },
+    "imunidadesEfeitos": [
+      "encantamento",
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 750,
+    "pm": 50,
+    "deslocamento": {
+      "terrestre": 18.0,
+      "voo": 36.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 8,
+      "des": 3,
+      "con": 5,
+      "int": 1,
+      "sab": 3,
+      "car": 5
+    },
+    "pericias": {
+      "atletismo": 21,
+      "diplomacia": 18,
+      "guerra": 14,
+      "intuicao": 21,
+      "nobreza": 14,
+      "religiao": 16
+    },
+    "ataques": [
+      {
+        "nome": "Cascos (x2)",
+        "bonusAtaque": 39,
+        "dano": "4d10+35",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Asas Guardiãs",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "As asas do Pégaso de Khalmyr funcionam como uma aura com 9m de raio. Aliados nessa área recebem redução de dano 5."
+      },
+      {
+        "nome": "Aura de Ordem",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 40,
+        "resistenciaTipo": "vontade",
+        "descricao": "O Pégaso emana uma aura de ordem com 30m de raio. Criaturas que comecem seu turno dentro sofrem -20 em Acrobacia, Enganação, Furtividade e Ladinagem e não podem mentir deliberadamente; seus efeitos de encantamento, ilusão e transmutação são dissipados (Von CD 40 reduz a penalidade para -10, permite mentir e não dissipa os efeitos)."
+      },
+      {
+        "nome": "Cascos Sagrados",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Os cascos do Pégaso são armas mágicas que causam +2d8 de dano contra devotos de deuses que canalizam apenas energia negativa e criaturas malignas."
+      },
+      {
+        "nome": "Meteoro",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Pégaso faz uma investida alada contra uma criatura e ataca com seus dois ataques de cascos contra o mesmo alvo, cada um recebendo o bônus de +2 da investida e causando +4d10 de dano."
+      },
+      {
+        "nome": "Ver Além das Mentiras",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Pégaso está permanentemente sob o efeito básico da magia Visão da Verdade."
+      },
+      {
+        "nome": "Magias (clérigo de Khalmyr 15º, CD 40)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Heroísmo (padrão, 12 PM): criatura adjacente imune a medo, 40 PV temporários, +6 em ataque/dano contra o inimigo de maior ND. Sopro da Salvação (padrão, 14 PM): cone de 9m cura 4d8+4 PV e remove uma longa lista de condições. Viagem Planar (padrão, 12 PM): o Pégaso e até 5 criaturas voluntárias tocadas viajam para outro Plano."
+      },
+      {
+        "nome": "Parceiro",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Pégaso de Khalmyr é um parceiro montaria (Grande) mestre, aceitando apenas quem julgue digno ou devotos de Khalmyr. Deslocamento 18m (voo 36m), ação de movimento extra por turno para se deslocar, e pode lançar Círculo da Justiça (custo -1 PM se já conhecida)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "shiradi",
+    "nome": "Shiradi",
+    "nd": "7",
+    "regiao": "celestiais",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": "celestial",
+    "tamanho": "grande",
+    "iniciativa": 8,
+    "percepcao": 10,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 29,
+    "resistencias": {
+      "fortitude": 14,
+      "reflexos": 19,
+      "vontade": 7
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [
+      "efeitos_de_metabolismo",
+      "efeitos_de_movimento",
+      "surpreendido"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 299,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 15.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 3,
+      "con": 4,
+      "int": 2,
+      "sab": 1,
+      "car": 6
+    },
+    "pericias": {
+      "atuacao": 13,
+      "furtividade": 12,
+      "investigacao": 9,
+      "intimidacao": 13
+    },
+    "ataques": [
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 26,
+        "dano": "2d12+18",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Evasão Aprimorada",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O shiradi possui Evasão Aprimorada."
+      },
+      {
+        "nome": "Brincar com a Comida",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 24,
+        "resistenciaTipo": "fortitude",
+        "descricao": "O shiradi faz dois ataques de garra contra uma criatura, causando dano não letal; se ambos acertarem, a criatura é arremessada 6m e fica confusa por 1 rodada (Fort CD 24 reduz o arremesso para 3m e evita a condição)."
+      },
+      {
+        "nome": "Entrada Majestosa",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 24,
+        "resistenciaTipo": "vontade",
+        "descricao": "Quando uma criatura vê o shiradi pela primeira vez na cena, fica fascinada por 1d4+1 rodadas (Von CD 24 reduz para 1 rodada)."
+      },
+      {
+        "nome": "Presença Libertadora",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Criaturas em alcance curto do shiradi recebem +5 em testes contra efeitos de movimento."
+      },
+      {
+        "nome": "Rugido Divino",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 24,
+        "resistenciaTipo": "vontade",
+        "descricao": "Criaturas em alcance curto do shiradi ficam apavoradas por 1d4 rodadas e depois abaladas (Von CD 24 reduz para abaladas por 1d4+1 rodadas). Recarga (movimento)."
+      }
+    ],
+    "equipamento": [
+      "simbolo_sagrado_de_valkaria"
+    ],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  }
+]

@@ -1,0 +1,1214 @@
+[
+  {
+    "id": "acolito_de_kally",
+    "nome": "Acólito de Kally",
+    "nd": "3",
+    "regiao": "igreja_de_kallyadranoch",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 4,
+    "percepcao": 7,
+    "sentidos": [],
+    "defesa": 19,
+    "resistencias": {
+      "fortitude": 10,
+      "reflexos": 3,
+      "vontade": 14
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 60,
+    "pm": 29,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 1,
+      "des": 1,
+      "con": 2,
+      "int": 1,
+      "sab": 4,
+      "car": 4
+    },
+    "pericias": {
+      "intimidacao": 9,
+      "misticismo": 4,
+      "religiao": 9
+    },
+    "ataques": [
+      {
+        "nome": "Maça",
+        "bonusAtaque": 13,
+        "dano": "1d8+13",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Aura de Medo",
+        "acao": "livre",
+        "custoPm": 2,
+        "recarga": null,
+        "cdResistencia": 19,
+        "resistenciaTipo": null,
+        "descricao": "O acólito de Kally gera uma aura de medo de 9m de raio que dura até o fim da cena. Todos os inimigos que entrem na aura ficam abalados até o fim da cena (Vontade CD 19 evita e a criatura fica imune a esta habilidade por um dia)."
+      },
+      {
+        "nome": "Servos do Dragão",
+        "acao": "completa",
+        "custoPm": 2,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O acólito invoca 2d4+1 kobolds em espaços desocupados em alcance curto. Eles agem a partir da próxima rodada do acólito, têm deslocamento 9m e podem gastar uma ação padrão para causar 1d6-1 pontos de dano de corte em uma criatura adjacente. Os kobolds têm Força –1, Destreza 4, Defesa 12 e 1 PV, falham automaticamente em qualquer teste oposto ou de resistência e desaparecem quando mortos ou ao fim da cena."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 19,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como clérigo de Kallyadranoch de 5º nível (CD 19): Comando (padrão, 2 PM), Controlar Fogo (padrão, 3 PM), Escudo da Fé (reação, 1 PM), Perdição (padrão, 3 PM)."
+      }
+    ],
+    "equipamento": [
+      "Gibão de peles",
+      "Maça",
+      "Símbolo sagrado de Kallyadranoch"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "alto_clerigo_de_kally",
+    "nome": "Alto Clérigo de Kally",
+    "nd": "13",
+    "regiao": "igreja_de_kallyadranoch",
+    "papel": "especial",
+    "tipo": "monstro",
+    "subtipo": "kallyanach",
+    "tamanho": "medio",
+    "iniciativa": 10,
+    "percepcao": 17,
+    "sentidos": [],
+    "defesa": 40,
+    "resistencias": {
+      "fortitude": 20,
+      "reflexos": 13,
+      "vontade": 26
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 455,
+    "pm": 72,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 6.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 0,
+      "con": 3,
+      "int": 1,
+      "sab": 7,
+      "car": 3
+    },
+    "pericias": {
+      "intimidacao": 15,
+      "intuicao": 17,
+      "misticismo": 11,
+      "religiao": 19
+    },
+    "ataques": [
+      {
+        "nome": "Lança (x2)",
+        "bonusAtaque": 35,
+        "dano": "1d6+23",
+        "danoExtra": "1d6 fogo",
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Lança (à distância)",
+        "bonusAtaque": 35,
+        "dano": "1d6+23",
+        "danoExtra": "1d6 fogo",
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Aura de Medo",
+        "acao": "livre",
+        "custoPm": 2,
+        "recarga": null,
+        "cdResistencia": 37,
+        "resistenciaTipo": null,
+        "descricao": "O alto clérigo de Kally gera uma aura de medo de 9m de raio que dura até o fim da cena. Todos os inimigos que entrem na aura ficam abalados até o fim da cena (Vontade CD 37 evita e a criatura fica imune a esta habilidade por um dia)."
+      },
+      {
+        "nome": "Magia Acelerada",
+        "acao": "livre",
+        "custoPm": 4,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando lança uma magia com execução de ação completa ou menor, o alto clérigo muda a execução dela para livre."
+      },
+      {
+        "nome": "Poder Ilimitado!",
+        "acao": "livre",
+        "custoPm": 3,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando lança uma magia sustentada, o alto clérigo muda a duração dela para cena."
+      },
+      {
+        "nome": "Servos do Dragão",
+        "acao": "completa",
+        "custoPm": 2,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O alto clérigo invoca 2d6+2 kobolds (veja Acólito de Kally)."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 37,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como clérigo de Kallyadranoch de 13º nível (CD 37): Coluna de Chamas (padrão, 13 PM, cilindro de fogo sagrado 3m de raio e 30m de altura em alcance longo, 13d6 fogo + 6d6 luz, Reflexos reduz à metade), Comando (padrão, 8 PM, quatro criaturas), Controlar Fogo (padrão, 3 PM), Escudo da Fé (reação, 1 PM), Manto do Cruzado (padrão, 10 PM, sustentada, criaturas escolhidas em alcance curto sofrem 4d8 de trevas no início de cada turno, o alto clérigo cura metade do dano causado), Oração (padrão, 11 PM, sustentada, +4/–4 em perícia e dano), Potência Divina (padrão, 6 PM, sustentada, tamanho aumenta uma categoria, Força +4 e RD 10, não pode lançar magias enquanto durar), Proteção Divina (reação, 3 PM, +5 no próximo teste de resistência)."
+      }
+    ],
+    "equipamento": [
+      "Lança de arremesso",
+      "Meia armadura",
+      "Símbolo sagrado de Kallyadranoch"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "avatar_de_kallyadranoch_dragao",
+    "nome": "Avatar de Kallyadranoch",
+    "nd": "21",
+    "regiao": "igreja_de_kallyadranoch",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "dragao",
+    "tamanho": "colossal",
+    "iniciativa": 25,
+    "percepcao": 32,
+    "sentidos": [
+      "percepcao_as_cegas",
+      "visao_no_escuro"
+    ],
+    "defesa": 65,
+    "resistencias": {
+      "fortitude": 36,
+      "reflexos": 22,
+      "vontade": 30
+    },
+    "rd": {
+      "geral": 50
+    },
+    "imunidadesEfeitos": [
+      "dano_de_luz"
+    ],
+    "imunidadesDano": [
+      "acido",
+      "eletricidade",
+      "essencia",
+      "fogo",
+      "frio",
+      "trevas",
+      "veneno"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +5"
+    ],
+    "pv": 2500,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 18.0,
+      "voo": 42.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 19,
+      "des": 0,
+      "con": 15,
+      "int": 9,
+      "sab": 9,
+      "car": 9
+    },
+    "pericias": {
+      "enganacao": 30,
+      "intimidacao": 30,
+      "intuicao": 30,
+      "misticismo": 30,
+      "religiao": 35
+    },
+    "ataques": [
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 58,
+        "dano": "5d20+70",
+        "danoExtra": null,
+        "margemAmeaca": 16,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 58,
+        "dano": "5d20+70",
+        "danoExtra": null,
+        "margemAmeaca": 16,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Aura Aterradora",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 51,
+        "resistenciaTipo": "vontade",
+        "descricao": "Aura Aterradora de dragão (Vontade CD 51 evita)."
+      },
+      {
+        "nome": "Centelha Divina",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 51,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar lança qualquer magia divina como um clérigo de 20º nível sem gastar PM (CD 51, limite de PM 20). Uma vez por cena, ele pode lançar uma dessas magias como uma ação livre."
+      },
+      {
+        "nome": "Dilacerar",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se o Avatar acerta os dois ataques de garra em uma mesma criatura no mesmo turno, causa mais 10d6+55 pontos de dano."
+      },
+      {
+        "nome": "Mergulho Mortal",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se estiver voando, o Avatar faz uma investida contra uma criatura no solo e ataca com suas duas garras e mordida. Os três ataques recebem o bônus de +2 da investida, mas devem ser feitos contra o mesmo personagem. Após os ataques, o avatar pousa adjacente ao alvo."
+      },
+      {
+        "nome": "Servos de Kally",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por cena, o Avatar invoca 6 dragões campeões (um de cada tipo entre ácido, eletricidade, fogo, frio, luz e trevas) que surgem em espaços desocupados em alcance longo. Eles agem no início da próxima rodada do Avatar, têm deslocamento de voo 18m e podem gastar uma ação padrão para emitir um sopro em um cone de 9m, que causa 6d12 pontos de dano de seu tipo de energia. Os dragões são Grandes, têm Força 5, Destreza 1, 110 PV, Defesa 32, imunidades de dragão e a dano de seu tipo, usam os valores do Avatar com –5 para qualquer teste oposto ou de resistência e desaparecem quando mortos ou ao fim da cena."
+      },
+      {
+        "nome": "Sopro Supremo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 51,
+        "resistenciaTipo": "reflexos",
+        "descricao": "O Avatar exala uma combinação de energias em um cone de 30m. Criaturas nessa área sofrem 8d12 pontos de dano de cada tipo de energia entre ácido, eletricidade, fogo, frio, luz e trevas (48d12 no total; Reflexos CD 51 reduz à metade). Sempre que rolar um 12 em um dado de dano, o Avatar causa +1d12 pontos de dano do mesmo tipo. O sopro ignora RD, e imunidade a esses tipos de dano apenas o reduz à metade. Recarga (movimento)."
+      },
+      {
+        "nome": "Varredura",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 51,
+        "resistenciaTipo": null,
+        "descricao": "Quando é flanqueado, o Avatar move sua cauda, varrendo um cone de 9m. Criaturas nessa área sofrem 16d6+30 pontos de dano e ficam caídas (Reflexos CD 51 reduz à metade e evita a condição)."
+      },
+      {
+        "nome": "Vendaval",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 51,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar causa um vendaval com suas asas. Criaturas em alcance curto são arremessadas 3m para cada categoria de tamanho abaixo do Avatar na direção oposta a ele e ficam lentas por 1 rodada (Fortitude CD 51 evita o arremesso)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "cavaleiro_de_kallyadranoch",
+    "nome": "Cavaleiro de Kallyadranoch",
+    "nd": "8",
+    "regiao": "igreja_de_kallyadranoch",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 12,
+    "percepcao": 8,
+    "sentidos": [],
+    "defesa": 35,
+    "resistencias": {
+      "fortitude": 19,
+      "reflexos": 17,
+      "vontade": 8
+    },
+    "rd": {
+      "geral": 5,
+      "fogo": 20
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +5"
+    ],
+    "pv": 250,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 2,
+      "con": 3,
+      "int": 0,
+      "sab": 0,
+      "car": 3
+    },
+    "pericias": {
+      "atletismo": 13,
+      "cavalgar": 20,
+      "intimidacao": 11
+    },
+    "ataques": [
+      {
+        "nome": "Lança montada (x2)",
+        "bonusAtaque": 26,
+        "dano": "1d12+15",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Espada bastarda (x2)",
+        "bonusAtaque": 26,
+        "dano": "1d12+15",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Usa a manobra agarrar com sua lança montada ou espada bastarda (teste +28). O cavaleiro de Kally só pode usar esta habilidade se estiver montado, pode manter uma criatura agarrada por vez e não ocupa sua arma para isso."
+      },
+      {
+        "nome": "Cavaleiro Dracônico",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando é alvo de um ataque corpo a corpo, o cavaleiro pode fazer um teste de Cavalgar oposto à Luta do atacante. Se vencer, evita o dano e pode fazer um ataque corpo a corpo contra o atacante."
+      },
+      {
+        "nome": "Despertar o Poder",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se o cavaleiro não estiver montado, invoca uma fúria terrível que fornece +5 em testes de ataque e rolagens de dano, redução de dano 5 e resistência a magia +2 até o fim da cena."
+      },
+      {
+        "nome": "Ginete de Corcel de Kally",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O cavaleiro possui um corcel de Kally, um parceiro montaria Grande. Enquanto estiver montado, seu deslocamento muda para 12m, seu deslocamento de voo muda para 12m, e ele recebe +1d8 em rolagens de dano corpo a corpo."
+      },
+      {
+        "nome": "Investida Aérea",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz uma investida montada, o cavaleiro causa +6d8 pontos de dano e pode continuar se movendo após o ataque, até o limite de seu deslocamento."
+      }
+    ],
+    "equipamento": [
+      "Armadura completa de couro de dragão",
+      "Espada bastarda",
+      "Lança montada"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "clerigo_de_kally",
+    "nome": "Clérigo de Kally",
+    "nd": "8",
+    "regiao": "igreja_de_kallyadranoch",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 9,
+    "percepcao": 14,
+    "sentidos": [],
+    "defesa": 29,
+    "resistencias": {
+      "fortitude": 15,
+      "reflexos": 8,
+      "vontade": 21
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 224,
+    "pm": 51,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 1,
+      "des": 1,
+      "con": 3,
+      "int": 1,
+      "sab": 6,
+      "car": 4
+    },
+    "pericias": {
+      "intimidacao": 12,
+      "misticismo": 9,
+      "religiao": 16
+    },
+    "ataques": [
+      {
+        "nome": "Maça (x2)",
+        "bonusAtaque": 24,
+        "dano": "1d8+17",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Azagaia (à distância)",
+        "bonusAtaque": 24,
+        "dano": "1d6+17",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Aura de Medo",
+        "acao": "livre",
+        "custoPm": 2,
+        "recarga": null,
+        "cdResistencia": 28,
+        "resistenciaTipo": null,
+        "descricao": "O clérigo de Kally gera uma aura de medo de 9m de raio que dura até o fim da cena. Todos os inimigos que entrem na aura ficam abalados até o fim da cena (Vontade CD 28 evita e a criatura fica imune a esta habilidade por um dia)."
+      },
+      {
+        "nome": "Magia Acelerada",
+        "acao": "livre",
+        "custoPm": 4,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando lança uma magia com execução de ação completa ou menor, o clérigo muda a execução dela para livre."
+      },
+      {
+        "nome": "Servos do Dragão",
+        "acao": "completa",
+        "custoPm": 2,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O clérigo invoca 2d4+1 kobolds, veja Acólito de Kally."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 28,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como clérigo de Kallyadranoch de 9º nível (CD 28, limite de PM 9): Coluna de Chamas (padrão, 9 PM, cilindro de fogo sagrado 3m de raio e 30m de altura em alcance longo, 9d6 fogo + 6d6 luz), Comando (padrão, 4 PM, duas criaturas), Controlar Fogo (padrão, 3 PM), Escudo da Fé (reação, 1 PM), Oração (padrão, 7 PM, sustentada), Proteção Divina (reação, 3 PM)."
+      }
+    ],
+    "equipamento": [
+      "Azagaia x2",
+      "Couraça",
+      "Maça",
+      "Símbolo sagrado de Kallyadranoch"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "corcel_de_kally",
+    "nome": "Corcel de Kally",
+    "nd": "2",
+    "regiao": "igreja_de_kallyadranoch",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 6,
+    "percepcao": 5,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 20,
+    "resistencias": {
+      "fortitude": 11,
+      "reflexos": 9,
+      "vontade": 2
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "fogo"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 72,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 18.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 2,
+      "con": 3,
+      "int": -3,
+      "sab": 1,
+      "car": 0
+    },
+    "pericias": {
+      "atletismo": 7
+    },
+    "ataques": [
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 12,
+        "dano": "1d6+4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 12,
+        "dano": "1d6+4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Natureza Dracônica",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Um corcel de Kally conta como um dragão para efeitos que afetem dragões."
+      },
+      {
+        "nome": "Sopro",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 16,
+        "resistenciaTipo": null,
+        "descricao": "Todas as criaturas em um cone de 6m sofrem 2d8 pontos de dano de fogo e ficam em chamas (Reflexos CD 16 reduz à metade e evita a condição). Recarga (movimento)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "peca de couro de dragao (cd 17 para extrair, veja tormenta20, p.312) e glandula incendiaria (cd 17 para extrair, vale t$ 15 para fabricar fogo alquimico).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "dracomante",
+    "nome": "Dracomante",
+    "nd": "5",
+    "regiao": "igreja_de_kallyadranoch",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 8,
+    "percepcao": 5,
+    "sentidos": [],
+    "defesa": 18,
+    "resistencias": {
+      "fortitude": 5,
+      "reflexos": 11,
+      "vontade": 17
+    },
+    "rd": {
+      "fogo": 10
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 112,
+    "pm": 40,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": -1,
+      "des": 3,
+      "con": 2,
+      "int": 6,
+      "sab": 2,
+      "car": 3
+    },
+    "pericias": {
+      "conhecimento": 12,
+      "intimidacao": 8,
+      "misticismo": 12
+    },
+    "ataques": [],
+    "habilidades": [
+      {
+        "nome": "Arcano de Batalha",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O dracomante soma sua Inteligência nas rolagens de dano quando lança magias ou usa seu Raio Arcano (já contabilizado)."
+      },
+      {
+        "nome": "Dracomancia",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando lança uma magia ou usa Raio Arcano, o dracomante recebe redução de dano 5 e resistência a magia +5 até o início de seu próximo turno."
+      },
+      {
+        "nome": "Raio Arcano",
+        "acao": "padrao",
+        "custoPm": 1,
+        "recarga": null,
+        "cdResistencia": 22,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura em alcance médio sofre 2d12+6 pontos de dano de fogo e fica em chamas (Reflexos CD 22 reduz à metade e evita a condição)."
+      },
+      {
+        "nome": "Presença Aterradora",
+        "acao": "padrao",
+        "custoPm": 1,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O dracomante faz um teste de Intimidação oposto à Vontade de criaturas em alcance curto. Aquelas que falharem no teste ficam abaladas até o fim da cena; se falharem por 10 ou mais também ficam apavoradas por 1 rodada."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 22,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como mago de 5º nível (CD 22): Armadura Arcana (padrão, 3 PM, +5 na Defesa por um dia), Bola de Fogo (padrão, 5 PM, 8d6+6 fogo em esfera de 6m), Campo de Força (reação, 4 PM, RD 30 contra o dano sofrido), Explosão de Chamas (padrão, 4 PM, 5d6+6 fogo em cone de 6m)."
+      }
+    ],
+    "equipamento": [
+      "Pergaminho de armadura arcana",
+      "Pergaminho de explosão de chamas",
+      "Pergaminho de bola de fogo x2"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "dracomante_superior",
+    "nome": "Dracomante Superior",
+    "nd": "14",
+    "regiao": "igreja_de_kallyadranoch",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "elfo",
+    "tamanho": "medio",
+    "iniciativa": 18,
+    "percepcao": 16,
+    "sentidos": [
+      "visao_na_penumbra"
+    ],
+    "defesa": 33,
+    "resistencias": {
+      "fortitude": 12,
+      "reflexos": 20,
+      "vontade": 28
+    },
+    "rd": {
+      "fogo": 15
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 500,
+    "pm": 112,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": -1,
+      "des": 4,
+      "con": 4,
+      "int": 8,
+      "sab": 2,
+      "car": 5
+    },
+    "pericias": {
+      "conhecimento": 22,
+      "intimidacao": 19,
+      "misticismo": 24
+    },
+    "ataques": [
+      {
+        "nome": "Adaga",
+        "bonusAtaque": 30,
+        "dano": "1d4+15",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Arcano de Batalha",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O dracomante superior soma sua Inteligência nas rolagens de dano quando lança magias ou usa seu Raio Arcano (já contabilizado)."
+      },
+      {
+        "nome": "Dracomancia",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando lança uma magia ou usa Raio Arcano, o dracomante superior recebe redução de dano 5 e resistência a magia +5 até o início de seu próximo turno."
+      },
+      {
+        "nome": "Magia Acelerada",
+        "acao": "livre",
+        "custoPm": 4,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando usa seu Raio Arcano ou lança uma magia com execução de ação completa ou menor, o dracomante superior muda a execução dela para livre."
+      },
+      {
+        "nome": "Presença Aterradora",
+        "acao": "padrao",
+        "custoPm": 1,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O dracomante faz um teste de Intimidação oposto à Vontade de criaturas em alcance curto. Aquelas que falharem no teste ficam abaladas até o fim da cena; se falharem por 10 ou mais também ficam apavoradas por 1 rodada."
+      },
+      {
+        "nome": "\"PRESENCIEM O VERDADEIRO PODER!\"",
+        "acao": "reacao",
+        "custoPm": 23,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando é reduzido a 300 PV ou menos, o dracomante lança a magia Transformação em Dragão."
+      },
+      {
+        "nome": "Raio Arcano",
+        "acao": "padrao",
+        "custoPm": 1,
+        "recarga": null,
+        "cdResistencia": 38,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura em alcance médio sofre 4d12+8 pontos de dano de fogo e fica em chamas (Reflexos CD 38 reduz à metade e evita a condição)."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 38,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como mago de 14º nível (CD 38, limite de PM 23): Armadura Arcana (padrão, 15 PM, +11 na Defesa por um dia), Bola de Fogo (padrão, 11 PM, 15d6+8 fogo em esfera de 6m), Campo de Força (reação, 7 PM, RD 50 contra o dano sofrido), Talho Invisível de Edauros (padrão, 10 PM, 10d8+8 de corte em cone de 9m, sangrando), Transformação em Dragão (completa, 23 PM, +2 Força/Constituição/Inteligência/Carisma, +5 Defesa, redução de fogo 30, deslocamento de voo 18m e um ataque de mordida +30/1d6+15 19/x3 usável com a adaga; uma vez por rodada pode soprar fogo em cone de 9m causando 10d6+10 fogo, Reflexos reduz à metade), Velocidade (padrão, 10 PM, sustentada, ação padrão adicional por turno)."
+      }
+    ],
+    "equipamento": [
+      "Adaga",
+      "Cetro elemental de couro de dragão (fogo)",
+      "Pergaminho de Transformação em Dragão"
+    ],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "kallyanach_barbaro",
+    "nome": "Kallyanach Bárbaro",
+    "nd": "6",
+    "regiao": "igreja_de_kallyadranoch",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "kallyanach",
+    "tamanho": "medio",
+    "iniciativa": 8,
+    "percepcao": 8,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 24,
+    "resistencias": {
+      "fortitude": 18,
+      "reflexos": 11,
+      "vontade": 6
+    },
+    "rd": {
+      "geral": 5,
+      "fogo": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 224,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 9.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 2,
+      "con": 4,
+      "int": 0,
+      "sab": 2,
+      "car": 0
+    },
+    "pericias": {
+      "atletismo": 9,
+      "sobrevivencia": 7
+    },
+    "ataques": [
+      {
+        "nome": "Gadanho",
+        "bonusAtaque": 20,
+        "dano": "2d4+15",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 4,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 20,
+        "dano": "1d6+14",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Fúria Elemental",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por cena, o kallyanach bárbaro entra em fúria. Recebe +4 em testes de ataque e seus ataques corpo a corpo causam +2d6 pontos de dano de fogo. Nesse estado não pode fazer nenhuma ação que exija calma e concentração (como usar Furtividade). A fúria termina se, ao fim da rodada, ele não tiver atacado nem sido alvo de um efeito hostil."
+      }
+    ],
+    "equipamento": [
+      "Couraça",
+      "Gadanho"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "kallyanach_morte_glacial",
+    "nome": "Kallyanach Morte Glacial",
+    "nd": "9",
+    "regiao": "igreja_de_kallyadranoch",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "kallyanach",
+    "tamanho": "medio",
+    "iniciativa": 14,
+    "percepcao": 9,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 32,
+    "resistencias": {
+      "fortitude": 9,
+      "reflexos": 21,
+      "vontade": 15
+    },
+    "rd": {
+      "frio": 10
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 340,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 9.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 1,
+      "des": 4,
+      "con": 3,
+      "int": 1,
+      "sab": 1,
+      "car": 1
+    },
+    "pericias": {
+      "acrobacia": 12,
+      "atletismo": 9,
+      "enganacao": 11,
+      "furtividade": 14,
+      "intimidacao": 9,
+      "ladinagem": 12
+    },
+    "ataques": [
+      {
+        "nome": "Espada curta (x2)",
+        "bonusAtaque": 27,
+        "dano": "1d6+12",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 27,
+        "dano": "1d6+12",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Ataque Furtivo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Causa +4d6 de dano adicional quando ataca um alvo desprevenido ou surpreso."
+      },
+      {
+        "nome": "Evasão",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando passa em um teste de Reflexos para reduzir o dano de um efeito à metade, em vez disso não sofre nenhum dano."
+      },
+      {
+        "nome": "Finta Aprimorada",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O kallyanach morte glacial pode fintar como uma ação de movimento."
+      },
+      {
+        "nome": "Sopro de Dragão",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 28,
+        "resistenciaTipo": null,
+        "descricao": "Criaturas em um cone de 6m sofrem 3d12 pontos de dano de frio, ficam lentas por 1d4 rodadas e, se estiverem surpreendidas, sofrem dano adicional de ataque furtivo (Reflexos CD 28 reduz à metade e evita a condição). Recarga (movimento)."
+      }
+    ],
+    "equipamento": [
+      "Couro batido ajustado",
+      "Espada curta x2",
+      "Gazua"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  }
+]

@@ -1,0 +1,2590 @@
+[
+  {
+    "id": "afogado",
+    "nome": "Afogado",
+    "nd": "7",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "lacaio",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 9,
+    "percepcao": 6,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 29,
+    "resistencias": {
+      "fortitude": 19,
+      "reflexos": 14,
+      "vontade": 8
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "atordoado",
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 60,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 9.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 2,
+      "con": 3,
+      "int": -1,
+      "sab": -1,
+      "car": -1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Pancada (x2)",
+        "bonusAtaque": 26,
+        "dano": "2d6+18",
+        "danoExtra": "2d8 acido",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Aura de Afogamento",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 24,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada turno do afogado, cada criatura em um raio de 9m que não seja capaz de respirar na água deve fazer um teste de Fortitude (CD 24, +1 por teste anterior). Se falhar, a criatura se afoga. Uma criatura afogada desta forma fica inconsciente e perde 1d6 pontos de vida por rodada até sair da área."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "armeiro_de_tenebra_clerigo",
+    "nome": "Armeiro de Tenebra Clérigo",
+    "nd": "8",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "anao",
+    "tamanho": "medio",
+    "iniciativa": 10,
+    "percepcao": 13,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 31,
+    "resistencias": {
+      "fortitude": 15,
+      "reflexos": 8,
+      "vontade": 21
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "trevas"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 210,
+    "pm": 45,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 1,
+      "des": 0,
+      "con": 5,
+      "int": 1,
+      "sab": 5,
+      "car": -2
+    },
+    "pericias": {
+      "misticismo": 9,
+      "oficio_armeiro": 11,
+      "religiao": 13
+    },
+    "ataques": [
+      {
+        "nome": "Machado de batalha",
+        "bonusAtaque": 24,
+        "dano": "1d8+1",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mosquete (à distância)",
+        "bonusAtaque": 24,
+        "dano": "2d8+16",
+        "danoExtra": "8d6 trevas",
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Disparo Preciso",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O armeiro de Tenebra clérigo pode fazer ataques à distância contra oponentes envolvidos em combate corpo a corpo sem a penalidade padrão de –5 no teste de ataque."
+      },
+      {
+        "nome": "Pacto da Pólvora",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando causa dano de trevas com seu mosquete, o armeiro recupera uma quantidade de PV igual à metade do dano de trevas causado."
+      },
+      {
+        "nome": "Saque Rápido",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O armeiro pode sacar ou guardar itens como uma ação livre e recarregar seu mosquete como uma ação de movimento."
+      },
+      {
+        "nome": "Visão nas Trevas",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O armeiro enxerga no escuro mesmo em magias de escuridão."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 28,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como clérigo de Tenebra de 8º nível (CD 28): Arma Mágica (padrão, 8 PM, +2 ataque/dano e +2d6 de frio), Curar Ferimentos (padrão, 8 PM, cura 9d8+9 PV), Escudo da Fé (reação, 8 PM, camuflagem contra ataques à distância e +5 na Defesa), Miasma Mefítico (padrão, 7 PM, nuvem de 6m de raio, 7d6 de ácido e enjoado)."
+      }
+    ],
+    "equipamento": [
+      "Balas x20",
+      "Capa pesada",
+      "Cota de malha",
+      "Machado de batalha",
+      "Mosquete certeiro",
+      "Símbolo sagrado de Tenebra"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "armeiro_de_tenebra_devoto",
+    "nome": "Armeiro de Tenebra Devoto",
+    "nd": "6",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "anao",
+    "tamanho": "medio",
+    "iniciativa": 7,
+    "percepcao": 8,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 26,
+    "resistencias": {
+      "fortitude": 12,
+      "reflexos": 6,
+      "vontade": 18
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "trevas"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 220,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 0,
+      "con": 5,
+      "int": 1,
+      "sab": 3,
+      "car": -2
+    },
+    "pericias": {
+      "oficio_armeiro": 9
+    },
+    "ataques": [
+      {
+        "nome": "Machado de batalha",
+        "bonusAtaque": 20,
+        "dano": "1d8",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mosquete (à distância)",
+        "bonusAtaque": 20,
+        "dano": "2d8+12",
+        "danoExtra": "6d6 trevas",
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Disparo Preciso",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O armeiro de Tenebra devoto pode fazer ataques à distância contra oponentes envolvidos em combate corpo a corpo sem a penalidade padrão de –5 no teste de ataque."
+      },
+      {
+        "nome": "Manto da Penumbra",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 22,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por cena, o armeiro pode gerar uma área de sombras como o efeito básico da magia Escuridão (CD 22)."
+      },
+      {
+        "nome": "Mira Apurada",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O armeiro recebe +2 em testes de ataque e na margem de ameaça com ataques à distância até o fim do turno."
+      },
+      {
+        "nome": "Pacto da Pólvora",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando causa dano de trevas com seu mosquete, o armeiro recupera uma quantidade de pontos de vida igual à metade do dano de trevas causado."
+      },
+      {
+        "nome": "Saque Rápido",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O armeiro pode sacar ou guardar itens como uma ação livre e recarregar seu mosquete como uma ação de movimento."
+      }
+    ],
+    "equipamento": [
+      "Armadura de couro",
+      "Balas x20",
+      "Machado de batalha",
+      "Mosquete certeiro",
+      "Símbolo sagrado de Tenebra"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "bando_pirata",
+    "nome": "Bando Pirata",
+    "nd": "6",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "lacaio",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "grande",
+    "iniciativa": 10,
+    "percepcao": 5,
+    "sentidos": [],
+    "defesa": 27,
+    "resistencias": {
+      "fortitude": 10,
+      "reflexos": 17,
+      "vontade": 9
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 54,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 1,
+      "con": 1,
+      "int": 0,
+      "sab": 1,
+      "car": -1
+    },
+    "pericias": {
+      "acrobacia": 10,
+      "atletismo": 7
+    },
+    "ataques": [
+      {
+        "nome": "Cimitarra [Bando]",
+        "bonusAtaque": 24,
+        "dano": "2d6+12",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Adaga [Bando]",
+        "bonusAtaque": 24,
+        "dano": "2d4+12",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Correr pelo Cordame",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O bando percorre até seu deslocamento, ignorando terreno difícil, e faz um ataque corpo a corpo com +2 no teste de ataque e +1d6 na rolagem de dano."
+      },
+      {
+        "nome": "Pernas do Mar",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando está se equilibrando ou escalando, o bando não fica desprevenido e seu deslocamento não é reduzido à metade."
+      }
+    ],
+    "equipamento": [
+      "Adaga",
+      "Cimitarra (1d8 cada)"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "capitao_afogado",
+    "nome": "Capitão Afogado",
+    "nd": "10",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "solo",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 11,
+    "percepcao": 8,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 35,
+    "resistencias": {
+      "fortitude": 21,
+      "reflexos": 10,
+      "vontade": 15
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [
+      "atordoado",
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 380,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 9.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 2,
+      "con": 3,
+      "int": -1,
+      "sab": -1,
+      "car": -1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Pancada (x2)",
+        "bonusAtaque": 29,
+        "dano": "2d6+24",
+        "danoExtra": "2d8 acido",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Aura de Afogamento",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 25,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada turno do afogado, cada criatura em um raio de 9m que não seja capaz de respirar na água deve fazer um teste de Fortitude (CD 25, +1 por teste anterior). Se falhar, a criatura se afoga. Uma criatura afogada desta forma fica inconsciente e perde 1d6 pontos de vida por rodada até sair da área."
+      },
+      {
+        "nome": "Recrutas Sufocados",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por cena, o capitão afogado invoca 1d4+1 grumetes afogados em espaços desocupados em alcance curto. Eles agem a partir da próxima rodada do capitão, têm deslocamento 6m (normal e de natação) e podem gastar uma ação padrão para causar 1d8+4 pontos de dano de impacto em uma criatura adjacente. Os grumetes afogados têm Força 2, Destreza 1, Defesa 18 e 1 PV, falham automaticamente em qualquer teste oposto ou de resistência e desaparecem quando mortos ou ao fim da cena. Uma criatura adjacente a um ou mais grumetes afogados sofre –2 em Fortitude."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao mais papagaio zumbi (um personagem com a habilidade familiar pode transformar o papagaio zumbi em um familiar que aumenta em +1 a cd dos testes para resistir a suas magias de necromancia e concede +2 em pilotagem).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "capitao_pirata",
+    "nome": "Capitão Pirata",
+    "nd": "7",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "solo",
+    "tipo": "mortoVivo",
+    "subtipo": "osteon",
+    "tamanho": "medio",
+    "iniciativa": 16,
+    "percepcao": 8,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 31,
+    "resistencias": {
+      "fortitude": 8,
+      "reflexos": 19,
+      "vontade": 14
+    },
+    "rd": {
+      "corte": 5,
+      "frio": 5,
+      "perfuracao": 5
+    },
+    "imunidadesEfeitos": [
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 265,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 1,
+      "des": 5,
+      "con": 2,
+      "int": 1,
+      "sab": 1,
+      "car": 3
+    },
+    "pericias": {
+      "acrobacia": 14,
+      "atletismo": 10,
+      "intimidacao": 13,
+      "pilotagem": 14
+    },
+    "ataques": [
+      {
+        "nome": "Cimitarra (x2)",
+        "bonusAtaque": 24,
+        "dano": "1d6+12",
+        "danoExtra": "2d12 acido",
+        "margemAmeaca": 17,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Pistola (à distância)",
+        "bonusAtaque": 24,
+        "dano": "2d6+12",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Evasão",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando passa em um teste de Reflexos para reduzir o dano de um efeito à metade, em vez disso não sofre nenhum dano."
+      },
+      {
+        "nome": "Correr pelo Cordame",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O capitão percorre até seu deslocamento, ignorando terreno difícil, e faz um ataque corpo a corpo com +2 no teste de ataque e +1d6 na rolagem de dano."
+      },
+      {
+        "nome": "Pernas do Mar",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando está se equilibrando ou escalando, o capitão não fica desprevenido e seu deslocamento não é reduzido à metade."
+      },
+      {
+        "nome": "Salmoura",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura que sofra dano de ácido de um ataque do capitão pirata sofre –2 em testes de perícia por 1 rodada."
+      },
+      {
+        "nome": "Saque Rápido",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O capitão pirata pode sacar ou guardar itens como uma ação livre e recarregar sua pistola como uma ação de movimento."
+      },
+      {
+        "nome": "Terror dos Mares",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 24,
+        "resistenciaTipo": null,
+        "descricao": "Criaturas em alcance médio ficam abaladas (Vontade CD 24 reduz a duração para 1 rodada e a criatura não pode mais ser abalada por esta habilidade até o fim da cena). Recarga (movimento)."
+      }
+    ],
+    "equipamento": [
+      "Balas x20",
+      "Bandana",
+      "Cimitarra",
+      "Pistola"
+    ],
+    "tesouro": "dobro mais bandeira pirata. uma bandeira pirata pode ser instalada em um veiculo sem custos, e oferece os beneficios da melhoria macabra.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "capitao_da_frota_aurea",
+    "nome": "Capitão da Frota Áurea",
+    "nd": "10",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 18,
+    "percepcao": 10,
+    "sentidos": [],
+    "defesa": 36,
+    "resistencias": {
+      "fortitude": 12,
+      "reflexos": 20,
+      "vontade": 16
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 360,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 7,
+      "con": 2,
+      "int": 1,
+      "sab": 1,
+      "car": 4
+    },
+    "pericias": {
+      "acrobacia": 18,
+      "atletismo": 13,
+      "diplomacia": 13,
+      "pilotagem": 18
+    },
+    "ataques": [
+      {
+        "nome": "Florete (x2)",
+        "bonusAtaque": 29,
+        "dano": "2d6+22",
+        "danoExtra": null,
+        "margemAmeaca": 14,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Pistola (à distância)",
+        "bonusAtaque": 29,
+        "dano": "2d6+12",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Evasão Aprimorada",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Mesmo em um teste de Reflexos falho, o capitão sofre apenas metade do dano, e nenhum dano se passar no teste."
+      },
+      {
+        "nome": "Bloqueio Resistente",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando é atingido por um ataque, o capitão da Frota Áurea pode fazer um teste de ataque com seu florete. O dano desse ataque é reduzido em um valor igual ao resultado do teste de ataque do capitão."
+      },
+      {
+        "nome": "Nadador Blindado",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O capitão não sofre penalidade por armadura em testes de Atletismo para nadar."
+      },
+      {
+        "nome": "Saque Rápido",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O capitão pode sacar ou guardar itens como uma ação livre e recarregar sua pistola como uma ação de movimento."
+      },
+      {
+        "nome": "Vendaval do Mar",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando se move 6m ou mais, o capitão recebe +5 nas rolagens de dano e na margem de ameaça com seu florete até o início de seu próximo turno."
+      }
+    ],
+    "equipamento": [
+      "Balas x20",
+      "Couraça reforçada",
+      "Florete maciço",
+      "Pistola"
+    ],
+    "tesouro": "dobro.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "capitao_do_conclave_pirata",
+    "nome": "Capitão do Conclave Pirata",
+    "nd": "8",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 16,
+    "percepcao": 9,
+    "sentidos": [],
+    "defesa": 33,
+    "resistencias": {
+      "fortitude": 10,
+      "reflexos": 19,
+      "vontade": 15
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 290,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 1,
+      "des": 6,
+      "con": 2,
+      "int": 1,
+      "sab": 1,
+      "car": 4
+    },
+    "pericias": {
+      "acrobacia": 16,
+      "atletismo": 11,
+      "intimidacao": 14,
+      "pilotagem": 16
+    },
+    "ataques": [
+      {
+        "nome": "Cimitarra (x2)",
+        "bonusAtaque": 26,
+        "dano": "2d6+12",
+        "danoExtra": null,
+        "margemAmeaca": 14,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Pistola (à distância)",
+        "bonusAtaque": 26,
+        "dano": "2d6+10",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Evasão",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando passa em um teste de Reflexos para reduzir o dano de um efeito à metade, em vez disso não sofre nenhum dano."
+      },
+      {
+        "nome": "Correr pelo Cordame",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O capitão percorre até seu deslocamento, ignorando terreno difícil, e faz um ataque corpo a corpo com +2 no teste de ataque e +1d6 na rolagem de dano."
+      },
+      {
+        "nome": "Pernas do Mar",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando está se equilibrando ou escalando, o capitão não fica desprevenido e seu deslocamento não é reduzido à metade."
+      },
+      {
+        "nome": "Disparo Covarde",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O capitão do Conclave Pirata só pode usar esta habilidade no seu primeiro turno de combate. Ele faz um ataque de pistola; o alvo desse ataque é considerado desprevenido."
+      },
+      {
+        "nome": "Sangria",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Sempre que rola um 6 em um dado de dano com sua cimitarra, o capitão rola +1d6 e soma o resultado ao dano causado (repetindo o processo para cada novo resultado 6)."
+      },
+      {
+        "nome": "Saque Rápido",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O capitão pode sacar ou guardar itens como uma ação livre e recarregar sua pistola como uma ação de movimento."
+      },
+      {
+        "nome": "Saraivada",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 26,
+        "resistenciaTipo": null,
+        "descricao": "O capitão comanda uma saraivada de canhões que atinge uma esfera de 6m em alcance médio. Criaturas na área sofrem 8d12 pontos de dano de impacto e ficam caídas (Reflexos CD 26 reduz à metade e evita a condição). O capitão só pode usar esta habilidade uma vez por cena, e apenas se estiver em alcance longo de seu navio."
+      },
+      {
+        "nome": "Todos a Postos",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por cena, o capitão invoca 1d4+1 marujos piratas em espaços desocupados em alcance curto. Eles agem a partir da próxima rodada do capitão, têm deslocamento 9m e podem gastar uma ação padrão para causar 1d6+4 pontos de dano de corte em uma criatura adjacente. Os marujos piratas têm Força 1, Destreza 3, Defesa 16 e 1 PV e falham automaticamente em qualquer teste oposto ou de resistência."
+      }
+    ],
+    "equipamento": [
+      "Balas x20",
+      "Cimitarra precisa",
+      "Couraça ajustada",
+      "Pistola"
+    ],
+    "tesouro": "dobro.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "chapeu_preto",
+    "nome": "Chapéu-Preto",
+    "nd": "12",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "meio-orc",
+    "tamanho": "medio",
+    "iniciativa": 20,
+    "percepcao": 12,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 42,
+    "resistencias": {
+      "fortitude": 20,
+      "reflexos": 26,
+      "vontade": 12
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 480,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 6,
+      "con": 3,
+      "int": 0,
+      "sab": 2,
+      "car": 3
+    },
+    "pericias": {
+      "cavalgar": 16,
+      "intimidacao": 20,
+      "jogatina": 13,
+      "sobrevivencia": 12
+    },
+    "ataques": [
+      {
+        "nome": "Adaga",
+        "bonusAtaque": 32,
+        "dano": "1d4+6",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Pistola (à distância)",
+        "bonusAtaque": 36,
+        "dano": "6d6+50",
+        "danoExtra": null,
+        "margemAmeaca": 17,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Evasão Aprimorada",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Mesmo em um teste de Reflexos falho, o chapéu-preto sofre apenas metade do dano, e nenhum dano se passar no teste."
+      },
+      {
+        "nome": "Bala nas Costas",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O chapéu-preto recebe +10 na margem de ameaça do primeiro ataque que fizer contra cada oponente na cena."
+      },
+      {
+        "nome": "Duro como o Inferno",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Todo dano de corte, impacto e perfuração que o chapéu-preto sofre é reduzido à metade."
+      },
+      {
+        "nome": "Mão Firme",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O chapéu-preto pode fazer ataques de pistola contra oponentes envolvidos em combate corpo a corpo sem sofrer a penalidade padrão de –5 no teste de ataque e, quando faz um ataque de pistola, rola dois dados e usa o melhor resultado."
+      },
+      {
+        "nome": "Reputação",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 33,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura que comece seu turno em alcance médio do chapéu-preto fica abalada (Vontade CD 33 evita e a criatura não pode mais ser abalada por esta habilidade até o fim da cena)."
+      },
+      {
+        "nome": "Saque Rápido",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O chapéu-preto pode sacar ou guardar itens como uma ação livre e recarregar sua pistola como uma ação de movimento."
+      },
+      {
+        "nome": "Tiro à Traição",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz um ataque de pistola contra um oponente desprevenido, o chapéu-preto recebe +5 na margem de ameaça e causa +6d6 pontos de dano."
+      }
+    ],
+    "equipamento": [
+      "Adaga",
+      "Balas x20",
+      "Pistola formidável"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "demonio_da_polvora",
+    "nome": "Demônio da Pólvora",
+    "nd": "12",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": "demonio",
+    "tamanho": "medio",
+    "iniciativa": 23,
+    "percepcao": 12,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 42,
+    "resistencias": {
+      "fortitude": 12,
+      "reflexos": 26,
+      "vontade": 20
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [
+      "armas_de_fogo",
+      "ofuscado"
+    ],
+    "imunidadesDano": [
+      "acido",
+      "frio",
+      "fogo",
+      "veneno"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 580,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 9,
+      "con": 6,
+      "int": 4,
+      "sab": 2,
+      "car": 2
+    },
+    "pericias": {
+      "enganacao": 17,
+      "misticismo": 14,
+      "oficio_alquimista": 19,
+      "oficio_armeiro": 19,
+      "religiao": 12
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 33,
+        "dano": "3d4+8",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Pistola demoníaca (à distância) (x2)",
+        "bonusAtaque": 36,
+        "dano": "4d6+30",
+        "danoExtra": "2d8 essencia",
+        "margemAmeaca": 15,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Mestre da Pólvora",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando ataca com uma arma de fogo, o demônio da pólvora ignora cobertura e camuflagem, não sofre a penalidade padrão de –5 em testes de ataque contra oponentes envolvidos em combate corpo a corpo e, quando dispara contra um alvo envolvido na manobra agarrar, sempre ataca o alvo escolhido."
+      },
+      {
+        "nome": "Munição Explosiva",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 33,
+        "resistenciaTipo": null,
+        "descricao": "Na rodada seguinte após atingir um alvo, a munição da pistola demoníaca explode. A vítima perde 6d6 pontos de vida e fica sangrando (Fortitude CD 33 reduz à metade e evita a condição)."
+      }
+    ],
+    "equipamento": [
+      "Pistola demoníaca"
+    ],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "goblin_de_sombreiro",
+    "nome": "Goblin de Sombreiro",
+    "nd": "2",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "lacaio",
+    "tipo": "humanoide",
+    "subtipo": "goblin",
+    "tamanho": "pequeno",
+    "iniciativa": 9,
+    "percepcao": 3,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 18,
+    "resistencias": {
+      "fortitude": 9,
+      "reflexos": 11,
+      "vontade": 4
+    },
+    "rd": {
+      "condicoes_de_sentidos": 2
+    },
+    "imunidadesEfeitos": [
+      "fascinado",
+      "ofuscado"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 16,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 9.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": -1,
+      "des": 4,
+      "con": 2,
+      "int": 0,
+      "sab": 0,
+      "car": 0
+    },
+    "pericias": {
+      "enganacao": 5,
+      "furtividade": 10
+    },
+    "ataques": [
+      {
+        "nome": "Adaga (x2)",
+        "bonusAtaque": 14,
+        "dano": "1d4+4",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Traque (à distância)",
+        "bonusAtaque": 14,
+        "dano": "2d6+4",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 3,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Ataque Furtivo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Causa +1d6 de dano adicional quando ataca um alvo desprevenido ou surpreso."
+      },
+      {
+        "nome": "Sombreiro",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando o goblin de sombreiro ataca pela primeira vez em um combate, sua vítima é considerada desprevenida contra esse ataque."
+      },
+      {
+        "nome": "Valentão",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O goblin recebe +2 em testes de ataque e rolagens de dano contra oponentes caídos, desprevenidos, enredados, flanqueados ou indefesos."
+      }
+    ],
+    "equipamento": [
+      "Adaga x2",
+      "Balas x20",
+      "Traque"
+    ],
+    "tesouro": "metade mais sombreiro.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "homem_piranha",
+    "nome": "Homem-Piranha",
+    "nd": "2",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 5,
+    "percepcao": 3,
+    "sentidos": [],
+    "defesa": 17,
+    "resistencias": {
+      "fortitude": 4,
+      "reflexos": 11,
+      "vontade": 7
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 68,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 2,
+      "con": 2,
+      "int": -1,
+      "sab": 0,
+      "car": -1
+    },
+    "pericias": {
+      "acrobacia": 5,
+      "atletismo": 7
+    },
+    "ataques": [
+      {
+        "nome": "Adaga (x2)",
+        "bonusAtaque": 13,
+        "dano": "1d4+7",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Dentes Afiados",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando uma criatura adjacente erra um ataque contra o homem-piranha por 5 ou mais, sofre 1d4+4 pontos de dano de corte."
+      }
+    ],
+    "equipamento": [
+      "Adaga x2"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "homem_piranha_capitao",
+    "nome": "Homem-Piranha Capitão",
+    "nd": "7",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "lefou",
+    "tamanho": "medio",
+    "iniciativa": 12,
+    "percepcao": 8,
+    "sentidos": [],
+    "defesa": 29,
+    "resistencias": {
+      "fortitude": 19,
+      "reflexos": 14,
+      "vontade": 9
+    },
+    "rd": {
+      "acido": 10,
+      "eletricidade": 10,
+      "fogo": 10,
+      "frio": 10,
+      "luz": 10,
+      "trevas": 10
+    },
+    "imunidadesEfeitos": [
+      "atordoado"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 290,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 3,
+      "con": 4,
+      "int": 0,
+      "sab": 1,
+      "car": -1
+    },
+    "pericias": {
+      "acrobacia": 10,
+      "atletismo": 13,
+      "pilotagem": 10
+    },
+    "ataques": [
+      {
+        "nome": "Machado anão",
+        "bonusAtaque": 25,
+        "dano": "1d10+20",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 4,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida do diabo",
+        "bonusAtaque": 25,
+        "dano": "1d4+20",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Fortificação",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "50% de chance de ignorar qualquer efeito adicional de acerto crítico ou ataque furtivo."
+      },
+      {
+        "nome": "Resistência a Lefeu e Tormenta",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Recebe +5 em testes de resistência contra efeitos causados por lefeu e pela Tormenta."
+      },
+      {
+        "nome": "Dentes Afiados",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando uma criatura adjacente erra um ataque contra o homem-piranha capitão por 5 ou mais, sofre 1d4+8 pontos de dano de corte."
+      },
+      {
+        "nome": "Sequência do Rio",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando o capitão acerta seus dois ataques em um mesmo oponente na mesma rodada, pode usar a manobra agarrar ou desarmar com a mordida do diabo (teste +25)."
+      }
+    ],
+    "equipamento": [
+      "Couraça selada",
+      "Machado anão",
+      "Mordida do diabo"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "homem_piranha_imediato",
+    "nome": "Homem-Piranha Imediato",
+    "nd": "4",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 5,
+    "percepcao": 8,
+    "sentidos": [],
+    "defesa": 20,
+    "resistencias": {
+      "fortitude": 6,
+      "reflexos": 14,
+      "vontade": 10
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 98,
+    "pm": 24,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 1,
+      "con": 3,
+      "int": -1,
+      "sab": 4,
+      "car": -1
+    },
+    "pericias": {
+      "acrobacia": 5,
+      "atletismo": 9,
+      "religiao": 8,
+      "sobrevivencia": 8
+    },
+    "ataques": [
+      {
+        "nome": "Clava",
+        "bonusAtaque": 15,
+        "dano": "2d6+14",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Dentes Afiados",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando uma criatura adjacente erra um ataque contra o homem-piranha imediato por 5 ou mais, sofre 1d4+6 pontos de dano de corte."
+      },
+      {
+        "nome": "Urro Divino",
+        "acao": "livre",
+        "custoPm": 1,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz um ataque ou lança uma magia, o imediato soma sua Constituição à rolagem de dano desse ataque ou magia."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 20,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como druida de Megalokk de 4º nível (CD 20): Amedrontar (padrão, 3 PM, apavorado e depois abalado), Armamento da Natureza (movimento, 4 PM, clava mágica +1 ataque/dano, +1d6 dano), Curar Ferimentos (padrão, 4 PM, cura 5d8+5 PV), Escudo da Fé (reação, 3 PM, +3 na Defesa até o próximo turno)."
+      }
+    ],
+    "equipamento": [
+      "Clava",
+      "Escudo leve",
+      "Símbolo sagrado de Megalokk"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "imediato",
+    "nome": "Imediato",
+    "nd": "4",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "solo",
+    "tipo": "mortoVivo",
+    "subtipo": "osteon",
+    "tamanho": "medio",
+    "iniciativa": 10,
+    "percepcao": 5,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 23,
+    "resistencias": {
+      "fortitude": 8,
+      "reflexos": 16,
+      "vontade": 6
+    },
+    "rd": {
+      "corte": 5,
+      "frio": 5,
+      "perfuracao": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 120,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 1,
+      "des": 4,
+      "con": 0,
+      "int": 0,
+      "sab": 1,
+      "car": -1
+    },
+    "pericias": {
+      "acrobacia": 10,
+      "atletismo": 7,
+      "intimidacao": 5,
+      "pilotagem": 8
+    },
+    "ataques": [
+      {
+        "nome": "Cimitarra",
+        "bonusAtaque": 17,
+        "dano": "2d6+8",
+        "danoExtra": "2d6 acido",
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Correr pelo Cordame",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O pirata percorre até seu deslocamento, ignorando terreno difícil, e faz um ataque corpo a corpo com +2 no teste de ataque e +1d6 na rolagem de dano."
+      },
+      {
+        "nome": "Pernas do Mar",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando está se equilibrando ou escalando, o pirata não fica desprevenido e seu deslocamento não é reduzido à metade."
+      },
+      {
+        "nome": "Salmoura",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura que sofra dano de ácido de um ataque do imediato sofre –2 em testes de perícia por 1 rodada."
+      }
+    ],
+    "equipamento": [
+      "Cimitarra"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "lobo_do_mar",
+    "nome": "Lobo do Mar",
+    "nd": "16",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 23,
+    "percepcao": 16,
+    "sentidos": [],
+    "defesa": 54,
+    "resistencias": {
+      "fortitude": 24,
+      "reflexos": 30,
+      "vontade": 16
+    },
+    "rd": {
+      "efeitos_mentais": 5,
+      "efeitos_de_movimento": 5,
+      "magia": 5
+    },
+    "imunidadesEfeitos": [
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 690,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 1,
+      "des": 7,
+      "con": 3,
+      "int": 2,
+      "sab": 2,
+      "car": 4
+    },
+    "pericias": {
+      "acrobacia": 23,
+      "atletismo": 17,
+      "intimidacao": 21,
+      "jogatina": 20,
+      "pilotagem": 23
+    },
+    "ataques": [
+      {
+        "nome": "Florete (x2)",
+        "bonusAtaque": 46,
+        "dano": "2d6+40",
+        "danoExtra": null,
+        "margemAmeaca": 15,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Adaga (x2)",
+        "bonusAtaque": 46,
+        "dano": "2d4+40",
+        "danoExtra": null,
+        "margemAmeaca": 15,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Adaga (à distância)",
+        "bonusAtaque": 46,
+        "dano": "2d4+40",
+        "danoExtra": null,
+        "margemAmeaca": 15,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Ataque Furtivo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Causa +8d6 de dano adicional quando ataca um alvo desprevenido ou surpreso."
+      },
+      {
+        "nome": "Bloqueio Resistente",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando é atingido por um ataque, o lobo do mar pode fazer um teste de ataque com seu florete. O dano desse ataque é reduzido em um valor igual ao resultado do teste de ataque do lobo do mar."
+      },
+      {
+        "nome": "Pirata",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O lobo do mar recebe todas as habilidades de piratas: Correr pelo Cordame (completa, percorre até seu deslocamento ignorando terreno difícil e faz um ataque corpo a corpo com +2 no teste de ataque e +1d6 na rolagem de dano) e Pernas do Mar (não fica desprevenido ao se equilibrar ou escalar, e seu deslocamento não é reduzido à metade)."
+      },
+      {
+        "nome": "Todos a Postos",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por cena, o lobo do mar invoca 2d4+1 marujos piratas em espaços desocupados em alcance curto. Eles agem a partir da próxima rodada do lobo do mar, têm deslocamento 9m e podem gastar uma ação padrão para causar 2d4+4 pontos de dano de corte em uma criatura adjacente. Os marujos piratas têm Força 1, Destreza 3, Defesa 25 e 1 PV e falham automaticamente em qualquer teste oposto ou de resistência."
+      },
+      {
+        "nome": "Truque do Convés",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 42,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura adjacente ao lobo do mar fica desprevenida contra seu próximo ataque nesta rodada (Vontade CD 42 evita). Esta habilidade só pode ser usada uma vez contra cada criatura na mesma cena."
+      }
+    ],
+    "equipamento": [
+      "Adaga precisa x3",
+      "Bandana",
+      "Florete formidável preciso"
+    ],
+    "tesouro": "dobro.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "lider_goblin_de_sombreiro",
+    "nome": "Líder Goblin de Sombreiro",
+    "nd": "6",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "goblin",
+    "tamanho": "pequeno",
+    "iniciativa": 12,
+    "percepcao": 5,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 28,
+    "resistencias": {
+      "fortitude": 13,
+      "reflexos": 18,
+      "vontade": 7
+    },
+    "rd": {
+      "condicoes_de_sentidos": 2
+    },
+    "imunidadesEfeitos": [
+      "fascinado",
+      "ofuscado"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 190,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 9.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": -1,
+      "des": 5,
+      "con": 2,
+      "int": 0,
+      "sab": 0,
+      "car": 0
+    },
+    "pericias": {
+      "enganacao": 7,
+      "furtividade": 13
+    },
+    "ataques": [
+      {
+        "nome": "Adaga (x2)",
+        "bonusAtaque": 20,
+        "dano": "2d4+8",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Bacamarte (à distância)",
+        "bonusAtaque": 20,
+        "dano": "4d6+8",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 3,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Evasão",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando passa em um teste de Reflexos para reduzir o dano de um efeito à metade, em vez disso não sofre nenhum dano."
+      },
+      {
+        "nome": "Ataque Furtivo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Causa +3d6 de dano adicional quando ataca um alvo desprevenido ou surpreso."
+      },
+      {
+        "nome": "Bacamarte",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando ataca, o líder goblin de sombreiro faz um teste de ataque e compara o resultado com a Defesa de cada criatura em um cone de 6m. Quando ataca, ele é empurrado 3m na direção oposta ao disparo."
+      },
+      {
+        "nome": "Poncho",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O poncho esvoaçante do líder faz mais do que protegê-lo do clima. Uma vez por cena, o líder pode usá-lo para evitar um ataque recém-sofrido."
+      },
+      {
+        "nome": "Sombreiro",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando o líder ataca pela primeira vez em um combate, sua vítima é considerada desprevenida contra este ataque."
+      },
+      {
+        "nome": "Valentão",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O líder recebe +2 em testes de ataque e rolagens de dano contra oponentes caídos, desprevenidos, enredados, flanqueados ou indefesos."
+      }
+    ],
+    "equipamento": [
+      "Adaga x2",
+      "Balas x20",
+      "Bacamarte"
+    ],
+    "tesouro": "metade mais sombreiro.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "lider_pistoleiro",
+    "nome": "Líder Pistoleiro",
+    "nd": "4",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 10,
+    "percepcao": 5,
+    "sentidos": [],
+    "defesa": 22,
+    "resistencias": {
+      "fortitude": 9,
+      "reflexos": 15,
+      "vontade": 6
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 120,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 4,
+      "con": 2,
+      "int": 0,
+      "sab": 1,
+      "car": 1
+    },
+    "pericias": {
+      "cavalgar": 10,
+      "jogatina": 7
+    },
+    "ataques": [
+      {
+        "nome": "Adaga",
+        "bonusAtaque": 16,
+        "dano": "1d4+7",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Pistola (à distância)",
+        "bonusAtaque": 16,
+        "dano": "2d6+15",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Dedo no Gatilho",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz um ataque de pistola contra um oponente desprevenido, o líder pistoleiro recebe +5 na rolagem de dano e na margem de ameaça."
+      },
+      {
+        "nome": "Disparo Preciso",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O líder pode fazer ataques à distância contra oponentes envolvidos em combate corpo a corpo sem a penalidade padrão de –5 no teste de ataque."
+      },
+      {
+        "nome": "Saque Rápido",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O líder pode sacar ou guardar itens como uma ação livre e recarregar sua pistola como uma ação de movimento."
+      },
+      {
+        "nome": "Tibar Furado",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O líder carrega um amuleto da sorte, como um tibar ou uma garrafinha de metal, que já salvou sua vida mais de uma vez. Uma vez por cena, quando sofre dano que o levaria a 0 PV ou menos, o líder ignora esse dano."
+      }
+    ],
+    "equipamento": [
+      "Adaga",
+      "Balas x20",
+      "Pistola"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "pirata",
+    "nome": "Pirata",
+    "nd": "0.5",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "lacaio",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 6,
+    "percepcao": 2,
+    "sentidos": [],
+    "defesa": 14,
+    "resistencias": {
+      "fortitude": 2,
+      "reflexos": 5,
+      "vontade": 1
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 8,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 0,
+      "con": 1,
+      "int": 0,
+      "sab": 1,
+      "car": -1
+    },
+    "pericias": {
+      "acrobacia": 6,
+      "atletismo": 4
+    },
+    "ataques": [
+      {
+        "nome": "Cimitarra",
+        "bonusAtaque": 9,
+        "dano": "1d6+6",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Correr pelo Cordame",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O pirata percorre até seu deslocamento, ignorando terreno difícil, e faz um ataque corpo a corpo com +2 no teste de ataque e +1d6 na rolagem de dano."
+      },
+      {
+        "nome": "Pernas do Mar",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando está se equilibrando ou escalando, o pirata não fica desprevenido e seu deslocamento não é reduzido à metade."
+      }
+    ],
+    "equipamento": [
+      "Cimitarra"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "pistoleiro",
+    "nome": "Pistoleiro",
+    "nd": "2",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 8,
+    "percepcao": 4,
+    "sentidos": [],
+    "defesa": 18,
+    "resistencias": {
+      "fortitude": 6,
+      "reflexos": 12,
+      "vontade": 4
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 63,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 3,
+      "con": 2,
+      "int": 0,
+      "sab": 1,
+      "car": 0
+    },
+    "pericias": {
+      "cavalgar": 8,
+      "jogatina": 5
+    },
+    "ataques": [
+      {
+        "nome": "Adaga",
+        "bonusAtaque": 12,
+        "dano": "1d4+5",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Pistola (à distância)",
+        "bonusAtaque": 12,
+        "dano": "2d6+10",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Disparo Preciso",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O pistoleiro pode fazer ataques à distância contra oponentes envolvidos em combate corpo a corpo sem a penalidade padrão de –5 no teste de ataque."
+      },
+      {
+        "nome": "Saque Rápido",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O pistoleiro pode sacar ou guardar itens como uma ação livre e recarregar sua pistola como uma ação de movimento."
+      }
+    ],
+    "equipamento": [
+      "Adaga",
+      "Balas x20",
+      "Pistola"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "sahuagin_metamorfo",
+    "nome": "Sahuagin Metamorfo",
+    "nd": "3",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "sahuagin",
+    "tamanho": "medio",
+    "iniciativa": 7,
+    "percepcao": 4,
+    "sentidos": [
+      "visao_no_escuro",
+      "sensibilidade_a_luz"
+    ],
+    "defesa": 20,
+    "resistencias": {
+      "fortitude": 10,
+      "reflexos": 13,
+      "vontade": 4
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 108,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 15.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 1,
+      "con": 1,
+      "int": 0,
+      "sab": 1,
+      "car": -1
+    },
+    "pericias": {
+      "adestramento": 2,
+      "atletismo": 5
+    },
+    "ataques": [
+      {
+        "nome": "Tridente",
+        "bonusAtaque": 16,
+        "dano": "1d8+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 14,
+        "dano": "1d4+4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Afinidade com Tubarões",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O sahuagin pode se comunicar telepaticamente com tubarões em alcance médio."
+      },
+      {
+        "nome": "Corpo Salino",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 15,
+        "resistenciaTipo": null,
+        "descricao": "Se for totalmente submerso em água doce, o sahuagin fica fatigado (Fortitude CD 15 evita)."
+      },
+      {
+        "nome": "Derrubar",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Usa a manobra derrubar com o tridente (teste +18)."
+      },
+      {
+        "nome": "Forma de Tubarão",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O sahuagin adquire uma forma híbrida de tubarão. Ele se torna Grande, recebe faro e +2 em Força e na Defesa, e seus ataques se tornam tridente +18 (1d8+8) e mordida +16 (1d6+6). Nessa forma, ele sempre ataca o oponente atualmente com a maior quantidade de dano sofrido."
+      },
+      {
+        "nome": "Frenesi",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando acerta um ataque de mordida, o sahuagin entra em frenesi até o fim da cena. Neste estado, ele recebe +2 em testes de ataque e rolagens de dano."
+      }
+    ],
+    "equipamento": [
+      "Tridente"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "sahuagin_predador",
+    "nome": "Sahuagin Predador",
+    "nd": "1",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "sahuagin",
+    "tamanho": "medio",
+    "iniciativa": 5,
+    "percepcao": 3,
+    "sentidos": [
+      "visao_no_escuro",
+      "sensibilidade_a_luz"
+    ],
+    "defesa": 14,
+    "resistencias": {
+      "fortitude": 4,
+      "reflexos": 10,
+      "vontade": 1
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 15,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 12.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 1,
+      "con": 1,
+      "int": 0,
+      "sab": 1,
+      "car": -1
+    },
+    "pericias": {
+      "adestramento": 1,
+      "atletismo": 4
+    },
+    "ataques": [
+      {
+        "nome": "Espada curta",
+        "bonusAtaque": 11,
+        "dano": "1d6+3",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 9,
+        "dano": "1d4+3",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Afinidade com Tubarões",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O sahuagin pode se comunicar telepaticamente com tubarões em alcance médio."
+      },
+      {
+        "nome": "Corpo Salino",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 15,
+        "resistenciaTipo": null,
+        "descricao": "Se for totalmente submerso em água doce, o sahuagin fica fatigado (Fortitude CD 15 evita)."
+      },
+      {
+        "nome": "Frenesi",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando acerta um ataque de mordida, o sahuagin entra em frenesi até o fim da cena. Neste estado, ele recebe +2 em testes de ataque e rolagens de dano."
+      }
+    ],
+    "equipamento": [
+      "Espada curta"
+    ],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  }
+]

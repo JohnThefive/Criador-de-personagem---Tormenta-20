@@ -1,0 +1,1456 @@
+[
+  {
+    "id": "alma_acorrentada",
+    "nome": "Alma Acorrentada",
+    "nd": "7",
+    "regiao": "areas_de_tormenta",
+    "papel": "lacaio",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 14,
+    "percepcao": 9,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 26,
+    "resistencias": {
+      "fortitude": 14,
+      "reflexos": 19,
+      "vontade": 8
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 56,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 0.0,
+      "voo": 9.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": null,
+      "des": 7,
+      "con": 2,
+      "int": 1,
+      "sab": 0,
+      "car": -2
+    },
+    "pericias": {
+      "furtividade": 15
+    },
+    "ataques": [
+      {
+        "nome": "Toque cáustico",
+        "bonusAtaque": 26,
+        "dano": "2d6+10",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "acido",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Incorpóreo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A alma acorrentada é incorpórea."
+      },
+      {
+        "nome": "Agarrar Oportunista",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando a alma acorrentada acerta um ataque, pode usar a manobra agarrar (teste +28). Contra uma criatura agarrada, a alma é considerada corpórea. Se a alma matar uma criatura que esteja agarrando, ambas desaparecerão."
+      },
+      {
+        "nome": "Aura Cáustica",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada turno da alma, todas as criaturas adjacentes a ela sofrem 6d6 pontos de dano de ácido. Uma criatura que morra dentro da aura cáustica não pode ser trazida de volta à vida."
+      },
+      {
+        "nome": "Invisibilidade Rubra",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A alma tem camuflagem total em áreas de Tormenta. Quando ataca, essa camuflagem muda para leve até o início de seu próximo turno."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "arquibruxo_da_tormenta",
+    "nome": "Arquibruxo da Tormenta",
+    "nd": "14",
+    "regiao": "areas_de_tormenta",
+    "papel": "especial",
+    "tipo": "monstro",
+    "subtipo": "lefou",
+    "tamanho": "medio",
+    "iniciativa": 13,
+    "percepcao": 16,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 45,
+    "resistencias": {
+      "fortitude": 14,
+      "reflexos": 22,
+      "vontade": 28
+    },
+    "rd": {
+      "magia": 2
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 486,
+    "pm": 105,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 12.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": -1,
+      "des": 2,
+      "con": 5,
+      "int": 7,
+      "sab": 0,
+      "car": -2
+    },
+    "pericias": {
+      "conhecimento": 20,
+      "intimidacao": 19,
+      "misticismo": 28
+    },
+    "ataques": [],
+    "habilidades": [
+      {
+        "nome": "Abominar a Realidade",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O arquibruxo está sempre no limiar da realidade: ignora terreno difícil e efeitos que o tenham como alvo têm 50% de chance de falha."
+      },
+      {
+        "nome": "Arcano de Batalha",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O arquibruxo soma sua Inteligência nas rolagens de dano quando lança magias ou usa seu Raio Arcano (já contabilizado)."
+      },
+      {
+        "nome": "Insanidade da Tormenta",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 40,
+        "resistenciaTipo": null,
+        "descricao": "2d10 PM (Vontade CD 40 evita)."
+      },
+      {
+        "nome": "Magia Acelerada (mágica)",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando usa Raio Arcano ou lança uma magia com execução de ação completa ou menor, o arquibruxo muda a execução desta ação para livre."
+      },
+      {
+        "nome": "Mente Aberrante (mágica)",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz um teste de Vontade para resistir a um efeito, o arquibruxo causa 12d6 pontos de dano psíquico na criatura que gerou o efeito."
+      },
+      {
+        "nome": "Raio Arcano (mágica)",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 40,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura em alcance médio sofre 4d12+7 pontos de dano de trevas e não pode recuperar PV por 1 rodada (Reflexos CD 40 reduz à metade e evita a restrição de cura)."
+      },
+      {
+        "nome": "Magias (bruxo 14º, CD 40, foco cajado arcano)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Desintegrar (14 PM, 12d12+7 de essência, Fortitude reduz para 3d12, 0 PV vira pó), Dissipar Magia (3 PM), Momento de Tormenta (3 PM, sustentada; nuvem rubra de 30m que manifesta chuva ácida 6d4 ácido, neblina venenosa perda de 2d12 PV, raios escarlates 6d8 eletricidade em até 6 alvos, ou pesadelos reais 4d6 psíquico + perda de 1d4 PM), Seta Infalível de Talude (12 PM, 10 lanças de 1d8+1 de essência distribuídas em até 10 criaturas, uma recebe +7 no dano), Sussurros Insanos (10 PM, confunde até 3 criaturas), Velocidade (3 PM)."
+      }
+    ],
+    "equipamento": [
+      "Anel da energia",
+      "Cajado arcano de matéria vermelha"
+    ],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "bruxo_da_tormenta",
+    "nome": "Bruxo da Tormenta",
+    "nd": "6",
+    "regiao": "areas_de_tormenta",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 5,
+    "percepcao": 6,
+    "sentidos": [],
+    "defesa": 27,
+    "resistencias": {
+      "fortitude": 6,
+      "reflexos": 12,
+      "vontade": 18
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 142,
+    "pm": 41,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": -1,
+      "des": 0,
+      "con": 2,
+      "int": 5,
+      "sab": 1,
+      "car": -2
+    },
+    "pericias": {
+      "conhecimento": 12,
+      "misticismo": 15
+    },
+    "ataques": [],
+    "habilidades": [
+      {
+        "nome": "Cuspir Enxame (mágica)",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Um enxame de insetos rubros Médio surge em um ponto em alcance curto (sustentada). No fim de cada um dos seus turnos, ele causa 4d6 pontos de dano de ácido a qualquer criatura em seu espaço. O bruxo pode gastar uma ação de movimento para mover o enxame com deslocamento de 9m."
+      },
+      {
+        "nome": "Mente Aberrante (mágica)",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz um teste de Vontade para resistir a um efeito, o bruxo causa 5d6 pontos de dano psíquico na criatura que gerou o efeito."
+      },
+      {
+        "nome": "Raio Arcano (mágica)",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 24,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura em alcance médio sofre 2d12 pontos de dano de trevas e não pode curar PV por 1 rodada (Reflexos CD 24 reduz à metade e evita a restrição de cura)."
+      },
+      {
+        "nome": "Magias (bruxo 6º, CD 24, foco cajado arcano)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Névoa (3 PM, cubo de 6m com camuflagem, enjoa quem estiver dentro), Raio do Enfraquecimento (3 PM, exausta/fatigada), Sussurros Insanos (5 PM, confunde até 2 humanoides), Velocidade (3 PM, ação de movimento extra por turno até o fim da cena)."
+      }
+    ],
+    "equipamento": [
+      "Cajado arcano de matéria vermelha"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "enxame_infernal",
+    "nome": "Enxame Infernal",
+    "nd": "8",
+    "regiao": "areas_de_tormenta",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "lefeu",
+    "tamanho": "grande",
+    "iniciativa": 8,
+    "percepcao": 7,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 33,
+    "resistencias": {
+      "fortitude": 15,
+      "reflexos": 23,
+      "vontade": 8
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 350,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 3.0,
+      "voo": 15.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": -3,
+      "des": 3,
+      "con": 2,
+      "int": -1,
+      "sab": 1,
+      "car": -1
+    },
+    "pericias": {
+      "furtividade": 9
+    },
+    "ataques": [],
+    "habilidades": [
+      {
+        "nome": "Enxame",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Toda criatura no espaço do enxame infernal sofre automaticamente 5d12 pontos de dano de perfuração no início do turno do enxame, sem necessidade de teste de ataque."
+      },
+      {
+        "nome": "Drenar Existência",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O dano causado pelo enxame infernal só pode ser curado após 24 horas ou após o enxame ser destruído."
+      },
+      {
+        "nome": "Insanidade da Tormenta",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 26,
+        "resistenciaTipo": null,
+        "descricao": "2d6 PM (Vontade CD 26 evita)."
+      },
+      {
+        "nome": "Zumbido Repugnante",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 26,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura que comece seu turno em alcance curto do enxame infernal fica alquebrada e surda (Fortitude CD 26 evita)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "esmagador_coletivo",
+    "nome": "Esmagador Coletivo",
+    "nd": "15",
+    "regiao": "areas_de_tormenta",
+    "papel": "solo",
+    "tipo": "construto",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 12,
+    "percepcao": 13,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 46,
+    "resistencias": {
+      "fortitude": 28,
+      "reflexos": 22,
+      "vontade": 14
+    },
+    "rd": {
+      "geral": 15
+    },
+    "imunidadesEfeitos": [
+      "acertos_criticos",
+      "efeitos_de_metabolismo",
+      "metamorfose",
+      "paralisia"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 800,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 14,
+      "des": -1,
+      "con": 15,
+      "int": null,
+      "sab": 0,
+      "car": null
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Pancada (x3)",
+        "bonusAtaque": 39,
+        "dano": "4d10+28",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Não pode ser flanqueado",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O esmagador coletivo não pode ser flanqueado."
+      },
+      {
+        "nome": "Absorver",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O esmagador absorve uma criatura Média ou menor que esteja agarrando há 3 rodadas consecutivas. A criatura morre instantaneamente e, para cada nível que tinha, o esmagador recebe 20 PV temporários."
+      },
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Pancada (teste +44)."
+      },
+      {
+        "nome": "Arranhar",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início de seus turnos, o esmagador causa 4d10+28 pontos de dano de corte em qualquer criatura que esteja agarrando."
+      },
+      {
+        "nome": "Arremessar Corpos",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 40,
+        "resistenciaTipo": null,
+        "descricao": "O esmagador arremessa 1d4+2 corpos humanoides, distribuídos entre criaturas em alcance longo. Cada corpo causa 4d8+15 pontos de dano de impacto (Reflexos CD 40 evita)."
+      },
+      {
+        "nome": "Forma Horrenda",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 40,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura que inicie seu turno em alcance médio do esmagador fica apavorada por 1d4 rodadas e depois abalada (Vontade CD 40 muda para abalada por 1d4 rodadas; a criatura não pode ser afetada por esta habilidade até o fim da cena)."
+      },
+      {
+        "nome": "Pancada Estonteante",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 40,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura atingida pela pancada do esmagador fica atordoada por 1 rodada (Fortitude CD 40 evita). Uma criatura só pode ser atordoada por essa habilidade uma vez por cena."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "gatzvalith",
+    "nome": "Gatzvalith, Lorde da Tormenta",
+    "nd": "22",
+    "regiao": "areas_de_tormenta",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "lekael",
+    "tamanho": "grande",
+    "iniciativa": 28,
+    "percepcao": 39,
+    "sentidos": [
+      "percepcao_perfeita"
+    ],
+    "defesa": 69,
+    "resistencias": {
+      "fortitude": 34,
+      "reflexos": 36,
+      "vontade": 24
+    },
+    "rd": {
+      "geral": 25,
+      "magia": 10
+    },
+    "imunidadesEfeitos": [
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 3700,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 15.0,
+      "voo": 36.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 18,
+      "des": 12,
+      "con": 19,
+      "int": 15,
+      "sab": 8,
+      "car": 14
+    },
+    "pericias": {
+      "conhecimento": 36,
+      "diplomacia": 35,
+      "enganacao": 35,
+      "guerra": 41,
+      "intimidacao": 40,
+      "intuicao": 34,
+      "misticismo": 31
+    },
+    "ataques": [
+      {
+        "nome": "Rompedor da Realidade (x4)",
+        "bonusAtaque": 64,
+        "dano": "4d12+31",
+        "danoExtra": "1d4 essencia",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "indefinido",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Maior que a Morte",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Gatzvalith possui a habilidade Maior que a Morte."
+      },
+      {
+        "nome": "Coração da Tormenta",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Um lekael só pode ser verdadeiramente destruído se o coração de sua área de Tormenta também for; caso não seja, retorna à vida em uma semana."
+      },
+      {
+        "nome": "Domínio Sobre o Tempo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Gatzvalith pode fazer duas ações padrão e duas ações de movimento a cada turno."
+      },
+      {
+        "nome": "Invocar Lefeu",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por cena, invoca um ou mais lefeu a sua escolha, cujo ND total somado seja igual ao seu. Surgem em alcance curto e agem a partir da próxima rodada."
+      },
+      {
+        "nome": "Poder sobre a Realidade",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 55,
+        "resistenciaTipo": null,
+        "descricao": "Pode lançar qualquer magia simulada de até 4º círculo como um conjurador de 20º nível (CD 55, limite de PM 20) sem gastar PM."
+      },
+      {
+        "nome": "Telepatia",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Pode se comunicar com qualquer criatura inteligente dentro de sua área de Tormenta ou a 1km de distância fora dela. É imune a efeitos mentais."
+      },
+      {
+        "nome": "Carapaça Suprema",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Gatzvalith sofre apenas metade do dano de fontes mundanas, exceto de aço-rubi."
+      },
+      {
+        "nome": "Estrategista Perfeito",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz um ataque, Gatzvalith joga dois dados e usa o melhor resultado. Todos os lefeu em alcance longo também recebem este benefício."
+      },
+      {
+        "nome": "Insanidade da Tormenta",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 55,
+        "resistenciaTipo": null,
+        "descricao": "2d20 PM (Vontade CD 55 evita). Esta habilidade pode afetar mesmo criaturas que já foram afetadas pela Insanidade da Tormenta de outras criaturas neste dia."
+      },
+      {
+        "nome": "Raio da Anticriação (mágica)",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 55,
+        "resistenciaTipo": null,
+        "descricao": "Gatzvalith dispara um raio rubro em uma criatura em alcance médio, causando 18d12 pontos de dano de essência (Fortitude CD 55 reduz à metade). Uma criatura reduzida a 0 PV ou menos por esta habilidade morre automaticamente e não pode ser ressuscitada (nem mesmo por Dom da Ressurreição)."
+      },
+      {
+        "nome": "Reescrever a Realidade (mágica)",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por cena, Gatzvalith reorganiza uma parte da realidade em uma esfera de 15m ao seu redor: efeitos mágicos na área são automaticamente dissipados (como por Dissipar Magia) e habilidades mundanas com duração maior que instantânea se encerram; inimigos na área ficam alquebrados por 1d4 rodadas."
+      },
+      {
+        "nome": "Sedução (mágica)",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 55,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura a até 1km de Gatzvalith perde 1d10 PM, fica pasma por 1 rodada e vulnerável (Vontade CD 55 evita). Falhas consecutivas na mesma cena se acumulam: na 2ª, perde mais 1d10 PM e fica esmorecida; na 3ª, perde 1d10 PM permanentemente e fica atordoada por 1 rodada; na 4ª, suas ações físicas nesta rodada ficam sob controle de Gatzvalith (mantém consciência, podendo ver, ouvir e falar com esforço, mas não lançar magias); na 5ª falha, a vítima se transforma em uma criatura do tipo monstro (lefeu) e se torna um NPC sob controle do mestre."
+      },
+      {
+        "nome": "Varrer",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando Gatzvalith faz um ataque corpo a corpo e reduz os pontos de vida do alvo para 0 ou menos, pode realizar um ataque adicional contra outra criatura dentro do seu alcance."
+      }
+    ],
+    "equipamento": [
+      "Rompedor da Realidade"
+    ],
+    "tesouro": "dobro.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "infecto",
+    "nome": "Infecto",
+    "nd": "3",
+    "regiao": "areas_de_tormenta",
+    "papel": "lacaio",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 4,
+    "percepcao": 4,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 20,
+    "resistencias": {
+      "fortitude": 14,
+      "reflexos": 4,
+      "vontade": 4
+    },
+    "rd": {
+      "corte": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 30,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 1,
+      "con": 3,
+      "int": null,
+      "sab": 1,
+      "car": -3
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 16,
+        "dano": "1d8+9",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Doença",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura mordida por um infecto é exposta à doença infecção escarlate."
+      },
+      {
+        "nome": "Parasitas Famintos",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 17,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura que comece seu turno adjacente ao infecto, ou faça um ataque corpo a corpo contra ele, é exposta à doença infecção escarlate (Reflexos CD 17 evita)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "lefeu_burodron",
+    "nome": "Lefeu, Burodron",
+    "nd": "11",
+    "regiao": "areas_de_tormenta",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "lefeu",
+    "tamanho": "enorme",
+    "iniciativa": 9,
+    "percepcao": 15,
+    "sentidos": [
+      "percepcao_as_cegas_medio",
+      "visao_no_escuro"
+    ],
+    "defesa": 42,
+    "resistencias": {
+      "fortitude": 24,
+      "reflexos": 19,
+      "vontade": 12
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 550,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 15.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 15.0,
+      "escavacao": 15.0
+    },
+    "atributos": {
+      "for": 10,
+      "des": 0,
+      "con": 6,
+      "int": -1,
+      "sab": 1,
+      "car": -3
+    },
+    "pericias": {
+      "atletismo": 19,
+      "furtividade": 9
+    },
+    "ataques": [
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 35,
+        "dano": "3d8+23",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 35,
+        "dano": "2d8+14",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Dilacerar",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se o burodron acerta os dois ataques de garra em uma mesma criatura no mesmo turno, causa mais 8d6+8 pontos de dano."
+      },
+      {
+        "nome": "Insanidade da Tormenta",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 31,
+        "resistenciaTipo": null,
+        "descricao": "2d8 PM (Vontade CD 31 evita)."
+      },
+      {
+        "nome": "Morte que Vem da Terra",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 31,
+        "resistenciaTipo": null,
+        "descricao": "O burodron mergulha no solo e emerge violentamente em um ponto em alcance médio. Criaturas adjacentes sofrem 8d8+32 pontos de dano de impacto e ficam caídas (Reflexos CD 31 reduz à metade e evita a condição)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "lefeu_ezzayn",
+    "nome": "Lefeu, Ezzayn",
+    "nd": "17",
+    "regiao": "areas_de_tormenta",
+    "papel": "especial",
+    "tipo": "monstro",
+    "subtipo": "lefeu",
+    "tamanho": "enorme",
+    "iniciativa": 15,
+    "percepcao": 18,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 46,
+    "resistencias": {
+      "fortitude": 27,
+      "reflexos": 25,
+      "vontade": 16
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 650,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 12,
+      "des": 5,
+      "con": 3,
+      "int": 0,
+      "sab": 3,
+      "car": -3
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Garra",
+        "bonusAtaque": 49,
+        "dano": "4d8+29",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Enxame",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O ezzayn causa automaticamente 14d8 pontos de dano de corte, sem necessidade de teste de ataque, a criaturas em seu espaço (habilidade de enxame, somada aos ataques normais quando aplicável)."
+      },
+      {
+        "nome": "Anarquia Lacerante",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O ezzayn faz um ataque de garra como um bando contra cada criatura adjacente ou em um quadrado ocupado por ele, com um único teste de ataque comparado à Defesa de cada alvo."
+      },
+      {
+        "nome": "Distorção Temporal",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O ezzayn pode realizar uma ação padrão ou de movimento adicional por turno."
+      },
+      {
+        "nome": "Insanidade da Tormenta",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 44,
+        "resistenciaTipo": null,
+        "descricao": "4d6 PM (Vontade CD 44 evita)."
+      },
+      {
+        "nome": "Subjugar",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No fim de cada um de seus turnos, o ezzayn usa a manobra derrubar (teste +54) contra cada criatura em seu espaço, com um único teste comparado ao teste de cada criatura na área. Criaturas que perderem o teste de manobra por 5 ou mais ainda sofrem 8d8 pontos de dano de corte."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "lefeu_hurobakk",
+    "nome": "Lefeu, Hurobakk",
+    "nd": "9",
+    "regiao": "areas_de_tormenta",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "lefeu",
+    "tamanho": "grande",
+    "iniciativa": 16,
+    "percepcao": 14,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 35,
+    "resistencias": {
+      "fortitude": 21,
+      "reflexos": 16,
+      "vontade": 9
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 380,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 15.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 8,
+      "des": 3,
+      "con": 5,
+      "int": 1,
+      "sab": 2,
+      "car": -2
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Pinça (x2)",
+        "bonusAtaque": 28,
+        "dano": "2d8+13",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 28,
+        "dano": "1d8+13",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Insanidade da Tormenta",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 28,
+        "resistenciaTipo": null,
+        "descricao": "2d8 PM (Vontade CD 28 evita)."
+      },
+      {
+        "nome": "Investida Rubra",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O hurobakk faz uma investida e ataca com suas duas pinças, recebendo +4d8 nas rolagens de dano com cada pinça; pode continuar se movendo após os ataques, até o limite de seu deslocamento."
+      },
+      {
+        "nome": "Passar por Cima",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 28,
+        "resistenciaTipo": null,
+        "descricao": "O hurobakk percorre até o dobro do seu deslocamento, passando por qualquer criatura Média ou menor. Uma criatura atropelada sofre 6d8+30 pontos de dano de impacto e fica caída (Reflexos CD 28 reduz à metade e evita a condição)."
+      },
+      {
+        "nome": "Pinças Destruidoras",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 28,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura atingida pela pinça do hurobakk tem sua armadura ou escudo (à escolha do hurobakk) avariado. Se não estiver usando armadura nem empunhando escudo, sofre +2d8 pontos de dano (em ambos os casos, Reflexos CD 28 evita)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "lefeu_morgadrel",
+    "nome": "Lefeu, Morgadrel",
+    "nd": "13",
+    "regiao": "areas_de_tormenta",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "lefeu",
+    "tamanho": "enorme",
+    "iniciativa": 10,
+    "percepcao": 18,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 47,
+    "resistencias": {
+      "fortitude": 18,
+      "reflexos": 13,
+      "vontade": 26
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 670,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 15.0,
+      "voo": 0.0,
+      "natacao": 15.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 10,
+      "des": 0,
+      "con": 7,
+      "int": 1,
+      "sab": 3,
+      "car": -1
+    },
+    "pericias": {
+      "furtividade": 10
+    },
+    "ataques": [
+      {
+        "nome": "Pinça (x2)",
+        "bonusAtaque": 40,
+        "dano": "4d10+19",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Disparar Espinhos",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "acao_de_movimento",
+        "cdResistencia": 35,
+        "resistenciaTipo": null,
+        "descricao": "Criaturas em uma esfera de 9m ao redor do morgadrel sofrem 12d8+24 pontos de dano de perfuração e ficam fatigadas por veneno (cumulativo; Reflexos CD 35 reduz à metade e evita a condição). Recarga (ação de movimento)."
+      },
+      {
+        "nome": "Insanidade da Tormenta",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 35,
+        "resistenciaTipo": null,
+        "descricao": "2d10 PM (Vontade CD 35 evita)."
+      },
+      {
+        "nome": "Investida Surpresa",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz uma investida contra um inimigo surpreendido, o morgadrel pode desferir todos seus ataques de pinça contra essa criatura."
+      },
+      {
+        "nome": "Jato de Ácido",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "acao_de_movimento",
+        "cdResistencia": 35,
+        "resistenciaTipo": null,
+        "descricao": "Criaturas em uma linha de 15m sofrem 8d12 pontos de dano de ácido e ficam cobertas por muco, sofrendo 3d12 pontos de dano de ácido no início de seus próximos 2 turnos (Reflexos CD 35 reduz à metade e evita o muco). Recarga (ação de movimento)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "lefeu_veridak",
+    "nome": "Lefeu, Veridak",
+    "nd": "8",
+    "regiao": "areas_de_tormenta",
+    "papel": "lacaio",
+    "tipo": "monstro",
+    "subtipo": "lefeu",
+    "tamanho": "grande",
+    "iniciativa": 12,
+    "percepcao": 15,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 34,
+    "resistencias": {
+      "fortitude": 9,
+      "reflexos": 22,
+      "vontade": 15
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 64,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 36.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 4,
+      "con": 3,
+      "int": -1,
+      "sab": 2,
+      "car": -3
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Lâmina (x2)",
+        "bonusAtaque": 29,
+        "dano": "2d6+13",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 29,
+        "dano": "1d6+13",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Garra (teste +31)."
+      },
+      {
+        "nome": "Insanidade da Tormenta",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 26,
+        "resistenciaTipo": null,
+        "descricao": "2d6 PM (Vontade CD 26 evita)."
+      },
+      {
+        "nome": "Relâmpago Rubro",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O veridak faz uma investida e ataca com suas duas lâminas e suas duas garras. Os quatro ataques recebem o bônus de +2 da investida, mas devem ser feitos contra o mesmo alvo. Pode continuar se movendo após os ataques, até o limite de seu deslocamento."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "turba_de_infectos",
+    "nome": "Turba de Infectos",
+    "nd": "7",
+    "regiao": "areas_de_tormenta",
+    "papel": "lacaio",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 6,
+    "percepcao": 6,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 30,
+    "resistencias": {
+      "fortitude": 16,
+      "reflexos": 6,
+      "vontade": 6
+    },
+    "rd": {
+      "corte": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 80,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 1,
+      "con": 3,
+      "int": null,
+      "sab": 1,
+      "car": -3
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 26,
+        "dano": "2d8+26",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Bando",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Representa um bando de infectos agindo em conjunto."
+      },
+      {
+        "nome": "Doença",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura mordida por uma turba de infectos é exposta à doença infecção escarlate."
+      },
+      {
+        "nome": "Parasitas Famintos",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 24,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura que comece o turno adjacente à turba, ou faça um ataque corpo a corpo contra ela, é exposta à doença infecção escarlate (Reflexos CD 24 evita)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  }
+]

@@ -1,20 +1,28 @@
 import 'dart:io';
+import 'dart:math' as math;
+import 'package:flutter/foundation.dart' show listEquals, mapEquals, setEquals;
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../domain/entities/combate/grid_tatico.dart';
 import '../../../../domain/entities/mestre/modelos_mestre.dart';
 import '../../../controllers/mestre_controller/mestre_cubit.dart';
 import '../../../controllers/mestre_controller/mestre_state.dart';
 
-/// Tabuleiro VTT do Mestre com suporte a Imagem de Fundo na Grid,
-/// Fog of War por célula, Pintura de Terreno e Movimentação animada de Personagens.
+/// Tabuleiro VTT do Mestre com renderização via CustomPainter + BlocSelector por camada,
+/// suporte a Imagem de Fundo na Grid, Fog of War por célula, Terrenos,
+/// Alcance de Movimento T20, Medição, Pings e Movimentação animada de Tokens.
 class MestreBattlemapWidget extends StatefulWidget {
-  final MestreState state;
   final MestreCubit cubit;
+  final bool modoMedicao;
+  final bool modoPing;
+  final bool fogModoRevelar;
 
   const MestreBattlemapWidget({
     super.key,
-    required this.state,
     required this.cubit,
+    this.modoMedicao = false,
+    this.modoPing = false,
+    this.fogModoRevelar = true,
   });
 
   @override
@@ -49,193 +57,368 @@ class _MestreBattlemapWidgetState extends State<MestreBattlemapWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final mapaReal = widget.state.mapaAtual;
-    final mapaExibido = widget.state.mapaProjetado;
+    return BlocSelector<MestreCubit, MestreState,
+        ({int largura, int altura, bool emPreview})?>(
+      bloc: widget.cubit,
+      selector: (s) {
+        final mapaReal = s.mapaAtual;
+        final mapaExibido = s.mapaProjetado;
+        if (mapaReal == null || mapaExibido == null) return null;
+        return (
+          largura: mapaExibido.largura,
+          altura: mapaExibido.altura,
+          emPreview: s.estaEmPreviewJogador,
+        );
+      },
+      builder: (context, mapInfo) {
+        if (mapInfo == null) {
+          return const Center(
+            child: Text(
+              'Nenhum mapa selecionado nesta aventura.',
+              style: TextStyle(color: Colors.white70),
+            ),
+          );
+        }
 
-    if (mapaReal == null || mapaExibido == null) {
-      return const Center(
-        child: Text(
-          'Nenhum mapa selecionado nesta aventura.',
-          style: TextStyle(color: Colors.white70),
-        ),
-      );
-    }
+        final emPreviewJogador = mapInfo.emPreview;
 
-    final emPreviewJogador = widget.state.estaEmPreviewJogador;
+        return Container(
+          decoration: BoxDecoration(
+            color: const Color(0xFF0B1120),
+            borderRadius: BorderRadius.circular(14),
+            border: Border.all(
+              color: emPreviewJogador ? Colors.cyanAccent : Colors.white24,
+              width: emPreviewJogador ? 2.0 : 1.0,
+            ),
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(13),
+            child: Stack(
+              children: [
+                // 1. Área interativa com Zoom e Pan
+                InteractiveViewer(
+                  transformationController: _transformController,
+                  minScale: 0.5,
+                  maxScale: 3.5,
+                  boundaryMargin: const EdgeInsets.all(100),
+                  child: Center(
+                    child: AspectRatio(
+                      aspectRatio: mapInfo.largura / mapInfo.altura,
+                      child: LayoutBuilder(
+                        builder: (context, constraints) {
+                          final cellW = constraints.maxWidth / mapInfo.largura;
+                          final cellH = constraints.maxHeight / mapInfo.altura;
 
-    return Container(
-      decoration: BoxDecoration(
-        color: const Color(0xFF0B1120),
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(
-          color: emPreviewJogador ? Colors.cyanAccent : Colors.white24,
-          width: emPreviewJogador ? 2.0 : 1.0,
-        ),
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(13),
-        child: Stack(
-          children: [
-            // 1. Área interativa com Zoom e Pan
-            InteractiveViewer(
-              transformationController: _transformController,
-              minScale: 0.5,
-              maxScale: 3.5,
-              boundaryMargin: const EdgeInsets.all(100),
-              child: Center(
-                child: AspectRatio(
-                  aspectRatio: mapaExibido.largura / mapaExibido.altura,
-                  child: LayoutBuilder(
-                    builder: (context, constraints) {
-                      final cellW = constraints.maxWidth / mapaExibido.largura;
-                      final cellH = constraints.maxHeight / mapaExibido.altura;
+                          return Stack(
+                            fit: StackFit.expand,
+                            children: [
+                              // CAMADA 1: Imagem de Fundo ou Textura Temática
+                              _buildCamadaFundo(),
 
-                      return Stack(
-                        fit: StackFit.expand,
-                        children: [
-                          // CAMADA 1: Imagem de Fundo ou Textura Temática
-                          _buildCamadaFundo(mapaExibido),
+                              // CAMADA 2: Grid, Terrenos, Fog of War, Alcance + Custos, Medição T20 e Pings
+                              _buildCamadaGridEPainter(cellW, cellH),
 
-                          // CAMADA 2: Células da Grid, Terrenos, Fog of War e Alcance de Movimento
-                          for (int y = 0; y < mapaExibido.altura; y++)
-                            for (int x = 0; x < mapaExibido.largura; x++)
-                              _buildCelulaGrid(
-                                Posicao2D(x, y),
-                                cellW,
-                                cellH,
-                                mapaReal: mapaReal,
-                                mapaProjetado: mapaExibido,
-                                emPreviewJogador: emPreviewJogador,
-                              ),
+                              // CAMADA 3: Tokens de Personagens com Animação Suave ao Mover
+                              _buildCamadaTokens(cellW, cellH),
+                            ],
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                ),
 
-                          // CAMADA 3: Tokens de Personagens com Animação Suave ao Mover
-                          for (final token in mapaExibido.tokens)
-                            _buildTokenAnimado(
-                              token,
-                              cellW,
-                              cellH,
-                              emPreviewJogador: emPreviewJogador,
-                            ),
-                        ],
-                      );
-                    },
+                // 2. Banner de Status da Ferramenta / Preview no Topo Esquerdo
+                Positioned(
+                  top: 10,
+                  left: 10,
+                  child: _buildBannerStatus(),
+                ),
+
+                // 3. Controles Flutuantes de Zoom no Canto Inferior Direito
+                Positioned(
+                  right: 10,
+                  bottom: 10,
+                  child: _buildControlesZoom(),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildCamadaFundo() {
+    return Positioned.fill(
+      child: BlocSelector<
+          MestreCubit,
+          MestreState,
+          ({
+            String? caminho,
+            PresetFundoMapa preset,
+            double offsetX,
+            double offsetY,
+            double escala,
+            double rotacaoGraus,
+          })?>(
+        bloc: widget.cubit,
+        selector: (s) {
+          final mapa = s.mapaProjetado;
+          if (mapa == null) return null;
+          return (
+            caminho: mapa.imagemCaminhoLocal,
+            preset: mapa.presetFundo,
+            offsetX: mapa.ajusteOffsetX,
+            offsetY: mapa.ajusteOffsetY,
+            escala: mapa.ajusteEscala,
+            rotacaoGraus: mapa.ajusteRotacaoGraus,
+          );
+        },
+        builder: (context, fundo) {
+          if (fundo == null) return const SizedBox.shrink();
+
+          final caminho = fundo.caminho;
+          final Widget conteudoFundo =
+              (caminho != null && caminho.trim().isNotEmpty)
+                  ? Image.file(
+                      File(caminho),
+                      fit: BoxFit.cover,
+                      cacheWidth: 1600,
+                      errorBuilder: (_, _, _) =>
+                          _buildPresetGradient(fundo.preset),
+                    )
+                  : _buildPresetGradient(fundo.preset);
+
+          return ClipRect(
+            child: RepaintBoundary(
+              child: Transform.translate(
+                offset: Offset(fundo.offsetX, fundo.offsetY),
+                child: Transform.rotate(
+                  angle: fundo.rotacaoGraus * (math.pi / 180),
+                  child: Transform.scale(
+                    scale: fundo.escala,
+                    child: SizedBox.expand(child: conteudoFundo),
                   ),
                 ),
               ),
             ),
-
-            // 2. Banner de Status da Ferramenta / Preview no Topo Esquerdo
-            Positioned(
-              top: 10,
-              left: 10,
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                decoration: BoxDecoration(
-                  color: const Color(0xFF0F172A).withValues(alpha: 0.92),
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(
-                    color: emPreviewJogador
-                        ? Colors.cyanAccent
-                        : Colors.amberAccent.withValues(alpha: 0.6),
-                  ),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                      emPreviewJogador
-                          ? Icons.visibility
-                          : Icons.shield_moon_outlined,
-                      size: 16,
-                      color: emPreviewJogador
-                          ? Colors.cyanAccent
-                          : Colors.amberAccent,
-                    ),
-                    const SizedBox(width: 8),
-                    Text(
-                      emPreviewJogador
-                          ? 'PREVIEW: VISÃO DO JOGADOR (Células e tokens ocultos filtrados)'
-                          : 'Modo: ${widget.state.ferramentaMapa.rotulo} — ${widget.state.ferramentaMapa.dica}',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 11,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-
-            // 3. Controles Flutuantes de Zoom no Canto Inferior Direito
-            Positioned(
-              right: 10,
-              bottom: 10,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: const Color(0xFF0F172A).withValues(alpha: 0.88),
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.white24),
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(
-                      icon:
-                          const Icon(Icons.add, size: 18, color: Colors.white),
-                      tooltip: 'Aproximar (+)',
-                      constraints:
-                          const BoxConstraints(minWidth: 38, minHeight: 38),
-                      onPressed: _zoomIn,
-                    ),
-                    const Divider(color: Colors.white24, height: 1),
-                    IconButton(
-                      icon: const Icon(
-                        Icons.remove,
-                        size: 18,
-                        color: Colors.white,
-                      ),
-                      tooltip: 'Afastar (-)',
-                      constraints:
-                          const BoxConstraints(minWidth: 38, minHeight: 38),
-                      onPressed: _zoomOut,
-                    ),
-                    const Divider(color: Colors.white24, height: 1),
-                    IconButton(
-                      icon: const Icon(
-                        Icons.center_focus_strong,
-                        size: 18,
-                        color: Colors.amberAccent,
-                      ),
-                      tooltip: 'Centralizar mapa',
-                      constraints:
-                          const BoxConstraints(minWidth: 38, minHeight: 38),
-                      onPressed: _resetZoom,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
 
-  Widget _buildCamadaFundo(MapaBatalhaMestre mapa) {
-    final caminho = mapa.imagemCaminhoLocal;
-    if (caminho != null && caminho.trim().isNotEmpty) {
-      final arquivo = File(caminho);
-      if (arquivo.existsSync()) {
-        return Image.file(
-          arquivo,
-          fit: BoxFit.cover,
-          errorBuilder: (_, _, _) => _buildPresetGradient(mapa.presetFundo),
+  Widget _buildCamadaGridEPainter(double cellW, double cellH) {
+    return Positioned.fill(
+      child: BlocSelector<MestreCubit, MestreState, _GridLayerSlice?>(
+        bloc: widget.cubit,
+        selector: (s) {
+          final mapaReal = s.mapaAtual;
+          final mapaExibido = s.mapaProjetado;
+          if (mapaReal == null || mapaExibido == null) return null;
+          return _GridLayerSlice(
+            mapaReal: mapaReal,
+            mapaExibido: mapaExibido,
+            emPreviewJogador: s.estaEmPreviewJogador,
+            celulasAlcancaveis: s.celulasAlcancaveisToken,
+            custosMovimento: s.custosMovimentoToken,
+            pontoOrigemMedicao: s.pontoOrigemMedicao,
+            pontoDestinoMedicao: s.pontoDestinoMedicao,
+            pingsAtivos: s.pingsAtivos,
+          );
+        },
+        builder: (context, slice) {
+          if (slice == null) return const SizedBox.shrink();
+
+          return GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTapUp: (details) {
+              final x = (details.localPosition.dx / cellW)
+                  .floor()
+                  .clamp(0, slice.mapaExibido.largura - 1);
+              final y = (details.localPosition.dy / cellH)
+                  .floor()
+                  .clamp(0, slice.mapaExibido.altura - 1);
+              final pos = Posicao2D(x, y);
+
+              if (widget.modoMedicao) {
+                widget.cubit.registrarPontoMedicao(pos);
+              } else if (widget.modoPing) {
+                widget.cubit.soltarPing(pos);
+              } else {
+                widget.cubit.aoClicarCelulaMapa(
+                  pos,
+                  fogModoRevelar: widget.fogModoRevelar,
+                );
+              }
+            },
+            child: RepaintBoundary(
+              child: CustomPaint(
+                key: const ValueKey('battlemap_grid_painter'),
+                painter: _BattlemapGridPainter(
+                  mapaReal: slice.mapaReal,
+                  mapaExibido: slice.mapaExibido,
+                  emPreviewJogador: slice.emPreviewJogador,
+                  celulasAlcancaveis: slice.celulasAlcancaveis,
+                  custosMovimento: slice.custosMovimento,
+                  pontoOrigemMedicao: slice.pontoOrigemMedicao,
+                  pontoDestinoMedicao: slice.pontoDestinoMedicao,
+                  pingsAtivos: slice.pingsAtivos,
+                ),
+                size: Size.infinite,
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildCamadaTokens(double cellW, double cellH) {
+    return Positioned.fill(
+      child: BlocSelector<MestreCubit, MestreState, _TokenLayerSlice?>(
+        bloc: widget.cubit,
+        selector: (s) {
+          final mapaExibido = s.mapaProjetado;
+          if (mapaExibido == null) return null;
+          return _TokenLayerSlice(
+            tokensVisiveis: mapaExibido.tokens,
+            tokenSelecionadoId: s.tokenSelecionadoParaMoverId,
+            tokenTurnoAtualId: mapaExibido.tokenTurnoAtualId,
+            ferramentaMapa: s.ferramentaMapa,
+            emPreviewJogador: s.estaEmPreviewJogador,
+          );
+        },
+        builder: (context, slice) {
+          if (slice == null) return const SizedBox.shrink();
+
+          return Stack(
+            clipBehavior: Clip.none,
+            children: [
+              for (final token in slice.tokensVisiveis)
+                _buildTokenAnimado(
+                  token,
+                  cellW,
+                  cellH,
+                  selecionado: slice.tokenSelecionadoId == token.id,
+                  turnoAtivo: slice.tokenTurnoAtualId == token.id,
+                  ferramentaMapa: slice.ferramentaMapa,
+                  emPreviewJogador: slice.emPreviewJogador,
+                ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildBannerStatus() {
+    return BlocSelector<MestreCubit, MestreState,
+        ({bool emPreview, FerramentaMapaMestre ferramenta})>(
+      bloc: widget.cubit,
+      selector: (s) => (
+        emPreview: s.estaEmPreviewJogador,
+        ferramenta: s.ferramentaMapa,
+      ),
+      builder: (context, info) {
+        final emPreview = info.emPreview;
+        final String texto;
+        if (emPreview) {
+          texto =
+              'PREVIEW: VISÃO DO JOGADOR (Células e tokens ocultos filtrados)';
+        } else if (widget.modoMedicao) {
+          texto =
+              'Modo: Medir Distância — Toque na origem e no destino (1□ = 1,5m)';
+        } else if (widget.modoPing) {
+          texto =
+              'Modo: Pings — Toque no mapa para destacar uma posição';
+        } else {
+          texto = 'Modo: ${info.ferramenta.rotulo} — ${info.ferramenta.dica}';
+        }
+
+        return Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          decoration: BoxDecoration(
+            color: const Color(0xFF0F172A).withValues(alpha: 0.92),
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(
+              color: emPreview
+                  ? Colors.cyanAccent
+                  : Colors.amberAccent.withValues(alpha: 0.6),
+            ),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                emPreview
+                    ? Icons.visibility
+                    : (widget.modoMedicao
+                        ? Icons.straighten
+                        : (widget.modoPing
+                            ? Icons.place_outlined
+                            : Icons.shield_moon_outlined)),
+                size: 16,
+                color: emPreview ? Colors.cyanAccent : Colors.amberAccent,
+              ),
+              const SizedBox(width: 8),
+              Text(
+                texto,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 11,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
         );
-      }
-    }
-    return _buildPresetGradient(mapa.presetFundo);
+      },
+    );
+  }
+
+  Widget _buildControlesZoom() {
+    return Container(
+      decoration: BoxDecoration(
+        color: const Color(0xFF0F172A).withValues(alpha: 0.88),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: Colors.white24),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          IconButton(
+            icon: const Icon(Icons.add, size: 18, color: Colors.white),
+            tooltip: 'Aproximar (+)',
+            constraints: const BoxConstraints(minWidth: 38, minHeight: 38),
+            onPressed: _zoomIn,
+          ),
+          const Divider(color: Colors.white24, height: 1),
+          IconButton(
+            icon: const Icon(
+              Icons.remove,
+              size: 18,
+              color: Colors.white,
+            ),
+            tooltip: 'Afastar (-)',
+            constraints: const BoxConstraints(minWidth: 38, minHeight: 38),
+            onPressed: _zoomOut,
+          ),
+          const Divider(color: Colors.white24, height: 1),
+          IconButton(
+            icon: const Icon(
+              Icons.center_focus_strong,
+              size: 18,
+              color: Colors.amberAccent,
+            ),
+            tooltip: 'Centralizar mapa',
+            constraints: const BoxConstraints(minWidth: 38, minHeight: 38),
+            onPressed: _resetZoom,
+          ),
+        ],
+      ),
+    );
   }
 
   Widget _buildPresetGradient(PresetFundoMapa preset) {
@@ -282,154 +465,28 @@ class _MestreBattlemapWidgetState extends State<MestreBattlemapWidget> {
     );
   }
 
-  Widget _buildCelulaGrid(
-    Posicao2D pos,
-    double w,
-    double h, {
-    required MapaBatalhaMestre mapaReal,
-    required MapaBatalhaMestre mapaProjetado,
-    required bool emPreviewJogador,
-  }) {
-    final bool revelada = mapaReal.celulasReveladas.contains(pos);
-    final terreno = mapaProjetado.terrenos[pos] ?? TipoTerreno.normal;
-    final bool alcancavel =
-        widget.state.celulasAlcancaveisToken.contains(pos);
-    final double? custoMetros = widget.state.custosMovimentoToken[pos];
-
-    // Se estiver no Preview de Jogador e a célula não foi revelada, fica 100% opaca (ADR-003 §3.1)
-    if (emPreviewJogador && !revelada) {
-      return Positioned(
-        left: pos.x * w,
-        top: pos.y * h,
-        width: w,
-        height: h,
-        child: Container(
-          decoration: BoxDecoration(
-            color: const Color(0xFF050811),
-            border: Border.all(
-              color: Colors.white.withValues(alpha: 0.05),
-              width: 0.5,
-            ),
-          ),
-          child: const Center(
-            child: Icon(
-              Icons.cloud,
-              size: 14,
-              color: Colors.white12,
-            ),
-          ),
-        ),
-      );
-    }
-
-    Color corCelula = Colors.transparent;
-    if (terreno == TipoTerreno.obstaculo) {
-      corCelula = Colors.black.withValues(alpha: 0.72);
-    } else if (terreno == TipoTerreno.dificil) {
-      corCelula = const Color(0xFFD97706).withValues(alpha: 0.32);
-    }
-
-    if (alcancavel) {
-      corCelula = const Color(0xFF38BDF8).withValues(alpha: 0.35);
-    }
-
-    // Na visão do Mestre, células ocultas para os jogadores têm névoa translúcida
-    final bool nevoaMestre = !emPreviewJogador && !revelada;
-
-    return Positioned(
-      left: pos.x * w,
-      top: pos.y * h,
-      width: w,
-      height: h,
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: () => widget.cubit.aoClicarCelulaMapa(pos),
-        child: Container(
-          decoration: BoxDecoration(
-            color: corCelula,
-            border: Border.all(
-              color: alcancavel
-                  ? Colors.cyanAccent
-                  : Colors.white.withValues(alpha: mapaReal.opacidadeGrid),
-              width: alcancavel ? 1.5 : 0.6,
-            ),
-          ),
-          child: Stack(
-            children: [
-              // Indicador de Terreno
-              if (terreno == TipoTerreno.obstaculo)
-                const Center(
-                  child: Icon(
-                    Icons.block,
-                    size: 16,
-                    color: Colors.white38,
-                  ),
-                )
-              else if (terreno == TipoTerreno.dificil)
-                const Align(
-                  alignment: Alignment.topRight,
-                  child: Padding(
-                    padding: EdgeInsets.all(2),
-                    child: Icon(
-                      Icons.landscape,
-                      size: 12,
-                      color: Colors.amberAccent,
-                    ),
-                  ),
-                ),
-
-              // Indicador de Névoa (apenas para o Mestre saber que está oculta aos jogadores)
-              if (nevoaMestre)
-                Container(
-                  color: Colors.black.withValues(alpha: 0.48),
-                  alignment: Alignment.bottomLeft,
-                  padding: const EdgeInsets.all(2),
-                  child: const Icon(
-                    Icons.visibility_off,
-                    size: 11,
-                    color: Colors.white38,
-                  ),
-                ),
-
-              // Custo de movimento em metros quando um token está selecionado
-              if (alcancavel && custoMetros != null)
-                Align(
-                  alignment: Alignment.bottomRight,
-                  child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 3, vertical: 1),
-                    decoration: BoxDecoration(
-                      color: Colors.black87,
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    child: Text(
-                      '${custoMetros.toStringAsFixed(1)}m',
-                      style: const TextStyle(
-                        color: Colors.cyanAccent,
-                        fontSize: 8,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
   Widget _buildTokenAnimado(
     TokenNoMapa token,
     double w,
     double h, {
+    required bool selecionado,
+    required bool turnoAtivo,
+    required FerramentaMapaMestre ferramentaMapa,
     required bool emPreviewJogador,
   }) {
-    final bool selecionado =
-        widget.state.tokenSelecionadoParaMoverId == token.id;
+    final span = token.tamanhoQuadrados.clamp(1, 4);
     final Color corBase =
         token.ehHeroi ? const Color(0xFF2563EB) : const Color(0xFFDC2626);
     final bool oculto = !token.visivelParaJogadores;
+
+    final nomeLimpo = token.nome.trim();
+    final String iniciais = nomeLimpo.isEmpty
+        ? '?'
+        : (nomeLimpo.length >= 2
+            ? nomeLimpo.substring(0, 2).toUpperCase()
+            : nomeLimpo.toUpperCase());
+    final String primeiroNome =
+        nomeLimpo.isEmpty ? 'Token' : nomeLimpo.split(' ').first;
 
     return AnimatedPositioned(
       key: ValueKey('token_${token.id}'),
@@ -437,13 +494,19 @@ class _MestreBattlemapWidgetState extends State<MestreBattlemapWidget> {
       curve: Curves.easeOutCubic,
       left: token.posicao.x * w,
       top: token.posicao.y * h,
-      width: w,
-      height: h,
+      width: w * span,
+      height: h * span,
       child: GestureDetector(
         onTap: () {
-          if (widget.state.ferramentaMapa ==
-              FerramentaMapaMestre.nevoaDeGuerra) {
-            widget.cubit.aoClicarCelulaMapa(token.posicao);
+          if (widget.modoMedicao) {
+            widget.cubit.registrarPontoMedicao(token.posicao);
+          } else if (widget.modoPing) {
+            widget.cubit.soltarPing(token.posicao);
+          } else if (ferramentaMapa == FerramentaMapaMestre.nevoaDeGuerra) {
+            widget.cubit.aoClicarCelulaMapa(
+              token.posicao,
+              fogModoRevelar: widget.fogModoRevelar,
+            );
           } else {
             widget.cubit.aoClicarTokenNoMapa(token);
           }
@@ -458,15 +521,19 @@ class _MestreBattlemapWidgetState extends State<MestreBattlemapWidget> {
                 color: corBase,
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: selecionado ? Colors.amberAccent : Colors.white,
-                  width: selecionado ? 3.0 : 1.8,
+                  color: turnoAtivo
+                      ? Colors.greenAccent
+                      : (selecionado ? Colors.amberAccent : Colors.white),
+                  width: (turnoAtivo || selecionado) ? 3.0 : 1.8,
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: selecionado
-                        ? Colors.amberAccent.withValues(alpha: 0.6)
-                        : Colors.black54,
-                    blurRadius: selecionado ? 8 : 4,
+                    color: turnoAtivo
+                        ? Colors.greenAccent.withValues(alpha: 0.7)
+                        : (selecionado
+                            ? Colors.amberAccent.withValues(alpha: 0.6)
+                            : Colors.black54),
+                    blurRadius: (turnoAtivo || selecionado) ? 10 : 4,
                   ),
                 ],
               ),
@@ -475,15 +542,32 @@ class _MestreBattlemapWidgetState extends State<MestreBattlemapWidget> {
                 children: [
                   // Iniciais do Personagem
                   Text(
-                    token.nome.length >= 2
-                        ? token.nome.substring(0, 2).toUpperCase()
-                        : token.nome.toUpperCase(),
-                    style: const TextStyle(
+                    iniciais,
+                    style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w900,
-                      fontSize: 11,
+                      fontSize: span > 1 ? 14 : 11,
                     ),
                   ),
+
+                  if (turnoAtivo)
+                    Positioned(
+                      key: ValueKey('turno_ativo_${token.id}'),
+                      top: 0,
+                      left: 0,
+                      child: Container(
+                        padding: const EdgeInsets.all(2),
+                        decoration: const BoxDecoration(
+                          color: Colors.greenAccent,
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(
+                          Icons.play_arrow,
+                          size: 10,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
 
                   // Ícone indicando que o token está oculto para os jogadores (RF-M7)
                   if (oculto && !emPreviewJogador)
@@ -517,7 +601,7 @@ class _MestreBattlemapWidgetState extends State<MestreBattlemapWidget> {
                         borderRadius: BorderRadius.circular(4),
                       ),
                       child: Text(
-                        token.nome.split(' ').first,
+                        primeiroNome,
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 8,
@@ -535,5 +619,432 @@ class _MestreBattlemapWidgetState extends State<MestreBattlemapWidget> {
         ),
       ),
     );
+  }
+}
+
+class _GridLayerSlice {
+  final MapaBatalhaMestre mapaReal;
+  final MapaBatalhaMestre mapaExibido;
+  final bool emPreviewJogador;
+  final Set<Posicao2D> celulasAlcancaveis;
+  final Map<Posicao2D, double> custosMovimento;
+  final Posicao2D? pontoOrigemMedicao;
+  final Posicao2D? pontoDestinoMedicao;
+  final List<Posicao2D> pingsAtivos;
+
+  const _GridLayerSlice({
+    required this.mapaReal,
+    required this.mapaExibido,
+    required this.emPreviewJogador,
+    required this.celulasAlcancaveis,
+    required this.custosMovimento,
+    required this.pontoOrigemMedicao,
+    required this.pontoDestinoMedicao,
+    required this.pingsAtivos,
+  });
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is _GridLayerSlice &&
+        other.mapaReal.largura == mapaReal.largura &&
+        other.mapaReal.altura == mapaReal.altura &&
+        other.mapaReal.gridVisivel == mapaReal.gridVisivel &&
+        other.mapaReal.opacidadeGrid == mapaReal.opacidadeGrid &&
+        identical(other.mapaReal.terrenos, mapaReal.terrenos) &&
+        identical(other.mapaReal.celulasReveladas, mapaReal.celulasReveladas) &&
+        other.emPreviewJogador == emPreviewJogador &&
+        identical(other.celulasAlcancaveis, celulasAlcancaveis) &&
+        identical(other.custosMovimento, custosMovimento) &&
+        other.pontoOrigemMedicao == pontoOrigemMedicao &&
+        other.pontoDestinoMedicao == pontoDestinoMedicao &&
+        listEquals(other.pingsAtivos, pingsAtivos);
+  }
+
+  @override
+  int get hashCode => Object.hash(
+        mapaReal.largura,
+        mapaReal.altura,
+        mapaReal.gridVisivel,
+        mapaReal.opacidadeGrid,
+        identityHashCode(mapaReal.terrenos),
+        identityHashCode(mapaReal.celulasReveladas),
+        emPreviewJogador,
+        identityHashCode(celulasAlcancaveis),
+        identityHashCode(custosMovimento),
+        pontoOrigemMedicao,
+        pontoDestinoMedicao,
+        Object.hashAll(pingsAtivos),
+      );
+}
+
+class _TokenLayerSlice {
+  final List<TokenNoMapa> tokensVisiveis;
+  final String? tokenSelecionadoId;
+  final String? tokenTurnoAtualId;
+  final FerramentaMapaMestre ferramentaMapa;
+  final bool emPreviewJogador;
+
+  const _TokenLayerSlice({
+    required this.tokensVisiveis,
+    required this.tokenSelecionadoId,
+    required this.tokenTurnoAtualId,
+    required this.ferramentaMapa,
+    required this.emPreviewJogador,
+  });
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is _TokenLayerSlice &&
+        listEquals(other.tokensVisiveis, tokensVisiveis) &&
+        other.tokenSelecionadoId == tokenSelecionadoId &&
+        other.tokenTurnoAtualId == tokenTurnoAtualId &&
+        other.ferramentaMapa == ferramentaMapa &&
+        other.emPreviewJogador == emPreviewJogador;
+  }
+
+  @override
+  int get hashCode => Object.hash(
+        Object.hashAll(tokensVisiveis),
+        tokenSelecionadoId,
+        tokenTurnoAtualId,
+        ferramentaMapa,
+        emPreviewJogador,
+      );
+}
+
+class _BattlemapGridPainter extends CustomPainter {
+  final MapaBatalhaMestre mapaReal;
+  final MapaBatalhaMestre mapaExibido;
+  final bool emPreviewJogador;
+  final Set<Posicao2D> celulasAlcancaveis;
+  final Map<Posicao2D, double> custosMovimento;
+  final Posicao2D? pontoOrigemMedicao;
+  final Posicao2D? pontoDestinoMedicao;
+  final List<Posicao2D> pingsAtivos;
+
+  _BattlemapGridPainter({
+    required this.mapaReal,
+    required this.mapaExibido,
+    required this.emPreviewJogador,
+    required this.celulasAlcancaveis,
+    required this.custosMovimento,
+    required this.pontoOrigemMedicao,
+    required this.pontoDestinoMedicao,
+    required this.pingsAtivos,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final largura = mapaExibido.largura;
+    final altura = mapaExibido.altura;
+    if (largura <= 0 || altura <= 0) return;
+
+    final cellW = size.width / largura;
+    final cellH = size.height / altura;
+
+    _desenharTerrenos(canvas, cellW, cellH, largura, altura);
+    _desenharAlcanceMovimento(canvas, cellW, cellH, largura, altura);
+    _desenharFogOfWar(canvas, cellW, cellH, largura, altura);
+    if (mapaExibido.gridVisivel) {
+      _desenharLinhasGrid(canvas, size, cellW, cellH, largura, altura);
+    }
+    _desenharBordasAlcanceECustos(canvas, cellW, cellH, largura, altura);
+    _desenharMedicaoDistancia(canvas, cellW, cellH);
+    _desenharPingsAtivos(canvas, cellW, cellH);
+  }
+
+  bool _dentroLimites(Posicao2D pos, int largura, int altura) {
+    return pos.x >= 0 && pos.x < largura && pos.y >= 0 && pos.y < altura;
+  }
+
+  void _desenharTerrenos(
+    Canvas canvas,
+    double cellW,
+    double cellH,
+    int largura,
+    int altura,
+  ) {
+    if (mapaExibido.terrenos.isEmpty) return;
+
+    final obstaculoFill = Paint()
+      ..color = Colors.black.withValues(alpha: 0.72)
+      ..style = PaintingStyle.fill;
+    final obstaculoMark = Paint()
+      ..color = Colors.white38
+      ..strokeWidth = 1.4
+      ..style = PaintingStyle.stroke;
+    final dificilFill = Paint()
+      ..color = const Color(0xFFD97706).withValues(alpha: 0.32)
+      ..style = PaintingStyle.fill;
+    final dificilMark = Paint()
+      ..color = Colors.amberAccent.withValues(alpha: 0.85)
+      ..strokeWidth = 1.3
+      ..style = PaintingStyle.stroke;
+
+    for (final entry in mapaExibido.terrenos.entries) {
+      final pos = entry.key;
+      if (!_dentroLimites(pos, largura, altura)) continue;
+
+      final rect = Rect.fromLTWH(pos.x * cellW, pos.y * cellH, cellW, cellH);
+      if (entry.value == TipoTerreno.obstaculo) {
+        canvas.drawRect(rect, obstaculoFill);
+        final pad = math.min(cellW, cellH) * 0.28;
+        canvas.drawLine(
+          Offset(rect.left + pad, rect.top + pad),
+          Offset(rect.right - pad, rect.bottom - pad),
+          obstaculoMark,
+        );
+        canvas.drawLine(
+          Offset(rect.right - pad, rect.top + pad),
+          Offset(rect.left + pad, rect.bottom - pad),
+          obstaculoMark,
+        );
+      } else if (entry.value == TipoTerreno.dificil) {
+        canvas.drawRect(rect, dificilFill);
+        final iconSize = math.min(cellW, cellH) * 0.24;
+        final topRight = Offset(rect.right - 3, rect.top + 3);
+        final path = Path()
+          ..moveTo(topRight.dx - iconSize, topRight.dy + iconSize)
+          ..lineTo(topRight.dx - iconSize * 0.5, topRight.dy)
+          ..lineTo(topRight.dx, topRight.dy + iconSize)
+          ..close();
+        canvas.drawPath(path, dificilMark);
+      }
+    }
+  }
+
+  void _desenharAlcanceMovimento(
+    Canvas canvas,
+    double cellW,
+    double cellH,
+    int largura,
+    int altura,
+  ) {
+    if (celulasAlcancaveis.isEmpty) return;
+
+    final fillPaint = Paint()
+      ..color = const Color(0xFF38BDF8).withValues(alpha: 0.35)
+      ..style = PaintingStyle.fill;
+
+    for (final pos in celulasAlcancaveis) {
+      if (!_dentroLimites(pos, largura, altura)) continue;
+      if (emPreviewJogador && !mapaReal.celulasReveladas.contains(pos)) continue;
+
+      final rect = Rect.fromLTWH(pos.x * cellW, pos.y * cellH, cellW, cellH);
+      canvas.drawRect(rect, fillPaint);
+    }
+  }
+
+  void _desenharFogOfWar(
+    Canvas canvas,
+    double cellW,
+    double cellH,
+    int largura,
+    int altura,
+  ) {
+    final reveladas = mapaReal.celulasReveladas;
+    if (reveladas.length == largura * altura) return;
+
+    final fogPaint = Paint()
+      ..color = emPreviewJogador
+          ? const Color(0xFF050811)
+          : Colors.black.withValues(alpha: 0.48)
+      ..style = PaintingStyle.fill;
+    final previewFogBorder = Paint()
+      ..color = Colors.white.withValues(alpha: 0.05)
+      ..strokeWidth = 0.5
+      ..style = PaintingStyle.stroke;
+
+    for (int y = 0; y < altura; y++) {
+      for (int x = 0; x < largura; x++) {
+        final pos = Posicao2D(x, y);
+        if (reveladas.contains(pos)) continue;
+
+        final rect = Rect.fromLTWH(x * cellW, y * cellH, cellW, cellH);
+        canvas.drawRect(rect, fogPaint);
+        if (emPreviewJogador) {
+          canvas.drawRect(rect, previewFogBorder);
+        }
+      }
+    }
+  }
+
+  void _desenharLinhasGrid(
+    Canvas canvas,
+    Size size,
+    double cellW,
+    double cellH,
+    int largura,
+    int altura,
+  ) {
+    final gridPaint = Paint()
+      ..color = Colors.white.withValues(alpha: mapaExibido.opacidadeGrid)
+      ..strokeWidth = 0.6
+      ..style = PaintingStyle.stroke;
+
+    for (int x = 0; x <= largura; x++) {
+      final dx = x * cellW;
+      canvas.drawLine(Offset(dx, 0), Offset(dx, size.height), gridPaint);
+    }
+    for (int y = 0; y <= altura; y++) {
+      final dy = y * cellH;
+      canvas.drawLine(Offset(0, dy), Offset(size.width, dy), gridPaint);
+    }
+  }
+
+  void _desenharBordasAlcanceECustos(
+    Canvas canvas,
+    double cellW,
+    double cellH,
+    int largura,
+    int altura,
+  ) {
+    if (celulasAlcancaveis.isEmpty) return;
+
+    final borderPaint = Paint()
+      ..color = Colors.cyanAccent
+      ..strokeWidth = 1.5
+      ..style = PaintingStyle.stroke;
+    final pillBgPaint = Paint()
+      ..color = Colors.black87
+      ..style = PaintingStyle.fill;
+    final textPainter = TextPainter(textDirection: TextDirection.ltr);
+
+    for (final pos in celulasAlcancaveis) {
+      if (!_dentroLimites(pos, largura, altura)) continue;
+      if (emPreviewJogador && !mapaReal.celulasReveladas.contains(pos)) continue;
+
+      final rect = Rect.fromLTWH(pos.x * cellW, pos.y * cellH, cellW, cellH);
+      canvas.drawRect(rect, borderPaint);
+
+      final custo = custosMovimento[pos];
+      if (custo != null) {
+        textPainter.text = TextSpan(
+          text: '${custo.toStringAsFixed(1)}m',
+          style: const TextStyle(
+            color: Colors.cyanAccent,
+            fontSize: 8,
+            fontWeight: FontWeight.bold,
+          ),
+        );
+        textPainter.layout();
+
+        final bgWidth = textPainter.width + 6;
+        final bgHeight = textPainter.height + 2;
+        if (bgWidth <= cellW && bgHeight <= cellH) {
+          final bgRect = RRect.fromRectAndRadius(
+            Rect.fromLTWH(
+              rect.right - bgWidth - 2,
+              rect.bottom - bgHeight - 2,
+              bgWidth,
+              bgHeight,
+            ),
+            const Radius.circular(3),
+          );
+          canvas.drawRRect(bgRect, pillBgPaint);
+          textPainter.paint(
+            canvas,
+            Offset(bgRect.left + 3, bgRect.top + 1),
+          );
+        }
+      }
+    }
+  }
+
+  void _desenharMedicaoDistancia(
+    Canvas canvas,
+    double cellW,
+    double cellH,
+  ) {
+    final orig = pontoOrigemMedicao;
+    if (orig == null) return;
+
+    final origCenter = Offset((orig.x + 0.5) * cellW, (orig.y + 0.5) * cellH);
+    final markerFill = Paint()
+      ..color = Colors.amberAccent
+      ..style = PaintingStyle.fill;
+    final markerStroke = Paint()
+      ..color = Colors.black87
+      ..strokeWidth = 1.5
+      ..style = PaintingStyle.stroke;
+
+    final dest = pontoDestinoMedicao;
+    if (dest != null) {
+      final destCenter = Offset((dest.x + 0.5) * cellW, (dest.y + 0.5) * cellH);
+
+      final lineGlow = Paint()
+        ..color = Colors.black54
+        ..strokeWidth = 4.5
+        ..strokeCap = StrokeCap.round
+        ..style = PaintingStyle.stroke;
+      final linePaint = Paint()
+        ..color = Colors.amberAccent
+        ..strokeWidth = 2.4
+        ..strokeCap = StrokeCap.round
+        ..style = PaintingStyle.stroke;
+
+      canvas.drawLine(origCenter, destCenter, lineGlow);
+      canvas.drawLine(origCenter, destCenter, linePaint);
+
+      canvas.drawCircle(destCenter, 5.0, markerFill);
+      canvas.drawCircle(destCenter, 5.0, markerStroke);
+    }
+
+    canvas.drawCircle(origCenter, 5.0, markerFill);
+    canvas.drawCircle(origCenter, 5.0, markerStroke);
+  }
+
+  void _desenharPingsAtivos(
+    Canvas canvas,
+    double cellW,
+    double cellH,
+  ) {
+    if (pingsAtivos.isEmpty) return;
+
+    final outerFill = Paint()
+      ..color = Colors.cyanAccent.withValues(alpha: 0.22)
+      ..style = PaintingStyle.fill;
+    final outerStroke = Paint()
+      ..color = Colors.cyanAccent
+      ..strokeWidth = 2.0
+      ..style = PaintingStyle.stroke;
+    final innerStroke = Paint()
+      ..color = Colors.amberAccent
+      ..strokeWidth = 1.8
+      ..style = PaintingStyle.stroke;
+    final centerDot = Paint()
+      ..color = Colors.amberAccent
+      ..style = PaintingStyle.fill;
+
+    final baseRadius = math.min(cellW, cellH);
+
+    for (final pos in pingsAtivos) {
+      final center = Offset((pos.x + 0.5) * cellW, (pos.y + 0.5) * cellH);
+      canvas.drawCircle(center, baseRadius * 0.42, outerFill);
+      canvas.drawCircle(center, baseRadius * 0.42, outerStroke);
+      canvas.drawCircle(center, baseRadius * 0.24, innerStroke);
+      canvas.drawCircle(center, 3.0, centerDot);
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant _BattlemapGridPainter oldDelegate) {
+    return oldDelegate.mapaExibido.largura != mapaExibido.largura ||
+        oldDelegate.mapaExibido.altura != mapaExibido.altura ||
+        oldDelegate.mapaExibido.gridVisivel != mapaExibido.gridVisivel ||
+        oldDelegate.mapaExibido.opacidadeGrid != mapaExibido.opacidadeGrid ||
+        oldDelegate.emPreviewJogador != emPreviewJogador ||
+        !mapEquals(oldDelegate.mapaExibido.terrenos, mapaExibido.terrenos) ||
+        !setEquals(
+          oldDelegate.mapaReal.celulasReveladas,
+          mapaReal.celulasReveladas,
+        ) ||
+        !setEquals(oldDelegate.celulasAlcancaveis, celulasAlcancaveis) ||
+        !mapEquals(oldDelegate.custosMovimento, custosMovimento) ||
+        oldDelegate.pontoOrigemMedicao != pontoOrigemMedicao ||
+        oldDelegate.pontoDestinoMedicao != pontoDestinoMedicao ||
+        !listEquals(oldDelegate.pingsAtivos, pingsAtivos);
   }
 }

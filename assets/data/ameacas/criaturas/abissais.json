@@ -1,0 +1,1355 @@
+[
+  {
+    "id": "abahddon",
+    "nome": "Abahddon, Lorde das Profundezas",
+    "nd": "20",
+    "regiao": "abissais",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": "abissal",
+    "tamanho": "grande",
+    "iniciativa": 19,
+    "percepcao": 22,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 64,
+    "resistencias": {
+      "fortitude": 29,
+      "reflexos": 21,
+      "vontade": 36
+    },
+    "rd": {
+      "luz": 20
+    },
+    "imunidadesEfeitos": [
+      "adivinhacao",
+      "efeitos_mentais"
+    ],
+    "imunidadesDano": [
+      "acido",
+      "fogo",
+      "veneno"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +5"
+    ],
+    "pv": 2555,
+    "pm": 156,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 18.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 8,
+      "des": 3,
+      "con": 5,
+      "int": 16,
+      "sab": 6,
+      "car": 12
+    },
+    "pericias": {
+      "atletismo": 24,
+      "diplomacia": 33,
+      "enganacao": 38,
+      "intimidacao": 33,
+      "intuicao": 27,
+      "misticismo": 32
+    },
+    "ataques": [
+      {
+        "nome": "Kazidhaan",
+        "bonusAtaque": 64,
+        "dano": "6d12+92",
+        "danoExtra": "2d8 essencia",
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 58,
+        "dano": "8d6+44",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Cauda",
+        "bonusAtaque": 58,
+        "dano": "8d8+36",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Maior que a Morte",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Abahddon é imune a efeitos que matam instantaneamente ou reduzem atributos a 0, e não pode ser mantido morto permanentemente."
+      },
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Cauda (teste +60)."
+      },
+      {
+        "nome": "Concentração Abissal",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Abahddon pode lançar magias mesmo com as mãos presas ou amordaçado (como sob efeito de Magia Discreta) e, em testes de Vontade para concentração, rola dois dados e usa o melhor resultado."
+      },
+      {
+        "nome": "Constrição",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada um de seus turnos, Abahddon causa 8d8+36 pontos de dano de impacto em qualquer criatura que esteja agarrando."
+      },
+      {
+        "nome": "Dádiva Abissal",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Abahddon transfere uma fração de seu poder para outra criatura em alcance curto, que escolhe um benefício: aprender e lançar uma magia de até 3º círculo (atributo-chave Carisma); +1 em um atributo à escolha; ou receber um poder qualquer (exceto concedido ou da Tormenta) cujos pré-requisitos cumpra. Uma mesma criatura só pode receber uma dádiva de Abahddon."
+      },
+      {
+        "nome": "Pacto Maculado",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura em alcance médio ouve 'conselhos' de uma voz suave (comandos simples). A cada conselho seguido, a criatura recebe +2 em rolagens de dano por 1 rodada e 2 PM temporários."
+      },
+      {
+        "nome": "Por Trás das Cortinas",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz um teste de Diplomacia, Enganação, Intimidação, Intuição ou Percepção, Abahddon rola dois dados e usa o melhor resultado."
+      },
+      {
+        "nome": "Preço do Pacto",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando Abahddon usa Desejo, Dádiva Abissal ou Pacto Maculado para conceder um efeito benéfico a uma criatura, essa criatura sofre uma penalidade cumulativa de -5 em testes de perícia e rolagens de dano contra Abahddon, durando o mesmo que o efeito benéfico."
+      },
+      {
+        "nome": "Magias (conjurador arcano 20º, CD 51, limite de PM 36)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Chuva de Meteoros (completa, 15 PM): quadrado de 36m em alcance longo, 15d6 de dano de impacto + 15d6 de dano de fogo, caído e agarrado sob escombros (Ref reduz à metade e evita condição). Desejo (padrão, 15 PM): dissipa magias de até 4º círculo, transporta até 10 voluntários em alcance longo para outro plano, ou algo mais poderoso ao custo de 2 PM. Desespero Esmagador (padrão, 8 PM): cone de 6m, debilitado e esmorecido (Von reduz para 1 rodada). Dissipar Magia (padrão, 3 PM): dissipa magias com CD igual ou menor que o teste de Misticismo. Legião (padrão, 15 PM, sustentada): até 10 criaturas em alcance médio obedecem cegamente, exceto ordens suicidas (teste de Vontade ao fim de cada turno para se libertar, ficando abaladas 1 rodada). Marionete (padrão, 10 PM, sustentada): controla as ações físicas de uma criatura em alcance médio (Fortitude anula). Rogar Maldição (padrão, 10 PM): criatura em alcance curto fica esmorecida e muda, permanentemente incapaz de se comunicar ou lançar magias (Fort evita)."
+      }
+    ],
+    "equipamento": [
+      "kazidhaan"
+    ],
+    "tesouro": "triplo.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "aucharai",
+    "nome": "Aucharai",
+    "nd": "6",
+    "regiao": "abissais",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": "abissal",
+    "tamanho": "medio",
+    "iniciativa": 10,
+    "percepcao": 6,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 26,
+    "resistencias": {
+      "fortitude": 8,
+      "reflexos": 18,
+      "vontade": 10
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "acido",
+      "veneno"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 240,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 5,
+      "con": 2,
+      "int": 3,
+      "sab": 1,
+      "car": 1
+    },
+    "pericias": {
+      "acrobacia": 10,
+      "atletismo": 9,
+      "furtividade": 15,
+      "ladinagem": 8
+    },
+    "ataques": [
+      {
+        "nome": "Espada Curta (x2)",
+        "bonusAtaque": 20,
+        "dano": "2d6+18",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Evasão",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O aucharai possui Evasão."
+      },
+      {
+        "nome": "Ataque Furtivo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "+2d6 de dano em ataque furtivo."
+      },
+      {
+        "nome": "Detectar Pensamentos",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 24,
+        "resistenciaTipo": null,
+        "descricao": "O aucharai detecta constantemente os pensamentos superficiais de todas as criaturas inteligentes em alcance curto. Ele não pode ser surpreendido por criaturas cujos pensamentos esteja detectando dessa forma e recebe +2 na Defesa e em testes de perícia contra elas. Uma criatura ciente desta habilidade pode gastar uma ação de movimento e fazer um teste de Vontade (CD 24); se passar, esconde seus pensamentos até o fim da cena."
+      },
+      {
+        "nome": "Escurecer Olhos",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 24,
+        "resistenciaTipo": "fortitude",
+        "descricao": "O aucharai invoca uma sombra mística sobre os olhos de uma criatura em alcance curto. A vítima fica cega (Fort CD 24 reduz para 1 rodada). Recarga (movimento)."
+      },
+      {
+        "nome": "Protegido Pela Escuridão",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se estiver em uma condição de pouca iluminação que forneça camuflagem leve, em vez disso o aucharai recebe camuflagem total."
+      },
+      {
+        "nome": "Visão Abissal",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O aucharai está permanentemente sob efeito da magia Visão Mística com o aprimoramento que permite enxergar criaturas e objetos invisíveis."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "diabrete",
+    "nome": "Diabrete",
+    "nd": "2",
+    "regiao": "abissais",
+    "papel": "lacaio",
+    "tipo": "espirito",
+    "subtipo": "abissal",
+    "tamanho": "minusculo",
+    "iniciativa": 5,
+    "percepcao": 4,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 17,
+    "resistencias": {
+      "fortitude": 6,
+      "reflexos": 12,
+      "vontade": 4
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "acido",
+      "veneno"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 20,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 12.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": -2,
+      "des": 2,
+      "con": 0,
+      "int": 2,
+      "sab": 1,
+      "car": 1
+    },
+    "pericias": {
+      "furtividade": 10,
+      "misticismo": 7
+    },
+    "ataques": [
+      {
+        "nome": "Ferrão",
+        "bonusAtaque": 14,
+        "dano": "1d6+8",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Peste Invisível",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O diabrete se torna invisível (como na magia Invisibilidade) até o fim da cena ou até fazer um ataque."
+      },
+      {
+        "nome": "Veneno",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 16,
+        "resistenciaTipo": null,
+        "descricao": "Peçonha comum (perde 1d12 pontos de vida, Fort CD 16 evita)."
+      },
+      {
+        "nome": "Familiar",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Um diabrete fornece +1 PM para gastar em aprimoramentos sempre que o devoto lança uma magia de ilusão ou veneno."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "diabrete_negociante",
+    "nome": "Diabrete Negociante",
+    "nd": "4",
+    "regiao": "abissais",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": "abissal",
+    "tamanho": "pequeno",
+    "iniciativa": 7,
+    "percepcao": 6,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 21,
+    "resistencias": {
+      "fortitude": 4,
+      "reflexos": 15,
+      "vontade": 11
+    },
+    "rd": {
+      "fogo": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "acido",
+      "veneno"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 120,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 12.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 3,
+      "con": 0,
+      "int": 6,
+      "sab": 2,
+      "car": 5
+    },
+    "pericias": {
+      "enganacao": 14,
+      "intuicao": 11,
+      "oficio_armeiro": 13,
+      "oficio_artesao": 13
+    },
+    "ataques": [
+      {
+        "nome": "Martelo de Forja",
+        "bonusAtaque": 15,
+        "dano": "1d8+8",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 15,
+        "dano": "1d6+8",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Barganha",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O diabrete negociante pode conceder um Desejo a uma criatura. Em troca, a criatura dá algo muito importante e imaterial, à escolha do mestre. Exemplos: Amor (um parceiro abandona o personagem, limite de parceiros diminui em -1); Coragem (falha automaticamente em resistências contra medo e sofre -5 em Iniciativa); Felicidade (perde benefícios de itens de alimentação e nunca tem recuperação melhor que normal); Juventude (perde 1 ponto de Constituição e falha automaticamente contra efeitos de cansaço)."
+      },
+      {
+        "nome": "Confundir",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 18,
+        "resistenciaTipo": "vontade",
+        "descricao": "Uma criatura em alcance curto fica confusa (Von CD 18 evita e a criatura fica imune a esta habilidade por um dia). Recarga (movimento)."
+      },
+      {
+        "nome": "Risada Enervante",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Criaturas a até 9m do diabrete sofrem -2 em Intuição e Vontade."
+      }
+    ],
+    "equipamento": [
+      "instrumentos_de_oficio_armeiro_aprimorados",
+      "instrumentos_de_oficio_artesao_aprimorados"
+    ],
+    "tesouro": "padrao e 1d4-1 itens feitos dos sentimentos de alguem.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "jhumariel",
+    "nome": "Jhumariel",
+    "nd": "10",
+    "regiao": "abissais",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": "abissal",
+    "tamanho": "grande",
+    "iniciativa": 7,
+    "percepcao": 8,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 36,
+    "resistencias": {
+      "fortitude": 22,
+      "reflexos": 14,
+      "vontade": 12
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "acido",
+      "fogo",
+      "veneno"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 400,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 2,
+      "con": 6,
+      "int": 2,
+      "sab": 1,
+      "car": -2
+    },
+    "pericias": {
+      "atletismo": 15,
+      "intimidacao": 15
+    },
+    "ataques": [
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 29,
+        "dano": "2d8+20",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida Ácida",
+        "bonusAtaque": 29,
+        "dano": "2d6+14",
+        "danoExtra": "2d6 acido",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Cuspe",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 30,
+        "resistenciaTipo": "reflexos",
+        "descricao": "O jhumariel cospe saliva ácida em uma criatura em alcance curto. A vítima sofre 8d8 pontos de dano de ácido e fica coberta por muco corrosivo que causa 4d8 pontos de dano de ácido no início de cada um dos seus dois próximos turnos (Ref CD 30 reduz à metade e evita o muco). Recarga (movimento)."
+      },
+      {
+        "nome": "Dilacerar",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se o jhumariel acerta os dois ataques de garra em uma mesma criatura no mesmo turno, causa mais 4d6+4 pontos de dano."
+      },
+      {
+        "nome": "Invocar Carvarel",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por cena, o jhumariel invoca 1d3+1 carvarel (guerreiro de chifres). Eles surgem em alcance curto e agem a partir da próxima rodada, em suas iniciativas."
+      },
+      {
+        "nome": "Mau Cheiro",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 30,
+        "resistenciaTipo": "fortitude",
+        "descricao": "O jhumariel expele um gás fétido. Todas as criaturas em alcance curto ficam enjoadas por 1d6 rodadas (Fort CD 30 evita). Uma criatura que passe no teste fica imune a esta habilidade por um dia. Veneno."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao mais 1d4 doses de saliva acida (cd 30 para extrair).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "lamashtu",
+    "nome": "Lamashtu, Rainha dos Massacres",
+    "nd": "20",
+    "regiao": "abissais",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": "abissal",
+    "tamanho": "grande",
+    "iniciativa": 23,
+    "percepcao": 21,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 65,
+    "resistencias": {
+      "fortitude": 36,
+      "reflexos": 28,
+      "vontade": 24
+    },
+    "rd": {
+      "geral": 30
+    },
+    "imunidadesEfeitos": [
+      "medo"
+    ],
+    "imunidadesDano": [
+      "acido",
+      "fogo"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 2500,
+    "pm": 126,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 18,
+      "des": 6,
+      "con": 16,
+      "int": 6,
+      "sab": 4,
+      "car": 10
+    },
+    "pericias": {
+      "acrobacia": 22,
+      "enganacao": 28,
+      "guerra": 27,
+      "intimidacao": 28,
+      "intuicao": 22,
+      "misticismo": 24
+    },
+    "ataques": [
+      {
+        "nome": "Cimitarra Energética",
+        "bonusAtaque": 58,
+        "dano": "6d6+62",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Martelo de Guerra Lancinante",
+        "bonusAtaque": 58,
+        "dano": "3d8+52",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mangual Magnífico",
+        "bonusAtaque": 58,
+        "dano": "4d8+48",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Espada Longa Anticriatura",
+        "bonusAtaque": 58,
+        "dano": "3d8+52",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Tridente Venenoso",
+        "bonusAtaque": 58,
+        "dano": "3d6+55",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Espada Bastarda Sanguinária",
+        "bonusAtaque": 58,
+        "dano": "3d10+48",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Evasão Aprimorada",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Lamashtu possui Evasão Aprimorada."
+      },
+      {
+        "nome": "Maior que a Morte",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Lamashtu é imune a efeitos que matam instantaneamente ou reduzem atributos a 0, e não pode ser mantida morta permanentemente."
+      },
+      {
+        "nome": "Arsenal Demoníaco",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Lamashtu possui uma variedade de armas encantadas. Atualmente usa as seis armas listadas (encantos não contabilizados nos valores acima), mas podem ser substituídas por quaisquer outras armas mágicas, a critério do mestre."
+      },
+      {
+        "nome": "Ataque Mágico",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando usa a ação agredir, Lamashtu lança uma magia com tempo de execução de ação padrão ou menor no lugar de um de seus ataques corpo a corpo."
+      },
+      {
+        "nome": "Furacão de Lâminas",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando erra um ataque corpo a corpo, Lamashtu pode repetir esse ataque contra outra criatura ao seu alcance. Recarga (movimento)."
+      },
+      {
+        "nome": "Investida Implacável",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz uma investida, Lamashtu causa +1d10 pontos de dano de fogo e pode continuar se movimentando depois do ataque."
+      },
+      {
+        "nome": "Invocar Jhumariel",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por cena, Lamashtu invoca 1d6+1 jhumariel. Eles surgem em espaços vazios em alcance curto e agem a partir da próxima rodada, em suas iniciativas."
+      },
+      {
+        "nome": "Superioridade em Batalha",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Lamashtu é imune a manobras de combate e não pode ser flanqueada. Além disso, seus ataques ignoram redução de dano."
+      },
+      {
+        "nome": "Tenacidade Sulfúrica",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz um ataque corpo a corpo que reduz os pontos de vida de um alvo a 0 ou menos, Lamashtu recupera uma quantidade de PV igual ao dano causado."
+      },
+      {
+        "nome": "Visão Perfeita",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Lamashtu está sempre sob efeito de Visão da Verdade, com todos os aprimoramentos."
+      },
+      {
+        "nome": "Magias (conjuradora arcana 20º, CD 51)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Assassino Fantasmagórico (padrão, 10 PM): invoca espectro adjacente que persegue um alvo em alcance médio (Vontade dissipa; senão o alvo crê nele e sofre dano de trevas ou colapso ao ser alcançado). Bola de Fogo (padrão, 19 PM): esfera de 6m em alcance médio, 22d6 de dano de fogo (Ref reduz à metade). Ferver Sangue (padrão, 20 PM, sustentada): alvos em alcance curto sofrem 7d8 de dano de fogo e enjoo por rodada (Fort reduz à metade e evita), corpo explode se reduzido a 0 PV. Perdição (padrão, 9 PM): alvos em alcance curto sofrem -5 em ataque e dano até o fim da cena. Teletransporte (padrão, 6 PM): até 1.000km, teste de Misticismo conforme familiaridade. Toque da Morte (padrão, 17 PM): alvo em alcance curto sofre 10d8+10 de dano de trevas, ou PV reduzidos a -10 se já estiver com menos da metade e falhar em Fortitude."
+      }
+    ],
+    "equipamento": [
+      "cimitarra_energetica",
+      "espada_bastarda_sanguinaria",
+      "espada_longa_anticriatura",
+      "mangual_magnifico",
+      "martelo_de_guerra_lancinante",
+      "tridente_venenoso"
+    ],
+    "tesouro": "triplo.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "margharon",
+    "nome": "Margharon",
+    "nd": "14",
+    "regiao": "abissais",
+    "papel": "especial",
+    "tipo": "espirito",
+    "subtipo": "abissal",
+    "tamanho": "enorme",
+    "iniciativa": 9,
+    "percepcao": 12,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 44,
+    "resistencias": {
+      "fortitude": 28,
+      "reflexos": 14,
+      "vontade": 22
+    },
+    "rd": {
+      "geral": 20
+    },
+    "imunidadesEfeitos": [
+      "atordoamento"
+    ],
+    "imunidadesDano": [
+      "acido",
+      "eletricidade",
+      "veneno"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +4"
+    ],
+    "pv": 490,
+    "pm": 70,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 0,
+      "con": 4,
+      "int": 6,
+      "sab": 3,
+      "car": 6
+    },
+    "pericias": {
+      "diplomacia": 17,
+      "enganacao": 22,
+      "misticismo": 19,
+      "intimidacao": 17,
+      "intuicao": 16,
+      "investigacao": 17
+    },
+    "ataques": [
+      {
+        "nome": "Tentáculo (x4)",
+        "bonusAtaque": 37,
+        "dano": "2d8+28",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 37,
+        "dano": "2d6+22",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Fortificação 50%",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O margharon tem 50% de chance de ignorar qualquer acerto crítico ou ataque furtivo sofrido."
+      },
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Tentáculo (teste +39)."
+      },
+      {
+        "nome": "Magia Acelerada",
+        "acao": "livre",
+        "custoPm": 4,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando lança uma magia com execução de ação completa ou menor, o margharon muda a execução dela para livre."
+      },
+      {
+        "nome": "Mudar Forma",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O margharon assume a forma de qualquer humanoide de tamanho Pequeno a Enorme, como o efeito da magia Metamorfose. Pode permanecer na forma escolhida por tempo indeterminado, mas, se morrer, reverte à forma natural."
+      },
+      {
+        "nome": "Magias (conjurador 14º, CD 40)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 20,
+        "resistenciaTipo": null,
+        "descricao": "Dissipar Magia (padrão, 3 PM): escolhe criatura, objeto ou esfera de 3m em alcance médio e faz teste de Misticismo, dissipando magias com CD igual ou menor. Muralha Elemental (padrão, 14 PM): muralha de fogo de até 30m por 3m de altura em alcance médio, causando 2d8 de dano de fogo a até 6m ao ser lançada e no início dos turnos do margharon; atravessá-la causa 16d6 de dano de fogo. Relâmpago (padrão, 12 PM): relâmpago em cada criatura escolhida em alcance médio, 12d6 de dano de eletricidade (Ref reduz à metade). Teletransporte (padrão, 6 PM): teleporta-se a até 1.000km, com teste de Misticismo (CD 20/30/40 conforme familiaridade com o destino); falha o leva a 1d10x10km de distância e, com 1 natural, fica atordoado por 1d4 rodadas."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "rhayrivel",
+    "nome": "Rhayrivel",
+    "nd": "7",
+    "regiao": "abissais",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": "abissal",
+    "tamanho": "medio",
+    "iniciativa": 9,
+    "percepcao": 7,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 31,
+    "resistencias": {
+      "fortitude": 19,
+      "reflexos": 15,
+      "vontade": 7
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "acido",
+      "veneno"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 280,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 2,
+      "con": 4,
+      "int": 1,
+      "sab": 0,
+      "car": -2
+    },
+    "pericias": {
+      "intimidacao": 14
+    },
+    "ataques": [
+      {
+        "nome": "Cimitarra (x2)",
+        "bonusAtaque": 24,
+        "dano": "2d8+20",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Correntes Farpadas",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 24,
+        "resistenciaTipo": "fortitude",
+        "descricao": "O rhayrivel projeta suas correntes contra uma criatura em alcance curto. A vítima sofre 3d6+26 pontos de dano de corte e é acometida por uma dor profunda, que causa uma penalidade de -5 em testes de perícia até o fim da cena (Fort CD 24 reduz à metade e evita a dor e a penalidade). Um efeito capaz de remover uma condição de fadiga remove a dor e a penalidade."
+      },
+      {
+        "nome": "Sadismo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O rhayrivel recebe +5 em testes de ataque e rolagens de dano contra criaturas que estejam sangrando."
+      },
+      {
+        "nome": "Talho Atroz",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 24,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Uma criatura atingida por um ataque de cimitarra do rhayrivel fica sangrando (Fort CD 24 evita)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "sucubo",
+    "nome": "Súcubo",
+    "nd": "5",
+    "regiao": "abissais",
+    "papel": "especial",
+    "tipo": "espirito",
+    "subtipo": "abissal",
+    "tamanho": "medio",
+    "iniciativa": 7,
+    "percepcao": 6,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 21,
+    "resistencias": {
+      "fortitude": 5,
+      "reflexos": 11,
+      "vontade": 17
+    },
+    "rd": {
+      "fogo": 10
+    },
+    "imunidadesEfeitos": [
+      "encantamento"
+    ],
+    "imunidadesDano": [
+      "acido",
+      "veneno"
+    ],
+    "vulnerabilidadesDano": [
+      "luz"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 140,
+    "pm": 30,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 15.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": -1,
+      "des": 3,
+      "con": 2,
+      "int": 3,
+      "sab": 2,
+      "car": 10
+    },
+    "pericias": {
+      "atuacao": 19,
+      "diplomacia": 19,
+      "enganacao": 19,
+      "intuicao": 6
+    },
+    "ataques": [
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 15,
+        "dano": "2d4+10",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Beijo Drenante",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 22,
+        "resistenciaTipo": "vontade",
+        "descricao": "O súcubo beija uma criatura adjacente, que fica enfeitiçada e frustrada (Von CD 22 evita). Falhas consecutivas na mesma cena se acumulam: na segunda, a criatura fica esmorecida; na terceira, fica inconsciente; na quarta, a vítima morre e o súcubo recupera 6d6 PM."
+      },
+      {
+        "nome": "Desejo Encarnado",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz um teste de uma perícia baseada em Carisma, o súcubo rola dois dados e usa o melhor resultado."
+      },
+      {
+        "nome": "Mudar Forma",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O súcubo assume a forma de qualquer humanoide de tamanho Pequeno a Grande, como o efeito da magia Metamorfose. Pode permanecer na forma escolhida por tempo indeterminado, mas, se morrer, reverte à forma natural."
+      },
+      {
+        "nome": "Magias (conjurador 7º, CD 22, 24 para encantamento)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Enfeitiçar (padrão, 6 PM): espírito, humanoide ou monstro em alcance curto fica enfeitiçado (Von evita). Imagem Espelhada (padrão, 5 PM): cria cinco cópias ilusórias que fornecem +10 na Defesa, perdendo 1 imagem e -2 na Defesa a cada erro sofrido. Marca da Obediência (padrão, 3 PM): uma criatura adjacente não ataca o súcubo ou seus aliados até o fim da cena (Von evita, repetível a cada turno). Sono (padrão, 1 PM): criatura em alcance curto fica exausta por 1d4+1 rodadas, depois fatigada (Von muda para fatigado por 1d4 rodadas)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "trio_de_carvarel",
+    "nome": "Trio de Carvarel",
+    "nd": "8",
+    "regiao": "abissais",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": "abissal",
+    "tamanho": "grande",
+    "iniciativa": 6,
+    "percepcao": 3,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 33,
+    "resistencias": {
+      "fortitude": 19,
+      "reflexos": 16,
+      "vontade": 15
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "acido",
+      "veneno"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 305,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 3,
+      "con": 4,
+      "int": -2,
+      "sab": 1,
+      "car": -1
+    },
+    "pericias": {
+      "atletismo": 13,
+      "intimidacao": 9
+    },
+    "ataques": [
+      {
+        "nome": "Machado de Guerra (x2)",
+        "bonusAtaque": 26,
+        "dano": "1d12+16",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Chifres (x2)",
+        "bonusAtaque": 26,
+        "dano": "2d6+10",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Marrada Infernal",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O trio de carvarel faz uma investida e desfere todos os seus ataques de machado de guerra e de chifres contra quaisquer criaturas em alcance. Todos os ataques recebem o bônus de +2 da investida, mas o trio não pode fazer mais de dois ataques contra a mesma criatura."
+      }
+    ],
+    "equipamento": [
+      "machado_de_guerra_cruel_x3"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  }
+]

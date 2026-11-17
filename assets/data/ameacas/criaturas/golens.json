@@ -1,0 +1,973 @@
+[
+  {
+    "id": "golem_de_barro",
+    "nome": "Golem de Barro",
+    "nd": "10",
+    "regiao": "golens",
+    "papel": "solo",
+    "tipo": "construto",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 9,
+    "percepcao": 9,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 36,
+    "resistencias": {
+      "fortitude": 22,
+      "reflexos": 10,
+      "vontade": 16
+    },
+    "rd": {
+      "fogo": 20
+    },
+    "imunidadesEfeitos": [
+      "magia_com_excecoes"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 400,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 0,
+      "con": 6,
+      "int": null,
+      "sab": 0,
+      "car": -5
+    },
+    "pericias": {
+      "furtividade": 19
+    },
+    "ataques": [
+      {
+        "nome": "Pancada (x2)",
+        "bonusAtaque": 29,
+        "dano": "2d10+25",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Tiro de lama (à distância) (x4)",
+        "bonusAtaque": 26,
+        "dano": "2d6+11",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "médio",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Corpo Barroso",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Em seu estado natural, o corpo do golem é maleável e feito de lama gosmenta. Ele pode passar por espaços apertados sem necessidade de testes de Acrobacia."
+      },
+      {
+        "nome": "Imunidade a Magia",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O golem de barro é imune a efeitos mágicos, com a seguinte exceção: a magia Controlar Terra usada para solidificar desativa os benefícios de Corpo Barroso; usada para amolecer, recupera esses benefícios. O golem pode fazer um teste de Fortitude para resistir a qualquer um desses efeitos."
+      },
+      {
+        "nome": "Lama",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura atingida por um ataque do golem sofre penalidade cumulativa de –1 em todas as perícias. Remover a lama exige uma ação completa."
+      },
+      {
+        "nome": "Ressecamento",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Caso sofra 100 pontos de dano de fogo, o corpo do golem resseca e endurece, perdendo seus ataques à distância, a redução de dano e as habilidades Corpo Barroso e Lama. Em compensação, o dano de suas pancadas se torna 2d10+30 (x4) e sua Furtividade passa a +4 (em vez de +19). Volta ao estado natural após uma semana imerso em água."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "1d4 doses de corrosivo mineral (cd 25 para extrair).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "golem_de_bronze",
+    "nome": "Golem de Bronze",
+    "nd": "9",
+    "regiao": "golens",
+    "papel": "solo",
+    "tipo": "construto",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 4,
+    "percepcao": 10,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 34,
+    "resistencias": {
+      "fortitude": 21,
+      "reflexos": 10,
+      "vontade": 15
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [
+      "magia_com_excecoes"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 350,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 7,
+      "des": 0,
+      "con": 5,
+      "int": null,
+      "sab": 0,
+      "car": -5
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Pancada (x2)",
+        "bonusAtaque": 27,
+        "dano": "2d10+23",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Imunidade a Magia",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O golem de bronze é imune a efeitos mágicos, com as seguintes exceções: efeitos mágicos de eletricidade o deixam lento por 1d6 rodadas; efeitos mágicos de fogo removem a condição lento e curam PV em quantidade igual à metade do dano que causariam."
+      },
+      {
+        "nome": "Soar os Sinos",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 28,
+        "resistenciaTipo": null,
+        "descricao": "O golem bate em seu peito e emite um som alto e retumbante. Todas as criaturas em alcance curto perdem 6d6+10 PV, ficam surdas por 1d4 rodadas e atordoadas por 1 rodada (Fortitude CD 28 reduz a perda à metade e evita as condições; uma criatura só pode ficar atordoada por esta habilidade uma vez por cena). Recarga (movimento)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "golem_de_carne",
+    "nome": "Golem de Carne",
+    "nd": "7",
+    "regiao": "golens",
+    "papel": "solo",
+    "tipo": "construto",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 6,
+    "percepcao": 7,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 31,
+    "resistencias": {
+      "fortitude": 18,
+      "reflexos": 6,
+      "vontade": 14
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [
+      "metamorfose",
+      "magia_com_excecoes"
+    ],
+    "imunidadesDano": [
+      "trevas"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 300,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": -1,
+      "con": 4,
+      "int": null,
+      "sab": 0,
+      "car": -5
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Pancada (x2)",
+        "bonusAtaque": 25,
+        "dano": "2d10+18",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Fúria Homicida",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se estiver com metade de seus PV ou menos, o golem de carne entra em fúria homicida: recebe +4 em testes de ataque e rolagens de dano e, quando causa dano, deixa a vítima sangrando. Entretanto, sempre deve atacar a criatura mais próxima."
+      },
+      {
+        "nome": "Imunidade a Magia",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O golem é imune a efeitos mágicos, com as seguintes exceções: magias de fogo e frio o deixam lento por 1d6 rodadas; efeitos mágicos de eletricidade removem a condição lento e curam PV em quantidade igual à metade do dano que causariam."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "golem_de_espelhos",
+    "nome": "Golem de Espelhos",
+    "nd": "9",
+    "regiao": "golens",
+    "papel": "solo",
+    "tipo": "construto",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 9,
+    "percepcao": 9,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 32,
+    "resistencias": {
+      "fortitude": 21,
+      "reflexos": 9,
+      "vontade": 15
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "magia_com_excecoes"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 350,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 0,
+      "con": 5,
+      "int": null,
+      "sab": 0,
+      "car": -5
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Espada bastarda (x2)",
+        "bonusAtaque": 28,
+        "dano": "2d10+24",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Copiar",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O golem copia uma habilidade (exceto a habilidade Magias) ou uma magia de uma criatura em alcance curto que possa ver, até o fim da cena. Pode ter até 5 habilidades e/ou magias copiadas ao mesmo tempo, e pode usá-las com suas próprias características (quando aplicável, a CD dessas habilidades é 28)."
+      },
+      {
+        "nome": "Imunidade a Magia",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O golem é imune a efeitos mágicos, com as seguintes exceções: a magia Despedaçar causa 50% a mais de dano no golem; efeitos mágicos de escuridão o deixam lento enquanto ele estiver na área afetada."
+      },
+      {
+        "nome": "Refletir",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando é alvo de um efeito que permite um teste de resistência e passa nesse teste, o golem pode refletir todo o efeito para uma criatura a sua escolha em alcance curto (o golem não sofre nenhuma parte do efeito). A criatura escolhida se torna o novo alvo do efeito, que é resolvido normalmente, mas o golem faz qualquer escolha necessária."
+      }
+    ],
+    "equipamento": [
+      "Espada bastarda aumentada precisa"
+    ],
+    "tesouro": "fragmento refletor (cd 24 para extrair, reduz em 1 pm o custo para fabricar um item com o encanto refletor).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "golem_de_ferro_superior",
+    "nome": "Golem de Ferro Superior",
+    "nd": "15",
+    "regiao": "golens",
+    "papel": "solo",
+    "tipo": "construto",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 8,
+    "percepcao": 11,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 55,
+    "resistencias": {
+      "fortitude": 28,
+      "reflexos": 22,
+      "vontade": 15
+    },
+    "rd": {
+      "geral": 15
+    },
+    "imunidadesEfeitos": [
+      "magia_com_excecoes"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 760,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 15,
+      "des": -1,
+      "con": 10,
+      "int": null,
+      "sab": 0,
+      "car": -5
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Pancada (x2)",
+        "bonusAtaque": 43,
+        "dano": "4d10+40",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Imunidade a Magia",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O golem de ferro superior é imune a efeitos mágicos, com as seguintes exceções: efeitos mágicos de eletricidade o deixam lento por 1d6 rodadas; efeitos mágicos de fogo removem a condição lento e curam 1 PV para cada 3 pontos de dano que causariam."
+      },
+      {
+        "nome": "Sopro",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 40,
+        "resistenciaTipo": null,
+        "descricao": "O golem expele uma nuvem de gás venenoso que preenche um cubo de 3m. Criaturas dentro da área perdem 10d12 pontos de vida e ficam enjoadas (Fortitude CD 40 reduz à metade e evita a condição). Recarga (movimento), veneno."
+      },
+      {
+        "nome": "Marcha de Ferro",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 40,
+        "resistenciaTipo": null,
+        "descricao": "O golem percorre até o dobro do seu deslocamento em linha reta, passando por qualquer criatura Média ou menor. Uma criatura atropelada sofre 10d12+35 pontos de dano e fica caída (Reflexos CD 40 reduz à metade e evita a condição)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "golem_de_materia_vermelha",
+    "nome": "Golem de Matéria Vermelha",
+    "nd": "18",
+    "regiao": "golens",
+    "papel": "solo",
+    "tipo": "construto",
+    "subtipo": "lefeu",
+    "tamanho": "enorme",
+    "iniciativa": 15,
+    "percepcao": 20,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 50,
+    "resistencias": {
+      "fortitude": 32,
+      "reflexos": 26,
+      "vontade": 18
+    },
+    "rd": {
+      "geral": 20
+    },
+    "imunidadesEfeitos": [
+      "magia"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 900,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 15,
+      "des": 0,
+      "con": 13,
+      "int": null,
+      "sab": 0,
+      "car": -5
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Pancada (x2)",
+        "bonusAtaque": 50,
+        "dano": "3d10+30",
+        "danoExtra": "2d6 materia_vermelha",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Abraço Corrosivo",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O golem cobre de ácido uma criatura que esteja agarrando. Enquanto estiver agarrada, e por 1 rodada após se soltar, a criatura sofre 10d10 pontos de dano de ácido no início de cada turno do golem."
+      },
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Usa a manobra agarrar com um ataque de pancada (teste +55)."
+      },
+      {
+        "nome": "Distorção Temporal",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O golem realiza uma ação padrão ou de movimento adicional por turno."
+      },
+      {
+        "nome": "Insanidade da Tormenta",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 47,
+        "resistenciaTipo": null,
+        "descricao": "Criaturas que entrem em contato próximo com o golem sofrem 3d10 pontos de insanidade da Tormenta (Vontade CD 47 evita)."
+      },
+      {
+        "nome": "Sangue Ácido",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando o golem sofre dano por um ataque corpo a corpo adjacente, o atacante sofre 4d10 pontos de dano de ácido."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "retalhos rubros (cd 33 para extrair, valem t$ 8.000 para fabricar itens de materia vermelha).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "golem_de_pedra",
+    "nome": "Golem de Pedra",
+    "nd": "12",
+    "regiao": "golens",
+    "papel": "solo",
+    "tipo": "construto",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 4,
+    "percepcao": 10,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 43,
+    "resistencias": {
+      "fortitude": 26,
+      "reflexos": 12,
+      "vontade": 20
+    },
+    "rd": {
+      "geral": 20
+    },
+    "imunidadesEfeitos": [
+      "atordoado",
+      "magia_com_excecoes"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 575,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 4.5,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 9,
+      "des": -2,
+      "con": 6,
+      "int": null,
+      "sab": 0,
+      "car": -5
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Pancada (x2)",
+        "bonusAtaque": 36,
+        "dano": "4d10+51",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Imobilidade",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 40,
+        "resistenciaTipo": null,
+        "descricao": "Pode permanecer completamente imóvel. Um personagem deve passar em um teste de Percepção (CD 40) para perceber que ele é uma criatura e não uma estátua."
+      },
+      {
+        "nome": "Imunidade a Magia",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O golem de pedra é imune a efeitos mágicos, com exceção da magia Despedaçar."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "gargula_assassina",
+    "nome": "Gárgula Assassina",
+    "nd": "4",
+    "regiao": "golens",
+    "papel": "solo",
+    "tipo": "construto",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 6,
+    "percepcao": 5,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 25,
+    "resistencias": {
+      "fortitude": 16,
+      "reflexos": 10,
+      "vontade": 4
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [
+      "petrificado"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 140,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 18.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 2,
+      "con": 4,
+      "int": -2,
+      "sab": 1,
+      "car": -2
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 17,
+        "dano": "2d6+10",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Ataque Furtivo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Causa +2d6 de dano adicional quando ataca um alvo desprevenido ou surpreso."
+      },
+      {
+        "nome": "Imobilidade",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 35,
+        "resistenciaTipo": null,
+        "descricao": "Pode permanecer completamente imóvel. Um personagem deve passar em um teste de Percepção (CD 35) para perceber que ela é uma criatura e não uma estátua."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "instrumento_divino",
+    "nome": "Instrumento Divino",
+    "nd": "7",
+    "regiao": "golens",
+    "papel": "solo",
+    "tipo": "construto",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 8,
+    "percepcao": 9,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 33,
+    "resistencias": {
+      "fortitude": 21,
+      "reflexos": 8,
+      "vontade": 15
+    },
+    "rd": {
+      "trevas": 10
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 266,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 1,
+      "con": 3,
+      "int": null,
+      "sab": 0,
+      "car": -5
+    },
+    "pericias": {
+      "diplomacia": 10,
+      "religiao": 12
+    },
+    "ataques": [
+      {
+        "nome": "Espada longa",
+        "bonusAtaque": 24,
+        "dano": "2d8+26",
+        "danoExtra": "4d8 luz_magica",
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Aura de Arrependimento",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 24,
+        "resistenciaTipo": null,
+        "descricao": "O instrumento divino emite uma aura que afeta todas as criaturas em um raio de 9m. Até o próximo turno do instrumento, quando uma criatura ataca ele ou seus aliados, fica atordoada após o ataque (Vontade CD 24 evita). Uma criatura só pode ficar atordoada por esta habilidade uma vez por cena."
+      },
+      {
+        "nome": "Fulgor Divino",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Sempre que o instrumento divino usa a ação agredir, criaturas em alcance curto ficam ofuscadas por 1 rodada."
+      },
+      {
+        "nome": "Quebrar Superior",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando o instrumento divino acerta um ataque, pode usar a manobra quebrar contra um objeto visível da vítima (teste +28). Ele ignora 10 pontos da RD de objetos."
+      }
+    ],
+    "equipamento": [
+      "Escudo pesado de mitral",
+      "Espada longa certeira",
+      "Símbolo sagrado"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "soldado_mecanico",
+    "nome": "Soldado Mecânico",
+    "nd": "3",
+    "regiao": "golens",
+    "papel": "lacaio",
+    "tipo": "construto",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 2,
+    "percepcao": 5,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 20,
+    "resistencias": {
+      "fortitude": 14,
+      "reflexos": 9,
+      "vontade": 4
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "fogo"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 23,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": -1,
+      "con": 3,
+      "int": null,
+      "sab": 0,
+      "car": -5
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Lança (x2)",
+        "bonusAtaque": 16,
+        "dano": "1d8+8",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Besta pesada (à distância)",
+        "bonusAtaque": 11,
+        "dano": "1d12+10",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Sopro",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 17,
+        "resistenciaTipo": null,
+        "descricao": "O soldado sopra uma nuvem de vapor escaldante em um cone de 6m. Criaturas na área sofrem 4d6 pontos de dano de fogo (Reflexos CD 17 reduz à metade). Recarga (movimento)."
+      },
+      {
+        "nome": "Movido a Vapor",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se o soldado fosse sofrer dano de fogo, em vez disso seu deslocamento aumenta em 3m por 1 rodada. Se ele sofrer dano de frio, fica lento por 1 rodada."
+      }
+    ],
+    "equipamento": [
+      "Besta pesada",
+      "Lança",
+      "Virotes x20"
+    ],
+    "tesouro": "pilha de sucata (vale t$ 100 para fabricar engenhocas).",
+    "recursoExtraivel": null
+  }
+]

@@ -1,0 +1,1814 @@
+[
+  {
+    "id": "alto_sacerdote_finntroll",
+    "nome": "Alto Sacerdote Finntroll",
+    "nd": "12",
+    "regiao": "trolls_nobres",
+    "papel": "especial",
+    "tipo": "monstro",
+    "subtipo": "finntroll",
+    "tamanho": "medio",
+    "iniciativa": 18,
+    "percepcao": 17,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 39,
+    "resistencias": {
+      "fortitude": 19,
+      "reflexos": 11,
+      "vontade": 27
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [
+      "adivinhacao",
+      "encantamento"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +2"
+    ],
+    "pv": 413,
+    "pm": 77,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": -1,
+      "des": 3,
+      "con": 6,
+      "int": 2,
+      "sab": 5,
+      "car": 1
+    },
+    "pericias": {
+      "conhecimento": 17,
+      "intimidacao": 16,
+      "misticismo": 17,
+      "religiao": 20
+    },
+    "ataques": [
+      {
+        "nome": "Adaga",
+        "bonusAtaque": 27,
+        "dano": "1d4+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Natureza Vegetal",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Afetado por habilidades e magias que afetam plantas."
+      },
+      {
+        "nome": "Regeneração Vegetal",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Recupera 5 PV. Não cura dano de ácido ou fogo. Não funciona exposto à luz do sol."
+      },
+      {
+        "nome": "Sensibilidade a Luz",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Exposto à luz do sol, fica ofuscado e sua regeneração vegetal não funciona."
+      },
+      {
+        "nome": "Arrogância Divina",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O alto sacerdote finntroll se considera a representação suprema da maior obra dos deuses. Criaturas que falhem em testes de resistência contra suas magias ficam frustradas."
+      },
+      {
+        "nome": "Magia Acelerada",
+        "acao": "livre",
+        "custoPm": 4,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando lança uma magia com execução de ação completa ou menor, o alto sacerdote muda a execução dela para livre."
+      },
+      {
+        "nome": "Trevas Insidiosas",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O alto sacerdote soma sua Sabedoria em suas rolagens de dano de magias de trevas (já contabilizado)."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 35,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como um clérigo de Tenebra de 15º nível (CD 35, limite de PM 15, -1 PM no custo de Toque Vampírico): Curar Ferimentos (padrão, 10 PM; uma criatura adjacente cura 11d8+11 PV); Ligação Sombria (padrão, 10 PM; o alto sacerdote escolhe um alvo em alcance longo e cria uma conexão entre seu corpo e o desse alvo, deixando uma marca idêntica na pele de ambos; enquanto a magia durar, sempre que ele sofrer qualquer dano ou condição, o alvo desta magia deve fazer um teste de Fortitude; se falhar, sofre o mesmo dano que o sacerdote ou recebe a mesma condição; a magia termina se o alvo chegar a 0 PV); Pele de Pedra (padrão, 10 PM; uma criatura adjacente é transformada em uma estátua de pedra sem consciência por 1d4 rodadas, Fort evita); Perdição (padrão, 7 PM; criaturas escolhidas em alcance curto sofrem -4 em testes de ataque e rolagens de dano); Profanar (padrão, 1 PM; uma esfera de 9m em alcance longo se enche com energia negativa por 1 dia; dentro dela, todo dano de trevas é maximizado); Resistência a Energia (padrão, 6 PM; criaturas escolhidas em alcance curto recebem redução de ácido ou fogo 10 até o fim da cena); Toque Vampírico (padrão, 6 PM; o alto sacerdote faz um ataque corpo a corpo; se acertar, além do dano normal, causa 8d6+5 pontos de dano de trevas, Fort reduz à metade, e recupera pontos de vida iguais à metade do dano de trevas causado)."
+      }
+    ],
+    "equipamento": [
+      "Adaga precisa",
+      "Anel do escudo mental",
+      "Manto pesado",
+      "Meia armadura",
+      "Símbolo sagrado de Tenebra"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "arcanista_finntroll",
+    "nome": "Arcanista Finntroll",
+    "nd": "14",
+    "regiao": "trolls_nobres",
+    "papel": "especial",
+    "tipo": "monstro",
+    "subtipo": "finntroll",
+    "tamanho": "medio",
+    "iniciativa": 17,
+    "percepcao": 13,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 43,
+    "resistencias": {
+      "fortitude": 24,
+      "reflexos": 16,
+      "vontade": 30
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "ofuscado"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +2"
+    ],
+    "pv": 423,
+    "pm": 90,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": -2,
+      "des": 4,
+      "con": 3,
+      "int": 8,
+      "sab": 2,
+      "car": 3
+    },
+    "pericias": {
+      "conhecimento": 19,
+      "intimidacao": 14,
+      "misticismo": 21
+    },
+    "ataques": [
+      {
+        "nome": "Açoite Finntroll",
+        "bonusAtaque": 35,
+        "dano": "1d8+2",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Natureza Vegetal",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Afetado por habilidades e magias que afetam plantas."
+      },
+      {
+        "nome": "Regeneração Vegetal",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Recupera 5 PV. Não cura dano de ácido ou fogo. Não funciona exposto à luz do sol."
+      },
+      {
+        "nome": "Sensibilidade a Luz",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Exposto à luz do sol, fica ofuscado e sua regeneração vegetal não funciona."
+      },
+      {
+        "nome": "Conjurar Trolloides",
+        "acao": "padrao",
+        "custoPm": 5,
+        "recarga": "todos_os_trolloides_foram_destruidos",
+        "cdResistencia": 40,
+        "resistenciaTipo": null,
+        "descricao": "O arcanista finntroll invoca 2d4+1 trolloides em espaços desocupados em alcance curto. Os trolloides agem a partir da próxima rodada do arcanista e têm deslocamento 9m, For 5, Des 2, Defesa 25, 1 PV, são imunes a dano exceto de ácido ou fogo, e falham automaticamente em qualquer teste de resistência ou oposto. O arcanista pode gastar uma ação de movimento para dar um dos seguintes comandos a qualquer número de trolloides: Andar (cada trolloide se move até 9m); Canalizar (a próxima magia que o arcanista lança tem como ponto de origem um trolloide a sua escolha, que é destruído após a magia ser lançada); Esmagar (cada trolloide causa 6d12 pontos de dano de impacto a uma criatura adjacente, Ref CD 40 reduz à metade); Proteger (cada trolloide adjacente ao arcanista fornece +2 nos testes de resistência e de manobras de combate dele neste turno). Eles desaparecem quando morrem ou no fim da cena e não agem sem receber uma ordem. Recarga (todos os trolloides foram destruídos)."
+      },
+      {
+        "nome": "Contramágica Nobre",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando vê uma magia ser conjurada, o arcanista faz uma contramágica. Se usar Dissipar Magia para isso, ele rola dois dados e usa o melhor resultado."
+      },
+      {
+        "nome": "Servidão Arcana",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 40,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Quando o arcanista lança uma magia, todas as criaturas em alcance médio sofrem dano de essência igual ao dobro dos pontos de mana gastos na magia (Fort CD 40 reduz à metade). Para cada criatura que falhar neste teste, o arcanista recupera 3 PM (limitado ao custo da magia)."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 40,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como um mago de 17º nível (CD 40, limite de PM 25): Campo de Força (reação, 7 PM; quando sofre dano, o arcanista recebe RD 50 contra esse dano); Controlar a Gravidade (padrão, 10 PM, sustentada); Dissipar Magia (padrão, 3 PM); Marionete (padrão, 10 PM, sustentada; o arcanista controla as ações físicas de uma criatura em alcance médio; ao sofrer a magia, e no início de cada um de seus turnos, a vítima faz um teste de Fortitude, se passar a magia é anulada); Raio do Enfraquecimento (padrão, 8 PM; criaturas escolhidas em alcance curto ficam exaustas, Fort muda para fatigado); Pele de Pedra (padrão, 10 PM; uma criatura adjacente é transformada em uma estátua de pedra sem consciência por 1d4 rodadas, Fort evita); Toque da Morte (padrão, 17 PM; uma criatura em alcance curto sofre 10d8+10 pontos de dano de trevas; se estiver com menos da metade de seus PV, em vez disso deve fazer um teste de Fortitude, se passar sofre o dano normal, caso contrário seus PV são reduzidos a -10)."
+      }
+    ],
+    "equipamento": [
+      "Açoite finntroll",
+      "Bolsa de pó poderosa canalizadora",
+      "Essência de mana x4",
+      "Manto pesado",
+      "Robe do arquimago"
+    ],
+    "tesouro": "dobro.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "cavaleiro_finntroll",
+    "nome": "Cavaleiro Finntroll",
+    "nd": "7",
+    "regiao": "trolls_nobres",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "finntroll",
+    "tamanho": "medio",
+    "iniciativa": 9,
+    "percepcao": 7,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 30,
+    "resistencias": {
+      "fortitude": 14,
+      "reflexos": 7,
+      "vontade": 20
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +2"
+    ],
+    "pv": 252,
+    "pm": 39,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 1,
+      "des": 2,
+      "con": 3,
+      "int": 4,
+      "sab": 0,
+      "car": 2
+    },
+    "pericias": {
+      "cavalgar": 12,
+      "intimidacao": 11,
+      "misticismo": 13
+    },
+    "ataques": [
+      {
+        "nome": "Açoite Finntroll",
+        "bonusAtaque": 22,
+        "dano": "4d4+12",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Natureza Vegetal",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Afetado por habilidades e magias que afetam plantas."
+      },
+      {
+        "nome": "Regeneração Vegetal",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Recupera 5 PV. Não cura dano de ácido ou fogo. Não funciona exposto à luz do sol."
+      },
+      {
+        "nome": "Sensibilidade a Luz",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Exposto à luz do sol, fica ofuscado e sua regeneração vegetal não funciona."
+      },
+      {
+        "nome": "Corcel Troll",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O cavaleiro finntroll cavalga um troll treinado, um parceiro montaria Grande. Enquanto estiver montado, seu deslocamento se torna 12m, ele recebe uma ação de movimento extra (apenas para se deslocar), os seguintes ataques em adição ao seu açoite — Mordida +22 (1d8+12) e duas garras +22 (2d6+12) — e Dilacerar (se o cavaleiro acerta os dois ataques de garra em uma mesma criatura no mesmo turno, causa mais 4d6+12 pontos de dano)."
+      },
+      {
+        "nome": "Investida Atroz",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O cavaleiro faz uma investida e ataca com seu açoite e todos os ataques de sua montaria. Todos os ataques recebem o bônus de +2 da investida, mas devem ser feitos contra o mesmo personagem."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 26,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como um mago de 7º nível (CD 26). Ele pode lançar magias enquanto montado sem precisar de testes de concentração: Amedrontar (padrão, 3 PM; um animal ou humanoide em alcance curto fica apavorado por 1d4+1 rodadas e depois abalado, Vontade reduz para abalado por 1d4 rodadas); Concentração de Combate (padrão, 3 PM; até o fim da cena, sempre que faz um ataque, o cavaleiro rola dois dados e usa o melhor resultado); Desespero Esmagador (padrão, 6 PM; criaturas num cone de 6m ficam fracas e frustradas, Vontade reduz para 1 rodada); Primor Atlético (movimento, 2 PM; o cavaleiro salta e pousa em alcance corpo a corpo de uma criatura em alcance curto; se fizer um ataque corpo a corpo contra essa criatura no mesmo turno, recebe os benefícios e penalidades de uma investida e causa um dado extra de dano do mesmo tipo com este ataque)."
+      }
+    ],
+    "equipamento": [
+      "Açoite finntroll cruel",
+      "Couraça",
+      "Essência de mana x2",
+      "Sela aprimorada"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "defeituoso",
+    "nome": "Defeituoso",
+    "nd": "6",
+    "regiao": "trolls_nobres",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 8,
+    "percepcao": 3,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 26,
+    "resistencias": {
+      "fortitude": 18,
+      "reflexos": 12,
+      "vontade": 6
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 235,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 3,
+      "con": 2,
+      "int": -3,
+      "sab": 0,
+      "car": -2
+    },
+    "pericias": {
+      "sobrevivencia": 6
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 19,
+        "dano": "3d6+16",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Enxertos",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 22,
+        "resistenciaTipo": null,
+        "descricao": "Cada defeituoso possui três enxertos, modificações resultantes de experimentos. Para cada enxerto, role 1d6 na tabela abaixo (enxertos iguais são cumulativos): 1) Cabeça Extra (o defeituoso recebe um ataque de mordida extra e +5 em Percepção e Vontade); 2) Carapaça (o defeituoso recebe RD 5 e +2 na Defesa); 3) Garra (o defeituoso recebe um ataque de garra, ataque +19, dano 2d10+12; se receber um segundo ataque de garra, recebe também Dilacerar — se acerta os dois ataques de garra em uma mesma criatura no mesmo turno, causa mais 1d10+6 pontos de dano); 4) Músculos Enxertados (o defeituoso recebe +2 em testes de ataque e rolagens de dano); 5) Pólipos (ação de movimento, uma vez por cena, o defeituoso expele uma nuvem de pólipos venenosos; criaturas em um raio de 9m ao redor dele perdem 4d12 PV e ficam enjoadas por veneno por 1 rodada, Fort CD 22 reduz a perda de vida à metade e evita a condição; cada enxerto adicional permite usar esta habilidade mais uma vez na mesma cena); 6) Sumidouro Místico (o defeituoso recebe resistência a magia +2 e, sempre que ele acerta um ataque corpo a corpo, a vítima perde 2 PM)."
+      },
+      {
+        "nome": "Recordações de Dor",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando sofre dano pela primeira vez em cada rodada, o defeituoso faz um ataque de mordida contra um oponente adjacente."
+      },
+      {
+        "nome": "Regeneração Experimental",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Cada defeituoso é suscetível a um tipo específico de energia, contra a qual sua cura acelerada não funciona. Role 1d6 para determinar essa energia: 1) ácido; 2) eletricidade; 3) fogo; 4) frio; 5) luz; 6) trevas. A cada enxerto de cabeça extra, role um tipo de energia adicional."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "finntroll_cacador",
+    "nome": "Finntroll Caçador",
+    "nd": "2",
+    "regiao": "trolls_nobres",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "finntroll",
+    "tamanho": "medio",
+    "iniciativa": 7,
+    "percepcao": 7,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 19,
+    "resistencias": {
+      "fortitude": 6,
+      "reflexos": 12,
+      "vontade": 4
+    },
+    "rd": {
+      "magia": 2
+    },
+    "imunidadesEfeitos": [
+      "atordoamento",
+      "metamorfose"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 65,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 3,
+      "con": 3,
+      "int": 2,
+      "sab": 2,
+      "car": -1
+    },
+    "pericias": {
+      "furtividade": 8,
+      "sobrevivencia": 7
+    },
+    "ataques": [
+      {
+        "nome": "Cimitarra (x2)",
+        "bonusAtaque": 12,
+        "dano": "1d6+5",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Besta pesada (à distância)",
+        "bonusAtaque": 12,
+        "dano": "1d12+4",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Marca da Presa",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Analisa criatura em alcance curto. Até fim da cena, recebe +1d8 em rolagens de dano contra ela (ou +2d8 se for anão, elfo ou humano). Também pode usar rede à distância (+12) para agarrar."
+      },
+      {
+        "nome": "Natureza Vegetal",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Afetado por habilidades e magias que afetam plantas."
+      },
+      {
+        "nome": "Regeneração Vegetal",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Recupera 5 PV. Não cura dano de ácido e fogo. Não funciona exposto à luz do sol."
+      },
+      {
+        "nome": "Sensibilidade a Luz",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Exposto à luz do sol, fica ofuscado e sua cura acelerada não funciona."
+      }
+    ],
+    "equipamento": [
+      "Besta pesada",
+      "cimitarras x2",
+      "rede",
+      "virotes x20"
+    ],
+    "tesouro": "padrao",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "finntroll_feitor",
+    "nome": "Finntroll Feitor",
+    "nd": "6",
+    "regiao": "trolls_nobres",
+    "papel": "especial",
+    "tipo": "monstro",
+    "subtipo": "finntroll",
+    "tamanho": "medio",
+    "iniciativa": 9,
+    "percepcao": 5,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 20,
+    "resistencias": {
+      "fortitude": 8,
+      "reflexos": 12,
+      "vontade": 16
+    },
+    "rd": {
+      "magia": 2
+    },
+    "imunidadesEfeitos": [
+      "atordoamento",
+      "metamorfose"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 155,
+    "pm": 35,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 3,
+      "con": 3,
+      "int": 4,
+      "sab": 0,
+      "car": 2
+    },
+    "pericias": {
+      "intimidacao": 9,
+      "misticismo": 11
+    },
+    "ataques": [
+      {
+        "nome": "Chicote",
+        "bonusAtaque": 18,
+        "dano": "1d3+10",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Açoitar",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No próximo turno de cada aliado em alcance médio, esse aliado recebe uma ação de movimento extra e +2 em testes de ataque e rolagens de dano."
+      },
+      {
+        "nome": "Magias (mago 7º, CD 26/28 encantamento)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Adaga Mental, Armadura Arcana, Enfeitiçar; Desespero Esmagador, Marca da Obediência, Relâmpago."
+      },
+      {
+        "nome": "Natureza Vegetal",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Afetado por habilidades e magias que afetam plantas."
+      },
+      {
+        "nome": "Regeneração Vegetal",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Recupera 5 PV. Não cura dano de ácido e fogo. Não funciona exposto à luz do sol."
+      },
+      {
+        "nome": "Sensibilidade a Luz",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Exposto à luz do sol, fica ofuscado."
+      }
+    ],
+    "equipamento": [
+      "Chicote cruel"
+    ],
+    "tesouro": "dobro",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "finntroll_senhor_de_estabulo",
+    "nome": "Finntroll Senhor de Estábulo",
+    "nd": "12",
+    "regiao": "trolls_nobres",
+    "papel": "especial",
+    "tipo": "monstro",
+    "subtipo": "finntroll",
+    "tamanho": "medio",
+    "iniciativa": 12,
+    "percepcao": 10,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 39,
+    "resistencias": {
+      "fortitude": 20,
+      "reflexos": 14,
+      "vontade": 24
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +2"
+    ],
+    "pv": 380,
+    "pm": 68,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 3,
+      "con": 3,
+      "int": 4,
+      "sab": 0,
+      "car": 2
+    },
+    "pericias": {
+      "intimidacao": 18,
+      "intuicao": 12,
+      "misticismo": 17
+    },
+    "ataques": [
+      {
+        "nome": "Açoite Finntroll",
+        "bonusAtaque": 33,
+        "dano": "1d8+12",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Natureza Vegetal",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Afetado por habilidades e magias que afetam plantas."
+      },
+      {
+        "nome": "Regeneração Vegetal",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Recupera 5 PV. Não cura dano de ácido ou fogo. Não funciona exposto à luz do sol."
+      },
+      {
+        "nome": "Sensibilidade a Luz",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Exposto à luz do sol, fica ofuscado e sua regeneração vegetal não funciona."
+      },
+      {
+        "nome": "Abrir os Viveiros",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O finntroll senhor de estábulo convoca 1d3+1 trolls, que surgem em espaços desocupados em alcance curto. Os trolls estão sob controle do finntroll, agem no turno dele a partir da rodada seguinte e não rendem recompensas se forem derrotados."
+      },
+      {
+        "nome": "Aura de Superioridade",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 35,
+        "resistenciaTipo": "vontade",
+        "descricao": "Sempre que uma criatura inteligente tentar uma ação hostil contra o finntroll, deve fazer um teste de Vontade (CD 35). Caso falhe, a criatura perde a ação. O finntroll só pode usar esta habilidade uma vez por cena contra cada criatura."
+      },
+      {
+        "nome": "Palavras de Humilhação",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O finntroll faz um teste de Intimidação oposto ao teste de Vontade de uma criatura que ele tenha atingido com seu açoite neste turno. Se vencer, causa 8d6 pontos de dano psíquico não letal à criatura."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 35,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como um mago de 9º nível (CD 35): Concentração de Combate (padrão, 3 PM; até o fim da cena, sempre que faz um ataque, o finntroll rola dois dados e usa o melhor resultado); Dissipar Magia (padrão, 3 PM); Enfeitiçar (padrão, 6 PM; cada humanoide em alcance curto fica enfeitiçado pelo finntroll até o fim da cena, ou até o finntroll ou um de seus aliados tomar uma ação hostil contra a criatura); Pele de Pedra (padrão, 6 PM; o finntroll recebe redução de dano 5 até o fim da cena); Toque Chocante (padrão, 9 PM; o finntroll faz um ataque corpo a corpo; se acertar, além do dano normal, causa 8d8+8 pontos de dano de eletricidade); Velocidade (padrão, 3 PM, sustentada; o finntroll pode executar uma ação padrão adicional por turno, que não pode ser usada para lançar magias)."
+      }
+    ],
+    "equipamento": [
+      "Açoite finntroll macabro",
+      "Manto pesado"
+    ],
+    "tesouro": "dobro.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "ganchador",
+    "nome": "Ganchador",
+    "nd": "5",
+    "regiao": "trolls_nobres",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 7,
+    "percepcao": 5,
+    "sentidos": [
+      "percepcao_as_cegas"
+    ],
+    "defesa": 26,
+    "resistencias": {
+      "fortitude": 15,
+      "reflexos": 11,
+      "vontade": 7
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 210,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 3,
+      "con": 5,
+      "int": -2,
+      "sab": 1,
+      "car": -2
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 17,
+        "dano": "2d6+8",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 17,
+        "dano": "1d8+8",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Dilacerar",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se acerta os dois ataques de garra na mesma criatura na mesma rodada, causa mais 2d8+8 de dano."
+      },
+      {
+        "nome": "Quebrar Tudo!",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "+2 em testes de ataque para quebrar (total +21) e +1d8 de dano contra objetos."
+      },
+      {
+        "nome": "Sensibilidade a Luz",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando exposto à luz do sol ou similar, fica ofuscado."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "metade mais duas garras (cd 20 para extrair; cada garra t$ 500 em materia-prima para armas de corte superiores)",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "horda_mycotann",
+    "nome": "Horda Mycotann",
+    "nd": "12",
+    "regiao": "trolls_nobres",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "mycotann",
+    "tamanho": "enorme",
+    "iniciativa": 14,
+    "percepcao": 17,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 33,
+    "resistencias": {
+      "fortitude": 23,
+      "reflexos": 14,
+      "vontade": 13
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 612,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": -1,
+      "con": 3,
+      "int": 1,
+      "sab": 0,
+      "car": -1
+    },
+    "pericias": {
+      "atletismo": 15
+    },
+    "ataques": [],
+    "habilidades": [
+      {
+        "nome": "Natureza Vegetal",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Afetado por habilidades e magias que afetam plantas."
+      },
+      {
+        "nome": "Enxame",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A horda causa automaticamente 8d12 pontos de dano de impacto a qualquer criatura em seu espaço, sem necessidade de teste de ataque."
+      },
+      {
+        "nome": "Esporos",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 32,
+        "resistenciaTipo": "fortitude",
+        "descricao": "A horda dispara esporos em uma nuvem de 3m de raio em alcance médio. Criaturas na área ficam paralisadas por 1d4 rodadas (apenas uma vez por cena) e perdem 6d6 PV (Fort CD 32 reduz à metade e evita a condição)."
+      },
+      {
+        "nome": "Telepatia",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A horda pode se comunicar telepaticamente com qualquer criatura viva em alcance médio."
+      },
+      {
+        "nome": "Véu de Esporos",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 32,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Uma criatura que comece seu turno dentro do espaço ocupado pela horda fica enjoada e enredada (Fort CD 32 evita). Veneno."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "2d4 doses de esporos de cogumelo (cd 27 para extrair).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "mycotann_druida",
+    "nome": "Mycotann Druida",
+    "nd": "5",
+    "regiao": "trolls_nobres",
+    "papel": "especial",
+    "tipo": "monstro",
+    "subtipo": "mycotann",
+    "tamanho": "medio",
+    "iniciativa": 10,
+    "percepcao": 15,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 22,
+    "resistencias": {
+      "fortitude": 11,
+      "reflexos": 5,
+      "vontade": 17
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 143,
+    "pm": 28,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 1,
+      "des": 0,
+      "con": 3,
+      "int": 0,
+      "sab": 4,
+      "car": 1
+    },
+    "pericias": {
+      "religiao": 8,
+      "sobrevivencia": 10
+    },
+    "ataques": [
+      {
+        "nome": "Pancada (x2)",
+        "bonusAtaque": 15,
+        "dano": "1d6+8",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Natureza Vegetal",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Afetado por habilidades e magias que afetam plantas."
+      },
+      {
+        "nome": "Esporos",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 22,
+        "resistenciaTipo": "fortitude",
+        "descricao": "O mycotann druida dispara uma nuvem de esporos que atinge uma criatura em alcance curto. O alvo fica enredado ou, se já estiver enredado por este efeito, em vez disso fica paralisado (Fort CD 22 evita). Veneno."
+      },
+      {
+        "nome": "Telepatia",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O mycotann pode se comunicar telepaticamente com qualquer criatura viva em alcance médio."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 22,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como um druida de Allihanna de 5º nível (CD 22), sem precisar falar: Controlar Plantas (padrão, 2 PM; um quadrado de 9m de vegetação em alcance curto se torna terreno difícil; criaturas na área quando a magia é lançada ou no início de seus próprios turnos ficam enredadas e imóveis, Fort evita; uma vítima pode se libertar com uma ação padrão e um teste de Acrobacia ou Atletismo); Curar Ferimentos (padrão, 5 PM; uma criatura adjacente cura 6d8+6 PV); Raio Solar (padrão, 5 PM; criaturas em uma linha de 30m sofrem 5d8 pontos de dano de luz, ou 5d12 se forem mortos-vivos, e ficam ofuscadas por 1 rodada, Reflexos reduz à metade e evita a condição)."
+      }
+    ],
+    "equipamento": [
+      "Símbolo sagrado de Allihanna"
+    ],
+    "tesouro": "metade mais 1d4 doses de esporos de cogumelo (cd 20 para extrair).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "mycotann_labutador",
+    "nome": "Mycotann Labutador",
+    "nd": "2",
+    "regiao": "trolls_nobres",
+    "papel": "lacaio",
+    "tipo": "monstro",
+    "subtipo": "mycotann",
+    "tamanho": "medio",
+    "iniciativa": 2,
+    "percepcao": 7,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 17,
+    "resistencias": {
+      "fortitude": 13,
+      "reflexos": 7,
+      "vontade": 2
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 15,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 1,
+      "des": 0,
+      "con": 3,
+      "int": 0,
+      "sab": -1,
+      "car": 1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Pancada (x2)",
+        "bonusAtaque": 12,
+        "dano": "1d6+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Natureza Vegetal",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Afetado por habilidades e magias que afetam plantas."
+      },
+      {
+        "nome": "Esporos",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 16,
+        "resistenciaTipo": "fortitude",
+        "descricao": "O mycotann labutador dispara uma nuvem de esporos em uma criatura em alcance curto. O alvo fica enredado ou, se já estiver enredado por este efeito, fica paralisado por 1 rodada (Fort CD 16 evita)."
+      },
+      {
+        "nome": "Telepatia",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O mycotann pode se comunicar telepaticamente com qualquer criatura viva em alcance médio."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "1d4 doses de esporos de cogumelo (cd 17 para extrair).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "perdigueiro_troll",
+    "nome": "Perdigueiro Troll",
+    "nd": "1",
+    "regiao": "trolls_nobres",
+    "papel": "lacaio",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 5,
+    "percepcao": 8,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 17,
+    "resistencias": {
+      "fortitude": 5,
+      "reflexos": 9,
+      "vontade": 1
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 10,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 15.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 3,
+      "con": 2,
+      "int": -4,
+      "sab": 1,
+      "car": -2
+    },
+    "pericias": {
+      "sobrevivencia": 8,
+      "furtividade": 6
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 10,
+        "dano": "1d6+5",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Tentáculos",
+        "bonusAtaque": 10,
+        "dano": "1d4+5",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Natureza Vegetal",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Afetado por habilidades e magias que afetam plantas."
+      },
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Usa a manobra agarrar com os tentáculos (teste +10)."
+      },
+      {
+        "nome": "Derrubar",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Usa a manobra derrubar com a mordida (teste +10)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "protetor_refem",
+    "nome": "Protetor-Refém",
+    "nd": "5",
+    "regiao": "trolls_nobres",
+    "papel": "lacaio",
+    "tipo": "humanoide",
+    "subtipo": "anao",
+    "tamanho": "medio",
+    "iniciativa": 2,
+    "percepcao": 5,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 23,
+    "resistencias": {
+      "fortitude": 16,
+      "reflexos": 11,
+      "vontade": 6
+    },
+    "rd": {
+      "geral": 5,
+      "efeitos_mentais": 2
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 40,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 0,
+      "con": 4,
+      "int": -1,
+      "sab": 1,
+      "car": -1
+    },
+    "pericias": {
+      "sobrevivencia": 5
+    },
+    "ataques": [
+      {
+        "nome": "Martelo de Guerra (x2)",
+        "bonusAtaque": 20,
+        "dano": "2d8+18",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Machadinha (à distância)",
+        "bonusAtaque": 17,
+        "dano": "1d6+16",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Libertação Mental",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 20,
+        "resistenciaTipo": null,
+        "descricao": "Embora difícil, é possível libertar a mente de um protetor-refém. Primeiro, é necessário deixá-lo esmorecido, exausto ou enfeitiçado. Após isso, um personagem deve fazer um teste estendido de Diplomacia (CD 20, 3 sucessos exigidos), em que cada teste é uma ação completa. Se passar, o controle mental sobre o protetor-refém termina, mas ele fica inconsciente por 1 hora."
+      }
+    ],
+    "equipamento": [
+      "Escudo pesado",
+      "Loriga segmentada",
+      "Machadinha x3",
+      "Martelo de guerra"
+    ],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "sacerdote_finntroll",
+    "nome": "Sacerdote Finntroll",
+    "nd": "6",
+    "regiao": "trolls_nobres",
+    "papel": "especial",
+    "tipo": "monstro",
+    "subtipo": "finntroll",
+    "tamanho": "medio",
+    "iniciativa": 9,
+    "percepcao": 9,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 25,
+    "resistencias": {
+      "fortitude": 13,
+      "reflexos": 8,
+      "vontade": 19
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +2"
+    ],
+    "pv": 162,
+    "pm": 49,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": -1,
+      "des": 2,
+      "con": 5,
+      "int": 2,
+      "sab": 4,
+      "car": 1
+    },
+    "pericias": {
+      "atletismo": 4,
+      "intimidacao": 11,
+      "religiao": 11
+    },
+    "ataques": [
+      {
+        "nome": "Açoite Finntroll",
+        "bonusAtaque": 18,
+        "dano": "1d8+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Natureza Vegetal",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Afetado por habilidades e magias que afetam plantas."
+      },
+      {
+        "nome": "Regeneração Vegetal",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Recupera 5 PV. Não cura dano de ácido ou fogo. Não funciona exposto à luz do sol."
+      },
+      {
+        "nome": "Sensibilidade a Luz",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Exposto à luz do sol, fica ofuscado e sua regeneração vegetal não funciona."
+      },
+      {
+        "nome": "Urro Divino",
+        "acao": "livre",
+        "custoPm": 1,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz um ataque ou lança uma magia, o sacerdote finntroll soma sua Constituição à rolagem de dano desse ataque ou magia."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 24,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como um clérigo de Megalokk de 9º nível (CD 24, limite de PM 9): Curar Ferimentos (padrão, 9 PM; uma criatura adjacente cura 10d8+10 PV, ou criaturas escolhidas em alcance curto curam 5d8+5); Comando (padrão, 4 PM; no início do seu próximo turno, duas criaturas em alcance curto largam os itens que estão segurando e não podem pegá-los novamente até o início de seu turno seguinte, Von evita); Enxame de Pestes (completa, 8 PM, sustentada; dois enxames de ratos surgem em alcance médio e ocupam um quadrado de 1,5m cada; no fim de cada um dos turnos do sacerdote, cada enxame causa 2d12 pontos de dano de corte a qualquer criatura em seu espaço, Fort reduz à metade; o sacerdote pode gastar uma ação de movimento para mover cada enxame 12m); Miasma Mefítico (padrão, 5 PM; uma nuvem de 6m de raio se forma em alcance médio; criaturas na área sofrem 6d6 pontos de dano de ácido e ficam enjoadas por 1 rodada, Fort reduz o dano à metade e evita a condição); Perdição (padrão, 5 PM; criaturas escolhidas em alcance curto sofrem -3 em testes de ataque e rolagens de dano até o fim da cena); Profanar (padrão, 1 PM; uma esfera de 9m em alcance longo se enche com energia negativa por 1 dia; dentro dela, todo dano de trevas é maximizado)."
+      }
+    ],
+    "equipamento": [
+      "Açoite finntroll",
+      "Manto pesado",
+      "Meia armadura",
+      "Símbolo sagrado de Megalokk"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "troll",
+    "nome": "Troll",
+    "nd": "5",
+    "regiao": "trolls_nobres",
+    "papel": "especial",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 4,
+    "percepcao": 3,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 23,
+    "resistencias": {
+      "fortitude": 14,
+      "reflexos": 10,
+      "vontade": 6
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 165,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 2,
+      "con": 6,
+      "int": -2,
+      "sab": -1,
+      "car": -2
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 17,
+        "dano": "1d8+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 17,
+        "dano": "1d6+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Dilacerar",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se acerta os dois ataques de garra na mesma criatura na mesma rodada, causa mais 2d6+6 de dano."
+      },
+      {
+        "nome": "Cura Acelerada",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Regenera 15 PV por rodada, exceto dano de ácido ou fogo."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "troll_das_cavernas",
+    "nome": "Troll das Cavernas",
+    "nd": "9",
+    "regiao": "trolls_nobres",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 7,
+    "percepcao": 14,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 29,
+    "resistencias": {
+      "fortitude": 21,
+      "reflexos": 15,
+      "vontade": 9
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 345,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 9,
+      "des": 0,
+      "con": 11,
+      "int": -2,
+      "sab": -1,
+      "car": -2
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Tacape",
+        "bonusAtaque": 26,
+        "dano": "3d6+27",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 26,
+        "dano": "2d6+27",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Golpe Avassalador",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 28,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Quando acerta com tacape, arremessa a vítima 1d6×1,5m (Fort CD 28 evita). A vítima fica caída e sofre 1d6 de impacto por 1,5m arremessada."
+      },
+      {
+        "nome": "Varrer",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando reduz o alvo a 0 PV, pode fazer um ataque adicional contra outra criatura no alcance."
+      },
+      {
+        "nome": "Cura Acelerada",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Recupera 20 PV por turno. Não funciona com dano de ácido ou fogo."
+      }
+    ],
+    "equipamento": [
+      "Tacape gigante"
+    ],
+    "tesouro": "metade",
+    "recursoExtraivel": null
+  }
+]

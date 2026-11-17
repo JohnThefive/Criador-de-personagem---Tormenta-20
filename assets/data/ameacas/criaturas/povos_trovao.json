@@ -1,0 +1,1424 @@
+[
+  {
+    "id": "ceratops_chefe_da_tribo",
+    "nome": "Ceratops Chefe da Tribo",
+    "nd": "7",
+    "regiao": "povos_trovao",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "ceratops",
+    "tamanho": "grande",
+    "iniciativa": 7,
+    "percepcao": 9,
+    "sentidos": [],
+    "defesa": 32,
+    "resistencias": {
+      "fortitude": 21,
+      "reflexos": 7,
+      "vontade": 14
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 280,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 0,
+      "con": 6,
+      "int": -1,
+      "sab": 2,
+      "car": 0
+    },
+    "pericias": {
+      "atletismo": 13,
+      "diplomacia": 7,
+      "intimidacao": 13,
+      "sobrevivencia": 9
+    },
+    "ataques": [
+      {
+        "nome": "Tacape",
+        "bonusAtaque": 24,
+        "dano": "3d8+22",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Chifres",
+        "bonusAtaque": 24,
+        "dano": "1d8+22",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Atropelamento",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 24,
+        "resistenciaTipo": null,
+        "descricao": "O ceratops chefe da tribo percorre até o dobro de seu deslocamento. Ele pode passar pelo espaço ocupado de quaisquer inimigos menores que ele, mas não pode passar duas vezes pelo mesmo espaço. Criaturas atropeladas desta forma sofrem 12d8+12 pontos de dano de impacto e ficam caídas (Reflexos CD 24 reduz à metade e evita a condição). Recarga (movimento)."
+      },
+      {
+        "nome": "Determinação Primal",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando o ceratops é reduzido a 80 PV ou menos, seus instintos de proteção da família despertam. Todas as condições e efeitos negativos afetando o ceratops se encerram e ele recebe resistência a magia +5 até o fim da cena."
+      },
+      {
+        "nome": "Medo de Altura",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se estiver adjacente a uma queda de 3m ou mais de altura (como um buraco ou penhasco), o ceratops fica abalado."
+      }
+    ],
+    "equipamento": [
+      "Tacape aumentado",
+      "Gibão de peles"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "ceratops_guerreiro",
+    "nome": "Ceratops Guerreiro",
+    "nd": "3",
+    "regiao": "povos_trovao",
+    "papel": "lacaio",
+    "tipo": "humanoide",
+    "subtipo": "ceratops",
+    "tamanho": "grande",
+    "iniciativa": 0,
+    "percepcao": 3,
+    "sentidos": [],
+    "defesa": 21,
+    "resistencias": {
+      "fortitude": 14,
+      "reflexos": 4,
+      "vontade": 9
+    },
+    "rd": {
+      "geral": 2
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 33,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": -1,
+      "con": 4,
+      "int": -1,
+      "sab": 0,
+      "car": 0
+    },
+    "pericias": {
+      "atletismo": 8,
+      "intimidacao": 8,
+      "sobrevivencia": 3
+    },
+    "ataques": [
+      {
+        "nome": "Tacape",
+        "bonusAtaque": 14,
+        "dano": "1d12+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Chifres",
+        "bonusAtaque": 14,
+        "dano": "1d8+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Atropelamento",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 17,
+        "resistenciaTipo": null,
+        "descricao": "O ceratops guerreiro percorre até o dobro de seu deslocamento. Ele pode passar pelo espaço ocupado de quaisquer inimigos menores que ele, mas não pode passar duas vezes pelo mesmo espaço. Criaturas atropeladas desta forma sofrem 4d8+4 pontos de dano de impacto e ficam caídas (Reflexos CD 17 reduz à metade e evita a condição). Recarga (movimento)."
+      },
+      {
+        "nome": "Medo de Altura",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se estiver adjacente a uma queda de 3m ou mais de altura (como um buraco ou penhasco), o ceratops fica abalado."
+      }
+    ],
+    "equipamento": [
+      "Tacape aumentado"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "pteros_ceifador",
+    "nome": "Pteros Ceifador",
+    "nd": "2",
+    "regiao": "povos_trovao",
+    "papel": "lacaio",
+    "tipo": "humanoide",
+    "subtipo": "pteros",
+    "tamanho": "medio",
+    "iniciativa": 6,
+    "percepcao": 9,
+    "sentidos": [
+      "visao_na_penumbra"
+    ],
+    "defesa": 16,
+    "resistencias": {
+      "fortitude": 4,
+      "reflexos": 9,
+      "vontade": 14
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 21,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 12.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 1,
+      "des": 3,
+      "con": 0,
+      "int": -1,
+      "sab": 4,
+      "car": 0
+    },
+    "pericias": {
+      "atletismo": 6,
+      "sobrevivencia": 7
+    },
+    "ataques": [
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 12,
+        "dano": "1d6+5",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Evasão",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando passa em um teste de Reflexos para reduzir o dano de um efeito à metade, em vez disso não sofre nenhum dano."
+      },
+      {
+        "nome": "Companheiros de Voo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Pteros ceifadores caçam em pares com seus companheiros. Se estiver flanqueando um inimigo com seu companheiro, o pteros recebe +2 em testes de ataque, em rolagens de dano e na Defesa contra esse inimigo. Quando um dos pteros morre, o choque deixa seu companheiro atordoado por 1 rodada e então esmorecido."
+      },
+      {
+        "nome": "Rasante",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O pteros faz uma investida e ataca com suas duas garras. Os dois ataques recebem o bônus de +2 da investida, mas devem ser feitos contra o mesmo alvo. Após o ataque, o pteros ceifador pode continuar seu movimento, até o limite de seu deslocamento."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "pteros_do_ceu_infinito",
+    "nome": "Pteros do Céu Infinito",
+    "nd": "5",
+    "regiao": "povos_trovao",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "pteros",
+    "tamanho": "medio",
+    "iniciativa": 7,
+    "percepcao": 11,
+    "sentidos": [
+      "visao_na_penumbra"
+    ],
+    "defesa": 20,
+    "resistencias": {
+      "fortitude": 5,
+      "reflexos": 11,
+      "vontade": 17
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 140,
+    "pm": 33,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 12.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 3,
+      "con": 0,
+      "int": -1,
+      "sab": 5,
+      "car": 0
+    },
+    "pericias": {
+      "atletismo": 5,
+      "cura": 9,
+      "religiao": 9,
+      "sobrevivencia": 9
+    },
+    "ataques": [
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 15,
+        "dano": "1d6+3",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Bênção de Anikka",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Por ser um devoto de Anikka do Céu Infinito (um aspecto de Wynna), o pteros do céu infinito lança magias arcanas como se fossem divinas. Além disso, quando lança uma magia, ele recebe +2 na Defesa por 1 rodada."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 22,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como clérigo de Wynna de 5º nível (CD 22): Curar Ferimentos (padrão, 5 PM, cura 6d8+6 PV), Controlar Plantas (padrão, 2 PM, quadrado de 9m de vegetação vira terreno difícil e enreda), Toque Chocante (padrão, 5 PM, raios em esfera de 6m, 4d8+4 de eletricidade), Tempestade Divina (padrão, 4 PM, sustentada, apenas em ambientes abertos, vendaval em cilindro de 15m de raio e altura, 3d8 de eletricidade por ação padrão gasta)."
+      }
+    ],
+    "equipamento": [
+      "Pó azul x2",
+      "Ramo verdejante x1d3",
+      "Símbolo sagrado de Anikka (Wynna)"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "totem_da_divina_serpente",
+    "nome": "Totem da Divina Serpente (Aspecto de Allihanna)",
+    "nd": "14",
+    "regiao": "povos_trovao",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 20,
+    "percepcao": 24,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 42,
+    "resistencias": {
+      "fortitude": 27,
+      "reflexos": 20,
+      "vontade": 15
+    },
+    "rd": {
+      "geral": 15
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "fogo",
+      "veneno"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +2"
+    ],
+    "pv": 700,
+    "pm": 83,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 9.0,
+      "escalada": 9.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 16,
+      "des": 4,
+      "con": 10,
+      "int": 2,
+      "sab": 8,
+      "car": 8
+    },
+    "pericias": {
+      "misticismo": 15,
+      "religiao": 24,
+      "sobrevivencia": 24
+    },
+    "ataques": [
+      {
+        "nome": "Presa de serpente",
+        "bonusAtaque": 38,
+        "dano": "2d6+23",
+        "danoExtra": "2d8 fogo",
+        "margemAmeaca": 16,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra",
+        "bonusAtaque": 38,
+        "dano": "1d10+23",
+        "danoExtra": "2d8 fogo",
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Cauda",
+        "bonusAtaque": 38,
+        "dano": "1d12+23",
+        "danoExtra": "2d8 fogo",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Usa a manobra agarrar com a cauda (teste +43)."
+      },
+      {
+        "nome": "Aura de Calor",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O totem da Divina Serpente emana um calor intenso. No início de cada turno do totem, todas as criaturas em um raio de 9m sofrem 4d6+15 pontos de dano de fogo."
+      },
+      {
+        "nome": "Chama Divina",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Cada dado de dano de fogo causado pelo totem aumenta em um passo (já contabilizado)."
+      },
+      {
+        "nome": "Constrição",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada um de seus turnos, o totem causa 4d6+19 pontos de dano de impacto em qualquer criatura que esteja agarrando."
+      },
+      {
+        "nome": "Tempestade de Chamas",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando faz um acerto crítico com sua presa de serpente, o totem pode lançar uma magia como uma ação livre."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 40,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como clérigo de Allihanna de 14º nível (CD 40): Bola de Fogo (padrão, 9 PM, 12d8 de fogo em esfera de 6m), Controlar Fogo (padrão, 3 PM), Coluna de Chamas (padrão, 6 PM, pilar de fogo sagrado, 6d8 de fogo + 6d6 de luz), Lança Ígnea de Aleph (padrão, 6 PM, 4d8 de fogo + 4d6 de perfuração, chamas), Muralha Elemental (padrão, 6 PM, apenas fogo, muro ou cúpula de chamas)."
+      }
+    ],
+    "equipamento": [
+      "Presa de serpente aumentada"
+    ],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "totem_de_sarana",
+    "nome": "Totem de Sarana (Aspecto de Marah)",
+    "nd": "10",
+    "regiao": "povos_trovao",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 21,
+    "percepcao": 17,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 34,
+    "resistencias": {
+      "fortitude": 10,
+      "reflexos": 16,
+      "vontade": 24
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [
+      "alquebrado",
+      "esmorecido",
+      "frustrado",
+      "paralisia"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +2"
+    ],
+    "pv": 420,
+    "pm": 40,
+    "deslocamento": {
+      "terrestre": 18.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 7,
+      "con": 5,
+      "int": 2,
+      "sab": 6,
+      "car": 6
+    },
+    "pericias": {
+      "atletismo": 26,
+      "cura": 17,
+      "diplomacia": 17,
+      "religiao": 20
+    },
+    "ataques": [],
+    "habilidades": [
+      {
+        "nome": "Aura de Sacrifício",
+        "acao": "reacao",
+        "custoPm": 2,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando um aliado em um raio de 9m sofre dano, o totem de Sarana sofre esse dano no lugar dele."
+      },
+      {
+        "nome": "Chuva Purificadora",
+        "acao": "padrao",
+        "custoPm": 3,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O totem evoca uma chuva que cobre um raio de 9m ao seu redor (sustentada). No início de cada turno do totem, cada aliado na área recupera 20 PV e perde todas as condições negativas."
+      },
+      {
+        "nome": "Placidez",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 32,
+        "resistenciaTipo": null,
+        "descricao": "O totem gera uma aura de paz em um raio de 30m. Qualquer outra criatura dentro da aura que tente realizar uma ação hostil deve fazer um teste de Vontade (CD 32). Se falhar, perde a ação. Se passar, pode agir normalmente, mas perde 1d4 PM ao fim de seu turno. Caso os PM da criatura sejam reduzidos a 0 por esta habilidade, ela fica enfeitiçada e perde a vontade de lutar por um dia."
+      },
+      {
+        "nome": "Toque Gentil",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 32,
+        "resistenciaTipo": null,
+        "descricao": "O totem toca uma criatura adjacente, que perde 2d4 PM (Reflexos CD 32 evita)."
+      },
+      {
+        "nome": "Veloz Como o Vento",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O totem pode fazer duas ações padrão em cada um de seus turnos. Além disso, quando corre, ele não precisa percorrer uma linha reta, desde que não passe pelo mesmo espaço mais de uma vez."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "totem_do_pai_de_tudo",
+    "nome": "Totem do Pai-de-Tudo (Aspecto de Azgher)",
+    "nd": "12",
+    "regiao": "povos_trovao",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 16,
+    "percepcao": 21,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 41,
+    "resistencias": {
+      "fortitude": 26,
+      "reflexos": 10,
+      "vontade": 22
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [
+      "cansaco",
+      "dano_de_luz"
+    ],
+    "imunidadesDano": [
+      "fogo",
+      "trevas"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +2"
+    ],
+    "pv": 700,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 10,
+      "des": 4,
+      "con": 6,
+      "int": 1,
+      "sab": 6,
+      "car": 6
+    },
+    "pericias": {
+      "atletismo": 20,
+      "diplomacia": 21,
+      "intuicao": 21,
+      "religiao": 21
+    },
+    "ataques": [
+      {
+        "nome": "Chifre solar (x3)",
+        "bonusAtaque": 36,
+        "dano": "1d12+18",
+        "danoExtra": "1d12 luz e 1d12 fogo",
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Força Solar",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 33,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando o totem do Pai-de-Tudo é alvo de um ataque corpo a corpo, uma de suas estrelas detona e causa 8d6 pontos de dano de luz em um raio de 6m ao seu redor (Reflexos CD 33 reduz à metade). O totem recupera uma quantidade de PV igual à metade do dano total causado pela explosão."
+      },
+      {
+        "nome": "Manto de Estrelas",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Para cada 100 PV que o totem perde, uma estrela surge ao seu redor, até um máximo de três estrelas. Para cada estrela, o totem recebe +2 em testes de ataque e seus ataques com chifre solar causam +1d8 pontos de dano de luz."
+      },
+      {
+        "nome": "Tudo que o Sol Toca",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 33,
+        "resistenciaTipo": null,
+        "descricao": "O totem emana uma aura de luz e clima ensolarado em um raio de 90m. Dentro desta área, efeitos que alterem o clima são automaticamente anulados ou, se já estiverem ativos, são dissipados. Uma criatura que comece seu turno nessa área fica fatigada ou, se já estiver fatigada, fica exausta (a condição máxima causada por esta habilidade; Fortitude CD 33 evita)."
+      },
+      {
+        "nome": "Vigilância do Pai",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Enquanto estiver sob a luz do sol, o totem está sob o efeito básico da magia Visão da Verdade."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "totem_do_rei_tirano",
+    "nome": "Totem do Rei-Tirano (Aspecto de Megalokk)",
+    "nd": "15",
+    "regiao": "povos_trovao",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": null,
+    "tamanho": "colossal",
+    "iniciativa": 16,
+    "percepcao": 17,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 50,
+    "resistencias": {
+      "fortitude": 28,
+      "reflexos": 22,
+      "vontade": 15
+    },
+    "rd": {
+      "geral": 15,
+      "veneno": 5
+    },
+    "imunidadesEfeitos": [
+      "cansaco"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 750,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 15.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 16,
+      "des": 1,
+      "con": 12,
+      "int": -4,
+      "sab": 2,
+      "car": -2
+    },
+    "pericias": {
+      "atletismo": 30,
+      "intimidacao": 30
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 40,
+        "dano": "4d20+20",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Pisão",
+        "bonusAtaque": 40,
+        "dano": "4d20+20",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Usa a manobra agarrar com a mordida (teste +50)."
+      },
+      {
+        "nome": "Engolir",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada um dos turnos do totem do Rei-Tirano, a criatura engolida sofre 4d8+8 pontos de dano de impacto mais 4d8+8 pontos de dano de ácido. Ela pode escapar causando um total de 100 pontos de dano a ele (Defesa 20, redução de dano 0)."
+      },
+      {
+        "nome": "Pisotear",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 40,
+        "resistenciaTipo": null,
+        "descricao": "Quando o totem se move, pisoteia qualquer criatura ou estrutura Grande ou menor em seu caminho, causando 4d12+19 pontos de dano de impacto (Reflexos CD 40 reduz à metade)."
+      },
+      {
+        "nome": "Sede de Sangue",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O totem recebe +5 em testes de ataque e rolagens de dano contra criaturas que tenham sofrido dano na última rodada."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "velocis_cacador",
+    "nome": "Velocis Caçador",
+    "nd": "4",
+    "regiao": "povos_trovao",
+    "papel": "lacaio",
+    "tipo": "humanoide",
+    "subtipo": "velocis",
+    "tamanho": "medio",
+    "iniciativa": 7,
+    "percepcao": 8,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 21,
+    "resistencias": {
+      "fortitude": 6,
+      "reflexos": 15,
+      "vontade": 9
+    },
+    "rd": {
+      "corte": 2,
+      "perfuracao": 2
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 25,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 1,
+      "des": 3,
+      "con": 1,
+      "int": -1,
+      "sab": 2,
+      "car": 0
+    },
+    "pericias": {
+      "atletismo": 7,
+      "furtividade": 6,
+      "sobrevivencia": 8
+    },
+    "ataques": [
+      {
+        "nome": "Lança",
+        "bonusAtaque": 17,
+        "dano": "1d6+9",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Azagaia (à distância)",
+        "bonusAtaque": 17,
+        "dano": "1d6+11",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Ataque em Movimento",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O velocis caçador pode se mover antes e depois de executar a ação agredir, desde que a distância total percorrida não seja maior que seu deslocamento."
+      },
+      {
+        "nome": "Esquiva de Projéteis",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O velocis caçador recebe +2 na Defesa contra ataques à distância (Defesa 23 contra esses ataques)."
+      },
+      {
+        "nome": "Covardia Defensiva",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando sofre dano de um ataque corpo a corpo, o velocis se move até metade de seu deslocamento em direção contrária ao atacante e recebe +2 na Defesa por 1 rodada."
+      },
+      {
+        "nome": "Estilo de Arremesso",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O velocis saca armas de arremesso como uma ação livre."
+      },
+      {
+        "nome": "Velocista da Planície",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz testes de Atletismo para correr ou saltar, o velocis rola dois dados e usa o melhor resultado."
+      },
+      {
+        "nome": "Veneno",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 18,
+        "resistenciaTipo": null,
+        "descricao": "Peçonha concentrada (perde 1d12 pontos de vida durante 3 rodadas, Fortitude CD 18 reduz a duração para 1 rodada)."
+      }
+    ],
+    "equipamento": [
+      "Azagaia x3",
+      "Escudo de couro",
+      "Lança",
+      "Peçonha concentrada x4"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "voracis_cacadora",
+    "nome": "Voracis Caçadora",
+    "nd": "8",
+    "regiao": "povos_trovao",
+    "papel": "lacaio",
+    "tipo": "humanoide",
+    "subtipo": "voracis",
+    "tamanho": "medio",
+    "iniciativa": 15,
+    "percepcao": 8,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 30,
+    "resistencias": {
+      "fortitude": 16,
+      "reflexos": 20,
+      "vontade": 8
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 64,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 9.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 5,
+      "con": 3,
+      "int": -1,
+      "sab": 0,
+      "car": 0
+    },
+    "pericias": {
+      "acrobacia": 13,
+      "atletismo": 13,
+      "intimidacao": 8,
+      "sobrevivencia": 10
+    },
+    "ataques": [
+      {
+        "nome": "Espada vespa",
+        "bonusAtaque": 27,
+        "dano": "2d4+22",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra",
+        "bonusAtaque": 27,
+        "dano": "1d6+22",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Azagaia (à distância)",
+        "bonusAtaque": 24,
+        "dano": "1d6+22",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Corta-Passos",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 26,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando faz um ataque corpo a corpo, a voracis caçadora pode sofrer uma penalidade de –2 nesse teste de ataque. Se fizer isso e acertar o ataque, o alvo fica lento (Fortitude CD 26 evita)."
+      },
+      {
+        "nome": "Marca da Presa",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A caçadora analisa uma criatura em alcance médio. Até o fim da cena, ela recebe +2d12 em rolagens de dano contra essa criatura."
+      },
+      {
+        "nome": "Rede (à distância)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Pode atacar com a rede para enredar em vez da azagaia."
+      }
+    ],
+    "equipamento": [
+      "Armadura de couro",
+      "Azagaia x3",
+      "Espada vespa atroz",
+      "Garra feroz maciça",
+      "Rede"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "voracis_rainha",
+    "nome": "Voracis Rainha",
+    "nd": "11",
+    "regiao": "povos_trovao",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "voracis",
+    "tamanho": "medio",
+    "iniciativa": 16,
+    "percepcao": 11,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 41,
+    "resistencias": {
+      "fortitude": 18,
+      "reflexos": 24,
+      "vontade": 11
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 530,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 9.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 7,
+      "con": 3,
+      "int": -1,
+      "sab": 2,
+      "car": 1
+    },
+    "pericias": {
+      "atletismo": 12,
+      "furtividade": 16,
+      "intimidacao": 10,
+      "sobrevivencia": 13
+    },
+    "ataques": [
+      {
+        "nome": "Presa de serpente (x2)",
+        "bonusAtaque": 30,
+        "dano": "1d8+27",
+        "danoExtra": null,
+        "margemAmeaca": 17,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra",
+        "bonusAtaque": 30,
+        "dano": "1d6+27",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Azagaia (à distância)",
+        "bonusAtaque": 28,
+        "dano": "1d6+25",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Caça em Bando",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por cena, a voracis rainha invoca 1d6+2 voracis em espaços desocupados em alcance curto. Eles agem a partir da próxima rodada da rainha, têm deslocamento 9m (normal e escalada) e podem gastar uma ação padrão para causar 2d4+4 pontos de dano de corte em uma criatura adjacente. As voracis têm Força 1, Destreza 4, Defesa 26 e 1 PV e falham automaticamente em qualquer teste oposto ou de resistência."
+      },
+      {
+        "nome": "Eviscerar",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 31,
+        "resistenciaTipo": null,
+        "descricao": "Quando acerta um ataque de garra, a rainha rasga a carne da vítima, que fica desprevenida e sangrando (Fortitude CD 31 evita). Essas condições persistem até que a vítima receba cura mágica ou primeiros socorros (perícia Cura). Criaturas imunes a acertos críticos e/ou sangramentos ou usando armaduras pesadas são imunes a esta habilidade. Metabolismo."
+      },
+      {
+        "nome": "Fúria Primeva",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": "matar_uma_criatura",
+        "cdResistencia": 31,
+        "resistenciaTipo": null,
+        "descricao": "A rainha entra em um estado de frenesi. Ela ganha 50 PV temporários e todas as criaturas em alcance médio ficam abaladas (Vontade CD 31 evita). Além disso, enquanto esta habilidade estiver ativa, a rainha recebe +4 em testes de ataque e rolagens de dano, mas não pode realizar ações que exigem calma e concentração. A fúria termina se, ao fim da rodada, a rainha não tiver atacado nem for alvo de um efeito hostil. Recarga (matar uma criatura)."
+      },
+      {
+        "nome": "Rede (à distância)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Pode atacar com a rede para enredar em vez da azagaia."
+      }
+    ],
+    "equipamento": [
+      "Azagaia x3",
+      "Bálsamo da drogadora x2",
+      "Garra feroz maciça",
+      "Presa de serpente",
+      "Rede"
+    ],
+    "tesouro": "dobro.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "xama_de_sarana",
+    "nome": "Xamã de Sarana",
+    "nd": "6",
+    "regiao": "povos_trovao",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "velocis",
+    "tamanho": "medio",
+    "iniciativa": 7,
+    "percepcao": 9,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 25,
+    "resistencias": {
+      "fortitude": 6,
+      "reflexos": 12,
+      "vontade": 18
+    },
+    "rd": {
+      "corte": 2,
+      "perfuracao": 2
+    },
+    "imunidadesEfeitos": [
+      "alquebrado",
+      "esmorecido",
+      "frustrado"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 168,
+    "pm": 34,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": -1,
+      "des": 2,
+      "con": 0,
+      "int": -1,
+      "sab": 4,
+      "car": 3
+    },
+    "pericias": {
+      "atletismo": 7,
+      "cura": 9,
+      "diplomacia": 13,
+      "religiao": 9,
+      "sobrevivencia": 11
+    },
+    "ataques": [],
+    "habilidades": [
+      {
+        "nome": "Aura de Paz",
+        "acao": "livre",
+        "custoPm": 2,
+        "recarga": null,
+        "cdResistencia": 24,
+        "resistenciaTipo": null,
+        "descricao": "A xamã de Sarana gera uma aura de paz com um raio de 9m e duração cena. Qualquer inimigo dentro da aura que tente fazer uma ação hostil contra ela deve passar em um teste de Vontade (CD 24) ou perde a ação. Se passar, fica imune a esta habilidade por um dia."
+      },
+      {
+        "nome": "Magia em Movimento",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando se move e lança uma magia na mesma rodada, a xamã pode se mover antes e depois da magia, desde que a distância total percorrida não seja maior que seu deslocamento."
+      },
+      {
+        "nome": "Velocista da Planície",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz testes de Atletismo para correr ou saltar, a xamã rola dois dados e usa o melhor resultado."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 24,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como clériga de Marah de 6º nível (CD 24): Caminhos da Natureza (padrão, 3 PM, deslocamento +3m e ignora terreno difícil natural), Curar Ferimentos (padrão, 3 PM, cura 4d8+8 PV), Escudo da Fé (reação, 1 PM, +2 na Defesa por 1 turno), Purificação (padrão, 3 PM, remove uma condição negativa de uma criatura adjacente), Tranquilidade (padrão, 2 PM, muda atitude para indiferente e impede ações hostis até o fim da cena)."
+      }
+    ],
+    "equipamento": [
+      "Bálsamo restaurador x3",
+      "Ramo verdejante x4",
+      "Símbolo sagrado de Sarana (Marah)"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  }
+]

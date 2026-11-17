@@ -1,0 +1,1556 @@
+[
+  {
+    "id": "aquinne",
+    "nome": "Aquin'ne",
+    "nd": "2",
+    "regiao": "elementais",
+    "papel": "lacaio",
+    "tipo": "espirito",
+    "subtipo": "elemental",
+    "tamanho": "pequeno",
+    "iniciativa": 4,
+    "percepcao": 4,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 18,
+    "resistencias": {
+      "fortitude": 10,
+      "reflexos": 7,
+      "vontade": 3
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "acertos_criticos",
+      "atordoado",
+      "cansaco",
+      "efeitos_de_metabolismo",
+      "paralisia"
+    ],
+    "imunidadesDano": [
+      "frio"
+    ],
+    "vulnerabilidadesDano": [
+      "fogo"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 21,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 15.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 2,
+      "con": 2,
+      "int": -2,
+      "sab": 2,
+      "car": -2
+    },
+    "pericias": {
+      "atletismo": 6,
+      "furtividade": 4
+    },
+    "ataques": [
+      {
+        "nome": "Tentáculo hídrico (x2)",
+        "bonusAtaque": 13,
+        "dano": "2d4+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Afogar",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura agarrada pelo aquin'ne é considerada submersa até se soltar."
+      },
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Tentáculo hídrico (teste +13)."
+      },
+      {
+        "nome": "Redemoinho de Maresia",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 16,
+        "resistenciaTipo": null,
+        "descricao": "O aquin'ne toca um objeto adjacente, que perde 5 PV (Reflexos CD 16 evita)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "1 dose de eter elemental (frio) (cd 17 para extrair).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "bando_de_pamgras",
+    "nome": "Bando de Pamgras",
+    "nd": "11",
+    "regiao": "elementais",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": "elemental",
+    "tamanho": "grande",
+    "iniciativa": 9,
+    "percepcao": 8,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 41,
+    "resistencias": {
+      "fortitude": 24,
+      "reflexos": 18,
+      "vontade": 11
+    },
+    "rd": {
+      "impacto": 10
+    },
+    "imunidadesEfeitos": [
+      "acertos_criticos",
+      "atordoado",
+      "cansaco",
+      "efeitos_de_metabolismo",
+      "paralisia"
+    ],
+    "imunidadesDano": [
+      "acido"
+    ],
+    "vulnerabilidadesDano": [
+      "eletricidade"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 550,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 6.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 8,
+      "des": 0,
+      "con": 4,
+      "int": -3,
+      "sab": -1,
+      "car": -1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Pancada (x2)",
+        "bonusAtaque": 34,
+        "dano": "4d10+30",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Bando",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Representa um bando de pamgras agindo em conjunto."
+      },
+      {
+        "nome": "Abalo Sísmico",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": "acao_de_movimento",
+        "cdResistencia": 31,
+        "resistenciaTipo": null,
+        "descricao": "Golpeia o solo repetidamente, abrindo fendas em pontos aleatórios num círculo de 30m de raio. Cada criatura na área rola um dado; em resultado ímpar, uma fenda se abre sob seus pés e ela cai dentro (Reflexos CD 31 evita a queda). Dentro da fenda fica agarrada; pode se soltar e saltar fora com ação completa e teste de Atletismo CD 31. No início de cada turno agarrada, sofre 4d8 de dano de impacto pelo esmagamento das rochas. Recarga (ação de movimento)."
+      },
+      {
+        "nome": "Cristalário",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 31,
+        "resistenciaTipo": null,
+        "descricao": "Os cristais afiados do corpo do bando ferem profundamente suas vítimas. Criaturas atingidas ficam sangrando (Fortitude CD 31 evita)."
+      },
+      {
+        "nome": "Golpe Avassalador",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 31,
+        "resistenciaTipo": null,
+        "descricao": "Quando acerta um ataque de pancada, arremessa a vítima 2d6 x 1,5m em uma direção à escolha dele (Fortitude CD 31 evita). A vítima fica caída e, se atingir um obstáculo, sofre 2d6 de dano de impacto por 1,5m arremessado."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "1d6 doses de eter elemental (acido) (cd 26 para extrair).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "ber_baram",
+    "nome": "Ber-baram",
+    "nd": "8",
+    "regiao": "elementais",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": "elemental",
+    "tamanho": "grande",
+    "iniciativa": 9,
+    "percepcao": 10,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 30,
+    "resistencias": {
+      "fortitude": 20,
+      "reflexos": 17,
+      "vontade": 7
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "acertos_criticos",
+      "atordoado",
+      "cansaco",
+      "efeitos_de_metabolismo",
+      "paralisia"
+    ],
+    "imunidadesDano": [
+      "fogo"
+    ],
+    "vulnerabilidadesDano": [
+      "frio"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 320,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 15.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 8,
+      "des": 5,
+      "con": 5,
+      "int": -2,
+      "sab": 2,
+      "car": 2
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Marrada",
+        "bonusAtaque": 26,
+        "dano": "2d10+12",
+        "danoExtra": "3d6 fogo",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Baforada Flamejante",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": "acao_de_movimento",
+        "cdResistencia": 26,
+        "resistenciaTipo": null,
+        "descricao": "O ber-baram sopra fogo num cone de 9m. Criaturas na área sofrem 7d6 pontos de dano de fogo (Reflexos CD 26 reduz à metade). Recarga (ação de movimento)."
+      },
+      {
+        "nome": "Marrada Explosiva",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": "acao_de_movimento",
+        "cdResistencia": 26,
+        "resistenciaTipo": null,
+        "descricao": "Quando acerta um ataque de marrada em investida, causa uma explosão de chamas em um raio de 6m do alvo. Todas as criaturas na área sofrem 6d6 pontos de dano de fogo (Reflexos CD 26 reduz à metade). Recarga (ação de movimento)."
+      },
+      {
+        "nome": "Sangue de Lava",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 26,
+        "resistenciaTipo": null,
+        "descricao": "Quando o ber-baram sofre dano de corte ou perfuração, criaturas adjacentes sofrem 4d6 pontos de dano de fogo e ficam em chamas (Reflexos CD 26 reduz à metade e evita as chamas)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "1d4 doses de eter elemental (fogo) (cd 23 para extrair).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "corgann",
+    "nome": "Corgann",
+    "nd": "8",
+    "regiao": "elementais",
+    "papel": "lacaio",
+    "tipo": "espirito",
+    "subtipo": "elemental",
+    "tamanho": "medio",
+    "iniciativa": 14,
+    "percepcao": 10,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 30,
+    "resistencias": {
+      "fortitude": 15,
+      "reflexos": 20,
+      "vontade": 9
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "acertos_criticos",
+      "atordoado",
+      "cansaco",
+      "efeitos_de_metabolismo",
+      "paralisia"
+    ],
+    "imunidadesDano": [
+      "frio"
+    ],
+    "vulnerabilidadesDano": [
+      "fogo"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 61,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 15.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 6,
+      "con": 3,
+      "int": -2,
+      "sab": 2,
+      "car": -1
+    },
+    "pericias": {
+      "furtividade": 14
+    },
+    "ataques": [
+      {
+        "nome": "Jato d'água (à distância) (x2)",
+        "bonusAtaque": 27,
+        "dano": "2d8+29",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "médio",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Jato Pressurizado",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "acao_de_movimento",
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O corgann dispara água pressurizada numa linha de 30m: um único teste de ataque de jato d'água comparado à Defesa de cada criatura na área; rolagem de dano com bônus cumulativo de +2d8 para cada acerto, aplicada a cada criatura atingida. Recarga (ação de movimento)."
+      },
+      {
+        "nome": "Navegar em Terra Firme",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O corgann inunda uma esfera de 6m em alcance curto, que se torna um corpo de água (terreno difícil para quem não tem deslocamento de natação); dentro dela pode fazer testes de Furtividade para se esconder sem precisar de cobertura."
+      },
+      {
+        "nome": "Salto Aquático",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O corgann salta para um ponto em um corpo d'água em alcance médio."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "1d4 doses de eter elemental (frio) (cd 23 para extrair).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "elemental_corrompido",
+    "nome": "Elemental Corrompido",
+    "nd": "16",
+    "regiao": "elementais",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": "elemental",
+    "tamanho": "colossal",
+    "iniciativa": 19,
+    "percepcao": 14,
+    "sentidos": [
+      "percepcao_as_cegas",
+      "visao_no_escuro"
+    ],
+    "defesa": 53,
+    "resistencias": {
+      "fortitude": 30,
+      "reflexos": 24,
+      "vontade": 16
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "acertos_criticos",
+      "atordoado",
+      "cansaco",
+      "dano_de_luz",
+      "efeitos_de_metabolismo",
+      "paralisia"
+    ],
+    "imunidadesDano": [
+      "acido",
+      "eletricidade",
+      "trevas"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 800,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 15.0,
+      "voo": 0.0,
+      "natacao": 15.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 12,
+      "des": 5,
+      "con": 13,
+      "int": -1,
+      "sab": 0,
+      "car": 0
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 46,
+        "dano": "3d12+15",
+        "danoExtra": "4d6 acido",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Pancada (x2)",
+        "bonusAtaque": 46,
+        "dano": "3d8+15",
+        "danoExtra": "4d6 acido",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Mordida (teste +56)."
+      },
+      {
+        "nome": "Corpo Volátil",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 42,
+        "resistenciaTipo": null,
+        "descricao": "Se fosse sofrer 20 ou mais pontos de dano de eletricidade ou fogo mágicos, a água em seu corpo evapora, criando uma nuvem corrosiva numa esfera de 6m ao redor. Criaturas que iniciem turnos na área sofrem 10d6 de dano de ácido e ficam enjoadas (Fortitude CD 42 reduz o dano à metade e evita a condição); dentro da nuvem, o deslocamento é reduzido para 3m, há –2 em testes de ataque e rolagens de dano, e camuflagem leve (até 1,5m) ou total (mais de 1,5m)."
+      },
+      {
+        "nome": "Engolfar",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 42,
+        "resistenciaTipo": null,
+        "descricao": "Se começar o turno agarrando uma criatura Grande ou menor, pode fazer um teste de agarrar contra ela; se vencer, engolfa a criatura, que continua agarrada e submersa, começando a sufocar e sofrendo 10d6 de dano de ácido no início de cada rodada do elemental. Pode se libertar com teste de Atletismo para natação (CD 42), escapando para um espaço livre adjacente."
+      },
+      {
+        "nome": "Reabastecer",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Em contato com um corpo d'água Médio ou maior, recebe cura acelerada 50. Se fosse sofrer dano mágico de frio, em vez disso cura PV igual à metade do dano que sofreria."
+      },
+      {
+        "nome": "Torrente Cáustica",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": "acao_de_movimento",
+        "cdResistencia": 42,
+        "resistenciaTipo": null,
+        "descricao": "Cospe uma torrente de água cáustica em um alvo em alcance médio: 5d6 de dano de ácido e 5d6 de dano de impacto, fica caído (Reflexos CD 42 reduz o dano à metade e evita a condição); se falhar por 10 ou mais, é empurrado 6m na direção oposta e, se usar armadura/escudo, o item é avariado. Recarga (ação de movimento)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "hallustir",
+    "nome": "Hallus'tir",
+    "nd": "15",
+    "regiao": "elementais",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": "elemental",
+    "tamanho": "colossal",
+    "iniciativa": 29,
+    "percepcao": 15,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 49,
+    "resistencias": {
+      "fortitude": 20,
+      "reflexos": 28,
+      "vontade": 15
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "acertos_criticos",
+      "atordoado",
+      "caido",
+      "cansaco",
+      "efeitos_de_metabolismo",
+      "paralisia"
+    ],
+    "imunidadesDano": [
+      "eletricidade"
+    ],
+    "vulnerabilidadesDano": [
+      "acido"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 718,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 14,
+      "con": 8,
+      "int": -3,
+      "sab": 0,
+      "car": -2
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Punho (x3)",
+        "bonusAtaque": 44,
+        "dano": "2d12+23",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Escombros (à distância) (x2)",
+        "bonusAtaque": 37,
+        "dano": "4d6+31",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 3,
+        "tipoDano": "impacto",
+        "alcance": "médio",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Corpo Eólico",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O hallus'tir pode atravessar qualquer fresta por onde o ar passaria, e só pode ser afetado por armas e efeitos mágicos."
+      },
+      {
+        "nome": "Relâmpago Selvagem",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 40,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, causa 6d10 pontos de dano de eletricidade em uma criatura em alcance médio (Reflexos CD 40 reduz à metade)."
+      },
+      {
+        "nome": "Tornado Vivo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 40,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada turno do hallus'tir, todas as criaturas Enormes ou menores em alcance longo ficam caídas e são puxadas 1d12 x 1,5m na direção dele (Fortitude CD 40 evita; voadoras sofrem –5). Quem for arrastado sofre 1d6 de impacto por 1,5m percorrido e, se chegar ao espaço do hallus'tir, é sugado para dentro dele e fica agarrado; pode se soltar com ação padrão e teste de Atletismo CD 40."
+      },
+      {
+        "nome": "Turbilhão de Escombros",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 40,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada turno do hallus'tir, todas as criaturas dentro dele sofrem 7d6 pontos de dano de impacto (Reflexos CD 40 reduz à metade)."
+      },
+      {
+        "nome": "Ventos da Matança",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O clima em uma esfera de 90m ao redor é de tempestade constante (sem chance de queda de raios) e, em uma esfera de 500m, é de vento forte. Esses climas não podem ser alterados."
+      },
+      {
+        "nome": "Olho da Tempestade",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se estiver na área de um efeito mágico que altera o clima, fica atordoado por 1 rodada (Fortitude CD do efeito, se houver, evita). Só pode ser atordoado dessa forma uma vez por cena."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "1d4+2 doses de eter elemental (eletricidade) (cd 30 para extrair) e 1d4+2 doses de raio cristalizado (cd 30 para extrair).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "namasqall",
+    "nome": "Namasqall",
+    "nd": "14",
+    "regiao": "elementais",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": "elemental",
+    "tamanho": "colossal",
+    "iniciativa": 18,
+    "percepcao": 13,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 42,
+    "resistencias": {
+      "fortitude": 28,
+      "reflexos": 22,
+      "vontade": 13
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "acertos_criticos",
+      "atordoado",
+      "cansaco",
+      "efeitos_de_metabolismo",
+      "paralisia"
+    ],
+    "imunidadesDano": [
+      "frio"
+    ],
+    "vulnerabilidadesDano": [
+      "fogo"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 700,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 18.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 10,
+      "des": 4,
+      "con": 10,
+      "int": -3,
+      "sab": -1,
+      "car": -1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Tentáculo d'água (x4)",
+        "bonusAtaque": 39,
+        "dano": "2d10+30",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Tentáculo d'água (teste +49), apenas contra criaturas Grandes ou menores."
+      },
+      {
+        "nome": "Constrição",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada um de seus turnos, causa 4d10+30 pontos de dano de impacto em cada criatura que esteja agarrando."
+      },
+      {
+        "nome": "Corpo Torrencial",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O clima em uma esfera de 90m ao redor do namasqall é de tempestade constante (sem chance de queda de raios) e, em uma esfera de 500m, é de chuva. Esses climas não podem ser alterados."
+      },
+      {
+        "nome": "Maremoto",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 36,
+        "resistenciaTipo": null,
+        "descricao": "O namasqall cria uma onda que varre um cone de 12m. Criaturas na área sofrem 12d6+40 de dano (metade frio, metade impacto) e são empurradas 6m (Reflexos CD 36 reduz à metade e evita o empurrão)."
+      },
+      {
+        "nome": "Olho da Tempestade",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se estiver na área de um efeito mágico que altera o clima, fica atordoado por 1 rodada (Fortitude CD do efeito, se houver, evita). Só pode ser atordoado dessa forma uma vez por cena."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "1d4+2 doses de eter elemental (frio) (cd 29 para extrair).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "pakk",
+    "nome": "Pakk",
+    "nd": "1",
+    "regiao": "elementais",
+    "papel": "lacaio",
+    "tipo": "espirito",
+    "subtipo": "elemental",
+    "tamanho": "minusculo",
+    "iniciativa": 7,
+    "percepcao": 2,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 15,
+    "resistencias": {
+      "fortitude": 5,
+      "reflexos": 10,
+      "vontade": 1
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "acertos_criticos",
+      "atordoado",
+      "cansaco",
+      "efeitos_de_metabolismo",
+      "paralisia"
+    ],
+    "imunidadesDano": [
+      "fogo"
+    ],
+    "vulnerabilidadesDano": [
+      "frio"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 9,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 0.0,
+      "voo": 12.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 5,
+      "con": 1,
+      "int": -1,
+      "sab": 2,
+      "car": 3
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Queimadura",
+        "bonusAtaque": 11,
+        "dano": "4d6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "fogo",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Arco de Chamas",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "acao_de_movimento",
+        "cdResistencia": 14,
+        "resistenciaTipo": null,
+        "descricao": "O pakk projeta chamas em um cone de 6m. Criaturas na área sofrem 3d6 pontos de dano de fogo (Reflexos CD 14 reduz à metade). Recarga (ação de movimento)."
+      },
+      {
+        "nome": "Labareda Viva",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada turno do pakk, todas as criaturas em alcance curto sofrem 1d4 pontos de dano de fogo."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "1 dose de eter elemental (fogo) (cd 16 para extrair).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "pamgra",
+    "nome": "Pamgra",
+    "nd": "7",
+    "regiao": "elementais",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": "elemental",
+    "tamanho": "medio",
+    "iniciativa": 7,
+    "percepcao": 6,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 31,
+    "resistencias": {
+      "fortitude": 20,
+      "reflexos": 14,
+      "vontade": 7
+    },
+    "rd": {
+      "impacto": 10
+    },
+    "imunidadesEfeitos": [
+      "acertos_criticos",
+      "atordoado",
+      "cansaco",
+      "efeitos_de_metabolismo",
+      "paralisia"
+    ],
+    "imunidadesDano": [
+      "acido"
+    ],
+    "vulnerabilidadesDano": [
+      "eletricidade"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 280,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 6.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 8,
+      "des": 0,
+      "con": 4,
+      "int": -3,
+      "sab": -1,
+      "car": -1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Pancada (x2)",
+        "bonusAtaque": 24,
+        "dano": "2d10+15",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Cristalário",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 26,
+        "resistenciaTipo": null,
+        "descricao": "Os cristais afiados do corpo do pamgra ferem profundamente suas vítimas. Criaturas atingidas por seus ataques ficam sangrando (Fortitude CD 26 evita)."
+      },
+      {
+        "nome": "Golpe Avassalador",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 24,
+        "resistenciaTipo": null,
+        "descricao": "Quando acerta um ataque de pancada, arremessa a vítima 1d6 x 1,5m em uma direção à escolha dele (Fortitude CD 24 evita). A vítima fica caída e, se atingir um obstáculo, sofre 1d6 de dano de impacto por 1,5m arremessado."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "1d4 doses de eter elemental (acido) (cd 22 para extrair).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "rarvnaak",
+    "nome": "Rarvnaak",
+    "nd": "7",
+    "regiao": "elementais",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": "elemental",
+    "tamanho": "medio",
+    "iniciativa": 14,
+    "percepcao": 10,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 29,
+    "resistencias": {
+      "fortitude": 12,
+      "reflexos": 21,
+      "vontade": 5
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "acertos_criticos",
+      "atordoado",
+      "caido",
+      "cansaco",
+      "efeitos_de_metabolismo",
+      "paralisia"
+    ],
+    "imunidadesDano": [
+      "eletricidade"
+    ],
+    "vulnerabilidadesDano": [
+      "acido"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 280,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 0.0,
+      "voo": 12.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 1,
+      "des": 7,
+      "con": 4,
+      "int": 0,
+      "sab": -1,
+      "car": -2
+    },
+    "pericias": {
+      "furtividade": 29
+    },
+    "ataques": [
+      {
+        "nome": "Soco pneumático (x2)",
+        "bonusAtaque": 20,
+        "dano": "1d8+16",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Ataque Furtivo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "+4d6 de dano extra quando flanqueia ou surpreende o alvo."
+      },
+      {
+        "nome": "Caçada Implacável",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O rarvnaak marca um alvo conhecido (uma descrição de alguém é suficiente). Recebe +5 em testes de ataque e rolagens de dano contra ele e, enquanto ambos estiverem no mesmo Plano, sabe sua distância e direção. Só pode ter um alvo marcado por vez."
+      },
+      {
+        "nome": "Corpo Eólico",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O rarvnaak pode atravessar qualquer fresta por onde o ar passaria, e só pode ser afetado por armas e efeitos mágicos."
+      },
+      {
+        "nome": "Invisibilidade Natural",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O rarvnaak está sempre invisível, com camuflagem total e +10 em Furtividade (já contabilizado); criaturas que não possam percebê-lo ficam desprevenidas."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "1d4 doses de eter elemental (eletricidade) (cd 22 para extrair).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "serpentaar",
+    "nome": "Serpentaar",
+    "nd": "14",
+    "regiao": "elementais",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": "elemental",
+    "tamanho": "enorme",
+    "iniciativa": 9,
+    "percepcao": 14,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 47,
+    "resistencias": {
+      "fortitude": 30,
+      "reflexos": 22,
+      "vontade": 14
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "acertos_criticos",
+      "atordoado",
+      "cansaco",
+      "efeitos_de_metabolismo",
+      "paralisia"
+    ],
+    "imunidadesDano": [
+      "fogo"
+    ],
+    "vulnerabilidadesDano": [
+      "frio"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 700,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 9.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 2,
+      "con": 4,
+      "int": -2,
+      "sab": 3,
+      "car": 2
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Mordida (x2)",
+        "bonusAtaque": 39,
+        "dano": "2d10+7",
+        "danoExtra": "6d6+31 fogo",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Aura de Calor",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada turno do serpentaar, todas as criaturas em um raio de 9m sofrem 10d6+30 pontos de dano de fogo."
+      },
+      {
+        "nome": "Corpo Ígneo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 38,
+        "resistenciaTipo": null,
+        "descricao": "Criaturas e objetos que iniciem seus turnos adjacentes ao serpentaar, ou que façam um ataque corpo a corpo contra ele, sofrem 4d12 pontos de dano de fogo (Reflexos CD 38 evita)."
+      },
+      {
+        "nome": "Irromper",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": "acao_de_movimento",
+        "cdResistencia": 28,
+        "resistenciaTipo": null,
+        "descricao": "O serpentaar cria quatro esferas flamejantes em alcance médio. Cada uma dura 2 rodadas, tem 1,5m de raio e causa 12d8 pontos de dano de fogo a criaturas que iniciem o turno em sua área (Reflexos CD 28 reduz à metade). Recarga (ação de movimento)."
+      },
+      {
+        "nome": "Resfriamento Forçado",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando sofre 70 pontos de dano de frio ou mais de um único efeito, o corpo do serpentaar resfria, desativando Corpo Ígneo por 2 rodadas."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "1d4+2 doses de eter elemental (fogo) (cd 29 para extrair).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "tpeel",
+    "nome": "T'Peel",
+    "nd": "1",
+    "regiao": "elementais",
+    "papel": "lacaio",
+    "tipo": "espirito",
+    "subtipo": "elemental",
+    "tamanho": "minusculo",
+    "iniciativa": 5,
+    "percepcao": 1,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 10,
+    "resistencias": {
+      "fortitude": 5,
+      "reflexos": 10,
+      "vontade": 1
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "acertos_criticos",
+      "atordoado",
+      "caido",
+      "cansaco",
+      "efeitos_de_metabolismo",
+      "paralisia"
+    ],
+    "imunidadesDano": [
+      "eletricidade"
+    ],
+    "vulnerabilidadesDano": [
+      "acido"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 12,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 0.0,
+      "voo": 9.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 4,
+      "con": 2,
+      "int": -2,
+      "sab": 0,
+      "car": -1
+    },
+    "pericias": {
+      "ladinagem": 7
+    },
+    "ataques": [
+      {
+        "nome": "Brisa agressiva",
+        "bonusAtaque": 11,
+        "dano": "2d4+9",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Lufada cortante (à distância)",
+        "bonusAtaque": 11,
+        "dano": "2d4+9",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "curto",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Corpo Eólico",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O t'peel pode atravessar qualquer fresta por onde o ar passaria, e só pode ser afetado por armas e efeitos mágicos."
+      },
+      {
+        "nome": "…E o Vento Levou",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando acerta um ataque de brisa agressiva, usa a manobra desarmar (teste +11). Se desarmar a vítima, prende a arma em seu redemoinho; recuperá-la exige vencer um teste de desarmar contra o t'peel."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "metade (role novamente qualquer item que ocupe mais de 2 espacos) e 1 dose de eter elemental (eletricidade) (cd 16 para extrair).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "tanaloom",
+    "nome": "Tanaloom",
+    "nd": "13",
+    "regiao": "elementais",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": "elemental",
+    "tamanho": "enorme",
+    "iniciativa": 10,
+    "percepcao": 12,
+    "sentidos": [
+      "nao_pode_ser_flanqueado",
+      "percepcao_as_cegas",
+      "visao_no_escuro"
+    ],
+    "defesa": 44,
+    "resistencias": {
+      "fortitude": 26,
+      "reflexos": 20,
+      "vontade": 13
+    },
+    "rd": {
+      "impacto": 15
+    },
+    "imunidadesEfeitos": [
+      "acertos_criticos",
+      "atordoado",
+      "caido",
+      "cansaco",
+      "efeitos_de_metabolismo",
+      "paralisia"
+    ],
+    "imunidadesDano": [
+      "acido"
+    ],
+    "vulnerabilidadesDano": [
+      "eletricidade"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 650,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 15.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 15.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 12,
+      "des": 0,
+      "con": 9,
+      "int": -2,
+      "sab": 2,
+      "car": -1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Pancada (x2)",
+        "bonusAtaque": 37,
+        "dano": "4d12+49",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Flechas ácidas (à distância) (x6)",
+        "bonusAtaque": 34,
+        "dano": "3d6+10",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 3,
+        "tipoDano": "acido",
+        "alcance": "médio",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Golpe Esmagador",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando acerta um ataque de pancada, pode usar a manobra derrubar (teste +42). Criaturas derrubadas precisam gastar ação padrão em vez de movimento para se levantar e não podem usar Acrobacia para levantar como ação livre, pois ficam presas ao chão."
+      },
+      {
+        "nome": "Metamorfismo Rochoso",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O tanaloom deforma o corpo para passar por espaços estreitos suficientes para criaturas Médias ou maiores, percorrendo até metade do seu deslocamento."
+      },
+      {
+        "nome": "Monólito",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 40,
+        "resistenciaTipo": null,
+        "descricao": "Um tanaloom pode permanecer completamente imóvel. Se estiver assim, um personagem deve passar num teste de Percepção (CD 40) para perceber que ele é uma criatura e não parte de uma construção."
+      },
+      {
+        "nome": "Rolo Compressor",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O tanaloom pode passar por espaços ocupados por criaturas Grandes ou menores, causando 2d10 de dano de impacto em cada uma nos espaços que atravessar (uma criatura só sofre esse dano uma vez por rodada)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "2d4 doses de eter elemental (acido) (cd 28 para extrair).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "terrier",
+    "nome": "Terrier",
+    "nd": "1",
+    "regiao": "elementais",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": "elemental",
+    "tamanho": "pequeno",
+    "iniciativa": 0,
+    "percepcao": 3,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 16,
+    "resistencias": {
+      "fortitude": 11,
+      "reflexos": 0,
+      "vontade": 5
+    },
+    "rd": {
+      "impacto": 5
+    },
+    "imunidadesEfeitos": [
+      "acertos_criticos",
+      "atordoado",
+      "cansaco",
+      "efeitos_de_metabolismo",
+      "paralisia"
+    ],
+    "imunidadesDano": [
+      "acido"
+    ],
+    "vulnerabilidadesDano": [
+      "eletricidade"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 35,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 0,
+      "con": 3,
+      "int": -3,
+      "sab": 1,
+      "car": 1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Pancada",
+        "bonusAtaque": 9,
+        "dano": "2d6+8",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Pedra-Punho",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "acao_de_movimento",
+        "cdResistencia": 16,
+        "resistenciaTipo": null,
+        "descricao": "O terrier dispara pedras do tamanho de um punho em criaturas a sua escolha em alcance curto. Cada criatura sofre 1d6+4 pontos de dano de impacto e fica atordoada por 1 rodada (Fortitude CD 16 reduz à metade e evita a condição; sucesso impede ficar atordoada por esta habilidade pela cena). Recarga (ação de movimento)."
+      },
+      {
+        "nome": "Pedregoso",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 30,
+        "resistenciaTipo": null,
+        "descricao": "Um terrier pode permanecer completamente imóvel. Se estiver assim, um personagem deve passar num teste de Percepção (CD 30) para perceber que ele é uma criatura e não um monte de pedras."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "1 dose de eter elemental (acido) (cd 16 para extrair).",
+    "recursoExtraivel": null
+  }
+]

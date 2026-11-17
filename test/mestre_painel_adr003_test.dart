@@ -5,6 +5,10 @@ import 'package:t20_creator/domain/entities/mestre/modelos_mestre.dart';
 import 'package:t20_creator/presentation/controllers/mestre_controller/mestre_cubit.dart';
 import 'package:t20_creator/presentation/controllers/mestre_controller/mestre_state.dart';
 import 'package:t20_creator/presentation/screens/mestre/mestre_painel_screen.dart';
+import 'package:t20_creator/presentation/screens/mestre/widgets/drawer_sessao_lan.dart';
+import 'package:t20_creator/presentation/screens/mestre/widgets/mestre_battlemap_widget.dart';
+import 'package:t20_creator/presentation/screens/mestre/widgets/tela_escudo_notas.dart';
+import 'package:t20_creator/presentation/screens/mestre/widgets/tela_mesa_jogo.dart';
 
 void main() {
   group('ADR-003 — Hierarquia Campanha -> Aventura -> Sessão & LAN Frontend', () {
@@ -129,8 +133,8 @@ void main() {
     });
   });
 
-  group('UI Tablet & Mobile — MestrePainelScreen (Novo Design)', () {
-    testWidgets('Renderiza layout Tablet com NavigationRail e navega entre Mapas e Escudo', (tester) async {
+  group('UI Mobile & Drawer — MestrePainelScreen', () {
+    testWidgets('Renderiza Campanhas inicialmente e navega via Drawer entre Mapas e Escudo', (tester) async {
       tester.view.physicalSize = const Size(1200, 800);
       tester.view.devicePixelRatio = 1.0;
       addTearDown(tester.view.resetPhysicalSize);
@@ -142,36 +146,40 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      // Verifica o chip de contexto no topo (Parte 0)
+      // Tela inicial exibe as campanhas em cards e FAB "Nova campanha"
       expect(find.textContaining('Coração de Rubi'), findsWidgets);
-
-      // Verifica os 2 destinos do NavigationRail (Parte 0)
-      expect(find.text('Mapas'), findsWidgets);
-      expect(find.text('Escudo e Notas'), findsWidgets);
-
-      // Na tela inicial (Biblioteca de Mapas - Parte 2), verifica cards de mapas e FAB
-      expect(find.textContaining('Ruínas da Estrada'), findsWidgets);
       expect(find.byType(FloatingActionButton), findsOneWidget);
 
-      // Navega para a aba "Escudo e Notas" (Parte 5)
-      await tester.tap(find.text('Escudo e Notas').first);
+      // Abre o Drawer e verifica os destinos do mestre
+      await tester.tap(find.byIcon(Icons.menu));
       await tester.pumpAndSettle();
 
-      // Verifica as abas do Escudo
+      final drawer = find.byType(NavigationDrawer);
+      expect(find.descendant(of: drawer, matching: find.text('Campanhas')), findsOneWidget);
+      expect(find.descendant(of: drawer, matching: find.text('Mapas')), findsOneWidget);
+      expect(find.descendant(of: drawer, matching: find.text('Escudo e Notas')), findsOneWidget);
+
+      // Navega para "Escudo e Notas"
+      await tester.tap(find.descendant(of: drawer, matching: find.text('Escudo e Notas')));
+      await tester.pumpAndSettle();
+
       expect(find.text('Condições'), findsOneWidget);
       expect(find.text('Perigos'), findsOneWidget);
       expect(find.text('Nomes'), findsOneWidget);
       expect(find.text('Regras de Combate'), findsOneWidget);
       expect(find.text('Notas da Sessão'), findsOneWidget);
 
-      // Volta para Mapas e clica no mapa para abrir a Mesa de Jogo (Parte 4)
-      await tester.tap(find.text('Mapas').first);
+      // Abre o Drawer, vai para "Mapas" e abre a Mesa de Jogo
+      await tester.tap(find.byIcon(Icons.menu));
+      await tester.pumpAndSettle();
+      await tester.tap(find.descendant(of: find.byType(NavigationDrawer), matching: find.text('Mapas')));
       await tester.pumpAndSettle();
 
+      expect(find.textContaining('Ruínas da Estrada'), findsWidgets);
       await tester.tap(find.textContaining('Ruínas da Estrada').first);
       await tester.pumpAndSettle();
 
-      // Verifica elementos da Mesa de Jogo (Parte 4)
+      // Verifica elementos da Mesa de Jogo
       expect(find.textContaining('Enviar aos jogadores'), findsOneWidget);
       expect(find.byIcon(Icons.circle), findsWidgets); // indicador LAN discreto
     });
@@ -339,6 +347,374 @@ void main() {
       // 6. Mestre aprova a ficha -> agora sim o herói entra no mapa de batalha
       cubit.atualizarStatusRevisaoFicha(kallista.characterId, StatusRevisaoFicha.aprovada);
       expect(cubit.state.mapaAtual!.tokens.any((t) => t.id == kallista.characterId), isTrue);
+    });
+  });
+
+  group('Auditoria Painel do Mestre — Regras, Cubit e Otimizações', () {
+    test('3º ponto de medição reinicia origem e limpa destino (limparDestinoMedicao: true)', () {
+      final cubit = MestreCubit();
+      addTearDown(cubit.close);
+
+      cubit.registrarPontoMedicao(const Posicao2D(1, 1));
+      expect(cubit.state.pontoOrigemMedicao, const Posicao2D(1, 1));
+      expect(cubit.state.pontoDestinoMedicao, isNull);
+
+      cubit.registrarPontoMedicao(const Posicao2D(4, 3));
+      expect(cubit.state.pontoOrigemMedicao, const Posicao2D(1, 1));
+      expect(cubit.state.pontoDestinoMedicao, const Posicao2D(4, 3));
+
+      // Ao registrar um 3º ponto, origem atualiza e destino volta a null
+      cubit.registrarPontoMedicao(const Posicao2D(6, 2));
+      expect(cubit.state.pontoOrigemMedicao, const Posicao2D(6, 2));
+      expect(cubit.state.pontoDestinoMedicao, isNull);
+    });
+
+    test('adicionarTokenCustomizadoNoMapa em lote gera 5 IDs distintos dentro dos limites do mapa', () {
+      final cubit = MestreCubit();
+      addTearDown(cubit.close);
+
+      final mapa = cubit.state.mapaAtual!;
+      final qtdInicial = mapa.tokens.length;
+
+      cubit.adicionarTokenCustomizadoNoMapa(
+        nome: 'Goblin Saqueador',
+        ehHeroi: false,
+        pvMax: 12,
+        posicao: Posicao2D(mapa.largura - 2, mapa.altura - 1),
+        quantidade: 5,
+      );
+
+      final mapaAtualizado = cubit.state.mapaAtual!;
+      final novosTokens = mapaAtualizado.tokens.skip(qtdInicial).toList();
+      expect(novosTokens.length, 5);
+      expect(novosTokens.map((t) => t.id).toSet().length, 5);
+
+      for (final token in novosTokens) {
+        expect(token.posicao.x, inInclusiveRange(0, mapaAtualizado.largura - 1));
+        expect(token.posicao.y, inInclusiveRange(0, mapaAtualizado.altura - 1));
+      }
+    });
+
+    test('Fog of War explícito: fogModoRevelar true mantém revelada e false oculta sem alternar', () {
+      final cubit = MestreCubit();
+      addTearDown(cubit.close);
+
+      cubit.selecionarFerramentaMapa(FerramentaMapaMestre.nevoaDeGuerra);
+
+      // No mapa padrão, colunas 0..6 iniciam reveladas e 7..11 ocultas
+      const pos = Posicao2D(10, 4);
+      expect(cubit.state.mapaAtual!.celulasReveladas.contains(pos), isFalse);
+
+      // Múltiplos cliques em modo revelar mantêm a célula revelada
+      cubit.aoClicarCelulaMapa(pos, fogModoRevelar: true);
+      expect(cubit.state.mapaAtual!.celulasReveladas.contains(pos), isTrue);
+
+      cubit.aoClicarCelulaMapa(pos, fogModoRevelar: true);
+      expect(cubit.state.mapaAtual!.celulasReveladas.contains(pos), isTrue);
+
+      // Múltiplos cliques em modo ocultar mantêm a célula oculta sem alternar
+      cubit.aoClicarCelulaMapa(pos, fogModoRevelar: false);
+      expect(cubit.state.mapaAtual!.celulasReveladas.contains(pos), isFalse);
+
+      cubit.aoClicarCelulaMapa(pos, fogModoRevelar: false);
+      expect(cubit.state.mapaAtual!.celulasReveladas.contains(pos), isFalse);
+    });
+
+    test('criarMapa preserva opções e salvarConfiguracoesMapaCompleto faz clamp e limpa imagem', () {
+      final cubit = MestreCubit();
+      addTearDown(cubit.close);
+
+      cubit.criarMapa(
+        nome: 'Câmara Oculta',
+        largura: 14,
+        altura: 10,
+        gridVisivel: false,
+        opacidadeGrid: 0.65,
+        ajusteEscala: 1.75,
+        imagemCaminhoLocal: '/tmp/mapa_teste.png',
+        comecarComTudoOculto: true,
+      );
+
+      final mapaCriado = cubit.state.mapaAtual!;
+      expect(mapaCriado.nome, 'Câmara Oculta');
+      expect(mapaCriado.gridVisivel, isFalse);
+      expect(mapaCriado.opacidadeGrid, closeTo(0.65, 0.001));
+      expect(mapaCriado.ajusteEscala, closeTo(1.75, 0.001));
+      expect(mapaCriado.imagemCaminhoLocal, '/tmp/mapa_teste.png');
+      expect(mapaCriado.celulasReveladas, isEmpty);
+
+      cubit.adicionarTokenCustomizadoNoMapa(
+        nome: 'Golem',
+        ehHeroi: false,
+        pvMax: 40,
+        posicao: const Posicao2D(12, 8),
+      );
+
+      final mapaEditado = cubit.state.mapaAtual!.copyWith(
+        largura: 6,
+        altura: 5,
+        limparImagemCustomizada: true,
+        terrenos: {
+          const Posicao2D(2, 2): TipoTerreno.dificil,
+          const Posicao2D(12, 8): TipoTerreno.obstaculo,
+        },
+        celulasReveladas: {
+          const Posicao2D(1, 1),
+          const Posicao2D(12, 8),
+        },
+      );
+
+      cubit.salvarConfiguracoesMapaCompleto(mapaEditado);
+
+      final mapaSalvo = cubit.state.mapaAtual!;
+      expect(mapaSalvo.largura, 6);
+      expect(mapaSalvo.altura, 5);
+      expect(mapaSalvo.imagemCaminhoLocal, isNull);
+      expect(mapaSalvo.tokens.single.posicao, const Posicao2D(5, 4));
+      expect(mapaSalvo.terrenos.containsKey(const Posicao2D(2, 2)), isTrue);
+      expect(mapaSalvo.terrenos.containsKey(const Posicao2D(12, 8)), isFalse);
+      expect(mapaSalvo.celulasReveladas, {const Posicao2D(1, 1)});
+    });
+  });
+
+  group('Auditoria Painel do Mestre — Widget Tests (VTT, LAN e IndexedStack)', () {
+    testWidgets('MestreBattlemapWidget usa CustomPaint único para grade e escala token 2x2', (tester) async {
+      final cubit = MestreCubit();
+      addTearDown(cubit.close);
+
+      cubit.adicionarTokenCustomizadoNoMapa(
+        nome: 'Ogro Gigante',
+        ehHeroi: false,
+        pvMax: 60,
+        tamanhoQuadrados: 2,
+        posicao: const Posicao2D(2, 2),
+      );
+
+      final token1x1 = cubit.state.mapaAtual!.tokens.firstWhere((t) => t.tamanhoQuadrados == 1);
+      final token2x2 = cubit.state.mapaAtual!.tokens.firstWhere((t) => t.tamanhoQuadrados == 2);
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: SizedBox(
+              width: 600,
+              height: 400,
+              child: MestreBattlemapWidget(cubit: cubit),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      // Grade desenhada por um único CustomPaint com painter ativo (sem N×M GestureDetectors por célula)
+      final gridCustomPaint = find.descendant(
+        of: find.byType(MestreBattlemapWidget),
+        matching: find.byKey(const ValueKey('battlemap_grid_painter')),
+      );
+      expect(gridCustomPaint, findsOneWidget);
+      final gridWidget = tester.widget<CustomPaint>(gridCustomPaint);
+      expect(gridWidget.painter, isNotNull);
+
+      final totalCelulas = cubit.state.mapaAtual!.largura * cubit.state.mapaAtual!.altura;
+      final gestureDetectors = find.descendant(
+        of: find.byType(MestreBattlemapWidget),
+        matching: find.byType(GestureDetector),
+      );
+      expect(gestureDetectors.evaluate().length, lessThan(totalCelulas));
+
+      // Token tamanhoQuadrados: 2 ocupa 2x largura e altura de um token 1x1
+      final size1x1 = tester.getSize(find.byKey(ValueKey('token_${token1x1.id}')));
+      final size2x2 = tester.getSize(find.byKey(ValueKey('token_${token2x2.id}')));
+      expect(size2x2.width, closeTo(size1x1.width * 2, 0.01));
+      expect(size2x2.height, closeTo(size1x1.height * 2, 0.01));
+    });
+
+    testWidgets('TelaMesaJogo mede distância entre 2 pontos e dispara ping com limpeza de timer', (tester) async {
+      tester.view.physicalSize = const Size(1200, 800);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(tester.view.resetPhysicalSize);
+
+      final cubit = MestreCubit();
+      addTearDown(cubit.close);
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: TelaMesaJogo(
+            cubit: cubit,
+            onVoltarBiblioteca: () {},
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      // Alterna para ferramenta Medir Distância
+      await tester.tap(find.byIcon(FerramentaMesa.medirDistancia.icone));
+      await tester.pumpAndSettle();
+
+      final gridPaint = find.byKey(const ValueKey('battlemap_grid_painter'));
+      final topLeft = tester.getTopLeft(gridPaint);
+      final size = tester.getSize(gridPaint);
+      final cellW = size.width / cubit.state.mapaAtual!.largura;
+      final cellH = size.height / cubit.state.mapaAtual!.altura;
+
+      // Toca em (2, 2) e (4, 4) -> 2 diagonais = 6.0 metros na regra T20
+      await tester.tapAt(topLeft + Offset(cellW * 2.5, cellH * 2.5));
+      await tester.pump();
+      await tester.tapAt(topLeft + Offset(cellW * 4.5, cellH * 4.5));
+      await tester.pumpAndSettle();
+
+      expect(cubit.state.pontoOrigemMedicao, const Posicao2D(2, 2));
+      expect(cubit.state.pontoDestinoMedicao, const Posicao2D(4, 4));
+      expect(find.textContaining('Distância: 6.0 metros'), findsOneWidget);
+
+      // Alterna para ferramenta Pings e dispara um ping em (5, 3)
+      await tester.tap(find.byIcon(FerramentaMesa.pings.icone));
+      await tester.pumpAndSettle();
+
+      await tester.tapAt(topLeft + Offset(cellW * 5.5, cellH * 3.5));
+      await tester.pump();
+
+      expect(cubit.state.pingsAtivos, contains(const Posicao2D(5, 3)));
+
+      // Avança o timer de 4s do ping para evitar pending timers
+      await tester.pump(const Duration(seconds: 5));
+      expect(cubit.state.pingsAtivos, isEmpty);
+    });
+
+    testWidgets('DrawerSessaoLan atualiza modais Convidar Jogadores e Jogadores na Sala em tempo real', (tester) async {
+      tester.view.physicalSize = const Size(1200, 800);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(tester.view.resetPhysicalSize);
+
+      final cubit = MestreCubit();
+      addTearDown(cubit.close);
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: SizedBox(
+              width: 360,
+              child: DrawerSessaoLan(cubit: cubit),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      // Abre sheet "Convidar Jogadores" e gira o PIN com atualização reativa no modal
+      await tester.tap(find.byTooltip('Convidar jogadores (QR e PIN)'));
+      await tester.pumpAndSettle();
+
+      final pinInicial = cubit.state.sessaoAtual!.codigoSalaLan;
+      expect(find.text('Convidar Jogadores'), findsOneWidget);
+      expect(find.text(pinInicial), findsOneWidget);
+
+      await tester.tap(find.text('Girar PIN'));
+      await tester.pump();
+      if (cubit.state.sessaoAtual!.codigoSalaLan == pinInicial) {
+        await tester.tap(find.text('Girar PIN'));
+        await tester.pump();
+      }
+
+      final novoPin = cubit.state.sessaoAtual!.codigoSalaLan;
+      expect(novoPin, isNot(pinInicial));
+      expect(find.text(novoPin), findsOneWidget);
+
+      // Fecha sheet "Convidar Jogadores"
+      await tester.tap(find.byIcon(Icons.close).last);
+      await tester.pumpAndSettle();
+
+      // Abre sheet "Jogadores na Sala" e simula entrada LAN com atualização reativa
+      await tester.tap(find.byTooltip('Jogadores na sala'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Jogadores na Sala'), findsOneWidget);
+      expect(find.text('Nenhum jogador na sala'), findsOneWidget);
+
+      await tester.tap(find.text('Simular Pedido de Entrada LAN'));
+      await tester.pump();
+
+      expect(find.text('Nenhum jogador na sala'), findsNothing);
+      expect(find.text('Kaelen'), findsOneWidget);
+      expect(find.text('Ficha aguardando revisão'), findsOneWidget);
+    });
+
+    testWidgets('MestrePainelScreen preserva estado de TelaEscudoNotas via IndexedStack ao alternar abas', (tester) async {
+      tester.view.physicalSize = const Size(1200, 800);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(tester.view.resetPhysicalSize);
+
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: MestrePainelScreen(),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      // Abre Drawer e vai para Escudo e Notas, digita busca e seleciona aba "Perigos"
+      await tester.tap(find.byIcon(Icons.menu));
+      await tester.pumpAndSettle();
+      await tester.tap(
+        find.descendant(
+          of: find.byType(NavigationDrawer),
+          matching: find.text('Escudo e Notas'),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      final buscaEscudo = find.descendant(
+        of: find.byType(TelaEscudoNotas),
+        matching: find.byType(TextField),
+      );
+      await tester.enterText(buscaEscudo.first, 'Armadilha');
+      await tester.pump();
+
+      await tester.tap(find.text('Perigos'));
+      await tester.pumpAndSettle();
+
+      final tabBarAntes = tester.widget<TabBar>(
+        find.descendant(
+          of: find.byType(TelaEscudoNotas),
+          matching: find.byType(TabBar),
+        ),
+      );
+      expect(tabBarAntes.controller?.index, 1);
+
+      // Alterna via Drawer para Mapas e volta para Escudo e Notas
+      await tester.tap(find.byIcon(Icons.menu));
+      await tester.pumpAndSettle();
+      await tester.tap(
+        find.descendant(
+          of: find.byType(NavigationDrawer),
+          matching: find.text('Mapas'),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byIcon(Icons.menu));
+      await tester.pumpAndSettle();
+      await tester.tap(
+        find.descendant(
+          of: find.byType(NavigationDrawer),
+          matching: find.text('Escudo e Notas'),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      // Busca e aba selecionada devem permanecer preservadas pelo IndexedStack
+      final buscaDepois = find.descendant(
+        of: find.byType(TelaEscudoNotas),
+        matching: find.widgetWithText(TextField, 'Armadilha'),
+      );
+      expect(buscaDepois, findsOneWidget);
+
+      final tabBarDepois = tester.widget<TabBar>(
+        find.descendant(
+          of: find.byType(TelaEscudoNotas),
+          matching: find.byType(TabBar),
+        ),
+      );
+      expect(tabBarDepois.controller?.index, 1);
     });
   });
 }

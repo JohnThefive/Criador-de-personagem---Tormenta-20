@@ -1,0 +1,1413 @@
+[
+  {
+    "id": "arqueiro_escravo",
+    "nome": "Arqueiro Escravo",
+    "nd": "5",
+    "regiao": "imperio_de_tauron",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "elfo",
+    "tamanho": "medio",
+    "iniciativa": 12,
+    "percepcao": 7,
+    "sentidos": [
+      "visao_na_penumbra"
+    ],
+    "defesa": 24,
+    "resistencias": {
+      "fortitude": 6,
+      "reflexos": 16,
+      "vontade": 11
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 36,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": -1,
+      "des": 5,
+      "con": 1,
+      "int": 2,
+      "sab": 0,
+      "car": -1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Arco longo (à distância) (x2)",
+        "bonusAtaque": 21,
+        "dano": "2d6+15",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Disparo Preciso",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O arqueiro escravo faz ataques à distância contra oponentes envolvidos em combate corpo a corpo sem sofrer a penalidade de –5 no teste de ataque."
+      },
+      {
+        "nome": "Flecha Amiga",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando um aliado em alcance médio ataca um inimigo, o arqueiro escravo faz um ataque de arco longo contra esse mesmo inimigo."
+      },
+      {
+        "nome": "Minha Vida Pela Legião",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando um aliado adjacente ao arqueiro escravo é atingido por um efeito que causa dano, o arqueiro sofre esse dano no lugar do aliado."
+      }
+    ],
+    "equipamento": [
+      "Arco longo",
+      "Couraça",
+      "Flechas x20"
+    ],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "centuriao",
+    "nome": "Centurião",
+    "nd": "3",
+    "regiao": "imperio_de_tauron",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "minotauro",
+    "tamanho": "medio",
+    "iniciativa": 4,
+    "percepcao": 2,
+    "sentidos": [
+      "faro"
+    ],
+    "defesa": 23,
+    "resistencias": {
+      "fortitude": 15,
+      "reflexos": 4,
+      "vontade": 8
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 100,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 0,
+      "con": 4,
+      "int": 2,
+      "sab": 0,
+      "car": 0
+    },
+    "pericias": {
+      "atletismo": 10,
+      "guerra": 7
+    },
+    "ataques": [
+      {
+        "nome": "Gládio",
+        "bonusAtaque": 14,
+        "dano": "1d6+5",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Chifres",
+        "bonusAtaque": 14,
+        "dano": "1d6+5",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Azagaia (à distância)",
+        "bonusAtaque": 10,
+        "dano": "1d6+5",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Medo de Altura",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se estiver adjacente a uma queda de 3m ou mais de altura (como um buraco ou penhasco), fica abalado."
+      },
+      {
+        "nome": "Coordenar Ataque",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O centurião coordena os ataques de uma falange da qual esteja participando. Até o próximo turno do centurião, sempre que um participante da falange fizer um ataque, pode rolar dois dados e usar o melhor resultado."
+      },
+      {
+        "nome": "Falange",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se o centurião estiver usando um escudo e adjacente a um aliado com esta habilidade, pode formar uma falange com esse aliado. Enquanto estiverem adjacentes um ao outro, os participantes da falange recebem +2 na Defesa e em testes de resistência."
+      },
+      {
+        "nome": "Ordens",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O centurião grita ordens para seus aliados em alcance médio. Eles recebem +2 em testes de perícia até o fim da cena."
+      }
+    ],
+    "equipamento": [
+      "Azagaia x3",
+      "Escudo pesado",
+      "Gládio certeiro",
+      "Loriga segmentada"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "centuriao_de_elite",
+    "nome": "Centurião de Elite",
+    "nd": "7",
+    "regiao": "imperio_de_tauron",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "minotauro",
+    "tamanho": "medio",
+    "iniciativa": 9,
+    "percepcao": 9,
+    "sentidos": [
+      "faro"
+    ],
+    "defesa": 32,
+    "resistencias": {
+      "fortitude": 20,
+      "reflexos": 8,
+      "vontade": 13
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [
+      "encantamento"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 250,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 0,
+      "con": 5,
+      "int": 3,
+      "sab": 0,
+      "car": 1
+    },
+    "pericias": {
+      "atletismo": 15,
+      "guerra": 12
+    },
+    "ataques": [
+      {
+        "nome": "Gládio",
+        "bonusAtaque": 23,
+        "dano": "2d8+16",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Chifres",
+        "bonusAtaque": 23,
+        "dano": "2d6+16",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Azagaia (à distância)",
+        "bonusAtaque": 23,
+        "dano": "1d6+14",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Medo de Altura",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se estiver adjacente a uma queda de 3m ou mais de altura (como um buraco ou penhasco), fica abalado."
+      },
+      {
+        "nome": "Coordenar Ataque",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O centurião de elite coordena os ataques de uma falange da qual esteja participando. Até o próximo turno do centurião, sempre que um participante da falange fizer um ataque, pode rolar dois dados e usar o melhor resultado."
+      },
+      {
+        "nome": "É Proibido Morrer",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Aliados em alcance médio do centurião recebem redução de dano 5."
+      },
+      {
+        "nome": "Falange",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se o centurião estiver usando um escudo e adjacente a um aliado com esta habilidade, pode formar uma falange com esse aliado. Enquanto estiverem adjacentes um ao outro, os participantes da falange recebem +2 na Defesa e em testes de resistência."
+      },
+      {
+        "nome": "Ordens",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O centurião grita ordens para seus aliados em alcance médio. Eles recebem +2 em testes de perícia até o fim da cena."
+      }
+    ],
+    "equipamento": [
+      "Azagaia x3",
+      "Escudo pesado",
+      "Gládio certeiro",
+      "Loriga segmentada reforçada"
+    ],
+    "tesouro": "dobro.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "decuria",
+    "nome": "Decúria",
+    "nd": "5",
+    "regiao": "imperio_de_tauron",
+    "papel": "lacaio",
+    "tipo": "humanoide",
+    "subtipo": "minotauro",
+    "tamanho": "grande",
+    "iniciativa": 5,
+    "percepcao": 3,
+    "sentidos": [
+      "faro"
+    ],
+    "defesa": 22,
+    "resistencias": {
+      "fortitude": 12,
+      "reflexos": 4,
+      "vontade": 6
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 60,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 0,
+      "con": 3,
+      "int": 1,
+      "sab": -1,
+      "car": 0
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Gládio [Bando]",
+        "bonusAtaque": 20,
+        "dano": "2d6+10",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Chifres [Bando]",
+        "bonusAtaque": 20,
+        "dano": "2d6+10",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Azagaia (à distância) [Bando]",
+        "bonusAtaque": 20,
+        "dano": "2d6+10",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Disciplina Militar",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando usa a ação agredir sob efeito da habilidade Ordens (veja Centurião), a decúria pode fazer um ataque adicional de gládio."
+      },
+      {
+        "nome": "Falange",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A decúria assume uma formação defensiva. Enquanto tiver pelo menos metade de seus PV, ela recebe +2 na Defesa e em testes de resistência."
+      },
+      {
+        "nome": "Medo de Altura",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se estiver adjacente a uma queda de 3m ou mais de altura (como um buraco ou penhasco), a decúria fica abalada."
+      }
+    ],
+    "equipamento": [
+      "Azagaia x3",
+      "Escudo pesado",
+      "Gládio",
+      "Loriga segmentada (1d10 de cada)"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "estouro_de_furias_de_tauron",
+    "nome": "Estouro de Fúrias de Tauron",
+    "nd": "5",
+    "regiao": "imperio_de_tauron",
+    "papel": "lacaio",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 16,
+    "percepcao": 7,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 30,
+    "resistencias": {
+      "fortitude": 15,
+      "reflexos": 19,
+      "vontade": 10
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "incorporeo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [
+      "frio"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 76,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 0.0,
+      "voo": 12.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": null,
+      "des": 5,
+      "con": 2,
+      "int": -1,
+      "sab": 1,
+      "car": 3
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Chifres espectrais [Bando]",
+        "bonusAtaque": 27,
+        "dano": "4d8+14",
+        "danoExtra": "4d8+14 trevas",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "fogo",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Chamas Espectrais",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 28,
+        "resistenciaTipo": null,
+        "descricao": "Os chifres espectrais do estouro de fúrias de Tauron contam como uma arma mágica. Além disso, uma criatura viva atingida pelos chifres fica desprevenida por 1 rodada e em chamas (Fortitude CD 28 evita)."
+      },
+      {
+        "nome": "Debandada Flamejante",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O estouro percorre até o dobro do seu deslocamento em linha reta, golpeando todas as criaturas em seu caminho. Ele faz um único teste de ataque de seus chifres espectrais e compara com a Defesa de cada criatura nos espaços por onde passou."
+      },
+      {
+        "nome": "Apagar a Chama",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando sofre dano de frio, o estouro fica debilitado e lento por 1 rodada."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "furia_de_tauron",
+    "nome": "Fúria de Tauron",
+    "nd": "4",
+    "regiao": "imperio_de_tauron",
+    "papel": "lacaio",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "pequeno",
+    "iniciativa": 14,
+    "percepcao": 5,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 20,
+    "resistencias": {
+      "fortitude": 8,
+      "reflexos": 15,
+      "vontade": 4
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "incorporeo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [
+      "frio"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 30,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 0.0,
+      "voo": 12.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": null,
+      "des": 5,
+      "con": 2,
+      "int": -1,
+      "sab": 1,
+      "car": 3
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Chifres espectrais",
+        "bonusAtaque": 15,
+        "dano": "2d8+7",
+        "danoExtra": "2d8+7 trevas",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "fogo",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Chamas Espectrais",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 20,
+        "resistenciaTipo": null,
+        "descricao": "Os chifres espectrais da fúria de Tauron contam como uma arma mágica. Além disso, uma criatura viva atingida pelos chifres fica desprevenida por 1 rodada e em chamas (Fortitude CD 20 evita)."
+      },
+      {
+        "nome": "Debandada Flamejante",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A fúria percorre até o dobro do seu deslocamento em linha reta, golpeando todas as criaturas em seu caminho. Ela faz um único teste de ataque de seus chifres espectrais e compara com a Defesa de cada criatura nos espaços por onde passou."
+      },
+      {
+        "nome": "Apagar a Chama",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando sofre dano de frio, a fúria fica debilitada e lenta por 1 rodada."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "gladiador_taurico",
+    "nome": "Gladiador Táurico",
+    "nd": "8",
+    "regiao": "imperio_de_tauron",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "minotauro",
+    "tamanho": "medio",
+    "iniciativa": 12,
+    "percepcao": 9,
+    "sentidos": [
+      "faro"
+    ],
+    "defesa": 34,
+    "resistencias": {
+      "fortitude": 20,
+      "reflexos": 16,
+      "vontade": 12
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 390,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 1,
+      "con": 3,
+      "int": 0,
+      "sab": 0,
+      "car": 4
+    },
+    "pericias": {
+      "atletismo": 15,
+      "atuacao": 15,
+      "intimidacao": 15
+    },
+    "ataques": [
+      {
+        "nome": "Tridente",
+        "bonusAtaque": 29,
+        "dano": "2d8+18",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Chifres",
+        "bonusAtaque": 29,
+        "dano": "2d6+18",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Rede (à distância)",
+        "bonusAtaque": 29,
+        "dano": "1d4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agitar a Torcida",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": "usar_estilo_espetacular_e_sangue_e_areia_contra_o_mesmo_inimigo",
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O gladiador táurico faz um teste de Atuação e recebe uma quantidade de PV temporários igual ao resultado. Recarga (usar Estilo Espetacular e Sangue e Areia contra o mesmo inimigo)."
+      },
+      {
+        "nome": "Estilo Espetacular",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O gladiador ataca uma criatura com o tridente, o chifre e a rede. Se acertar o ataque de rede e enredar o alvo, pode fazer um ataque adicional de tridente contra ele."
+      },
+      {
+        "nome": "Sangue e Areia",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando acerta um ataque de tridente em um inimigo enredado por sua rede, o gladiador deixa a vítima sangrando."
+      }
+    ],
+    "equipamento": [
+      "Couraça",
+      "Rede",
+      "Tridente cruel e equilibrado"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "governador_corrupto",
+    "nome": "Governador Corrupto",
+    "nd": "6",
+    "regiao": "imperio_de_tauron",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "minotauro",
+    "tamanho": "medio",
+    "iniciativa": 5,
+    "percepcao": 7,
+    "sentidos": [
+      "faro"
+    ],
+    "defesa": 18,
+    "resistencias": {
+      "fortitude": 12,
+      "reflexos": 6,
+      "vontade": 18
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 122,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 1,
+      "des": 0,
+      "con": 3,
+      "int": 3,
+      "sab": 2,
+      "car": 5
+    },
+    "pericias": {
+      "conhecimento": 8,
+      "diplomacia": 14,
+      "guerra": 8,
+      "intimidacao": 17,
+      "intuicao": 9,
+      "nobreza": 18
+    },
+    "ataques": [
+      {
+        "nome": "Adaga",
+        "bonusAtaque": 19,
+        "dano": "1d4+12",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Chifres",
+        "bonusAtaque": 18,
+        "dano": "1d6+12",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Como Ousa?",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando um inimigo tenta usar uma ação hostil contra o governador corrupto, o governador faz um teste de Intimidação oposto à Vontade do agressor. Se o governador vencer o teste oposto, o inimigo perde a ação."
+      },
+      {
+        "nome": "Deliberação Desnorteante",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 24,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por cena, o governador faz um discurso elaborado que deixa todos os inimigos em alcance curto pasmos por 1 rodada e desprevenidos pela cena (Vontade CD 24 anula)."
+      },
+      {
+        "nome": "Guarda Pessoal",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O governador está sempre acompanhado de quatro legionários, que não contam para o cálculo de XP e tesouro do encontro."
+      },
+      {
+        "nome": "Incitar",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O governador ordena (ou xinga, ou chicoteia) seus subordinados para que sejam mais cruéis e eficazes. Todos os aliados do governador em alcance médio recebem +5 em testes de perícia e +1d10 em rolagens de dano por 1 rodada."
+      },
+      {
+        "nome": "Proteja-me!",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando sofre um ataque, o governador corrupto escolhe um aliado adjacente para se tornar o alvo desse ataque."
+      },
+      {
+        "nome": "Medo de Altura",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se estiver adjacente a uma queda de 3m ou mais de altura (como um buraco ou penhasco), o governador fica abalado."
+      }
+    ],
+    "equipamento": [
+      "Adaga certeira",
+      "Tabardo aprimorado",
+      "Traje da corte"
+    ],
+    "tesouro": "dobro.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "legionario",
+    "nome": "Legionário",
+    "nd": "1",
+    "regiao": "imperio_de_tauron",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "minotauro",
+    "tamanho": "medio",
+    "iniciativa": 3,
+    "percepcao": 1,
+    "sentidos": [
+      "faro"
+    ],
+    "defesa": 19,
+    "resistencias": {
+      "fortitude": 10,
+      "reflexos": 2,
+      "vontade": 4
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 12,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 0,
+      "con": 3,
+      "int": 1,
+      "sab": -1,
+      "car": 0
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Gládio",
+        "bonusAtaque": 10,
+        "dano": "1d6+5",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Chifres",
+        "bonusAtaque": 10,
+        "dano": "1d6+5",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Azagaia (à distância)",
+        "bonusAtaque": 10,
+        "dano": "1d6+5",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Falange",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se o legionário estiver usando um escudo e adjacente a um aliado com esta habilidade, pode formar uma falange com esse aliado. Enquanto estiverem adjacentes um ao outro, os participantes da falange recebem +2 na Defesa e em testes de resistência."
+      },
+      {
+        "nome": "Medo de Altura",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se estiver adjacente a uma queda de 3m ou mais de altura (como um buraco ou penhasco), o legionário fica abalado."
+      }
+    ],
+    "equipamento": [
+      "Azagaia x3",
+      "Escudo pesado",
+      "Gládio",
+      "Loriga segmentada"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "legionario_insano",
+    "nome": "Legionário Insano",
+    "nd": "8",
+    "regiao": "imperio_de_tauron",
+    "papel": "lacaio",
+    "tipo": "humanoide",
+    "subtipo": "minotauro",
+    "tamanho": "medio",
+    "iniciativa": 10,
+    "percepcao": 7,
+    "sentidos": [
+      "faro"
+    ],
+    "defesa": 30,
+    "resistencias": {
+      "fortitude": 20,
+      "reflexos": 16,
+      "vontade": 7
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +5"
+    ],
+    "pv": 80,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 7,
+      "des": 2,
+      "con": 6,
+      "int": -1,
+      "sab": -1,
+      "car": -3
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Gládio (x2)",
+        "bonusAtaque": 27,
+        "dano": "1d8+16",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Chifres",
+        "bonusAtaque": 27,
+        "dano": "1d6+14",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Desapego à Vida",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O legionário insano não fica inconsciente quando é reduzido a 0 PV ou menos e só morre quando é reduzido a –40 PV."
+      },
+      {
+        "nome": "Olhar Desesperador",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 26,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, o legionário encara um inimigo em alcance curto, que fica apavorado por 1 rodada e então abalado (Vontade CD 26 reduz para abalado por 1 rodada; o alvo fica imune a esta habilidade até o fim da cena)."
+      },
+      {
+        "nome": "Retribuição Ensandecida",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando sofre dano de um inimigo adjacente, o legionário pode usar uma ação agredir contra essa criatura."
+      }
+    ],
+    "equipamento": [
+      "Gládio",
+      "Loriga segmentada"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "minauro_arcanista",
+    "nome": "Minauro Arcanista",
+    "nd": "3",
+    "regiao": "imperio_de_tauron",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "minauro",
+    "tamanho": "medio",
+    "iniciativa": 5,
+    "percepcao": 6,
+    "sentidos": [],
+    "defesa": 17,
+    "resistencias": {
+      "fortitude": 9,
+      "reflexos": 4,
+      "vontade": 15
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 64,
+    "pm": 34,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 0,
+      "con": 2,
+      "int": 4,
+      "sab": 1,
+      "car": 0
+    },
+    "pericias": {
+      "atletismo": 5,
+      "conhecimento": 9,
+      "diplomacia": 5,
+      "investigacao": 11,
+      "misticismo": 9
+    },
+    "ataques": [
+      {
+        "nome": "Espada curta",
+        "bonusAtaque": 7,
+        "dano": "1d6+2",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Faro",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Você tem olfato apurado. Contra inimigos em alcance curto que não possa ver, não fica desprevenido e camuflagem total causa apenas 20% de chance de falha."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 20,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como mago de 5º nível (CD 20, limite de PM 5): Armadura Arcana (reação, 2 PM, +5 na Defesa contra o próximo ataque que sofrer), Bola de Fogo (padrão, 5 PM, 8d6 fogo em raio de 6m), Explosão de Chamas (padrão, 3 PM, 3d6 fogo em cone de 6m), Primor Atlético (padrão, 4 PM, deslocamento 18m e +10 em Atletismo até o fim da cena)."
+      }
+    ],
+    "equipamento": [
+      "Essência de mana",
+      "Espada curta",
+      "Varinha arcana"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "minauro_ladino",
+    "nome": "Minauro Ladino",
+    "nd": "6",
+    "regiao": "imperio_de_tauron",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "minauro",
+    "tamanho": "medio",
+    "iniciativa": 11,
+    "percepcao": 5,
+    "sentidos": [],
+    "defesa": 25,
+    "resistencias": {
+      "fortitude": 8,
+      "reflexos": 18,
+      "vontade": 10
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 147,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 4,
+      "con": 2,
+      "int": 3,
+      "sab": 0,
+      "car": -1
+    },
+    "pericias": {
+      "acrobacia": 11,
+      "atletismo": 7,
+      "diplomacia": 6,
+      "furtividade": 11,
+      "investigacao": 10,
+      "jogatina": 6,
+      "ladinagem": 11
+    },
+    "ataques": [
+      {
+        "nome": "Espada curta (x2)",
+        "bonusAtaque": 18,
+        "dano": "2d6+15",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Evasão Aprimorada",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Mesmo em um teste de Reflexos falho, o minauro ladino sofre apenas metade do dano, e nenhum dano se passar no teste."
+      },
+      {
+        "nome": "Faro",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Você tem olfato apurado. Contra inimigos em alcance curto que não possa ver, não fica desprevenido e camuflagem total causa apenas 20% de chance de falha."
+      },
+      {
+        "nome": "Ataque Furtivo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Causa +3d6 de dano adicional quando ataca um alvo desprevenido ou surpreso."
+      },
+      {
+        "nome": "Bombardeiro Veloz",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 24,
+        "resistenciaTipo": null,
+        "descricao": "O minauro ladino saca uma de suas bombas e a arremessa em alcance curto. Uma bomba de fumaça gera fumaça espessa em um raio de 6m até o fim da cena; uma bomba causa 6d6 pontos de dano de impacto em todas as criaturas em um raio de 3m (Reflexos CD 24 reduz à metade)."
+      },
+      {
+        "nome": "Fuga Formidável",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Até o fim da cena, o minauro ladino recebe +3m em seu deslocamento, +5 em Acrobacia e Atletismo e ignora penalidades em movimento por terreno difícil. Ele perde esses benefícios se fizer uma ação que não seja diretamente relacionada a fugir."
+      },
+      {
+        "nome": "Mãos Leves",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O minauro ladino faz testes de Ladinagem como uma ação livre. Além disso, não sofre penalidade em testes de Furtividade por se mover ao seu deslocamento normal e reduz a penalidade por atacar e fazer outras ações chamativas para –10."
+      },
+      {
+        "nome": "Pirueta Defensiva",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando sofre dano de um ataque, o minauro reduz esse dano à metade."
+      }
+    ],
+    "equipamento": [
+      "Bomba x3",
+      "Bomba de fumaça x3",
+      "Espada curta",
+      "Gazua"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  }
+]

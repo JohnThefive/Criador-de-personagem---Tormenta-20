@@ -1,0 +1,4225 @@
+[
+  {
+    "id": "bandido",
+    "nome": "Bandido",
+    "nd": "0.25",
+    "regiao": "ermos",
+    "papel": "lacaio",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 4,
+    "percepcao": 1,
+    "sentidos": [],
+    "defesa": 13,
+    "resistencias": {
+      "fortitude": 1,
+      "reflexos": 3,
+      "vontade": -1
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 6,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 1,
+      "des": 2,
+      "con": 1,
+      "int": 0,
+      "sab": -1,
+      "car": 0
+    },
+    "pericias": {
+      "furtividade": 5
+    },
+    "ataques": [
+      {
+        "nome": "Clava",
+        "bonusAtaque": 7,
+        "dano": "1d6+3",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [],
+    "equipamento": [
+      "Clava"
+    ],
+    "tesouro": "metade",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "basilisco",
+    "nome": "Basilisco",
+    "nd": "4",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 6,
+    "percepcao": 5,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 23,
+    "resistencias": {
+      "fortitude": 10,
+      "reflexos": 9,
+      "vontade": 9
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 145,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 9.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 2,
+      "con": 4,
+      "int": -4,
+      "sab": 1,
+      "car": 0
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 16,
+        "dano": "2d8+12",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": "veneno"
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Olhar Petrificante",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 18,
+        "resistenciaTipo": "reflexos",
+        "descricao": "No início do turno, criaturas em alcance curto fazem Reflexos CD 18. Falha: fica lento. Já lento: fica petrificado permanentemente. Fechar os olhos evita mas causa cegueira por uma rodada. Efeitos que removem paralisia revertem a petrificação."
+      },
+      {
+        "nome": "Veneno",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 18,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Peçonha concentrada: perde 1d12 PV por rodada durante 3 rodadas (Fort CD 18 reduz para uma rodada)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "1d4 doses de peconha concentrada (cd 19 para extrair); couro de basilisco (cd 19, t$ 1.000 em materia-prima para armadura superior)",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "bulette",
+    "nome": "Bulette",
+    "nd": "7",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 9,
+    "percepcao": 8,
+    "sentidos": [
+      "percepcao_as_cegas_longo"
+    ],
+    "defesa": 32,
+    "resistencias": {
+      "fortitude": 20,
+      "reflexos": 9,
+      "vontade": 12
+    },
+    "rd": {
+      "adamante": 5,
+      "acido": 10,
+      "fogo": 10
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 310,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 12.0
+    },
+    "atributos": {
+      "for": 8,
+      "des": 2,
+      "con": 5,
+      "int": -4,
+      "sab": 1,
+      "car": -3
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 23,
+        "dano": "3d8+24",
+        "danoExtra": "4d6 acido",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Mordida (teste +25)."
+      },
+      {
+        "nome": "Aura Cáustica",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada turno do bulette, todas as criaturas adjacentes sofrem 4d6 pontos de dano de ácido."
+      },
+      {
+        "nome": "Engolir",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada um dos turnos do bulette, a criatura engolida sofre 2d8+12 pontos de dano de impacto mais 4d6 pontos de dano de ácido. Pode escapar causando um total de 20 pontos de dano a ele (Defesa 10, redução de dano 0)."
+      },
+      {
+        "nome": "Espreitador das Dunas",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Enquanto o bulette estiver 'nadando' no solo, é muito difícil percebê-lo. Em vez do normal, a CD de Percepção para ouvi-lo é 40, ou +20 em seu teste de Furtividade, o que for maior."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "duas pecas de couro de bulette (cd 22 para extrair).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "carrasco_de_lena",
+    "nome": "Carrasco de Lena",
+    "nd": "6",
+    "regiao": "ermos",
+    "papel": "especial",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 6,
+    "percepcao": 6,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 27,
+    "resistencias": {
+      "fortitude": 16,
+      "reflexos": 12,
+      "vontade": 8
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 180,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 1,
+      "con": 4,
+      "int": -4,
+      "sab": 1,
+      "car": -2
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Tentáculo",
+        "bonusAtaque": 20,
+        "dano": "2d6+10",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 20,
+        "dano": "2d8+20",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Açoite Circular",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 22,
+        "resistenciaTipo": null,
+        "descricao": "O carrasco de Lena agita seu tentáculo, causando 2d6+10 pontos de dano de corte em todas as criaturas a até 3m (Reflexos CD 22 reduz à metade)."
+      },
+      {
+        "nome": "Inversão de Dano",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O carrasco converte qualquer dano recebido em cura. Caso já esteja com PV máximos, recebe PV temporários com limite igual aos seus PV máximos (pode acumular até 180 PV temporários)."
+      },
+      {
+        "nome": "Vulnerabilidade a Cura",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Efeitos de cura causam dano ao carrasco em vez de curar PV. Itens alquímicos e poções de cura podem ser usados como granadas contra ele (reduz à metade se passar em um teste de Reflexos contra a CD do item)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "centauro_chefe",
+    "nome": "Centauro Chefe",
+    "nd": "8",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "centauro",
+    "tamanho": "grande",
+    "iniciativa": 10,
+    "percepcao": 10,
+    "sentidos": [],
+    "defesa": 33,
+    "resistencias": {
+      "fortitude": 21,
+      "reflexos": 15,
+      "vontade": 8
+    },
+    "rd": {
+      "efeitos_mentais": 5,
+      "medo": 5,
+      "veneno": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 320,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 2,
+      "con": 4,
+      "int": -1,
+      "sab": 2,
+      "car": 1
+    },
+    "pericias": {
+      "atletismo": 13,
+      "intimidacao": 9
+    },
+    "ataques": [
+      {
+        "nome": "Machado de guerra (x2)",
+        "bonusAtaque": 26,
+        "dano": "3d6+18",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 4,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Cascos",
+        "bonusAtaque": 26,
+        "dano": "1d8+18",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Coice Oportuno",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando uma criatura erra um ataque corpo a corpo contra o centauro chefe por 5 ou mais, ele faz um ataque de cascos contra essa criatura."
+      },
+      {
+        "nome": "Investida Galopante",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 26,
+        "resistenciaTipo": null,
+        "descricao": "O centauro faz uma investida, podendo passar pelo espaço ocupado por criaturas menores e continuar se movendo depois do ataque; se acertar, causa +4d8 de dano. Criaturas no caminho percorrido sofrem 1d8+9 de dano de impacto e ficam caídas (Reflexos CD 26 evita)."
+      },
+      {
+        "nome": "Medo de Altura",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se estiver adjacente a uma queda de 3m ou mais de altura, o centauro fica abalado."
+      }
+    ],
+    "equipamento": [
+      "Machado de guerra aumentado maciço",
+      "Gibão de peles"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "centauro_combatente",
+    "nome": "Centauro Combatente",
+    "nd": "1",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "centauro",
+    "tamanho": "grande",
+    "iniciativa": 3,
+    "percepcao": 3,
+    "sentidos": [],
+    "defesa": 16,
+    "resistencias": {
+      "fortitude": 9,
+      "reflexos": 2,
+      "vontade": 5
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 35,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 2,
+      "con": 3,
+      "int": -2,
+      "sab": 1,
+      "car": -2
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Tacape",
+        "bonusAtaque": 9,
+        "dano": "1d12+5",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Cascos",
+        "bonusAtaque": 9,
+        "dano": "1d8+5",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Arco longo (à distância)",
+        "bonusAtaque": 7,
+        "dano": "1d10+5",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Investida Poderosa",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz investida com tacape, causa +1d12 de dano."
+      },
+      {
+        "nome": "Medo de Altura",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se adjacente a uma queda de 3m ou mais, fica abalado."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "centauro_xama",
+    "nome": "Centauro Xamã",
+    "nd": "3",
+    "regiao": "ermos",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "centauro",
+    "tamanho": "grande",
+    "iniciativa": 4,
+    "percepcao": 8,
+    "sentidos": [],
+    "defesa": 21,
+    "resistencias": {
+      "fortitude": 9,
+      "reflexos": 4,
+      "vontade": 15
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 35,
+    "pm": 20,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 1,
+      "con": 3,
+      "int": -1,
+      "sab": 4,
+      "car": 0
+    },
+    "pericias": {
+      "religiao": 8,
+      "sobrevivencia": 10
+    },
+    "ataques": [
+      {
+        "nome": "Bordão",
+        "bonusAtaque": 11,
+        "dano": "1d8+4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Cascos",
+        "bonusAtaque": 11,
+        "dano": "1d8+4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 17,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como clérigo de Allihanna de 3º nível (CD 17): Armamento da Natureza (movimento, 3 PM), Controlar Plantas (padrão, 2 PM, Fort evita), Curar Ferimentos (padrão, 3 PM, cura 4d8+4 PV)."
+      },
+      {
+        "nome": "Medo de Altura",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se adjacente a uma queda de 3m ou mais, fica abalado."
+      },
+      {
+        "nome": "Voz da Natureza",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Sempre sob efeito de Voz Divina apenas para falar com animais."
+      }
+    ],
+    "equipamento": [
+      "Bordão aumentado",
+      "símbolo sagrado de Allihanna"
+    ],
+    "tesouro": "metade",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "centauro_xama_de_megalokk",
+    "nome": "Centauro Xamã de Megalokk",
+    "nd": "10",
+    "regiao": "ermos",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "centauro",
+    "tamanho": "grande",
+    "iniciativa": 12,
+    "percepcao": 16,
+    "sentidos": [],
+    "defesa": 31,
+    "resistencias": {
+      "fortitude": 16,
+      "reflexos": 10,
+      "vontade": 22
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 260,
+    "pm": 70,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 2,
+      "con": 4,
+      "int": -1,
+      "sab": 6,
+      "car": 1
+    },
+    "pericias": {
+      "adestramento": 10,
+      "intimidacao": 10,
+      "religiao": 15
+    },
+    "ataques": [
+      {
+        "nome": "Clava",
+        "bonusAtaque": 24,
+        "dano": "1d8+15",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 24,
+        "dano": "1d6+15",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Cascos",
+        "bonusAtaque": 24,
+        "dano": "1d8+15",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Ira Coletiva (mágica)",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Sustentada. Causa um frenesi em aliados em alcance curto, que recebem +5 em testes de ataque e rolagens de dano corpo a corpo e redução de dano 10, mas ficam esmorecidos e não podem fazer ações que exijam calma e concentração (como usar Furtividade ou lançar magias)."
+      },
+      {
+        "nome": "Voz dos Monstros (mágica)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O centauro está sempre sob efeito da magia Voz Divina, apenas para falar com monstros."
+      },
+      {
+        "nome": "Medo de Altura",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se estiver adjacente a uma queda de 3m ou mais de altura, o centauro fica abalado."
+      },
+      {
+        "nome": "Magias (clérigo de Megalokk, 10º nível, CD 32)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Magias concedidas por Megalokk, à escolha do mestre, incluindo capacidades ofensivas contra inimigos da tribo."
+      }
+    ],
+    "equipamento": [
+      "Clava macabra aumentada",
+      "Farrapos de ermitão",
+      "Símbolo sagrado de Megalokk"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "chefe_bandido",
+    "nome": "Chefe Bandido",
+    "nd": "1",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 4,
+    "percepcao": 2,
+    "sentidos": [],
+    "defesa": 16,
+    "resistencias": {
+      "fortitude": 5,
+      "reflexos": 8,
+      "vontade": 3
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 30,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 2,
+      "con": 2,
+      "int": 0,
+      "sab": 0,
+      "car": 1
+    },
+    "pericias": {
+      "furtividade": 7,
+      "intimidacao": 6
+    },
+    "ataques": [
+      {
+        "nome": "Espada curta",
+        "bonusAtaque": 9,
+        "dano": "1d6+5",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Adaga (à distância)",
+        "bonusAtaque": 7,
+        "dano": "1d4+3",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Ataque Furtivo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, causa +2d6 com ataques corpo a corpo ou à distância em alcance curto contra alvos desprevenidos ou flanqueados."
+      }
+    ],
+    "equipamento": [
+      "Adaga",
+      "espada curta"
+    ],
+    "tesouro": "padrao",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "cao_do_inferno",
+    "nome": "Cão do Inferno",
+    "nd": "3",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 6,
+    "percepcao": 4,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 21,
+    "resistencias": {
+      "fortitude": 11,
+      "reflexos": 9,
+      "vontade": 7
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "fogo"
+    ],
+    "vulnerabilidadesDano": [
+      "frio"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 95,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 3,
+      "con": 4,
+      "int": -2,
+      "sab": 1,
+      "car": -2
+    },
+    "pericias": {
+      "atletismo": 9
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 14,
+        "dano": "2d6+6",
+        "danoExtra": "2d6 fogo",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Sopro",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 17,
+        "resistenciaTipo": "reflexos",
+        "descricao": "Cospe fogo em cone de 6m. Criaturas sofrem 4d6+4 de fogo (Ref CD 17 reduz à metade). Recarga (movimento)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "1d4 doses de essencia abissal (cd 18 para extrair)",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "ente",
+    "nome": "Ente",
+    "nd": "8",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 7,
+    "percepcao": 11,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 34,
+    "resistencias": {
+      "fortitude": 21,
+      "reflexos": 8,
+      "vontade": 15
+    },
+    "rd": {
+      "corte": 10
+    },
+    "imunidadesEfeitos": [
+      "sangramento"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [
+      "fogo"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 310,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 9,
+      "des": -1,
+      "con": 5,
+      "int": 1,
+      "sab": 3,
+      "car": 1
+    },
+    "pericias": {
+      "furtividade": 2,
+      "intuicao": 11,
+      "sobrevivencia": 16
+    },
+    "ataques": [
+      {
+        "nome": "Pancada (x2)",
+        "bonusAtaque": 26,
+        "dano": "4d8+16",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Fortificação",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "25% de chance de ignorar completamente qualquer efeito que exija uma localização anatômica vital."
+      },
+      {
+        "nome": "Natureza Vegetal",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O ente é uma criatura de natureza vegetal."
+      },
+      {
+        "nome": "Árvore Ancestral",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 26,
+        "resistenciaTipo": null,
+        "descricao": "Cada ente possui uma habilidade entre as seguintes, que representa sua origem: Carvalho (ataques causam 50% mais dano contra construtos e objetos); Jasmim (nuvem de perfume em esfera de 9m: criaturas que tentem ação hostil contra o ente fazem Vontade CD 26 ou perdem a ação, sucesso dá imunidade pela cena; metabolismo); Nogueira (ação de movimento, arremessa uma noz em alcance curto, 2d6+8 de impacto, Reflexos CD 26 evita; recarga de movimento); Salgueiro (ao acertar pancada, pode agarrar como ação livre, teste +31; vítima agarrada é erguida 4,5m e cai se soltar); Sequoia (dano de Atropelamento aumenta para 4d8+8 e a CD sobe para 29)."
+      },
+      {
+        "nome": "Atropelamento",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 26,
+        "resistenciaTipo": null,
+        "descricao": "O ente percorre até o dobro do deslocamento, podendo passar por inimigos menores (não duas vezes pelo mesmo espaço). Criaturas atropeladas sofrem 2d8+8 de impacto e ficam caídas (Reflexos CD 26 reduz à metade e evita a condição). Recarga (movimento)."
+      },
+      {
+        "nome": "Pastor de Árvores",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por dia, anima até duas árvores em alcance curto, que se desenraízam e lutam com as mesmas estatísticas do ente, mas deslocamento 3m, Inteligência –4 e sem esta habilidade. Após um dia voltam ao normal, enraizando-se onde estiverem."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao mais lasca de ente (cd 23 para extrair, vale t$ 70 para fabricar um dedo de ente).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "enxame_estirge",
+    "nome": "Enxame Estirge",
+    "nd": "5",
+    "regiao": "ermos",
+    "papel": "lacaio",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 9,
+    "percepcao": 4,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 23,
+    "resistencias": {
+      "fortitude": 6,
+      "reflexos": 16,
+      "vontade": 11
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 40,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 0.0,
+      "voo": 12.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": -3,
+      "des": 5,
+      "con": -1,
+      "int": -5,
+      "sab": 0,
+      "car": -2
+    },
+    "pericias": {},
+    "ataques": [],
+    "habilidades": [
+      {
+        "nome": "Enxame",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Toda criatura no espaço do enxame estirge sofre 1d6 pontos de dano de perfuração. Para cada ponto de dano sofrido dessa forma, a criatura perde 1d6 pontos de vida como um efeito metabólico."
+      },
+      {
+        "nome": "Chupar Sangue",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Para cada ponto de vida que o enxame fizer uma criatura perder, ele ganha 1 PV temporário."
+      },
+      {
+        "nome": "Sangrar",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 20,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura que perca pontos de vida para o enxame estirge fica sangrando (Fortitude CD 20 evita)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "ova de estirge.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "estirge",
+    "nome": "Estirge",
+    "nd": "1",
+    "regiao": "ermos",
+    "papel": "lacaio",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "minusculo",
+    "iniciativa": 7,
+    "percepcao": 2,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 16,
+    "resistencias": {
+      "fortitude": 1,
+      "reflexos": 10,
+      "vontade": 5
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 9,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 0.0,
+      "voo": 12.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": -4,
+      "des": 5,
+      "con": -1,
+      "int": -5,
+      "sab": 0,
+      "car": -2
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Probóscide",
+        "bonusAtaque": 11,
+        "dano": "1d4+1",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Probóscide (teste +21)."
+      },
+      {
+        "nome": "Chupar Sangue",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando agarra uma criatura, e no início de cada um de seus turnos enquanto permanecer agarrando, drena sangue como um efeito metabólico: a vítima perde 3d6 PV e o estirge ganha a mesma quantidade em PV temporários. Após drenar 10 PV ou mais, solta-se e tenta fugir."
+      },
+      {
+        "nome": "Sangrar",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando o estirge solta uma criatura de quem estava drenando sangue (por vontade própria ou não), a vítima fica sangrando."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "ova de estirge.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "fera_lider",
+    "nome": "Fera-Líder",
+    "nd": "5",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 4,
+    "percepcao": 4,
+    "sentidos": [],
+    "defesa": 25,
+    "resistencias": {
+      "fortitude": 12,
+      "reflexos": 16,
+      "vontade": 5
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [
+      "frio"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 195,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 0,
+      "con": 4,
+      "int": -2,
+      "sab": 0,
+      "car": -2
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 16,
+        "dano": "2d6+12",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Espinho (à distância) (x2)",
+        "bonusAtaque": 16,
+        "dano": "2d6+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "curto",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Natureza Vegetal",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A fera-líder é uma criatura de natureza vegetal."
+      },
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Garra (teste +16)."
+      },
+      {
+        "nome": "Corpo Espinhoso",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 20,
+        "resistenciaTipo": null,
+        "descricao": "Qualquer criatura que erre um ataque corpo a corpo adjacente, desarmado ou com arma natural, contra a fera-líder sofre 2d4+6 pontos de dano de perfuração (Reflexos CD 20 evita)."
+      },
+      {
+        "nome": "Drenar Sangue",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se iniciar o turno agarrando uma criatura, pode drenar seu sangue: causa 2d6+4 PV de dano e recupera a mesma quantidade."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "espinhos (cd 20 para extrair, valem t$ 150 para fabricar flechas superiores).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "fera_mae",
+    "nome": "Fera-Mãe",
+    "nd": "13",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 7,
+    "percepcao": 24,
+    "sentidos": [],
+    "defesa": 45,
+    "resistencias": {
+      "fortitude": 28,
+      "reflexos": 8,
+      "vontade": 23
+    },
+    "rd": {
+      "corte": 15
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [
+      "frio"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 685,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 0.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 8,
+      "des": -3,
+      "con": 8,
+      "int": 2,
+      "sab": 4,
+      "car": -2
+    },
+    "pericias": {},
+    "ataques": [],
+    "habilidades": [
+      {
+        "nome": "Natureza Vegetal",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A fera-mãe é uma criatura de natureza vegetal."
+      },
+      {
+        "nome": "Corpo Espinhoso",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 35,
+        "resistenciaTipo": null,
+        "descricao": "Qualquer criatura que erre um ataque corpo a corpo contra a fera-mãe sofre 2d8+10 pontos de dano de perfuração mais veneno (Reflexos CD 35 evita)."
+      },
+      {
+        "nome": "Saraivada de Espinhos",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 35,
+        "resistenciaTipo": null,
+        "descricao": "Dispara espinhos em criaturas a sua escolha em alcance médio. Cada criatura sofre 12d12+24 pontos de dano de perfuração mais veneno (Reflexos CD 35 reduz à metade)."
+      },
+      {
+        "nome": "Veneno",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 35,
+        "resistenciaTipo": null,
+        "descricao": "Peçonha potente: perde 2d12 PV por rodada durante 3 rodadas (Fortitude CD 35 reduz a duração para 1 rodada)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "1d4+1 doses de peconha potente (cd 28 para extrair) e espinhos (cd 28 para extrair, valem t$ 1.000 para fabricar flechas superiores).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "fera_vassalo",
+    "nome": "Fera-Vassalo",
+    "nd": "3",
+    "regiao": "ermos",
+    "papel": "lacaio",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 3,
+    "percepcao": 3,
+    "sentidos": [],
+    "defesa": 21,
+    "resistencias": {
+      "fortitude": 10,
+      "reflexos": 13,
+      "vontade": 4
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [
+      "frio"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 22,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 0,
+      "con": 3,
+      "int": -2,
+      "sab": 0,
+      "car": -3
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 15,
+        "dano": "2d6+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Espinho (à distância) (x2)",
+        "bonusAtaque": 15,
+        "dano": "2d6+3",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "curto",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Natureza Vegetal",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A fera-vassalo é uma criatura de natureza vegetal."
+      },
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Garra (teste +15)."
+      },
+      {
+        "nome": "Corpo Espinhoso",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 17,
+        "resistenciaTipo": null,
+        "descricao": "Qualquer criatura que erre um ataque corpo a corpo adjacente, desarmado ou com arma natural, contra a fera-vassalo sofre 2d4+3 pontos de dano de perfuração (Reflexos CD 17 evita)."
+      },
+      {
+        "nome": "Drenar Sangue",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se iniciar o turno agarrando uma criatura, pode drenar seu sangue: a vítima perde 2d4+3 PV e a fera recupera a mesma quantidade."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "espinhos (cd 18 para extrair, valem t$ 50 para fabricar flechas superiores).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "gnoll_capanga",
+    "nome": "Gnoll Capanga",
+    "nd": "0.5",
+    "regiao": "ermos",
+    "papel": "lacaio",
+    "tipo": "humanoide",
+    "subtipo": "gnoll",
+    "tamanho": "medio",
+    "iniciativa": 3,
+    "percepcao": 3,
+    "sentidos": [
+      "faro"
+    ],
+    "defesa": 14,
+    "resistencias": {
+      "fortitude": 5,
+      "reflexos": 3,
+      "vontade": 0
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 8,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 1,
+      "con": 3,
+      "int": -1,
+      "sab": 1,
+      "car": -1
+    },
+    "pericias": {
+      "sobrevivencia": 5
+    },
+    "ataques": [
+      {
+        "nome": "Espada curta",
+        "bonusAtaque": 9,
+        "dano": "1d6+3",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 9,
+        "dano": "1d6+3",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Bote",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Pode fazer uma investida usando a espada curta e a mordida, recebendo +2 em ambos os ataques se forem feitos contra o mesmo alvo."
+      }
+    ],
+    "equipamento": [
+      "Armadura de couro",
+      "Escudo leve",
+      "Espada curta"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "gnoll_cacador_de_cabecas",
+    "nome": "Gnoll Caçador de Cabeças",
+    "nd": "8",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "gnoll",
+    "tamanho": "medio",
+    "iniciativa": 12,
+    "percepcao": 10,
+    "sentidos": [
+      "faro"
+    ],
+    "defesa": 33,
+    "resistencias": {
+      "fortitude": 15,
+      "reflexos": 20,
+      "vontade": 9
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 320,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 1,
+      "des": 4,
+      "con": 2,
+      "int": 1,
+      "sab": 1,
+      "car": -1
+    },
+    "pericias": {
+      "atletismo": 9,
+      "furtividade": 14,
+      "sobrevivencia": 11
+    },
+    "ataques": [
+      {
+        "nome": "Espada longa (x2)",
+        "bonusAtaque": 26,
+        "dano": "1d8+15",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 26,
+        "dano": "1d6+15",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Besta leve (à distância) (x2)",
+        "bonusAtaque": 27,
+        "dano": "2d8+30",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Caminhos Selvagens",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Pode atravessar terrenos naturais difíceis sem sofrer redução em seu deslocamento."
+      },
+      {
+        "nome": "Disparo Preciso",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Pode fazer ataques à distância contra oponentes envolvidos em combate corpo a corpo sem sofrer a penalidade de –5 no teste de ataque."
+      },
+      {
+        "nome": "Emboscar",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Na primeira rodada de combate, pode realizar uma ação padrão adicional."
+      },
+      {
+        "nome": "Marca da Presa",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Analisa uma criatura em alcance médio. Até o fim da cena, recebe +1d8 em rolagens de dano contra ela (dobrado se for humanoide)."
+      }
+    ],
+    "equipamento": [
+      "Bálsamo restaurador x3",
+      "Besta leve precisa",
+      "Couro batido",
+      "Espada longa",
+      "Virotes x20"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "gnoll_filibusteiro",
+    "nome": "Gnoll Filibusteiro",
+    "nd": "2",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "gnoll",
+    "tamanho": "medio",
+    "iniciativa": 9,
+    "percepcao": 4,
+    "sentidos": [
+      "faro"
+    ],
+    "defesa": 19,
+    "resistencias": {
+      "fortitude": 7,
+      "reflexos": 11,
+      "vontade": 4
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 60,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 4,
+      "con": 3,
+      "int": -1,
+      "sab": 2,
+      "car": -1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Espada curta",
+        "bonusAtaque": 11,
+        "dano": "1d6+4",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 11,
+        "dano": "1d6+4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mosquete (à distância)",
+        "bonusAtaque": 12,
+        "dano": "2d8+9",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Recarga Rápida",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Pode recarregar seu mosquete como uma ação de movimento."
+      }
+    ],
+    "equipamento": [
+      "Balas x20",
+      "espada curta",
+      "mosquete"
+    ],
+    "tesouro": "padrao",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "gnoll_lider_de_alcateia",
+    "nome": "Gnoll Líder de Alcateia",
+    "nd": "5",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "gnoll",
+    "tamanho": "medio",
+    "iniciativa": 8,
+    "percepcao": 5,
+    "sentidos": [
+      "faro"
+    ],
+    "defesa": 24,
+    "resistencias": {
+      "fortitude": 17,
+      "reflexos": 11,
+      "vontade": 5
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 200,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 1,
+      "con": 2,
+      "int": 0,
+      "sab": 1,
+      "car": -1
+    },
+    "pericias": {
+      "cavalgar": 5,
+      "intimidacao": 7,
+      "sobrevivencia": 7
+    },
+    "ataques": [
+      {
+        "nome": "Machado de batalha",
+        "bonusAtaque": 17,
+        "dano": "1d8+12",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 17,
+        "dano": "1d6+12",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Azagaia (à distância)",
+        "bonusAtaque": 17,
+        "dano": "1d6+12",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Líder da Alcateia",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Recebe +2 em rolagens de dano para cada aliado gnoll adjacente ao alvo do ataque."
+      },
+      {
+        "nome": "Ordens",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Dá ordens aos aliados em alcance médio, que recebem +2 em um teste de perícia de sua escolha até o fim da cena."
+      }
+    ],
+    "equipamento": [
+      "Azagaia x2",
+      "Couro batido",
+      "Machado de batalha"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "gnoll_saqueador",
+    "nome": "Gnoll Saqueador",
+    "nd": "1",
+    "regiao": "ermos",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "gnoll",
+    "tamanho": "medio",
+    "iniciativa": 5,
+    "percepcao": 4,
+    "sentidos": [
+      "faro"
+    ],
+    "defesa": 15,
+    "resistencias": {
+      "fortitude": 7,
+      "reflexos": 7,
+      "vontade": 1
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 15,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 2,
+      "con": 3,
+      "int": -2,
+      "sab": 1,
+      "car": -1
+    },
+    "pericias": {
+      "sobrevivencia": 5
+    },
+    "ataques": [
+      {
+        "nome": "Lança",
+        "bonusAtaque": 10,
+        "dano": "1d6+4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 10,
+        "dano": "1d6+4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Arco curto (à distância)",
+        "bonusAtaque": 9,
+        "dano": "1d6+3",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [],
+    "equipamento": [
+      "Arco curto",
+      "flechas x20",
+      "lança"
+    ],
+    "tesouro": "metade",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "gnoll_vuulrak",
+    "nome": "Gnoll Vuul'rak",
+    "nd": "16",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "gnoll",
+    "tamanho": "grande",
+    "iniciativa": 14,
+    "percepcao": 15,
+    "sentidos": [
+      "faro"
+    ],
+    "defesa": 51,
+    "resistencias": {
+      "fortitude": 29,
+      "reflexos": 25,
+      "vontade": 17
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [
+      "efeitos_mentais"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 900,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 8,
+      "des": 0,
+      "con": 10,
+      "int": -4,
+      "sab": 1,
+      "car": -2
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Mordida (x3)",
+        "bonusAtaque": 44,
+        "dano": "2d6+30",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Tacape (x2)",
+        "bonusAtaque": 44,
+        "dano": "2d10+30",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Descarregar Raiva",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Sempre que seus PV cruzarem um múltiplo de 100, faz um ataque de tacape contra a Defesa de todas as criaturas em seu alcance; mesmo que erre, causa metade do dano."
+      },
+      {
+        "nome": "Golpe Avassalador",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 42,
+        "resistenciaTipo": null,
+        "descricao": "Ao acertar um ataque de tacape, arremessa a vítima 1d6 x 1,5m na direção que escolher (Fortitude CD 42 evita). Se colidir com um obstáculo, sofre 1d6 pontos de dano para cada 1,5m percorrido depois da colisão."
+      },
+      {
+        "nome": "Ódio Inexplicável",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Recebe +5 em testes de ataque e rolagens de dano contra elfos, e ataca-os sempre que possível."
+      }
+    ],
+    "equipamento": [
+      "Tacape aumentado x2"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "gnoll_xama_de_allihanna",
+    "nome": "Gnoll Xamã de Allihanna",
+    "nd": "2",
+    "regiao": "ermos",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "gnoll",
+    "tamanho": "medio",
+    "iniciativa": 2,
+    "percepcao": 6,
+    "sentidos": [
+      "faro"
+    ],
+    "defesa": 17,
+    "resistencias": {
+      "fortitude": 7,
+      "reflexos": 2,
+      "vontade": 13
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 50,
+    "pm": 12,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 1,
+      "des": 1,
+      "con": 2,
+      "int": 0,
+      "sab": 3,
+      "car": 0
+    },
+    "pericias": {
+      "cura": 6,
+      "intuicao": 6,
+      "religiao": 6,
+      "sobrevivencia": 8
+    },
+    "ataques": [
+      {
+        "nome": "Clava",
+        "bonusAtaque": 9,
+        "dano": "1d6+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 9,
+        "dano": "1d6+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Caminhos Selvagens",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Pode atravessar terrenos naturais difíceis sem sofrer redução em seu deslocamento."
+      },
+      {
+        "nome": "Medicina Primal",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 15,
+        "resistenciaTipo": null,
+        "descricao": "Teste de Cura (CD 15); se bem-sucedido, uma criatura com 0 PV adjacente recupera 2d6+3 PV."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 18,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como clérigo de Allihanna de 2º nível (CD 18): Armamento da Natureza (2 PM), Controlar Plantas (2 PM), Curar Ferimentos (2 PM)."
+      }
+    ],
+    "equipamento": [
+      "Armadura de couro",
+      "Clava",
+      "Símbolo sagrado de Allihanna"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "gnoll_xama_de_marah",
+    "nome": "Gnoll Xamã de Marah",
+    "nd": "6",
+    "regiao": "ermos",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "gnoll",
+    "tamanho": "medio",
+    "iniciativa": 6,
+    "percepcao": 9,
+    "sentidos": [
+      "faro"
+    ],
+    "defesa": 25,
+    "resistencias": {
+      "fortitude": 9,
+      "reflexos": 5,
+      "vontade": 19
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "alquebrado",
+      "esmorecido",
+      "frustrado"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 180,
+    "pm": 34,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 1,
+      "con": 2,
+      "int": 2,
+      "sab": 4,
+      "car": 1
+    },
+    "pericias": {
+      "cura": 11,
+      "diplomacia": 8,
+      "intuicao": 9,
+      "misticismo": 7,
+      "religiao": 9
+    },
+    "ataques": [],
+    "habilidades": [
+      {
+        "nome": "Aura de Paz",
+        "acao": "livre",
+        "custoPm": 2,
+        "recarga": null,
+        "cdResistencia": 24,
+        "resistenciaTipo": null,
+        "descricao": "Habilidade mágica; cria uma aura de 9m de raio. Um inimigo que aja de forma hostil dentro da aura deve fazer um teste de Vontade (CD 24) ou perde sua ação; se passar, fica imune a esse efeito por 1 dia."
+      },
+      {
+        "nome": "Símbolo Sagrado Energizado",
+        "acao": "movimento",
+        "custoPm": 1,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Habilidade mágica; seu símbolo sagrado emite uma luz prateada. Enquanto durar, suas magias divinas custam 1 PM a menos (mínimo 1)."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 24,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como clérigo de Marah de 6º nível (CD 24): Curar Ferimentos (6 PM, cura 7d8+7), Dissipar Magia (3 PM), Enfeitiçar (1 PM), Santuário (1 PM)."
+      }
+    ],
+    "equipamento": [
+      "Bálsamo restaurador x4",
+      "Couro batido",
+      "Símbolo sagrado de Marah"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "gnoll_xama_de_megalokk",
+    "nome": "Gnoll Xamã de Megalokk",
+    "nd": "5",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "gnoll",
+    "tamanho": "medio",
+    "iniciativa": 7,
+    "percepcao": 9,
+    "sentidos": [
+      "faro"
+    ],
+    "defesa": 24,
+    "resistencias": {
+      "fortitude": 11,
+      "reflexos": 8,
+      "vontade": 14
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 170,
+    "pm": 25,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 1,
+      "con": 3,
+      "int": 0,
+      "sab": 3,
+      "car": -1
+    },
+    "pericias": {
+      "atletismo": 6,
+      "intimidacao": 8,
+      "religiao": 7
+    },
+    "ataques": [
+      {
+        "nome": "Tacape",
+        "bonusAtaque": 17,
+        "dano": "1d10+16",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 3,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 17,
+        "dano": "1d6+16",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Urro Divino",
+        "acao": "livre",
+        "custoPm": 1,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Soma seu modificador de Constituição ao dano de um ataque corpo a corpo ou magia realizado neste turno."
+      },
+      {
+        "nome": "Voz dos Monstros",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Habilidade mágica; pode se comunicar com monstros não inteligentes."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 20,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como clérigo de Megalokk de 5º nível (CD 20): Amedrontar (3 PM), Armamento da Natureza (2 PM), Físico Divino (3 PM), Perdição (3 PM)."
+      }
+    ],
+    "equipamento": [
+      "Couro batido",
+      "Símbolo sagrado de Megalokk",
+      "Tacape"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "gorlogg",
+    "nome": "Gorlogg",
+    "nd": "1",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 4,
+    "percepcao": 3,
+    "sentidos": [
+      "visao_na_penumbra"
+    ],
+    "defesa": 16,
+    "resistencias": {
+      "fortitude": 8,
+      "reflexos": 5,
+      "vontade": 3
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 36,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 2,
+      "con": 5,
+      "int": -4,
+      "sab": 1,
+      "car": -2
+    },
+    "pericias": {
+      "atletismo": 9
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 9,
+        "dano": "2d6+8",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se acerta um ataque de mordida, pode usar a manobra agarrar (teste +13)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "grifo",
+    "nome": "Grifo",
+    "nd": "3",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 9,
+    "percepcao": 7,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 19,
+    "resistencias": {
+      "fortitude": 9,
+      "reflexos": 15,
+      "vontade": 4
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 110,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 24.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 4,
+      "con": 3,
+      "int": -4,
+      "sab": 2,
+      "car": -1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 14,
+        "dano": "2d6+5",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 14,
+        "dano": "1d6+5",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Bote",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Faz investida e ataca com mordida e duas garras. Os três ataques recebem +2 da investida, mas devem ser contra o mesmo alvo."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "ninho tem 25% de chance de conter 1d4 ovos (t$ 2.500 cada)",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "guarda_de_cidade",
+    "nome": "Guarda de Cidade",
+    "nd": "0.5",
+    "regiao": "ermos",
+    "papel": "lacaio",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 4,
+    "percepcao": 3,
+    "sentidos": [],
+    "defesa": 15,
+    "resistencias": {
+      "fortitude": 5,
+      "reflexos": 2,
+      "vontade": 1
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 8,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 1,
+      "con": 2,
+      "int": 0,
+      "sab": 0,
+      "car": 0
+    },
+    "pericias": {
+      "atletismo": 5
+    },
+    "ataques": [
+      {
+        "nome": "Maça",
+        "bonusAtaque": 7,
+        "dano": "1d8+5",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [],
+    "equipamento": [
+      "Apito",
+      "couro batido",
+      "maça"
+    ],
+    "tesouro": "nenhum",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "hiena",
+    "nome": "Hiena",
+    "nd": "1",
+    "regiao": "ermos",
+    "papel": "especial",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 5,
+    "percepcao": 6,
+    "sentidos": [
+      "faro",
+      "penumbra"
+    ],
+    "defesa": 14,
+    "resistencias": {
+      "fortitude": 9,
+      "reflexos": 6,
+      "vontade": 1
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 17,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 15.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 3,
+      "con": 3,
+      "int": -4,
+      "sab": 2,
+      "car": -2
+    },
+    "pericias": {
+      "furtividade": 5,
+      "sobrevivencia": 6
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 9,
+        "dano": "1d6+7",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Derrubar",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Ao acertar um ataque de mordida, pode fazer um teste de Luta (+9) para derrubar o alvo."
+      },
+      {
+        "nome": "Oportunista",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Recebe +2 em rolagens de dano contra inimigos que já tenham sido feridos nesta rodada."
+      },
+      {
+        "nome": "Furtividade em Colinas/Planícies",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Recebe +5 em testes de Furtividade quando em colinas ou planícies (já incluído no total acima)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "hiena_rainha",
+    "nome": "Hiena Rainha",
+    "nd": "2",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 6,
+    "percepcao": 7,
+    "sentidos": [
+      "faro",
+      "penumbra"
+    ],
+    "defesa": 18,
+    "resistencias": {
+      "fortitude": 12,
+      "reflexos": 7,
+      "vontade": 3
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 68,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 15.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 3,
+      "con": 3,
+      "int": -4,
+      "sab": 2,
+      "car": -2
+    },
+    "pericias": {
+      "furtividade": 6,
+      "sobrevivencia": 7
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 12,
+        "dano": "2d6+12",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Resistência a Medo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Recebe +5 em testes de Vontade para resistir a efeitos de medo."
+      },
+      {
+        "nome": "Derrubar",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Ao acertar um ataque de mordida, pode fazer um teste de Luta (+12) para derrubar o alvo."
+      },
+      {
+        "nome": "Gargalhada Perturbadora",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 16,
+        "resistenciaTipo": null,
+        "descricao": "Inimigos em alcance médio ficam abalados (Vontade CD 16 evita e torna o alvo imune a essa habilidade por 1 dia). Hienas e gnolls aliados em alcance médio recebem +5 em testes de Vontade até o fim da cena."
+      },
+      {
+        "nome": "Oportunista",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Recebe +2 em rolagens de dano contra inimigos que já tenham sido feridos nesta rodada."
+      },
+      {
+        "nome": "Furtividade em Colinas/Planícies",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Recebe +5 em testes de Furtividade quando em colinas ou planícies (já incluído no total acima)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "hienodonte",
+    "nome": "Hienodonte",
+    "nd": "2",
+    "regiao": "ermos",
+    "papel": "especial",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 5,
+    "percepcao": 6,
+    "sentidos": [
+      "faro",
+      "penumbra"
+    ],
+    "defesa": 20,
+    "resistencias": {
+      "fortitude": 14,
+      "reflexos": 9,
+      "vontade": 4
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 38,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 2,
+      "con": 4,
+      "int": -4,
+      "sab": 1,
+      "car": -2
+    },
+    "pericias": {
+      "furtividade": 3,
+      "sobrevivencia": 6
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 16,
+        "dano": "2d8+15",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Derrubar",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Ao acertar um ataque de mordida, pode fazer um teste de Luta (+18) para derrubar o alvo."
+      },
+      {
+        "nome": "Oportunista",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Recebe +2 em rolagens de dano contra inimigos que já tenham sido feridos nesta rodada."
+      },
+      {
+        "nome": "Furtividade em Colinas/Planícies",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Recebe +5 em testes de Furtividade quando em colinas ou planícies (já incluído no total acima)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "lagarto_perseguidor",
+    "nome": "Lagarto Perseguidor",
+    "nd": "2",
+    "regiao": "ermos",
+    "papel": "lacaio",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 7,
+    "percepcao": 5,
+    "sentidos": [
+      "faro",
+      "baixa_luminosidade"
+    ],
+    "defesa": 18,
+    "resistencias": {
+      "fortitude": 7,
+      "reflexos": 12,
+      "vontade": 3
+    },
+    "rd": {
+      "fogo": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [
+      "frio"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 16,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 9.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 2,
+      "con": 3,
+      "int": -5,
+      "sab": 0,
+      "car": -4
+    },
+    "pericias": {
+      "atletismo": 11,
+      "furtividade": 7
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 14,
+        "dano": "2d4+14",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Mordida Infecciosa",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 16,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura mordida deve fazer um teste de Fortitude (CD 16) no início de cada um de seus turnos; se falhar, perde 1d6 PV; se passar, encerra o efeito (metabolismo)."
+      },
+      {
+        "nome": "Mordida Surpresa",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A primeira criatura atacada pelo lagarto perseguidor em cada combate fica desprevenida contra este ataque."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "lobo",
+    "nome": "Lobo",
+    "nd": "0.5",
+    "regiao": "ermos",
+    "papel": "especial",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 5,
+    "percepcao": 6,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 14,
+    "resistencias": {
+      "fortitude": 6,
+      "reflexos": 3,
+      "vontade": 1
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 14,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 15.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 3,
+      "con": 3,
+      "int": -4,
+      "sab": 2,
+      "car": -2
+    },
+    "pericias": {
+      "sobrevivencia": 6
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 7,
+        "dano": "1d6+5",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Derrubar",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se acerta um ataque de mordida, pode fazer a manobra derrubar (teste +7)."
+      },
+      {
+        "nome": "Táticas de Alcateia",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando flanqueia um inimigo, recebe +2 no teste de ataque e na rolagem de dano (total +4 no ataque, +2 no dano com flanquear)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "lobo_das_cavernas",
+    "nome": "Lobo-das-Cavernas",
+    "nd": "2",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 5,
+    "percepcao": 7,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 19,
+    "resistencias": {
+      "fortitude": 11,
+      "reflexos": 7,
+      "vontade": 6
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 73,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 15.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 2,
+      "con": 6,
+      "int": -4,
+      "sab": 2,
+      "car": -2
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 13,
+        "dano": "2d6+10",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Derrubar",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se acerta um ataque de mordida, pode fazer a manobra derrubar."
+      },
+      {
+        "nome": "Táticas de Alcateia",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando flanqueia um inimigo, recebe +2 no teste de ataque e na rolagem de dano."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "matrona_gnoll",
+    "nome": "Matrona Gnoll",
+    "nd": "11",
+    "regiao": "ermos",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "gnoll",
+    "tamanho": "medio",
+    "iniciativa": 11,
+    "percepcao": 15,
+    "sentidos": [
+      "faro"
+    ],
+    "defesa": 39,
+    "resistencias": {
+      "fortitude": 25,
+      "reflexos": 11,
+      "vontade": 18
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 390,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 1,
+      "con": 5,
+      "int": 0,
+      "sab": 2,
+      "car": 3
+    },
+    "pericias": {
+      "intimidacao": 19,
+      "sobrevivencia": 13
+    },
+    "ataques": [
+      {
+        "nome": "Machado de guerra (x2)",
+        "bonusAtaque": 32,
+        "dano": "3d6+26",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 32,
+        "dano": "1d6+26",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Latido Enervante",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 33,
+        "resistenciaTipo": null,
+        "descricao": "Inimigos em alcance curto perdem a ação de movimento em seu próximo turno (Vontade CD 33 evita). Recarrega ao acertar um ataque de mordida."
+      },
+      {
+        "nome": "Matrona da Alcateia",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Gnolls aliados em alcance médio têm imunidade a medo e recebem +2 em testes de perícia e rolagens de dano."
+      },
+      {
+        "nome": "Pega!",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Gnolls aliados em alcance curto podem fazer um ataque como reação imediata. Recarrega com uma ação de movimento."
+      },
+      {
+        "nome": "Quebra-Pescoço",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 33,
+        "resistenciaTipo": null,
+        "descricao": "Se um ataque de mordida exceder a Defesa do alvo por 5 ou mais, a vítima perde 6d6 PV e fica atordoada por 1 rodada (Fortitude CD 33 reduz a perda de PV à metade e evita a condição)."
+      }
+    ],
+    "equipamento": [
+      "Couraça macabra",
+      "Machado de guerra cruel"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "nuvem_de_estirges",
+    "nome": "Nuvem de Estirges",
+    "nd": "16",
+    "regiao": "ermos",
+    "papel": "lacaio",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 19,
+    "percepcao": 14,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 51,
+    "resistencias": {
+      "fortitude": 17,
+      "reflexos": 29,
+      "vontade": 24
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 180,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 0.0,
+      "voo": 12.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": -2,
+      "des": 5,
+      "con": -1,
+      "int": -5,
+      "sab": 0,
+      "car": -2
+    },
+    "pericias": {},
+    "ataques": [],
+    "habilidades": [
+      {
+        "nome": "Enxame",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Toda criatura no espaço da nuvem de estirges sofre 10d6 pontos de dano de perfuração. Para cada ponto de dano sofrido dessa forma, a criatura perde 1d6 pontos de vida como um efeito metabólico."
+      },
+      {
+        "nome": "Chupar Sangue",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Para cada ponto de vida que a nuvem fizer uma criatura perder, ela ganha 1 PV temporário."
+      },
+      {
+        "nome": "Sangrar",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 40,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura que perca pontos de vida para a nuvem de estirges fica sangrando (Fortitude CD 40 evita)."
+      },
+      {
+        "nome": "Zumbido Atordoante",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Criaturas dentro da nuvem de estirges ficam ofuscadas e surdas."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "ova de estirge.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "ogro",
+    "nome": "Ogro",
+    "nd": "4",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "gigante",
+    "tamanho": "grande",
+    "iniciativa": 3,
+    "percepcao": 1,
+    "sentidos": [
+      "visao_na_penumbra"
+    ],
+    "defesa": 23,
+    "resistencias": {
+      "fortitude": 16,
+      "reflexos": 10,
+      "vontade": 0
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 130,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 7,
+      "des": 0,
+      "con": 4,
+      "int": -3,
+      "sab": -2,
+      "car": -2
+    },
+    "pericias": {
+      "atletismo": 12,
+      "intuicao": -5
+    },
+    "ataques": [
+      {
+        "nome": "Tacape",
+        "bonusAtaque": 16,
+        "dano": "1d12+18",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Burro Demais...",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Sofre –5 em testes de Intuição e Vontade (já contabilizado)."
+      },
+      {
+        "nome": "...Para Morrer!",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Todo dano de corte, impacto e perfuração sofrido é reduzido à metade."
+      }
+    ],
+    "equipamento": [
+      "Tacape aumentado"
+    ],
+    "tesouro": "padrao",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "rhandomm",
+    "nome": "Rhandomm",
+    "nd": "20",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": null,
+    "tamanho": "colossal",
+    "iniciativa": 20,
+    "percepcao": 26,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 63,
+    "resistencias": {
+      "fortitude": 34,
+      "reflexos": 20,
+      "vontade": 28
+    },
+    "rd": {
+      "magia": 10
+    },
+    "imunidadesEfeitos": [
+      "adivinhacao",
+      "atordoado",
+      "cansaco",
+      "efeitos_mentais",
+      "efeitos_de_metabolismo",
+      "efeitos_magicos_de_movimento",
+      "dano",
+      "medo",
+      "metamorfose",
+      "paralisia"
+    ],
+    "imunidadesDano": [
+      "veneno"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +10"
+    ],
+    "pv": 1300,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 15.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 19,
+      "des": 4,
+      "con": 17,
+      "int": -4,
+      "sab": 0,
+      "car": 0
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Pancada (x2)",
+        "bonusAtaque": 55,
+        "dano": "4d12+40",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 4,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Rocha (à distância)",
+        "bonusAtaque": 50,
+        "dano": "6d10+40",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "longo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Aura Caótica",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início do turno do Rhandomm, cada criatura em uma esfera de 30m perde 6d6 pontos de vida, à medida que seus corpos se distorcem pelo puro poder do Caos. Sempre que rolar um 6 num desses dados, soma esse valor e rola o dado novamente."
+      },
+      {
+        "nome": "Golpe Avassalador",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 50,
+        "resistenciaTipo": null,
+        "descricao": "Quando acerta um ataque de pancada, arremessa a vítima 1d6 x 1,5m em uma direção à escolha dele (Fortitude CD 50 evita). A vítima fica caída e, se atingir um obstáculo, sofre 1d6 de dano de impacto por 1,5m arremessado."
+      },
+      {
+        "nome": "Punhos Caóticos",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura atingida por uma pancada do Rhandomm perde 6d6 pontos de vida. Sempre que rolar um 6 num desses dados, soma esse valor e rola o dado novamente."
+      },
+      {
+        "nome": "Salto Prodigioso",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Rhandomm salta 60m para um espaço desocupado em qualquer direção."
+      },
+      {
+        "nome": "Sentidos Titânicos (mágica)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Rhandomm está permanentemente sob o efeito básico de Visão da Verdade como uma magia simulada."
+      },
+      {
+        "nome": "Titânico",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 50,
+        "resistenciaTipo": null,
+        "descricao": "O Rhandomm é imune a manobras de combate e não pode ser flanqueado. Quando se move, pisoteia qualquer criatura ou objeto Enorme ou menor em seu caminho, causando 20d6 pontos de dano de impacto (uma vez por rodada por criatura, Reflexos CD 50 reduz à metade). Seus ataques ignoram redução de dano e atingem todas as criaturas em um quadrado de 6m (um único teste de ataque comparado à Defesa de cada inimigo na área)."
+      },
+      {
+        "nome": "Varrer",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando faz um ataque corpo a corpo e reduz os PV do alvo para 0 ou menos, pode realizar um ataque adicional contra outra criatura dentro do seu alcance."
+      },
+      {
+        "nome": "Fraqueza Variável",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Rhandomm é suscetível a um tipo de dano, que muda sempre que desperta da hibernação. Role 1d10: 1) Ácido; 2) Corte; 3) Eletricidade; 4) Essência; 5) Fogo; 6) Frio; 7) Impacto; 8) Luz; 9) Perfuração; 10) Trevas. Efeitos desse tipo de dano ignoram a imunidade a dano do Rhandomm."
+      },
+      {
+        "nome": "Montanha Viva",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 30,
+        "resistenciaTipo": null,
+        "descricao": "Um personagem pode gastar uma ação padrão e fazer um teste de Atletismo (CD 30) para escalar o Rhandomm. Se falhar por 5 ou mais, cai na frente do monstro e sofre 8d6 de dano de queda. Passando em três desses testes, chega aos ombros do monstro, onde recebe camuflagem leve contra os ataques da criatura e ataca como se o Rhandomm estivesse desprevenido."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "sargento_da_guarda",
+    "nome": "Sargento da Guarda",
+    "nd": "1",
+    "regiao": "ermos",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 5,
+    "percepcao": 4,
+    "sentidos": [],
+    "defesa": 17,
+    "resistencias": {
+      "fortitude": 9,
+      "reflexos": 4,
+      "vontade": 3
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 28,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 1,
+      "con": 2,
+      "int": 0,
+      "sab": 0,
+      "car": 1
+    },
+    "pericias": {
+      "atletismo": 7,
+      "intuicao": 4
+    },
+    "ataques": [
+      {
+        "nome": "Maça",
+        "bonusAtaque": 10,
+        "dano": "1d8+10",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Besta leve (à distância)",
+        "bonusAtaque": 9,
+        "dano": "1d8+5",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Ordens",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Grita ordens para aliados em alcance médio. Eles recebem +2 em testes de perícia até o fim da cena."
+      }
+    ],
+    "equipamento": [
+      "Apito",
+      "besta leve",
+      "cota de malha",
+      "maça",
+      "virotes x20"
+    ],
+    "tesouro": "metade",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "serpe",
+    "nome": "Serpe",
+    "nd": "5",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 5,
+    "percepcao": 7,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 24,
+    "resistencias": {
+      "fortitude": 10,
+      "reflexos": 16,
+      "vontade": 5
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "paralisia"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 200,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 18.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 1,
+      "con": 6,
+      "int": -2,
+      "sab": 1,
+      "car": -1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 17,
+        "dano": "2d6+12",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Ferrão",
+        "bonusAtaque": 17,
+        "dano": "1d8+12",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": "veneno"
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se acerta mordida, pode usar agarrar (teste +19)."
+      },
+      {
+        "nome": "Veneno",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 20,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Peçonha concentrada: perde 1d12 PV por rodada durante 3 rodadas (Fort CD 20 reduz para uma rodada)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "1d4 doses de peconha concentrada (cd 20 para extrair)",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "tendriculo",
+    "nome": "Tendrículo",
+    "nd": "6",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 9,
+    "percepcao": 6,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 25,
+    "resistencias": {
+      "fortitude": 16,
+      "reflexos": 8,
+      "vontade": 12
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "sangramento"
+    ],
+    "imunidadesDano": [
+      "veneno"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 210,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 2,
+      "con": 2,
+      "int": -2,
+      "sab": 3,
+      "car": -4
+    },
+    "pericias": {
+      "furtividade": 10
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 20,
+        "dano": "2d6+10",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Tentáculo (x2)",
+        "bonusAtaque": 24,
+        "dano": "4d4+5",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Natureza Vegetal",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O tendrículo é uma criatura de natureza vegetal."
+      },
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Tentáculo (teste +24)."
+      },
+      {
+        "nome": "Engolir",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada um dos turnos do tendrículo, a criatura engolida sofre 2d10+5 pontos de dano de impacto mais 2d10+5 pontos de dano de ácido. Pode escapar causando um total de 20 pontos de dano a ele (Defesa 10). Enquanto tiver uma criatura engolida, o tendrículo ganha cura acelerada 20."
+      },
+      {
+        "nome": "Veneno",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 22,
+        "resistenciaTipo": null,
+        "descricao": "Essência de sombra: debilitado (Fortitude CD 22 reduz para fraco)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "1d4 doses de essencia de sombra (cd 21 para extrair).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "urso_coruja",
+    "nome": "Urso-Coruja",
+    "nd": "4",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 7,
+    "percepcao": 5,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 23,
+    "resistencias": {
+      "fortitude": 16,
+      "reflexos": 10,
+      "vontade": 5
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 145,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 7,
+      "des": 3,
+      "con": 5,
+      "int": -4,
+      "sab": 1,
+      "car": -2
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 16,
+        "dano": "1d8+5",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 15,
+        "dano": "1d6+5",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se acerta um ataque de garra, pode usar agarrar (teste +18)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum",
+    "recursoExtraivel": null
+  }
+]

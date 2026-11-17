@@ -1,0 +1,4514 @@
+[
+  {
+    "id": "abahddon",
+    "nome": "Abahddon, Lorde das Profundezas",
+    "nd": "20",
+    "regiao": "abissais",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "acolito_de_kally",
+    "nome": "Acólito de Kally",
+    "nd": "3",
+    "regiao": "igreja_de_kallyadranoch",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "afogado",
+    "nome": "Afogado",
+    "nd": "7",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "lacaio",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "aka_oni",
+    "nome": "Aka Oni",
+    "nd": "9",
+    "regiao": "imperio_de_jade",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "allaraz",
+    "nome": "Allaraz",
+    "nd": "14",
+    "regiao": "genios",
+    "papel": "especial",
+    "tipo": "espirito"
+  },
+  {
+    "id": "alma_acorrentada",
+    "nome": "Alma Acorrentada",
+    "nd": "7",
+    "regiao": "areas_de_tormenta",
+    "papel": "lacaio",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "alto_clerigo_de_kally",
+    "nome": "Alto Clérigo de Kally",
+    "nd": "13",
+    "regiao": "igreja_de_kallyadranoch",
+    "papel": "especial",
+    "tipo": "monstro"
+  },
+  {
+    "id": "alto_sacerdote_finntroll",
+    "nome": "Alto Sacerdote Finntroll",
+    "nd": "12",
+    "regiao": "trolls_nobres",
+    "papel": "especial",
+    "tipo": "monstro"
+  },
+  {
+    "id": "alto_sacerdote_de_hyninn",
+    "nome": "Alto Sacerdote de Hyninn",
+    "nd": "8",
+    "regiao": "capangas_e_bandoleiros",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "alzeras",
+    "nome": "Alzeras",
+    "nd": "11",
+    "regiao": "reino_dos_mortos",
+    "papel": "especial",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "aparicao",
+    "nome": "Aparição",
+    "nd": "5",
+    "regiao": "reino_dos_mortos",
+    "papel": "especial",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "aquinne",
+    "nome": "Aquin'ne",
+    "nd": "2",
+    "regiao": "elementais",
+    "papel": "lacaio",
+    "tipo": "espirito"
+  },
+  {
+    "id": "aranha_gigante",
+    "nome": "Aranha Gigante",
+    "nd": "2",
+    "regiao": "masmorras",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "arauto_de_thwor",
+    "nome": "Arauto de Thwor",
+    "nd": "4",
+    "regiao": "duyshidakk",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "arcanista_finntroll",
+    "nome": "Arcanista Finntroll",
+    "nd": "14",
+    "regiao": "trolls_nobres",
+    "papel": "especial",
+    "tipo": "monstro"
+  },
+  {
+    "id": "arcano_de_guerra_adepto",
+    "nome": "Arcano de Guerra Adepto",
+    "nd": "4",
+    "regiao": "puristas",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "arcano_de_guerra_veterano",
+    "nome": "Arcano de Guerra Veterano",
+    "nd": "11",
+    "regiao": "puristas",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "armeiro_de_tenebra_clerigo",
+    "nome": "Armeiro de Tenebra Clérigo",
+    "nd": "8",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "armeiro_de_tenebra_devoto",
+    "nome": "Armeiro de Tenebra Devoto",
+    "nd": "6",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "armento_de_burafontes",
+    "nome": "Armento de Burafontes",
+    "nd": "8",
+    "regiao": "mundo_perdido",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "arqueiro_escravo",
+    "nome": "Arqueiro Escravo",
+    "nd": "5",
+    "regiao": "imperio_de_tauron",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "arquibruxo_da_tormenta",
+    "nome": "Arquibruxo da Tormenta",
+    "nd": "14",
+    "regiao": "areas_de_tormenta",
+    "papel": "especial",
+    "tipo": "monstro"
+  },
+  {
+    "id": "arquilich_ferren_asloth",
+    "nome": "Arquilich Ferren Asloth",
+    "nd": "21",
+    "regiao": "reino_dos_mortos",
+    "papel": "solo",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "asa_assassina",
+    "nome": "Asa-Assassina",
+    "nd": "1",
+    "regiao": "masmorras",
+    "papel": "lacaio",
+    "tipo": "animal"
+  },
+  {
+    "id": "aspecto_de_aharadak",
+    "nome": "Aspecto de Aharadak",
+    "nd": "10",
+    "regiao": "culto_de_aharadak",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "aspecto_de_allihanna",
+    "nome": "Aspecto de Allihanna",
+    "nd": "5",
+    "regiao": "aspectos",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "aspecto_de_kallyadranoch",
+    "nome": "Aspecto de Kallyadranoch",
+    "nd": "6",
+    "regiao": "aspectos",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "aspecto_de_khalmyr",
+    "nome": "Aspecto de Khalmyr",
+    "nd": "5",
+    "regiao": "aspectos",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "aspecto_de_lin_wu",
+    "nome": "Aspecto de Lin-Wu",
+    "nd": "4",
+    "regiao": "aspectos",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "aspecto_de_marah",
+    "nome": "Aspecto de Marah",
+    "nd": "4",
+    "regiao": "aspectos",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "aspecto_de_valkaria",
+    "nome": "Aspecto de Valkaria",
+    "nd": "5",
+    "regiao": "aspectos",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "aucharai",
+    "nome": "Aucharai",
+    "nd": "6",
+    "regiao": "abissais",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "avatar_de_aharadak",
+    "nome": "Avatar de Aharadak",
+    "nd": "20",
+    "regiao": "avatares",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "avatar_de_aharadak_culto",
+    "nome": "Avatar de Aharadak (Culto)",
+    "nd": "21",
+    "regiao": "culto_de_aharadak",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "avatar_de_allihanna",
+    "nome": "Avatar de Allihanna",
+    "nd": "20",
+    "regiao": "avatares",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "avatar_de_arsenal",
+    "nome": "Avatar de Arsenal",
+    "nd": "18",
+    "regiao": "avatares",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "avatar_de_azgher",
+    "nome": "Avatar de Azgher",
+    "nd": "20",
+    "regiao": "avatares",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "avatar_de_hyninn",
+    "nome": "Avatar de Hyninn",
+    "nd": "19",
+    "regiao": "avatares",
+    "papel": "especial",
+    "tipo": "espirito"
+  },
+  {
+    "id": "avatar_de_kallyadranoch",
+    "nome": "Avatar de Kallyadranoch",
+    "nd": "20",
+    "regiao": "avatares",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "avatar_de_kallyadranoch_dragao",
+    "nome": "Avatar de Kallyadranoch",
+    "nd": "21",
+    "regiao": "igreja_de_kallyadranoch",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "avatar_de_khalmyr",
+    "nome": "Avatar de Khalmyr",
+    "nd": "20",
+    "regiao": "avatares",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "avatar_de_lena",
+    "nome": "Avatar de Lena",
+    "nd": "20",
+    "regiao": "avatares",
+    "papel": "especial",
+    "tipo": "espirito"
+  },
+  {
+    "id": "avatar_de_lin_wu",
+    "nome": "Avatar de Lin-Wu",
+    "nd": "19",
+    "regiao": "avatares",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "avatar_de_marah",
+    "nome": "Avatar de Marah",
+    "nd": "19",
+    "regiao": "avatares",
+    "papel": "especial",
+    "tipo": "espirito"
+  },
+  {
+    "id": "avatar_de_megalokk",
+    "nome": "Avatar de Megalokk",
+    "nd": "20",
+    "regiao": "avatares",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "avatar_de_nimb",
+    "nome": "Avatar de Nimb",
+    "nd": "20",
+    "regiao": "avatares",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "avatar_de_sszzaas",
+    "nome": "Avatar de Sszzaas",
+    "nd": "19",
+    "regiao": "avatares",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "avatar_de_tanna_toh",
+    "nome": "Avatar de Tanna-Toh",
+    "nd": "20",
+    "regiao": "avatares",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "avatar_de_tenebra",
+    "nome": "Avatar de Tenebra",
+    "nd": "20",
+    "regiao": "avatares",
+    "papel": "solo",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "avatar_de_thwor",
+    "nome": "Avatar de Thwor",
+    "nd": "18",
+    "regiao": "avatares",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "avatar_de_thyatis",
+    "nome": "Avatar de Thyatis",
+    "nd": "19",
+    "regiao": "avatares",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "avatar_de_valkaria",
+    "nome": "Avatar de Valkaria",
+    "nd": "20",
+    "regiao": "avatares",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "avatar_de_wynna",
+    "nome": "Avatar de Wynna",
+    "nd": "20",
+    "regiao": "avatares",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "avatar_do_oceano",
+    "nome": "Avatar do Oceano",
+    "nd": "20",
+    "regiao": "avatares",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "baleote",
+    "nome": "Baleote",
+    "nd": "1",
+    "regiao": "montarias",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "bandido",
+    "nome": "Bandido",
+    "nd": "0.25",
+    "regiao": "ermos",
+    "papel": "lacaio",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "bandido_ligeiro",
+    "nome": "Bandido Ligeiro",
+    "nd": "0.5",
+    "regiao": "capangas_e_bandoleiros",
+    "papel": "lacaio",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "bandido_selvagem",
+    "nome": "Bandido Selvagem",
+    "nd": "1",
+    "regiao": "capangas_e_bandoleiros",
+    "papel": "lacaio",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "bando_pirata",
+    "nome": "Bando Pirata",
+    "nd": "6",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "lacaio",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "bando_de_deinonicos",
+    "nome": "Bando de Deinonicos",
+    "nd": "8",
+    "regiao": "mundo_perdido",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "bando_de_pamgras",
+    "nome": "Bando de Pamgras",
+    "nd": "11",
+    "regiao": "elementais",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "basilisco",
+    "nome": "Basilisco",
+    "nd": "4",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "ber_baram",
+    "nome": "Ber-baram",
+    "nd": "8",
+    "regiao": "elementais",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "bispo_de_guerra",
+    "nome": "Bispo de Guerra",
+    "nd": "8",
+    "regiao": "igreja_de_arsenal",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "bispo_do_forte_sagrado",
+    "nome": "Bispo do Forte Sagrado (Bispo de Guerra)",
+    "nd": "10",
+    "regiao": "exemplos_de_criacao",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "bogum",
+    "nome": "Bogum",
+    "nd": "0.5",
+    "regiao": "mascotes_e_familiares",
+    "papel": "lacaio",
+    "tipo": "construto"
+  },
+  {
+    "id": "brawar",
+    "nome": "Brawar",
+    "nd": "14",
+    "regiao": "masmorras",
+    "papel": "solo",
+    "tipo": "construto"
+  },
+  {
+    "id": "brontoterio",
+    "nome": "Brontotério",
+    "nd": "8",
+    "regiao": "montarias",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "bruxa_goblin",
+    "nome": "Bruxa Goblin",
+    "nd": "11",
+    "regiao": "duyshidakk",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "bruxo_da_tormenta",
+    "nome": "Bruxo da Tormenta",
+    "nd": "6",
+    "regiao": "areas_de_tormenta",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "bugbear_guarda_costas",
+    "nome": "Bugbear Guarda-Costas",
+    "nd": "6",
+    "regiao": "duyshidakk",
+    "papel": "lacaio",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "bugbear_sentinela",
+    "nome": "Bugbear Sentinela",
+    "nd": "2",
+    "regiao": "duyshidakk",
+    "papel": "lacaio",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "bulette",
+    "nome": "Bulette",
+    "nd": "7",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "burafonte",
+    "nome": "Burafonte",
+    "nd": "4",
+    "regiao": "mundo_perdido",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "bufalo_paladino_de_bullton",
+    "nome": "Búfalo Paladino de Bullton",
+    "nd": "6",
+    "regiao": "reinos_de_moreania",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "bufalo_de_guerra",
+    "nome": "Búfalo-de-Guerra",
+    "nd": "2",
+    "regiao": "reinos_de_moreania",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "canceronte",
+    "nome": "Canceronte",
+    "nd": "3",
+    "regiao": "sob_as_ondas",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "canceronte_de_guerra",
+    "nome": "Canceronte de Guerra",
+    "nd": "16",
+    "regiao": "sob_as_ondas",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "capanga",
+    "nome": "Capanga",
+    "nd": "0.5",
+    "regiao": "capangas_e_bandoleiros",
+    "papel": "lacaio",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "capanga_minotauro",
+    "nome": "Capanga Minotauro",
+    "nd": "3",
+    "regiao": "capangas_e_bandoleiros",
+    "papel": "lacaio",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "capelao_de_guerra",
+    "nome": "Capelão de Guerra",
+    "nd": "4",
+    "regiao": "puristas",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "capitao_afogado",
+    "nome": "Capitão Afogado",
+    "nd": "10",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "solo",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "capitao_pirata",
+    "nome": "Capitão Pirata",
+    "nd": "7",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "solo",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "capitao_da_frota_aurea",
+    "nome": "Capitão da Frota Áurea",
+    "nd": "10",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "capitao_do_conclave_pirata",
+    "nome": "Capitão do Conclave Pirata",
+    "nd": "8",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "capitao_baluarte",
+    "nome": "Capitão-Baluarte",
+    "nd": "5",
+    "regiao": "puristas",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "capivara",
+    "nome": "Capivara",
+    "nd": "1",
+    "regiao": "montarias",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "carcaju",
+    "nome": "Carcaju",
+    "nd": "1",
+    "regiao": "uivantes",
+    "papel": "especial",
+    "tipo": "animal"
+  },
+  {
+    "id": "cardume_de_aquinne",
+    "nome": "Cardume de Aquin'ne",
+    "nd": "5",
+    "regiao": "exemplos_de_criacao",
+    "papel": "lacaio",
+    "tipo": "espirito"
+  },
+  {
+    "id": "cardume_de_selakos",
+    "nome": "Cardume de Selakos",
+    "nd": "9",
+    "regiao": "sob_as_ondas",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "carnical",
+    "nome": "Carniçal",
+    "nd": "1",
+    "regiao": "mortos_vivos",
+    "papel": "solo",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "carrasco_de_lena",
+    "nome": "Carrasco de Lena",
+    "nd": "6",
+    "regiao": "ermos",
+    "papel": "especial",
+    "tipo": "monstro"
+  },
+  {
+    "id": "carruagem_de_comando",
+    "nome": "Carruagem de Comando",
+    "nd": "5",
+    "regiao": "puristas",
+    "papel": "solo",
+    "tipo": "construto"
+  },
+  {
+    "id": "cascavel",
+    "nome": "Cascavel",
+    "nd": "0.25",
+    "regiao": "sszzaazitas",
+    "papel": "lacaio",
+    "tipo": "animal"
+  },
+  {
+    "id": "cavaleiro_finntroll",
+    "nome": "Cavaleiro Finntroll",
+    "nd": "7",
+    "regiao": "trolls_nobres",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "cavaleiro_de_kallyadranoch",
+    "nome": "Cavaleiro de Kallyadranoch",
+    "nd": "8",
+    "regiao": "igreja_de_kallyadranoch",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "cavaleiro_do_leopardo_sangrento",
+    "nome": "Cavaleiro do Leopardo Sangrento",
+    "nd": "9",
+    "regiao": "puristas",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "cavalo_esqueleto",
+    "nome": "Cavalo Esqueleto",
+    "nd": "1",
+    "regiao": "mortos_vivos",
+    "papel": "solo",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "cavalo_glacial",
+    "nome": "Cavalo Glacial",
+    "nd": "2",
+    "regiao": "montarias",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "cavalo_de_carga",
+    "nome": "Cavalo de Carga",
+    "nd": "0.5",
+    "regiao": "montarias",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "cavalo_de_guerra",
+    "nome": "Cavalo de Guerra",
+    "nd": "1",
+    "regiao": "montarias",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "cavalo_de_montaria",
+    "nome": "Cavalo de Montaria",
+    "nd": "0.5",
+    "regiao": "montarias",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "cavalo_de_namalkah",
+    "nome": "Cavalo de Namalkah",
+    "nd": "2",
+    "regiao": "montarias",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "cacador_de_impuros",
+    "nome": "Caçador de Impuros",
+    "nd": "8",
+    "regiao": "puristas",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "cemiterio_vivo",
+    "nome": "Cemitério Vivo",
+    "nd": "17",
+    "regiao": "reino_dos_mortos",
+    "papel": "solo",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "centauro_chefe",
+    "nome": "Centauro Chefe",
+    "nd": "8",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "centauro_combatente",
+    "nome": "Centauro Combatente",
+    "nd": "1",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "centauro_xama",
+    "nome": "Centauro Xamã",
+    "nd": "3",
+    "regiao": "ermos",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "centauro_xama_de_megalokk",
+    "nome": "Centauro Xamã de Megalokk",
+    "nd": "10",
+    "regiao": "ermos",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "centopeia_dragao",
+    "nome": "Centopeia-Dragão",
+    "nd": "7",
+    "regiao": "masmorras",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "centuriao",
+    "nome": "Centurião",
+    "nd": "3",
+    "regiao": "imperio_de_tauron",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "centuriao_de_elite",
+    "nome": "Centurião de Elite",
+    "nd": "7",
+    "regiao": "imperio_de_tauron",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "ceratops_chefe_da_tribo",
+    "nome": "Ceratops Chefe da Tribo",
+    "nd": "7",
+    "regiao": "povos_trovao",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "ceratops_guerreiro",
+    "nome": "Ceratops Guerreiro",
+    "nd": "3",
+    "regiao": "povos_trovao",
+    "papel": "lacaio",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "cerianthar",
+    "nome": "Cerianthar",
+    "nd": "4",
+    "regiao": "sanguinarias",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "chacal_zumbi",
+    "nome": "Chacal-Zumbi",
+    "nd": "2",
+    "regiao": "reino_dos_mortos",
+    "papel": "especial",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "chapeu_preto",
+    "nome": "Chapéu-Preto",
+    "nd": "12",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "chefe_bandido",
+    "nome": "Chefe Bandido",
+    "nd": "1",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "chefe_de_gangue",
+    "nome": "Chefe de Gangue",
+    "nd": "2",
+    "regiao": "capangas_e_bandoleiros",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "chefe_de_quadrilha",
+    "nome": "Chefe de Quadrilha",
+    "nd": "4",
+    "regiao": "capangas_e_bandoleiros",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "chibi_kabuto",
+    "nome": "Chibi-Kabuto",
+    "nd": "0.25",
+    "regiao": "imperio_de_jade",
+    "papel": "especial",
+    "tipo": "animal"
+  },
+  {
+    "id": "clerigo_de_kally",
+    "nome": "Clérigo de Kally",
+    "nd": "8",
+    "regiao": "igreja_de_kallyadranoch",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "cocatriz",
+    "nome": "Cocatriz",
+    "nd": "3",
+    "regiao": "masmorras",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "cocatriz_real",
+    "nome": "Cocatriz-Real",
+    "nd": "7",
+    "regiao": "masmorras",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "coletor_de_arsenal",
+    "nome": "Coletor de Arsenal",
+    "nd": "10",
+    "regiao": "igreja_de_arsenal",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "colosso_supremo",
+    "nome": "Colosso Supremo",
+    "nd": "14",
+    "regiao": "puristas",
+    "papel": "solo",
+    "tipo": "construto"
+  },
+  {
+    "id": "companhia_blindada_de_elite",
+    "nome": "Companhia Blindada de Elite",
+    "nd": "9",
+    "regiao": "puristas",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "concilio_forjador",
+    "nome": "Concílio Forjador",
+    "nd": "13",
+    "regiao": "igreja_de_arsenal",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "corcel_de_comando",
+    "nome": "Corcel de Comando",
+    "nd": "3",
+    "regiao": "puristas",
+    "papel": "especial",
+    "tipo": "construto"
+  },
+  {
+    "id": "corcel_de_kally",
+    "nome": "Corcel de Kally",
+    "nd": "2",
+    "regiao": "igreja_de_kallyadranoch",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "corcel_do_deserto",
+    "nome": "Corcel do Deserto",
+    "nd": "2",
+    "regiao": "montarias",
+    "papel": "especial",
+    "tipo": "monstro"
+  },
+  {
+    "id": "corgann",
+    "nome": "Corgann",
+    "nd": "8",
+    "regiao": "elementais",
+    "papel": "lacaio",
+    "tipo": "espirito"
+  },
+  {
+    "id": "coruja_druida",
+    "nome": "Coruja Druida",
+    "nd": "10",
+    "regiao": "reinos_de_moreania",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "cultista_de_sszzaas",
+    "nome": "Cultista de Sszzaas",
+    "nd": "7",
+    "regiao": "sszzaazitas",
+    "papel": "especial",
+    "tipo": "monstro"
+  },
+  {
+    "id": "cao_de_kally",
+    "nome": "Cão de Kally",
+    "nd": "2",
+    "regiao": "kobolds",
+    "papel": "lacaio",
+    "tipo": "monstro"
+  },
+  {
+    "id": "cao_do_inferno",
+    "nome": "Cão do Inferno",
+    "nd": "3",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "dabbus",
+    "nome": "Dabbus",
+    "nd": "15",
+    "regiao": "genios",
+    "papel": "especial",
+    "tipo": "espirito"
+  },
+  {
+    "id": "dai_kabuto",
+    "nome": "Dai-Kabuto",
+    "nd": "4",
+    "regiao": "imperio_de_jade",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "daitengu",
+    "nome": "Daitengu",
+    "nd": "8",
+    "regiao": "imperio_de_jade",
+    "papel": "especial",
+    "tipo": "espirito"
+  },
+  {
+    "id": "dancarino_de_guerra",
+    "nome": "Dançarino de Guerra",
+    "nd": "4",
+    "regiao": "puristas",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "dancarino_de_guerra_veterano",
+    "nome": "Dançarino de Guerra Veterano",
+    "nd": "6",
+    "regiao": "puristas",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "decuria",
+    "nome": "Decúria",
+    "nd": "5",
+    "regiao": "imperio_de_tauron",
+    "papel": "lacaio",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "defeituoso",
+    "nome": "Defeituoso",
+    "nd": "6",
+    "regiao": "trolls_nobres",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "deinonico",
+    "nome": "Deinonico",
+    "nd": "4",
+    "regiao": "mundo_perdido",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "dejeto_vivo",
+    "nome": "Dejeto Vivo",
+    "nd": "6",
+    "regiao": "exemplos_de_criacao",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "demonio_da_polvora",
+    "nome": "Demônio da Pólvora",
+    "nd": "12",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "devorador_de_medos",
+    "nome": "Devorador de Medos",
+    "nd": "8",
+    "regiao": "duyshidakk",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "devoto_de_hyninn_manhoso",
+    "nome": "Devoto de Hyninn Manhoso",
+    "nd": "0.5",
+    "regiao": "capangas_e_bandoleiros",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "devoto_de_hyninn_simao",
+    "nome": "Devoto de Hyninn Simão",
+    "nd": "1",
+    "regiao": "capangas_e_bandoleiros",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "devoto_de_hyninn_velhaco",
+    "nome": "Devoto de Hyninn Velhaco",
+    "nd": "4",
+    "regiao": "capangas_e_bandoleiros",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "diabrete",
+    "nome": "Diabrete",
+    "nd": "2",
+    "regiao": "abissais",
+    "papel": "lacaio",
+    "tipo": "espirito"
+  },
+  {
+    "id": "diabrete_negociante",
+    "nome": "Diabrete Negociante",
+    "nd": "4",
+    "regiao": "abissais",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "dracomante",
+    "nome": "Dracomante",
+    "nd": "5",
+    "regiao": "igreja_de_kallyadranoch",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "dracomante_superior",
+    "nome": "Dracomante Superior",
+    "nd": "14",
+    "regiao": "igreja_de_kallyadranoch",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "dragonete",
+    "nome": "Dragonete",
+    "nd": "4",
+    "regiao": "fadas",
+    "papel": "especial",
+    "tipo": "espirito"
+  },
+  {
+    "id": "dragao_adulto",
+    "nome": "Dragão Adulto",
+    "nd": "11",
+    "regiao": "dragoes",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "dragao_adulto_da_tirania",
+    "nome": "Dragão Adulto da Tirania",
+    "nd": "11",
+    "regiao": "dragoes",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "dragao_adulto_dos_segredos",
+    "nome": "Dragão Adulto dos Segredos",
+    "nd": "11",
+    "regiao": "dragoes",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "dragao_bicefalo",
+    "nome": "Dragão Bicéfalo",
+    "nd": "12",
+    "regiao": "dragoes",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "dragao_celestial_adulto",
+    "nome": "Dragão Celestial Adulto",
+    "nd": "15",
+    "regiao": "imperio_de_jade",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "dragao_celestial_jovem",
+    "nome": "Dragão Celestial Jovem",
+    "nd": "10",
+    "regiao": "imperio_de_jade",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "dragao_celestial_veneravel",
+    "nome": "Dragão Celestial Venerável",
+    "nd": "20",
+    "regiao": "imperio_de_jade",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "dragao_feral",
+    "nome": "Dragão Feral",
+    "nd": "10",
+    "regiao": "dragoes",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "dragao_filhote",
+    "nome": "Dragão Filhote",
+    "nd": "3",
+    "regiao": "dragoes",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "dragao_filhote_do_bosque",
+    "nome": "Dragão Filhote do Bosque",
+    "nd": "3",
+    "regiao": "dragoes",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "dragao_filhote_dos_rios",
+    "nome": "Dragão Filhote dos Rios",
+    "nd": "3",
+    "regiao": "dragoes",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "dragao_jovem",
+    "nome": "Dragão Jovem",
+    "nd": "7",
+    "regiao": "dragoes",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "dragao_jovem_da_protecao",
+    "nome": "Dragão Jovem da Proteção",
+    "nd": "7",
+    "regiao": "dragoes",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "dragao_jovem_do_ocaso",
+    "nome": "Dragão Jovem do Ocaso",
+    "nd": "7",
+    "regiao": "dragoes",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "dragao_veneravel",
+    "nome": "Dragão Venerável",
+    "nd": "15",
+    "regiao": "dragoes",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "dragao_veneravel_da_equidade",
+    "nome": "Dragão Venerável da Equidade",
+    "nd": "15",
+    "regiao": "dragoes",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "dragao_veneravel_dos_recifes",
+    "nome": "Dragão Venerável dos Recifes",
+    "nd": "15",
+    "regiao": "dragoes",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "dragao_rei",
+    "nome": "Dragão-Rei",
+    "nd": "20",
+    "regiao": "dragoes",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "dromedario",
+    "nome": "Dromedário",
+    "nd": "1",
+    "regiao": "montarias",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "driade",
+    "nome": "Dríade",
+    "nd": "4",
+    "regiao": "fadas",
+    "papel": "especial",
+    "tipo": "espirito"
+  },
+  {
+    "id": "duende_maior",
+    "nome": "Duende Maior",
+    "nd": "5",
+    "regiao": "fadas",
+    "papel": "especial",
+    "tipo": "espirito"
+  },
+  {
+    "id": "duende_menor",
+    "nome": "Duende Menor",
+    "nd": "1",
+    "regiao": "fadas",
+    "papel": "especial",
+    "tipo": "espirito"
+  },
+  {
+    "id": "duplo",
+    "nome": "Duplo",
+    "nd": "4",
+    "regiao": "capangas_e_bandoleiros",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "eiradaan_guardiao",
+    "nome": "Eiradaan Guardião",
+    "nd": "7",
+    "regiao": "fadas",
+    "papel": "especial",
+    "tipo": "espirito"
+  },
+  {
+    "id": "eiradaan_nobre",
+    "nome": "Eiradaan Nobre",
+    "nd": "13",
+    "regiao": "fadas",
+    "papel": "especial",
+    "tipo": "espirito"
+  },
+  {
+    "id": "elefante",
+    "nome": "Elefante",
+    "nd": "7",
+    "regiao": "montarias",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "elemental_corrompido",
+    "nome": "Elemental Corrompido",
+    "nd": "16",
+    "regiao": "elementais",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "elemental_do_veneno_grande",
+    "nome": "Elemental do Veneno Grande",
+    "nd": "12",
+    "regiao": "sszzaazitas",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "elemental_do_veneno_medio",
+    "nome": "Elemental do Veneno Médio",
+    "nd": "8",
+    "regiao": "sszzaazitas",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "elemental_do_veneno_pequeno",
+    "nome": "Elemental do Veneno Pequeno",
+    "nd": "2",
+    "regiao": "sszzaazitas",
+    "papel": "especial",
+    "tipo": "espirito"
+  },
+  {
+    "id": "elfo_do_mar_chefe",
+    "nome": "Elfo-do-Mar Chefe",
+    "nd": "6",
+    "regiao": "sob_as_ondas",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "elfo_do_mar_druida",
+    "nome": "Elfo-do-Mar Druida",
+    "nd": "10",
+    "regiao": "sob_as_ondas",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "elfo_do_mar_pescador",
+    "nome": "Elfo-do-Mar Pescador",
+    "nd": "2",
+    "regiao": "sob_as_ondas",
+    "papel": "lacaio",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "engenho_de_guerra",
+    "nome": "Engenho de Guerra Goblin",
+    "nd": "3",
+    "regiao": "duyshidakk",
+    "papel": "solo",
+    "tipo": "construto"
+  },
+  {
+    "id": "enguia_rainha",
+    "nome": "Enguia Rainha",
+    "nd": "19",
+    "regiao": "sob_as_ondas",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "ente",
+    "nome": "Ente",
+    "nd": "8",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "enxame_estirge",
+    "nome": "Enxame Estirge",
+    "nd": "5",
+    "regiao": "ermos",
+    "papel": "lacaio",
+    "tipo": "monstro"
+  },
+  {
+    "id": "enxame_infernal",
+    "nome": "Enxame Infernal",
+    "nd": "8",
+    "regiao": "areas_de_tormenta",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "enxame_kobold",
+    "nome": "Enxame Kobold",
+    "nd": "2",
+    "regiao": "dragoes",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "enxame_larval",
+    "nome": "Enxame Larval",
+    "nd": "1",
+    "regiao": "kobolds",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "enxame_de_gali_gali",
+    "nome": "Enxame de Gali-Gali",
+    "nd": "1",
+    "regiao": "mundo_perdido",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "enxame_de_aguas_vivas",
+    "nome": "Enxame de Águas-vivas",
+    "nd": "6",
+    "regiao": "sob_as_ondas",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "escudeiro",
+    "nome": "Escudeiro",
+    "nd": "0.5",
+    "regiao": "mascotes_e_familiares",
+    "papel": "especial",
+    "tipo": "animal"
+  },
+  {
+    "id": "esmagador_coletivo",
+    "nome": "Esmagador Coletivo",
+    "nd": "15",
+    "regiao": "areas_de_tormenta",
+    "papel": "solo",
+    "tipo": "construto"
+  },
+  {
+    "id": "espada_da_floresta",
+    "nome": "Espada-da-Floresta",
+    "nd": "3",
+    "regiao": "mundo_perdido",
+    "papel": "solo",
+    "tipo": "construto"
+  },
+  {
+    "id": "esqueleto",
+    "nome": "Esqueleto",
+    "nd": "2",
+    "regiao": "reino_dos_mortos",
+    "papel": "lacaio",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "esqueleto_de_elite",
+    "nome": "Esqueleto de Elite",
+    "nd": "4",
+    "regiao": "reino_dos_mortos",
+    "papel": "especial",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "estirge",
+    "nome": "Estirge",
+    "nd": "1",
+    "regiao": "ermos",
+    "papel": "lacaio",
+    "tipo": "monstro"
+  },
+  {
+    "id": "estouro_de_furias_de_tauron",
+    "nome": "Estouro de Fúrias de Tauron",
+    "nd": "5",
+    "regiao": "imperio_de_tauron",
+    "papel": "lacaio",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "fado",
+    "nome": "Fado",
+    "nd": "8",
+    "regiao": "celestiais",
+    "papel": "solo",
+    "tipo": "construto"
+  },
+  {
+    "id": "falange",
+    "nome": "Falange",
+    "nd": "8",
+    "regiao": "reino_dos_mortos",
+    "papel": "solo",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "fantasma",
+    "nome": "Fantasma",
+    "nd": "7",
+    "regiao": "mortos_vivos",
+    "papel": "especial",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "fantasma_ancestral",
+    "nome": "Fantasma Ancestral",
+    "nd": "14",
+    "regiao": "mortos_vivos",
+    "papel": "especial",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "fanatico_lefou",
+    "nome": "Fanático Lefou",
+    "nd": "5",
+    "regiao": "culto_de_aharadak",
+    "papel": "lacaio",
+    "tipo": "monstro"
+  },
+  {
+    "id": "fera_lider",
+    "nome": "Fera-Líder",
+    "nd": "5",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "fera_mae",
+    "nome": "Fera-Mãe",
+    "nd": "13",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "fera_vassalo",
+    "nome": "Fera-Vassalo",
+    "nd": "3",
+    "regiao": "ermos",
+    "papel": "lacaio",
+    "tipo": "monstro"
+  },
+  {
+    "id": "finntroll_cacador",
+    "nome": "Finntroll Caçador",
+    "nd": "2",
+    "regiao": "trolls_nobres",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "finntroll_feitor",
+    "nome": "Finntroll Feitor",
+    "nd": "6",
+    "regiao": "trolls_nobres",
+    "papel": "especial",
+    "tipo": "monstro"
+  },
+  {
+    "id": "finntroll_senhor_de_estabulo",
+    "nome": "Finntroll Senhor de Estábulo",
+    "nd": "12",
+    "regiao": "trolls_nobres",
+    "papel": "especial",
+    "tipo": "monstro"
+  },
+  {
+    "id": "fofo",
+    "nome": "Fofo",
+    "nd": "0.5",
+    "regiao": "mascotes_e_familiares",
+    "papel": "lacaio",
+    "tipo": "monstro"
+  },
+  {
+    "id": "forjador_liturgico",
+    "nome": "Forjador Litúrgico",
+    "nd": "9",
+    "regiao": "igreja_de_arsenal",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "furia_extrema",
+    "nome": "Fúria Extrema",
+    "nd": "20",
+    "regiao": "celestiais",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "furia_de_tauron",
+    "nome": "Fúria de Tauron",
+    "nd": "4",
+    "regiao": "imperio_de_tauron",
+    "papel": "lacaio",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "galhada_femea",
+    "nome": "Galhada Fêmea",
+    "nd": "2",
+    "regiao": "mundo_perdido",
+    "papel": "lacaio",
+    "tipo": "construto"
+  },
+  {
+    "id": "galhada_macho",
+    "nome": "Galhada Macho",
+    "nd": "2",
+    "regiao": "mundo_perdido",
+    "papel": "lacaio",
+    "tipo": "construto"
+  },
+  {
+    "id": "gali_gali",
+    "nome": "Gali-Gali",
+    "nd": "0.25",
+    "regiao": "mundo_perdido",
+    "papel": "lacaio",
+    "tipo": "animal"
+  },
+  {
+    "id": "galokk_capanga",
+    "nome": "Galokk Capanga",
+    "nd": "6",
+    "regiao": "gigantes",
+    "papel": "lacaio",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "galokk_guarda_costas",
+    "nome": "Galokk Guarda-Costas",
+    "nd": "10",
+    "regiao": "gigantes",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "gamba",
+    "nome": "Gambá",
+    "nd": "0.5",
+    "regiao": "mascotes_e_familiares",
+    "papel": "lacaio",
+    "tipo": "animal"
+  },
+  {
+    "id": "ganchador",
+    "nome": "Ganchador",
+    "nd": "5",
+    "regiao": "trolls_nobres",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "gangue_goblin",
+    "nome": "Gangue Goblin",
+    "nd": "5",
+    "regiao": "duyshidakk",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "garra_zumbi",
+    "nome": "Garra-Zumbi",
+    "nd": "0.25",
+    "regiao": "mortos_vivos",
+    "papel": "lacaio",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "garra_zumbi_enxame",
+    "nome": "Garra-Zumbi Enxame",
+    "nd": "3",
+    "regiao": "mortos_vivos",
+    "papel": "lacaio",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "garra_zumbi_gigante",
+    "nome": "Garra-Zumbi Gigante",
+    "nd": "5",
+    "regiao": "mortos_vivos",
+    "papel": "solo",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "garra_zumbi_ogro",
+    "nome": "Garra-Zumbi Ogro",
+    "nd": "2",
+    "regiao": "mortos_vivos",
+    "papel": "especial",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "gatuno",
+    "nome": "Gatuno",
+    "nd": "1",
+    "regiao": "capangas_e_bandoleiros",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "gatuno_mestre",
+    "nome": "Gatuno Mestre",
+    "nd": "3",
+    "regiao": "capangas_e_bandoleiros",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "gatzvalith",
+    "nome": "Gatzvalith, Lorde da Tormenta",
+    "nd": "22",
+    "regiao": "areas_de_tormenta",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "geraktril",
+    "nome": "Geraktril",
+    "nd": "6",
+    "regiao": "tormenta",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "gigante_bicefalo",
+    "nome": "Gigante Bicéfalo",
+    "nd": "13",
+    "regiao": "gigantes",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "gigante_esqueleto",
+    "nome": "Gigante Esqueleto",
+    "nd": "5",
+    "regiao": "mortos_vivos",
+    "papel": "solo",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "gigante_maximo",
+    "nome": "Gigante Máximo",
+    "nd": "20",
+    "regiao": "gigantes",
+    "papel": "lacaio",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "gigante_real",
+    "nome": "Gigante Real",
+    "nd": "19",
+    "regiao": "gigantes",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "gigante_das_colinas",
+    "nome": "Gigante das Colinas",
+    "nd": "7",
+    "regiao": "gigantes",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "gigante_das_rochas",
+    "nome": "Gigante das Rochas",
+    "nd": "9",
+    "regiao": "gigantes",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "gigante_do_fogo",
+    "nome": "Gigante do Fogo",
+    "nd": "11",
+    "regiao": "gigantes",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "gigante_do_gelo",
+    "nome": "Gigante do Gelo",
+    "nd": "9",
+    "regiao": "gigantes",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "gigante_dos_mares",
+    "nome": "Gigante dos Mares",
+    "nd": "9",
+    "regiao": "gigantes",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "gizzehi",
+    "nome": "Gizzehi",
+    "nd": "12",
+    "regiao": "genios",
+    "papel": "especial",
+    "tipo": "espirito"
+  },
+  {
+    "id": "gladiador_taurico",
+    "nome": "Gladiador Táurico",
+    "nd": "8",
+    "regiao": "imperio_de_tauron",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "glooop",
+    "nome": "Glooop",
+    "nd": "2",
+    "regiao": "masmorras",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "glop",
+    "nome": "Glop",
+    "nd": "0.25",
+    "regiao": "masmorras",
+    "papel": "especial",
+    "tipo": "monstro"
+  },
+  {
+    "id": "gnoll_capanga",
+    "nome": "Gnoll Capanga",
+    "nd": "0.5",
+    "regiao": "ermos",
+    "papel": "lacaio",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "gnoll_cacador_de_cabecas",
+    "nome": "Gnoll Caçador de Cabeças",
+    "nd": "8",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "gnoll_filibusteiro",
+    "nome": "Gnoll Filibusteiro",
+    "nd": "2",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "gnoll_lider_de_alcateia",
+    "nome": "Gnoll Líder de Alcateia",
+    "nd": "5",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "gnoll_saqueador",
+    "nome": "Gnoll Saqueador",
+    "nd": "1",
+    "regiao": "ermos",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "gnoll_vuulrak",
+    "nome": "Gnoll Vuul'rak",
+    "nd": "16",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "gnoll_xama_de_allihanna",
+    "nome": "Gnoll Xamã de Allihanna",
+    "nd": "2",
+    "regiao": "ermos",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "gnoll_xama_de_marah",
+    "nome": "Gnoll Xamã de Marah",
+    "nd": "6",
+    "regiao": "ermos",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "gnoll_xama_de_megalokk",
+    "nome": "Gnoll Xamã de Megalokk",
+    "nd": "5",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "goblin_engenhoqueiro",
+    "nome": "Goblin Engenhoqueiro",
+    "nd": "3",
+    "regiao": "duyshidakk",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "goblin_salteador",
+    "nome": "Goblin Salteador",
+    "nd": "0.25",
+    "regiao": "duyshidakk",
+    "papel": "lacaio",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "goblin_de_ferro",
+    "nome": "Goblin de Ferro",
+    "nd": "5",
+    "regiao": "duyshidakk",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "goblin_de_ferro_mark_ii",
+    "nome": "Goblin de Ferro Mark II",
+    "nd": "8",
+    "regiao": "duyshidakk",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "goblin_de_sombreiro",
+    "nome": "Goblin de Sombreiro",
+    "nd": "2",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "lacaio",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "goblin_bomba",
+    "nome": "Goblin-Bomba",
+    "nd": "3",
+    "regiao": "duyshidakk",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "golem_de_barro",
+    "nome": "Golem de Barro",
+    "nd": "10",
+    "regiao": "golens",
+    "papel": "solo",
+    "tipo": "construto"
+  },
+  {
+    "id": "golem_de_bronze",
+    "nome": "Golem de Bronze",
+    "nd": "9",
+    "regiao": "golens",
+    "papel": "solo",
+    "tipo": "construto"
+  },
+  {
+    "id": "golem_de_carne",
+    "nome": "Golem de Carne",
+    "nd": "7",
+    "regiao": "golens",
+    "papel": "solo",
+    "tipo": "construto"
+  },
+  {
+    "id": "golem_de_espelhos",
+    "nome": "Golem de Espelhos",
+    "nd": "9",
+    "regiao": "golens",
+    "papel": "solo",
+    "tipo": "construto"
+  },
+  {
+    "id": "golem_de_ferro",
+    "nome": "Golem de Ferro",
+    "nd": "10",
+    "regiao": "masmorras",
+    "papel": "solo",
+    "tipo": "construto"
+  },
+  {
+    "id": "golem_de_ferro_superior",
+    "nome": "Golem de Ferro Superior",
+    "nd": "15",
+    "regiao": "golens",
+    "papel": "solo",
+    "tipo": "construto"
+  },
+  {
+    "id": "golem_de_materia_vermelha",
+    "nome": "Golem de Matéria Vermelha",
+    "nd": "18",
+    "regiao": "golens",
+    "papel": "solo",
+    "tipo": "construto"
+  },
+  {
+    "id": "golem_de_nor_enorme",
+    "nome": "Golem de Nor Enorme",
+    "nd": "10",
+    "regiao": "uivantes",
+    "papel": "solo",
+    "tipo": "construto"
+  },
+  {
+    "id": "golem_de_nor_grande",
+    "nome": "Golem de Nor Grande",
+    "nd": "8",
+    "regiao": "uivantes",
+    "papel": "solo",
+    "tipo": "construto"
+  },
+  {
+    "id": "golem_de_nor_medio",
+    "nome": "Golem de Nor Médio",
+    "nd": "1",
+    "regiao": "uivantes",
+    "papel": "solo",
+    "tipo": "construto"
+  },
+  {
+    "id": "golem_de_pedra",
+    "nome": "Golem de Pedra",
+    "nd": "12",
+    "regiao": "golens",
+    "papel": "solo",
+    "tipo": "construto"
+  },
+  {
+    "id": "gorlogg",
+    "nome": "Gorlogg",
+    "nd": "1",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "gorlogg_alfa",
+    "nome": "Gorlogg Alfa",
+    "nd": "5",
+    "regiao": "montarias",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "governador_corrupto",
+    "nome": "Governador Corrupto",
+    "nd": "6",
+    "regiao": "imperio_de_tauron",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "grande_battham",
+    "nome": "Grande Battham",
+    "nd": "12",
+    "regiao": "mundo_perdido",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "grande_tachygloss",
+    "nome": "Grande Tachygloss",
+    "nd": "16",
+    "regiao": "sanguinarias",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "grifo",
+    "nome": "Grifo",
+    "nd": "3",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "guarda_de_cidade",
+    "nome": "Guarda de Cidade",
+    "nd": "0.5",
+    "regiao": "ermos",
+    "papel": "lacaio",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "guerreiro_perpetuo",
+    "nome": "Guerreiro Perpétuo",
+    "nd": "7",
+    "regiao": "igreja_de_arsenal",
+    "papel": "solo",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "guerreiro_de_chifres",
+    "nome": "Guerreiro de Chifres",
+    "nd": "3",
+    "regiao": "masmorras",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "gargula",
+    "nome": "Gárgula",
+    "nd": "2",
+    "regiao": "masmorras",
+    "papel": "solo",
+    "tipo": "construto"
+  },
+  {
+    "id": "gargula_assassina",
+    "nome": "Gárgula Assassina",
+    "nd": "4",
+    "regiao": "golens",
+    "papel": "solo",
+    "tipo": "construto"
+  },
+  {
+    "id": "gorgona",
+    "nome": "Górgona",
+    "nd": "6",
+    "regiao": "sszzaazitas",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "gorgona_matriarca",
+    "nome": "Górgona Matriarca",
+    "nd": "14",
+    "regiao": "sszzaazitas",
+    "papel": "especial",
+    "tipo": "monstro"
+  },
+  {
+    "id": "hallustir",
+    "nome": "Hallus'tir",
+    "nd": "15",
+    "regiao": "elementais",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "harpia_saqueadora",
+    "nome": "Harpia Saqueadora",
+    "nd": "4",
+    "regiao": "masmorras",
+    "papel": "lacaio",
+    "tipo": "monstro"
+  },
+  {
+    "id": "hidra",
+    "nome": "Hidra",
+    "nd": "11",
+    "regiao": "sszzaazitas",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "hidra_esqueleto",
+    "nome": "Hidra Esqueleto",
+    "nd": "11",
+    "regiao": "mortos_vivos",
+    "papel": "solo",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "hiena",
+    "nome": "Hiena",
+    "nd": "1",
+    "regiao": "ermos",
+    "papel": "especial",
+    "tipo": "animal"
+  },
+  {
+    "id": "hiena_rainha",
+    "nome": "Hiena Rainha",
+    "nd": "2",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "hienodonte",
+    "nome": "Hienodonte",
+    "nd": "2",
+    "regiao": "ermos",
+    "papel": "especial",
+    "tipo": "animal"
+  },
+  {
+    "id": "hippossauro",
+    "nome": "Hippossauro",
+    "nd": "3",
+    "regiao": "reinos_de_moreania",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "hobgoblin_atirador",
+    "nome": "Hobgoblin Atirador",
+    "nd": "5",
+    "regiao": "duyshidakk",
+    "papel": "lacaio",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "hobgoblin_comandante_tatico",
+    "nome": "Hobgoblin Comandante Tático",
+    "nd": "11",
+    "regiao": "duyshidakk",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "hobgoblin_gladiador",
+    "nome": "Hobgoblin Gladiador",
+    "nd": "16",
+    "regiao": "duyshidakk",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "hobgoblin_mago_de_batalha",
+    "nome": "Hobgoblin Mago de Batalha",
+    "nd": "5",
+    "regiao": "duyshidakk",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "hobgoblin_soldado",
+    "nome": "Hobgoblin Soldado",
+    "nd": "2",
+    "regiao": "duyshidakk",
+    "papel": "lacaio",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "homem_piranha",
+    "nome": "Homem-Piranha",
+    "nd": "2",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "homem_piranha_capitao",
+    "nome": "Homem-Piranha Capitão",
+    "nd": "7",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "homem_piranha_imediato",
+    "nome": "Homem-Piranha Imediato",
+    "nd": "4",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "homunculo",
+    "nome": "Homúnculo",
+    "nd": "1",
+    "regiao": "mascotes_e_familiares",
+    "papel": "lacaio",
+    "tipo": "construto"
+  },
+  {
+    "id": "horda_goblin",
+    "nome": "Horda Goblin",
+    "nd": "14",
+    "regiao": "duyshidakk",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "horda_mycotann",
+    "nome": "Horda Mycotann",
+    "nd": "12",
+    "regiao": "trolls_nobres",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "horda_de_ko_kabuto",
+    "nome": "Horda de Ko-Kabuto",
+    "nd": "3",
+    "regiao": "imperio_de_jade",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "horda_de_otyughs",
+    "nome": "Horda de Otyughs",
+    "nd": "16",
+    "regiao": "reinos_de_moreania",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "hynne_dormente",
+    "nome": "Hynne Dormente",
+    "nd": "5",
+    "regiao": "sszzaazitas",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "imediato",
+    "nome": "Imediato",
+    "nd": "4",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "solo",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "infecto",
+    "nome": "Infecto",
+    "nd": "3",
+    "regiao": "areas_de_tormenta",
+    "papel": "lacaio",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "iniciada_de_sszzaas",
+    "nome": "Iniciada de Sszzaas",
+    "nd": "3",
+    "regiao": "sszzaazitas",
+    "papel": "especial",
+    "tipo": "monstro"
+  },
+  {
+    "id": "iniciado_da_agonia",
+    "nome": "Iniciado da Agonia",
+    "nd": "3",
+    "regiao": "culto_de_aharadak",
+    "papel": "lacaio",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "instrumento_divino",
+    "nome": "Instrumento Divino",
+    "nd": "7",
+    "regiao": "golens",
+    "papel": "solo",
+    "tipo": "construto"
+  },
+  {
+    "id": "irukanjin",
+    "nome": "Irukanjin",
+    "nd": "4",
+    "regiao": "sob_as_ondas",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "jagunco",
+    "nome": "Jagunço",
+    "nd": "2",
+    "regiao": "capangas_e_bandoleiros",
+    "papel": "lacaio",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "jairuan",
+    "nome": "Jairuan",
+    "nd": "6",
+    "regiao": "genios",
+    "papel": "especial",
+    "tipo": "espirito"
+  },
+  {
+    "id": "jhumariel",
+    "nome": "Jhumariel",
+    "nd": "10",
+    "regiao": "abissais",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "jiboia",
+    "nome": "Jiboia",
+    "nd": "0.5",
+    "regiao": "sszzaazitas",
+    "papel": "especial",
+    "tipo": "animal"
+  },
+  {
+    "id": "kaijin_bruto",
+    "nome": "Kaijin Bruto",
+    "nd": "11",
+    "regiao": "imperio_de_jade",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "kaijin_capanga",
+    "nome": "Kaijin Capanga",
+    "nd": "6",
+    "regiao": "imperio_de_jade",
+    "papel": "lacaio",
+    "tipo": "monstro"
+  },
+  {
+    "id": "kaijin_ninja",
+    "nome": "Kaijin Ninja",
+    "nd": "13",
+    "regiao": "imperio_de_jade",
+    "papel": "especial",
+    "tipo": "monstro"
+  },
+  {
+    "id": "kaiju",
+    "nome": "Kaiju",
+    "nd": "20",
+    "regiao": "sanguinarias",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "kallyanach_barbaro",
+    "nome": "Kallyanach Bárbaro",
+    "nd": "6",
+    "regiao": "igreja_de_kallyadranoch",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "kallyanach_morte_glacial",
+    "nome": "Kallyanach Morte Glacial",
+    "nd": "9",
+    "regiao": "igreja_de_kallyadranoch",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "kappa_brigao",
+    "nome": "Kappa Brigão",
+    "nd": "1",
+    "regiao": "imperio_de_jade",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "kappa_yokozuna",
+    "nome": "Kappa Yokozuna",
+    "nd": "3",
+    "regiao": "imperio_de_jade",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "kemooz",
+    "nome": "Kemooz",
+    "nd": "9",
+    "regiao": "genios",
+    "papel": "especial",
+    "tipo": "espirito"
+  },
+  {
+    "id": "keylor",
+    "nome": "Keylor",
+    "nd": "9",
+    "regiao": "uivantes",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "killbone",
+    "nome": "Kill'Bone",
+    "nd": "0.5",
+    "regiao": "mascotes_e_familiares",
+    "papel": "lacaio",
+    "tipo": "animal"
+  },
+  {
+    "id": "kishin",
+    "nome": "Kishin",
+    "nd": "13",
+    "regiao": "igreja_de_arsenal",
+    "papel": "solo",
+    "tipo": "construto"
+  },
+  {
+    "id": "kishinauros",
+    "nome": "Kishinauros",
+    "nd": "21",
+    "regiao": "igreja_de_arsenal",
+    "papel": "solo",
+    "tipo": "construto"
+  },
+  {
+    "id": "ko_kabuto",
+    "nome": "Ko-Kabuto",
+    "nd": "1",
+    "regiao": "imperio_de_jade",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "kobold_bruto",
+    "nome": "Kobold Bruto",
+    "nd": "4",
+    "regiao": "kobolds",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "kobold_explosivo",
+    "nome": "Kobold Explosivo",
+    "nd": "1",
+    "regiao": "kobolds",
+    "papel": "lacaio",
+    "tipo": "monstro"
+  },
+  {
+    "id": "kobold_patrulheiro",
+    "nome": "Kobold Patrulheiro",
+    "nd": "0.5",
+    "regiao": "kobolds",
+    "papel": "lacaio",
+    "tipo": "monstro"
+  },
+  {
+    "id": "kobold_veterano",
+    "nome": "Kobold Veterano",
+    "nd": "2",
+    "regiao": "kobolds",
+    "papel": "lacaio",
+    "tipo": "monstro"
+  },
+  {
+    "id": "kobold_xama",
+    "nome": "Kobold Xamã",
+    "nd": "3",
+    "regiao": "kobolds",
+    "papel": "especial",
+    "tipo": "monstro"
+  },
+  {
+    "id": "kobold_mae",
+    "nome": "Kobold-Mãe",
+    "nd": "12",
+    "regiao": "kobolds",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "kraken",
+    "nome": "Kraken",
+    "nd": "19",
+    "regiao": "sob_as_ondas",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "lacedon",
+    "nome": "Lacedon",
+    "nd": "2",
+    "regiao": "mortos_vivos",
+    "papel": "solo",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "lagarto_perseguidor",
+    "nome": "Lagarto Perseguidor",
+    "nd": "2",
+    "regiao": "ermos",
+    "papel": "lacaio",
+    "tipo": "animal"
+  },
+  {
+    "id": "lagash",
+    "nome": "Lagash",
+    "nd": "13",
+    "regiao": "sszzaazitas",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "lamashtu",
+    "nome": "Lamashtu, Rainha dos Massacres",
+    "nd": "20",
+    "regiao": "abissais",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "lefeu_burodron",
+    "nome": "Lefeu, Burodron",
+    "nd": "11",
+    "regiao": "areas_de_tormenta",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "lefeu_ezzayn",
+    "nome": "Lefeu, Ezzayn",
+    "nd": "17",
+    "regiao": "areas_de_tormenta",
+    "papel": "especial",
+    "tipo": "monstro"
+  },
+  {
+    "id": "lefeu_hurobakk",
+    "nome": "Lefeu, Hurobakk",
+    "nd": "9",
+    "regiao": "areas_de_tormenta",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "lefeu_morgadrel",
+    "nome": "Lefeu, Morgadrel",
+    "nd": "13",
+    "regiao": "areas_de_tormenta",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "lefeu_veridak",
+    "nome": "Lefeu, Veridak",
+    "nd": "8",
+    "regiao": "areas_de_tormenta",
+    "papel": "lacaio",
+    "tipo": "monstro"
+  },
+  {
+    "id": "legionario",
+    "nome": "Legionário",
+    "nd": "1",
+    "regiao": "imperio_de_tauron",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "legionario_insano",
+    "nome": "Legionário Insano",
+    "nd": "8",
+    "regiao": "imperio_de_tauron",
+    "papel": "lacaio",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "leao",
+    "nome": "Leão",
+    "nd": "2",
+    "regiao": "montarias",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "lich",
+    "nome": "Lich",
+    "nd": "15",
+    "regiao": "reino_dos_mortos",
+    "papel": "especial",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "lich_de_aslothia",
+    "nome": "Lich de Aslothia",
+    "nd": "18",
+    "regiao": "reino_dos_mortos",
+    "papel": "especial",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "lobo",
+    "nome": "Lobo",
+    "nd": "0.5",
+    "regiao": "ermos",
+    "papel": "especial",
+    "tipo": "animal"
+  },
+  {
+    "id": "lobo_do_mar",
+    "nome": "Lobo do Mar",
+    "nd": "16",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "lobo_das_cavernas",
+    "nome": "Lobo-das-Cavernas",
+    "nd": "2",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "luminar",
+    "nome": "Luminar",
+    "nd": "1",
+    "regiao": "celestiais",
+    "papel": "especial",
+    "tipo": "espirito"
+  },
+  {
+    "id": "lyuba",
+    "nome": "Lyuba",
+    "nd": "14",
+    "regiao": "uivantes",
+    "papel": "solo",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "lider_fanatico_lefou",
+    "nome": "Líder Fanático Lefou",
+    "nd": "8",
+    "regiao": "culto_de_aharadak",
+    "papel": "lacaio",
+    "tipo": "monstro"
+  },
+  {
+    "id": "lider_goblin_de_sombreiro",
+    "nome": "Líder Goblin de Sombreiro",
+    "nd": "6",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "lider_mercenario_de_aslothia",
+    "nome": "Líder Mercenário de Aslothia",
+    "nd": "5",
+    "regiao": "reino_dos_mortos",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "lider_pistoleiro",
+    "nome": "Líder Pistoleiro",
+    "nd": "4",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "livido",
+    "nome": "Lívido",
+    "nd": "3",
+    "regiao": "mortos_vivos",
+    "papel": "especial",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "malafex",
+    "nome": "Malafex",
+    "nd": "0.5",
+    "regiao": "mascotes_e_familiares",
+    "papel": "especial",
+    "tipo": "animal"
+  },
+  {
+    "id": "mamute",
+    "nome": "Mamute",
+    "nd": "8",
+    "regiao": "uivantes",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "mamute_esqueleto",
+    "nome": "Mamute Esqueleto",
+    "nd": "8",
+    "regiao": "mortos_vivos",
+    "papel": "solo",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "mamae_glop",
+    "nome": "Mamãe Glop",
+    "nd": "2",
+    "regiao": "masmorras",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "mantor",
+    "nome": "Mantor",
+    "nd": "5",
+    "regiao": "masmorras",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "manticora",
+    "nome": "Mantícora",
+    "nd": "6",
+    "regiao": "masmorras",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "manticora_primal",
+    "nome": "Mantícora Primal",
+    "nd": "14",
+    "regiao": "reinos_de_moreania",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "maniaco_lefou",
+    "nome": "Maníaco Lefou",
+    "nd": "2",
+    "regiao": "tormenta",
+    "papel": "lacaio",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "margharon",
+    "nome": "Margharon",
+    "nd": "14",
+    "regiao": "abissais",
+    "papel": "especial",
+    "tipo": "espirito"
+  },
+  {
+    "id": "mashin_monge",
+    "nome": "Mashin Monge",
+    "nd": "3",
+    "regiao": "imperio_de_jade",
+    "papel": "solo",
+    "tipo": "construto"
+  },
+  {
+    "id": "mashin_samurai",
+    "nome": "Mashin Samurai",
+    "nd": "5",
+    "regiao": "imperio_de_jade",
+    "papel": "solo",
+    "tipo": "construto"
+  },
+  {
+    "id": "matrona_gnoll",
+    "nome": "Matrona Gnoll",
+    "nd": "11",
+    "regiao": "ermos",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "mega_selako",
+    "nome": "Mega-Selako",
+    "nd": "12",
+    "regiao": "sob_as_ondas",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "meio_orc_bandoleiro",
+    "nome": "Meio-Orc Bandoleiro",
+    "nd": "1",
+    "regiao": "brutos_e_indomaveis",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "meio_orc_capanga",
+    "nome": "Meio-Orc Capanga",
+    "nd": "1",
+    "regiao": "brutos_e_indomaveis",
+    "papel": "lacaio",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "meio_orc_chefe",
+    "nome": "Meio-Orc Chefe",
+    "nd": "5",
+    "regiao": "brutos_e_indomaveis",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "mercenario_de_aslothia",
+    "nome": "Mercenário de Aslothia",
+    "nd": "3",
+    "regiao": "reino_dos_mortos",
+    "papel": "lacaio",
+    "tipo": "monstro"
+  },
+  {
+    "id": "minauro_arcanista",
+    "nome": "Minauro Arcanista",
+    "nd": "3",
+    "regiao": "imperio_de_tauron",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "minauro_ladino",
+    "nome": "Minauro Ladino",
+    "nd": "6",
+    "regiao": "imperio_de_tauron",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "minotauro_chefe_da_manada",
+    "nome": "Minotauro Chefe da Manada",
+    "nd": "6",
+    "regiao": "uivantes",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "minotauro_da_manada",
+    "nome": "Minotauro da Manada",
+    "nd": "2",
+    "regiao": "uivantes",
+    "papel": "lacaio",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "morgue_raz",
+    "nome": "Morgue'raz",
+    "nd": "9",
+    "regiao": "reino_dos_mortos",
+    "papel": "solo",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "mortalha",
+    "nome": "Mortalha",
+    "nd": "11",
+    "regiao": "mortos_vivos",
+    "papel": "solo",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "muhir",
+    "nome": "Muhir",
+    "nd": "15",
+    "regiao": "celestiais",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "mycotann_druida",
+    "nome": "Mycotann Druida",
+    "nd": "5",
+    "regiao": "trolls_nobres",
+    "papel": "especial",
+    "tipo": "monstro"
+  },
+  {
+    "id": "mycotann_labutador",
+    "nome": "Mycotann Labutador",
+    "nd": "2",
+    "regiao": "trolls_nobres",
+    "papel": "lacaio",
+    "tipo": "monstro"
+  },
+  {
+    "id": "mimico",
+    "nome": "Mímico",
+    "nd": "6",
+    "regiao": "masmorras",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "mumia",
+    "nome": "Múmia",
+    "nd": "5",
+    "regiao": "mortos_vivos",
+    "papel": "solo",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "nagah_defensor",
+    "nome": "Nagah Defensor",
+    "nd": "7",
+    "regiao": "sszzaazitas",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "nagah_dormente",
+    "nome": "Nagah Dormente",
+    "nd": "3",
+    "regiao": "sszzaazitas",
+    "papel": "lacaio",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "nagah_encantadora",
+    "nome": "Nagah Encantadora",
+    "nd": "7",
+    "regiao": "sszzaazitas",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "nagah_guardiao",
+    "nome": "Nagah Guardião",
+    "nd": "3",
+    "regiao": "sszzaazitas",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "nagah_mistica_de_arton",
+    "nome": "Nagah Mística",
+    "nd": "6",
+    "regiao": "sszzaazitas",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "nagah_mistica",
+    "nome": "Nagah Mística",
+    "nd": "6",
+    "regiao": "sszzaazitas",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "nagah_retalhador",
+    "nome": "Nagah Retalhador",
+    "nd": "12",
+    "regiao": "sszzaazitas",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "nagah_sacerdotisa",
+    "nome": "Nagah Sacerdotisa",
+    "nd": "5",
+    "regiao": "sszzaazitas",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "naja",
+    "nome": "Naja",
+    "nd": "1",
+    "regiao": "sszzaazitas",
+    "papel": "lacaio",
+    "tipo": "animal"
+  },
+  {
+    "id": "namasqall",
+    "nome": "Namasqall",
+    "nd": "14",
+    "regiao": "elementais",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "nastarrath",
+    "nome": "Nastarrath",
+    "nd": "18",
+    "regiao": "sszzaazitas",
+    "papel": "solo",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "necrodraco_esqueleto",
+    "nome": "Necrodraco Esqueleto",
+    "nd": "12",
+    "regiao": "mortos_vivos",
+    "papel": "solo",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "necrodraco_lich",
+    "nome": "Necrodraco Lich",
+    "nd": "20",
+    "regiao": "mortos_vivos",
+    "papel": "solo",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "necrodraco_zumbi",
+    "nome": "Necrodraco Zumbi",
+    "nd": "14",
+    "regiao": "mortos_vivos",
+    "papel": "solo",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "necromante",
+    "nome": "Necromante",
+    "nd": "7",
+    "regiao": "reino_dos_mortos",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "nereida",
+    "nome": "Nereida",
+    "nd": "12",
+    "regiao": "sob_as_ondas",
+    "papel": "especial",
+    "tipo": "espirito"
+  },
+  {
+    "id": "nezumi_brutamontes",
+    "nome": "Nezumi Brutamontes",
+    "nd": "4",
+    "regiao": "imperio_de_jade",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "nezumi_capanga",
+    "nome": "Nezumi Capanga",
+    "nd": "1",
+    "regiao": "imperio_de_jade",
+    "papel": "lacaio",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "ninfa",
+    "nome": "Ninfa",
+    "nd": "6",
+    "regiao": "fadas",
+    "papel": "especial",
+    "tipo": "espirito"
+  },
+  {
+    "id": "ninhada_de_dragoes_filhotes",
+    "nome": "Ninhada de Dragões Filhotes",
+    "nd": "5",
+    "regiao": "dragoes",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "nuvem_de_estirges",
+    "nome": "Nuvem de Estirges",
+    "nd": "16",
+    "regiao": "ermos",
+    "papel": "lacaio",
+    "tipo": "monstro"
+  },
+  {
+    "id": "naiade",
+    "nome": "Náiade",
+    "nd": "3",
+    "regiao": "fadas",
+    "papel": "especial",
+    "tipo": "espirito"
+  },
+  {
+    "id": "ogro",
+    "nome": "Ogro",
+    "nd": "4",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "ogro_capanga",
+    "nome": "Ogro Capanga",
+    "nd": "11",
+    "regiao": "brutos_e_indomaveis",
+    "papel": "lacaio",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "ogro_cacador",
+    "nome": "Ogro Caçador",
+    "nd": "7",
+    "regiao": "brutos_e_indomaveis",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "ogro_esqueleto",
+    "nome": "Ogro Esqueleto",
+    "nd": "3",
+    "regiao": "mortos_vivos",
+    "papel": "solo",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "ogro_furioso",
+    "nome": "Ogro Furioso",
+    "nd": "5",
+    "regiao": "uivantes",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "oni",
+    "nome": "Oni",
+    "nd": "5",
+    "regiao": "imperio_de_jade",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "orc_chefe",
+    "nome": "Orc Chefe",
+    "nd": "2",
+    "regiao": "masmorras",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "orc_combatente",
+    "nome": "Orc Combatente",
+    "nd": "0.5",
+    "regiao": "masmorras",
+    "papel": "lacaio",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "orc_mutante",
+    "nome": "Orc Mutante",
+    "nd": "5",
+    "regiao": "masmorras",
+    "papel": "lacaio",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "orc_mutante_superior",
+    "nome": "Orc Mutante Superior",
+    "nd": "10",
+    "regiao": "brutos_e_indomaveis",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "orc_rei",
+    "nome": "Orc Rei",
+    "nd": "5",
+    "regiao": "brutos_e_indomaveis",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "orc_veterano",
+    "nome": "Orc Veterano",
+    "nd": "1",
+    "regiao": "brutos_e_indomaveis",
+    "papel": "lacaio",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "orc_xama",
+    "nome": "Orc Xamã",
+    "nd": "7",
+    "regiao": "brutos_e_indomaveis",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "orel",
+    "nome": "Orel",
+    "nd": "16",
+    "regiao": "celestiais",
+    "papel": "especial",
+    "tipo": "espirito"
+  },
+  {
+    "id": "otyugh",
+    "nome": "Otyugh",
+    "nd": "5",
+    "regiao": "tormenta",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "oxxdon",
+    "nome": "Oxxdon",
+    "nd": "2",
+    "regiao": "sanguinarias",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "oxxdon_imenso",
+    "nome": "Oxxdon Imenso",
+    "nd": "10",
+    "regiao": "sanguinarias",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "pakk",
+    "nome": "Pakk",
+    "nd": "1",
+    "regiao": "elementais",
+    "papel": "lacaio",
+    "tipo": "espirito"
+  },
+  {
+    "id": "pamgra",
+    "nome": "Pamgra",
+    "nd": "7",
+    "regiao": "elementais",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "pantera",
+    "nome": "Pantera",
+    "nd": "2",
+    "regiao": "montarias",
+    "papel": "especial",
+    "tipo": "animal"
+  },
+  {
+    "id": "parcus",
+    "nome": "Parcus",
+    "nd": "14",
+    "regiao": "celestiais",
+    "papel": "solo",
+    "tipo": "construto"
+  },
+  {
+    "id": "patrulha_kobold",
+    "nome": "Patrulha Kobold",
+    "nd": "4",
+    "regiao": "kobolds",
+    "papel": "lacaio",
+    "tipo": "monstro"
+  },
+  {
+    "id": "peixe_recife",
+    "nome": "Peixe-Recife",
+    "nd": "6",
+    "regiao": "sob_as_ondas",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "perdigueiro_troll",
+    "nome": "Perdigueiro Troll",
+    "nd": "1",
+    "regiao": "trolls_nobres",
+    "papel": "lacaio",
+    "tipo": "animal"
+  },
+  {
+    "id": "pilly",
+    "nome": "Pilly",
+    "nd": "3",
+    "regiao": "celestiais",
+    "papel": "lacaio",
+    "tipo": "espirito"
+  },
+  {
+    "id": "pirata",
+    "nome": "Pirata",
+    "nd": "0.5",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "lacaio",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "pistoleiro",
+    "nome": "Pistoleiro",
+    "nd": "2",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "platan",
+    "nome": "Platan",
+    "nd": "2",
+    "regiao": "sob_as_ondas",
+    "papel": "especial",
+    "tipo": "animal"
+  },
+  {
+    "id": "pliorex",
+    "nome": "Pliorex",
+    "nd": "5",
+    "regiao": "sob_as_ondas",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "pliorex_abissal",
+    "nome": "Pliorex Abissal",
+    "nd": "10",
+    "regiao": "sob_as_ondas",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "probo",
+    "nome": "Probo",
+    "nd": "11",
+    "regiao": "celestiais",
+    "papel": "solo",
+    "tipo": "construto"
+  },
+  {
+    "id": "protetor",
+    "nome": "Protetor",
+    "nd": "7",
+    "regiao": "celestiais",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "protetor_refem",
+    "nome": "Protetor-Refém",
+    "nd": "5",
+    "regiao": "trolls_nobres",
+    "papel": "lacaio",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "pteros_ceifador",
+    "nome": "Pteros Ceifador",
+    "nd": "2",
+    "regiao": "povos_trovao",
+    "papel": "lacaio",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "pteros_do_ceu_infinito",
+    "nome": "Pteros do Céu Infinito",
+    "nd": "5",
+    "regiao": "povos_trovao",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "purificado",
+    "nome": "Purificado",
+    "nd": "2",
+    "regiao": "puristas",
+    "papel": "lacaio",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "pegaso",
+    "nome": "Pégaso",
+    "nd": "3",
+    "regiao": "celestiais",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "pegaso_de_khalmyr",
+    "nome": "Pégaso de Khalmyr",
+    "nd": "15",
+    "regiao": "celestiais",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "quimera",
+    "nome": "Quimera",
+    "nd": "8",
+    "regiao": "masmorras",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "raagoran",
+    "nome": "Raagoran",
+    "nd": "8",
+    "regiao": "mundo_perdido",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "raposa_bucaneira",
+    "nome": "Raposa Bucaneira",
+    "nd": "2",
+    "regiao": "reinos_de_moreania",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "rarvnaak",
+    "nome": "Rarvnaak",
+    "nd": "7",
+    "regiao": "elementais",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "rato_gigante",
+    "nome": "Rato Gigante",
+    "nd": "0.25",
+    "regiao": "masmorras",
+    "papel": "lacaio",
+    "tipo": "animal"
+  },
+  {
+    "id": "razza_kham",
+    "nome": "Razza'Kham",
+    "nd": "17",
+    "regiao": "sanguinarias",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "recruta_purista",
+    "nome": "Recruta Purista",
+    "nd": "0.5",
+    "regiao": "puristas",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "rei_tirano",
+    "nome": "Rei-Tirano",
+    "nd": "14",
+    "regiao": "mundo_perdido",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "rei_tirano_esqueleto",
+    "nome": "Rei-Tirano Esqueleto",
+    "nd": "12",
+    "regiao": "mortos_vivos",
+    "papel": "solo",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "reishid",
+    "nome": "Reishid",
+    "nd": "8",
+    "regiao": "tormenta",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "reishid_lider_de_culto",
+    "nome": "Reishid Líder de Culto",
+    "nd": "12",
+    "regiao": "culto_de_aharadak",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "rhandomm",
+    "nome": "Rhandomm",
+    "nd": "20",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "rhayrivel",
+    "nome": "Rhayrivel",
+    "nd": "7",
+    "regiao": "abissais",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "rinoceronte",
+    "nome": "Rinoceronte",
+    "nd": "4",
+    "regiao": "montarias",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "rinoceronte_lanoso",
+    "nome": "Rinoceronte Lanoso",
+    "nd": "6",
+    "regiao": "montarias",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "rival_espelho",
+    "nome": "Rival Espelho",
+    "nd": "0",
+    "regiao": "sszzaazitas",
+    "papel": "lacaio",
+    "tipo": "monstro"
+  },
+  {
+    "id": "sacerdote_finntroll",
+    "nome": "Sacerdote Finntroll",
+    "nd": "6",
+    "regiao": "trolls_nobres",
+    "papel": "especial",
+    "tipo": "monstro"
+  },
+  {
+    "id": "sacerdote_da_agonia",
+    "nome": "Sacerdote da Agonia",
+    "nd": "9",
+    "regiao": "culto_de_aharadak",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "sacerdote_de_aharadak",
+    "nome": "Sacerdote de Aharadak",
+    "nd": "10",
+    "regiao": "tormenta",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "sacerdote_de_hyninn",
+    "nome": "Sacerdote de Hyninn",
+    "nd": "2",
+    "regiao": "capangas_e_bandoleiros",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "sahuagin_metamorfo",
+    "nome": "Sahuagin Metamorfo",
+    "nd": "3",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "sahuagin_predador",
+    "nome": "Sahuagin Predador",
+    "nd": "1",
+    "regiao": "piratas_e_pistoleiros",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "sangue_do_ayrrak",
+    "nome": "Sangue do Ayrrak",
+    "nd": "19",
+    "regiao": "duyshidakk",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "sapo_atroz",
+    "nome": "Sapo Atroz",
+    "nd": "2",
+    "regiao": "brutos_e_indomaveis",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "sargento_da_guarda",
+    "nome": "Sargento da Guarda",
+    "nd": "1",
+    "regiao": "ermos",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "sargento_mor",
+    "nome": "Sargento-Mor",
+    "nd": "3",
+    "regiao": "puristas",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "sckhar_dragao_rei_do_fogo",
+    "nome": "Sckhar, Dragão-Rei do Fogo",
+    "nd": "22",
+    "regiao": "dragoes",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "selako",
+    "nome": "Selako",
+    "nd": "2",
+    "regiao": "sob_as_ondas",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "selako_tigre",
+    "nome": "Selako-Tigre",
+    "nd": "6",
+    "regiao": "sob_as_ondas",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "senhor_das_mumias",
+    "nome": "Senhor das Múmias",
+    "nd": "15",
+    "regiao": "mortos_vivos",
+    "papel": "especial",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "senhor_do_gigante_rubro_forma_final",
+    "nome": "Senhor do Gigante Rubro (Forma Final)",
+    "nd": "16",
+    "regiao": "culto_de_aharadak",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "senhor_do_gigante_rubro_forma_inicial",
+    "nome": "Senhor do Gigante Rubro (Forma Inicial)",
+    "nd": "9",
+    "regiao": "culto_de_aharadak",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "serpe",
+    "nome": "Serpe",
+    "nd": "5",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "serpe_ancia",
+    "nome": "Serpe Anciã",
+    "nd": "8",
+    "regiao": "sanguinarias",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "serpentaar",
+    "nome": "Serpentaar",
+    "nd": "14",
+    "regiao": "elementais",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "shiradi",
+    "nome": "Shiradi",
+    "nd": "7",
+    "regiao": "celestiais",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "slark",
+    "nome": "Slark",
+    "nd": "1",
+    "regiao": "masmorras",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "soldado_blindado",
+    "nome": "Soldado Blindado",
+    "nd": "5",
+    "regiao": "puristas",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "soldado_mecanico",
+    "nome": "Soldado Mecânico",
+    "nd": "3",
+    "regiao": "golens",
+    "papel": "lacaio",
+    "tipo": "construto"
+  },
+  {
+    "id": "soldado_purista",
+    "nome": "Soldado Purista",
+    "nd": "1",
+    "regiao": "puristas",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "soldado_superior",
+    "nome": "Soldado Superior",
+    "nd": "17",
+    "regiao": "puristas",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "sombra_de_thwor",
+    "nome": "Sombra de Thwor",
+    "nd": "9",
+    "regiao": "duyshidakk",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "soterrado_vagante",
+    "nome": "Soterrado Vagante",
+    "nd": "2",
+    "regiao": "uivantes",
+    "papel": "lacaio",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "sszzaazita_celebrante",
+    "nome": "Sszzaazita Celebrante",
+    "nd": "16",
+    "regiao": "sszzaazitas",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "stagh",
+    "nome": "Stagh",
+    "nd": "3",
+    "regiao": "uivantes",
+    "papel": "lacaio",
+    "tipo": "espirito"
+  },
+  {
+    "id": "sucuri",
+    "nome": "Sucuri",
+    "nd": "3",
+    "regiao": "sszzaazitas",
+    "papel": "especial",
+    "tipo": "animal"
+  },
+  {
+    "id": "satiro_arqueiro",
+    "nome": "Sátiro Arqueiro",
+    "nd": "2",
+    "regiao": "fadas",
+    "papel": "lacaio",
+    "tipo": "espirito"
+  },
+  {
+    "id": "silfide_encantadora",
+    "nome": "Sílfide Encantadora",
+    "nd": "8",
+    "regiao": "fadas",
+    "papel": "especial",
+    "tipo": "espirito"
+  },
+  {
+    "id": "silfide_travessa",
+    "nome": "Sílfide Travessa",
+    "nd": "1",
+    "regiao": "fadas",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "sucubo",
+    "nome": "Súcubo",
+    "nd": "5",
+    "regiao": "abissais",
+    "papel": "especial",
+    "tipo": "espirito"
+  },
+  {
+    "id": "tpeel",
+    "nome": "T'Peel",
+    "nd": "1",
+    "regiao": "elementais",
+    "papel": "lacaio",
+    "tipo": "espirito"
+  },
+  {
+    "id": "tabrachi_campeao",
+    "nome": "Tabrachi Campeão",
+    "nd": "3",
+    "regiao": "brutos_e_indomaveis",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "tabrachi_soldado",
+    "nome": "Tabrachi Soldado",
+    "nd": "1",
+    "regiao": "brutos_e_indomaveis",
+    "papel": "lacaio",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "tanaloom",
+    "nome": "Tanaloom",
+    "nd": "13",
+    "regiao": "elementais",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "tarso",
+    "nome": "Tarso, Dragão-Rei dos Mortos",
+    "nd": "22",
+    "regiao": "mortos_vivos",
+    "papel": "solo",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "tatu_montanha",
+    "nome": "Tatu-Montanha",
+    "nd": "4",
+    "regiao": "montarias",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "tendriculo",
+    "nome": "Tendrículo",
+    "nd": "6",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "tengu_bandoleiro",
+    "nome": "Tengu Bandoleiro",
+    "nd": "6",
+    "regiao": "imperio_de_jade",
+    "papel": "lacaio",
+    "tipo": "espirito"
+  },
+  {
+    "id": "tentacute",
+    "nome": "Tentacute",
+    "nd": "0.5",
+    "regiao": "mascotes_e_familiares",
+    "papel": "lacaio",
+    "tipo": "animal"
+  },
+  {
+    "id": "terrier",
+    "nome": "Terrier",
+    "nd": "1",
+    "regiao": "elementais",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "thuwarokk",
+    "nome": "Thuwarokk",
+    "nd": "16",
+    "regiao": "tormenta",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "tigre",
+    "nome": "Tigre",
+    "nd": "3",
+    "regiao": "montarias",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "tigre_de_hyninn",
+    "nome": "Tigre-de-Hyninn",
+    "nd": "5",
+    "regiao": "masmorras",
+    "papel": "especial",
+    "tipo": "monstro"
+  },
+  {
+    "id": "tigre_de_hyninn_primordial",
+    "nome": "Tigre-de-Hyninn Primordial",
+    "nd": "11",
+    "regiao": "masmorras",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "tirano_do_terceiro",
+    "nome": "Tirano do Terceiro",
+    "nd": "10",
+    "regiao": "dragoes",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "totem_da_divina_serpente",
+    "nome": "Totem da Divina Serpente (Aspecto de Allihanna)",
+    "nd": "14",
+    "regiao": "povos_trovao",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "totem_de_sarana",
+    "nome": "Totem de Sarana (Aspecto de Marah)",
+    "nd": "10",
+    "regiao": "povos_trovao",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "totem_do_pai_de_tudo",
+    "nome": "Totem do Pai-de-Tudo (Aspecto de Azgher)",
+    "nd": "12",
+    "regiao": "povos_trovao",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "totem_do_rei_tirano",
+    "nome": "Totem do Rei-Tirano (Aspecto de Megalokk)",
+    "nd": "15",
+    "regiao": "povos_trovao",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "trio_de_carvarel",
+    "nome": "Trio de Carvarel",
+    "nd": "8",
+    "regiao": "abissais",
+    "papel": "solo",
+    "tipo": "espirito"
+  },
+  {
+    "id": "trobo",
+    "nome": "Trobo",
+    "nd": "1",
+    "regiao": "montarias",
+    "papel": "especial",
+    "tipo": "animal"
+  },
+  {
+    "id": "trog",
+    "nome": "Trog",
+    "nd": "1",
+    "regiao": "masmorras",
+    "papel": "lacaio",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "trog_anao_bruto",
+    "nome": "Trog Anão Bruto",
+    "nd": "1",
+    "regiao": "brutos_e_indomaveis",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "trog_anao_eremita",
+    "nome": "Trog Anão Eremita",
+    "nd": "8",
+    "regiao": "brutos_e_indomaveis",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "trog_cacador",
+    "nome": "Trog Caçador",
+    "nd": "2",
+    "regiao": "brutos_e_indomaveis",
+    "papel": "lacaio",
+    "tipo": "monstro"
+  },
+  {
+    "id": "trog_rei_dos_tuneis",
+    "nome": "Trog Rei dos Túneis",
+    "nd": "5",
+    "regiao": "brutos_e_indomaveis",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "troll",
+    "nome": "Troll",
+    "nd": "5",
+    "regiao": "trolls_nobres",
+    "papel": "especial",
+    "tipo": "monstro"
+  },
+  {
+    "id": "troll_das_cavernas",
+    "nome": "Troll das Cavernas",
+    "nd": "9",
+    "regiao": "trolls_nobres",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "tropa_de_tentacutes",
+    "nome": "Tropa de Tentacutes",
+    "nd": "2",
+    "regiao": "mascotes_e_familiares",
+    "papel": "lacaio",
+    "tipo": "animal"
+  },
+  {
+    "id": "tumarkhan",
+    "nome": "Tumarkhân",
+    "nd": "4",
+    "regiao": "montarias",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "tuntram",
+    "nome": "Tuntram",
+    "nd": "10",
+    "regiao": "mundo_perdido",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "turba_zumbi",
+    "nome": "Turba Zumbi",
+    "nd": "2",
+    "regiao": "reino_dos_mortos",
+    "papel": "solo",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "turba_de_infectos",
+    "nome": "Turba de Infectos",
+    "nd": "7",
+    "regiao": "areas_de_tormenta",
+    "papel": "lacaio",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "uktril",
+    "nome": "Uktril",
+    "nd": "3",
+    "regiao": "tormenta",
+    "papel": "especial",
+    "tipo": "monstro"
+  },
+  {
+    "id": "unicornio",
+    "nome": "Unicórnio",
+    "nd": "4",
+    "regiao": "montarias",
+    "papel": "especial",
+    "tipo": "espirito"
+  },
+  {
+    "id": "uraghian_adulto",
+    "nome": "Uraghian Adulto",
+    "nd": "8",
+    "regiao": "sanguinarias",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "uraghian_jovem",
+    "nome": "Uraghian Jovem",
+    "nd": "5",
+    "regiao": "sanguinarias",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "urso_panda",
+    "nome": "Urso Panda",
+    "nd": "1",
+    "regiao": "montarias",
+    "papel": "especial",
+    "tipo": "animal"
+  },
+  {
+    "id": "urso_pardo",
+    "nome": "Urso Pardo",
+    "nd": "3",
+    "regiao": "montarias",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "urso_pardo_esqueleto",
+    "nome": "Urso Pardo Esqueleto",
+    "nd": "4",
+    "regiao": "mortos_vivos",
+    "papel": "solo",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "urso_das_cavernas",
+    "nome": "Urso das Cavernas",
+    "nd": "8",
+    "regiao": "montarias",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "urso_das_neves",
+    "nome": "Urso das Neves",
+    "nd": "5",
+    "regiao": "uivantes",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "urso_coruja",
+    "nome": "Urso-Coruja",
+    "nd": "4",
+    "regiao": "ermos",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "vampiro",
+    "nome": "Vampiro",
+    "nd": "12",
+    "regiao": "reino_dos_mortos",
+    "papel": "solo",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "velha_bruxa",
+    "nome": "Velha Bruxa",
+    "nd": "9",
+    "regiao": "fadas",
+    "papel": "especial",
+    "tipo": "espirito"
+  },
+  {
+    "id": "velocis_cacador",
+    "nome": "Velocis Caçador",
+    "nd": "4",
+    "regiao": "povos_trovao",
+    "papel": "lacaio",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "verilemur",
+    "nome": "Verilêmur",
+    "nd": "0.5",
+    "regiao": "mascotes_e_familiares",
+    "papel": "especial",
+    "tipo": "animal"
+  },
+  {
+    "id": "verme_do_gelo_adulto",
+    "nome": "Verme do Gelo Adulto",
+    "nd": "18",
+    "regiao": "uivantes",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "verme_do_gelo_larva",
+    "nome": "Verme do Gelo Larva",
+    "nd": "10",
+    "regiao": "uivantes",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "voracis_cacadora",
+    "nome": "Voracis Caçadora",
+    "nd": "8",
+    "regiao": "povos_trovao",
+    "papel": "lacaio",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "voracis_rainha",
+    "nome": "Voracis Rainha",
+    "nd": "11",
+    "regiao": "povos_trovao",
+    "papel": "solo",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "warg",
+    "nome": "Warg",
+    "nd": "3",
+    "regiao": "montarias",
+    "papel": "solo",
+    "tipo": "monstro"
+  },
+  {
+    "id": "wisphago",
+    "nome": "Wisphago",
+    "nd": "8",
+    "regiao": "reino_dos_mortos",
+    "papel": "solo",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "xama_de_sarana",
+    "nome": "Xamã de Sarana",
+    "nd": "6",
+    "regiao": "povos_trovao",
+    "papel": "especial",
+    "tipo": "humanoide"
+  },
+  {
+    "id": "yazzu",
+    "nome": "Yazzu",
+    "nd": "10",
+    "regiao": "genios",
+    "papel": "especial",
+    "tipo": "espirito"
+  },
+  {
+    "id": "yidishan_bugbear",
+    "nome": "Yidishan Bugbear",
+    "nd": "2",
+    "regiao": "reinos_de_moreania",
+    "papel": "solo",
+    "tipo": "construto"
+  },
+  {
+    "id": "zumbi",
+    "nome": "Zumbi",
+    "nd": "0.25",
+    "regiao": "reino_dos_mortos",
+    "papel": "solo",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "zumbi_peconha",
+    "nome": "Zumbi Peçonha",
+    "nd": "1",
+    "regiao": "sszzaazitas",
+    "papel": "especial",
+    "tipo": "mortoVivo"
+  },
+  {
+    "id": "zyrrinaz",
+    "nome": "Zyrrinaz",
+    "nd": "5",
+    "regiao": "culto_de_aharadak",
+    "papel": "lacaio",
+    "tipo": "monstro"
+  },
+  {
+    "id": "agua_viva",
+    "nome": "Água-viva",
+    "nd": "1",
+    "regiao": "sob_as_ondas",
+    "papel": "lacaio",
+    "tipo": "animal"
+  },
+  {
+    "id": "agua_viva_gigante",
+    "nome": "Água-viva Gigante",
+    "nd": "8",
+    "regiao": "sob_as_ondas",
+    "papel": "solo",
+    "tipo": "animal"
+  },
+  {
+    "id": "arvore_matilha",
+    "nome": "Árvore-Matilha",
+    "nd": "13",
+    "regiao": "mundo_perdido",
+    "papel": "solo",
+    "tipo": "construto"
+  }
+]

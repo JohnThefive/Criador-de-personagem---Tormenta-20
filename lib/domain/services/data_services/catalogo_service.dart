@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'call_ameacas.dart';
 import 'call_armaduras.dart';
 import 'call_armas.dart';
 import 'call_classes.dart';
@@ -37,6 +38,7 @@ class CatalogoService {
       BancoDeDivindades.carregar(),
       BancoDeMagias.carregarMagias(),
       BancoDePericias.carregarPericias(),
+      BancoDeAmeacas.carregar(),
     ]).then((_) {});
     return _loadingFuture!;
   }

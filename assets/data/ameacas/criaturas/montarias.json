@@ -1,0 +1,2160 @@
+[
+  {
+    "id": "baleote",
+    "nome": "Baleote",
+    "nd": "1",
+    "regiao": "montarias",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 3,
+    "percepcao": 7,
+    "sentidos": [
+      "visao_na_penumbra"
+    ],
+    "defesa": 21,
+    "resistencias": {
+      "fortitude": 13,
+      "reflexos": 9,
+      "vontade": 5
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "eletricidade"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 110,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 15.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 0,
+      "con": 3,
+      "int": -4,
+      "sab": 1,
+      "car": 1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Cauda",
+        "bonusAtaque": 14,
+        "dano": "2d8+12",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Descarga Elétrica",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "acao_de_movimento",
+        "cdResistencia": 17,
+        "resistenciaTipo": null,
+        "descricao": "O baleote projeta um raio elétrico que atinge uma linha de 9m. Criaturas nessa área sofrem 3d6 pontos de dano de eletricidade (Reflexos CD 17 reduz à metade). Recarga (ação de movimento)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "brontoterio",
+    "nome": "Brontotério",
+    "nd": "8",
+    "regiao": "montarias",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 8,
+    "percepcao": 10,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 34,
+    "resistencias": {
+      "fortitude": 20,
+      "reflexos": 7,
+      "vontade": 15
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 310,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 8,
+      "des": 0,
+      "con": 5,
+      "int": -4,
+      "sab": 1,
+      "car": -3
+    },
+    "pericias": {
+      "atletismo": 18
+    },
+    "ataques": [
+      {
+        "nome": "Chifre",
+        "bonusAtaque": 26,
+        "dano": "4d8+25",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Besta Trovão",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": "acao_de_movimento",
+        "cdResistencia": 26,
+        "resistenciaTipo": null,
+        "descricao": "O brontotério bate suas patas dianteiras no chão, fazendo o barulho de um trovão. Todas as criaturas em alcance curto ficam surdas por 1d4 rodadas (Fortitude CD 26 evita). Recarga (ação de movimento)."
+      },
+      {
+        "nome": "Bloqueio com Chifre",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando é atingido por um ataque corpo a corpo, o brontotério pode fazer um teste de ataque de chifre e subtrair o resultado desta rolagem do dano causado pelo ataque."
+      },
+      {
+        "nome": "Investida Avassaladora",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O brontotério faz uma investida com seu chifre. Se acertar o ataque, causa +4d8 pontos de dano e a vítima é arremessada 1d6 x 1,5m na direção oposta."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "capivara",
+    "nome": "Capivara",
+    "nd": "1",
+    "regiao": "montarias",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 1,
+    "percepcao": 5,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 16,
+    "resistencias": {
+      "fortitude": 11,
+      "reflexos": 5,
+      "vontade": 0
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 35,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 12.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 1,
+      "con": 3,
+      "int": -3,
+      "sab": 1,
+      "car": 5
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 11,
+        "dano": "1d8+12",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Aparência Inofensiva",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 14,
+        "resistenciaTipo": null,
+        "descricao": "A primeira criatura inteligente (Int –3 ou maior) que atacar a capivara em uma cena deve fazer um teste de Vontade (CD 14). Se falhar, perde sua ação."
+      },
+      {
+        "nome": "Fedorentina",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 14,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por cena, a capivara secreta um odor fétido. Criaturas em alcance curto ficam enjoadas por 1d4 rodadas (Fortitude CD 14 evita)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "cavalo_glacial",
+    "nome": "Cavalo Glacial",
+    "nd": "2",
+    "regiao": "montarias",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 4,
+    "percepcao": 6,
+    "sentidos": [
+      "percepcao_as_cegas",
+      "visao_na_penumbra"
+    ],
+    "defesa": 19,
+    "resistencias": {
+      "fortitude": 14,
+      "reflexos": 7,
+      "vontade": 2
+    },
+    "rd": {
+      "frio": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 60,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 12.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 1,
+      "con": 3,
+      "int": -4,
+      "sab": 1,
+      "car": -2
+    },
+    "pericias": {
+      "atletismo": 7
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 12,
+        "dano": "1d8+9",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Esguicho",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "passar_1_rodada_submerso_em_agua",
+        "cdResistencia": 16,
+        "resistenciaTipo": null,
+        "descricao": "O cavalo glacial dispara um jato de água gelada pelo respiro em sua cabeça. Criaturas num cone de 6m sofrem 4d6 pontos de dano de frio e ficam lentas por 1d4 rodadas (Fortitude CD 16 reduz à metade e evita a condição). Recarga (passar 1 rodada submerso em água)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "1 dose de eter elemental (frio) (cd 17 para extrair).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "cavalo_de_carga",
+    "nome": "Cavalo de Carga",
+    "nd": "0.5",
+    "regiao": "montarias",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 2,
+    "percepcao": 5,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 12,
+    "resistencias": {
+      "fortitude": 6,
+      "reflexos": 0,
+      "vontade": 3
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 27,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 0,
+      "con": 3,
+      "int": -4,
+      "sab": 1,
+      "car": -2
+    },
+    "pericias": {
+      "atletismo": 9
+    },
+    "ataques": [
+      {
+        "nome": "Cascos",
+        "bonusAtaque": 7,
+        "dano": "2d4+5",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "cavalo_de_guerra",
+    "nome": "Cavalo de Guerra",
+    "nd": "1",
+    "regiao": "montarias",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 3,
+    "percepcao": 5,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 14,
+    "resistencias": {
+      "fortitude": 6,
+      "reflexos": 5,
+      "vontade": 3
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 33,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 15.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 1,
+      "con": 2,
+      "int": -4,
+      "sab": 1,
+      "car": -2
+    },
+    "pericias": {
+      "atletismo": 9
+    },
+    "ataques": [
+      {
+        "nome": "Cascos",
+        "bonusAtaque": 9,
+        "dano": "2d6+5",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "cavalo_de_montaria",
+    "nome": "Cavalo de Montaria",
+    "nd": "0.5",
+    "regiao": "montarias",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 3,
+    "percepcao": 5,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 13,
+    "resistencias": {
+      "fortitude": 6,
+      "reflexos": 3,
+      "vontade": 0
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 25,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 15.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 1,
+      "con": 2,
+      "int": -4,
+      "sab": 1,
+      "car": -2
+    },
+    "pericias": {
+      "atletismo": 9
+    },
+    "ataques": [
+      {
+        "nome": "Cascos",
+        "bonusAtaque": 7,
+        "dano": "2d4+5",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "cavalo_de_namalkah",
+    "nome": "Cavalo de Namalkah",
+    "nd": "2",
+    "regiao": "montarias",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 7,
+    "percepcao": 6,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 18,
+    "resistencias": {
+      "fortitude": 11,
+      "reflexos": 7,
+      "vontade": 4
+    },
+    "rd": {
+      "medo": 2
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 60,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 15.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 2,
+      "con": 3,
+      "int": -4,
+      "sab": 1,
+      "car": 0
+    },
+    "pericias": {
+      "atletismo": 11
+    },
+    "ataques": [
+      {
+        "nome": "Cascos",
+        "bonusAtaque": 9,
+        "dano": "2d8+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "corcel_do_deserto",
+    "nome": "Corcel do Deserto",
+    "nd": "2",
+    "regiao": "montarias",
+    "papel": "especial",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 5,
+    "percepcao": 7,
+    "sentidos": [
+      "percepcao_as_cegas"
+    ],
+    "defesa": 21,
+    "resistencias": {
+      "fortitude": 13,
+      "reflexos": 7,
+      "vontade": 2
+    },
+    "rd": {
+      "fogo": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 55,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 15.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 2,
+      "con": 4,
+      "int": -3,
+      "sab": 1,
+      "car": -1
+    },
+    "pericias": {
+      "atletismo": 8
+    },
+    "ataques": [
+      {
+        "nome": "Cascos",
+        "bonusAtaque": 12,
+        "dano": "2d8+9",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Substância Urticante",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 16,
+        "resistenciaTipo": null,
+        "descricao": "A carapaça do corcel é coberta por uma substância que causa uma coceira debilitante. Uma criatura que acerte um ataque corpo a corpo no corcel é acometida por uma urticária terrível que a impede de fazer ações, exceto reações, por 1d4 rodadas (Fortitude CD 16 evita). Uma criatura só pode ser afetada por esta habilidade uma vez por cena."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "1d6 doses de acido (cd 17 para extrair).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "dromedario",
+    "nome": "Dromedário",
+    "nd": "1",
+    "regiao": "montarias",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 7,
+    "percepcao": 2,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 15,
+    "resistencias": {
+      "fortitude": 11,
+      "reflexos": 5,
+      "vontade": 1
+    },
+    "rd": {
+      "efeitos_metabolicos_e_de_clima": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 36,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 1,
+      "con": 4,
+      "int": -2,
+      "sab": 2,
+      "car": 0
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 9,
+        "dano": "2d4+7",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Cusparada",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 14,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura em alcance curto sofre 1d4+3 pontos de dano de impacto e fica enjoada pela rodada (Reflexos CD 14 evita o dano e a condição)."
+      },
+      {
+        "nome": "Patas do Deserto",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O deslocamento do dromedário não é reduzido por terreno difícil natural em desertos e superfícies similares."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "elefante",
+    "nome": "Elefante",
+    "nd": "7",
+    "regiao": "montarias",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 6,
+    "percepcao": 10,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 32,
+    "resistencias": {
+      "fortitude": 23,
+      "reflexos": 7,
+      "vontade": 11
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 260,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": -1,
+      "con": 4,
+      "int": -4,
+      "sab": 1,
+      "car": 0
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Presas",
+        "bonusAtaque": 24,
+        "dano": "2d8+26",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Tromba",
+        "bonusAtaque": 24,
+        "dano": "2d6+22",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Arremessar",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 24,
+        "resistenciaTipo": null,
+        "descricao": "Se começar seu turno agarrando uma criatura Média ou menor, o elefante arremessa a vítima 1d6 x 1,5m em uma direção à escolha dele. A vítima sofre 2d6 pontos de dano de impacto, fica caída e, se atingir algum obstáculo, sofre +2d6 pontos de dano (Reflexos CD 24 reduz à metade e evita a condição caído)."
+      },
+      {
+        "nome": "Atropelamento",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": "acao_de_movimento",
+        "cdResistencia": 24,
+        "resistenciaTipo": null,
+        "descricao": "O elefante percorre até o dobro de seu deslocamento. Pode passar pelo espaço ocupado de quaisquer inimigos menores que ele, mas não pode passar duas vezes pelo mesmo espaço. Criaturas atropeladas sofrem 2d8+26 pontos de dano de impacto e ficam caídas (Reflexos CD 24 reduz à metade e evita a condição). Recarga (ação de movimento)."
+      },
+      {
+        "nome": "Pisotear",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 24,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura que o elefante esteja agarrando, ou que esteja caída adjacente a ele, sofre 4d8+52 pontos de dano de impacto e fica fraca por 1 rodada (Fortitude CD 24 reduz à metade e evita a condição)."
+      },
+      {
+        "nome": "Prender",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se o elefante acerta um ataque de tromba, pode fazer a manobra agarrar ou derrubar (teste +29)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "gorlogg_alfa",
+    "nome": "Gorlogg Alfa",
+    "nd": "5",
+    "regiao": "montarias",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 5,
+    "percepcao": 4,
+    "sentidos": [
+      "visao_na_penumbra"
+    ],
+    "defesa": 24,
+    "resistencias": {
+      "fortitude": 13,
+      "reflexos": 9,
+      "vontade": 6
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 206,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 5,
+      "con": 6,
+      "int": -4,
+      "sab": 1,
+      "car": -2
+    },
+    "pericias": {
+      "atletismo": 12
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 18,
+        "dano": "4d8+16",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 4,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Mordida (teste +22)."
+      },
+      {
+        "nome": "Mordida Dilaceradora",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se um ataque do gorlogg alfa exceder a Defesa do inimigo por 5 ou mais, a vítima fica sangrando."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "leao",
+    "nome": "Leão",
+    "nd": "2",
+    "regiao": "montarias",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 8,
+    "percepcao": 9,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 17,
+    "resistencias": {
+      "fortitude": 9,
+      "reflexos": 10,
+      "vontade": 4
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 68,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 15.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 3,
+      "con": 3,
+      "int": -4,
+      "sab": 1,
+      "car": -2
+    },
+    "pericias": {
+      "atletismo": 10,
+      "furtividade": 8
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 12,
+        "dano": "1d8+5",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 12,
+        "dano": "1d6+5",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Mordida (teste +14)."
+      },
+      {
+        "nome": "Bote",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O leão faz uma investida e ataca com sua mordida e suas garras. Os três ataques recebem o bônus de +2 da investida, mas devem ser feitos contra a mesma criatura."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "pantera",
+    "nome": "Pantera",
+    "nd": "2",
+    "regiao": "montarias",
+    "papel": "especial",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 7,
+    "percepcao": 4,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 16,
+    "resistencias": {
+      "fortitude": 5,
+      "reflexos": 11,
+      "vontade": 0
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 55,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 18.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 9.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 6,
+      "con": 3,
+      "int": -3,
+      "sab": 1,
+      "car": -2
+    },
+    "pericias": {
+      "atletismo": 7,
+      "furtividade": 11
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 12,
+        "dano": "1d8+4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 12,
+        "dano": "1d6+4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Mordida (teste +14)."
+      },
+      {
+        "nome": "Sufocar",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada um de seus turnos, a pantera causa 1d8+4 pontos de dano de perfuração na criatura que estiver agarrando. Enquanto estiver agarrada desta forma, a criatura não poderá falar nem respirar (veja 'Sufocamento', Tormenta20, p. 319)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "rinoceronte",
+    "nome": "Rinoceronte",
+    "nd": "4",
+    "regiao": "montarias",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 4,
+    "percepcao": 5,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 23,
+    "resistencias": {
+      "fortitude": 16,
+      "reflexos": 4,
+      "vontade": 10
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 130,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 0,
+      "con": 4,
+      "int": -4,
+      "sab": 1,
+      "car": -3
+    },
+    "pericias": {
+      "atletismo": 10
+    },
+    "ataques": [
+      {
+        "nome": "Chifre",
+        "bonusAtaque": 16,
+        "dano": "1d8+10",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Investida Avassaladora",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O rinoceronte faz uma investida e ataca com seu chifre. Se acertar o ataque, causa +2d8 pontos de dano e a vítima é arremessada 1d6 x 1,5m na direção oposta."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "rinoceronte_lanoso",
+    "nome": "Rinoceronte Lanoso",
+    "nd": "6",
+    "regiao": "montarias",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 6,
+    "percepcao": 8,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 24,
+    "resistencias": {
+      "fortitude": 18,
+      "reflexos": 6,
+      "vontade": 12
+    },
+    "rd": {
+      "geral": 5,
+      "frio": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 260,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 7,
+      "des": 0,
+      "con": 4,
+      "int": -4,
+      "sab": 1,
+      "car": -3
+    },
+    "pericias": {
+      "atletismo": 12
+    },
+    "ataques": [
+      {
+        "nome": "Chifre",
+        "bonusAtaque": 20,
+        "dano": "2d8+25",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Habitante da Tundra",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O deslocamento do rinoceronte lanoso não é afetado por gelo ou neve."
+      },
+      {
+        "nome": "Investida Avassaladora",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O rinoceronte faz uma investida com seu chifre. Se acertar o ataque, causa +3d8 pontos de dano e a vítima é arremessada 1d6 x 1,5m na direção oposta."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "tatu_montanha",
+    "nome": "Tatu-Montanha",
+    "nd": "4",
+    "regiao": "montarias",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 4,
+    "percepcao": 7,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 25,
+    "resistencias": {
+      "fortitude": 16,
+      "reflexos": 10,
+      "vontade": 4
+    },
+    "rd": {
+      "corte": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "acido"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 125,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 9.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 0,
+      "con": 4,
+      "int": -3,
+      "sab": 1,
+      "car": -2
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Cauda",
+        "bonusAtaque": 16,
+        "dano": "2d6+18",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Retrair",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando sofre um ataque corpo a corpo, o tatu se retrai para sua concha. Ele recebe +5 na Defesa contra esse ataque e, se o ataque errar, o agressor sofre 1d6+9 pontos de dano de perfuração."
+      },
+      {
+        "nome": "Varrer Ameaças",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "acao_de_movimento",
+        "cdResistencia": 18,
+        "resistenciaTipo": null,
+        "descricao": "O tatu-montanha golpeia com sua cauda em um cone de 4,5m. Criaturas na área sofrem 2d6+9 pontos de dano de perfuração e ficam caídas (Reflexos CD 18 reduz à metade e evita a condição). Recarga (ação de movimento)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "casco de tatu (cd 19 para extrair, vale t$ 100 para fabricar um escudo ou uma armadura superior).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "tigre",
+    "nome": "Tigre",
+    "nd": "3",
+    "regiao": "montarias",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 12,
+    "percepcao": 9,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 18,
+    "resistencias": {
+      "fortitude": 10,
+      "reflexos": 16,
+      "vontade": 4
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 95,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 15.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 4,
+      "con": 3,
+      "int": -4,
+      "sab": 1,
+      "car": -2
+    },
+    "pericias": {
+      "atletismo": 10,
+      "furtividade": 9
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 14,
+        "dano": "1d8+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 14,
+        "dano": "1d6+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Bote",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O tigre faz uma investida e ataca com sua mordida e suas garras. Os três ataques recebem o bônus de +2 da investida, mas devem ser feitos contra a mesma criatura."
+      },
+      {
+        "nome": "Ímpeto Destrutivo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O tigre recebe +2 em testes de ataque e rolagens de dano em seu primeiro turno de combate."
+      },
+      {
+        "nome": "Rugido Paralisante",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 17,
+        "resistenciaTipo": null,
+        "descricao": "Criaturas em alcance curto ficam imóveis por 1 rodada (Fortitude CD 17 evita). Uma criatura só pode ser alvo desta habilidade uma vez por cena."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "trobo",
+    "nome": "Trobo",
+    "nd": "1",
+    "regiao": "montarias",
+    "papel": "especial",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 4,
+    "percepcao": 5,
+    "sentidos": [
+      "visao_na_penumbra"
+    ],
+    "defesa": 14,
+    "resistencias": {
+      "fortitude": 5,
+      "reflexos": 8,
+      "vontade": 3
+    },
+    "rd": {
+      "magia": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 15,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 15.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 2,
+      "con": 1,
+      "int": -4,
+      "sab": 1,
+      "car": -2
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 11,
+        "dano": "2d4+8",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "tumarkhan",
+    "nome": "Tumarkhân",
+    "nd": "4",
+    "regiao": "montarias",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 2,
+    "percepcao": 5,
+    "sentidos": [
+      "visao_na_penumbra"
+    ],
+    "defesa": 25,
+    "resistencias": {
+      "fortitude": 16,
+      "reflexos": 10,
+      "vontade": 2
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 130,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 10,
+      "des": 0,
+      "con": 5,
+      "int": -5,
+      "sab": 1,
+      "car": -1
+    },
+    "pericias": {
+      "atletismo": 14
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 15,
+        "dano": "2d10+12",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Atropelamento",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": "acao_de_movimento",
+        "cdResistencia": 18,
+        "resistenciaTipo": null,
+        "descricao": "O tumarkhân percorre até o dobro de seu deslocamento. Pode passar pelo espaço ocupado de quaisquer inimigos menores que ele, mas não pode passar duas vezes pelo mesmo espaço. Criaturas atropeladas sofrem 2d10+12 pontos de dano de impacto e ficam caídas (Reflexos CD 18 reduz à metade e evita a condição). Recarga (ação de movimento)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "unicornio",
+    "nome": "Unicórnio",
+    "nd": "4",
+    "regiao": "montarias",
+    "papel": "especial",
+    "tipo": "espirito",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 12,
+    "percepcao": 15,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 21,
+    "resistencias": {
+      "fortitude": 4,
+      "reflexos": 10,
+      "vontade": 16
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "encantamento"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 99,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 15.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 3,
+      "con": 4,
+      "int": -2,
+      "sab": 6,
+      "car": 3
+    },
+    "pericias": {
+      "intuicao": 15
+    },
+    "ataques": [
+      {
+        "nome": "Chifre",
+        "bonusAtaque": 14,
+        "dano": "1d8+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Cascos",
+        "bonusAtaque": 14,
+        "dano": "2d8+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Chifre Mágico (mágica)",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O unicórnio toca uma criatura adjacente com seu chifre e usa um dos efeitos a seguir: Curar (a criatura recupera 8d8+8 pontos de vida); Purificar (uma condição negativa ou maldição da criatura é removida); Reviver (a criatura é revivida, desde que tenha morrido há no máximo uma semana)."
+      },
+      {
+        "nome": "Paz Encarnada",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Um espírito de bondade e pureza, o unicórnio nunca ataca outros seres. Pode, entretanto, fazer testes de ataque para se defender de manobras de combate. Se atacar, perde sua essência e se torna um espírito amaldiçoado."
+      },
+      {
+        "nome": "Presciência (mágica)",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 20,
+        "resistenciaTipo": null,
+        "descricao": "O unicórnio pressente automaticamente perigos nas proximidades. Quando está em alcance médio de uma criatura hostil ou de uma armadilha, faz um teste de Intuição (CD 20). Se passar, conhece a direção e a distância do perigo, além de saber se é uma criatura ou uma armadilha. Se falhar, sabe apenas que existe um perigo na área."
+      },
+      {
+        "nome": "Sumir (mágica)",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O unicórnio se teletransporta para um ponto qualquer em alcance médio. Não precisa ver o destino para usar essa habilidade."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "chifre de unicornio (cd 19 para extrair).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "urso_panda",
+    "nome": "Urso Panda",
+    "nd": "1",
+    "regiao": "montarias",
+    "papel": "especial",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 3,
+    "percepcao": 3,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 15,
+    "resistencias": {
+      "fortitude": 9,
+      "reflexos": 5,
+      "vontade": 2
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 28,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 3,
+      "con": 3,
+      "int": -4,
+      "sab": 1,
+      "car": 1
+    },
+    "pericias": {
+      "atletismo": 6
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 9,
+        "dano": "1d6+4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garras",
+        "bonusAtaque": 9,
+        "dano": "2d4+4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Rolamento Defensivo",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando sofre dano, o urso panda reduz esse dano à metade e fica caído."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "urso_pardo",
+    "nome": "Urso Pardo",
+    "nd": "3",
+    "regiao": "montarias",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 4,
+    "percepcao": 7,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 19,
+    "resistencias": {
+      "fortitude": 13,
+      "reflexos": 10,
+      "vontade": 4
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 95,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 1,
+      "con": 5,
+      "int": -4,
+      "sab": 1,
+      "car": -2
+    },
+    "pericias": {
+      "atletismo": 11
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 14,
+        "dano": "1d8+4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 14,
+        "dano": "1d6+4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Mordida (teste +16)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "urso_das_cavernas",
+    "nome": "Urso das Cavernas",
+    "nd": "8",
+    "regiao": "montarias",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 9,
+    "percepcao": 10,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 31,
+    "resistencias": {
+      "fortitude": 20,
+      "reflexos": 15,
+      "vontade": 9
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 300,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 7,
+      "des": 1,
+      "con": 6,
+      "int": -4,
+      "sab": 2,
+      "car": -2
+    },
+    "pericias": {
+      "atletismo": 15
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 27,
+        "dano": "2d10+15",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 27,
+        "dano": "2d8+15",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Abraço de Urso",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada um de seus turnos, o urso das cavernas causa 3d8+15 pontos de dano de impacto em uma criatura Grande ou menor que esteja agarrando."
+      },
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Mordida (teste +32)."
+      },
+      {
+        "nome": "Garras Destruidoras",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando causa dano com suas garras, o urso pode rolar novamente qualquer resultado 1 ou 2 na rolagem de dano."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "warg",
+    "nome": "Warg",
+    "nd": "3",
+    "regiao": "montarias",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 6,
+    "percepcao": 10,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 21,
+    "resistencias": {
+      "fortitude": 9,
+      "reflexos": 13,
+      "vontade": 5
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 110,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 3,
+      "con": 4,
+      "int": -2,
+      "sab": 2,
+      "car": -1
+    },
+    "pericias": {
+      "furtividade": 11,
+      "sobrevivencia": 10
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 15,
+        "dano": "2d6+12",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Ataque Furtivo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O warg causa +2d6 de dano extra quando flanqueia ou surpreende o alvo."
+      },
+      {
+        "nome": "Derrubar",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Mordida (teste +17)."
+      },
+      {
+        "nome": "Predador Oculto",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O warg pode se mover com seu deslocamento normal enquanto se esconde ou rastreia sem penalidades nos testes de Furtividade ou Sobrevivência. Além disso, sofre apenas –5 de penalidade em testes de Furtividade para esconder-se após atacar ou fazer uma ação chamativa (em vez de –20)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  }
+]

@@ -1,9 +1,12 @@
+import 'dart:math';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../domain/entities/equipamento/arma.dart';
 import '../../../domain/entities/combate/combatente.dart';
 import '../../../domain/entities/combate/efeito_ativo_combate.dart';
 import '../../../domain/entities/combate/grid_tatico.dart';
+import '../../../domain/entities/combate/monstro.dart';
 import '../../../domain/entities/combate/tipo_acao.dart';
+import '../../../domain/entities/combate/tipo_dano.dart';
 import '../../../domain/services/combate_services/combate_engine.dart';
 import '../../../domain/services/combate_services/movimento_engine.dart';
 import '../../../domain/services/habilidades_services/relogio_e_cena_service.dart';
@@ -29,12 +32,16 @@ class CombateCubit extends Cubit<CombateState> {
   }) {
     if (participantes.isEmpty) return;
 
+    final int maxTamanho = participantes
+        .map((p) => p.tamanhoQuadrados)
+        .fold(1, max);
+
     // Mapa tático padrão com alguns terrenos difíceis e obstáculos
     final gridPadrao =
         mapa ??
         GridMapa(
-          largura: 10,
-          altura: 8,
+          largura: max(10, maxTamanho + 6),
+          altura: max(8, maxTamanho + 2),
           terrenos: {
             const Posicao2D(4, 2): TipoTerreno.obstaculo,
             const Posicao2D(4, 3): TipoTerreno.obstaculo,
@@ -51,10 +58,17 @@ class CombateCubit extends Cubit<CombateState> {
       int yHeroi = 3;
       int yInimigo = 3;
       for (final p in participantes) {
+        final span = p.tamanhoQuadrados;
         if (p.time == TimeCombatente.heroi) {
-          posicoes[p.id] = Posicao2D(1, yHeroi++);
+          final yMaxHeroi = max(0, gridPadrao.altura - span);
+          posicoes[p.id] = Posicao2D(1, min(yHeroi, yMaxHeroi));
+          yHeroi += span;
         } else {
-          posicoes[p.id] = Posicao2D(8, yInimigo++);
+          final xMaxInimigo = max(0, gridPadrao.largura - span);
+          final yMaxInimigo = max(0, gridPadrao.altura - span);
+          final xInimigo = min(8, xMaxInimigo);
+          posicoes[p.id] = Posicao2D(xInimigo, min(yInimigo, yMaxInimigo));
+          yInimigo += span;
         }
       }
     }
@@ -299,9 +313,17 @@ class CombateCubit extends Cubit<CombateState> {
     final posAtacante = state.posicoesCombatentes[atacante.id];
     final posDefensor = state.posicoesCombatentes[defensor.id];
     if (posAtacante != null && posDefensor != null) {
-      final bool ehAdjacente = posAtacante.ehAdjacente(posDefensor);
+      final bool ehAdjacente = posAtacante.ehAdjacenteArea(
+        posDefensor,
+        tamanhoEsta: atacante.tamanhoQuadrados,
+        tamanhoOutra: defensor.tamanhoQuadrados,
+      );
       if (arma.ehCorpoACorpo && !ehAdjacente) {
-        final distMetros = posAtacante.distanciaMetros(posDefensor);
+        final distMetros = posAtacante.distanciaMetrosAreas(
+          posDefensor,
+          tamanhoEsta: atacante.tamanhoQuadrados,
+          tamanhoOutra: defensor.tamanhoQuadrados,
+        );
         emit(
           state.copyWith(
             logCombate: [
@@ -492,7 +514,11 @@ class CombateCubit extends Cubit<CombateState> {
     double distanciaMetros = 3.0;
 
     if (posAtacante != null && posDefensor != null) {
-      distanciaMetros = posAtacante.distanciaMetros(posDefensor);
+      distanciaMetros = posAtacante.distanciaMetrosAreas(
+        posDefensor,
+        tamanhoEsta: atacante.tamanhoQuadrados,
+        tamanhoOutra: defensor.tamanhoQuadrados,
+      );
       if (distanciaMetros < 3.0) {
         emit(
           state.copyWith(
@@ -520,22 +546,51 @@ class CombateCubit extends Cubit<CombateState> {
 
     gastarAcao(TipoAcao.completa);
 
-    // Reposiciona o atacante adjacente ao defensor no grid
+    // Reposiciona o atacante adjacente ao defensor no grid respeitando footprints N×N
     final novasPosicoes = Map<String, Posicao2D>.from(state.posicoesCombatentes);
     if (posAtacante != null && posDefensor != null) {
-      final adjacentes = [
-        Posicao2D(posDefensor.x + 1, posDefensor.y),
-        Posicao2D(posDefensor.x - 1, posDefensor.y),
-        Posicao2D(posDefensor.x, posDefensor.y + 1),
-        Posicao2D(posDefensor.x, posDefensor.y - 1),
-      ];
-      final destino = adjacentes.where((p) =>
-        state.mapaGrid.dentroDosLimites(p) &&
-        !novasPosicoes.values.contains(p) &&
-        state.mapaGrid.obterTerreno(p) != TipoTerreno.obstaculo
-      ).firstOrNull ?? posAtacante;
+      final celulasOcupadasPorOutros = <Posicao2D>{};
+      for (final c in state.filaIniciativa) {
+        if (c.id == atacante.id) continue;
+        final posOutro = novasPosicoes[c.id];
+        if (posOutro != null) {
+          celulasOcupadasPorOutros.addAll(
+            posOutro.celulasOcupadas(c.tamanhoQuadrados),
+          );
+        }
+      }
 
-      novasPosicoes[atacante.id] = destino;
+      Posicao2D? melhorDestino;
+      int melhorDistParaAtacante = 1 << 20;
+      for (int x = 0; x <= state.mapaGrid.largura - atacante.tamanhoQuadrados; x++) {
+        for (int y = 0; y <= state.mapaGrid.altura - atacante.tamanhoQuadrados; y++) {
+          final candidato = Posicao2D(x, y);
+          if (!candidato.ehAdjacenteArea(
+            posDefensor,
+            tamanhoEsta: atacante.tamanhoQuadrados,
+            tamanhoOutra: defensor.tamanhoQuadrados,
+          )) {
+            continue;
+          }
+          final celulasCandidato = candidato.celulasOcupadas(atacante.tamanhoQuadrados);
+          final bloqueado = celulasCandidato.any((cel) =>
+              celulasOcupadasPorOutros.contains(cel) ||
+              state.mapaGrid.obterTerreno(cel) == TipoTerreno.obstaculo);
+          if (bloqueado) continue;
+
+          final dAtk = candidato.distanciaParaArea(
+            posAtacante,
+            tamanhoEsta: atacante.tamanhoQuadrados,
+            tamanhoOutra: atacante.tamanhoQuadrados,
+          );
+          if (dAtk < melhorDistParaAtacante) {
+            melhorDistParaAtacante = dAtk;
+            melhorDestino = candidato;
+          }
+        }
+      }
+
+      novasPosicoes[atacante.id] = melhorDestino ?? posAtacante;
     }
 
     final resInvestida = _engine.executarInvestida(
@@ -836,6 +891,8 @@ class CombateCubit extends Cubit<CombateState> {
     Combatente? alvo,
     int? valorDanoOuCura,
     bool ehCura = false,
+    TipoDano? tipoDano,
+    bool ehLuz = false,
   }) {
     final lancador = state.combatenteAtual;
     if (lancador == null) return;
@@ -876,7 +933,11 @@ class CombateCubit extends Cubit<CombateState> {
         magia.alcance.tipo != 'pessoal') {
       final posAlvo = state.posicoesCombatentes[alvo.id];
       if (posAlvo != null) {
-        final distMetros = posLancador.distanciaMetros(posAlvo);
+        final distMetros = posLancador.distanciaMetrosAreas(
+          posAlvo,
+          tamanhoEsta: lancador.tamanhoQuadrados,
+          tamanhoOutra: alvo.tamanhoQuadrados,
+        );
         if (distMetros > alcanceMaximo) {
           emit(
             state.copyWith(
@@ -898,6 +959,13 @@ class CombateCubit extends Cubit<CombateState> {
       return c.id == lancador.id ? lancadorComMenosPm : c;
     }).toList();
     // 5. Aplica dano ou cura no alvo se especificado
+    final ehCuraDeLuz =
+        ehLuz ||
+        (ehCura &&
+            (magia.escola.toLowerCase().contains('evoc') ||
+                magia.nome.toLowerCase().contains('luz') ||
+                magia.nome.toLowerCase().contains('curar')));
+
     final novosLogs = <String>[
       "✨ ${lancador.nome} lançou ${magia.nome} gastando $custoPm PM (restam ${lancadorComMenosPm.pmAtual} PM).",
     ];
@@ -905,13 +973,44 @@ class CombateCubit extends Cubit<CombateState> {
       novaFila = novaFila.map((c) {
         if (c.id == alvo.id) {
           if (ehCura) {
-            novosLogs.add("💚 ${alvo.nome} foi curado em $valorDanoOuCura PV!");
-            return c.aplicarCura(valorDanoOuCura);
-          } else {
-            novosLogs.add(
-              "💥 ${alvo.nome} sofreu $valorDanoOuCura de dano mágico de ${magia.nome}!",
+            final atualizado = c.aplicarCura(
+              valorDanoOuCura,
+              magica: true,
+              ehLuz: ehCuraDeLuz,
             );
-            return c.aplicarDano(valorDanoOuCura);
+            if (c.ehConstruto) {
+              novosLogs.add(
+                "⚙️ ${c.nome} é um Construto e não recupera PV por efeitos de cura.",
+              );
+            } else if (c.ehMortoVivo && ehCuraDeLuz) {
+              final danoReal = c.pvAtual - atualizado.pvAtual;
+              novosLogs.add(
+                "☀️ ${c.nome} é Morto-Vivo e sofreu $danoReal de dano de luz pela magia de cura!",
+              );
+            } else {
+              novosLogs.add("💚 ${alvo.nome} foi curado em $valorDanoOuCura PV!");
+            }
+            return atualizado;
+          } else {
+            final atualizado = c.aplicarDano(
+              valorDanoOuCura,
+              tipo: tipoDano,
+            );
+            final delta = atualizado.pvAtual - c.pvAtual;
+            if (delta > 0) {
+              novosLogs.add(
+                "💀 ${c.nome} absorveu dano de trevas e recuperou $delta PV!",
+              );
+            } else if (delta == 0) {
+              novosLogs.add(
+                "🛡️ ${c.nome} resistiu/é imune ao dano de ${magia.nome}!",
+              );
+            } else {
+              novosLogs.add(
+                "💥 ${alvo.nome} sofreu ${-delta} de dano mágico de ${magia.nome}!",
+              );
+            }
+            return atualizado;
           }
         }
         return c;
@@ -934,6 +1033,9 @@ class CombateCubit extends Cubit<CombateState> {
     required String motivo,
     bool ehCura = false,
     bool ehMetade = false,
+    TipoDano? tipoDano,
+    bool ehLuz = false,
+    bool ehReparoConstruto = false,
   }) {
     final valorFinal = ehMetade ? (valor / 2).floor() : valor;
     if (valorFinal <= 0) return;
@@ -942,12 +1044,38 @@ class CombateCubit extends Cubit<CombateState> {
     final novaFila = state.filaIniciativa.map((c) {
       if (c.id == combatenteId) {
         if (ehCura) {
-          novosLogs.add("💚 ${c.nome} recuperou $valorFinal PV ($motivo).");
-          return c.aplicarCura(valorFinal);
+          final atualizado = c.aplicarCura(
+            valorFinal,
+            ehLuz: ehLuz,
+            ehReparoConstruto: ehReparoConstruto,
+          );
+          if (c.ehConstruto && !ehReparoConstruto) {
+            novosLogs.add(
+              "⚙️ ${c.nome} (Construto) ignorou a cura ($motivo) — use Ofício (artesão).",
+            );
+          } else if (c.ehMortoVivo && ehLuz) {
+            novosLogs.add(
+              "☀️ ${c.nome} (Morto-Vivo) sofreu dano de luz ($motivo).",
+            );
+          } else {
+            novosLogs.add("💚 ${c.nome} recuperou $valorFinal PV ($motivo).");
+          }
+          return atualizado;
         } else {
-          final prefixo = ehMetade ? "💥 [1/2 Dano (Resistiu)]" : "💥 [Dano Total]";
-          novosLogs.add("$prefixo ${c.nome} sofreu $valorFinal de dano ($motivo).");
-          return c.aplicarDano(valorFinal);
+          final atualizado = c.aplicarDano(valorFinal, tipo: tipoDano);
+          final delta = atualizado.pvAtual - c.pvAtual;
+          if (delta > 0) {
+            novosLogs.add(
+              "💀 ${c.nome} (Morto-Vivo) recuperou $delta PV com dano de trevas ($motivo).",
+            );
+          } else {
+            final prefixo = ehMetade ? "💥 [1/2 Dano (Resistiu)]" : "💥 [Dano Total]";
+            final danoEfetivo = c.pvAtual - atualizado.pvAtual;
+            novosLogs.add(
+              "$prefixo ${c.nome} sofreu $danoEfetivo de dano efetivo ($motivo).",
+            );
+          }
+          return atualizado;
         }
       }
       return c;
@@ -1082,7 +1210,11 @@ class CombateCubit extends Cubit<CombateState> {
         posHeroi != null &&
         arma != null &&
         arma.ehCorpoACorpo &&
-        !posBot.ehAdjacente(posHeroi)) {
+        !posBot.ehAdjacenteArea(
+          posHeroi,
+          tamanhoEsta: bot.tamanhoQuadrados,
+          tamanhoOutra: heroiAlvo.tamanhoQuadrados,
+        )) {
       if (state.temAcaoMovimento) {
         final alcancaveis = MovimentoEngine.calcularAlcancaveis(
           mapa: state.mapaGrid,
@@ -1097,10 +1229,18 @@ class CombateCubit extends Cubit<CombateState> {
 
         // Seleciona a célula válida que mais aproxima o bot do herói
         Posicao2D? melhorDestino;
-        int menorDistancia = posBot.distanciaEmQuadrados(posHeroi);
+        int menorDistancia = posBot.distanciaParaArea(
+          posHeroi,
+          tamanhoEsta: bot.tamanhoQuadrados,
+          tamanhoOutra: heroiAlvo.tamanhoQuadrados,
+        );
 
         for (final destino in alcancaveis.destinosValidos) {
-          final dist = destino.distanciaEmQuadrados(posHeroi);
+          final dist = destino.distanciaParaArea(
+            posHeroi,
+            tamanhoEsta: bot.tamanhoQuadrados,
+            tamanhoOutra: heroiAlvo.tamanhoQuadrados,
+          );
           if (dist < menorDistancia) {
             menorDistancia = dist;
             melhorDestino = destino;
@@ -1124,7 +1264,11 @@ class CombateCubit extends Cubit<CombateState> {
           !arma.ehCorpoACorpo ||
           (posBotFinal != null &&
               posHeroi != null &&
-              posBotFinal.ehAdjacente(posHeroi));
+              posBotFinal.ehAdjacenteArea(
+                posHeroi,
+                tamanhoEsta: bot.tamanhoQuadrados,
+                tamanhoOutra: heroiAlvo.tamanhoQuadrados,
+              ));
 
       if (podeAtacar) {
         executarAtaque(defensor: heroiAlvo, arma: arma);
@@ -1150,5 +1294,146 @@ class CombateCubit extends Cubit<CombateState> {
     }
 
     proximoTurno();
+  }
+
+  /// Executa habilidade especial de um [CombatenteMonstro], controlando PM, ação e recarga.
+  void usarHabilidadeMonstro(
+    HabilidadeMonstro habilidade, {
+    Combatente? alvo,
+    int? valorDanoOuCura,
+    TipoDano? tipoDano,
+    bool ehCura = false,
+    bool ehLuz = false,
+  }) {
+    final atual = state.combatenteAtual;
+    if (atual is! CombatenteMonstro) return;
+
+    if (atual.habilidadeEmRecarga(habilidade.nome)) {
+      emit(
+        state.copyWith(
+          logCombate: [
+            ...state.logCombate,
+            "⏳ ${habilidade.nome} precisa ser recarregada (ação de ${habilidade.recarga ?? 'recarga'}) antes de ser usada novamente!",
+          ],
+        ),
+      );
+      return;
+    }
+
+    final custoPm = habilidade.custoPm;
+    if (atual.pmAtual < custoPm) {
+      emit(
+        state.copyWith(
+          logCombate: [
+            ...state.logCombate,
+            "⚠️ ${atual.nome} não possui PM suficiente para ${habilidade.nome} (exige $custoPm PM).",
+          ],
+        ),
+      );
+      return;
+    }
+
+    final tipoAcao = _parseTipoAcao(habilidade.acao);
+    if (tipoAcao != null && !gastarAcao(tipoAcao)) {
+      emit(
+        state.copyWith(
+          logCombate: [
+            ...state.logCombate,
+            "⚠️ ${atual.nome} não possui ação (${tipoAcao.label}) para usar ${habilidade.nome}!",
+          ],
+        ),
+      );
+      return;
+    }
+
+    CombatenteMonstro atualizado = atual.copyWith(
+      pmAtual: atual.pmAtual - custoPm,
+    );
+    if (habilidade.recarga != null && habilidade.recarga!.trim().isNotEmpty) {
+      atualizado = atualizado.marcarHabilidadeEmRecarga(habilidade.nome);
+    }
+
+    List<Combatente> novaFila = state.filaIniciativa.map((c) {
+      return c.id == atual.id ? atualizado : c;
+    }).toList();
+
+    final logs = <String>[
+      "🔥 ${atual.nome} usou ${habilidade.nome}${custoPm > 0 ? ' ($custoPm PM)' : ''}"
+          "${habilidade.recarga != null ? ' [Entrou em recarga: ${habilidade.recarga}]' : ''}.",
+    ];
+
+    if (alvo != null && valorDanoOuCura != null && valorDanoOuCura > 0) {
+      novaFila = novaFila.map((c) {
+        if (c.id == alvo.id) {
+          if (ehCura) {
+            final res = c.aplicarCura(valorDanoOuCura, ehLuz: ehLuz);
+            logs.add("💚 ${alvo.nome} afetado por cura de ${habilidade.nome}.");
+            return res;
+          } else {
+            final res = c.aplicarDano(valorDanoOuCura, tipo: tipoDano);
+            final danoEfetivo = c.pvAtual - res.pvAtual;
+            logs.add("💥 ${alvo.nome} sofreu ${danoEfetivo >= 0 ? danoEfetivo : 0} de dano (${habilidade.nome}).");
+            return res;
+          }
+        }
+        return c;
+      }).toList();
+    }
+
+    final statusFinal = _engine.verificarFimDeCombate(novaFila);
+    emit(
+      state.copyWith(
+        filaIniciativa: novaFila,
+        statusCombate: statusFinal,
+        logCombate: [...state.logCombate, ...logs],
+      ),
+    );
+  }
+
+  /// Recarrega habilidade de [CombatenteMonstro] gastando a ação especificada na ficha.
+  void recarregarHabilidadeMonstro(HabilidadeMonstro habilidade) {
+    final atual = state.combatenteAtual;
+    if (atual is! CombatenteMonstro) return;
+    if (!atual.habilidadeEmRecarga(habilidade.nome)) return;
+
+    final tipoAcao = _parseTipoAcao(habilidade.recarga ?? 'movimento') ??
+        TipoAcao.movimento;
+    if (!gastarAcao(tipoAcao)) {
+      emit(
+        state.copyWith(
+          logCombate: [
+            ...state.logCombate,
+            "⚠️ ${atual.nome} não possui ação (${tipoAcao.label}) para recarregar ${habilidade.nome}!",
+          ],
+        ),
+      );
+      return;
+    }
+
+    final recarregado = atual.recarregarHabilidade(habilidade.nome);
+    final novaFila = state.filaIniciativa.map((c) {
+      return c.id == atual.id ? recarregado : c;
+    }).toList();
+
+    emit(
+      state.copyWith(
+        filaIniciativa: novaFila,
+        logCombate: [
+          ...state.logCombate,
+          "🔄 ${atual.nome} gastou ação de ${tipoAcao.label} e recarregou ${habilidade.nome}!",
+        ],
+      ),
+    );
+  }
+
+  TipoAcao? _parseTipoAcao(String? acaoRaw) {
+    if (acaoRaw == null) return null;
+    final n = acaoRaw.trim().toLowerCase();
+    if (n.isEmpty || n.contains('passiva')) return null;
+    if (n.contains('completa')) return TipoAcao.completa;
+    if (n.contains('movimento')) return TipoAcao.movimento;
+    if (n.contains('livre')) return TipoAcao.livre;
+    if (n.contains('reac') || n.contains('reaç')) return TipoAcao.reacao;
+    return TipoAcao.padrao;
   }
 }

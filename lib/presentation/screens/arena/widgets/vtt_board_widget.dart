@@ -324,14 +324,16 @@ class _VttBoardWidgetState extends State<VttBoardWidget> {
 
     final bool ehVez = widget.state.combatenteAtual?.id == id;
     final bool ehHeroi = combatente.time == TimeCombatente.heroi;
+    final int span = combatente.tamanhoQuadrados;
 
     return Positioned(
       left: pos.x * w + 2,
       top: pos.y * h + 2,
-      width: w - 4,
-      height: h - 4,
+      width: w * span - 4,
+      height: h * span - 4,
       child: Tooltip(
-        message: '${combatente.nome} (${combatente.pvAtual}/${combatente.pvMax} PV | Def: ${combatente.defesa})',
+        message:
+            '${combatente.nome}${span > 1 ? ' (${span}x$span)' : ''} (${combatente.pvAtual}/${combatente.pvMax} PV | Def: ${combatente.defesa})',
         child: Semantics(
           label: 'Token de ${combatente.nome}, ${combatente.pvAtual} de ${combatente.pvMax} pontos de vida',
           button: true,
@@ -340,7 +342,8 @@ class _VttBoardWidgetState extends State<VttBoardWidget> {
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 200),
               decoration: BoxDecoration(
-                shape: BoxShape.circle,
+                shape: span > 1 ? BoxShape.rectangle : BoxShape.circle,
+                borderRadius: span > 1 ? BorderRadius.circular(12) : null,
                 color: ehHeroi ? const Color(0xFF1E88E5) : const Color(0xFFE53935),
                 border: Border.all(
                   color: ehVez ? Colors.amberAccent : Colors.white,
@@ -356,17 +359,44 @@ class _VttBoardWidgetState extends State<VttBoardWidget> {
                       ]
                     : null,
               ),
-              child: Center(
-                child: Text(
-                  combatente.nome.isNotEmpty
-                      ? combatente.nome[0].toUpperCase()
-                      : '?',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w900,
-                    fontSize: 13,
+              child: Stack(
+                children: [
+                  Center(
+                    child: Text(
+                      combatente.nome.isNotEmpty
+                          ? combatente.nome[0].toUpperCase()
+                          : '?',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w900,
+                        fontSize: span > 1 ? 18 : 13,
+                      ),
+                    ),
                   ),
-                ),
+                  if (span > 1)
+                    Positioned(
+                      right: 4,
+                      bottom: 2,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 4,
+                          vertical: 1,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.black54,
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: Text(
+                          '${span}x$span',
+                          style: const TextStyle(
+                            color: Colors.white70,
+                            fontSize: 9,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                ],
               ),
             ),
           ),

@@ -1,0 +1,762 @@
+[
+  {
+    "id": "geraktril",
+    "nome": "Geraktril",
+    "nd": "6",
+    "regiao": "tormenta",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "lefeu",
+    "tamanho": "medio",
+    "iniciativa": 13,
+    "percepcao": 16,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 30,
+    "resistencias": {
+      "fortitude": 18,
+      "reflexos": 15,
+      "vontade": 6
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [
+      "acertos_criticos",
+      "cansaco",
+      "paralisia",
+      "metabolismo",
+      "metamorfose"
+    ],
+    "imunidadesDano": [
+      "acido",
+      "eletricidade",
+      "fogo",
+      "frio",
+      "luz",
+      "trevas",
+      "veneno"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 240,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 7,
+      "des": 5,
+      "con": 3,
+      "int": 1,
+      "sab": 3,
+      "car": -1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Pinça (x2)",
+        "bonusAtaque": 23,
+        "dano": "3d6+10",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra",
+        "bonusAtaque": 23,
+        "dano": "1d8+10",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Insanidade da Tormenta",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 22,
+        "resistenciaTipo": "vontade",
+        "descricao": "Criatura que veja um ou mais lefeu faz Von CD 22 ou perde 2d4 PM. Reduzida a 0 PM, fica confusa. Uma vez por dia."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "maniaco_lefou",
+    "nome": "Maníaco Lefou",
+    "nd": "2",
+    "regiao": "tormenta",
+    "papel": "lacaio",
+    "tipo": "humanoide",
+    "subtipo": "lefou",
+    "tamanho": "medio",
+    "iniciativa": 4,
+    "percepcao": 2,
+    "sentidos": [],
+    "defesa": 18,
+    "resistencias": {
+      "fortitude": 12,
+      "reflexos": 7,
+      "vontade": 3
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 25,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 1,
+      "con": 1,
+      "int": -1,
+      "sab": -1,
+      "car": -2
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Machado de guerra",
+        "bonusAtaque": 16,
+        "dano": "1d12+15",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Frenesi Insano",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Sempre que causa ou sofre dano, recebe +2 cumulativo em testes de ataque e rolagens de dano até fim da cena."
+      }
+    ],
+    "equipamento": [
+      "Machado de guerra"
+    ],
+    "tesouro": "metade",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "otyugh",
+    "nome": "Otyugh",
+    "nd": "5",
+    "regiao": "tormenta",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 3,
+    "percepcao": 10,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 24,
+    "resistencias": {
+      "fortitude": 17,
+      "reflexos": 11,
+      "vontade": 5
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [
+      "doencas"
+    ],
+    "imunidadesDano": [
+      "veneno"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 213,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": -1,
+      "con": 4,
+      "int": -2,
+      "sab": 1,
+      "car": -2
+    },
+    "pericias": {
+      "furtividade": 3
+    },
+    "ataques": [
+      {
+        "nome": "Tentáculo (x2)",
+        "bonusAtaque": 17,
+        "dano": "1d8+9",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 17,
+        "dano": "1d6+9",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": "doença"
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se acerta tentáculo, pode usar agarrar (teste +19). Alcance de 4,5m."
+      },
+      {
+        "nome": "Constrição",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada turno, causa 1d8+9 de impacto na criatura agarrada."
+      },
+      {
+        "nome": "Doença",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Mordida expõe à doença infecção do esgoto."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "reishid",
+    "nome": "Reishid",
+    "nd": "8",
+    "regiao": "tormenta",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "lefeu",
+    "tamanho": "medio",
+    "iniciativa": 17,
+    "percepcao": 19,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 37,
+    "resistencias": {
+      "fortitude": 19,
+      "reflexos": 21,
+      "vontade": 10
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [
+      "acertos_criticos",
+      "cansaco",
+      "paralisia",
+      "metabolismo",
+      "metamorfose"
+    ],
+    "imunidadesDano": [
+      "acido",
+      "eletricidade",
+      "fogo",
+      "frio",
+      "luz",
+      "trevas",
+      "veneno"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 295,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 15.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 7,
+      "con": 4,
+      "int": 4,
+      "sab": 4,
+      "car": 1
+    },
+    "pericias": {
+      "furtividade": 20
+    },
+    "ataques": [
+      {
+        "nome": "Adaga da Tormenta",
+        "bonusAtaque": 30,
+        "dano": "1d4+18",
+        "danoExtra": "1d8 trevas",
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra",
+        "bonusAtaque": 30,
+        "dano": "1d6+18",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 30,
+        "dano": "1d6+18",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": "veneno"
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Ataque em Movimento",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Pode se mover antes e depois da ação agredir, desde que a distância total não exceda seu deslocamento."
+      },
+      {
+        "nome": "Ataque Reflexo",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, pode atacar um alvo adjacente desprevenido ou que se mova para fora do seu alcance."
+      },
+      {
+        "nome": "Insanidade da Tormenta",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 26,
+        "resistenciaTipo": "vontade",
+        "descricao": "Lefeu mais poderoso; criaturas que os vejam fazem Von CD 26 ou perdem 2d6 PM. Confusa se chegar a 0 PM. Uma vez por dia."
+      },
+      {
+        "nome": "Sombra Rubra",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Em testes de Iniciativa ou Furtividade, rola dois dados e usa o melhor resultado."
+      },
+      {
+        "nome": "Veneno",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 26,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Paralisia por 1d6 horas (Fort CD 26 reduz para lento por 1d6 rodadas)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao mais adaga da tormenta",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "sacerdote_de_aharadak",
+    "nome": "Sacerdote de Aharadak",
+    "nd": "10",
+    "regiao": "tormenta",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 17,
+    "percepcao": 15,
+    "sentidos": [],
+    "defesa": 38,
+    "resistencias": {
+      "fortitude": 16,
+      "reflexos": 10,
+      "vontade": 22
+    },
+    "rd": {
+      "acido": 10,
+      "eletricidade": 10,
+      "fogo": 10,
+      "frio": 10,
+      "luz": 10,
+      "trevas": 10
+    },
+    "imunidadesEfeitos": [
+      "confusao"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 315,
+    "pm": 56,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 15.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 3,
+      "con": 5,
+      "int": 4,
+      "sab": 6,
+      "car": 5
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Correntes de espinhos aberrantes (x2)",
+        "bonusAtaque": 30,
+        "dano": "4d6+12",
+        "danoExtra": "1d6 acido",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte_acido",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 30,
+        "dano": "1d6+12",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Magia Acelerada",
+        "acao": "livre",
+        "custoPm": 4,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, muda a execução de uma magia para livre."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 30,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como clérigo de Aharadak de 10º nível (CD 30). Curar Ferimentos e outras magias divinas aberrantes."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "thuwarokk",
+    "nome": "Thuwarokk",
+    "nd": "16",
+    "regiao": "tormenta",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "lefeu",
+    "tamanho": "colossal",
+    "iniciativa": 11,
+    "percepcao": 12,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 50,
+    "resistencias": {
+      "fortitude": 30,
+      "reflexos": 24,
+      "vontade": 16
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [
+      "acertos_criticos",
+      "cansaco",
+      "paralisia",
+      "metabolismo",
+      "metamorfose"
+    ],
+    "imunidadesDano": [
+      "acido",
+      "eletricidade",
+      "fogo",
+      "frio",
+      "luz",
+      "trevas",
+      "veneno"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 900,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 17,
+      "des": -1,
+      "con": 10,
+      "int": -3,
+      "sab": 0,
+      "car": -4
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Pancada (x4)",
+        "bonusAtaque": 48,
+        "dano": "4d12+24",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Carapaça",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 25,
+        "resistenciaTipo": null,
+        "descricao": "Reduz todo dano de corte, impacto e perfuração à metade. Se passar em salvaguarda contra magia-alvo, a magia é revertida contra o conjurador. Pontos fracos podem ser encontrados com Percepção CD 25; atacar um ponto fraco tem –5 no ataque mas ignora as proteções da carapaça."
+      },
+      {
+        "nome": "Insanidade da Tormenta",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 42,
+        "resistenciaTipo": "vontade",
+        "descricao": "Criaturas que vejam o thuwarokk fazem Von CD 42 ou perdem 2d12 PM. Confusa se chegar a 0 PM. Uma vez por dia."
+      },
+      {
+        "nome": "Jato de Ácido",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 42,
+        "resistenciaTipo": "reflexos",
+        "descricao": "Cone de 30m. Criaturas sofrem 10d8+20 de ácido (Ref CD 42 reduz à metade). Recarga (movimento)."
+      },
+      {
+        "nome": "Passar por Cima",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 42,
+        "resistenciaTipo": "reflexos",
+        "descricao": "Percorre até o dobro do deslocamento, passando por criaturas Enormes ou menores. Atropeladas sofrem 10d12+50 de dano (Ref CD 42 reduz à metade)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "uktril",
+    "nome": "Uktril",
+    "nd": "3",
+    "regiao": "tormenta",
+    "papel": "especial",
+    "tipo": "monstro",
+    "subtipo": "lefeu",
+    "tamanho": "medio",
+    "iniciativa": 9,
+    "percepcao": 10,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 22,
+    "resistencias": {
+      "fortitude": 12,
+      "reflexos": 11,
+      "vontade": 6
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [
+      "acertos_criticos",
+      "cansaco",
+      "paralisia",
+      "metabolismo",
+      "metamorfose"
+    ],
+    "imunidadesDano": [
+      "acido",
+      "eletricidade",
+      "fogo",
+      "frio",
+      "luz",
+      "trevas",
+      "veneno"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 45,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 4,
+      "con": 2,
+      "int": -1,
+      "sab": 2,
+      "car": -4
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Pinça",
+        "bonusAtaque": 16,
+        "dano": "2d6+6",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra",
+        "bonusAtaque": 16,
+        "dano": "1d6+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Insanidade da Tormenta",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 17,
+        "resistenciaTipo": "vontade",
+        "descricao": "Criatura que veja um ou mais lefeu faz Von CD 17 ou perde 1d6 PM. Reduzida a 0 PM, fica confusa. Uma vez por dia."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum",
+    "recursoExtraivel": null
+  }
+]

@@ -1,0 +1,2426 @@
+[
+  {
+    "id": "dragao_adulto",
+    "nome": "Dragão Adulto",
+    "nd": "11",
+    "regiao": "dragoes",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "dragao",
+    "tamanho": "enorme",
+    "iniciativa": 12,
+    "percepcao": 15,
+    "sentidos": [
+      "percepcao_as_cegas",
+      "visao_no_escuro"
+    ],
+    "defesa": 42,
+    "resistencias": {
+      "fortitude": 24,
+      "reflexos": 11,
+      "vontade": 18
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "fogo"
+    ],
+    "vulnerabilidadesDano": [
+      "frio"
+    ],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +3"
+    ],
+    "pv": 600,
+    "pm": 70,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 24.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 13,
+      "des": 1,
+      "con": 10,
+      "int": 6,
+      "sab": 6,
+      "car": 6
+    },
+    "pericias": {
+      "enganacao": 22,
+      "intimidacao": 22,
+      "intuicao": 22,
+      "misticismo": 22
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 35,
+        "dano": "4d10+25",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 35,
+        "dano": "3d10+25",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Aura Aterradora",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 31,
+        "resistenciaTipo": "vontade",
+        "descricao": "Vontade CD 31 evita."
+      },
+      {
+        "nome": "Magia",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 32,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como conjurador arcano de 11º nível (CD 32). Campo de Força (Reação, 4 PM), Curar Ferimentos (11 PM), Dissipar Magia (3 PM)."
+      },
+      {
+        "nome": "Sopro",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Cone de fogo com dano elevado. Recarga (movimento)."
+      },
+      {
+        "nome": "Varrer",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando reduz um alvo a 0 PV, pode fazer um ataque adicional contra outra criatura no alcance."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "dobro",
+    "recursoExtraivel": {
+      "nome": "4 peças de couro de dragão",
+      "pericia": "sobrevivencia",
+      "cdBase": 30
+    }
+  },
+  {
+    "id": "dragao_adulto_da_tirania",
+    "nome": "Dragão Adulto da Tirania",
+    "nd": "11",
+    "regiao": "dragoes",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "dragao",
+    "tamanho": "enorme",
+    "iniciativa": 12,
+    "percepcao": 15,
+    "sentidos": [
+      "percepcao_as_cegas",
+      "visao_no_escuro"
+    ],
+    "defesa": 42,
+    "resistencias": {
+      "fortitude": 24,
+      "reflexos": 11,
+      "vontade": 20
+    },
+    "rd": {
+      "geral": 10,
+      "magia": 3
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "luz"
+    ],
+    "vulnerabilidadesDano": [
+      "trevas"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 614,
+    "pm": 77,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 24.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 11,
+      "des": 1,
+      "con": 8,
+      "int": 4,
+      "sab": 4,
+      "car": 4
+    },
+    "pericias": {
+      "atletismo": 32,
+      "intimidacao": 15,
+      "misticismo": 15
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 34,
+        "dano": "4d10+25",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 34,
+        "dano": "3d10+25",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Aura Aterradora",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 32,
+        "resistenciaTipo": null,
+        "descricao": "Vontade CD 32 evita."
+      },
+      {
+        "nome": "Imposição Avassaladora",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 32,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando o dragão reduz os PV de um inimigo para 0 ou menos, outros inimigos em alcance médio sofrem 4d12 pontos de dano psíquico (Vontade CD 32 reduz à metade)."
+      },
+      {
+        "nome": "Sopro",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "acao_de_movimento",
+        "cdResistencia": 32,
+        "resistenciaTipo": null,
+        "descricao": "Criaturas em uma linha de 18m sofrem 12d12 pontos de dano de luz e ficam cegas por 1d4 rodadas (Reflexos CD 32 reduz à metade e evita a condição; só uma vez por cena por criatura). Recarga (ação de movimento)."
+      },
+      {
+        "nome": "Magias (conjurador arcano, 11º nível, CD 32)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Campo de Força (4 PM, reação; RD 30 contra o dano sofrido), Desespero Esmagador (11 PM; cone de 6m, debilitado/esmorecido até o fim da cena, pasmo 1 rodada), Dissipar Magia (3 PM), Enfeitiçar (1 PM), Luz (1 PM), Tempestade Divina (9 PM, completa, sustentada; vendaval com chuva em cilindro de 90m, revela invisíveis, torna lentos Médios ou menores, força teste de Atletismo para voadores não caírem)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "dobro",
+    "recursoExtraivel": {
+      "nome": "4 peças de couro de dragão",
+      "pericia": "sobrevivencia",
+      "cdBase": 26
+    }
+  },
+  {
+    "id": "dragao_adulto_dos_segredos",
+    "nome": "Dragão Adulto dos Segredos",
+    "nd": "11",
+    "regiao": "dragoes",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "dragao",
+    "tamanho": "enorme",
+    "iniciativa": 14,
+    "percepcao": 17,
+    "sentidos": [
+      "percepcao_as_cegas",
+      "visao_no_escuro"
+    ],
+    "defesa": 40,
+    "resistencias": {
+      "fortitude": 13,
+      "reflexos": 17,
+      "vontade": 25
+    },
+    "rd": {
+      "geral": 10,
+      "magia": 3
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "trevas"
+    ],
+    "vulnerabilidadesDano": [
+      "luz"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 522,
+    "pm": 90,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 24.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 7,
+      "des": 1,
+      "con": 6,
+      "int": 8,
+      "sab": 6,
+      "car": 6
+    },
+    "pericias": {
+      "conhecimento": 19,
+      "enganacao": 17,
+      "intimidacao": 17,
+      "intuicao": 25,
+      "misticismo": 19
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 33,
+        "dano": "3d12+20",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 35,
+        "dano": "2d12+20",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Aura Aterradora",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 32,
+        "resistenciaTipo": null,
+        "descricao": "Vontade CD 32 evita."
+      },
+      {
+        "nome": "Enxergar as Farsas (mágica)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O dragão adulto dos segredos está permanentemente sob o efeito básico da magia Visão da Verdade."
+      },
+      {
+        "nome": "Esmiuçar a Alma",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando uma criatura fica abalada pelo dragão, ele enxerga seus segredos mais profundos: obtém informações a critério do mestre e, até o fim da cena, recebe +2 em testes de perícia contra ela e passa automaticamente em testes de Intuição contra ela."
+      },
+      {
+        "nome": "Magia Ampliada",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando lança uma magia, o dragão aumenta seu alcance em um passo (de curto para médio, de médio para longo) ou dobra sua área de efeito."
+      },
+      {
+        "nome": "Sopro",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "acao_de_movimento",
+        "cdResistencia": 38,
+        "resistenciaTipo": null,
+        "descricao": "Criaturas numa esfera de 9m em alcance médio sofrem 12d12 pontos de dano de trevas e ficam enjoadas por 1d4 rodadas (Reflexos CD 38 reduz à metade e evita a condição; só uma vez por cena por criatura). Recarga (ação de movimento)."
+      },
+      {
+        "nome": "Magias (conjurador arcano, 11º nível, CD 35)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Campo de Força (7 PM, reação; RD 50 contra o dano sofrido), Compreensão (4 PM; extrai informações dos pensamentos, Vontade anula), Criar Ilusão (9 PM; ilusões com imagens, sons e texturas em até 9 cubos de 1,5m, Vontade desacredita), Desespero Esmagador (8 PM; cone de 6m, debilitado/esmorecido pela cena), Dissipar Magia (3 PM), Escuridão (3 PM), Marca da Obediência (6 PM; ordena a um adjacente que não ataque até o fim da cena, repetível; falha causa 3d6 de dano psíquico)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "dobro",
+    "recursoExtraivel": {
+      "nome": "4 peças de couro de dragão",
+      "pericia": "sobrevivencia",
+      "cdBase": 26
+    }
+  },
+  {
+    "id": "dragao_bicefalo",
+    "nome": "Dragão Bicéfalo",
+    "nd": "12",
+    "regiao": "dragoes",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "dragao",
+    "tamanho": "enorme",
+    "iniciativa": 13,
+    "percepcao": 17,
+    "sentidos": [
+      "nao_pode_ser_flanqueado",
+      "percepcao_as_cegas",
+      "visao_no_escuro"
+    ],
+    "defesa": 44,
+    "resistencias": {
+      "fortitude": 26,
+      "reflexos": 12,
+      "vontade": 20
+    },
+    "rd": {
+      "geral": 10,
+      "magia": 3
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "acido",
+      "eletricidade"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 650,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 24.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 11,
+      "des": 1,
+      "con": 8,
+      "int": 3,
+      "sab": 5,
+      "car": 4
+    },
+    "pericias": {
+      "enganacao": 16,
+      "intimidacao": 16,
+      "misticismo": 15
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 36,
+        "dano": "4d10+26",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra",
+        "bonusAtaque": 36,
+        "dano": "3d10+26",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Aura Aterradora",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 33,
+        "resistenciaTipo": null,
+        "descricao": "Vontade CD 33 evita."
+      },
+      {
+        "nome": "Duas Mentes",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O dragão bicéfalo faz uma ação padrão adicional por rodada. Além disso, quando faz um teste de Vontade, rola dois dados e escolhe o melhor resultado."
+      },
+      {
+        "nome": "Sopro",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "acao_de_movimento",
+        "cdResistencia": 33,
+        "resistenciaTipo": null,
+        "descricao": "O dragão usa um dos sopros a seguir. Esfera Elétrica: dispara raios em uma esfera de 9m em alcance médio, criaturas na área sofrem 12d12 de dano de eletricidade e ficam ofuscadas por 1d4 rodadas (Reflexos CD 33 reduz à metade e evita a condição). Nuvem Cáustica: nuvem de ácido cobre um cubo de 9m por 2 rodadas; criaturas que comecem seus turnos na área sofrem 12d6 de dano de ácido e ficam vulneráveis por 1d4 rodadas (Fortitude CD 33 reduz à metade e evita a condição). Recarga (ação de movimento)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "dobro e 4 pecas de couro de dragao (2 de dragao de acido, 2 de dragao eletrico; cd 27 para extrair).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "dragao_feral",
+    "nome": "Dragão Feral",
+    "nd": "10",
+    "regiao": "dragoes",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "dragao",
+    "tamanho": "enorme",
+    "iniciativa": 13,
+    "percepcao": 12,
+    "sentidos": [
+      "faro",
+      "percepcao_as_cegas",
+      "visao_no_escuro"
+    ],
+    "defesa": 38,
+    "resistencias": {
+      "fortitude": 22,
+      "reflexos": 10,
+      "vontade": 14
+    },
+    "rd": {
+      "geral": 10,
+      "magia": 3
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "frio"
+    ],
+    "vulnerabilidadesDano": [
+      "fogo"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 495,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 24.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 13,
+      "des": 3,
+      "con": 10,
+      "int": -3,
+      "sab": 2,
+      "car": -1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 30,
+        "dano": "3d12+14",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 30,
+        "dano": "2d10+14",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Amadurecimento Primitivo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O dragão feral conta como um dragão adulto, mas não possui as habilidades Magia Dracônica e Metamorfose Dracônica."
+      },
+      {
+        "nome": "Aura Aterradora",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 30,
+        "resistenciaTipo": null,
+        "descricao": "Vontade CD 30 evita."
+      },
+      {
+        "nome": "Dilacerar",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se o dragão acerta os dois ataques de garra em uma mesma criatura no mesmo turno, causa mais 3d10+14 pontos de dano."
+      },
+      {
+        "nome": "Investida Imparável",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": "acao_de_movimento",
+        "cdResistencia": 30,
+        "resistenciaTipo": null,
+        "descricao": "O dragão se move até o dobro do seu deslocamento, passando por qualquer criatura Grande ou menor. Criaturas em seu caminho sofrem 7d8+14 pontos de dano de corte, são empurradas até o fim do deslocamento do dragão e ficam caídas na frente dele (Reflexos CD 30 reduz à metade e evita o empurrão, mas não a condição caído). Recarga (ação de movimento)."
+      },
+      {
+        "nome": "Sopro",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "acao_de_movimento",
+        "cdResistencia": 30,
+        "resistenciaTipo": null,
+        "descricao": "Todas as criaturas em um cone de 12m sofrem 12d12 pontos de dano de frio e ficam lentas (Reflexos CD 30 reduz à metade e evita a condição). Recarga (ação de movimento)."
+      },
+      {
+        "nome": "Varrer",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando o dragão faz um ataque corpo a corpo e reduz os PV do alvo para 0 ou menos, pode realizar um ataque adicional contra outra criatura dentro do seu alcance."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao",
+    "recursoExtraivel": {
+      "nome": "2 peças de couro de dragão",
+      "pericia": "sobrevivencia",
+      "cdBase": 25
+    }
+  },
+  {
+    "id": "dragao_filhote",
+    "nome": "Dragão Filhote",
+    "nd": "3",
+    "regiao": "dragoes",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "dragao",
+    "tamanho": "medio",
+    "iniciativa": 6,
+    "percepcao": 8,
+    "sentidos": [
+      "percepcao_as_cegas",
+      "visao_no_escuro"
+    ],
+    "defesa": 22,
+    "resistencias": {
+      "fortitude": 15,
+      "reflexos": 3,
+      "vontade": 9
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "fogo"
+    ],
+    "vulnerabilidadesDano": [
+      "frio"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 140,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 18.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 3,
+      "con": 3,
+      "int": 0,
+      "sab": 0,
+      "car": 0
+    },
+    "pericias": {
+      "intimidacao": 11
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 15,
+        "dano": "2d6+5",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 15,
+        "dano": "1d6+5",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Sopro",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 18,
+        "resistenciaTipo": "reflexos",
+        "descricao": "Cone de 6m. Criaturas sofrem 2d12 de fogo e ficam em chamas (Ref CD 18 reduz à metade e evita). Recarga (movimento)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "dragao_filhote_do_bosque",
+    "nome": "Dragão Filhote do Bosque",
+    "nd": "3",
+    "regiao": "dragoes",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "dragao",
+    "tamanho": "medio",
+    "iniciativa": 8,
+    "percepcao": 6,
+    "sentidos": [
+      "percepcao_as_cegas",
+      "visao_no_escuro"
+    ],
+    "defesa": 21,
+    "resistencias": {
+      "fortitude": 14,
+      "reflexos": 3,
+      "vontade": 10
+    },
+    "rd": {
+      "magia": 1
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "acido"
+    ],
+    "vulnerabilidadesDano": [
+      "eletricidade"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 120,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 18.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 3,
+      "con": 2,
+      "int": -1,
+      "sab": 1,
+      "car": 0
+    },
+    "pericias": {
+      "furtividade": 7
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 14,
+        "dano": "2d6+4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 14,
+        "dano": "1d6+4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Bote",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O dragão filhote do bosque faz uma investida e ataca com sua mordida e suas duas garras. Os três ataques recebem o bônus de +2 da investida, mas devem ser feitos contra o mesmo alvo."
+      },
+      {
+        "nome": "Sopro",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "acao_de_movimento",
+        "cdResistencia": 18,
+        "resistenciaTipo": null,
+        "descricao": "Todas as criaturas numa esfera de 3m em alcance curto sofrem 2d12 pontos de dano de ácido e ficam vulneráveis por 1d4 rodadas (Reflexos CD 18 reduz à metade e evita a condição). Recarga (ação de movimento)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "dragao_filhote_dos_rios",
+    "nome": "Dragão Filhote dos Rios",
+    "nd": "3",
+    "regiao": "dragoes",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "dragao",
+    "tamanho": "grande",
+    "iniciativa": 9,
+    "percepcao": 6,
+    "sentidos": [
+      "percepcao_as_cegas",
+      "visao_no_escuro"
+    ],
+    "defesa": 22,
+    "resistencias": {
+      "fortitude": 12,
+      "reflexos": 6,
+      "vontade": 10
+    },
+    "rd": {
+      "magia": 1
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "eletricidade"
+    ],
+    "vulnerabilidadesDano": [
+      "acido"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 120,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 18.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 4,
+      "con": 3,
+      "int": 0,
+      "sab": 0,
+      "car": 0
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 13,
+        "dano": "2d6+4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 13,
+        "dano": "1d6+4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Sopro",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": "acao_de_movimento",
+        "cdResistencia": 18,
+        "resistenciaTipo": null,
+        "descricao": "Todas as criaturas em um cone de 6m sofrem 2d12 pontos de dano de eletricidade e ficam ofuscadas por 1d4 rodadas (Reflexos CD 18 reduz à metade e evita a condição). Recarga (ação de movimento)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "dragao_jovem",
+    "nome": "Dragão Jovem",
+    "nd": "7",
+    "regiao": "dragoes",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "dragao",
+    "tamanho": "grande",
+    "iniciativa": 11,
+    "percepcao": 11,
+    "sentidos": [
+      "percepcao_as_cegas",
+      "visao_no_escuro"
+    ],
+    "defesa": 32,
+    "resistencias": {
+      "fortitude": 20,
+      "reflexos": 9,
+      "vontade": 12
+    },
+    "rd": {
+      "geral": 5,
+      "magia": 2
+    },
+    "imunidadesEfeitos": [
+      "atordoamento",
+      "paralisia",
+      "metamorfose"
+    ],
+    "imunidadesDano": [
+      "fogo"
+    ],
+    "vulnerabilidadesDano": [
+      "frio"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 320,
+    "pm": 15,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 18.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 7,
+      "des": 2,
+      "con": 6,
+      "int": 2,
+      "sab": 2,
+      "car": 2
+    },
+    "pericias": {
+      "intimidacao": 11
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 25,
+        "dano": "2d6+14",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 25,
+        "dano": "1d8+14",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Sopro",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 25,
+        "resistenciaTipo": "reflexos",
+        "descricao": "Cone de 9m. Criaturas sofrem 6d12 de fogo e ficam em chamas (Ref CD 25 reduz à metade e evita). Recarga (movimento)."
+      },
+      {
+        "nome": "Metamorfose Dracônica",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Transforma-se em outras criaturas como a magia Metamorfose, sem limitação de tamanho mínimo."
+      },
+      {
+        "nome": "Varrer",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando reduz o alvo a 0 PV com ataque corpo a corpo, pode fazer um ataque adicional contra outra criatura no alcance."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "dobro",
+    "recursoExtraivel": {
+      "nome": "2 peças de couro de dragão",
+      "pericia": "sobrevivencia",
+      "cdBase": 22
+    }
+  },
+  {
+    "id": "dragao_jovem_da_protecao",
+    "nome": "Dragão Jovem da Proteção",
+    "nd": "7",
+    "regiao": "dragoes",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "dragao",
+    "tamanho": "grande",
+    "iniciativa": 11,
+    "percepcao": 11,
+    "sentidos": [
+      "percepcao_as_cegas",
+      "visao_no_escuro"
+    ],
+    "defesa": 32,
+    "resistencias": {
+      "fortitude": 20,
+      "reflexos": 9,
+      "vontade": 12
+    },
+    "rd": {
+      "geral": 5,
+      "magia": 2
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "eletricidade"
+    ],
+    "vulnerabilidadesDano": [
+      "acido"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 320,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 18.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 7,
+      "des": 2,
+      "con": 6,
+      "int": 2,
+      "sab": 2,
+      "car": 2
+    },
+    "pericias": {
+      "diplomacia": 11
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 25,
+        "dano": "2d6+14",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 25,
+        "dano": "1d8+14",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Fortificação",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "25% de chance de ignorar completamente qualquer efeito que exija uma localização anatômica vital."
+      },
+      {
+        "nome": "Asas Guardiãs",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Todos os aliados adjacentes ao dragão recebem redução de dano 5 até o fim da cena."
+      },
+      {
+        "nome": "Sopro",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "acao_de_movimento",
+        "cdResistencia": 25,
+        "resistenciaTipo": null,
+        "descricao": "Todas as criaturas em uma linha de 12m sofrem 6d12 pontos de dano de eletricidade e ficam ofuscadas por 1d4 rodadas (Reflexos CD 25 reduz à metade e evita a condição). Cada vez que rolar o valor máximo em um dado do sopro, role um dado extra e some ao dano total. Recarga (ação de movimento)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "dobro",
+    "recursoExtraivel": {
+      "nome": "2 peças de couro de dragão",
+      "pericia": "sobrevivencia",
+      "cdBase": 22
+    }
+  },
+  {
+    "id": "dragao_jovem_do_ocaso",
+    "nome": "Dragão Jovem do Ocaso",
+    "nd": "7",
+    "regiao": "dragoes",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "dragao",
+    "tamanho": "grande",
+    "iniciativa": 11,
+    "percepcao": 12,
+    "sentidos": [
+      "percepcao_as_cegas",
+      "visao_no_escuro"
+    ],
+    "defesa": 31,
+    "resistencias": {
+      "fortitude": 20,
+      "reflexos": 9,
+      "vontade": 15
+    },
+    "rd": {
+      "geral": 5,
+      "magia": 2
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "frio"
+    ],
+    "vulnerabilidadesDano": [
+      "fogo"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 320,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 18.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 3,
+      "con": 5,
+      "int": 3,
+      "sab": 3,
+      "car": 2
+    },
+    "pericias": {
+      "intimidacao": 11
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 24,
+        "dano": "2d6+14",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 24,
+        "dano": "1d8+14",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Mordida Definhante",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 25,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura atingida pela mordida do dragão jovem do ocaso fica alquebrada (Vontade CD 25 evita; a criatura não pode mais ser afetada por esta habilidade até o fim da cena)."
+      },
+      {
+        "nome": "Sopro",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "acao_de_movimento",
+        "cdResistencia": 25,
+        "resistenciaTipo": null,
+        "descricao": "Todas as criaturas em um cone de 9m sofrem 6d12 pontos de dano de frio e ficam lentas por 1d4 rodadas (Reflexos CD 25 reduz à metade e evita a condição). Recarga (ação de movimento)."
+      },
+      {
+        "nome": "Ver o Fim",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O dragão percebe automaticamente a presença, posição e status de criaturas em alcance médio, como o efeito básico da magia Condição."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "dobro",
+    "recursoExtraivel": {
+      "nome": "2 peças de couro de dragão",
+      "pericia": "sobrevivencia",
+      "cdBase": 22
+    }
+  },
+  {
+    "id": "dragao_veneravel",
+    "nome": "Dragão Venerável",
+    "nd": "15",
+    "regiao": "dragoes",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "dragao",
+    "tamanho": "enorme",
+    "iniciativa": 16,
+    "percepcao": 22,
+    "sentidos": [
+      "percepcao_as_cegas",
+      "visao_no_escuro"
+    ],
+    "defesa": 52,
+    "resistencias": {
+      "fortitude": 28,
+      "reflexos": 15,
+      "vontade": 22
+    },
+    "rd": {
+      "geral": 15,
+      "magia": 4
+    },
+    "imunidadesEfeitos": [
+      "atordoamento",
+      "paralisia",
+      "metamorfose"
+    ],
+    "imunidadesDano": [
+      "fogo"
+    ],
+    "vulnerabilidadesDano": [
+      "frio"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 800,
+    "pm": 97,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 24.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 13,
+      "des": 1,
+      "con": 10,
+      "int": 6,
+      "sab": 6,
+      "car": 6
+    },
+    "pericias": {
+      "enganacao": 22,
+      "intimidacao": 22,
+      "intuicao": 22,
+      "misticismo": 22
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 44,
+        "dano": "4d12+40",
+        "danoExtra": null,
+        "margemAmeaca": 17,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 44,
+        "dano": "3d12+40",
+        "danoExtra": null,
+        "margemAmeaca": 17,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Aura Aterradora",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 40,
+        "resistenciaTipo": "vontade",
+        "descricao": "Criatura que comece o turno em alcance longo fica apavorada (4 níveis ou menos) ou abalada (5+ níveis) até fim da cena (Von CD 40 evita)."
+      },
+      {
+        "nome": "Fluxo de Mana",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Pode manter duas magias sustentadas simultaneamente com apenas uma ação livre."
+      },
+      {
+        "nome": "Magia Acelerada",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, muda a execução de uma magia para livre (4 PM)."
+      },
+      {
+        "nome": "Magias (conjurador 15º, CD 40)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Campo de Força (reação, 7 PM, RD 50), Controlar a Gravidade (padrão, 10 PM), Curar Ferimentos (padrão, 15 PM, 16d8+16 PV), Dissipar Magia (padrão, 3 PM), Enfeitiçar (padrão, 1 PM), Globo de Invulnerabilidade (padrão, 10 PM, 3º círculo ou menor), Velocidade (padrão, 3 PM, sustentada)."
+      },
+      {
+        "nome": "Sopro",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 40,
+        "resistenciaTipo": "reflexos",
+        "descricao": "Cone de 15m. Criaturas sofrem 16d12 de fogo e ficam em chamas (Ref CD 40 reduz à metade e evita). Recarga (movimento)."
+      },
+      {
+        "nome": "Varrer",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando reduz o alvo a 0 PV, pode fazer um ataque adicional."
+      },
+      {
+        "nome": "Metamorfose Dracônica",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Transforma-se em outras criaturas sem limitação de tamanho mínimo."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "dobro",
+    "recursoExtraivel": {
+      "nome": "4 peças de couro de dragão",
+      "pericia": "sobrevivencia",
+      "cdBase": 30
+    }
+  },
+  {
+    "id": "dragao_veneravel_da_equidade",
+    "nome": "Dragão Venerável da Equidade",
+    "nd": "15",
+    "regiao": "dragoes",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "dragao",
+    "tamanho": "enorme",
+    "iniciativa": 16,
+    "percepcao": 22,
+    "sentidos": [
+      "percepcao_as_cegas",
+      "visao_no_escuro"
+    ],
+    "defesa": 52,
+    "resistencias": {
+      "fortitude": 28,
+      "reflexos": 15,
+      "vontade": 22
+    },
+    "rd": {
+      "geral": 15,
+      "magia": 4
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "luz"
+    ],
+    "vulnerabilidadesDano": [
+      "trevas"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 800,
+    "pm": 97,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 24.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 13,
+      "des": 1,
+      "con": 10,
+      "int": 6,
+      "sab": 6,
+      "car": 6
+    },
+    "pericias": {
+      "enganacao": 22,
+      "intimidacao": 22,
+      "intuicao": 22,
+      "misticismo": 22
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 44,
+        "dano": "4d12+40",
+        "danoExtra": null,
+        "margemAmeaca": 17,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 44,
+        "dano": "3d12+40",
+        "danoExtra": null,
+        "margemAmeaca": 17,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Aura Aterradora",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 40,
+        "resistenciaTipo": null,
+        "descricao": "Vontade CD 40 evita."
+      },
+      {
+        "nome": "Equalizar (mágica)",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 32,
+        "resistenciaTipo": null,
+        "descricao": "Quando uma criatura (incluindo o dragão) em alcance médio faz um teste, ela o refaz, escolhendo 10 em vez de rolar o dado (Vontade CD 32 evita)."
+      },
+      {
+        "nome": "Magia Acelerada",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando lança uma magia com execução de ação completa ou menor, o dragão muda a execução dela para livre."
+      },
+      {
+        "nome": "Restabelecer a Igualdade",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando sofre um ataque ou uma magia de um inimigo, o dragão pode fazer um ataque ou lançar uma de suas magias (conforme a ação sofrida) contra esse inimigo."
+      },
+      {
+        "nome": "Sopro",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "acao_de_movimento",
+        "cdResistencia": 40,
+        "resistenciaTipo": null,
+        "descricao": "Todas as criaturas em um cone de 15m sofrem 16d12 pontos de dano de luz e ficam cegas por 1d4 rodadas (Reflexos CD 40 reduz à metade, evita a condição e impede ficar cega por esta habilidade pela cena). Recarga (ação de movimento)."
+      },
+      {
+        "nome": "Magias (conjurador arcano, 15º nível, CD 40)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Círculo da Justiça (6 PM, completa; esfera de 9m, –20 em Acrobacia/Enganação/Furtividade/Ladinagem e impede mentir, Vontade reduz para –10 e permite mentir), Curar Ferimentos (15 PM; 16d8+16 PV), Desespero Esmagador (8 PM; cone de 6m, debilitado/esmorecido pela cena), Dissipar Magia (3 PM), Missão Divina (8 PM + penalidade de –1 PM; marca permanente, –2 cumulativo em ações hostis, Vontade evita), Selo de Mana (6 PM; selo que exige teste de Vontade para qualquer ação que gaste PM funcionar), Velocidade (10 PM, sustentada; ação padrão extra por turno)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "dobro",
+    "recursoExtraivel": {
+      "nome": "4 peças de couro de dragão",
+      "pericia": "sobrevivencia",
+      "cdBase": 30
+    }
+  },
+  {
+    "id": "dragao_veneravel_dos_recifes",
+    "nome": "Dragão Venerável dos Recifes",
+    "nd": "15",
+    "regiao": "dragoes",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "dragao",
+    "tamanho": "enorme",
+    "iniciativa": 19,
+    "percepcao": 20,
+    "sentidos": [
+      "percepcao_as_cegas",
+      "visao_no_escuro"
+    ],
+    "defesa": 48,
+    "resistencias": {
+      "fortitude": 28,
+      "reflexos": 20,
+      "vontade": 17
+    },
+    "rd": {
+      "geral": 15,
+      "magia": 4
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "eletricidade"
+    ],
+    "vulnerabilidadesDano": [
+      "acido"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 790,
+    "pm": 97,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 24.0,
+      "natacao": 24.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 12,
+      "des": 4,
+      "con": 10,
+      "int": 4,
+      "sab": 4,
+      "car": 8
+    },
+    "pericias": {
+      "atletismo": 25,
+      "diplomacia": 22,
+      "enganacao": 22,
+      "intimidacao": 22
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 44,
+        "dano": "4d12+30",
+        "danoExtra": null,
+        "margemAmeaca": 17,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 44,
+        "dano": "2d12+30",
+        "danoExtra": null,
+        "margemAmeaca": 17,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Cauda",
+        "bonusAtaque": 44,
+        "dano": "2d12+30",
+        "danoExtra": null,
+        "margemAmeaca": 17,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Aura Aterradora",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 40,
+        "resistenciaTipo": null,
+        "descricao": "Vontade CD 40 evita."
+      },
+      {
+        "nome": "Evasão Aprimorada",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O dragão possui a habilidade Evasão Aprimorada."
+      },
+      {
+        "nome": "Fluxo de Mana",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O dragão pode manter dois efeitos sustentados simultaneamente com apenas uma ação livre (mas pagando o custo de cada um)."
+      },
+      {
+        "nome": "Magia Acelerada",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando lança uma magia com execução de ação completa ou menor, o dragão muda a execução para livre."
+      },
+      {
+        "nome": "Profunda Paixão",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz um teste de uma perícia baseada em Carisma, o dragão rola dois dados e escolhe o melhor."
+      },
+      {
+        "nome": "Sopro",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "acao_de_movimento",
+        "cdResistencia": 40,
+        "resistenciaTipo": null,
+        "descricao": "Todas as criaturas em uma linha de 18m sofrem 16d12 pontos de dano de eletricidade e ficam ofuscadas por 1d4 rodadas (Reflexos CD 40 reduz à metade e evita a condição). Cada vez que um dado de dano do sopro rolar o valor máximo, role um dado extra e some ao total. Recarga (ação de movimento)."
+      },
+      {
+        "nome": "Magias (conjurador arcano, 15º nível, CD 40)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Campo de Força (7 PM, reação; RD 50 contra o dano sofrido), Controlar o Clima (10 PM, completa; muda o clima em esfera de 2km por 4d12 horas), Curar Ferimentos (15 PM; 16d8+16 PV), Enfeitiçar (1 PM), Globo de Invulnerabilidade (10 PM, sustentada; detém magias de 3º círculo ou menos em 3m), Suporte Ambiental (5 PM; 1 dia, imunidade a calor/frio extremos, respira na água, não sufoca em fumaça), Velocidade (10 PM, sustentada; ação padrão extra por turno)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "dobro",
+    "recursoExtraivel": {
+      "nome": "4 peças de couro de dragão",
+      "pericia": "sobrevivencia",
+      "cdBase": 30
+    }
+  },
+  {
+    "id": "dragao_rei",
+    "nome": "Dragão-Rei",
+    "nd": "20",
+    "regiao": "dragoes",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "dragao",
+    "tamanho": "colossal",
+    "iniciativa": 19,
+    "percepcao": 27,
+    "sentidos": [
+      "percepcao_as_cegas",
+      "visao_no_escuro"
+    ],
+    "defesa": 62,
+    "resistencias": {
+      "fortitude": 34,
+      "reflexos": 20,
+      "vontade": 28
+    },
+    "rd": {
+      "geral": 20
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "fogo"
+    ],
+    "vulnerabilidadesDano": [
+      "frio"
+    ],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +5"
+    ],
+    "pv": 1400,
+    "pm": 120,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 24.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 17,
+      "des": 0,
+      "con": 12,
+      "int": 7,
+      "sab": 7,
+      "car": 7
+    },
+    "pericias": {
+      "enganacao": 26,
+      "intimidacao": 26,
+      "intuicao": 26,
+      "misticismo": 26
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 45,
+        "dano": "6d12+35",
+        "danoExtra": null,
+        "margemAmeaca": 17,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 45,
+        "dano": "4d12+35",
+        "danoExtra": null,
+        "margemAmeaca": 17,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Aura Aterradora",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": "vontade",
+        "descricao": "Vontade CD alta evita. Criaturas que falhem ficam abaladas ou em pânico."
+      },
+      {
+        "nome": "Magia",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como conjurador arcano de 20º nível."
+      },
+      {
+        "nome": "Sopro",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Cone enorme de fogo devastador. Recarga (movimento)."
+      },
+      {
+        "nome": "Varrer",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando reduz um alvo a 0 PV, pode fazer um ataque adicional contra outra criatura no alcance."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "dobro",
+    "recursoExtraivel": {
+      "nome": "6 peças de couro de dragão",
+      "pericia": "sobrevivencia",
+      "cdBase": 35
+    }
+  },
+  {
+    "id": "enxame_kobold",
+    "nome": "Enxame Kobold",
+    "nd": "2",
+    "regiao": "dragoes",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "kobold",
+    "tamanho": "medio",
+    "iniciativa": 8,
+    "percepcao": 5,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 15,
+    "resistencias": {
+      "fortitude": 5,
+      "reflexos": 8,
+      "vontade": 2
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 55,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 4,
+      "con": 1,
+      "int": -1,
+      "sab": 0,
+      "car": -2
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "[Bando] Lanças e flechas",
+        "bonusAtaque": 12,
+        "dano": "2d6+4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Bando",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se o ataque exceder a Defesa por 10+, causa dobro de dano. Se errar, ainda causa metade do dano. Imune a manobras e efeitos que afetam apenas uma criatura sem dano. Sofre +50% de dano de área."
+      },
+      {
+        "nome": "Armadilhas",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Enxames kobold frequentemente preparam armadilhas nos arredores de seus covis."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "ninhada_de_dragoes_filhotes",
+    "nome": "Ninhada de Dragões Filhotes",
+    "nd": "5",
+    "regiao": "dragoes",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "dragao",
+    "tamanho": "grande",
+    "iniciativa": 9,
+    "percepcao": 7,
+    "sentidos": [
+      "percepcao_as_cegas",
+      "visao_no_escuro"
+    ],
+    "defesa": 25,
+    "resistencias": {
+      "fortitude": 14,
+      "reflexos": 8,
+      "vontade": 12
+    },
+    "rd": {
+      "magia": 1
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "fogo"
+    ],
+    "vulnerabilidadesDano": [
+      "frio"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 240,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 18.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 3,
+      "con": 3,
+      "int": 0,
+      "sab": 0,
+      "car": 0
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 18,
+        "dano": "4d6+8",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 18,
+        "dano": "2d6+8",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Bando",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Representa um bando de dragões filhotes agindo em conjunto."
+      },
+      {
+        "nome": "Avalanche de Escamas",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se a ninhada acertar os dois ataques de garra em uma mesma criatura Grande ou menor na mesma rodada, a vítima fica caída e agarrada. A ninhada pode manter uma criatura agarrada desta forma sem perder o uso de nenhuma de suas armas naturais."
+      },
+      {
+        "nome": "Sopro Duplo",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": "acao_de_movimento",
+        "cdResistencia": 21,
+        "resistenciaTipo": null,
+        "descricao": "A ninhada sopra dois cones de 6m em direções diferentes. Todas as criaturas nessas áreas sofrem 4d12 pontos de dano de fogo e ficam em chamas (Reflexos CD 21 reduz à metade e evita a condição). Recarga (ação de movimento)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "sckhar_dragao_rei_do_fogo",
+    "nome": "Sckhar, Dragão-Rei do Fogo",
+    "nd": "22",
+    "regiao": "dragoes",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "dragao",
+    "tamanho": "colossal",
+    "iniciativa": 23,
+    "percepcao": 34,
+    "sentidos": [
+      "percepcao_as_cegas_longo",
+      "visao_no_escuro"
+    ],
+    "defesa": 71,
+    "resistencias": {
+      "fortitude": 38,
+      "reflexos": 25,
+      "vontade": 33
+    },
+    "rd": {
+      "geral": 20,
+      "magia": 5
+    },
+    "imunidadesEfeitos": [
+      "encantamento"
+    ],
+    "imunidadesDano": [
+      "fogo"
+    ],
+    "vulnerabilidadesDano": [
+      "frio"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 4000,
+    "pm": 287,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 36.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 20,
+      "des": 2,
+      "con": 15,
+      "int": 12,
+      "sab": 12,
+      "car": 12
+    },
+    "pericias": {
+      "diplomacia": 33,
+      "enganacao": 33,
+      "intimidacao": 33,
+      "intuicao": 33,
+      "misticismo": 33,
+      "nobreza": 33
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 66,
+        "dano": "10d20+60",
+        "danoExtra": null,
+        "margemAmeaca": 16,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 61,
+        "dano": "10d20+60",
+        "danoExtra": null,
+        "margemAmeaca": 16,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Aqui Está, Aqui Pertence",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 55,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura em alcance longo que use habilidades de transporte planar (como Teletransporte) deve fazer um teste de Vontade (CD 55). Se falhar, a habilidade não tem efeito, mas os PM são gastos mesmo assim."
+      },
+      {
+        "nome": "Aura Aterradora",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 55,
+        "resistenciaTipo": null,
+        "descricao": "Vontade CD 55 evita. Uma criatura que falhe sofre 8d6 pontos de dano psíquico."
+      },
+      {
+        "nome": "Deus das Chamas",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "As magias de fogo de Sckhar estão sob efeito de Magia Ampliada e seus dados de dano aumentam, cada um, em dois passos (já contabilizado). Todo dano de fogo causado por Sckhar ignora redução de dano e, contra criaturas imunes a fogo, ainda causa metade do dano."
+      },
+      {
+        "nome": "Ego",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando Sckhar faz um teste de perícia (exceto de ataque), passa automaticamente nesse teste."
+      },
+      {
+        "nome": "Escamas Supremas",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Sckhar sofre apenas metade do dano de fontes mundanas."
+      },
+      {
+        "nome": "Fluxo de Mana",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Sckhar pode manter dois efeitos sustentados simultaneamente com apenas uma ação livre (mas pagando o custo de cada um)."
+      },
+      {
+        "nome": "Imposição Real",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Sckhar altera a temperatura de uma área de qualquer tamanho em Sckharshantallas, variando de clima ameno até calor extremo, por uma cena."
+      },
+      {
+        "nome": "Magia Acelerada",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando lança uma magia com execução de ação completa ou menor, Sckhar muda a execução dela para livre."
+      },
+      {
+        "nome": "Poder Incontestável",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A primeira magia que Sckhar lança em cada rodada não pode ser alvo de contramágica."
+      },
+      {
+        "nome": "Sopro",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "acao_de_movimento",
+        "cdResistencia": 55,
+        "resistenciaTipo": null,
+        "descricao": "Todas as criaturas em um cone de 30m sofrem 30d12 pontos de dano de fogo e ficam em chamas (Reflexos CD 55 reduz o dano à metade e evita a condição). Cada vez que um dado de dano do sopro rolar o valor máximo, role um dado extra e some ao total. Recarga (ação de movimento)."
+      },
+      {
+        "nome": "Varrer",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando Sckhar faz um ataque corpo a corpo e reduz os PV do alvo para 0 ou menos, pode realizar um ataque adicional contra outra criatura dentro do seu alcance."
+      },
+      {
+        "nome": "Magias (conjurador arcano, 20º nível, CD 55, limite de PM 32)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Aprisionamento (15 PM, completa; Vontade anula), Bola de Fogo (27 PM; 18d10 de fogo em raio de 12m, Reflexos reduz à metade), Campo de Força (11 PM, reação; RD 70), Chuva de Meteoros (15 PM, completa; quadrado de 36m, 15d6 de impacto + 15d10 de fogo, caído e agarrado), Coluna de Chamas (16 PM; cilindro de 6m de raio e 30m de altura, 16d10 de fogo + 6d6 de luz), Controlar Fogo (3 PM), Dissipar Magia (3 PM), Globo de Invulnerabilidade (15 PM, sustentada; detém magias de 4º círculo ou menos), Imobilizar (9 PM; paralisa, Vontade reduz para lento), Muralha Elemental (6 PM, somente fogo), Segunda Chance (25 PM; 400 PV e condições), Velocidade (10 PM, sustentada; ação padrão extra por turno)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "10 pecas de couro de dragao (cd 35 para extrair), alem de fortuna praticamente incalculavel no reino de sckharshantallas (provavelmente equivalente a tesouro triplo, se derrotado fora de seu dominio).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "tirano_do_terceiro",
+    "nome": "Tirano do Terceiro",
+    "nd": "10",
+    "regiao": "dragoes",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 9,
+    "percepcao": 10,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 37,
+    "resistencias": {
+      "fortitude": 22,
+      "reflexos": 10,
+      "vontade": 16
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [
+      "atordoamento",
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +2"
+    ],
+    "pv": 370,
+    "pm": 62,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 7,
+      "des": 3,
+      "con": 7,
+      "int": 5,
+      "sab": 4,
+      "car": 4
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Machado de batalha (x2)",
+        "bonusAtaque": 29,
+        "dano": "2d8+14",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra",
+        "bonusAtaque": 29,
+        "dano": "1d8+14",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Dádiva Dracônica",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Pode lançar magias arcanas cavalgando e/ou de armadura sem precisar de testes de Misticismo."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 30,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como mago de 10º nível (CD 30). Bola de Fogo (9 PM, 12d6+5 fogo)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao",
+    "recursoExtraivel": null
+  }
+]

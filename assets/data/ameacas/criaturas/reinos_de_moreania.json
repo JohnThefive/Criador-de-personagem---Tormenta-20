@@ -1,0 +1,855 @@
+[
+  {
+    "id": "bufalo_paladino_de_bullton",
+    "nome": "Búfalo Paladino de Bullton",
+    "nd": "6",
+    "regiao": "reinos_de_moreania",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "moreau",
+    "tamanho": "medio",
+    "iniciativa": 3,
+    "percepcao": 4,
+    "sentidos": [
+      "faro"
+    ],
+    "defesa": 28,
+    "resistencias": {
+      "fortitude": 16,
+      "reflexos": 6,
+      "vontade": 14
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 250,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 0,
+      "con": 3,
+      "int": 0,
+      "sab": 1,
+      "car": 3
+    },
+    "pericias": {
+      "atletismo": 10,
+      "cavalgar": 7,
+      "intimidacao": 10,
+      "nobreza": 5,
+      "religiao": 6
+    },
+    "ataques": [
+      {
+        "nome": "Montante",
+        "bonusAtaque": 18,
+        "dano": "3d6+15",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Chifres",
+        "bonusAtaque": 18,
+        "dano": "1d6+10",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Búfalo de Batalha",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O búfalo paladino cavalga um búfalo-de-guerra parceiro veterano."
+      },
+      {
+        "nome": "Fúria Sagrada",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por cena, o búfalo paladino entra em fúria sagrada, recebendo +4 em testes de ataque e dano corpo a corpo até o fim do combate."
+      },
+      {
+        "nome": "Grandes Chifres",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O búfalo paladino pode usar seus chifres como ataque secundário junto de sua arma principal, sem a penalidade padrão de ataques múltiplos."
+      },
+      {
+        "nome": "Marrada Impressionante",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando acerta um ataque de chifres, o búfalo paladino pode usar a manobra derrubar como ataque adicional livre, sem provocar ataque de oportunidade."
+      }
+    ],
+    "equipamento": [
+      "Alforje",
+      "Armadura completa",
+      "Montante aumentada"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "bufalo_de_guerra",
+    "nome": "Búfalo-de-Guerra",
+    "nd": "2",
+    "regiao": "reinos_de_moreania",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 3,
+    "percepcao": 4,
+    "sentidos": [
+      "faro"
+    ],
+    "defesa": 18,
+    "resistencias": {
+      "fortitude": 13,
+      "reflexos": 7,
+      "vontade": 2
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 80,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 7,
+      "des": 0,
+      "con": 4,
+      "int": -5,
+      "sab": 1,
+      "car": -2
+    },
+    "pericias": {
+      "atletismo": 10
+    },
+    "ataques": [
+      {
+        "nome": "Marrada",
+        "bonusAtaque": 10,
+        "dano": "2d8+10",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Atropelamento",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 16,
+        "resistenciaTipo": null,
+        "descricao": "O búfalo-de-guerra percorre até o dobro de seu deslocamento. Ele pode passar pelo espaço ocupado de quaisquer inimigos menores que ele, mas não pode passar duas vezes pelo mesmo espaço. Criaturas atropeladas desta forma sofrem 4d8+10 pontos de dano de impacto e ficam caídas (Reflexos CD 16 reduz à metade e evita a condição). Recarga (movimento)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "coruja_druida",
+    "nome": "Coruja Druida",
+    "nd": "10",
+    "regiao": "reinos_de_moreania",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "moreau",
+    "tamanho": "medio",
+    "iniciativa": 12,
+    "percepcao": 16,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 33,
+    "resistencias": {
+      "fortitude": 12,
+      "reflexos": 14,
+      "vontade": 24
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 284,
+    "pm": 55,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 1,
+      "des": 3,
+      "con": 3,
+      "int": 2,
+      "sab": 5,
+      "car": 1
+    },
+    "pericias": {
+      "adestramento": 12,
+      "misticismo": 11,
+      "religiao": 14,
+      "sobrevivencia": 16
+    },
+    "ataques": [
+      {
+        "nome": "Bordão (x2)",
+        "bonusAtaque": 25,
+        "dano": "1d8+16",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Chamado da Dama Altiva",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A coruja druida invoca 2d4 animais para lutarem ao seu lado por até 1 minuto."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 32,
+        "resistenciaTipo": null,
+        "descricao": "A coruja druida lança magias como uma druida de Allihanna de 10º nível (CD 32): Comunhão com a Natureza, Concentração de Combate, Ilusão Lacerante, Silêncio, Vidência."
+      }
+    ],
+    "equipamento": [
+      "Bandoleira de poções",
+      "Bordão",
+      "Essência de mana x3",
+      "Farrapos de ermitão",
+      "Símbolo sagrado de Allihanna"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "hippossauro",
+    "nome": "Hippossauro",
+    "nd": "3",
+    "regiao": "reinos_de_moreania",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 4,
+    "percepcao": 7,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 20,
+    "resistencias": {
+      "fortitude": 14,
+      "reflexos": 10,
+      "vontade": 4
+    },
+    "rd": {
+      "perfuracao": 10
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 100,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 15.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 3,
+      "con": 3,
+      "int": -4,
+      "sab": 1,
+      "car": 1
+    },
+    "pericias": {
+      "atletismo": 7,
+      "sobrevivencia": 4
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 13,
+        "dano": "1d8+4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 13,
+        "dano": "1d6+4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Salto Mortal",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 17,
+        "resistenciaTipo": null,
+        "descricao": "O hippossauro salta com suas duas garras em um inimigo em alcance curto. A vítima sofre 4d6+8 pontos de dano de corte e fica sangrando (Reflexos CD 17 reduz o dano à metade e evita a condição)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "horda_de_otyughs",
+    "nome": "Horda de Otyughs",
+    "nd": "16",
+    "regiao": "reinos_de_moreania",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "colossal",
+    "iniciativa": 10,
+    "percepcao": 14,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 53,
+    "resistencias": {
+      "fortitude": 30,
+      "reflexos": 24,
+      "vontade": 16
+    },
+    "rd": {
+      "geral": 20
+    },
+    "imunidadesEfeitos": [
+      "doencas"
+    ],
+    "imunidadesDano": [
+      "veneno"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 800,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": -1,
+      "con": 4,
+      "int": -2,
+      "sab": 1,
+      "car": -3
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Tentáculo [Bando] (x2)",
+        "bonusAtaque": 44,
+        "dano": "4d8+18",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "4,5m",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida [Bando]",
+        "bonusAtaque": 44,
+        "dano": "4d6+18",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Usa a manobra agarrar com o tentáculo (teste +54). A horda pode manter até cinco criaturas Grandes ou menores agarradas sem ocupar seus tentáculos."
+      },
+      {
+        "nome": "Chuva de Tentáculos",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A horda faz um ataque de tentáculo contra cada criatura em seu alcance."
+      },
+      {
+        "nome": "Constrição",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada um de seus turnos, a horda causa 2d8+18 pontos de dano de impacto em cada criatura que esteja agarrando."
+      },
+      {
+        "nome": "Doença",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura mordida pela horda, ou que comece seu turno adjacente a ela, é exposta à doença infecção do esgoto. Devido à virulência da horda, a CD para resistir a essa doença é 42."
+      },
+      {
+        "nome": "Mar de Tentáculos",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Criaturas a até 4,5m da horda ficam enredadas."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "manticora_primal",
+    "nome": "Mantícora Primal",
+    "nd": "14",
+    "regiao": "reinos_de_moreania",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 14,
+    "percepcao": 16,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 44,
+    "resistencias": {
+      "fortitude": 28,
+      "reflexos": 14,
+      "vontade": 22
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 655,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 18.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 8,
+      "des": 3,
+      "con": 5,
+      "int": -3,
+      "sab": 3,
+      "car": -3
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 40,
+        "dano": "3d10+25",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 40,
+        "dano": "2d8+25",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Crueldade",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se acertar seus dois ataques de garra no mesmo turno, a mantícora primal pode continuar atacando com as garras, com uma penalidade cumulativa de –5 em cada ataque adicional no mesmo turno, até errar um ataque."
+      },
+      {
+        "nome": "Espinhos",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 38,
+        "resistenciaTipo": null,
+        "descricao": "A mantícora dispara 2d4 espinhos de sua cauda. Cada espinho atinge uma criatura em alcance médio, causando 2d8+8 pontos de dano de perfuração (Reflexos CD 38 reduz à metade). Recarga (movimento)."
+      },
+      {
+        "nome": "Ressentimento",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 38,
+        "resistenciaTipo": null,
+        "descricao": "A mantícora emite um rugido atormentador. Criaturas em alcance curto ficam imóveis por 1 rodada e sofrem 8d8 pontos de dano psíquico (Vontade CD 38 reduz à metade e evita a condição). Uma criatura só pode ser afetada pelo Ressentimento da mesma mantícora uma vez por cena."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao mais espinhos (cd 29 para extrair, valem t$ 300 para fabricar flechas superiores).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "raposa_bucaneira",
+    "nome": "Raposa Bucaneira",
+    "nd": "2",
+    "regiao": "reinos_de_moreania",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "moreau",
+    "tamanho": "medio",
+    "iniciativa": 7,
+    "percepcao": 3,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 18,
+    "resistencias": {
+      "fortitude": 7,
+      "reflexos": 14,
+      "vontade": 1
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 46,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 4,
+      "con": 2,
+      "int": 2,
+      "sab": -1,
+      "car": 3
+    },
+    "pericias": {
+      "acrobacia": 7,
+      "atletismo": 3,
+      "enganacao": 9,
+      "intimidacao": 6,
+      "nobreza": 7
+    },
+    "ataques": [
+      {
+        "nome": "Pistola-punhal",
+        "bonusAtaque": 12,
+        "dano": "1d6+4",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Pistola-punhal (à distância)",
+        "bonusAtaque": 10,
+        "dano": "2d6+6",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Evasão",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando passa em um teste de Reflexos para reduzir o dano de um efeito à metade, em vez disso não sofre nenhum dano."
+      },
+      {
+        "nome": "Audácia",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, a bucaneira soma seu Carisma em um teste de perícia (exceto em ataque)."
+      },
+      {
+        "nome": "Cobrir de Pólvora",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A bucaneira joga um punhado de pólvora em um alvo em alcance curto. Até o fim da cena, o próximo ataque contra esse alvo causa +1d6 pontos de dano de fogo e o deixa em chamas."
+      },
+      {
+        "nome": "Estampido Ensurdecedor",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 18,
+        "resistenciaTipo": null,
+        "descricao": "Quando a bucaneira dispara com sua pistola-punhal (à distância ou em corpo a corpo), todas as criaturas adjacentes a ela ficam abaladas e surdas (Fortitude CD 18 reduz a duração para 1 rodada)."
+      },
+      {
+        "nome": "Pistola-Punhal",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando ataca em corpo a corpo com sua pistola-punhal, a raposa bucaneira pode disparar sua bala para causar +2d6 pontos de dano de perfuração."
+      },
+      {
+        "nome": "Pistoleira Veloz",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A bucaneira não sofre a penalidade padrão de –5 em ataques por disparar contra oponentes envolvidos em combate corpo a corpo, e pode recarregar sua pistola-punhal como uma ação de movimento."
+      }
+    ],
+    "equipamento": [
+      "Balas x20",
+      "Capa esvoaçante",
+      "Pistola-punhal"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "yidishan_bugbear",
+    "nome": "Yidishan Bugbear",
+    "nd": "2",
+    "regiao": "reinos_de_moreania",
+    "papel": "solo",
+    "tipo": "construto",
+    "subtipo": "yidishan",
+    "tamanho": "medio",
+    "iniciativa": 3,
+    "percepcao": 0,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 21,
+    "resistencias": {
+      "fortitude": 13,
+      "reflexos": 9,
+      "vontade": 2
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 70,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 2,
+      "con": 3,
+      "int": -2,
+      "sab": -1,
+      "car": -4
+    },
+    "pericias": {
+      "furtividade": 3,
+      "intimidacao": 9
+    },
+    "ataques": [
+      {
+        "nome": "Pancada",
+        "bonusAtaque": 10,
+        "dano": "2d6+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Espasmo Final",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando é reduzido a 0 PV ou menos, o yidishan bugbear faz um ataque de pancada contra uma criatura adjacente (geralmente, aquela que causou dano a ele por último)."
+      },
+      {
+        "nome": "Saborear Pavor",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Enquanto estiver em alcance curto de uma criatura abalada ou apavorada, o yidishan recebe um bônus em testes de ataque e rolagens de dano igual à penalidade causada pela condição."
+      },
+      {
+        "nome": "Soco Pneumático",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 16,
+        "resistenciaTipo": null,
+        "descricao": "O yidishan faz um ataque de pancada. Se acertar, causa +2d6 pontos de dano e a vítima fica enjoada por um turno e caída (Fortitude CD 16 evita a condição enjoada). Recarga (movimento)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  }
+]

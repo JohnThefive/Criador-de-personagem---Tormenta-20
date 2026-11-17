@@ -1,0 +1,2767 @@
+[
+  {
+    "id": "cascavel",
+    "nome": "Cascavel",
+    "nd": "0.25",
+    "regiao": "sszzaazitas",
+    "papel": "lacaio",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "minusculo",
+    "iniciativa": 5,
+    "percepcao": 3,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 13,
+    "resistencias": {
+      "fortitude": 2,
+      "reflexos": 5,
+      "vontade": -1
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 2,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 9.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": -2,
+      "des": 3,
+      "con": 0,
+      "int": -5,
+      "sab": 0,
+      "car": -4
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 7,
+        "dano": "1d4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": "veneno"
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Veneno",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 16,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Perde 1d12 PV (Fort CD 16 evita)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "cultista_de_sszzaas",
+    "nome": "Cultista de Sszzaas",
+    "nd": "7",
+    "regiao": "sszzaazitas",
+    "papel": "especial",
+    "tipo": "monstro",
+    "subtipo": "medusa",
+    "tamanho": "medio",
+    "iniciativa": 11,
+    "percepcao": 12,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 29,
+    "resistencias": {
+      "fortitude": 7,
+      "reflexos": 14,
+      "vontade": 20
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 160,
+    "pm": 40,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 2,
+      "con": 0,
+      "int": 4,
+      "sab": 4,
+      "car": 5
+    },
+    "pericias": {
+      "enganacao": 20,
+      "intuicao": 20,
+      "religiao": 17
+    },
+    "ataques": [
+      {
+        "nome": "Adaga",
+        "bonusAtaque": 22,
+        "dano": "1d4+4",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": "veneno"
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Ataque Furtivo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, causa +5d6 em ataques contra alvos desprevenidos ou flanqueados."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 26,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como clérига de Sszzaas de 7º nível (CD 26): 1º — Arma Mágica, Comando, Curar Ferimentos, Escuridão; 2º — Enxame de Pestes, Miasma Mefítico."
+      },
+      {
+        "nome": "Olhar Atordoante",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 26,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Criatura em alcance curto fica atordoada por 1 rodada (apenas uma vez por cena; Fort CD 26 evita)."
+      },
+      {
+        "nome": "Veneno",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 26,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Perde 2d12 PV durante 3 rodadas (Fort CD 26 reduz para uma rodada)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "elemental_do_veneno_grande",
+    "nome": "Elemental do Veneno Grande",
+    "nd": "12",
+    "regiao": "sszzaazitas",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": "elemental",
+    "tamanho": "grande",
+    "iniciativa": 8,
+    "percepcao": 13,
+    "sentidos": [
+      "percepcao_as_cegas"
+    ],
+    "defesa": 43,
+    "resistencias": {
+      "fortitude": 26,
+      "reflexos": 12,
+      "vontade": 20
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "acertos_criticos",
+      "atordoado",
+      "caido",
+      "efeitos_de_metabolismo",
+      "paralisia"
+    ],
+    "imunidadesDano": [
+      "veneno"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 550,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 0.0,
+      "voo": 18.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": -3,
+      "des": 2,
+      "con": 0,
+      "int": -2,
+      "sab": 3,
+      "car": -4
+    },
+    "pericias": {},
+    "ataques": [],
+    "habilidades": [
+      {
+        "nome": "Incorpóreo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O elemental do veneno grande é incorpóreo."
+      },
+      {
+        "nome": "Corpo Nocivo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando o elemental do veneno grande sofre dano por um ataque corpo a corpo, o atacante perde 6d6 pontos de vida por veneno, a menos que esteja usando uma arma alongada."
+      },
+      {
+        "nome": "Existência Insalubre",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O elemental ignora imunidade a veneno."
+      },
+      {
+        "nome": "Morte Gasosa",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O elemental pode entrar no espaço ocupado por outras criaturas. No fim de cada turno do elemental, quaisquer criaturas em seu espaço perdem 10d12 pontos de vida por veneno e ficam exaustas."
+      },
+      {
+        "nome": "Pústula Explosiva",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 35,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Se sofrer 200 pontos de dano ou mais em uma única rodada, o elemental explode numa nuvem de gás de 9m de raio ao seu redor. Criaturas na área perdem 8d12 pontos de vida por veneno durante 5 rodadas (Fort CD 35 reduz a perda à metade). Na rodada seguinte, dois elementais do veneno médios surgem em espaços desocupados na área da explosão (eles não contam para as recompensas do encontro)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "1d6 doses de peconha potente (cd 27 para extrair), 1d6 doses de po de lich (cd 27 para extrair).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "elemental_do_veneno_medio",
+    "nome": "Elemental do Veneno Médio",
+    "nd": "8",
+    "regiao": "sszzaazitas",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": "elemental",
+    "tamanho": "medio",
+    "iniciativa": 5,
+    "percepcao": 9,
+    "sentidos": [
+      "percepcao_as_cegas"
+    ],
+    "defesa": 31,
+    "resistencias": {
+      "fortitude": 21,
+      "reflexos": 8,
+      "vontade": 15
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "acertos_criticos",
+      "atordoado",
+      "caido",
+      "efeitos_de_metabolismo",
+      "paralisia"
+    ],
+    "imunidadesDano": [
+      "veneno"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 280,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 0.0,
+      "voo": 9.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": -3,
+      "des": 1,
+      "con": 0,
+      "int": -2,
+      "sab": 1,
+      "car": -4
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Pústula Virulenta",
+        "bonusAtaque": 26,
+        "dano": "3d6+25",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "médio",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": "veneno"
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Corpo Nocivo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando o elemental do veneno médio sofre dano por um ataque corpo a corpo adjacente, o atacante perde 3d6 pontos de vida por veneno."
+      },
+      {
+        "nome": "Existência Insalubre",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O elemental ignora imunidade a veneno."
+      },
+      {
+        "nome": "Veneno",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 28,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Perde 4d12 pontos de vida durante 3 rodadas (Fort CD 28 reduz para 1 rodada)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "1d6 doses de peconha concentrada (cd 23 para extrair).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "elemental_do_veneno_pequeno",
+    "nome": "Elemental do Veneno Pequeno",
+    "nd": "2",
+    "regiao": "sszzaazitas",
+    "papel": "especial",
+    "tipo": "espirito",
+    "subtipo": "elemental",
+    "tamanho": "pequeno",
+    "iniciativa": 3,
+    "percepcao": 5,
+    "sentidos": [
+      "percepcao_as_cegas"
+    ],
+    "defesa": 17,
+    "resistencias": {
+      "fortitude": 13,
+      "reflexos": 2,
+      "vontade": 7
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "acertos_criticos",
+      "atordoado",
+      "caido",
+      "efeitos_de_metabolismo",
+      "paralisia"
+    ],
+    "imunidadesDano": [
+      "veneno"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 49,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 0.0,
+      "voo": 6.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": -3,
+      "des": 0,
+      "con": 2,
+      "int": -3,
+      "sab": 2,
+      "car": -4
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Pústula Asquerosa",
+        "bonusAtaque": 12,
+        "dano": "1d4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "médio",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": "enjoado por 1d4 rodadas"
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Corpo Nocivo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando o elemental do veneno pequeno sofre dano por um ataque corpo a corpo, o atacante perde 1d6 pontos de vida por veneno, a menos que esteja usando uma arma alongada."
+      },
+      {
+        "nome": "Existência Insalubre",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O elemental ignora imunidade a veneno."
+      },
+      {
+        "nome": "Fumos Tóxicos",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 18,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Uma vez por rodada, o elemental emite uma nuvem de veneno corrosivo. Criaturas em um raio de 9m ao redor dele perdem 1d12 pontos de vida por veneno e ficam vulneráveis (Fort CD 18 reduz a perda de vida à metade e evita a condição)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "1d4 doses de peconha irritante (cd 17 para extrair).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "gorgona",
+    "nome": "Górgona",
+    "nd": "6",
+    "regiao": "sszzaazitas",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "medusa",
+    "tamanho": "medio",
+    "iniciativa": 16,
+    "percepcao": 9,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 26,
+    "resistencias": {
+      "fortitude": 13,
+      "reflexos": 19,
+      "vontade": 8
+    },
+    "rd": {
+      "veneno": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 231,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 4,
+      "con": 1,
+      "int": 1,
+      "sab": 2,
+      "car": 3
+    },
+    "pericias": {
+      "enganacao": 13,
+      "furtividade": 14
+    },
+    "ataques": [
+      {
+        "nome": "Espada Curta",
+        "bonusAtaque": 20,
+        "dano": "1d6+15",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": "veneno"
+      },
+      {
+        "nome": "Arco Longo (x2)",
+        "bonusAtaque": 20,
+        "dano": "1d12+15",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": "veneno"
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Disparo Preciso",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A górgona pode fazer ataques à distância contra oponentes envolvidos em combate corpo a corpo sem sofrer a penalidade de -5 no teste de ataque."
+      },
+      {
+        "nome": "Olhar Petrificante",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 22,
+        "resistenciaTipo": "reflexos",
+        "descricao": "No início de seu turno, cada personagem em alcance curto da górgona deve fazer um teste de Reflexos (CD 22). Se passar, desvia o olhar. Se falhar, fica lento. Se já estiver lento, fica petrificado permanentemente. Um personagem pode fechar os olhos como uma reação para ficar imune a esta habilidade, mas sofrerá os efeitos de estar cego por 1 rodada. Efeitos que removem paralisia revertem a petrificação. Metamorfose."
+      },
+      {
+        "nome": "Veneno",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 22,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Peçonha concentrada: perde 1d12 pontos de vida por rodada durante 3 rodadas (Fort CD 22 reduz para 1 rodada)."
+      }
+    ],
+    "equipamento": [
+      "Arco longo certeiro",
+      "Espada curta",
+      "Flechas x20"
+    ],
+    "tesouro": "padrao mais 1d4 doses de peconha concentrada.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "gorgona_matriarca",
+    "nome": "Górgona Matriarca",
+    "nd": "14",
+    "regiao": "sszzaazitas",
+    "papel": "especial",
+    "tipo": "monstro",
+    "subtipo": "medusa",
+    "tamanho": "medio",
+    "iniciativa": 22,
+    "percepcao": 19,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 43,
+    "resistencias": {
+      "fortitude": 14,
+      "reflexos": 25,
+      "vontade": 25
+    },
+    "rd": {
+      "veneno": 5
+    },
+    "imunidadesEfeitos": [
+      "atordoada",
+      "enfeiticada"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +2"
+    ],
+    "pv": 498,
+    "pm": 89,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 4,
+      "con": 3,
+      "int": 2,
+      "sab": 6,
+      "car": 4
+    },
+    "pericias": {
+      "enganacao": 20,
+      "furtividade": 20,
+      "intuicao": 19,
+      "misticismo": 15,
+      "religiao": 19
+    },
+    "ataques": [
+      {
+        "nome": "Espada Curta",
+        "bonusAtaque": 36,
+        "dano": "1d6+20",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": "veneno"
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Magia Acelerada",
+        "acao": "livre",
+        "custoPm": 4,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando lança uma magia com execução de ação completa ou menor, a górgona matriarca muda a execução dela para livre."
+      },
+      {
+        "nome": "Olhar Petrificante",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 38,
+        "resistenciaTipo": "reflexos",
+        "descricao": "Como a górgona, mas com CD 38."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 38,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como uma clériga de Sszzaas de 14º nível (CD 38): Miasma Mefítico (padrão, 9 PM; criaturas em um raio de 6m em alcance médio sofrem 8d6 pontos de dano de ácido e ficam enjoadas por 1 rodada, Fort reduz o dano à metade e evita a condição); Rogar Maldição (padrão, 10 PM; a matriarca amaldiçoa uma criatura em alcance curto; o alvo fica esmorecido e não pode se comunicar ou lançar magias permanentemente, Fort reduz para 1 rodada); Toque Vampírico (padrão, 13 PM; a matriarca faz um ataque corpo a corpo; se acertar, além do dano normal, causa 14d6 pontos de dano de trevas e recupera pontos de vida iguais à metade desse dano de trevas); Visão da Verdade (padrão, 9 PM; até o fim da cena, a matriarca pode ver através de camuflagem e escuridão, normais e mágicas, e de efeitos de ilusão e transmutação, enxergando a verdade como formas translúcidas ou sobrepostas, e recebe +10 em testes de Intuição e Percepção)."
+      },
+      {
+        "nome": "Veneno",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 43,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Beladona: paralisado por 3 rodadas (Fort CD 43 reduz para lento por 3 rodadas)."
+      }
+    ],
+    "equipamento": [
+      "Espada curta certeira"
+    ],
+    "tesouro": "padrao mais 1d4 doses de beladona.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "hidra",
+    "nome": "Hidra",
+    "nd": "11",
+    "regiao": "sszzaazitas",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 9,
+    "percepcao": 9,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 35,
+    "resistencias": {
+      "fortitude": 24,
+      "reflexos": 18,
+      "vontade": 9
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 550,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 9.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 10,
+      "des": 0,
+      "con": 10,
+      "int": -4,
+      "sab": 0,
+      "car": -1
+    },
+    "pericias": {
+      "furtividade": 4
+    },
+    "ataques": [
+      {
+        "nome": "Mordida (x5)",
+        "bonusAtaque": 34,
+        "dano": "3d6+16",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Cura Acelerada 100",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Recupera 100 PV no início de cada turno."
+      },
+      {
+        "nome": "Cortar Cabeças",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Atacar uma cabeça (–2 no ataque). 25+ dano de corte decepa a cabeça, removendo um ataque. Após 1d4 rodadas, duas novas cabeças nascem (máximo 10). Cauterizar o pescoço (25+ dano de ácido ou fogo) impede o crescimento. A hidra só morre se todas as cabeças forem decepadas e cauterizadas."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "hynne_dormente",
+    "nome": "Hynne Dormente",
+    "nd": "5",
+    "regiao": "sszzaazitas",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "hynne",
+    "tamanho": "pequeno",
+    "iniciativa": 14,
+    "percepcao": 6,
+    "sentidos": [],
+    "defesa": 22,
+    "resistencias": {
+      "fortitude": 6,
+      "reflexos": 16,
+      "vontade": 11
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 99,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": -1,
+      "des": 3,
+      "con": 1,
+      "int": 3,
+      "sab": 0,
+      "car": 2
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Adaga",
+        "bonusAtaque": 15,
+        "dano": "1d4+11",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": "veneno"
+      },
+      {
+        "nome": "Adaga (à distância)",
+        "bonusAtaque": 15,
+        "dano": "1d6+11",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": "veneno"
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Ataque Furtivo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, causa +4d6 em ataques contra alvos desprevenidos ou flanqueados."
+      },
+      {
+        "nome": "Falso Amigo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Assassino veterano."
+      },
+      {
+        "nome": "Pirueta Escapatória",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando é atingido por um ataque, o hynne pode fazer um teste de Acrobacia e reduzir o resultado deste teste do dano sofrido."
+      },
+      {
+        "nome": "Reviravolta",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O alvo do primeiro ataque do hynne na cena é considerado desprevenido."
+      },
+      {
+        "nome": "Sorte Salvadora",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, o hynne pode rolar novamente um teste de resistência."
+      },
+      {
+        "nome": "Veneno",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 20,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Peçonha concentrada: perde 1d12 pontos de vida por rodada durante 3 rodadas (Fort CD 20 reduz a duração para 1 rodada)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "iniciada_de_sszzaas",
+    "nome": "Iniciada de Sszzaas",
+    "nd": "3",
+    "regiao": "sszzaazitas",
+    "papel": "especial",
+    "tipo": "monstro",
+    "subtipo": "medusa",
+    "tamanho": "medio",
+    "iniciativa": 7,
+    "percepcao": 7,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 19,
+    "resistencias": {
+      "fortitude": 3,
+      "reflexos": 9,
+      "vontade": 15
+    },
+    "rd": {
+      "veneno": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 69,
+    "pm": 19,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 2,
+      "con": 0,
+      "int": 4,
+      "sab": 3,
+      "car": 4
+    },
+    "pericias": {
+      "enganacao": 20,
+      "intuicao": 20,
+      "religiao": 17
+    },
+    "ataques": [
+      {
+        "nome": "Adaga",
+        "bonusAtaque": 12,
+        "dano": "1d4+3",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": "veneno"
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Ataque Furtivo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, causa +2d6 em ataques contra alvos desprevenidos ou flanqueados."
+      },
+      {
+        "nome": "Falso Amigo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Médico iniciante."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 19,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como uma clériga de Sszzaas de 3º nível (CD 19): Arma Mágica (padrão, 3 PM; até o fim da cena, uma arma adjacente se torna mágica, fornecendo +1 nos testes de ataque e rolagens de dano e +1d6 pontos de dano de fogo; a iniciada usa Sabedoria em vez de Força nos testes de ataque com ela, ataque total +16); Comando (padrão, 2 PM; no início do seu próximo turno, uma criatura em alcance curto fica pasma por 1 rodada, Von evita; uma vez por cena contra a mesma criatura); Curar Ferimentos (padrão, 3 PM; uma criatura adjacente cura 4d8+4 PV); Escuridão (padrão, 3 PM; até o fim da cena, um objeto em alcance curto emana escuridão total em um raio de 6m, bloqueando a visão na área e através dela)."
+      },
+      {
+        "nome": "Olhar Atordoante",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 19,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Uma criatura em alcance curto fica atordoada por 1 rodada (apenas uma vez por cena; Fort CD 19 evita)."
+      },
+      {
+        "nome": "Veneno",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Perde 1d12 pontos de vida."
+      }
+    ],
+    "equipamento": [
+      "Adaga",
+      "Couro batido",
+      "Símbolo sagrado de Sszzaas"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "jiboia",
+    "nome": "Jiboia",
+    "nd": "0.5",
+    "regiao": "sszzaazitas",
+    "papel": "especial",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 5,
+    "percepcao": 3,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 14,
+    "resistencias": {
+      "fortitude": 3,
+      "reflexos": 5,
+      "vontade": 0
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 14,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 9.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 3,
+      "con": 1,
+      "int": -5,
+      "sab": 1,
+      "car": -4
+    },
+    "pericias": {
+      "furtividade": 7
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 9,
+        "dano": "1d6+4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se acerta mordida, pode usar agarrar (teste +9)."
+      },
+      {
+        "nome": "Constrição",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada turno, causa 2d6+4 de impacto na criatura agarrada."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "lagash",
+    "nome": "Lagash",
+    "nd": "13",
+    "regiao": "sszzaazitas",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 19,
+    "percepcao": 11,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 41,
+    "resistencias": {
+      "fortitude": 26,
+      "reflexos": 20,
+      "vontade": 13
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "efeitos_de_movimento"
+    ],
+    "imunidadesDano": [
+      "veneno"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 660,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 12.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 11,
+      "des": 4,
+      "con": 9,
+      "int": -3,
+      "sab": 2,
+      "car": -2
+    },
+    "pericias": {
+      "furtividade": 17
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 37,
+        "dano": "4d12+28",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": "veneno"
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se acerta mordida, pode usar agarrar (teste +42)."
+      },
+      {
+        "nome": "Constrição",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada turno, causa 6d12+28 de impacto na criatura agarrada."
+      },
+      {
+        "nome": "Crias de Sszzaas",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Cospe 2d6 serpentes em espaços em alcance curto (For -1, Des 2, Def auto-acertada, 1 PV, 1d6 perfuração adjacente). Desaparecem ao fim da cena. Recarga (movimento)."
+      },
+      {
+        "nome": "Cuspe Venenoso",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 35,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Cone de 9m. Criaturas perdem 6d12 PV e ficam cegas por 1d4 rodadas (Fort CD 35 reduz à metade e evita cegueira)."
+      },
+      {
+        "nome": "Veneno",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 35,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Perde 4d12 PV por rodada durante 5 rodadas (Fort CD 35 reduz para uma rodada)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "nagah_defensor",
+    "nome": "Nagah Defensor",
+    "nd": "7",
+    "regiao": "sszzaazitas",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "nagah",
+    "tamanho": "medio",
+    "iniciativa": 12,
+    "percepcao": 10,
+    "sentidos": [
+      "visao_na_penumbra"
+    ],
+    "defesa": 31,
+    "resistencias": {
+      "fortitude": 10,
+      "reflexos": 17,
+      "vontade": 14
+    },
+    "rd": {
+      "geral": 5,
+      "veneno": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 82,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 3,
+      "con": 3,
+      "int": 0,
+      "sab": 1,
+      "car": 0
+    },
+    "pericias": {
+      "atletismo": 12,
+      "enganacao": 5
+    },
+    "ataques": [
+      {
+        "nome": "Alfange (x2)",
+        "bonusAtaque": 26,
+        "dano": "4d4+15",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Cauda",
+        "bonusAtaque": 26,
+        "dano": "1d6+10",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Escudo Vivo",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando um aliado adjacente ao nagah defensor sofre dano, ele pode proteger esse aliado. Se fizer isso, o dano é reduzido à metade e é causado ao nagah, em vez de ao aliado."
+      },
+      {
+        "nome": "Falso Amigo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Fortão veterano."
+      }
+    ],
+    "equipamento": [
+      "Alfange",
+      "Couraça"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "nagah_dormente",
+    "nome": "Nagah Dormente",
+    "nd": "3",
+    "regiao": "sszzaazitas",
+    "papel": "lacaio",
+    "tipo": "humanoide",
+    "subtipo": "nagah",
+    "tamanho": "medio",
+    "iniciativa": 7,
+    "percepcao": 6,
+    "sentidos": [
+      "visao_na_penumbra"
+    ],
+    "defesa": 22,
+    "resistencias": {
+      "fortitude": 6,
+      "reflexos": 12,
+      "vontade": 9
+    },
+    "rd": {
+      "veneno": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 27,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 4,
+      "con": 1,
+      "int": 0,
+      "sab": 3,
+      "car": 1
+    },
+    "pericias": {
+      "enganacao": 8,
+      "furtividade": 9,
+      "sobrevivencia": 9
+    },
+    "ataques": [
+      {
+        "nome": "Espada Curta",
+        "bonusAtaque": 14,
+        "dano": "1d6+4",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Cauda",
+        "bonusAtaque": 14,
+        "dano": "1d6+4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Arco Curto",
+        "bonusAtaque": 14,
+        "dano": "1d6+8",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Falso Amigo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Parceiro perseguidor."
+      },
+      {
+        "nome": "Marca da Traição",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A nagah analisa um alvo em alcance curto. Até o fim da cena ela recebe +1d8 em rolagens de dano contra essa criatura. Se o alvo for alguém com quem ela passou pelo menos uma cena como aliada, esse bônus é dobrado. Ela só pode ter um oponente marcado por vez."
+      }
+    ],
+    "equipamento": [
+      "Arco curto",
+      "Armadura de couro",
+      "Espada curta",
+      "Flechas x20"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "nagah_encantadora",
+    "nome": "Nagah Encantadora",
+    "nd": "7",
+    "regiao": "sszzaazitas",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "nagah",
+    "tamanho": "medio",
+    "iniciativa": 10,
+    "percepcao": 10,
+    "sentidos": [
+      "visao_na_penumbra"
+    ],
+    "defesa": 29,
+    "resistencias": {
+      "fortitude": 9,
+      "reflexos": 15,
+      "vontade": 20
+    },
+    "rd": {
+      "veneno": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 197,
+    "pm": 59,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 3,
+      "con": 2,
+      "int": 3,
+      "sab": 1,
+      "car": 5
+    },
+    "pericias": {
+      "conhecimento": 11,
+      "enganacao": 16,
+      "furtividade": 10,
+      "intuicao": 10,
+      "misticismo": 12
+    },
+    "ataques": [
+      {
+        "nome": "Adaga",
+        "bonusAtaque": 22,
+        "dano": "1d6+4",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Cauda",
+        "bonusAtaque": 22,
+        "dano": "1d6+4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Falso Amigo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Adepta veterana."
+      },
+      {
+        "nome": "Linhagem Feérica",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A CD para resistir às magias de encantamento e ilusão da nagah encantadora aumenta em +2 e essas magias custam -1 PM (já contabilizado)."
+      },
+      {
+        "nome": "Magia Acelerada",
+        "acao": "livre",
+        "custoPm": 4,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando lança uma magia com execução de ação completa ou menor, a nagah muda a execução dela para livre."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 26,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como uma feiticeira de 9º nível (CD 26, 28 para encantamento e ilusão, limite de PM 9): Adaga Mental (padrão, 8 PM; uma criatura em alcance curto sofre 6d6 pontos de dano psíquico e fica atordoada por 1 rodada, Vontade reduz o dano à metade e evita a condição; uma vez por cena); Desespero Esmagador (padrão, 8 PM; a nagah projeta uma onda de desespero em um cone de 6m; criaturas na área ficam fracas e frustradas até o fim da cena e pasmas por 1 rodada, Vontade evita a condição pasmo e reduz a duração das outras condições para 1 rodada; uma vez por cena); Enfeitiçar (padrão, 5 PM; cada humanoide em alcance curto fica enfeitiçado pela nagah até o fim da cena, ou até a nagah ou um de seus aliados tomar uma ação hostil contra a criatura); Ilusão Lacerante (padrão, 8 PM, sustentada; a nagah cria uma ilusão que ocupa um cubo de 9m; cada criatura na área deve fazer um teste de Vontade, se falhar, acredita que a ilusão é real e sofre 5d6 pontos de dano psíquico não letal; repete o teste a cada turno que começar na área); Imagem Espelhada (padrão, 8 PM; seis cópias ilusórias da nagah surgem ao seu redor, concedendo +12 na Defesa; cada vez que um ataque erra a nagah, uma das cópias desaparece e o bônus na Defesa diminui em 2, mas a criatura atacante fica ofuscada por 1 rodada); Invisibilidade (padrão, 4 PM; a nagah fica invisível até o fim da cena ou até realizar uma ação hostil, recebendo camuflagem total e +10 em testes de Furtividade contra ouvir, e criaturas que não possam vê-la ficam desprevenidas contra seus ataques)."
+      },
+      {
+        "nome": "Fraquezas Ofídicas",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A nagah sofre 1 ponto de dano adicional para cada dado de dano de frio e -5 em testes de resistência contra Músicas de bardo."
+      }
+    ],
+    "equipamento": [
+      "Adaga",
+      "Essência de mana"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "nagah_guardiao",
+    "nome": "Nagah Guardião",
+    "nd": "3",
+    "regiao": "sszzaazitas",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "nagah",
+    "tamanho": "medio",
+    "iniciativa": 6,
+    "percepcao": 3,
+    "sentidos": [
+      "visao_na_penumbra"
+    ],
+    "defesa": 21,
+    "resistencias": {
+      "fortitude": 6,
+      "reflexos": 11,
+      "vontade": 9
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 45,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 3,
+      "con": 2,
+      "int": 0,
+      "sab": 0,
+      "car": 0
+    },
+    "pericias": {
+      "enganacao": 4,
+      "furtividade": 6
+    },
+    "ataques": [
+      {
+        "nome": "Cimitarra (x2)",
+        "bonusAtaque": 14,
+        "dano": "1d6+6",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Cauda",
+        "bonusAtaque": 14,
+        "dano": "1d6+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Fraquezas Ofídias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Sofre 1 ponto de dano adicional por dado de dano de frio e –5 em testes de resistência contra Músicas de Bardo."
+      }
+    ],
+    "equipamento": [
+      "Cimitarras x2"
+    ],
+    "tesouro": "padrao",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "nagah_mistica_de_arton",
+    "nome": "Nagah Mística",
+    "nd": "6",
+    "regiao": "sszzaazitas",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "nagah",
+    "tamanho": "medio",
+    "iniciativa": 8,
+    "percepcao": 6,
+    "sentidos": [
+      "visao_na_penumbra"
+    ],
+    "defesa": 20,
+    "resistencias": {
+      "fortitude": 6,
+      "reflexos": 12,
+      "vontade": 18
+    },
+    "rd": {
+      "veneno": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 160,
+    "pm": 35,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 1,
+      "des": 3,
+      "con": 2,
+      "int": 4,
+      "sab": 2,
+      "car": 2
+    },
+    "pericias": {
+      "conhecimento": 10,
+      "enganacao": 9,
+      "furtividade": 10,
+      "intuicao": 9,
+      "misticismo": 10
+    },
+    "ataques": [
+      {
+        "nome": "Adaga",
+        "bonusAtaque": 18,
+        "dano": "1d6+6",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Cauda",
+        "bonusAtaque": 18,
+        "dano": "1d6+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Falso Amigo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Adepta veterana."
+      },
+      {
+        "nome": "Magia Acelerada",
+        "acao": "livre",
+        "custoPm": 4,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando lança uma magia com execução de ação completa ou menor, a nagah mística muda a execução dela para livre."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 24,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como uma maga de 8º nível (CD 24): Imagem Espelhada (padrão, 5 PM; cinco cópias ilusórias da nagah surgem ao seu redor, concedendo +10 na Defesa; cada vez que um ataque erra a nagah, uma das cópias desaparece e o bônus na Defesa diminui em 2); Relâmpago (padrão, 5 PM; a nagah causa 8d6 pontos de dano de eletricidade em todas as criaturas em uma linha de 30m, Reflexos reduz à metade); Velocidade (padrão, 3 PM, sustentada; a nagah pode executar uma ação padrão adicional por turno, que não pode ser usada para lançar magias)."
+      },
+      {
+        "nome": "Fraquezas Ofídicas",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A nagah sofre 1 ponto de dano adicional para cada dado de dano de frio e -5 em testes de resistência contra Músicas de bardo."
+      }
+    ],
+    "equipamento": [
+      "Adaga",
+      "Essência de mana"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "nagah_mistica",
+    "nome": "Nagah Mística",
+    "nd": "6",
+    "regiao": "sszzaazitas",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "nagah",
+    "tamanho": "medio",
+    "iniciativa": 8,
+    "percepcao": 6,
+    "sentidos": [
+      "visao_na_penumbra"
+    ],
+    "defesa": 20,
+    "resistencias": {
+      "fortitude": 6,
+      "reflexos": 12,
+      "vontade": 18
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 160,
+    "pm": 35,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 4,
+      "con": 2,
+      "int": 4,
+      "sab": 3,
+      "car": 3
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Adaga",
+        "bonusAtaque": 18,
+        "dano": "1d6+6",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Cauda",
+        "bonusAtaque": 18,
+        "dano": "1d6+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Magia Acelerada",
+        "acao": "livre",
+        "custoPm": 4,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, muda a execução de uma magia para livre."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 26,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como maga de 8º nível (CD 26)."
+      },
+      {
+        "nome": "Fraquezas Ofídias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Sofre 1 ponto de dano adicional por dado de dano de frio e –5 em testes contra Músicas de Bardo."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "nagah_retalhador",
+    "nome": "Nagah Retalhador",
+    "nd": "12",
+    "regiao": "sszzaazitas",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "nagah",
+    "tamanho": "medio",
+    "iniciativa": 20,
+    "percepcao": 14,
+    "sentidos": [
+      "visao_na_penumbra"
+    ],
+    "defesa": 43,
+    "resistencias": {
+      "fortitude": 20,
+      "reflexos": 26,
+      "vontade": 12
+    },
+    "rd": {
+      "veneno": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 600,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 5,
+      "con": 4,
+      "int": 0,
+      "sab": 2,
+      "car": 1
+    },
+    "pericias": {
+      "enganacao": 15,
+      "furtividade": 17,
+      "intimidacao": 13
+    },
+    "ataques": [
+      {
+        "nome": "Cimitarra (x4)",
+        "bonusAtaque": 36,
+        "dano": "1d8+12",
+        "danoExtra": null,
+        "margemAmeaca": 15,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": "veneno"
+      },
+      {
+        "nome": "Cauda",
+        "bonusAtaque": 36,
+        "dano": "1d6+12",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Usa a manobra agarrar com a cauda (teste +38)."
+      },
+      {
+        "nome": "Barreira de Lâminas",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Duas vezes por rodada, quando é alvo de um ataque corpo a corpo, o nagah retalhador pode fazer um teste de ataque oposto ao resultado desse ataque. Se vencer, evita o dano e pode fazer um ataque corpo a corpo contra o atacante."
+      },
+      {
+        "nome": "Constrição",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada um de seus turnos, o retalhador causa 2d6+12 pontos de dano de impacto na criatura que estiver agarrando com sua cauda."
+      },
+      {
+        "nome": "Retalhar",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Para cada dois ataques de cimitarra que o retalhador acertar em uma mesma criatura na mesma rodada, ele causa mais 2d8+12 pontos de dano."
+      },
+      {
+        "nome": "Veneno",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 33,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Peçonha potente: perde 2d12 pontos de vida por rodada durante 3 rodadas (Fort CD 33 reduz a duração para 1 rodada)."
+      }
+    ],
+    "equipamento": [
+      "Cimitarra de mitral x4"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "nagah_sacerdotisa",
+    "nome": "Nagah Sacerdotisa",
+    "nd": "5",
+    "regiao": "sszzaazitas",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "nagah",
+    "tamanho": "medio",
+    "iniciativa": 6,
+    "percepcao": 7,
+    "sentidos": [
+      "visao_na_penumbra"
+    ],
+    "defesa": 23,
+    "resistencias": {
+      "fortitude": 5,
+      "reflexos": 11,
+      "vontade": 17
+    },
+    "rd": {
+      "veneno": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 140,
+    "pm": 38,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": -1,
+      "des": 2,
+      "con": 0,
+      "int": 3,
+      "sab": 3,
+      "car": 5
+    },
+    "pericias": {
+      "enganacao": 15,
+      "furtividade": 1,
+      "intuicao": 9,
+      "religiao": 9
+    },
+    "ataques": [
+      {
+        "nome": "Adaga",
+        "bonusAtaque": 15,
+        "dano": "1d4+5",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": "veneno"
+      },
+      {
+        "nome": "Cauda",
+        "bonusAtaque": 15,
+        "dano": "1d6+5",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Devoção Dissimulada",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A nagah sacerdotisa se apresenta como devota de outra divindade. Quando faz um teste de Enganação ou Religião para ocultar sua devoção verdadeira, ela rola dois dados e usa o melhor resultado."
+      },
+      {
+        "nome": "Falso Amigo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Médica veterana."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 22,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como uma clériga de Sszzaas de 7º nível (CD 22, limite de PM 7): Curar Ferimentos (padrão, 7 PM; uma criatura em alcance curto cura 8d8+8 PV); Comando (padrão, 6 PM; no início do seu próximo turno, três criaturas em alcance curto ficam pasmas por 1 rodada, Von evita); Marca da Obediência (padrão, 3 PM; a sacerdotisa ordena que uma criatura adjacente não ataque a ela ou a seus aliados até o fim da cena, Von evita; a criatura pode repetir o teste de Vontade em cada um de seus turnos subsequentes); Miasma Mefítico (padrão, 7 PM; criaturas em um raio de 6m em alcance médio sofrem 7d6 pontos de dano de ácido e ficam enjoadas por 1 rodada, Fort reduz à metade e evita a condição); Santuário (padrão, 1 PM; a sacerdotisa toca uma criatura; até o fim da cena, ou até que essa criatura faça uma ação hostil, qualquer criatura que tente fazer uma ação hostil contra ela perde a ação, Von evita)."
+      },
+      {
+        "nome": "Veneno",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 22,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Peçonha concentrada: perde 1d12 pontos de vida por rodada durante 3 rodadas (Fort CD 22 reduz para 1 rodada)."
+      }
+    ],
+    "equipamento": [
+      "Adaga",
+      "Couraça",
+      "Escudo leve",
+      "Símbolo sagrado (qualquer, exceto Sszzaas)"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "naja",
+    "nome": "Naja",
+    "nd": "1",
+    "regiao": "sszzaazitas",
+    "papel": "lacaio",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "pequeno",
+    "iniciativa": 8,
+    "percepcao": 3,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 17,
+    "resistencias": {
+      "fortitude": 5,
+      "reflexos": 10,
+      "vontade": 1
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 13,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 6.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": -1,
+      "des": 4,
+      "con": 1,
+      "int": -5,
+      "sab": 0,
+      "car": -4
+    },
+    "pericias": {
+      "furtividade": 10
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 12,
+        "dano": "1d4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": "veneno"
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Veneno",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 18,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Perde 1d12 PV por rodada durante 3 rodadas (Fort CD 18 reduz para uma rodada)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "1 dose de peconha concentrada (cd 16 para extrair)",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "nastarrath",
+    "nome": "Nastarrath",
+    "nd": "18",
+    "regiao": "sszzaazitas",
+    "papel": "solo",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "colossal",
+    "iniciativa": 15,
+    "percepcao": 17,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 56,
+    "resistencias": {
+      "fortitude": 32,
+      "reflexos": 18,
+      "vontade": 26
+    },
+    "rd": {
+      "geral": 20
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "corte",
+      "perfuracao"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 1150,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 12,
+      "des": 0,
+      "con": 8,
+      "int": -1,
+      "sab": 2,
+      "car": -1
+    },
+    "pericias": {
+      "enganacao": 16,
+      "furtividade": 12,
+      "intuicao": 17
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 50,
+        "dano": "4d10+42",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": "veneno"
+      },
+      {
+        "nome": "Cauda (x2)",
+        "bonusAtaque": 50,
+        "dano": "3d8+42",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": "veneno"
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Usa a manobra agarrar com a mordida (teste +60)."
+      },
+      {
+        "nome": "Engolir",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada um dos turnos do Nastarrath, a criatura engolida sofre 4d8+21 pontos de dano de perfuração e perde 4d12 pontos de vida por veneno. Ela pode escapar causando um total de 200 pontos de dano a ele (Defesa 25) ou, se for Minúscula, gastando uma ação de movimento. A criatura engolida não fica cega nem tem cobertura contra efeitos do lado de fora (e vice-versa)."
+      },
+      {
+        "nome": "Mastigar",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada um de seus turnos, o Nastarrath causa 6d12+34 pontos de dano de corte, mais veneno, na criatura que estiver agarrando com sua mordida."
+      },
+      {
+        "nome": "Veneno",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 52,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Perde 6d12 pontos de vida por rodada durante 3 rodadas (Fort CD 52 reduz para 2d12 por 3 rodadas)."
+      }
+    ],
+    "equipamento": [
+      "1d4 doses de pó de lich (CD 38 para extrair)"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "rival_espelho",
+    "nome": "Rival Espelho",
+    "nd": "0",
+    "regiao": "sszzaazitas",
+    "papel": "lacaio",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 0,
+    "percepcao": 0,
+    "sentidos": [],
+    "defesa": 10,
+    "resistencias": {
+      "fortitude": 0,
+      "reflexos": 0,
+      "vontade": 0
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 1,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 0.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": null,
+      "des": null,
+      "con": null,
+      "int": null,
+      "sab": null,
+      "car": null
+    },
+    "pericias": {},
+    "ataques": [],
+    "habilidades": [
+      {
+        "nome": "ND Variável",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Um rival espelho possui as características e o ND do personagem que está copiando. Todos os campos numéricos desta entrada (ND, PV, Defesa, atributos, etc.) são apenas placeholders; na prática, use integralmente a ficha do personagem copiado."
+      },
+      {
+        "nome": "Transferir Dor",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Todo dano que o rival espelho sofre, bem como efeitos adicionais desse dano, é aplicado ao personagem que ele está copiando e não ao rival. Se o personagem copiado for reduzido a 0 PV ou menos, o rival desaparece após 1 rodada."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "sszzaazita_celebrante",
+    "nome": "Sszzaazita Celebrante",
+    "nd": "16",
+    "regiao": "sszzaazitas",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 23,
+    "percepcao": 17,
+    "sentidos": [],
+    "defesa": 51,
+    "resistencias": {
+      "fortitude": 24,
+      "reflexos": 28,
+      "vontade": 18
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 571,
+    "pm": 83,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 7,
+      "con": 4,
+      "int": 2,
+      "sab": 3,
+      "car": 5
+    },
+    "pericias": {
+      "enganacao": 26,
+      "intimidacao": 26,
+      "intuicao": 24,
+      "religiao": 24
+    },
+    "ataques": [
+      {
+        "nome": "Punhal Sszzaazita",
+        "bonusAtaque": 44,
+        "dano": "1d4+20",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": "veneno"
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Evasão",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando passa em um teste de Reflexos para reduzir o dano de um efeito à metade, em vez disso não sofre nenhum dano."
+      },
+      {
+        "nome": "Assassinar",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O sszzaazita celebrante analisa uma criatura em alcance curto. Até o fim de seu próximo turno, ele dobra os dados de dano extras por Ataque Furtivo em seu primeiro Ataque Furtivo que causar dano contra essa criatura."
+      },
+      {
+        "nome": "Ataque Furtivo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Causa +8d8 pontos de dano em ataques contra alvos desprevenidos ou flanqueados."
+      },
+      {
+        "nome": "Cobra em Pele de Cordeiro",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O celebrante é considerado um respeitado membro do clero de outro deus e recebe +5 em testes de Enganação e Intimidação com seus devotos."
+      },
+      {
+        "nome": "Falso Amigo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Médico veterano."
+      },
+      {
+        "nome": "Ritual Disfarçado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 38,
+        "resistenciaTipo": null,
+        "descricao": "O celebrante disfarça suas magias como se fossem de outra divindade. Uma criatura que veja o celebrante lançar uma magia deve fazer um teste de Intuição ou Misticismo (CD 38) para perceber sua verdadeira natureza. Se falhar, sofre -5 em seu teste de resistência contra ela."
+      },
+      {
+        "nome": "Manto do Traidor",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O celebrante pode se esconder mesmo sem camuflagem ou cobertura disponíveis, não sofre penalidade em testes de Furtividade por se mover ao seu deslocamento normal e reduz a penalidade em Furtividade por atacar e fazer outras ações chamativas para -5."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 38,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como um clérigo de Sszzaas de 16º nível (CD 38): Curar Ferimentos (padrão, 12 PM; uma criatura adjacente cura 13d8+13 PV); Libertação (padrão, 14 PM; o celebrante fica imune a efeitos de movimento, ignora qualquer efeito que impeça ou restrinja seu deslocamento, pode escolher 20 em testes de Atletismo e Acrobacia, e pode fazer todas as manobras desta perícia mesmo sem treinamento); Manto de Sombras (padrão, 6 PM, sustentada; o celebrante se torna incorpóreo; pode gastar uma ação de movimento e 1 PM para \"entrar\" em uma sombra do seu tamanho ou maior e se teletransportar para outra sombra, também do seu tamanho ou maior, em alcance médio; além disso, torna-se vulnerável a luz direta, sofrendo 1 ponto de dano por rodada se exposto a uma fonte de luz); Silêncio (padrão, 3 PM, sustentada; o celebrante cria uma esfera de 6m em alcance médio; criaturas nessa área ficam surdas e por isso não podem lançar magias)."
+      },
+      {
+        "nome": "Veneno",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 38,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Perde 2d12 pontos de vida durante 3 rodadas (Fort CD 38 reduz para 1 rodada)."
+      }
+    ],
+    "equipamento": [
+      "Estojo de disfarces aprimorado",
+      "Punhal sszzaazita",
+      "Símbolo sagrado (qualquer, exceto Sszzaas)"
+    ],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "sucuri",
+    "nome": "Sucuri",
+    "nd": "3",
+    "regiao": "sszzaazitas",
+    "papel": "especial",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 5,
+    "percepcao": 4,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 19,
+    "resistencias": {
+      "fortitude": 9,
+      "reflexos": 15,
+      "vontade": 3
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 88,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 9.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 2,
+      "con": 4,
+      "int": -5,
+      "sab": 1,
+      "car": -4
+    },
+    "pericias": {
+      "furtividade": 8
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 18,
+        "dano": "2d6+14",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se acerta mordida, pode usar agarrar (teste +20)."
+      },
+      {
+        "nome": "Constrição",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada turno, causa 4d6+14 de impacto na criatura agarrada."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "1 dose de peconha comum (cd 15 para extrair)",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "zumbi_peconha",
+    "nome": "Zumbi Peçonha",
+    "nd": "1",
+    "regiao": "sszzaazitas",
+    "papel": "especial",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": -1,
+    "percepcao": -1,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 15,
+    "resistencias": {
+      "fortitude": 9,
+      "reflexos": 1,
+      "vontade": 6
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 21,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": -1,
+      "con": 2,
+      "int": null,
+      "sab": -1,
+      "car": -5
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 10,
+        "dano": "1d6+9",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "3m",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": "veneno"
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Bote Oculto",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O alvo do primeiro ataque do zumbi em uma cena é considerado desprevenido."
+      },
+      {
+        "nome": "Veneno",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 14,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Atordoado por 1 rodada e fraco (Fort CD 14 reduz para fraco por 1 rodada)."
+      },
+      {
+        "nome": "Fraqueza Zumbi",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O zumbi sofre o dobro de dano de acertos críticos ou de ataques feitos contra seu cérebro (Defesa 25)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  }
+]

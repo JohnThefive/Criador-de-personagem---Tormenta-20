@@ -1,0 +1,768 @@
+[
+  {
+    "id": "bispo_de_guerra",
+    "nome": "Bispo de Guerra",
+    "nd": "8",
+    "regiao": "igreja_de_arsenal",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 8,
+    "percepcao": 14,
+    "sentidos": [],
+    "defesa": 28,
+    "resistencias": {
+      "fortitude": 15,
+      "reflexos": 8,
+      "vontade": 26
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 230,
+    "pm": 66,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 0,
+      "con": 4,
+      "int": 2,
+      "sab": 6,
+      "car": 1
+    },
+    "pericias": {
+      "guerra": 16,
+      "misticismo": 12,
+      "religiao": 16
+    },
+    "ataques": [
+      {
+        "nome": "Martelo de guerra (x2)",
+        "bonusAtaque": 24,
+        "dano": "1d8+10",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Ódio Puro",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Como um purista, o bispo de guerra recebe +5 em testes de Vontade quando está seguindo ordens de um superior (qualquer purista com ND maior) e +2 em rolagens de dano contra humanoides não humanos."
+      },
+      {
+        "nome": "Prece de Combate",
+        "acao": "livre",
+        "custoPm": 2,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando lança uma magia divina com tempo de conjuração de uma ação padrão em si mesmo, o bispo pode lançá-la como uma ação de movimento."
+      },
+      {
+        "nome": "Símbolo Sagrado Energizado",
+        "acao": "movimento",
+        "custoPm": 1,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O bispo energiza seu símbolo sagrado. Até o fim da cena, ele emite uma luz avermelhada que ilumina como uma tocha e, enquanto estiver sendo empunhado pelo bispo, reduz o custo de magias divinas em –1 PM."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 28,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como clérigo de Arsenal de 9º nível (CD 28, limite de PM 9): Curar Ferimentos (padrão, 8 PM, criatura adjacente cura 9d8+9 PV), Dissipar Magia (padrão, 3 PM, teste de Misticismo em criatura/objeto/esfera de 3m em alcance médio), Escudo da Fé (reação, 3 PM, +3 na Defesa por 1 turno para uma criatura em alcance curto que sofra um ataque), Oração (padrão, 7 PM, sustentada, bispo e aliados em alcance curto +4 em perícia e dano, inimigos em alcance curto –4), Soco de Arsenal (padrão, 7 PM, 6d6+3 de dano de impacto em alcance médio, empurra 3m, Fortitude reduz à metade e evita o empurrão), Sopro da Salvação (padrão, 8 PM, cone de 9m cura 3d8+3 PV e remove uma condição de uma lista extensa de condições negativas)."
+      }
+    ],
+    "equipamento": [
+      "Armadura completa ajustada reforçada",
+      "Escudo leve reforçado",
+      "Martelo de guerra",
+      "Símbolo sagrado de Arsenal",
+      "Poção de velocidade"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "coletor_de_arsenal",
+    "nome": "Coletor de Arsenal",
+    "nd": "10",
+    "regiao": "igreja_de_arsenal",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 15,
+    "percepcao": 13,
+    "sentidos": [],
+    "defesa": 32,
+    "resistencias": {
+      "fortitude": 22,
+      "reflexos": 10,
+      "vontade": 18
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +5"
+    ],
+    "pv": 280,
+    "pm": 54,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 1,
+      "con": 3,
+      "int": 2,
+      "sab": 4,
+      "car": 0
+    },
+    "pericias": {
+      "guerra": 15,
+      "misticismo": 16,
+      "religiao": 18
+    },
+    "ataques": [
+      {
+        "nome": "Martelo de guerra",
+        "bonusAtaque": 27,
+        "dano": "2d8+30",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Chicote",
+        "bonusAtaque": 27,
+        "dano": "1d4+25",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "4,5m",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Chicote de Aço",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Especialmente fixado a sua armadura, o chicote do coletor deixa a mão livre e não pode ser desarmado."
+      },
+      {
+        "nome": "Desarmar Superior",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando desarma um oponente usando seu chicote, o coletor puxa a arma para sua mão livre."
+      },
+      {
+        "nome": "Marca da Oferenda",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando o coletor é derrotado, todo seu equipamento, incluindo armas que ele esteja empunhando, é teletransportado para um templo de Arsenal."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 32,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como clérigo de Arsenal de 10º nível (CD 32): Arma Espiritual (padrão, 5 PM, até o fim da cena uma vez por rodada quando sofre um ataque corpo a corpo pode usar uma reação para causar 4d6 pontos de dano de impacto no atacante), Físico Divino (padrão, 3 PM, +2 em Força, Destreza ou Constituição à escolha, sem PV/PM adicionais), Lendas e Histórias (padrão, 6 PM, sustentada, descobre informações sobre uma criatura/objeto/local tocando), Soco de Arsenal (padrão, 9 PM, 7d6+5 de dano de impacto em alcance médio, empurra 3m, Fortitude reduz à metade e evita o empurrão), Visão Mística (padrão, 3 PM, detecta auras mágicas em alcance médio por 1 dia)."
+      }
+    ],
+    "equipamento": [
+      "Armadura completa abascanta",
+      "Chicote",
+      "Martelo de guerra formidável",
+      "Símbolo sagrado de Arsenal"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "concilio_forjador",
+    "nome": "Concílio Forjador",
+    "nd": "13",
+    "regiao": "igreja_de_arsenal",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "grande",
+    "iniciativa": 11,
+    "percepcao": 14,
+    "sentidos": [],
+    "defesa": 41,
+    "resistencias": {
+      "fortitude": 20,
+      "reflexos": 13,
+      "vontade": 26
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 430,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 1,
+      "con": 3,
+      "int": 3,
+      "sab": 4,
+      "car": 1
+    },
+    "pericias": {
+      "guerra": 15,
+      "misticismo": 15,
+      "oficio_armeiro": 16,
+      "religiao": 16
+    },
+    "ataques": [
+      {
+        "nome": "Armamento sagrado [Bando] (x2)",
+        "bonusAtaque": 35,
+        "dano": "4d12+40",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 3,
+        "tipoDano": "variavel",
+        "alcance": "corpo a corpo ou à distância, conforme a arma",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Armamento Sagrado",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O líder de cada concílio porta uma arma mágica a ser oferecida ao seu oponente. Escolha um tipo de arma e dois encantos adequados, ou determine-os aleatoriamente usando as tabelas de tesouros (Tormenta20, Capítulo 8). O concílio empunha essa arma em corpo a corpo ou à distância, conforme apropriado. Independente do tipo de arma, nas mãos do concílio ela possui as estatísticas indicadas em seu ataque, modificadas por seus encantos. Se o encanto escolhido tiver um custo em PM, ele pode usá-lo sem gastar PM."
+      },
+      {
+        "nome": "Desprezo pelo Ordinário",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O concílio sofre apenas metade do dano de armas mundanas sem melhorias."
+      }
+    ],
+    "equipamento": [
+      "Arma superior com 1 melhoria a sua escolha",
+      "Instrumentos de Ofício (armeiro) aprimorados",
+      "Meia armadura (1d4 de cada)",
+      "Armamento sagrado"
+    ],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "forjador_liturgico",
+    "nome": "Forjador Litúrgico",
+    "nd": "9",
+    "regiao": "igreja_de_arsenal",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 9,
+    "percepcao": 12,
+    "sentidos": [],
+    "defesa": 32,
+    "resistencias": {
+      "fortitude": 15,
+      "reflexos": 9,
+      "vontade": 21
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 230,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 1,
+      "con": 3,
+      "int": 3,
+      "sab": 4,
+      "car": 1
+    },
+    "pericias": {
+      "guerra": 13,
+      "misticismo": 13,
+      "oficio_armeiro": 14,
+      "religiao": 14
+    },
+    "ataques": [
+      {
+        "nome": "Armamento sagrado (x2)",
+        "bonusAtaque": 25,
+        "dano": "2d12+20",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 3,
+        "tipoDano": "variavel",
+        "alcance": "corpo a corpo ou à distância, conforme a arma",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Armamento Sagrado",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O forjador litúrgico porta uma arma mágica a ser oferecida ao seu oponente. Escolha um tipo de arma e um encanto adequado, ou determine-os aleatoriamente usando as tabelas de tesouros (Tormenta20, Capítulo 8). Independente do tipo de arma, nas mãos do forjador ela possui as estatísticas indicadas em seu ataque, modificadas por seu encanto. Se o encanto escolhido tiver um custo em PM, ele pode usá-lo sem gastar PM."
+      },
+      {
+        "nome": "Desprezo pelo Ordinário",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O forjador sofre apenas metade do dano de armas mundanas sem melhorias."
+      }
+    ],
+    "equipamento": [
+      "Armamento sagrado",
+      "Instrumentos de Ofício (armeiro) aprimorados",
+      "Meia armadura"
+    ],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "guerreiro_perpetuo",
+    "nome": "Guerreiro Perpétuo",
+    "nd": "7",
+    "regiao": "igreja_de_arsenal",
+    "papel": "solo",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 9,
+    "percepcao": 13,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 33,
+    "resistencias": {
+      "fortitude": 20,
+      "reflexos": 14,
+      "vontade": 7
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [
+      "incorporeo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 265,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 0.0,
+      "voo": 9.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": null,
+      "des": 6,
+      "con": 0,
+      "int": 0,
+      "sab": 4,
+      "car": -1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Martelo de guerra (x2)",
+        "bonusAtaque": 25,
+        "dano": "4d6+19",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Sempre Armado",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se o guerreiro perpétuo for desarmado por um inimigo, sua arma retornará a ele no fim da rodada. Quando isso ocorre, ela causa 3d12+13 pontos de dano de impacto às criaturas adjacentes ao guerreiro."
+      },
+      {
+        "nome": "Casca Vazia",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O guerreiro pode manipular seu próprio equipamento, mas não pode atravessar objetos sólidos."
+      }
+    ],
+    "equipamento": [
+      "Escudo pesado",
+      "Grilhão de descrença",
+      "Martelo de guerra"
+    ],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "kishin",
+    "nome": "Kishin",
+    "nd": "13",
+    "regiao": "igreja_de_arsenal",
+    "papel": "solo",
+    "tipo": "construto",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 16,
+    "percepcao": 9,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 46,
+    "resistencias": {
+      "fortitude": 26,
+      "reflexos": 13,
+      "vontade": 20
+    },
+    "rd": {
+      "geral": 15
+    },
+    "imunidadesEfeitos": [
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +2"
+    ],
+    "pv": 617,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 12,
+      "des": 6,
+      "con": 10,
+      "int": null,
+      "sab": 3,
+      "car": -3
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Armamento adaptativo (x2)",
+        "bonusAtaque": 39,
+        "dano": "1d4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "variavel_veja_armamento_adaptativo",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Armamento Adaptativo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 35,
+        "resistenciaTipo": null,
+        "descricao": "Máquina de combate com armas mágicas acopladas a seu corpo. A cada rodada, escolhe uma das seguintes armas para seus ataques: Uivante (montante, 2d6+66, 19, mais 2d6 de frio — quando usa a ação agredir pode aumentar sua sobrecarga em 1 nível; se fizer isso, as criaturas atingidas pelo Uivante neste turno ficam enredadas por 1 rodada, Reflexos CD 35 evita); Finitude (lança montada, 3d8+51, 18/x3 — quando faz uma investida, pode aumentar sua sobrecarga em 1 nível; se acertar o ataque, causa +4d8 pontos de dano e recupera uma quantidade de PV igual a esse dano adicional); Método (martelo de guerra, 4d12+55, 19/x3 — quando derruba um inimigo, pode aumentar sua sobrecarga em 1 nível para fazer um ataque adicional contra essa criatura)."
+      },
+      {
+        "nome": "Sobrecarga",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A sobrecarga do kishin inflama e fortalece seus mecanismos. Para cada nível de sobrecarga, recebe +2 em testes de perícia e rolagens de dano, mas sofre 5 pontos de dano de fogo (sua RD se aplica normalmente) no início de cada um de seus turnos. A sobrecarga volta a zero ao fim da cena."
+      },
+      {
+        "nome": "Zona de Perigo",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O kishin aumenta sua sobrecarga em 1 nível."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "1d4 lascas adaptativas (cd 28 para extrair, cada lasca vale t$ 1.000 para fabricar armas superiores).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "kishinauros",
+    "nome": "Kishinauros",
+    "nd": "21",
+    "regiao": "igreja_de_arsenal",
+    "papel": "solo",
+    "tipo": "construto",
+    "subtipo": null,
+    "tamanho": "colossal",
+    "iniciativa": 25,
+    "percepcao": 15,
+    "sentidos": [
+      "percepcao_as_cegas_longo"
+    ],
+    "defesa": 61,
+    "resistencias": {
+      "fortitude": 36,
+      "reflexos": 22,
+      "vontade": 30
+    },
+    "rd": {
+      "geral": 30
+    },
+    "imunidadesEfeitos": [
+      "efeitos_de_movimento",
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +5"
+    ],
+    "pv": 2450,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 15.0,
+      "voo": 12.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 16,
+      "des": 8,
+      "con": 12,
+      "int": null,
+      "sab": 5,
+      "car": -3
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Armamento adaptativo (x3)",
+        "bonusAtaque": 59,
+        "dano": "1d4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "variavel_veja_armamento_adaptativo",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Balística Avançada (à distância)",
+        "bonusAtaque": 59,
+        "dano": "1d4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "variavel_veja_balistica_avancada",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Armamento Adaptativo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 51,
+        "resistenciaTipo": null,
+        "descricao": "A cada rodada, o Kishinauros escolhe uma das seguintes armas mágicas para seus ataques corpo a corpo. Quando usa a ação agredir, pode aumentar sua sobrecarga em 1 para energizar a arma por um turno. Malho Relampejante (martelo de guerra, 6d6+44, x3 — se energizado, criaturas atingidas ficam atordoadas por 1 rodada, Fortitude CD 51 evita; só pode ser atordoada uma vez por cena). Perfuratriz Sibilante (alabarda, 4d10+42, x4 — se energizado, seus ataques ignoram redução de dano e imunidade a acertos críticos). Vingadora e Impérvio (espada bastarda e escudo pesado, 6d8+38, 19 — o Kishinauros recebe +2 na Defesa; se energizado, uma vez na rodada, quando é alvo de uma magia, pode refleti-la de volta ao conjurador, mantendo as características da magia mas tornando o conjurador seu novo alvo)."
+      },
+      {
+        "nome": "Balística Avançada",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 51,
+        "resistenciaTipo": null,
+        "descricao": "A cada rodada, o Kishinauros escolhe uma das seguintes armas para seus ataques à distância. Balista Explosiva (besta pesada, 4d12+17, 19 — criaturas na área atingida pelo virote sofrem 12d6 pontos de dano de fogo, Reflexos CD 51 reduz à metade; recarga movimento). Canhão Final (mosquete, 4d12+38 de essência, 19/x4 — em um resultado 1 no teste de ataque, a sobrecarga aumenta em 1 e o Canhão Final explode: criaturas em alcance curto, incluindo o Kishinauros, sofrem 16d12+60 pontos de dano, metade fogo e metade essência, e ficam em chamas, Reflexos CD 51 reduz à metade; recarga padrão). Morteiro Elemental x4 (6d6, x2, alcance longo — cada ataque causa dano de um tipo diferente entre ácido, eletricidade, fogo e frio; recarga movimento, apenas com sobrecarga 0)."
+      },
+      {
+        "nome": "Células de Resfriamento",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 51,
+        "resistenciaTipo": null,
+        "descricao": "O Kishinauros expele calor acumulado na forma de gás venenoso. Sua sobrecarga é reduzida a 0, e criaturas em alcance curto ficam enjoadas e perdem 10 PV por ponto de sobrecarga expelido (Fortitude CD 51 reduz a perda à metade e evita a condição). Veneno."
+      },
+      {
+        "nome": "Disparo Automático",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, o Kishinauros faz um ataque à distância."
+      },
+      {
+        "nome": "Protocolos de Emergência",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 51,
+        "resistenciaTipo": null,
+        "descricao": "O Kishinauros aumenta sua sobrecarga em 1 e lança uma das magias a seguir, em reação a uma condição específica, como um clérigo de Arsenal de 20º nível (CD 51, limite de PM 20) sem pagar PM. Deflagração de Mana: quando reduzido a 200 PV ou menos, todas as outras criaturas numa esfera de 15m ao redor dele sofrem 200 pontos de dano de essência e todos os itens mágicos (exceto artefatos) tornam-se mundanos permanentemente (Fortitude reduz à metade; itens recuperam sua magia após 1 dia). Fúria do Panteão: quando reduzido a 700 PV ou menos, cria uma nuvem de tempestade num cubo de 90m em alcance longo até o fim da cena — os ventos tornam ataques à distância impossíveis e a área conta como condição terrível para lançar magia, inimigos na área têm visibilidade reduzida (como a magia Névoa); uma vez por turno, até 6 inimigos sofrem 10d8 pontos de dano de eletricidade (Reflexos reduz à metade). Soco de Arsenal: quando desarmado, causa 12d6+16 pontos de dano de impacto em uma criatura em alcance médio e a empurra até 3m na direção oposta (Fortitude reduz à metade e evita o empurrão). Terremoto: uma vez por rodada, quando erra um ataque corpo a corpo, tremores rasgam o solo em alcance médio — cada criatura na área fica atordoada (apenas uma vez por cena) e precisa rolar um dado; com resultado ímpar, uma fenda se abre, a criatura cai dentro (Reflexos evita) e é considerada agarrada, podendo se soltar gastando uma ação completa e passando em um teste de Atletismo (CD 51); no início de cada turno da criatura agarrada, ela sofre 8d8 pontos de dano de impacto."
+      },
+      {
+        "nome": "Titânico",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 51,
+        "resistenciaTipo": null,
+        "descricao": "O Kishinauros é imune a manobras de combate, não pode ser flanqueado e sofre metade do dano de ataques que não sejam de outra criatura Titânica. Quando se move, pisoteia qualquer criatura ou objeto Enorme ou menor em seu caminho (atravessando seu espaço), causando 20d6 pontos de dano de impacto (uma vez por rodada por criatura, Reflexos CD 51 reduz à metade). Além disso, seus ataques ignoram redução de dano e atingem todas as criaturas em um quadrado de 6m (para cada ataque, ele faz um único teste de ataque e compara o resultado com a Defesa de cada inimigo na área)."
+      },
+      {
+        "nome": "Sobrecarga",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A sobrecarga do Kishinauros fortalece seus mecanismos. Para cada ponto de sobrecarga, recebe +5 em testes de perícia e rolagens de dano, mas sofre 5 pontos de dano de fogo (sua RD se aplica) no início de cada um de seus turnos."
+      },
+      {
+        "nome": "Zona de Perigo",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Kishinauros aumenta sua sobrecarga em 1."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nucleo mistico. alimentado por incontaveis itens magicos, o nucleo do kishinauros pode ser usado para encantar outras armas. o nucleo tem tres cargas, cada uma pode conceder um encanto a uma arma, que nao conta no limite de encantos. cada item so pode receber um encanto desta forma, e deve cumprir seus requisitos.",
+    "recursoExtraivel": null
+  }
+]

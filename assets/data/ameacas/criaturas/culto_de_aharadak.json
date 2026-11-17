@@ -1,0 +1,1214 @@
+[
+  {
+    "id": "aspecto_de_aharadak",
+    "nome": "Aspecto de Aharadak",
+    "nd": "10",
+    "regiao": "culto_de_aharadak",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "lefeu",
+    "tamanho": "grande",
+    "iniciativa": 10,
+    "percepcao": 25,
+    "sentidos": [
+      "percepcao_as_cegas"
+    ],
+    "defesa": 38,
+    "resistencias": {
+      "fortitude": 22,
+      "reflexos": 10,
+      "vontade": 20
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 472,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 9.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 10,
+      "des": 1,
+      "con": 7,
+      "int": 2,
+      "sab": 5,
+      "car": -4
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 30,
+        "dano": "4d8+22",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 30,
+        "dano": "3d8+22",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Mordida (teste +32)."
+      },
+      {
+        "nome": "Cuspir Enxame (mágica)",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Um enxame de insetos rubros Grande surge em um ponto em alcance curto (sustentada, sem gasto de PM). No fim de cada um dos turnos do aspecto, causa 4d12 pontos de dano de ácido a qualquer criatura em seu espaço. Pode gastar uma ação de movimento para mover o enxame com deslocamento de voo 12m."
+      },
+      {
+        "nome": "Engolir",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada um dos turnos do aspecto, a criatura engolida sofre 4d6+11 pontos de dano de impacto mais 4d6+11 pontos de dano de ácido. Pode escapar causando um total de 25 pontos de dano a ele (Defesa 15, redução de dano 0)."
+      },
+      {
+        "nome": "Insanidade da Tormenta",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 30,
+        "resistenciaTipo": null,
+        "descricao": "2d12 PM (Vontade CD 30 evita)."
+      },
+      {
+        "nome": "Sangue Ácido",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando o aspecto sofre dano por um ataque corpo a corpo adjacente, o atacante sofre 10 pontos de dano de ácido."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "avatar_de_aharadak_culto",
+    "nome": "Avatar de Aharadak (Culto)",
+    "nd": "21",
+    "regiao": "culto_de_aharadak",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "lefeu",
+    "tamanho": "colossal",
+    "iniciativa": 18,
+    "percepcao": 30,
+    "sentidos": [
+      "percepcao_as_cegas_longo"
+    ],
+    "defesa": 70,
+    "resistencias": {
+      "fortitude": 36,
+      "reflexos": 31,
+      "vontade": 31
+    },
+    "rd": {
+      "geral": 20
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 2804,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 0.0,
+      "voo": 18.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 20,
+      "des": -2,
+      "con": 12,
+      "int": 4,
+      "sab": 10,
+      "car": -1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Tentáculo (x4)",
+        "bonusAtaque": 58,
+        "dano": "4d12+47",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 58,
+        "dano": "6d12+47",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Tentáculo (teste +68). O avatar pode manter até 4 criaturas Enormes ou menores agarradas ao mesmo tempo."
+      },
+      {
+        "nome": "Centelha Divina (mágica)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 52,
+        "resistenciaTipo": null,
+        "descricao": "O avatar pode lançar qualquer magia divina como um clérigo de 20º nível sem gastar PM (CD 52, limite de PM 20)."
+      },
+      {
+        "nome": "Devorar a Existência",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura atingida por um ataque corpo a corpo do avatar perde 1d4 PM. Se não tiver PM suficientes, fica fascinada."
+      },
+      {
+        "nome": "Engolir",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 52,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada um dos turnos do avatar, em vez de sofrer dano, a criatura engolida faz um teste de Vontade (CD 52). Se passar, aparece em um local aleatório em alcance médio, debilitada e confusa por 1d4 rodadas. Se falhar, perde todos os seus PM ou, se não tiver mais, é transportada para o Reino de Aharadak. Pode escapar causando um total de 250 pontos de dano a ele (Defesa 30, redução de dano 5)."
+      },
+      {
+        "nome": "Insanidade da Tormenta",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 52,
+        "resistenciaTipo": null,
+        "descricao": "2d20 PM (Vontade CD 52 evita). Pode afetar mesmo criaturas já afetadas pela Insanidade da Tormenta de outras criaturas neste dia."
+      },
+      {
+        "nome": "Presença da Tormenta (mágica)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 25,
+        "resistenciaTipo": null,
+        "descricao": "O avatar emana uma aura de 30m de raio. Cada criatura que comece seu turno na área fica esmorecida (CD 25 +2 por turno consecutivo evita). Nessa área o custo em PM de habilidades aumenta em +2 e cada item encantado perde um encanto à escolha do portador. No início de cada turno do avatar, role 1d6: 1) Definhamento (10d8 de perda de PV e debilitado, Fortitude CD 52 evita); 2) Tempestade Elétrica (1d20 ímpar = 5d8 de eletricidade e 5d8 de trevas); 3) Chuva Ácida (4d8 de ácido); 4) Labaredas Infernais (1d20 ímpar = 5d8 de fogo e 5d8 de trevas, Reflexos CD 52 reduz à metade); 5) Pesadelos Reais (Vontade CD 52 ou apavorado; repete o teste a cada turno, falha = 6d8 psíquico e perda de 1d8 PM; termina com 2 sucessos seguidos); 6) Magia Caótica (anula magias na área; conjurar exige Vontade CD 52 ou a magia falha gastando PM; falha por 5+ causa explosão de 4d8 de essência no conjurador)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "fanatico_lefou",
+    "nome": "Fanático Lefou",
+    "nd": "5",
+    "regiao": "culto_de_aharadak",
+    "papel": "lacaio",
+    "tipo": "monstro",
+    "subtipo": "lefou",
+    "tamanho": "medio",
+    "iniciativa": 5,
+    "percepcao": 4,
+    "sentidos": [],
+    "defesa": 23,
+    "resistencias": {
+      "fortitude": 16,
+      "reflexos": 11,
+      "vontade": 6
+    },
+    "rd": {
+      "efeitos_mentais": 3,
+      "efeitos_lefeu_e_da_tormenta": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 55,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 1,
+      "con": 2,
+      "int": -1,
+      "sab": 0,
+      "car": -2
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 22,
+        "dano": "2d6+10",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 22,
+        "dano": "1d6+10",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Frenesi Insano",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando causa ou sofre dano, o fanático lefou recebe um bônus cumulativo de +2 em testes de ataque e rolagens de dano até o fim da cena."
+      },
+      {
+        "nome": "Mente Aberrante (mágica)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz um teste de Vontade para resistir a um efeito, o fanático causa 3d6 pontos de dano psíquico na criatura que gerou o efeito."
+      },
+      {
+        "nome": "Sangue Ácido",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando o fanático sofre dano por um ataque corpo a corpo adjacente, o atacante sofre 5 pontos de dano de ácido."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "iniciado_da_agonia",
+    "nome": "Iniciado da Agonia",
+    "nd": "3",
+    "regiao": "culto_de_aharadak",
+    "papel": "lacaio",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 8,
+    "percepcao": 8,
+    "sentidos": [],
+    "defesa": 20,
+    "resistencias": {
+      "fortitude": 5,
+      "reflexos": 8,
+      "vontade": 13
+    },
+    "rd": {
+      "magia_divina": 5
+    },
+    "imunidadesEfeitos": [
+      "efeitos_mentais",
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 28,
+    "pm": 28,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 1,
+      "des": 3,
+      "con": 2,
+      "int": -1,
+      "sab": 3,
+      "car": -1
+    },
+    "pericias": {
+      "intimidacao": 7,
+      "religiao": 6
+    },
+    "ataques": [
+      {
+        "nome": "Adaga",
+        "bonusAtaque": 16,
+        "dano": "1d4+7",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Júbilo na Dor",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando causa ou sofre dano, o acólito da agonia recebe redução de dano 2 e recupera 1d4 pontos de mana. A redução de dano é cumulativa, até um máximo de RD 10, mas volta a zero se passar 1 rodada sem causar ou sofrer dano."
+      },
+      {
+        "nome": "Magias (clérigo de Aharadak, 5º nível, CD 17, limite de 5 PM)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Arma Espiritual (4 PM; +2 na Defesa e reação de 2d6 corte ao sofrer ataque corpo a corpo), Infligir Ferimentos (5 PM; 4d8+4 de trevas), Perdição (3 PM; –2 em ataque e dano a inimigos escolhidos)."
+      }
+    ],
+    "equipamento": [
+      "Adaga",
+      "Gibão de peles",
+      "Símbolo sagrado de Aharadak"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "lider_fanatico_lefou",
+    "nome": "Líder Fanático Lefou",
+    "nd": "8",
+    "regiao": "culto_de_aharadak",
+    "papel": "lacaio",
+    "tipo": "monstro",
+    "subtipo": "lefou",
+    "tamanho": "medio",
+    "iniciativa": 9,
+    "percepcao": 8,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 33,
+    "resistencias": {
+      "fortitude": 20,
+      "reflexos": 15,
+      "vontade": 9
+    },
+    "rd": {
+      "efeitos_lefeu_da_tormenta_e_mentais": 5
+    },
+    "imunidadesEfeitos": [
+      "acertos_criticos"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 90,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 21.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 1,
+      "con": 2,
+      "int": -1,
+      "sab": 0,
+      "car": -2
+    },
+    "pericias": {
+      "intimidacao": 11
+    },
+    "ataques": [
+      {
+        "nome": "Tacape",
+        "bonusAtaque": 27,
+        "dano": "3d10+20",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 27,
+        "dano": "1d4+10",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Pata insetoide (x2)",
+        "bonusAtaque": 27,
+        "dano": "1d4+10",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Frenesi Insano",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando causa ou sofre dano, recebe um bônus cumulativo de +2 em testes de ataque e rolagens de dano até o fim da cena."
+      },
+      {
+        "nome": "Mente Aberrante (mágica)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz um teste de Vontade para resistir a um efeito, causa 5d6 pontos de dano psíquico na criatura que gerou o efeito."
+      },
+      {
+        "nome": "Sangue Ácido",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando sofre dano por um ataque corpo a corpo adjacente, o atacante sofre 9 pontos de dano de ácido."
+      }
+    ],
+    "equipamento": [
+      "Tacape"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "reishid_lider_de_culto",
+    "nome": "Reishid Líder de Culto",
+    "nd": "12",
+    "regiao": "culto_de_aharadak",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "lefeu",
+    "tamanho": "medio",
+    "iniciativa": 19,
+    "percepcao": 23,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 47,
+    "resistencias": {
+      "fortitude": 20,
+      "reflexos": 27,
+      "vontade": 13
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 483,
+    "pm": 66,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 15.0,
+      "natacao": 0.0,
+      "escalada": 9.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 7,
+      "con": 5,
+      "int": 4,
+      "sab": 6,
+      "car": 1
+    },
+    "pericias": {
+      "furtividade": 27,
+      "intimidacao": 11,
+      "religiao": 21
+    },
+    "ataques": [
+      {
+        "nome": "Adaga da Tormenta",
+        "bonusAtaque": 40,
+        "dano": "1d4+21",
+        "danoExtra": "1d8 trevas",
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra",
+        "bonusAtaque": 40,
+        "dano": "2d6+21",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 40,
+        "dano": "2d6+21",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Ataque em Movimento",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O reishid líder de culto pode se mover antes e depois de executar a ação agredir, desde que a distância total percorrida não seja maior que seu deslocamento."
+      },
+      {
+        "nome": "Insanidade da Tormenta",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 35,
+        "resistenciaTipo": null,
+        "descricao": "3d6 PM (Vontade CD 35 evita)."
+      },
+      {
+        "nome": "Magia Acelerada (mágica)",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando lança uma magia com execução de ação completa ou menor, o reishid muda a execução dela para livre."
+      },
+      {
+        "nome": "Sombra Rubra",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz um teste de Iniciativa ou Furtividade, rola dois dados e usa o melhor resultado."
+      },
+      {
+        "nome": "Veneno",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 35,
+        "resistenciaTipo": null,
+        "descricao": "Paralisado por 1d6 horas (Fortitude CD 35 reduz para lento por 1d6 rodadas)."
+      },
+      {
+        "nome": "Magias (clérigo de Aharadak, 12º nível, CD 35)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Anular a Luz (6 PM; escuridão de 6m, dissipa magias de 3º círculo ou menos, +4 Defesa a aliados, enjoa inimigos 1d4 rodadas), Comando (4 PM; até 2 criaturas largam itens empunhados), Marca da Obediência (6 PM; ordena a um adjacente que não ataque até o fim da cena, repetível; falha causa 3d6 de dano psíquico)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao mais uma adaga da tormenta.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "sacerdote_da_agonia",
+    "nome": "Sacerdote da Agonia",
+    "nd": "9",
+    "regiao": "culto_de_aharadak",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 15,
+    "percepcao": 19,
+    "sentidos": [],
+    "defesa": 32,
+    "resistencias": {
+      "fortitude": 9,
+      "reflexos": 15,
+      "vontade": 21
+    },
+    "rd": {
+      "magia_divina": 5
+    },
+    "imunidadesEfeitos": [
+      "efeitos_mentais",
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 192,
+    "pm": 61,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 1,
+      "des": 3,
+      "con": 3,
+      "int": -1,
+      "sab": 6,
+      "car": 0
+    },
+    "pericias": {
+      "intimidacao": 11,
+      "religiao": 15
+    },
+    "ataques": [
+      {
+        "nome": "Adaga da Tormenta (x2)",
+        "bonusAtaque": 22,
+        "dano": "1d4+16",
+        "danoExtra": "1d8 trevas",
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Não pode ser flanqueado",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O sacerdote da agonia não pode ser flanqueado."
+      },
+      {
+        "nome": "Fortificação",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "25% de chance de ignorar completamente qualquer efeito que exija uma localização anatômica vital para funcionar."
+      },
+      {
+        "nome": "Apetite por Destruição (mágica)",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O sacerdote suga a energia vital de todos os seres em uma esfera de 6m ao seu redor. Criaturas vivas na área sofrem 6d10 pontos de dano de trevas e ele recebe PV temporários iguais ao dano total causado."
+      },
+      {
+        "nome": "Júbilo na Dor",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando causa ou sofre dano, recebe redução de dano 2 e recupera 2d4 pontos de mana. A redução de dano é cumulativa, até um máximo de RD 20, mas volta a zero se passar 1 rodada sem causar ou sofrer dano."
+      },
+      {
+        "nome": "Magias (clérigo de Aharadak, 9º nível, CD 32, limite de 10 PM)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Arma Espiritual (10 PM; até o fim da cena, 2x/rodada reage a ataque corpo a corpo causando 4d6 de corte), Enxame Rubro de Ichabod (8 PM, sustentada; enxame de 3m causa 5d12 de ácido por turno, movível 12m), Infligir Ferimentos (7 PM; 5d8+5 de trevas), Miasma Mefítico (7 PM; nuvem de 6m de raio, 7d6 de ácido e enjoo), Perdição (5 PM; –3 em ataque e dano a inimigos escolhidos)."
+      }
+    ],
+    "equipamento": [
+      "Gibão de peles espinhoso de matéria vermelha",
+      "Símbolo sagrado de Aharadak"
+    ],
+    "tesouro": "metade mais uma adaga da tormenta.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "senhor_do_gigante_rubro_forma_final",
+    "nome": "Senhor do Gigante Rubro (Forma Final)",
+    "nd": "16",
+    "regiao": "culto_de_aharadak",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "lefeu",
+    "tamanho": "grande",
+    "iniciativa": 20,
+    "percepcao": 21,
+    "sentidos": [
+      "nao_pode_ser_flanqueado",
+      "percepcao_as_cegas"
+    ],
+    "defesa": 55,
+    "resistencias": {
+      "fortitude": 30,
+      "reflexos": 26,
+      "vontade": 16
+    },
+    "rd": {
+      "geral": 15,
+      "magia": 5
+    },
+    "imunidadesEfeitos": [
+      "acertos_criticos",
+      "cansaco",
+      "efeitos_de_metabolismo",
+      "paralisia"
+    ],
+    "imunidadesDano": [
+      "veneno"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 850,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 9.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 14,
+      "des": 4,
+      "con": 11,
+      "int": -2,
+      "sab": 2,
+      "car": -4
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Garra (x4)",
+        "bonusAtaque": 43,
+        "dano": "1d12+18",
+        "danoExtra": "1d6 materia_vermelha",
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Tentáculo (x2)",
+        "bonusAtaque": 43,
+        "dano": "1d12+18",
+        "danoExtra": "1d6 materia_vermelha",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Tentáculo (teste +45)."
+      },
+      {
+        "nome": "Armamento Rubro",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "As armas do gigante rubro são mágicas e de matéria vermelha. Criaturas atingidas pelas garras ficam sangrando; criaturas atingidas pelos tentáculos ficam fracas (ou debilitadas, se já estiverem fracas)."
+      },
+      {
+        "nome": "Carapaça Espinhosa",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando agarra uma criatura ou é agarrado, e no início de cada turno em que estiver agarrando ou agarrado, causa 14 pontos de dano de perfuração nesta criatura."
+      },
+      {
+        "nome": "Dilacerar",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Para cada dois ataques de garra que acertar em uma mesma criatura no mesmo turno, causa mais 6d8+18 pontos de dano."
+      },
+      {
+        "nome": "Insanidade da Tormenta",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 42,
+        "resistenciaTipo": null,
+        "descricao": "2d12 PM (Vontade CD 42 evita)."
+      },
+      {
+        "nome": "Morte dos Céus",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Salta para um espaço desocupado em alcance médio. Se aterrissar adjacente a uma criatura, seu primeiro ataque contra ela neste turno recebe +2 no teste e +2d8 de dano."
+      },
+      {
+        "nome": "Teia Corrosiva",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 42,
+        "resistenciaTipo": null,
+        "descricao": "Dispara muco adesivo em um alvo em alcance curto: 8d6 de dano de ácido e fica imóvel (Reflexos CD 42 reduz à metade e evita); enquanto imóvel sofre 3d6 de ácido por turno. Pode se libertar com ação padrão e Acrobacia ou Atletismo CD 42."
+      },
+      {
+        "nome": "Varrer",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando faz um ataque corpo a corpo e reduz os PV do alvo para 0 ou menos, pode realizar um ataque adicional contra outra criatura dentro do seu alcance."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "1d4 sementes rubras (cd 31 para extrair).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "senhor_do_gigante_rubro_forma_inicial",
+    "nome": "Senhor do Gigante Rubro (Forma Inicial)",
+    "nd": "9",
+    "regiao": "culto_de_aharadak",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 13,
+    "percepcao": 15,
+    "sentidos": [
+      "nao_pode_ser_flanqueado",
+      "percepcao_as_cegas"
+    ],
+    "defesa": 34,
+    "resistencias": {
+      "fortitude": 21,
+      "reflexos": 15,
+      "vontade": 9
+    },
+    "rd": {
+      "acido": 10,
+      "magia": 5
+    },
+    "imunidadesEfeitos": [
+      "acertos_criticos",
+      "cansaco",
+      "efeitos_de_metabolismo",
+      "paralisia"
+    ],
+    "imunidadesDano": [
+      "veneno"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 340,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 9.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 11,
+      "des": 3,
+      "con": 9,
+      "int": -1,
+      "sab": 2,
+      "car": -2
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Garra (x4)",
+        "bonusAtaque": 28,
+        "dano": "1d8+11",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Carapaça Espinhosa",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando agarra uma criatura ou é agarrado, e no início de cada turno em que estiver agarrando ou agarrado, o gigante rubro causa 11 pontos de dano de perfuração nesta criatura."
+      },
+      {
+        "nome": "Desembarcar",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O senhor do gigante rubro pode sair de seu simbionte por curtos períodos. Isso o deixa fraco e, a cada hora de afastamento, o torna fatigado, exausto, inconsciente e por fim morto. Voltar ao interior da armadura é uma ação completa e remove essas condições no início da rodada seguinte. Geralmente o piloto é um iniciado da agonia. Se o piloto for morto fora da armadura, ela se desintegra automaticamente."
+      },
+      {
+        "nome": "Evoluções",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 28,
+        "resistenciaTipo": null,
+        "descricao": "Cada gigante rubro possui duas habilidades, escolhidas entre: Dilacerar (para cada dois ataques de garra que acertar em uma mesma criatura no mesmo turno, causa mais 2d8+10 pontos de dano); Morte dos Céus, ação de movimento (salta para um espaço desocupado em alcance médio; se aterrissar adjacente a uma criatura, seu primeiro ataque contra ela neste turno recebe +2 no teste e +1d8 de dano); Teia Corrosiva, ação de movimento (dispara muco adesivo em um alvo em alcance curto, 3d6 de dano de ácido e fica imóvel, Reflexos CD 28 reduz à metade e evita; enquanto imóvel sofre 3d6 de ácido por turno; pode se libertar com ação padrão e Acrobacia ou Atletismo CD 28); Tentáculo (ataque adicional como as garras, mas de impacto; se acertar pode fazer a manobra agarrar como ação livre, teste +30); Zunido Enlouquecedor, reação (a cada 100 PV perdidos, emite um zunido em esfera de 30m; criaturas na área perdem 2d8 PM, Vontade CD 28 evita)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "zyrrinaz",
+    "nome": "Zyrrinaz",
+    "nd": "5",
+    "regiao": "culto_de_aharadak",
+    "papel": "lacaio",
+    "tipo": "monstro",
+    "subtipo": "lefeu",
+    "tamanho": "medio",
+    "iniciativa": 10,
+    "percepcao": 13,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 24,
+    "resistencias": {
+      "fortitude": 11,
+      "reflexos": 19,
+      "vontade": 7
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 41,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 12.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 6,
+      "con": 2,
+      "int": -1,
+      "sab": 4,
+      "car": -3
+    },
+    "pericias": {
+      "acrobacia": 10,
+      "furtividade": 10
+    },
+    "ataques": [
+      {
+        "nome": "Garra",
+        "bonusAtaque": 19,
+        "dano": "2d6+13",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Arco longo (à distância)",
+        "bonusAtaque": 23,
+        "dano": "1d12+19",
+        "danoExtra": "1d4 materia_vermelha",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Flechas da Anticriação",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O zyrrinaz dispara por ângulos impossíveis, inutilizando as defesas de seus alvos. Seus ataques de arco ignoram cobertura, camuflagem, redução de dano e habilidades que evitam ou reduzem dano (como Durão ou Rolamento Defensivo). Além disso, quando ataca com o arco, rola dois dados e usa o melhor resultado."
+      },
+      {
+        "nome": "Insanidade da Tormenta",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 20,
+        "resistenciaTipo": null,
+        "descricao": "2d4 PM (Vontade CD 20 evita)."
+      }
+    ],
+    "equipamento": [
+      "Arco longo",
+      "Flechas de matéria vermelha x20"
+    ],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  }
+]

@@ -1,0 +1,1798 @@
+[
+  {
+    "id": "arcano_de_guerra_adepto",
+    "nome": "Arcano de Guerra Adepto",
+    "nd": "4",
+    "regiao": "puristas",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 7,
+    "percepcao": 5,
+    "sentidos": [],
+    "defesa": 22,
+    "resistencias": {
+      "fortitude": 6,
+      "reflexos": 11,
+      "vontade": 16
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +2"
+    ],
+    "pv": 82,
+    "pm": 36,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 3,
+      "con": 2,
+      "int": 6,
+      "sab": 1,
+      "car": 0
+    },
+    "pericias": {
+      "conhecimento": 12,
+      "guerra": 14,
+      "misticismo": 12
+    },
+    "ataques": [
+      {
+        "nome": "Adaga",
+        "bonusAtaque": 13,
+        "dano": "1d4+2",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Conjurador Magibélico",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O arcano de guerra adepto pode lançar magias vestindo armaduras pesadas sem precisar de testes de Misticismo. Além disso, sempre que faz um teste de Misticismo, ele pode rolar dois dados e escolher o melhor resultado."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 20,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como mago de 5º nível (CD 20, limite de PM 11): Explosão de Chamas (padrão, 3 PM, 4d6 de fogo em cone de 6m), Névoa (padrão, 11 PM, nuvem em cubo de 6m com dano de ácido), Salto Dimensional (reação, 5 PM, +5 na Defesa e Reflexos contra um ataque, depois salta para espaço adjacente), Sopro das Uivantes (padrão, 6 PM, 8d6 de frio em cone de 9m, empurra e derruba), Toque Chocante (padrão, 3 PM, 4d8+4 de eletricidade)."
+      }
+    ],
+    "equipamento": [
+      "Adaga",
+      "Armadura completa",
+      "Tomo de guerra"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "arcano_de_guerra_veterano",
+    "nome": "Arcano de Guerra Veterano",
+    "nd": "11",
+    "regiao": "puristas",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 14,
+    "percepcao": 9,
+    "sentidos": [],
+    "defesa": 41,
+    "resistencias": {
+      "fortitude": 11,
+      "reflexos": 24,
+      "vontade": 18
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +5"
+    ],
+    "pv": 360,
+    "pm": 85,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 3,
+      "con": 3,
+      "int": 7,
+      "sab": 2,
+      "car": 0
+    },
+    "pericias": {
+      "conhecimento": 16,
+      "guerra": 16,
+      "misticismo": 18
+    },
+    "ataques": [
+      {
+        "nome": "Adaga",
+        "bonusAtaque": 31,
+        "dano": "1d4+2",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Conjurador Magibélico",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O arcano de guerra veterano pode lançar magias vestindo armaduras pesadas sem precisar de testes de Misticismo. Além disso, sempre que faz um teste de Misticismo, ele pode rolar dois dados e escolher o melhor resultado."
+      },
+      {
+        "nome": "Magia Acelerada",
+        "acao": "livre",
+        "custoPm": 4,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando lança uma magia com execução de ação completa ou menor, o arcano muda a execução dela para livre."
+      },
+      {
+        "nome": "Magias Devastadoras",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "As magias do arcano que causam dano têm cada um de seus dados de dano aumentados em um passo (já contabilizado) e ignoram até 10 pontos de redução de dano."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 33,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como mago de 9º nível (CD 33): Açoite Flamejante (movimento, 7 PM, sustentada, 6d8 de fogo, chamas e enredado), Campo de Força (reação, 4 PM, RD 30 contra o dano sofrido), Muralha Elemental (padrão, 9 PM, muralha de fogo de até 30m, 2d8 por proximidade e 12d8 ao atravessar), Relâmpago (padrão, 7 PM, 8d8 de eletricidade em cada criatura escolhida em alcance médio), Sopro das Uivantes (padrão, 6 PM, 8d8 de frio em cone de 9m, empurra e derruba), Velocidade (padrão, 3 PM, sustentada, ação padrão adicional por turno, não pode ser usada para lançar magias)."
+      }
+    ],
+    "equipamento": [
+      "Adaga",
+      "Armadura completa reforçada",
+      "Tomo de guerra"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "capelao_de_guerra",
+    "nome": "Capelão de Guerra",
+    "nd": "4",
+    "regiao": "puristas",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 4,
+    "percepcao": 7,
+    "sentidos": [],
+    "defesa": 21,
+    "resistencias": {
+      "fortitude": 10,
+      "reflexos": 5,
+      "vontade": 16
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 105,
+    "pm": 25,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 0,
+      "con": 4,
+      "int": 1,
+      "sab": 3,
+      "car": -1
+    },
+    "pericias": {
+      "misticismo": 5,
+      "religiao": 7
+    },
+    "ataques": [
+      {
+        "nome": "Martelo de guerra",
+        "bonusAtaque": 14,
+        "dano": "1d8+15",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Arma Mágica",
+        "acao": "padrao",
+        "custoPm": 5,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma arma torna-se mágica (+2 ataque/dano, +1d6 fogo)."
+      },
+      {
+        "nome": "Bênção",
+        "acao": "padrao",
+        "custoPm": 3,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Aliados em alcance curto recebem +2 em testes de ataque e rolagens de dano até o fim da cena."
+      },
+      {
+        "nome": "Curar Ferimentos",
+        "acao": "padrao",
+        "custoPm": 5,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Criatura adjacente cura 6d8+6 PV."
+      },
+      {
+        "nome": "Soco de Arsenal",
+        "acao": "padrao",
+        "custoPm": 5,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Criatura em alcance médio sofre 5d6+5 de impacto e é empurrada 3m (Fort reduz dano à metade e evita empurrão)."
+      }
+    ],
+    "equipamento": [
+      "Armadura completa",
+      "escudo leve",
+      "martelo de guerra certeiro",
+      "símbolo sagrado"
+    ],
+    "tesouro": "padrao",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "capitao_baluarte",
+    "nome": "Capitão-Baluarte",
+    "nd": "5",
+    "regiao": "puristas",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 4,
+    "percepcao": 5,
+    "sentidos": [],
+    "defesa": 33,
+    "resistencias": {
+      "fortitude": 15,
+      "reflexos": 5,
+      "vontade": 13
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 115,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 0,
+      "con": 4,
+      "int": 3,
+      "sab": 1,
+      "car": 4
+    },
+    "pericias": {
+      "cavalgar": 4,
+      "guerra": 7,
+      "nobreza": 7
+    },
+    "ataques": [
+      {
+        "nome": "Espada longa",
+        "bonusAtaque": 17,
+        "dano": "1d8+8",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Comandar",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Aliados em alcance médio recebem +4 em testes de ataque e rolagens de dano até o fim da rodada."
+      },
+      {
+        "nome": "Formação Invencível",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Aliados em alcance curto recebem +2 na Defesa."
+      }
+    ],
+    "equipamento": [
+      "Armadura completa reforçada",
+      "escudo pesado reforçado",
+      "espada longa certeira"
+    ],
+    "tesouro": "dobro",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "carruagem_de_comando",
+    "nome": "Carruagem de Comando",
+    "nd": "5",
+    "regiao": "puristas",
+    "papel": "solo",
+    "tipo": "construto",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 6,
+    "percepcao": 4,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 22,
+    "resistencias": {
+      "fortitude": 15,
+      "reflexos": 11,
+      "vontade": 7
+    },
+    "rd": {
+      "corte": 5,
+      "impacto": 5,
+      "perfuracao": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 190,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 15.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 2,
+      "con": 6,
+      "int": null,
+      "sab": 0,
+      "car": -5
+    },
+    "pericias": {
+      "atletismo": 14
+    },
+    "ataques": [
+      {
+        "nome": "Pancada (x2)",
+        "bonusAtaque": 15,
+        "dano": "2d8+10",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Pernas Longas",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A carruagem de comando não sofre redução em seu deslocamento por terreno difícil."
+      },
+      {
+        "nome": "Cúpula de Proteção",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O piloto da carruagem de comando está protegido por uma cúpula protetora (como o efeito básico da magia Campo de Força). Se o campo for destruído, a carruagem usa sua próxima ação de movimento para refazê-lo."
+      },
+      {
+        "nome": "Encantos de Comando",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Encantos fazem com que a voz do piloto possa ser ouvida a até 300m e, caso ele possua alguma habilidade baseada em voz ou som, o alcance dessa habilidade se torna longo."
+      },
+      {
+        "nome": "Evacuação de Emergência",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 24,
+        "resistenciaTipo": null,
+        "descricao": "Se a carruagem inicia seu turno com 20 PV ou menos, o piloto é alvo da magia Teletransporte com o aprimoramento de santuário, sem custo em PM. Em seguida, a carruagem começa a emitir um alarme agudo e fica imóvel por 2 turnos — no fim do segundo turno, ela explode, causando 6d6 pontos de dano de fogo e 6d6 pontos de dano de perfuração em todas as criaturas em alcance curto (Reflexos CD 24 reduz à metade). Uma palavra de comando pode impedir a explosão."
+      },
+      {
+        "nome": "Pernas Mecânicas",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A carruagem recebe +5 em testes para resistir às manobras derrubar e empurrar."
+      },
+      {
+        "nome": "Piloto",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma carruagem é mais eficiente quando controlada por um piloto, como um arcano de guerra. Pilotar exige uma ação de movimento do piloto a cada rodada e permite que a carruagem use os valores de Iniciativa, Reflexos e ataque do piloto ou os seus, os que forem maiores. O piloto é considerado uma ameaça adicional para efeitos de ND."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "caixa de voz, gema de forca (cd 20 para extrair).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "cavaleiro_do_leopardo_sangrento",
+    "nome": "Cavaleiro do Leopardo Sangrento",
+    "nd": "9",
+    "regiao": "puristas",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 17,
+    "percepcao": 15,
+    "sentidos": [],
+    "defesa": 36,
+    "resistencias": {
+      "fortitude": 21,
+      "reflexos": 11,
+      "vontade": 17
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 270,
+    "pm": 58,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 2,
+      "con": 4,
+      "int": 4,
+      "sab": 0,
+      "car": 2
+    },
+    "pericias": {
+      "furtividade": 8,
+      "intimidacao": 17,
+      "misticismo": 19
+    },
+    "ataques": [
+      {
+        "nome": "Espada bastarda",
+        "bonusAtaque": 28,
+        "dano": "3d6+15",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Cavaleiro Místico",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 28,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como mago de 9º nível (CD 28). Pode lançar magias arcanas de armadura sem testes. Uma vez por rodada, ao agredir corpo a corpo, pode lançar uma magia como ação livre."
+      },
+      {
+        "nome": "Magias disponíveis",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Concentração de Combate (padrão, 3 PM), Dissipar Magia (padrão, 3 PM), Pele de Pedra (padrão, 6 PM, RD 5), Toque Chocante (padrão, 9 PM, 8d8+8 eletricidade), Velocidade (padrão, 3 PM, sustentada)."
+      }
+    ],
+    "equipamento": [
+      "Armadura completa reforçada",
+      "espada bastarda aumentada pungente de adamante"
+    ],
+    "tesouro": "padrao",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "cacador_de_impuros",
+    "nome": "Caçador de Impuros",
+    "nd": "8",
+    "regiao": "puristas",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 18,
+    "percepcao": 14,
+    "sentidos": [],
+    "defesa": 34,
+    "resistencias": {
+      "fortitude": 4,
+      "reflexos": 17,
+      "vontade": 9
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 290,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 4,
+      "con": 3,
+      "int": 2,
+      "sab": 2,
+      "car": 3
+    },
+    "pericias": {
+      "atletismo": 10,
+      "enganacao": 11,
+      "furtividade": 14,
+      "investigacao": 10,
+      "sobrevivencia": 10
+    },
+    "ataques": [
+      {
+        "nome": "Cimitarra (x2)",
+        "bonusAtaque": 23,
+        "dano": "1d6+10",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Besta leve (à distância) (x2)",
+        "bonusAtaque": 23,
+        "dano": "1d8+10",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Espião Infiltrado",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O caçador de impuros faz um teste de Enganação contra a Diplomacia de um alvo não humano, para apontá-lo como culpado de algum crime que não cometeu. Se vencer, criaturas inteligentes (Inteligência –3 ou maior) em alcance médio mudam a atitude com o alvo para hostil até o fim da cena."
+      },
+      {
+        "nome": "Espreitador Astuto",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O caçador pode executar uma ação padrão adicional em seu primeiro turno de combate. Além disso, quando se move 6m ou mais, ele recebe +1d12 nas rolagens de dano de ataques corpo a corpo e à distância em alcance curto até o início do seu próximo turno."
+      },
+      {
+        "nome": "Inimigo de Todos",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O caçador analisa uma criatura humanoide não humana em alcance longo. Até o fim da cena, ou até usar esta habilidade em outra criatura, ele recebe +6 em testes de perícia e +2d12 nas rolagens de dano contra essa criatura, e seus ataques contra o alvo recebem +2 na margem de ameaça."
+      },
+      {
+        "nome": "Munição Estilhaçadora",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O caçador pode executar as manobras desarmar e quebrar com ataques à distância. Adicionalmente, por serem de aço-rubi, seus virotes ignoram 10 pontos da redução de dano do alvo."
+      },
+      {
+        "nome": "Saque Rápido",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O caçador pode sacar ou guardar itens e recarregar sua besta leve como uma ação livre."
+      }
+    ],
+    "equipamento": [
+      "Besta leve",
+      "Cimitarra",
+      "Couraça sob medida",
+      "Virotes de aço rubi x20"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "colosso_supremo",
+    "nome": "Colosso Supremo",
+    "nd": "14",
+    "regiao": "puristas",
+    "papel": "solo",
+    "tipo": "construto",
+    "subtipo": null,
+    "tamanho": "colossal",
+    "iniciativa": 8,
+    "percepcao": 9,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 46,
+    "resistencias": {
+      "fortitude": 31,
+      "reflexos": 19,
+      "vontade": 20
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +5"
+    ],
+    "pv": 675,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 20,
+      "des": 4,
+      "con": null,
+      "int": 5,
+      "sab": 5,
+      "car": 3
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Espada titânica",
+        "bonusAtaque": 39,
+        "dano": "4d12+30",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Balistas",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Duas balistas (uma em cada ombro), disparadas em rodadas alternadas (+39, 6d8 perfuração, crítico 19, alcance médio). Tripulações têm Defesa 26, 50 PV cada."
+      },
+      {
+        "nome": "Fumos Tóxicos",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Criaturas que comecem o turno adjacentes ao colosso sofrem efeito de veneno."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "companhia_blindada_de_elite",
+    "nome": "Companhia Blindada de Elite",
+    "nd": "9",
+    "regiao": "puristas",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "grande",
+    "iniciativa": 7,
+    "percepcao": 9,
+    "sentidos": [],
+    "defesa": 41,
+    "resistencias": {
+      "fortitude": 17,
+      "reflexos": 8,
+      "vontade": 16
+    },
+    "rd": {
+      "magico": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 275,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 1,
+      "con": 4,
+      "int": 1,
+      "sab": 1,
+      "car": 0
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Martelo de guerra [Bando]",
+        "bonusAtaque": 27,
+        "dano": "2d8+12",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Ódio Puro",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Como um purista, a companhia recebe +5 em testes de Vontade quando está seguindo ordens de um superior (qualquer purista com ND maior) e +2 em rolagens de dano contra humanoides não humanos."
+      },
+      {
+        "nome": "Empurrão",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A companhia blindada de elite usa a manobra empurrar (teste +32) contra um alvo adjacente, mas não pode se mover junto com ele e sofre –5 na Defesa até o início de seu próximo turno."
+      },
+      {
+        "nome": "Prontidão",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Sempre que um inimigo entra ou sai por conta própria do alcance pessoal da companhia, ela pode fazer um ataque adicional contra essa criatura. Se acertar, além de causar dano, deixa o alvo imóvel até o início de seu próximo turno."
+      }
+    ],
+    "equipamento": [
+      "Armadura completa",
+      "Escudo pesado reforçado",
+      "Martelo de guerra pungente (1d6 de cada)",
+      "Poção de Curar Ferimentos (2d8+2) x2d6"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "corcel_de_comando",
+    "nome": "Corcel de Comando",
+    "nd": "3",
+    "regiao": "puristas",
+    "papel": "especial",
+    "tipo": "construto",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 5,
+    "percepcao": 3,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 19,
+    "resistencias": {
+      "fortitude": 13,
+      "reflexos": 9,
+      "vontade": 5
+    },
+    "rd": {
+      "corte": 5,
+      "impacto": 5,
+      "perfuracao": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 82,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 15.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 2,
+      "con": 5,
+      "int": null,
+      "sab": 0,
+      "car": -5
+    },
+    "pericias": {
+      "atletismo": 13
+    },
+    "ataques": [
+      {
+        "nome": "Pancada (x2)",
+        "bonusAtaque": 12,
+        "dano": "1d10+5",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Pernas Longas",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O corcel de comando não sofre redução em seu deslocamento por terreno difícil."
+      },
+      {
+        "nome": "Cúpula de Proteção",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O piloto do corcel de comando está protegido por uma cúpula protetora (como o efeito básico da magia Campo de Força). Se o campo for destruído, o corcel usa sua próxima ação de movimento para refazê-lo."
+      },
+      {
+        "nome": "Encantos de Comando",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Encantos fazem com que a voz do piloto possa ser ouvida a até 300m e, caso ele possua alguma habilidade baseada em voz ou som, o alcance dessa habilidade se torna longo."
+      },
+      {
+        "nome": "Evacuação de Emergência",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 19,
+        "resistenciaTipo": null,
+        "descricao": "Se o corcel inicia seu turno com 20 PV ou menos, o piloto é alvo da magia Teletransporte com o aprimoramento de santuário, sem custo em PM. Em seguida, o corcel começa a emitir um alarme agudo e fica imóvel por 2 turnos — no fim do segundo turno, ele explode, causando 4d6 pontos de dano de fogo e 4d6 pontos de dano de perfuração em todas as criaturas em alcance curto (Reflexos CD 19 reduz à metade). Uma palavra de comando pode impedir a explosão."
+      },
+      {
+        "nome": "Piloto",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O corcel é mais eficiente quando controlado por um piloto, como um arcano de guerra. Pilotar exige uma ação de movimento do piloto a cada rodada e permite que o corcel use os valores de Iniciativa, Reflexos e ataque do piloto ou os seus, os que forem maiores. O piloto é considerado uma ameaça adicional para efeitos de ND."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "caixa de voz (cd 18 para extrair) e gema de forca (cd 18 para extrair).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "dancarino_de_guerra",
+    "nome": "Dançarino de Guerra",
+    "nd": "4",
+    "regiao": "puristas",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 11,
+    "percepcao": 3,
+    "sentidos": [],
+    "defesa": 24,
+    "resistencias": {
+      "fortitude": 10,
+      "reflexos": 14,
+      "vontade": 6
+    },
+    "rd": {
+      "efeitos_de_movimento": 2
+    },
+    "imunidadesEfeitos": [
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 110,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 5,
+      "con": 4,
+      "int": 1,
+      "sab": -1,
+      "car": 2
+    },
+    "pericias": {
+      "acrobacia": 12,
+      "atletismo": 8
+    },
+    "ataques": [
+      {
+        "nome": "Machado de batalha (x2)",
+        "bonusAtaque": 16,
+        "dano": "2d8+5",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Evasão",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando passa em um teste de Reflexos para reduzir o dano de um efeito à metade, em vez disso não sofre nenhum dano."
+      },
+      {
+        "nome": "A Vida Não É Suficiente para Mim",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando um dançarino de guerra morre em combate, cada um de seus aliados em alcance médio é tomado por um frenesi equivalente ao efeito básico da magia Velocidade, até o fim da cena."
+      },
+      {
+        "nome": "Matar É Viver",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": "realizar_uma_investida",
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O dançarino entra em um estado de frenesi de combate, durante o qual pode fazer um ataque adicional sempre que executa a ação agredir. O transe termina se, ao fim da rodada, ele não tiver sido atacado nem sido alvo de um efeito hostil. Recarga (realizar uma investida)."
+      },
+      {
+        "nome": "Viver É Lutar",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando é alvo de um ataque corpo a corpo, o dançarino pode fazer um teste de Acrobacia. Ele reduz desse ataque em um valor igual ao resultado de seu teste e, se reduzir o dano a 0, pode fazer um ataque corpo a corpo contra o atacante."
+      }
+    ],
+    "equipamento": [
+      "Machado de batalha x2",
+      "Sapatos de camurça"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "dancarino_de_guerra_veterano",
+    "nome": "Dançarino de Guerra Veterano",
+    "nd": "6",
+    "regiao": "puristas",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 13,
+    "percepcao": 4,
+    "sentidos": [],
+    "defesa": 28,
+    "resistencias": {
+      "fortitude": 12,
+      "reflexos": 16,
+      "vontade": 8
+    },
+    "rd": {
+      "efeitos_de_movimento": 5
+    },
+    "imunidadesEfeitos": [
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 175,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 5,
+      "con": 4,
+      "int": 1,
+      "sab": -1,
+      "car": 2
+    },
+    "pericias": {
+      "acrobacia": 16,
+      "atletismo": 9
+    },
+    "ataques": [
+      {
+        "nome": "Machado de batalha (x2)",
+        "bonusAtaque": 20,
+        "dano": "3d8+15",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Evasão",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando passa em um teste de Reflexos para reduzir o dano de um efeito à metade, em vez disso não sofre nenhum dano."
+      },
+      {
+        "nome": "A Morte Não É Suficiente para Meus Inimigos",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando um dançarino de guerra veterano reduz os PV de um inimigo a 0 ou menos com um ataque corpo a corpo, pode executar um ataque adicional contra outra criatura dentro do seu alcance. O dançarino recebe +5 nesse teste de ataque e na rolagem de dano."
+      },
+      {
+        "nome": "A Vida Não É Suficiente para Mim",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando um dançarino morre em combate, cada um de seus aliados em alcance médio é tomado por um frenesi equivalente ao efeito básico da magia Velocidade, até o fim da cena."
+      },
+      {
+        "nome": "Matar É Viver",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "realizar_uma_investida",
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O dançarino entra em um estado de frenesi de combate, durante o qual pode fazer um ataque adicional sempre que executa a ação agredir. O transe termina se, ao fim da rodada, ele não tiver sido atacado nem sido alvo de um efeito hostil. Recarga (realizar uma investida)."
+      },
+      {
+        "nome": "Viver É Lutar",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando é alvo de um ataque corpo a corpo, o dançarino pode fazer um teste de Acrobacia. Ele reduz desse ataque em um valor igual ao resultado de seu teste e, se reduzir o dano a 0, pode fazer um ataque corpo a corpo contra o atacante."
+      }
+    ],
+    "equipamento": [
+      "Machado de batalha x2",
+      "Sapatos de camurça aprimorados"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "purificado",
+    "nome": "Purificado",
+    "nd": "2",
+    "regiao": "puristas",
+    "papel": "lacaio",
+    "tipo": "humanoide",
+    "subtipo": "hynne",
+    "tamanho": "pequeno",
+    "iniciativa": 5,
+    "percepcao": 2,
+    "sentidos": [],
+    "defesa": 10,
+    "resistencias": {
+      "fortitude": 3,
+      "reflexos": 4,
+      "vontade": 0
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "efeitos_mentais"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 9,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 2,
+      "con": 1,
+      "int": 0,
+      "sab": -1,
+      "car": 2
+    },
+    "pericias": {
+      "diplomacia": 7,
+      "enganacao": 7
+    },
+    "ataques": [],
+    "habilidades": [
+      {
+        "nome": "Cicatrizes Amordaçantes",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 25,
+        "resistenciaTipo": null,
+        "descricao": "Por mais que tente, o purificado não consegue alertar outras pessoas de sua condição. Qualquer tentativa do purificado de fazer isso requer que o interlocutor passe em um teste de Intuição (CD 25). Se falhar, ele não entende o que o purificado tentou comunicar durante a rodada."
+      },
+      {
+        "nome": "Gema da Purificação",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 20,
+        "resistenciaTipo": null,
+        "descricao": "Quando o purificado chega a 3m ou menos de um não humano, a gema começa a brilhar e zunir durante 3 turnos. Ao fim do terceiro turno ela explode, matando o purificado e causando 6d6 pontos de dano de essência em todas as criaturas em alcance curto. A gema pode ser desativada com uma ação completa e um teste de Ladinagem ou Misticismo (CD 20), mas uma falha a detona imediatamente. Caso outra gema esteja no alcance da explosão, ela também se ativa e explode no próximo turno do seu purificado."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "recruta_purista",
+    "nome": "Recruta Purista",
+    "nd": "0.5",
+    "regiao": "puristas",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 3,
+    "percepcao": 0,
+    "sentidos": [],
+    "defesa": 16,
+    "resistencias": {
+      "fortitude": 6,
+      "reflexos": 2,
+      "vontade": 0
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 10,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 1,
+      "con": 2,
+      "int": -1,
+      "sab": -1,
+      "car": 0
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Alabarda",
+        "bonusAtaque": 8,
+        "dano": "1d10+5",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte_perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Lutar em Formação",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Adjacente a aliado com o mesmo poder: +2 em testes de ataque e Defesa."
+      }
+    ],
+    "equipamento": [
+      "Alabarda",
+      "cota de malha"
+    ],
+    "tesouro": "nenhum",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "sargento_mor",
+    "nome": "Sargento-Mor",
+    "nd": "3",
+    "regiao": "puristas",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 4,
+    "percepcao": 3,
+    "sentidos": [],
+    "defesa": 24,
+    "resistencias": {
+      "fortitude": 14,
+      "reflexos": 9,
+      "vontade": 5
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 105,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 1,
+      "con": 4,
+      "int": 0,
+      "sab": 0,
+      "car": 0
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Espada bastarda",
+        "bonusAtaque": 14,
+        "dano": "1d12+15",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Besta pesada (à distância)",
+        "bonusAtaque": 12,
+        "dano": "1d12+10",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Lutar em Formação",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se adjacente a um aliado com este poder, recebe +2 em testes de ataque e Defesa."
+      },
+      {
+        "nome": "Varrer",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando reduz o alvo a 0 PV com ataque corpo a corpo, pode fazer um ataque adicional contra outra criatura no alcance."
+      }
+    ],
+    "equipamento": [
+      "Armadura completa",
+      "besta pesada",
+      "escudo pesado",
+      "espada bastarda aumentada certeira",
+      "virotes x20"
+    ],
+    "tesouro": "padrao",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "soldado_blindado",
+    "nome": "Soldado Blindado",
+    "nd": "5",
+    "regiao": "puristas",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 5,
+    "percepcao": 7,
+    "sentidos": [],
+    "defesa": 32,
+    "resistencias": {
+      "fortitude": 15,
+      "reflexos": 6,
+      "vontade": 14
+    },
+    "rd": {
+      "magico": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 135,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 1,
+      "con": 4,
+      "int": 1,
+      "sab": 1,
+      "car": 0
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Martelo de guerra",
+        "bonusAtaque": 16,
+        "dano": "2d8+12",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Ódio Puro",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Como um purista, o soldado blindado recebe +5 em testes de Vontade quando está seguindo ordens de um superior (qualquer purista com ND maior) e +2 em rolagens de dano contra humanoides não humanos."
+      },
+      {
+        "nome": "Empurrão",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O soldado blindado faz uma manobra empurrar (teste +16) contra um alvo adjacente, mas não pode se mover junto com o alvo e sofre –5 na Defesa até o início de seu próximo turno."
+      },
+      {
+        "nome": "Prontidão",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Sempre que um inimigo entra ou sai por conta própria do alcance pessoal do soldado, o soldado pode fazer um ataque adicional contra essa criatura. Se acertar, além de causar dano, deixa o alvo imóvel até o início de seu próximo turno."
+      }
+    ],
+    "equipamento": [
+      "Armadura completa",
+      "Escudo pesado reforçado",
+      "Martelo de guerra pungente",
+      "Poção de Curar Ferimentos (2d8+2) x2"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "soldado_purista",
+    "nome": "Soldado Purista",
+    "nd": "1",
+    "regiao": "puristas",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 4,
+    "percepcao": 1,
+    "sentidos": [],
+    "defesa": 20,
+    "resistencias": {
+      "fortitude": 10,
+      "reflexos": 4,
+      "vontade": 1
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 20,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 1,
+      "con": 3,
+      "int": 0,
+      "sab": -1,
+      "car": 0
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Espada bastarda",
+        "bonusAtaque": 9,
+        "dano": "1d10+9",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Besta pesada (à distância)",
+        "bonusAtaque": 7,
+        "dano": "1d12+4",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Lutar em Formação",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se adjacente a um aliado com este poder, recebe +2 em testes de ataque e Defesa."
+      }
+    ],
+    "equipamento": [
+      "Besta pesada",
+      "escudo pesado",
+      "espada bastarda",
+      "meia armadura",
+      "virotes x10"
+    ],
+    "tesouro": "metade",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "soldado_superior",
+    "nome": "Soldado Superior",
+    "nd": "17",
+    "regiao": "puristas",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 26,
+    "percepcao": 18,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 50,
+    "resistencias": {
+      "fortitude": 28,
+      "reflexos": 28,
+      "vontade": 20
+    },
+    "rd": {
+      "geral": 15
+    },
+    "imunidadesEfeitos": [
+      "doencas",
+      "efeitos_mentais",
+      "medo"
+    ],
+    "imunidadesDano": [
+      "veneno"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 1080,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 7,
+      "des": 7,
+      "con": 7,
+      "int": 3,
+      "sab": 2,
+      "car": -1
+    },
+    "pericias": {
+      "acrobacia": 26,
+      "atletismo": 26
+    },
+    "ataques": [
+      {
+        "nome": "Ataque desarmado (x4)",
+        "bonusAtaque": 47,
+        "dano": "2d12+30",
+        "danoExtra": null,
+        "margemAmeaca": 17,
+        "multiplicadorCritico": 3,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Golpes Penetrantes",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Os ataques desarmados do soldado superior podem causar dano letal ou não letal e ignoram 10 pontos de redução de dano do alvo."
+      },
+      {
+        "nome": "Mestre de Manobras",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O soldado recebe +10 em testes de manobras. Além disso, uma vez por rodada, quando acerta um ataque desarmado, o soldado pode fazer uma manobra de combate (teste +57) contra a criatura atingida como uma ação livre."
+      },
+      {
+        "nome": "Super Soldado",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando o soldado é reduzido a 570 PV ou menos, entra em um frenesi de combate. Seus ataques mudam para ataque desarmado x4 +57 (3d12+30, 17/x3), sua Defesa se torna 60, seu deslocamento aumenta para 18m e ele passa a poder executar uma ação padrão adicional por turno. Entretanto, ele se torna vulnerável a todos os tipos de dano e sofre –5 em Vontade."
+      }
+    ],
+    "equipamento": [
+      "Cinto do campeão",
+      "Faixas do pugilista",
+      "Manoplas de adamante"
+    ],
+    "tesouro": "padrao, mais ingredientes para uma dose de soro supremo (um teste estendido de oficio (alquimista) cd 40, obtendo 5 sucessos antes de 3 falhas, um dia por teste, produz uma dose de soro supremo; ingerir uma dose aumenta permanentemente forca, destreza ou constituicao, escolhida na fabricacao, em +1; um personagem so pode se beneficiar de uma dose).",
+    "recursoExtraivel": null
+  }
+]

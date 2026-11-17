@@ -4,8 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../domain/entities/personagem/personagem.dart';
 import '../../../domain/repositories/i_personagem_repository.dart';
 import '../../../domain/services/powers_service/aprendizado_magia_service.dart';
+import '../../../domain/services/sessao_lan/sessao_cliente_lan_service.dart';
+import '../../../domain/services/sessao_lan/sessao_lan_transport.dart';
+import '../../../domain/services/sessao_lan/sessao_loopback_transport.dart';
 import '../../controllers/ficha_controller/ficha_cubit.dart';
 import '../../controllers/ficha_controller/ficha_state.dart';
+import '../../controllers/ficha_controller/sessao_jogador_cubit.dart';
 
 import 'widgets/aba_geral_view.dart';
 import 'widgets/aba_habilidades_view.dart';
@@ -13,31 +17,69 @@ import 'widgets/aba_historia_view.dart';
 import 'widgets/aba_inventario_view.dart';
 import 'widgets/aba_magias_view.dart';
 import 'widgets/aba_pericias_view.dart';
+import 'widgets/aba_sessao_view.dart';
 import 'widgets/ficha_banner_evolucao.dart';
 import 'widgets/ficha_cabecalho_widget.dart';
 
 /// Tela principal da Ficha do Personagem (Painel do Jogador).
 ///
 /// Atua como coordenadora de alto nível, integrando o cabeçalho fixo,
-/// banner de evolução pendente e o controlador das 6 abas de navegação.
+/// banner de evolução pendente e o controlador das 7 abas de navegação.
 class FichaScreen extends StatelessWidget {
   final Personagem personagemInicial;
   final IPersonagemRepository? repository;
+  final SessaoClienteService? sessaoClienteService;
+  final bool usarTransporteLan;
+  final VoidCallback? onAbrirMapaMesa;
 
   const FichaScreen({
     super.key,
     required this.personagemInicial,
     this.repository,
+    this.sessaoClienteService,
+    this.usarTransporteLan = false,
+    this.onAbrirMapaMesa,
   });
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => FichaCubit(
-        personagemInicial: personagemInicial,
-        repository: repository,
+    final gerenciarClienteInterno =
+        sessaoClienteService == null && usarTransporteLan;
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => FichaCubit(
+            personagemInicial: personagemInicial,
+            repository: repository,
+          ),
+        ),
+        BlocProvider(
+          create: (ctx) => SessaoJogadorCubit(
+            clienteService:
+                sessaoClienteService ??
+                (usarTransporteLan
+                    ? SessaoClienteLanService()
+                    : SessaoLoopbackTransport().cliente),
+            lerFichaState: () => ctx.read<FichaCubit>().state,
+            disposeClienteAoFechar: gerenciarClienteInterno,
+          ),
+        ),
+      ],
+      child: BlocListener<FichaCubit, FichaState>(
+        listenWhen: (prev, curr) {
+          final p1 = prev.personagem;
+          final p2 = curr.personagem;
+          return p1.pvAtual != p2.pvAtual ||
+              p1.pvTotal != p2.pvTotal ||
+              p1.pmAtual != p2.pmAtual ||
+              p1.pmTotal != p2.pmTotal ||
+              p1.defesaFinal != p2.defesaFinal;
+        },
+        listener: (ctx, state) {
+          ctx.read<SessaoJogadorCubit>().sincronizarPersonagemAtual(state);
+        },
+        child: _FichaView(onAbrirMapaMesa: onAbrirMapaMesa),
       ),
-      child: const _FichaView(),
     );
   }
 }
@@ -46,7 +88,9 @@ class FichaScreen extends StatelessWidget {
 typedef PainelJogadorScreen = FichaScreen;
 
 class _FichaView extends StatefulWidget {
-  const _FichaView();
+  final VoidCallback? onAbrirMapaMesa;
+
+  const _FichaView({this.onAbrirMapaMesa});
 
   @override
   State<_FichaView> createState() => _FichaViewState();
@@ -63,6 +107,7 @@ class _FichaViewState extends State<_FichaView>
     Tab(icon: Icon(Icons.menu_book_outlined, size: 19), text: 'Magias'),
     Tab(icon: Icon(Icons.backpack_outlined, size: 19), text: 'Inventário'),
     Tab(icon: Icon(Icons.edit_note_rounded, size: 20), text: 'Notas'),
+    Tab(icon: Icon(Icons.wifi_tethering_outlined, size: 19), text: 'Sessão'),
   ];
 
   @override
@@ -224,13 +269,14 @@ class _FichaViewState extends State<_FichaView>
                     Expanded(
                       child: TabBarView(
                         controller: _tabController,
-                        children: const [
-                          AbaGeralView(),
-                          AbaPericiasView(),
-                          AbaHabilidadesView(),
-                          AbaMagiasView(),
-                          AbaInventarioView(),
-                          AbaHistoriaView(),
+                        children: [
+                          const AbaGeralView(),
+                          const AbaPericiasView(),
+                          const AbaHabilidadesView(),
+                          const AbaMagiasView(),
+                          const AbaInventarioView(),
+                          const AbaHistoriaView(),
+                          AbaSessaoView(onAbrirMapa: widget.onAbrirMapaMesa),
                         ],
                       ),
                     ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../domain/entities/magia/magia.dart';
-import '../../../../domain/entities/personagem/personagem.dart';
 import '../../../../domain/services/ficha_services/calculo_ficha_service.dart';
 import '../../../../domain/services/data_services/call_magias.dart';
 import '../../../../domain/services/powers_service/aprendizado_magia_service.dart';
@@ -689,4 +688,3 @@ class _CardMagiaInterativoState extends State<_CardMagiaInterativo> {
     );
   }
 }
-

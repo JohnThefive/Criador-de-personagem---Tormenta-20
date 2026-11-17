@@ -33,8 +33,8 @@ class ArenaScreen extends StatefulWidget {
 }
 
 class _ArenaScreenState extends State<ArenaScreen> {
-  late final Personagem _clonePersonagem;
-  final ArenaStatsCollector _stats = ArenaStatsCollector();
+  late Personagem _clonePersonagem;
+  ArenaStatsCollector _stats = ArenaStatsCollector();
   FaseArena _fase = FaseArena.selecaoInimigos;
   final List<Combatente> _inimigosEscolhidos = [];
 
@@ -43,11 +43,24 @@ class _ArenaScreenState extends State<ArenaScreen> {
   @override
   void initState() {
     super.initState();
+    _clonePersonagem = _criarClonePersonagem();
+    _inimigosEscolhidos.add(InimigosTreino.orcGuerreiro);
+  }
+
+  Personagem _criarClonePersonagem() {
     final jsonStr = PersonagemStorageService.personagemToJson(
       widget.personagemOriginal,
     );
-    _clonePersonagem = PersonagemStorageService.personagemFromJson(jsonStr);
-    _inimigosEscolhidos.add(InimigosTreino.orcGuerreiro);
+    return PersonagemStorageService.personagemFromJson(jsonStr);
+  }
+
+  void _voltarParaSelecaoInimigos() {
+    setState(() {
+      _clonePersonagem = _criarClonePersonagem();
+      _stats = ArenaStatsCollector();
+      _relatorioExibido = false;
+      _fase = FaseArena.selecaoInimigos;
+    });
   }
 
   void _iniciarCombateComIniciativas(
@@ -76,6 +89,7 @@ class _ArenaScreenState extends State<ArenaScreen> {
     );
 
     setState(() {
+      _relatorioExibido = false;
       _fase = FaseArena.combateAtivo;
     });
   }
@@ -95,6 +109,7 @@ class _ArenaScreenState extends State<ArenaScreen> {
               state,
               _stats,
               clonePersonagem: _clonePersonagem,
+              onSelecionarNovosInimigos: _voltarParaSelecaoInimigos,
             );
           }
         },

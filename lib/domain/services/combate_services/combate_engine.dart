@@ -285,6 +285,17 @@ class CombateEngine {
     int? d20Atacante,
     int? d20Defensor,
   }) {
+    if (atacante.temForcaNula) {
+      return ResultadoAtropelar(
+        atacanteVenceu: false,
+        totalAtacante: 0,
+        totalDefensor: 0,
+        defensorAtualizado: defensor,
+        log:
+            '⚠️ ${atacante.nome} possui Força nula (–) e não pode exercer força física para atropelar.',
+      );
+    }
+
     final d20Atk = d20Atacante ?? _rolarDado(20);
     final d20Def = d20Defensor ?? _rolarDado(20);
     final totalAtk = d20Atk + atacante.modLuta;
@@ -422,7 +433,7 @@ class CombateEngine {
     }
     danoBruto += dadosInfo.bonusFixo +
         armaAtacante.bonusDanoMelhorias +
-        atacante.modForca;
+        (atacante.temForcaNula ? 0 : atacante.modForca);
 
     final danoEfetivo = max(0, danoBruto - rdObjeto);
     final novosPv = max(0, pvAtualObjeto - danoEfetivo);
@@ -673,7 +684,7 @@ class CombateEngine {
 
     // Bônus de Força em corpo a corpo e arremesso (R65)
     int bonusAtributo = 0;
-    if (arma.somaForcaAoDano) {
+    if (arma.somaForcaAoDano && !atacante.temForcaNula) {
       bonusAtributo = atacante.modForca;
     }
 

@@ -78,19 +78,26 @@ class _RolarIniciativaViewState extends State<RolarIniciativaView> {
     }
   }
 
+  String _formatMod(int mod) => mod >= 0 ? '+$mod' : '$mod';
+
   void _iniciarRolagemInimigo() {
     if (widget.inimigos.isEmpty) {
       setState(() => _etapa = EtapaIniciativa.ordemFinal);
       return;
     }
 
-    final inimigoAtual = widget.inimigos[_indiceInimigoAtual];
+    _rolarInimigoIndice(0);
+  }
+
+  void _rolarInimigoIndice(int indice) {
+    final inimigoAtual = widget.inimigos[indice];
     final resultado = _diceService.rolarD20(
       modificador: inimigoAtual.modIniciativa,
       nomeModificador: 'Iniciativa (${inimigoAtual.nome})',
     );
 
     setState(() {
+      _indiceInimigoAtual = indice;
       _resultadosInimigos[inimigoAtual.id] = resultado;
       _etapa = EtapaIniciativa.rolandoInimigo;
     });
@@ -99,10 +106,7 @@ class _RolarIniciativaViewState extends State<RolarIniciativaView> {
   void _aoTerminarAnimacaoInimigo() {
     if (_etapa == EtapaIniciativa.rolandoInimigo) {
       if (_indiceInimigoAtual + 1 < widget.inimigos.length) {
-        setState(() {
-          _indiceInimigoAtual++;
-          _etapa = EtapaIniciativa.aguardandoInimigo;
-        });
+        _rolarInimigoIndice(_indiceInimigoAtual + 1);
       } else {
         setState(() {
           _etapa = EtapaIniciativa.ordemFinal;
@@ -165,7 +169,7 @@ class _RolarIniciativaViewState extends State<RolarIniciativaView> {
               // 2. Dado D20 Icosaédrico 3D Central
               Center(
                 child: D20Dice(
-                  key: ValueKey(_etapa),
+                  key: ValueKey('$_etapa-$_indiceInimigoAtual'),
                   valorFinal: _obterValorDadoAtivo(),
                   rolando:
                       _etapa == EtapaIniciativa.rolandoHeroi ||
@@ -242,7 +246,7 @@ class _RolarIniciativaViewState extends State<RolarIniciativaView> {
                           ),
                         ),
                         Text(
-                          'Bônus de Iniciativa: ${modHeroi >= 0 ? "+$modHeroi" : "$modHeroi"}',
+                          'Bônus de Iniciativa: ${_formatMod(modHeroi)}',
                           style: const TextStyle(
                             color: Colors.amberAccent,
                             fontSize: 12,
@@ -275,14 +279,15 @@ class _RolarIniciativaViewState extends State<RolarIniciativaView> {
         );
 
       case EtapaIniciativa.rolandoHeroi:
-        return const Center(
+        return Center(
           child: Text(
-            'Rolando o d20 do Herói...',
-            style: TextStyle(
+            'Rolando o d20 do Herói (Inic. ${_formatMod(modHeroi)})...',
+            style: const TextStyle(
               color: Colors.amberAccent,
               fontSize: 15,
               fontWeight: FontWeight.bold,
             ),
+            textAlign: TextAlign.center,
           ),
         );
 
@@ -293,7 +298,46 @@ class _RolarIniciativaViewState extends State<RolarIniciativaView> {
               resultado: _resultadoHeroi!,
               titulo: 'Iniciativa de ${widget.heroi.nome}',
             ),
-            const SizedBox(height: 18),
+            if (widget.inimigos.isNotEmpty) ...[
+              const SizedBox(height: 12),
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF1E293B),
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: Colors.white12),
+                ),
+                child: Wrap(
+                  spacing: 8,
+                  runSpacing: 6,
+                  children: widget.inimigos
+                      .map(
+                        (e) => Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 4,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.red.withValues(alpha: 0.18),
+                            borderRadius: BorderRadius.circular(6),
+                            border: Border.all(color: Colors.redAccent.withValues(alpha: 0.4)),
+                          ),
+                          child: Text(
+                            '${e.nome} (Inic. ${_formatMod(e.modIniciativa)})',
+                            style: const TextStyle(
+                              color: Colors.white70,
+                              fontSize: 11,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      )
+                      .toList(),
+                ),
+              ),
+            ],
+            const SizedBox(height: 16),
             ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFFE53935),
@@ -306,7 +350,7 @@ class _RolarIniciativaViewState extends State<RolarIniciativaView> {
               icon: const Icon(Icons.arrow_forward_rounded),
               label: Text(
                 widget.inimigos.length > 1
-                    ? 'Confirmar e Rolar Inimigos'
+                    ? 'Confirmar e Rolar Inimigos (${widget.inimigos.length})'
                     : 'Confirmar e Rolar ${inimigoAtual?.nome ?? "Inimigo"}',
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
@@ -320,32 +364,121 @@ class _RolarIniciativaViewState extends State<RolarIniciativaView> {
 
       case EtapaIniciativa.aguardandoInimigo:
       case EtapaIniciativa.rolandoInimigo:
+        final modAtual = inimigoAtual?.modIniciativa ?? 0;
         return Column(
           children: [
-            Text(
-              'Rolando iniciativa para ${inimigoAtual?.nome ?? "Inimigo"}...',
-              style: const TextStyle(
-                color: Colors.redAccent,
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: const Color(0xFF1E293B),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: Colors.redAccent.withValues(alpha: 0.6)),
               ),
-              textAlign: TextAlign.center,
+              child: Column(
+                children: [
+                  Text(
+                    'Inimigo ${_indiceInimigoAtual + 1} de ${widget.inimigos.length}',
+                    style: const TextStyle(
+                      color: Colors.white60,
+                      fontSize: 11,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    'Rolando iniciativa para ${inimigoAtual?.nome ?? "Inimigo"}...',
+                    style: const TextStyle(
+                      color: Colors.redAccent,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 6),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 4,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.amberAccent.withValues(alpha: 0.14),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Text(
+                      'Modificador de Iniciativa: ${_formatMod(modAtual)}',
+                      style: const TextStyle(
+                        color: Colors.amberAccent,
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
             const SizedBox(height: 12),
             const LinearProgressIndicator(color: Colors.redAccent),
+            if (widget.inimigos.length > 1) ...[
+              const SizedBox(height: 12),
+              ...widget.inimigos.asMap().entries.map((entry) {
+                final idx = entry.key;
+                final ini = entry.value;
+                final jaRolou = idx < _indiceInimigoAtual;
+                final resAnterior = jaRolou ? _resultadosInimigos[ini.id] : null;
+                final ehAtual = idx == _indiceInimigoAtual;
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 4),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          '${ehAtual ? "▶ " : ""}${ini.nome} (Inic. ${_formatMod(ini.modIniciativa)})',
+                          style: TextStyle(
+                            color: ehAtual
+                                ? Colors.white
+                                : (jaRolou ? Colors.white70 : Colors.white38),
+                            fontSize: 12,
+                            fontWeight:
+                                ehAtual ? FontWeight.bold : FontWeight.normal,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      Text(
+                        resAnterior != null
+                            ? '${resAnterior.total}'
+                            : (ehAtual ? 'Rolando...' : 'Aguardando'),
+                        style: TextStyle(
+                          color: resAnterior != null
+                              ? Colors.redAccent
+                              : (ehAtual ? Colors.amberAccent : Colors.white38),
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }),
+            ],
           ],
         );
 
       case EtapaIniciativa.ordemFinal:
         final totalHeroi = _resultadoHeroi?.total ?? 10;
-        final primeiroInimigo =
-            widget.inimigos.isNotEmpty ? widget.inimigos.first : null;
-        final totalInimigo =
-            primeiroInimigo != null
-                ? (_resultadosInimigos[primeiroInimigo.id]?.total ?? 10)
-                : 0;
+        Combatente? inimigoMaisRapido;
+        int maiorIniciativaInimigo = -999;
+        for (final ini in widget.inimigos) {
+          final tot = _resultadosInimigos[ini.id]?.total ?? 10;
+          if (inimigoMaisRapido == null || tot > maiorIniciativaInimigo) {
+            inimigoMaisRapido = ini;
+            maiorIniciativaInimigo = tot;
+          }
+        }
 
-        final heroiAgePrimeiro = totalHeroi >= totalInimigo;
+        final heroiAgePrimeiro =
+            inimigoMaisRapido == null || totalHeroi >= maiorIniciativaInimigo;
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -378,7 +511,7 @@ class _RolarIniciativaViewState extends State<RolarIniciativaView> {
                     child: Text(
                       heroiAgePrimeiro
                           ? '👉 ${widget.heroi.nome} joga primeiro!'
-                          : '👉 ${primeiroInimigo?.nome ?? "O Inimigo"} joga primeiro!',
+                          : '👉 ${inimigoMaisRapido.nome} joga primeiro!',
                       style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -408,7 +541,7 @@ class _RolarIniciativaViewState extends State<RolarIniciativaView> {
                         children: [
                           Expanded(
                             child: Text(
-                              '🛡️ ${widget.heroi.nome}',
+                              '🛡️ ${widget.heroi.nome} (Inic. ${_formatMod(modHeroi)})',
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
@@ -460,7 +593,7 @@ class _RolarIniciativaViewState extends State<RolarIniciativaView> {
                             children: [
                               Expanded(
                                 child: Text(
-                                  '👹 ${inimigo.nome}',
+                                  '👹 ${inimigo.nome} (Inic. ${_formatMod(inimigo.modIniciativa)})',
                                   style: const TextStyle(color: Colors.white70),
                                   overflow: TextOverflow.ellipsis,
                                 ),

@@ -1,0 +1,2165 @@
+[
+  {
+    "id": "aka_oni",
+    "nome": "Aka Oni",
+    "nd": "9",
+    "regiao": "imperio_de_jade",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": "lefeu",
+    "tamanho": "medio",
+    "iniciativa": 9,
+    "percepcao": 14,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 35,
+    "resistencias": {
+      "fortitude": 21,
+      "reflexos": 16,
+      "vontade": 9
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 360,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 7,
+      "des": 1,
+      "con": 3,
+      "int": -1,
+      "sab": 1,
+      "car": -4
+    },
+    "pericias": {
+      "atletismo": 15,
+      "intimidacao": 11
+    },
+    "ataques": [
+      {
+        "nome": "Tetsubo",
+        "bonusAtaque": 28,
+        "dano": "1d12+18",
+        "danoExtra": "1d6 materia_vermelha",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Pinça (x2)",
+        "bonusAtaque": 28,
+        "dano": "1d4+13",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Chifres",
+        "bonusAtaque": 28,
+        "dano": "1d6+13",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Ataque Pesado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando acerta um ataque de tetsubo, o aka oni faz a manobra derrubar ou empurrar contra o alvo (teste +30)."
+      },
+      {
+        "nome": "Avesso à Honra",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Os ataques do oni causam +1d10 pontos de dano de trevas contra devotos de Lin-Wu e personagens que sigam algum código de conduta (como Código de Honra ou Código do Herói)."
+      },
+      {
+        "nome": "Doença",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura atingida pelos chifres do oni é exposta à doença infecção escarlate."
+      },
+      {
+        "nome": "Insanidade da Tormenta",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 28,
+        "resistenciaTipo": null,
+        "descricao": "Criaturas que vejam o aka oni perdem 2d6 PM (Vontade CD 28 evita)."
+      }
+    ],
+    "equipamento": [
+      "Gibão de peles",
+      "Tetsubo aumentado de matéria vermelha"
+    ],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "chibi_kabuto",
+    "nome": "Chibi-Kabuto",
+    "nd": "0.25",
+    "regiao": "imperio_de_jade",
+    "papel": "especial",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "minusculo",
+    "iniciativa": 4,
+    "percepcao": 6,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 13,
+    "resistencias": {
+      "fortitude": 2,
+      "reflexos": 3,
+      "vontade": -2
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 8,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 3.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": -2,
+      "des": 2,
+      "con": 0,
+      "int": -4,
+      "sab": 1,
+      "car": -3
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Galhada",
+        "bonusAtaque": 4,
+        "dano": "1d6+2",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "dai_kabuto",
+    "nome": "Dai-Kabuto",
+    "nd": "4",
+    "regiao": "imperio_de_jade",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 5,
+    "percepcao": 8,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 25,
+    "resistencias": {
+      "fortitude": 16,
+      "reflexos": 10,
+      "vontade": 4
+    },
+    "rd": {
+      "geral": 2
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 155,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 6.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 1,
+      "con": 2,
+      "int": -4,
+      "sab": 1,
+      "car": -3
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Galhada",
+        "bonusAtaque": 16,
+        "dano": "2d8+12",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarralhada",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O dai-kabuto recebe +2 em testes para agarrar e derrubar."
+      },
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Usa a manobra agarrar com sua galhada (teste +20)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "daitengu",
+    "nome": "Daitengu",
+    "nd": "8",
+    "regiao": "imperio_de_jade",
+    "papel": "especial",
+    "tipo": "espirito",
+    "subtipo": "tengu",
+    "tamanho": "medio",
+    "iniciativa": 14,
+    "percepcao": 11,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 32,
+    "resistencias": {
+      "fortitude": 8,
+      "reflexos": 21,
+      "vontade": 15
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 222,
+    "pm": 64,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 12.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 6,
+      "con": 2,
+      "int": 4,
+      "sab": 1,
+      "car": 0
+    },
+    "pericias": {
+      "acrobacia": 14,
+      "enganacao": 10,
+      "misticismo": 14,
+      "sobrevivencia": 9
+    },
+    "ataques": [
+      {
+        "nome": "Katana (x2)",
+        "bonusAtaque": 26,
+        "dano": "2d10+24",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Asas Desorientadoras",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se não estiver usando suas asas para voar, o daitengu pode fintar como ação de movimento."
+      },
+      {
+        "nome": "Ataque Reflexo",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, o daitengu pode fazer um ataque corpo a corpo contra um alvo em seu alcance natural que esteja desprevenido ou que se mova voluntariamente para fora desse alcance."
+      },
+      {
+        "nome": "Imprevisível como o Vento",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando não está voando e faz um ataque ou uma finta, o daitengu pode rolar dois dados e usar o melhor resultado."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 28,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como bruxo de 8º nível (CD 28; foco arcano: sua katana): Primor Atlético (movimento, 2 PM, salta e pousa em alcance corpo a corpo de uma criatura em alcance curto, benefícios de investida e dado extra de dano se atacar neste turno), Resistência a Energia (padrão, 6 PM, redução de dano 10 contra energia escolhida para criaturas em alcance curto até o fim da cena), Soco de Arsenal (padrão, 4 PM, alcance natural aumenta para 4,5m até o fim da cena), Velocidade (padrão, 3 PM, sustentada, ação padrão adicional por turno, não pode ser usada para lançar magias)."
+      }
+    ],
+    "equipamento": [
+      "Katana x2"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "dragao_celestial_adulto",
+    "nome": "Dragão Celestial Adulto",
+    "nd": "15",
+    "regiao": "imperio_de_jade",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 16,
+    "percepcao": 24,
+    "sentidos": [
+      "percepcao_as_cegas_medio",
+      "visao_no_escuro"
+    ],
+    "defesa": 50,
+    "resistencias": {
+      "fortitude": 24,
+      "reflexos": 15,
+      "vontade": 28
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "eletricidade"
+    ],
+    "vulnerabilidadesDano": [
+      "acido"
+    ],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +3"
+    ],
+    "pv": 825,
+    "pm": 108,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 36.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 12,
+      "des": 2,
+      "con": 8,
+      "int": 6,
+      "sab": 7,
+      "car": 6
+    },
+    "pericias": {
+      "conhecimento": 22,
+      "diplomacia": 22,
+      "intuicao": 23,
+      "misticismo": 22,
+      "religiao": 23
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 42,
+        "dano": "4d10+30",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 42,
+        "dano": "3d10+30",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Magia Acelerada",
+        "acao": "livre",
+        "custoPm": 4,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando lança uma magia com execução de ação completa ou menor, o dragão celestial muda a execução dela para livre."
+      },
+      {
+        "nome": "Presença Celestial",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 42,
+        "resistenciaTipo": "vontade",
+        "descricao": "Aura de presença celestial (Vontade CD 42 evita)."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 42,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como clérigo de Lin-Wu de 15º nível (CD 42, limite de PM 23): Coluna de Chamas (padrão, 18 PM, cilindro 3m de raio em alcance longo, 12d6 fogo + 12d6 luz, Reflexos reduz à metade), Curar Ferimentos (padrão, 15 PM, criatura adjacente cura 16d8+16 PV ou criaturas em alcance curto curam 11d8+11), Dissipar Magia (padrão, 3 PM), Escudo da Fé (padrão, 17 PM, camuflagem leve contra ataques à distância e +8 na Defesa por 1 dia), Santuário (padrão, 10 PM), Viagem Planar (padrão, 12 PM, dragão e até 5 criaturas voluntárias tocadas viajam para outro Plano)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "dobro.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "dragao_celestial_jovem",
+    "nome": "Dragão Celestial Jovem",
+    "nd": "10",
+    "regiao": "imperio_de_jade",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 12,
+    "percepcao": 16,
+    "sentidos": [
+      "percepcao_as_cegas",
+      "visao_no_escuro"
+    ],
+    "defesa": 35,
+    "resistencias": {
+      "fortitude": 18,
+      "reflexos": 10,
+      "vontade": 22
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "eletricidade"
+    ],
+    "vulnerabilidadesDano": [
+      "acido"
+    ],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +2"
+    ],
+    "pv": 450,
+    "pm": 75,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 36.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 9,
+      "des": 2,
+      "con": 8,
+      "int": 4,
+      "sab": 5,
+      "car": 4
+    },
+    "pericias": {
+      "conhecimento": 15,
+      "diplomacia": 15,
+      "intuicao": 16,
+      "misticismo": 15,
+      "religiao": 16
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 29,
+        "dano": "4d10+20",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 29,
+        "dano": "3d10+20",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 32,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como clérigo de Lin-Wu de 10º nível (CD 32): Coluna de Chamas (padrão, 10 PM, cilindro 3m de raio e 30m de altura em alcance longo, 8d6 fogo + 8d6 luz, Reflexos reduz à metade), Curar Ferimentos (padrão, 10 PM, criatura adjacente cura 11d8+11 PV ou criaturas em alcance curto curam 6d8+6), Dissipar Magia (padrão, 3 PM), Escudo da Fé (reação, 8 PM, camuflagem leve contra ataques à distância e +5 na Defesa por 1 turno), Santuário (padrão, 10 PM, criatura tocada protegida de ações hostis, Vontade evita)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "dobro.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "dragao_celestial_veneravel",
+    "nome": "Dragão Celestial Venerável",
+    "nd": "20",
+    "regiao": "imperio_de_jade",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 20,
+    "percepcao": 28,
+    "sentidos": [
+      "percepcao_as_cegas_longo",
+      "visao_no_escuro"
+    ],
+    "defesa": 60,
+    "resistencias": {
+      "fortitude": 28,
+      "reflexos": 21,
+      "vontade": 34
+    },
+    "rd": {
+      "geral": 20
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "eletricidade"
+    ],
+    "vulnerabilidadesDano": [
+      "acido"
+    ],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +4"
+    ],
+    "pv": 1300,
+    "pm": 143,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 48.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 15,
+      "des": 2,
+      "con": 10,
+      "int": 8,
+      "sab": 9,
+      "car": 8
+    },
+    "pericias": {
+      "conhecimento": 25,
+      "diplomacia": 25,
+      "intuicao": 26,
+      "misticismo": 25,
+      "religiao": 26
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 52,
+        "dano": "8d12+45",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 52,
+        "dano": "8d12+45",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Bombardeio Celestial",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 49,
+        "resistenciaTipo": null,
+        "descricao": "O dragão celestial cria 6 esferas de essência que ficam flutuando ao seu redor até o fim da cena. Uma vez por rodada, ele pode gastar uma ação de movimento para disparar uma dessas esferas em uma criatura em alcance longo; o alvo sofre 12d6 pontos de dano de essência e é empurrado 6m na direção oposta (Fortitude CD 49 evita o empurrão). Uma vez por rodada, quando é alvo de um ataque ou habilidade, o dragão pode disparar uma dessas esferas contra o atacante."
+      },
+      {
+        "nome": "Magia Acelerada",
+        "acao": "livre",
+        "custoPm": 4,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando lança uma magia com execução de ação completa ou menor, o dragão celestial muda a execução dela para livre."
+      },
+      {
+        "nome": "Presença Celestial",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 49,
+        "resistenciaTipo": "vontade",
+        "descricao": "Aura de presença celestial (Vontade CD 49 evita)."
+      },
+      {
+        "nome": "Sopro",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 49,
+        "resistenciaTipo": null,
+        "descricao": "Todas as criaturas em um cone de 18m sofrem 20d12 pontos de dano de eletricidade e ficam ofuscadas por 1d4 rodadas (Reflexos CD 49 reduz à metade e evita a condição). Recarga (movimento)."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 49,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como clérigo de Lin-Wu de 20º nível (CD 49, limite de PM 30): Aura Divina (padrão, 19 PM, aura de 9m de raio até o fim da cena, dragão e aliados devotos de Lin-Wu imunes a encantamento e +12 na Defesa e testes de resistência, +7 para aliados não devotos; inimigos que entrem na área fazem Vontade ou recebem uma condição entre esmorecido, debilitado ou lento até o fim da cena), Curar Ferimentos (padrão, 15 PM, criatura adjacente cura 16d8+16 PV ou criaturas em alcance curto curam 11d8+11), Dissipar Magia (padrão, 3 PM), Escudo da Fé (padrão, 25 PM, camuflagem leve contra ataques à distância e +12 na Defesa por 1 dia), Intervenção Divina (padrão, 15 PM, cura todos os PV e condições de até 10 criaturas em alcance longo, incluindo mortos-vivos, ou dissipa os efeitos de uma magia de 4º círculo ou menor; algo mais poderoso exige o sacrifício de 2 PM), Katana Celestial (padrão, 24 PM, quatro linhas de 30m formando um \"X\", 14d8 de dano de luz — ou 14d12 se mortos-vivos —, cegas e surdas até o fim da cena, Reflexos reduz à metade e evita as condições)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "dobro.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "horda_de_ko_kabuto",
+    "nome": "Horda de Ko-Kabuto",
+    "nd": "3",
+    "regiao": "imperio_de_jade",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 5,
+    "percepcao": 7,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 22,
+    "resistencias": {
+      "fortitude": 11,
+      "reflexos": 13,
+      "vontade": 3
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 112,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 3.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 1,
+      "des": 2,
+      "con": 1,
+      "int": -4,
+      "sab": 1,
+      "car": -3
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Galhada [Bando]",
+        "bonusAtaque": 12,
+        "dano": "2d6+10",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarralhada",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A horda de ko-kabuto recebe +2 em testes para agarrar e derrubar."
+      },
+      {
+        "nome": "Formação Defensiva",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A horda recebe +2 na Defesa até seu próximo turno."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "kaijin_bruto",
+    "nome": "Kaijin Bruto",
+    "nd": "11",
+    "regiao": "imperio_de_jade",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "kaijin",
+    "tamanho": "grande",
+    "iniciativa": 7,
+    "percepcao": 12,
+    "sentidos": [],
+    "defesa": 42,
+    "resistencias": {
+      "fortitude": 24,
+      "reflexos": 12,
+      "vontade": 17
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 600,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 8,
+      "des": 1,
+      "con": 6,
+      "int": -2,
+      "sab": 1,
+      "car": -4
+    },
+    "pericias": {
+      "atletismo": 21,
+      "intimidacao": 21
+    },
+    "ataques": [
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 32,
+        "dano": "1d10+20",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Pinça",
+        "bonusAtaque": 32,
+        "dano": "1d12+20",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Tentáculo",
+        "bonusAtaque": 32,
+        "dano": "2d4+18",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Fortificação",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "50% de chance de ignorar qualquer efeito adicional de acerto crítico ou ataque furtivo."
+      },
+      {
+        "nome": "Resistência a Lefeu e Tormenta",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Recebe +5 em testes de resistência contra efeitos causados por lefeu e pela Tormenta."
+      },
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Usa a manobra agarrar com seu tentáculo (teste +34)."
+      },
+      {
+        "nome": "Dilacerar",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se o kaijin bruto acerta os dois ataques de garra em uma mesma criatura no mesmo turno, causa mais 2d10+20 pontos de dano."
+      },
+      {
+        "nome": "Mutação Rubra",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 32,
+        "resistenciaTipo": null,
+        "descricao": "O kaijin possui três mutações, escolhidas entre as seguintes. Asas de Inseto: deslocamento de voo 9m. Carapaça Superior (reação): uma vez por rodada, quando sofre dano, pode reduzir esse dano à metade. Deslocado: camuflagem leve contra todos os ataques e ignora terreno difícil. Insanidade da Tormenta: criaturas que vejam o kaijin perdem 1d10 PM (Vontade CD 32 evita, uma vez por dia por criatura). Mãos Aderentes: deslocamento de escalada 9m. Mente Alienígena: rola dois dados em testes de Vontade e usa o melhor; quando passa em um teste de Vontade para resistir a um efeito, causa 6d6 de dano psíquico na criatura que gerou o efeito. Sangue Corrosivo (reação): uma vez por rodada, quando sofre dano, todas as criaturas adjacentes sofrem 4d6 de dano de ácido."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "kaijin_capanga",
+    "nome": "Kaijin Capanga",
+    "nd": "6",
+    "regiao": "imperio_de_jade",
+    "papel": "lacaio",
+    "tipo": "monstro",
+    "subtipo": "kaijin",
+    "tamanho": "medio",
+    "iniciativa": 5,
+    "percepcao": 8,
+    "sentidos": [],
+    "defesa": 26,
+    "resistencias": {
+      "fortitude": 17,
+      "reflexos": 12,
+      "vontade": 7
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 60,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 2,
+      "con": 4,
+      "int": -1,
+      "sab": 1,
+      "car": -3
+    },
+    "pericias": {
+      "intimidacao": 10
+    },
+    "ataques": [
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 22,
+        "dano": "2d6+15",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Fortificação",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "50% de chance de ignorar qualquer efeito adicional de acerto crítico ou ataque furtivo."
+      },
+      {
+        "nome": "Resistência a Lefeu e Tormenta",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Recebe +5 em testes de resistência contra efeitos causados por lefeu e pela Tormenta."
+      },
+      {
+        "nome": "Mutação Rubra",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 22,
+        "resistenciaTipo": null,
+        "descricao": "O kaijin capanga possui duas mutações, escolhidas entre as seguintes. Asas de Inseto: deslocamento de voo 9m. Carapaça Superior (reação): uma vez por rodada, quando sofre dano, pode reduzir esse dano à metade. Deslocado: camuflagem leve contra todos os ataques e ignora terreno difícil. Insanidade da Tormenta: criaturas que vejam o kaijin perdem 2d4 PM (Vontade CD 22 evita, uma vez por dia por criatura). Mãos Aderentes: deslocamento de escalada 9m. Mente Alienígena: rola dois dados em testes de Vontade e usa o melhor; quando passa em um teste de Vontade para resistir a um efeito, causa 5d6 de dano psíquico na criatura que gerou o efeito. Sangue Corrosivo (reação): uma vez por rodada, quando sofre dano, todas as criaturas adjacentes sofrem 3d6 de dano de ácido."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "kaijin_ninja",
+    "nome": "Kaijin Ninja",
+    "nd": "13",
+    "regiao": "imperio_de_jade",
+    "papel": "especial",
+    "tipo": "monstro",
+    "subtipo": "kaijin",
+    "tamanho": "medio",
+    "iniciativa": 17,
+    "percepcao": 12,
+    "sentidos": [],
+    "defesa": 36,
+    "resistencias": {
+      "fortitude": 20,
+      "reflexos": 26,
+      "vontade": 12
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 450,
+    "pm": 48,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 9.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 7,
+      "con": 4,
+      "int": 3,
+      "sab": 2,
+      "car": -2
+    },
+    "pericias": {
+      "acrobacia": 17,
+      "furtividade": 27,
+      "ladinagem": 17
+    },
+    "ataques": [
+      {
+        "nome": "Espada curta (x3)",
+        "bonusAtaque": 32,
+        "dano": "2d6+20",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Zarabatana (à distância)",
+        "bonusAtaque": 34,
+        "dano": "1d4+15",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Evasão",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando passa em um teste de Reflexos para reduzir o dano de um efeito à metade, em vez disso não sofre nenhum dano."
+      },
+      {
+        "nome": "Resistência a Lefeu e Tormenta",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Recebe +5 em testes de resistência contra efeitos causados por lefeu e pela Tormenta."
+      },
+      {
+        "nome": "Ataque Furtivo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Causa +6d6 de dano adicional quando ataca um alvo desprevenido ou surpreso."
+      },
+      {
+        "nome": "Sangue Corrosivo",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando o kaijin ninja sofre dano, todas as criaturas adjacentes a ele sofrem 4d6 pontos de dano de ácido."
+      },
+      {
+        "nome": "Sombra",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O kaijin não sofre penalidade em testes de Furtividade por se mover ao seu deslocamento normal e reduz a penalidade em Furtividade por atacar e fazer outras ações chamativas para –10."
+      },
+      {
+        "nome": "Veneno",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 37,
+        "resistenciaTipo": null,
+        "descricao": "O ataque de zarabatana expõe o alvo a essência de sombra (debilitado, Fortitude CD 37 reduz para fraco)."
+      },
+      {
+        "nome": "Truques Ninjas",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 37,
+        "resistenciaTipo": null,
+        "descricao": "Lança as seguintes magias simuladas como um conjurador arcano de 12º nível (CD 37): Imagem Espelhada (padrão, 5 PM, 4 cópias ilusórias, +8 na Defesa), Invisibilidade (padrão, 6 PM, até o fim da cena), Névoa (padrão, 8 PM, cubo de 6m em alcance curto), Primor Atlético (padrão, 4 PM, deslocamento +9m e +10 em Atletismo), Teia (padrão, 4 PM, cubo de terreno difícil de 6m, enredado)."
+      }
+    ],
+    "equipamento": [
+      "Dardos x20",
+      "Espada curta certeira",
+      "Essência de sombra x1d4",
+      "Gazua",
+      "Manto camuflado aprimorado",
+      "Zarabatana certeira (todos adaptados)"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "kappa_brigao",
+    "nome": "Kappa Brigão",
+    "nd": "1",
+    "regiao": "imperio_de_jade",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": "kappa",
+    "tamanho": "medio",
+    "iniciativa": 5,
+    "percepcao": 0,
+    "sentidos": [],
+    "defesa": 18,
+    "resistencias": {
+      "fortitude": 5,
+      "reflexos": 11,
+      "vontade": 0
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 30,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 9.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 1,
+      "des": 3,
+      "con": 2,
+      "int": 0,
+      "sab": 0,
+      "car": -1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Ataque desarmado (x2)",
+        "bonusAtaque": 9,
+        "dano": "1d6+4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Não Pode Ser Flanqueado",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O kappa brigão não pode ser flanqueado."
+      },
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Usa a manobra agarrar com seu ataque desarmado (teste +9)."
+      },
+      {
+        "nome": "Carapaça Kappa",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O kappa brigão recebe cobertura leve quando está caído ou submerso."
+      },
+      {
+        "nome": "Cura das Águas",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por cena, o kappa pode lançar Curar Ferimentos para curar 2d8+2 PV de uma criatura. Ele não pode usar esta habilidade se a água de sua cabeça estiver derramada."
+      },
+      {
+        "nome": "Tigela D'água",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando falha por 5 ou mais em um teste para evitar ser agarrado, derrubado ou empurrado, o kappa derrama a água de sua cabeça. Ele fica enjoado até encher a tigela novamente (o que exige uma fonte de água e uma ação padrão)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "kappa_yokozuna",
+    "nome": "Kappa Yokozuna",
+    "nd": "3",
+    "regiao": "imperio_de_jade",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": "kappa",
+    "tamanho": "medio",
+    "iniciativa": 6,
+    "percepcao": 2,
+    "sentidos": [],
+    "defesa": 23,
+    "resistencias": {
+      "fortitude": 9,
+      "reflexos": 15,
+      "vontade": 3
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 105,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 9.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 3,
+      "con": 3,
+      "int": 0,
+      "sab": 1,
+      "car": -1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Ataque desarmado (x2)",
+        "bonusAtaque": 14,
+        "dano": "1d6+7",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Não Pode Ser Flanqueado",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O kappa yokozuna não pode ser flanqueado."
+      },
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Usa a manobra agarrar com seu ataque desarmado (teste +16). Quando agarra uma criatura, o kappa yokozuna a derruba automaticamente."
+      },
+      {
+        "nome": "Carapaça Kappa",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O kappa recebe cobertura leve quando está caído ou submerso."
+      },
+      {
+        "nome": "Cura das Águas",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por cena, o kappa pode lançar Curar Ferimentos para curar 4d8+4 PV de uma criatura. Ele não pode usar esta habilidade se a água de sua cabeça estiver derramada."
+      },
+      {
+        "nome": "Golpe Impactante",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 17,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura atingida por um ataque desarmado do kappa é empurrada 1,5m para cada 5 pontos de dano que sofrer (Fortitude CD 17 evita)."
+      },
+      {
+        "nome": "Tigela D'água",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando falha por 5 ou mais em um teste para evitar ser agarrado, derrubado ou empurrado, o kappa derrama a água de sua cabeça. Ele fica enjoado até encher a tigela novamente (o que exige uma fonte de água e uma ação padrão)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "ko_kabuto",
+    "nome": "Ko-Kabuto",
+    "nd": "1",
+    "regiao": "imperio_de_jade",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "pequeno",
+    "iniciativa": 4,
+    "percepcao": 6,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 17,
+    "resistencias": {
+      "fortitude": 7,
+      "reflexos": 11,
+      "vontade": 0
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 38,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 3.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 2,
+      "con": 1,
+      "int": -4,
+      "sab": 1,
+      "car": -3
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Galhada",
+        "bonusAtaque": 8,
+        "dano": "1d8+9",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarralhada",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O ko-kabuto recebe +2 em testes para agarrar e derrubar."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "mashin_monge",
+    "nome": "Mashin Monge",
+    "nd": "3",
+    "regiao": "imperio_de_jade",
+    "papel": "solo",
+    "tipo": "construto",
+    "subtipo": "golem",
+    "tamanho": "medio",
+    "iniciativa": 7,
+    "percepcao": 3,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 22,
+    "resistencias": {
+      "fortitude": 4,
+      "reflexos": 15,
+      "vontade": 10
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "frio"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 135,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 4,
+      "con": 3,
+      "int": 0,
+      "sab": 3,
+      "car": 0
+    },
+    "pericias": {
+      "acrobacia": 7,
+      "atletismo": 6,
+      "cura": 6,
+      "religiao": 6
+    },
+    "ataques": [
+      {
+        "nome": "Ataque desarmado (x3)",
+        "bonusAtaque": 15,
+        "dano": "1d6+4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Adaga (à distância)",
+        "bonusAtaque": 13,
+        "dano": "1d4+4",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Evasão",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando passa em um teste de Reflexos para reduzir o dano de um efeito à metade, em vez disso não sofre nenhum dano."
+      },
+      {
+        "nome": "Arma Elemental",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Até o fim da rodada, o mashin monge causa +1d6 pontos de dano de frio com seus ataques."
+      },
+      {
+        "nome": "Ataque de Chi",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Os ataques desarmados do monge ignoram 5 pontos de redução de dano."
+      }
+    ],
+    "equipamento": [
+      "Adaga x3"
+    ],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "mashin_samurai",
+    "nome": "Mashin Samurai",
+    "nd": "5",
+    "regiao": "imperio_de_jade",
+    "papel": "solo",
+    "tipo": "construto",
+    "subtipo": "golem",
+    "tamanho": "medio",
+    "iniciativa": 12,
+    "percepcao": 3,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 25,
+    "resistencias": {
+      "fortitude": 17,
+      "reflexos": 7,
+      "vontade": 13
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "fogo"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 221,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 2,
+      "con": 3,
+      "int": 1,
+      "sab": 1,
+      "car": 0
+    },
+    "pericias": {
+      "atletismo": 8,
+      "nobreza": 5,
+      "religiao": 5
+    },
+    "ataques": [
+      {
+        "nome": "Katana (x2)",
+        "bonusAtaque": 18,
+        "dano": "1d10+10",
+        "danoExtra": "1d6 fogo",
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Arma Acoplada",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A katana do mashin samurai é acoplada ao seu braço. Ela não pode ser desarmada e ele pode sacá-la como uma ação livre."
+      },
+      {
+        "nome": "Kiai Divino",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "padrao",
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz um ataque, o mashin causa dano máximo, sem a necessidade de rolar dados. Recarga (padrão)."
+      },
+      {
+        "nome": "Lâmina da Alma em Chamas",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 20,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando faz um ataque com sua katana, o mashin pode disparar uma esfera flamejante contra uma criatura em alcance médio. O alvo sofre 6d6 pontos de dano de fogo (Reflexos CD 20 reduz à metade)."
+      }
+    ],
+    "equipamento": [
+      "Katana certeira",
+      "Meia armadura"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "nezumi_brutamontes",
+    "nome": "Nezumi Brutamontes",
+    "nd": "4",
+    "regiao": "imperio_de_jade",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "nezumi",
+    "tamanho": "pequeno",
+    "iniciativa": 5,
+    "percepcao": 4,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 23,
+    "resistencias": {
+      "fortitude": 16,
+      "reflexos": 10,
+      "vontade": 4
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 140,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 1,
+      "con": 3,
+      "int": -1,
+      "sab": 0,
+      "car": -1
+    },
+    "pericias": {
+      "atletismo": 7,
+      "intimidacao": 5
+    },
+    "ataques": [
+      {
+        "nome": "Marreta",
+        "bonusAtaque": 16,
+        "dano": "3d8+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 16,
+        "dano": "1d6+3",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Resistência a Medo de Criaturas Maiores",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Recebe +5 em testes de Vontade para resistir a efeitos de medo causados por criaturas maiores que ele."
+      },
+      {
+        "nome": "Estocada Invertida",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, se acertar um ataque com sua marreta, o nezumi brutamontes pode fazer um ataque em outra criatura usando a ponta do cabo da arma (ataque +16, dano 2d8+6, impacto)."
+      },
+      {
+        "nome": "Roedor",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando o nezumi brutamontes faz um acerto crítico com sua mordida, deixa a armadura da vítima avariada ou, se ela estiver sem armadura, aumenta em +1 o multiplicador desse crítico."
+      }
+    ],
+    "equipamento": [
+      "Gibão de peles",
+      "Marreta aumentada"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "nezumi_capanga",
+    "nome": "Nezumi Capanga",
+    "nd": "1",
+    "regiao": "imperio_de_jade",
+    "papel": "lacaio",
+    "tipo": "humanoide",
+    "subtipo": "nezumi",
+    "tamanho": "pequeno",
+    "iniciativa": 4,
+    "percepcao": 4,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 15,
+    "resistencias": {
+      "fortitude": 10,
+      "reflexos": 5,
+      "vontade": 1
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 9,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 2,
+      "con": 2,
+      "int": -1,
+      "sab": 0,
+      "car": -1
+    },
+    "pericias": {
+      "atletismo": 4,
+      "intimidacao": 3
+    },
+    "ataques": [
+      {
+        "nome": "Neko-te (x2)",
+        "bonusAtaque": 11,
+        "dano": "1d4+3",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 11,
+        "dano": "1d6+3",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Azagaia (à distância)",
+        "bonusAtaque": 9,
+        "dano": "1d6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Resistência a Medo de Criaturas Maiores",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Recebe +5 em testes de Vontade para resistir a efeitos de medo causados por criaturas maiores que ele."
+      },
+      {
+        "nome": "Roedor",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando o nezumi capanga faz um acerto crítico com sua mordida, deixa a armadura da vítima avariada ou, se ela estiver sem armadura, aumenta em +1 o multiplicador desse crítico."
+      }
+    ],
+    "equipamento": [
+      "Azagaia",
+      "Neko-te x2"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "oni",
+    "nome": "Oni",
+    "nd": "5",
+    "regiao": "imperio_de_jade",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 5,
+    "percepcao": 3,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 24,
+    "resistencias": {
+      "fortitude": 17,
+      "reflexos": 11,
+      "vontade": 5
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [
+      "doencas"
+    ],
+    "imunidadesDano": [
+      "fogo",
+      "veneno"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 200,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 1,
+      "con": 3,
+      "int": 0,
+      "sab": -1,
+      "car": -2
+    },
+    "pericias": {
+      "atletismo": 9,
+      "intimidacao": 7
+    },
+    "ataques": [
+      {
+        "nome": "Machado de guerra",
+        "bonusAtaque": 17,
+        "dano": "1d12+16",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Chifres",
+        "bonusAtaque": 17,
+        "dano": "1d6+10",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Ataque Pesado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando acerta um ataque de machado de guerra, o oni faz a manobra derrubar ou empurrar contra o alvo (teste +19)."
+      },
+      {
+        "nome": "Avesso à Honra",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Os ataques do oni causam +1d10 pontos de dano de trevas contra devotos de Lin-Wu e personagens que sigam algum código de conduta (como Código de Honra ou Código do Herói)."
+      },
+      {
+        "nome": "Doença",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura atingida pelos chifres do oni é exposta à doença calafrio diabólico (Tormenta20, p.318)."
+      }
+    ],
+    "equipamento": [
+      "Machado de guerra"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "tengu_bandoleiro",
+    "nome": "Tengu Bandoleiro",
+    "nd": "6",
+    "regiao": "imperio_de_jade",
+    "papel": "lacaio",
+    "tipo": "espirito",
+    "subtipo": "tengu",
+    "tamanho": "medio",
+    "iniciativa": 9,
+    "percepcao": 7,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 25,
+    "resistencias": {
+      "fortitude": 12,
+      "reflexos": 19,
+      "vontade": 5
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 51,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 12.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 4,
+      "con": 1,
+      "int": 2,
+      "sab": 0,
+      "car": -1
+    },
+    "pericias": {
+      "acrobacia": 9,
+      "enganacao": 6,
+      "sobrevivencia": 5
+    },
+    "ataques": [
+      {
+        "nome": "Katana (x2)",
+        "bonusAtaque": 25,
+        "dano": "2d10+21",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Asas Desorientadoras",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se não estiver usando suas asas para voar, o tengu bandoleiro pode fintar como ação de movimento."
+      },
+      {
+        "nome": "Ataque Reflexo",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, o tengu pode fazer um ataque corpo a corpo contra um alvo em seu alcance natural que esteja desprevenido ou que se mova voluntariamente para fora desse alcance."
+      },
+      {
+        "nome": "Imprevisível como o Vento",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando não está voando e faz um ataque ou uma finta, o tengu pode rolar dois dados e usar o melhor resultado."
+      }
+    ],
+    "equipamento": [
+      "Katana"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  }
+]

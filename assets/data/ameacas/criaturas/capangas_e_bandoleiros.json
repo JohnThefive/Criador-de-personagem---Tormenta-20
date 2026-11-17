@@ -1,0 +1,1477 @@
+[
+  {
+    "id": "alto_sacerdote_de_hyninn",
+    "nome": "Alto Sacerdote de Hyninn",
+    "nd": "8",
+    "regiao": "capangas_e_bandoleiros",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 13,
+    "percepcao": 13,
+    "sentidos": [],
+    "defesa": 30,
+    "resistencias": {
+      "fortitude": 10,
+      "reflexos": 15,
+      "vontade": 19
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "efeitos_mentais"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 175,
+    "pm": 60,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 3,
+      "con": 1,
+      "int": 1,
+      "sab": 5,
+      "car": 4
+    },
+    "pericias": {
+      "enganacao": 16,
+      "furtividade": 13,
+      "ladinagem": 14,
+      "religiao": 14
+    },
+    "ataques": [
+      {
+        "nome": "Adaga (x2)",
+        "bonusAtaque": 24,
+        "dano": "1d4+12",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Bênção do Gatuno",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por cena, o alto sacerdote lança uma magia como uma ação livre, pagando seu custo normal."
+      },
+      {
+        "nome": "Fé na Sorte",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando sofre dano, o alto sacerdote reduz esse dano à metade."
+      },
+      {
+        "nome": "Forma de Macaco (mágica)",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O alto sacerdote se transforma em um macaco, adquirindo tamanho Minúsculo (+5 Furtividade, –5 em manobras) e deslocamento de escalada 9m. O equipamento desaparece até voltar ao normal. Dura indefinidamente, terminando se atacar, lançar magia ou sofrer dano."
+      },
+      {
+        "nome": "Malandragem Divina",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz um teste de perícia, o alto sacerdote usa Enganação no lugar da perícia original."
+      },
+      {
+        "nome": "Magias (clérigo de Hyninn, 8º nível, CD 28)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Arma Espiritual (6 PM; +2 na Defesa e reação de 3d6 corte ao sofrer ataque corpo a corpo), Curar Ferimentos (8 PM; 9d8+9 PV), Despedaçar (7 PM; 4d8+8 de impacto, dobrado contra construtos/objetos, atordoa), Enxame de Pestes (7 PM, completa, sustentada; enxame de palhaços em miniatura causa 4d12 de corte por turno, movível 12m)."
+      }
+    ],
+    "equipamento": [
+      "Adaga",
+      "Capa esvoaçante aprimorada",
+      "Gazua",
+      "Manto eclesiástico",
+      "Símbolo sagrado de Hyninn"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "bandido_ligeiro",
+    "nome": "Bandido Ligeiro",
+    "nd": "0.5",
+    "regiao": "capangas_e_bandoleiros",
+    "papel": "lacaio",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 4,
+    "percepcao": 1,
+    "sentidos": [],
+    "defesa": 15,
+    "resistencias": {
+      "fortitude": 3,
+      "reflexos": 5,
+      "vontade": 0
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 9,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 1,
+      "des": 2,
+      "con": 1,
+      "int": 0,
+      "sab": -1,
+      "car": 0
+    },
+    "pericias": {
+      "furtividade": 6
+    },
+    "ataques": [
+      {
+        "nome": "Clava",
+        "bonusAtaque": 9,
+        "dano": "1d6+5",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Funda (à distância)",
+        "bonusAtaque": 9,
+        "dano": "1d6+1",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [],
+    "equipamento": [
+      "Clava",
+      "Funda",
+      "Pedras x20"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "bandido_selvagem",
+    "nome": "Bandido Selvagem",
+    "nd": "1",
+    "regiao": "capangas_e_bandoleiros",
+    "papel": "lacaio",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 4,
+    "percepcao": 3,
+    "sentidos": [],
+    "defesa": 16,
+    "resistencias": {
+      "fortitude": 8,
+      "reflexos": 6,
+      "vontade": 2
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 12,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 1,
+      "con": 1,
+      "int": 0,
+      "sab": 0,
+      "car": -1
+    },
+    "pericias": {
+      "furtividade": 7,
+      "sobrevivencia": 2
+    },
+    "ataques": [
+      {
+        "nome": "Lança (x2)",
+        "bonusAtaque": 11,
+        "dano": "1d6+5",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Azagaia (à distância)",
+        "bonusAtaque": 11,
+        "dano": "1d6+5",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Arremesso de Emboscada",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma única vez em seu primeiro turno de combate, o bandido selvagem saca uma azagaia e faz um ataque à distância com ela."
+      }
+    ],
+    "equipamento": [
+      "Azagaia x3",
+      "Escudo leve",
+      "Lança"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "capanga",
+    "nome": "Capanga",
+    "nd": "0.5",
+    "regiao": "capangas_e_bandoleiros",
+    "papel": "lacaio",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 3,
+    "percepcao": 2,
+    "sentidos": [],
+    "defesa": 13,
+    "resistencias": {
+      "fortitude": 5,
+      "reflexos": 3,
+      "vontade": 0
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 7,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 1,
+      "con": 1,
+      "int": -1,
+      "sab": 0,
+      "car": -1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Tacape",
+        "bonusAtaque": 10,
+        "dano": "1d10+5",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Ímpeto Agressor",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O capanga recebe +1d10 na rolagem de dano de seu primeiro ataque na cena."
+      }
+    ],
+    "equipamento": [
+      "Tacape"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "capanga_minotauro",
+    "nome": "Capanga Minotauro",
+    "nd": "3",
+    "regiao": "capangas_e_bandoleiros",
+    "papel": "lacaio",
+    "tipo": "humanoide",
+    "subtipo": "minotauro",
+    "tamanho": "medio",
+    "iniciativa": 3,
+    "percepcao": 2,
+    "sentidos": [
+      "faro"
+    ],
+    "defesa": 22,
+    "resistencias": {
+      "fortitude": 15,
+      "reflexos": 5,
+      "vontade": 10
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 35,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 0,
+      "con": 3,
+      "int": -1,
+      "sab": 0,
+      "car": -1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Machado de batalha",
+        "bonusAtaque": 17,
+        "dano": "2d6+15",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Chifres",
+        "bonusAtaque": 17,
+        "dano": "1d6+15",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Azagaia (à distância)",
+        "bonusAtaque": 17,
+        "dano": "1d6+10",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Medo de Altura",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se estiver adjacente a uma queda de 3m ou mais de altura (como um buraco ou penhasco), o capanga minotauro fica abalado."
+      }
+    ],
+    "equipamento": [
+      "Azagaia x3",
+      "Cota de malha",
+      "Escudo pesado",
+      "Machado de batalha"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "chefe_de_gangue",
+    "nome": "Chefe de Gangue",
+    "nd": "2",
+    "regiao": "capangas_e_bandoleiros",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 6,
+    "percepcao": 6,
+    "sentidos": [],
+    "defesa": 19,
+    "resistencias": {
+      "fortitude": 11,
+      "reflexos": 7,
+      "vontade": 4
+    },
+    "rd": {
+      "medo": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 63,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 2,
+      "con": 2,
+      "int": 1,
+      "sab": 0,
+      "car": 1
+    },
+    "pericias": {
+      "furtividade": 7,
+      "intimidacao": 7
+    },
+    "ataques": [
+      {
+        "nome": "Espada longa",
+        "bonusAtaque": 12,
+        "dano": "1d8+5",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Espada curta",
+        "bonusAtaque": 12,
+        "dano": "1d6+5",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Ataque Furtivo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "+2d6 de dano extra quando flanqueia ou surpreende o alvo."
+      },
+      {
+        "nome": "Ordens",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O chefe grita ordens para seus aliados em alcance médio. Eles recebem +2 em testes de perícia até o fim da cena."
+      }
+    ],
+    "equipamento": [
+      "Couro batido",
+      "Espada curta",
+      "Espada longa"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "chefe_de_quadrilha",
+    "nome": "Chefe de Quadrilha",
+    "nd": "4",
+    "regiao": "capangas_e_bandoleiros",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 8,
+    "percepcao": 5,
+    "sentidos": [],
+    "defesa": 22,
+    "resistencias": {
+      "fortitude": 14,
+      "reflexos": 11,
+      "vontade": 5
+    },
+    "rd": {
+      "medo": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 120,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 3,
+      "con": 2,
+      "int": 1,
+      "sab": 0,
+      "car": 1
+    },
+    "pericias": {
+      "furtividade": 8,
+      "intimidacao": 8
+    },
+    "ataques": [
+      {
+        "nome": "Espada longa",
+        "bonusAtaque": 16,
+        "dano": "1d8+6",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Espada curta certeira",
+        "bonusAtaque": 16,
+        "dano": "1d6+6",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Ataque Furtivo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "+3d6 de dano extra quando flanqueia ou surpreende o alvo."
+      },
+      {
+        "nome": "Ordens",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O chefe grita ordens para seus aliados em alcance médio. Eles recebem +2 em testes de perícia até o fim da cena."
+      },
+      {
+        "nome": "Tropas Dispensáveis",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando é afetado por um ataque ou efeito, o chefe faz com que um aliado adjacente sofra todos os efeitos em seu lugar."
+      }
+    ],
+    "equipamento": [
+      "Bandana",
+      "Couro batido",
+      "Espada curta certeira",
+      "Espada longa"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "devoto_de_hyninn_manhoso",
+    "nome": "Devoto de Hyninn Manhoso",
+    "nd": "0.5",
+    "regiao": "capangas_e_bandoleiros",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 5,
+    "percepcao": 3,
+    "sentidos": [],
+    "defesa": 13,
+    "resistencias": {
+      "fortitude": -1,
+      "reflexos": 6,
+      "vontade": 3
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "efeitos_de_movimento"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 12,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": -1,
+      "des": 2,
+      "con": 0,
+      "int": 1,
+      "sab": 0,
+      "car": 2
+    },
+    "pericias": {
+      "enganacao": 6,
+      "furtividade": 6,
+      "ladinagem": 6
+    },
+    "ataques": [
+      {
+        "nome": "Adaga",
+        "bonusAtaque": 6,
+        "dano": "2d4+5",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "No Bolso Dói Mais (mágica)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando acerta um ataque em corpo a corpo, para cada 1 ponto de dano causado, o devoto rouba T$ 1 da vítima. Mesmo que o devoto seja derrotado, há 50% de chance de que esses tibares tenham desaparecido para sempre, pela graça de Hyninn."
+      },
+      {
+        "nome": "Truque de Espelhos",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 15,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando é atacado, o devoto pode enganar o atacante com uma distração, fazendo com que o ataque erre automaticamente (Vontade CD 15 evita). Só pode usar esta habilidade uma vez por cena contra cada criatura."
+      }
+    ],
+    "equipamento": [
+      "Adaga",
+      "Gazua"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "devoto_de_hyninn_simao",
+    "nome": "Devoto de Hyninn Simão",
+    "nd": "1",
+    "regiao": "capangas_e_bandoleiros",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 6,
+    "percepcao": 3,
+    "sentidos": [],
+    "defesa": 15,
+    "resistencias": {
+      "fortitude": 0,
+      "reflexos": 11,
+      "vontade": 5
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "efeitos_de_movimento"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 26,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": -1,
+      "des": 3,
+      "con": 0,
+      "int": 1,
+      "sab": 0,
+      "car": 2
+    },
+    "pericias": {
+      "enganacao": 6,
+      "furtividade": 7,
+      "ladinagem": 7
+    },
+    "ataques": [
+      {
+        "nome": "Adaga",
+        "bonusAtaque": 8,
+        "dano": "2d4+10",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "No Bolso Dói Mais (mágica)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando acerta um ataque em corpo a corpo, para cada 1 ponto de dano causado, o devoto rouba T$ 1 da vítima. Mesmo que o devoto seja derrotado, há 75% de chance de que esses tibares tenham desaparecido para sempre, louvado seja Hyninn."
+      },
+      {
+        "nome": "Truque de Espelhos",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 16,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando é atacado, o devoto pode enganar o atacante com uma distração, fazendo com que o ataque erre automaticamente (Vontade CD 16 evita). Só pode usar esta habilidade uma vez por cena contra cada criatura."
+      }
+    ],
+    "equipamento": [
+      "Adaga",
+      "Gazua"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "devoto_de_hyninn_velhaco",
+    "nome": "Devoto de Hyninn Velhaco",
+    "nd": "4",
+    "regiao": "capangas_e_bandoleiros",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 9,
+    "percepcao": 5,
+    "sentidos": [],
+    "defesa": 22,
+    "resistencias": {
+      "fortitude": 4,
+      "reflexos": 16,
+      "vontade": 10
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "efeitos_de_movimento",
+      "surpreendido"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 88,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 4,
+      "con": 0,
+      "int": 1,
+      "sab": 0,
+      "car": 3
+    },
+    "pericias": {
+      "enganacao": 10,
+      "furtividade": 10,
+      "ladinagem": 10
+    },
+    "ataques": [
+      {
+        "nome": "Adaga (x2)",
+        "bonusAtaque": 15,
+        "dano": "1d4+8",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Malandríssimo (mágica)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando o devoto passa em um teste de resistência contra um efeito de um inimigo, esse inimigo perde 3 PM."
+      },
+      {
+        "nome": "No Bolso Dói Mais (mágica)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando acerta um ataque em corpo a corpo, para cada 1 ponto de dano causado, o devoto rouba T$ 1 da vítima. Mesmo que seja derrotado, há 90% de chance de que esses tibares tenham desaparecido para sempre, pois é grande a mão de Hyninn."
+      },
+      {
+        "nome": "Truque de Espelhos",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 20,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando é atacado, o devoto pode enganar o atacante com uma distração, fazendo com que o ataque erre automaticamente (Vontade CD 20 evita). Só pode usar esta habilidade uma vez por cena contra cada criatura."
+      }
+    ],
+    "equipamento": [
+      "Adaga precisa",
+      "Capa esvoaçante",
+      "Gazua"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "duplo",
+    "nome": "Duplo",
+    "nd": "4",
+    "regiao": "capangas_e_bandoleiros",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "duplo",
+    "tamanho": "medio",
+    "iniciativa": 9,
+    "percepcao": 6,
+    "sentidos": [],
+    "defesa": 21,
+    "resistencias": {
+      "fortitude": 5,
+      "reflexos": 15,
+      "vontade": 10
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "adivinhacao",
+      "efeitos_mentais"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 143,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 5,
+      "con": 2,
+      "int": 2,
+      "sab": 2,
+      "car": 4
+    },
+    "pericias": {
+      "enganacao": 14,
+      "furtividade": 11,
+      "intuicao": 10
+    },
+    "ataques": [
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 14,
+        "dano": "1d6+7",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Ataque Furtivo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "+3d6 de dano extra quando flanqueia ou surpreende o alvo."
+      },
+      {
+        "nome": "Detectar Pensamentos (mágica)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 20,
+        "resistenciaTipo": null,
+        "descricao": "O duplo detecta constantemente os pensamentos superficiais de todas as criaturas inteligentes em alcance curto. Não pode ser surpreendido por elas, e recebe +2 na Defesa e em testes de perícia contra elas. Uma criatura ciente desta habilidade pode gastar uma ação de movimento e fazer um teste de Vontade (CD 20); se passar, esconde seus pensamentos até o fim da cena."
+      },
+      {
+        "nome": "Mudar Forma (mágica)",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O duplo assume a forma de qualquer humanoide de tamanho Pequeno a Grande, como no efeito da magia Metamorfose. Pode permanecer na forma escolhida por tempo indeterminado, mas reverte à forma natural se morrer."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "gatuno",
+    "nome": "Gatuno",
+    "nd": "1",
+    "regiao": "capangas_e_bandoleiros",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 7,
+    "percepcao": 2,
+    "sentidos": [],
+    "defesa": 14,
+    "resistencias": {
+      "fortitude": 0,
+      "reflexos": 11,
+      "vontade": 5
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 25,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 6.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 3,
+      "con": 1,
+      "int": 1,
+      "sab": 0,
+      "car": 0
+    },
+    "pericias": {
+      "acrobacia": 7,
+      "furtividade": 10,
+      "ladinagem": 7
+    },
+    "ataques": [
+      {
+        "nome": "Porrete",
+        "bonusAtaque": 9,
+        "dano": "1d6+5",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Ataque Furtivo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "+2d6 de dano extra quando flanqueia ou surpreende o alvo."
+      },
+      {
+        "nome": "Pancada na Cabeça",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 16,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura atingida por um ataque furtivo do gatuno fica inconsciente e caída ou, se estiver em combate ou outra situação perigosa, fica exausta por 1 rodada e depois fatigada (em ambos os casos, Fortitude CD 16 reduz para fatigada por 1d4 rodadas)."
+      },
+      {
+        "nome": "Sombra",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O gatuno não sofre penalidade em testes de Furtividade por se mover ao seu deslocamento normal e reduz a penalidade por atacar e fazer outras ações chamativas para –10."
+      }
+    ],
+    "equipamento": [
+      "Armadura de couro",
+      "Gazua",
+      "Porrete"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "gatuno_mestre",
+    "nome": "Gatuno Mestre",
+    "nd": "3",
+    "regiao": "capangas_e_bandoleiros",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 8,
+    "percepcao": 3,
+    "sentidos": [],
+    "defesa": 19,
+    "resistencias": {
+      "fortitude": 3,
+      "reflexos": 15,
+      "vontade": 9
+    },
+    "rd": {
+      "efeitos_de_movimento": 3
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 68,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 6.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 4,
+      "con": 1,
+      "int": 1,
+      "sab": 0,
+      "car": 0
+    },
+    "pericias": {
+      "acrobacia": 9,
+      "furtividade": 12,
+      "ladinagem": 10
+    },
+    "ataques": [
+      {
+        "nome": "Porrete",
+        "bonusAtaque": 14,
+        "dano": "1d6+7",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Evasão",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O gatuno mestre possui a habilidade Evasão."
+      },
+      {
+        "nome": "Ataque Furtivo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "+3d6 de dano extra quando flanqueia ou surpreende o alvo."
+      },
+      {
+        "nome": "Bomba de Fumaça",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O gatuno mestre prepara e arremessa uma bomba de fumaça em um ponto em alcance curto. A bomba libera fumaça espessa num raio de 6m a partir do impacto, obscurecendo a visão (camuflagem leve até 1,5m, camuflagem total a partir de 3m), durando até o fim da cena."
+      },
+      {
+        "nome": "Pancada na Cabeça",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 19,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura atingida por um ataque furtivo do gatuno mestre fica inconsciente e caída ou, se em combate ou situação perigosa, fica exausta por 1 rodada e depois fatigada (Fortitude CD 19 reduz para fatigada por 1d4 rodadas)."
+      },
+      {
+        "nome": "Sombra",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O gatuno mestre não sofre penalidade em testes de Furtividade por se mover ao seu deslocamento normal e reduz a penalidade por atacar e fazer outras ações chamativas para –10."
+      }
+    ],
+    "equipamento": [
+      "Armadura de couro",
+      "Bomba de fumaça x3",
+      "Gazua aprimorada",
+      "Porrete"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "jagunco",
+    "nome": "Jagunço",
+    "nd": "2",
+    "regiao": "capangas_e_bandoleiros",
+    "papel": "lacaio",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 7,
+    "percepcao": 3,
+    "sentidos": [],
+    "defesa": 18,
+    "resistencias": {
+      "fortitude": 8,
+      "reflexos": 9,
+      "vontade": 5
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 21,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 3,
+      "con": 2,
+      "int": -1,
+      "sab": 0,
+      "car": -1
+    },
+    "pericias": {
+      "intimidacao": 6,
+      "sobrevivencia": 5
+    },
+    "ataques": [
+      {
+        "nome": "Espada longa (x2)",
+        "bonusAtaque": 14,
+        "dano": "1d8+6",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Pistola (à distância)",
+        "bonusAtaque": 14,
+        "dano": "2d6+6",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Saque Rápido",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O jagunço pode sacar ou guardar itens como uma ação livre e recarregar sua pistola como uma ação de movimento."
+      }
+    ],
+    "equipamento": [
+      "Balas x20",
+      "Couro batido",
+      "Espada longa",
+      "Pistola"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "sacerdote_de_hyninn",
+    "nome": "Sacerdote de Hyninn",
+    "nd": "2",
+    "regiao": "capangas_e_bandoleiros",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "goblin",
+    "tamanho": "pequeno",
+    "iniciativa": 6,
+    "percepcao": 6,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 17,
+    "resistencias": {
+      "fortitude": 5,
+      "reflexos": 7,
+      "vontade": 12
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "efeitos_mentais"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 49,
+    "pm": 28,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 9.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": -1,
+      "des": 3,
+      "con": 1,
+      "int": 0,
+      "sab": 3,
+      "car": 2
+    },
+    "pericias": {
+      "enganacao": 7,
+      "ladinagem": 10,
+      "religiao": 6
+    },
+    "ataques": [
+      {
+        "nome": "Adaga (x2)",
+        "bonusAtaque": 10,
+        "dano": "1d4+5",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Bênção do Gatuno",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por cena, o sacerdote de Hyninn lança uma magia como uma ação livre, pagando seu custo normal."
+      },
+      {
+        "nome": "Forma de Macaco (mágica)",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O sacerdote se transforma em um macaco, adquirindo tamanho Minúsculo (+5 Furtividade, –5 em manobras). O equipamento desaparece (perde seus benefícios) até voltar ao normal. A transformação dura indefinidamente, terminando se ele atacar, lançar magia ou sofrer dano."
+      },
+      {
+        "nome": "Malandragem Divina",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz um teste de perícia, o sacerdote usa Enganação no lugar da perícia original."
+      },
+      {
+        "nome": "Magias (clérigo de Hyninn, 2º nível, CD 18)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Arma Espiritual (2 PM; +1 na Defesa e reação de 2d6 corte ao sofrer ataque corpo a corpo), Curar Ferimentos (2 PM; 3d8+3 PV), Despedaçar (1 PM; 1d8+2 de impacto, dobrado contra construtos/objetos, atordoa)."
+      }
+    ],
+    "equipamento": [
+      "Adaga",
+      "Gazua",
+      "Símbolo sagrado de Hyninn"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  }
+]

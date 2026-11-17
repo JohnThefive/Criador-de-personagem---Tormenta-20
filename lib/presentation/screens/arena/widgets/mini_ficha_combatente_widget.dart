@@ -219,7 +219,7 @@ class MiniFichaCombatenteWidget extends StatelessWidget {
           ),
           const SizedBox(height: 8),
 
-          // Métricas Rápidas: Defesa, Deslocamento e Ataques
+          // Métricas Rápidas: Defesa, Deslocamento, Ataques e Resistências
           Wrap(
             spacing: 10,
             runSpacing: 4,
@@ -240,14 +240,37 @@ class MiniFichaCombatenteWidget extends StatelessWidget {
                 '+${combatente.modPontaria}',
                 Icons.gps_fixed,
               ),
+              if (combatente is CombatenteMonstro) ...[
+                _buildBadge(
+                  'Fort',
+                  '${combatente.modFortitude >= 0 ? "+" : ""}${combatente.modFortitude}',
+                  Icons.favorite_border,
+                ),
+                _buildBadge(
+                  'Ref',
+                  '${combatente.modReflexos >= 0 ? "+" : ""}${combatente.modReflexos}',
+                  Icons.flash_on,
+                ),
+                _buildBadge(
+                  'Von',
+                  '${combatente.modVontade >= 0 ? "+" : ""}${combatente.modVontade}',
+                  Icons.psychology,
+                ),
+              ],
             ],
           ),
+
+          if (combatente case final CombatenteMonstro monstroAtual) ...[
+            const SizedBox(height: 6),
+            _buildThreatBadges(monstroAtual),
+          ],
 
           // Armas Equipadas
           if (combatente.armas.isNotEmpty) ...[
             const SizedBox(height: 6),
             Wrap(
               spacing: 6,
+              runSpacing: 4,
               children: combatente.armas.map((a) {
                 return Container(
                   padding: const EdgeInsets.symmetric(
@@ -302,8 +325,97 @@ class MiniFichaCombatenteWidget extends StatelessWidget {
     );
   }
 
+  Widget _buildThreatBadges(CombatenteMonstro monstro) {
+    final ficha = monstro.fichaMonstro;
+    final badges = <Widget>[
+      _buildMiniPill(
+        'ND ${ficha.nd} • ${ficha.papel.label} • ${ficha.tipoCriatura}${ficha.tamanhoQuadrados > 1 ? ' (${ficha.tamanhoQuadrados}x${ficha.tamanhoQuadrados})' : ''}',
+        Colors.red.shade900.withValues(alpha: 0.45),
+        Colors.redAccent.withValues(alpha: 0.5),
+      ),
+    ];
+
+    if (ficha.rd.isNotEmpty) {
+      final rdTexto = ficha.rd.entries.map((e) => '${e.key} ${e.value}').join(', ');
+      badges.add(
+        _buildMiniPill(
+          'RD: $rdTexto',
+          Colors.blueGrey.shade800,
+          Colors.lightBlueAccent.withValues(alpha: 0.4),
+        ),
+      );
+    }
+
+    if (ficha.imunidadesDano.isNotEmpty) {
+      badges.add(
+        _buildMiniPill(
+          'Imune dano: ${ficha.imunidadesDano.join(', ')}',
+          Colors.teal.shade900.withValues(alpha: 0.5),
+          Colors.tealAccent.withValues(alpha: 0.4),
+        ),
+      );
+    }
+
+    if (ficha.vulnerabilidadesDano.isNotEmpty) {
+      badges.add(
+        _buildMiniPill(
+          'Vulnerável: ${ficha.vulnerabilidadesDano.join(', ')}',
+          Colors.orange.shade900.withValues(alpha: 0.5),
+          Colors.orangeAccent.withValues(alpha: 0.5),
+        ),
+      );
+    }
+
+    final nulos = <String>[
+      if (ficha.forcaNula) 'For –',
+      if (ficha.destrezaNula) 'Des –',
+      if (ficha.constituicaoNula) 'Con –',
+      if (ficha.modInteligencia == null) 'Int –',
+    ];
+    if (nulos.isNotEmpty) {
+      badges.add(
+        _buildMiniPill(
+          'Atrib.: ${nulos.join(', ')}',
+          Colors.white10,
+          Colors.white24,
+        ),
+      );
+    }
+
+    for (final h in ficha.habilidades.where((h) => h.recarga != null)) {
+      final emRecarga = monstro.habilidadeEmRecarga(h.nome);
+      badges.add(
+        _buildMiniPill(
+          '${h.nome}${emRecarga ? ' [EM RECARGA]' : ' [Pronta]'}',
+          emRecarga
+              ? Colors.amber.shade900.withValues(alpha: 0.4)
+              : Colors.green.shade900.withValues(alpha: 0.4),
+          emRecarga ? Colors.amberAccent : Colors.greenAccent,
+        ),
+      );
+    }
+
+    return Wrap(spacing: 6, runSpacing: 4, children: badges);
+  }
+
+  Widget _buildMiniPill(String texto, Color bg, Color border) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+      decoration: BoxDecoration(
+        color: bg,
+        borderRadius: BorderRadius.circular(4),
+        border: Border.all(color: border),
+      ),
+      child: Text(
+        texto,
+        style: const TextStyle(color: Colors.white, fontSize: 10),
+      ),
+    );
+  }
+
   Widget _buildBadge(String label, String valor, IconData icone) {
     return Row(
+      mainAxisSize: MainAxisSize.min,
       children: [
         Icon(icone, size: 12, color: Colors.white54),
         const SizedBox(width: 3),

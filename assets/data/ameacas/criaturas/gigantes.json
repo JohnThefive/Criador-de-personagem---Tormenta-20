@@ -1,0 +1,1014 @@
+[
+  {
+    "id": "galokk_capanga",
+    "nome": "Galokk Capanga",
+    "nd": "6",
+    "regiao": "gigantes",
+    "papel": "lacaio",
+    "tipo": "humanoide",
+    "subtipo": "gigante",
+    "tamanho": "grande",
+    "iniciativa": 3,
+    "percepcao": 3,
+    "sentidos": [],
+    "defesa": 26,
+    "resistencias": {
+      "fortitude": 17,
+      "reflexos": 7,
+      "vontade": 12
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 50,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 0,
+      "con": 2,
+      "int": -1,
+      "sab": 0,
+      "car": -2
+    },
+    "pericias": {
+      "atletismo": 9,
+      "intimidacao": 5
+    },
+    "ataques": [
+      {
+        "nome": "Machado de Guerra (x2)",
+        "bonusAtaque": 24,
+        "dano": "3d6+19",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Força dos Titãs",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando acerta um ataque corpo a corpo, pode rolar mais uma vez qualquer resultado máximo da rolagem de dano e adicionar o novo resultado ao dano causado."
+      },
+      {
+        "nome": "Forçar a Barra",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando faz um teste de resistência, soma sua Força (+4) nesse teste."
+      }
+    ],
+    "equipamento": [
+      "couro_batido",
+      "machado_de_guerra_aumentado"
+    ],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "galokk_guarda_costas",
+    "nome": "Galokk Guarda-Costas",
+    "nd": "10",
+    "regiao": "gigantes",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "gigante",
+    "tamanho": "grande",
+    "iniciativa": 5,
+    "percepcao": 7,
+    "sentidos": [],
+    "defesa": 35,
+    "resistencias": {
+      "fortitude": 21,
+      "reflexos": 11,
+      "vontade": 16
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 80,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 0,
+      "con": 2,
+      "int": 0,
+      "sab": 0,
+      "car": -2
+    },
+    "pericias": {
+      "atletismo": 14,
+      "intimidacao": 9
+    },
+    "ataques": [
+      {
+        "nome": "Machado de Batalha (x2)",
+        "bonusAtaque": 34,
+        "dano": "1d10+31",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Escudo Pesado",
+        "bonusAtaque": 34,
+        "dano": "1d8+26",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Força dos Titãs",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando acerta um ataque corpo a corpo, pode rolar mais uma vez qualquer resultado máximo da rolagem de dano e adicionar o novo resultado ao dano causado."
+      },
+      {
+        "nome": "Forçar a Barra",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando faz um teste de resistência, soma sua Força (+5) nesse teste."
+      },
+      {
+        "nome": "Grande Escudo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O galokk guarda-costas fornece cobertura leve a aliados adjacentes menores que ele."
+      }
+    ],
+    "equipamento": [
+      "escudo_pesado_espinhoso",
+      "machado_de_batalha_aumentado",
+      "meia_armadura"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "gigante_bicefalo",
+    "nome": "Gigante Bicéfalo",
+    "nd": "13",
+    "regiao": "gigantes",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "gigante",
+    "tamanho": "enorme",
+    "iniciativa": 10,
+    "percepcao": 17,
+    "sentidos": [],
+    "defesa": 44,
+    "resistencias": {
+      "fortitude": 26,
+      "reflexos": 11,
+      "vontade": 20
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 680,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 14,
+      "des": -1,
+      "con": 10,
+      "int": -2,
+      "sab": 1,
+      "car": -2
+    },
+    "pericias": {
+      "atletismo": 26,
+      "intimidacao": 13
+    },
+    "ataques": [
+      {
+        "nome": "Clava (x2)",
+        "bonusAtaque": 38,
+        "dano": "4d10+40",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Arremessar Duas Rochas",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 35,
+        "resistenciaTipo": "reflexos",
+        "descricao": "Arremessa duas rochas, cada uma em um quadrado de 3m em alcance curto. Criaturas nas áreas sofrem 6d12 de dano de impacto (Ref CD 35 reduz à metade)."
+      },
+      {
+        "nome": "Atropelamento",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 35,
+        "resistenciaTipo": "reflexos",
+        "descricao": "Percorre até o dobro de seu deslocamento, passando pelos espaços de inimigos menores (não duas vezes pelo mesmo espaço). Criaturas atropeladas sofrem 6d10+40 de dano de impacto e ficam caídas (Ref CD 35 reduz à metade e evita a condição). Recarga (movimento)."
+      },
+      {
+        "nome": "Duas Cabeças...",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz um teste de Intuição ou Vontade, faz dois testes e usa o melhor resultado."
+      },
+      {
+        "nome": "...Brigam Mais do que Uma",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando usa Duas Cabeças... em teste contra perícia baseada em Carisma ou efeito de encantamento, se passar em apenas um dos testes, fica pasmo por 1 rodada (1x por cena para a mesma perícia/efeito)."
+      }
+    ],
+    "equipamento": [
+      "clava_aumentada_x2"
+    ],
+    "tesouro": "dobro.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "gigante_maximo",
+    "nome": "Gigante Máximo",
+    "nd": "20",
+    "regiao": "gigantes",
+    "papel": "lacaio",
+    "tipo": "humanoide",
+    "subtipo": "gigante",
+    "tamanho": "colossal",
+    "iniciativa": 7,
+    "percepcao": 16,
+    "sentidos": [
+      "visao_na_penumbra"
+    ],
+    "defesa": 70,
+    "resistencias": {
+      "fortitude": 38,
+      "reflexos": 25,
+      "vontade": 33
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "atordoamento",
+      "encantamento",
+      "dano_mental_exceto_cabeca",
+      "metamorfose",
+      "efeitos_de_movimento"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 1,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 45.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 20,
+      "des": -3,
+      "con": 20,
+      "int": -2,
+      "sab": 0,
+      "car": -2
+    },
+    "pericias": {},
+    "ataques": [],
+    "habilidades": [
+      {
+        "nome": "Grande Demais",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 20,
+        "resistenciaTipo": null,
+        "descricao": "O gigante é muito grande para ser derrotado de uma só vez: é necessário escalá-lo e derrotar cada parte do corpo individualmente. Cada parte conta como uma criatura individual com seus próprios PV. Escalar uma parte exige ação completa e teste de Atletismo (CD conforme a etapa); falhar impede avançar e causa 8d6 de dano de impacto; falhar por 5+ causa 16d6 e faz cair para a parte anterior; falhar por 10+ derruba ao chão com dano de queda da parte em que estava. Deslocamento de escalada/voo dá +10 no teste; veículo ou montaria voadora/escaladora permite usar Cavalgar ou Pilotagem no lugar de Atletismo. Partes: (1) Duas Pernas, CD 20, dano de queda 10d6, 750 PV cada — cada perna derrotada reduz o deslocamento em 15m e os Ataques Colossais de perna em 1; (2) Tronco, CD 25, dano de queda 20d6, 3.000 PV; (3) Dois Braços, CD 30, dano de queda 30d6, 750 PV cada — cada braço derrotado reduz os Ataques Colossais de braço (exceto Tapa) em 1; (4) Cabeça, CD 40, dano de queda 40d6, 1.000 PV, Cura Acelerada 500 (reduzida em 100 para cada outra parte derrotada); derrotar a cabeça deixa o gigante inconsciente."
+      },
+      {
+        "nome": "Titânico",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 55,
+        "resistenciaTipo": null,
+        "descricao": "É imune a manobras de combate, não pode ser flanqueado e sofre metade do dano de ataques que não sejam de outra criatura Titânica. Quando se move, pisoteia criaturas ou objetos Enormes ou menores em seu caminho, causando 20d8 de dano de impacto (1x por rodada por criatura, Ref CD 55 reduz à metade). Seus ataques ignoram redução de dano e atingem todas as criaturas em um quadrado de 6m."
+      },
+      {
+        "nome": "Ataques Colossais",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 55,
+        "resistenciaTipo": null,
+        "descricao": "O gigante máximo usa duas habilidades diferentes entre: Agarrar (braço, teste +75; a vítima se solta com ação padrão e manobra/Acrobacia oposta, ou causando 100 de dano ao braço). Apertar (braço; 1d100+50 de dano de impacto a criatura agarrada). Arremessar (braço; arremessa criatura agarrada a alcance longo, 30d6 de dano de impacto e caída, Acrobacia ou Ref CD 55 reduz à metade). Chute (perna; quadrado de 9m em alcance curto, 3d20+25 de dano de impacto, arremessada 30m e caída, Fort CD 55 reduz à metade e evita). Pisotear (perna; efeito básico de Terremoto em raio de 90m, não mágico, não afeta o gigante). Safanão (braço; derruba quem o escala, Ref CD 55 evita, senão cai e sofre dano de queda da etapa). Tapa (braço; teste +65, dano 1d100+100 de impacto; usável mesmo com braços derrotados, com -10 no teste e metade do dano)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "dobro.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "gigante_real",
+    "nome": "Gigante Real",
+    "nd": "19",
+    "regiao": "gigantes",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "gigante",
+    "tamanho": "colossal",
+    "iniciativa": 14,
+    "percepcao": 9,
+    "sentidos": [],
+    "defesa": 59,
+    "resistencias": {
+      "fortitude": 32,
+      "reflexos": 26,
+      "vontade": 19
+    },
+    "rd": {
+      "geral": 20
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 1140,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 15.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 17,
+      "des": -1,
+      "con": 15,
+      "int": -1,
+      "sab": 0,
+      "car": 0
+    },
+    "pericias": {
+      "atletismo": 34,
+      "intimidacao": 34
+    },
+    "ataques": [
+      {
+        "nome": "Clava (x3)",
+        "bonusAtaque": 52,
+        "dano": "5d20+40",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Fortificação 50%",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Tem 50% de chance de ignorar qualquer acerto crítico ou ataque furtivo sofrido."
+      },
+      {
+        "nome": "Titânico",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 47,
+        "resistenciaTipo": null,
+        "descricao": "É imune a manobras de combate, não pode ser flanqueado e sofre metade do dano de ataques que não sejam de outra criatura Titânica. Quando se move, pisoteia criaturas ou objetos Enormes ou menores em seu caminho, causando 18d6 de dano de impacto (1x por rodada por criatura, Ref CD 47 reduz à metade). Seus ataques ignoram redução de dano e atingem todas as criaturas em um quadrado de 6m (um único teste de ataque comparado à Defesa de cada inimigo na área)."
+      },
+      {
+        "nome": "Arremessar Descomunal",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 47,
+        "resistenciaTipo": "reflexos_acrobacia",
+        "descricao": "Arremessa uma criatura agarrada ou objeto Enorme ou menor em alcance longo. Criaturas na área (e a criatura arremessada) sofrem 20d10+40 de dano de impacto e ficam atordoadas por 1 rodada e caídas (Ref CD 47 reduz à metade e evita; atordoamento só 1x por cena)."
+      },
+      {
+        "nome": "Golpe Racha-Montanha",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Um único ataque corpo a corpo com +5 na margem de ameaça e no multiplicador de crítico. Recarga (movimento)."
+      },
+      {
+        "nome": "Pisotear o Solo",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 47,
+        "resistenciaTipo": "reflexos",
+        "descricao": "Onda de choque em raio de 30m. Criaturas em contato com o solo sofrem 25d12 de dano de impacto e ficam caídas (Ref CD 47 reduz à metade e evita a condição). Recarga (movimento)."
+      }
+    ],
+    "equipamento": [
+      "clava_gigante",
+      "meia_armadura"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "gigante_das_colinas",
+    "nome": "Gigante das Colinas",
+    "nd": "7",
+    "regiao": "gigantes",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "gigante",
+    "tamanho": "enorme",
+    "iniciativa": 2,
+    "percepcao": 2,
+    "sentidos": [],
+    "defesa": 31,
+    "resistencias": {
+      "fortitude": 20,
+      "reflexos": 14,
+      "vontade": 7
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 280,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 9,
+      "des": -1,
+      "con": 3,
+      "int": -2,
+      "sab": -1,
+      "car": -1
+    },
+    "pericias": {
+      "atletismo": 16,
+      "intimidacao": 8,
+      "sobrevivencia": 6
+    },
+    "ataques": [
+      {
+        "nome": "Clava (x2)",
+        "bonusAtaque": 24,
+        "dano": "1d10+24",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Arremessar Rochas",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 24,
+        "resistenciaTipo": "reflexos",
+        "descricao": "O gigante arremessa uma rocha em um quadrado de 3m em alcance curto. Criaturas na área sofrem 6d12 de dano de impacto (Ref CD 24 reduz à metade)."
+      }
+    ],
+    "equipamento": [
+      "clava_aumentada",
+      "gibao_de_peles"
+    ],
+    "tesouro": "bolsa de gigante.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "gigante_das_rochas",
+    "nome": "Gigante das Rochas",
+    "nd": "9",
+    "regiao": "gigantes",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "gigante",
+    "tamanho": "enorme",
+    "iniciativa": 6,
+    "percepcao": 5,
+    "sentidos": [],
+    "defesa": 33,
+    "resistencias": {
+      "fortitude": 21,
+      "reflexos": 9,
+      "vontade": 14
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 380,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 11,
+      "des": -1,
+      "con": 4,
+      "int": 1,
+      "sab": -1,
+      "car": -1
+    },
+    "pericias": {
+      "atletismo": 19,
+      "intuicao": 7,
+      "oficio_cervejeiro": 9,
+      "sobrevivencia": 7
+    },
+    "ataques": [
+      {
+        "nome": "Machado de Batalha (x2)",
+        "bonusAtaque": 26,
+        "dano": "4d12+10",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 4,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Barril Gigante de...",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 28,
+        "resistenciaTipo": null,
+        "descricao": "O gigante das rochas usa uma dose da bebida de seu barril gigante (CD 28)."
+      },
+      {
+        "nome": "Arremessar Barris",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "recuperar_o_barril",
+        "cdResistencia": 28,
+        "resistenciaTipo": "reflexos",
+        "descricao": "O gigante arremessa seu barril em um quadrado de 3m em alcance curto. Criaturas na área sofrem 7d12 de dano de impacto (Ref CD 28 reduz à metade). Recarga (recuperar o barril)."
+      },
+      {
+        "nome": "Fúria Blindada",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Enquanto sob efeito de Pavio Curto, sofre apenas metade do dano de corte, impacto e perfuração não mágico."
+      },
+      {
+        "nome": "Pavio Curto",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando é ofendido ou sofre dano de um inimigo, entra em fúria: +3 em ataque e dano, ataques causam sangramento, mas deve atacar a criatura mais próxima. Termina se não atacar nem for alvo de ação hostil ao fim da rodada."
+      }
+    ],
+    "equipamento": [
+      "barril_gigante",
+      "couraca",
+      "machado_de_batalha_aumentado_macico"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "gigante_do_fogo",
+    "nome": "Gigante do Fogo",
+    "nd": "11",
+    "regiao": "gigantes",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "gigante",
+    "tamanho": "enorme",
+    "iniciativa": 7,
+    "percepcao": 9,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 36,
+    "resistencias": {
+      "fortitude": 24,
+      "reflexos": 9,
+      "vontade": 15
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "fogo"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 390,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 12,
+      "des": -2,
+      "con": 4,
+      "int": 3,
+      "sab": -1,
+      "car": 1
+    },
+    "pericias": {
+      "atletismo": 23,
+      "guerra": 12,
+      "oficio_armeiro": 14
+    },
+    "ataques": [
+      {
+        "nome": "Machado de Batalha (x3)",
+        "bonusAtaque": 27,
+        "dano": "3d6+16",
+        "danoExtra": "2d6 fogo",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Arremessar Bigorna",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "recuperar_a_bigorna",
+        "cdResistencia": 33,
+        "resistenciaTipo": "reflexos",
+        "descricao": "O gigante arremessa sua bigorna em um quadrado de 4,5m em alcance curto. Criaturas na área sofrem 10d12 de dano (metade impacto, metade fogo) e ficam em chamas (Ref CD 33 reduz à metade e evita a condição). Recarga (recuperar a bigorna)."
+      },
+      {
+        "nome": "Bigorna Flamejante",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O gigante faz uma arma adjacente causar +2d6 de dano de fogo até o fim da cena. Não pode usar esta habilidade no mesmo turno que Arremessar Bigorna."
+      },
+      {
+        "nome": "Falange de Fogo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Aliados adjacentes ao gigante recebem redução de dano 5."
+      },
+      {
+        "nome": "Ponto de Forja",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 33,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Criaturas que causem dano corpo a corpo contra o gigante ou contra um aliado adjacente a ele sofrem 4d6 de dano e ficam com suas armas avariadas (Fort CD 33 evita a avaria)."
+      }
+    ],
+    "equipamento": [
+      "machado_de_batalha_de_adamante_aumentado",
+      "meia_armadura_banhada_a_ouro"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "gigante_do_gelo",
+    "nome": "Gigante do Gelo",
+    "nd": "9",
+    "regiao": "gigantes",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "gigante",
+    "tamanho": "enorme",
+    "iniciativa": 6,
+    "percepcao": 5,
+    "sentidos": [],
+    "defesa": 33,
+    "resistencias": {
+      "fortitude": 21,
+      "reflexos": 9,
+      "vontade": 14
+    },
+    "rd": {
+      "frio": 15
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 380,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 11,
+      "des": -1,
+      "con": 4,
+      "int": 1,
+      "sab": -1,
+      "car": -1
+    },
+    "pericias": {
+      "atletismo": 21,
+      "intuicao": 7,
+      "oficio_cozinheiro": 11,
+      "sobrevivencia": 7
+    },
+    "ataques": [
+      {
+        "nome": "Machado de Batalha (x2)",
+        "bonusAtaque": 26,
+        "dano": "4d12+8",
+        "danoExtra": "1d6 frio",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Arremessar Geleira",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 28,
+        "resistenciaTipo": "reflexos",
+        "descricao": "O gigante arremessa um pedaço de geleira em um quadrado de 4,5m em alcance curto. Criaturas na área sofrem 8d12 de dano de frio e ficam lentas (Ref CD 28 reduz à metade e evita a condição)."
+      },
+      {
+        "nome": "Barril Gigante de...",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 28,
+        "resistenciaTipo": null,
+        "descricao": "O gigante usa uma dose da bebida de seu barril gigante (CD 28)."
+      },
+      {
+        "nome": "Fúria Gélida",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 28,
+        "resistenciaTipo": null,
+        "descricao": "Enquanto sob efeito de Pavio Curto, emana uma aura de 9m de frio e ventos fortes: recebe camuflagem leve contra ataques à distância feitos de fora da aura, e criaturas dentro sofrem 4d6 de dano de frio no início dos turnos do gigante (Fort CD 28 reduz à metade)."
+      },
+      {
+        "nome": "Pavio Curto",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando é ofendido ou sofre dano de um inimigo, entra em fúria: +3 em ataque e dano, ataques causam sangramento, mas deve atacar a criatura mais próxima. Termina se não atacar nem for alvo de ação hostil ao fim da rodada."
+      }
+    ],
+    "equipamento": [
+      "barril_gigante",
+      "gibao_de_peles",
+      "machado_de_batalha_aumentado_de_gelo_eterno"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "gigante_dos_mares",
+    "nome": "Gigante dos Mares",
+    "nd": "9",
+    "regiao": "gigantes",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "gigante",
+    "tamanho": "enorme",
+    "iniciativa": 6,
+    "percepcao": 5,
+    "sentidos": [
+      "visao_na_penumbra"
+    ],
+    "defesa": 33,
+    "resistencias": {
+      "fortitude": 21,
+      "reflexos": 9,
+      "vontade": 14
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 380,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 12.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 11,
+      "des": -1,
+      "con": 4,
+      "int": 1,
+      "sab": -1,
+      "car": -1
+    },
+    "pericias": {
+      "atletismo": 19,
+      "intuicao": 7,
+      "oficio_pescador": 9,
+      "sobrevivencia": 7
+    },
+    "ataques": [
+      {
+        "nome": "Machado de Batalha (x2)",
+        "bonusAtaque": 26,
+        "dano": "4d12+10",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Barril Gigante de...",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 28,
+        "resistenciaTipo": null,
+        "descricao": "O gigante dos mares usa uma dose da bebida de seu barril gigante (CD 28)."
+      },
+      {
+        "nome": "Coquetel Praiano",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por cena, o gigante usa uma bebida que combina os efeitos de duas bebidas diferentes de Barril Gigante de..."
+      },
+      {
+        "nome": "Dar um Tchibum",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 28,
+        "resistenciaTipo": "reflexos",
+        "descricao": "O gigante salta em um quadrado de 4,5m em alcance curto e fica caído. Criaturas na área sofrem 9d12 de dano de impacto e são empurradas 6m para fora da área (Ref CD 28 reduz à metade). Recarga (movimento)."
+      },
+      {
+        "nome": "Pavio Curto",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando é ofendido ou sofre dano de um inimigo, entra em fúria: +3 em ataque e dano, ataques causam sangramento, mas deve atacar a criatura mais próxima. Termina se não atacar nem for alvo de ação hostil ao fim da rodada."
+      }
+    ],
+    "equipamento": [
+      "barril_gigante",
+      "gibao_de_peles",
+      "machado_de_batalha_aumentado_de_lanajuste"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  }
+]

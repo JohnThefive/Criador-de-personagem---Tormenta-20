@@ -1,4 +1,5 @@
 import '../combate/grid_tatico.dart';
+import '../combate/monstro.dart';
 
 /// ADR-003 §3.1: Controle de visibilidade de qualquer entidade gerenciada pelo Mestre.
 sealed class Visibilidade {
@@ -113,6 +114,23 @@ enum PresetFundoMapa {
   const PresetFundoMapa(this.rotulo);
 }
 
+T _enumByName<T extends Enum>(List<T> values, Object? raw, T fallback) {
+  final s = raw?.toString();
+  if (s == null) return fallback;
+  return values.where((v) => v.name == s).firstOrNull ?? fallback;
+}
+
+String _posKey(Posicao2D pos) => '${pos.x},${pos.y}';
+
+Posicao2D? _parsePos(String raw) {
+  final partes = raw.split(',');
+  if (partes.length != 2) return null;
+  final x = int.tryParse(partes[0]);
+  final y = int.tryParse(partes[1]);
+  if (x == null || y == null) return null;
+  return Posicao2D(x, y);
+}
+
 /// Representa um jogador e seu personagem vinculados a uma Sessão/Aventura (ElencoEntry).
 class ElencoSessaoEntry {
   final String characterId;
@@ -179,6 +197,46 @@ class ElencoSessaoEntry {
       ipJogador: ipJogador ?? this.ipJogador,
     );
   }
+
+  Map<String, dynamic> toJson() => {
+        'characterId': characterId,
+        'nomePersonagem': nomePersonagem,
+        'nomeJogador': nomeJogador,
+        'classeResumo': classeResumo,
+        'pvAtual': pvAtual,
+        'pvMax': pvMax,
+        'pmAtual': pmAtual,
+        'pmMax': pmMax,
+        'defesa': defesa,
+        'deslocamentoMetros': deslocamentoMetros,
+        'statusRevisao': statusRevisao.name,
+        if (notaRevisao != null) 'notaRevisao': notaRevisao,
+        'conectadoViaLan': conectadoViaLan,
+        if (ipJogador != null) 'ipJogador': ipJogador,
+      };
+
+  factory ElencoSessaoEntry.fromJson(Map<String, dynamic> json) {
+    return ElencoSessaoEntry(
+      characterId: json['characterId']?.toString() ?? '',
+      nomePersonagem: json['nomePersonagem']?.toString() ?? 'Personagem',
+      nomeJogador: json['nomeJogador']?.toString() ?? 'Jogador',
+      classeResumo: json['classeResumo']?.toString() ?? '',
+      pvAtual: (json['pvAtual'] as num?)?.toInt() ?? 20,
+      pvMax: (json['pvMax'] as num?)?.toInt() ?? 20,
+      pmAtual: (json['pmAtual'] as num?)?.toInt() ?? 10,
+      pmMax: (json['pmMax'] as num?)?.toInt() ?? 10,
+      defesa: (json['defesa'] as num?)?.toInt() ?? 15,
+      deslocamentoMetros: (json['deslocamentoMetros'] as num?)?.toDouble() ?? 9.0,
+      statusRevisao: _enumByName(
+        StatusRevisaoFicha.values,
+        json['statusRevisao'],
+        StatusRevisaoFicha.aprovada,
+      ),
+      notaRevisao: json['notaRevisao']?.toString(),
+      conectadoViaLan: json['conectadoViaLan'] == true,
+      ipJogador: json['ipJogador']?.toString(),
+    );
+  }
 }
 
 /// Tipo de combatente presente no mapa de batalha (Inimigo, NPC, Aliado ou Herói)
@@ -205,12 +263,14 @@ class TokenNoMapa {
   final int pmMax;
   final int defesa;
   final int tamanhoQuadrados; // 1 = 1x1, 2 = 2x2, 3 = 3x3
-  final String? corAnelHex;
   final int? iniciativa;
   final List<String> condicoes;
   final String? retrato;
   final double deslocamentoMetros;
   final Visibilidade visibilidade;
+  final String? monstroId;
+  final Monstro? monstro;
+  final List<String> habilidadesGastas;
 
   const TokenNoMapa({
     required this.id,
@@ -224,12 +284,14 @@ class TokenNoMapa {
     this.pmMax = 10,
     this.defesa = 15,
     this.tamanhoQuadrados = 1,
-    this.corAnelHex,
     this.iniciativa,
     this.condicoes = const [],
     this.retrato,
     this.deslocamentoMetros = 9.0,
     this.visibilidade = const ParaTodos(),
+    this.monstroId,
+    this.monstro,
+    this.habilidadesGastas = const [],
   }) : tipo = tipo ?? (ehHeroi ? TipoCombatenteMapa.heroi : TipoCombatenteMapa.inimigo);
 
   bool get visivelParaJogadores => visibilidade is! SomenteMestre;
@@ -245,12 +307,14 @@ class TokenNoMapa {
     int? pmMax,
     int? defesa,
     int? tamanhoQuadrados,
-    String? corAnelHex,
     int? iniciativa,
     List<String>? condicoes,
     String? retrato,
     double? deslocamentoMetros,
     Visibilidade? visibilidade,
+    String? monstroId,
+    Monstro? monstro,
+    List<String>? habilidadesGastas,
   }) {
     return TokenNoMapa(
       id: id,
@@ -264,12 +328,81 @@ class TokenNoMapa {
       pmMax: pmMax ?? this.pmMax,
       defesa: defesa ?? this.defesa,
       tamanhoQuadrados: tamanhoQuadrados ?? this.tamanhoQuadrados,
-      corAnelHex: corAnelHex ?? this.corAnelHex,
       iniciativa: iniciativa ?? this.iniciativa,
       condicoes: condicoes ?? this.condicoes,
       retrato: retrato ?? this.retrato,
       deslocamentoMetros: deslocamentoMetros ?? this.deslocamentoMetros,
       visibilidade: visibilidade ?? this.visibilidade,
+      monstroId: monstroId ?? this.monstroId,
+      monstro: monstro ?? this.monstro,
+      habilidadesGastas: habilidadesGastas ?? this.habilidadesGastas,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'nome': nome,
+        'x': posicao.x,
+        'y': posicao.y,
+        'ehHeroi': ehHeroi,
+        'tipo': tipo.name,
+        'pvAtual': pvAtual,
+        'pvMax': pvMax,
+        'pmAtual': pmAtual,
+        'pmMax': pmMax,
+        'defesa': defesa,
+        'tamanhoQuadrados': tamanhoQuadrados,
+        if (iniciativa != null) 'iniciativa': iniciativa,
+        if (condicoes.isNotEmpty) 'condicoes': condicoes,
+        if (retrato != null) 'retrato': retrato,
+        'deslocamentoMetros': deslocamentoMetros,
+        'visibilidade': visibilidade.toJson(),
+        if (monstroId != null) 'monstroId': monstroId,
+        if (monstro != null) 'monstro': monstro!.toJson(),
+        if (habilidadesGastas.isNotEmpty) 'habilidadesGastas': habilidadesGastas,
+      };
+
+  factory TokenNoMapa.fromJson(Map<String, dynamic> json) {
+    final ehHeroi = json['ehHeroi'] != false;
+    final monstroJson = json['monstro'];
+    return TokenNoMapa(
+      id: json['id']?.toString() ?? '',
+      nome: json['nome']?.toString() ?? 'Combatente',
+      posicao: Posicao2D(
+        (json['x'] as num?)?.toInt() ?? 0,
+        (json['y'] as num?)?.toInt() ?? 0,
+      ),
+      ehHeroi: ehHeroi,
+      tipo: _enumByName(
+        TipoCombatenteMapa.values,
+        json['tipo'],
+        ehHeroi ? TipoCombatenteMapa.heroi : TipoCombatenteMapa.inimigo,
+      ),
+      pvAtual: (json['pvAtual'] as num?)?.toInt() ?? 20,
+      pvMax: (json['pvMax'] as num?)?.toInt() ?? 20,
+      pmAtual: (json['pmAtual'] as num?)?.toInt() ?? 10,
+      pmMax: (json['pmMax'] as num?)?.toInt() ?? 10,
+      defesa: (json['defesa'] as num?)?.toInt() ?? 15,
+      tamanhoQuadrados: (json['tamanhoQuadrados'] as num?)?.toInt() ?? 1,
+      iniciativa: (json['iniciativa'] as num?)?.toInt(),
+      condicoes: (json['condicoes'] as List<dynamic>? ?? const [])
+          .map((e) => e.toString())
+          .toList(),
+      retrato: json['retrato']?.toString(),
+      deslocamentoMetros: (json['deslocamentoMetros'] as num?)?.toDouble() ?? 9.0,
+      visibilidade: json['visibilidade'] is Map
+          ? Visibilidade.fromJson(
+              Map<String, dynamic>.from(json['visibilidade'] as Map),
+            )
+          : const ParaTodos(),
+      monstroId: json['monstroId']?.toString(),
+      monstro: monstroJson is Map
+          ? Monstro.fromJson(Map<String, dynamic>.from(monstroJson))
+          : null,
+      habilidadesGastas:
+          (json['habilidadesGastas'] as List<dynamic>? ?? const [])
+              .map((e) => e.toString())
+              .toList(),
     );
   }
 }
@@ -285,7 +418,6 @@ class MapaBatalhaMestre {
   final String? imagemCaminhoLocal;
   final double opacidadeGrid;
   final bool gridVisivel;
-  final String? corLinhasHex;
   final double ajusteOffsetX;
   final double ajusteOffsetY;
   final double ajusteEscala;
@@ -296,6 +428,8 @@ class MapaBatalhaMestre {
   final Map<Posicao2D, TipoTerreno> terrenos;
   final Set<Posicao2D> celulasReveladas;
   final List<TokenNoMapa> tokens;
+  final int rodadaCombate;
+  final String? tokenTurnoAtualId;
 
   MapaBatalhaMestre({
     required this.id,
@@ -306,7 +440,6 @@ class MapaBatalhaMestre {
     this.imagemCaminhoLocal,
     this.opacidadeGrid = 0.35,
     this.gridVisivel = true,
-    this.corLinhasHex,
     this.ajusteOffsetX = 0.0,
     this.ajusteOffsetY = 0.0,
     this.ajusteEscala = 1.0,
@@ -317,6 +450,8 @@ class MapaBatalhaMestre {
     this.terrenos = const {},
     this.celulasReveladas = const {},
     this.tokens = const [],
+    this.rodadaCombate = 1,
+    this.tokenTurnoAtualId,
   }) : criadoEm = criadoEm ?? DateTime.now();
 
   GridMapa get comoGridMapa => GridMapa(
@@ -334,7 +469,6 @@ class MapaBatalhaMestre {
     bool limparImagemCustomizada = false,
     double? opacidadeGrid,
     bool? gridVisivel,
-    String? corLinhasHex,
     double? ajusteOffsetX,
     double? ajusteOffsetY,
     double? ajusteEscala,
@@ -345,6 +479,9 @@ class MapaBatalhaMestre {
     Map<Posicao2D, TipoTerreno>? terrenos,
     Set<Posicao2D>? celulasReveladas,
     List<TokenNoMapa>? tokens,
+    int? rodadaCombate,
+    String? tokenTurnoAtualId,
+    bool limparTurnoAtual = false,
   }) {
     return MapaBatalhaMestre(
       id: id,
@@ -357,7 +494,6 @@ class MapaBatalhaMestre {
           : (imagemCaminhoLocal ?? this.imagemCaminhoLocal),
       opacidadeGrid: opacidadeGrid ?? this.opacidadeGrid,
       gridVisivel: gridVisivel ?? this.gridVisivel,
-      corLinhasHex: corLinhasHex ?? this.corLinhasHex,
       ajusteOffsetX: ajusteOffsetX ?? this.ajusteOffsetX,
       ajusteOffsetY: ajusteOffsetY ?? this.ajusteOffsetY,
       ajusteEscala: ajusteEscala ?? this.ajusteEscala,
@@ -368,6 +504,87 @@ class MapaBatalhaMestre {
       terrenos: terrenos ?? this.terrenos,
       celulasReveladas: celulasReveladas ?? this.celulasReveladas,
       tokens: tokens ?? this.tokens,
+      rodadaCombate: rodadaCombate ?? this.rodadaCombate,
+      tokenTurnoAtualId: limparTurnoAtual
+          ? null
+          : (tokenTurnoAtualId ?? this.tokenTurnoAtualId),
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'nome': nome,
+        'largura': largura,
+        'altura': altura,
+        'presetFundo': presetFundo.name,
+        if (imagemCaminhoLocal != null) 'imagemCaminhoLocal': imagemCaminhoLocal,
+        'opacidadeGrid': opacidadeGrid,
+        'gridVisivel': gridVisivel,
+        'ajusteOffsetX': ajusteOffsetX,
+        'ajusteOffsetY': ajusteOffsetY,
+        'ajusteEscala': ajusteEscala,
+        'ajusteRotacaoGraus': ajusteRotacaoGraus,
+        if (corFundoHex != null) 'corFundoHex': corFundoHex,
+        'notas': notas,
+        'criadoEm': criadoEm.toIso8601String(),
+        'terrenos': {
+          for (final e in terrenos.entries) _posKey(e.key): e.value.name,
+        },
+        'celulasReveladas': celulasReveladas.map(_posKey).toList(),
+        'tokens': tokens.map((t) => t.toJson()).toList(),
+        'rodadaCombate': rodadaCombate,
+        if (tokenTurnoAtualId != null) 'tokenTurnoAtualId': tokenTurnoAtualId,
+      };
+
+  factory MapaBatalhaMestre.fromJson(Map<String, dynamic> json) {
+    final terrenos = <Posicao2D, TipoTerreno>{};
+    final rawTerrenos = json['terrenos'];
+    if (rawTerrenos is Map) {
+      for (final e in rawTerrenos.entries) {
+        final pos = _parsePos(e.key.toString());
+        if (pos != null) {
+          terrenos[pos] = _enumByName(TipoTerreno.values, e.value, TipoTerreno.normal);
+        }
+      }
+    }
+    final reveladas = <Posicao2D>{};
+    final rawRev = json['celulasReveladas'];
+    if (rawRev is List) {
+      for (final item in rawRev) {
+        final pos = _parsePos(item.toString());
+        if (pos != null) reveladas.add(pos);
+      }
+    }
+    final tokensList = (json['tokens'] as List?)
+            ?.whereType<Map>()
+            .map((e) => TokenNoMapa.fromJson(Map<String, dynamic>.from(e)))
+            .toList() ??
+        const [];
+    return MapaBatalhaMestre(
+      id: (json['id'] ?? '').toString(),
+      nome: (json['nome'] ?? '').toString(),
+      largura: (json['largura'] as num?)?.toInt() ?? 12,
+      altura: (json['altura'] as num?)?.toInt() ?? 8,
+      presetFundo: _enumByName(
+        PresetFundoMapa.values,
+        json['presetFundo'],
+        PresetFundoMapa.masmorraPedra,
+      ),
+      imagemCaminhoLocal: json['imagemCaminhoLocal']?.toString(),
+      opacidadeGrid: (json['opacidadeGrid'] as num?)?.toDouble() ?? 0.35,
+      gridVisivel: json['gridVisivel'] != false,
+      ajusteOffsetX: (json['ajusteOffsetX'] as num?)?.toDouble() ?? 0.0,
+      ajusteOffsetY: (json['ajusteOffsetY'] as num?)?.toDouble() ?? 0.0,
+      ajusteEscala: (json['ajusteEscala'] as num?)?.toDouble() ?? 1.0,
+      ajusteRotacaoGraus: (json['ajusteRotacaoGraus'] as num?)?.toDouble() ?? 0.0,
+      corFundoHex: json['corFundoHex']?.toString(),
+      notas: (json['notas'] ?? '').toString(),
+      criadoEm: DateTime.tryParse((json['criadoEm'] ?? '').toString()),
+      terrenos: terrenos,
+      celulasReveladas: reveladas,
+      tokens: tokensList,
+      rodadaCombate: (json['rodadaCombate'] as num?)?.toInt() ?? 1,
+      tokenTurnoAtualId: json['tokenTurnoAtualId']?.toString(),
     );
   }
 }
@@ -436,6 +653,29 @@ class NotaMestre {
       atualizadoEm: atualizadoEm ?? this.atualizadoEm,
     );
   }
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'titulo': titulo,
+        'conteudo': conteudo,
+        'visibilidade': visibilidade.toJson(),
+        'atualizadoEm': atualizadoEm.toIso8601String(),
+      };
+
+  factory NotaMestre.fromJson(Map<String, dynamic> json) {
+    final visRaw = json['visibilidade'];
+    return NotaMestre(
+      id: (json['id'] ?? '').toString(),
+      titulo: (json['titulo'] ?? '').toString(),
+      conteudo: (json['conteudo'] ?? '').toString(),
+      visibilidade: visRaw is Map
+          ? Visibilidade.fromJson(Map<String, dynamic>.from(visRaw))
+          : const SomenteMestre(),
+      atualizadoEm:
+          DateTime.tryParse((json['atualizadoEm'] ?? '').toString()) ??
+              DateTime.now(),
+    );
+  }
 }
 
 /// RF-M9: Handout (documento, pista ou ilustração entregue aos jogadores).
@@ -466,6 +706,27 @@ class HandoutMestre {
       descricao: descricao ?? this.descricao,
       entregueAosJogadores: entregueAosJogadores ?? this.entregueAosJogadores,
       lidoPorJogadores: lidoPorJogadores ?? this.lidoPorJogadores,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'titulo': titulo,
+        'descricao': descricao,
+        'entregueAosJogadores': entregueAosJogadores,
+        'lidoPorJogadores': lidoPorJogadores,
+      };
+
+  factory HandoutMestre.fromJson(Map<String, dynamic> json) {
+    return HandoutMestre(
+      id: (json['id'] ?? '').toString(),
+      titulo: (json['titulo'] ?? '').toString(),
+      descricao: (json['descricao'] ?? '').toString(),
+      entregueAosJogadores: json['entregueAosJogadores'] == true,
+      lidoPorJogadores: (json['lidoPorJogadores'] as List?)
+              ?.map((e) => e.toString())
+              .toList() ??
+          const [],
     );
   }
 }
@@ -526,6 +787,20 @@ class ItemChecklistNota {
       concluido: concluido ?? this.concluido,
     );
   }
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'texto': texto,
+        'concluido': concluido,
+      };
+
+  factory ItemChecklistNota.fromJson(Map<String, dynamic> json) {
+    return ItemChecklistNota(
+      id: (json['id'] ?? '').toString(),
+      texto: (json['texto'] ?? '').toString(),
+      concluido: json['concluido'] == true,
+    );
+  }
 }
 
 /// Perigo de Tormenta 20 (Terreno, Armadilha ou Ambiente)
@@ -557,6 +832,28 @@ class PerigoMestre {
       dano: dano,
       descricao: descricao,
       fixado: fixado ?? this.fixado,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'nome': nome,
+        'tipo': tipo,
+        'cd': cd,
+        'dano': dano,
+        'descricao': descricao,
+        'fixado': fixado,
+      };
+
+  factory PerigoMestre.fromJson(Map<String, dynamic> json) {
+    return PerigoMestre(
+      id: (json['id'] ?? '').toString(),
+      nome: (json['nome'] ?? '').toString(),
+      tipo: (json['tipo'] ?? '').toString(),
+      cd: (json['cd'] ?? '').toString(),
+      dano: (json['dano'] ?? '').toString(),
+      descricao: (json['descricao'] ?? '').toString(),
+      fixado: json['fixado'] == true,
     );
   }
 }
@@ -623,6 +920,56 @@ class SessaoJogo {
       notaFixada: notaFixada ?? this.notaFixada,
     );
   }
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'numero': numero,
+        'titulo': titulo,
+        'objetivoResumo': objetivoResumo,
+        if (mapaAtivoId != null) 'mapaAtivoId': mapaAtivoId,
+        'elenco': elenco.map((e) => e.toJson()).toList(),
+        'nivelAutomacao': nivelAutomacao.name,
+        'codigoSalaLan': codigoSalaLan,
+        'statusSessao': statusSessao.name,
+        'data': data.toIso8601String(),
+        'checklistNotas': checklistNotas.map((e) => e.toJson()).toList(),
+        'notasSessaoTexto': notasSessaoTexto,
+        'notaFixada': notaFixada,
+      };
+
+  factory SessaoJogo.fromJson(Map<String, dynamic> json) {
+    return SessaoJogo(
+      id: (json['id'] ?? '').toString(),
+      numero: (json['numero'] as num?)?.toInt() ?? 1,
+      titulo: (json['titulo'] ?? '').toString(),
+      objetivoResumo: (json['objetivoResumo'] ?? '').toString(),
+      mapaAtivoId: json['mapaAtivoId']?.toString(),
+      elenco: (json['elenco'] as List?)
+              ?.whereType<Map>()
+              .map((e) => ElencoSessaoEntry.fromJson(Map<String, dynamic>.from(e)))
+              .toList() ??
+          const [],
+      nivelAutomacao: _enumByName(
+        NivelAutomacaoMesa.values,
+        json['nivelAutomacao'],
+        NivelAutomacaoMesa.automatico,
+      ),
+      codigoSalaLan: (json['codigoSalaLan'] ?? 'T20-4829').toString(),
+      statusSessao: _enumByName(
+        StatusSessao.values,
+        json['statusSessao'],
+        StatusSessao.emAndamento,
+      ),
+      data: DateTime.tryParse((json['data'] ?? '').toString()),
+      checklistNotas: (json['checklistNotas'] as List?)
+              ?.whereType<Map>()
+              .map((e) => ItemChecklistNota.fromJson(Map<String, dynamic>.from(e)))
+              .toList() ??
+          const [],
+      notasSessaoTexto: (json['notasSessaoTexto'] ?? '').toString(),
+      notaFixada: json['notaFixada'] == true,
+    );
+  }
 }
 
 /// RF-M3: Aventura dentro de uma Campanha (contém Sessões, Mapas, Notas e Handouts).
@@ -663,6 +1010,44 @@ class AventuraMestre {
       handouts: handouts ?? this.handouts,
     );
   }
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'nome': nome,
+        'sinopse': sinopse,
+        'sessoes': sessoes.map((e) => e.toJson()).toList(),
+        'mapas': mapas.map((e) => e.toJson()).toList(),
+        'notas': notas.map((e) => e.toJson()).toList(),
+        'handouts': handouts.map((e) => e.toJson()).toList(),
+      };
+
+  factory AventuraMestre.fromJson(Map<String, dynamic> json) {
+    return AventuraMestre(
+      id: (json['id'] ?? '').toString(),
+      nome: (json['nome'] ?? '').toString(),
+      sinopse: (json['sinopse'] ?? '').toString(),
+      sessoes: (json['sessoes'] as List?)
+              ?.whereType<Map>()
+              .map((e) => SessaoJogo.fromJson(Map<String, dynamic>.from(e)))
+              .toList() ??
+          const [],
+      mapas: (json['mapas'] as List?)
+              ?.whereType<Map>()
+              .map((e) => MapaBatalhaMestre.fromJson(Map<String, dynamic>.from(e)))
+              .toList() ??
+          const [],
+      notas: (json['notas'] as List?)
+              ?.whereType<Map>()
+              .map((e) => NotaMestre.fromJson(Map<String, dynamic>.from(e)))
+              .toList() ??
+          const [],
+      handouts: (json['handouts'] as List?)
+              ?.whereType<Map>()
+              .map((e) => HandoutMestre.fromJson(Map<String, dynamic>.from(e)))
+              .toList() ??
+          const [],
+    );
+  }
 }
 
 /// Entidade de topo da hierarquia do Mestre: Campanha -> Aventura -> Sessão.
@@ -671,28 +1056,80 @@ class CampanhaMestre {
   final String nome;
   final String descricao;
   final String patamar;
+  final String? codigoConexaoLan;
   final List<AventuraMestre> aventuras;
+  final List<MapaBatalhaMestre> mapas;
+  final List<ElencoSessaoEntry> jogadoresConvidados;
 
   const CampanhaMestre({
     required this.id,
     required this.nome,
     this.descricao = '',
     this.patamar = 'Iniciante (Nível 1 a 4)',
+    this.codigoConexaoLan,
     this.aventuras = const [],
+    this.mapas = const [],
+    this.jogadoresConvidados = const [],
   });
 
   CampanhaMestre copyWith({
     String? nome,
     String? descricao,
     String? patamar,
+    String? codigoConexaoLan,
+    bool limparCodigoConexaoLan = false,
     List<AventuraMestre>? aventuras,
+    List<MapaBatalhaMestre>? mapas,
+    List<ElencoSessaoEntry>? jogadoresConvidados,
   }) {
     return CampanhaMestre(
       id: id,
       nome: nome ?? this.nome,
       descricao: descricao ?? this.descricao,
       patamar: patamar ?? this.patamar,
+      codigoConexaoLan: limparCodigoConexaoLan
+          ? null
+          : (codigoConexaoLan ?? this.codigoConexaoLan),
       aventuras: aventuras ?? this.aventuras,
+      mapas: mapas ?? this.mapas,
+      jogadoresConvidados: jogadoresConvidados ?? this.jogadoresConvidados,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'nome': nome,
+        'descricao': descricao,
+        'patamar': patamar,
+        if (codigoConexaoLan != null) 'codigoConexaoLan': codigoConexaoLan,
+        'aventuras': aventuras.map((e) => e.toJson()).toList(),
+        'mapas': mapas.map((e) => e.toJson()).toList(),
+        'jogadoresConvidados':
+            jogadoresConvidados.map((e) => e.toJson()).toList(),
+      };
+
+  factory CampanhaMestre.fromJson(Map<String, dynamic> json) {
+    return CampanhaMestre(
+      id: (json['id'] ?? '').toString(),
+      nome: (json['nome'] ?? '').toString(),
+      descricao: (json['descricao'] ?? '').toString(),
+      patamar: (json['patamar'] ?? 'Iniciante (Nível 1 a 4)').toString(),
+      codigoConexaoLan: json['codigoConexaoLan']?.toString(),
+      aventuras: (json['aventuras'] as List?)
+              ?.whereType<Map>()
+              .map((e) => AventuraMestre.fromJson(Map<String, dynamic>.from(e)))
+              .toList() ??
+          const [],
+      mapas: (json['mapas'] as List?)
+              ?.whereType<Map>()
+              .map((e) => MapaBatalhaMestre.fromJson(Map<String, dynamic>.from(e)))
+              .toList() ??
+          const [],
+      jogadoresConvidados: (json['jogadoresConvidados'] as List?)
+              ?.whereType<Map>()
+              .map((e) => ElencoSessaoEntry.fromJson(Map<String, dynamic>.from(e)))
+              .toList() ??
+          const [],
     );
   }
 }

@@ -1,0 +1,951 @@
+[
+  {
+    "id": "cerianthar",
+    "nome": "Cerianthar",
+    "nd": "4",
+    "regiao": "sanguinarias",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 9,
+    "percepcao": 5,
+    "sentidos": [
+      "percepcao_as_cegas"
+    ],
+    "defesa": 22,
+    "resistencias": {
+      "fortitude": 15,
+      "reflexos": 5,
+      "vontade": 10
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 140,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 2,
+      "con": 2,
+      "int": -4,
+      "sab": 1,
+      "car": 0
+    },
+    "pericias": {
+      "furtividade": 9
+    },
+    "ataques": [
+      {
+        "nome": "Tentáculo (x4)",
+        "bonusAtaque": 16,
+        "dano": "1d6+4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "3m",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Usa a manobra agarrar com um tentáculo (teste +16)."
+      },
+      {
+        "nome": "Constrição",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada um de seus turnos, o cerianthar causa 2d6+4 pontos de dano de corte em cada criatura que esteja agarrando."
+      },
+      {
+        "nome": "Imobilidade",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 35,
+        "resistenciaTipo": null,
+        "descricao": "Um cerianthar pode permanecer completamente imóvel. Se ele estiver assim, um personagem deve passar num teste de Percepção (CD 35) para perceber que ele é uma criatura e não parte da paisagem."
+      },
+      {
+        "nome": "Muitos Tentáculos",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O cerianthar possui oito tentáculos. Ele pode atacar com no máximo quatro tentáculos ao mesmo tempo, mas pode usar os demais para manter criaturas agarradas."
+      },
+      {
+        "nome": "Tentáculos Decepáveis",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "É possível cortar um tentáculo com um ataque direto. Cada tentáculo tem Defesa 24 e é cortado se sofrer pelo menos 10 pontos de dano de corte em um único ataque. Se o tentáculo estava agarrando uma criatura, ela é solta automaticamente."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "grande_tachygloss",
+    "nome": "Grande Tachygloss",
+    "nd": "16",
+    "regiao": "sanguinarias",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 14,
+    "percepcao": 16,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 53,
+    "resistencias": {
+      "fortitude": 30,
+      "reflexos": 24,
+      "vontade": 16
+    },
+    "rd": {
+      "geral": 20
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 800,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 12.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 7,
+      "des": 0,
+      "con": 8,
+      "int": -4,
+      "sab": 2,
+      "car": -3
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 43,
+        "dano": "3d8+23",
+        "danoExtra": "6d6 perfuracao",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Cauda",
+        "bonusAtaque": 43,
+        "dano": "2d10+23",
+        "danoExtra": "6d6 perfuracao",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Acúleos",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O tachygloss é coberto de espinhos pontiagudos. Todo dano de perfuração que ele causa ignora redução de dano."
+      },
+      {
+        "nome": "Armadura de Espinhos",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando o tachygloss sofre dano por um ataque corpo a corpo adjacente, o atacante sofre 6d6 pontos de dano de perfuração."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "aculeos de tachygloss (cd 31 para extrair, valem t$ 1.000 para fabricar uma arma com a melhoria penetrante).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "kaiju",
+    "nome": "Kaiju",
+    "nd": "20",
+    "regiao": "sanguinarias",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "kaiju",
+    "tamanho": "colossal",
+    "iniciativa": 22,
+    "percepcao": 16,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 62,
+    "resistencias": {
+      "fortitude": 34,
+      "reflexos": 28,
+      "vontade": 20
+    },
+    "rd": {
+      "geral": 30
+    },
+    "imunidadesEfeitos": [
+      "efeitos_de_metabolismo",
+      "mental",
+      "medo",
+      "metamorfose",
+      "paralisia"
+    ],
+    "imunidadesDano": [
+      "veneno"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 1500,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 15.0,
+      "voo": 36.0,
+      "natacao": 36.0,
+      "escalada": 9.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 20,
+      "des": 0,
+      "con": 15,
+      "int": -3,
+      "sab": 2,
+      "car": -3
+    },
+    "pericias": {
+      "atletismo": 35,
+      "intimidacao": 35
+    },
+    "ataques": [
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 55,
+        "dano": "2d20+50",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 55,
+        "dano": "2d20+50",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Cauda",
+        "bonusAtaque": 55,
+        "dano": "2d20+50",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Fortificação 75%",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Golpes críticos e ataques furtivos contra o kaiju têm 75% de chance de não causar efeito adicional."
+      },
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Usa a manobra agarrar com a mordida (teste +60)."
+      },
+      {
+        "nome": "Arsenal Titânico",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 50,
+        "resistenciaTipo": null,
+        "descricao": "Cada kaiju possui dois poderes titânicos, escolhidos entre os seguintes: Arremessar Montanha (padrão; arremessa um pedregulho em alcance longo, causando 10d12 pontos de dano de impacto ao alvo e a todas as criaturas em alcance curto dele, soterrando todos — Reflexos CD 50 reduz o dano à metade e evita o soterramento; criaturas soterradas ficam imóveis e sofrem 2d12 pontos de dano de impacto no início de cada um de seus turnos; soltar-se exige uma ação completa e um teste de Força CD 28; recarga por movimento); Fúria Retalhadora (uma vez por rodada, quando sofre dano, o kaiju recebe +5 em testes de ataque e +1d20 nas rolagens de dano até o fim do seu próximo turno); Ferrão Peçonhento (o ataque de cauda do kaiju é substituído por um ataque de ferrão com as mesmas estatísticas, mas causando dano de perfuração mais veneno); Poeira dos Sonhos (ação de movimento; criaturas em alcance médio ficam inconscientes e caídas, criaturas em combate ficam exaustas — Vontade CD 50 muda para fatigada e a criatura fica imune a esta habilidade até o fim da cena; recarga por movimento); Rugido Aterrador (padrão; todas as criaturas em alcance longo sofrem 16d12 pontos de dano de impacto e ficam apavoradas e surdas — Fortitude CD 50 reduz o dano à metade, evita a condição surdo e muda de apavoradas para abaladas; recarga por movimento); Sopro Corrosivo (padrão; todas as criaturas em um cone de 12m sofrem 12d20 pontos de dano de ácido e ficam vulneráveis — Reflexos CD 50 reduz o dano à metade e evita a condição; recarga por movimento); Tempestade de Ferrões (completa; criaturas em alcance médio sofrem 6d12 pontos de dano de perfuração e são expostas ao veneno peçonha kaiju — Reflexos CD 50 reduz o dano à metade e evita o veneno; recarga por padrão); Terremoto da Ira (completa; todas as criaturas em alcance médio em contato com o solo sofrem 14d12 pontos de dano e ficam caídas — Reflexos CD 50 reduz o dano à metade e evita a condição; recarga ao ser reduzido a 800 PV); Ventos Bravios (quando o kaiju voa, os ventos produzidos por ele arremessam todas as criaturas em alcance médio 15m na direção oposta do kaiju — Fortitude CD 50 evita; uma criatura arremessada fica caída e, se atingir algum obstáculo, sofre 1d6 pontos de dano de impacto para cada 1,5m que foi arremessada; pré-requisito: deslocamento de voo)."
+      },
+      {
+        "nome": "Engolir",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada um dos turnos do kaiju, cada criatura engolida sofre 2d20+50 pontos de dano de impacto mais 2d20+50 pontos de dano de ácido. Elas podem escapar causando um total de 200 pontos de dano a ele (Defesa 25, fortificação 25%, redução de dano 0). O kaiju pode manter uma criatura Enorme, ou até dez criaturas Grandes ou menores, engolidas por vez."
+      },
+      {
+        "nome": "Maior que a Vida",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando falha em um teste de resistência contra um efeito com duração maior que instantânea, um kaiju pode, no início do seu turno, fazer um novo teste de resistência oposto à CD original, até o fim da duração do efeito. Além disso, se reduzido a 0 PV ou menos, assim que restaurado a 1 PV por sua cura acelerada, o kaiju desiste de lutar e retorna à sua terra de origem."
+      },
+      {
+        "nome": "Titânico",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 50,
+        "resistenciaTipo": null,
+        "descricao": "O kaiju é imune a manobras de combate, não pode ser flanqueado e sofre metade do dano de ataques que não sejam de outra criatura Titânica. Quando se move, pisoteia qualquer criatura ou objeto Enorme ou menor em seu caminho (atravessando seu espaço), causando 20d6 pontos de dano de impacto (uma vez por rodada por criatura, Reflexos CD 50 reduz à metade). Além disso, seus ataques ignoram redução de dano e atingem todas as criaturas em um quadrado de 6m (para cada ataque, ele faz um único teste de ataque e compara o resultado com a Defesa de cada inimigo na área)."
+      },
+      {
+        "nome": "Veneno",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 50,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Peçonha kaiju: perde 5d12 PV por rodada durante 10 rodadas (Fort CD 50 reduz para 1 rodada)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao, mais 6 pecas de couraca de kaiju (cd 35 para extrair).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "oxxdon",
+    "nome": "Oxxdon",
+    "nd": "2",
+    "regiao": "sanguinarias",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 7,
+    "percepcao": 4,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 20,
+    "resistencias": {
+      "fortitude": 7,
+      "reflexos": 9,
+      "vontade": 4
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 72,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 4,
+      "con": 2,
+      "int": -4,
+      "sab": 1,
+      "car": -1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Antena",
+        "bonusAtaque": 12,
+        "dano": "1d4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": "ferrugem"
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 12,
+        "dano": "1d8+4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Ferrugem",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 17,
+        "resistenciaTipo": "fortitude",
+        "descricao": "A antena do oxxdon destrói automaticamente qualquer objeto de metal atingido. Uma arma de metal que cause dano a um oxxdon também é destruída imediatamente (itens mágicos têm direito a um teste de Fortitude contra CD 17 para evitar). Contra criaturas de metal (como golens), a antena deixa o alvo fatigado, então exausto, então paralisado (mesmo que seja imune a essas condições; Fort CD 17 evita). Remover cada uma destas condições da criatura exige uma hora de trabalho, o gasto de T$ 50 em materiais e passar em um teste de Ofício (artesão) contra CD 20."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "oxxdon_imenso",
+    "nome": "Oxxdon Imenso",
+    "nd": "10",
+    "regiao": "sanguinarias",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 18,
+    "percepcao": 10,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 36,
+    "resistencias": {
+      "fortitude": 13,
+      "reflexos": 24,
+      "vontade": 11
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 400,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 6,
+      "con": 3,
+      "int": -4,
+      "sab": 1,
+      "car": -1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Antena (x2)",
+        "bonusAtaque": 29,
+        "dano": "1d8+10",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": "ferrugem"
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 29,
+        "dano": "3d8+10",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Aura Oxidante",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A presença de um oxxdon imenso corrói a própria existência. Objetos soltos, bem como criaturas, que comecem o turno em um raio de 9m sofrem 4d6+10 pontos de dano de essência e ficam fatigadas por 1 rodada."
+      },
+      {
+        "nome": "Ferrugem",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 30,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Como o oxxdon comum, mas com CD 30."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "razza_kham",
+    "nome": "Razza'Kham",
+    "nd": "17",
+    "regiao": "sanguinarias",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 16,
+    "percepcao": 21,
+    "sentidos": [
+      "faro",
+      "percepcao_as_cegas",
+      "visao_no_escuro"
+    ],
+    "defesa": 54,
+    "resistencias": {
+      "fortitude": 30,
+      "reflexos": 24,
+      "vontade": 17
+    },
+    "rd": {
+      "geral": 15,
+      "acido": 20,
+      "eletricidade": 20,
+      "fogo": 20,
+      "frio": 20
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 1010,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 15.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 14,
+      "des": 2,
+      "con": 7,
+      "int": -5,
+      "sab": 2,
+      "car": 0
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 47,
+        "dano": "6d10+36",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 47,
+        "dano": "10d10+36",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Brutalidade Incontida",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Sempre que o razza'kham rola um resultado máximo em um dado de dano, rola um dado extra de dano do mesmo tipo."
+      },
+      {
+        "nome": "Dilacerar",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se o razza'kham acerta os dois ataques de garra em uma mesma criatura no mesmo turno, causa mais 8d6 pontos de dano."
+      },
+      {
+        "nome": "Varrer",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando o razza'kham faz um ataque corpo a corpo e reduz os pontos de vida do alvo para 0 ou menos, pode realizar um ataque adicional contra outra criatura dentro do seu alcance."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "tres pecas de quitina razza (cd 32 para extrair).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "serpe_ancia",
+    "nome": "Serpe Anciã",
+    "nd": "8",
+    "regiao": "sanguinarias",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 8,
+    "percepcao": 7,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 33,
+    "resistencias": {
+      "fortitude": 15,
+      "reflexos": 21,
+      "vontade": 8
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "paralisia"
+    ],
+    "imunidadesDano": [
+      "veneno"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 320,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 18.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 7,
+      "des": 1,
+      "con": 6,
+      "int": -2,
+      "sab": 1,
+      "car": -1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 26,
+        "dano": "3d6+15",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Ferrão",
+        "bonusAtaque": 26,
+        "dano": "2d12+15",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": "veneno"
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Usa a manobra agarrar com a mordida (teste +31)."
+      },
+      {
+        "nome": "Jato de Podridão",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 26,
+        "resistenciaTipo": "fortitude",
+        "descricao": "A serpe dispara um jato de veneno que ignora imunidade e afeta uma linha de 18m. Criaturas na área perdem 6d12 pontos de vida (Fort CD 26 reduz à metade). Recarga (movimento)."
+      },
+      {
+        "nome": "Veneno",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 26,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Peçonha anciã: perde 3d12 pontos de vida por rodada durante 3 rodadas, ignorando imunidade a veneno (Fort CD 26 reduz a duração para 1 rodada)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "1d4 doses de peconha ancia (cd 23 para extrair).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "uraghian_adulto",
+    "nome": "Uraghian Adulto",
+    "nd": "8",
+    "regiao": "sanguinarias",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 7,
+    "percepcao": 10,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 33,
+    "resistencias": {
+      "fortitude": 21,
+      "reflexos": 8,
+      "vontade": 15
+    },
+    "rd": {
+      "fogo": 20
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 330,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 8,
+      "des": -1,
+      "con": 6,
+      "int": -5,
+      "sab": 2,
+      "car": -2
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 26,
+        "dano": "2d12+35",
+        "danoExtra": "6d6 fogo",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Couraça Cáustica",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura que cause dano ao uraghian com um ataque corpo a corpo sofre 6d6 pontos de dano de fogo. Criaturas com alcance natural maior que 1,5m não sofrem esse dano."
+      },
+      {
+        "nome": "Rajada Flamejante",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 26,
+        "resistenciaTipo": "reflexos",
+        "descricao": "O uraghian cospe óleo flamejante em um cone de 18m. Criaturas na área sofrem 10d6+20 pontos de dano de fogo e ficam em chamas (Ref CD 26 reduz o dano à metade e evita a condição). Recarga (movimento)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "oleo de besouro x1d6 (cd 23 para extrair) e casulos de seda x2d4 (cd 23 para extrair, cada casulo vale t$ 100 para fabricar um vestuario superior).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "uraghian_jovem",
+    "nome": "Uraghian Jovem",
+    "nd": "5",
+    "regiao": "sanguinarias",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 3,
+    "percepcao": 5,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 24,
+    "resistencias": {
+      "fortitude": 17,
+      "reflexos": 5,
+      "vontade": 11
+    },
+    "rd": {
+      "fogo": 20
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 200,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": -1,
+      "con": 5,
+      "int": -5,
+      "sab": 1,
+      "car": -2
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 17,
+        "dano": "2d8+10",
+        "danoExtra": "6d6 fogo",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Couraça Cáustica",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura que cause dano ao uraghian com um ataque corpo a corpo sofre 6d6 pontos de dano de fogo. Criaturas com alcance natural maior que 1,5m não sofrem esse dano."
+      },
+      {
+        "nome": "Rajada Flamejante",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 20,
+        "resistenciaTipo": "reflexos",
+        "descricao": "O uraghian cospe óleo flamejante em um cone de 12m. Criaturas na área sofrem 6d6+12 pontos de dano de fogo e ficam em chamas (Ref CD 20 reduz o dano à metade e evita a condição). Recarga (movimento)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "oleo de besouro x1d4 (cd 20 para extrair).",
+    "recursoExtraivel": null
+  }
+]

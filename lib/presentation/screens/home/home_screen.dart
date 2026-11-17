@@ -48,7 +48,10 @@ class HomeScreen extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => FichaScreen(personagemInicial: personagem),
+        builder: (context) => FichaScreen(
+          personagemInicial: personagem,
+          usarTransporteLan: true,
+        ),
       ),
     ).then((_) {
       if (context.mounted) {

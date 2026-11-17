@@ -1,0 +1,1874 @@
+[
+  {
+    "id": "arauto_de_thwor",
+    "nome": "Arauto de Thwor",
+    "nd": "4",
+    "regiao": "duyshidakk",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 5,
+    "percepcao": 8,
+    "sentidos": [],
+    "defesa": 23,
+    "resistencias": {
+      "fortitude": 10,
+      "reflexos": 4,
+      "vontade": 16
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 135,
+    "pm": 26,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 1,
+      "con": 3,
+      "int": 0,
+      "sab": 4,
+      "car": 0
+    },
+    "pericias": {
+      "intimidacao": 9,
+      "religiao": 8
+    },
+    "ataques": [
+      {
+        "nome": "Machado de guerra",
+        "bonusAtaque": 16,
+        "dano": "3d6+12",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "O Mundo como Ele É",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando erra um ataque, pode repetir o teste. Pode usar uma vez contra cada oponente por cena."
+      },
+      {
+        "nome": "Magias (clérigo Thwor 4º, CD 18)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Amedrontar (3 PM, Von reduz para abalado), Curar Ferimentos (4 PM, 5d8+5 PV), Perdição (1 PM, –1 ataque/dano até fim da cena)."
+      }
+    ],
+    "equipamento": [
+      "Machado de guerra",
+      "símbolo sagrado de Thwor"
+    ],
+    "tesouro": "padrao",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "bruxa_goblin",
+    "nome": "Bruxa Goblin",
+    "nd": "11",
+    "regiao": "duyshidakk",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "goblin",
+    "tamanho": "pequeno",
+    "iniciativa": 11,
+    "percepcao": 11,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 37,
+    "resistencias": {
+      "fortitude": 12,
+      "reflexos": 17,
+      "vontade": 24
+    },
+    "rd": {
+      "magia": 2
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 370,
+    "pm": 98,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 18.0,
+      "natacao": 0.0,
+      "escalada": 9.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": -1,
+      "des": 2,
+      "con": 3,
+      "int": 7,
+      "sab": 2,
+      "car": 1
+    },
+    "pericias": {
+      "conhecimento": 16,
+      "cura": 11,
+      "misticismo": 21,
+      "religiao": 16
+    },
+    "ataques": [],
+    "habilidades": [
+      {
+        "nome": "Autofagia (mágica)",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A bruxa lança uma magia divina qualquer de encantamento ou necromancia de até 3º círculo pagando um custo em PV igual ao custo em PM da magia."
+      },
+      {
+        "nome": "Raio Conspurcado (mágica)",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 33,
+        "resistenciaTipo": null,
+        "descricao": "A bruxa dispara um raio em uma criatura em alcance médio, causando 4d12 pontos de dano de trevas; o alvo fica abalado (Vontade CD 33 reduz à metade e evita a condição)."
+      },
+      {
+        "nome": "Magias (bruxa, 13º nível, CD 33, foco pilão conspurcado: –1 PM e +2 CD em encantamento/necromancia)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Amedrontar (9 PM; apavorado 1d4+1 rodadas, depois abalado), Crânio Voador de Vladislav (10 PM; 8d8+8 de trevas e abalado em alcance médio), Ferver Sangue (11 PM, sustentada; 7d8 de fogo/rodada e enjoado, explode causando 6d6 de fogo em área se reduzido a 0 PV), Marionete (9 PM, sustentada; controla ações físicas, Fortitude anula a cada rodada), Raio do Enfraquecimento (7 PM; exausta), Sussurros Insanos (3 PM; confunde um humanoide), Tentáculos de Trevas (6 PM; agarra e esmaga criaturas numa esfera de 6m, 4d6 de trevas por esmagão)."
+      }
+    ],
+    "equipamento": [
+      "Pilão conspurcado",
+      "Vassoura voadora"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "bugbear_guarda_costas",
+    "nome": "Bugbear Guarda-Costas",
+    "nd": "6",
+    "regiao": "duyshidakk",
+    "papel": "lacaio",
+    "tipo": "humanoide",
+    "subtipo": "bugbear",
+    "tamanho": "medio",
+    "iniciativa": 8,
+    "percepcao": 5,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 26,
+    "resistencias": {
+      "fortitude": 14,
+      "reflexos": 15,
+      "vontade": 7
+    },
+    "rd": {
+      "medo": 2
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 48,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 3,
+      "con": 3,
+      "int": 1,
+      "sab": 0,
+      "car": -2
+    },
+    "pericias": {
+      "atletismo": 11,
+      "furtividade": 8,
+      "intimidacao": 11
+    },
+    "ataques": [
+      {
+        "nome": "Machado de guerra (x2)",
+        "bonusAtaque": 24,
+        "dano": "3d6+20",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Êxtase no Medo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O bugbear guarda-costas sofre metade do dano de criaturas sob algum efeito de medo."
+      },
+      {
+        "nome": "Quebrar Armas",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando acerta um ataque corpo a corpo, o guarda-costas pode usar a manobra quebrar (teste +26)."
+      }
+    ],
+    "equipamento": [
+      "Gibão de peles",
+      "Machado de guerra aumentado cruel"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "bugbear_sentinela",
+    "nome": "Bugbear Sentinela",
+    "nd": "2",
+    "regiao": "duyshidakk",
+    "papel": "lacaio",
+    "tipo": "humanoide",
+    "subtipo": "bugbear",
+    "tamanho": "medio",
+    "iniciativa": 6,
+    "percepcao": 5,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 17,
+    "resistencias": {
+      "fortitude": 8,
+      "reflexos": 10,
+      "vontade": 3
+    },
+    "rd": {
+      "medo": 2
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 18,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 3,
+      "con": 2,
+      "int": -1,
+      "sab": 0,
+      "car": -2
+    },
+    "pericias": {
+      "atletismo": 8,
+      "furtividade": 6,
+      "intimidacao": 8
+    },
+    "ataques": [
+      {
+        "nome": "Machado de guerra",
+        "bonusAtaque": 14,
+        "dano": "3d6+10",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Êxtase no Medo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O bugbear sentinela sofre metade do dano de criaturas sob algum efeito de medo."
+      }
+    ],
+    "equipamento": [
+      "Apito",
+      "Gibão de peles",
+      "Machado de guerra aumentado"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "devorador_de_medos",
+    "nome": "Devorador de Medos",
+    "nd": "8",
+    "regiao": "duyshidakk",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "bugbear",
+    "tamanho": "medio",
+    "iniciativa": 11,
+    "percepcao": 9,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 31,
+    "resistencias": {
+      "fortitude": 21,
+      "reflexos": 15,
+      "vontade": 8
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 325,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 3,
+      "con": 3,
+      "int": 0,
+      "sab": 1,
+      "car": 0
+    },
+    "pericias": {
+      "furtividade": 13,
+      "intimidacao": 14
+    },
+    "ataques": [
+      {
+        "nome": "Machado de guerra (x2)",
+        "bonusAtaque": 26,
+        "dano": "1d12+20",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Apavorar",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Teste de Intimidação oposto pela Vontade de criaturas em alcance médio. Falha: abalado pela cena. Falha por 10+: apavorado 1d4 rodadas e abalado pela cena."
+      },
+      {
+        "nome": "Artesão do Medo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Em testes de Intimidação, rola dois dados e usa o melhor."
+      },
+      {
+        "nome": "Medo Inebriante",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Sofre metade do dano de criaturas abaladas/apavoradas. Em alcance médio de criaturas abaladas/apavoradas, recebe bônus igual à penalidade da condição em perícias e dano."
+      }
+    ],
+    "equipamento": [
+      "Machado de guerra cruel"
+    ],
+    "tesouro": "metade",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "engenho_de_guerra",
+    "nome": "Engenho de Guerra Goblin",
+    "nd": "3",
+    "regiao": "duyshidakk",
+    "papel": "solo",
+    "tipo": "construto",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 3,
+    "percepcao": 5,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 25,
+    "resistencias": {
+      "fortitude": 18,
+      "reflexos": 6,
+      "vontade": 12
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [
+      "efeitos_de_mente",
+      "fadiga",
+      "exaustao"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 246,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 12,
+      "des": 0,
+      "con": null,
+      "int": 2,
+      "sab": 1,
+      "car": -1
+    },
+    "pericias": {},
+    "ataques": [],
+    "habilidades": [
+      {
+        "nome": "Arsenal de Engenhocas",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 22,
+        "resistenciaTipo": "reflexos",
+        "descricao": "Rola 1d6 quatro vezes para ativar engenhocas: 1) Canhão elétrico (linha alcance médio, 8d8 eletricidade, Ref CD 22 metade), 2) Balestra ácida (criatura alcance médio, 8d8+4d6 ácido, Ref CD 22 metade), 3) Cospe-chamas (cone 9m, 8d6 fogo + em chamas, Ref CD 22 metade), 4) Lança-bombas (esfera alcance curto, 8d6 impacto + atordoado, Ref CD 22 metade), 5) Fumaça de Escapamento (camuflagem total em alcance curto por 1d4 rodadas), 6) Turbina (aumenta deslocamento em +6m por uma rodada)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "gangue_goblin",
+    "nome": "Gangue Goblin",
+    "nd": "5",
+    "regiao": "duyshidakk",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "goblin",
+    "tamanho": "grande",
+    "iniciativa": 5,
+    "percepcao": 10,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 20,
+    "resistencias": {
+      "fortitude": 14,
+      "reflexos": 10,
+      "vontade": 6
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 171,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 9.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 1,
+      "des": 3,
+      "con": 1,
+      "int": -1,
+      "sab": -1,
+      "car": -2
+    },
+    "pericias": {},
+    "ataques": [],
+    "habilidades": [
+      {
+        "nome": "Enxame",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Toda criatura no espaço da gangue goblin sofre 5d6 pontos de dano de perfuração."
+      },
+      {
+        "nome": "Frenesi Incontrolável",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Para cada 20 pontos de dano que a gangue goblin sofre, seu dano aumenta em +1d6 até o fim da cena."
+      },
+      {
+        "nome": "Cada Um por Si!",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando é reduzida a 0 PV ou menos, a gangue se dispersa, deixando apenas os mais fracos para trás: transforma-se em 1d4+2 goblins salteadores."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "goblin_engenhoqueiro",
+    "nome": "Goblin Engenhoqueiro",
+    "nd": "3",
+    "regiao": "duyshidakk",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "goblin",
+    "tamanho": "pequeno",
+    "iniciativa": 7,
+    "percepcao": 3,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 18,
+    "resistencias": {
+      "fortitude": 6,
+      "reflexos": 10,
+      "vontade": 5
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 45,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 2,
+      "con": 2,
+      "int": 3,
+      "sab": -1,
+      "car": 0
+    },
+    "pericias": {
+      "furtividade": 7,
+      "oficio_engenhoqueiro": 10
+    },
+    "ataques": [
+      {
+        "nome": "Adaga",
+        "bonusAtaque": 8,
+        "dano": "1d4+2",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Besta leve (à distância)",
+        "bonusAtaque": 9,
+        "dano": "1d6+2",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Engenhocas",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 15,
+        "resistenciaTipo": null,
+        "descricao": "Teste de Ofício (CD 15, +5 por uso no dia). Engenhocas disponíveis: Asa de Bambu (voo 12m até o fim da cena), Cospe-chamas (cone 9m, 6d6 fogo, Ref CD 19 metade), Gritador (–2 em testes de ataque/dano para criaturas em alcance curto até o fim da cena)."
+      }
+    ],
+    "equipamento": [
+      "Adaga",
+      "besta leve",
+      "instrumentos de Ofício (engenhoqueiro)",
+      "virotes x20"
+    ],
+    "tesouro": "padrao",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "goblin_salteador",
+    "nome": "Goblin Salteador",
+    "nd": "0.25",
+    "regiao": "duyshidakk",
+    "papel": "lacaio",
+    "tipo": "humanoide",
+    "subtipo": "goblin",
+    "tamanho": "pequeno",
+    "iniciativa": 5,
+    "percepcao": 1,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 13,
+    "resistencias": {
+      "fortitude": 2,
+      "reflexos": 3,
+      "vontade": -1
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 4,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 3,
+      "con": 0,
+      "int": 0,
+      "sab": -1,
+      "car": -1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Adaga (x2)",
+        "bonusAtaque": 7,
+        "dano": "1d4",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Frenesi",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Recebe +2 em testes de ataque e rolagens de dano para cada goblin salteador adjacente ao alvo."
+      }
+    ],
+    "equipamento": [
+      "Adagas x2"
+    ],
+    "tesouro": "padrao",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "goblin_de_ferro",
+    "nome": "Goblin de Ferro",
+    "nd": "5",
+    "regiao": "duyshidakk",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "goblin",
+    "tamanho": "medio",
+    "iniciativa": 11,
+    "percepcao": 2,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 28,
+    "resistencias": {
+      "fortitude": 17,
+      "reflexos": 11,
+      "vontade": 5
+    },
+    "rd": {
+      "corte": 10
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 150,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 12.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 3,
+      "con": 2,
+      "int": 5,
+      "sab": -1,
+      "car": 0
+    },
+    "pericias": {
+      "atletismo": 11,
+      "oficio_engenhoqueiro": 16
+    },
+    "ataques": [
+      {
+        "nome": "Pancada",
+        "bonusAtaque": 16,
+        "dano": "2d8+22",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Armadura Blindada",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A veste mecânica do goblin de ferro fornece +10 na Defesa e redução de corte, impacto e perfuração 10 (já contabilizados)."
+      },
+      {
+        "nome": "Engenhocas de Combate",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 20,
+        "resistenciaTipo": null,
+        "descricao": "O goblin de ferro ativa uma engenhoca de sua armadura, escolhida aleatoriamente (role 1d6): 1) Garra eletrificada (como Toque Chocante); 2) Lança-chamas (como Explosão de Chamas); 3) Disparador de rede (como Teia); 4) Foguetes teleguiados (como Seta Infalível, dano de fogo); 5) Campo de força (como Campo de Força); 6) Míssil explosivo (como Bola de Fogo). Exige teste de Ofício (engenhoqueiro) CD 20; falha faz a engenhoca pifar (não pode mais ser usada), e selecioná-la de novo a faz explodir (4d6 de fogo em alcance curto, inclusive no goblin; Reflexos CD 21 reduz à metade). A CD para resistir às engenhocas é 21."
+      }
+    ],
+    "equipamento": [
+      "Instrumentos de Ofício (engenhoqueiro)"
+    ],
+    "tesouro": "padrao mais pecas sobressalentes (valem t$ 500 para fabricar engenhocas).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "goblin_de_ferro_mark_ii",
+    "nome": "Goblin de Ferro Mark II",
+    "nd": "8",
+    "regiao": "duyshidakk",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "goblin",
+    "tamanho": "grande",
+    "iniciativa": 17,
+    "percepcao": 6,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 36,
+    "resistencias": {
+      "fortitude": 15,
+      "reflexos": 21,
+      "vontade": 7
+    },
+    "rd": {
+      "corte": 20
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 300,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 18.0,
+      "natacao": 0.0,
+      "escalada": 12.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 4,
+      "con": 2,
+      "int": 8,
+      "sab": -1,
+      "car": 0
+    },
+    "pericias": {
+      "atletismo": 14,
+      "oficio_engenhoqueiro": 26
+    },
+    "ataques": [
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 24,
+        "dano": "3d6+26",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "3m",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Arco Voltaico",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 25,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, o goblin de ferro mark II causa 4d8+4 pontos de dano de eletricidade em dois alvos a até 3m (Reflexos CD 25 reduz à metade). Alvos com armadura de metal sofrem –5 no teste; alvos agarrados não têm direito ao teste."
+      },
+      {
+        "nome": "Armadura Blindada",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A veste mecânica fornece +15 na Defesa e redução de corte, impacto e perfuração 20 (já contabilizados)."
+      },
+      {
+        "nome": "Canhão Congelante",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 25,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, dispara um raio que aprisiona uma criatura em alcance médio em bloco de gelo: 6d8 de dano de frio e fica paralisado (Fortitude CD 25 reduz à metade e muda para lento por 1 rodada). O bloco tem 10 PV, RD 8 e vulnerabilidade a fogo; quebrar exige ação completa e teste de Força CD 18."
+      },
+      {
+        "nome": "Foguete Explosivo",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 25,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, dispara um projétil em alcance médio: 4d6 de fogo e fica em chamas; adjacentes sofrem metade do dano e também ficam em chamas (Reflexos CD 25 reduz à metade e evita a condição)."
+      },
+      {
+        "nome": "Garra-Gancho",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Faz a manobra agarrar (teste +19) contra um alvo Médio ou menor em alcance curto; se agarrar, pode puxá-lo para um espaço adjacente. No início do turno, causa 3d10+8 de dano de impacto em cada criatura agarrada (pode agarrar até duas, uma com cada garra)."
+      }
+    ],
+    "equipamento": [
+      "Instrumentos de Ofício (engenhoqueiro) aprimorados"
+    ],
+    "tesouro": "padrao mais pecas sobressalentes (valem t$ 2.000 para fabricar engenhocas).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "goblin_bomba",
+    "nome": "Goblin-Bomba",
+    "nd": "3",
+    "regiao": "duyshidakk",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "goblin",
+    "tamanho": "pequeno",
+    "iniciativa": 9,
+    "percepcao": 2,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 19,
+    "resistencias": {
+      "fortitude": 9,
+      "reflexos": 15,
+      "vontade": 3
+    },
+    "rd": {
+      "acido": 5,
+      "veneno": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 74,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 9.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 4,
+      "con": 2,
+      "int": 3,
+      "sab": -1,
+      "car": 0
+    },
+    "pericias": {
+      "furtividade": 7,
+      "oficio_alquimista": 9
+    },
+    "ataques": [],
+    "habilidades": [
+      {
+        "nome": "Granadas a Granel",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 18,
+        "resistenciaTipo": null,
+        "descricao": "O goblin-bomba arremessa uma granada em alcance médio. Quando acerta, role 1d4: 1) alvo e adjacentes sofrem 3d6+8 de fogo e ficam em chamas (Reflexos CD 18 reduz à metade e evita); 2) alvo e adjacentes sofrem 2d4+10 de ácido mais 2d4 na rodada seguinte (Reflexos CD 18 reduz à metade e evita o dano secundário); 3) alvo perde 1d12 PV por veneno e fica fraco (Fortitude CD 18 reduz a perda à metade e evita a condição); 4) efeito semelhante à magia Névoa centrada no alvo, com cheiro horrível (Fortitude CD 18 evita)."
+      },
+      {
+        "nome": "Grand Finale",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 18,
+        "resistenciaTipo": null,
+        "descricao": "Quando chega a 0 PV, role 1d6: em 1 ou 2, todas as granadas explodem — o goblin e seu equipamento são destruídos e criaturas a 3m sofrem 2d6 de fogo, ácido e veneno (total 6d6) e ficam atordoadas por 1 rodada (Reflexos CD 18 reduz à metade e evita a condição)."
+      }
+    ],
+    "equipamento": [
+      "Bandoleira de poções",
+      "Couro batido"
+    ],
+    "tesouro": "padrao mais insumos (valem t$ 50 para fabricar itens alquimicos).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "hobgoblin_atirador",
+    "nome": "Hobgoblin Atirador",
+    "nd": "5",
+    "regiao": "duyshidakk",
+    "papel": "lacaio",
+    "tipo": "humanoide",
+    "subtipo": "hobgoblin",
+    "tamanho": "medio",
+    "iniciativa": 13,
+    "percepcao": 6,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 22,
+    "resistencias": {
+      "fortitude": 11,
+      "reflexos": 16,
+      "vontade": 6
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "ofuscado"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 38,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 1,
+      "des": 5,
+      "con": 2,
+      "int": 1,
+      "sab": 2,
+      "car": -2
+    },
+    "pericias": {
+      "acrobacia": 5,
+      "furtividade": 7,
+      "oficio_armeiro": 7
+    },
+    "ataques": [
+      {
+        "nome": "Lança de fogo",
+        "bonusAtaque": 17,
+        "dano": "1d10+6",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Lança de fogo (à distância)",
+        "bonusAtaque": 20,
+        "dano": "3d8+20",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Fuzileiro",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O hobgoblin atirador não sofre a penalidade padrão de –5 em ataques por disparar contra oponentes envolvidos em combate corpo a corpo, e pode recarregar suas armas de fogo como uma ação livre."
+      },
+      {
+        "nome": "Lança de Fogo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando acerta um ataque à distância em um alvo adjacente, causa +1d8 de dano. Quando acerta um ataque corpo a corpo, pode disparar sua arma para causar +2d8 de dano."
+      },
+      {
+        "nome": "Mira Apurada",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O atirador recebe +2 em testes de ataque e na margem de ameaça com ataques à distância até o fim do turno."
+      }
+    ],
+    "equipamento": [
+      "Balas x20",
+      "Couraça",
+      "Lança de fogo",
+      "Instrumentos de Ofício (armeiro)"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "hobgoblin_comandante_tatico",
+    "nome": "Hobgoblin Comandante Tático",
+    "nd": "11",
+    "regiao": "duyshidakk",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "hobgoblin",
+    "tamanho": "medio",
+    "iniciativa": 27,
+    "percepcao": 13,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 40,
+    "resistencias": {
+      "fortitude": 22,
+      "reflexos": 14,
+      "vontade": 17
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [
+      "confusao"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 425,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 2,
+      "con": 4,
+      "int": 4,
+      "sab": 2,
+      "car": 1
+    },
+    "pericias": {
+      "cavalgar": 27,
+      "guerra": 29,
+      "intimidacao": 26
+    },
+    "ataques": [
+      {
+        "nome": "Lança montada (x2)",
+        "bonusAtaque": 32,
+        "dano": "2d8+27",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 4,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Espada longa (x2)",
+        "bonusAtaque": 32,
+        "dano": "1d8+25",
+        "danoExtra": null,
+        "margemAmeaca": 17,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Carga Odiosa",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz uma investida montada, pode fazer dois ataques corpo a corpo contra o mesmo alvo, e ambos recebem +6d8 nas rolagens de dano."
+      },
+      {
+        "nome": "Corcel Duyshidakk",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O comandante cavalga um fiel warg. Enquanto montado, seu deslocamento se torna 12m e recebe +2d6 em rolagens de dano corpo a corpo."
+      },
+      {
+        "nome": "Estandarte de Thwor",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Aliados em alcance médio recebem +2 na Defesa e em testes de perícia."
+      },
+      {
+        "nome": "Manobras Evasivas",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando faz um teste de resistência, substitui esse teste por um teste de Guerra. Se passar, todos os aliados em alcance curto que fizerem este teste de resistência na rodada também passam."
+      },
+      {
+        "nome": "Ordens de Ataque",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, ordena um aliado em alcance médio a fazer uma ação agredir como uma reação, imediatamente."
+      }
+    ],
+    "equipamento": [
+      "Armadura completa reforçada",
+      "Escudo pesado",
+      "Espada longa precisa",
+      "Lança montada",
+      "Poção de Curar Ferimentos (10d8+10)"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "hobgoblin_gladiador",
+    "nome": "Hobgoblin Gladiador",
+    "nd": "16",
+    "regiao": "duyshidakk",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "hobgoblin",
+    "tamanho": "medio",
+    "iniciativa": 25,
+    "percepcao": 18,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 46,
+    "resistencias": {
+      "fortitude": 24,
+      "reflexos": 32,
+      "vontade": 16
+    },
+    "rd": {
+      "magia": 5
+    },
+    "imunidadesEfeitos": [
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 1000,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 8,
+      "des": 6,
+      "con": 5,
+      "int": 0,
+      "sab": 2,
+      "car": 4
+    },
+    "pericias": {
+      "atletismo": 28,
+      "furtividade": 25,
+      "intimidacao": 20
+    },
+    "ataques": [
+      {
+        "nome": "Corrente de espinhos (x4)",
+        "bonusAtaque": 42,
+        "dano": "2d4+25",
+        "danoExtra": null,
+        "margemAmeaca": 16,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agraciado por Thwor",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Os ataques do hobgoblin gladiador ignoram 5 pontos da RD dos alvos e são considerados lancinantes, e ele recebe +5 em testes de ataque contra oponentes caídos, desprevenidos, flanqueados ou indefesos."
+      },
+      {
+        "nome": "Campeão Bestial",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Combinando ferocidade e treinamento, o gladiador se torna Grande até o fim da cena, recebendo redução de dano 10 e +4 em Força (ataque +46, dano 1d10+29, crítico 16)."
+      },
+      {
+        "nome": "Lento Demais!",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando é alvo de um ataque corpo a corpo, pode fazer um teste de ataque oposto ao resultado desse ataque; se vencer, evita o dano e pode fazer um ataque corpo a corpo contra o atacante."
+      },
+      {
+        "nome": "Não Tão Rápido!",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando uma criatura no alcance natural do gladiador fica desprevenida ou se move voluntariamente para fora desse alcance, ele faz um ataque corpo a corpo contra ela."
+      },
+      {
+        "nome": "Venha Aqui e Lute!",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Faz uma manobra agarrar (teste +44, ou +50 se estiver Grande) com sua corrente contra um alvo em alcance curto; se vencer, pode puxá-lo para dentro de seu alcance natural e causar o dano de um ataque corpo a corpo contra ele."
+      }
+    ],
+    "equipamento": [
+      "Corrente de espinhos de mitral ameaçadora",
+      "Couraça reforçada abascanta",
+      "Poção de Físico Divino (aprimoramento para os três atributos)"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "hobgoblin_mago_de_batalha",
+    "nome": "Hobgoblin Mago de Batalha",
+    "nd": "5",
+    "regiao": "duyshidakk",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "hobgoblin",
+    "tamanho": "medio",
+    "iniciativa": 5,
+    "percepcao": 4,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 17,
+    "resistencias": {
+      "fortitude": 11,
+      "reflexos": 5,
+      "vontade": 17
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 120,
+    "pm": 35,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 1,
+      "con": 3,
+      "int": 4,
+      "sab": 0,
+      "car": -1
+    },
+    "pericias": {
+      "guerra": 9,
+      "misticismo": 9,
+      "oficio_armeiro": 11
+    },
+    "ataques": [
+      {
+        "nome": "Espada longa",
+        "bonusAtaque": 14,
+        "dano": "1d8+3",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Arcano de Batalha",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Soma Inteligência (+4) nas rolagens de dano com magias."
+      },
+      {
+        "nome": "Magias (mago 5º, CD 22)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Amedrontar (3 PM), Armadura Arcana (5 PM, +6 Def), Bola de Fogo (5 PM, 8d6+5 fogo área), Concentração de Combate (livre, 1 PM, vantagem), Toque Vampírico (5 PM, 6d6+5 trevas + cura metade)."
+      }
+    ],
+    "equipamento": [
+      "Espada longa",
+      "essência de mana"
+    ],
+    "tesouro": "padrao",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "hobgoblin_soldado",
+    "nome": "Hobgoblin Soldado",
+    "nd": "2",
+    "regiao": "duyshidakk",
+    "papel": "lacaio",
+    "tipo": "humanoide",
+    "subtipo": "hobgoblin",
+    "tamanho": "medio",
+    "iniciativa": 4,
+    "percepcao": 1,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 19,
+    "resistencias": {
+      "fortitude": 12,
+      "reflexos": 7,
+      "vontade": 3
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 18,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 2,
+      "con": 1,
+      "int": 0,
+      "sab": 0,
+      "car": -1
+    },
+    "pericias": {
+      "oficio_armeiro": 2
+    },
+    "ataques": [
+      {
+        "nome": "Espada longa",
+        "bonusAtaque": 15,
+        "dano": "1d8+15",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Arco longo (à distância)",
+        "bonusAtaque": 11,
+        "dano": "1d8+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [],
+    "equipamento": [
+      "Arco longo",
+      "cota de malha",
+      "escudo pesado",
+      "espada longa",
+      "flechas x20"
+    ],
+    "tesouro": "padrao",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "horda_goblin",
+    "nome": "Horda Goblin",
+    "nd": "14",
+    "regiao": "duyshidakk",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "goblin",
+    "tamanho": "colossal",
+    "iniciativa": 14,
+    "percepcao": 23,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 42,
+    "resistencias": {
+      "fortitude": 28,
+      "reflexos": 23,
+      "vontade": 16
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 666,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 9.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 3,
+      "con": 1,
+      "int": 0,
+      "sab": -1,
+      "car": -2
+    },
+    "pericias": {},
+    "ataques": [],
+    "habilidades": [
+      {
+        "nome": "Enxame",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Toda criatura no espaço da horda goblin sofre 14d6 pontos de dano de perfuração."
+      },
+      {
+        "nome": "Pilhar e Devorar",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 35,
+        "resistenciaTipo": null,
+        "descricao": "A horda saqueia e consome tudo à sua volta em velocidade assustadora. Quando causa dano, recupera PV igual à metade do resultado de sua rolagem de dano (independente de quantas criaturas sofreram dano). Cada vez que uma criatura sofre dano da horda, um de seus itens (à escolha da horda, entre armadura, escudo e arma empunhada) é avariado (Reflexos CD 35 evita)."
+      },
+      {
+        "nome": "Sobrepujar",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início do seu turno, a horda faz a manobra agarrar (teste +49) contra todas as criaturas de tamanho Grande ou menor em seu espaço."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "sangue_do_ayrrak",
+    "nome": "Sangue do Ayrrak",
+    "nd": "19",
+    "regiao": "duyshidakk",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "bugbear",
+    "tamanho": "medio",
+    "iniciativa": 21,
+    "percepcao": 17,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 59,
+    "resistencias": {
+      "fortitude": 32,
+      "reflexos": 19,
+      "vontade": 26
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "efeitos_mentais",
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 1364,
+    "pm": 57,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 9,
+      "des": 7,
+      "con": 7,
+      "int": 3,
+      "sab": 3,
+      "car": 4
+    },
+    "pericias": {
+      "atletismo": 24,
+      "diplomacia": 19,
+      "guerra": 18,
+      "intimidacao": 24,
+      "religiao": 18
+    },
+    "ataques": [
+      {
+        "nome": "Uyzrrak Da'ukthra (x4)",
+        "bonusAtaque": 52,
+        "dano": "4d12+31",
+        "danoExtra": "2d8 trevas",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "O Mundo Como Deve Ser",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 47,
+        "resistenciaTipo": null,
+        "descricao": "Cada Sangue do Ayrrak recebe três das habilidades a seguir, escolhidas entre habilidades adjacentes entre si na 'Roda do Akzath' (diagrama do livro): Vida (cura acelerada 15, imunidade a efeitos de metabolismo e veneno, pode lançar Curar Ferimentos e Sopro da Salvação a CD 47); Ignorância, ação livre (entra em fúria: até o fim da cena, +10 em ataque e dano corpo a corpo, +1 no multiplicador de crítico e RD 10, mas não pode fazer ações que exijam calma e concentração); Mudança (pode lançar Metamorfose a CD 47); Fim, ação livre, 5 PM (encerra um efeito sobre um adjacente, incluindo ele mesmo); Morte (pode lançar Assassino Fantasmagórico, Poeira da Podridão e Toque da Morte a CD 47); Conhecimento (resistência a magia +8); Continuidade (uma vez por cena, ao ser reduzido a 0 PV ou menos, fica com 500 PV em vez disso); Início, ação padrão, 10 PM (ele e todas as criaturas em alcance longo voltam ao início do turno anterior do Sangue, desfazendo todas as ações e consequências a partir daquele ponto, exceto o próprio gasto de PM; as demais criaturas repetem as mesmas ações, rolando os dados novamente)."
+      }
+    ],
+    "equipamento": [
+      "Couraça guardiã",
+      "Uyzrrak Da'ukthra"
+    ],
+    "tesouro": "dobro.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "sombra_de_thwor",
+    "nome": "Sombra de Thwor",
+    "nd": "9",
+    "regiao": "duyshidakk",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "hobgoblin",
+    "tamanho": "medio",
+    "iniciativa": 17,
+    "percepcao": 10,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 33,
+    "resistencias": {
+      "fortitude": 15,
+      "reflexos": 21,
+      "vontade": 9
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 295,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 8,
+      "con": 5,
+      "int": 3,
+      "sab": 2,
+      "car": 2
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Duas machadinhas (corpo a corpo)",
+        "bonusAtaque": 27,
+        "dano": "1d6+12",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": "veneno"
+      },
+      {
+        "nome": "Duas machadinhas (à distância)",
+        "bonusAtaque": 27,
+        "dano": "1d6+12",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": "veneno"
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Assassinar",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Analisa criatura em alcance curto. Em seu primeiro Ataque Furtivo que causar dano a ela até o próximo turno, dobra os dados de dano do Ataque Furtivo."
+      },
+      {
+        "nome": "Ataque Furtivo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, causa +7d6 em ataques contra alvos desprevenidos ou flanqueados (corpo a corpo ou à distância curta)."
+      },
+      {
+        "nome": "Evasão Aprimorada",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Efeitos com Reflexos para reduzir dano à metade: o sombra não sofre dano algum se passar e metade se falhar."
+      },
+      {
+        "nome": "Um com as Sombras",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Nunca fica surpreendido ou flanqueado."
+      },
+      {
+        "nome": "Veneno",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Nas machadinhas (tipo de veneno não especificado)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao",
+    "recursoExtraivel": null
+  }
+]

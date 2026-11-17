@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../domain/entities/combate/combatente.dart';
+import '../../../../domain/entities/combate/monstro.dart';
 import '../../../../domain/services/combate_services/arena_stats_collector.dart';
 import '../../../../domain/services/combate_services/calculadora_tatica_t20.dart';
 import '../../../controllers/combate_controller/combate_cubit.dart';
@@ -35,6 +36,12 @@ class ArenaPainelAcoes extends StatelessWidget {
     final ehVezDoHeroi = atual?.time == TimeCombatente.heroi;
 
     if (!ehVezDoHeroi || atual == null) {
+      final monstroAtual = atual is CombatenteMonstro ? atual : null;
+      final habilidadesAtivas = monstroAtual?.fichaMonstro.habilidades
+              .where((h) => !h.ehPassiva)
+              .toList() ??
+          const [];
+
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
         color: const Color(0xFF1E293B),
@@ -52,6 +59,24 @@ class ArenaPainelAcoes extends StatelessWidget {
                 ),
               ),
             ),
+            if (monstroAtual != null && habilidadesAtivas.isNotEmpty) ...[
+              OutlinedButton.icon(
+                icon: const Icon(Icons.bolt, size: 16, color: Colors.amberAccent),
+                label: Text(
+                  'Habilidades (${habilidadesAtivas.length})',
+                  style: const TextStyle(color: Colors.amberAccent, fontSize: 12),
+                ),
+                style: OutlinedButton.styleFrom(
+                  side: const BorderSide(color: Colors.amberAccent),
+                ),
+                onPressed: () => _abrirHabilidadesAmeaca(
+                  context,
+                  monstroAtual,
+                  habilidadesAtivas,
+                ),
+              ),
+              const SizedBox(width: 8),
+            ],
             ElevatedButton.icon(
               icon: const Icon(Icons.play_arrow, size: 18),
               label: const Text('Executar Ação da IA'),
@@ -409,6 +434,70 @@ class ArenaPainelAcoes extends StatelessWidget {
               }),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  void _abrirHabilidadesAmeaca(
+    BuildContext context,
+    CombatenteMonstro monstro,
+    List<HabilidadeMonstro> habilidades,
+  ) {
+    showModalBottomSheet<void>(
+      context: context,
+      backgroundColor: const Color(0xFF1E293B),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (ctx) => Padding(
+        padding: const EdgeInsets.all(16),
+        child: ListView.separated(
+          shrinkWrap: true,
+          itemCount: habilidades.length,
+          separatorBuilder: (_, _) => const SizedBox(height: 8),
+          itemBuilder: (_, idx) {
+            final h = habilidades[idx];
+            final emRecarga = monstro.habilidadeEmRecarga(h.nome);
+            return Card(
+              color: const Color(0xFF0F172A),
+              child: ListTile(
+                title: Text(
+                  '${h.nome}${h.custoPm > 0 ? " (${h.custoPm} PM)" : ""}',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 13,
+                  ),
+                ),
+                subtitle: Text(
+                  '${h.acao}${h.possuiRecarga ? " • Recarga: ${h.recarga}" : ""}\n${h.descricao}',
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(color: Colors.white70, fontSize: 11),
+                ),
+                trailing: emRecarga
+                    ? OutlinedButton(
+                        onPressed: () {
+                          Navigator.pop(ctx);
+                          cubit.recarregarHabilidadeMonstro(h);
+                        },
+                        child: const Text('Recarregar', style: TextStyle(fontSize: 11)),
+                      )
+                    : ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.amber[800],
+                          foregroundColor: Colors.white,
+                        ),
+                        onPressed: () {
+                          Navigator.pop(ctx);
+                          cubit.usarHabilidadeMonstro(h);
+                        },
+                        child: const Text('Usar', style: TextStyle(fontSize: 11)),
+                      ),
+              ),
+            );
+          },
         ),
       ),
     );

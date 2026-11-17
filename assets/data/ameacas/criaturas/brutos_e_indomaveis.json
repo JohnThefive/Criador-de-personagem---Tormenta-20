@@ -1,0 +1,1599 @@
+[
+  {
+    "id": "meio_orc_bandoleiro",
+    "nome": "Meio-Orc Bandoleiro",
+    "nd": "1",
+    "regiao": "brutos_e_indomaveis",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "meio-orc",
+    "tamanho": "medio",
+    "iniciativa": 5,
+    "percepcao": 1,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 15,
+    "resistencias": {
+      "fortitude": 10,
+      "reflexos": 5,
+      "vontade": 1
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 15,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 1,
+      "con": 2,
+      "int": 0,
+      "sab": -1,
+      "car": -1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Espada curta",
+        "bonusAtaque": 11,
+        "dano": "1d6+13",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Adaga (à distância)",
+        "bonusAtaque": 9,
+        "dano": "1d4+7",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "curto",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Ataque Furtivo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "+2d6 de dano extra quando flanqueia ou surpreende o alvo."
+      },
+      {
+        "nome": "Criatura das Profundezas",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Recebe +2 em Percepção quando usada no subterrâneo (já refletido nas perícias, se aplicável)."
+      }
+    ],
+    "equipamento": [
+      "Adaga x2",
+      "Armadura de couro",
+      "Espada curta"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "meio_orc_capanga",
+    "nome": "Meio-Orc Capanga",
+    "nd": "1",
+    "regiao": "brutos_e_indomaveis",
+    "papel": "lacaio",
+    "tipo": "humanoide",
+    "subtipo": "meio-orc",
+    "tamanho": "medio",
+    "iniciativa": 6,
+    "percepcao": 3,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 16,
+    "resistencias": {
+      "fortitude": 11,
+      "reflexos": 4,
+      "vontade": 2
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 12,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 1,
+      "con": 2,
+      "int": 0,
+      "sab": -1,
+      "car": -1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Maça",
+        "bonusAtaque": 11,
+        "dano": "1d8+12",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Ímpeto Agressor",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O meio-orc capanga recebe +1d10 na rolagem de dano de seu primeiro ataque na cena."
+      }
+    ],
+    "equipamento": [
+      "Couro batido",
+      "Maça"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "meio_orc_chefe",
+    "nome": "Meio-Orc Chefe",
+    "nd": "5",
+    "regiao": "brutos_e_indomaveis",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "meio-orc",
+    "tamanho": "medio",
+    "iniciativa": 6,
+    "percepcao": 4,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 24,
+    "resistencias": {
+      "fortitude": 17,
+      "reflexos": 11,
+      "vontade": 6
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 190,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 2,
+      "con": 4,
+      "int": 1,
+      "sab": 0,
+      "car": -1
+    },
+    "pericias": {
+      "intimidacao": 7,
+      "sobrevivencia": 6
+    },
+    "ataques": [
+      {
+        "nome": "Machado de batalha",
+        "bonusAtaque": 18,
+        "dano": "2d8+30",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Ataque Furtivo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "+3d6 de dano extra quando flanqueia ou surpreende o alvo."
+      },
+      {
+        "nome": "Ordens",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O meio-orc chefe grita ordens para seus aliados em alcance médio. Eles recebem +2 em testes de perícia até o fim da cena."
+      },
+      {
+        "nome": "Urro Selvagem",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O chefe recebe +2 em testes de ataque e rolagens de dano corpo a corpo até o fim da cena, mas não pode fazer nenhuma ação que exija calma e concentração."
+      }
+    ],
+    "equipamento": [
+      "Gibão de peles",
+      "Machado de batalha"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "ogro_capanga",
+    "nome": "Ogro Capanga",
+    "nd": "11",
+    "regiao": "brutos_e_indomaveis",
+    "papel": "lacaio",
+    "tipo": "humanoide",
+    "subtipo": "gigante",
+    "tamanho": "grande",
+    "iniciativa": 9,
+    "percepcao": 4,
+    "sentidos": [
+      "baixa_luminosidade"
+    ],
+    "defesa": 36,
+    "resistencias": {
+      "fortitude": 23,
+      "reflexos": 18,
+      "vontade": 8
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "enfeiticado"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 111,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 11,
+      "des": 0,
+      "con": 6,
+      "int": -3,
+      "sab": -1,
+      "car": -2
+    },
+    "pericias": {
+      "atletismo": 20,
+      "intuicao": 4
+    },
+    "ataques": [
+      {
+        "nome": "Marreta (x2)",
+        "bonusAtaque": 36,
+        "dano": "3d6+49",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Cruel Demais…",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Cada ataque de marreta do ogro capanga atinge todas as criaturas ao seu redor. Para cada ataque, ele faz um único teste e compara seu resultado com a Defesa de cada criatura em seu alcance."
+      },
+      {
+        "nome": "…Para Sentir!",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O ogro sofre –5 em Intuição e Vontade (já contabilizados). Porém, efeitos negativos não permanentes que ele sofra que durem mais de 2 rodadas têm a duração reduzida para 2 rodadas, e as penalidades numéricas de quaisquer condições que ele sofra são reduzidas à metade."
+      }
+    ],
+    "equipamento": [
+      "Marreta aumentada cruel"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "ogro_cacador",
+    "nome": "Ogro Caçador",
+    "nd": "7",
+    "regiao": "brutos_e_indomaveis",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "gigante",
+    "tamanho": "grande",
+    "iniciativa": 7,
+    "percepcao": 2,
+    "sentidos": [
+      "baixa_luminosidade"
+    ],
+    "defesa": 29,
+    "resistencias": {
+      "fortitude": 20,
+      "reflexos": 14,
+      "vontade": 4
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 265,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 9,
+      "des": 0,
+      "con": 5,
+      "int": -3,
+      "sab": -1,
+      "car": -2
+    },
+    "pericias": {
+      "atletismo": 16,
+      "intuicao": -3
+    },
+    "ataques": [
+      {
+        "nome": "Tacape (x2)",
+        "bonusAtaque": 24,
+        "dano": "3d6+21",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Grande Demais…",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Todo dano de corte, impacto e perfuração que o ogro caçador sofre é reduzido à metade, e ele pode se deslocar normalmente ao agarrar (e arrastar) um alvo."
+      },
+      {
+        "nome": "…Para se Importar!",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O ogro sofre –5 em Intuição e Vontade (já contabilizados). Porém, efeitos negativos não permanentes que ele sofra que durem mais de 2 rodadas têm a duração reduzida para 2 rodadas."
+      }
+    ],
+    "equipamento": [
+      "Tacape aumentado"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "orc_mutante_superior",
+    "nome": "Orc Mutante Superior",
+    "nd": "10",
+    "regiao": "brutos_e_indomaveis",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "orc",
+    "tamanho": "medio",
+    "iniciativa": 9,
+    "percepcao": 8,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 34,
+    "resistencias": {
+      "fortitude": 22,
+      "reflexos": 15,
+      "vontade": 9
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 372,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 9,
+      "des": 2,
+      "con": 4,
+      "int": -2,
+      "sab": 0,
+      "car": -3
+    },
+    "pericias": {
+      "atletismo": 20,
+      "intimidacao": 8
+    },
+    "ataques": [
+      {
+        "nome": "Tacape",
+        "bonusAtaque": 29,
+        "dano": "1d12+18",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Pancada",
+        "bonusAtaque": 27,
+        "dano": "1d8+18",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 27,
+        "dano": "1d6+18",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Sensibilidade a Luz",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando exposto à luz do sol ou similar, o orc fica ofuscado."
+      },
+      {
+        "nome": "Mutações",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 26,
+        "resistenciaTipo": null,
+        "descricao": "Cada orc mutante superior possui três mutações, escolhidas entre as seguintes (o exemplar aqui descrito possui Braço Direito Extra, Braço Esquerdo Extra e Cabeça Adicional, já refletidos em suas estatísticas): Cabeça Adicional (ao fazer um teste de Percepção ou Vontade, rola dois dados e usa o melhor resultado); Braço Direito Extra, livre (se acerta um ataque de pancada, pode usar a manobra agarrar, teste +29); Braço Esquerdo Extra, livre (se acerta o ataque de tacape e o de mordida na mesma criatura na mesma rodada, rasga a vítima com o terceiro braço degenerado, causando 1d8+12 de dano de corte); Braços Longos (o alcance natural aumenta em 3m); Mutação Constante (recebe cura acelerada 10); Pernas Fortes (deslocamento +6m, ignora terreno difícil); Uivo de Melancolia, ação completa (emite um uivo de sofrimento que deixa criaturas em alcance curto alquebradas, Vontade CD 26 evita)."
+      }
+    ],
+    "equipamento": [
+      "Tacape macabro"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "orc_rei",
+    "nome": "Orc Rei",
+    "nd": "5",
+    "regiao": "brutos_e_indomaveis",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "orc",
+    "tamanho": "medio",
+    "iniciativa": 7,
+    "percepcao": 4,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 25,
+    "resistencias": {
+      "fortitude": 15,
+      "reflexos": 11,
+      "vontade": 7
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "atordoado",
+      "cansaco"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 210,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 1,
+      "con": 4,
+      "int": 0,
+      "sab": 0,
+      "car": 1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Lança (x2)",
+        "bonusAtaque": 18,
+        "dano": "2d8+12",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Aura de Fúria",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Outros orcs sob comando do orc rei em um raio de 30m recebem +2 na Defesa, em testes de perícia e em rolagens de dano."
+      },
+      {
+        "nome": "Estocada Atroz",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 20,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura atingida por um ataque de lança do rei fica sangrando (Fortitude CD 20 evita)."
+      },
+      {
+        "nome": "Sensibilidade a Luz",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando exposto à luz do sol ou similar, o orc fica ofuscado."
+      }
+    ],
+    "equipamento": [
+      "Couro batido",
+      "Escudo pesado",
+      "Lança"
+    ],
+    "tesouro": "dobro.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "orc_veterano",
+    "nome": "Orc Veterano",
+    "nd": "1",
+    "regiao": "brutos_e_indomaveis",
+    "papel": "lacaio",
+    "tipo": "humanoide",
+    "subtipo": "orc",
+    "tamanho": "medio",
+    "iniciativa": 4,
+    "percepcao": 1,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 16,
+    "resistencias": {
+      "fortitude": 10,
+      "reflexos": 5,
+      "vontade": 1
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 14,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 1,
+      "con": 3,
+      "int": -1,
+      "sab": -1,
+      "car": -1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Marreta",
+        "bonusAtaque": 11,
+        "dano": "3d4+9",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Sensibilidade a Luz",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando exposto à luz do sol ou similar, o orc fica ofuscado."
+      }
+    ],
+    "equipamento": [
+      "Couro batido",
+      "Marreta"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "orc_xama",
+    "nome": "Orc Xamã",
+    "nd": "7",
+    "regiao": "brutos_e_indomaveis",
+    "papel": "especial",
+    "tipo": "humanoide",
+    "subtipo": "orc",
+    "tamanho": "medio",
+    "iniciativa": 4,
+    "percepcao": 13,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 29,
+    "resistencias": {
+      "fortitude": 14,
+      "reflexos": 7,
+      "vontade": 20
+    },
+    "rd": {
+      "veneno": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 196,
+    "pm": 41,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 1,
+      "con": 2,
+      "int": -1,
+      "sab": 6,
+      "car": -1
+    },
+    "pericias": {
+      "intimidacao": 9,
+      "religiao": 13
+    },
+    "ataques": [
+      {
+        "nome": "Adaga (x2)",
+        "bonusAtaque": 29,
+        "dano": "2d4+20",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Sensibilidade a Luz",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando exposto à luz do sol ou similar, o orc fica ofuscado."
+      },
+      {
+        "nome": "Urro Divino (mágica)",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz um ataque ou lança uma magia, o orc xamã soma sua Constituição à rolagem de dano desse ataque ou magia."
+      },
+      {
+        "nome": "Magias (clérigo de Megalokk, 7º nível, CD 26)",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Arma Espiritual (5 PM, sustentada; 1/rodada causa 3d6 de dano de impacto a adjacente, ou reage ao ser atingido para causar o dano ao atacante), Despedaçar (7 PM; 4d8+8 de impacto, dobrado contra construtos/objetos, atordoa), Físico Divino (3 PM; +2 em For/Des/Con a um adjacente até o fim da cena), Soco de Arsenal (7 PM; 6d6+3 de impacto e empurra 3m)."
+      }
+    ],
+    "equipamento": [
+      "Adaga",
+      "Ossos de monstro x1d4",
+      "Símbolo sagrado de Megalokk"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "sapo_atroz",
+    "nome": "Sapo Atroz",
+    "nd": "2",
+    "regiao": "brutos_e_indomaveis",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 6,
+    "percepcao": 3,
+    "sentidos": [
+      "baixa_luminosidade"
+    ],
+    "defesa": 16,
+    "resistencias": {
+      "fortitude": 15,
+      "reflexos": 7,
+      "vontade": 0
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 95,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 9.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 1,
+      "con": 3,
+      "int": -4,
+      "sab": 1,
+      "car": -2
+    },
+    "pericias": {
+      "atletismo": 10,
+      "furtividade": 7
+    },
+    "ataques": [
+      {
+        "nome": "Língua",
+        "bonusAtaque": 12,
+        "dano": "1d6+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "3m",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Língua (teste +16)."
+      },
+      {
+        "nome": "Boca de Sapo",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada um de seus turnos, o sapo atroz causa 2d6+8 pontos de dano de impacto, mais veneno, na criatura que estiver agarrando com sua língua."
+      },
+      {
+        "nome": "Salto Esmagador",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 17,
+        "resistenciaTipo": null,
+        "descricao": "O sapo pula e cai sobre um oponente menor que ele em alcance curto. O alvo fica caído e sofre 2d6+12 pontos de dano de impacto (Reflexos CD 17 reduz à metade e evita a condição)."
+      },
+      {
+        "nome": "Veneno",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 18,
+        "resistenciaTipo": null,
+        "descricao": "Perde 1d12 PV e fica paralisado por 1 rodada (Fortitude CD 18 evita a paralisia e reduz a perda de vida para 1d6)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "1d4 doses de veneno batraquio (cd 17 para extrair) e pedaco de lingua (cd 17 para extrair).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "tabrachi_campeao",
+    "nome": "Tabrachi Campeão",
+    "nd": "3",
+    "regiao": "brutos_e_indomaveis",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "tabrachi",
+    "tamanho": "medio",
+    "iniciativa": 7,
+    "percepcao": 4,
+    "sentidos": [
+      "baixa_luminosidade"
+    ],
+    "defesa": 21,
+    "resistencias": {
+      "fortitude": 9,
+      "reflexos": 15,
+      "vontade": 3
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 105,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 9.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 2,
+      "con": 4,
+      "int": -1,
+      "sab": -1,
+      "car": -2
+    },
+    "pericias": {
+      "atletismo": 13,
+      "cavalgar": 5,
+      "furtividade": 6
+    },
+    "ataques": [
+      {
+        "nome": "Lança",
+        "bonusAtaque": 14,
+        "dano": "1d6+3",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Língua",
+        "bonusAtaque": 14,
+        "dano": "1d4+3",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "3m",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Azagaia (à distância)",
+        "bonusAtaque": 11,
+        "dano": "1d6+3",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Linguarudo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O tabrachi campeão recebe +2 em testes para desarmar ou derrubar com a língua."
+      },
+      {
+        "nome": "Veneno",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 16,
+        "resistenciaTipo": null,
+        "descricao": "Peçonha comum: perde 1d12 PV (Fortitude CD 16 evita)."
+      }
+    ],
+    "equipamento": [
+      "Azagaia x2",
+      "Escudo pesado",
+      "Gibão de peles",
+      "Lança",
+      "1d4 doses de peçonha comum"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "tabrachi_soldado",
+    "nome": "Tabrachi Soldado",
+    "nd": "1",
+    "regiao": "brutos_e_indomaveis",
+    "papel": "lacaio",
+    "tipo": "humanoide",
+    "subtipo": "tabrachi",
+    "tamanho": "medio",
+    "iniciativa": 5,
+    "percepcao": 2,
+    "sentidos": [
+      "baixa_luminosidade"
+    ],
+    "defesa": 16,
+    "resistencias": {
+      "fortitude": 5,
+      "reflexos": 10,
+      "vontade": 1
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 12,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 9.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 2,
+      "con": 3,
+      "int": -1,
+      "sab": -1,
+      "car": -2
+    },
+    "pericias": {
+      "atletismo": 8,
+      "furtividade": 4
+    },
+    "ataques": [
+      {
+        "nome": "Lança",
+        "bonusAtaque": 11,
+        "dano": "1d6+5",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Língua",
+        "bonusAtaque": 11,
+        "dano": "1d4+5",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "3m",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Azagaia (à distância)",
+        "bonusAtaque": 7,
+        "dano": "1d6+5",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Linguarudo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O tabrachi soldado recebe +2 em testes para desarmar ou derrubar com a língua."
+      }
+    ],
+    "equipamento": [
+      "Azagaia x2",
+      "Couro batido",
+      "Escudo leve",
+      "Lança"
+    ],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "trog_anao_bruto",
+    "nome": "Trog Anão Bruto",
+    "nd": "1",
+    "regiao": "brutos_e_indomaveis",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "trog",
+    "tamanho": "medio",
+    "iniciativa": 1,
+    "percepcao": 5,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 19,
+    "resistencias": {
+      "fortitude": 11,
+      "reflexos": 0,
+      "vontade": 5
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 35,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 3,
+      "des": 0,
+      "con": 4,
+      "int": -2,
+      "sab": 0,
+      "car": -1
+    },
+    "pericias": {
+      "sobrevivencia": 7
+    },
+    "ataques": [
+      {
+        "nome": "Machado de guerra",
+        "bonusAtaque": 9,
+        "dano": "1d12+3",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 9,
+        "dano": "1d6+3",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Mau Cheiro",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 14,
+        "resistenciaTipo": null,
+        "descricao": "Fortitude CD 14 evita (veneno)."
+      },
+      {
+        "nome": "Sobrevivente",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz um teste de resistência, o trog anão bruto rola dois dados e usa o melhor resultado."
+      }
+    ],
+    "equipamento": [
+      "Loriga segmentada",
+      "Machado de guerra"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "trog_anao_eremita",
+    "nome": "Trog Anão Eremita",
+    "nd": "8",
+    "regiao": "brutos_e_indomaveis",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "trog",
+    "tamanho": "medio",
+    "iniciativa": 7,
+    "percepcao": 18,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 33,
+    "resistencias": {
+      "fortitude": 22,
+      "reflexos": 6,
+      "vontade": 16
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 330,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 7,
+      "des": -1,
+      "con": 6,
+      "int": 0,
+      "sab": 2,
+      "car": -2
+    },
+    "pericias": {
+      "sobrevivencia": 20
+    },
+    "ataques": [
+      {
+        "nome": "Machado de guerra",
+        "bonusAtaque": 26,
+        "dano": "3d6+20",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 26,
+        "dano": "2d6+18",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Armadura Fúngica",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando o trog anão eremita sofre dano, todas as criaturas adjacentes perdem 2d12 pontos de vida (veneno)."
+      },
+      {
+        "nome": "Gosto por Tripas",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O trog recebe +2 em rolagens de dano contra criaturas em que já tenha causado dano na cena."
+      },
+      {
+        "nome": "Mau Cheiro",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 26,
+        "resistenciaTipo": null,
+        "descricao": "Fortitude CD 26 evita (veneno)."
+      },
+      {
+        "nome": "Sobrevivente",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz um teste de resistência, o trog rola dois dados e usa o melhor resultado."
+      }
+    ],
+    "equipamento": [
+      "Machado de guerra atroz"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "trog_cacador",
+    "nome": "Trog Caçador",
+    "nd": "2",
+    "regiao": "brutos_e_indomaveis",
+    "papel": "lacaio",
+    "tipo": "monstro",
+    "subtipo": "trog",
+    "tamanho": "medio",
+    "iniciativa": 6,
+    "percepcao": 5,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 18,
+    "resistencias": {
+      "fortitude": 7,
+      "reflexos": 12,
+      "vontade": 3
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 14,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 3,
+      "con": 3,
+      "int": -1,
+      "sab": 2,
+      "car": -1
+    },
+    "pericias": {
+      "furtividade": 13,
+      "sobrevivencia": 7
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 11,
+        "dano": "1d6+7",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Arco longo (à distância)",
+        "bonusAtaque": 14,
+        "dano": "1d8+12",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Marca da Presa",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O trog caçador analisa uma criatura em alcance curto. Até o fim da cena, recebe +1d8 em rolagens de dano contra essa criatura."
+      },
+      {
+        "nome": "Mau Cheiro",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 16,
+        "resistenciaTipo": null,
+        "descricao": "Fortitude CD 16 evita (veneno)."
+      }
+    ],
+    "equipamento": [
+      "Arco longo",
+      "Flechas x20"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "trog_rei_dos_tuneis",
+    "nome": "Trog Rei dos Túneis",
+    "nd": "5",
+    "regiao": "brutos_e_indomaveis",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "trog",
+    "tamanho": "grande",
+    "iniciativa": 5,
+    "percepcao": 4,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 25,
+    "resistencias": {
+      "fortitude": 17,
+      "reflexos": 11,
+      "vontade": 4
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 226,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 6.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 1,
+      "con": 5,
+      "int": -2,
+      "sab": 0,
+      "car": -1
+    },
+    "pericias": {
+      "furtividade": 7,
+      "intimidacao": 7
+    },
+    "ataques": [
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 17,
+        "dano": "1d8+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 17,
+        "dano": "1d8+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Dilacerar",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se o trog rei dos túneis acerta os dois ataques de garra em uma mesma criatura no mesmo turno, causa mais 2d8+6 pontos de dano."
+      },
+      {
+        "nome": "Gosto por Tripas",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O rei recebe +2 em rolagens de dano contra criaturas em que já tenha causado dano nesta cena."
+      },
+      {
+        "nome": "Mau Cheiro",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 20,
+        "resistenciaTipo": null,
+        "descricao": "Fortitude CD 20 evita (veneno)."
+      },
+      {
+        "nome": "Terror dos Túneis",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 20,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura que comece seu turno em alcance curto do rei dos túneis fica apavorada por 1 rodada e então abalada (Vontade CD 20 muda para abalada por 1 rodada; a criatura não pode mais ser afetada por esta habilidade até o fim da cena)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  }
+]

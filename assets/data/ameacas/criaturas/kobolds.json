@@ -1,0 +1,902 @@
+[
+  {
+    "id": "cao_de_kally",
+    "nome": "Cão de Kally",
+    "nd": "2",
+    "regiao": "kobolds",
+    "papel": "lacaio",
+    "tipo": "monstro",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 5,
+    "percepcao": 6,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 18,
+    "resistencias": {
+      "fortitude": 13,
+      "reflexos": 7,
+      "vontade": 2
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 21,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 15.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 2,
+      "con": 5,
+      "int": -3,
+      "sab": 1,
+      "car": -1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 14,
+        "dano": "1d6+8",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garras",
+        "bonusAtaque": 14,
+        "dano": "1d4+8",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Derrubar",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Usa a manobra derrubar com a mordida (teste +14)."
+      },
+      {
+        "nome": "Sopro",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 15,
+        "resistenciaTipo": null,
+        "descricao": "O cão de Kally cospe fogo em um cone de 9m. Criaturas na área sofrem 2d8+4 pontos de dano de fogo e ficam em chamas (Reflexos CD 15 reduz à metade e evita a condição). Recarga (movimento)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "enxame_larval",
+    "nome": "Enxame Larval",
+    "nd": "1",
+    "regiao": "kobolds",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "kobold",
+    "tamanho": "medio",
+    "iniciativa": 7,
+    "percepcao": 3,
+    "sentidos": [
+      "sensibilidade_a_luz",
+      "visao_no_escuro"
+    ],
+    "defesa": 16,
+    "resistencias": {
+      "fortitude": 5,
+      "reflexos": 11,
+      "vontade": 0
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "corte",
+      "perfuracao"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 30,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 6.0
+    },
+    "atributos": {
+      "for": -1,
+      "des": 2,
+      "con": 0,
+      "int": -4,
+      "sab": -1,
+      "car": -3
+    },
+    "pericias": {},
+    "ataques": [],
+    "habilidades": [
+      {
+        "nome": "Enxame",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Qualquer criatura que comece seu turno no espaço do enxame larval, ou entre nele, sofre 3d4 pontos de dano de perfuração (sem necessidade de teste de ataque)."
+      },
+      {
+        "nome": "Distração",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 15,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura que comece seu turno dentro do espaço do enxame não pode fazer ações que exijam concentração (como lançar magias) e sofre –2 em perícias (Fortitude CD 15 evita ambos). Estes efeitos duram até ela sair da área do enxame e se livrar dos kobolds."
+      },
+      {
+        "nome": "Entrar nas Roupas",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando uma criatura sai do espaço do enxame, algumas larvas ficam dentro de suas roupas. Se falhou no teste de resistência, a criatura continua sofrendo os efeitos de Distração até gastar uma ação padrão para se livrar das larvas."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "kobold_bruto",
+    "nome": "Kobold Bruto",
+    "nd": "4",
+    "regiao": "kobolds",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "kobold",
+    "tamanho": "grande",
+    "iniciativa": 5,
+    "percepcao": 2,
+    "sentidos": [
+      "sensibilidade_a_luz",
+      "visao_no_escuro"
+    ],
+    "defesa": 23,
+    "resistencias": {
+      "fortitude": 16,
+      "reflexos": 10,
+      "vontade": 2
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 120,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 1,
+      "con": 4,
+      "int": -3,
+      "sab": -2,
+      "car": -2
+    },
+    "pericias": {
+      "atletismo": 10
+    },
+    "ataques": [
+      {
+        "nome": "Tacape",
+        "bonusAtaque": 16,
+        "dano": "1d12+18",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Escamas de Kally",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Todo dano que o kobold bruto sofre é reduzido à metade."
+      },
+      {
+        "nome": "Peste Oportunista",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Os ataques do kobold causam +1d4 pontos de dano contra inimigos que já sofreram dano na rodada."
+      },
+      {
+        "nome": "Cabecinha",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A habilidade Escamas de Kally não se aplica a acertos críticos e ataques contra a cabeça diminuta do kobold (Defesa 33)."
+      }
+    ],
+    "equipamento": [
+      "Tacape aumentado"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "kobold_explosivo",
+    "nome": "Kobold Explosivo",
+    "nd": "1",
+    "regiao": "kobolds",
+    "papel": "lacaio",
+    "tipo": "monstro",
+    "subtipo": "kobold",
+    "tamanho": "pequeno",
+    "iniciativa": 4,
+    "percepcao": 0,
+    "sentidos": [
+      "sensibilidade_a_luz",
+      "visao_no_escuro"
+    ],
+    "defesa": 15,
+    "resistencias": {
+      "fortitude": 5,
+      "reflexos": 10,
+      "vontade": 1
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 9,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 1,
+      "des": 2,
+      "con": 0,
+      "int": -1,
+      "sab": 0,
+      "car": -1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Lança",
+        "bonusAtaque": 11,
+        "dano": "1d6+9",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Funda (à distância)",
+        "bonusAtaque": 11,
+        "dano": "1d4+9",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Detonação Final",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 14,
+        "resistenciaTipo": null,
+        "descricao": "Quando o kobold é reduzido a 0 PV, role 1d6: com um resultado 1 ou 2, ocorre uma explosão. Todas as criaturas a até 3m sofrem 4d6 pontos de dano de impacto (Reflexos CD 14 reduz à metade)."
+      },
+      {
+        "nome": "Peste Oportunista",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Os ataques do kobold explosivo causam +1d4 pontos de dano contra inimigos que já sofreram dano na rodada."
+      }
+    ],
+    "equipamento": [
+      "Funda",
+      "Lança",
+      "Pedras x20"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "kobold_patrulheiro",
+    "nome": "Kobold Patrulheiro",
+    "nd": "0.5",
+    "regiao": "kobolds",
+    "papel": "lacaio",
+    "tipo": "monstro",
+    "subtipo": "kobold",
+    "tamanho": "pequeno",
+    "iniciativa": 4,
+    "percepcao": 0,
+    "sentidos": [
+      "sensibilidade_a_luz",
+      "visao_no_escuro"
+    ],
+    "defesa": 14,
+    "resistencias": {
+      "fortitude": 3,
+      "reflexos": 5,
+      "vontade": 0
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 6,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 1,
+      "des": 2,
+      "con": 0,
+      "int": -1,
+      "sab": 0,
+      "car": -1
+    },
+    "pericias": {
+      "furtividade": 8
+    },
+    "ataques": [
+      {
+        "nome": "Lança",
+        "bonusAtaque": 9,
+        "dano": "1d6+1",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Funda (à distância)",
+        "bonusAtaque": 9,
+        "dano": "1d4+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Peste Oportunista",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Os ataques do kobold patrulheiro causam +1d4 pontos de dano contra inimigos que já sofreram dano na rodada."
+      }
+    ],
+    "equipamento": [
+      "Funda",
+      "Lança",
+      "Pedras x20"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "kobold_veterano",
+    "nome": "Kobold Veterano",
+    "nd": "2",
+    "regiao": "kobolds",
+    "papel": "lacaio",
+    "tipo": "monstro",
+    "subtipo": "kobold",
+    "tamanho": "pequeno",
+    "iniciativa": 5,
+    "percepcao": 1,
+    "sentidos": [
+      "sensibilidade_a_luz",
+      "visao_no_escuro"
+    ],
+    "defesa": 19,
+    "resistencias": {
+      "fortitude": 7,
+      "reflexos": 12,
+      "vontade": 3
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 13,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 1,
+      "des": 2,
+      "con": 0,
+      "int": -1,
+      "sab": 0,
+      "car": -1
+    },
+    "pericias": {
+      "furtividade": 9
+    },
+    "ataques": [
+      {
+        "nome": "Lança (x2)",
+        "bonusAtaque": 14,
+        "dano": "1d6+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Funda (à distância)",
+        "bonusAtaque": 14,
+        "dano": "2d4+12",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Muito Já Apanhei",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O kobold veterano ignora todo o dano do primeiro ataque que sofre em cada cena."
+      },
+      {
+        "nome": "Peste Oportunista",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Os ataques do kobold causam +1d4 pontos de dano contra inimigos que já sofreram dano na rodada."
+      }
+    ],
+    "equipamento": [
+      "Armadura de couro",
+      "Funda",
+      "Lança",
+      "Pedras x20"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "kobold_xama",
+    "nome": "Kobold Xamã",
+    "nd": "3",
+    "regiao": "kobolds",
+    "papel": "especial",
+    "tipo": "monstro",
+    "subtipo": "kobold",
+    "tamanho": "pequeno",
+    "iniciativa": 5,
+    "percepcao": 6,
+    "sentidos": [
+      "sensibilidade_a_luz",
+      "visao_no_escuro"
+    ],
+    "defesa": 20,
+    "resistencias": {
+      "fortitude": 3,
+      "reflexos": 9,
+      "vontade": 15
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +1"
+    ],
+    "pv": 69,
+    "pm": 15,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 2,
+      "con": 1,
+      "int": -1,
+      "sab": 3,
+      "car": -1
+    },
+    "pericias": {
+      "cura": 6,
+      "furtividade": 9,
+      "misticismo": 2,
+      "religiao": 6
+    },
+    "ataques": [
+      {
+        "nome": "Gadanho",
+        "bonusAtaque": 12,
+        "dano": "2d4+3",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 4,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 12,
+        "dano": "1d4+3",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Funda (à distância)",
+        "bonusAtaque": 12,
+        "dano": "1d6+3",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Aura de Medo",
+        "acao": "livre",
+        "custoPm": 2,
+        "recarga": null,
+        "cdResistencia": 19,
+        "resistenciaTipo": null,
+        "descricao": "O xamã gera uma aura de medo de 9m de raio e duração cena. Todos os inimigos que entram na aura ficam abalados até o fim da cena (Vontade CD 19 evita) e a criatura não pode mais ser abalada por esta habilidade por um dia."
+      },
+      {
+        "nome": "Peste Oportunista",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Os ataques do xamã causam +1d4 pontos de dano contra inimigos que já sofreram dano na rodada."
+      },
+      {
+        "nome": "Símbolo Sagrado Energizado",
+        "acao": "movimento",
+        "custoPm": 1,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O xamã energiza seu símbolo sagrado. Até o fim da cena, ele emite uma luz avermelhada que ilumina como uma tocha e, enquanto estiver sendo empunhado pelo xamã, reduz o custo de magias divinas em –1 PM."
+      },
+      {
+        "nome": "Magias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 19,
+        "resistenciaTipo": null,
+        "descricao": "Lança magias como clérigo de Kallyadranoch de 3º nível (CD 19): Curar Ferimentos (padrão, 3 PM, cura 4d8+4 PV), Escudo da Fé (reação, 1 PM, +2 na Defesa até o próximo turno), Perdição (padrão, 1 PM, –1 em testes de ataque e rolagens de dano até o fim da cena)."
+      }
+    ],
+    "equipamento": [
+      "Andrajos",
+      "Bálsamo restaurador",
+      "Funda",
+      "Gadanho",
+      "Pedras x20",
+      "Símbolo sagrado de Kallyadranoch"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "kobold_mae",
+    "nome": "Kobold-Mãe",
+    "nd": "12",
+    "regiao": "kobolds",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "kobold",
+    "tamanho": "grande",
+    "iniciativa": 9,
+    "percepcao": 15,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 41,
+    "resistencias": {
+      "fortitude": 26,
+      "reflexos": 15,
+      "vontade": 12
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "efeitos_de_movimento"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 550,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 0.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": -3,
+      "con": 7,
+      "int": -2,
+      "sab": 3,
+      "car": -1
+    },
+    "pericias": {},
+    "ataques": [],
+    "habilidades": [
+      {
+        "nome": "Canção de Ninar",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "usar_queridinho_da_mamae",
+        "cdResistencia": 35,
+        "resistenciaTipo": null,
+        "descricao": "Todos os kobolds em uma esfera de 30m ao redor da kobold-mãe perdem quaisquer condições de medo. Demais criaturas na área sofrem 12d6 pontos de dano psíquico e ficam atordoadas por 1 rodada (Vontade CD 35 reduz à metade, evita a condição, e a criatura não pode mais ser atordoada por esta habilidade até o fim da cena). Recarga (usar Queridinho da Mamãe)."
+      },
+      {
+        "nome": "Mãe É Sagrado",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Kobolds que estejam em alcance curto da kobold-mãe recebem +2 em testes de perícia e rolagens de dano. Cada vez que ela sofre um ataque ou é alvo de uma habilidade, esses bônus aumentam em +1 até o fim da cena."
+      },
+      {
+        "nome": "Ovos",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A kobold-mãe invoca 1d8+2 ninhadas de kobolds que surgem em espaços desocupados em alcance curto. Elas agem a partir da próxima rodada da mamãe, têm deslocamento 12m (normal e de escalada) e a habilidade enxame (3d6+15, perfuração). As ninhadas são Médias, têm Força –1, Destreza 4, Defesa 35 e 1 PV, falham automaticamente em qualquer teste oposto ou de resistência e desaparecem quando mortas ou ao fim da cena. Recarga (movimento)."
+      },
+      {
+        "nome": "Protejam a Mamãe",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando a kobold-mãe sofre dano, um kobold em alcance curto se sacrifica por ela. O kobold morre, mas o dano que a mãe sofreria é reduzido a 0."
+      },
+      {
+        "nome": "Queridinho da Mamãe",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A kobold-mãe aponta para outro kobold em alcance curto. Por 1 rodada, esse kobold fica imune a efeitos de movimento e recebe +5 em testes de perícia e rolagens de dano."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "patrulha_kobold",
+    "nome": "Patrulha Kobold",
+    "nd": "4",
+    "regiao": "kobolds",
+    "papel": "lacaio",
+    "tipo": "monstro",
+    "subtipo": "kobold",
+    "tamanho": "medio",
+    "iniciativa": 6,
+    "percepcao": 2,
+    "sentidos": [
+      "sensibilidade_a_luz",
+      "visao_no_escuro"
+    ],
+    "defesa": 23,
+    "resistencias": {
+      "fortitude": 10,
+      "reflexos": 15,
+      "vontade": 5
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 30,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 1,
+      "des": 2,
+      "con": 0,
+      "int": -1,
+      "sab": 0,
+      "car": -1
+    },
+    "pericias": {
+      "furtividade": 8
+    },
+    "ataques": [
+      {
+        "nome": "Lança [Bando]",
+        "bonusAtaque": 17,
+        "dano": "1d6+1",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Funda (à distância) [Bando]",
+        "bonusAtaque": 17,
+        "dano": "1d4+6",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Peste Oportunista",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Os ataques da patrulha kobold causam +1d4 pontos de dano contra inimigos que já sofreram dano na rodada."
+      }
+    ],
+    "equipamento": [
+      "Funda",
+      "Lança",
+      "Pedras x20 (1d8 de cada)"
+    ],
+    "tesouro": "metade.",
+    "recursoExtraivel": null
+  }
+]

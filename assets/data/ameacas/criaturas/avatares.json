@@ -1,0 +1,3302 @@
+[
+  {
+    "id": "avatar_de_aharadak",
+    "nome": "Avatar de Aharadak",
+    "nd": "20",
+    "regiao": "avatares",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "lekael",
+    "tamanho": "colossal",
+    "iniciativa": 22,
+    "percepcao": 31,
+    "sentidos": [
+      "percepcao_as_cegas_longo"
+    ],
+    "defesa": 73,
+    "resistencias": {
+      "fortitude": 37,
+      "reflexos": 27,
+      "vontade": 31
+    },
+    "rd": {
+      "geral": 20
+    },
+    "imunidadesEfeitos": [
+      "efeitos_mentais",
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 2477,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 3.0,
+      "voo": 12.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 18,
+      "des": 6,
+      "con": 12,
+      "int": 16,
+      "sab": 10,
+      "car": 5
+    },
+    "pericias": {
+      "atletismo": 34,
+      "conhecimento": 34,
+      "diplomacia": 36,
+      "enganacao": 36,
+      "intimidacao": 36,
+      "intuicao": 36,
+      "misticismo": 34,
+      "religiao": 28
+    },
+    "ataques": [
+      {
+        "nome": "Garra (x7)",
+        "bonusAtaque": 67,
+        "dano": "4d10+31",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Carapaça Suprema",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar sofre apenas metade do dano de fontes mundanas, exceto aço-rubi."
+      },
+      {
+        "nome": "Domínio sobre o Tempo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar pode fazer duas ações padrão e duas ações de movimento a cada turno."
+      },
+      {
+        "nome": "Insanidade da Tormenta",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 51,
+        "resistenciaTipo": "vontade",
+        "descricao": "2d20 PM (Von CD 51 evita). Esta habilidade pode afetar mesmo criaturas que já foram afetadas pela Insanidade da Tormenta de outras criaturas nesse dia."
+      },
+      {
+        "nome": "Invocar Lefeu",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por cena, o Avatar invoca um ou mais lefeu a sua escolha, cujo ND total somado seja igual a 20. Eles surgem em alcance curto e agem a partir da próxima rodada, em suas iniciativas."
+      },
+      {
+        "nome": "Poder sobre a Realidade",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 51,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar pode lançar qualquer magia simulada de até 4º círculo como um conjurador de 20º nível sem gastar PM (CD 51, limite de PM 20) e pode lançar Momento de Tormenta uma vez por rodada como uma ação livre."
+      },
+      {
+        "nome": "Percepção Perfeita",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar está sempre sob efeito de Visão da Verdade, com todos os aprimoramentos."
+      },
+      {
+        "nome": "Presentes Rubros",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar fornece suas bênçãos a uma criatura voluntária em alcance curto. O alvo recebe dois poderes da Tormenta a sua escolha (alternativamente, com o suplemento Ameaças de Arton, pode receber um simbionte). Uma criatura só pode ser alvo desta habilidade uma vez. Uma criatura que tenha recebido uma bênção dessa forma irá inevitavelmente ao mundo de Aharadak após sua morte e não pode ser revivida de nenhuma forma."
+      },
+      {
+        "nome": "Telepatia",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar pode se comunicar com qualquer criatura inteligente (Int –3 ou mais) dentro de uma área de Tormenta ou a até 1km dela."
+      },
+      {
+        "nome": "Terror Absoluto",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 51,
+        "resistenciaTipo": "vontade",
+        "descricao": "O Avatar emana uma aura de medo de 30m de raio. Criaturas à escolha dele que entrem ou comecem seus turnos na aura ficam abaladas (CD 51 evita); se já estiverem abaladas, ficam apavoradas. Uma criatura apavorada dessa forma sofre os efeitos de falhar no teste de resistência contra a Insanidade da Tormenta do Avatar. Criaturas imunes a medo ainda são afetadas pela aura mas recebem +5 nos testes de resistência contra ela. Medo."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "2d6 pecas rubras (cd 35 para extrair, cada peca vale t$ 1.500 para fabricar itens de materia vermelha)",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "avatar_de_allihanna",
+    "nome": "Avatar de Allihanna",
+    "nd": "20",
+    "regiao": "avatares",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 26,
+    "percepcao": 32,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 61,
+    "resistencias": {
+      "fortitude": 20,
+      "reflexos": 34,
+      "vontade": 28
+    },
+    "rd": {
+      "geral": 20
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +5"
+    ],
+    "pv": 1200,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 15.0,
+      "voo": 15.0,
+      "natacao": 15.0,
+      "escalada": 15.0,
+      "escavacao": 15.0
+    },
+    "atributos": {
+      "for": 8,
+      "des": 8,
+      "con": 10,
+      "int": 7,
+      "sab": 14,
+      "car": 10
+    },
+    "pericias": {
+      "adestramento": 41,
+      "atletismo": 26,
+      "furtividade": 26,
+      "intimidacao": 28,
+      "intuicao": 32,
+      "misticismo": 25,
+      "religiao": 32,
+      "sobrevivencia": 35
+    },
+    "ataques": [
+      {
+        "nome": "Arsenal Natural (x4)",
+        "bonusAtaque": 54,
+        "dano": "1d4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "especial",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Não Pode Ser Flanqueado",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar não pode ser flanqueado."
+      },
+      {
+        "nome": "Maior que a Morte",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar é imune a efeitos que matam instantaneamente ou reduzem atributos a 0, e não pode ser mantido morto permanentemente."
+      },
+      {
+        "nome": "Sem Redução por Terreno Difícil Natural",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar não sofre redução de deslocamento por terreno difícil de origem natural."
+      },
+      {
+        "nome": "Arsenal Natural",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz cada um de seus ataques de Arsenal Natural, o Avatar de Allihanna escolhe uma das armas naturais a seguir (pode escolher a mesma arma múltiplas vezes). Cauda: dano 8d12+29, alcance 6m. Chifres: dano 10d10+24, ignora 10 pontos de redução de dano do alvo. Garra: dano 6d12+31, crítico 19, caso acerte dois ataques de garra em uma mesma criatura no mesmo turno, causa mais 4d12 pontos de dano. Mordida: dano 8d12+28, crítico x3, caso acerte, pode fazer a manobra derrubar como uma ação livre (teste +59). Tentáculo: dano 6d10+39, caso acerte, pode fazer a manobra agarrar como uma ação livre (teste +59)."
+      },
+      {
+        "nome": "Centelha Divina",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 49,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar pode lançar qualquer magia divina como um clérigo de 20º nível sem gastar PM (CD 49, limite de PM 20). Se estiver em terreno natural, o custo das magias do Avatar é reduzido em –4 PM e a CD para resistir a elas aumenta em +4."
+      },
+      {
+        "nome": "Deusa dos Animais",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 49,
+        "resistenciaTipo": "vontade",
+        "descricao": "Cada animal em alcance médio deve fazer um teste de Vontade (CD 49). Se falhar, fica sob controle do Avatar até o fim da cena. Se o animal for um parceiro, em vez disso o personagem que ele segue faz um teste de Adestramento (CD 40) para evitar o controle. Animais sob controle do Avatar funcionam como parceiros, não contam em seu limite de parceiros e seus benefícios são cumulativos."
+      },
+      {
+        "nome": "Forma Natural",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar assume a forma de um animal ou planta a sua escolha de tamanho entre Pequeno e Enorme. Ele recebe +10 em testes de Enganação para se passar por essa criatura, mas seu Arsenal Natural fica limitado às armas compatíveis com a forma escolhida. Suas demais estatísticas não mudam."
+      },
+      {
+        "nome": "Voz da Natureza",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar pode falar com animais (como o efeito da magia Voz Divina)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "avatar_de_arsenal",
+    "nome": "Avatar de Arsenal",
+    "nd": "18",
+    "regiao": "avatares",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 23,
+    "percepcao": 25,
+    "sentidos": [],
+    "defesa": 60,
+    "resistencias": {
+      "fortitude": 32,
+      "reflexos": 17,
+      "vontade": 30
+    },
+    "rd": {
+      "geral": 10,
+      "aventureiros": 5
+    },
+    "imunidadesEfeitos": [
+      "efeitos_mentais",
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 1080,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 12.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 14,
+      "des": 6,
+      "con": 12,
+      "int": 9,
+      "sab": 8,
+      "car": 8
+    },
+    "pericias": {
+      "atletismo": 31,
+      "guerra": 39,
+      "intimidacao": 28,
+      "misticismo": 26,
+      "pilotagem": 23,
+      "religiao": 25
+    },
+    "ataques": [
+      {
+        "nome": "Martelo dos Trovões",
+        "bonusAtaque": 49,
+        "dano": "8d8+36",
+        "danoExtra": "8d6 eletricidade",
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 3,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Holy Avenger (x2)",
+        "bonusAtaque": 49,
+        "dano": "6d12+36",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Maior que a Morte",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar é imune a efeitos que matam instantaneamente ou reduzem atributos a 0, e não pode ser mantido morto permanentemente."
+      },
+      {
+        "nome": "Acessar Arsenal",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar de Arsenal troca um dos itens equipados de sua Algibeira Infinita por outro item mágico qualquer (exceto itens únicos, como artefatos). Acessórios fornecem seus benefícios normalmente e surgem acoplados à armadura; eles não precisam ser vestidos ou empunhados. Armas e armaduras substituem as que o avatar estiver usando; substitua apenas os efeitos mágicos dos itens. Se um item tiver uma habilidade com custo em pontos de mana, o Avatar pode usá-la sem gastar PM (limite de PM 18)."
+      },
+      {
+        "nome": "Algibeira Infinita",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar tem acesso à imensa coleção de itens mágicos de Arsenal e começa cada cena equipado com um elmo do teletransporte, botas aladas e um anel do sustento."
+      },
+      {
+        "nome": "Centelha Divina",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 47,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar pode lançar qualquer magia divina como um clérigo de 18º nível sem gastar PM (CD 47, limite de PM 18) e pode lançar a magia Soco de Arsenal como ação livre uma vez por rodada."
+      },
+      {
+        "nome": "Extinção",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por cena, o Avatar faz um ataque com a Holy Avenger contra uma criatura. Se acertar, a criatura é completamente destruída."
+      },
+      {
+        "nome": "Plano de Contigência",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando é alvo de um acerto crítico, manobra de combate ou habilidade mágica, o Avatar recebe +10 nos testes para resistir a esse efeito e redução de dano 50 contra qualquer dano que ele cause."
+      },
+      {
+        "nome": "Varrer",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando o Avatar faz um ataque corpo a corpo e reduz os pontos de vida do alvo a 0 ou menos, pode realizar um ataque adicional contra outra criatura dentro do seu alcance."
+      }
+    ],
+    "equipamento": [
+      "armadura_de_arsenal",
+      "holy_avenger",
+      "martelo_dos_trovoes"
+    ],
+    "tesouro": "padrao, mais quaisquer itens equipados por algibeira infinita.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "avatar_de_azgher",
+    "nome": "Avatar de Azgher",
+    "nd": "20",
+    "regiao": "avatares",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 25,
+    "percepcao": 40,
+    "sentidos": [
+      "percepcao_as_cegas_ilimitado"
+    ],
+    "defesa": 58,
+    "resistencias": {
+      "fortitude": 36,
+      "reflexos": 25,
+      "vontade": 33
+    },
+    "rd": {
+      "geral": 20
+    },
+    "imunidadesEfeitos": [
+      "dano_de_luz",
+      "dano_de_fogo",
+      "dano_de_trevas"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +5"
+    ],
+    "pv": 2752,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 18.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 14,
+      "des": 7,
+      "con": 10,
+      "int": 10,
+      "sab": 14,
+      "car": 10
+    },
+    "pericias": {
+      "acrobacia": 25,
+      "diplomacia": 31,
+      "intimidacao": 31,
+      "intuicao": 35,
+      "misticismo": 31,
+      "religiao": 40,
+      "sobrevivencia": 35
+    },
+    "ataques": [
+      {
+        "nome": "Labareda (x2)",
+        "bonusAtaque": 58,
+        "dano": "3d6+38",
+        "danoExtra": "6d6 fogo",
+        "margemAmeaca": 15,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Raio de Sol (x2)",
+        "bonusAtaque": 58,
+        "dano": "4d8+38",
+        "danoExtra": "2d12 luz",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mensageiro do Deserto (x2)",
+        "bonusAtaque": 58,
+        "dano": "4d12+45",
+        "danoExtra": "6d6 fogo",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "distância",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Maior que a Morte",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar é imune a efeitos que matam instantaneamente ou reduzem atributos a 0, e não pode ser mantido morto permanentemente."
+      },
+      {
+        "nome": "Evasão Aprimorada",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar possui Evasão Aprimorada."
+      },
+      {
+        "nome": "Sem Redução por Terreno Difícil",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar não sofre redução de deslocamento por terreno difícil."
+      },
+      {
+        "nome": "Aquele-que-Tudo-Vê",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar de Azgher está sempre sob efeito de Visão da Verdade, com todos os aprimoramentos."
+      },
+      {
+        "nome": "Centelha Divina",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 52,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar lança qualquer magia divina como um clérigo de 20º nível sem gastar PM (CD 52, limite de PM 20) e pode lançar Cólera de Azgher uma vez por rodada como uma ação livre."
+      },
+      {
+        "nome": "Escaramuça Vigilante",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando se move 6m ou mais, o Avatar recebe +10 na Defesa e em Reflexos, e +3d8 nas rolagens de dano até o início do seu próximo turno. Além disso, pode fazer um ataque com Raio de Sol contra qualquer inimigo que saia do seu alcance."
+      },
+      {
+        "nome": "Presença Calorosa",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início do turno do Avatar, criaturas à escolha dele em um raio de 30m sofrem 3d6 pontos de dano de fogo. Esse dano só pode ser curado fora dessa área. Metabolismo."
+      },
+      {
+        "nome": "Tempestade Solar",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 55,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Todas as criaturas em uma esfera de 6m em alcance médio sofrem 100 pontos de dano de essência, todas as magias na área são automaticamente dissipadas e todos os itens mágicos na área, exceto artefatos, viram itens mundanos até o fim da cena (Fort CD 55 reduz à metade e evita o efeito sobre suas magias e itens mágicos). Recarga (movimento)."
+      },
+      {
+        "nome": "Todo Ouro Pertence a Azgher",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 52,
+        "resistenciaTipo": "reflexos",
+        "descricao": "O Avatar absorve todo o ouro em um raio de 30m. Isso inclui tibares de ouro, itens banhados a ouro e quaisquer outros itens de ouro a critério do mestre (Ref CD 52 evita que seus itens sejam absorvidos, mas atrai a ira do Avatar)."
+      }
+    ],
+    "equipamento": [
+      "labareda",
+      "mensageiro_do_deserto",
+      "raio_de_sol"
+    ],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "avatar_de_hyninn",
+    "nome": "Avatar de Hyninn",
+    "nd": "19",
+    "regiao": "avatares",
+    "papel": "especial",
+    "tipo": "espirito",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 35,
+    "percepcao": 23,
+    "sentidos": [],
+    "defesa": 57,
+    "resistencias": {
+      "fortitude": 19,
+      "reflexos": 32,
+      "vontade": 26
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 798,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 18,
+      "con": 6,
+      "int": 13,
+      "sab": 6,
+      "car": 16
+    },
+    "pericias": {
+      "atletismo": 35,
+      "acrobacia": 35,
+      "diplomacia": 31,
+      "enganacao": 41,
+      "furtividade": 38,
+      "intuicao": 21,
+      "investigacao": 28,
+      "jogatina": 31,
+      "ladinagem": 38,
+      "oficio_artesao": 33
+    },
+    "ataques": [
+      {
+        "nome": "Falso Amigo (x2)",
+        "bonusAtaque": 50,
+        "dano": "1d4+30",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Falso Amigo (à distância)",
+        "bonusAtaque": 50,
+        "dano": "1d4+30",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Evasão Aprimorada",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar possui Evasão Aprimorada."
+      },
+      {
+        "nome": "Maior que a Morte",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar é imune a efeitos que matam instantaneamente ou reduzem atributos a 0, e não pode ser mantido morto permanentemente."
+      },
+      {
+        "nome": "Não Pode Ser Flanqueado ou Surpreendido",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar não pode ser flanqueado ou surpreendido."
+      },
+      {
+        "nome": "Ataque Furtivo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "+10d8 de dano em ataque furtivo."
+      },
+      {
+        "nome": "Centelha Divina",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 49,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar de Hyninn pode lançar qualquer magia divina como um clérigo de 19º nível sem gastar PM (CD 49, limite de PM 19)."
+      },
+      {
+        "nome": "Ferramentas Ladinas",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar conta como se sempre estivesse empunhando quaisquer ferramentas necessárias para usar suas perícias, como estojo de disfarces, gazuas etc."
+      },
+      {
+        "nome": "Forma de Macaco",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar se transforma em um macaco. Ele adquire tamanho Minúsculo (+5 em Furtividade e –5 em testes de manobra) e recebe deslocamento de escalada 9m. Seu equipamento desaparece (e ele perde seus benefícios) até ele voltar ao normal, mas suas outras estatísticas não são alteradas. A transformação dura indefinidamente, mas termina caso ele faça um ataque, lance uma magia ou gaste uma ação livre para encerrá-la."
+      },
+      {
+        "nome": "Ladrão Divino",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar não sofre penalidade em testes de Furtividade por se mover ao seu deslocamento normal ou por atacar e fazer outras ações chamativas, e pode fazer duas ações de movimento por turno."
+      },
+      {
+        "nome": "No Bolso Dói Mais",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando acerta um ataque em corpo a corpo, para cada 1 ponto de dano causado, o Avatar rouba T$ 10 da vítima. Mesmo que o Avatar seja derrotado, há 90% de chance de que esses tibares tenham desaparecido para sempre, pela graça dele mesmo."
+      },
+      {
+        "nome": "Roubar Essência",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar faz um teste de Ladinagem oposto à Vontade de uma criatura adjacente que não possa percebê-lo. Se passar, rouba uma habilidade do alvo. A habilidade assume a forma de uma moeda. O alvo não pode usar a habilidade roubada até recuperar a moeda. O Avatar não pode roubar mais de uma habilidade por criatura por vez."
+      },
+      {
+        "nome": "Roubo Descarado",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por criatura por cena, quando uma criatura em alcance curto faz um teste de perícia, o Avatar pode roubar o resultado desse teste. Caso ele faça isso, o teste se torna uma falha e, até o fim da cena, o Avatar pode substituir o resultado do d20 de um dos seus próprios testes pelo resultado do teste roubado."
+      },
+      {
+        "nome": "O Deus Certo Para o Trabalho",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando faz um ataque furtivo ou usa uma perícia da lista do ladino, o Avatar recebe +20 nesse teste."
+      }
+    ],
+    "equipamento": [
+      "falso_amigo"
+    ],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "avatar_de_kallyadranoch",
+    "nome": "Avatar de Kallyadranoch",
+    "nd": "20",
+    "regiao": "avatares",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": "dragao",
+    "tamanho": "medio",
+    "iniciativa": 20,
+    "percepcao": 18,
+    "sentidos": [
+      "percepcao_as_cegas",
+      "visao_no_escuro"
+    ],
+    "defesa": 50,
+    "resistencias": {
+      "fortitude": 20,
+      "reflexos": 28,
+      "vontade": 35
+    },
+    "rd": {
+      "geral": 50
+    },
+    "imunidadesEfeitos": [
+      "atordoamento",
+      "cansaco",
+      "dano_de_luz",
+      "metamorfose",
+      "paralisia"
+    ],
+    "imunidadesDano": [
+      "acido",
+      "eletricidade",
+      "essencia",
+      "fogo",
+      "frio",
+      "trevas",
+      "veneno"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +5"
+    ],
+    "pv": 1405,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 18.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 13,
+      "des": 8,
+      "con": 12,
+      "int": 14,
+      "sab": 6,
+      "car": 19
+    },
+    "pericias": {
+      "conhecimento": 35,
+      "diplomacia": 37,
+      "enganacao": 37,
+      "intimidacao": 40,
+      "misticismo": 40,
+      "nobreza": 40,
+      "oficio_escriba": 35,
+      "religiao": 27
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 52,
+        "dano": "5d12+50",
+        "danoExtra": null,
+        "margemAmeaca": 17,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 50,
+        "dano": "4d10+35",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Ajoelhem-se Perante Mim",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 50,
+        "resistenciaTipo": "fortitude",
+        "descricao": "O Avatar emite um comando de subserviência. Criaturas à escolha dele em alcance curto ficam caídas e não podem executar ações hostis contra ele por 1 rodada (Fort CD 50 evita a condição e reduz o efeito para penalidade de –5 em testes contra o Avatar por 1 rodada)."
+      },
+      {
+        "nome": "Aura Aterradora",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 50,
+        "resistenciaTipo": "vontade",
+        "descricao": "Aura Aterradora de dragão (Vontade CD 50 evita)."
+      },
+      {
+        "nome": "Cálice",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, o Avatar ignora todas as penalidades e restrições impostas por uma condição ou efeito."
+      },
+      {
+        "nome": "Centelha Divina",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 50,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar lança qualquer magia arcana como um mago de 20º nível sem gastar PM (CD 50, limite de PM 20). Sempre que uma criatura falha no teste de resistência contra uma magia do Avatar, fica abalada (essa condição ignora imunidade a medo e é cumulativa)."
+      },
+      {
+        "nome": "Majestade Altiva",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 50,
+        "resistenciaTipo": "vontade",
+        "descricao": "No início de cada turno do Avatar, todas as criaturas em alcance médio que estejam apavoradas ficam fascinadas (Von CD 50 evita e a criatura não é mais afetada por esta habilidade até o fim do dia)."
+      },
+      {
+        "nome": "Metamorfose Dracônica",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar se transforma em outra criatura, como a magia Metamorfose (mas sem limitação para tamanhos menores que o seu). Se for morto, ele reverte a sua forma original."
+      },
+      {
+        "nome": "Servos de Kallyadranoch",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por cena, o Avatar invoca 6 capangas dragões campeões (um de cada tipo entre ácido, eletricidade, fogo, frio, luz e trevas) que surgem em espaços desocupados em alcance longo. Eles agem no início da próxima rodada do Avatar, têm deslocamento de voo 18m e podem gastar uma ação padrão para emitir um sopro em um cone de 9m, que causa 6d12 pontos de dano de seu tipo de energia. Os dragões são Grandes, têm For 5, Des 1, 110 PV, Defesa 32, imunidades de dragão e a dano de seu tipo, usam os valores do Avatar com –5 para qualquer teste oposto ou de resistência e desaparecem quando mortos ou ao fim da cena."
+      },
+      {
+        "nome": "Sopro Supremo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 50,
+        "resistenciaTipo": "reflexos",
+        "descricao": "O Avatar exala uma combinação de energias em um cone de 30m. Criaturas nessa área sofrem 7d12 pontos de dano de cada tipo de energia entre ácido, eletricidade, fogo, frio, luz e trevas (42d12 no total; Ref CD 50 reduz à metade). Sempre que rolar um 12 em um dado de dano, o Avatar causa +1d12 pontos de dano do mesmo tipo. O sopro ignora RD, e imunidade a esses tipos de dano apenas o reduz à metade. Recarga (movimento)."
+      },
+      {
+        "nome": "Tomar Poder",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar faz um teste de Misticismo para roubar o poder mágico em um raio de 9m em alcance médio. Ele dissipa todas as magias nessa área com CD igual ou menor que o resultado de seu teste e recebe os benefícios dessas magias à escolha dele por 1d4+1 rodadas."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "triplo.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "avatar_de_khalmyr",
+    "nome": "Avatar de Khalmyr",
+    "nd": "20",
+    "regiao": "avatares",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 22,
+    "percepcao": 32,
+    "sentidos": [],
+    "defesa": 66,
+    "resistencias": {
+      "fortitude": 30,
+      "reflexos": 22,
+      "vontade": 38
+    },
+    "rd": {
+      "geral": 20
+    },
+    "imunidadesEfeitos": [
+      "acertos_criticos",
+      "efeitos_mentais",
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +5"
+    ],
+    "pv": 2500,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 14,
+      "des": 6,
+      "con": 16,
+      "int": 8,
+      "sab": 16,
+      "car": 12
+    },
+    "pericias": {
+      "cavalgar": 24,
+      "conhecimento": 30,
+      "diplomacia": 38,
+      "guerra": 34,
+      "intuicao": 40,
+      "investigacao": 34,
+      "nobreza": 34,
+      "religiao": 40
+    },
+    "ataques": [
+      {
+        "nome": "Rhumnam (x4)",
+        "bonusAtaque": 58,
+        "dano": "6d6+40",
+        "danoExtra": "6d8 luz",
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Rhumnam (à distância)",
+        "bonusAtaque": 58,
+        "dano": "6d6+40",
+        "danoExtra": "6d8 luz",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 4,
+        "tipoDano": "corte",
+        "alcance": "médio",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Maior que a Morte",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar é imune a efeitos que matam instantaneamente ou reduzem atributos a 0, e não pode ser mantido morto permanentemente."
+      },
+      {
+        "nome": "Centelha Divina",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 52,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar de Khalmyr pode lançar qualquer magia divina como um clérigo de 20º nível sem gastar PM (CD 52, limite de PM 20). Uma vez por rodada, ele pode lançar Círculo da Justiça como ação livre."
+      },
+      {
+        "nome": "Cura Pelas Mãos",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar cura 10d6+10 pontos de vida por luz de uma criatura em alcance curto e remove dela as condições abalado, apavorado, atordoado, cego, doente, exausto, fatigado e surdo."
+      },
+      {
+        "nome": "Eu Tenho o Tabuleiro",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 52,
+        "resistenciaTipo": "vontade",
+        "descricao": "O Avatar emana uma aura de ordem de 30m de raio. Cada criatura que comece seu turno dentro da aura deve fazer um teste de Vontade (CD 52). Se falhar, até o fim do seu turno todas as suas rolagens de d20 para testes de perícia são automaticamente 10. Se passar no teste de Vontade, a criatura fica imune a esta habilidade pelo resto da cena."
+      },
+      {
+        "nome": "Julgamento dos Culpados",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 52,
+        "resistenciaTipo": "vontade",
+        "descricao": "Uma criatura culpada de crimes graves ou maligna (a critério do mestre) que comece seu turno na aura de ordem do Avatar fica paralisada (Vont CD 52 muda para apavorada e a criatura não pode mais ser paralisada por esta habilidade pelo resto da cena). Esta habilidade afeta mesmo criaturas imunes a efeitos de medo e de movimento."
+      },
+      {
+        "nome": "Julgamento dos Inocentes",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura que, a critério do mestre, seja bondosa ou inocente que comece seu turno na aura de ordem do Avatar recebe +6 em testes de ataque e na Defesa, e redução de dano 10."
+      },
+      {
+        "nome": "Pilar da Criação",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar recebe +6 na Defesa e redução de dano 30 até o fim da cena ou até encerrar esta habilidade (uma ação livre), mas seu deslocamento é reduzido à metade e ele não pode correr ou fazer investidas."
+      },
+      {
+        "nome": "Rhumnam",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando o Avatar acerta um ataque com Rhumnam em uma criatura culpada de crimes graves ou maligna (a critério do mestre), a criatura é completamente destruída. Contra inocentes, os ataques do Avatar com Rhumnam não causam dano. Além disso, enquanto estiver empunhando Rhumnam, o Avatar recebe imunidade a magias arcanas."
+      },
+      {
+        "nome": "Ver Além da Mentira",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar está permanentemente sob o efeito básico da magia Visão da Verdade."
+      }
+    ],
+    "equipamento": [
+      "balas_x20",
+      "baluarte_anao",
+      "rhumnam"
+    ],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "avatar_de_lena",
+    "nome": "Avatar de Lena",
+    "nd": "20",
+    "regiao": "avatares",
+    "papel": "especial",
+    "tipo": "espirito",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 22,
+    "percepcao": 34,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 59,
+    "resistencias": {
+      "fortitude": 28,
+      "reflexos": 20,
+      "vontade": 34
+    },
+    "rd": {
+      "geral": 20
+    },
+    "imunidadesEfeitos": [
+      "cansaco",
+      "efeitos_de_metabolismo",
+      "medo",
+      "necromancia"
+    ],
+    "imunidadesDano": [
+      "trevas"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 900,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 6,
+      "con": 12,
+      "int": 8,
+      "sab": 18,
+      "car": 14
+    },
+    "pericias": {
+      "cura": 39,
+      "diplomacia": 35,
+      "intuicao": 34,
+      "misticismo": 26,
+      "religiao": 39
+    },
+    "ataques": [],
+    "habilidades": [
+      {
+        "nome": "Abençoar a Chegada",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se o Avatar de Lena estiver presente durante o nascimento de uma criança, o parto transcorre sem nenhum problema. Além disso, ela chega a Arton sob as bênçãos de saúde e graça da deusa e recebe +1 em Constituição e Carisma."
+      },
+      {
+        "nome": "Aura de Vida",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar emite uma aura de luz de 30m. No início de cada turno dele, todas as criaturas nessa área curam 50 PV."
+      },
+      {
+        "nome": "Centelha Divina",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 51,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar lança qualquer magia divina como um clérigo de 20º nível sem gastar PM (CD 51, limite de PM 40). Ele jamais usa magias que causam dano ou perda de PV, nem magias que aumentem o dano letal de seus aliados."
+      },
+      {
+        "nome": "Transferir Vitalidade",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, o Avatar gasta qualquer quantidade dos seus pontos de vida para curar dano ou condições de criaturas em alcance curto, à taxa de 1 PV por 1 ponto de vida curado ou 3 PV por condição removida, entre abalado, apavorado, alquebrado, atordoado, cego, confuso, debilitado, enjoado, esmorecido, exausto, fascinado, fatigado, fraco, frustrado, ofuscado, pasmo, sangrando, surdo ou vulnerável."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "avatar_de_lin_wu",
+    "nome": "Avatar de Lin-Wu",
+    "nd": "19",
+    "regiao": "avatares",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": "dragao",
+    "tamanho": "enorme",
+    "iniciativa": 29,
+    "percepcao": 35,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 56,
+    "resistencias": {
+      "fortitude": 19,
+      "reflexos": 27,
+      "vontade": 33
+    },
+    "rd": {
+      "geral": 30
+    },
+    "imunidadesEfeitos": [
+      "atordoamento",
+      "efeitos_de_metabolismo",
+      "ilusao",
+      "medo",
+      "metamorfose",
+      "paralisia"
+    ],
+    "imunidadesDano": [
+      "eletricidade"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +5"
+    ],
+    "pv": 1284,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 15.0,
+      "voo": 30.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 12,
+      "des": 12,
+      "con": 10,
+      "int": 8,
+      "sab": 18,
+      "car": 10
+    },
+    "pericias": {
+      "atletismo": 29,
+      "conhecimento": 28,
+      "guerra": 28,
+      "intimidacao": 27,
+      "intuicao": 35,
+      "nobreza": 33,
+      "religiao": 38
+    },
+    "ataques": [
+      {
+        "nome": "Kaminari (x2)",
+        "bonusAtaque": 54,
+        "dano": "1d4+72",
+        "danoExtra": "1d4+30 eletricidade",
+        "margemAmeaca": 17,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 52,
+        "dano": "1d4+40",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Centelha Divina",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 48,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar de Lin-Wu lança qualquer magia divina como um clérigo de 19º nível sem gastar PM (CD 48, limite de PM 19). Uma vez por rodada, ele pode lançar Fúria do Panteão como uma ação livre. Alternativamente, com o suplemento Ameaças de Arton, em vez disso ele lança Katana Celestial."
+      },
+      {
+        "nome": "Dragão Divino",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar tem todas as habilidades de dragões celestiais."
+      },
+      {
+        "nome": "Explosão de Relâmpagos",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 49,
+        "resistenciaTipo": "reflexos",
+        "descricao": "Quando o Avatar acerta um ataque com Kaminari, outras criaturas a 6m do alvo desse ataque sofrem 30 pontos de dano de eletricidade (Ref CD 49 reduz à metade)."
+      },
+      {
+        "nome": "Kiai Celestial",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar sempre causa dano máximo, sem necessidade de rolar dados (já contabilizado nos valores de dano acima)."
+      },
+      {
+        "nome": "Mil Cortes",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar faz um ataque com Kaminari em um cone de 30m. Ele faz um único ataque e compara o resultado com a Defesa de todas as criaturas na área. Então faz uma única rolagem de dano e aplica-a em cada inimigo atingido. Caso o ataque seja um acerto crítico, o Avatar pode usar esta habilidade uma segunda vez. Recarga (movimento)."
+      },
+      {
+        "nome": "Punir a Desonra",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando ataca uma criatura que possui um código de conduta (como Código de Honra ou devoção a alguma divindade) e que, a critério do mestre, não esteja obedecendo a esse código, o Avatar rola dois dados e escolhe o melhor resultado."
+      }
+    ],
+    "equipamento": [
+      "kaminari"
+    ],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "avatar_de_marah",
+    "nome": "Avatar de Marah",
+    "nd": "19",
+    "regiao": "avatares",
+    "papel": "especial",
+    "tipo": "espirito",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 27,
+    "percepcao": 29,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 48,
+    "resistencias": {
+      "fortitude": 29,
+      "reflexos": 36,
+      "vontade": 42
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [
+      "atordoamento",
+      "efeitos_mentais",
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +5"
+    ],
+    "pv": 789,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 10,
+      "con": 8,
+      "int": 8,
+      "sab": 12,
+      "car": 20
+    },
+    "pericias": {
+      "acrobacia": 27,
+      "atuacao": 45,
+      "conhecimento": 25,
+      "diplomacia": 40,
+      "enganacao": 35,
+      "intuicao": 29,
+      "misticismo": 25,
+      "religiao": 29
+    },
+    "ataques": [],
+    "habilidades": [
+      {
+        "nome": "Maior que a Morte",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar é imune a efeitos que matam instantaneamente ou reduzem atributos a 0, e não pode ser mantido morto permanentemente."
+      },
+      {
+        "nome": "Bênção da Calmaria",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 53,
+        "resistenciaTipo": "vontade",
+        "descricao": "O Avatar de Marah emana uma aura de calmaria de 30m. Qualquer criatura nessa área que tente executar uma ação hostil deve fazer um teste de Vontade (CD 53). Se falhar, perde a ação. Se passar, pode agir normalmente, mas perde 2d6 PM ao fim do seu turno. Caso os PM da criatura sejam reduzidos a 0 por esta habilidade, ela fica enfeitiçada e perde a vontade de lutar por 1 dia."
+      },
+      {
+        "nome": "Coração Gentil",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz um teste de uma perícia baseada em Sabedoria ou Carisma, o Avatar rola dois dados e usa o melhor resultado."
+      },
+      {
+        "nome": "Centelha Divina",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 49,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar pode lançar qualquer magia divina como um clérigo de 19º nível sem gastar PM (CD 49, 53 para encantamento e ilusão, limite de PM 20). Uma vez por rodada, ele pode lançar Enfeitiçar como ação livre."
+      },
+      {
+        "nome": "Faça Amor, Não Faça Guerra",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Qualquer criatura dentro da Bênção da Calmaria do Avatar que aceitar encerrar um conflito de maneira pacífica recebe +3 PM por nível até o fim da aventura. Esses bônus desaparecem caso a criatura execute qualquer ação hostil."
+      },
+      {
+        "nome": "Incitar Paixão",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar e todos os seus aliados em alcance médio recebem +5 em testes de perícia e 40 PM temporários até o fim da cena. Qualquer criatura que executar uma ação hostil perde esses bônus."
+      },
+      {
+        "nome": "Música da Calmaria",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar possui todos os poderes de Música de Bardo e pode usá-los sem gastar PM."
+      }
+    ],
+    "equipamento": [
+      "pandeiro_aprimorado",
+      "veu_do_desejo"
+    ],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "avatar_de_megalokk",
+    "nome": "Avatar de Megalokk",
+    "nd": "20",
+    "regiao": "avatares",
+    "papel": "solo",
+    "tipo": "monstro",
+    "subtipo": "kaiju",
+    "tamanho": "colossal",
+    "iniciativa": 26,
+    "percepcao": 27,
+    "sentidos": [
+      "visao_no_escuro",
+      "faro"
+    ],
+    "defesa": 57,
+    "resistencias": {
+      "fortitude": 40,
+      "reflexos": 29,
+      "vontade": 18
+    },
+    "rd": {
+      "geral": 50
+    },
+    "imunidadesEfeitos": [
+      "efeitos_de_metabolismo",
+      "efeitos_mentais",
+      "medo",
+      "metamorfose",
+      "paralisia"
+    ],
+    "imunidadesDano": [
+      "veneno"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 1800,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 18.0,
+      "voo": 12.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 18,
+      "des": 8,
+      "con": 20,
+      "int": 3,
+      "sab": 6,
+      "car": 6
+    },
+    "pericias": {
+      "atletismo": 39,
+      "intimidacao": 32,
+      "sobrevivencia": 32
+    },
+    "ataques": [
+      {
+        "nome": "Mordida (x4)",
+        "bonusAtaque": 54,
+        "dano": "4d20+20",
+        "danoExtra": null,
+        "margemAmeaca": 17,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 54,
+        "dano": "2d20+20",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Maior que a Morte",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar é imune a efeitos que matam instantaneamente ou reduzem atributos a 0, e não pode ser mantido morto permanentemente."
+      },
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Mordida (teste +64)."
+      },
+      {
+        "nome": "Engolir",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se o Avatar de Megalokk começar seu turno agarrando uma criatura menor que ele, pode fazer um teste de agarrar contra ela. Se vencer, engole a criatura. Uma criatura engolida continua agarrada, fica cega, tem cobertura total contra efeitos vindos do lado de fora do Avatar (e vice-versa) e sofre 6d12+20 pontos de dano de impacto no início de cada turno do Avatar. O Avatar pode manter quantas criaturas engolidas quiser. Uma criatura engolida pode escapar causando 100 pontos de dano ao estômago do Avatar (Defesa 30). Isso faz com que ela seja regurgitada e fique caída na frente do monstro."
+      },
+      {
+        "nome": "Incontível",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Sempre que falha em um teste de resistência contra um efeito com duração maior que instantânea, o Avatar pode fazer um novo teste contra esse efeito no início do seu próximo turno. A cada novo teste de resistência contra o mesmo efeito, o Avatar recebe um bônus cumulativo de +5 no teste."
+      },
+      {
+        "nome": "Presas Monstruosas",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 48,
+        "resistenciaTipo": null,
+        "descricao": "Cada vez que o Avatar acerta um ataque com suas Presas Monstruosas, ele gera um dos efeitos abaixo, definido aleatoriamente. 1) Basilisco: a criatura atingida fica lenta (Fort CD 48 reduz a duração para 1 rodada); caso uma criatura lenta dessa forma seja atingida novamente e falhe no teste de Fortitude, fica petrificada. 2) Dragão: a criatura atingida sofre 4d12 pontos de dano de fogo e sua armadura ou escudo (à escolha dela) fica avariado (Ref CD 48 reduz à metade e evita a condição). 3) Lobo Atroz: a criatura atingida fica sangrando (Ref CD 48 evita); esse sangramento causa a perda de 2d6 PV, em vez do normal. 4) Serpe: o ataque inocula veneno de serpe divina."
+      },
+      {
+        "nome": "Presença Selvagem",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 48,
+        "resistenciaTipo": "vontade",
+        "descricao": "O Avatar emana uma aura de violência de 30m de raio. No início de seus turnos, cada criatura nessa área deve fazer um teste de Vontade (CD 48). Se falhar, fica esmorecida. Se já estiver esmorecida, em vez disso entra em um frenesi selvagem por 1 rodada; em seu próximo turno, ela deve atacar a criatura mais próxima, mesmo que seja um aliado."
+      },
+      {
+        "nome": "Rasgar Montanhas",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 48,
+        "resistenciaTipo": "reflexos",
+        "descricao": "O Avatar desfere um golpe concentrado que atinge todas as criaturas em um cubo de 15m de lado adjacente a ele. Criaturas nessa área sofrem 10d20+70 pontos de dano de corte e ficam caídas (Ref CD 48 reduz à metade e evita a condição). Recarga (movimento)."
+      },
+      {
+        "nome": "Titânico",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 48,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar é imune a manobras de combate, não pode ser flanqueado e sofre metade do dano de efeitos que não sejam de outra criatura Titânica. Quando se move, pisoteia qualquer criatura ou objeto Enorme ou menor em seu caminho (atravessando seu espaço), causando 20d6 pontos de dano de impacto (uma vez por rodada por criatura, Ref CD 48 reduz à metade). Além disso, ele ignora redução de dano e seus ataques atingem todas as criaturas em um quadrado de 6m (para cada ataque, ele faz um único teste de ataque e compara o resultado com a Defesa de cada inimigo na área)."
+      },
+      {
+        "nome": "Veneno",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 48,
+        "resistenciaTipo": null,
+        "descricao": "Peçonha de Serpe Divina (fica fraco e perde 4d12 pontos de vida por rodada durante 10 rodadas, Fort CD 48 reduz para 1 rodada). Este veneno ignora qualquer imunidade a venenos."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "avatar_de_nimb",
+    "nome": "Avatar de Nimb",
+    "nd": "20",
+    "regiao": "avatares",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": "nimb",
+    "tamanho": "medio",
+    "iniciativa": 31,
+    "percepcao": 0,
+    "sentidos": [],
+    "defesa": 61,
+    "resistencias": {
+      "fortitude": 27,
+      "reflexos": 33,
+      "vontade": 39
+    },
+    "rd": {
+      "geral": 21
+    },
+    "imunidadesEfeitos": [
+      "efeitos_de_adivinhacao",
+      "efeitos_de_encantamento",
+      "metamorfose",
+      "efeitos_mentais"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 4777,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 0.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 9,
+      "des": 11,
+      "con": 7,
+      "int": 17,
+      "sab": null,
+      "car": 13
+    },
+    "pericias": {
+      "diplomacia": 31,
+      "jogatina": 43
+    },
+    "ataques": [],
+    "habilidades": [
+      {
+        "nome": "Maior que a Morte",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar é imune a efeitos que matam instantaneamente ou reduzem atributos a 0, e não pode ser mantido morto permanentemente."
+      },
+      {
+        "nome": "Percepção e Sabedoria Imprevisíveis",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A Percepção do Avatar é 1d20+21, rolada a cada teste. Sua Sabedoria é sempre 1d20, rolada no início de cada cena (afetando quaisquer testes e CDs que dependam desse atributo)."
+      },
+      {
+        "nome": "Perícias Aleatórias",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Além de Diplomacia e Jogatina, o Avatar possui 1d12 perícias adicionais, definidas aleatoriamente no início da cena, cada uma em +13."
+      },
+      {
+        "nome": "Aura Caótica Derradeira",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar de Nimb emana uma aura de puro Caos capaz de distorcer a própria existência de seus inimigos. No início do turno do Avatar, cada criatura em um raio de 90m perde 8d6 pontos de vida. Cada vez que rolar o valor máximo em um dado de dano da aura, role um dado extra e some ao dano total desta habilidade."
+      },
+      {
+        "nome": "Centelha Divina",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 55,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar pode lançar qualquer magia divina como um clérigo de 19,5º nível sem gastar PM (CD 55, limite de PM 21). Sempre que uma criatura obtém um resultado 1 no dado em um teste de resistência contra uma magia do Avatar, ela fica confusa."
+      },
+      {
+        "nome": "Eu Movo as Peças!",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No começo da rodada, o Avatar rola 1d6 e move cada criatura a sua escolha em alcance médio um número de quadrados igual ao resultado, em uma direção a sua escolha."
+      },
+      {
+        "nome": "Mimsicais Dados Frumiosos",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 55,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar faz alguma coisa que gera um efeito inesperado. Role 1d7: 1) role novamente, escolha outro efeito desta tabela e role novamente; 2) inimigos em alcance médio sofrem 10d12 de dano de impacto e ficam surdos (Fort CD 55 reduz à metade e evita a condição); 3) inimigos em uma linha de 15m sofrem 12d10+10d8 de dano psíquico e ficam confusos (Von CD 55 reduz à metade e evita a condição); 4) o Avatar recupera 20d10 PV e cura uma condição; 5) cada criatura em um cone de 18m sofre 10d12 de dano de fogo e 10d12 de dano de impacto e recebe tibares iguais ao dano causado (Ref CD 55 reduz o dano e os tibares à metade); 6) todos os efeitos de 2 a 5 ocorrem ao mesmo tempo; 7) todos os efeitos acima e o Avatar ainda ganha um queijo."
+      },
+      {
+        "nome": "Ódio ao Previsível",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 55,
+        "resistenciaTipo": "vontade",
+        "descricao": "O Avatar odeia previsibilidade e pune quem não guarda nenhuma surpresa. Sempre que uma criatura em alcance médio escolher 10 em um teste ou executar a mesma ação que executou em sua rodada anterior, o Avatar causa a ela 10d20 pontos de dano psíquico e a criatura não pode mais executar essa ação ou escolher 10 com essa perícia específica até o fim da cena (Von CD 55 reduz à metade e evita a restrição de ações)."
+      },
+      {
+        "nome": "Ou Não",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por cena, o Avatar desfaz uma série de acontecimentos recentes. Quando ele usa esta habilidade, todos os eventos da rodada atual são desfeitos (como se nunca tivessem ocorrido) e o presente retorna para o início da rodada anterior do Avatar. Esta habilidade afeta apenas os eventos da cena atual."
+      },
+      {
+        "nome": "Sorrelfliflo Galunflante",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar tem todos os deslocamentos que existem nos livros, que existiram em livros passados e que existirão em livros futuros, ou não."
+      },
+      {
+        "nome": "Sorte e Azar",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No final de cada turno do Avatar, role 1d6. Em um valor ímpar, até o início do próximo turno do Avatar todos os sucessos em testes se tornam falhas e todas as falhas se tornam sucessos (para efeito de margens de ameaça e habilidades, um resultado 1 no d20 equivale a um 20, um 2 equivale a um 19 e assim por diante)."
+      }
+    ],
+    "equipamento": [
+      "item_aleatorio_1",
+      "item_aleatorio_2",
+      "item_aleatorio_3",
+      "um_queijo"
+    ],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "avatar_de_sszzaas",
+    "nome": "Avatar de Sszzaas",
+    "nd": "19",
+    "regiao": "avatares",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 34,
+    "percepcao": 30,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 59,
+    "resistencias": {
+      "fortitude": 26,
+      "reflexos": 30,
+      "vontade": 33
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [
+      "veneno"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 1007,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 7,
+      "des": 14,
+      "con": 6,
+      "int": 20,
+      "sab": 10,
+      "car": 17
+    },
+    "pericias": {
+      "acrobacia": 31,
+      "conhecimento": 40,
+      "diplomacia": 34,
+      "enganacao": 37,
+      "furtividade": 31,
+      "intuicao": 30,
+      "investigacao": 37,
+      "ladinagem": 31,
+      "misticismo": 37,
+      "oficio_alquimista": 37
+    },
+    "ataques": [
+      {
+        "nome": "Inoculadora",
+        "bonusAtaque": 52,
+        "dano": "1d4+31",
+        "danoExtra": null,
+        "margemAmeaca": 15,
+        "multiplicadorCritico": 4,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Evasão Aprimorada",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar possui Evasão Aprimorada."
+      },
+      {
+        "nome": "Maior que a Morte",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar é imune a efeitos que matam instantaneamente ou reduzem atributos a 0, e não pode ser mantido morto permanentemente."
+      },
+      {
+        "nome": "Não Pode Ser Flanqueado ou Surpreendido",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar não pode ser flanqueado ou surpreendido."
+      },
+      {
+        "nome": "Ataque Furtivo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "+10d8 de dano em ataque furtivo."
+      },
+      {
+        "nome": "Centelha Divina",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 49,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar de Sszzaas pode lançar qualquer magia divina, ou magia arcana de ilusão, como um clérigo de 19º nível sem gastar PM (CD 49, limite de PM 20) usando apenas concentração (Magia Discreta). Outros personagens só percebem que ele lançou uma magia se passarem num teste de Misticismo (CD 40)."
+      },
+      {
+        "nome": "Falso Amigo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando usa Disfarce Ilusório para mudar a própria aparência, o Avatar recebe um bônus adicional de +10 nos testes de Enganação. Alternativamente, com o suplemento Ameaças de Arton, ele pode agir como um falso amigo mestre de qualquer tipo."
+      },
+      {
+        "nome": "Manto do Traidor",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar pode se esconder mesmo sem camuflagem ou cobertura disponíveis, não sofre penalidade em testes de Furtividade por se mover ao seu deslocamento normal e reduz a penalidade em Furtividade por atacar e fazer outras ações chamativas para –5."
+      },
+      {
+        "nome": "Reviravolta",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O alvo do primeiro ataque do Avatar em cada cena é considerado desprevenido."
+      },
+      {
+        "nome": "Senhor da Intriga",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz um teste de uma perícia baseada em Inteligência ou Carisma, o Avatar rola dois dados e usa o melhor resultado."
+      },
+      {
+        "nome": "Trocar de Pele",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 49,
+        "resistenciaTipo": "vontade",
+        "descricao": "Uma vez por rodada, ao ser alvo de um efeito hostil, o Avatar pode trocar de lugar com uma criatura em alcance médio (Von CD 49 evita). A criatura trocada passa a ser o novo alvo da ação."
+      },
+      {
+        "nome": "Veneno",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 49,
+        "resistenciaTipo": null,
+        "descricao": "Peçonha anciã (perde 3d12 pontos de vida por rodada durante 3 rodadas, ignora imunidade a veneno, Fort CD 49 reduz a duração para 1 rodada)."
+      }
+    ],
+    "equipamento": [
+      "inoculadora"
+    ],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "avatar_de_tanna_toh",
+    "nome": "Avatar de Tanna-Toh",
+    "nd": "20",
+    "regiao": "avatares",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 23,
+    "percepcao": 35,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 57,
+    "resistencias": {
+      "fortitude": 27,
+      "reflexos": 35,
+      "vontade": 41
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [
+      "efeitos_mentais",
+      "ilusao"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 953,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 6.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 6,
+      "con": 6,
+      "int": 20,
+      "sab": 14,
+      "car": 8
+    },
+    "pericias": {
+      "atuacao": 29,
+      "conhecimento": 41,
+      "cura": 32,
+      "intuicao": 35,
+      "misticismo": 38,
+      "nobreza": 38,
+      "religiao": 35
+    },
+    "ataques": [
+      {
+        "nome": "Cajado do Poder",
+        "bonusAtaque": 54,
+        "dano": "1d6+20",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Maior que a Morte",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar é imune a efeitos que matam instantaneamente ou reduzem atributos a 0, e não pode ser mantido morto permanentemente."
+      },
+      {
+        "nome": "Centelha Divina",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 51,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar de Tanna-Toh pode lançar qualquer magia arcana ou divina como um conjurador de 19º nível sem gastar PM (CD 51, limite de PM 20). Uma vez por rodada, pode lançar a magia Comando como ação livre."
+      },
+      {
+        "nome": "Compartilhar Conhecimento",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura em alcance curto se torna treinada em uma perícia em que não era treinada. Este efeito dura até o fim do dia."
+      },
+      {
+        "nome": "Golpe Semântico",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar pode substituir testes de Diplomacia e Intimidação por testes de Conhecimento."
+      },
+      {
+        "nome": "Mestra da Verdade",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar sempre sabe quando alguém está mentindo. Além disso, quando faz um teste de uma perícia baseada em Inteligência ou Sabedoria, ele rola dois dados e escolhe o melhor resultado."
+      },
+      {
+        "nome": "Plantar Curiosidade",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 51,
+        "resistenciaTipo": "vontade",
+        "descricao": "Uma criatura adjacente é infundida de imensa curiosidade e necessidade de cumprir uma tarefa à escolha do Avatar pela próxima semana. Enquanto está nessa missão, o alvo recebe +2 em testes de perícia. O Avatar não pode escolher missões suicidas ou que contrariem as Obrigações & Restrições de Tanna-Toh. A criatura pode recusar a missão — mas, no fim de cada dia em que não se esforçar para cumprir a tarefa, deve fazer um teste de Vontade (CD 51); se falhar, sofre uma penalidade cumulativa de –2 em todos os testes e rolagens."
+      },
+      {
+        "nome": "Poder das Histórias",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar retira de sua bolsa um livro da Biblioteca de Tanna-Toh, com histórias tão poderosas que seus personagens escapam das páginas. O Avatar invoca uma ou mais criaturas em alcance curto, cujo ND total somado seja igual ao seu. As criaturas surgem em alcance curto e agem a partir da próxima rodada, em suas iniciativas."
+      }
+    ],
+    "equipamento": [
+      "cajado_do_poder",
+      "robe_professoral"
+    ],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "avatar_de_tenebra",
+    "nome": "Avatar de Tenebra",
+    "nd": "20",
+    "regiao": "avatares",
+    "papel": "solo",
+    "tipo": "mortoVivo",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 30,
+    "percepcao": 28,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 63,
+    "resistencias": {
+      "fortitude": 22,
+      "reflexos": 30,
+      "vontade": 36
+    },
+    "rd": {
+      "geral": 20
+    },
+    "imunidadesEfeitos": [
+      "efeitos_de_sentidos",
+      "encantamento",
+      "escuridao",
+      "dano_de_luz",
+      "dano_de_trevas"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +5"
+    ],
+    "pv": 1750,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 18.0,
+      "voo": 24.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 8,
+      "des": 12,
+      "con": 8,
+      "int": 15,
+      "sab": 10,
+      "car": 16
+    },
+    "pericias": {
+      "acrobacia": 30,
+      "atuacao": 34,
+      "diplomacia": 34,
+      "enganacao": 34,
+      "furtividade": 33,
+      "intimidacao": 34,
+      "misticismo": 36,
+      "religiao": 31
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 55,
+        "dano": "3d8+35",
+        "danoExtra": "2d12 trevas",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 4,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x4)",
+        "bonusAtaque": 52,
+        "dano": "3d10+30",
+        "danoExtra": "2d12 trevas",
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Maior que a Morte",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar é imune a efeitos que matam instantaneamente ou reduzem atributos a 0, e não pode ser mantido morto permanentemente."
+      },
+      {
+        "nome": "Centelha Divina",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 51,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar de Tenebra pode lançar qualquer magia como um clérigo de 20º nível sem gastar PM (CD 51, limite de PM 20). Para magias de necromancia, o Avatar recebe +4 na CD e no limite de PM."
+      },
+      {
+        "nome": "Deusa das Trevas",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Todo dano de trevas causado pelo Avatar ignora redução de dano e, contra criaturas imunes a trevas, ainda causa metade do dano."
+      },
+      {
+        "nome": "Dominação Sombria",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 51,
+        "resistenciaTipo": "vontade",
+        "descricao": "O Avatar sussurra palavras de controle para criaturas a sua escolha em alcance curto. Cada criatura fica confusa, enfeitiçada ou fascinada até o fim da cena, ou perde suas memórias da última hora, à escolha do Avatar (Von CD 51 evita). Uma criatura só pode ser alvo desta habilidade uma vez por cena."
+      },
+      {
+        "nome": "Drenar Sangue",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 51,
+        "resistenciaTipo": "fortitude",
+        "descricao": "O Avatar causa 13d8 pontos de dano de trevas em uma criatura viva em alcance curto (Fort CD 51 reduz à metade) e recupera PV em valor igual ao dano causado. Uma criatura morta dessa forma se erguerá como um vampiro na próxima noite e deverá vencer um teste de Vontade oposto contra o Avatar ou ficará sob o controle dele até ser libertada ou destruída."
+      },
+      {
+        "nome": "Filhos das Trevas",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando sofre dano, o Avatar transfere esse dano para outro morto-vivo em alcance longo."
+      },
+      {
+        "nome": "Hordas dos Mortos",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar invoca um ou mais mortos-vivos a sua escolha, cujo ND total somado seja igual a 20. Eles surgem em um espaço desocupado em alcance curto, obedecem aos comandos do Avatar e agem a partir da próxima rodada, em suas iniciativas. O Avatar só pode usar esta habilidade novamente quando todos os mortos-vivos forem eliminados."
+      },
+      {
+        "nome": "Manto da Noite",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 51,
+        "resistenciaTipo": "vontade",
+        "descricao": "O Avatar emana uma aura de 30m de raio de escuridão total, que fornece camuflagem total e bloqueia a visão na área e através dela. Qualquer criatura que tente usar uma habilidade mágica de luz dentro da aura deve passar em um teste de Vontade (CD 51). Se falhar, a habilidade não tem efeito, mas quaisquer custos são pagos."
+      },
+      {
+        "nome": "Olhos Sombrios",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar está permanentemente sob o efeito básico da magia Visão da Verdade."
+      },
+      {
+        "nome": "Presença Majestosa",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 51,
+        "resistenciaTipo": "vontade",
+        "descricao": "Qualquer criatura que tente executar uma ação hostil contra o Avatar deve fazer um teste de Vontade (CD 51). Se falhar, perde a ação (apenas uma vez por cena)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "avatar_de_thwor",
+    "nome": "Avatar de Thwor",
+    "nd": "18",
+    "regiao": "avatares",
+    "papel": "solo",
+    "tipo": "humanoide",
+    "subtipo": "bugbear",
+    "tamanho": "enorme",
+    "iniciativa": 25,
+    "percepcao": 27,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 56,
+    "resistencias": {
+      "fortitude": 32,
+      "reflexos": 22,
+      "vontade": 22
+    },
+    "rd": {
+      "adamante": 20
+    },
+    "imunidadesEfeitos": [
+      "cansaco",
+      "efeitos_mentais",
+      "efeitos_de_metabolismo",
+      "paralisia"
+    ],
+    "imunidadesDano": [
+      "veneno"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +10"
+    ],
+    "pv": 1100,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 15.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 14,
+      "des": 8,
+      "con": 12,
+      "int": 10,
+      "sab": 10,
+      "car": 10
+    },
+    "pericias": {
+      "atletismo": 34,
+      "diplomacia": 30,
+      "guerra": 35,
+      "intimidacao": 30,
+      "religiao": 30
+    },
+    "ataques": [
+      {
+        "nome": "Machado de Guerra (x3)",
+        "bonusAtaque": 49,
+        "dano": "4d10+20",
+        "danoExtra": "2d8 corte",
+        "margemAmeaca": 15,
+        "multiplicadorCritico": 3,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Centelha Divina",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 47,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar de Thwor lança qualquer magia divina como um clérigo de 18º nível, sem gastar PM (CD 47, limite de PM 18)."
+      },
+      {
+        "nome": "Discurso Impactante",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 47,
+        "resistenciaTipo": "vontade",
+        "descricao": "Uma vez por cena, o Avatar faz um discurso que leva todas as criaturas em um raio de 30m a questionarem suas próprias crenças. Devotos de outros deuses perdem seus PM e ficam abalados, enquanto criaturas inteligentes (Int –3 ou mais) sem devoção passam a obedecer às Obrigações & Restrições de Thwor até o fim da cena (Von CD 47 evita). Devotos de Thwor na área afetada recuperam todos os seus PM e recebem +2 em testes de perícia até o fim da cena. Mental."
+      },
+      {
+        "nome": "Encarnação do Mundo Como Deve Ser",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar começa com todos os poderes a seguir (Luz, Início, Movimento, Continuidade, Eles, Conhecimento, Fora, Vida). Para cada 100 pontos de vida que ele tiver abaixo de seu máximo de PV, perde um desses poderes em ordem a partir de Vida (ele recupera os poderes se recuperar seus PV)."
+      },
+      {
+        "nome": "Luz",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 47,
+        "resistenciaTipo": null,
+        "descricao": "Quando fosse sofrer dano de luz, em vez disso o Avatar causa essa mesma quantidade de dano em uma criatura em alcance curto e a deixa ofuscada (Ref CD 47 reduz à metade e evita a condição)."
+      },
+      {
+        "nome": "Início",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Todas as criaturas em um raio de 30m voltam ao início do turno anterior do Avatar. Todas as ações a partir desse ponto são desfeitas (isso inclui as consequências dessas ações, como perda de PV e PM). Com exceção do Avatar, nenhuma outra criatura sabe o que vai acontecer e todas devem executar as mesmas ações que realizaram originalmente (mas quaisquer dados devem ser rolados novamente)."
+      },
+      {
+        "nome": "Movimento",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar executa uma ação padrão adicional por turno."
+      },
+      {
+        "nome": "Continuidade",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando um inimigo em alcance médio faz um teste de resistência contra uma magia do Avatar, se um sucesso nesse teste reduziria a duração do efeito, o inimigo faz o teste duas vezes e usa o pior resultado."
+      },
+      {
+        "nome": "Eles",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Inimigos do Avatar em um raio de 30m não são considerados aliados uns dos outros para efeitos de suas próprias habilidades."
+      },
+      {
+        "nome": "Conhecimento",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar recebe +10 em sua resistência a magia."
+      },
+      {
+        "nome": "Fora",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando um inimigo em alcance médio usa uma habilidade em área ou que afeta vários aliados, esse inimigo não é incluído na própria habilidade."
+      },
+      {
+        "nome": "Vida",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar recebe cura acelerada 20."
+      },
+      {
+        "nome": "O Ayrrak",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando o Avatar sofre uma condição ou dano, ele os transfere para um outro duyshidakk em alcance longo."
+      },
+      {
+        "nome": "Ordens de Ataque",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, o Avatar ordena um aliado duyshidakk em alcance médio a fazer uma ação agredir como uma reação, imediatamente."
+      },
+      {
+        "nome": "Presença Motivadora",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar emana uma aura de euforia em um raio de 30m. Aliados duyshidakk nessa área recebem +5 na Defesa e em testes de perícia."
+      }
+    ],
+    "equipamento": [
+      "machado_de_guerra_magnifico_gigante_atroz_de_adamante"
+    ],
+    "tesouro": "dobro.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "avatar_de_thyatis",
+    "nome": "Avatar de Thyatis",
+    "nd": "19",
+    "regiao": "avatares",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 25,
+    "percepcao": 36,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 59,
+    "resistencias": {
+      "fortitude": 19,
+      "reflexos": 32,
+      "vontade": 26
+    },
+    "rd": {
+      "trevas": 10
+    },
+    "imunidadesEfeitos": [
+      "doencas",
+      "medo"
+    ],
+    "imunidadesDano": [
+      "fogo"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 1140,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 0.0,
+      "voo": 18.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 12,
+      "des": 8,
+      "con": 12,
+      "int": 11,
+      "sab": 16,
+      "car": 10
+    },
+    "pericias": {
+      "conhecimento": 31,
+      "diplomacia": 30,
+      "intuicao": 36,
+      "religiao": 33
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 52,
+        "dano": "5d10+30",
+        "danoExtra": "20d6+30 fogo",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 52,
+        "dano": "5d8+30",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Evasão",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar possui Evasão."
+      },
+      {
+        "nome": "Maior que a Morte",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar é imune a efeitos que matam instantaneamente ou reduzem atributos a 0, e não pode ser mantido morto permanentemente."
+      },
+      {
+        "nome": "Armas Abençoadas",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "As armas naturais do Avatar de Thyatis são consideradas mágicas e sagradas; elas causam +4d8 pontos de dano contra devotos de deuses que canalizam apenas energia negativa e criaturas malignas (a critério do mestre)."
+      },
+      {
+        "nome": "Canto da Fênix",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 47,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Quando o Avatar chega a 0 PV ou menos, seu corpo explode. Todas as criaturas em um raio de 30m sofrem 300 pontos de dano de fogo (Fort CD 47 reduz à metade)."
+      },
+      {
+        "nome": "Centelha Divina",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 47,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar pode lançar qualquer magia divina como um clérigo de 19º nível sem gastar PM (CD 47, limite de PM 19). Uma vez por rodada, ele pode lançar Alterar Destino ou Segunda Chance como uma ação livre."
+      },
+      {
+        "nome": "Destino Reescrito",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma criatura que morra na presença do Avatar é ressuscitada 1d6 rodadas após sua morte. Pelas próximas 24 horas essa criatura ficará inconsciente, imersa em um sono profundo permeado por visões enviadas por Thyatis. As visões revelam o motivo da presença do Avatar e carregam um comando que deve ser obedecido pela criatura. Até que a missão seja cumprida, a cada semana em que a criatura não estiver ativamente buscando cumpri-la, ela recebe uma penalidade cumulativa de –2 em todos os testes."
+      },
+      {
+        "nome": "Fogo Purificador",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Dano de fogo causado pelo Avatar ignora RD, e imunidade a fogo apenas o reduz à metade."
+      },
+      {
+        "nome": "Não Há Morte",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando o Avatar explode por sua habilidade Canto da Fênix, ressurge no mesmo local, 1d6 rodadas depois. Ele retorna completamente restaurado, mas com apenas metade dos seus pontos de vida iniciais. Ele não pode usar esta habilidade novamente até recuperar todos os seus PV."
+      },
+      {
+        "nome": "Telepatia Inata",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar pode se comunicar telepaticamente com qualquer criatura em alcance longo."
+      },
+      {
+        "nome": "Visão Flamejante",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar está permanentemente sob efeito das magias Visão Mística, com o aprimoramento que permite enxergar criaturas e objetos invisíveis, e Visão da Verdade."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "pena flamejante (se o portador da pena morrer, ela e automaticamente consumida e ele e ressuscitado apos 1d6 rodadas). em raras ocasioes, o avatar pode presentear um aliado com uma dessas penas.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "avatar_de_valkaria",
+    "nome": "Avatar de Valkaria",
+    "nd": "20",
+    "regiao": "avatares",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": "humano",
+    "tamanho": "medio",
+    "iniciativa": 32,
+    "percepcao": 24,
+    "sentidos": [],
+    "defesa": 68,
+    "resistencias": {
+      "fortitude": 33,
+      "reflexos": 25,
+      "vontade": 38
+    },
+    "rd": {
+      "geral": 20
+    },
+    "imunidadesEfeitos": [
+      "efeitos_mentais",
+      "efeitos_de_movimento",
+      "medo"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +5"
+    ],
+    "pv": 3800,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 18.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 14,
+      "des": 14,
+      "con": 12,
+      "int": 10,
+      "sab": 6,
+      "car": 15
+    },
+    "pericias": {
+      "acrobacia": 32,
+      "atletismo": 32,
+      "atuacao": 33,
+      "diplomacia": 33,
+      "intuicao": 27
+    },
+    "ataques": [
+      {
+        "nome": "Exploradora (x4)",
+        "bonusAtaque": 65,
+        "dano": "8d8+35",
+        "danoExtra": "6d8 luz",
+        "margemAmeaca": 16,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Maior que a Morte",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar é imune a efeitos que matam instantaneamente ou reduzem atributos a 0, e não pode ser mantido morto permanentemente."
+      },
+      {
+        "nome": "Sem Redução por Terreno Difícil",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar não sofre redução de deslocamento por terreno difícil."
+      },
+      {
+        "nome": "Alcançar o Infinito",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando o Avatar de Valkaria faz um teste de perícia, um resultado de 17 ou mais no dado sempre é um sucesso, não importando o valor a ser alcançado."
+      },
+      {
+        "nome": "Aventureira Mística",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando executa uma ação padrão, o Avatar lança uma de suas magias."
+      },
+      {
+        "nome": "Centelha Divina",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 55,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar pode lançar qualquer magia divina como um clérigo de 20º nível sem gastar PM (CD 55, limite de PM 20)."
+      },
+      {
+        "nome": "Livre Como a Ambição",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar pode atravessar objetos sólidos, como paredes, como se fosse intangível."
+      },
+      {
+        "nome": "Passo Divino",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, o avatar se move 3m."
+      },
+      {
+        "nome": "Mudança Encarnada",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar começa cada cena com três habilidades escolhidas entre: Aventureira Completa (+5 em testes de perícia); Desafiante Sagrada (livre, sustentada: aura de 18m onde criaturas escolhem combater ousadamente com uma restrição tipo Bravata Imprudente, ganhando 1 PM temporário cumulativo por turno, ou sofrer -5 em testes de perícia e dano); Intervenção Direta (completa, 1x por cena: lança até três magias, depois fica incapacitado de lançar magias por 1d4 rodadas); Mais Além! (reação: ao rolar 17+ num d20, recebe uma ação completa mesmo fora do seu turno); Mestra Exploradora (ao se mover 12m ou mais, +5 na margem de ameaça e +2d10 de dano contra não humanos); Realeza Divina (reação: rola novamente um teste recém-feito e escolhe o resultado); Resiliência Heroica (reação, 1x por cena: evita sofrer dano). O Avatar pode gastar uma ação padrão para trocar uma habilidade por outra não usada na cena, mas só depois de ter usado todas as iniciais ao menos uma vez."
+      }
+    ],
+    "equipamento": [
+      "exploradora",
+      "cota_de_malha_fortificada_guardia_sem_penalidade"
+    ],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "avatar_de_wynna",
+    "nome": "Avatar de Wynna",
+    "nd": "20",
+    "regiao": "avatares",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 26,
+    "percepcao": 24,
+    "sentidos": [],
+    "defesa": 63,
+    "resistencias": {
+      "fortitude": 22,
+      "reflexos": 36,
+      "vontade": 30
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [
+      "efeitos_mentais",
+      "itens_mundanos"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +5"
+    ],
+    "pv": 1800,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 12.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 8,
+      "con": 6,
+      "int": 15,
+      "sab": 6,
+      "car": 19
+    },
+    "pericias": {
+      "atuacao": 37,
+      "diplomacia": 37,
+      "misticismo": 41
+    },
+    "ataques": [
+      {
+        "nome": "Belo Presente (adaga)",
+        "bonusAtaque": 54,
+        "dano": "1d4+11",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Maior que a Morte",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar é imune a efeitos que matam instantaneamente ou reduzem atributos a 0, e não pode ser mantido morto permanentemente."
+      },
+      {
+        "nome": "Carícia Mágica",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar de Wynna pode abençoar uma criatura em alcance curto. A criatura aprende e pode lançar uma magia qualquer de 1º círculo, à escolha do Avatar (atributo-chave escolhido pela criatura entre Inteligência e Carisma)."
+      },
+      {
+        "nome": "Centelha Divina",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 55,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar pode lançar qualquer magia como um conjurador de 20º nível sem gastar PM (CD 55, limite de PM 30)."
+      },
+      {
+        "nome": "Conjuração Tríplice",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar lança três magias de escolas e círculos diferentes que tenham tempo de conjuração de uma ação padrão ou menor."
+      },
+      {
+        "nome": "Metamagia Suprema",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando uma magia é lançada a partir de um ponto em alcance longo, o Avatar pode alterar algumas de suas características. Ele pode mudar o tipo de dano da magia, pode escolher se o dano será letal ou não letal e pode mudar o tipo de teste de resistência dela."
+      },
+      {
+        "nome": "Sem Atalhos",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar dissipa todos os itens mágicos permanentes em alcance curto. Para cada item dissipado dessa forma, seu portador aprende uma magia de 1º círculo, arcana ou divina, à escolha do Avatar (atributo-chave escolhido pelo portador entre Inteligência e Carisma)."
+      },
+      {
+        "nome": "Visão da Magia",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar está sempre sob efeito de Visão Mística, com todos os aprimoramentos."
+      },
+      {
+        "nome": "Vivificar Magia",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, o Avatar pode anular uma magia lançada em alcance médio. No início do próximo turno do Avatar, essa magia se torna um capanga feitiço vivo que surge em um ponto à escolha do Avatar entre ele e a fonte da magia original. Um feitiço vivo tem Defesa 20, 1 PV, é imune a dano e falha automaticamente em qualquer teste de resistência ou oposto. O Avatar pode gastar uma ação de movimento para fazer todos os feitiços vivos andarem (deslocamento de voo 12m) ou para dissipá-los. Para cada feitiço vivo que se dissipa dessa forma, o Avatar lança a magia da qual o feitiço se originou (usando suas próprias características), tendo como ponto de origem o espaço onde o feitiço estava quando foi dissipado."
+      }
+    ],
+    "equipamento": [
+      "belo_presente_adaga"
+    ],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "avatar_do_oceano",
+    "nome": "Avatar do Oceano",
+    "nd": "20",
+    "regiao": "avatares",
+    "papel": "solo",
+    "tipo": "espirito",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 34,
+    "percepcao": 28,
+    "sentidos": [
+      "percepcao_as_cegas_longo"
+    ],
+    "defesa": 65,
+    "resistencias": {
+      "fortitude": 36,
+      "reflexos": 30,
+      "vontade": 22
+    },
+    "rd": {
+      "geral": 20
+    },
+    "imunidadesEfeitos": [
+      "acertos_criticos",
+      "queda",
+      "precipitacoes"
+    ],
+    "imunidadesDano": [
+      "fogo",
+      "frio"
+    ],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 2500,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 36.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 12,
+      "des": 8,
+      "con": 16,
+      "int": 8,
+      "sab": 12,
+      "car": 8
+    },
+    "pericias": {
+      "adestramento": 34,
+      "atletismo": 33,
+      "diplomacia": 29,
+      "intimidacao": 29,
+      "religiao": 33,
+      "sobrevivencia": 38
+    },
+    "ataques": [
+      {
+        "nome": "Dente do Leviatã (x4)",
+        "bonusAtaque": 58,
+        "dano": "4d8+50",
+        "danoExtra": "4d12 frio",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Jato d'Água (x6)",
+        "bonusAtaque": 58,
+        "dano": "2d12+35",
+        "danoExtra": "2d12 frio",
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "longo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Caçador Submarino",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz um teste de perícia em um ambiente aquático, o Avatar do Oceano rola dois dados e usa o melhor resultado."
+      },
+      {
+        "nome": "Centelha Divina",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 51,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar pode lançar qualquer magia divina como um clérigo de 20º nível sem gastar PM (CD 51, limite de PM 20). Se estiver em terreno aquático, o custo de suas magias é reduzido em –4 PM e a CD para resistir a elas aumenta em +4."
+      },
+      {
+        "nome": "Dominar as Tempestades",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar pode alterar o clima em uma esfera de 2 km ao seu redor (como o efeito básico da magia Controlar o Clima)."
+      },
+      {
+        "nome": "Forma Animal",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar adquire a forma de um monstro marinho gigantesco. Ele recebe +5 em Força e na Defesa, seu ataque corpo a corpo muda para mordida +58 (4d12+25) e pancada x8 +54 (4d12+20) e seu tamanho muda para Colossal. Nessa forma, ele não pode falar, mas pode lançar magias."
+      },
+      {
+        "nome": "Golpe Tempestuoso",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 51,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Uma criatura atingida por um ataque corpo a corpo do Avatar é empurrada 1,5m para cada 5 pontos de dano que sofrer (Fort CD 51 evita)."
+      },
+      {
+        "nome": "Mar em Fúria",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 51,
+        "resistenciaTipo": "fortitude",
+        "descricao": "Se estiver no mar, o Avatar invoca um maremoto em uma esfera de 30m de raio. Criaturas nessa área sofrem 15d10 pontos de dano, metade frio e metade impacto, e são tragadas para dentro do mar (Fort CD 51 reduz à metade e evita ser tragado). Uma criatura tragada afunda 1,5m para cada 5 pontos de dano sofrido. Recarga (movimento)."
+      },
+      {
+        "nome": "Onda Colossal",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar inunda uma esfera com 15m de raio em alcance médio de uma fonte de água salgada em alcance longo. A área se torna um corpo de água salgada que conta como terreno difícil para criaturas sem deslocamento de natação."
+      },
+      {
+        "nome": "Voz das Marés",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O Avatar pode falar com animais, espíritos, humanoides e monstros marinhos (como o efeito da magia Voz Divina)."
+      }
+    ],
+    "equipamento": [
+      "dente_do_leviata"
+    ],
+    "tesouro": "dobro.",
+    "recursoExtraivel": null
+  }
+]

@@ -1,0 +1,1260 @@
+[
+  {
+    "id": "armento_de_burafontes",
+    "nome": "Armento de Burafontes",
+    "nd": "8",
+    "regiao": "mundo_perdido",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "colossal",
+    "iniciativa": 5,
+    "percepcao": 6,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 35,
+    "resistencias": {
+      "fortitude": 21,
+      "reflexos": 15,
+      "vontade": 8
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 310,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 8,
+      "des": 1,
+      "con": 4,
+      "int": -4,
+      "sab": -2,
+      "car": -1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Cauda [Bando]",
+        "bonusAtaque": 26,
+        "dano": "2d10+24",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Cauda Espinhosa",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz um acerto crítico em uma criatura com sua cauda, o armento de burafontes deixa a vítima sangrando."
+      },
+      {
+        "nome": "Postura Protetora",
+        "acao": "movimento",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O armento forma um círculo para proteger seus filhotes, mantendo suas caudas voltadas para fora. Enquanto essa postura estiver ativa, o armento não pode se deslocar, mas pode golpear todas as criaturas ao seu redor. Ele faz um único ataque de cauda e compara o resultado com a Defesa de cada criatura ao seu alcance."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "2d4 protuberancias osseas (cd 23 para extrair, cada protuberancia vale t$ 100 para fabricar armas corpo a corpo superiores).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "bando_de_deinonicos",
+    "nome": "Bando de Deinonicos",
+    "nd": "8",
+    "regiao": "mundo_perdido",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 9,
+    "percepcao": 8,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 23,
+    "resistencias": {
+      "fortitude": 18,
+      "reflexos": 12,
+      "vontade": 7
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 700,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 15.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 3,
+      "con": 4,
+      "int": -4,
+      "sab": 2,
+      "car": 0
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Mordida [Bando]",
+        "bonusAtaque": 26,
+        "dano": "4d4+8",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra [Bando] (x2)",
+        "bonusAtaque": 26,
+        "dano": "2d6+8",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Caçada Primal",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Os deinonicos avançam correndo e saltando, e atacam todas as criaturas em seu caminho. O bando percorre até o dobro de seu deslocamento; ele pode passar por espaços ocupados por criaturas Médias ou menores, mas não pode passar duas vezes pelo mesmo espaço. Ao final do movimento ele faz dois ataques com garras e compara o resultado de cada ataque com a Defesa de todas as criaturas nos espaços por onde passou, causando dano normal de garras em cada acerto. Os deinonicos não podem utilizar esta habilidade se estiverem flanqueados. Recarga (movimento)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "garras terriveis x2d4 (cd 23 para extrair, cada garra vale t$ 100 para fabricar uma arma de corte superior leve ou de uma mao).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "burafonte",
+    "nome": "Burafonte",
+    "nd": "4",
+    "regiao": "mundo_perdido",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 3,
+    "percepcao": 4,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 25,
+    "resistencias": {
+      "fortitude": 18,
+      "reflexos": 8,
+      "vontade": 4
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 120,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 8,
+      "des": 1,
+      "con": 4,
+      "int": -4,
+      "sab": -2,
+      "car": -1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Cauda",
+        "bonusAtaque": 13,
+        "dano": "1d10+12",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Cauda Espinhosa",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz um acerto crítico em uma criatura com sua cauda, o burafonte deixa a vítima sangrando."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "protuberancias osseas (cd 19 para extrair, valem t$ 100 para fabricar armas corpo a corpo superiores).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "deinonico",
+    "nome": "Deinonico",
+    "nd": "4",
+    "regiao": "mundo_perdido",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 7,
+    "percepcao": 6,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 23,
+    "resistencias": {
+      "fortitude": 16,
+      "reflexos": 10,
+      "vontade": 5
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 140,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 15.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 4,
+      "des": 3,
+      "con": 3,
+      "int": -4,
+      "sab": 2,
+      "car": 0
+    },
+    "pericias": {
+      "atletismo": 7
+    },
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 16,
+        "dano": "2d4+4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 16,
+        "dano": "1d6+8",
+        "danoExtra": null,
+        "margemAmeaca": 18,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Investida Terrível",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O deinonico faz uma investida e ataca com sua mordida e suas garras. Os três ataques recebem o bônus de +2 da investida, mas devem ser feitos contra o mesmo alvo, e os dois ataques de garra recebem +2 na margem de ameaça e no multiplicador de crítico."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "duas garras terriveis (cd 19 para extrair, cada garra vale t$ 100 para fabricar uma arma de corte superior leve ou de uma mao).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "enxame_de_gali_gali",
+    "nome": "Enxame de Gali-Gali",
+    "nd": "1",
+    "regiao": "mundo_perdido",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 3,
+    "percepcao": 3,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 15,
+    "resistencias": {
+      "fortitude": 5,
+      "reflexos": 11,
+      "vontade": 0
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 30,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 6.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 1,
+      "des": 1,
+      "con": 0,
+      "int": -4,
+      "sab": 1,
+      "car": -2
+    },
+    "pericias": {},
+    "ataques": [],
+    "habilidades": [
+      {
+        "nome": "Enxame",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Qualquer criatura que comece seu turno no espaço do enxame, ou entre nele, sofre 4d4+6 pontos de dano de corte."
+      },
+      {
+        "nome": "Grudar nas Costas",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando uma criatura sai do espaço do enxame, alguns gali-gali ficam presos em suas costas. A criatura continua sofrendo metade do dano de Enxame até gastar uma ação de movimento para se livrar deles."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "espada_da_floresta",
+    "nome": "Espada-da-Floresta",
+    "nd": "3",
+    "regiao": "mundo_perdido",
+    "papel": "solo",
+    "tipo": "construto",
+    "subtipo": null,
+    "tamanho": "medio",
+    "iniciativa": 8,
+    "percepcao": 7,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 22,
+    "resistencias": {
+      "fortitude": 8,
+      "reflexos": 11,
+      "vontade": 8
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [
+      "fogo"
+    ],
+    "habilidadesDefensivas": [],
+    "pv": 108,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 6,
+      "des": 3,
+      "con": 4,
+      "int": -2,
+      "sab": 2,
+      "car": 0
+    },
+    "pericias": {
+      "furtividade": 4
+    },
+    "ataques": [
+      {
+        "nome": "Espada espinhenta",
+        "bonusAtaque": 14,
+        "dano": "1d12+15",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Natureza Vegetal",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O espada-da-floresta é uma criatura de natureza vegetal."
+      },
+      {
+        "nome": "Adaptado ao Ambiente",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando em florestas, o espada-da-floresta recebe camuflagem leve contra ataques à distância e ignora terreno difícil natural (sua Furtividade sobe para +9 em florestas)."
+      },
+      {
+        "nome": "Dínamo Vegetal",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando sofre dano de eletricidade, em vez disso o espada-da-floresta cura PV em quantidade igual a metade do dano que seria causado."
+      },
+      {
+        "nome": "Riposte Natural",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, quando é alvo de um ataque corpo a corpo, o espada-da-floresta pode fazer um teste de ataque e subtrair seu resultado do dano causado pelo ataque."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "espada espinhenta (cd 18 para extrair) e 50% de chance de 1d4 frutos da espada-mae (cd 18 para extrair).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "galhada_femea",
+    "nome": "Galhada Fêmea",
+    "nd": "2",
+    "regiao": "mundo_perdido",
+    "papel": "lacaio",
+    "tipo": "construto",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 4,
+    "percepcao": 7,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 19,
+    "resistencias": {
+      "fortitude": 4,
+      "reflexos": 11,
+      "vontade": 7
+    },
+    "rd": {
+      "geral": 2
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [
+      "fogo"
+    ],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +2"
+    ],
+    "pv": 17,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 3,
+      "con": 1,
+      "int": -4,
+      "sab": 1,
+      "car": 0
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Cascos",
+        "bonusAtaque": 14,
+        "dano": "2d6+10",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Natureza Vegetal",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O galhada é uma criatura de natureza vegetal."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "1d4 doses de seiva-galhada (cd 17 para extrair, cada dose conta como um balsamo restaurador). como alternativa, se a galhada tiver uma atitude indiferente ou melhor, um personagem pode usar uma acao completa para fazer um teste de adestramento (cd 16) com ela; se passar, consegue extrair a seiva de forma amistosa. a galhada produz seiva apenas uma vez por dia.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "galhada_macho",
+    "nome": "Galhada Macho",
+    "nd": "2",
+    "regiao": "mundo_perdido",
+    "papel": "lacaio",
+    "tipo": "construto",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 4,
+    "percepcao": 7,
+    "sentidos": [
+      "visao_no_escuro"
+    ],
+    "defesa": 19,
+    "resistencias": {
+      "fortitude": 4,
+      "reflexos": 11,
+      "vontade": 7
+    },
+    "rd": {
+      "geral": 2
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [
+      "fogo"
+    ],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +2"
+    ],
+    "pv": 17,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 2,
+      "des": 3,
+      "con": 1,
+      "int": -4,
+      "sab": 1,
+      "car": 0
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Chifres",
+        "bonusAtaque": 12,
+        "dano": "1d6+7",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Cascos",
+        "bonusAtaque": 12,
+        "dano": "1d6+7",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Natureza Vegetal",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O galhada é uma criatura de natureza vegetal."
+      },
+      {
+        "nome": "Galhada de Allihanna",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Os chifres do galhada macho são abençoados por Allihanna; eles são armas mágicas que causam o dobro de dano contra mortos-vivos."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "galhada abencoada (cd 17 para extrair, vale t$ 50 para fabricar um dedo de ente ou uma arma de perfuracao superior).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "gali_gali",
+    "nome": "Gali-Gali",
+    "nd": "0.25",
+    "regiao": "mundo_perdido",
+    "papel": "lacaio",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "minusculo",
+    "iniciativa": 3,
+    "percepcao": 3,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 11,
+    "resistencias": {
+      "fortitude": 0,
+      "reflexos": 2,
+      "vontade": -1
+    },
+    "rd": {},
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 4,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 6.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 0,
+      "des": 1,
+      "con": 0,
+      "int": -4,
+      "sab": 1,
+      "car": -2
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 7,
+        "dano": "1d4+4",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "grande_battham",
+    "nome": "Grande Battham",
+    "nd": "12",
+    "regiao": "mundo_perdido",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "colossal",
+    "iniciativa": 9,
+    "percepcao": 17,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 38,
+    "resistencias": {
+      "fortitude": 26,
+      "reflexos": 20,
+      "vontade": 12
+    },
+    "rd": {},
+    "imunidadesEfeitos": [
+      "manobras_de_combate"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 800,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 15,
+      "des": -1,
+      "con": 10,
+      "int": -5,
+      "sab": 2,
+      "car": -1
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Cauda",
+        "bonusAtaque": 36,
+        "dano": "3d6+45",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "médio",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Pisão",
+        "bonusAtaque": 36,
+        "dano": "4d12+45",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Quase Titânico",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 33,
+        "resistenciaTipo": null,
+        "descricao": "Quando se move, o battham pisoteia qualquer criatura ou estrutura Grande ou menor em seu caminho, causando 12d6 pontos de dano de impacto (uma vez por rodada por criatura, Reflexos CD 33 reduz à metade). Além disso, seus ataques atingem todas as criaturas em um quadrado de 3m (para cada ataque, ele faz um único teste de ataque e compara o resultado com a Defesa de cada inimigo na área)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "figado de lagarto-trovao (cd 27 para extrair).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "raagoran",
+    "nome": "Raagoran",
+    "nd": "8",
+    "regiao": "mundo_perdido",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "grande",
+    "iniciativa": 7,
+    "percepcao": 9,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 33,
+    "resistencias": {
+      "fortitude": 21,
+      "reflexos": 15,
+      "vontade": 8
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 320,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 5,
+      "des": 0,
+      "con": 4,
+      "int": -4,
+      "sab": 0,
+      "car": -3
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Garra (x2)",
+        "bonusAtaque": 26,
+        "dano": "2d8+18",
+        "danoExtra": null,
+        "margemAmeaca": 19,
+        "multiplicadorCritico": 2,
+        "tipoDano": "corte",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 26,
+        "dano": "2d6+12",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Usa a manobra agarrar com a mordida (teste +28)."
+      },
+      {
+        "nome": "Dilacerar",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se o raagoran acerta os dois ataques de garra em uma mesma criatura no mesmo turno, causa mais 2d8+12 pontos de dano."
+      },
+      {
+        "nome": "Engolir",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada um dos turnos do raagoran, a criatura engolida sofre 2d10+8 pontos de dano de impacto mais 2d10+8 pontos de dano de ácido. Ela pode escapar causando um total de 20 pontos de dano a ele (Defesa 10, redução de dano 0)."
+      },
+      {
+        "nome": "Carapaça de Lodo",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Se o raagoran passar pelo menos 1 rodada completamente imerso em água (ou coberto por uma quantidade equivalente de água), sua carapaça de lodo se desfaz e ele perde sua redução de dano."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "nenhum.",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "rei_tirano",
+    "nome": "Rei-Tirano",
+    "nd": "14",
+    "regiao": "mundo_perdido",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 12,
+    "percepcao": 12,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 46,
+    "resistencias": {
+      "fortitude": 28,
+      "reflexos": 22,
+      "vontade": 14
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 725,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 11,
+      "des": 1,
+      "con": 6,
+      "int": -4,
+      "sab": 1,
+      "car": -2
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Mordida",
+        "bonusAtaque": 40,
+        "dano": "6d10+36",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 4,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      },
+      {
+        "nome": "Cauda",
+        "bonusAtaque": 37,
+        "dano": "6d6+31",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "impacto",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Agarrar Aprimorado",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Usa a manobra agarrar com a mordida (teste +45)."
+      },
+      {
+        "nome": "Cauda Avassaladora",
+        "acao": "livre",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 38,
+        "resistenciaTipo": null,
+        "descricao": "Quando acerta um ataque de cauda, o rei-tirano arremessa a vítima 1d10 x 1,5m em uma direção à escolha dele (Fortitude CD 38 evita). A vítima fica caída e, se atingir algum obstáculo, sofre 1d8 pontos de dano de impacto para cada 1,5m que foi arremessada."
+      },
+      {
+        "nome": "Engolir",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "No início de cada um dos turnos do rei-tirano, a criatura engolida sofre 4d12+20 pontos de dano de impacto mais 4d12+20 pontos de dano de ácido. Ela pode escapar causando um total de 75 pontos de dano a ele (Defesa 20, redução de dano 0)."
+      },
+      {
+        "nome": "Visão Baseada em Movimento",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "O rei-tirano sofre –10 em testes de Percepção para encontrar criaturas que não estejam se movendo (em termos de jogo, criaturas que tenham feito apenas ações mentais em seu turno anterior)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "dentes do rei-tirano (cd 29 para extrair, valem t$ 1.500 para fabricar armas superiores).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "tuntram",
+    "nome": "Tuntram",
+    "nd": "10",
+    "regiao": "mundo_perdido",
+    "papel": "solo",
+    "tipo": "animal",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 9,
+    "percepcao": 12,
+    "sentidos": [
+      "faro",
+      "visao_na_penumbra"
+    ],
+    "defesa": 36,
+    "resistencias": {
+      "fortitude": 24,
+      "reflexos": 9,
+      "vontade": 15
+    },
+    "rd": {
+      "geral": 5
+    },
+    "imunidadesEfeitos": [],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [],
+    "habilidadesDefensivas": [],
+    "pv": 450,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 9.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 9,
+      "des": 0,
+      "con": 8,
+      "int": -4,
+      "sab": 2,
+      "car": -2
+    },
+    "pericias": {},
+    "ataques": [
+      {
+        "nome": "Chifres",
+        "bonusAtaque": 30,
+        "dano": "3d12+33",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 3,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Amontoar",
+        "acao": "completa",
+        "custoPm": 0,
+        "recarga": "movimento",
+        "cdResistencia": 30,
+        "resistenciaTipo": null,
+        "descricao": "O tuntram se move em linha reta até o dobro do seu deslocamento, passando por qualquer criatura Grande ou menor. Criaturas em seu caminho sofrem 9d6+12 pontos de dano de perfuração, são empurradas até o fim do deslocamento do tuntram e ficam caídas na frente dele (Reflexos CD 30 reduz à metade e evita o empurrão, mas não a condição caído). Recarga (movimento)."
+      },
+      {
+        "nome": "Investida Pesada",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Quando faz uma investida, o tuntram recebe +4 no teste de ataque (para um total de +6) e causa +6d6 pontos de dano."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "folho de tuntram (cd 25 para extrair, vale t$ 1.000 para fabricar armaduras e escudos superiores).",
+    "recursoExtraivel": null
+  },
+  {
+    "id": "arvore_matilha",
+    "nome": "Árvore-Matilha",
+    "nd": "13",
+    "regiao": "mundo_perdido",
+    "papel": "solo",
+    "tipo": "construto",
+    "subtipo": null,
+    "tamanho": "enorme",
+    "iniciativa": 7,
+    "percepcao": 15,
+    "sentidos": [
+      "faro",
+      "visao_no_escuro"
+    ],
+    "defesa": 44,
+    "resistencias": {
+      "fortitude": 26,
+      "reflexos": 20,
+      "vontade": 13
+    },
+    "rd": {
+      "geral": 10
+    },
+    "imunidadesEfeitos": [
+      "efeitos_de_sentidos"
+    ],
+    "imunidadesDano": [],
+    "vulnerabilidadesDano": [
+      "fogo"
+    ],
+    "habilidadesDefensivas": [
+      "Resistência a Magia +5"
+    ],
+    "pv": 700,
+    "pm": 0,
+    "deslocamento": {
+      "terrestre": 12.0,
+      "voo": 0.0,
+      "natacao": 0.0,
+      "escalada": 0.0,
+      "escavacao": 0.0
+    },
+    "atributos": {
+      "for": 9,
+      "des": 1,
+      "con": 3,
+      "int": null,
+      "sab": 0,
+      "car": -2
+    },
+    "pericias": {
+      "furtividade": 6
+    },
+    "ataques": [
+      {
+        "nome": "Mordida (x6)",
+        "bonusAtaque": 37,
+        "dano": "2d6+20",
+        "danoExtra": null,
+        "margemAmeaca": 20,
+        "multiplicadorCritico": 2,
+        "tipoDano": "perfuracao",
+        "alcance": "Corpo a corpo",
+        "acao": "padrao",
+        "custoPm": 0,
+        "efeitoAdicional": null
+      }
+    ],
+    "habilidades": [
+      {
+        "nome": "Natureza Vegetal",
+        "acao": "passiva",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "A árvore-matilha é uma criatura de natureza vegetal."
+      },
+      {
+        "nome": "Descarregar Raiva",
+        "acao": "reacao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": null,
+        "resistenciaTipo": null,
+        "descricao": "Uma vez por rodada, se os PV da árvore-matilha forem reduzidos abaixo de um valor múltiplo de 100 (600, 500 etc.), ela libera sua raiva atacando tudo ao seu redor. Ela faz um ataque de mordida e compara o resultado com a Defesa de cada criatura ao seu alcance. Mesmo que erre uma criatura, ainda assim ela causa metade do dano a ela."
+      },
+      {
+        "nome": "Uivo Aterrador",
+        "acao": "padrao",
+        "custoPm": 0,
+        "recarga": null,
+        "cdResistencia": 35,
+        "resistenciaTipo": null,
+        "descricao": "Criaturas em alcance médio ficam apavoradas (Vontade CD 35 reduz para abalado e a criatura não pode ser apavorada por esta habilidade nesta cena)."
+      }
+    ],
+    "equipamento": [],
+    "tesouro": "padrao.",
+    "recursoExtraivel": null
+  }
+]
