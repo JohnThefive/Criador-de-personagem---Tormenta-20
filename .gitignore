@@ -61,3 +61,5 @@ generate_graph_html.py
 *.keystore
 
 .agents
+
+/.agents
