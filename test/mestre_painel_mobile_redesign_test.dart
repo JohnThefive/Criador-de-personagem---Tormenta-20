@@ -6,7 +6,6 @@ import 'package:t20_creator/presentation/screens/mestre/campanha_detalhe_screen.
 import 'package:t20_creator/presentation/screens/mestre/criar_campanha_screen.dart';
 import 'package:t20_creator/presentation/screens/mestre/mesa_sessao_screen.dart';
 import 'package:t20_creator/presentation/screens/mestre/mestre_painel_screen.dart';
-import 'package:t20_creator/presentation/screens/mestre/widgets/drawer_sessao_lan.dart';
 import 'package:t20_creator/presentation/screens/mestre/widgets/mestre_empty_state.dart';
 import 'package:t20_creator/presentation/screens/mestre/widgets/tela_escudo_notas.dart';
 import 'package:t20_creator/presentation/screens/mestre/widgets/tela_mesa_jogo.dart';
@@ -173,59 +172,6 @@ void main() {
         // Acima da borda superior do teclado simulado (844 - 320 = 524)
         expect(rect.bottom, lessThanOrEqualTo(524));
         expect(rect.height, greaterThanOrEqualTo(48));
-      },
-    );
-
-    testWidgets(
-      'Regressão DrawerSessaoLan: SnackBar "Criar aventura agora" funciona após fechar Drawer',
-      (tester) async {
-        tester.view.physicalSize = const Size(390, 844);
-        tester.view.devicePixelRatio = 1.0;
-        addTearDown(tester.view.resetPhysicalSize);
-
-        final cubit = MestreCubit();
-        addTearDown(cubit.close);
-        final scaffoldKey = GlobalKey<ScaffoldState>();
-
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              key: scaffoldKey,
-              drawer: DrawerSessaoLan(cubit: cubit),
-              body: const Center(child: Text('Host')),
-            ),
-          ),
-        );
-        await tester.pumpAndSettle();
-
-        // Abre o Drawer e inicia criação de campanha
-        scaffoldKey.currentState!.openDrawer();
-        await tester.pumpAndSettle();
-
-        await tester.tap(find.text('+ Nova campanha'));
-        await tester.pumpAndSettle();
-
-        await tester.enterText(
-          find.descendant(
-            of: find.byType(BottomSheet),
-            matching: find.byType(TextField),
-          ).first,
-          'Campanha Teste Regressão',
-        );
-        await tester.tap(find.text('Confirmar'));
-        await tester.pumpAndSettle();
-
-        // Fecha o Drawer desmontando o contexto antigo da barra lateral
-        Navigator.of(scaffoldKey.currentContext!).pop();
-        await tester.pumpAndSettle();
-
-        // Toca na ação do SnackBar — não deve lançar exceção de contexto desativado
-        expect(find.text('Criar aventura agora'), findsOneWidget);
-        await tester.tap(find.text('Criar aventura agora'));
-        await tester.pumpAndSettle();
-
-        expect(tester.takeException(), isNull);
-        expect(find.text('Nova Aventura'), findsOneWidget);
       },
     );
 

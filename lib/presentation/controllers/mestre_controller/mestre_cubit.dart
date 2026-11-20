@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../domain/entities/combate/combatente.dart';
 import '../../../domain/entities/combate/grid_tatico.dart';
 import '../../../domain/entities/combate/monstro.dart';
+import '../../../domain/entities/mestre/catalogo_mestre_padrao.dart';
 import '../../../domain/entities/mestre/modelos_mestre.dart';
 import '../../../domain/entities/entidade_sessao_lan/sessao_lan_modelos.dart';
 import '../../../domain/services/combate_services/movimento_engine.dart';
@@ -13,8 +14,22 @@ import '../../../domain/services/sessao_lan/sessao_lan_transport.dart';
 import 'mestre_state.dart';
 
 class MestreCubit extends Cubit<MestreState> {
+  static const int maxLogsRedeLan = 50;
+  static const Duration _intervaloCoalescingSnapshotLan = Duration(
+    milliseconds: 50,
+  );
+  static const Duration _debouncePersistenciaPadrao = Duration(
+    milliseconds: 250,
+  );
+  static const Duration _debouncePersistenciaMapa = Duration(
+    milliseconds: 800,
+  );
+
   final bool _autoPersistir;
   Timer? _timerPersistencia;
+  Timer? _timerSnapshotLan;
+  MapaBatalhaMestre? _mapaPendenteSnapshotLan;
+  bool _ultimaMudancaEhEdicaoMapa = false;
   bool _hidratando = false;
   bool _pendenciaSalvar = false;
 
@@ -22,6 +37,7 @@ class MestreCubit extends Cubit<MestreState> {
   StreamSubscription<SolicitacaoEntradaSessao>? _solicitacoesLanSub;
   StreamSubscription<AtualizacaoPersonagemSessao>? _atualizacoesLanSub;
   StreamSubscription<Map<String, dynamic>>? _acoesMapaLanSub;
+  StreamSubscription<String>? _desconexoesLanSub;
   final Map<String, Map<String, dynamic>> _snapshotsFichasLan = {};
 
   MestreCubit({bool autoPersistir = true, SessaoHostService? sessaoHostService})
@@ -35,11 +51,47 @@ class MestreCubit extends Cubit<MestreState> {
     }
   }
 
+  List<String> _anexarLogRedeLan(String mensagem) {
+    final lista = [...state.logsRedeLan, mensagem];
+    if (lista.length <= maxLogsRedeLan) return lista;
+    return lista.sublist(lista.length - maxLogsRedeLan);
+  }
+
+  void _agendarPublicacaoSnapshotLan(MapaBatalhaMestre mapa) {
+    if (_hostService == null || state.statusLan == StatusConexaoLan.desligado) {
+      return;
+    }
+    _mapaPendenteSnapshotLan = mapa;
+    if (_timerSnapshotLan?.isActive ?? false) return;
+    _timerSnapshotLan = Timer(
+      _intervaloCoalescingSnapshotLan,
+      _despacharSnapshotLanPendente,
+    );
+  }
+
+  void _despacharSnapshotLanPendente() {
+    _timerSnapshotLan = null;
+    final mapa = _mapaPendenteSnapshotLan;
+    _mapaPendenteSnapshotLan = null;
+    if (isClosed ||
+        mapa == null ||
+        _hostService == null ||
+        state.statusLan == StatusConexaoLan.desligado) {
+      return;
+    }
+    unawaited(
+      _hostService!.publicarSnapshotMesa(
+        SnapshotMesa.sanitizadoDeMapa(mapa),
+      ),
+    );
+  }
+
   /// Vincula ou troca o transporte host LAN consumido pelo Painel do Mestre.
   void vincularSessaoHostService(SessaoHostService? host) {
     unawaited(_solicitacoesLanSub?.cancel());
     unawaited(_atualizacoesLanSub?.cancel());
     unawaited(_acoesMapaLanSub?.cancel());
+    unawaited(_desconexoesLanSub?.cancel());
     _hostService = host;
     if (host == null) return;
     _solicitacoesLanSub = host.solicitacoesEntrada.listen(
@@ -49,6 +101,9 @@ class MestreCubit extends Cubit<MestreState> {
       aplicarAtualizacaoPersonagemLan,
     );
     _acoesMapaLanSub = host.acoesMapa.listen(aplicarAcaoMapaJogadorLan);
+    _desconexoesLanSub = host.desconexoesCliente.listen(
+      marcarJogadorDesconectadoLan,
+    );
     unawaited(() async {
       final ip = await host.descobrirIpLocal();
       if (!isClosed && ip != null && ip.isNotEmpty && ip != state.ipHostLocal) {
@@ -70,13 +125,15 @@ class MestreCubit extends Cubit<MestreState> {
   @override
   void onChange(Change<MestreState> change) {
     super.onChange(change);
+    final ehEdicaoMapa = _ultimaMudancaEhEdicaoMapa;
+    _ultimaMudancaEhEdicaoMapa = false;
     if (!_autoPersistir || _hidratando || !MestreStorageService.podePersistir) {
       return;
     }
     _pendenciaSalvar = true;
     _timerPersistencia?.cancel();
     _timerPersistencia = Timer(
-      const Duration(milliseconds: 250),
+      ehEdicaoMapa ? _debouncePersistenciaMapa : _debouncePersistenciaPadrao,
       () => unawaited(salvarAgora()),
     );
   }
@@ -86,6 +143,10 @@ class MestreCubit extends Cubit<MestreState> {
     await _solicitacoesLanSub?.cancel();
     await _atualizacoesLanSub?.cancel();
     await _acoesMapaLanSub?.cancel();
+    await _desconexoesLanSub?.cancel();
+    _timerSnapshotLan?.cancel();
+    _timerSnapshotLan = null;
+    _mapaPendenteSnapshotLan = null;
     _timerPersistencia?.cancel();
     if (_autoPersistir && _pendenciaSalvar) {
       await salvarAgora();
@@ -343,7 +404,7 @@ class MestreCubit extends Cubit<MestreState> {
       aventuraSelecionadaId: aventuraInicial.id,
       sessaoSelecionadaId: sessaoInicial.id,
       mapaSelecionadoId: mapaInicial.id,
-      perigos: _perigosPadraoT20,
+      perigos: CatalogoMestrePadrao.perigosPadraoT20,
       logsRedeLan: const [
         '[Sistema] Painel do Mestre inicializado (Modo Offline / Preparação).',
       ],
@@ -359,20 +420,8 @@ class MestreCubit extends Cubit<MestreState> {
 
   /// Normaliza um código de sala para o formato `T20-XXXX` quando informados
   /// apenas 4 dígitos (`7492`) ou `T207492` sem hífen.
-  static String normalizarCodigoLan(String raw) {
-    final limpo = raw.trim().toUpperCase().replaceAll(
-      RegExp(r'[^A-Z0-9-]'),
-      '',
-    );
-    if (limpo.isEmpty) return '';
-    if (RegExp(r'^\d{4}$').hasMatch(limpo)) {
-      return 'T20-$limpo';
-    }
-    if (RegExp(r'^T20\d{4}$').hasMatch(limpo)) {
-      return 'T20-${limpo.substring(3)}';
-    }
-    return limpo;
-  }
+  static String normalizarCodigoLan(String raw) =>
+      CodigoSalaLan.normalizar(raw);
 
   /// Retorna o código LAN efetivo da sessão/campanha ativa normalizado.
   String get codigoSalaLanAtivo {
@@ -400,10 +449,9 @@ class MestreCubit extends Cubit<MestreState> {
       emit(
         state.copyWith(
           ipHostLocal: ipFinal,
-          logsRedeLan: [
-            ...state.logsRedeLan,
+          logsRedeLan: _anexarLogRedeLan(
             '🌐 [Host LAN] IP local detectado: $ipFinal:${state.portaHostLan}.',
-          ],
+          ),
         ),
       );
     }
@@ -849,51 +897,30 @@ class MestreCubit extends Cubit<MestreState> {
         : StatusConexaoLan.desligado;
 
     final codigoSala = codigoSalaLanAtivo;
-    if (_hostService != null) {
-      if (novoStatus == StatusConexaoLan.aguardandoJogadores) {
-        unawaited(() async {
-          final ipDetectado = await _hostService!.descobrirIpLocal();
-          final ipFinal = (ipDetectado != null && ipDetectado.isNotEmpty)
-              ? ipDetectado
-              : state.ipHostLocal;
-          if (!isClosed && ipFinal != state.ipHostLocal) {
-            emit(
-              state.copyWith(
-                ipHostLocal: ipFinal,
-                logsRedeLan: [
-                  ...state.logsRedeLan,
-                  '🌐 [Host LAN] IP local detectado: $ipFinal:${state.portaHostLan}.',
-                ],
-              ),
-            );
-          }
-          await _hostService!.iniciar(
-            ip: ipFinal,
-            porta: state.portaHostLan,
-            codigoSala: codigoSala,
-          );
-          final mapa = state.mapaAtual;
-          if (mapa != null) {
-            await _hostService!.publicarSnapshotMesa(
-              SnapshotMesa.sanitizadoDeMapa(mapa),
-            );
-          }
-        }());
-      } else {
-        unawaited(_hostService!.encerrar());
-      }
-    }
-
     final logMsg = novoStatus == StatusConexaoLan.aguardandoJogadores
         ? '📡 [Host LAN] Sala aberta em ${state.ipHostLocal}:${state.portaHostLan} (Código: $codigoSala).'
         : '🔌 [Host LAN] Sala encerrada pelo Mestre.';
 
+    if (novoStatus == StatusConexaoLan.desligado) {
+      _timerSnapshotLan?.cancel();
+      _timerSnapshotLan = null;
+      _mapaPendenteSnapshotLan = null;
+    }
+
     emit(
       state.copyWith(
         statusLan: novoStatus,
-        logsRedeLan: [...state.logsRedeLan, logMsg],
+        logsRedeLan: _anexarLogRedeLan(logMsg),
       ),
     );
+
+    if (_hostService != null) {
+      if (novoStatus == StatusConexaoLan.aguardandoJogadores) {
+        unawaited(_sincronizarHostLanAtivo());
+      } else {
+        unawaited(_hostService!.encerrar());
+      }
+    }
   }
 
   void gerarNovoCodigoSalaLan() {
@@ -919,10 +946,9 @@ class MestreCubit extends Cubit<MestreState> {
     emit(
       state.copyWith(
         campanhas: campanhas,
-        logsRedeLan: [
-          ...state.logsRedeLan,
+        logsRedeLan: _anexarLogRedeLan(
           '🔑 Novo código PIN da sala gerado: $novoCodigo.',
-        ],
+        ),
       ),
     );
     unawaited(_sincronizarHostLanAtivo());
@@ -952,7 +978,7 @@ class MestreCubit extends Cubit<MestreState> {
           solicitacao.snapshotPersonagem!;
     }
 
-    final ipFinal = ipJogador ?? '192.168.1.${115 + ses.elenco.length}';
+    final ipFinal = ipJogador ?? solicitacao.ipRemoto ?? 'LAN';
     final entrada = solicitacao.toElencoEntry(
       statusRevisao: StatusRevisaoFicha.pendente,
       conectadoViaLan: true,
@@ -972,10 +998,40 @@ class MestreCubit extends Cubit<MestreState> {
     emit(
       state.copyWith(
         campanhas: campanhas,
-        logsRedeLan: [
-          ...state.logsRedeLan,
+        logsRedeLan: _anexarLogRedeLan(
           '📩 [JOIN / LAN] ${entrada.nomeJogador} ($ipFinal) enviou a ficha "${entrada.nomePersonagem}" (Aguardando Revisão RF-M1).',
-        ],
+        ),
+      ),
+    );
+  }
+
+  /// Marca um jogador como desconectado no elenco quando o socket LAN cai ou fecha.
+  void marcarJogadorDesconectadoLan(String characterId) {
+    final ses = state.sessaoAtual;
+    if (ses == null) return;
+
+    final alvo = ses.elenco
+        .where((e) => e.characterId == characterId)
+        .firstOrNull;
+    if (alvo == null || !alvo.conectadoViaLan) return;
+
+    final novoElenco = ses.elenco
+        .map(
+          (e) => e.characterId == characterId
+              ? e.copyWith(conectadoViaLan: false)
+              : e,
+        )
+        .toList();
+
+    final campanhas = _substituirSessao(ses.copyWith(elenco: novoElenco));
+    if (campanhas == null) return;
+
+    emit(
+      state.copyWith(
+        campanhas: campanhas,
+        logsRedeLan: _anexarLogRedeLan(
+          '🔌 [LAN] ${alvo.nomePersonagem} (${alvo.nomeJogador}) desconectou da sala.',
+        ),
       ),
     );
   }
@@ -1020,55 +1076,6 @@ class MestreCubit extends Cubit<MestreState> {
     }).toList();
 
     _atualizarMapaAtual(mapa.copyWith(tokens: novosTokens));
-  }
-
-  /// Simula (Frontend) o recebimento de um pedido de conexão de jogador via LAN para revisão do Mestre (RF-M1).
-  void simularPedidoEntradaJogadorLan({
-    required String nomeJogador,
-    required String nomePersonagem,
-    required String classeResumo,
-    int pvMax = 24,
-    int pmMax = 10,
-  }) {
-    final ses = state.sessaoAtual;
-    if (ses == null) return;
-
-    final id = _nextId('lan');
-    final ip = '192.168.1.${115 + ses.elenco.length}';
-    final novoConvidado = ElencoSessaoEntry(
-      characterId: id,
-      nomePersonagem: nomePersonagem.trim().isEmpty
-          ? 'Thorin'
-          : nomePersonagem.trim(),
-      nomeJogador: nomeJogador.trim().isEmpty
-          ? 'Jogador LAN'
-          : nomeJogador.trim(),
-      classeResumo: classeResumo.trim().isEmpty
-          ? 'Paladino Nv 2'
-          : classeResumo.trim(),
-      pvAtual: pvMax,
-      pvMax: pvMax,
-      pmAtual: pmMax,
-      pmMax: pmMax,
-      statusRevisao: StatusRevisaoFicha.pendente,
-      conectadoViaLan: true,
-      ipJogador: ip,
-    );
-
-    final campanhas = _substituirSessao(
-      ses.copyWith(elenco: [...ses.elenco, novoConvidado]),
-    );
-    if (campanhas == null) return;
-
-    emit(
-      state.copyWith(
-        campanhas: campanhas,
-        logsRedeLan: [
-          ...state.logsRedeLan,
-          '📩 [JOIN / LAN] $nomeJogador ($ip) enviou a ficha "$nomePersonagem" (Aguardando Revisão RF-M1).',
-        ],
-      ),
-    );
   }
 
   /// RF-M1: Aprova, solicita alterações ou recusa a ficha de um jogador da sessão.
@@ -1627,6 +1634,7 @@ class MestreCubit extends Cubit<MestreState> {
   }
 
   /// Processa ações de mapa enviadas por um jogador via LAN após validação de identidade no Host.
+  /// Valida de forma autoritativa: aprovação, Fog of War, colisão com outros tokens e alcance (MovimentoEngine).
   void aplicarAcaoMapaJogadorLan(Map<String, dynamic> acao) {
     final tipo = acao['tipo']?.toString();
     final charId = acao['characterId']?.toString();
@@ -1645,7 +1653,72 @@ class MestreCubit extends Cubit<MestreState> {
         false;
     if (!aprovado) return;
 
-    moverToken(charId, Posicao2D(x, y));
+    final mapa = state.mapaAtual;
+    if (mapa == null) return;
+    final token = mapa.tokens.where((t) => t.id == charId).firstOrNull;
+    if (token == null) return;
+
+    final destino = Posicao2D(x, y);
+    if (destino == token.posicao) return;
+
+    // 1. Não permite mover para célula fora dos limites ou sob Névoa de Guerra
+    final celulasDestino = destino.celulasOcupadas(token.tamanhoQuadrados);
+    final invalidaOuOculta = celulasDestino.any(
+      (c) =>
+          c.x < 0 ||
+          c.y < 0 ||
+          c.x >= mapa.largura ||
+          c.y >= mapa.altura ||
+          !mapa.celulasReveladas.contains(c) ||
+          mapa.terrenos[c] == TipoTerreno.obstaculo,
+    );
+    if (invalidaOuOculta) return;
+
+    // 2. Validação de colisão com outros tokens presentes no mapa
+    final celulasOcupadasPorOutros = <Posicao2D>{
+      for (final outro in mapa.tokens)
+        if (outro.id != token.id)
+          ...outro.posicao.celulasOcupadas(outro.tamanhoQuadrados),
+    };
+    if (celulasDestino.any(celulasOcupadasPorOutros.contains)) return;
+
+    // 3. Validação autoritativa de alcance pelo MovimentoEngine
+    final posicoes = <String, Posicao2D>{
+      for (final t in mapa.tokens) t.id: t.posicao,
+    };
+    final combatentes = <String, Combatente>{
+      for (final t in mapa.tokens)
+        t.id: Combatente(
+          id: t.id,
+          nome: t.nome,
+          time: t.ehHeroi ? TimeCombatente.heroi : TimeCombatente.inimigo,
+          pvMax: t.pvMax,
+          pvAtual: t.pvAtual,
+          pmMax: t.pmMax,
+          pmAtual: t.pmAtual,
+          defesa: t.defesa,
+          deslocamentoMetros: t.deslocamentoMetros,
+          modIniciativa: t.iniciativa ?? 0,
+          modLuta: 0,
+          modPontaria: 0,
+          modPercepcao: 0,
+          modForca: 0,
+          modDestreza: 0,
+          modConstituicao: 0,
+        ),
+    };
+
+    final resultado = MovimentoEngine.calcularAlcancaveis(
+      mapa: mapa.comoGridMapa,
+      inicio: token.posicao,
+      deslocamentoMaximoMetros: token.deslocamentoMetros,
+      posicoesCombatentes: posicoes,
+      combatentesPorId: combatentes,
+      combatenteAtivoId: token.id,
+    );
+    if (!resultado.destinosValidos.contains(destino)) return;
+
+    moverToken(charId, destino);
   }
 
   void aoClicarCelulaMapa(Posicao2D pos, {bool? fogModoRevelar}) {
@@ -1791,12 +1864,27 @@ class MestreCubit extends Cubit<MestreState> {
   }
 
   List<CampanhaMestre>? _substituirMapa(MapaBatalhaMestre mapaAtualizado) {
+    final camp = state.campanhaAtual;
     final av = state.aventuraAtual;
-    if (av == null) return null;
-    final novosMapas = av.mapas.map((m) {
-      return m.id == mapaAtualizado.id ? mapaAtualizado : m;
-    }).toList();
-    return _substituirAventura(av.copyWith(mapas: novosMapas));
+    if (camp == null || av == null) return null;
+
+    final novosMapasAventura = av.mapas
+        .map((m) => m.id == mapaAtualizado.id ? mapaAtualizado : m)
+        .toList();
+    final avAtualizada = av.copyWith(mapas: novosMapasAventura);
+    final novasAventuras = camp.aventuras
+        .map((a) => a.id == avAtualizada.id ? avAtualizada : a)
+        .toList();
+    final novosMapasCampanha = camp.mapas
+        .map((m) => m.id == mapaAtualizado.id ? mapaAtualizado : m)
+        .toList();
+
+    return _substituirCampanha(
+      camp.copyWith(
+        aventuras: novasAventuras,
+        mapas: novosMapasCampanha,
+      ),
+    );
   }
 
   void _atualizarCampanhaAtual(
@@ -1840,14 +1928,9 @@ class MestreCubit extends Cubit<MestreState> {
   void _atualizarMapaAtual(MapaBatalhaMestre mapaAtualizado) {
     final campanhas = _substituirMapa(mapaAtualizado);
     if (campanhas == null) return;
+    _ultimaMudancaEhEdicaoMapa = true;
     emit(state.copyWith(campanhas: campanhas));
-    if (_hostService != null && state.statusLan != StatusConexaoLan.desligado) {
-      unawaited(
-        _hostService!.publicarSnapshotMesa(
-          SnapshotMesa.sanitizadoDeMapa(mapaAtualizado),
-        ),
-      );
-    }
+    _agendarPublicacaoSnapshotLan(mapaAtualizado);
   }
 
   // ===========================================================================
@@ -2371,9 +2454,11 @@ class MestreCubit extends Cubit<MestreState> {
     required String tom,
   }) {
     final nomesBanco =
-        _bancoNomesPorRaca[raca] ?? _bancoNomesPorRaca['Humano']!;
+        CatalogoMestrePadrao.bancoNomesPorRaca[raca] ??
+        CatalogoMestrePadrao.bancoNomesPorRaca['Humano']!;
     final sobrenomes =
-        _bancoSobrenomesPorRaca[raca] ?? _bancoSobrenomesPorRaca['Humano']!;
+        CatalogoMestrePadrao.bancoSobrenomesPorRaca[raca] ??
+        CatalogoMestrePadrao.bancoSobrenomesPorRaca['Humano']!;
 
     final poolNomes = _filtrarPorGenero(nomesBanco, genero);
     final primeiroNome = poolNomes[_random.nextInt(poolNomes.length)];
@@ -2428,230 +2513,4 @@ class MestreCubit extends Cubit<MestreState> {
       emit(state.copyWith(nomesFavoritos: [nome, ...state.nomesFavoritos]));
     }
   }
-
-  static const List<PerigoMestre> _perigosPadraoT20 = [
-    PerigoMestre(
-      id: 'per_areia_movedica',
-      nome: 'Areia Movediça',
-      tipo: 'Terreno',
-      cd: 'CD 15 Atletismo',
-      dano: 'Afogamento (1d6 PV/rodada se submergir)',
-      descricao:
-          'Entrar no quadrado custa 3m de deslocamento. Teste de Atletismo no início do turno para não afundar. Cada rodada falha puxa o personagem mais fundo.',
-      fixado: true,
-    ),
-    PerigoMestre(
-      id: 'per_poco_estacas',
-      nome: 'Poço com Estacas de Ferro',
-      tipo: 'Armadilha',
-      cd: 'CD 20 Percepção / Ladinagem',
-      dano: '3d6 impacto + 2d6 perfuração',
-      descricao:
-          'Alçapão camuflado com 6 metros de profundidade. Vítimas caem sofrendo dano de queda e empalamento, ficando presas nas estacas enferrujadas.',
-      fixado: true,
-    ),
-    PerigoMestre(
-      id: 'per_frio_uivantes',
-      nome: 'Frio Extremo das Uivantes',
-      tipo: 'Ambiente',
-      cd: 'CD 15 Fortitude (por hora)',
-      dano: '1d6 dano de frio e Fatigado',
-      descricao:
-          'Sem agasalhos de pele ou calor mágico, falha no teste causa dano letal de frio e a condição Fatigado (que escala para Exausto e Inconsciente).',
-      fixado: true,
-    ),
-    PerigoMestre(
-      id: 'per_lava',
-      nome: 'Lava Vulcânica',
-      tipo: 'Terreno',
-      cd: 'CD 20 Reflexos',
-      dano: '6d6 fogo (toque) / 12d6 fogo (imersão)',
-      descricao:
-          'Contato direto queima imediatamente. Imersão parcial incinera equipamentos inflamáveis e causa dano contínuo extremo até ser retirado.',
-    ),
-    PerigoMestre(
-      id: 'per_gas_asfixiante',
-      nome: 'Gás de Enxofre Asfixiante',
-      tipo: 'Ambiente',
-      cd: 'CD 18 Fortitude',
-      dano: '2d4 perda de vida e Asfixiado',
-      descricao:
-          'Vazamento subterrâneo denso. Falha causa condição Enjoado e impede a respiração natural. Ignora redução de dano (perda de vida direta).',
-    ),
-    PerigoMestre(
-      id: 'per_runa_explosiva',
-      nome: 'Runa Arcana Explosiva',
-      tipo: 'Armadilha',
-      cd: 'CD 22 Misticismo',
-      dano: '4d8 essência / fogo (raio 4,5m)',
-      descricao:
-          'Glifo gravado no piso que detona ao ser pisado. Reflexos CD 22 reduz o dano à metade. Dispersar exige sucesso em teste de Misticismo.',
-    ),
-  ];
-
-  static const Map<String, List<String>> _bancoNomesPorRaca = {
-    'Humano': [
-      'Aldor',
-      'Thalon',
-      'Valen',
-      'Brendan',
-      'Elenor',
-      'Selena',
-      'Gareth',
-      'Mirian',
-      'Lorcan',
-      'Kaelen',
-    ],
-    'Elfo': [
-      'Eladrien',
-      'Faenor',
-      'Sylvana',
-      'Thalion',
-      'Alysia',
-      'Kaelis',
-      'Liadon',
-      'Sariel',
-      'Galanodel',
-      'Celeborn',
-    ],
-    'Anão': [
-      'Thorin',
-      'Balgur',
-      'Durnan',
-      'Helga',
-      'Brunhild',
-      'Orgrim',
-      'Kragan',
-      'Dwalin',
-      'Keldor',
-      'Moradin',
-    ],
-    'Qareen': [
-      'Zahir',
-      'Yasmin',
-      'Aziz',
-      'Soraya',
-      'Jamil',
-      'Farah',
-      'Malik',
-      'Samira',
-      'Tariq',
-      'Layla',
-    ],
-    'Minotauro': [
-      'Tauron',
-      'Asterios',
-      'Kragor',
-      'Gorgon',
-      'Bravus',
-      'Thorgar',
-      'Minos',
-      'Corax',
-      'Voldur',
-      'Rorik',
-    ],
-    'Lefou': [
-      'Keth',
-      'Xylar',
-      'Vorz',
-      'Nyx',
-      'Malakor',
-      'Zalthor',
-      'Kyros',
-      'Gorgath',
-      'Veth',
-      'Szar',
-    ],
-    'Goblin': [
-      'Grik',
-      'Snikt',
-      'Razz',
-      'Nokk',
-      'Pip',
-      'Zul',
-      'Blix',
-      'Krag',
-      'Snarl',
-      'Grib',
-    ],
-    'Dahllan': [
-      'Flora',
-      'Silvia',
-      'Daphne',
-      'Dryas',
-      'Verdan',
-      'Linden',
-      'Bramble',
-      'Rowan',
-      'Briar',
-      'Ivy',
-    ],
-  };
-
-  static const Map<String, List<String>> _bancoSobrenomesPorRaca = {
-    'Humano': [
-      'de Valkaria',
-      'Ferrobraço',
-      'da Colina',
-      'Valente',
-      'do Vento',
-      'Machado-Largo',
-      'Guarda-Real',
-      'Corvomar',
-    ],
-    'Elfo': [
-      'Folha-de-Prata',
-      'Estrela-D’Alva',
-      'do Rio Silente',
-      'Raio-da-Manhã',
-      'Canto-Verde',
-      'Luar-Eterno',
-      'Passo-Leve',
-    ],
-    'Anão': [
-      'Barba-de-Ferro',
-      'Martelo-Pesado',
-      'Mina-Profunda',
-      'Quebra-Rochas',
-      'Escudo-de-Bronze',
-      'Pedra-Negra',
-    ],
-    'Qareen': [
-      'al-Zahir',
-      'do Fogo-Fátuo',
-      'da Brisa-Doce',
-      'al-Hassan',
-      'das Areias-Douradas',
-      'do Poço-Azul',
-    ],
-    'Minotauro': [
-      'Chifre-de-Aço',
-      'Fúria-de-Tauron',
-      'Labiríntico',
-      'Forte-como-Montanha',
-      'Casco-Bruto',
-    ],
-    'Lefou': [
-      'Sangue-Rubro',
-      'Olhar-Torto',
-      'do Vazio',
-      'Pele-de-Quitina',
-      'Toque-da-Mancha',
-    ],
-    'Goblin': [
-      'Dente-Torto',
-      'Ladrão-de-Carvão',
-      'Fura-Bolso',
-      'Mão-Leve',
-      'Pavio-Curto',
-      'Trabuco',
-    ],
-    'Dahllan': [
-      'Raiz-Firme',
-      'Flor-de-Espinho',
-      'do Carvalho-Antigo',
-      'Casca-Verde',
-      'da Floresta-Alta',
-    ],
-  };
 }

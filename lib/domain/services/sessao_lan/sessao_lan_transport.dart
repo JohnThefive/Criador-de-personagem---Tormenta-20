@@ -38,6 +38,9 @@ abstract class SessaoHostService {
 
   Stream<Map<String, dynamic>> get acoesMapa;
 
+  /// Emite o `characterId` sempre que um jogador desconecta ou perde conexão.
+  Stream<String> get desconexoesCliente;
+
   Future<void> notificarRevisaoFicha(
     String characterId,
     StatusRevisaoFicha status, {

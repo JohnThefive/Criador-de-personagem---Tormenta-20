@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:t20_creator/domain/entities/combate/grid_tatico.dart';
 import 'package:t20_creator/domain/entities/combate/monstro.dart';
+import 'package:t20_creator/domain/entities/mestre/modelos_mestre.dart';
 import 'package:t20_creator/domain/services/data_services/call_ameacas.dart';
 import 'package:t20_creator/domain/services/data_services/mestre_storage_service.dart';
 import 'package:t20_creator/presentation/controllers/mestre_controller/mestre_cubit.dart';
@@ -271,6 +272,43 @@ void main() {
           snap!.ameacasCustomizadas.map((m) => m.nome),
           equals(['Saqueador Corrompido']),
         );
+      },
+    );
+
+    test(
+      'TokenNoMapa omite ficha completa de monstro padrão no JSON e reidrata pelo catálogo',
+      () {
+        const goblinPadrao = Monstro(
+          id: 'goblin_padrao_catalogo',
+          nome: 'Goblin Salteador',
+          nd: '1/4',
+          regiao: 'Reinados',
+          pvMax: 6,
+          defesa: 14,
+          iniciativa: 3,
+          customizado: false,
+        );
+        BancoDeAmeacas.carregarParaTestes(monstros: [goblinPadrao]);
+
+        const token = TokenNoMapa(
+          id: 'tok_goblin_1',
+          nome: 'Goblin Salteador',
+          posicao: Posicao2D(2, 2),
+          ehHeroi: false,
+          tipo: TipoCombatenteMapa.inimigo,
+          pvAtual: 6,
+          pvMax: 6,
+          monstroId: 'goblin_padrao_catalogo',
+          monstro: goblinPadrao,
+        );
+
+        final json = token.toJson();
+        expect(json['monstroId'], equals('goblin_padrao_catalogo'));
+        expect(json.containsKey('monstro'), isFalse);
+
+        final restaurado = TokenNoMapa.fromJson(json);
+        expect(restaurado.monstroId, equals('goblin_padrao_catalogo'));
+        expect(restaurado.monstro?.nome, equals('Goblin Salteador'));
       },
     );
   });

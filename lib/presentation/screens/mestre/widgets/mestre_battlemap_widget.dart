@@ -759,6 +759,94 @@ class _BattlemapGridPainter extends CustomPainter {
     return pos.x >= 0 && pos.x < largura && pos.y >= 0 && pos.y < altura;
   }
 
+  static final Paint _obstaculoFill = Paint()
+    ..color = Colors.black.withValues(alpha: 0.72)
+    ..style = PaintingStyle.fill;
+  static final Paint _obstaculoMark = Paint()
+    ..color = Colors.white38
+    ..strokeWidth = 1.4
+    ..style = PaintingStyle.stroke;
+  static final Paint _dificilFill = Paint()
+    ..color = const Color(0xFFD97706).withValues(alpha: 0.32)
+    ..style = PaintingStyle.fill;
+  static final Paint _dificilMark = Paint()
+    ..color = Colors.amberAccent.withValues(alpha: 0.85)
+    ..strokeWidth = 1.3
+    ..style = PaintingStyle.stroke;
+  static final Paint _alcanceFill = Paint()
+    ..color = const Color(0xFF38BDF8).withValues(alpha: 0.35)
+    ..style = PaintingStyle.fill;
+  static final Paint _fogPreviewPaint = Paint()
+    ..color = const Color(0xFF050811)
+    ..style = PaintingStyle.fill;
+  static final Paint _fogMestrePaint = Paint()
+    ..color = Colors.black.withValues(alpha: 0.48)
+    ..style = PaintingStyle.fill;
+  static final Paint _previewFogBorder = Paint()
+    ..color = Colors.white.withValues(alpha: 0.05)
+    ..strokeWidth = 0.5
+    ..style = PaintingStyle.stroke;
+  static final Paint _gridPaint = Paint()
+    ..strokeWidth = 0.6
+    ..style = PaintingStyle.stroke;
+  static final Paint _alcanceBorder = Paint()
+    ..color = Colors.cyanAccent
+    ..strokeWidth = 1.5
+    ..style = PaintingStyle.stroke;
+  static final Paint _pillBgPaint = Paint()
+    ..color = Colors.black87
+    ..style = PaintingStyle.fill;
+  static final Paint _markerFill = Paint()
+    ..color = Colors.amberAccent
+    ..style = PaintingStyle.fill;
+  static final Paint _markerStroke = Paint()
+    ..color = Colors.black87
+    ..strokeWidth = 1.5
+    ..style = PaintingStyle.stroke;
+  static final Paint _lineGlow = Paint()
+    ..color = Colors.black54
+    ..strokeWidth = 4.5
+    ..strokeCap = StrokeCap.round
+    ..style = PaintingStyle.stroke;
+  static final Paint _linePaint = Paint()
+    ..color = Colors.amberAccent
+    ..strokeWidth = 2.4
+    ..strokeCap = StrokeCap.round
+    ..style = PaintingStyle.stroke;
+  static final Paint _pingOuterFill = Paint()
+    ..color = Colors.cyanAccent.withValues(alpha: 0.22)
+    ..style = PaintingStyle.fill;
+  static final Paint _pingOuterStroke = Paint()
+    ..color = Colors.cyanAccent
+    ..strokeWidth = 2.0
+    ..style = PaintingStyle.stroke;
+  static final Paint _pingInnerStroke = Paint()
+    ..color = Colors.amberAccent
+    ..strokeWidth = 1.8
+    ..style = PaintingStyle.stroke;
+  static final Paint _pingCenterDot = Paint()
+    ..color = Colors.amberAccent
+    ..style = PaintingStyle.fill;
+
+  static final Map<String, TextPainter> _custoTextCache = {};
+
+  static TextPainter _obterTextPainterCusto(double custo) {
+    final label = '${custo.toStringAsFixed(1)}m';
+    return _custoTextCache.putIfAbsent(label, () {
+      return TextPainter(
+        text: TextSpan(
+          text: label,
+          style: const TextStyle(
+            color: Colors.cyanAccent,
+            fontSize: 8,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        textDirection: TextDirection.ltr,
+      )..layout();
+    });
+  }
+
   void _desenharTerrenos(
     Canvas canvas,
     double cellW,
@@ -768,49 +856,35 @@ class _BattlemapGridPainter extends CustomPainter {
   ) {
     if (mapaExibido.terrenos.isEmpty) return;
 
-    final obstaculoFill = Paint()
-      ..color = Colors.black.withValues(alpha: 0.72)
-      ..style = PaintingStyle.fill;
-    final obstaculoMark = Paint()
-      ..color = Colors.white38
-      ..strokeWidth = 1.4
-      ..style = PaintingStyle.stroke;
-    final dificilFill = Paint()
-      ..color = const Color(0xFFD97706).withValues(alpha: 0.32)
-      ..style = PaintingStyle.fill;
-    final dificilMark = Paint()
-      ..color = Colors.amberAccent.withValues(alpha: 0.85)
-      ..strokeWidth = 1.3
-      ..style = PaintingStyle.stroke;
-
+    final minDim = math.min(cellW, cellH);
     for (final entry in mapaExibido.terrenos.entries) {
       final pos = entry.key;
       if (!_dentroLimites(pos, largura, altura)) continue;
 
       final rect = Rect.fromLTWH(pos.x * cellW, pos.y * cellH, cellW, cellH);
       if (entry.value == TipoTerreno.obstaculo) {
-        canvas.drawRect(rect, obstaculoFill);
-        final pad = math.min(cellW, cellH) * 0.28;
+        canvas.drawRect(rect, _obstaculoFill);
+        final pad = minDim * 0.28;
         canvas.drawLine(
           Offset(rect.left + pad, rect.top + pad),
           Offset(rect.right - pad, rect.bottom - pad),
-          obstaculoMark,
+          _obstaculoMark,
         );
         canvas.drawLine(
           Offset(rect.right - pad, rect.top + pad),
           Offset(rect.left + pad, rect.bottom - pad),
-          obstaculoMark,
+          _obstaculoMark,
         );
       } else if (entry.value == TipoTerreno.dificil) {
-        canvas.drawRect(rect, dificilFill);
-        final iconSize = math.min(cellW, cellH) * 0.24;
+        canvas.drawRect(rect, _dificilFill);
+        final iconSize = minDim * 0.24;
         final topRight = Offset(rect.right - 3, rect.top + 3);
         final path = Path()
           ..moveTo(topRight.dx - iconSize, topRight.dy + iconSize)
           ..lineTo(topRight.dx - iconSize * 0.5, topRight.dy)
           ..lineTo(topRight.dx, topRight.dy + iconSize)
           ..close();
-        canvas.drawPath(path, dificilMark);
+        canvas.drawPath(path, _dificilMark);
       }
     }
   }
@@ -824,16 +898,12 @@ class _BattlemapGridPainter extends CustomPainter {
   ) {
     if (celulasAlcancaveis.isEmpty) return;
 
-    final fillPaint = Paint()
-      ..color = const Color(0xFF38BDF8).withValues(alpha: 0.35)
-      ..style = PaintingStyle.fill;
-
     for (final pos in celulasAlcancaveis) {
       if (!_dentroLimites(pos, largura, altura)) continue;
       if (emPreviewJogador && !mapaReal.celulasReveladas.contains(pos)) continue;
 
       final rect = Rect.fromLTWH(pos.x * cellW, pos.y * cellH, cellW, cellH);
-      canvas.drawRect(rect, fillPaint);
+      canvas.drawRect(rect, _alcanceFill);
     }
   }
 
@@ -847,15 +917,7 @@ class _BattlemapGridPainter extends CustomPainter {
     final reveladas = mapaReal.celulasReveladas;
     if (reveladas.length == largura * altura) return;
 
-    final fogPaint = Paint()
-      ..color = emPreviewJogador
-          ? const Color(0xFF050811)
-          : Colors.black.withValues(alpha: 0.48)
-      ..style = PaintingStyle.fill;
-    final previewFogBorder = Paint()
-      ..color = Colors.white.withValues(alpha: 0.05)
-      ..strokeWidth = 0.5
-      ..style = PaintingStyle.stroke;
+    final fogPaint = emPreviewJogador ? _fogPreviewPaint : _fogMestrePaint;
 
     for (int y = 0; y < altura; y++) {
       for (int x = 0; x < largura; x++) {
@@ -865,7 +927,7 @@ class _BattlemapGridPainter extends CustomPainter {
         final rect = Rect.fromLTWH(x * cellW, y * cellH, cellW, cellH);
         canvas.drawRect(rect, fogPaint);
         if (emPreviewJogador) {
-          canvas.drawRect(rect, previewFogBorder);
+          canvas.drawRect(rect, _previewFogBorder);
         }
       }
     }
@@ -879,18 +941,17 @@ class _BattlemapGridPainter extends CustomPainter {
     int largura,
     int altura,
   ) {
-    final gridPaint = Paint()
-      ..color = Colors.white.withValues(alpha: mapaExibido.opacidadeGrid)
-      ..strokeWidth = 0.6
-      ..style = PaintingStyle.stroke;
+    _gridPaint.color = Colors.white.withValues(
+      alpha: mapaExibido.opacidadeGrid,
+    );
 
     for (int x = 0; x <= largura; x++) {
       final dx = x * cellW;
-      canvas.drawLine(Offset(dx, 0), Offset(dx, size.height), gridPaint);
+      canvas.drawLine(Offset(dx, 0), Offset(dx, size.height), _gridPaint);
     }
     for (int y = 0; y <= altura; y++) {
       final dy = y * cellH;
-      canvas.drawLine(Offset(0, dy), Offset(size.width, dy), gridPaint);
+      canvas.drawLine(Offset(0, dy), Offset(size.width, dy), _gridPaint);
     }
   }
 
@@ -903,34 +964,16 @@ class _BattlemapGridPainter extends CustomPainter {
   ) {
     if (celulasAlcancaveis.isEmpty) return;
 
-    final borderPaint = Paint()
-      ..color = Colors.cyanAccent
-      ..strokeWidth = 1.5
-      ..style = PaintingStyle.stroke;
-    final pillBgPaint = Paint()
-      ..color = Colors.black87
-      ..style = PaintingStyle.fill;
-    final textPainter = TextPainter(textDirection: TextDirection.ltr);
-
     for (final pos in celulasAlcancaveis) {
       if (!_dentroLimites(pos, largura, altura)) continue;
       if (emPreviewJogador && !mapaReal.celulasReveladas.contains(pos)) continue;
 
       final rect = Rect.fromLTWH(pos.x * cellW, pos.y * cellH, cellW, cellH);
-      canvas.drawRect(rect, borderPaint);
+      canvas.drawRect(rect, _alcanceBorder);
 
       final custo = custosMovimento[pos];
       if (custo != null) {
-        textPainter.text = TextSpan(
-          text: '${custo.toStringAsFixed(1)}m',
-          style: const TextStyle(
-            color: Colors.cyanAccent,
-            fontSize: 8,
-            fontWeight: FontWeight.bold,
-          ),
-        );
-        textPainter.layout();
-
+        final textPainter = _obterTextPainterCusto(custo);
         final bgWidth = textPainter.width + 6;
         final bgHeight = textPainter.height + 2;
         if (bgWidth <= cellW && bgHeight <= cellH) {
@@ -943,7 +986,7 @@ class _BattlemapGridPainter extends CustomPainter {
             ),
             const Radius.circular(3),
           );
-          canvas.drawRRect(bgRect, pillBgPaint);
+          canvas.drawRRect(bgRect, _pillBgPaint);
           textPainter.paint(
             canvas,
             Offset(bgRect.left + 3, bgRect.top + 1),
@@ -962,38 +1005,19 @@ class _BattlemapGridPainter extends CustomPainter {
     if (orig == null) return;
 
     final origCenter = Offset((orig.x + 0.5) * cellW, (orig.y + 0.5) * cellH);
-    final markerFill = Paint()
-      ..color = Colors.amberAccent
-      ..style = PaintingStyle.fill;
-    final markerStroke = Paint()
-      ..color = Colors.black87
-      ..strokeWidth = 1.5
-      ..style = PaintingStyle.stroke;
-
     final dest = pontoDestinoMedicao;
     if (dest != null) {
       final destCenter = Offset((dest.x + 0.5) * cellW, (dest.y + 0.5) * cellH);
 
-      final lineGlow = Paint()
-        ..color = Colors.black54
-        ..strokeWidth = 4.5
-        ..strokeCap = StrokeCap.round
-        ..style = PaintingStyle.stroke;
-      final linePaint = Paint()
-        ..color = Colors.amberAccent
-        ..strokeWidth = 2.4
-        ..strokeCap = StrokeCap.round
-        ..style = PaintingStyle.stroke;
+      canvas.drawLine(origCenter, destCenter, _lineGlow);
+      canvas.drawLine(origCenter, destCenter, _linePaint);
 
-      canvas.drawLine(origCenter, destCenter, lineGlow);
-      canvas.drawLine(origCenter, destCenter, linePaint);
-
-      canvas.drawCircle(destCenter, 5.0, markerFill);
-      canvas.drawCircle(destCenter, 5.0, markerStroke);
+      canvas.drawCircle(destCenter, 5.0, _markerFill);
+      canvas.drawCircle(destCenter, 5.0, _markerStroke);
     }
 
-    canvas.drawCircle(origCenter, 5.0, markerFill);
-    canvas.drawCircle(origCenter, 5.0, markerStroke);
+    canvas.drawCircle(origCenter, 5.0, _markerFill);
+    canvas.drawCircle(origCenter, 5.0, _markerStroke);
   }
 
   void _desenharPingsAtivos(
@@ -1003,29 +1027,14 @@ class _BattlemapGridPainter extends CustomPainter {
   ) {
     if (pingsAtivos.isEmpty) return;
 
-    final outerFill = Paint()
-      ..color = Colors.cyanAccent.withValues(alpha: 0.22)
-      ..style = PaintingStyle.fill;
-    final outerStroke = Paint()
-      ..color = Colors.cyanAccent
-      ..strokeWidth = 2.0
-      ..style = PaintingStyle.stroke;
-    final innerStroke = Paint()
-      ..color = Colors.amberAccent
-      ..strokeWidth = 1.8
-      ..style = PaintingStyle.stroke;
-    final centerDot = Paint()
-      ..color = Colors.amberAccent
-      ..style = PaintingStyle.fill;
-
     final baseRadius = math.min(cellW, cellH);
 
     for (final pos in pingsAtivos) {
       final center = Offset((pos.x + 0.5) * cellW, (pos.y + 0.5) * cellH);
-      canvas.drawCircle(center, baseRadius * 0.42, outerFill);
-      canvas.drawCircle(center, baseRadius * 0.42, outerStroke);
-      canvas.drawCircle(center, baseRadius * 0.24, innerStroke);
-      canvas.drawCircle(center, 3.0, centerDot);
+      canvas.drawCircle(center, baseRadius * 0.42, _pingOuterFill);
+      canvas.drawCircle(center, baseRadius * 0.42, _pingOuterStroke);
+      canvas.drawCircle(center, baseRadius * 0.24, _pingInnerStroke);
+      canvas.drawCircle(center, 3.0, _pingCenterDot);
     }
   }
 
@@ -1036,15 +1045,23 @@ class _BattlemapGridPainter extends CustomPainter {
         oldDelegate.mapaExibido.gridVisivel != mapaExibido.gridVisivel ||
         oldDelegate.mapaExibido.opacidadeGrid != mapaExibido.opacidadeGrid ||
         oldDelegate.emPreviewJogador != emPreviewJogador ||
-        !mapEquals(oldDelegate.mapaExibido.terrenos, mapaExibido.terrenos) ||
-        !setEquals(
-          oldDelegate.mapaReal.celulasReveladas,
-          mapaReal.celulasReveladas,
-        ) ||
-        !setEquals(oldDelegate.celulasAlcancaveis, celulasAlcancaveis) ||
-        !mapEquals(oldDelegate.custosMovimento, custosMovimento) ||
+        (!identical(oldDelegate.mapaExibido.terrenos, mapaExibido.terrenos) &&
+            !mapEquals(oldDelegate.mapaExibido.terrenos, mapaExibido.terrenos)) ||
+        (!identical(
+              oldDelegate.mapaReal.celulasReveladas,
+              mapaReal.celulasReveladas,
+            ) &&
+            !setEquals(
+              oldDelegate.mapaReal.celulasReveladas,
+              mapaReal.celulasReveladas,
+            )) ||
+        (!identical(oldDelegate.celulasAlcancaveis, celulasAlcancaveis) &&
+            !setEquals(oldDelegate.celulasAlcancaveis, celulasAlcancaveis)) ||
+        (!identical(oldDelegate.custosMovimento, custosMovimento) &&
+            !mapEquals(oldDelegate.custosMovimento, custosMovimento)) ||
         oldDelegate.pontoOrigemMedicao != pontoOrigemMedicao ||
         oldDelegate.pontoDestinoMedicao != pontoDestinoMedicao ||
-        !listEquals(oldDelegate.pingsAtivos, pingsAtivos);
+        (!identical(oldDelegate.pingsAtivos, pingsAtivos) &&
+            !listEquals(oldDelegate.pingsAtivos, pingsAtivos));
   }
 }

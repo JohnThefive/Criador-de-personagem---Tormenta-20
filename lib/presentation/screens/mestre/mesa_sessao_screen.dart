@@ -297,6 +297,7 @@ class _AbaJogadoresSessao extends StatelessWidget {
                             ListTile(
                               contentPadding: EdgeInsets.zero,
                               minTileHeight: 52,
+                              onTap: () => _abrirFichaJogador(context, heroi),
                               leading: CircleAvatar(
                                 backgroundColor: colorScheme.primaryContainer,
                                 foregroundColor: colorScheme.onPrimaryContainer,
@@ -315,9 +316,22 @@ class _AbaJogadoresSessao extends StatelessWidget {
                               subtitle: Text(
                                 '${heroi.nomeJogador} • PV ${heroi.pvAtual}/${heroi.pvMax} • PM ${heroi.pmAtual}/${heroi.pmMax}',
                               ),
-                              trailing: pendente
-                                  ? null
-                                  : (jaNoMapa
+                              trailing: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  IconButton(
+                                    key: Key(
+                                      'botao_inspecionar_ficha_${heroi.characterId}',
+                                    ),
+                                    tooltip: 'Inspecionar ficha e enviar nota',
+                                    icon: const Icon(
+                                      Icons.description_outlined,
+                                    ),
+                                    onPressed: () =>
+                                        _abrirFichaJogador(context, heroi),
+                                  ),
+                                  if (!pendente)
+                                    jaNoMapa
                                         ? Chip(
                                             label: const Text('No mapa'),
                                             backgroundColor:
@@ -336,7 +350,9 @@ class _AbaJogadoresSessao extends StatelessWidget {
                                                     onIrParaMapa();
                                                   },
                                             child: const Text('No mapa'),
-                                          )),
+                                          ),
+                                ],
+                              ),
                             ),
                             if (pendente) ...[
                               const SizedBox(height: 6),
@@ -389,6 +405,248 @@ class _AbaJogadoresSessao extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  void _abrirFichaJogador(BuildContext context, ElencoSessaoEntry heroi) {
+    showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      useSafeArea: true,
+      showDragHandle: true,
+      builder: (_) => _SheetFichaJogadorLan(
+        cubit: cubit,
+        entry: heroi,
+      ),
+    );
+  }
+}
+
+class _SheetFichaJogadorLan extends StatefulWidget {
+  final MestreCubit cubit;
+  final ElencoSessaoEntry entry;
+
+  const _SheetFichaJogadorLan({
+    required this.cubit,
+    required this.entry,
+  });
+
+  @override
+  State<_SheetFichaJogadorLan> createState() => _SheetFichaJogadorLanState();
+}
+
+class _SheetFichaJogadorLanState extends State<_SheetFichaJogadorLan> {
+  late final TextEditingController _notaCtrl;
+
+  @override
+  void initState() {
+    super.initState();
+    _notaCtrl = TextEditingController(text: widget.entry.notaRevisao ?? '');
+  }
+
+  @override
+  void dispose() {
+    _notaCtrl.dispose();
+    super.dispose();
+  }
+
+  List<String> _lerListaNomes(dynamic raw) {
+    if (raw is! List) return const [];
+    return raw
+        .map((e) {
+          if (e is Map && e['nome'] != null) return e['nome'].toString();
+          return e.toString();
+        })
+        .where((s) => s.trim().isNotEmpty)
+        .toList();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+    final snap = widget.cubit.obterSnapshotFichaJogador(
+      widget.entry.characterId,
+    );
+    final attrs = snap?['atributos'] is Map
+        ? Map<String, dynamic>.from(snap!['atributos'] as Map)
+        : const <String, dynamic>{};
+    final pericias = _lerListaNomes(snap?['periciasTreinadas']);
+    final magias = _lerListaNomes(snap?['magiasConhecidas']);
+    final armas = _lerListaNomes(snap?['armasJson']);
+    final armadura = snap?['armaduraJson'] is Map
+        ? (snap!['armaduraJson'] as Map)['nome']?.toString()
+        : null;
+    final escudo = snap?['escudoJson'] is Map
+        ? (snap!['escudoJson'] as Map)['nome']?.toString()
+        : null;
+    final vestidos = _lerListaNomes(snap?['itensVestidosExtras']);
+    final itens = _lerListaNomes(snap?['itensInventario']);
+    final anotacoes = (snap?['anotacoes'] ?? '').toString().trim();
+    final tibaresOuro = (snap?['tibaresOuro'] as num?)?.toInt() ?? 0;
+    final tibaresPrata = (snap?['tibares'] as num?)?.toInt() ?? 0;
+    final tibaresCobre = (snap?['tibaresCobre'] as num?)?.toInt() ?? 0;
+
+    final inventario = <String>[
+      ...armas,
+      if (armadura != null && armadura.isNotEmpty) armadura,
+      if (escudo != null && escudo.isNotEmpty) escudo,
+      ...vestidos,
+      ...itens,
+    ];
+
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        maxHeight: MediaQuery.sizeOf(context).height * 0.85,
+      ),
+      child: SingleChildScrollView(
+        padding: EdgeInsets.only(
+          left: 16,
+          right: 16,
+          top: 4,
+          bottom: MediaQuery.of(context).viewInsets.bottom + 20,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    '${widget.entry.nomePersonagem} • ${widget.entry.classeResumo}',
+                    style: textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                IconButton(
+                  icon: const Icon(Icons.close),
+                  tooltip: 'Fechar',
+                  onPressed: () => Navigator.pop(context),
+                ),
+              ],
+            ),
+            Text(
+              'Jogador: ${widget.entry.nomeJogador} • PV ${widget.entry.pvAtual}/${widget.entry.pvMax} • PM ${widget.entry.pmAtual}/${widget.entry.pmMax} • Def ${widget.entry.defesa}',
+              style: textTheme.bodySmall?.copyWith(
+                color: colorScheme.primary,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            if (snap == null) ...[
+              const SizedBox(height: 10),
+              Text(
+                'Snapshot detalhado ainda não enviado por este jogador.',
+                style: textTheme.bodySmall?.copyWith(
+                  color: colorScheme.onSurfaceVariant,
+                ),
+              ),
+            ] else ...[
+              if (attrs.isNotEmpty) ...[
+                const SizedBox(height: 10),
+                Text(
+                  'Atributos',
+                  style: textTheme.labelLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Wrap(
+                  spacing: 6,
+                  runSpacing: 4,
+                  children: attrs.entries.map((e) {
+                    final val = (e.value as num?)?.toInt() ?? 0;
+                    final fmt = val >= 0 ? '+$val' : '$val';
+                    return Chip(
+                      visualDensity: VisualDensity.compact,
+                      label: Text(
+                        '${e.key} $fmt',
+                        style: const TextStyle(fontSize: 11),
+                      ),
+                    );
+                  }).toList(),
+                ),
+              ],
+              if (pericias.isNotEmpty) ...[
+                const SizedBox(height: 8),
+                Text(
+                  'Perícias treinadas: ${pericias.join(", ")}',
+                  style: textTheme.bodySmall?.copyWith(
+                    color: colorScheme.onSurfaceVariant,
+                  ),
+                ),
+              ],
+              const SizedBox(height: 10),
+              Text(
+                magias.isEmpty
+                    ? 'Magias aprendidas: nenhuma'
+                    : 'Magias aprendidas: ${magias.join(", ")}',
+                style: textTheme.bodySmall,
+              ),
+              const SizedBox(height: 8),
+              Text(
+                inventario.isEmpty
+                    ? 'Inventário: vazio'
+                    : 'Inventário: ${inventario.join(", ")}',
+                style: textTheme.bodySmall,
+              ),
+              if (tibaresOuro > 0 || tibaresPrata > 0 || tibaresCobre > 0) ...[
+                const SizedBox(height: 4),
+                Text(
+                  'Tibares: $tibaresOuro TO • $tibaresPrata T\$ • $tibaresCobre TC',
+                  style: textTheme.bodySmall?.copyWith(
+                    color: colorScheme.onSurfaceVariant,
+                  ),
+                ),
+              ],
+              if (anotacoes.isNotEmpty) ...[
+                const SizedBox(height: 8),
+                Text(
+                  'Anotações do jogador: $anotacoes',
+                  style: textTheme.bodySmall?.copyWith(
+                    color: colorScheme.onSurfaceVariant,
+                  ),
+                ),
+              ],
+            ],
+            const Divider(height: 20),
+            TextField(
+              key: const Key('campo_nota_mestre_para_jogador'),
+              controller: _notaCtrl,
+              maxLines: 2,
+              decoration: const InputDecoration(
+                labelText: 'Enviar nota ao jogador',
+                hintText: 'Ex.: Você encontrou uma chave enferrujada no baú.',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 10),
+            FilledButton.icon(
+              key: const Key('botao_enviar_nota_jogador'),
+              icon: const Icon(Icons.send_rounded, size: 16),
+              label: const Text('Enviar Nota'),
+              onPressed: () {
+                final texto = _notaCtrl.text.trim();
+                if (texto.isEmpty) return;
+                widget.cubit.enviarNotaParaJogadorLan(
+                  widget.entry.characterId,
+                  texto,
+                );
+                Navigator.pop(context);
+                ScaffoldMessenger.maybeOf(context)?.showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      'Nota enviada para ${widget.entry.nomePersonagem}.',
+                    ),
+                    behavior: SnackBarBehavior.floating,
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -1,3 +1,4 @@
+import '../../services/data_services/call_ameacas.dart';
 import '../combate/grid_tatico.dart';
 import '../combate/monstro.dart';
 
@@ -339,32 +340,44 @@ class TokenNoMapa {
     );
   }
 
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'nome': nome,
-        'x': posicao.x,
-        'y': posicao.y,
-        'ehHeroi': ehHeroi,
-        'tipo': tipo.name,
-        'pvAtual': pvAtual,
-        'pvMax': pvMax,
-        'pmAtual': pmAtual,
-        'pmMax': pmMax,
-        'defesa': defesa,
-        'tamanhoQuadrados': tamanhoQuadrados,
-        if (iniciativa != null) 'iniciativa': iniciativa,
-        if (condicoes.isNotEmpty) 'condicoes': condicoes,
-        if (retrato != null) 'retrato': retrato,
-        'deslocamentoMetros': deslocamentoMetros,
-        'visibilidade': visibilidade.toJson(),
-        if (monstroId != null) 'monstroId': monstroId,
-        if (monstro != null) 'monstro': monstro!.toJson(),
-        if (habilidadesGastas.isNotEmpty) 'habilidadesGastas': habilidadesGastas,
-      };
+  Map<String, dynamic> toJson() {
+    final omitirMonstroCatalogo =
+        monstro != null &&
+        !monstro!.customizado &&
+        monstroId != null &&
+        BancoDeAmeacas.pertenceAoCatalogoPadrao(monstroId!);
+    return {
+      'id': id,
+      'nome': nome,
+      'x': posicao.x,
+      'y': posicao.y,
+      'ehHeroi': ehHeroi,
+      'tipo': tipo.name,
+      'pvAtual': pvAtual,
+      'pvMax': pvMax,
+      'pmAtual': pmAtual,
+      'pmMax': pmMax,
+      'defesa': defesa,
+      'tamanhoQuadrados': tamanhoQuadrados,
+      if (iniciativa != null) 'iniciativa': iniciativa,
+      if (condicoes.isNotEmpty) 'condicoes': condicoes,
+      if (retrato != null) 'retrato': retrato,
+      'deslocamentoMetros': deslocamentoMetros,
+      'visibilidade': visibilidade.toJson(),
+      if (monstroId != null) 'monstroId': monstroId,
+      if (monstro != null && !omitirMonstroCatalogo)
+        'monstro': monstro!.toJson(),
+      if (habilidadesGastas.isNotEmpty) 'habilidadesGastas': habilidadesGastas,
+    };
+  }
 
   factory TokenNoMapa.fromJson(Map<String, dynamic> json) {
     final ehHeroi = json['ehHeroi'] != false;
+    final monstroId = json['monstroId']?.toString();
     final monstroJson = json['monstro'];
+    final monstroResolvido = monstroJson is Map
+        ? Monstro.fromJson(Map<String, dynamic>.from(monstroJson))
+        : (monstroId != null ? BancoDeAmeacas.getById(monstroId) : null);
     return TokenNoMapa(
       id: json['id']?.toString() ?? '',
       nome: json['nome']?.toString() ?? 'Combatente',
@@ -395,10 +408,8 @@ class TokenNoMapa {
               Map<String, dynamic>.from(json['visibilidade'] as Map),
             )
           : const ParaTodos(),
-      monstroId: json['monstroId']?.toString(),
-      monstro: monstroJson is Map
-          ? Monstro.fromJson(Map<String, dynamic>.from(monstroJson))
-          : null,
+      monstroId: monstroId,
+      monstro: monstroResolvido,
       habilidadesGastas:
           (json['habilidadesGastas'] as List<dynamic>? ?? const [])
               .map((e) => e.toString())
@@ -727,33 +738,6 @@ class HandoutMestre {
               ?.map((e) => e.toString())
               .toList() ??
           const [],
-    );
-  }
-}
-
-/// RF-M4: Cartão de Regra Rápida para o Escudo do Mestre.
-class RegraCard {
-  final String id;
-  final String titulo;
-  final String categoria;
-  final String corpo;
-  final bool fixado;
-
-  const RegraCard({
-    required this.id,
-    required this.titulo,
-    required this.categoria,
-    required this.corpo,
-    this.fixado = false,
-  });
-
-  RegraCard copyWith({bool? fixado}) {
-    return RegraCard(
-      id: id,
-      titulo: titulo,
-      categoria: categoria,
-      corpo: corpo,
-      fixado: fixado ?? this.fixado,
     );
   }
 }

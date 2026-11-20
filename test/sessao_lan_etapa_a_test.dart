@@ -14,6 +14,7 @@ import 'package:t20_creator/domain/services/sessao_lan/sessao_preferencias_servi
 import 'package:t20_creator/presentation/controllers/ficha_controller/ficha_state.dart';
 import 'package:t20_creator/presentation/controllers/ficha_controller/sessao_jogador_cubit.dart';
 import 'package:t20_creator/presentation/controllers/mestre_controller/mestre_cubit.dart';
+import 'package:t20_creator/presentation/controllers/mestre_controller/mestre_state.dart';
 
 Personagem _criarPersonagemTeste({int? pvAtual, int? pmAtual}) {
   const raca = Raca(
@@ -115,7 +116,7 @@ void main() {
     );
 
     test(
-      'SnapshotMesa.sanitizadoDeMapa omite tokens ocultos e ficha completa de monstro',
+      'SnapshotMesa.sanitizadoDeMapa omite tokens ocultos, névoa de guerra e ficha completa de monstro',
       () {
         final mapa = MapaBatalhaMestre(
           id: 'm1',
@@ -123,6 +124,11 @@ void main() {
           largura: 10,
           altura: 10,
           tokenTurnoAtualId: 'tok_oculto',
+          celulasReveladas: {const Posicao2D(3, 3)},
+          terrenos: {
+            const Posicao2D(3, 3): TipoTerreno.dificil,
+            const Posicao2D(8, 8): TipoTerreno.obstaculo,
+          },
           tokens: const [
             TokenNoMapa(
               id: 'tok_visivel',
@@ -140,9 +146,15 @@ void main() {
               ),
             ),
             TokenNoMapa(
+              id: 'tok_na_nevoa',
+              nome: 'Orc na Névoa',
+              posicao: Posicao2D(8, 8),
+              visibilidade: ParaTodos(),
+            ),
+            TokenNoMapa(
               id: 'tok_oculto',
               nome: 'Assassino Oculto',
-              posicao: Posicao2D(5, 5),
+              posicao: Posicao2D(3, 3),
               visibilidade: SomenteMestre(),
             ),
           ],
@@ -153,6 +165,8 @@ void main() {
         expect(snap.tokensVisiveis.first.id, equals('tok_visivel'));
         expect(snap.tokensVisiveis.first.monstro, isNull);
         expect(snap.tokenTurnoAtualId, isNull);
+        expect(snap.terrenos.containsKey(const Posicao2D(3, 3)), isTrue);
+        expect(snap.terrenos.containsKey(const Posicao2D(8, 8)), isFalse);
 
         final roundTrip = SnapshotMesa.fromJson(snap.toJson());
         expect(roundTrip.toJson(), equals(snap.toJson()));
@@ -274,6 +288,182 @@ void main() {
           equals(EstadoConexaoJogador.desconectado),
         );
         expect(jogador.state.ultimoSnapshot, isNull);
+      },
+    );
+
+    test('MestreCubit limita logsRedeLan às últimas 50 mensagens', () {
+      final mestre = MestreCubit(autoPersistir: false);
+      addTearDown(mestre.close);
+
+      for (int i = 0; i < 65; i++) {
+        mestre.gerarNovoCodigoSalaLan();
+      }
+
+      expect(mestre.state.logsRedeLan.length, equals(MestreCubit.maxLogsRedeLan));
+    });
+
+    test(
+      'MestreCubit faz coalescing (~50ms) ao publicar snapshots em rajada de edições de mapa',
+      () async {
+        final transport = SessaoLoopbackTransport();
+        addTearDown(transport.dispose);
+
+        final mestre = MestreCubit(
+          autoPersistir: false,
+          sessaoHostService: transport.host,
+        );
+        addTearDown(mestre.close);
+
+        mestre.alternarServidorLan();
+        await Future<void>.delayed(Duration.zero);
+
+        var fichaAtual = FichaState(personagem: _criarPersonagemTeste());
+        final jogador = SessaoJogadorCubit(
+          clienteService: transport.cliente,
+          lerFichaState: () => fichaAtual,
+          autoCarregarPreferencias: false,
+          autoPersistirPreferencias: false,
+        );
+        addTearDown(jogador.close);
+
+        jogador.definirCodigoSala(mestre.state.sessaoAtual!.codigoSalaLan);
+        await jogador.conectar();
+        await Future<void>.delayed(Duration.zero);
+        mestre.atualizarStatusRevisaoFicha(
+          'char_valeros_1',
+          StatusRevisaoFicha.aprovada,
+        );
+        await Future<void>.delayed(Duration.zero);
+
+        var snapshotsRecebidos = 0;
+        final sub = transport.cliente.streamEstadoMesa.listen((_) {
+          snapshotsRecebidos++;
+        });
+        addTearDown(sub.cancel);
+
+        // Rajada de 6 edições de névoa em sequência síncrona
+        mestre.selecionarFerramentaMapa(FerramentaMapaMestre.nevoaDeGuerra);
+        mestre.aoClicarCelulaMapa(const Posicao2D(0, 0), fogModoRevelar: true);
+        mestre.aoClicarCelulaMapa(const Posicao2D(0, 1), fogModoRevelar: true);
+        mestre.aoClicarCelulaMapa(const Posicao2D(0, 2), fogModoRevelar: true);
+        mestre.aoClicarCelulaMapa(const Posicao2D(0, 3), fogModoRevelar: true);
+        mestre.aoClicarCelulaMapa(const Posicao2D(0, 4), fogModoRevelar: true);
+        mestre.aoClicarCelulaMapa(const Posicao2D(0, 5), fogModoRevelar: true);
+
+        await Future<void>.delayed(const Duration(milliseconds: 90));
+        expect(snapshotsRecebidos, equals(1));
+        expect(
+          jogador.state.ultimoSnapshot!.celulasReveladas,
+          contains(const Posicao2D(0, 5)),
+        );
+      },
+    );
+
+    test(
+      'aplicarAcaoMapaJogadorLan valida alcance (MovimentoEngine), colisão e Fog of War no Host',
+      () {
+        final mestre = MestreCubit(autoPersistir: false);
+        addTearDown(mestre.close);
+
+        mestre.receberSolicitacaoEntradaLan(
+          SolicitacaoEntradaSessao(
+            codigoSala: mestre.codigoSalaLanAtivo,
+            characterId: 'heroi_val',
+            nomeJogador: 'Ana',
+            nomePersonagem: 'Valeros',
+            classeResumo: 'Guerreiro 1',
+            pvAtual: 20,
+            pvMax: 20,
+            pmAtual: 6,
+            pmMax: 6,
+            defesa: 16,
+            deslocamentoMetros: 9.0,
+          ),
+        );
+        mestre.atualizarStatusRevisaoFicha(
+          'heroi_val',
+          StatusRevisaoFicha.aprovada,
+        );
+
+        final posInicial = mestre.state.mapaAtual!.tokens
+            .firstWhere((t) => t.id == 'heroi_val')
+            .posicao;
+
+        // Adiciona inimigo na célula adjacente (2, 1) para testar colisão
+        mestre.adicionarTokenCustomizadoNoMapa(
+          nome: 'Goblin Bloqueador',
+          ehHeroi: false,
+          tipo: TipoCombatenteMapa.inimigo,
+          pvMax: 6,
+          pmMax: 0,
+          defesa: 13,
+          tamanhoQuadrados: 1,
+          posicao: const Posicao2D(2, 1),
+        );
+
+        // 1. Bloqueia colisão com outro token em (2, 1)
+        mestre.aplicarAcaoMapaJogadorLan({
+          'tipo': 'mover',
+          'characterId': 'heroi_val',
+          'x': 2,
+          'y': 1,
+        });
+        expect(
+          mestre.state.mapaAtual!.tokens
+              .firstWhere((t) => t.id == 'heroi_val')
+              .posicao,
+          equals(posInicial),
+        );
+
+        // 2. Bloqueia movimento fora de alcance / sob névoa (ex.: canto extremo do mapa)
+        mestre.aplicarAcaoMapaJogadorLan({
+          'tipo': 'mover',
+          'characterId': 'heroi_val',
+          'x': mestre.state.mapaAtual!.largura - 1,
+          'y': mestre.state.mapaAtual!.altura - 1,
+        });
+        expect(
+          mestre.state.mapaAtual!.tokens
+              .firstWhere((t) => t.id == 'heroi_val')
+              .posicao,
+          equals(posInicial),
+        );
+
+        // 3. Permite movimento válido dentro do alcance, revelado e livre (1, 2)
+        mestre.aplicarAcaoMapaJogadorLan({
+          'tipo': 'mover',
+          'characterId': 'heroi_val',
+          'x': 1,
+          'y': 2,
+        });
+        expect(
+          mestre.state.mapaAtual!.tokens
+              .firstWhere((t) => t.id == 'heroi_val')
+              .posicao,
+          equals(const Posicao2D(1, 2)),
+        );
+      },
+    );
+
+    test(
+      'Edição de mapa mantém CampanhaMestre.mapas sincronizado com AventuraMestre.mapas',
+      () {
+        final mestre = MestreCubit(autoPersistir: false);
+        addTearDown(mestre.close);
+
+        final mapaId = mestre.state.mapaAtual!.id;
+        mestre.selecionarFerramentaMapa(FerramentaMapaMestre.nevoaDeGuerra);
+        mestre.aoClicarCelulaMapa(const Posicao2D(0, 0), fogModoRevelar: true);
+
+        final mapaAventura = mestre.state.aventuraAtual!.mapas.firstWhere(
+          (m) => m.id == mapaId,
+        );
+        final mapaCampanha = mestre.state.campanhaAtual!.mapas.firstWhere(
+          (m) => m.id == mapaId,
+        );
+
+        expect(mapaAventura.celulasReveladas, contains(const Posicao2D(0, 0)));
+        expect(mapaCampanha.celulasReveladas, equals(mapaAventura.celulasReveladas));
       },
     );
   });

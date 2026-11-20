@@ -9,7 +9,7 @@ import 'package:t20_creator/domain/entities/personagem/classe_do_personagem.dart
 import 'package:t20_creator/domain/entities/personagem/personagem.dart';
 import 'package:t20_creator/domain/entities/personagem/raca.dart';
 import 'package:t20_creator/domain/entities/entidade_sessao_lan/sessao_lan_modelos.dart'
-    show EstadoConexaoJogador;
+    show EstadoConexaoJogador, SnapshotMesa;
 import 'package:t20_creator/domain/repositories/i_personagem_repository.dart';
 import 'package:t20_creator/domain/services/sessao_lan/sessao_cliente_lan_service.dart';
 import 'package:t20_creator/domain/services/sessao_lan/sessao_host_lan_service.dart';
@@ -121,16 +121,21 @@ void main() {
         jogador.state.estadoConexao,
         equals(EstadoConexaoJogador.aguardandoAprovacao),
       );
-      expect(
-        mestre.state.sessaoAtual!.elenco.any(
-          (e) =>
-              e.characterId == 'char_lan_1' &&
-              e.statusRevisao == StatusRevisaoFicha.pendente,
-        ),
-        isTrue,
+      final entradaPendente = mestre.state.sessaoAtual!.elenco.firstWhere(
+        (e) => e.characterId == 'char_lan_1',
       );
+      expect(entradaPendente.statusRevisao, StatusRevisaoFicha.pendente);
+      expect(entradaPendente.ipJogador, equals('127.0.0.1'));
+      expect(entradaPendente.conectadoViaLan, isTrue);
 
-      // Mestre aprova -> cliente fica conectado
+      // Segurança: cliente ainda pendente NÃO recebe snapshot da mesa
+      await host.publicarSnapshotMesa(
+        SnapshotMesa.sanitizadoDeMapa(mestre.state.mapaAtual!),
+      );
+      await Future<void>.delayed(const Duration(milliseconds: 80));
+      expect(jogador.state.ultimoSnapshot, isNull);
+
+      // Mestre aprova -> cliente fica conectado e recebe snapshot
       mestre.atualizarStatusRevisaoFicha(
         'char_lan_1',
         StatusRevisaoFicha.aprovada,
@@ -140,6 +145,7 @@ void main() {
         jogador.state.estadoConexao,
         equals(EstadoConexaoJogador.conectado),
       );
+      expect(jogador.state.ultimoSnapshot, isNotNull);
 
       // Jogador move o próprio token para célula livre (3, 3) via WebSocket real
       await jogador.moverMeuToken(const Posicao2D(3, 3));
@@ -186,6 +192,14 @@ void main() {
         (t) => t.id == 'char_lan_1',
       );
       expect(tokAtualizado.pvAtual, equals(18));
+
+      // Ao desconectar, o Host notifica o MestreCubit e marca conectadoViaLan = false
+      await jogador.desconectar();
+      await Future<void>.delayed(const Duration(milliseconds: 120));
+      final entradaOffline = mestre.state.sessaoAtual!.elenco.firstWhere(
+        (e) => e.characterId == 'char_lan_1',
+      );
+      expect(entradaOffline.conectadoViaLan, isFalse);
     });
 
     testWidgets('MapaJogadorScreen permite selecionar o próprio token e movê-lo na grade', (tester) async {
@@ -407,15 +421,34 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      // Terrenos do mapa inicial (4,2 obstáculo; 5,4 difícil) estão presentes no snapshot e na grade
-      expect(find.byKey(const ValueKey('celula_obstaculo_4_2')), findsOneWidget);
-      expect(find.byKey(const ValueKey('celula_dificil_5_4')), findsOneWidget);
+      // Terrenos do mapa inicial (4,2 obstáculo; 5,4 difícil) estão presentes no snapshot e no CustomPaint da grade
+      final customPaintInicial = tester.widget<CustomPaint>(
+        find.byKey(const ValueKey('mapa_jogador_grid_canvas')),
+      );
+      final painterInicial =
+          customPaintInicial.painter as MapaJogadorGridPainter;
+      expect(
+        painterInicial.snapshot.terrenos[const Posicao2D(4, 2)],
+        equals(TipoTerreno.obstaculo),
+      );
+      expect(
+        painterInicial.snapshot.terrenos[const Posicao2D(5, 4)],
+        equals(TipoTerreno.dificil),
+      );
 
       // Ao tocar no próprio token ('V'), destaca células alcançáveis e mostra alcance em metros
       await tester.tap(find.text('V').first);
       await tester.pumpAndSettle();
       expect(find.textContaining('Alcance: 9.0m'), findsOneWidget);
-      expect(find.byKey(const ValueKey('celula_alcancavel_2_1')), findsOneWidget);
+      final customPaintSelecionado = tester.widget<CustomPaint>(
+        find.byKey(const ValueKey('mapa_jogador_grid_canvas')),
+      );
+      final painterSelecionado =
+          customPaintSelecionado.painter as MapaJogadorGridPainter;
+      expect(
+        painterSelecionado.celulasAlcancaveis,
+        contains(const Posicao2D(2, 1)),
+      );
 
       // 2. Verifica mini-aba "Personagens" no Escudo do Mestre com a ficha completa
       await tester.pumpWidget(

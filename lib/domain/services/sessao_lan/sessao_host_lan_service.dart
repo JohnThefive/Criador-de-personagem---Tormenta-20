@@ -14,6 +14,7 @@ class SessaoHostLanService implements SessaoHostService {
   final _atualizacoesCtrl =
       StreamController<AtualizacaoPersonagemSessao>.broadcast();
   final _acoesMapaCtrl = StreamController<Map<String, dynamic>>.broadcast();
+  final _desconexoesCtrl = StreamController<String>.broadcast();
 
   HttpServer? _httpServer;
   RawDatagramSocket? _udpSocket;
@@ -24,6 +25,8 @@ class SessaoHostLanService implements SessaoHostService {
   // characterId -> WebSocket conectado (garante que cada cliente só receba/altere o seu)
   final Map<String, WebSocket> _clientesPorCharId = {};
   final Map<WebSocket, String> _charIdPorSocket = {};
+  // Somente characterIds já aprovados pelo Mestre recebem snapshots da mesa e podem enviar ações.
+  final Set<String> _clientesAprovados = {};
 
   @override
   Stream<SolicitacaoEntradaSessao> get solicitacoesEntrada =>
@@ -35,6 +38,9 @@ class SessaoHostLanService implements SessaoHostService {
 
   @override
   Stream<Map<String, dynamic>> get acoesMapa => _acoesMapaCtrl.stream;
+
+  @override
+  Stream<String> get desconexoesCliente => _desconexoesCtrl.stream;
 
   int? get portaAtiva => _httpServer?.port;
 
@@ -178,12 +184,14 @@ class SessaoHostLanService implements SessaoHostService {
           ..close();
         return;
       }
+      final ipRemoto = req.connectionInfo?.remoteAddress.address;
       final socket = await WebSocketTransformer.upgrade(req);
-      _escutarCliente(socket);
+      socket.pingInterval = const Duration(seconds: 5);
+      _escutarCliente(socket, ipRemoto: ipRemoto);
     });
 
-    final ipReal = await descobrirIpLocal() ?? ip;
-    final broadcasts = await _obterEnderecosBroadcast();
+    var ipReal = await descobrirIpLocal() ?? ip;
+    var broadcasts = await _obterEnderecosBroadcast();
 
     // Anúncio UDP na LAN para descoberta automática pelo código da sala
     _udpSocket = await RawDatagramSocket.bind(
@@ -192,14 +200,19 @@ class SessaoHostLanService implements SessaoHostService {
       reuseAddress: true,
     );
     _udpSocket!.broadcastEnabled = true;
-    final anuncioBytes = utf8.encode(
+
+    List<int> gerarAnuncioBytes(String ipAtual) => utf8.encode(
       jsonEncode({
         'app': 't20_creator',
         'codigoSala': _codigoSalaAtivo,
-        'ip': ipReal,
+        'ip': ipAtual,
         'porta': _httpServer!.port,
       }),
     );
+
+    var anuncioBytes = gerarAnuncioBytes(ipReal);
+    var ciclosDesdeReavaliacao = 0;
+    var reavaliandoRede = false;
 
     void enviarAnuncio() {
       for (final destino in broadcasts) {
@@ -210,13 +223,33 @@ class SessaoHostLanService implements SessaoHostService {
     }
 
     enviarAnuncio();
-    _anuncioTimer = Timer.periodic(
-      const Duration(seconds: 2),
-      (_) => enviarAnuncio(),
-    );
+    _anuncioTimer = Timer.periodic(const Duration(seconds: 2), (_) {
+      ciclosDesdeReavaliacao++;
+      if (ciclosDesdeReavaliacao >= 5 && !reavaliandoRede) {
+        ciclosDesdeReavaliacao = 0;
+        reavaliandoRede = true;
+        unawaited(() async {
+          try {
+            if (_httpServer == null || _codigoSalaAtivo == null) return;
+            final novoIp = await descobrirIpLocal() ?? ipReal;
+            final novosBroadcasts = await _obterEnderecosBroadcast();
+            if (_httpServer == null || _codigoSalaAtivo == null) return;
+            broadcasts = novosBroadcasts;
+            if (novoIp != ipReal) {
+              ipReal = novoIp;
+              anuncioBytes = gerarAnuncioBytes(ipReal);
+            }
+          } catch (_) {
+          } finally {
+            reavaliandoRede = false;
+          }
+        }());
+      }
+      enviarAnuncio();
+    });
   }
 
-  void _escutarCliente(WebSocket socket) {
+  void _escutarCliente(WebSocket socket, {String? ipRemoto}) {
     socket.listen(
       (raw) {
         if (raw is! String || raw.length > maxBytesMensagem) return;
@@ -243,9 +276,19 @@ class SessaoHostLanService implements SessaoHostService {
               );
               return;
             }
+
+            final socketAnterior = _clientesPorCharId[sol.characterId];
+            if (socketAnterior != null && socketAnterior != socket) {
+              _charIdPorSocket.remove(socketAnterior);
+              unawaited(socketAnterior.close());
+            }
+
+            _clientesAprovados.remove(sol.characterId);
             _clientesPorCharId[sol.characterId] = socket;
             _charIdPorSocket[socket] = sol.characterId;
-            _solicitacoesCtrl.add(sol);
+            _solicitacoesCtrl.add(
+              sol.copyWith(ipRemoto: ipRemoto ?? sol.ipRemoto),
+            );
             _enviar(
               socket,
               'evento',
@@ -258,13 +301,18 @@ class SessaoHostLanService implements SessaoHostService {
             );
           } else if (tipo == 'atualizacao_personagem') {
             final dto = AtualizacaoPersonagemSessao.fromJson(mapa);
-            // Segurança: só aceita atualização do próprio characterId autenticado no socket
-            if (_charIdPorSocket[socket] != dto.characterId) return;
+            // Segurança: só aceita atualização do próprio characterId aprovado no socket
+            if (_charIdPorSocket[socket] != dto.characterId ||
+                !_clientesAprovados.contains(dto.characterId)) {
+              return;
+            }
             _atualizacoesCtrl.add(dto);
           } else if (tipo == 'acao_mapa') {
             final characterId = mapa['characterId']?.toString();
-            // Segurança: jogador só pode mover/agir com o próprio personagem
-            if (characterId == null || _charIdPorSocket[socket] != characterId) {
+            // Segurança: jogador aprovado só pode mover/agir com o próprio personagem
+            if (characterId == null ||
+                _charIdPorSocket[socket] != characterId ||
+                !_clientesAprovados.contains(characterId)) {
               return;
             }
             _acoesMapaCtrl.add(mapa);
@@ -277,6 +325,10 @@ class SessaoHostLanService implements SessaoHostService {
         final charId = _charIdPorSocket.remove(socket);
         if (charId != null && _clientesPorCharId[charId] == socket) {
           _clientesPorCharId.remove(charId);
+          _clientesAprovados.remove(charId);
+          if (!_desconexoesCtrl.isClosed) {
+            _desconexoesCtrl.add(charId);
+          }
         }
       },
       onError: (_) {},
@@ -297,30 +349,18 @@ class SessaoHostLanService implements SessaoHostService {
     final socket = _clientesPorCharId[characterId];
     if (socket == null) return;
 
-    final evento = switch (status) {
-      StatusRevisaoFicha.aprovada => EventoSessaoCliente(
-        estado: EstadoConexaoJogador.conectado,
-        tipo: TipoEventoSessaoCliente.aprovada,
-        codigoSala: _codigoSalaAtivo,
-        characterId: characterId,
-        mensagem: notaRevisao,
-      ),
-      StatusRevisaoFicha.pendente ||
-      StatusRevisaoFicha.desatualizada => EventoSessaoCliente(
-        estado: EstadoConexaoJogador.aguardandoAprovacao,
-        tipo: TipoEventoSessaoCliente.estadoAlterado,
-        codigoSala: _codigoSalaAtivo,
-        characterId: characterId,
-      ),
-      StatusRevisaoFicha.alteracoesSolicitadas ||
-      StatusRevisaoFicha.recusada => EventoSessaoCliente(
-        estado: EstadoConexaoJogador.erro,
-        tipo: TipoEventoSessaoCliente.recusada,
-        codigoSala: _codigoSalaAtivo,
-        characterId: characterId,
-        mensagem: notaRevisao ?? 'Entrada recusada pelo Mestre.',
-      ),
-    };
+    if (status == StatusRevisaoFicha.aprovada) {
+      _clientesAprovados.add(characterId);
+    } else {
+      _clientesAprovados.remove(characterId);
+    }
+
+    final evento = EventoSessaoCliente.deRevisaoFicha(
+      status: status,
+      characterId: characterId,
+      codigoSala: _codigoSalaAtivo,
+      notaRevisao: notaRevisao,
+    );
 
     _enviar(socket, 'evento', evento.toJson());
     if (status == StatusRevisaoFicha.aprovada && _ultimoSnapshot != null) {
@@ -331,8 +371,16 @@ class SessaoHostLanService implements SessaoHostService {
   @override
   Future<void> publicarSnapshotMesa(SnapshotMesa snapshot) async {
     _ultimoSnapshot = snapshot;
-    for (final socket in _clientesPorCharId.values) {
-      _enviar(socket, 'snapshot_mesa', snapshot.toJson());
+    if (_clientesAprovados.isEmpty) return;
+    final rawMsg = jsonEncode({
+      'tipo': 'snapshot_mesa',
+      'payload': snapshot.toJson(),
+    });
+    for (final charId in _clientesAprovados) {
+      final socket = _clientesPorCharId[charId];
+      if (socket != null && socket.readyState == WebSocket.open) {
+        socket.add(rawMsg);
+      }
     }
   }
 
@@ -346,6 +394,7 @@ class SessaoHostLanService implements SessaoHostService {
     final socketsAtivos = List<WebSocket>.from(_clientesPorCharId.values);
     _clientesPorCharId.clear();
     _charIdPorSocket.clear();
+    _clientesAprovados.clear();
 
     for (final s in socketsAtivos) {
       _enviar(
@@ -370,5 +419,6 @@ class SessaoHostLanService implements SessaoHostService {
     await _solicitacoesCtrl.close();
     await _atualizacoesCtrl.close();
     await _acoesMapaCtrl.close();
+    await _desconexoesCtrl.close();
   }
 }

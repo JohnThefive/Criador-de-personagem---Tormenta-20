@@ -4,6 +4,33 @@ import '../../services/ficha_services/personagem_storage_service.dart';
 import '../combate/grid_tatico.dart';
 import '../mestre/modelos_mestre.dart';
 
+/// Utilitário compartilhado para normalização e validação do código de sala LAN (`T20-XXXX`).
+class CodigoSalaLan {
+  CodigoSalaLan._();
+
+  static final RegExp regexValido = RegExp(r'^T20-\d{4}$');
+
+  /// Normaliza entrada do usuário: uppercase e prefixo `T20-` automático quando
+  /// informados 4 dígitos (`7492`) ou `T20XXXX` sem hífen.
+  static String normalizar(String raw) {
+    final limpo = raw.trim().toUpperCase().replaceAll(
+      RegExp(r'[^A-Z0-9-]'),
+      '',
+    );
+    if (limpo.isEmpty) return '';
+    if (RegExp(r'^\d{4}$').hasMatch(limpo)) {
+      return 'T20-$limpo';
+    }
+    if (RegExp(r'^T20\d{4}$').hasMatch(limpo)) {
+      return 'T20-${limpo.substring(3)}';
+    }
+    return limpo;
+  }
+
+  static bool ehValido(String codigo) =>
+      regexValido.hasMatch(normalizar(codigo));
+}
+
 /// Estado de conexão da aba Sessão na Ficha do Jogador.
 enum EstadoConexaoJogador {
   desconectado,
@@ -36,6 +63,7 @@ class SolicitacaoEntradaSessao extends Equatable {
   final int defesa;
   final double deslocamentoMetros;
   final Map<String, dynamic>? snapshotPersonagem;
+  final String? ipRemoto;
 
   const SolicitacaoEntradaSessao({
     required this.codigoSala,
@@ -50,7 +78,28 @@ class SolicitacaoEntradaSessao extends Equatable {
     required this.defesa,
     required this.deslocamentoMetros,
     this.snapshotPersonagem,
+    this.ipRemoto,
   });
+
+  SolicitacaoEntradaSessao copyWith({
+    String? ipRemoto,
+  }) {
+    return SolicitacaoEntradaSessao(
+      codigoSala: codigoSala,
+      characterId: characterId,
+      nomePersonagem: nomePersonagem,
+      nomeJogador: nomeJogador,
+      classeResumo: classeResumo,
+      pvAtual: pvAtual,
+      pvMax: pvMax,
+      pmAtual: pmAtual,
+      pmMax: pmMax,
+      defesa: defesa,
+      deslocamentoMetros: deslocamentoMetros,
+      snapshotPersonagem: snapshotPersonagem,
+      ipRemoto: ipRemoto ?? this.ipRemoto,
+    );
+  }
 
   factory SolicitacaoEntradaSessao.fromFichaState(
     FichaState state, {
@@ -101,7 +150,7 @@ class SolicitacaoEntradaSessao extends Equatable {
       deslocamentoMetros: deslocamentoMetros,
       statusRevisao: statusRevisao,
       conectadoViaLan: conectadoViaLan,
-      ipJogador: ipJogador,
+      ipJogador: ipJogador ?? ipRemoto,
     );
   }
 
@@ -119,6 +168,7 @@ class SolicitacaoEntradaSessao extends Equatable {
         'deslocamentoMetros': deslocamentoMetros,
         if (snapshotPersonagem != null)
           'snapshotPersonagem': snapshotPersonagem,
+        if (ipRemoto != null) 'ipRemoto': ipRemoto,
       };
 
   factory SolicitacaoEntradaSessao.fromJson(Map<String, dynamic> json) {
@@ -138,6 +188,7 @@ class SolicitacaoEntradaSessao extends Equatable {
       snapshotPersonagem: json['snapshotPersonagem'] is Map
           ? Map<String, dynamic>.from(json['snapshotPersonagem'] as Map)
           : null,
+      ipRemoto: json['ipRemoto']?.toString(),
     );
   }
 
@@ -155,6 +206,7 @@ class SolicitacaoEntradaSessao extends Equatable {
         defesa,
         deslocamentoMetros,
         snapshotPersonagem,
+        ipRemoto,
       ];
 }
 
@@ -247,6 +299,43 @@ class EventoSessaoCliente extends Equatable {
     this.mensagem,
   });
 
+  /// Mapeia uma decisão de revisão de ficha do Mestre para o evento correspondente ao cliente.
+  factory EventoSessaoCliente.deRevisaoFicha({
+    required StatusRevisaoFicha status,
+    required String characterId,
+    String? codigoSala,
+    String? notaRevisao,
+  }) {
+    return switch (status) {
+      StatusRevisaoFicha.aprovada => EventoSessaoCliente(
+        estado: EstadoConexaoJogador.conectado,
+        tipo: TipoEventoSessaoCliente.aprovada,
+        codigoSala: codigoSala,
+        characterId: characterId,
+        mensagem: notaRevisao,
+      ),
+      StatusRevisaoFicha.pendente ||
+      StatusRevisaoFicha.desatualizada => EventoSessaoCliente(
+        estado: EstadoConexaoJogador.aguardandoAprovacao,
+        tipo: TipoEventoSessaoCliente.estadoAlterado,
+        codigoSala: codigoSala,
+        characterId: characterId,
+      ),
+      StatusRevisaoFicha.alteracoesSolicitadas ||
+      StatusRevisaoFicha.recusada => EventoSessaoCliente(
+        estado: EstadoConexaoJogador.erro,
+        tipo: TipoEventoSessaoCliente.recusada,
+        codigoSala: codigoSala,
+        characterId: characterId,
+        mensagem:
+            notaRevisao ??
+            (status == StatusRevisaoFicha.alteracoesSolicitadas
+                ? 'O Mestre solicitou alterações na ficha.'
+                : 'Entrada recusada pelo Mestre.'),
+      ),
+    };
+  }
+
   Map<String, dynamic> toJson() => {
         'estado': estado.name,
         'tipo': tipo.name,
@@ -307,9 +396,11 @@ class SnapshotMesa extends Equatable {
   });
 
   /// Constrói a visão segura para jogadores a partir de um [MapaBatalhaMestre].
+  /// Aplica [projectMapaFor] com [VisaoMestreComoJogador] para jamais vazar
+  /// terrenos ou tokens em células sob Névoa de Guerra pela rede.
   factory SnapshotMesa.sanitizadoDeMapa(MapaBatalhaMestre mapa) {
-    final tokensSeguros = mapa.tokens
-        .where((t) => t.visivelParaJogadores)
+    final mapaProjetado = projectMapaFor(const VisaoMestreComoJogador(), mapa);
+    final tokensSeguros = mapaProjetado.tokens
         .map(
           (t) => TokenNoMapa(
             id: t.id,
@@ -332,22 +423,22 @@ class SnapshotMesa extends Equatable {
         .toList(growable: false);
 
     final turnoVisivel =
-        tokensSeguros.any((t) => t.id == mapa.tokenTurnoAtualId)
-            ? mapa.tokenTurnoAtualId
+        tokensSeguros.any((t) => t.id == mapaProjetado.tokenTurnoAtualId)
+            ? mapaProjetado.tokenTurnoAtualId
             : null;
 
     return SnapshotMesa(
-      mapaId: mapa.id,
-      nomeMapa: mapa.nome,
-      largura: mapa.largura,
-      altura: mapa.altura,
-      rodadaCombate: mapa.rodadaCombate,
+      mapaId: mapaProjetado.id,
+      nomeMapa: mapaProjetado.nome,
+      largura: mapaProjetado.largura,
+      altura: mapaProjetado.altura,
+      rodadaCombate: mapaProjetado.rodadaCombate,
       tokenTurnoAtualId: turnoVisivel,
-      presetFundo: mapa.presetFundo,
-      gridVisivel: mapa.gridVisivel,
-      opacidadeGrid: mapa.opacidadeGrid,
-      terrenos: Map<Posicao2D, TipoTerreno>.from(mapa.terrenos),
-      celulasReveladas: Set<Posicao2D>.from(mapa.celulasReveladas),
+      presetFundo: mapaProjetado.presetFundo,
+      gridVisivel: mapaProjetado.gridVisivel,
+      opacidadeGrid: mapaProjetado.opacidadeGrid,
+      terrenos: Map<Posicao2D, TipoTerreno>.from(mapaProjetado.terrenos),
+      celulasReveladas: Set<Posicao2D>.from(mapaProjetado.celulasReveladas),
       tokensVisiveis: tokensSeguros,
     );
   }

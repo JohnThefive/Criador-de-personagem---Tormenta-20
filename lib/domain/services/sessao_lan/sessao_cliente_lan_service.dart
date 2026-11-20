@@ -84,6 +84,7 @@ class SessaoClienteLanService implements SessaoClienteService {
 
       final uri = 'ws://${destino.$1}:${destino.$2}';
       final socket = await WebSocket.connect(uri).timeout(timeoutConexao);
+      socket.pingInterval = const Duration(seconds: 5);
 
       await _socketSub?.cancel();
       await _socket?.close();

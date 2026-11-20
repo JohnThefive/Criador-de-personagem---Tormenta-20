@@ -38,6 +38,14 @@ class _MestrePainelScreenState extends State<MestrePainelScreen> {
   late final bool _cubitProprio;
   SessaoHostLanService? _hostLan;
   int _destinoSelecionado = 0;
+  final Set<int> _destinosVisitados = {0};
+
+  void _selecionarDestino(int index) {
+    setState(() {
+      _destinoSelecionado = index;
+      _destinosVisitados.add(index);
+    });
+  }
 
   @override
   void initState() {
@@ -101,9 +109,7 @@ class _MestrePainelScreenState extends State<MestrePainelScreen> {
                 return Scaffold(
                   drawer: MestreDrawer(
                     destinoSelecionado: _destinoSelecionado,
-                    onSelecionarDestino: (index) {
-                      setState(() => _destinoSelecionado = index);
-                    },
+                    onSelecionarDestino: _selecionarDestino,
                     onVoltarHome: () => Navigator.of(context).pop(),
                   ),
                   appBar: AppBar(
@@ -138,47 +144,56 @@ class _MestrePainelScreenState extends State<MestrePainelScreen> {
                           onAbrirCampanha: (camp) =>
                               _abrirDetalheCampanha(context, camp),
                         ),
-                        TelaBibliotecaMapas(
-                          key: const ValueKey('tela_biblioteca_mapas'),
-                          cubit: _cubit,
-                          onAbrirMesaJogo: (mapa) {
-                            _cubit.selecionarMapa(mapa.id);
-                            Navigator.of(context).push(
-                              MaterialPageRoute<void>(
-                                builder: (_) => MesaSessaoScreen(cubit: _cubit),
-                              ),
-                            );
-                          },
-                          onAbrirEditorMapa: ({mapaParaEditar}) {
-                            Navigator.of(context).push(
-                              MaterialPageRoute<void>(
-                                builder: (ctx) => TelaEditorMapa(
-                                  mapaOriginal: mapaParaEditar,
-                                  cubit: _cubit,
-                                  onSalvo: () => Navigator.of(ctx).pop(),
+                        if (_destinosVisitados.contains(1))
+                          TelaBibliotecaMapas(
+                            key: const ValueKey('tela_biblioteca_mapas'),
+                            cubit: _cubit,
+                            onAbrirMesaJogo: (mapa) {
+                              _cubit.selecionarMapa(mapa.id);
+                              Navigator.of(context).push(
+                                MaterialPageRoute<void>(
+                                  builder: (_) =>
+                                      MesaSessaoScreen(cubit: _cubit),
                                 ),
-                              ),
-                            );
-                          },
-                        ),
-                        TelaBestiarioMestre(
-                          key: const ValueKey('tela_bestiario_mestre'),
-                          cubit: _cubit,
-                          autoCarregar:
-                              _destinoSelecionado ==
-                              MestreDestinoDrawer.bestiario.index,
-                        ),
-                        TelaEscudoNotas(
-                          key: const ValueKey('tela_escudo_notas'),
-                          cubit: _cubit,
-                        ),
+                              );
+                            },
+                            onAbrirEditorMapa: ({mapaParaEditar}) {
+                              Navigator.of(context).push(
+                                MaterialPageRoute<void>(
+                                  builder: (ctx) => TelaEditorMapa(
+                                    mapaOriginal: mapaParaEditar,
+                                    cubit: _cubit,
+                                    onSalvo: () => Navigator.of(ctx).pop(),
+                                  ),
+                                ),
+                              );
+                            },
+                          )
+                        else
+                          const SizedBox.shrink(),
+                        if (_destinosVisitados.contains(2))
+                          TelaBestiarioMestre(
+                            key: const ValueKey('tela_bestiario_mestre'),
+                            cubit: _cubit,
+                            autoCarregar:
+                                _destinoSelecionado ==
+                                MestreDestinoDrawer.bestiario.index,
+                          )
+                        else
+                          const SizedBox.shrink(),
+                        if (_destinosVisitados.contains(3))
+                          TelaEscudoNotas(
+                            key: const ValueKey('tela_escudo_notas'),
+                            cubit: _cubit,
+                          )
+                        else
+                          const SizedBox.shrink(),
                       ],
                     ),
                   ),
                   bottomNavigationBar: NavigationBar(
                     selectedIndex: _destinoSelecionado,
-                    onDestinationSelected: (index) =>
-                        setState(() => _destinoSelecionado = index),
+                    onDestinationSelected: _selecionarDestino,
                     destinations: const [
                       NavigationDestination(
                         icon: Icon(Icons.campaign_outlined),

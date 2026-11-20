@@ -10,7 +10,7 @@ import 'sessao_jogador_state.dart';
 /// Gerencia o ciclo de conexão do Jogador à mesa LAN do Mestre sem acoplar
 /// a entidade [Personagem] à camada de transporte.
 class SessaoJogadorCubit extends Cubit<SessaoJogadorState> {
-  static final RegExp regexCodigoValido = RegExp(r'^T20-\d{4}$');
+  static RegExp get regexCodigoValido => CodigoSalaLan.regexValido;
 
   final SessaoClienteService _clienteService;
   final FichaState Function() _lerFichaState;
@@ -40,23 +40,10 @@ class SessaoJogadorCubit extends Cubit<SessaoJogadorState> {
 
   /// Normaliza entrada do usuário: uppercase e prefixo `T20-` automático quando
   /// informados 4 dígitos ou `T20XXXX` sem hífen.
-  static String normalizarCodigoSala(String raw) {
-    final limpo = raw.trim().toUpperCase().replaceAll(
-      RegExp(r'[^A-Z0-9-]'),
-      '',
-    );
-    if (limpo.isEmpty) return '';
-    if (RegExp(r'^\d{4}$').hasMatch(limpo)) {
-      return 'T20-$limpo';
-    }
-    if (RegExp(r'^T20\d{4}$').hasMatch(limpo)) {
-      return 'T20-${limpo.substring(3)}';
-    }
-    return limpo;
-  }
+  static String normalizarCodigoSala(String raw) =>
+      CodigoSalaLan.normalizar(raw);
 
-  static bool ehCodigoValido(String codigo) =>
-      regexCodigoValido.hasMatch(normalizarCodigoSala(codigo));
+  static bool ehCodigoValido(String codigo) => CodigoSalaLan.ehValido(codigo);
 
   Future<void> carregarPreferencias() async {
     final prefs = await SessaoPreferenciasService.carregar();

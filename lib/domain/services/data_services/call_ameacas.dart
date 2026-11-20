@@ -206,6 +206,14 @@ class BancoDeAmeacas {
         _resumoIndexPorId[id.toUpperCase()];
   }
 
+  /// Verifica se o [id] pertence ao catálogo embutido padrão (não customizado).
+  static bool pertenceAoCatalogoPadrao(String id) {
+    final key = id.trim().toLowerCase();
+    if (key.isEmpty || _customizadasPorId.containsKey(key)) return false;
+    return _resumoIndexPorId.containsKey(key) ||
+        _criaturasBase.any((m) => m.id.toLowerCase() == key);
+  }
+
   /// Recupera em O(1) uma criatura já carregada (ou customizada) pelo [id].
   static Monstro? getById(String id) {
     return _indexPorId[id] ??

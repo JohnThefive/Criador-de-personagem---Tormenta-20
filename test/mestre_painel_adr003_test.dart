@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:t20_creator/domain/entities/combate/grid_tatico.dart';
+import 'package:t20_creator/domain/entities/entidade_sessao_lan/sessao_lan_modelos.dart';
 import 'package:t20_creator/domain/entities/mestre/modelos_mestre.dart';
 import 'package:t20_creator/presentation/controllers/mestre_controller/mestre_cubit.dart';
 import 'package:t20_creator/presentation/controllers/mestre_controller/mestre_state.dart';
+import 'package:t20_creator/presentation/screens/mestre/mesa_sessao_screen.dart';
 import 'package:t20_creator/presentation/screens/mestre/mestre_painel_screen.dart';
-import 'package:t20_creator/presentation/screens/mestre/widgets/drawer_sessao_lan.dart';
 import 'package:t20_creator/presentation/screens/mestre/widgets/mestre_battlemap_widget.dart';
 import 'package:t20_creator/presentation/screens/mestre/widgets/tela_escudo_notas.dart';
 import 'package:t20_creator/presentation/screens/mestre/widgets/tela_mesa_jogo.dart';
@@ -48,10 +49,20 @@ void main() {
       expect(cubit.state.statusLan, StatusConexaoLan.aguardandoJogadores);
 
       // Simula entrada de jogador via LAN com ficha pendente
-      cubit.simularPedidoEntradaJogadorLan(
-        nomeJogador: 'Rafael',
-        nomePersonagem: 'Orion',
-        classeResumo: 'Bardo Nv 3',
+      cubit.receberSolicitacaoEntradaLan(
+        SolicitacaoEntradaSessao(
+          codigoSala: cubit.codigoSalaLanAtivo,
+          characterId: 'lan_orion',
+          nomeJogador: 'Rafael',
+          nomePersonagem: 'Orion',
+          classeResumo: 'Bardo Nv 3',
+          pvAtual: 24,
+          pvMax: 24,
+          pmAtual: 10,
+          pmMax: 10,
+          defesa: 14,
+          deslocamentoMetros: 9.0,
+        ),
       );
 
       final orion = cubit.state.sessaoAtual!.elenco.firstWhere(
@@ -332,10 +343,20 @@ void main() {
       expect(cubit.state.mapaAtual!.tokens.any((t) => t.nome == 'Lobo das Cavernas'), isTrue);
 
       // 4. Jogador conecta via LAN
-      cubit.simularPedidoEntradaJogadorLan(
-        nomeJogador: 'Beatriz',
-        nomePersonagem: 'Kallista',
-        classeResumo: 'Clériga Nv 2',
+      cubit.receberSolicitacaoEntradaLan(
+        SolicitacaoEntradaSessao(
+          codigoSala: cubit.codigoSalaLanAtivo,
+          characterId: 'lan_kallista',
+          nomeJogador: 'Beatriz',
+          nomePersonagem: 'Kallista',
+          classeResumo: 'Clériga Nv 2',
+          pvAtual: 24,
+          pvMax: 24,
+          pmAtual: 10,
+          pmMax: 10,
+          defesa: 14,
+          deslocamentoMetros: 9.0,
+        ),
       );
       expect(cubit.state.sessaoAtual!.elenco.length, 1);
       final kallista = cubit.state.sessaoAtual!.elenco.first;
@@ -581,63 +602,75 @@ void main() {
       expect(cubit.state.pingsAtivos, isEmpty);
     });
 
-    testWidgets('DrawerSessaoLan atualiza modais Convidar Jogadores e Jogadores na Sala em tempo real', (tester) async {
-      tester.view.physicalSize = const Size(1200, 800);
-      tester.view.devicePixelRatio = 1.0;
-      addTearDown(tester.view.resetPhysicalSize);
+    testWidgets(
+      'MesaSessaoScreen aba Jogadores exibe entrada LAN, inspeciona ficha e envia nota ao jogador',
+      (tester) async {
+        tester.view.physicalSize = const Size(430, 900);
+        tester.view.devicePixelRatio = 1.0;
+        addTearDown(tester.view.resetPhysicalSize);
 
-      final cubit = MestreCubit();
-      addTearDown(cubit.close);
+        final cubit = MestreCubit();
+        addTearDown(cubit.close);
 
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: SizedBox(
-              width: 360,
-              child: DrawerSessaoLan(cubit: cubit),
-            ),
+        await tester.pumpWidget(
+          MaterialApp(
+            home: MesaSessaoScreen(cubit: cubit, abaInicial: 2),
           ),
-        ),
-      );
-      await tester.pumpAndSettle();
+        );
+        await tester.pumpAndSettle();
 
-      // Abre sheet "Convidar Jogadores" e gira o PIN com atualização reativa no modal
-      await tester.tap(find.byTooltip('Convidar jogadores (QR e PIN)'));
-      await tester.pumpAndSettle();
+        expect(find.text('Nenhum jogador nesta sessão ainda.'), findsOneWidget);
 
-      final pinInicial = cubit.state.sessaoAtual!.codigoSalaLan;
-      expect(find.text('Convidar Jogadores'), findsOneWidget);
-      expect(find.text(pinInicial), findsOneWidget);
+        cubit.receberSolicitacaoEntradaLan(
+          SolicitacaoEntradaSessao(
+            codigoSala: cubit.codigoSalaLanAtivo,
+            characterId: 'char_kaelen',
+            nomeJogador: 'Lucas',
+            nomePersonagem: 'Kaelen',
+            classeResumo: 'Ladino Nv 2',
+            pvAtual: 18,
+            pvMax: 18,
+            pmAtual: 6,
+            pmMax: 6,
+            defesa: 15,
+            deslocamentoMetros: 9.0,
+            snapshotPersonagem: const {
+              'atributos': {'FOR': 1, 'DES': 4},
+              'periciasTreinadas': ['Furtividade', 'Ladinagem'],
+              'magiasConhecidas': ['Névoa'],
+              'itensInventario': ['Gazuas'],
+            },
+          ),
+        );
+        await tester.pumpAndSettle();
 
-      await tester.tap(find.text('Girar PIN'));
-      await tester.pump();
-      if (cubit.state.sessaoAtual!.codigoSalaLan == pinInicial) {
-        await tester.tap(find.text('Girar PIN'));
-        await tester.pump();
-      }
+        expect(find.text('Nenhum jogador nesta sessão ainda.'), findsNothing);
+        expect(find.text('Kaelen'), findsOneWidget);
 
-      final novoPin = cubit.state.sessaoAtual!.codigoSalaLan;
-      expect(novoPin, isNot(pinInicial));
-      expect(find.text(novoPin), findsOneWidget);
+        // Abre o modal de inspeção de ficha e envia uma nota ao jogador
+        await tester.tap(
+          find.byKey(const Key('botao_inspecionar_ficha_char_kaelen')),
+        );
+        await tester.pumpAndSettle();
 
-      // Fecha sheet "Convidar Jogadores"
-      await tester.tap(find.byIcon(Icons.close).last);
-      await tester.pumpAndSettle();
+        expect(find.text('Kaelen • Ladino Nv 2'), findsOneWidget);
+        expect(find.text('DES +4'), findsOneWidget);
+        expect(find.textContaining('Furtividade'), findsOneWidget);
+        expect(find.textContaining('Gazuas'), findsOneWidget);
 
-      // Abre sheet "Jogadores na Sala" e simula entrada LAN com atualização reativa
-      await tester.tap(find.byTooltip('Jogadores na sala'));
-      await tester.pumpAndSettle();
+        await tester.enterText(
+          find.byKey(const Key('campo_nota_mestre_para_jogador')),
+          'Você encontrou uma chave enferrujada.',
+        );
+        await tester.tap(find.byKey(const Key('botao_enviar_nota_jogador')));
+        await tester.pumpAndSettle();
 
-      expect(find.text('Jogadores na Sala'), findsOneWidget);
-      expect(find.text('Nenhum jogador na sala'), findsOneWidget);
-
-      await tester.tap(find.text('Simular Pedido de Entrada LAN'));
-      await tester.pump();
-
-      expect(find.text('Nenhum jogador na sala'), findsNothing);
-      expect(find.text('Kaelen'), findsOneWidget);
-      expect(find.text('Ficha aguardando revisão'), findsOneWidget);
-    });
+        final entry = cubit.state.sessaoAtual!.elenco.firstWhere(
+          (e) => e.characterId == 'char_kaelen',
+        );
+        expect(entry.notaRevisao, 'Você encontrou uma chave enferrujada.');
+      },
+    );
 
     testWidgets('MestrePainelScreen preserva estado de TelaEscudoNotas via IndexedStack ao alternar abas', (tester) async {
       tester.view.physicalSize = const Size(1200, 800);

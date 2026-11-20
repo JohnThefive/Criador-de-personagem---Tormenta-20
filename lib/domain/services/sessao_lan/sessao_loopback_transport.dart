@@ -14,10 +14,12 @@ class SessaoLoopbackTransport {
       StreamController<AtualizacaoPersonagemSessao>.broadcast();
   final _acoesMapaHostCtrl =
       StreamController<Map<String, dynamic>>.broadcast();
+  final _desconexoesHostCtrl = StreamController<String>.broadcast();
 
   bool _hostAtivo = false;
   String? _codigoSalaAtivo;
   String? _characterIdConectado;
+  bool _clienteAprovado = false;
   SnapshotMesa? _ultimoSnapshotPublicado;
   bool _disposed = false;
 
@@ -35,6 +37,7 @@ class SessaoLoopbackTransport {
     await _solicitacoesHostCtrl.close();
     await _atualizacoesHostCtrl.close();
     await _acoesMapaHostCtrl.close();
+    await _desconexoesHostCtrl.close();
   }
 }
 
@@ -93,7 +96,10 @@ class _LoopbackClienteService implements SessaoClienteService {
     }
 
     _bus._characterIdConectado = solicitacao.characterId;
-    _bus._solicitacoesHostCtrl.add(solicitacao);
+    _bus._clienteAprovado = false;
+    _bus._solicitacoesHostCtrl.add(
+      solicitacao.copyWith(ipRemoto: solicitacao.ipRemoto ?? '127.0.0.1'),
+    );
     _bus._eventosClienteCtrl.add(
       EventoSessaoCliente(
         estado: EstadoConexaoJogador.aguardandoAprovacao,
@@ -107,7 +113,12 @@ class _LoopbackClienteService implements SessaoClienteService {
   @override
   Future<void> desconectar() async {
     if (_bus._disposed) return;
+    final charIdAnterior = _bus._characterIdConectado;
     _bus._characterIdConectado = null;
+    _bus._clienteAprovado = false;
+    if (charIdAnterior != null) {
+      _bus._desconexoesHostCtrl.add(charIdAnterior);
+    }
     _bus._eventosClienteCtrl.add(
       const EventoSessaoCliente(
         estado: EstadoConexaoJogador.desconectado,
@@ -120,13 +131,13 @@ class _LoopbackClienteService implements SessaoClienteService {
   Future<void> enviarAtualizacaoPersonagem(
     AtualizacaoPersonagemSessao dto,
   ) async {
-    if (_bus._disposed || !_bus._hostAtivo) return;
+    if (_bus._disposed || !_bus._hostAtivo || !_bus._clienteAprovado) return;
     _bus._atualizacoesHostCtrl.add(dto);
   }
 
   @override
   Future<void> enviarAcaoMapa(Map<String, dynamic> acao) async {
-    if (_bus._disposed || !_bus._hostAtivo) return;
+    if (_bus._disposed || !_bus._hostAtivo || !_bus._clienteAprovado) return;
     final charId = acao['characterId']?.toString();
     if (charId == null || _bus._characterIdConectado != charId) return;
     _bus._acoesMapaHostCtrl.add(Map<String, dynamic>.from(acao));
@@ -153,6 +164,9 @@ class _LoopbackHostService implements SessaoHostService {
   Stream<Map<String, dynamic>> get acoesMapa => _bus._acoesMapaHostCtrl.stream;
 
   @override
+  Stream<String> get desconexoesCliente => _bus._desconexoesHostCtrl.stream;
+
+  @override
   Future<void> iniciar({
     required String ip,
     required int porta,
@@ -169,6 +183,7 @@ class _LoopbackHostService implements SessaoHostService {
     _bus._hostAtivo = false;
     _bus._codigoSalaAtivo = null;
     _bus._ultimoSnapshotPublicado = null;
+    _bus._clienteAprovado = false;
     if (_bus._characterIdConectado != null) {
       _bus._characterIdConectado = null;
       _bus._eventosClienteCtrl.add(
@@ -189,49 +204,28 @@ class _LoopbackHostService implements SessaoHostService {
   }) async {
     if (_bus._disposed || _bus._characterIdConectado != characterId) return;
 
-    switch (status) {
-      case StatusRevisaoFicha.aprovada:
-        _bus._eventosClienteCtrl.add(
-          EventoSessaoCliente(
-            estado: EstadoConexaoJogador.conectado,
-            tipo: TipoEventoSessaoCliente.aprovada,
-            codigoSala: _bus._codigoSalaAtivo,
-            characterId: characterId,
-            mensagem: notaRevisao,
-          ),
-        );
-        if (_bus._ultimoSnapshotPublicado != null) {
-          _bus._snapshotMesaCtrl.add(_bus._ultimoSnapshotPublicado!);
-        }
-        break;
-      case StatusRevisaoFicha.pendente:
-      case StatusRevisaoFicha.desatualizada:
-        _bus._eventosClienteCtrl.add(
-          EventoSessaoCliente(
-            estado: EstadoConexaoJogador.aguardandoAprovacao,
-            tipo: TipoEventoSessaoCliente.estadoAlterado,
-            codigoSala: _bus._codigoSalaAtivo,
-            characterId: characterId,
-          ),
-        );
-        break;
-      case StatusRevisaoFicha.alteracoesSolicitadas:
-      case StatusRevisaoFicha.recusada:
+    if (status == StatusRevisaoFicha.aprovada) {
+      _bus._clienteAprovado = true;
+    } else {
+      _bus._clienteAprovado = false;
+      if (status == StatusRevisaoFicha.alteracoesSolicitadas ||
+          status == StatusRevisaoFicha.recusada) {
         _bus._characterIdConectado = null;
-        _bus._eventosClienteCtrl.add(
-          EventoSessaoCliente(
-            estado: EstadoConexaoJogador.erro,
-            tipo: TipoEventoSessaoCliente.recusada,
-            codigoSala: _bus._codigoSalaAtivo,
-            characterId: characterId,
-            mensagem:
-                notaRevisao ??
-                (status == StatusRevisaoFicha.alteracoesSolicitadas
-                    ? 'O Mestre solicitou alterações na ficha.'
-                    : 'Entrada recusada pelo Mestre.'),
-          ),
-        );
-        break;
+      }
+    }
+
+    _bus._eventosClienteCtrl.add(
+      EventoSessaoCliente.deRevisaoFicha(
+        status: status,
+        characterId: characterId,
+        codigoSala: _bus._codigoSalaAtivo,
+        notaRevisao: notaRevisao,
+      ),
+    );
+
+    if (status == StatusRevisaoFicha.aprovada &&
+        _bus._ultimoSnapshotPublicado != null) {
+      _bus._snapshotMesaCtrl.add(_bus._ultimoSnapshotPublicado!);
     }
   }
 
@@ -239,7 +233,9 @@ class _LoopbackHostService implements SessaoHostService {
   Future<void> publicarSnapshotMesa(SnapshotMesa snapshot) async {
     if (_bus._disposed || !_bus._hostAtivo) return;
     _bus._ultimoSnapshotPublicado = snapshot;
-    _bus._snapshotMesaCtrl.add(snapshot);
+    if (_bus._clienteAprovado) {
+      _bus._snapshotMesaCtrl.add(snapshot);
+    }
   }
 
   @override

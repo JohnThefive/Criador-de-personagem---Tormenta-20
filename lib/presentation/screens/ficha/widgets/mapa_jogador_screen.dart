@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../domain/entities/combate/combatente.dart';
@@ -84,6 +86,16 @@ class MapaMesaJogadorWidget extends StatefulWidget {
 class _MapaMesaJogadorWidgetState extends State<MapaMesaJogadorWidget> {
   String? _tokenSelecionadoId;
 
+  // Cache de memoização para evitar executar Dijkstra a cada frame de build().
+  SnapshotMesa? _cacheSnapshot;
+  String? _cacheTokenSelecionadoId;
+  String? _cacheMeuCharId;
+  double? _cacheMeuDeslocamento;
+  ({Set<Posicao2D> destinos, Map<Posicao2D, double> custos}) _cacheAlcance = (
+    destinos: const {},
+    custos: const {},
+  );
+
   Color _corFundoMapa(PresetFundoMapa preset) => switch (preset) {
     PresetFundoMapa.masmorraPedra => const Color(0xFF1E293B),
     PresetFundoMapa.florestaArton => const Color(0xFF143321),
@@ -92,6 +104,28 @@ class _MapaMesaJogadorWidgetState extends State<MapaMesaJogadorWidget> {
     PresetFundoMapa.areaTormenta => const Color(0xFF3B0A1E),
     PresetFundoMapa.imagemCustomizada => const Color(0xFF1E293B),
   };
+
+  ({Set<Posicao2D> destinos, Map<Posicao2D, double> custos})
+  _obterAlcanceMemoizado(
+    SnapshotMesa snap,
+    String meuCharId,
+    double meuDeslocamentoFicha,
+  ) {
+    if (_cacheTokenSelecionadoId == _tokenSelecionadoId &&
+        _cacheMeuCharId == meuCharId &&
+        _cacheMeuDeslocamento == meuDeslocamentoFicha &&
+        (identical(_cacheSnapshot, snap) || _cacheSnapshot == snap)) {
+      return _cacheAlcance;
+    }
+
+    final calculado = _calcularAlcance(snap, meuCharId, meuDeslocamentoFicha);
+    _cacheSnapshot = snap;
+    _cacheTokenSelecionadoId = _tokenSelecionadoId;
+    _cacheMeuCharId = meuCharId;
+    _cacheMeuDeslocamento = meuDeslocamentoFicha;
+    _cacheAlcance = calculado;
+    return calculado;
+  }
 
   ({Set<Posicao2D> destinos, Map<Posicao2D, double> custos}) _calcularAlcance(
     SnapshotMesa snap,
@@ -157,6 +191,28 @@ class _MapaMesaJogadorWidgetState extends State<MapaMesaJogadorWidget> {
     );
   }
 
+  void _aoTocarGrade(
+    Offset localPosition,
+    double cellSize,
+    SnapshotMesa snap,
+    String meuCharId,
+    Set<Posicao2D> alcancaveis,
+  ) {
+    if (_tokenSelecionadoId != meuCharId) return;
+    final x = (localPosition.dx / cellSize).floor();
+    final y = (localPosition.dy / cellSize).floor();
+    if (x < 0 || x >= snap.largura || y < 0 || y >= snap.altura) return;
+
+    final pos = Posicao2D(x, y);
+    if (!snap.celulasReveladas.contains(pos)) return;
+    final terreno = snap.terrenos[pos] ?? TipoTerreno.normal;
+    if (terreno == TipoTerreno.obstaculo) return;
+    if (alcancaveis.isNotEmpty && !alcancaveis.contains(pos)) return;
+
+    context.read<SessaoJogadorCubit>().moverMeuToken(pos);
+    setState(() => _tokenSelecionadoId = null);
+  }
+
   @override
   Widget build(BuildContext context) {
     final personagem = context.select(
@@ -180,7 +236,7 @@ class _MapaMesaJogadorWidgetState extends State<MapaMesaJogadorWidget> {
         }
 
         final movendoProprio = _tokenSelecionadoId == meuCharId;
-        final alcance = _calcularAlcance(
+        final alcance = _obterAlcanceMemoizado(
           snap,
           meuCharId,
           personagem.deslocamento,
@@ -268,28 +324,34 @@ class _MapaMesaJogadorWidgetState extends State<MapaMesaJogadorWidget> {
       ),
       child: Stack(
         children: [
-          // Grade, Terrenos, Alcance e Fog of War
-          for (int y = 0; y < snap.altura; y++)
-            for (int x = 0; x < snap.largura; x++)
-              Positioned(
-                left: x * cellSize,
-                top: y * cellSize,
-                width: cellSize,
-                height: cellSize,
-                child: _buildCelula(
-                  snap,
-                  x,
-                  y,
-                  meuCharId,
-                  alcancaveis,
-                  custos,
+          // Grade, Terrenos, Alcance e Fog of War em um único CustomPaint + RepaintBoundary
+          Positioned.fill(
+            child: GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTapUp: (details) => _aoTocarGrade(
+                details.localPosition,
+                cellSize,
+                snap,
+                meuCharId,
+                alcancaveis,
+              ),
+              child: RepaintBoundary(
+                child: CustomPaint(
+                  key: const ValueKey('mapa_jogador_grid_canvas'),
+                  size: Size(larguraPx, alturaPx),
+                  painter: MapaJogadorGridPainter(
+                    snapshot: snap,
+                    celulasAlcancaveis: alcancaveis,
+                    custosMovimento: custos,
+                    compacto: widget.compacto,
+                  ),
                 ),
               ),
+            ),
+          ),
           // Tokens visíveis ao jogador
           for (final tok in snap.tokensVisiveis)
-            if (snap.celulasReveladas.isEmpty ||
-                tok.ehHeroi ||
-                snap.celulasReveladas.contains(tok.posicao))
+            if (tok.ehHeroi || snap.celulasReveladas.contains(tok.posicao))
               Positioned(
                 left: tok.posicao.x * cellSize,
                 top: tok.posicao.y * cellSize,
@@ -309,117 +371,6 @@ class _MapaMesaJogadorWidgetState extends State<MapaMesaJogadorWidget> {
                 ),
               ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildCelula(
-    SnapshotMesa snap,
-    int x,
-    int y,
-    String meuCharId,
-    Set<Posicao2D> alcancaveis,
-    Map<Posicao2D, double> custos,
-  ) {
-    final pos = Posicao2D(x, y);
-    final revelada =
-        snap.celulasReveladas.isEmpty || snap.celulasReveladas.contains(pos);
-    final terreno = revelada
-        ? (snap.terrenos[pos] ?? TipoTerreno.normal)
-        : TipoTerreno.normal;
-    final alcancavel = revelada && alcancaveis.contains(pos);
-    final custo = custos[pos];
-    final podeMoverAqui =
-        _tokenSelecionadoId == meuCharId &&
-        revelada &&
-        terreno != TipoTerreno.obstaculo &&
-        (alcancaveis.isEmpty || alcancavel);
-
-    Color corCelula;
-    if (!revelada) {
-      corCelula = Colors.black.withValues(alpha: 0.78);
-    } else if (terreno == TipoTerreno.obstaculo) {
-      corCelula = Colors.black.withValues(alpha: 0.72);
-    } else if (alcancavel) {
-      corCelula = const Color(0xFF38BDF8).withValues(alpha: 0.35);
-    } else if (terreno == TipoTerreno.dificil) {
-      corCelula = const Color(0xFFD97706).withValues(alpha: 0.35);
-    } else {
-      corCelula = Colors.transparent;
-    }
-
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: podeMoverAqui
-          ? () {
-              context.read<SessaoJogadorCubit>().moverMeuToken(pos);
-              setState(() => _tokenSelecionadoId = null);
-            }
-          : null,
-      child: Container(
-        key: revelada && terreno == TipoTerreno.obstaculo
-            ? ValueKey('celula_obstaculo_${x}_$y')
-            : (revelada && terreno == TipoTerreno.dificil
-                  ? ValueKey('celula_dificil_${x}_$y')
-                  : (alcancavel ? ValueKey('celula_alcancavel_${x}_$y') : null)),
-        decoration: BoxDecoration(
-          color: corCelula,
-          border: alcancavel
-              ? Border.all(color: Colors.cyanAccent, width: 1.4)
-              : (snap.gridVisivel
-                    ? Border.all(
-                        color: Colors.white.withValues(
-                          alpha: snap.opacidadeGrid * 0.45,
-                        ),
-                        width: 0.5,
-                      )
-                    : null),
-        ),
-        child: Stack(
-          children: [
-            if (revelada && terreno == TipoTerreno.obstaculo)
-              Center(
-                child: Icon(
-                  Icons.close,
-                  size: widget.compacto ? 13 : 18,
-                  color: Colors.white38,
-                ),
-              ),
-            if (revelada && terreno == TipoTerreno.dificil)
-              Positioned(
-                top: 1,
-                right: 1,
-                child: Icon(
-                  Icons.change_history_rounded,
-                  size: widget.compacto ? 9 : 12,
-                  color: Colors.amberAccent,
-                ),
-              ),
-            if (alcancavel && custo != null)
-              Positioned(
-                right: 1,
-                bottom: 1,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 2,
-                    vertical: 0.5,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.black87,
-                    borderRadius: BorderRadius.circular(3),
-                  ),
-                  child: Text(
-                    '${custo.toStringAsFixed(1)}m',
-                    style: TextStyle(
-                      color: Colors.cyanAccent,
-                      fontSize: widget.compacto ? 6.5 : 8,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-          ],
-        ),
       ),
     );
   }
@@ -499,5 +450,217 @@ class _MapaMesaJogadorWidgetState extends State<MapaMesaJogadorWidget> {
           ? conteudo
           : SafeArea(top: false, child: conteudo),
     );
+  }
+}
+
+/// Painter de alta performance para o grid tático do Jogador.
+/// Renderiza terrenos, alcance de movimento, Fog of War e linhas da grade em um único Canvas.
+class MapaJogadorGridPainter extends CustomPainter {
+  final SnapshotMesa snapshot;
+  final Set<Posicao2D> celulasAlcancaveis;
+  final Map<Posicao2D, double> custosMovimento;
+  final bool compacto;
+
+  static final Paint _obstaculoFill = Paint()
+    ..color = Colors.black.withValues(alpha: 0.72)
+    ..style = PaintingStyle.fill;
+  static final Paint _obstaculoMark = Paint()
+    ..color = Colors.white38
+    ..strokeWidth = 1.4
+    ..style = PaintingStyle.stroke;
+  static final Paint _dificilFill = Paint()
+    ..color = const Color(0xFFD97706).withValues(alpha: 0.35)
+    ..style = PaintingStyle.fill;
+  static final Paint _dificilMark = Paint()
+    ..color = Colors.amberAccent
+    ..strokeWidth = 1.3
+    ..style = PaintingStyle.stroke;
+  static final Paint _alcanceFill = Paint()
+    ..color = const Color(0xFF38BDF8).withValues(alpha: 0.35)
+    ..style = PaintingStyle.fill;
+  static final Paint _alcanceBorder = Paint()
+    ..color = Colors.cyanAccent
+    ..strokeWidth = 1.4
+    ..style = PaintingStyle.stroke;
+  static final Paint _fogPaint = Paint()
+    ..color = Colors.black.withValues(alpha: 0.78)
+    ..style = PaintingStyle.fill;
+  static final Paint _pillBgPaint = Paint()
+    ..color = Colors.black87
+    ..style = PaintingStyle.fill;
+  static final Paint _gridPaint = Paint()
+    ..strokeWidth = 0.5
+    ..style = PaintingStyle.stroke;
+
+  static final Map<String, TextPainter> _custoTextCache = {};
+
+  const MapaJogadorGridPainter({
+    required this.snapshot,
+    required this.celulasAlcancaveis,
+    required this.custosMovimento,
+    required this.compacto,
+  });
+
+  TextPainter _obterTextPainterCusto(double custo, bool compacto) {
+    final label = '${custo.toStringAsFixed(1)}m';
+    final cacheKey = '${compacto ? "c" : "n"}_$label';
+    return _custoTextCache.putIfAbsent(cacheKey, () {
+      return TextPainter(
+        text: TextSpan(
+          text: label,
+          style: TextStyle(
+            color: Colors.cyanAccent,
+            fontSize: compacto ? 6.5 : 8,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        textDirection: TextDirection.ltr,
+      )..layout();
+    });
+  }
+
+  bool _dentroLimites(Posicao2D pos, int largura, int altura) =>
+      pos.x >= 0 && pos.x < largura && pos.y >= 0 && pos.y < altura;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final largura = snapshot.largura;
+    final altura = snapshot.altura;
+    if (largura <= 0 || altura <= 0) return;
+
+    final cellW = size.width / largura;
+    final cellH = size.height / altura;
+    final reveladas = snapshot.celulasReveladas;
+
+    // 1. Terrenos revelados
+    if (snapshot.terrenos.isNotEmpty) {
+      final minDim = math.min(cellW, cellH);
+      for (final entry in snapshot.terrenos.entries) {
+        final pos = entry.key;
+        if (!_dentroLimites(pos, largura, altura) || !reveladas.contains(pos)) {
+          continue;
+        }
+        final rect = Rect.fromLTWH(pos.x * cellW, pos.y * cellH, cellW, cellH);
+        if (entry.value == TipoTerreno.obstaculo) {
+          canvas.drawRect(rect, _obstaculoFill);
+          final pad = minDim * 0.28;
+          canvas.drawLine(
+            Offset(rect.left + pad, rect.top + pad),
+            Offset(rect.right - pad, rect.bottom - pad),
+            _obstaculoMark,
+          );
+          canvas.drawLine(
+            Offset(rect.right - pad, rect.top + pad),
+            Offset(rect.left + pad, rect.bottom - pad),
+            _obstaculoMark,
+          );
+        } else if (entry.value == TipoTerreno.dificil) {
+          canvas.drawRect(rect, _dificilFill);
+          final iconSize = minDim * 0.24;
+          final topRight = Offset(rect.right - 2, rect.top + 2);
+          final path = Path()
+            ..moveTo(topRight.dx - iconSize, topRight.dy + iconSize)
+            ..lineTo(topRight.dx - iconSize * 0.5, topRight.dy)
+            ..lineTo(topRight.dx, topRight.dy + iconSize)
+            ..close();
+          canvas.drawPath(path, _dificilMark);
+        }
+      }
+    }
+
+    // 2. Preenchimento das células alcançáveis reveladas
+    if (celulasAlcancaveis.isNotEmpty) {
+      for (final pos in celulasAlcancaveis) {
+        if (!_dentroLimites(pos, largura, altura) || !reveladas.contains(pos)) {
+          continue;
+        }
+        canvas.drawRect(
+          Rect.fromLTWH(pos.x * cellW, pos.y * cellH, cellW, cellH),
+          _alcanceFill,
+        );
+      }
+    }
+
+    // 3. Fog of War nas células não reveladas
+    if (reveladas.length < largura * altura) {
+      for (int y = 0; y < altura; y++) {
+        for (int x = 0; x < largura; x++) {
+          if (reveladas.contains(Posicao2D(x, y))) continue;
+          canvas.drawRect(
+            Rect.fromLTWH(x * cellW, y * cellH, cellW, cellH),
+            _fogPaint,
+          );
+        }
+      }
+    }
+
+    // 4. Linhas do grid
+    if (snapshot.gridVisivel) {
+      _gridPaint.color = Colors.white.withValues(
+        alpha: snapshot.opacidadeGrid * 0.45,
+      );
+      for (int x = 0; x <= largura; x++) {
+        final dx = x * cellW;
+        canvas.drawLine(Offset(dx, 0), Offset(dx, size.height), _gridPaint);
+      }
+      for (int y = 0; y <= altura; y++) {
+        final dy = y * cellH;
+        canvas.drawLine(Offset(0, dy), Offset(size.width, dy), _gridPaint);
+      }
+    }
+
+    // 5. Bordas de alcance e badges de custo em metros
+    if (celulasAlcancaveis.isNotEmpty) {
+      for (final pos in celulasAlcancaveis) {
+        if (!_dentroLimites(pos, largura, altura) || !reveladas.contains(pos)) {
+          continue;
+        }
+        final rect = Rect.fromLTWH(pos.x * cellW, pos.y * cellH, cellW, cellH);
+        canvas.drawRect(rect, _alcanceBorder);
+
+        final custo = custosMovimento[pos];
+        if (custo != null) {
+          final tp = _obterTextPainterCusto(custo, compacto);
+          final bgWidth = tp.width + 4;
+          final bgHeight = tp.height + 1;
+          if (bgWidth <= cellW && bgHeight <= cellH) {
+            final bgRect = RRect.fromRectAndRadius(
+              Rect.fromLTWH(
+                rect.right - bgWidth - 1,
+                rect.bottom - bgHeight - 1,
+                bgWidth,
+                bgHeight,
+              ),
+              const Radius.circular(3),
+            );
+            canvas.drawRRect(bgRect, _pillBgPaint);
+            tp.paint(canvas, Offset(bgRect.left + 2, bgRect.top + 0.5));
+          }
+        }
+      }
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant MapaJogadorGridPainter oldDelegate) {
+    return oldDelegate.compacto != compacto ||
+        oldDelegate.snapshot.largura != snapshot.largura ||
+        oldDelegate.snapshot.altura != snapshot.altura ||
+        oldDelegate.snapshot.gridVisivel != snapshot.gridVisivel ||
+        oldDelegate.snapshot.opacidadeGrid != snapshot.opacidadeGrid ||
+        (!identical(oldDelegate.snapshot.terrenos, snapshot.terrenos) &&
+            !mapEquals(oldDelegate.snapshot.terrenos, snapshot.terrenos)) ||
+        (!identical(
+              oldDelegate.snapshot.celulasReveladas,
+              snapshot.celulasReveladas,
+            ) &&
+            !setEquals(
+              oldDelegate.snapshot.celulasReveladas,
+              snapshot.celulasReveladas,
+            )) ||
+        (!identical(oldDelegate.celulasAlcancaveis, celulasAlcancaveis) &&
+            !setEquals(oldDelegate.celulasAlcancaveis, celulasAlcancaveis)) ||
+        (!identical(oldDelegate.custosMovimento, custosMovimento) &&
+            !mapEquals(oldDelegate.custosMovimento, custosMovimento));
   }
 }
