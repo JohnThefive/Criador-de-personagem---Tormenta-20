@@ -4,17 +4,20 @@ import 'package:flutter/foundation.dart' show listEquals, mapEquals, setEquals;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../domain/entities/combate/grid_tatico.dart';
+import '../../../../domain/entities/entidade_sessao_lan/sessao_lan_modelos.dart';
+import '../../../../domain/entities/habilidades/modelos_habilidade_duracao.dart';
 import '../../../../domain/entities/mestre/modelos_mestre.dart';
 import '../../../controllers/mestre_controller/mestre_cubit.dart';
 import '../../../controllers/mestre_controller/mestre_state.dart';
 
 /// Tabuleiro VTT do Mestre com renderização via CustomPainter + BlocSelector por camada,
 /// suporte a Imagem de Fundo na Grid, Fog of War por célula, Terrenos,
-/// Alcance de Movimento T20, Medição, Pings e Movimentação animada de Tokens.
+/// Alcance de Movimento T20, Áreas de Efeito T20, Medição, Pings e Movimentação animada de Tokens.
 class MestreBattlemapWidget extends StatefulWidget {
   final MestreCubit cubit;
   final bool modoMedicao;
   final bool modoPing;
+  final bool modoAreaEfeito;
   final bool fogModoRevelar;
 
   const MestreBattlemapWidget({
@@ -22,6 +25,7 @@ class MestreBattlemapWidget extends StatefulWidget {
     required this.cubit,
     this.modoMedicao = false,
     this.modoPing = false,
+    this.modoAreaEfeito = false,
     this.fogModoRevelar = true,
   });
 
@@ -226,6 +230,8 @@ class _MestreBattlemapWidgetState extends State<MestreBattlemapWidget> {
             pontoOrigemMedicao: s.pontoOrigemMedicao,
             pontoDestinoMedicao: s.pontoDestinoMedicao,
             pingsAtivos: s.pingsAtivos,
+            areasEfeitoAtivas: s.areasEfeitoAtivas,
+            formaAreaMestre: s.formaAreaMestre,
           );
         },
         builder: (context, slice) {
@@ -242,7 +248,25 @@ class _MestreBattlemapWidgetState extends State<MestreBattlemapWidget> {
                   .clamp(0, slice.mapaExibido.altura - 1);
               final pos = Posicao2D(x, y);
 
-              if (widget.modoMedicao) {
+              if (widget.modoAreaEfeito) {
+                final usaVertice =
+                    slice.formaAreaMestre == TipoArea.esfera ||
+                    slice.formaAreaMestre == TipoArea.cilindro;
+                final VerticeGrid? vertice = usaVertice
+                    ? VerticeGrid(
+                        (details.localPosition.dx / cellW)
+                            .round()
+                            .clamp(1, math.max(1, slice.mapaExibido.largura - 1)),
+                        (details.localPosition.dy / cellH)
+                            .round()
+                            .clamp(1, math.max(1, slice.mapaExibido.altura - 1)),
+                      )
+                    : null;
+                widget.cubit.projetarAreaMestre(
+                  pontoAlvo: pos,
+                  verticeAlvo: vertice,
+                );
+              } else if (widget.modoMedicao) {
                 widget.cubit.registrarPontoMedicao(pos);
               } else if (widget.modoPing) {
                 widget.cubit.soltarPing(pos);
@@ -265,6 +289,7 @@ class _MestreBattlemapWidgetState extends State<MestreBattlemapWidget> {
                   pontoOrigemMedicao: slice.pontoOrigemMedicao,
                   pontoDestinoMedicao: slice.pontoDestinoMedicao,
                   pingsAtivos: slice.pingsAtivos,
+                  areasEfeitoAtivas: slice.areasEfeitoAtivas,
                 ),
                 size: Size.infinite,
               ),
@@ -327,6 +352,9 @@ class _MestreBattlemapWidgetState extends State<MestreBattlemapWidget> {
         if (emPreview) {
           texto =
               'PREVIEW: VISÃO DO JOGADOR (Células e tokens ocultos filtrados)';
+        } else if (widget.modoAreaEfeito) {
+          texto =
+              'Modo: Área de Efeito T20 — Toque no mapa para posicionar (◎ interseção para Esfera/Cilindro)';
         } else if (widget.modoMedicao) {
           texto =
               'Modo: Medir Distância — Toque na origem e no destino (1□ = 1,5m)';
@@ -631,6 +659,8 @@ class _GridLayerSlice {
   final Posicao2D? pontoOrigemMedicao;
   final Posicao2D? pontoDestinoMedicao;
   final List<Posicao2D> pingsAtivos;
+  final List<AreaEfeitoAtivaLan> areasEfeitoAtivas;
+  final TipoArea formaAreaMestre;
 
   const _GridLayerSlice({
     required this.mapaReal,
@@ -641,6 +671,8 @@ class _GridLayerSlice {
     required this.pontoOrigemMedicao,
     required this.pontoDestinoMedicao,
     required this.pingsAtivos,
+    required this.areasEfeitoAtivas,
+    required this.formaAreaMestre,
   });
 
   @override
@@ -658,7 +690,9 @@ class _GridLayerSlice {
         identical(other.custosMovimento, custosMovimento) &&
         other.pontoOrigemMedicao == pontoOrigemMedicao &&
         other.pontoDestinoMedicao == pontoDestinoMedicao &&
-        listEquals(other.pingsAtivos, pingsAtivos);
+        listEquals(other.pingsAtivos, pingsAtivos) &&
+        listEquals(other.areasEfeitoAtivas, areasEfeitoAtivas) &&
+        other.formaAreaMestre == formaAreaMestre;
   }
 
   @override
@@ -675,6 +709,8 @@ class _GridLayerSlice {
         pontoOrigemMedicao,
         pontoDestinoMedicao,
         Object.hashAll(pingsAtivos),
+        Object.hashAll(areasEfeitoAtivas),
+        formaAreaMestre,
       );
 }
 
@@ -723,6 +759,7 @@ class _BattlemapGridPainter extends CustomPainter {
   final Posicao2D? pontoOrigemMedicao;
   final Posicao2D? pontoDestinoMedicao;
   final List<Posicao2D> pingsAtivos;
+  final List<AreaEfeitoAtivaLan> areasEfeitoAtivas;
 
   _BattlemapGridPainter({
     required this.mapaReal,
@@ -733,6 +770,7 @@ class _BattlemapGridPainter extends CustomPainter {
     required this.pontoOrigemMedicao,
     required this.pontoDestinoMedicao,
     required this.pingsAtivos,
+    required this.areasEfeitoAtivas,
   });
 
   @override
@@ -746,11 +784,13 @@ class _BattlemapGridPainter extends CustomPainter {
 
     _desenharTerrenos(canvas, cellW, cellH, largura, altura);
     _desenharAlcanceMovimento(canvas, cellW, cellH, largura, altura);
+    _desenharAreasEfeito(canvas, cellW, cellH, largura, altura);
     _desenharFogOfWar(canvas, cellW, cellH, largura, altura);
     if (mapaExibido.gridVisivel) {
       _desenharLinhasGrid(canvas, size, cellW, cellH, largura, altura);
     }
     _desenharBordasAlcanceECustos(canvas, cellW, cellH, largura, altura);
+    _desenharCentrosAreasEfeito(canvas, cellW, cellH);
     _desenharMedicaoDistancia(canvas, cellW, cellH);
     _desenharPingsAtivos(canvas, cellW, cellH);
   }
@@ -776,6 +816,34 @@ class _BattlemapGridPainter extends CustomPainter {
   static final Paint _alcanceFill = Paint()
     ..color = const Color(0xFF38BDF8).withValues(alpha: 0.35)
     ..style = PaintingStyle.fill;
+  static final Paint _areaMestreFill = Paint()
+    ..color = const Color(0xFFF59E0B).withValues(alpha: 0.44)
+    ..style = PaintingStyle.fill;
+  static final Paint _areaMestreBorder = Paint()
+    ..color = Colors.amberAccent
+    ..strokeWidth = 1.6
+    ..style = PaintingStyle.stroke;
+  static final Paint _areaJogadorFill = Paint()
+    ..color = const Color(0xFFEC4899).withValues(alpha: 0.40)
+    ..style = PaintingStyle.fill;
+  static final Paint _areaJogadorBorder = Paint()
+    ..color = Colors.pinkAccent
+    ..strokeWidth = 1.6
+    ..style = PaintingStyle.stroke;
+  static final Paint _areaBloqueadaFill = Paint()
+    ..color = const Color(0xFF7F1D1D).withValues(alpha: 0.28)
+    ..style = PaintingStyle.fill;
+  static final Paint _centroVerticeBg = Paint()
+    ..color = const Color(0xFF0F172A)
+    ..style = PaintingStyle.fill;
+  static final Paint _centroVerticeOuter = Paint()
+    ..color = Colors.white
+    ..strokeWidth = 2.0
+    ..style = PaintingStyle.stroke;
+  static final Paint _centroVerticeInner = Paint()
+    ..color = Colors.amberAccent
+    ..strokeWidth = 1.5
+    ..style = PaintingStyle.stroke;
   static final Paint _fogPreviewPaint = Paint()
     ..color = const Color(0xFF050811)
     ..style = PaintingStyle.fill;
@@ -904,6 +972,61 @@ class _BattlemapGridPainter extends CustomPainter {
 
       final rect = Rect.fromLTWH(pos.x * cellW, pos.y * cellH, cellW, cellH);
       canvas.drawRect(rect, _alcanceFill);
+    }
+  }
+
+  void _desenharAreasEfeito(
+    Canvas canvas,
+    double cellW,
+    double cellH,
+    int largura,
+    int altura,
+  ) {
+    if (areasEfeitoAtivas.isEmpty) return;
+
+    for (final area in areasEfeitoAtivas) {
+      final fill = area.ehDoMestre ? _areaMestreFill : _areaJogadorFill;
+      final border = area.ehDoMestre ? _areaMestreBorder : _areaJogadorBorder;
+
+      for (final pos in area.celulasAfetadas) {
+        if (!_dentroLimites(pos, largura, altura)) continue;
+        if (emPreviewJogador && !mapaReal.celulasReveladas.contains(pos)) {
+          continue;
+        }
+        final rect = Rect.fromLTWH(pos.x * cellW, pos.y * cellH, cellW, cellH);
+        canvas.drawRect(rect, fill);
+        canvas.drawRect(rect, border);
+      }
+
+      if (!emPreviewJogador) {
+        for (final pos in area.celulasBloqueadas) {
+          if (!_dentroLimites(pos, largura, altura)) continue;
+          final rect = Rect.fromLTWH(
+            pos.x * cellW,
+            pos.y * cellH,
+            cellW,
+            cellH,
+          );
+          canvas.drawRect(rect, _areaBloqueadaFill);
+        }
+      }
+    }
+  }
+
+  void _desenharCentrosAreasEfeito(
+    Canvas canvas,
+    double cellW,
+    double cellH,
+  ) {
+    if (areasEfeitoAtivas.isEmpty) return;
+
+    for (final area in areasEfeitoAtivas) {
+      final v = area.centroVertice;
+      if (v == null) continue;
+      final center = Offset(v.vx * cellW, v.vy * cellH);
+      canvas.drawCircle(center, 7.0, _centroVerticeBg);
+      canvas.drawCircle(center, 7.0, _centroVerticeOuter);
+      canvas.drawCircle(center, 4.0, _centroVerticeInner);
     }
   }
 
@@ -1062,6 +1185,8 @@ class _BattlemapGridPainter extends CustomPainter {
         oldDelegate.pontoOrigemMedicao != pontoOrigemMedicao ||
         oldDelegate.pontoDestinoMedicao != pontoDestinoMedicao ||
         (!identical(oldDelegate.pingsAtivos, pingsAtivos) &&
-            !listEquals(oldDelegate.pingsAtivos, pingsAtivos));
+            !listEquals(oldDelegate.pingsAtivos, pingsAtivos)) ||
+        (!identical(oldDelegate.areasEfeitoAtivas, areasEfeitoAtivas) &&
+            !listEquals(oldDelegate.areasEfeitoAtivas, areasEfeitoAtivas));
   }
 }

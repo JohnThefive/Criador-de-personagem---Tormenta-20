@@ -227,7 +227,31 @@ class GeometriaGrid {
     return area.origemCelula != null || area.origemVertice != null;
   }
 
-  /// Calcula todos os quadrados brutos da forma geométrica (antes do filtro de barreiras).
+  /// Converte um vetor `(origem -> destino)` em uma das 8 direções do grid
+  /// (4 retas: N/S/L/O e 4 diagonais: NE/NO/SE/SO).
+  ({int dx, int dy}) direcaoOitoSentidos(Posicao2D origem, Posicao2D destino) {
+    final diffX = destino.x - origem.x;
+    final diffY = destino.y - origem.y;
+    if (diffX == 0 && diffY == 0) {
+      return (dx: 1, dy: 0);
+    }
+    final angulo = atan2(diffY.toDouble(), diffX.toDouble());
+    final octante = ((angulo / (pi / 4)).round() % 8 + 8) % 8;
+    return switch (octante) {
+      0 => (dx: 1, dy: 0), // Leste (→)
+      1 => (dx: 1, dy: 1), // Sudeste (↘)
+      2 => (dx: 0, dy: 1), // Sul (↓)
+      3 => (dx: -1, dy: 1), // Sudoeste (↙)
+      4 => (dx: -1, dy: 0), // Oeste (←)
+      5 => (dx: -1, dy: -1), // Noroeste (↖)
+      6 => (dx: 0, dy: -1), // Norte (↑)
+      _ => (dx: 1, dy: -1), // Nordeste (↗)
+    };
+  }
+
+  /// Calcula todos os quadrados brutos da forma geométrica (antes do filtro de barreiras),
+  /// seguindo fielmente a ilustração oficial de Áreas de Efeito do Tormenta 20
+  /// (1 quadrado = 1,5 m; diagonais custam 2 quadrados).
   Set<Posicao2D> calcularQuadradosBrutosArea(Area area) {
     final resultado = <Posicao2D>{};
     final r = max(1, area.tamanhoQuadrados);
@@ -235,6 +259,9 @@ class GeometriaGrid {
     switch (area.tipo) {
       case TipoArea.esfera:
       case TipoArea.cilindro:
+        // Centro sempre na interseção de 4 quadrados (vértice).
+        // Em T20: Raio 1,5m (r=1) -> 2x2 (4q); Raio 3m (r=2) -> 2-4-4-2 (12q);
+        // Raio 6m (r=4) -> 2-4-6-8-8-6-4-2 (40q), satisfazendo distX + distY <= r.
         final v = area.origemVertice ??
             VerticeGrid(
               area.celulaReferenciaOrigem.x,
@@ -244,7 +271,7 @@ class GeometriaGrid {
           for (int y = v.vy - r; y < v.vy + r; y++) {
             final distX = (x + 0.5 - v.coordX).abs();
             final distY = (y + 0.5 - v.coordY).abs();
-            if (max(distX, distY) <= r) {
+            if (distX + distY <= r + 1e-9) {
               resultado.add(Posicao2D(x, y));
             }
           }
@@ -253,6 +280,7 @@ class GeometriaGrid {
 
       case TipoArea.quadrado:
       case TipoArea.cubo:
+        // Cubo 1,5m (r=1) -> 1 quadrado; Cubo 3m (r=2) -> bloco 2x2 (4 quadrados).
         final orig = area.celulaReferenciaOrigem;
         for (int dx = 0; dx < r; dx++) {
           for (int dy = 0; dy < r; dy++) {
@@ -262,12 +290,12 @@ class GeometriaGrid {
         break;
 
       case TipoArea.linha:
+        // Começa no quadrado adjacente ao personagem e segue reta nas 8 direções.
         final orig = area.celulaReferenciaOrigem;
         final dest = area.direcaoDestino ?? Posicao2D(orig.x + r, orig.y);
-        final dx = (dest.x - orig.x).sign;
-        final dy = (dest.y - orig.y).sign;
-        final stepX = (dx == 0 && dy == 0) ? 1 : dx;
-        final stepY = dy;
+        final dir = direcaoOitoSentidos(orig, dest);
+        final stepX = dir.dx;
+        final stepY = dir.dy;
         final largura = max(1, area.larguraQuadrados);
 
         for (int passo = 0; passo < r; passo++) {
@@ -286,30 +314,38 @@ class GeometriaGrid {
         break;
 
       case TipoArea.cone:
+        // Cone T20 nas 8 direções (4 retas e 4 diagonais), iniciando em `orig` (adjacente ao personagem):
+        // - Reta: passo d (1..r) tem meia-largura d ~/ 2 -> larguras 1, 3, 3 (4,5m), 1, 3, 3, 5 (6m), 1, 3, 3, 5, 5, 7 (9m).
+        // - Diagonal: triângulo retângulo u + v < r (4,5m -> 3+2+1=6q; 6m -> 4+3+2+1=10q; 9m -> 6+5+4+3+2+1=21q).
         final orig = area.celulaReferenciaOrigem;
         final dest = area.direcaoDestino ?? Posicao2D(orig.x + r, orig.y);
-        final diffX = dest.x - orig.x;
-        final diffY = dest.y - orig.y;
-        final horizontal = diffX.abs() >= diffY.abs();
-        final sinalPrincipal = horizontal
-            ? (diffX >= 0 ? 1 : -1)
-            : (diffY >= 0 ? 1 : -1);
+        final dir = direcaoOitoSentidos(orig, dest);
 
-        // No passo d (1..r), a largura na extremidade é d (na extremidade r, largura = r)
-        for (int d = 1; d <= r; d++) {
-          final larguraPasso =
-              configuracoes.coneLarguraFinalIgualComprimento ? d : max(1, d ~/ 2);
-          final offsetInicial = -(larguraPasso ~/ 2);
-          for (int k = 0; k < larguraPasso; k++) {
-            final lateral = offsetInicial + k;
-            if (horizontal) {
+        if (dir.dx != 0 && dir.dy != 0) {
+          for (int u = 0; u < r; u++) {
+            for (int v = 0; v < r - u; v++) {
               resultado.add(
-                Posicao2D(orig.x + (d - 1) * sinalPrincipal, orig.y + lateral),
+                Posicao2D(orig.x + u * dir.dx, orig.y + v * dir.dy),
               );
-            } else {
-              resultado.add(
-                Posicao2D(orig.x + lateral, orig.y + (d - 1) * sinalPrincipal),
-              );
+            }
+          }
+        } else {
+          final horizontal = dir.dx != 0;
+          final sinalPrincipal = horizontal ? dir.dx : dir.dy;
+          for (int d = 1; d <= r; d++) {
+            final meiaLargura = configuracoes.coneLarguraFinalIgualComprimento
+                ? d ~/ 2
+                : max(0, (d - 1) ~/ 3);
+            for (int lateral = -meiaLargura; lateral <= meiaLargura; lateral++) {
+              if (horizontal) {
+                resultado.add(
+                  Posicao2D(orig.x + (d - 1) * sinalPrincipal, orig.y + lateral),
+                );
+              } else {
+                resultado.add(
+                  Posicao2D(orig.x + lateral, orig.y + (d - 1) * sinalPrincipal),
+                );
+              }
             }
           }
         }
@@ -414,5 +450,193 @@ class GeometriaGrid {
       return elevacaoAlvo >= minZ && elevacaoAlvo <= maxZ;
     }
     return true;
+  }
+
+  /// Converte todas as células de [TipoTerreno.obstaculo] de um [GridMapa] em [Barreira]s
+  /// com leve inset (`1e-3`) para bloquear raios que atravessam obstáculos sem bloquear
+  /// falsamente células adjacentes que apenas tocam a quina.
+  List<Barreira> construirBarreirasObstaculos(GridMapa mapa) {
+    const eps = 1e-3;
+    final barreiras = <Barreira>[];
+    for (final entry in mapa.terrenos.entries) {
+      if (entry.value != TipoTerreno.obstaculo) continue;
+      final p = entry.key;
+      final x1 = p.x + eps;
+      final y1 = p.y + eps;
+      final x2 = p.x + 1.0 - eps;
+      final y2 = p.y + 1.0 - eps;
+      barreiras.add(
+        Barreira(
+          id: 'obs_${p.x}_${p.y}',
+          segmentos: [
+            SegmentoBarreira(x1: x1, y1: y1, x2: x2, y2: y1),
+            SegmentoBarreira(x1: x2, y1: y1, x2: x2, y2: y2),
+            SegmentoBarreira(x1: x2, y1: y2, x2: x1, y2: y2),
+            SegmentoBarreira(x1: x1, y1: y2, x2: x1, y2: y1),
+          ],
+        ),
+      );
+    }
+    return barreiras;
+  }
+
+  /// Fonte única de verdade para projetar uma Área de Efeito oficial de Tormenta 20
+  /// (Cone 8-direções, Esfera/Cilindro com `◎` na interseção, Cubo/Quadrado, Linha)
+  /// sobre um [GridMapa], respeitando limites e bloqueio de linha de efeito por obstáculos.
+  ({
+    Set<Posicao2D> celulasArea,
+    Set<Posicao2D> celulasBloqueadas,
+    VerticeGrid? centroVertice,
+    ({int dx, int dy})? direcaoAplicada,
+    bool origemDentroDoAlcance,
+    bool origemTemLinhaDeEfeito,
+  }) calcularAreaTaticaNoMapa({
+    required GridMapa mapa,
+    required Posicao2D posLancador,
+    required TipoArea tipoArea,
+    required double tamanhoMetros,
+    Posicao2D? pontoAlvo,
+    VerticeGrid? verticeAlvo,
+    double alcanceMaximoMetros = 90.0,
+    bool ehAlcancePessoal = false,
+    Set<Posicao2D>? celulasAlcancePrecalculadas,
+  }) {
+    final barreiras = construirBarreirasObstaculos(mapa);
+    final tamanhoQuadrados = metrosParaQuadrados(tamanhoMetros).clamp(1, 40);
+    final destino = pontoAlvo ?? posLancador;
+
+    final Area areaConfigurada;
+    VerticeGrid? centroVertice;
+    ({int dx, int dy})? direcaoAplicada;
+    bool origemDentroDoAlcance;
+    bool origemTemLoE;
+
+    switch (tipoArea) {
+      case TipoArea.cone:
+      case TipoArea.linha:
+        final dir = direcaoOitoSentidos(posLancador, destino);
+        direcaoAplicada = dir;
+        final origem = Posicao2D(
+          posLancador.x + dir.dx,
+          posLancador.y + dir.dy,
+        );
+        final direcaoDestino = Posicao2D(
+          origem.x + dir.dx * tamanhoQuadrados,
+          origem.y + dir.dy * tamanhoQuadrados,
+        );
+        areaConfigurada = Area(
+          tipo: tipoArea,
+          tamanhoQuadrados: tamanhoQuadrados,
+          origemCelula: origem,
+          direcaoDestino: direcaoDestino,
+        );
+        origemDentroDoAlcance = true;
+        origemTemLoE =
+            mapa.dentroDosLimites(origem) &&
+            mapa.obterTerreno(origem) != TipoTerreno.obstaculo;
+        break;
+
+      case TipoArea.esfera:
+      case TipoArea.cilindro:
+        final v =
+            verticeAlvo ??
+            VerticeGrid(
+              destino.x.clamp(1, max(1, mapa.largura - 1)),
+              destino.y.clamp(1, max(1, mapa.altura - 1)),
+            );
+        centroVertice = v;
+        areaConfigurada = Area(
+          tipo: tipoArea,
+          tamanhoQuadrados: tamanhoQuadrados,
+          alturaQuadrados: tamanhoQuadrados,
+          origemVertice: v,
+        );
+        final maxQuadAlcance = metrosParaQuadrados(alcanceMaximoMetros);
+        origemDentroDoAlcance =
+            ehAlcancePessoal ||
+            calcularDistanciaAteVertice(posLancador, v) <= maxQuadAlcance;
+        origemTemLoE = temLinhaDeEfeito(
+          origem: posLancador,
+          destinoVertice: v,
+          barreiras: barreiras,
+        );
+        break;
+
+      case TipoArea.cubo:
+      case TipoArea.quadrado:
+      case TipoArea.outro:
+        areaConfigurada = Area(
+          tipo: tipoArea == TipoArea.quadrado
+              ? TipoArea.quadrado
+              : TipoArea.cubo,
+          tamanhoQuadrados: tamanhoQuadrados,
+          alturaQuadrados: tamanhoQuadrados,
+          origemCelula: destino,
+        );
+        origemDentroDoAlcance =
+            ehAlcancePessoal ||
+            (celulasAlcancePrecalculadas != null
+                ? celulasAlcancePrecalculadas.contains(destino)
+                : posLancador.distanciaMetros(destino) <=
+                      alcanceMaximoMetros + 1e-6);
+        origemTemLoE =
+            mapa.obterTerreno(destino) != TipoTerreno.obstaculo &&
+            temLinhaDeEfeito(
+              origem: posLancador,
+              destinoCelula: destino,
+              barreiras: barreiras,
+            );
+        break;
+    }
+
+    final brutos = calcularQuadradosBrutosArea(areaConfigurada);
+    final celulasArea = <Posicao2D>{};
+    final celulasBloqueadas = <Posicao2D>{};
+
+    for (final pos in brutos) {
+      if (!mapa.dentroDosLimites(pos)) continue;
+      if (mapa.obterTerreno(pos) == TipoTerreno.obstaculo) {
+        celulasBloqueadas.add(pos);
+        continue;
+      }
+      if (!origemTemLoE) {
+        celulasBloqueadas.add(pos);
+        continue;
+      }
+
+      final bool propaga;
+      if (centroVertice != null) {
+        propaga = temLinhaDeEfeito(
+          origem: pos,
+          destinoVertice: centroVertice,
+          barreiras: barreiras,
+        );
+      } else {
+        final origemPropagacao =
+            (tipoArea == TipoArea.cone || tipoArea == TipoArea.linha)
+            ? posLancador
+            : areaConfigurada.celulaReferenciaOrigem;
+        propaga = temLinhaDeEfeito(
+          origem: origemPropagacao,
+          destinoCelula: pos,
+          barreiras: barreiras,
+        );
+      }
+
+      if (propaga) {
+        celulasArea.add(pos);
+      } else {
+        celulasBloqueadas.add(pos);
+      }
+    }
+
+    return (
+      celulasArea: celulasArea,
+      celulasBloqueadas: celulasBloqueadas,
+      centroVertice: centroVertice,
+      direcaoAplicada: direcaoAplicada,
+      origemDentroDoAlcance: origemDentroDoAlcance,
+      origemTemLinhaDeEfeito: origemTemLoE,
+    );
   }
 }

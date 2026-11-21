@@ -2,7 +2,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../domain/entities/combate/grid_tatico.dart';
+import '../../../../domain/entities/habilidades/modelos_habilidade_duracao.dart';
 import '../../../../domain/entities/mestre/modelos_mestre.dart';
+import '../../../../domain/services/combate_services/dice_roll_service.dart';
 import '../../../controllers/mestre_controller/mestre_cubit.dart';
 import '../../../controllers/mestre_controller/mestre_state.dart';
 import '../../../widgets/app_safe_scaffold.dart';
@@ -16,6 +18,7 @@ enum FerramentaMesa {
   adicionarToken('Adicionar Token', Icons.person_add_alt_1_outlined),
   bestiario('Bestiário', Icons.menu_book_outlined),
   fogOfWar('Fog of War', Icons.cloud_outlined),
+  areaEfeito('Área de Efeito', Icons.crisis_alert_outlined),
   medirDistancia('Medir Distância', Icons.straighten_outlined),
   pings('Pings e Marcadores', Icons.place_outlined),
   visao('Mestre ⇄ Jogador', Icons.visibility_outlined);
@@ -94,6 +97,8 @@ class _TelaMesaJogoState extends State<TelaMesaJogo> {
                         modoMedicao:
                             _ferramentaAtiva == FerramentaMesa.medirDistancia,
                         modoPing: _ferramentaAtiva == FerramentaMesa.pings,
+                        modoAreaEfeito:
+                            _ferramentaAtiva == FerramentaMesa.areaEfeito,
                         fogModoRevelar: _fogModoRevelar,
                       ),
                     ),
@@ -103,26 +108,30 @@ class _TelaMesaJogoState extends State<TelaMesaJogo> {
                       bottom: 24,
                       left: 20,
                       right: 20,
-                      child: BlocSelector<MestreCubit, MestreState,
-                          ({Posicao2D? orig, Posicao2D? dest})>(
-                        bloc: widget.cubit,
-                        selector: (s) => (
-                          orig: s.pontoOrigemMedicao,
-                          dest: s.pontoDestinoMedicao,
-                        ),
-                        builder: (context, medicao) {
-                          if (_ferramentaAtiva !=
-                                  FerramentaMesa.medirDistancia ||
-                              medicao.orig == null) {
-                            return const SizedBox.shrink();
-                          }
-                          return _buildOverlayMedicaoDistancia(
-                            context,
-                            medicao.orig!,
-                            medicao.dest,
-                          );
-                        },
-                      ),
+                      child:
+                          BlocSelector<
+                            MestreCubit,
+                            MestreState,
+                            ({Posicao2D? orig, Posicao2D? dest})
+                          >(
+                            bloc: widget.cubit,
+                            selector: (s) => (
+                              orig: s.pontoOrigemMedicao,
+                              dest: s.pontoDestinoMedicao,
+                            ),
+                            builder: (context, medicao) {
+                              if (_ferramentaAtiva !=
+                                      FerramentaMesa.medirDistancia ||
+                                  medicao.orig == null) {
+                                return const SizedBox.shrink();
+                              }
+                              return _buildOverlayMedicaoDistancia(
+                                context,
+                                medicao.orig!,
+                                medicao.dest,
+                              );
+                            },
+                          ),
                     ),
 
                     // 2. TOPO TRANSLÚCIDO MÍNIMO
@@ -139,6 +148,14 @@ class _TelaMesaJogoState extends State<TelaMesaJogo> {
                       left: maxW >= 600 ? 76 : 8,
                       right: 8,
                       child: _buildBarraIniciativa(context),
+                    ),
+
+                    // 2c. CARD DE RESOLUÇÃO 1-TOQUE DE MAGIA LAN (OPÇÃO A)
+                    Positioned(
+                      top: 118,
+                      left: maxW >= 600 ? 76 : 8,
+                      right: 8,
+                      child: _buildCardMagiaLanPendente(context),
                     ),
 
                     // 3. BARRA DE FERRAMENTAS RESPONSIVA
@@ -162,6 +179,15 @@ class _TelaMesaJogoState extends State<TelaMesaJogo> {
                         bottom: 20,
                         left: 20,
                         child: _buildSubBarraFogOfWar(context),
+                      ),
+
+                    // Sub-barra contextual de Área de Efeito T20
+                    if (_ferramentaAtiva == FerramentaMesa.areaEfeito)
+                      Positioned(
+                        bottom: 20,
+                        left: maxW >= 600 ? 76 : 12,
+                        right: maxW >= 600 ? 80 : 72,
+                        child: _buildSubBarraAreaEfeito(context),
                       ),
 
                     // 4. MINI FICHA FLUTUANTE ARRASTÁVEL DO TOKEN SELECIONADO
@@ -207,18 +233,19 @@ class _TelaMesaJogoState extends State<TelaMesaJogo> {
 
   Widget _buildBarraSuperiorTranslucida(BuildContext context) {
     return BlocSelector<
-        MestreCubit,
-        MestreState,
-        ({
-          String nomeMapa,
-          bool salaAberta,
-          int conectados,
-          int total,
-          bool enviando,
-          bool enviado,
-          bool emCombate,
-          int rodada,
-        })>(
+      MestreCubit,
+      MestreState,
+      ({
+        String nomeMapa,
+        bool salaAberta,
+        int conectados,
+        int total,
+        bool enviando,
+        bool enviado,
+        bool emCombate,
+        int rodada,
+      })
+    >(
       bloc: widget.cubit,
       selector: (s) {
         final sessao = s.sessaoAtual;
@@ -267,8 +294,10 @@ class _TelaMesaJogoState extends State<TelaMesaJogo> {
                   onTap: () => _exibirSheetTrocarMapa(context),
                   borderRadius: BorderRadius.circular(8),
                   child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 6,
+                      vertical: 4,
+                    ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -304,8 +333,10 @@ class _TelaMesaJogoState extends State<TelaMesaJogo> {
                     () => _painelIniciativaAberto = !_painelIniciativaAberto,
                   ),
                   child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 5,
+                    ),
                     decoration: BoxDecoration(
                       color: iniciativaVisivel
                           ? MestreCores.escuroVinho
@@ -460,8 +491,7 @@ class _TelaMesaJogoState extends State<TelaMesaJogo> {
           child: Row(
             children: [
               Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
+                padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
                 decoration: BoxDecoration(
                   color: MestreCores.escuroVinho,
                   borderRadius: BorderRadius.circular(6),
@@ -515,7 +545,9 @@ class _TelaMesaJogoState extends State<TelaMesaJogo> {
                               child: InkWell(
                                 borderRadius: BorderRadius.circular(8),
                                 onTap: () {
-                                  if (widget.cubit.state
+                                  if (widget
+                                          .cubit
+                                          .state
                                           .tokenSelecionadoParaMoverId !=
                                       t.id) {
                                     widget.cubit.aoClicarTokenNoMapa(t);
@@ -551,20 +583,21 @@ class _TelaMesaJogoState extends State<TelaMesaJogo> {
                                           ),
                                           decoration: BoxDecoration(
                                             color: Colors.black38,
-                                            borderRadius:
-                                                BorderRadius.circular(4),
+                                            borderRadius: BorderRadius.circular(
+                                              4,
+                                            ),
                                           ),
                                           child: Text(
                                             '${t.iniciativa ?? '–'}',
                                             style: MestreCores.estiloMono
                                                 .copyWith(
-                                              color: ativo
-                                                  ? MestreCores.escuroOuro
-                                                  : MestreCores
-                                                      .escuroOnSurface,
-                                              fontSize: 11,
-                                              fontWeight: FontWeight.bold,
-                                            ),
+                                                  color: ativo
+                                                      ? MestreCores.escuroOuro
+                                                      : MestreCores
+                                                            .escuroOnSurface,
+                                                  fontSize: 11,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
                                           ),
                                         ),
                                       ),
@@ -606,8 +639,9 @@ class _TelaMesaJogoState extends State<TelaMesaJogo> {
                   'Próx.',
                   style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
                 ),
-                onPressed:
-                    ordenados.isEmpty ? null : () => widget.cubit.avancarTurno(),
+                onPressed: ordenados.isEmpty
+                    ? null
+                    : () => widget.cubit.avancarTurno(),
               ),
               if (emCombate)
                 IconButton(
@@ -677,8 +711,9 @@ class _TelaMesaJogoState extends State<TelaMesaJogo> {
                           ? MestreCores.escuroOuro
                           : MestreCores.escuroOnSurfaceVariant,
                       style: IconButton.styleFrom(
-                        backgroundColor:
-                            sel ? MestreCores.escuroVinho : Colors.transparent,
+                        backgroundColor: sel
+                            ? MestreCores.escuroVinho
+                            : Colors.transparent,
                       ),
                       tooltip: f.rotulo,
                       onPressed: () => _selecionarFerramenta(f),
@@ -750,8 +785,9 @@ class _TelaMesaJogoState extends State<TelaMesaJogo> {
               child: Icon(
                 _barraMobileExpandida ? Icons.close : _ferramentaAtiva.icone,
               ),
-              onPressed: () =>
-                  setState(() => _barraMobileExpandida = !_barraMobileExpandida),
+              onPressed: () => setState(
+                () => _barraMobileExpandida = !_barraMobileExpandida,
+              ),
             ),
           ],
         );
@@ -789,7 +825,8 @@ class _TelaMesaJogoState extends State<TelaMesaJogo> {
     } else if (f == FerramentaMesa.fogOfWar) {
       widget.cubit.selecionarFerramentaMapa(FerramentaMapaMestre.nevoaDeGuerra);
     } else if (f == FerramentaMesa.medirDistancia ||
-        f == FerramentaMesa.pings) {
+        f == FerramentaMesa.pings ||
+        f == FerramentaMesa.areaEfeito) {
       widget.cubit.selecionarFerramentaMapa(
         FerramentaMapaMestre.moverPersonagens,
       );
@@ -828,7 +865,9 @@ class _TelaMesaJogoState extends State<TelaMesaJogo> {
           TextButton.icon(
             icon: const Icon(Icons.wb_sunny_outlined, size: 14),
             label: const Text('Revelar tudo', style: TextStyle(fontSize: 11)),
-            style: TextButton.styleFrom(foregroundColor: MestreCores.escuroOuro),
+            style: TextButton.styleFrom(
+              foregroundColor: MestreCores.escuroOuro,
+            ),
             onPressed: () => widget.cubit.revelarTodoMapa(),
           ),
           TextButton.icon(
@@ -841,6 +880,538 @@ class _TelaMesaJogoState extends State<TelaMesaJogo> {
           ),
         ],
       ),
+    );
+  }
+
+  // ---------------------------------------------------------------------------
+  // SUB-BARRA ÁREA DE EFEITO T20 (CONE / ESFERA / CILINDRO / CUBO / LINHA)
+  // ---------------------------------------------------------------------------
+
+  Widget _buildSubBarraAreaEfeito(BuildContext context) {
+    const formas = <({TipoArea tipo, String rotulo})>[
+      (tipo: TipoArea.cone, rotulo: 'Cone'),
+      (tipo: TipoArea.esfera, rotulo: 'Esfera (Raio)'),
+      (tipo: TipoArea.cilindro, rotulo: 'Cilindro'),
+      (tipo: TipoArea.cubo, rotulo: 'Cubo/Quad.'),
+      (tipo: TipoArea.linha, rotulo: 'Linha'),
+    ];
+    const tamanhos = <double>[1.5, 3.0, 4.5, 6.0, 9.0, 12.0, 15.0];
+
+    return BlocBuilder<MestreCubit, MestreState>(
+      bloc: widget.cubit,
+      buildWhen: (prev, curr) =>
+          prev.formaAreaMestre != curr.formaAreaMestre ||
+          prev.tamanhoAreaMestreMetros != curr.tamanhoAreaMestreMetros ||
+          prev.areasEfeitoAtivas != curr.areasEfeitoAtivas ||
+          prev.mapaAtual?.tokens != curr.mapaAtual?.tokens,
+      builder: (context, state) {
+        final atingidos = widget.cubit.tokensAfetadosPelaArea();
+        return Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          decoration: BoxDecoration(
+            color: MestreCores.escuroSurface.withValues(alpha: 0.94),
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(
+              color: Colors.amberAccent.withValues(alpha: 0.5),
+            ),
+            boxShadow: const [BoxShadow(color: Colors.black54, blurRadius: 8)],
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Wrap(
+                spacing: 6,
+                runSpacing: 4,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: [
+                  const Text(
+                    'Forma:',
+                    style: TextStyle(
+                      color: Colors.white70,
+                      fontSize: 11,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  for (final f in formas)
+                    ChoiceChip(
+                      key: Key('chip_mestre_aoe_${f.tipo.name}'),
+                      label: Text(
+                        f.rotulo,
+                        style: const TextStyle(fontSize: 11),
+                      ),
+                      selected: state.formaAreaMestre == f.tipo,
+                      selectedColor: Colors.amber.shade800,
+                      visualDensity: VisualDensity.compact,
+                      onSelected: (_) => widget.cubit
+                          .configurarFerramentaAreaMestre(forma: f.tipo),
+                    ),
+                ],
+              ),
+              const SizedBox(height: 4),
+              Wrap(
+                spacing: 6,
+                runSpacing: 4,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: [
+                  const Text(
+                    'Tamanho:',
+                    style: TextStyle(
+                      color: Colors.white70,
+                      fontSize: 11,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  for (final m in tamanhos)
+                    ChoiceChip(
+                      key: Key(
+                        'chip_mestre_aoe_tam_${m == m.roundToDouble() ? "${m.toInt()}m" : "${m}m"}',
+                      ),
+                      label: Text(
+                        m == m.roundToDouble()
+                            ? '${m.toInt()}m'
+                            : '${m.toStringAsFixed(1).replaceAll('.', ',')}m',
+                        style: const TextStyle(fontSize: 11),
+                      ),
+                      selected:
+                          (state.tamanhoAreaMestreMetros - m).abs() < 0.01,
+                      selectedColor: Colors.indigo,
+                      visualDensity: VisualDensity.compact,
+                      onSelected: (_) => widget.cubit
+                          .configurarFerramentaAreaMestre(tamanhoMetros: m),
+                    ),
+                  if (state.areasEfeitoAtivas.isNotEmpty) ...[
+                    const SizedBox(width: 6),
+                    FilledButton.tonalIcon(
+                      key: const Key('btn_mestre_aplicar_dano_area'),
+                      icon: const Icon(Icons.bolt, size: 15),
+                      label: Text(
+                        'Dano/Cura (${atingidos.length} alvo${atingidos.length == 1 ? '' : 's'})',
+                        style: const TextStyle(fontSize: 11),
+                      ),
+                      onPressed: atingidos.isEmpty
+                          ? null
+                          : () =>
+                                _exibirDialogDanoAreaMestre(context, atingidos),
+                    ),
+                    TextButton.icon(
+                      key: const Key('btn_mestre_limpar_areas'),
+                      icon: const Icon(Icons.clear, size: 14),
+                      label: const Text(
+                        'Limpar',
+                        style: TextStyle(fontSize: 11),
+                      ),
+                      style: TextButton.styleFrom(
+                        foregroundColor: Colors.redAccent,
+                      ),
+                      onPressed: () => widget.cubit.limparAreasEfeito(),
+                    ),
+                  ],
+                ],
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void _exibirDialogDanoAreaMestre(
+    BuildContext context,
+    List<TokenNoMapa> atingidos,
+  ) {
+    int qtdDados = 4;
+    int tipoDado = 6;
+    int modDano = 0;
+    bool ehCura = false;
+    final roller = DiceRollService();
+
+    showDialog<void>(
+      context: context,
+      builder: (ctx) {
+        return StatefulBuilder(
+          builder: (ctx, setDialogState) {
+            final expr = modDano == 0
+                ? '${qtdDados}d$tipoDado'
+                : (modDano > 0
+                      ? '${qtdDados}d$tipoDado+$modDano'
+                      : '${qtdDados}d$tipoDado$modDano');
+            return AlertDialog(
+              backgroundColor: const Color(0xFF1E293B),
+              title: Text(
+                'Rolar e Aplicar na Área (${atingidos.length} alvos)',
+                style: const TextStyle(color: Colors.white, fontSize: 15),
+              ),
+              content: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Alvos: ${atingidos.map((t) => t.nome).join(', ')}',
+                      style: const TextStyle(
+                        color: Colors.amberAccent,
+                        fontSize: 12,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Wrap(
+                      spacing: 6,
+                      children: [
+                        ChoiceChip(
+                          label: const Text('Dano'),
+                          selected: !ehCura,
+                          selectedColor: Colors.red.shade800,
+                          onSelected: (_) =>
+                              setDialogState(() => ehCura = false),
+                        ),
+                        ChoiceChip(
+                          label: const Text('Cura'),
+                          selected: ehCura,
+                          selectedColor: Colors.green.shade800,
+                          onSelected: (_) =>
+                              setDialogState(() => ehCura = true),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    Wrap(
+                      spacing: 4,
+                      runSpacing: 4,
+                      children: [2, 4, 6, 8, 10, 12, 20, 100].map((faces) {
+                        return ChoiceChip(
+                          label: Text('d$faces'),
+                          selected: tipoDado == faces,
+                          selectedColor: Colors.indigo,
+                          visualDensity: VisualDensity.compact,
+                          onSelected: (_) =>
+                              setDialogState(() => tipoDado = faces),
+                        );
+                      }).toList(),
+                    ),
+                    const SizedBox(height: 8),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Qtd. Dados:',
+                          style: TextStyle(color: Colors.white70, fontSize: 12),
+                        ),
+                        Row(
+                          children: [
+                            IconButton(
+                              icon: const Icon(
+                                Icons.remove_circle_outline,
+                                color: Colors.white70,
+                              ),
+                              onPressed: qtdDados > 1
+                                  ? () => setDialogState(() => qtdDados--)
+                                  : null,
+                            ),
+                            Text(
+                              '$qtdDados',
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            IconButton(
+                              icon: const Icon(
+                                Icons.add_circle_outline,
+                                color: Colors.white70,
+                              ),
+                              onPressed: () => setDialogState(() => qtdDados++),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Modificador:',
+                          style: TextStyle(color: Colors.white70, fontSize: 12),
+                        ),
+                        Row(
+                          children: [
+                            IconButton(
+                              icon: const Icon(
+                                Icons.remove_circle_outline,
+                                color: Colors.white70,
+                              ),
+                              onPressed: () => setDialogState(() => modDano--),
+                            ),
+                            Text(
+                              modDano >= 0 ? '+$modDano' : '$modDano',
+                              style: const TextStyle(
+                                color: Colors.cyanAccent,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            IconButton(
+                              icon: const Icon(
+                                Icons.add_circle_outline,
+                                color: Colors.white70,
+                              ),
+                              onPressed: () => setDialogState(() => modDano++),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(ctx),
+                  child: const Text('Cancelar'),
+                ),
+                OutlinedButton(
+                  onPressed: () {
+                    final r = roller.rolarDano(expressaoDano: expr);
+                    widget.cubit.aplicarDanoOuCuraEmLote(
+                      tokenIds: atingidos.map((t) => t.id).toList(),
+                      valor: r.total,
+                      ehCura: ehCura,
+                      ehMetade: true,
+                      motivo:
+                          '🎲 Área Mestre ($expr = ${r.total}, Metade = ${(r.total / 2).floor()}) em ${atingidos.length} alvos.',
+                    );
+                    Navigator.pop(ctx);
+                  },
+                  child: Text('Metade ($expr)'),
+                ),
+                FilledButton(
+                  onPressed: () {
+                    final r = roller.rolarDano(expressaoDano: expr);
+                    widget.cubit.aplicarDanoOuCuraEmLote(
+                      tokenIds: atingidos.map((t) => t.id).toList(),
+                      valor: r.total,
+                      ehCura: ehCura,
+                      motivo:
+                          '🎲 Área Mestre ($expr = ${r.total}) em ${atingidos.length} alvos.',
+                    );
+                    Navigator.pop(ctx);
+                  },
+                  child: Text('Total ($expr)'),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
+
+  // ---------------------------------------------------------------------------
+  // CARD FLUTUANTE DE RESOLUÇÃO 1-TOQUE PARA MAGIA LAN (OPÇÃO A)
+  // ---------------------------------------------------------------------------
+
+  Widget _buildCardMagiaLanPendente(BuildContext context) {
+    return BlocBuilder<MestreCubit, MestreState>(
+      bloc: widget.cubit,
+      buildWhen: (prev, curr) =>
+          prev.magiaLanPendente != curr.magiaLanPendente ||
+          prev.mapaAtual?.tokens != curr.mapaAtual?.tokens,
+      builder: (context, state) {
+        final pendente = state.magiaLanPendente;
+        final mapa = state.mapaAtual;
+        if (pendente == null || mapa == null) {
+          return const SizedBox.shrink();
+        }
+
+        final tokensPorId = <String, TokenNoMapa>{
+          for (final t in mapa.tokens) t.id: t,
+        };
+        final alvosTokens = pendente.alvosPendentesIds
+            .map((id) => tokensPorId[id])
+            .whereType<TokenNoMapa>()
+            .toList();
+
+        return Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 540),
+            child: Container(
+              key: const Key('card_magia_lan_pendente_mestre'),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+              decoration: BoxDecoration(
+                color: const Color(0xFF0F172A).withValues(alpha: 0.96),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: Colors.amberAccent, width: 1.5),
+                boxShadow: const [
+                  BoxShadow(color: Colors.black87, blurRadius: 12),
+                ],
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.auto_awesome,
+                        color: Colors.amberAccent,
+                        size: 18,
+                      ),
+                      const SizedBox(width: 6),
+                      Expanded(
+                        child: Text(
+                          '${pendente.lancadorNome} lançou ${pendente.magiaNome} (${pendente.custoPm} PM • ${pendente.expressaoDados} = ${pendente.valorRolado} ${pendente.ehCura ? "Cura" : "Dano"})',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12.5,
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                        key: const Key('btn_fechar_magia_lan_pendente'),
+                        icon: const Icon(
+                          Icons.close,
+                          size: 18,
+                          color: Colors.white54,
+                        ),
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(),
+                        onPressed: () =>
+                            widget.cubit.descartarMagiaLanPendente(),
+                      ),
+                    ],
+                  ),
+                  if (pendente.rotuloArea != null) ...[
+                    const SizedBox(height: 2),
+                    Text(
+                      '📐 Área: ${pendente.rotuloArea}',
+                      style: const TextStyle(
+                        color: Colors.cyanAccent,
+                        fontSize: 11,
+                      ),
+                    ),
+                  ],
+                  const SizedBox(height: 8),
+                  if (alvosTokens.isEmpty)
+                    const Text(
+                      'Nenhum token atingido na área.',
+                      style: TextStyle(color: Colors.white70, fontSize: 11.5),
+                    )
+                  else ...[
+                    for (final tok in alvosTokens)
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 4),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                '${tok.ehHeroi ? "🔵" : "🔴"} ${tok.nome} (${tok.pvAtual}/${tok.pvMax} PV)',
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                            TextButton(
+                              key: Key('btn_magia_lan_total_${tok.id}'),
+                              style: TextButton.styleFrom(
+                                foregroundColor: pendente.ehCura
+                                    ? Colors.greenAccent
+                                    : Colors.redAccent,
+                                visualDensity: VisualDensity.compact,
+                              ),
+                              onPressed: () =>
+                                  widget.cubit.resolverAlvoMagiaLanPendente(
+                                    tokenId: tok.id,
+                                    aplicar: true,
+                                  ),
+                              child: Text(
+                                pendente.ehCura
+                                    ? 'Total (+${pendente.valorRolado})'
+                                    : 'Total (-${pendente.valorRolado})',
+                                style: const TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            if (!pendente.ehCura)
+                              TextButton(
+                                key: Key('btn_magia_lan_metade_${tok.id}'),
+                                style: TextButton.styleFrom(
+                                  foregroundColor: Colors.orangeAccent,
+                                  visualDensity: VisualDensity.compact,
+                                ),
+                                onPressed: () =>
+                                    widget.cubit.resolverAlvoMagiaLanPendente(
+                                      tokenId: tok.id,
+                                      aplicar: true,
+                                      ehMetade: true,
+                                    ),
+                                child: Text(
+                                  'Metade (-${pendente.valorMetade})',
+                                  style: const TextStyle(
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            TextButton(
+                              key: Key('btn_magia_lan_ignorar_${tok.id}'),
+                              style: TextButton.styleFrom(
+                                foregroundColor: Colors.white54,
+                                visualDensity: VisualDensity.compact,
+                              ),
+                              onPressed: () =>
+                                  widget.cubit.resolverAlvoMagiaLanPendente(
+                                    tokenId: tok.id,
+                                    aplicar: false,
+                                  ),
+                              child: const Text(
+                                'Ignorar',
+                                style: TextStyle(fontSize: 11),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    if (alvosTokens.length > 1) ...[
+                      const Divider(color: Colors.white12, height: 10),
+                      Wrap(
+                        spacing: 8,
+                        children: [
+                          FilledButton.tonal(
+                            key: const Key('btn_magia_lan_total_todos'),
+                            onPressed: () => widget.cubit
+                                .resolverTodosMagiaLanPendente(aplicar: true),
+                            child: Text(
+                              'Total em Todos (${alvosTokens.length})',
+                              style: const TextStyle(fontSize: 11),
+                            ),
+                          ),
+                          if (!pendente.ehCura)
+                            OutlinedButton(
+                              key: const Key('btn_magia_lan_metade_todos'),
+                              onPressed: () =>
+                                  widget.cubit.resolverTodosMagiaLanPendente(
+                                    aplicar: true,
+                                    ehMetade: true,
+                                  ),
+                              child: Text(
+                                'Metade em Todos (-${pendente.valorMetade})',
+                                style: const TextStyle(fontSize: 11),
+                              ),
+                            ),
+                        ],
+                      ),
+                    ],
+                  ],
+                ],
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 
@@ -921,8 +1492,9 @@ class _TelaMesaJogoState extends State<TelaMesaJogo> {
     double maxH,
   ) {
     final nomeTrim = token.nome.trim();
-    final inicial =
-        nomeTrim.isEmpty ? '?' : nomeTrim.substring(0, 1).toUpperCase();
+    final inicial = nomeTrim.isEmpty
+        ? '?'
+        : nomeTrim.substring(0, 1).toUpperCase();
     final monstro = token.monstro;
     final minimizada = _miniFichaMinimizada ?? token.ehHeroi;
 
@@ -931,10 +1503,10 @@ class _TelaMesaJogoState extends State<TelaMesaJogo> {
     final maxLeft = (maxW - larguraCard - 8.0).clamp(8.0, maxW);
     final maxTop = (maxH - 68.0).clamp(68.0, maxH);
 
-    final defaultLeft =
-        ehTablet ? (maxW - larguraCard - 12.0).clamp(8.0, maxLeft) : (maxW - larguraCard) / 2;
-    final defaultTop =
-        ehTablet ? 68.0 : (maxH - 270.0).clamp(68.0, maxTop);
+    final defaultLeft = ehTablet
+        ? (maxW - larguraCard - 12.0).clamp(8.0, maxLeft)
+        : (maxW - larguraCard) / 2;
+    final defaultTop = ehTablet ? 68.0 : (maxH - 270.0).clamp(68.0, maxTop);
 
     final posAtual = _posicaoMiniFicha ?? Offset(defaultLeft, defaultTop);
     final left = posAtual.dx.clamp(8.0, maxLeft);
@@ -971,7 +1543,8 @@ class _TelaMesaJogoState extends State<TelaMesaJogo> {
                     onPanUpdate: (details) {
                       setState(() {
                         final base =
-                            _posicaoMiniFicha ?? Offset(defaultLeft, defaultTop);
+                            _posicaoMiniFicha ??
+                            Offset(defaultLeft, defaultTop);
                         _posicaoMiniFicha = Offset(
                           (base.dx + details.delta.dx).clamp(8.0, maxLeft),
                           (base.dy + details.delta.dy).clamp(64.0, maxTop),
@@ -1059,8 +1632,8 @@ class _TelaMesaJogoState extends State<TelaMesaJogo> {
                                   : MestreCores.statusAlertaEscuro,
                             ),
                             tooltip: 'Mostrar/Ocultar para jogadores',
-                            onPressed: () =>
-                                widget.cubit.alternarVisibilidadeToken(token.id),
+                            onPressed: () => widget.cubit
+                                .alternarVisibilidadeToken(token.id),
                           ),
                           IconButton(
                             constraints: const BoxConstraints(
@@ -1085,9 +1658,7 @@ class _TelaMesaJogoState extends State<TelaMesaJogo> {
                           ),
                           padding: EdgeInsets.zero,
                           icon: Icon(
-                            minimizada
-                                ? Icons.expand_more
-                                : Icons.expand_less,
+                            minimizada ? Icons.expand_more : Icons.expand_less,
                             size: 20,
                             color: MestreCores.escuroOuro,
                           ),
@@ -1132,17 +1703,18 @@ class _TelaMesaJogoState extends State<TelaMesaJogo> {
                             (delta) {
                               widget.cubit.ajustarPvToken(token.id, delta);
                             },
-                            onEditarEmLote: () => _exibirSheetAjustePontosEmLote(
-                              context,
-                              token: token,
-                              rotulo: 'PV',
-                              atual: token.pvAtual,
-                              maxValor: token.pvMax,
-                              cor: Colors.redAccent,
-                              rd: token.monstro?.rd ?? const {},
-                              onDelta: (d) =>
-                                  widget.cubit.ajustarPvToken(token.id, d),
-                            ),
+                            onEditarEmLote: () =>
+                                _exibirSheetAjustePontosEmLote(
+                                  context,
+                                  token: token,
+                                  rotulo: 'PV',
+                                  atual: token.pvAtual,
+                                  maxValor: token.pvMax,
+                                  cor: Colors.redAccent,
+                                  rd: token.monstro?.rd ?? const {},
+                                  onDelta: (d) =>
+                                      widget.cubit.ajustarPvToken(token.id, d),
+                                ),
                           ),
                         ),
                         const SizedBox(width: 8),
@@ -1155,17 +1727,18 @@ class _TelaMesaJogoState extends State<TelaMesaJogo> {
                             (delta) {
                               widget.cubit.ajustarPmToken(token.id, delta);
                             },
-                            onEditarEmLote: () => _exibirSheetAjustePontosEmLote(
-                              context,
-                              token: token,
-                              rotulo: 'PM',
-                              atual: token.pmAtual,
-                              maxValor: token.pmMax,
-                              cor: Colors.blueAccent,
-                              rd: const {},
-                              onDelta: (d) =>
-                                  widget.cubit.ajustarPmToken(token.id, d),
-                            ),
+                            onEditarEmLote: () =>
+                                _exibirSheetAjustePontosEmLote(
+                                  context,
+                                  token: token,
+                                  rotulo: 'PM',
+                                  atual: token.pmAtual,
+                                  maxValor: token.pmMax,
+                                  cor: Colors.blueAccent,
+                                  rd: const {},
+                                  onDelta: (d) =>
+                                      widget.cubit.ajustarPmToken(token.id, d),
+                                ),
                           ),
                         ),
                       ],
@@ -1206,11 +1779,10 @@ class _TelaMesaJogoState extends State<TelaMesaJogo> {
                                   ),
                                 ),
                                 visualDensity: VisualDensity.compact,
-                                onPressed: () =>
-                                    _exibirDialogAdicionarCondicao(
-                                      context,
-                                      token,
-                                    ),
+                                onPressed: () => _exibirDialogAdicionarCondicao(
+                                  context,
+                                  token,
+                                ),
                               ),
                             ],
                           ),
@@ -1240,8 +1812,8 @@ class _TelaMesaJogoState extends State<TelaMesaJogo> {
                             FichaRapidaMonstroCard(
                               monstro: monstro,
                               habilidadesRecargaGastas: token.habilidadesGastas,
-                              onAlternarRecarga: (nomeHab) => widget.cubit
-                                  .alternarRecargaHabilidadeToken(
+                              onAlternarRecarga: (nomeHab) =>
+                                  widget.cubit.alternarRecargaHabilidadeToken(
                                     token.id,
                                     nomeHab,
                                   ),
@@ -1469,7 +2041,9 @@ class _TelaMesaJogoState extends State<TelaMesaJogo> {
                   (m) => ListTile(
                     title: Text(
                       m.nome,
-                      style: const TextStyle(color: MestreCores.escuroOnSurface),
+                      style: const TextStyle(
+                        color: MestreCores.escuroOnSurface,
+                      ),
                     ),
                     subtitle: Text(
                       '${m.largura}×${m.altura} • ${m.tokens.length} combatentes',
@@ -1500,10 +2074,7 @@ class _SheetCriarTokenCombatente extends StatefulWidget {
   final MestreCubit cubit;
   final int abaInicial;
 
-  const _SheetCriarTokenCombatente({
-    required this.cubit,
-    this.abaInicial = 0,
-  });
+  const _SheetCriarTokenCombatente({required this.cubit, this.abaInicial = 0});
 
   @override
   State<_SheetCriarTokenCombatente> createState() =>
@@ -1554,331 +2125,353 @@ class _SheetCriarTokenCombatenteState
         child: SizedBox(
           height: alturaModal,
           child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 12, 8, 0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'Adicionar Combatente ao Mapa',
-                    style: TextStyle(
-                      fontFamily: 'serif',
-                      color: MestreCores.escuroOnSurface,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  IconButton(
-                    icon: const Icon(
-                      Icons.close,
-                      color: MestreCores.escuroOnSurfaceVariant,
-                      size: 20,
-                    ),
-                    onPressed: () => Navigator.pop(context),
-                  ),
-                ],
-              ),
-            ),
-            const TabBar(
-              indicatorColor: MestreCores.escuroOuro,
-              labelColor: MestreCores.escuroOuro,
-              unselectedLabelColor: MestreCores.escuroOnSurfaceVariant,
-              tabs: [
-                Tab(
-                  icon: Icon(Icons.edit_outlined, size: 16),
-                  text: 'Customizado',
-                ),
-                Tab(
-                  icon: Icon(Icons.pets_outlined, size: 16),
-                  text: 'Escolher do Bestiário',
-                ),
-              ],
-            ),
-            Expanded(
-              child: TabBarView(
-                children: [
-                  SingleChildScrollView(
-                    padding: EdgeInsets.only(
-                      left: 16,
-                      right: 16,
-                      top: 12,
-                      bottom: MediaQuery.of(context).viewInsets.bottom + 20,
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        // Segmented Button: Inimigo / NPC / Aliado
-          SegmentedButton<TipoCombatenteMapa>(
-            segments: const [
-              ButtonSegment(
-                value: TipoCombatenteMapa.inimigo,
-                label: Text('Inimigo'),
-              ),
-              ButtonSegment(
-                value: TipoCombatenteMapa.npc,
-                label: Text('NPC'),
-              ),
-              ButtonSegment(
-                value: TipoCombatenteMapa.aliado,
-                label: Text('Aliado'),
-              ),
-            ],
-            selected: {_tipo},
-            onSelectionChanged: (val) => setState(() => _tipo = val.first),
-          ),
-          const SizedBox(height: 10),
-
-          TextField(
-            controller: _nomeController,
-            style: const TextStyle(
-              color: MestreCores.escuroOnSurface,
-              fontSize: 13,
-            ),
-            decoration: const InputDecoration(
-              labelText: 'Nome da Criatura/NPC',
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: MestreCores.escuroOutline),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: MestreCores.escuroOuro),
-              ),
-            ),
-          ),
-          const SizedBox(height: 10),
-
-          Row(
             children: [
-              Expanded(
-                child: TextField(
-                  controller: _pvController,
-                  keyboardType: TextInputType.number,
-                  style: const TextStyle(
-                    color: MestreCores.escuroOnSurface,
-                    fontSize: 12,
-                  ),
-                  decoration: const InputDecoration(
-                    labelText: 'PV',
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: MestreCores.escuroOutline),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 12, 8, 0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Adicionar Combatente ao Mapa',
+                      style: TextStyle(
+                        fontFamily: 'serif',
+                        color: MestreCores.escuroOnSurface,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: TextField(
-                  controller: _pmController,
-                  keyboardType: TextInputType.number,
-                  style: const TextStyle(
-                    color: MestreCores.escuroOnSurface,
-                    fontSize: 12,
-                  ),
-                  decoration: const InputDecoration(
-                    labelText: 'PM',
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: MestreCores.escuroOutline),
+                    IconButton(
+                      icon: const Icon(
+                        Icons.close,
+                        color: MestreCores.escuroOnSurfaceVariant,
+                        size: 20,
+                      ),
+                      onPressed: () => Navigator.pop(context),
                     ),
-                  ),
+                  ],
                 ),
               ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: TextField(
-                  controller: _defController,
-                  keyboardType: TextInputType.number,
-                  style: const TextStyle(
-                    color: MestreCores.escuroOnSurface,
-                    fontSize: 12,
+              const TabBar(
+                indicatorColor: MestreCores.escuroOuro,
+                labelColor: MestreCores.escuroOuro,
+                unselectedLabelColor: MestreCores.escuroOnSurfaceVariant,
+                tabs: [
+                  Tab(
+                    icon: Icon(Icons.edit_outlined, size: 16),
+                    text: 'Customizado',
                   ),
-                  decoration: const InputDecoration(
-                    labelText: 'Defesa',
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: MestreCores.escuroOutline),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: TextField(
-                  controller: _iniController,
-                  keyboardType: TextInputType.number,
-                  style: const TextStyle(
-                    color: MestreCores.escuroOnSurface,
-                    fontSize: 12,
-                  ),
-                  decoration: const InputDecoration(
-                    labelText: 'Iniciativa',
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: MestreCores.escuroOutline),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 10),
-
-          // Tamanho em Quadrados
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'Tamanho do Token:',
-                style: TextStyle(
-                  color: MestreCores.escuroOnSurface,
-                  fontSize: 12,
-                ),
-              ),
-              const SizedBox(height: 6),
-              Wrap(
-                spacing: 6,
-                runSpacing: 6,
-                children: [
-                  ChoiceChip(
-                    label: const Text('1×1 Médio'),
-                    selected: _tamanho == 1,
-                    onSelected: (_) => setState(() => _tamanho = 1),
-                  ),
-                  ChoiceChip(
-                    label: const Text('2×2 Grande'),
-                    selected: _tamanho == 2,
-                    onSelected: (_) => setState(() => _tamanho = 2),
-                  ),
-                  ChoiceChip(
-                    label: const Text('3×3 Enorme'),
-                    selected: _tamanho == 3,
-                    onSelected: (_) => setState(() => _tamanho = 3),
+                  Tab(
+                    icon: Icon(Icons.pets_outlined, size: 16),
+                    text: 'Escolher do Bestiário',
                   ),
                 ],
               ),
-            ],
-          ),
-          const SizedBox(height: 8),
+              Expanded(
+                child: TabBarView(
+                  children: [
+                    SingleChildScrollView(
+                      padding: EdgeInsets.only(
+                        left: 16,
+                        right: 16,
+                        top: 12,
+                        bottom: MediaQuery.of(context).viewInsets.bottom + 20,
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          // Segmented Button: Inimigo / NPC / Aliado
+                          SegmentedButton<TipoCombatenteMapa>(
+                            segments: const [
+                              ButtonSegment(
+                                value: TipoCombatenteMapa.inimigo,
+                                label: Text('Inimigo'),
+                              ),
+                              ButtonSegment(
+                                value: TipoCombatenteMapa.npc,
+                                label: Text('NPC'),
+                              ),
+                              ButtonSegment(
+                                value: TipoCombatenteMapa.aliado,
+                                label: Text('Aliado'),
+                              ),
+                            ],
+                            selected: {_tipo},
+                            onSelectionChanged: (val) =>
+                                setState(() => _tipo = val.first),
+                          ),
+                          const SizedBox(height: 10),
 
-          SwitchListTile(
-            dense: true,
-            contentPadding: EdgeInsets.zero,
-            title: const Text(
-              'Visível aos Jogadores',
-              style: TextStyle(
-                color: MestreCores.escuroOnSurface,
-                fontSize: 12,
-              ),
-            ),
-            value: _visivelAosJogadores,
-            activeThumbColor: MestreCores.escuroOuro,
-            onChanged: (val) => setState(() => _visivelAosJogadores = val),
-          ),
+                          TextField(
+                            controller: _nomeController,
+                            style: const TextStyle(
+                              color: MestreCores.escuroOnSurface,
+                              fontSize: 13,
+                            ),
+                            decoration: const InputDecoration(
+                              labelText: 'Nome da Criatura/NPC',
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: MestreCores.escuroOutline,
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: MestreCores.escuroOuro,
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 10),
 
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                'Duplicar × N para grupos:',
-                style: TextStyle(
-                  color: MestreCores.escuroOnSurface,
-                  fontSize: 12,
+                          Row(
+                            children: [
+                              Expanded(
+                                child: TextField(
+                                  controller: _pvController,
+                                  keyboardType: TextInputType.number,
+                                  style: const TextStyle(
+                                    color: MestreCores.escuroOnSurface,
+                                    fontSize: 12,
+                                  ),
+                                  decoration: const InputDecoration(
+                                    labelText: 'PV',
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: MestreCores.escuroOutline,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              Expanded(
+                                child: TextField(
+                                  controller: _pmController,
+                                  keyboardType: TextInputType.number,
+                                  style: const TextStyle(
+                                    color: MestreCores.escuroOnSurface,
+                                    fontSize: 12,
+                                  ),
+                                  decoration: const InputDecoration(
+                                    labelText: 'PM',
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: MestreCores.escuroOutline,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              Expanded(
+                                child: TextField(
+                                  controller: _defController,
+                                  keyboardType: TextInputType.number,
+                                  style: const TextStyle(
+                                    color: MestreCores.escuroOnSurface,
+                                    fontSize: 12,
+                                  ),
+                                  decoration: const InputDecoration(
+                                    labelText: 'Defesa',
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: MestreCores.escuroOutline,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              Expanded(
+                                child: TextField(
+                                  controller: _iniController,
+                                  keyboardType: TextInputType.number,
+                                  style: const TextStyle(
+                                    color: MestreCores.escuroOnSurface,
+                                    fontSize: 12,
+                                  ),
+                                  decoration: const InputDecoration(
+                                    labelText: 'Iniciativa',
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: MestreCores.escuroOutline,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 10),
+
+                          // Tamanho em Quadrados
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Tamanho do Token:',
+                                style: TextStyle(
+                                  color: MestreCores.escuroOnSurface,
+                                  fontSize: 12,
+                                ),
+                              ),
+                              const SizedBox(height: 6),
+                              Wrap(
+                                spacing: 6,
+                                runSpacing: 6,
+                                children: [
+                                  ChoiceChip(
+                                    label: const Text('1×1 Médio'),
+                                    selected: _tamanho == 1,
+                                    onSelected: (_) =>
+                                        setState(() => _tamanho = 1),
+                                  ),
+                                  ChoiceChip(
+                                    label: const Text('2×2 Grande'),
+                                    selected: _tamanho == 2,
+                                    onSelected: (_) =>
+                                        setState(() => _tamanho = 2),
+                                  ),
+                                  ChoiceChip(
+                                    label: const Text('3×3 Enorme'),
+                                    selected: _tamanho == 3,
+                                    onSelected: (_) =>
+                                        setState(() => _tamanho = 3),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 8),
+
+                          SwitchListTile(
+                            dense: true,
+                            contentPadding: EdgeInsets.zero,
+                            title: const Text(
+                              'Visível aos Jogadores',
+                              style: TextStyle(
+                                color: MestreCores.escuroOnSurface,
+                                fontSize: 12,
+                              ),
+                            ),
+                            value: _visivelAosJogadores,
+                            activeThumbColor: MestreCores.escuroOuro,
+                            onChanged: (val) =>
+                                setState(() => _visivelAosJogadores = val),
+                          ),
+
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text(
+                                'Duplicar × N para grupos:',
+                                style: TextStyle(
+                                  color: MestreCores.escuroOnSurface,
+                                  fontSize: 12,
+                                ),
+                              ),
+                              Row(
+                                children: [
+                                  IconButton(
+                                    icon: const Icon(
+                                      Icons.remove,
+                                      size: 16,
+                                      color: MestreCores.escuroOuro,
+                                    ),
+                                    onPressed: _duplicarN > 1
+                                        ? () => setState(() => _duplicarN--)
+                                        : null,
+                                  ),
+                                  Text(
+                                    '$_duplicarN',
+                                    style: const TextStyle(
+                                      color: MestreCores.escuroOnSurface,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  IconButton(
+                                    icon: const Icon(
+                                      Icons.add,
+                                      size: 16,
+                                      color: MestreCores.escuroOuro,
+                                    ),
+                                    onPressed: _duplicarN < 8
+                                        ? () => setState(() => _duplicarN++)
+                                        : null,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 14),
+
+                          FilledButton(
+                            style: FilledButton.styleFrom(
+                              backgroundColor: MestreCores.escuroOuro,
+                              foregroundColor: MestreCores.escuroOuroTexto,
+                              minimumSize: const Size.fromHeight(48),
+                            ),
+                            onPressed: () {
+                              final pv = int.tryParse(_pvController.text) ?? 20;
+                              final pm = int.tryParse(_pmController.text) ?? 10;
+                              final def =
+                                  int.tryParse(_defController.text) ?? 15;
+                              final ini = int.tryParse(_iniController.text);
+                              final nomeBase =
+                                  _nomeController.text.trim().isEmpty
+                                  ? 'Ameaça'
+                                  : _nomeController.text.trim();
+
+                              final mapa = widget.cubit.state.mapaAtual;
+                              final posInicial = mapa != null
+                                  ? Posicao2D(
+                                      (_tipo == TipoCombatenteMapa.aliado
+                                              ? 2
+                                              : mapa.largura - 2)
+                                          .clamp(0, mapa.largura - 1),
+                                      1.clamp(0, mapa.altura - 1),
+                                    )
+                                  : null;
+
+                              widget.cubit.adicionarTokenCustomizadoNoMapa(
+                                nome: nomeBase,
+                                ehHeroi:
+                                    _tipo == TipoCombatenteMapa.heroi ||
+                                    _tipo == TipoCombatenteMapa.aliado,
+                                tipo: _tipo,
+                                pvMax: pv,
+                                pmMax: pm,
+                                defesa: def,
+                                iniciativa: ini,
+                                tamanhoQuadrados: _tamanho,
+                                ocultoParaJogadores: !_visivelAosJogadores,
+                                posicao: posInicial,
+                                quantidade: _duplicarN,
+                              );
+                              Navigator.pop(context);
+                            },
+                            child: Text(
+                              'Adicionar ($_duplicarN)',
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Theme(
+                      data: MestreCores.homeStyleTheme,
+                      child: TelaBestiarioMestre(
+                        cubit: widget.cubit,
+                        onAmeacaAdicionada: (_) => Navigator.pop(context),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              Row(
-                children: [
-                  IconButton(
-                    icon: const Icon(
-                      Icons.remove,
-                      size: 16,
-                      color: MestreCores.escuroOuro,
-                    ),
-                    onPressed: _duplicarN > 1
-                        ? () => setState(() => _duplicarN--)
-                        : null,
-                  ),
-                  Text(
-                    '$_duplicarN',
-                    style: const TextStyle(
-                      color: MestreCores.escuroOnSurface,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  IconButton(
-                    icon: const Icon(
-                      Icons.add,
-                      size: 16,
-                      color: MestreCores.escuroOuro,
-                    ),
-                    onPressed: _duplicarN < 8
-                        ? () => setState(() => _duplicarN++)
-                        : null,
-                  ),
-                ],
-              ),
             ],
-          ),
-          const SizedBox(height: 14),
-
-          FilledButton(
-            style: FilledButton.styleFrom(
-              backgroundColor: MestreCores.escuroOuro,
-              foregroundColor: MestreCores.escuroOuroTexto,
-              minimumSize: const Size.fromHeight(48),
-            ),
-            onPressed: () {
-              final pv = int.tryParse(_pvController.text) ?? 20;
-              final pm = int.tryParse(_pmController.text) ?? 10;
-              final def = int.tryParse(_defController.text) ?? 15;
-              final ini = int.tryParse(_iniController.text);
-              final nomeBase = _nomeController.text.trim().isEmpty
-                  ? 'Ameaça'
-                  : _nomeController.text.trim();
-
-              final mapa = widget.cubit.state.mapaAtual;
-              final posInicial = mapa != null
-                  ? Posicao2D(
-                      (_tipo == TipoCombatenteMapa.aliado
-                              ? 2
-                              : mapa.largura - 2)
-                          .clamp(0, mapa.largura - 1),
-                      1.clamp(0, mapa.altura - 1),
-                    )
-                  : null;
-
-              widget.cubit.adicionarTokenCustomizadoNoMapa(
-                nome: nomeBase,
-                ehHeroi: _tipo == TipoCombatenteMapa.heroi ||
-                    _tipo == TipoCombatenteMapa.aliado,
-                tipo: _tipo,
-                pvMax: pv,
-                pmMax: pm,
-                defesa: def,
-                iniciativa: ini,
-                tamanhoQuadrados: _tamanho,
-                ocultoParaJogadores: !_visivelAosJogadores,
-                posicao: posInicial,
-                quantidade: _duplicarN,
-              );
-              Navigator.pop(context);
-            },
-            child: Text(
-              'Adicionar ($_duplicarN)',
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-          ),
-                      ],
-                    ),
-                  ),
-                  Theme(
-                    data: MestreCores.homeStyleTheme,
-                    child: TelaBestiarioMestre(
-                      cubit: widget.cubit,
-                      onAmeacaAdicionada: (_) => Navigator.pop(context),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
           ),
         ),
       ),
@@ -2037,8 +2630,9 @@ class _SheetAjustePontosEmLoteState extends State<_SheetAjustePontosEmLote> {
               children: [-10, -5, 5, 10].map((atalho) {
                 return OutlinedButton(
                   style: OutlinedButton.styleFrom(
-                    foregroundColor:
-                        atalho < 0 ? Colors.redAccent : Colors.greenAccent,
+                    foregroundColor: atalho < 0
+                        ? Colors.redAccent
+                        : Colors.greenAccent,
                     side: BorderSide(
                       color: atalho < 0
                           ? Colors.redAccent.withValues(alpha: 0.6)
@@ -2089,16 +2683,16 @@ class _SheetAjustePontosEmLoteState extends State<_SheetAjustePontosEmLote> {
                   ChoiceChip(
                     label: const Text('Sem RD'),
                     selected: _rdSelecionadaKey == null,
-                    onSelected: (_) =>
-                        setState(() => _rdSelecionadaKey = null),
+                    onSelected: (_) => setState(() => _rdSelecionadaKey = null),
                   ),
                   ...widget.rd.entries.map(
                     (e) => ChoiceChip(
                       label: Text('${e.key} ${e.value}'),
                       selected: _rdSelecionadaKey == e.key,
                       onSelected: (_) => setState(
-                        () => _rdSelecionadaKey =
-                            _rdSelecionadaKey == e.key ? null : e.key,
+                        () => _rdSelecionadaKey = _rdSelecionadaKey == e.key
+                            ? null
+                            : e.key,
                       ),
                     ),
                   ),
@@ -2152,9 +2746,7 @@ class _SheetAjustePontosEmLoteState extends State<_SheetAjustePontosEmLote> {
                             widget.onDelta(valorDigitado);
                             Navigator.pop(context);
                           },
-                    child: Text(
-                      widget.rotulo == 'PV' ? 'Curar' : 'Recuperar',
-                    ),
+                    child: Text(widget.rotulo == 'PV' ? 'Curar' : 'Recuperar'),
                   ),
                 ),
               ],

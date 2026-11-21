@@ -7,20 +7,47 @@ import '../../../domain/entities/combate/grid_tatico.dart';
 import '../../../domain/entities/combate/monstro.dart';
 import '../../../domain/entities/combate/tipo_acao.dart';
 import '../../../domain/entities/combate/tipo_dano.dart';
+import '../../../domain/entities/habilidades/modelos_habilidade_duracao.dart';
 import '../../../domain/services/combate_services/combate_engine.dart';
 import '../../../domain/services/combate_services/movimento_engine.dart';
+import '../../../domain/services/habilidades_services/geometria_grid.dart';
 import '../../../domain/services/habilidades_services/relogio_e_cena_service.dart';
 import 'combate_state.dart';
 import '../../../domain/entities/magia/magia.dart';
 
+class PreviewMagiaCombate {
+  final Set<Posicao2D> celulasAlcance;
+  final Set<Posicao2D> celulasArea;
+  final Set<Posicao2D> celulasBloqueadas;
+  final VerticeGrid? centroVertice;
+  final ({int dx, int dy})? direcaoAplicada;
+  final List<Combatente> alvosAfetados;
+  final bool origemDentroDoAlcance;
+  final bool origemTemLinhaDeEfeito;
+
+  const PreviewMagiaCombate({
+    required this.celulasAlcance,
+    required this.celulasArea,
+    this.celulasBloqueadas = const {},
+    this.centroVertice,
+    this.direcaoAplicada,
+    required this.alvosAfetados,
+    required this.origemDentroDoAlcance,
+    this.origemTemLinhaDeEfeito = true,
+  });
+}
+
 class CombateCubit extends Cubit<CombateState> {
   final CombateEngine _engine;
+  final GeometriaGrid _geometriaGrid;
   final void Function(EventoTurnClock evento)? onEventoTurnClock;
 
   CombateCubit({
     CombateEngine? engine,
+    GeometriaGrid? geometriaGrid,
     this.onEventoTurnClock,
   })  : _engine = engine ?? CombateEngine(),
+        _geometriaGrid = geometriaGrid ?? const GeometriaGrid(),
         super(const CombateState());
 
   /// 1. Inicia o combate, define posições no grid 2D e ordena/rola a iniciativa
@@ -885,18 +912,188 @@ class CombateCubit extends Cubit<CombateState> {
     }
   }
 
+  /// Calcula as células de alcance, as células da área de efeito (Cone, Esfera/Cilindro,
+  /// Cubo/Quadrado, Linha ou Alvo Único), barreiras (linha de efeito) e os combatentes atingidos.
+  PreviewMagiaCombate calcularPreviewMagia({
+    required Magia magia,
+    TipoArea? tipoAreaOverride,
+    double? tamanhoMetrosOverride,
+    Posicao2D? pontoAlvo,
+    VerticeGrid? verticeAlvo,
+  }) {
+    final lancador = state.combatenteAtual;
+    final posLancador =
+        (lancador != null ? state.posicoesCombatentes[lancador.id] : null) ??
+        const Posicao2D(0, 0);
+    final spanLancador = lancador?.tamanhoQuadrados ?? 1;
+
+    final alcanceMaximo = calcularAlcanceMetrosMagia(magia.alcance);
+    final mapa = state.mapaGrid;
+    final ehAlcancePessoal = magia.alcance.tipo.toLowerCase() == 'pessoal';
+
+    // 1. Células dentro do alcance da magia
+    final celulasAlcance = <Posicao2D>{};
+    for (int y = 0; y < mapa.altura; y++) {
+      for (int x = 0; x < mapa.largura; x++) {
+        final cel = Posicao2D(x, y);
+        final dist = posLancador.distanciaMetrosAreas(
+          cel,
+          tamanhoEsta: spanLancador,
+          tamanhoOutra: 1,
+        );
+        if (dist <= alcanceMaximo + 1e-6) {
+          celulasAlcance.add(cel);
+        }
+      }
+    }
+
+    final areaPadrao = magia.efeito.extrairAreaPadrao(
+      alcanceDetalhes: magia.alcance.detalhes,
+    );
+    final TipoArea? tipoEfetivo = tipoAreaOverride ?? areaPadrao?.tipo;
+    final double tamanhoMetros =
+        tamanhoMetrosOverride ?? (areaPadrao?.tamanhoMetros ?? 1.5);
+    final destino = pontoAlvo ?? posLancador;
+
+    // 2. Alvo Único (tipoEfetivo == null): apenas o quadrado do alvo
+    if (tipoEfetivo == null) {
+      final barreiras = _geometriaGrid.construirBarreirasObstaculos(mapa);
+      final temLoE = _geometriaGrid.temLinhaDeEfeito(
+        origem: posLancador,
+        destinoCelula: destino,
+        barreiras: barreiras,
+      );
+      final celulasArea = <Posicao2D>{
+        if (mapa.dentroDosLimites(destino) &&
+            mapa.obterTerreno(destino) != TipoTerreno.obstaculo)
+          destino,
+      };
+      final dentroAlcance = ehAlcancePessoal || celulasAlcance.contains(destino);
+      final alvos = temLoE
+          ? _combatentesNaArea(
+              celulasArea,
+              lancadorId: lancador?.id,
+              incluirLancador: destino == posLancador || ehAlcancePessoal,
+            )
+          : const <Combatente>[];
+      return PreviewMagiaCombate(
+        celulasAlcance: celulasAlcance,
+        celulasArea: celulasArea,
+        alvosAfetados: alvos,
+        origemDentroDoAlcance: dentroAlcance,
+        origemTemLinhaDeEfeito: temLoE,
+      );
+    }
+
+    // 3. Delega a geometria tática oficial de T20 ao GeometriaGrid
+    final calc = _geometriaGrid.calcularAreaTaticaNoMapa(
+      mapa: mapa,
+      posLancador: posLancador,
+      tipoArea: tipoEfetivo,
+      tamanhoMetros: tamanhoMetros,
+      pontoAlvo: destino,
+      verticeAlvo: verticeAlvo,
+      alcanceMaximoMetros: alcanceMaximo,
+      ehAlcancePessoal: ehAlcancePessoal,
+      celulasAlcancePrecalculadas: celulasAlcance,
+    );
+
+    final alvosAfetados = _combatentesNaArea(
+      calc.celulasArea,
+      lancadorId: lancador?.id,
+      incluirLancador: !ehAlcancePessoal,
+    );
+
+    return PreviewMagiaCombate(
+      celulasAlcance: celulasAlcance,
+      celulasArea: calc.celulasArea,
+      celulasBloqueadas: calc.celulasBloqueadas,
+      centroVertice: calc.centroVertice,
+      direcaoAplicada: calc.direcaoAplicada,
+      alvosAfetados: alvosAfetados,
+      origemDentroDoAlcance: calc.origemDentroDoAlcance,
+      origemTemLinhaDeEfeito: calc.origemTemLinhaDeEfeito,
+    );
+  }
+
+  List<Combatente> _combatentesNaArea(
+    Set<Posicao2D> celulasArea, {
+    String? lancadorId,
+    bool incluirLancador = false,
+  }) {
+    final atingidos = <Combatente>[];
+    for (final c in state.filaIniciativa) {
+      if (c.pvAtual <= 0) continue;
+      if (!incluirLancador && c.id == lancadorId) continue;
+      final pos = state.posicoesCombatentes[c.id];
+      if (pos == null) continue;
+      final span = c.tamanhoQuadrados;
+      bool tocou = false;
+      for (int dx = 0; dx < span && !tocou; dx++) {
+        for (int dy = 0; dy < span && !tocou; dy++) {
+          if (celulasArea.contains(Posicao2D(pos.x + dx, pos.y + dy))) {
+            tocou = true;
+          }
+        }
+      }
+      if (tocou) {
+        atingidos.add(c);
+      }
+    }
+    return atingidos;
+  }
+
+  /// Atualiza o overlay visual de alcance e área de magia no tabuleiro VTT
+  void atualizarPreviewMagia({
+    Set<Posicao2D> celulasAlcance = const {},
+    Set<Posicao2D> celulasArea = const {},
+    VerticeGrid? centroVertice,
+  }) {
+    emit(
+      state.copyWith(
+        celulasAlcanceMagia: celulasAlcance,
+        celulasAreaMagia: celulasArea,
+        centroAreaMagia: centroVertice,
+        limparCentroAreaMagia: centroVertice == null,
+      ),
+    );
+  }
+
+  /// Limpa o overlay visual de alcance e área de magia do tabuleiro VTT
+  void limparPreviewMagia() {
+    if (state.celulasAlcanceMagia.isEmpty &&
+        state.celulasAreaMagia.isEmpty &&
+        state.centroAreaMagia == null) {
+      return;
+    }
+    emit(
+      state.copyWith(
+        celulasAlcanceMagia: const {},
+        celulasAreaMagia: const {},
+        limparCentroAreaMagia: true,
+      ),
+    );
+  }
+
   /// Executa o lançamento de magia com validação de PM, ação e alcance métrico
   void lancarMagia({
     required Magia magia,
     Combatente? alvo,
+    List<Combatente>? alvosAfetados,
     int? valorDanoOuCura,
     bool ehCura = false,
     TipoDano? tipoDano,
     bool ehLuz = false,
+    int? custoPmOverride,
+    String? resumoRolagem,
+    String? resumoArea,
   }) {
     final lancador = state.combatenteAtual;
     if (lancador == null) return;
-    final custoPm = calcularCustoPmMagia(magia);
+    final custoBase = calcularCustoPmMagia(magia);
+    final custoPm = custoPmOverride != null
+        ? (custoPmOverride < 1 ? 1 : custoPmOverride)
+        : custoBase;
     // 1. Validação de PM suficiente
     if (lancador.pmAtual < custoPm) {
       emit(
@@ -909,26 +1106,12 @@ class CombateCubit extends Cubit<CombateState> {
       );
       return;
     }
-    // 2. Validação da Ação exigida (padrão, movimento, etc.)
-    final tipoAcao = magia.execucao.tipo.toLowerCase().contains('movimento')
-        ? TipoAcao.movimento
-        : TipoAcao.padrao;
-    if (!gastarAcao(tipoAcao)) {
-      emit(
-        state.copyWith(
-          logCombate: [
-            ...state.logCombate,
-            "⚠️ ${lancador.nome} não possui ação disponível para lançar ${magia.nome}!",
-          ],
-        ),
-      );
-      return;
-    }
-
-    // 3. Validação de Alcance no Grid Tático
+    // 2. Validação de Alcance no Grid Tático (antes de consumir a ação)
     final alcanceMaximo = calcularAlcanceMetrosMagia(magia.alcance);
     final posLancador = state.posicoesCombatentes[lancador.id];
-    if (alvo != null &&
+    final usaAreaMultiAlvo = alvosAfetados != null;
+    if (!usaAreaMultiAlvo &&
+        alvo != null &&
         posLancador != null &&
         magia.alcance.tipo != 'pessoal') {
       final posAlvo = state.posicoesCombatentes[alvo.id];
@@ -951,6 +1134,22 @@ class CombateCubit extends Cubit<CombateState> {
         }
       }
     }
+
+    // 3. Validação da Ação exigida (padrão, movimento, etc.)
+    final tipoAcao = magia.execucao.tipo.toLowerCase().contains('movimento')
+        ? TipoAcao.movimento
+        : TipoAcao.padrao;
+    if (!gastarAcao(tipoAcao)) {
+      emit(
+        state.copyWith(
+          logCombate: [
+            ...state.logCombate,
+            "⚠️ ${lancador.nome} não possui ação disponível para lançar ${magia.nome}!",
+          ],
+        ),
+      );
+      return;
+    }
     // 4. Deduz o PM do Lançador e atualiza a fila de combate
     final lancadorComMenosPm = lancador.copyWith(
       pmAtual: lancador.pmAtual - custoPm,
@@ -958,7 +1157,7 @@ class CombateCubit extends Cubit<CombateState> {
     List<Combatente> novaFila = state.filaIniciativa.map((c) {
       return c.id == lancador.id ? lancadorComMenosPm : c;
     }).toList();
-    // 5. Aplica dano ou cura no alvo se especificado
+    // 5. Aplica dano ou cura nos alvos se especificado
     final ehCuraDeLuz =
         ehLuz ||
         (ehCura &&
@@ -967,11 +1166,19 @@ class CombateCubit extends Cubit<CombateState> {
                 magia.nome.toLowerCase().contains('curar')));
 
     final novosLogs = <String>[
-      "✨ ${lancador.nome} lançou ${magia.nome} gastando $custoPm PM (restam ${lancadorComMenosPm.pmAtual} PM).",
+      "✨ ${lancador.nome} lançou ${magia.nome}${resumoArea != null ? ' [$resumoArea]' : ''} gastando $custoPm PM (restam ${lancadorComMenosPm.pmAtual} PM).",
+      if (resumoRolagem != null && resumoRolagem.trim().isNotEmpty)
+        "🎲 Rolagem de ${magia.nome}: ${resumoRolagem.trim()}.",
     ];
-    if (alvo != null && valorDanoOuCura != null && valorDanoOuCura > 0) {
+
+    final listaAlvos = usaAreaMultiAlvo
+        ? alvosAfetados
+        : (alvo != null ? <Combatente>[alvo] : const <Combatente>[]);
+    final idsAlvos = listaAlvos.map((a) => a.id).toSet();
+
+    if (idsAlvos.isNotEmpty && valorDanoOuCura != null && valorDanoOuCura > 0) {
       novaFila = novaFila.map((c) {
-        if (c.id == alvo.id) {
+        if (idsAlvos.contains(c.id)) {
           if (ehCura) {
             final atualizado = c.aplicarCura(
               valorDanoOuCura,
@@ -988,7 +1195,7 @@ class CombateCubit extends Cubit<CombateState> {
                 "☀️ ${c.nome} é Morto-Vivo e sofreu $danoReal de dano de luz pela magia de cura!",
               );
             } else {
-              novosLogs.add("💚 ${alvo.nome} foi curado em $valorDanoOuCura PV!");
+              novosLogs.add("💚 ${c.nome} foi curado em $valorDanoOuCura PV!");
             }
             return atualizado;
           } else {
@@ -1007,7 +1214,7 @@ class CombateCubit extends Cubit<CombateState> {
               );
             } else {
               novosLogs.add(
-                "💥 ${alvo.nome} sofreu ${-delta} de dano mágico de ${magia.nome}!",
+                "💥 ${c.nome} sofreu ${-delta} de dano mágico de ${magia.nome}!",
               );
             }
             return atualizado;
@@ -1015,12 +1222,17 @@ class CombateCubit extends Cubit<CombateState> {
         }
         return c;
       }).toList();
+    } else if (usaAreaMultiAlvo && idsAlvos.isEmpty) {
+      novosLogs.add("📐 Nenhum combatente estava dentro da área afetada.");
     }
     final statusFinal = _engine.verificarFimDeCombate(novaFila);
     emit(
       state.copyWith(
         filaIniciativa: novaFila,
         statusCombate: statusFinal,
+        celulasAlcanceMagia: const {},
+        celulasAreaMagia: const {},
+        limparCentroAreaMagia: true,
         logCombate: [...state.logCombate, ...novosLogs],
       ),
     );

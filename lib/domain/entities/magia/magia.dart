@@ -1,3 +1,5 @@
+import '../habilidades/modelos_habilidade_duracao.dart';
+
 class ExecucaoMagia {
   final String tipo; // 'padrao', 'reacao', 'livre', etc.
   final String? detalhes;
@@ -27,15 +29,108 @@ class AlcanceMagia {
 }
 
 class EfeitoMagia {
+  static final RegExp _regexMetros = RegExp(
+    r'(\d+(?:[.,]\d+)?)\s*m\b',
+    caseSensitive: false,
+  );
+
   final String tipo; // 'alvo', 'area', 'efeito'
   final String? descricao;
+  final String? formaArea; // opcional: 'cone', 'esfera', 'cubo', 'quadrado', 'linha'
+  final double? tamanhoMetros; // opcional: tamanho explícito em metros
 
-  const EfeitoMagia({required this.tipo, this.descricao});
+  const EfeitoMagia({
+    required this.tipo,
+    this.descricao,
+    this.formaArea,
+    this.tamanhoMetros,
+  });
 
   factory EfeitoMagia.fromJson(Map<String, dynamic> json) {
     return EfeitoMagia(
       tipo: json['tipo']?.toString() ?? 'alvo',
       descricao: json['descricao']?.toString(),
+      formaArea: json['formaArea']?.toString(),
+      tamanhoMetros: (json['tamanhoMetros'] as num?)?.toDouble(),
+    );
+  }
+
+  /// Extrai a definição geométrica (`Area`) a partir dos campos estruturados
+  /// ou interpretando automaticamente `descricao` (ex.: "cone de 6m",
+  /// "esfera de 6m de raio", "Quadrado de 3m", "cubo com 6m de lado", "linha de 9m").
+  /// Retorna `null` se a magia for de alvo único sem área geométrica.
+  Area? extrairAreaPadrao({String? alcanceDetalhes}) {
+    final textoFonte = [
+      ?formaArea,
+      ?descricao,
+      ?alcanceDetalhes,
+    ].join(' ').toLowerCase();
+
+    TipoArea? tipoDetectado;
+    if (formaArea != null) {
+      final f = formaArea!.toLowerCase().trim();
+      if (f.contains('cone')) {
+        tipoDetectado = TipoArea.cone;
+      } else if (f.contains('esfera') ||
+          f.contains('circulo') ||
+          f.contains('círculo') ||
+          f.contains('raio') ||
+          f.contains('cilindro')) {
+        tipoDetectado = TipoArea.esfera;
+      } else if (f.contains('cubo') || f.contains('quadrado')) {
+        tipoDetectado = TipoArea.cubo;
+      } else if (f.contains('linha')) {
+        tipoDetectado = TipoArea.linha;
+      }
+    }
+
+    if (tipoDetectado == null) {
+      if (textoFonte.contains('cone')) {
+        tipoDetectado = TipoArea.cone;
+      } else if (textoFonte.contains('esfera') ||
+          textoFonte.contains('cilindro') ||
+          textoFonte.contains('círculo') ||
+          textoFonte.contains('circulo') ||
+          textoFonte.contains('domo') ||
+          textoFonte.contains('nuvem') ||
+          textoFonte.contains('explosão') ||
+          textoFonte.contains('explosao') ||
+          textoFonte.contains('de raio')) {
+        tipoDetectado = TipoArea.esfera;
+      } else if (textoFonte.contains('cubo') ||
+          textoFonte.contains('quadrado')) {
+        tipoDetectado = TipoArea.cubo;
+      } else if (textoFonte.contains('linha')) {
+        tipoDetectado = TipoArea.linha;
+      } else if (tipo.toLowerCase() == 'area' || tipo.toLowerCase() == 'área') {
+        tipoDetectado = TipoArea.esfera;
+      }
+    }
+
+    if (tipoDetectado == null) return null;
+
+    double? metros = tamanhoMetros;
+    if (metros == null) {
+      final match = _regexMetros.firstMatch(textoFonte);
+      if (match != null) {
+        final raw = match.group(1)!.replaceAll(',', '.');
+        metros = double.tryParse(raw);
+      }
+    }
+
+    metros ??= switch (tipoDetectado) {
+      TipoArea.cone => 6.0,
+      TipoArea.esfera || TipoArea.cilindro => 6.0,
+      TipoArea.cubo || TipoArea.quadrado => 3.0,
+      TipoArea.linha => 9.0,
+      TipoArea.outro => 1.5,
+    };
+
+    final quadrados = (metros / kMetrosPorQuadradoT20).round().clamp(1, 40);
+    return Area(
+      tipo: tipoDetectado,
+      tamanhoQuadrados: quadrados,
+      alturaQuadrados: quadrados,
     );
   }
 }

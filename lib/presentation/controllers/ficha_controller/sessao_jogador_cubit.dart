@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../domain/entities/combate/grid_tatico.dart';
 import '../../../domain/entities/entidade_sessao_lan/sessao_lan_modelos.dart';
+import '../../../domain/entities/habilidades/modelos_habilidade_duracao.dart';
 import '../../../domain/services/sessao_lan/sessao_lan_transport.dart';
 import '../../../domain/services/sessao_lan/sessao_preferencias_service.dart';
 import 'ficha_state.dart';
@@ -161,6 +162,65 @@ class SessaoJogadorCubit extends Cubit<SessaoJogadorState> {
       'characterId': charId,
       'x': destino.x,
       'y': destino.y,
+    });
+  }
+
+  /// Projeta um template de Área de Efeito T20 no mapa compartilhado da sessão LAN.
+  Future<void> projetarAreaNoMapa({
+    required TipoArea tipo,
+    required double tamanhoMetros,
+    Posicao2D? pontoAlvo,
+    VerticeGrid? verticeAlvo,
+    String? rotulo,
+  }) async {
+    if (state.estadoConexao != EstadoConexaoJogador.conectado) return;
+    final charId = _lerFichaState().personagem.id;
+    await _clienteService.enviarAcaoMapa({
+      'tipo': 'projetar_area',
+      'characterId': charId,
+      'forma': tipo.name,
+      'tamanhoMetros': tamanhoMetros,
+      if (pontoAlvo != null) 'x': pontoAlvo.x,
+      if (pontoAlvo != null) 'y': pontoAlvo.y,
+      if (verticeAlvo != null) 'vx': verticeAlvo.vx,
+      if (verticeAlvo != null) 'vy': verticeAlvo.vy,
+      'rotulo': ?rotulo,
+    });
+  }
+
+  /// Limpa o template de Área de Efeito projetado por este jogador.
+  Future<void> limparMinhaAreaNoMapa() async {
+    if (state.estadoConexao != EstadoConexaoJogador.conectado) return;
+    final charId = _lerFichaState().personagem.id;
+    await _clienteService.enviarAcaoMapa({
+      'tipo': 'limpar_area',
+      'characterId': charId,
+    });
+  }
+
+  /// Envia o lançamento de uma magia (`NdX + Mod` + PM) com os alvos atingidos
+  /// para resolução em 1 toque pelo Mestre na mesa LAN.
+  Future<void> enviarLancamentoMagiaLan({
+    required String magiaNome,
+    required int custoPm,
+    required String expressaoDados,
+    required int valorRolado,
+    required bool ehCura,
+    required List<String> alvosIds,
+    String? rotuloArea,
+  }) async {
+    if (state.estadoConexao != EstadoConexaoJogador.conectado) return;
+    final charId = _lerFichaState().personagem.id;
+    await _clienteService.enviarAcaoMapa({
+      'tipo': 'lancar_magia',
+      'characterId': charId,
+      'magiaNome': magiaNome,
+      'custoPm': custoPm,
+      'expressaoDados': expressaoDados,
+      'valorRolado': valorRolado,
+      'ehCura': ehCura,
+      'alvosIds': alvosIds,
+      'rotuloArea': ?rotuloArea,
     });
   }
 

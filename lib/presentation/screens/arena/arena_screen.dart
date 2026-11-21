@@ -382,6 +382,9 @@ class _ArenaScreenState extends State<ArenaScreen> {
       buildWhen: (previous, current) {
         return previous.posicoesCombatentes != current.posicoesCombatentes ||
             previous.celulasAlcancaveis != current.celulasAlcancaveis ||
+            previous.celulasAlcanceMagia != current.celulasAlcanceMagia ||
+            previous.celulasAreaMagia != current.celulasAreaMagia ||
+            previous.centroAreaMagia != current.centroAreaMagia ||
             previous.mapaGrid != current.mapaGrid ||
             previous.combatenteAtual?.id != current.combatenteAtual?.id ||
             previous.modoMovimentoAtivo != current.modoMovimentoAtivo ||

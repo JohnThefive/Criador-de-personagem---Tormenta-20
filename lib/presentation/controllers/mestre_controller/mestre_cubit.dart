@@ -4,17 +4,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../domain/entities/combate/combatente.dart';
 import '../../../domain/entities/combate/grid_tatico.dart';
 import '../../../domain/entities/combate/monstro.dart';
+import '../../../domain/entities/habilidades/modelos_habilidade_duracao.dart';
 import '../../../domain/entities/mestre/catalogo_mestre_padrao.dart';
 import '../../../domain/entities/mestre/modelos_mestre.dart';
 import '../../../domain/entities/entidade_sessao_lan/sessao_lan_modelos.dart';
 import '../../../domain/services/combate_services/movimento_engine.dart';
 import '../../../domain/services/data_services/call_ameacas.dart';
 import '../../../domain/services/data_services/mestre_storage_service.dart';
+import '../../../domain/services/habilidades_services/geometria_grid.dart';
 import '../../../domain/services/sessao_lan/sessao_lan_transport.dart';
 import 'mestre_state.dart';
 
 class MestreCubit extends Cubit<MestreState> {
   static const int maxLogsRedeLan = 50;
+  static const GeometriaGrid _geometriaGrid = GeometriaGrid();
   static const Duration _intervaloCoalescingSnapshotLan = Duration(
     milliseconds: 50,
   );
@@ -81,7 +84,7 @@ class MestreCubit extends Cubit<MestreState> {
     }
     unawaited(
       _hostService!.publicarSnapshotMesa(
-        SnapshotMesa.sanitizadoDeMapa(mapa),
+        SnapshotMesa.sanitizadoDeMapa(areasEfeito: state.areasEfeitoAtivas, mapa),
       ),
     );
   }
@@ -463,7 +466,7 @@ class MestreCubit extends Cubit<MestreState> {
     final mapa = state.mapaAtual;
     if (mapa != null) {
       await _hostService!.publicarSnapshotMesa(
-        SnapshotMesa.sanitizadoDeMapa(mapa),
+        SnapshotMesa.sanitizadoDeMapa(areasEfeito: state.areasEfeitoAtivas, mapa),
       );
     }
   }
@@ -1120,7 +1123,7 @@ class MestreCubit extends Cubit<MestreState> {
       if (mapa != null && state.statusLan != StatusConexaoLan.desligado) {
         unawaited(
           _hostService!.publicarSnapshotMesa(
-            SnapshotMesa.sanitizadoDeMapa(mapa),
+            SnapshotMesa.sanitizadoDeMapa(areasEfeito: state.areasEfeitoAtivas, mapa),
           ),
         );
       }
@@ -1190,7 +1193,7 @@ class MestreCubit extends Cubit<MestreState> {
         state.statusLan != StatusConexaoLan.desligado) {
       unawaited(
         _hostService!.publicarSnapshotMesa(
-          SnapshotMesa.sanitizadoDeMapa(mapa),
+          SnapshotMesa.sanitizadoDeMapa(areasEfeito: state.areasEfeitoAtivas, mapa),
         ),
       );
     }
@@ -1634,29 +1637,144 @@ class MestreCubit extends Cubit<MestreState> {
   }
 
   /// Processa ações de mapa enviadas por um jogador via LAN após validação de identidade no Host.
-  /// Valida de forma autoritativa: aprovação, Fog of War, colisão com outros tokens e alcance (MovimentoEngine).
+  /// Valida de forma autoritativa: aprovação, Fog of War, colisão com outros tokens e alcance (MovimentoEngine),
+  /// além de projeção de Áreas de Efeito T20 e lançamento de magias (`NdX + Mod`).
   void aplicarAcaoMapaJogadorLan(Map<String, dynamic> acao) {
     final tipo = acao['tipo']?.toString();
     final charId = acao['characterId']?.toString();
-    if (tipo != 'mover' || charId == null || charId.isEmpty) return;
-
-    final x = (acao['x'] as num?)?.toInt();
-    final y = (acao['y'] as num?)?.toInt();
-    if (x == null || y == null) return;
+    if (tipo == null || charId == null || charId.isEmpty) return;
 
     final ses = state.sessaoAtual;
-    final aprovado = ses?.elenco.any(
+    final entradaElenco = ses?.elenco
+        .where(
           (e) =>
               e.characterId == charId &&
               e.statusRevisao == StatusRevisaoFicha.aprovada,
-        ) ??
-        false;
-    if (!aprovado) return;
+        )
+        .firstOrNull;
+    if (entradaElenco == null) return;
 
     final mapa = state.mapaAtual;
     if (mapa == null) return;
     final token = mapa.tokens.where((t) => t.id == charId).firstOrNull;
-    if (token == null) return;
+
+    if (tipo == 'limpar_area') {
+      limparAreasEfeito(criadorId: charId);
+      return;
+    }
+
+    if (tipo == 'projetar_area') {
+      final formaStr = acao['forma']?.toString();
+      final tipoArea = TipoArea.values.firstWhere(
+        (e) => e.name == formaStr,
+        orElse: () => TipoArea.esfera,
+      );
+      final tamanhoMetros =
+          ((acao['tamanhoMetros'] as num?)?.toDouble() ?? 6.0).clamp(1.5, 60.0);
+      final x = (acao['x'] as num?)?.toInt();
+      final y = (acao['y'] as num?)?.toInt();
+      final vx = (acao['vx'] as num?)?.toInt();
+      final vy = (acao['vy'] as num?)?.toInt();
+      final rotulo = acao['rotulo']?.toString() ??
+          '${entradaElenco.nomePersonagem} • ${tipoArea.name.toUpperCase()}';
+
+      final posOrigem = token?.posicao ?? const Posicao2D(0, 0);
+      final pontoAlvo = (x != null && y != null)
+          ? Posicao2D(
+              x.clamp(0, max(0, mapa.largura - 1)),
+              y.clamp(0, max(0, mapa.altura - 1)),
+            )
+          : posOrigem;
+      final verticeAlvo = (vx != null && vy != null)
+          ? VerticeGrid(
+              vx.clamp(1, max(1, mapa.largura - 1)),
+              vy.clamp(1, max(1, mapa.altura - 1)),
+            )
+          : null;
+
+      final calc = _geometriaGrid.calcularAreaTaticaNoMapa(
+        mapa: mapa.comoGridMapa,
+        posLancador: posOrigem,
+        tipoArea: tipoArea,
+        tamanhoMetros: tamanhoMetros,
+        pontoAlvo: pontoAlvo,
+        verticeAlvo: verticeAlvo,
+      );
+
+      final novaArea = AreaEfeitoAtivaLan(
+        id: 'aoe_$charId',
+        criadorId: charId,
+        rotulo: rotulo,
+        tipo: tipoArea,
+        tamanhoMetros: tamanhoMetros,
+        celulasAfetadas: calc.celulasArea,
+        celulasBloqueadas: calc.celulasBloqueadas,
+        centroVertice: calc.centroVertice,
+        ehDoMestre: false,
+      );
+      final outras = state.areasEfeitoAtivas
+          .where((a) => a.criadorId != charId)
+          .toList();
+      emit(state.copyWith(areasEfeitoAtivas: [...outras, novaArea]));
+      _agendarPublicacaoSnapshotLan(mapa);
+      return;
+    }
+
+    if (tipo == 'lancar_magia') {
+      final magiaNome = acao['magiaNome']?.toString() ?? 'Magia';
+      final custoPm = ((acao['custoPm'] as num?)?.toInt() ?? 1).clamp(0, 99);
+      final expressaoDados = acao['expressaoDados']?.toString() ?? '1d6';
+      final valorRolado =
+          ((acao['valorRolado'] as num?)?.toInt() ?? 0).clamp(0, 999);
+      final ehCura = acao['ehCura'] == true;
+      final rotuloArea = acao['rotuloArea']?.toString();
+      final alvosRaw = (acao['alvosIds'] as List<dynamic>? ?? const [])
+          .map((e) => e.toString())
+          .toSet();
+
+      // Se o jogador tem uma área projetada ativa, inclui todos os tokens na área;
+      // caso contrário, valida os IDs enviados contra os tokens do mapa.
+      final areaDoJogador = state.areasEfeitoAtivas
+          .where((a) => a.criadorId == charId)
+          .firstOrNull;
+      final alvosPorArea =
+          (areaDoJogador != null && areaDoJogador.celulasAfetadas.isNotEmpty)
+          ? tokensAfetadosPelaArea(areaDoJogador).map((t) => t.id).toSet()
+          : const <String>{};
+      final alvosValidosIds = mapa.tokens
+          .where((t) => alvosPorArea.contains(t.id) || alvosRaw.contains(t.id))
+          .map((t) => t.id)
+          .toList();
+
+      final evento = EventoMagiaLanPendente(
+        id: 'mag_lan_${DateTime.now().millisecondsSinceEpoch}',
+        lancadorId: charId,
+        lancadorNome: entradaElenco.nomePersonagem,
+        magiaNome: magiaNome,
+        custoPm: custoPm,
+        expressaoDados: expressaoDados,
+        valorRolado: valorRolado,
+        ehCura: ehCura,
+        rotuloArea: rotuloArea ?? areaDoJogador?.rotulo,
+        alvosPendentesIds: alvosValidosIds,
+      );
+
+      final msgLog =
+          '✨ ${entradaElenco.nomePersonagem} lançou $magiaNome ($custoPm PM • $expressaoDados = $valorRolado ${ehCura ? "Cura" : "Dano"})${alvosValidosIds.isNotEmpty ? " em ${alvosValidosIds.length} alvo(s)" : ""}.';
+      emit(
+        state.copyWith(
+          magiaLanPendente: evento,
+          logsRedeLan: _anexarLogRedeLan(msgLog),
+        ),
+      );
+      return;
+    }
+
+    if (tipo != 'mover' || token == null) return;
+
+    final x = (acao['x'] as num?)?.toInt();
+    final y = (acao['y'] as num?)?.toInt();
+    if (x == null || y == null) return;
 
     final destino = Posicao2D(x, y);
     if (destino == token.posicao) return;
@@ -1769,7 +1887,7 @@ class MestreCubit extends Cubit<MestreState> {
             state.statusLan != StatusConexaoLan.desligado) {
           unawaited(
             _hostService!.publicarSnapshotMesa(
-              SnapshotMesa.sanitizadoDeMapa(mapaMovido),
+              SnapshotMesa.sanitizadoDeMapa(areasEfeito: state.areasEfeitoAtivas, mapaMovido),
             ),
           );
         }
@@ -2356,7 +2474,7 @@ class MestreCubit extends Cubit<MestreState> {
         state.statusLan != StatusConexaoLan.desligado) {
       unawaited(
         _hostService!.publicarSnapshotMesa(
-          SnapshotMesa.sanitizadoDeMapa(mapa),
+          SnapshotMesa.sanitizadoDeMapa(areasEfeito: state.areasEfeitoAtivas, mapa),
         ),
       );
     }
@@ -2394,6 +2512,194 @@ class MestreCubit extends Cubit<MestreState> {
         emit(state.copyWith(pingsAtivos: atualizados));
       }
     });
+  }
+
+  // ===========================================================================
+  // ÁREAS DE EFEITO T20 E RESOLUÇÃO DE MAGIAS LAN (OPÇÃO A)
+  // ===========================================================================
+
+  void configurarFerramentaAreaMestre({
+    TipoArea? forma,
+    double? tamanhoMetros,
+  }) {
+    emit(
+      state.copyWith(
+        formaAreaMestre: forma,
+        tamanhoAreaMestreMetros: tamanhoMetros,
+      ),
+    );
+  }
+
+  /// Projeta ou atualiza o template de Área de Efeito do Mestre no mapa atual
+  /// e sincroniza com os jogadores conectados via LAN (respeitando Fog of War).
+  void projetarAreaMestre({
+    Posicao2D? pontoAlvo,
+    VerticeGrid? verticeAlvo,
+    Posicao2D? origemOverride,
+    String? rotulo,
+  }) {
+    final mapa = state.mapaAtual;
+    if (mapa == null) return;
+
+    final tokenOrigemId =
+        state.tokenSelecionadoParaMoverId ?? mapa.tokenTurnoAtualId;
+    final tokenOrigem = tokenOrigemId != null
+        ? mapa.tokens.where((t) => t.id == tokenOrigemId).firstOrNull
+        : null;
+    final tipo = state.formaAreaMestre;
+    final metros = state.tamanhoAreaMestreMetros;
+    final ehDirecional = tipo == TipoArea.cone || tipo == TipoArea.linha;
+    final posOrigem =
+        origemOverride ??
+        tokenOrigem?.posicao ??
+        (ehDirecional
+            ? const Posicao2D(0, 0)
+            : (pontoAlvo ?? const Posicao2D(0, 0)));
+    final calc = _geometriaGrid.calcularAreaTaticaNoMapa(
+      mapa: mapa.comoGridMapa,
+      posLancador: posOrigem,
+      tipoArea: tipo,
+      tamanhoMetros: metros,
+      pontoAlvo: pontoAlvo ?? posOrigem,
+      verticeAlvo: verticeAlvo,
+    );
+
+    final areaMestre = AreaEfeitoAtivaLan(
+      id: 'aoe_mestre',
+      criadorId: 'mestre',
+      rotulo:
+          rotulo ?? 'Mestre • ${tipo.name.toUpperCase()} ${metros.toStringAsFixed(1)}m',
+      tipo: tipo,
+      tamanhoMetros: metros,
+      celulasAfetadas: calc.celulasArea,
+      celulasBloqueadas: calc.celulasBloqueadas,
+      centroVertice: calc.centroVertice,
+      ehDoMestre: true,
+    );
+
+    final outras = state.areasEfeitoAtivas
+        .where((a) => a.criadorId != 'mestre')
+        .toList();
+    emit(state.copyWith(areasEfeitoAtivas: [...outras, areaMestre]));
+    _agendarPublicacaoSnapshotLan(mapa);
+  }
+
+  /// Remove templates de Área de Efeito (todos ou apenas os de [criadorId]).
+  void limparAreasEfeito({String? criadorId}) {
+    if (state.areasEfeitoAtivas.isEmpty) return;
+    final novas = criadorId == null
+        ? const <AreaEfeitoAtivaLan>[]
+        : state.areasEfeitoAtivas
+              .where((a) => a.criadorId != criadorId)
+              .toList();
+    emit(state.copyWith(areasEfeitoAtivas: novas));
+    final mapa = state.mapaAtual;
+    if (mapa != null) {
+      _agendarPublicacaoSnapshotLan(mapa);
+    }
+  }
+
+  /// Retorna todos os tokens do mapa atual que tocam nos quadrados afetados por [area]
+  /// (ou pela área ativa do Mestre/mais recente caso [area] seja omitida).
+  List<TokenNoMapa> tokensAfetadosPelaArea([AreaEfeitoAtivaLan? area]) {
+    final mapa = state.mapaAtual;
+    final areaAlvo = area ?? state.areasEfeitoAtivas.lastOrNull;
+    if (mapa == null || areaAlvo == null) return const [];
+
+    final celulas = areaAlvo.celulasAfetadas;
+    if (celulas.isEmpty) return const [];
+
+    final atingidos = <TokenNoMapa>[];
+    for (final tok in mapa.tokens) {
+      final ocupadas = tok.posicao.celulasOcupadas(tok.tamanhoQuadrados);
+      if (ocupadas.any(celulas.contains)) {
+        atingidos.add(tok);
+      }
+    }
+    return atingidos;
+  }
+
+  /// Aplica dano ou cura em lote a múltiplos tokens do mapa atual de uma só vez.
+  void aplicarDanoOuCuraEmLote({
+    required List<String> tokenIds,
+    required int valor,
+    bool ehCura = false,
+    bool ehMetade = false,
+    String? motivo,
+  }) {
+    final mapa = state.mapaAtual;
+    if (mapa == null || tokenIds.isEmpty || valor <= 0) return;
+
+    final idsSet = tokenIds.toSet();
+    final valorEfetivo = ehMetade ? (valor / 2).floor() : valor;
+    final delta = ehCura ? valorEfetivo : -valorEfetivo;
+
+    final novosTokens = mapa.tokens.map((t) {
+      if (!idsSet.contains(t.id)) return t;
+      final novoPv = (t.pvAtual + delta).clamp(0, max(1, t.pvMax)).toInt();
+      return t.copyWith(pvAtual: novoPv);
+    }).toList();
+
+    _atualizarMapaAtual(mapa.copyWith(tokens: novosTokens));
+    if (motivo != null && motivo.trim().isNotEmpty) {
+      emit(state.copyWith(logsRedeLan: _anexarLogRedeLan(motivo)));
+    }
+  }
+
+  /// Resolve um único alvo de [magiaLanPendente] (Opção A: Total, Metade ou Ignorar).
+  void resolverAlvoMagiaLanPendente({
+    required String tokenId,
+    required bool aplicar,
+    bool ehMetade = false,
+  }) {
+    final pendente = state.magiaLanPendente;
+    if (pendente == null) return;
+
+    if (aplicar) {
+      aplicarDanoOuCuraEmLote(
+        tokenIds: [tokenId],
+        valor: pendente.valorRolado,
+        ehCura: pendente.ehCura,
+        ehMetade: ehMetade,
+      );
+    }
+
+    final restantes = pendente.alvosPendentesIds
+        .where((id) => id != tokenId)
+        .toList();
+    if (restantes.isEmpty) {
+      emit(state.copyWith(limparMagiaLanPendente: true));
+    } else {
+      emit(
+        state.copyWith(
+          magiaLanPendente: pendente.copyWith(alvosPendentesIds: restantes),
+        ),
+      );
+    }
+  }
+
+  /// Resolve todos os alvos restantes de [magiaLanPendente] de uma só vez (Total, Metade ou Ignorar).
+  void resolverTodosMagiaLanPendente({
+    required bool aplicar,
+    bool ehMetade = false,
+  }) {
+    final pendente = state.magiaLanPendente;
+    if (pendente == null) return;
+
+    if (aplicar && pendente.alvosPendentesIds.isNotEmpty) {
+      aplicarDanoOuCuraEmLote(
+        tokenIds: pendente.alvosPendentesIds,
+        valor: pendente.valorRolado,
+        ehCura: pendente.ehCura,
+        ehMetade: ehMetade,
+      );
+    }
+    emit(state.copyWith(limparMagiaLanPendente: true));
+  }
+
+  void descartarMagiaLanPendente() {
+    if (state.magiaLanPendente == null) return;
+    emit(state.copyWith(limparMagiaLanPendente: true));
   }
 
   // ===========================================================================

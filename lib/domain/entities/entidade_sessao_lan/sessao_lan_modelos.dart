@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import '../../../presentation/controllers/ficha_controller/ficha_state.dart';
 import '../../services/ficha_services/personagem_storage_service.dart';
 import '../combate/grid_tatico.dart';
+import '../habilidades/modelos_habilidade_duracao.dart';
 import '../mestre/modelos_mestre.dart';
 
 /// Utilitário compartilhado para normalização e validação do código de sala LAN (`T20-XXXX`).
@@ -364,6 +365,163 @@ class EventoSessaoCliente extends Equatable {
   List<Object?> get props => [estado, tipo, codigoSala, characterId, mensagem];
 }
 
+/// Template de Área de Efeito ativo no mapa da sessão LAN (do Mestre ou de um Jogador).
+class AreaEfeitoAtivaLan extends Equatable {
+  final String id;
+  final String criadorId;
+  final String rotulo;
+  final TipoArea tipo;
+  final double tamanhoMetros;
+  final Set<Posicao2D> celulasAfetadas;
+  final Set<Posicao2D> celulasBloqueadas;
+  final VerticeGrid? centroVertice;
+  final bool ehDoMestre;
+
+  const AreaEfeitoAtivaLan({
+    required this.id,
+    required this.criadorId,
+    required this.rotulo,
+    required this.tipo,
+    required this.tamanhoMetros,
+    required this.celulasAfetadas,
+    this.celulasBloqueadas = const {},
+    this.centroVertice,
+    this.ehDoMestre = false,
+  });
+
+  /// Filtra as células afetadas para manter apenas aquelas dentro das células reveladas
+  /// pelo Fog of War, evitando vazamento de salas ocultas pela rede.
+  AreaEfeitoAtivaLan? sanitizadaParaCelulasReveladas(
+    Set<Posicao2D> celulasReveladas,
+  ) {
+    final visiveis = celulasAfetadas.intersection(celulasReveladas);
+    if (visiveis.isEmpty) return null;
+    return AreaEfeitoAtivaLan(
+      id: id,
+      criadorId: criadorId,
+      rotulo: rotulo,
+      tipo: tipo,
+      tamanhoMetros: tamanhoMetros,
+      celulasAfetadas: visiveis,
+      centroVertice: centroVertice,
+      ehDoMestre: ehDoMestre,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'criadorId': criadorId,
+        'rotulo': rotulo,
+        'tipo': tipo.name,
+        'tamanhoMetros': tamanhoMetros,
+        'celulasAfetadas': celulasAfetadas
+            .map((p) => {'x': p.x, 'y': p.y})
+            .toList(growable: false),
+        if (centroVertice != null) 'centroVertice': centroVertice!.toJson(),
+        'ehDoMestre': ehDoMestre,
+      };
+
+  factory AreaEfeitoAtivaLan.fromJson(Map<String, dynamic> json) {
+    final celsRaw = json['celulasAfetadas'] as List<dynamic>? ?? const [];
+    final vertRaw = json['centroVertice'] as Map?;
+    return AreaEfeitoAtivaLan(
+      id: (json['id'] ?? '').toString(),
+      criadorId: (json['criadorId'] ?? '').toString(),
+      rotulo: (json['rotulo'] ?? 'Área').toString(),
+      tipo: TipoArea.values.firstWhere(
+        (e) => e.name == json['tipo']?.toString(),
+        orElse: () => TipoArea.esfera,
+      ),
+      tamanhoMetros: (json['tamanhoMetros'] as num?)?.toDouble() ?? 6.0,
+      celulasAfetadas: celsRaw
+          .whereType<Map>()
+          .map(
+            (m) => Posicao2D(
+              (m['x'] as num?)?.toInt() ?? 0,
+              (m['y'] as num?)?.toInt() ?? 0,
+            ),
+          )
+          .toSet(),
+      centroVertice: vertRaw != null
+          ? VerticeGrid.fromJson(Map<String, dynamic>.from(vertRaw))
+          : null,
+      ehDoMestre: json['ehDoMestre'] == true,
+    );
+  }
+
+  @override
+  List<Object?> get props => [
+        id,
+        criadorId,
+        rotulo,
+        tipo,
+        tamanhoMetros,
+        celulasAfetadas,
+        celulasBloqueadas,
+        centroVertice,
+        ehDoMestre,
+      ];
+}
+
+/// Magia lançada por um Jogador conectado via LAN aguardando resolução rápida (1 toque)
+/// pelo Mestre (Total / Metade / Ignorar por alvo ou em lote).
+class EventoMagiaLanPendente extends Equatable {
+  final String id;
+  final String lancadorId;
+  final String lancadorNome;
+  final String magiaNome;
+  final int custoPm;
+  final String expressaoDados;
+  final int valorRolado;
+  final bool ehCura;
+  final String? rotuloArea;
+  final List<String> alvosPendentesIds;
+
+  const EventoMagiaLanPendente({
+    required this.id,
+    required this.lancadorId,
+    required this.lancadorNome,
+    required this.magiaNome,
+    required this.custoPm,
+    required this.expressaoDados,
+    required this.valorRolado,
+    required this.ehCura,
+    this.rotuloArea,
+    required this.alvosPendentesIds,
+  });
+
+  int get valorMetade => (valorRolado / 2).floor();
+
+  EventoMagiaLanPendente copyWith({List<String>? alvosPendentesIds}) {
+    return EventoMagiaLanPendente(
+      id: id,
+      lancadorId: lancadorId,
+      lancadorNome: lancadorNome,
+      magiaNome: magiaNome,
+      custoPm: custoPm,
+      expressaoDados: expressaoDados,
+      valorRolado: valorRolado,
+      ehCura: ehCura,
+      rotuloArea: rotuloArea,
+      alvosPendentesIds: alvosPendentesIds ?? this.alvosPendentesIds,
+    );
+  }
+
+  @override
+  List<Object?> get props => [
+        id,
+        lancadorId,
+        lancadorNome,
+        magiaNome,
+        custoPm,
+        expressaoDados,
+        valorRolado,
+        ehCura,
+        rotuloArea,
+        alvosPendentesIds,
+      ];
+}
+
 /// Snapshot sanitizado do [MapaBatalhaMestre] enviado pelo Host aos jogadores.
 /// Nunca inclui tokens ocultos ao jogador nem a ficha completa de monstros do Mestre.
 class SnapshotMesa extends Equatable {
@@ -379,6 +537,7 @@ class SnapshotMesa extends Equatable {
   final Map<Posicao2D, TipoTerreno> terrenos;
   final Set<Posicao2D> celulasReveladas;
   final List<TokenNoMapa> tokensVisiveis;
+  final List<AreaEfeitoAtivaLan> areasEfeitoVisiveis;
 
   const SnapshotMesa({
     required this.mapaId,
@@ -393,12 +552,16 @@ class SnapshotMesa extends Equatable {
     this.terrenos = const {},
     this.celulasReveladas = const {},
     this.tokensVisiveis = const [],
+    this.areasEfeitoVisiveis = const [],
   });
 
   /// Constrói a visão segura para jogadores a partir de um [MapaBatalhaMestre].
   /// Aplica [projectMapaFor] com [VisaoMestreComoJogador] para jamais vazar
-  /// terrenos ou tokens em células sob Névoa de Guerra pela rede.
-  factory SnapshotMesa.sanitizadoDeMapa(MapaBatalhaMestre mapa) {
+  /// terrenos, tokens ou áreas de efeito em células sob Névoa de Guerra pela rede.
+  factory SnapshotMesa.sanitizadoDeMapa(
+    MapaBatalhaMestre mapa, {
+    List<AreaEfeitoAtivaLan> areasEfeito = const [],
+  }) {
     final mapaProjetado = projectMapaFor(const VisaoMestreComoJogador(), mapa);
     final tokensSeguros = mapaProjetado.tokens
         .map(
@@ -427,6 +590,16 @@ class SnapshotMesa extends Equatable {
             ? mapaProjetado.tokenTurnoAtualId
             : null;
 
+    final areasSeguras = <AreaEfeitoAtivaLan>[];
+    for (final area in areasEfeito) {
+      final sanitizada = area.sanitizadaParaCelulasReveladas(
+        mapaProjetado.celulasReveladas,
+      );
+      if (sanitizada != null) {
+        areasSeguras.add(sanitizada);
+      }
+    }
+
     return SnapshotMesa(
       mapaId: mapaProjetado.id,
       nomeMapa: mapaProjetado.nome,
@@ -440,6 +613,7 @@ class SnapshotMesa extends Equatable {
       terrenos: Map<Posicao2D, TipoTerreno>.from(mapaProjetado.terrenos),
       celulasReveladas: Set<Posicao2D>.from(mapaProjetado.celulasReveladas),
       tokensVisiveis: tokensSeguros,
+      areasEfeitoVisiveis: List.unmodifiable(areasSeguras),
     );
   }
 
@@ -468,12 +642,17 @@ class SnapshotMesa extends Equatable {
             .toList(growable: false),
         'tokensVisiveis':
             tokensVisiveis.map((t) => t.toJson()).toList(growable: false),
+        if (areasEfeitoVisiveis.isNotEmpty)
+          'areasEfeitoVisiveis': areasEfeitoVisiveis
+              .map((a) => a.toJson())
+              .toList(growable: false),
       };
 
   factory SnapshotMesa.fromJson(Map<String, dynamic> json) {
     final terrenosRaw = json['terrenos'] as List<dynamic>? ?? const [];
     final reveladasRaw = json['celulasReveladas'] as List<dynamic>? ?? const [];
     final tokensRaw = json['tokensVisiveis'] as List<dynamic>? ?? const [];
+    final areasRaw = json['areasEfeitoVisiveis'] as List<dynamic>? ?? const [];
 
     final mapaTerrenos = <Posicao2D, TipoTerreno>{};
     for (final item in terrenosRaw.whereType<Map>()) {
@@ -518,6 +697,10 @@ class SnapshotMesa extends Equatable {
           .map((m) => TokenNoMapa.fromJson(Map<String, dynamic>.from(m)))
           .where((t) => t.visivelParaJogadores)
           .toList(growable: false),
+      areasEfeitoVisiveis: areasRaw
+          .whereType<Map>()
+          .map((m) => AreaEfeitoAtivaLan.fromJson(Map<String, dynamic>.from(m)))
+          .toList(growable: false),
     );
   }
 
@@ -535,5 +718,6 @@ class SnapshotMesa extends Equatable {
         terrenos,
         celulasReveladas,
         tokensVisiveis,
+        areasEfeitoVisiveis,
       ];
 }

@@ -3,6 +3,7 @@ import '../../../domain/entities/combate/combatente.dart';
 import '../../../domain/entities/combate/efeito_ativo_combate.dart';
 import '../../../domain/entities/combate/grid_tatico.dart';
 import '../../../domain/entities/combate/resultado_ataque.dart';
+import '../../../domain/entities/habilidades/modelos_habilidade_duracao.dart';
 import '../../../domain/services/combate_services/combate_engine.dart';
 
 class CombateState extends Equatable {
@@ -23,6 +24,9 @@ class CombateState extends Equatable {
   final List<String> logCombate;
   final ResultadoAtaque? ultimoResultadoAtaque;
   final List<EfeitoAtivoCombate> efeitosAtivos;
+  final Set<Posicao2D> celulasAlcanceMagia;
+  final Set<Posicao2D> celulasAreaMagia;
+  final VerticeGrid? centroAreaMagia;
 
   const CombateState({
     this.filaIniciativa = const [],
@@ -42,6 +46,9 @@ class CombateState extends Equatable {
     this.logCombate = const [],
     this.ultimoResultadoAtaque,
     this.efeitosAtivos = const [],
+    this.celulasAlcanceMagia = const {},
+    this.celulasAreaMagia = const {},
+    this.centroAreaMagia,
   });
 
   Combatente? get combatenteAtual =>
@@ -77,6 +84,10 @@ class CombateState extends Equatable {
     ResultadoAtaque? ultimoResultadoAtaque,
     bool limparUltimoAtaque = false,
     List<EfeitoAtivoCombate>? efeitosAtivos,
+    Set<Posicao2D>? celulasAlcanceMagia,
+    Set<Posicao2D>? celulasAreaMagia,
+    VerticeGrid? centroAreaMagia,
+    bool limparCentroAreaMagia = false,
   }) {
     return CombateState(
       filaIniciativa: filaIniciativa ?? this.filaIniciativa,
@@ -100,6 +111,11 @@ class CombateState extends Equatable {
           ? null
           : (ultimoResultadoAtaque ?? this.ultimoResultadoAtaque),
       efeitosAtivos: efeitosAtivos ?? this.efeitosAtivos,
+      celulasAlcanceMagia: celulasAlcanceMagia ?? this.celulasAlcanceMagia,
+      celulasAreaMagia: celulasAreaMagia ?? this.celulasAreaMagia,
+      centroAreaMagia: limparCentroAreaMagia
+          ? null
+          : (centroAreaMagia ?? this.centroAreaMagia),
     );
   }
 
@@ -122,5 +138,8 @@ class CombateState extends Equatable {
     logCombate,
     ultimoResultadoAtaque,
     efeitosAtivos,
+    celulasAlcanceMagia,
+    celulasAreaMagia,
+    centroAreaMagia,
   ];
 }

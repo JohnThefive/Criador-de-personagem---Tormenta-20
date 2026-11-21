@@ -1,4 +1,6 @@
 import '../../../domain/entities/combate/grid_tatico.dart';
+import '../../../domain/entities/entidade_sessao_lan/sessao_lan_modelos.dart';
+import '../../../domain/entities/habilidades/modelos_habilidade_duracao.dart';
 import '../../../domain/entities/mestre/modelos_mestre.dart';
 
 /// Ferramenta ativa no Editor / Controlador de Mapa de Batalha do Mestre.
@@ -50,6 +52,12 @@ class MestreState {
   final List<Posicao2D> pingsAtivos;
   final int revisaoBestiario;
 
+  // Ferramenta de Área de Efeito T20 e Magias vindas da LAN
+  final List<AreaEfeitoAtivaLan> areasEfeitoAtivas;
+  final TipoArea formaAreaMestre;
+  final double tamanhoAreaMestreMetros;
+  final EventoMagiaLanPendente? magiaLanPendente;
+
   const MestreState({
     required this.campanhas,
     this.campanhaSelecionadaId,
@@ -78,6 +86,10 @@ class MestreState {
     this.pontoDestinoMedicao,
     this.pingsAtivos = const [],
     this.revisaoBestiario = 0,
+    this.areasEfeitoAtivas = const [],
+    this.formaAreaMestre = TipoArea.esfera,
+    this.tamanhoAreaMestreMetros = 6.0,
+    this.magiaLanPendente,
   });
 
   CampanhaMestre? get campanhaAtual {
@@ -154,6 +166,11 @@ class MestreState {
     Posicao2D? pontoDestinoMedicao,
     List<Posicao2D>? pingsAtivos,
     int? revisaoBestiario,
+    List<AreaEfeitoAtivaLan>? areasEfeitoAtivas,
+    TipoArea? formaAreaMestre,
+    double? tamanhoAreaMestreMetros,
+    EventoMagiaLanPendente? magiaLanPendente,
+    bool limparMagiaLanPendente = false,
   }) {
     return MestreState(
       campanhas: campanhas ?? this.campanhas,
@@ -199,6 +216,13 @@ class MestreState {
           : (pontoDestinoMedicao ?? this.pontoDestinoMedicao),
       pingsAtivos: pingsAtivos ?? this.pingsAtivos,
       revisaoBestiario: revisaoBestiario ?? this.revisaoBestiario,
+      areasEfeitoAtivas: areasEfeitoAtivas ?? this.areasEfeitoAtivas,
+      formaAreaMestre: formaAreaMestre ?? this.formaAreaMestre,
+      tamanhoAreaMestreMetros:
+          tamanhoAreaMestreMetros ?? this.tamanhoAreaMestreMetros,
+      magiaLanPendente: limparMagiaLanPendente
+          ? null
+          : (magiaLanPendente ?? this.magiaLanPendente),
     );
   }
 }

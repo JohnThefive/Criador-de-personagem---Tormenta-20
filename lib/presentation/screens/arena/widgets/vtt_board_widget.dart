@@ -124,6 +124,37 @@ class _VttBoardWidgetState extends State<VttBoardWidget> {
                           // 2. Combatentes sobre o grid
                           for (final entry in widget.state.posicoesCombatentes.entries)
                             _buildToken(entry.key, entry.value, cellWidth, cellHeight),
+
+                          // 3. Centro da Área (círculo duplo na interseção de 4 quadrados para Esfera/Cilindro)
+                          if (widget.state.centroAreaMagia != null)
+                            Positioned(
+                              left: widget.state.centroAreaMagia!.vx * cellWidth - 8,
+                              top: widget.state.centroAreaMagia!.vy * cellHeight - 8,
+                              width: 16,
+                              height: 16,
+                              child: IgnorePointer(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: const Color(0xFF0F172A),
+                                    border: Border.all(
+                                      color: Colors.white,
+                                      width: 2,
+                                    ),
+                                  ),
+                                  padding: const EdgeInsets.all(2),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        color: Colors.amberAccent,
+                                        width: 1.5,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
                         ],
                       );
                     },
@@ -212,6 +243,8 @@ class _VttBoardWidgetState extends State<VttBoardWidget> {
   Widget _buildCell(Posicao2D pos, double w, double h, AvaliacaoPosicaoGrid? avaliacao) {
     final terreno = widget.state.mapaGrid.obterTerreno(pos);
     final alcancavel = widget.state.celulasAlcancaveis.contains(pos);
+    final noAlcanceMagia = widget.state.celulasAlcanceMagia.contains(pos);
+    final naAreaMagia = widget.state.celulasAreaMagia.contains(pos);
 
     Color corFundo = const Color(0xFF0F172A);
     Color corBorda = Colors.white12;
@@ -225,7 +258,17 @@ class _VttBoardWidgetState extends State<VttBoardWidget> {
       corFundo = const Color(0xFF334155);
     }
 
-    if (alcancavel) {
+    if (naAreaMagia) {
+      corFundo = const Color(0xFFF59E0B).withValues(alpha: 0.45);
+      corBorda = Colors.amberAccent;
+      larguraBorda = 1.6;
+      iconeTatico = Icons.auto_awesome;
+      corIcone = Colors.amberAccent;
+    } else if (noAlcanceMagia) {
+      corFundo = Colors.indigo.withValues(alpha: 0.22);
+      corBorda = Colors.indigoAccent.withValues(alpha: 0.65);
+      larguraBorda = 1.0;
+    } else if (alcancavel) {
       larguraBorda = 1.5;
       if (avaliacao?.temCobertura == true) {
         corFundo = const Color(0xFF0284C7).withValues(alpha: 0.35);
